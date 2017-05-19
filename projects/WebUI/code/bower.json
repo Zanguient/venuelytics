@@ -24,6 +24,8 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
+    "angular":"1.6.4",
+    "angular-route":"1.6.4",
     "html5shiv": "^3.7.3",
     "respond": "^1.4.2",
     "Slidebars": "slidebars#^0.10.3",

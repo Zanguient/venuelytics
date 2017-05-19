@@ -51,7 +51,15 @@ module.exports = {
             'bower_components/smooth-scroll/dist/js/smooth-scroll.min.js',
             'bower_components/typed.js/dist/typed.min.js',
             "bower_components/snackbar/dist/snackbar.min.js",
-            "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
+            "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
+			'bower_components/angular/angular.min.js',
+			'bower_components/angular-route/angular-route.min.js',
+			'src/app.js',
+			'src/js/controllers/homeCtrl.js',
+			'src/js/controllers/venueCtrl.js',
+			'src/js/controllers/venueDetailsCtrl.js',
+			'src/js/services/restUrlService.js',
+			'src/js/services/venueService.js'
         ],
         css : [
             'bower_components/animate.css/animate.min.css',
@@ -66,7 +74,8 @@ module.exports = {
             'bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
             'bower_components/owl.carousel/dist/assets/owl.theme.default.min.css',
             "bower_components/snackbar/dist/snackbar.min.css",
-            "bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css.map"
+            "bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css.map",
+			'src/css/custom.css'
         ],
         fonts : [
             'bower_components/bootstrap/dist/fonts/*',

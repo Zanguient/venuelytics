@@ -1,0 +1,32 @@
+
+<div class="material-background"></div>
+
+<div class="container container-full">
+    <div class="ms-paper">
+        <div class="row">
+            
+            <div class="col-md-9 ms-paper-content-container">
+                <div class="ms-paper-content" style="width: 1170px;">
+                    <h1>Venues</h1>
+                    <section class="ms-component-section" >
+
+                        <div class="row" >
+                            <ul class="col-md-4" ng-repeat="venue in listOfVenuesByCity">
+                                <h3 class="text-center">{{venue.venueName}}</h3>
+                                <li class="card" style="list-style-type: none;">
+                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                    <div class="card-block text-center">
+                                        <!-- <h4 class="color-primary">Lorem ipsum dolor sit</h4> -->
+                                        <p>{{venue.description}}</p>
+                                        <a href="javascript:void(0)" class="btn btn-primary"><i class="zmdi zmdi-star"></i> Button</a>
+                                        <a ng-click="selectVenue(venue)" class="btn btn-primary btn-raised"><i class="zmdi zmdi-flower"></i> View</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div> <!-- row -->
+                    </section>
+                </div> <!-- ms-paper-content -->
+            </div> <!-- col-md-9 -->
+        </div> <!-- row -->
+    </div> <!-- ms-paper -->
+</div> <!-- container -->
