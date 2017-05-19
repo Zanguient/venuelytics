@@ -13,7 +13,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             self.init = function() {
                 $window.scrollTo(0, 0);
                 self.detailsOfVenue = VenueService.selectedVenueDetails;
-                $log.info("Venue details-->";
+                $log.info("Venue details-->");
             };
 
             self.init();
