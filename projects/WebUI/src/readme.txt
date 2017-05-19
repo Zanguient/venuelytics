@@ -1,1 +1,0 @@
-Angular js project src folder. Use this as root folder.
