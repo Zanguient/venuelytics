@@ -16,6 +16,8 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id;
                 $log.info("resevationURL:"+self.resevationURL);
                 $log.info("Venue details-->");
+
+                $('#venueReservationFrame').iFrameResize( [{log:true,interval:1000}] );
             };
 
             self.init();
