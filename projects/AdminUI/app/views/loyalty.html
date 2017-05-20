@@ -1,0 +1,49 @@
+
+<h3>Loyalty Management
+   <small>Manage your Loyalty &amp; Rewards Program</small>
+   <span> <a
+		class="btn btn-default pull-right" style="margin-top: -25px;"
+		href="#/app/loyaltyedit/new"><em class="fa fa-plus"></em> Add Level</a></span>
+</h3>
+<div ng-controller="LoyaltyController" class="container-fluid">
+  
+   <!-- START DATATABLE 2 -->
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="panel panel-default">
+            
+            <div class="panel-body">
+            <toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+               <table id="loyalty_table"  class="table table-striped table-hover">
+                  <thead>
+                     <tr>
+                      	<th></th>
+                        <th >Membership</th>
+                        <th>Discount</th>
+                        <th class="text-nowrap">Reward Text</th>
+                        <th>Condition</th>
+                        <th>Actions</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                   <tfoot>
+                     <tr>
+                        <th> </th>
+                         <th> </th>
+                         <th> </th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                       	 
+                        </th> 
+                     </tr>
+                  </tfoot>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- END DATATABLE 2 -->
+   
+</div>

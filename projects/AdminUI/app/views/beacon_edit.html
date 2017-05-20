@@ -1,0 +1,74 @@
+<h3>Add / Edit Beacon
+   <small>Add a new Beacon or Edit an existing Beacon.</small>
+</h3>
+<!-- START row-->
+<div class="row" ng-controller="BeaconController">
+   <div class="col-lg-6">
+      <form  name="beaconInfo" validate-form="" novalidate role="form">
+         <!-- START panel-->
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <div class="panel-title">Beacon Information</div>
+            </div>
+            <div class="panel-body">
+            <toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+               <div class="form-group">
+                  <label class="control-label">Beacon Name *</label>
+                  <input type="text" name="name" required="required" class="form-control" ng-model="data.beaconName"/>
+               </div>
+               <div class="form-group">
+                  <label class="control-label">Description *</label>
+                  <input type="text" name="description" required="required" class="form-control" ng-model="data.description"/>
+               </div>
+               
+	           <div class="form-group">
+                  <label class="control-label nowrap">Store *</label>
+                   <select name="storeId" required="required"  class="form-control col-sm-4" ng-model="data.storeNumber" >
+	                   	<option ng-repeat="store in stores" value="{{store.storeNumber}}">{{storeAddress(store)}}</option>	
+	                 </select>
+               </div>
+	           <div class="form-group">
+	                 <label class="control-label nowrap">Company Identifier *</label>
+	                 <input type="text" name="company_identifier" required="required" class="form-control" ng-model="data.udid"/>
+	            </div>
+
+               <div class="row">
+	               <div class="form-group col-sm-6">
+	                  <label class="control-label nowrap">Store Identifier *</label>
+	                  <input type="text" name="major" required="required" data-parsley-type="integer" class="form-control" ng-model="data.majorLocCode"/>
+	               </div>
+	               <div class="form-group  col-sm-6">
+	                  <label class="control-label nowrap">Aisle Identifier *</label>
+	                  <input type="text" name="minor" required="required" data-parsley-type="integer" class="form-control" ng-model="data.minorLocCode"/>
+	               </div>
+               </div>
+                <div class="row">
+                	<div class="form-group  col-sm-6">
+	                  <label class="control-label nowrap">Aisle Name*</label>
+	                  <input type="text" name="aisleName" required="required" class="form-control" ng-model="data.aisleName"/>
+	               </div>
+	               <div class="form-group col-sm-6">
+	                  <label class="control-label nowrap">Department Name</label>
+	                  <input type="text" name="departmentName" class="form-control" ng-model="data.departmentName"/>
+	               </div>
+	               
+               </div>
+                <div class="form-group">
+                   <div class="checkbox c-checkbox">
+                     <label>
+                        <input type="checkbox" name="enabled"  ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N" />
+                        <span class="fa fa-check"></span>Enable Beacon
+                        </label>
+                  </div>
+               </div>
+               <div class="required">* Required fields</div>
+            </div>
+            <div class="panel-footer">
+         		<button type="submit" class="btn btn-primary" ng-click="update(beaconInfo.$valid,data)">Save</button>
+            </div>
+         </div>
+         <!-- END panel-->
+      </form>
+   </div>
+</div>
+<!-- END row-->

@@ -1,0 +1,35 @@
+<h3>
+	Add / Edit Venue <small>Add a new Venue or Edit an existing Venue.</small>
+</h3>
+<!-- START row-->
+<div class="row" ng-controller="StoreController">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+			<tabset type="pills"> 
+				<tab> 
+					<tab-heading> <em class="fa fa-home fa-fw"></em>Venue Information</tab-heading> 
+					<hr>
+					<div ng-include="'app/templates/venue/form-venue.html'"></div>
+				</tab> 
+				<tab> 
+					<tab-heading> <em class="fa fa-list-ul fa-fw"></em>Attributes</tab-heading> 
+					<hr>
+					<div ng-include="'app/templates/venue/venue-attributes.html'"></div>
+				</tab> 
+				<tab> 
+					<tab-heading> <em class="fa fa-birthday-cake fa-fw"></em>Private Events</tab-heading> 
+					<hr>
+					<div ng-include="'app/templates/venue/private-events.html'"></div>
+				</tab> 
+				<tab> 
+					<tab-heading> <em class="fa fa-beer fa-fw"></em>Bottle</tab-heading> 
+					<hr>
+					<div ng-include="'app/templates/venue/venue-bottle.html'"></div>
+				</tab> 
+				
+			</tabset>
+		</div>
+	</div>
+</div>
+<!-- END row-->

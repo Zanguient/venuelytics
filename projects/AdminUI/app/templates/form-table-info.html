@@ -1,0 +1,42 @@
+<div>
+	<legend>Table Information</legend>
+	<!-- START row -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label>Table Name *:</label> 
+				<input type="text" name="tableName" required="required" placeholder="Table N" class="form-control" ng-model="newTable.name"/>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<label>Price ($):</label> 
+				<input type="text" name="price" placeholder="100" class="form-control" ng-model="newTable.price"/>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label>Capacity (people) *:</label> 
+				<input type="text" required="true" name="capacity" placeholder="4" class="form-control" ng-model="newTable.servingSize"/>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group">
+				<label>Description:</label> 
+				<textarea placeholder="Enter table description" rows="5" class="form-control ng-pristine ng-valid" ng-model="newTable.description"></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="pull-right">
+			<button type="button" class="btn btn-default" ng-click="closeThisDialog(0)">Cancel</button>
+    		<button type="button" class="btn btn-primary" ng-click="confirm(0)">Save</button>
+    		&nbsp;&nbsp;&nbsp;
+    	</div>
+	</div>
+	<!-- END row -->
+</div>

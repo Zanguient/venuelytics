@@ -1,0 +1,135 @@
+{
+  "EMAIL_OPEN" : "Email Open",
+  "NOTIF_OPEN": " Notification Open",
+  "SMS_OPEN" : "SMS Open",
+  "PASSBOOK_OPEN": "Passbook Open",
+  "OFFER_OPEN" : "Offer Open",
+  "login" : {
+  		"LOGIN" :  "Login",
+  		"FAILED" : "Login Failed",
+  		"ID": "Enter Login ID",
+  		"PASSWORD": "password",
+  		"FORGOT_PASSWORD":"Forgot your password?",
+  		"SIGNUP" :"Need to Signup?",
+  		"REGISTER" : "Register Now",
+  		"REMEMBER" : "Remember Me",
+  		"SIGNIN":"SIGN IN TO CONTINUE."
+	},
+  "dashboard": {
+    "WELCOME": "Welcome to {{appName}}"
+  },
+  "topbar": {
+    "messages": {
+      "UNREAD": "Unread messages",
+      "MORE": "More messages"
+    },
+    "search": {
+      "PLACEHOLDER": "Type and hit enter.."
+    },
+    "notification": {
+      "MORE": "More notifications"
+    }
+  },
+  "offsidebar": {
+    "setting": {
+      "SETTINGS": "Settings",
+      "THEMES": "Themes",
+      "layout": {
+        "FIXED": "Fixed",
+        "COLLAPSED": "Collapsed"
+      }
+    },
+    "chat": {
+      "CONNECTIONS": "Connections",
+      "SEARCH": "Search contacts",
+      "ONLINE": "ONLINE",
+      "OFFLINE": "OFFLINE",
+      "LOAD_MORE": "Load More",
+      "TASK_COMPLETION": "Tasks completion",
+      "QUOTA": "Upload Quota"
+    }
+  },
+  "sidebar": {
+    "WELCOME": "Welcome",
+    "heading": {
+      "HEADER": "Administration",
+      "COMPONENTS": "Content Management",
+      "SETUP": "System Setup",
+      "INTL" : "Intelligence"
+    },
+    "nav": {
+      "DASHBOARD": "Auto Pilot",
+      "WIDGETS": "Recommendations",
+      "DOCUMENTATION": "Documentation",
+      "CINSIGHTS" : "Mobile Analytics",
+      "INSTORE" : "In-Store Analytics",
+      "C360" : "Customer 360",
+      "element": {
+        "OFFERS": "Offers",
+        "BUTTON": "Ads",
+        "COLOR": "Colors",
+        "NOTIFICATION": "Notification",
+        "INTERACTION": "Interaction",
+        "SPINNER": "Spinner",
+        "ANIMATION": "Animation",
+        "DROPDOWN": "Dropdown",
+        "PANEL": "Panel",
+        "PORTLET": "Portlet",
+        "GRID": "Grid",
+        "GRID_MASONRY": "Grid Masonry",
+        "TYPO": "Typography",
+        "FONT_ICON": "Font Icons",
+        "WEATHER_ICON": "Weather Icons"
+      },
+      "form": {
+        "FORM": "Ads",
+        "STANDARD": "Standard",
+        "EXTENDED": "Extended",
+        "VALIDATION": "Validation",
+        "WIZARD": "Wizard",
+        "UPLOAD": "Upload"
+      },
+      "chart": {
+        "TRACK": "Track Promotions",
+        "FLOT": "Flot",
+        "RADIAL": "Radial"
+      },
+      "table": {
+        "PERF": "Performance Analytics",
+        "STANDARD": "Standard",
+        "EXTENDED": "Extended",
+        "DATATABLE": "Datatable"
+      },
+      "map": {
+        "MAP": "Maps",
+        "GOOGLE": "Google Map",
+        "VECTOR": "Vector Map"
+      },
+      "extra": {
+        "EXTRA": "Vendor Details",
+        "MAILBOX": "Mailbox",
+        "TIMELINE": "Timeline",
+        "CALENDAR": "Calendar",
+        "INVOICE": "Invoice",
+        "SEARCH": "Search",
+        "TODO": "Todo List",
+        "PROFILE": "Profile"
+      },
+      "pages": {
+        "MYPROFILE": "My Profile",
+        "LOGIN": "Login",
+        "REGISTER": "Register",
+        "RECOVER": "Recover password",
+        "PROFILE": "Profile",
+        "LOCK": "Lock",
+        "STARTER": "Starter Template",
+        "STORES": "Venue Management",
+        "USERS": "User Management",
+        "AGENCIES":"Agency Management",
+        "BEACONS": "Beacon Management",
+        "LOYALTY": "Loyalty Management",
+        "SETTINGS": "Application Settings"
+      }
+    }
+  }
+}

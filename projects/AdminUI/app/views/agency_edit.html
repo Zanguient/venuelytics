@@ -1,0 +1,66 @@
+<h3>Add / Edit User
+   <small>Add a new Agency or Edit an existing Agency.</small>
+</h3>
+<!-- START row-->
+<div class="row" ng-controller="AgencyController">
+   <div class="col-lg-6">
+       <form  name="userInfo" validate-form="" novalidate role="form">
+         <!-- START panel-->
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <div class="panel-title">User Information</div>
+            </div>
+            <div class="panel-body">
+            	<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+            	
+               <div class="form-group">
+                  <label class="control-label">Name *</label>
+                  <input type="text" name="name" required="required" class="form-control" ng-model="data.name"/>
+               </div>
+               <div class="form-group">
+                  <label class="control-label">Manager Name</label>
+                  <input type="text" name="managerName" class="form-control" ng-model="data.managerName" readOnly = "true"/>
+               </div>
+               <div class="form-group">
+                  <label class="control-label nowrap">Phone</label>
+                  <input type="text" masked="" data-inputmask="'mask': '(999) 999-9999'" name="phone" class="form-control" ng-model="data.phone"/>
+               </div>
+               <div class="form-group">
+                  <label class="control-label nowrap">Mobile</label>
+                  <input type="text" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" class="form-control" ng-model="data.mobile"/>
+               </div>
+               <div class="form-group">
+                  <label class="control-label nowrap">Address</label>
+                  <input type="text" name="address"  class="form-control" ng-model="data.address"/>
+               </div>
+               <div class="form-group">
+                  <label class="control-label nowrap">City</label>
+                  <input type="text" name="city"  class="form-control" ng-model="data.city"/>
+               </div>
+               <div class="form-group">
+                  <label class="control-label nowrap">Country</label>
+                  <input type="text" name="country"  class="form-control" ng-model="data.country"/>
+               </div>
+               <div class="form-group">
+                  <label class="control-label nowrap">ZIP</label>
+                  <input type="text" name="zip"  class="form-control" ng-model="data.zip"/>
+               </div>
+              <div class="form-group">
+                   <div class="checkbox c-checkbox">
+                     <label>
+                        <input type="checkbox" name="enabled"  ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N"/>
+                        <span class="fa fa-check"></span>Activate
+                        </label>
+                  </div>
+               </div>
+              <div class="required">* Required fields</div>
+            </div>
+            <div class="panel-footer">
+         		<button type="submit" class="btn btn-primary" ng-click="update(userInfo.$valid,data)">Save</button>
+            </div>
+         </div>
+         <!-- END panel-->
+      </form>
+   </div>
+</div>
+<!-- END row-->

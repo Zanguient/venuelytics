@@ -1,0 +1,24 @@
+
+<div class="col-lg-3 col-md-6">
+	<!-- START panel-->
+	<div class="panel" ng-style="instorecard.contentColorCode">
+		<div class="panel-heading panel_grad_dark">
+			<div class="row">
+				<div class="col-xs-3">
+					<em class="fa fa-support fa-5x"></em>
+				</div>
+				<div class="col-xs-9 text-right">
+					<div class="text-lg">{{instorecard.count}}</div>
+					<p class="m0">{{instorecard.description}}</p>
+				</div>
+			</div>
+		</div>
+		<a ng-href="{{instorecard.link}}" ng-style="instorecard.linkColorCode"
+			class="panel-footer bg-gray-dark bt0 clearfix btn-block"> <span
+			class="pull-left">{{instorecard.linkDescription}}</span> <span
+			class="pull-right"> <em class="fa fa-chevron-circle-right"></em>
+		</span>
+		</a>
+	</div>
+	<!-- END panel-->
+</div>

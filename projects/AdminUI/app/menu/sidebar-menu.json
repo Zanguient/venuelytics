@@ -1,0 +1,38 @@
+[
+  {
+    "text": "Dashboard",
+    "sref":"app.dashboard",
+    "submenu": [],
+    "translate": "Dashboard",
+    "icon": "icon-speedometer"
+  },
+  {
+  	"text": "Venue Management",
+	"sref": "app.stores",
+	 "icon": "icon-home",
+	 "translate": "sidebar.nav.pages.STORES",
+	 "submenu": []
+  },
+  {
+	"text": "Users Management",
+	"sref": "app.users",
+	"icon": "icon-users",
+	"translate": "sidebar.nav.pages.USERS",
+	"submenu": []
+ }, 
+  {
+	"text": "Agency Management",
+	"sref": "app.agencies",
+	"icon": "fa fa-building-o",
+	"translate": "sidebar.nav.pages.AGENCIES",
+	"submenu": []
+ }, 
+ {
+	"text": "Application Settings",
+	"sref": "app.settings",
+	"icon": "icon-settings",
+	"translate": "sidebar.nav.pages.SETTINGS",
+	"submenu": []
+ }
+ 
+]
