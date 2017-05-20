@@ -1,6 +1,7 @@
 var app = angular.module('Mobinite', ['ngRoute']);
 
 
+
 // configure our routes
 app.config(['$routeProvider', '$httpProvider', '$locationProvider','$sceDelegateProvider', function($routeProvider, $httpProvider, $locationProvider,$sceDelegateProvider) {
     $locationProvider.hashPrefix('');
@@ -27,4 +28,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider','$sceDelegate
             controller: 'VenueDetailsController'
         })
         .otherwise('/');
+
+    $locationProvider.html5Mode({
+              enabled: true,
+              requireBase: true,
+              rewriteLinks:true
+            });
 }]);
