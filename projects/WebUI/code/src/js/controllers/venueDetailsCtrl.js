@@ -11,8 +11,10 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
     		var self = $scope;
 
             self.init = function() {
-                $window.scrollTo(0, 0);
+
                 self.detailsOfVenue = VenueService.selectedVenueDetails;
+                self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id;
+                $log.info("resevationURL:"+self.resevationURL);
                 $log.info("Venue details-->");
             };
 

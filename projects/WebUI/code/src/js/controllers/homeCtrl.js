@@ -26,17 +26,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 
 
     		self.selectCity = function(cityName) {
-    			$log.info("City name-->"+cityName);
-                $http({
-                    method: 'GET',
-                    url: RestURL.baseURL + '/venues?&city=' + cityName + '&from=0&size=10'
-                }).then(function(success) {
-                    $log.info("Success data-->");
-                    VenueService.venueByCityName = success.data.venues;
-                    $location.url('/venues');
-                },function(error) {
-                    $log.error("Error"+error);
-                });
+                $location.url('/venues/'+cityName);
     		};
     		
     }]);
