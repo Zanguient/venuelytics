@@ -11,3 +11,5 @@
 /app/views/partials/top-navbar.html
 /app/js/**
 /app/css/**
+/cache/**
+/dist/**
