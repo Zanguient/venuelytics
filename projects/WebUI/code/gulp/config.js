@@ -59,6 +59,7 @@ module.exports = {
 			'src/js/controllers/homeCtrl.js',
 			'src/js/controllers/venueCtrl.js',
 			'src/js/controllers/venueDetailsCtrl.js',
+			'src/js/controllers/businessCtrl.js',
 			'src/js/services/restUrlService.js',
 			'src/js/services/venueService.js'
         ],

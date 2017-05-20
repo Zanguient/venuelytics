@@ -1,0 +1,148 @@
+<style>
+@media screen and (min-device-width: 1200px) and (max-device-width:
+ 1600px) {
+ #businessImage {
+  height: 300px;
+  width: 550px;
+ }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width:
+ 480px) {
+ #businessImage {
+  height: 200px;
+  width: 350px;
+ }
+}
+</style>
+<div class="container">
+	<div class="row">
+		<div ng-hide="createBusiness == true">
+            <form class="search-form">
+                <div class="form-group">
+                <div class="col-md-10">
+                <input type="text" class="form-control" id="search" placeholder="Enter the Name of your business..." ng-model="searchBusiness">
+                </div>
+                <button type="submit" class="btn btn-raised btn-primary pull-right" ng-click="search()">Search</button>
+                </div>
+            </form>
+    	</div>
+    	<br ng-hide="createBusiness == true">
+    	<br ng-hide="createBusiness == true">
+    	<br ng-hide="createBusiness == true">
+    	<div ng-repeat="business in businessDetails" ng-hide="createBusiness == true">
+		<article class="card wow fadeInLeft animation-delay-5 mb-4">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+            				<uib-slide ng-repeat="slide in business.imageUrls" index="$index">
+                				<img id="businessImage" ng-src="{{slide.originalUrl}}" class="img-responsive">
+            				</uib-slide>
+        				</uib-carousel>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3 class="no-mt">{{business.venueName}}</h3>
+                        <p class="mb-4">{{business.description | limitTo: 200 }}{{business.description.length > 200 ? '...' :''}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <img src="assets/img/demo/avatar50.jpg" alt="..." class="img-circle mr-1"> by <a href="javascript:void(0)">Victoria</a> in <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
+                        <span class="ml-1 hidden-xs"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">April 15, 2015</span></span>
+                    </div>
+                    <div class="col-lg-4 text-right">
+                            <a href="javascript:void(0)" class="btn btn-primary btn-raised btn-block animate-icon"><i class="zmdi zmdi-wrench"></i>CLAIM BUSINESS</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    	</div>
+    	<div class="form-group" ng-hide="createBusiness == true">
+    	<center>
+        <button type="submit" class="btn btn-raised btn-primary" ng-if="businessDetails" ng-click="createBusinessMethod()">CREATE BUSINESS</button>
+        </center>
+    	</div>
+    	<div ng-show="createBusiness == true">
+    	<div ng-hide="hideForm == true">
+			<form class="search-form">
+                <div class="form-group">
+                    <label for="inputEmail" class="col-md-2 control-label">Email</label>
+						<div class="col-md-10">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Phone Number</label>
+						<div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="Phone Number">
+                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10 col-md-offset-2">
+                        <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit()">Submit</button>
+                        <button type="button" class="btn btn-raised btn-danger" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+    	</div>
+    	</div>
+    	<div ng-show="businessData == true">
+			<form class="search-form">
+			    <div class="form-group">
+						<div class="col-md-10">
+							<table class="table-responsive">
+							<tr>
+								<td rowspan="3" style="width:100px;height:100px">
+								    <img src="{{businessImage}}" alt="" class="img-responsive">
+								</td>
+								<td>
+							    	&nbsp&nbsp&nbsp&nbsp<label class="control-label">{{venueName}}</label>
+							    </td>
+							</tr>
+							<tr>
+							    <td>
+							    	&nbsp&nbsp&nbsp&nbsp<label class="control-label">{{venueAddress}}</label>
+							    </td>
+							</tr>
+							</table>
+                        </div>
+                </div>
+                 <div class="form-group">
+						<div class="col-md-10">
+						    <label class="control-label">Link to your premium service</label>
+                            <input type="text" class="form-control">
+                        </div>
+                </div>
+                <div class="form-group">
+						<div class="col-md-10">
+							<label class="control-label">Script to include on your website.</label>
+						    <table class="table-responsive">
+							<tr>
+								<td>
+								    <label class="control-label">Menu</label>
+								</td>
+								<td>
+							    	&nbsp&nbsp&nbsp&nbsp<label class="control-label">Menu Items</label>
+							    </td>
+							</tr>
+							<tr>
+							    <td>
+							    	<label class="control-label">Button</label>
+							    </td>
+							    <td>
+							    	&nbsp&nbsp&nbsp&nbsp<label class="control-label">Button Items</label>
+							    </td>
+							</tr>
+							</table>
+                        </div>
+                </div>
+                <div class="form-group">
+						<div class="col-md-10">
+						    <label class="control-label">Url to include in your Facebook,Twitter,Instagram,Snapchat and other social media sites.</label>
+                            <input type="text" class="form-control">
+                        </div>
+                </div>
+            </form>
+    	</div>
+    </div>
+	</div>
