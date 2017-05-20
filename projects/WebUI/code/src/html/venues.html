@@ -1,10 +1,14 @@
-<style>
-@media screen and (min-device-width: 1200px) and (max-device-width:
+<!-- <style>
+ @media screen and (min-device-width: 1200px) and (max-device-width:
  1600px) {
  #frameImage {
-  height: 180px;
-  width: 280px;
+  max-width: 280px;
+  height: auto;
+  width: auto;
  }
+ #venueListCard {
+  margin-bottom: 0px;
+}
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width:
@@ -17,7 +21,7 @@
   width: 380px;
  }
 }
-</style>
+</style> -->
 <div class="material-background"></div>
 <div class="container container-full">
     <div class="ms-paper">
@@ -26,257 +30,377 @@
             <!-- <div class="col-md-9 ms-paper-content-container"> -->
             <!-- <div class="ms-paper-content"> -->
             <!-- <section class="ms-component-section"> -->
-            <div class="card">
+            <div class="card" id="venueListCard">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-6" role="tablist">
                     <li role="presentation" class="active">
-                        <a class="withoutripple" ng-href="/venues/Albany#bar" aria-controls="bar" role="tab" data-toggle="tab">
+                        <a class="withoutripple" ng-href="#bar" aria-controls="bar" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-home"></i>
                             <span class="hidden-xs">BAR</span>
                         </a>
                     </li>
                     <li role="presentation">
-                        <a class="withoutripple" ng-href="/venues/Albany#club" aria-controls="club" role="tab" data-toggle="tab">
+                        <a class="withoutripple" ng-href="#club" aria-controls="club" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-account"></i>
                             <span class="hidden-xs">CLUB</span>
                         </a>
                     </li>
                     <li role="presentation">
-                        <a class="withoutripple" ng-href="/venues/Albany#lounge" aria-controls="lounge" role="tab" data-toggle="tab">
+                        <a class="withoutripple" ng-href="#lounge" aria-controls="lounge" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-email"></i>
                             <span class="hidden-xs">LOUNGE</span>
                         </a>
                     </li>
                     <li role="presentation">
-                        <a class="withoutripple" ng-href="/venues/Albany#nightclub" aria-controls="nightclub" role="tab" data-toggle="tab">
+                        <a class="withoutripple" ng-href="#nightclub" aria-controls="nightclub" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-settings"></i>
                             <span class="hidden-xs">NIGHTCLUB</span>
                         </a>
                     </li>
                     <li role="presentation">
-                        <a class="withoutripple" ng-href="/venues/Albany#karaoke" aria-controls="karaoke" role="tab" data-toggle="tab">
+                        <a class="withoutripple" ng-href="#karaoke" aria-controls="karaoke" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-settings"></i>
                             <span class="hidden-xs">KARAOKE</span>
                         </a>
                     </li>
                     <li role="presentation">
-                        <a class="withoutripple" ng-href="/venues/Albany#restaurant" aria-controls="restaurant" role="tab" data-toggle="tab">
+                        <a class="withoutripple" ng-href="#restaurant" aria-controls="restaurant" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-settings"></i>
                             <span class="hidden-xs">RESTAURANT</span>
                         </a>
                     </li>
                 </ul>
-                <div class="card-block">
+                <div class="card-block" style="padding-left: 0px;">
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade active in" id="bar">
                             <div>
-                                <div class="ms-paper-content">
-                                    <h1>Venues</h1>
-                                    <section class="ms-component-section" >
-                                        <div class="row" >
-                                            <ul id="frameResponsive" class="col-md-3" ng-repeat="venue in listOfVenuesByCity">
-                                                <h3 class="text-center">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                <li class="card" style="list-style-type: none;">
-                                                    <img id="frameImage" ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
-                                                        <div class="card-block">
-                                                            <!-- <h4 class="color-primary">Lorem ipsum dolor sit</h4> -->
-                                                            <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                            <!-- <button class="btn btn-default btn-xs" ng-click="venueDescription(venue.description)"></button> -->
-                                                            <center>
-                                                                <a href="javascript:void(0)" class="btn btn-primary">
-                                                                    <i class="zmdi zmdi-star"></i> Button
+                                <div class="container">
+                                    <div class="row masonry-container">
+                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
+                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                        <figcaption class="ms-thumbnail-caption text-center">
+                                                            <div class="ms-thumbnail-caption-content">
+                                                                <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                <div class="mt-2">
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
+                                                                        <i class="zmdi zmdi-favorite"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
+                                                                        <i class="zmdi zmdi-star"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
+                                                                        <i class="zmdi zmdi-share"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="card-block">
+                                                        <h2>
+                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                        </h2>
+                                                        <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-4">
+                                                                <div class="mt-05">
+                                                                    <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-8">
+                                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
+                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
                                                                 </a>
-                                                                <a ng-click="selectVenue(venue)" class="btn btn-primary btn-raised">
-                                                                    <i class="zmdi zmdi-flower"></i> View
-                                                                </a>
-                                                            </center>
+                                                            </div>
                                                         </div>
-                                                    </li>
-                                                </ul>
+                                                    </div>
+                                                </article>
                                             </div>
-                                            <!-- row -->
-                                        </section>
+                                        </div>
                                     </div>
+                                    <!-- container -->
                                     <!-- ms-paper-content -->
                                 </div>
                                 <!-- col-md-9 -->
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="club">
                                 <div>
-                                    <div class="ms-paper-content">
-                                        <h1>Venues</h1>
-                                        <section class="ms-component-section" >
-                                            <div class="row" >
-                                                <ul id="frameResponsive" class="col-md-3" ng-repeat="venue in listOfVenuesByCity">
-                                                    <h3 class="text-center">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                    <li class="card" style="list-style-type: none;">
-                                                        <img id="frameImage" ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
-                                                            <div class="card-block">
-                                                                <!-- <h4 class="color-primary">Lorem ipsum dolor sit</h4> -->
-                                                                <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                                <!-- <button class="btn btn-default btn-xs" ng-click="venueDescription(venue.description)"></button> -->
-                                                                <center>
-                                                                    <a href="javascript:void(0)" class="btn btn-primary">
-                                                                        <i class="zmdi zmdi-star"></i> Button
+                                <div class="container">
+                                    <div class="row masonry-container">
+                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
+                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                        <figcaption class="ms-thumbnail-caption text-center">
+                                                            <div class="ms-thumbnail-caption-content">
+                                                                <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                <div class="mt-2">
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
+                                                                        <i class="zmdi zmdi-favorite"></i>
                                                                     </a>
-                                                                    <a ng-click="selectVenue(venue)" class="btn btn-primary btn-raised">
-                                                                        <i class="zmdi zmdi-flower"></i> View
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
+                                                                        <i class="zmdi zmdi-star"></i>
                                                                     </a>
-                                                                </center>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
+                                                                        <i class="zmdi zmdi-share"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <!-- row -->
-                                            </section>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="card-block">
+                                                        <h2>
+                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                        </h2>
+                                                        <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-4">
+                                                                <div class="mt-05">
+                                                                    <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-8">
+                                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
+                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
                                         </div>
-                                        <!-- ms-paper-content -->
                                     </div>
+                                    <!-- container -->
+                                    <!-- ms-paper-content -->
+                                </div>
                                     <!-- col-md-9 -->
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="lounge">
                                     <div>
-                                        <div class="ms-paper-content">
-                                            <h1>Venues</h1>
-                                            <section class="ms-component-section" >
-                                                <div class="row" >
-                                                    <ul id="frameResponsive" class="col-md-3" ng-repeat="venue in listOfVenuesByCity">
-                                                        <h3 class="text-center">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                        <li class="card" style="list-style-type: none;">
-                                                            <img id="frameImage" ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
-                                                                <div class="card-block">
-                                                                    <!-- <h4 class="color-primary">Lorem ipsum dolor sit</h4> -->
-                                                                    <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                                    <!-- <button class="btn btn-default btn-xs" ng-click="venueDescription(venue.description)"></button> -->
-                                                                    <center>
-                                                                        <a href="javascript:void(0)" class="btn btn-primary">
-                                                                            <i class="zmdi zmdi-star"></i> Button
-                                                                        </a>
-                                                                        <a ng-click="selectVenue(venue)" class="btn btn-primary btn-raised">
-                                                                            <i class="zmdi zmdi-flower"></i> View
-                                                                        </a>
-                                                                    </center>
+                                <div class="container">
+                                    <div class="row masonry-container">
+                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
+                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                        <figcaption class="ms-thumbnail-caption text-center">
+                                                            <div class="ms-thumbnail-caption-content">
+                                                                <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                <div class="mt-2">
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
+                                                                        <i class="zmdi zmdi-favorite"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
+                                                                        <i class="zmdi zmdi-star"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
+                                                                        <i class="zmdi zmdi-share"></i>
+                                                                    </a>
                                                                 </div>
-                                                            </li>
-                                                        </ul>
+                                                            </div>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="card-block">
+                                                        <h2>
+                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                        </h2>
+                                                        <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-4">
+                                                                <div class="mt-05">
+                                                                    <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-8">
+                                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
+                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <!-- row -->
-                                                </section>
+                                                </article>
                                             </div>
-                                            <!-- ms-paper-content -->
                                         </div>
+                                    </div>
+                                    <!-- container -->
+                                    <!-- ms-paper-content -->
+                                </div>
                                         <!-- col-md-9 -->
                                     </div>
                                     <div role="tabpanel" class="tab-pane fade" id="nightclub">
                                         <div>
-                                            <div class="ms-paper-content">
-                                                <h1>Venues</h1>
-                                                <section class="ms-component-section" >
-                                                    <div class="row" >
-                                                        <ul id="frameResponsive" class="col-md-3" ng-repeat="venue in listOfVenuesByCity">
-                                                            <h3 class="text-center">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <li class="card" style="list-style-type: none;">
-                                                                <img id="frameImage" ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
-                                                                    <div class="card-block">
-                                                                        <!-- <h4 class="color-primary">Lorem ipsum dolor sit</h4> -->
-                                                                        <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                                        <!-- <button class="btn btn-default btn-xs" ng-click="venueDescription(venue.description)"></button> -->
-                                                                        <center>
-                                                                            <a href="javascript:void(0)" class="btn btn-primary">
-                                                                                <i class="zmdi zmdi-star"></i> Button
-                                                                            </a>
-                                                                            <a ng-click="selectVenue(venue)" class="btn btn-primary btn-raised">
-                                                                                <i class="zmdi zmdi-flower"></i> View
-                                                                            </a>
-                                                                        </center>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                <div class="container">
+                                    <div class="row masonry-container">
+                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
+                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                        <figcaption class="ms-thumbnail-caption text-center">
+                                                            <div class="ms-thumbnail-caption-content">
+                                                                <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                <div class="mt-2">
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
+                                                                        <i class="zmdi zmdi-favorite"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
+                                                                        <i class="zmdi zmdi-star"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
+                                                                        <i class="zmdi zmdi-share"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="card-block">
+                                                        <h2>
+                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                        </h2>
+                                                        <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-4">
+                                                                <div class="mt-05">
+                                                                    <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-8">
+                                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
+                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                        <!-- row -->
-                                                    </section>
-                                                </div>
-                                                <!-- ms-paper-content -->
+                                                    </div>
+                                                </article>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <!-- container -->
+                                    <!-- ms-paper-content -->
+                                </div>
                                             <!-- col-md-9 -->
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="karaoke">
-                                        <div>
-                                            <div class="ms-paper-content">
-                                                <h1>Venues</h1>
-                                                <section class="ms-component-section" >
-                                                    <div class="row" >
-                                                        <ul id="frameResponsive" class="col-md-3" ng-repeat="venue in listOfVenuesByCity">
-                                                            <h3 class="text-center">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <li class="card" style="list-style-type: none;">
-                                                                <img id="frameImage" ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
-                                                                    <div class="card-block">
-                                                                        <!-- <h4 class="color-primary">Lorem ipsum dolor sit</h4> -->
-                                                                        <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                                        <!-- <button class="btn btn-default btn-xs" ng-click="venueDescription(venue.description)"></button> -->
-                                                                        <center>
-                                                                            <a href="javascript:void(0)" class="btn btn-primary">
-                                                                                <i class="zmdi zmdi-star"></i> Button
-                                                                            </a>
-                                                                            <a ng-click="selectVenue(venue)" class="btn btn-primary btn-raised">
-                                                                                <i class="zmdi zmdi-flower"></i> View
-                                                                            </a>
-                                                                        </center>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                            <div>
+                                <div class="container">
+                                    <div class="row masonry-container">
+                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
+                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                        <figcaption class="ms-thumbnail-caption text-center">
+                                                            <div class="ms-thumbnail-caption-content">
+                                                                <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                <div class="mt-2">
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
+                                                                        <i class="zmdi zmdi-favorite"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
+                                                                        <i class="zmdi zmdi-star"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
+                                                                        <i class="zmdi zmdi-share"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="card-block">
+                                                        <h2>
+                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                        </h2>
+                                                        <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-4">
+                                                                <div class="mt-05">
+                                                                    <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-8">
+                                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
+                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                        <!-- row -->
-                                                    </section>
-                                                </div>
-                                                <!-- ms-paper-content -->
+                                                    </div>
+                                                </article>
                                             </div>
-                                            <!-- col-md-9 -->
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="restaurant">
-                                        <div>
-                                            <div class="ms-paper-content">
-                                                <h1>Venues</h1>
-                                                <section class="ms-component-section" >
-                                                    <div class="row" >
-                                                        <ul id="frameResponsive" class="col-md-3" ng-repeat="venue in listOfVenuesByCity">
-                                                            <h3 class="text-center">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <li class="card" style="list-style-type: none;">
-                                                                <img id="frameImage" ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
-                                                                    <div class="card-block">
-                                                                        <!-- <h4 class="color-primary">Lorem ipsum dolor sit</h4> -->
-                                                                        <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                                        <!-- <button class="btn btn-default btn-xs" ng-click="venueDescription(venue.description)"></button> -->
-                                                                        <center>
-                                                                            <a href="javascript:void(0)" class="btn btn-primary">
-                                                                                <i class="zmdi zmdi-star"></i> Button
-                                                                            </a>
-                                                                            <a ng-click="selectVenue(venue)" class="btn btn-primary btn-raised">
-                                                                                <i class="zmdi zmdi-flower"></i> View
-                                                                            </a>
-                                                                        </center>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <!-- row -->
-                                                    </section>
-                                                </div>
-                                                <!-- ms-paper-content -->
-                                            </div>
-                                            <!-- col-md-9 -->
                                         </div>
                                     </div>
+                                    <!-- container -->
+                                    <!-- ms-paper-content -->
                                 </div>
+                                                <!-- col-md-9 -->
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="restaurant">
+                                                <div>
+                                <div class="container">
+                                    <div class="row masonry-container">
+                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
+                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                        <figcaption class="ms-thumbnail-caption text-center">
+                                                            <div class="ms-thumbnail-caption-content">
+                                                                <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
+                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                                <div class="mt-2">
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
+                                                                        <i class="zmdi zmdi-favorite"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
+                                                                        <i class="zmdi zmdi-star"></i>
+                                                                    </a>
+                                                                    <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
+                                                                        <i class="zmdi zmdi-share"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </figcaption>
+                                                    </figure>
+                                                    <div class="card-block">
+                                                        <h2>
+                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                        </h2>
+                                                        <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-4">
+                                                                <div class="mt-05">
+                                                                    <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-8">
+                                                                <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
+                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- container -->
+                                    <!-- ms-paper-content -->
+                                </div>
+                                                    <!-- col-md-9 -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- card -->
+                                    <!-- </section> -->
+                                    <!-- </div> -->
+                                    <!-- </div> -->
+                                </div>
+                                <!-- row -->
                             </div>
-                            <!-- card -->
-                            <!-- </section> -->
-                            <!-- </div> -->
-                            <!-- </div> -->
+                            <!-- ms-paper -->
                         </div>
-                        <!-- row -->
-                    </div>
-                    <!-- ms-paper -->
-                </div>
-                <!-- container -->
+                        <!-- container -->
