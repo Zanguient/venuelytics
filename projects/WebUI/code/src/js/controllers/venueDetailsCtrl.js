@@ -17,7 +17,14 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 $log.info("resevationURL:"+self.resevationURL);
                 $log.info("Venue details-->");
 
-                $('#venueReservationFrame').iFrameResize( [{log:true,interval:1000}] );
+                iFrameResize({
+                        log                     : false,                  // Enable console logging
+                        inPageLinks             : false,
+                        heightCalculationMethod: 'max',
+                        widthCalculationMethod: 'min',
+                        sizeWidth: false,
+                        checkOrigin: false
+                    });
             };
 
             self.init();
