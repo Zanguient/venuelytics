@@ -26,16 +26,19 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 },function(error) {
                     $log.error("Error"+error);
                 });
-            }
+            };
+            
             self.createBusinessMethod = function(){
             	self.createBusiness = true;
-            }
+            };
+            
             self.cancel = function() {
             	self.createBusiness = false;
-            }
+            };
+            
             self.businessSubmit = function() {
             	self.businessData = true;
             	self.hideForm = true;
-            }
+            };
     		
     }]);
