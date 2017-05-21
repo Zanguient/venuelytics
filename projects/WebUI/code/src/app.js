@@ -2,7 +2,7 @@ var app = angular.module('Mobinite', ['ngRoute']);
 
 
 // configure our routes
-app.config(['$routeProvider', '$httpProvider', '$locationProvider','$sceDelegateProvider', function($routeProvider, $httpProvider, $locationProvider,$sceDelegateProvider) {
+app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegateProvider', function($routeProvider, $httpProvider, $locationProvider, $sceDelegateProvider) {
     $locationProvider.hashPrefix('');
     $httpProvider.defaults.withCredentials = true;
 
@@ -14,7 +14,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider','$sceDelegate
     ]);
 
     $routeProvider
-        .when('/', {
+        .when('/home', {
             templateUrl: 'home.html',
             controller: 'HomeController'
         })
@@ -30,5 +30,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider','$sceDelegate
             templateUrl: 'businessSearch.html',
             controller: 'businessController'
         })
-        .otherwise('/');
+        .otherwise('/home');
+
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: true,
+        rewriteLinks: true
+    });
+
 }]);

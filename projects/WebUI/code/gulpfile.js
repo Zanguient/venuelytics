@@ -297,7 +297,8 @@ gulp.task('connect', function() {
     connect.server({
         root: config.folders.dist,
         port: 8080,
-        livereload: true
+        livereload: true,
+        fallback: config.folders.dist+'/index.html'
     });
 });
 
