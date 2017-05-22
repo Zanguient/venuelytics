@@ -18,13 +18,12 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                     url: RestURL.baseURL + '/venues?&search=' + self.searchBusiness + '&from=0&size=10'
                 }).then(function(success) {
                     self.businessDetails = success.data.venues;
-                    $log.info("sucess>>>>>>>"+angular.toJson(self.businessDetails));
                     self.businessImage = self.businessDetails[0].imageUrls[0].originalUrl;
                     self.venueName = self.businessDetails[0].venueName;
                     self.venueAddress = self.businessDetails[0].address;
 
                 },function(error) {
-                    $log.error("Error"+error);
+                    $log.error("Error: "+error);
                 });
             };
             

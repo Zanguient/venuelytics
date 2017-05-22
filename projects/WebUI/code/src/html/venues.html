@@ -1,27 +1,3 @@
-<!-- <style>
- @media screen and (min-device-width: 1200px) and (max-device-width:
- 1600px) {
- #frameImage {
-  max-width: 280px;
-  height: auto;
-  width: auto;
- }
- #venueListCard {
-  margin-bottom: 0px;
-}
-}
-
-@media only screen and (min-device-width: 320px) and (max-device-width:
- 480px) {
- #frameImage {
-  height: 200px;
-  width: 350px;
- }
- #frameResponsive {
-  width: 380px;
- }
-}
-</style> -->
 <div class="material-background"></div>
 <div class="container container-full">
     <div class="ms-paper">
@@ -33,100 +9,47 @@
             <div class="card" id="venueListCard">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-6" role="tablist">
-                    <li role="presentation" class="active">
-                        <a class="withoutripple" ng-href="#bar" aria-controls="bar" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-class="{ active: isSet(1) }">
+                        <a href ng-click="setTab(1)" class="withoutripple" aria-controls="clubs" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-home"></i>
-                            <span class="hidden-xs">BAR</span>
+                            <span class="hidden-xs">CLUBS</span>
                         </a>
                     </li>
-                    <li role="presentation">
-                        <a class="withoutripple" ng-href="#club" aria-controls="club" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-class="{ active: isSet(2) }">
+                        <a href ng-click="setTab(2)" class="withoutripple" aria-controls="casinos" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-account"></i>
-                            <span class="hidden-xs">CLUB</span>
+                            <span class="hidden-xs">CASINOS</span>
                         </a>
                     </li>
-                    <li role="presentation">
-                        <a class="withoutripple" ng-href="#lounge" aria-controls="lounge" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-class="{ active: isSet(3) }">
+                        <a href ng-click="setTab(3)" class="withoutripple" aria-controls="bars" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-email"></i>
-                            <span class="hidden-xs">LOUNGE</span>
+                            <span class="hidden-xs">BARS</span>
                         </a>
                     </li>
-                    <li role="presentation">
-                        <a class="withoutripple" ng-href="#nightclub" aria-controls="nightclub" role="tab" data-toggle="tab">
-                            <i class="zmdi zmdi-settings"></i>
-                            <span class="hidden-xs">NIGHTCLUB</span>
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a class="withoutripple" ng-href="#karaoke" aria-controls="karaoke" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-class="{ active: isSet(4) }">
+                        <a href ng-click="setTab(4)" class="withoutripple" aria-controls="karaoke" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-settings"></i>
                             <span class="hidden-xs">KARAOKE</span>
                         </a>
                     </li>
-                    <li role="presentation">
-                        <a class="withoutripple" ng-href="#restaurant" aria-controls="restaurant" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-class="{ active: isSet(5) }">
+                        <a href ng-click="setTab(5)" class="withoutripple" aria-controls="bowling" role="tab" data-toggle="tab">
+                            <i class="zmdi zmdi-settings"></i>
+                            <span class="hidden-xs">BOWLING</span>
+                        </a>
+                    </li>
+                    <li role="presentation" ng-class="{ active: isSet(6) }">
+                        <a href ng-click="setTab(6)" class="withoutripple" aria-controls="restaurant" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-settings"></i>
                             <span class="hidden-xs">RESTAURANT</span>
                         </a>
                     </li>
                 </ul>
-                <div class="card-block" style="padding-left: 0px;">
+                <div class="card-block" id="venueCardBlock">
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade active in" id="bar">
-                            <div>
-                                <div class="container">
-                                    <div class="row masonry-container">
-                                        <div class="col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
-                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
-                                                    <figcaption class="ms-thumbnail-caption text-center">
-                                                        <div class="ms-thumbnail-caption-content">
-                                                            <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                                            <div class="mt-2">
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
-                                                                    <i class="zmdi zmdi-favorite"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
-                                                                    <i class="zmdi zmdi-star"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
-                                                                    <i class="zmdi zmdi-share"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption>
-                                                </figure>
-                                                <div class="card-block">
-                                                    <h2>
-                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
-                                                        </h2>
-                                                    <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                    <div class="row">
-                                                        <div class="col-lg-6 col-md-4">
-                                                            <div class="mt-05">
-                                                                <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-8">
-                                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon" ng-click="selectVenue(venue)">View more 
-                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
-                                                                </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- container -->
-                                <!-- ms-paper-content -->
-                            </div>
-                            <!-- col-md-9 -->
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="club">
+                        <div role="tabpanel" id="clubs" ng-show="isSet(1)" class="tab-pane fade active in">
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
@@ -179,7 +102,7 @@
                             </div>
                             <!-- col-md-9 -->
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="lounge">
+                        <div role="tabpanel" id="casinos" ng-show="isSet(2)" class="tab-pane fade active in">
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
@@ -232,7 +155,7 @@
                             </div>
                             <!-- col-md-9 -->
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="nightclub">
+                        <div role="tabpanel" id="bars" ng-show="isSet(3)" class="tab-pane fade active in">
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
@@ -285,7 +208,7 @@
                             </div>
                             <!-- col-md-9 -->
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="karaoke">
+                        <div role="tabpanel" id="karaoke" ng-show="isSet(4)" class="tab-pane fade active in">
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
@@ -338,7 +261,60 @@
                             </div>
                             <!-- col-md-9 -->
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="restaurant">
+                        <div role="tabpanel" id="bowling" ng-show="isSet(5)" class="tab-pane fade active in">
+                            <div>
+                                <div class="container">
+                                    <div class="row masonry-container">
+                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
+                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                    <figcaption class="ms-thumbnail-caption text-center">
+                                                        <div class="ms-thumbnail-caption-content">
+                                                            <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                            <div class="mt-2">
+                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
+                                                                    <i class="zmdi zmdi-favorite"></i>
+                                                                </a>
+                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
+                                                                    <i class="zmdi zmdi-star"></i>
+                                                                </a>
+                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
+                                                                    <i class="zmdi zmdi-share"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </figcaption>
+                                                </figure>
+                                                <div class="card-block">
+                                                    <h2>
+                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                        </h2>
+                                                    <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-4">
+                                                            <div class="mt-05">
+                                                                <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-8">
+                                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
+                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
+                                                                </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- container -->
+                                <!-- ms-paper-content -->
+                            </div>
+                            <!-- col-md-9 -->
+                        </div>
+                        <div role="tabpanel" id="restaurant" ng-show="isSet(6)" class="tab-pane fade active in">
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">

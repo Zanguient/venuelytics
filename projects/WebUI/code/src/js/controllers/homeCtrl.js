@@ -10,15 +10,19 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     		
     		var self = $scope;
 
+            self.selectedCountry = 'Northen America';
+
+            self.countries = ['Northen America', 'Canada', 'South America', 'India'];
+
             self.init = function() {
                 $http({
                     method: 'GET',
                     url: RestURL.baseURL + '/venues/cities'
                 }).then(function(success) {
                     self.listOfCities = success.data.cities;
-                    $log.info("Success data-->");
+                    $log.info("Success getting cities.");
                 },function(error) {
-                    $log.error("Error"+error);
+                    $log.error("Error: "+error);
                 });
             };
 
@@ -28,5 +32,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     		self.selectCity = function(cityName) {
                 $location.url('/venues/'+cityName);
     		};
+
+            self.selectedCountry = function(country) {
+                $log.info("selectedCountry :"+country);
+            };
     		
     }]);

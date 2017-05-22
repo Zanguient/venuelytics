@@ -32,3 +32,41 @@
 #cityImage li {
   list-style-type: none;
 }
+
+@media screen and (min-device-width: 1200px) and (max-device-width:
+ 1600px) {
+ #businessImage {
+  height: 300px;
+  width: 550px;
+ }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width:
+ 480px) {
+ #businessImage {
+  height: 200px;
+  width: 350px;
+ }
+}
+
+#venueBanner {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#venueCardBlock {
+  padding-left: 0px;
+}
+
+#venueListCard {
+  margin-bottom: 0px;
+}
+
+#businessDetails {
+  width:100px;
+  height:100px;
+}
+
+#countryDropdown {
+  left: 77%;
+  color:black  
+}

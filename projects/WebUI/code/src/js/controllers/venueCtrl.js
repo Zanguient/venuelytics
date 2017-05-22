@@ -10,16 +10,17 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
     		
     		var self = $scope;
 
+            self.tab = 1;
+
             self.init = function() {
-                var cityName = $routeParams.cityName;
+                self.city = $routeParams.cityName;
                 $http({
                     method: 'GET',
-                    url: RestURL.baseURL + '/venues?&city=' + cityName + '&from=0&size=10'
+                    url: RestURL.baseURL + '/venues?&city=' + self.city + '&from=0&size=10'
                 }).then(function(success) {
-                    $log.info("Success data-->");
                     self.listOfVenuesByCity = success.data.venues;
                 },function(error) {
-                    $log.error("Error"+error);
+                    $log.error("Error: "+error);
                 });
 
                 $log.info("Init Venues By Cities Completed");
@@ -27,8 +28,15 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
 
             self.init();
 
+            $scope.setTab = function(newTab){
+              self.tab = newTab;
+            };
+
+            $scope.isSet = function(tabNum){
+              return self.tab === tabNum;
+            };
+
     		self.selectVenue = function(venue) {
-    			$log.info("Selected Venue-->");
                 VenueService.selectedVenueDetails = venue;
     			$location.url('/venueDetails');
     		};
