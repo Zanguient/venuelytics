@@ -56,6 +56,9 @@
 
     "globals": {
         "angular": false,
-        "$": false
+        "$": false,
+		"jQuery": false,
+		"WOW": false,
+		"app": false
     }
 }

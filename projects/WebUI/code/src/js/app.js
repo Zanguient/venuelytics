@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    document.addEventListener("touchstart", function(){}, true);
+    document.addEventListener('touchstart', function(){}, true);
 
     new WOW().init();
 
@@ -85,7 +85,7 @@ $(document).ready(function(){
 
     var confOpen = false;
 
-    $(".ms-conf-btn").click(function () {
+    $('.ms-conf-btn').click(function () {
         if (!confOpen) {
             confOpen = true;
             openConf();
@@ -95,7 +95,7 @@ $(document).ready(function(){
             closeConf();
         }
     });
-    $(".sb-site-container").click(function () {
+    $('.sb-site-container').click(function () {
         if (confOpen) {
             confOpen = false;
             closeConf();
@@ -103,7 +103,7 @@ $(document).ready(function(){
     });
 
     $('#datePicker').datepicker({
-        orientation: "bottom left",
+        orientation: 'bottom left',
         autoclose: true,
         todayHighlight: true
     });
@@ -136,20 +136,20 @@ $(document).ready(function(){
 });
 
 function openConf(op) {
-    $("#ms-configurator").animate({
-        "right": '0px'
+    $('#ms-configurator').animate({
+        'right': '0px'
     }, 400);
-    $(".ms-configurator-btn").animate({
-        "right": '-60px'
+    $('.ms-configurator-btn').animate({
+        'right': '-60px'
     }, 200);
 }
 
 function closeConf() {
-    $("#ms-configurator").animate({
-        "right": '-310px'
+    $('#ms-configurator').animate({
+        'right': '-310px'
     }, 200);
-    $(".ms-configurator-btn").animate({
-        "right": '20px'
+    $('.ms-configurator-btn').animate({
+        'right': '20px'
     }, 400);
 }
 
