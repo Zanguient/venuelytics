@@ -187,7 +187,9 @@ gulp.task('html:release', function() {
 gulp.task('js', function() {
     gulp.src(['src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*'])
         .pipe(jshint())
-        .pipe(jshint.reporter('default'))
+        .pipe(jshint.reporter('gulp-jshint-html-reporter', {
+        	filename: 'jshint-output.html'
+        }))
         .pipe(gulpif(config.compress, concat('app.min.js')))
         .pipe(gulpif(config.compress, uglify()))
         .pipe(gulp.dest(paths.js))
