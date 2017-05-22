@@ -7,6 +7,18 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.createBusiness = false;
             self.businessData = false;
             self.hideForm = false;
+            self.claimForm = false;
+            self.newUser = {
+                businessName: '',
+                address: '',
+                address2: '',
+                city: '',
+                emailId: ''
+            };
+            self.claim = {
+                email: '',
+                password: ''
+            };
             self.init = function() {
             };
 
@@ -27,17 +39,31 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 });
             };
             
-            self.createBusinessMethod = function(){
-            	self.createBusiness = true;
+            self.claimBusiness = function(){
+                self.createBusiness = true;
             };
             
             self.cancel = function() {
-            	self.createBusiness = false;
+                self.createBusiness = false;
             };
             
             self.businessSubmit = function() {
-            	self.businessData = true;
-            	self.hideForm = true;
+                    self.businessData = true;
+                    self.hideForm = true;
+            };
+            self.createBusinessMethod = function() {
+                self.createBusiness = true;
+                self.hideForm = true;
+                self.claimForm = true;
+            };
+            self.submitForm = function() {
+                angular.forEach(self.myForm.$error.required, function(field) {
+                    field.$setDirty();
+                });
+            };
+            self.showMessage = function(input) {
+                var show = input.$invalid && (input.$dirty || input.$touched);
+                return show;
             };
     		
     }]);

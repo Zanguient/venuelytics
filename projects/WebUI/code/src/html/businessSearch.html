@@ -1,3 +1,6 @@
+<center>
+    <h2>BUSINESS SEARCH</h2>
+</center>
 <div class="container">
 	<div class="row">
 		<div ng-hide="createBusiness == true">
@@ -10,9 +13,7 @@
                 </div>
             </form>
     	</div>
-    	<br ng-hide="createBusiness == true">
-    	<br ng-hide="createBusiness == true">
-    	<br ng-hide="createBusiness == true">
+        <br/><br/><br/>
     	<div ng-repeat="business in businessDetails" ng-hide="createBusiness == true">
 		<article class="card wow fadeInLeft animation-delay-5 mb-4">
             <div class="card-block">
@@ -35,8 +36,9 @@
                         <span class="ml-1 hidden-xs"><i class="zmdi zmdi-time mr-05 color-info"></i> <span class="color-medium-dark">April 15, 2015</span></span>
                     </div>
                     <div class="col-lg-4 text-right">
-                            <a href="javascript:void(0)" class="btn btn-primary btn-raised btn-block animate-icon"><i class="zmdi zmdi-wrench"></i>CLAIM BUSINESS</a>
+                            <button href="javascript:void(0)" class="btn btn-primary btn-raised btn-block animate-icon" ng-click="claimBusiness()"><i class="zmdi zmdi-wrench"></i>CLAIM BUSINESS</button>
                     </div>
+>
                 </div>
             </div>
         </article>
@@ -47,29 +49,97 @@
         </center>
     	</div>
     	<div ng-show="createBusiness == true">
-    	<div ng-hide="hideForm == true">
-			<form class="search-form">
-                <div class="form-group">
-                    <label for="inputEmail" class="col-md-2 control-label">Email</label>
-						<div class="col-md-10">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Email">
-                        </div>
+        <div ng-hide="hideForm == true">
+        <form class="search-form" id="myFormClaim" name="myFormClaim" novalidate ng-submit="submitForm()">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="email" class="form-control" placeholder="Email" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="claimEmailId" ng-model="claim.email" required>
+                    <span class="error-message" ng-show="showMessage(myFormClaim.claimEmailId)">Email is required</span>
                 </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Phone Number</label>
-						<div class="col-md-10">
-                            <input type="text" class="form-control" placeholder="Phone Number">
-                        </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="password" class="form-control" name="password" placeholder="Password" ng-model="claim.password" required>
+                    <span class="error-message" ng-show="showMessage(myFormClaim.password)">Password is required</span>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-10 col-md-offset-2">
-                        <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit()">Submit</button>
-                        <button type="button" class="btn btn-raised btn-danger" ng-click="cancel()">Cancel</button>
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit(claim)" novalidate="novalidate">Submit</button>
+                    <button type="button" class="btn btn-raised btn-danger" ng-click="cancel()">Cancel</button>
                 </div>
-            </form>
-    	</div>
-    	</div>
+            </div>
+        </form>
+        </div>
+        </div>
+        <div ng-show="claimForm == true">
+        <form class="search-form" id="myForm" name="myForm" novalidate ng-submit="submitForm()">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="inputEmail" name="businessName" placeholder="Business Name" ng-model="newUser.businessName" required>
+                    <span class="error-message" ng-show="showMessage(myForm.businessName)">Business Name is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <textarea class="form-control" rows="2" name="address" placeholder="Address" ng-model="newUser.address" required> </textarea>
+                    <span class="error-message" ng-show="showMessage(myForm.address)">Address is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <textarea class="form-control" rows="2" name="address2" placeholder="Address2" ng-model="newUser.address2" required> </textarea>
+                    <span class="error-message" ng-show="showMessage(myForm.address2)">Address2 is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="city" name="city" placeholder="City" ng-model="newUser.city" required>
+                    <span class="error-message" ng-show="showMessage(myForm.city)">City is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <select id="selectState" class="form-control selectpicker" data-dropup-auto="false">
+                        <option>Los angles</option>
+                        <option>New Jersey</option>
+                        <option>Florida</option>
+                        <option>California</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <select id="selectCategory" class="form-control selectpicker" data-dropup-auto="false">
+                        <option>Wedding</option>
+                        <option>BirthDay Party</option>
+                        <option>Event</option>
+                        <option>WeekEnd Party</option>
+                    </select>
+            `   </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <select id="selectRole" class="form-control selectpicker" data-dropup-auto="false">
+                        <option>Artist</option>
+                        <option>Customer</option>
+                        <option>Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="emailId" ng-model="newUser.emailId" required>
+                      <span class="error-message" ng-show="showMessage(myForm.emailId)">Email is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate">Create Account</button>
+                </div>
+            </div>
+        </form> 
+        </div>
     	<div ng-show="businessData == true">
 			<form class="search-form">
 			    <div class="form-group">
