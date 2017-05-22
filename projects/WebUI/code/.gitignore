@@ -3,3 +3,4 @@
 /cache/**
 /src/scss/themes/**
 /bower_components/**
+/jshint-output.html
