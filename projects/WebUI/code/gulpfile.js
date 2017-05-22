@@ -19,8 +19,10 @@ var runSequence =   require('run-sequence').use(gulp);
 var imagemin =      require('gulp-imagemin');
 var changed =       require('gulp-changed');
 var merge =         require('merge-stream');
-
+var awspublish = require('gulp-awspublish');
+var CacheBuster  = require('gulp-cachebust');
 var config =        require('./gulp/config');
+var cachebust = new CacheBuster();
 
 var paths = {
     dist : path.join(config.folders.dist),
@@ -99,12 +101,12 @@ gulp.task('plugins', function() {
     gulp.src(config.plugins.fonts)
         .pipe(gulp.dest(paths.fonts));
 
-    gulp.src(config.plugins.img)
+    return gulp.src(config.plugins.img)
         .pipe(gulp.dest(paths.img));
 });
 
 gulp.task('revolution', function() {
-    gulp.src([
+    return gulp.src([
         './plugins/slider-revolution/revolution/**/*',
         './plugins/slider-revolution/revolution-addons/**/*',
         './plugins/slider-revolution/assets/**/*'],
@@ -113,7 +115,7 @@ gulp.task('revolution', function() {
 });
 
 gulp.task('html', function() {
-    gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
+    return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
         .pipe(changed(path.join(paths.html)))
         .pipe(processhtml({
             recursive: true,
@@ -129,7 +131,7 @@ gulp.task('html', function() {
 });
 
 gulp.task('html:dist', function() {
-    gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
+    return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
         .pipe(processhtml({
             recursive: true,
             process: true,
@@ -197,7 +199,7 @@ gulp.task('js', function() {
         .pipe(gulpif(config.compress, uglify()))
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
-    gulp.src('src/js/pages/**/*')
+   return gulp.src('src/js/pages/**/*')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
         .pipe(gulpif(config.compress, uglify()))
@@ -239,7 +241,7 @@ function generateNames() {
 
 
 gulp.task('scss', function () {
-  gulp.src('src/scss/**/*.scss')
+  return gulp.src('src/scss/**/*.scss')
     .pipe(gulpif(config.allColors, sassThemes('src/scss/themes/_*.scss', generateNames())))
     .pipe(sass().on('error', sass.logError))
     .pipe(gulpif(config.compress, please({
@@ -258,20 +260,20 @@ gulp.task('scss', function () {
 });
 
 gulp.task('img', function() {
-    gulp.src('src/img/**/*')
+    return gulp.src('src/img/**/*')
         .pipe(gulpif(config.compress, imagemin()))
         .pipe(gulp.dest(paths.img))
         .pipe(connect.reload());
 });
 
 gulp.task('fonts', function() {
-    gulp.src('src/fonts/**/*')
+    return gulp.src('src/fonts/**/*')
         .pipe(gulp.dest(paths.fonts))
         .pipe(connect.reload());
 });
 
 gulp.task('media', function() {
-    gulp.src('src/media/**/*')
+    return gulp.src('src/media/**/*')
         .pipe(gulp.dest(paths.media))
         .pipe(connect.reload());
 });
@@ -322,7 +324,7 @@ gulp.task('dist', function() {
         config.environment = 'navbar';
     }
 
-    runSequence(
+    return runSequence(
         'clean',
         'themes',
         ['plugins', 'html:dist', 'js', 'scss', 'img', 'fonts', 'media', 'revolution']
@@ -334,7 +336,7 @@ gulp.task('demo', function() {
     config.compress = true;
     config.environment = 'demo';
 
-    runSequence(
+    return runSequence(
         'clean',
         'themes',
         ['plugins', 'html', 'js', 'scss', 'img', 'fonts', 'media', 'revolution']
@@ -344,14 +346,14 @@ gulp.task('demo', function() {
 gulp.task('dev', function() {
     config.environment = 'dev';
 
-    runSequence(
+    return runSequence(
         'clean',
         ['plugins', 'html', 'js', 'scss', 'img', 'fonts', 'media', 'revolution']
     );
 });
 
 gulp.task('work', function() {
-    runSequence(
+    return runSequence(
         'dev',
         ['connect', 'watch']
     );
@@ -362,9 +364,52 @@ gulp.task('release', function() {
     config.compress = true;
     config.environment = 'dist';
 
-    runSequence(
+    return runSequence(
         'clean',
         'themes',
         ['plugins', 'html:release', 'js', 'scss', 'img', 'fonts', 'media', 'revolution']
     );
 });
+
+gulp.task('aws:deploy', function() {
+    config.allColors = true;
+    config.compress = true;
+    config.environment = 'dist';
+
+    return runSequence(
+        'dist','aws:upload'
+    );
+});
+
+gulp.task('aws:upload', function () {
+    
+    var publisher = awspublish.create({
+        region: 'us-west-1',
+        params: {
+          Bucket: 'dev.webui'
+        }
+      }, {
+        cacheFileName: 'cache/release.webui.cache'
+      });
+     
+      // define custom headers 
+      var headers = {
+        'Cache-Control': 'max-age=315360000, no-transform, public'
+        // ... 
+      };
+     
+      return gulp.src(['dist/**'])
+         // gzip, Set Content-Encoding headers and add .gz extension 
+        .pipe(awspublish.gzip())
+     
+        // publisher will add Content-Length, Content-Type and headers specified above 
+        // If not specified it will set x-amz-acl to public-read by default 
+        .pipe(publisher.publish(headers))
+     
+        // create a cache file to speed up consecutive uploads 
+        .pipe(publisher.cache())
+     
+         // print upload updates to console 
+        .pipe(awspublish.reporter());
+});
+

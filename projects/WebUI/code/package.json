@@ -17,7 +17,7 @@
     "Template",
     "Theme"
   ],
-  "author": "Adrián Guerra Marrero",
+  "author": "Venuelytics INC",
   "license": "SEE LICENSE IN license.txt",
   "bugs": {
     "url": "https://github.com/adrigm/material-style/issues"
@@ -45,6 +45,9 @@
     "merge-stream": "^1.0.1",
     "path": "^0.12.7",
     "run-sequence": "^1.2.2",
-    "yargs": "^7.1.0"
+    "yargs": "^7.1.0",
+     "gulp-awspublish":"^3.3.0",
+     "gulp-cachebust":"^0.0.6",
+    "gulp-angular-templatecache":"^1.5.0"
   }
 }
