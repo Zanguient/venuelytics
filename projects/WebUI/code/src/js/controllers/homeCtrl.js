@@ -20,9 +20,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     url: RestURL.baseURL + '/venues/cities'
                 }).then(function(success) {
                     self.listOfCities = success.data.cities;
-                    $log.info("Success getting cities.");
+                    $log.info('Success getting cities.');
                 },function(error) {
-                    $log.error("Error: "+error);
+                    $log.error('Error: '+error);
                 });
             };
 
@@ -34,7 +34,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     		};
 
             self.selectedCountry = function(country) {
-                $log.info("selectedCountry :"+country);
+                $log.info('selectedCountry: '+country);
             };
     		
     }]);

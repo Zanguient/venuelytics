@@ -20,10 +20,10 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                 }).then(function(success) {
                     self.listOfVenuesByCity = success.data.venues;
                 },function(error) {
-                    $log.error("Error: "+error);
+                    $log.error('Error: ' + error);
                 });
 
-                $log.info("Init Venues By Cities Completed");
+                $log.info('Init Venues By Cities Completed.');
             };
 
             self.init();

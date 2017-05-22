@@ -8,7 +8,7 @@
     $.fn.dropdownHover = function (options) {
         // don't do anything if touch is supported
         // (plugin causes some issues on mobile)
-        if('ontouchstart' in document) return this; // don't want to affect chaining
+        if('ontouchstart' in document) {return this;} // don't want to affect chaining
 
         // the element we really care about
         // is the dropdown-toggle's parent
@@ -42,8 +42,9 @@
                     return true;
                 }
 
-                if ($(window).width() > 767)
+                if ($(window).width() > 767) {
                     openDropdown(event);
+                }
             }, function () {
                 if ($(window).width() > 767) {
                 // clear timer for hover event
@@ -65,8 +66,9 @@
                     return true;
                 }
 
-                if ($(window).width() > 767)
+                if ($(window).width() > 767) {
                     openDropdown(event);
+                }
             });
 
             // handle submenus
@@ -96,8 +98,9 @@
                 timeoutHover = window.setTimeout(function () {
                     $allDropdowns.find(':focus').blur();
 
-                    if(settings.instantlyCloseOthers === true)
+                    if(settings.instantlyCloseOthers === true) {
                         $allDropdowns.removeClass('open');
+                    }
 
                     // clear timer for hover event
                     window.clearTimeout(timeoutHover);

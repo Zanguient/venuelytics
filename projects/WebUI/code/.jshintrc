@@ -59,6 +59,7 @@
         "$": false,
 		"jQuery": false,
 		"WOW": false,
-		"app": false
+		"app": false,
+		"iFrameResize": false
     }
 }

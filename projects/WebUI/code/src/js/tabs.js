@@ -31,7 +31,7 @@ function tabs() {
         var currentLeft = tabsLeft['tabL' + id];
 
         var tabLeft = 0;
-        for(m = 0; m < numTabs; m++) {
+        for(var m = 0; m < numTabs; m++) {
             currentLeft[m] = tabLeft;
             currentWidth[m] = $(tabsElements[m]).width();
 

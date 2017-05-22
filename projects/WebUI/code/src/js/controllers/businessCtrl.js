@@ -35,7 +35,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                     self.venueAddress = self.businessDetails[0].address;
 
                 },function(error) {
-                    $log.error("Error: "+error);
+                    $log.error('Error: '+error);
                 });
             };
             
