@@ -65,5 +65,26 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 var show = input.$invalid && (input.$dirty || input.$touched);
                 return show;
             };
-    		
+			
+			// initial image index
+			self._Index = 0;
+			// if a current image is the same as requested image
+			self.isActive = function (index) {
+			return self._Index === index;
+			};
+			
+			// show prev image
+			self.showPrev = function (slide) {
+			self._Index = (self._Index > 0) ? --self._Index : slide.length - 1;
+			};
+			
+			// show next image
+			self.showNext = function (slide) {
+			self._Index = (self._Index < slide.length - 1) ? ++self._Index : 0;
+			};
+
+			// show a certain image
+			self.showPhoto = function (slide,index) {
+			self._Index = index;
+			}; 		
     }]);

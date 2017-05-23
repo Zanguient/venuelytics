@@ -39,18 +39,33 @@
 
 @media screen and (min-device-width: 1200px) and (max-device-width:
  1600px) {
- #businessImage {
+  #businessImage {
+  height: 300px;
+  width: 565px;
+ }
+ #sliderThumb{
+  width:40px;
+  height:22px;
+}
+.slider {
   height: 300px;
   width: 550px;
- }
-
+}
 }
 @media only screen and (min-device-width: 320px) and (max-device-width:
  480px) {
  #businessImage {
   height: 200px;
-  width: 350px;
+  width: 365px;
  }
+ #sliderThumb{
+  width:40px;
+  height:22px;
+}
+.slider {
+  width: 350px;
+  height: 200px;
+}
 }
 
 #venueBanner {
@@ -79,4 +94,34 @@
 
 #venueImages {
   height: 243px;
+}
+
+.buttonNav {
+bottom: -4px;
+display: block;
+height: 48px;
+left: 0;
+margin: 0 auto;
+padding: 1em 0 0.8em;
+position: absolute;
+right: 0;
+text-align: center;
+width: 100%;
+z-index: 5;
+}
+.buttonNav li {
+border: 5px solid #AAAAAA;
+border-radius: 5px;
+cursor: pointer;
+display: inline-block;
+height: 30px;
+margin: 0 8px;
+position: relative;
+width: 50px;
+}
+.buttonNav li.active {
+border: 5px solid #FFFFFF;
+}
+.buttonNav li img {
+width: 100%;
 }

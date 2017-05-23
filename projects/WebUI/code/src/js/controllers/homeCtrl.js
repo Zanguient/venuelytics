@@ -15,6 +15,15 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             self.countries = ['Northen America', 'Canada', 'South America', 'India'];
 
             self.init = function() {
+				if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position){
+                    mysrclat = position.coords.latitude; 
+                    mysrclong = position.coords.longitude;
+                    self.$apply(function(){
+                        self.position = position;
+                        });
+                    });
+                }
                 $http({
                     method: 'GET',
                     url: RestURL.baseURL + '/venues/cities'

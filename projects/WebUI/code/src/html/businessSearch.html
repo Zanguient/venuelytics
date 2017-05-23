@@ -19,11 +19,14 @@
             <div class="card-block">
                 <div class="row">
                     <div class="col-lg-6">
-                        <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-            				<uib-slide ng-repeat="slide in business.imageUrls" index="$index">
-                				<img id="businessImage" ng-src="{{slide.originalUrl}}" class="img-responsive">
-            				</uib-slide>
-        				</uib-carousel>
+                        <div class="slider">
+                            <img id="businessImage" ng-repeat="slide in business.imageUrls" class="slide" ng-swipe-right="showPrev(slide)" ng-swipe-left="showNext(slide)" ng-show="isActive($index)" ng-src="{{slide.originalUrl}}" />
+                            <ul class="buttonNav">
+                                <li ng-repeat="slide in business.imageUrls" ng-class="{'active':isActive($index)}">
+                                <img id="sliderThumb" src="{{slide.originalUrl}}" class="img-responsive" ng-click="showPhoto(slide,$index);" />
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         <h3 class="no-mt">{{business.venueName}}</h3>
@@ -38,7 +41,6 @@
                     <div class="col-lg-4 text-right">
                             <button href="javascript:void(0)" class="btn btn-primary btn-raised btn-block animate-icon" ng-click="claimBusiness()"><i class="zmdi zmdi-wrench"></i>CLAIM BUSINESS</button>
                     </div>
->
                 </div>
             </div>
         </article>
