@@ -43,6 +43,7 @@
   height: 300px;
   width: 550px;
  }
+
 }
 @media only screen and (min-device-width: 320px) and (max-device-width:
  480px) {
@@ -53,8 +54,9 @@
 }
 
 #venueBanner {
-  max-height: 100%;
-  max-width: 100%;
+  height: 100%;
+  width: 100%;
+  padding-left: 0px;
 }
 
 #venueCardBlock {
@@ -71,6 +73,10 @@
 }
 
 #countryDropdown {
-  left: 77%;
-  color:black  
+  margin-left: 75%;
+  color: black;
+}
+
+#venueImages {
+  height: 243px;
 }
