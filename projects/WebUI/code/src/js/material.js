@@ -11,20 +11,20 @@
   };
 
   function _isChar(evt) {
-    if (typeof evt.which == "undefined") {
+    if (typeof evt.which === "undefined") {
       return true;
-    } else if (typeof evt.which == "number" && evt.which > 0) {
+    } else if (typeof evt.which === "number" && evt.which > 0) {
       return (
           !evt.ctrlKey &&
           !evt.metaKey &&
           !evt.altKey &&
-          evt.which != 8  && // backspace
-          evt.which != 9  && // tab
-          evt.which != 13 && // enter
-          evt.which != 16 && // shift
-          evt.which != 17 && // ctrl
-          evt.which != 20 && // caps lock
-          evt.which != 27    // escape
+          evt.which !== 8  && // backspace
+          evt.which !== 9  && // tab
+          evt.which !== 13 && // enter
+          evt.which !== 16 && // shift
+          evt.which !== 17 && // ctrl
+          evt.which !== 20 && // caps lock
+          evt.which !== 27    // escape
       );
     }
     return false;
@@ -170,7 +170,7 @@
           }
 
           // Set as empty if is empty (damn I must improve this...)
-          if ($input.val() === null || $input.val() == "undefined" || $input.val() === "") {
+          if ($input.val() === null || $input.val() === "undefined" || $input.val() === "") {
             $formGroup.addClass("is-empty");
           }
 
@@ -226,7 +226,7 @@
         //  NOTE: programmatic changing of value using $.val() must trigger the change event i.e. $.val('x').trigger('change')
         .on("change", ".form-group input", function () {
           var $input = $(this);
-          if ($input.attr("type") == "file") {
+          if ($input.attr("type") === "file") {
             return;
           }
 
