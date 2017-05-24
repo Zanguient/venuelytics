@@ -39,7 +39,7 @@
             </div> -->
 
             <!-- Static grid for city -->
-            <div class="row">
+            <!--<div class="row">
                 <ul class="col-md-4" ng-repeat="city in listOfCities">
                     
                     <li class="card" id="cityImage">
@@ -50,8 +50,12 @@
                         </div>
                     </li>
                 </ul>
+            </div>-->
+            
+            <div class="row">
+                <div class="city-image-block col-sm-4" style="background: url({{city.imageUrl}}) no-repeat center top;background-size:cover;" ng-repeat="city in listOfCities">
+                <p class="content"> {{city.name}} </p>
             </div>
-
 
         </div>
     </div>
