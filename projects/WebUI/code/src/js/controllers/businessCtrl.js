@@ -16,8 +16,9 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 emailId: ''
             };
             self.claim = {
+                name: '',
                 email: '',
-                password: ''
+                phone: ''
             };
             self.init = function() {
             };
@@ -39,8 +40,14 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 });
             };
             
-            self.claimBusiness = function(){
+            self.claim = function() {
                 self.createBusiness = true;
+            };
+
+            self.claimBusiness = function(){
+                self.businessData = true;
+                self.hideForm = true;
+                self.claimForm = false;
             };
             
             self.cancel = function() {
@@ -48,10 +55,16 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
             
             self.businessSubmit = function() {
-                    self.businessData = true;
-                    self.hideForm = true;
+                self.businessData = true;
+                self.hideForm = true;
             };
+
+            self.save = function(newUser) {
+               $('#successView').modal('show');
+            };
+
             self.createBusinessMethod = function() {
+                $window.scrollTo(0, 0);
                 self.createBusiness = true;
                 self.hideForm = true;
                 self.claimForm = true;
