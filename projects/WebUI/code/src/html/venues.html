@@ -77,7 +77,7 @@
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2>
-                                                            <a href="" ng-click="selectVenue()">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
                                                         </h2>
                                                     <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
                                                     <div class="row">
@@ -106,7 +106,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -127,19 +127,16 @@
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2>
-                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
                                                         </h2>
                                                     <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-md-4">
-                                                            <div class="mt-05">
-                                                                <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-8">
-                                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
-                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
-                                                                </a>
+                                                        <div class="col-lg-12 col-md-4">
+                                                            <i class="mr-2 fa fa-user-circle-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-beer" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-bell" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-camera" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -159,7 +156,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -180,19 +177,16 @@
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2>
-                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
                                                         </h2>
                                                     <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-md-4">
-                                                            <div class="mt-05">
-                                                                <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-8">
-                                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
-                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
-                                                                </a>
+                                                        <div class="col-lg-12 col-md-4">
+                                                            <i class="mr-2 fa fa-user-circle-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-beer" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-bell" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-camera" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -212,7 +206,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -233,19 +227,16 @@
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2>
-                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
                                                         </h2>
                                                     <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-md-4">
-                                                            <div class="mt-05">
-                                                                <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-8">
-                                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
-                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
-                                                                </a>
+                                                        <div class="col-lg-12 col-md-4">
+                                                            <i class="mr-2 fa fa-user-circle-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-beer" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-bell" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-camera" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -265,7 +256,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -286,19 +277,16 @@
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2>
-                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
                                                         </h2>
                                                     <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-md-4">
-                                                            <div class="mt-05">
-                                                                <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-8">
-                                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
-                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
-                                                                </a>
+                                                        <div class="col-lg-12 col-md-4">
+                                                            <i class="mr-2 fa fa-user-circle-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-beer" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-bell" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-camera" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -318,7 +306,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive">
+                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -339,19 +327,16 @@
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2>
-                                                            <a href=javascript:void(0)>{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
+                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
                                                         </h2>
                                                     <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-md-4">
-                                                            <div class="mt-05">
-                                                                <a href="javascript:void(0)" class="ms-tag ms-tag-info">Design</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-8">
-                                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm btn-block animate-icon">Read more 
-                                                                    <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i>
-                                                                </a>
+                                                        <div class="col-lg-12 col-md-4">
+                                                            <i class="mr-2 fa fa-user-circle-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-beer" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-bell" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-camera" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i>
+                                                            <i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i>
                                                         </div>
                                                     </div>
                                                 </div>
