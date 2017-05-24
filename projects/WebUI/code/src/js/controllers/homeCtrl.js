@@ -10,15 +10,13 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     		
     		var self = $scope;
 
-            self.selectedCountry = 'Northen America';
-
-            self.countries = ['Northen America', 'Canada', 'South America', 'India'];
-
             self.init = function() {
+                self.selectedCountry = 'North America';
+                self.countries = ['North America', 'Canada', 'South America', 'India'];
 				if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position){
-                    mysrclat = position.coords.latitude; 
-                    mysrclong = position.coords.longitude;
+                    currentLat = position.coords.latitude; 
+                    currentLong = position.coords.longitude;
                     self.$apply(function(){
                         self.position = position;
                         });

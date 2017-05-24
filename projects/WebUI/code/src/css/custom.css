@@ -29,8 +29,10 @@
     color: white;    
 }
 
-#cityImage li {
+#cityImage {
   list-style-type: none;
+  cursor: pointer; 
+  cursor: hand;
 }
 
 .error-message {
@@ -62,10 +64,32 @@
   width:40px;
   height:22px;
 }
+#forMobile {
+  width: 100%;
+}
+#countryMain {
+  margin-left: 0px;
+  left: 50px;
+}
 .slider {
   width: 350px;
   height: 200px;
 }
+}
+
+/*For iPhone 6 plus*/
+@media only screen 
+    and (min-device-width : 414px) 
+    and (max-device-width : 736px) 
+    and (orientation : landscape) 
+    and (-webkit-min-device-pixel-ratio : 3) 
+{ 
+
+  #countryMain {
+    margin-left: 0px;
+    left: 50px;
+  }
+
 }
 
 #venueBanner {
@@ -96,32 +120,65 @@
   height: 243px;
 }
 
+#navBar {
+  margin-bottom: 0px;
+}
+
+#venueTabs {
+  margin-top: 40px;
+}
+
+#cityName {
+  text-shadow: 2px 0px #000000;
+}
+
+#countryMain {
+  margin-left: 750px;
+}
+
+#countryLabel {
+  width: 132px; 
+  margin-top: 6px;
+}
+
+#countrySelect {
+  width: 200px; 
+  margin-top: 0px;
+}
+
+#serviceIcon {
+  padding-left: 15px;
+}
+
 .buttonNav {
-bottom: -4px;
-display: block;
-height: 48px;
-left: 0;
-margin: 0 auto;
-padding: 1em 0 0.8em;
-position: absolute;
-right: 0;
-text-align: center;
-width: 100%;
-z-index: 5;
+  bottom: -4px;
+  display: block;
+  height: 48px;
+  left: 0;
+  margin: 0 auto;
+  padding: 1em 0 0.8em;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 100%;
+  z-index: 5;
 }
+
 .buttonNav li {
-border: 5px solid #AAAAAA;
-border-radius: 5px;
-cursor: pointer;
-display: inline-block;
-height: 30px;
-margin: 0 8px;
-position: relative;
-width: 50px;
+  border: 5px solid #AAAAAA;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  height: 30px;
+  margin: 0 8px;
+  position: relative;
+  width: 50px;
 }
+
 .buttonNav li.active {
-border: 5px solid #FFFFFF;
+  border: 5px solid #FFFFFF;
 }
+
 .buttonNav li img {
-width: 100%;
+  width: 100%;
 }

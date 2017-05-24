@@ -61,7 +61,8 @@ module.exports = {
 			'src/js/controllers/venueDetailsCtrl.js',
 			'src/js/controllers/businessCtrl.js',
 			'src/js/services/restUrlService.js',
-			'src/js/services/venueService.js'
+			'src/js/services/venueService.js',
+			'src/js/services/ajaxService.js'
         ],
         css : [
             'bower_components/animate.css/animate.min.css',
