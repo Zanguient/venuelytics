@@ -15,10 +15,10 @@
     "nonbsp": true,
     "nonew": true,
     "plusplus": false,
-    "quotmark": "single",
+    "quotmark": "false",
     "undef": true,
     "unused": false,
-    "strict": false,
+    "strict": true,
     "maxparams": 10,
     "maxdepth": 5,
     "maxstatements": 40,
@@ -54,6 +54,8 @@
     "browser": true,
     "node": true,
 
+	"camelcase": true,
+	
     "globals": {
         "angular": false,
         "$": false,
