@@ -1,18 +1,27 @@
-<div >
+<div class="container" id="venueBanner">
     <div>
-        <img src="assets/img/demo/banner.jpg" id="venueBanner">
+        <img src="assets/img/demo/banner.jpg" id="forMobile">
     </div>
 </div>
 <!-- container -->
-<div class="wrap wrap-mountain mt-6">
+<div class="wrap wrap-mountain">
     <div class="container">
         <h2 class="text-center text-light mb-6 wow fadeInDown animation-delay-5">Discover fun <strong>Venues</strong> around You!</h2>
 
-        <div class="form-group" id="countryDropdown">
-            <label for="select111">Select you country:</label>
+        <!-- <div class="form-group" id="countryDropdown">
+            <label for="select111">Select your country:</label>
             <select data-dropup-auto="false">
                 <option  ng-repeat="country in countries" value="{{country}}" ng-model="selectedCountry">{{country}}</option>
             </select>
+        </div> -->
+
+        <div class="form-group" id="countryMain">
+            <div for="select111" class="col-md-2 control-label" id="countryLabel">Country :</div>
+                <div class="btn-group bootstrap-select form-control" id="countrySelect" style="color:white;">
+                    <select id="select111" class="form-control selectpicker" data-dropup-auto="false" >
+                        <option ng-repeat="country in countries">{{country}}</option>
+                    </select>
+                </div>
         </div>
 
         <div class="row">
@@ -33,10 +42,10 @@
             <div class="row">
                 <ul class="col-md-4" ng-repeat="city in listOfCities">
                     
-                    <li class="card" id="cityImage" style="list-style-type: none;">
+                    <li class="card" id="cityImage">
                         <div class="image-block col-sm-4" style="background: url({{city.imageUrl}}) no-repeat center top;background-size:cover; width: 370px;" ng-click="selectCity(city.name)">
                             <div class="content" style="margin-top: 85px;">
-                                <center><font size="5"><b>{{city.name}}</b></font></center>
+                                <center><h2 id="cityName">{{city.name}}</h2></center>
                             </div>
                         </div>
                     </li>
