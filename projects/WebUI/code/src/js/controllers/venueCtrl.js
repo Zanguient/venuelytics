@@ -14,7 +14,8 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
 
             $scope.setTab = function(newTab, type){
                 $log.info('Venue type:'+type);
-                AjaxService.getVenuesByType($routeParams.cityName, type).then(function(response) {
+                self.selectedCityName = $routeParams.cityName;
+                AjaxService.getVenuesByType(self.selectedCityName, type).then(function(response) {
                     self.listOfVenuesByCity = response;
                 });
                 self.tab = newTab;
