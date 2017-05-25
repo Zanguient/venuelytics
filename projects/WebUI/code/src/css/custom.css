@@ -223,3 +223,6 @@
     object-fit: cover;
     min-width: 100%
 }
+.bootstrap-select>.btn:first-child{
+  color: white !important;
+}
