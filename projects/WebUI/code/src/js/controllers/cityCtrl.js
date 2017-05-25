@@ -15,14 +15,17 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 self.countries = ['North America', 'Canada', 'South America', 'India'];
 				if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position){
-                    currentLat = position.coords.latitude; 
-                    currentLong = position.coords.longitude;
+                    self.currentLat = position.coords.latitude; 
+                    self.currentLong = position.coords.longitude;
+                    VenueService.latitude = self.currentLat;
+                    VenueService.longitude = self.currentLong;
+                    self.afterGettingLocation(self.currentLat, self.currentLong);
                     self.$apply(function(){
                         self.position = position;
                         });
                     });
                 }
-                $http({
+                /*$http({
                     method: 'GET',
                     url: RestURL.baseURL + '/venues/cities'
                 }).then(function(success) {
@@ -30,18 +33,30 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                     $log.info('Success getting cities.');
                 },function(error) {
                     $log.error('Error: '+error);
-                });
+                });*/
             };
 
             self.init();
 
 
-    		self.selectCity = function(cityName) {
-                $location.url('/venues/'+cityName);
+    		self.selectCity = function(city) {
+                VenueService.cityDistance = city.distanceInMiles;
+                $location.url('/venues/'+city.name);
     		};
 
             self.selectedCountry = function(country) {
                 $log.info('selectedCountry: '+country);
             };
     		
+            self.afterGettingLocation = function(lat, long) {
+                $http({
+                    method: 'GET',
+                    url: RestURL.baseURL + '/venues/cities?lat=' + lat + '&lng=' + long
+                }).then(function(success) {
+                    self.listOfCities = success.data.cities;
+                    $log.info('Success getting cities.');
+                },function(error) {
+                    $log.error('Error: '+error);
+                });
+            };
     }]);

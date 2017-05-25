@@ -4,10 +4,11 @@
  */
 app.service('AjaxService', ['$http', 'RestURL', function ($http, RestURL) {
 	
+    //lat=' + lat + '&lng=' + long + '&
     this.getVenuesByType = function(city, venueType, lat, long) {
     	return $http({
                     method: 'GET',
-                    url: RestURL.baseURL + '/venues?lat=' + lat + '&lng=' + long + '&city=' + city + '&from=0&size=100&type=' + venueType
+                    url: RestURL.baseURL + '/venues?city=' + city + '&from=0&size=100&type=' + venueType
                 }).then(function(success) {
                     return success.data.venues;
                 },function(error) {

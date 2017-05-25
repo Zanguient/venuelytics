@@ -46,39 +46,68 @@
 @media screen and (min-device-width: 1200px) and (max-device-width:
  1600px) {
   #businessImage {
-  height: 300px;
-  width: 565px;
- }
- #sliderThumb{
-  width:40px;
-  height:22px;
-}
-.slider {
-  height: 300px;
-  width: 550px;
+    height: 300px;
+    width: 565px;
+  }
+  #sliderThumb{
+    width:40px;
+    height:22px;
+  }
+  .slider {
+    height: 300px;
+    width: 550px;
+  }
+  #forMobile {
+    height: 690px;
+  }
+  #businessMessage{
+    margin-left: 12px;
+  }
+  #businessTitle {
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+  #businessMenu {
+    margin-top: 0px;
+  }
+  #myFormClaim{
+    margin-left: 150px;
+  }
+  #claimTitle {
+    padding-left: 10px;
+  }
+  #venueBackground {
+    height: 280px;
+  }
+  #venueCardBlock {
+  padding-left: 0px;
 }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width:
  480px) {
- #businessImage {
-  height: 200px;
-  width: 365px;
- }
- #sliderThumb{
-  width:40px;
-  height:22px;
-}
-#forMobile {
-  width: 100%;
-}
-#countryMain {
-  margin-left: 0px;
-  left: 50px;
-}
-.slider {
-  width: 350px;
-  height: 200px;
-}
+  #businessImage {
+    height: 200px;
+    width: 365px;
+  }
+  #sliderThumb{
+    width:40px;
+    height:22px;
+  }
+  #forMobile {
+    width: 100%;
+    height: 100%;
+  }
+  #countryMain {
+    margin-left: 0px;
+    left: 50px;
+  }
+  .slider {
+    width: 350px;
+    height: 200px;
+  }
+  #venueBackground {
+    height: 190px;
+  }
 }
 
 /*For iPhone 6 plus*/
@@ -94,6 +123,13 @@
     left: 50px;
   }
 
+  #venueCardBlock {
+    padding-left: 20px;
+  }
+
+  #venueBackground {
+    height: 190px;
+  }
 }
 
 #venueBanner {
@@ -101,10 +137,6 @@
   width: 100%;
   padding-left: 0px;
   padding-right: 0px;
-}
-
-#venueCardBlock {
-  padding-left: 0px;
 }
 
 #venueListCard {

@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div class="material-background"></div>
+<div class="material-background" id="venueBackground"></div>
 <div class="container container-full">
     <div class="ms-paper">
         <div class="row" id="venueTabs">
@@ -65,7 +65,7 @@
                                         <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
                                                     <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
@@ -97,6 +97,9 @@
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
+
+                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
+
                                                 </div>
                                             </article>
                                         </div>
@@ -114,7 +117,7 @@
                                         <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
                                                     <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
@@ -146,6 +149,7 @@
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
+                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
                                                 </div>
                                             </article>
                                         </div>
@@ -163,7 +167,7 @@
                                         <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
                                                     <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
@@ -195,6 +199,7 @@
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
+                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
                                                 </div>
                                             </article>
                                         </div>
@@ -212,7 +217,7 @@
                                         <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
                                                     <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
@@ -244,6 +249,7 @@
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
+                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
                                                 </div>
                                             </article>
                                         </div>
@@ -261,7 +267,7 @@
                                         <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
                                                     <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
@@ -293,6 +299,7 @@
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
+                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
                                                 </div>
                                             </article>
                                         </div>
@@ -310,7 +317,7 @@
                                     <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
                                                     <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
@@ -342,6 +349,7 @@
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
+                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
                                                 </div>
                                             </article>
                                         </div>

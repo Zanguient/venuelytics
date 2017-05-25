@@ -4,7 +4,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
     		$log.log('Inside Business Controller.');
     		
     		var self = $scope;
-            self.createBusiness = false;
+            self.claimBusiness = false;
             self.businessData = false;
             self.hideForm = false;
             self.claimForm = false;
@@ -41,17 +41,18 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
             
             self.claim = function() {
-                self.createBusiness = true;
+                $window.scrollTo(0, 0);
+                self.claimBusiness = true;
             };
 
-            self.claimBusiness = function(){
+            self.createBusinessAccount = function(){
                 self.businessData = true;
                 self.hideForm = true;
                 self.claimForm = false;
             };
             
             self.cancel = function() {
-                self.createBusiness = false;
+                self.claimBusiness = false;
             };
             
             self.businessSubmit = function() {
@@ -65,7 +66,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
 
             self.createBusinessMethod = function() {
                 $window.scrollTo(0, 0);
-                self.createBusiness = true;
+                self.claimBusiness = true;
                 self.hideForm = true;
                 self.claimForm = true;
             };

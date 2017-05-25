@@ -3,6 +3,9 @@ app.service('VenueService', function() {
   this.selectedVenueDetails = '';
   this.latitude = '';
   this.longitude = '';
+  this.selectedVenueType = '';
+  this.selectedCity = '';
+  this.cityDistance = '';
 
   this.sessionScope = {};
   this.stateScope = {};
