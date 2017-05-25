@@ -59,9 +59,9 @@
         </center>
     	</div>
     	<div ng-show="claimBusiness == true">
-        <center><h2>CLAIM BUSINESS</h2></center>
+        
         <div ng-hide="hideForm == true">
-
+            <center><h2>CLAIM BUSINESS</h2></center>
 
         <form class="search-form" id="myFormClaim" name="myFormClaim" novalidate ng-submit="submitForm()">
                             <fieldset>
@@ -121,7 +121,7 @@
                                     <label for="searchBusiness" class="col-md-2 control-label"><font size="3">Business Name:</font></label>
 
                                     <div class="col-md-10">
-                                        <input type="text" id="ms-form-pass" class="form-control" id="inputEmail" name="businessName" placeholder="Business Name" ng-model="newUser.businessName" required>
+                                        <input type="text" id="ms-form-pass" class="form-control" id="inputEmail" name="businessName" ng-model="newUser.businessName" required>
                                         <span class="error-message" ng-show="showMessage(myForm.businessName)">Business Name is required</span>
                                     </div>
                                 </div>
