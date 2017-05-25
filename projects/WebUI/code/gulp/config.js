@@ -56,6 +56,7 @@ module.exports = {
 			'bower_components/angular-route/angular-route.min.js',
             'bower_components/iframe-resizer/js/iframeResizer.min.js',
 			'src/app.js',
+			'src/js/controllers/cityCtrl.js',
 			'src/js/controllers/homeCtrl.js',
 			'src/js/controllers/venueCtrl.js',
 			'src/js/controllers/venueDetailsCtrl.js',

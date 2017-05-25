@@ -1,6 +1,8 @@
 app.service('VenueService', function() {
   this.venueByCityName = '';
   this.selectedVenueDetails = '';
+  this.latitude = '';
+  this.longitude = '';
 
   this.sessionScope = {};
   this.stateScope = {};

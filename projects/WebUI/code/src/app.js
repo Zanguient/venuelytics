@@ -18,6 +18,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'home.html',
             controller: 'HomeController'
         })
+        .when('/cities', {
+            templateUrl: 'city.html',
+            controller: 'CityController'
+        })
         .when('/venues/:cityName', {
             templateUrl: 'venues.html',
             controller: 'VenueController'
