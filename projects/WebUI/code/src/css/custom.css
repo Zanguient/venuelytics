@@ -108,6 +108,9 @@
   #venueBackground {
     height: 190px;
   }
+  #navigation {
+    margin-left: 10px;
+  }
 }
 
 /*For iPhone 6 plus*/
@@ -129,6 +132,10 @@
 
   #venueBackground {
     height: 190px;
+  }
+
+  #navigation {
+    margin-left: 10px;
   }
 }
 
