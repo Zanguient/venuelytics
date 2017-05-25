@@ -79,7 +79,7 @@
             </div>-->
             
             <div class="row">
-                <div class="city-image-block col-sm-4" style="background: url({{city.imageUrl}}) no-repeat center top;background-size:cover;" ng-repeat="city in listOfCities">
+                <div id="cityImage" class="city-image-block col-sm-4" style="background: url({{city.imageUrl}}) no-repeat center top;background-size:cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city.name)">
                 <p class="content"> {{city.name}} </p>
             </div>
 
