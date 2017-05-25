@@ -100,6 +100,7 @@
   height: 100%;
   width: 100%;
   padding-left: 0px;
+  padding-right: 0px;
 }
 
 #venueCardBlock {
@@ -209,4 +210,16 @@
 .city-image-block:hover > p {
     background-color: rgba(3,3,3,0.5);    
     color: white;    
+}
+.banner-fill-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+.banner-fill-img img {
+    vertical-align: middle;
+    height: 500px;
+    object-fit: cover;
+    min-width: 100%
 }
