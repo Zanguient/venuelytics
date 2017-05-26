@@ -21,6 +21,7 @@
 
     	</div>
         <div id="claimCard">
+        <center><h5 ng-show="businessDetailLength == 0">Sorry, the matching business profile is not available currently. Please click on Create Business button below to update your business details.</h5></center>
     	<div ng-repeat="business in businessDetails" ng-hide="claimBusiness == true">
 		<article class="card wow fadeInLeft animation-delay-5 mb-4">
             <div class="card-block">

@@ -31,9 +31,12 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                     url: RestURL.baseURL + '/venues?&search=' + self.searchBusiness + '&from=0&size=10'
                 }).then(function(success) {
                     self.businessDetails = success.data.venues;
-                    self.businessImage = self.businessDetails[0].imageUrls[0].originalUrl;
-                    self.venueName = self.businessDetails[0].venueName;
-                    self.venueAddress = self.businessDetails[0].address;
+                    self.businessDetailLength = self.businessDetails.length;
+                    if(self.businessDetailLength != 0) {
+                        self.businessImage = self.businessDetails[0].imageUrls[0].originalUrl;
+                        self.venueName = self.businessDetails[0].venueName;
+                        self.venueAddress = self.businessDetails[0].address;
+                    }
 
                 },function(error) {
                     $log.error('Error: '+error);
@@ -66,6 +69,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
 
             self.createBusinessMethod = function() {
                 $window.scrollTo(0, 0);
+                self.businessDetailLength = 1;
                 self.claimBusiness = true;
                 self.hideForm = true;
                 self.claimForm = true;

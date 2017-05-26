@@ -1,7 +1,7 @@
-<div class="ms-hero-page ms-hero-img-keyboard ms-hero-bg-primary">
+<div class="ms-hero-page ms-hero-img-keyboard">
     <div class="container">
         <div class="text-center">
-            <span class="ms-logo ms-logo-lg ms-logo-white center-block mb-2 mt-2 animated zoomInDown animation-delay-5">V</span>
+            <img src="assets/img/logo-collapsed.png" class="ms-logo" id="logoCollapsed" />
             <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{selectedCityName}}</h1>
         </div>
     </div>
@@ -64,7 +64,7 @@
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
-                                        <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
+                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
@@ -92,7 +92,7 @@
                                                             <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
                                                         </h2>
                                                     <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                    <div class="row" id="serviceIcon">
+                                                    <div class="row col-lg-8" id="serviceIcon">
                                                         <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-futbol-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i></a>
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i></a>
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-shopping-bag" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i></a>
@@ -100,7 +100,7 @@
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
 
-                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
+                                                    <div ng-hide="selectedCityDistance == -1" class="col-lg-5">{{selectedCityDistance | number : 2}} miles</div><br/>
 
                                                 </div>
                                             </article>
@@ -116,7 +116,7 @@
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
-                                        <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
+                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
@@ -151,7 +151,7 @@
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
-                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
+                                                    <div ng-hide="selectedCityDistance == -1">Distance in miles: {{selectedCityDistance | number : 2}} </div>
                                                 </div>
                                             </article>
                                         </div>
@@ -166,7 +166,7 @@
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
-                                        <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
+                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
@@ -216,7 +216,7 @@
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
-                                        <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
+                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
@@ -266,7 +266,7 @@
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
-                                        <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
+                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
@@ -316,7 +316,7 @@
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
-                                    <h3 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h3>
+                                    <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">

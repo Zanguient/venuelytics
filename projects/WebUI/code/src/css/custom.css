@@ -81,7 +81,10 @@
   }
   #venueCardBlock {
   padding-left: 0px;
-}
+  }
+  #logoCollapsed {
+    margin-top: 15px;
+  }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width:
  480px) {
@@ -111,6 +114,9 @@
   #navigation {
     margin-left: 10px;
   }
+  #logoCollapsed {
+    margin-top: 10px;
+  }
 }
 
 /*For iPhone 6 plus*/
@@ -136,6 +142,10 @@
 
   #navigation {
     margin-left: 10px;
+  }
+
+  #logoCollapsed {
+    margin-top: 10px;
   }
 }
 
