@@ -13,27 +13,29 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             self.init = function() {
                 self.selectedCountry = 'North America';
                 self.countries = ['North America', 'Canada', 'South America', 'India'];
-				if (navigator.geolocation) {
+				if (navigator && navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function(position){
-                    self.currentLat = position.coords.latitude; 
-                    self.currentLong = position.coords.longitude;
-                    VenueService.latitude = self.currentLat;
-                    VenueService.longitude = self.currentLong;
-                    self.afterGettingLocation(self.currentLat, self.currentLong);
-                    self.$apply(function(){
-                        self.position = position;
-                        });
+                        self.currentLat = position.coords.latitude; 
+                        self.currentLong = position.coords.longitude;
+                        VenueService.latitude = self.currentLat;
+                        VenueService.longitude = self.currentLong;
+                        self.afterGettingLocation(self.currentLat, self.currentLong);
+                        self.$apply(function(){
+                            self.position = position;
+                            });
+                    });
+                } else{
+
+                    $http({
+                        method: 'GET',
+                        url: RestURL.baseURL + '/venues/cities'
+                    }).then(function(success) {
+                        self.listOfCities = success.data.cities;
+                        $log.info('Success getting cities.');
+                    },function(error) {
+                        $log.error('Error: '+error);
                     });
                 }
-                /*$http({
-                    method: 'GET',
-                    url: RestURL.baseURL + '/venues/cities'
-                }).then(function(success) {
-                    self.listOfCities = success.data.cities;
-                    $log.info('Success getting cities.');
-                },function(error) {
-                    $log.error('Error: '+error);
-                });*/
             };
 
             self.init();
