@@ -22,25 +22,30 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                         self.afterGettingLocation(self.currentLat, self.currentLong);
                         self.$apply(function(){
                             self.position = position;
-                            });
+                        });
+                    },
+                    function (error) { 
+                        self.populateAllCities();
                     });
                 } else{
 
-                    $http({
-                        method: 'GET',
-                        url: RestURL.baseURL + '/venues/cities'
-                    }).then(function(success) {
-                        self.listOfCities = success.data.cities;
-                        $log.info('Success getting cities.');
-                    },function(error) {
-                        $log.error('Error: '+error);
-                    });
+                    self.populateAllCities();
                 }
             };
 
             self.init();
 
-
+            self.populateAllCities = function(){
+                $http({
+                    method: 'GET',
+                    url: RestURL.baseURL + '/venues/cities'
+                }).then(function(success) {
+                    self.listOfCities = success.data.cities;
+                    $log.info('Success getting cities.');
+                },function(error) {
+                    $log.error('Error: '+error);
+                });
+            }
     		self.selectCity = function(city) {
                 VenueService.cityDistance = city.distanceInMiles;
                 $location.url('/venues/'+city.name);
