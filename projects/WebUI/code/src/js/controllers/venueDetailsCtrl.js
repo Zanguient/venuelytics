@@ -15,6 +15,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 self.selectedCity = VenueService.selectedCity;
                 self.selectedType = VenueService.selectedVenueType;
                 self.detailsOfVenue = VenueService.selectedVenueDetails;
+                self.venueName =    self.detailsOfVenue.venueName;
                 self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id;
 
                 iFrameResize({

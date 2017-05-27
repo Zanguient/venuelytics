@@ -88,7 +88,7 @@ var targets = {
 gulp.task('plugins', ['plugins:js', 'plugins:css', 'plugins:fonts', 'plugins:img'],function() {   
     return gulp.src(config.plugins.jsConcat)
         .pipe(gulpif(config.concat, concat('plugins.min.js')))
-        .pipe(gulpif(config.concat, uglify()))
+        .pipe(gulpif(config.compress, uglify()))
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.jsConcat));
 });
@@ -303,19 +303,7 @@ gulp.task('default', function() {
 });
 
 
-gulp.task('dist:pre',['clean'], function(cb) {
-    config.compress = true;
-    config.environment = 'dist';
-    config.allColors = true;
-
-    config.themes = [themeOptions.primaryColor];
-    config.shines = [themeOptions.shineColor];
-
-
-    if (themeOptions.navbarMode) {
-        config.environment = 'navbar';
-    }
-
+gulp.task('dist:pre', function(cb) {
    return runSequence('themes', ['plugins', 'html:dist', 'js', 'scss', 'img', 'fonts', 'media', 'revolution'], cb);
 });
 
@@ -337,23 +325,35 @@ gulp.task('demo', function() {
 
 gulp.task('dev', function() {
     config.environment = 'dev';
-
+    config.compress = false;
     return runSequence(
         'clean', ['plugins', 'html', 'js', 'scss', 'img', 'fonts', 'media', 'revolution'], 'dist'
     );
 });
 
 gulp.task('work', function() {
+    config.environment = 'dev';
+    config.compress = false;
     return runSequence(
         'dev', ['connect', 'watch']
     );
 });
 
-
-gulp.task('aws:deploy',['dist'],function() {
-    config.allColors = true;
+gulp.task('dist:clean', function(cb) {
+    return runSequence('clean', 'dist', cb);
+});
+gulp.task('aws:deploy',['dist:clean'],function() {
     config.compress = true;
     config.environment = 'dist';
+    config.allColors = true;
+
+    config.themes = [themeOptions.primaryColor];
+    config.shines = [themeOptions.shineColor];
+
+
+    if (themeOptions.navbarMode) {
+        config.environment = 'navbar';
+    }
 
     var publisher = awspublish.create({
         region: 'us-west-1',

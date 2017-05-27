@@ -1,8 +1,7 @@
 <div class="ms-hero-page ms-hero-img-keyboard">
     <div class="container">
         <div class="text-center">
-            <img src="assets/img/logo-collapsed.png" class="ms-logo" id="logoCollapsed" style="margin-top: 15px;" />
-            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{selectedCity}} - {{selectedType}}</h1>
+            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{detailsOfVenue.venueName}} - {{selectedCity}}</h1>
         </div>
     </div>
 </div>
@@ -15,7 +14,7 @@
 
 <div class="container">
     <br>
-    <a href="/cities" id="navigation">City</a> -> <a href="venues/{{selectedCity}}">{{selectedCity}}</a>
+    <h3><a href="/cities" id="navigation">Home > Cities </a> <a href="venues/{{selectedCity}}"> > {{selectedCity}}</a></h3>
     <div class="row" id="venueTabs">
         <div class="col-md-12">
 

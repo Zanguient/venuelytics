@@ -1,7 +1,6 @@
 <div class="ms-hero-page ms-hero-img-keyboard">
     <div class="container">
         <div class="text-center">
-            <img src="assets/img/logo-collapsed.png" class="ms-logo" id="logoCollapsed" />
             <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{selectedCityName}}</h1>
         </div>
     </div>
@@ -10,7 +9,7 @@
 <div class="material-background" id="venueBackground"></div>
 <div class="container container-full">
     <br>
-    <a href="/cities" id="navigation">City</a>
+    <a href="/cities" id="navigation"><h3>Home > City</h3></a>
     <div class="ms-paper">
         <div class="row" id="venueTabs">
             <!-- For Horizontal tabs -->
@@ -68,7 +67,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
+                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -120,7 +119,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
+                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -170,7 +169,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
+                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -220,7 +219,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
+                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -270,7 +269,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
+                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
@@ -320,7 +319,7 @@
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].originalUrl}}" alt="" class="img-responsive" id="venueImages">
+                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
                                                     <!-- <figcaption class="ms-thumbnail-caption text-center">
                                                         <div class="ms-thumbnail-caption-content">
                                                             <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
