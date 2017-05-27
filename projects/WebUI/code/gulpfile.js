@@ -18,7 +18,7 @@ var path = require('path');
 var runSequence = require('run-sequence').use(gulp);
 var imagemin = require('gulp-imagemin');
 var changed = require('gulp-changed');
-var merge = require('merge-stream');
+var mergeStream = require('merge-stream');
 var awspublish = require('gulp-awspublish');
 var CacheBuster = require('gulp-cachebust');
 var config = require('./gulp/config');
@@ -85,22 +85,33 @@ var targets = {
     },
 };
 
-gulp.task('plugins', function() {
-    gulp.src(config.plugins.js)
-        .pipe(gulp.dest(paths.js));
-
-    gulp.src(config.plugins.jsConcat)
+gulp.task('plugins', ['plugins:js', 'plugins:css', 'plugins:fonts', 'plugins:img'],function() {   
+    return gulp.src(config.plugins.jsConcat)
         .pipe(gulpif(config.concat, concat('plugins.min.js')))
         .pipe(gulpif(config.concat, uglify()))
+        .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.jsConcat));
+});
 
-    gulp.src(config.plugins.css)
+gulp.task('plugins:js', function() {
+    return gulp.src(config.plugins.js)
+        .pipe(cachebust.resources())
+        .pipe(gulp.dest(paths.js));
+});
+
+gulp.task('plugins:css', function() {
+    return gulp.src(config.plugins.css)
         .pipe(gulpif(config.concat, concat('plugins.min.css')))
+        .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.css));
+});
 
-    gulp.src(config.plugins.fonts)
+gulp.task('plugins:fonts', function() {
+    return gulp.src(config.plugins.fonts)
         .pipe(gulp.dest(paths.fonts));
+});
 
+gulp.task('plugins:img', function() {
     return gulp.src(config.plugins.img)
         .pipe(gulp.dest(paths.img));
 });
@@ -131,7 +142,7 @@ gulp.task('html', function() {
             indent_size: 2
         })))
         .pipe(gulp.dest(path.join(paths.html)))
-        .pipe(connect.reload());
+     //   .pipe(connect.reload());
 });
 
 gulp.task('html:dist', function() {
@@ -148,77 +159,45 @@ gulp.task('html:dist', function() {
             indent_size: 2
         })))
         .pipe(gulp.dest(path.join(paths.html)))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
-gulp.task('html:release', function() {
-    for (var h in config.headers) {
-        targets.dist.data.headerClass = 'ms-' + config.headers[h];
 
-        for (var n in config.navbars) {
-            targets.dist.data.navbarClass = 'ms-' + config.navbars[n];
-            gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
-                .pipe(processhtml({
-                    recursive: true,
-                    process: true,
-                    strip: true,
-                    environment: targets[config.environment].environment,
-                    data: targets[config.environment].data,
-                    customBlockTypes: ['gulp/components-menu.js']
-                }))
-                .pipe(prettify({
-                    indent_size: 2
-                }))
-                .pipe(gulp.dest(paths.html + '/' + config.headers[h] + '-' + config.navbars[n]))
-                .pipe(connect.reload());
-        }
-    }
+gulp.task('js', ['js:base', 'js:configurator'], function() {
 
-    for (var nav in config.navbars) {
-        config.environment = 'navbar';
-        targets.navbar.data.navbarClass = 'ms-' + config.navbars[nav] + ' navbar-mode';
-        gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
-            .pipe(processhtml({
-                recursive: true,
-                process: true,
-                strip: true,
-                environment: targets[config.environment].environment,
-                data: targets[config.environment].data,
-                customBlockTypes: ['gulp/components-menu.js']
-            }))
-            .pipe(prettify({
-                indent_size: 2
-            }))
-            .pipe(gulp.dest(path.join(paths.html, config.navbars[nav])))
-            .pipe(connect.reload());
-    }
-});
-
-gulp.task('js', function() {
-    gulp.src(['src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*'])
-        .pipe(jshint())
-        .pipe(jshint.reporter('gulp-jshint-html-reporter', {
-            filename: 'jshint-output.html'
-        }))
-        .pipe(gulpif(config.compress, concat('app.min.js')))
-        .pipe(gulpif(config.compress, uglify()))
-        .pipe(gulp.dest(paths.js))
-        .pipe(connect.reload());
-    gulp.src('src/js/configurator.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
-        .pipe(gulpif(config.compress, concat('configurator.min.js')))
-        .pipe(gulpif(config.compress, uglify()))
-        .pipe(gulp.dest(paths.js))
-        .pipe(connect.reload());
     return gulp.src('src/js/pages/**/*')
         .pipe(jshint())
-        .pipe(jshint.reporter('default'))
+        //.pipe(jshint.reporter('default'))
         .pipe(gulpif(config.compress, uglify()))
+        .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
+gulp.task('js:base', function() {
+
+    return gulp.src(['src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*'])
+        .pipe(jshint())
+       // .pipe(jshint.reporter('gulp-jshint-html-reporter', {
+       //     filename: 'jshint-output.html'
+       // }))
+        .pipe(gulpif(config.compress, concat('app.min.js')))
+        .pipe(gulpif(config.compress, uglify()))
+        .pipe(cachebust.resources())
+        .pipe(gulp.dest(paths.js))
+        //.pipe(connect.reload());
+});
+
+gulp.task('js:configurator', function() {
+    return gulp.src('src/js/configurator.js')
+        .pipe(jshint())
+        //.pipe(jshint.reporter('default'))
+        .pipe(gulpif(config.compress, concat('configurator.min.js')))
+        .pipe(gulpif(config.compress, uglify()))
+        .pipe(cachebust.resources())
+        .pipe(gulp.dest(paths.js))
+       // .pipe(connect.reload());
+});
 
 gulp.task('themes', function(cb) {
     var out = [];
@@ -238,7 +217,7 @@ gulp.task('themes', function(cb) {
                 .pipe(gulp.dest('src/scss/themes')));
         }
     }
-    return merge(out);
+    return mergeStream(out);
 });
 
 function generateNames() {
@@ -267,27 +246,28 @@ gulp.task('scss', function() {
             extname: '.css'
         })))
         //.pipe(gulpif(!config.compress, rename('style.' + config.defaultTheme + '.min.css')))
+        .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.css))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('img', function() {
     return gulp.src('src/img/**/*')
       //  .pipe(gulpif(config.compress, imagemin()))
         .pipe(gulp.dest(paths.img))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('fonts', function() {
     return gulp.src('src/fonts/**/*')
         .pipe(gulp.dest(paths.fonts))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('media', function() {
     return gulp.src('src/media/**/*')
         .pipe(gulp.dest(paths.media))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('clean', function() {
@@ -308,7 +288,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('connect', function() {
-    connect.server({
+    return connect.server({
         root: config.folders.dist,
         port: 8080,
         livereload: true,
@@ -323,7 +303,7 @@ gulp.task('default', function() {
 });
 
 
-gulp.task('dist',['clean'], function() {
+gulp.task('dist:pre',['clean'], function(cb) {
     config.compress = true;
     config.environment = 'dist';
     config.allColors = true;
@@ -336,9 +316,14 @@ gulp.task('dist',['clean'], function() {
         config.environment = 'navbar';
     }
 
-    return runSequence('themes', ['plugins', 'html:dist', 'js', 'scss', 'img', 'fonts', 'media', 'revolution']);
+   return runSequence('themes', ['plugins', 'html:dist', 'js', 'scss', 'img', 'fonts', 'media', 'revolution'], cb);
 });
 
+gulp.task('dist',['dist:pre'], function(cb) {
+    return gulp.src('dist/index.html')
+     .pipe(cachebust.references())
+     .pipe(gulp.dest(config.folders.dist));
+});
 gulp.task('demo', function() {
     config.allColors = true;
     config.compress = true;
@@ -364,18 +349,8 @@ gulp.task('work', function() {
     );
 });
 
-gulp.task('release', function() {
-    config.allColors = true;
-    config.compress = true;
-    config.environment = 'dist';
 
-    return runSequence(
-        'clean',
-        'themes', ['plugins', 'html:release', 'js', 'scss', 'img', 'fonts', 'media', 'revolution']
-    );
-});
-
-gulp.task('aws:deploy', function() {
+gulp.task('aws:deploy',['dist'],function() {
     config.allColors = true;
     config.compress = true;
     config.environment = 'dist';
