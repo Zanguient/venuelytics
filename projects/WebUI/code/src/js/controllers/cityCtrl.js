@@ -42,6 +42,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 }).then(function(success) {
                     self.listOfCities = success.data.cities;
                     $log.info('Success getting cities.');
+                    document.getElementById('loadingCities').style.display = 'none';
                 },function(error) {
                     $log.error('Error: '+error);
                 });
@@ -62,6 +63,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 }).then(function(success) {
                     self.listOfCities = success.data.cities;
                     $log.info('Success getting cities.');
+                    document.getElementById('loadingCities').style.display = 'none';
                 },function(error) {
                     $log.error('Error: '+error);
                 });
