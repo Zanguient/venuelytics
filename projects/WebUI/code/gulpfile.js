@@ -37,7 +37,8 @@ var paths = {
     css: path.join(config.folders.dist, config.folders.assets, 'css'),
     img: path.join(config.folders.dist, config.folders.assets, 'img'),
     plugins: path.join(config.folders.dist, config.folders.assets, config.folders.plugins),
-    revolution: path.join(config.folders.dist, config.folders.assets, config.folders.plugins, 'revolution')
+    revolution: path.join(config.folders.dist, config.folders.assets, config.folders.plugins, 'revolution'),
+    i18n: path.join(config.folders.dist, config.folders.assets, 'i18n'),
 };
 
 var themeOptions = {
@@ -240,6 +241,12 @@ function generateNames() {
     return result;
 }
 
+gulp.task('i18n', function() {
+    return gulp.src('src/i18n/*.json')
+      //  .pipe(gulpif(config.compress, imagemin()))
+        .pipe(gulp.dest(paths.i18n))
+        .pipe(connect.reload());
+});
 
 gulp.task('scss', function() {
     return gulp.src('src/scss/**/*.scss')
@@ -314,7 +321,7 @@ gulp.task('default', function() {
 
 
 gulp.task('dist:pre', function(cb) {
-   return runSequence('themes', ['plugins', 'html:dist',  'scss', 'img', 'fonts', 'media', 'revolution'], 'js',cb);
+   return runSequence('themes', ['plugins', 'html:dist', 'i18n','scss', 'img', 'fonts', 'media', 'revolution'], 'js',cb);
 });
 
 gulp.task('dist',['dist:pre'], function(cb) {
@@ -327,7 +334,7 @@ gulp.task('dev', function() {
     config.environment = 'dev';
     config.compress = false;
     return runSequence(
-        'clean', ['plugins', 'html',  'scss', 'img', 'fonts', 'media', 'revolution'], 'js', 'dist'
+        'clean', ['plugins', 'html',  'i18n', 'scss', 'img', 'fonts', 'media', 'revolution'], 'js', 'dist'
     );
 });
 

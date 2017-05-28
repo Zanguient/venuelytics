@@ -55,6 +55,13 @@
     "typed.js": "^1.1.7",
     "snackbar": "^0.1.5",
     "bootstrap-datepicker": "^1.6.4",
-    "iframe-resizer": "^3.5.14"
+    "iframe-resizer": "^3.5.14",
+    "angular-translate": "^2.15.1",
+    "angular-translate-loader-static-files": "^2.15.1",
+    "angular-translate-storage-local": "^2.15.1",
+    "angular-translate-handler-log": "^2.15.1",
+    "angular-dynamic-locale": "^0.1.32",
+    "angular-i18n": "^1.6.4",
+    "angular-cookies": "^1.6.4"
   }
 }

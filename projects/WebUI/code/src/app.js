@@ -1,4 +1,4 @@
-var app = angular.module('Mobinite', ['ngRoute', 'templates']);
+var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies']);
 
 
 // configure our routes
@@ -42,6 +42,14 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         rewriteLinks: true
     });
 
-}]);
+}]).config(['$translateProvider', function ($translateProvider) {
 
+    $translateProvider.useStaticFilesLoader({
+        prefix : 'assets/i18n/',
+        suffix : '.json'
+    });
+    $translateProvider.preferredLanguage('en');
+    $translateProvider.useLocalStorage();
+
+}]);
 angular.module('templates', []);
