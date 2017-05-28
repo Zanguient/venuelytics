@@ -1,4 +1,4 @@
-var app = angular.module('Mobinite', ['ngRoute']);
+var app = angular.module('Mobinite', ['ngRoute', 'templates']);
 
 
 // configure our routes
@@ -43,3 +43,5 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     });
 
 }]);
+
+angular.module('templates', []);

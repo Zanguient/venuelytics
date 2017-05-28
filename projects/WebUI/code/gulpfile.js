@@ -23,6 +23,8 @@ var awspublish = require('gulp-awspublish');
 var CacheBuster = require('gulp-cachebust');
 var config = require('./gulp/config');
 var cachebust = new CacheBuster();
+var templateHtmlCache = require('gulp-angular-templatecache');
+var filter = require('gulp-filter');
 
 var paths = {
     dist: path.join(config.folders.dist),
@@ -146,6 +148,8 @@ gulp.task('html', function() {
 });
 
 gulp.task('html:dist', function() {
+    const f = filter([ 'src/html/*.html', '!src/html/index.html'], {restore: true});
+    const indexFilter =  filter([ 'src/html/index.html'], {restore: true});
     return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
         .pipe(processhtml({
             recursive: true,
@@ -158,7 +162,13 @@ gulp.task('html:dist', function() {
         .pipe(gulpif(config.compress, prettify({
             indent_size: 2
         })))
+        .pipe(f)
+        .pipe(templateHtmlCache())
+        .pipe(gulp.dest('src/js/'))
+        .pipe(f.restore)
+        .pipe(indexFilter)
         .pipe(gulp.dest(path.join(paths.html)))
+        .pipe(indexFilter.restore)
         .pipe(connect.reload());
 });
 
@@ -304,7 +314,7 @@ gulp.task('default', function() {
 
 
 gulp.task('dist:pre', function(cb) {
-   return runSequence('themes', ['plugins', 'html:dist', 'js', 'scss', 'img', 'fonts', 'media', 'revolution'], cb);
+   return runSequence('themes', ['plugins', 'html:dist',  'scss', 'img', 'fonts', 'media', 'revolution'], 'js',cb);
 });
 
 gulp.task('dist',['dist:pre'], function(cb) {
@@ -312,22 +322,12 @@ gulp.task('dist',['dist:pre'], function(cb) {
      .pipe(cachebust.references())
      .pipe(gulp.dest(config.folders.dist));
 });
-gulp.task('demo', function() {
-    config.allColors = true;
-    config.compress = true;
-    config.environment = 'demo';
-
-    return runSequence(
-        'clean',
-        'themes', ['plugins', 'html', 'js', 'scss', 'img', 'fonts', 'media', 'revolution']
-    );
-});
 
 gulp.task('dev', function() {
     config.environment = 'dev';
     config.compress = false;
     return runSequence(
-        'clean', ['plugins', 'html', 'js', 'scss', 'img', 'fonts', 'media', 'revolution'], 'dist'
+        'clean', ['plugins', 'html',  'scss', 'img', 'fonts', 'media', 'revolution'], 'js', 'dist'
     );
 });
 
