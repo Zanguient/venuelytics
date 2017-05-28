@@ -1,4 +1,4 @@
-<div class="ms-slidebar sb-slidebar sb-left sb-style-overlay" id="ms-slidebar">
+<div class="ms-slidebar sb-slidebar sb-left sb-style-overlay" id="ms-slidebar" ng-controller="sidebarController">
     <div class="sb-slidebar-container">
         <header class="ms-slidebar-header">
             <div class="ms-slidebar-login">
@@ -20,16 +20,16 @@
         </header>
 
         <ul class="ms-slidebar-menu" id="slidebar-menu" role="tablist" aria-multiselectable="true">
-            <li class="panel" role="tabpanel" id="sch1">
-                <a ng-href="/home" class="panel-collapse collapse" role="button" data-toggle="collapse" data-parent="#slidebar-menu" aria-expanded="false">
+            <li class="panel" role="tabpanel" id="sch1" ng-click="navigateMenu('home')">
+                <a class="panel-collapse collapse" role="button" data-toggle="collapse" data-parent="#slidebar-menu" aria-expanded="false">
                     <i class="zmdi zmdi-home"></i> Home
                 </a>
                 <!-- <ul id="sc1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch1">
                     <li><a ng-href="/home">Home</a></li>
                 </ul> -->
             </li>
-            <li class="panel" role="tab" id="sch4">
-                <a ng-href="/searchBusiness" class="panel-collapse collapse" role="tabpanel" data-toggle="collapse" data-parent="#slidebar-menu" aria-expanded="false">
+            <li class="panel" role="tab" id="sch4" ng-click="navigateMenu('searchBusiness')">
+                <a class="panel-collapse collapse" role="tabpanel" data-toggle="collapse" data-parent="#slidebar-menu" aria-expanded="false">
                     <i class="zmdi zmdi-edit"></i> Business
                 </a>
                 <!-- <ul id="sc4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch4">
@@ -43,8 +43,8 @@
                     <li><a href="blog-post2.html">Blog Post 2</a></li>
                 </ul> -->
             </li>
-            <li class="panel" role="tab" id="sch2">
-                <a class="panel-collapse collapse" role="tabpanel" data-toggle="collapse" data-parent="#slidebar-menu" ng-href="/cities" aria-expanded="false">
+            <li class="panel" role="tab" id="sch2" ng-click="navigateMenu('cities')">
+                <a class="panel-collapse collapse" role="tabpanel" data-toggle="collapse" data-parent="#slidebar-menu" aria-expanded="false">
                         <i class="zmdi zmdi-desktop-mac"></i> Consumers
                     </a>
                 <!-- <ul id="sc2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch2">
