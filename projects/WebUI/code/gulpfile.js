@@ -25,8 +25,14 @@ var config = require('./gulp/config');
 var cachebust = new CacheBuster();
 var templateHtmlCache = require('gulp-angular-templatecache');
 var filter = require('gulp-filter');
+var pseudoTranslator = require('gulp-pseudo-translate-angular-json');
+var jeditor = require('gulp-json-editor');
+
 
 var paths = {
+    src : {
+        i18n: 'src/i18n'
+    },
     dist: path.join(config.folders.dist),
     assets: path.join(config.folders.dist, config.folders.assets),
     html: path.join(config.folders.dist),
@@ -241,8 +247,22 @@ function generateNames() {
     return result;
 }
 
-gulp.task('i18n', function() {
-    return gulp.src('src/i18n/*.json')
+/**
+ * @name   i18n:pseudo
+ * @desc   Read English JSON Dictionary and Write Pseudo JSON Dictionary File
+ */
+gulp.task('i18n:pseudo', function() {
+  gulp.src(paths.src.i18n + '/en.json') // url to source file 
+  .pipe(jeditor(function(json) {
+      return pseudoTranslator(json);
+    }))
+  .pipe(rename('pseudo.json')) // destination file name 
+  .pipe(gulp.dest(paths.src.i18n)); // destination folder 
+});
+
+
+gulp.task('i18n', ['i18n:pseudo'], function() {
+    return gulp.src(paths.src.i18n + '/*.json')
       //  .pipe(gulpif(config.compress, imagemin()))
         .pipe(gulp.dest(paths.i18n))
         .pipe(connect.reload());
@@ -318,7 +338,6 @@ gulp.task('default', function() {
         ['connect']
     );
 });
-
 
 gulp.task('dist:pre', function(cb) {
    return runSequence('themes', ['plugins', 'html:dist', 'i18n','scss', 'img', 'fonts', 'media', 'revolution'], 'js',cb);

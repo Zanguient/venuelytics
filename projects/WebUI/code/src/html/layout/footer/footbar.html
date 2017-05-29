@@ -1,5 +1,5 @@
 <aside class="ms-footbar">
-    <div class="container">
+    <div class="container" ng-controller="HomeController as homeController">
         <div class="row">
             <div class="col-md-4 ms-footer-col">
                 <div class="ms-footbar-block">
@@ -17,6 +17,8 @@
                         <li><a href="page-faq2.html"><i class="zmdi zmdi-help"></i> FAQ</a></li>
                         <li><a href="page-login2.html"><i class="zmdi zmdi-lock"></i> Login</a></li>
                         <li><a href="page-contact.html"><i class="zmdi zmdi-email"></i> Contact</a></li>
+                        <li><a ng-click="changeLanguage('en')"><i class=""></i> English</a></li>
+                        <li><a ng-click="changeLanguage('pseudo')"><i class=""></i>Pseudo</a></li>
                     </ul>
                 </div>
                 <div class="ms-footbar-block">
