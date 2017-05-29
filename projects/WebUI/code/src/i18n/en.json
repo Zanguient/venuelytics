@@ -2,5 +2,39 @@
 	"city":{
 		"REAL_TIME_SERVICE":"Personalized Real-Time Premium Services to Consumers!",
 		"DISCOVER_FUN":"Discover fun <strong>Venues</strong> around You!"
+	},
+	"business":{
+		"CREATE_BUSINESS":"CREATE BUSINESS",
+		"BUSINESS_SEARCH":"BUSINESS SEARCH",
+		"BUSINESS_NAME":"Enter business name",
+		"SEARCH":"Search",
+		"CLAIM_BUSINESS":"CLAIM BUSINESS",
+		"EMAIL":"Email",
+		"PHONE":"Phone Number",
+		"SUBMIT":"Submit",
+		"CANCEL":"Cancel",
+		"OK":"Ok",
+		"ADDRESS":"Address",
+		"CITY":"City",
+		"STATE":"State",
+		"CATEGORY":"Category",
+		"ROLE":"Role",
+		"CREATE_ACCOUNT":"CREATE ACCOUNT",
+		"REGISTERED":"Registered Successfully",
+		"SUCCESS":"Your info are Registered Successfully. You will receive mail for verification",
+		"LINK":"Link to your premium service",
+		"SCRIPT":"Script to include on your website",
+		"URL":"URL to include in your Facebook, Twitter, Instagram, Snapchat & other social media sites:",
+		"FREE_TRAIL":"Create a business account to start your 30-day free trail."
+	},
+	"venue":{
+		"HOME":"Home",
+		"CITIES":"Cities",
+		"CLUBS":"CLUBS",
+		"CASINOS":"CASINOS",
+		"BARSTAB":"BARS",
+		"KARAOKE":"KARAOKE",
+		"BOWLING":"BOWLING",
+		"RESTAURANT":"RESTAURANT"
 	}
 }

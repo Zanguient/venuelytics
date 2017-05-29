@@ -55,6 +55,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             self.init();
 
     		self.selectCity = function(city) {
+                VenueService.selectedCityInfo = city;
                 VenueService.cityDistance = city.distanceInMiles;
                 $location.url('/venues/'+city.name);
     		};

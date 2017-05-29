@@ -7,82 +7,61 @@
 </div>
 
 <div class="container container-full">
-    <a href="/cities" id="navigation"><h3>Home > City</h3></a>
+    <a href="/cities" id="navigation"><h3>{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}}</h3></a>
     <div class="ms-paper">
         <div class="row" id="venueTabs">
             <!-- For Horizontal tabs -->
-            <!-- <div class="col-md-9 ms-paper-content-container"> -->
-            <!-- <div class="ms-paper-content"> -->
-            <!-- <section class="ms-component-section"> -->
             <div class="card" id="venueListCard">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-6" role="tablist">
-                    <li role="presentation" ng-class="{ active: isSet(1) }">
-                        <a href ng-click="setTab(1, 'CLUB')"  ng-init="setTab(1, 'CLUB')" class="withoutripple" aria-controls="clubs" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-if="clubTab != 0">
+                        <a href ng-click="setTab('CLUB')"  ng-init="setTab('CLUB')" class="withoutripple" aria-controls="clubs" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-home"></i>
-                            <span class="hidden-xs">CLUBS</span>
+                            <span class="hidden-xs">{{"venue.CLUBS" | translate}}</span>
                         </a>
                     </li>
-                    <li role="presentation" ng-class="{ active: isSet(2) }">
-                        <a href ng-click="setTab(2, 'CASINO')" class="withoutripple" aria-controls="casinos" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-if="casinoTab != 0">
+                        <a href ng-click="setTab('CASINO')" class="withoutripple" aria-controls="casinos" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-account"></i>
-                            <span class="hidden-xs">CASINOS</span>
+                            <span class="hidden-xs">{{"venue.CASINOS" | translate}}</span>
                         </a>
                     </li>
-                    <li role="presentation" ng-class="{ active: isSet(3) }">
-                        <a href ng-click="setTab(3, 'BAR')" class="withoutripple" aria-controls="bars" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-if="barTab != 0">
+                        <a href ng-click="setTab('BAR')" class="withoutripple" aria-controls="bars" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-email"></i>
-                            <span class="hidden-xs">BARS</span>
+                            <span class="hidden-xs">{{"venue.BARSTAB" | translate}}</span>
                         </a>
                     </li>
-                    <li role="presentation" ng-class="{ active: isSet(4) }">
-                        <a href ng-click="setTab(4, 'KARAOKE')" class="withoutripple" aria-controls="karaoke" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-if="karaokeTab != 0">
+                        <a href ng-click="setTab('KARAOKE')" class="withoutripple" aria-controls="karaoke" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-settings"></i>
-                            <span class="hidden-xs">KARAOKE</span>
+                            <span class="hidden-xs">{{"venue.KARAOKE" | translate}}</span>
                         </a>
                     </li>
-                    <li role="presentation" ng-class="{ active: isSet(5) }">
-                        <a href ng-click="setTab(5, 'BOWLING')" class="withoutripple" aria-controls="bowling" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-if="bowlingTab != 0">
+                        <a href ng-click="setTab('BOWLING')" class="withoutripple" aria-controls="bowling" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-settings"></i>
-                            <span class="hidden-xs">BOWLING</span>
+                            <span class="hidden-xs">{{"venue.BOWLING" | translate}}</span>
                         </a>
                     </li>
-                    <li role="presentation" ng-class="{ active: isSet(6) }">
-                        <a href ng-click="setTab(6, 'RESTAURANT')" class="withoutripple" aria-controls="restaurant" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-if="restaurantTab != 0">
+                        <a href ng-click="setTab('RESTAURANT')" class="withoutripple" aria-controls="restaurant" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-settings"></i>
-                            <span class="hidden-xs">RESTAURANT</span>
+                            <span class="hidden-xs">{{"venue.RESTAURANT" | translate}}</span>
                         </a>
                     </li>
                 </ul>
                 <div class="card-block" id="venueCardBlock">
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" id="clubs" ng-show="isSet(1)" class="tab-pane fade active in">
+                        <div role="tabpanel" id="clubs" class="tab-pane fade active in">
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
-                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
-                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
+                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity" ng-if="venue.imageUrls[0].smallUrl">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
                                                     <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
-                                                    <!-- <figcaption class="ms-thumbnail-caption text-center">
-                                                        <div class="ms-thumbnail-caption-content">
-                                                            <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                                            <div class="mt-2">
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
-                                                                    <i class="zmdi zmdi-favorite"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
-                                                                    <i class="zmdi zmdi-star"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
-                                                                    <i class="zmdi zmdi-share"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption> -->
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2>
@@ -99,256 +78,6 @@
 
                                                     <div ng-hide="selectedCityDistance == -1" class="col-lg-5">{{selectedCityDistance | number : 2}} miles</div><br/>
 
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- container -->
-                                <!-- ms-paper-content -->
-                            </div>
-                            <!-- col-md-9 -->
-                        </div>
-                        <div role="tabpanel" id="casinos" ng-show="isSet(2)" class="tab-pane fade active in">
-                            <div>
-                                <div class="container">
-                                    <div class="row masonry-container">
-                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
-                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
-                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
-                                                    <!-- <figcaption class="ms-thumbnail-caption text-center">
-                                                        <div class="ms-thumbnail-caption-content">
-                                                            <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                                            <div class="mt-2">
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
-                                                                    <i class="zmdi zmdi-favorite"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
-                                                                    <i class="zmdi zmdi-star"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
-                                                                    <i class="zmdi zmdi-share"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption> -->
-                                                </figure>
-                                                <div class="card-block">
-                                                    <h2>
-                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
-                                                        </h2>
-                                                    <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                    <div class="row" id="serviceIcon">
-                                                        <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-futbol-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-shopping-bag" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
-                                                    </div>
-                                                    <div ng-hide="selectedCityDistance == -1">Distance in miles: {{selectedCityDistance | number : 2}} </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- container -->
-                                <!-- ms-paper-content -->
-                            </div>
-                            <!-- col-md-9 -->
-                        </div>
-                        <div role="tabpanel" id="bars" ng-show="isSet(3)" class="tab-pane fade active in">
-                            <div>
-                                <div class="container">
-                                    <div class="row masonry-container">
-                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
-                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
-                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
-                                                    <!-- <figcaption class="ms-thumbnail-caption text-center">
-                                                        <div class="ms-thumbnail-caption-content">
-                                                            <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                                            <div class="mt-2">
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
-                                                                    <i class="zmdi zmdi-favorite"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
-                                                                    <i class="zmdi zmdi-star"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
-                                                                    <i class="zmdi zmdi-share"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption> -->
-                                                </figure>
-                                                <div class="card-block">
-                                                    <h2>
-                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
-                                                        </h2>
-                                                    <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                    <div class="row" id="serviceIcon">
-                                                        <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-futbol-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-shopping-bag" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
-                                                    </div>
-                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- container -->
-                                <!-- ms-paper-content -->
-                            </div>
-                            <!-- col-md-9 -->
-                        </div>
-                        <div role="tabpanel" id="karaoke" ng-show="isSet(4)" class="tab-pane fade active in">
-                            <div>
-                                <div class="container">
-                                    <div class="row masonry-container">
-                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
-                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
-                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
-                                                    <!-- <figcaption class="ms-thumbnail-caption text-center">
-                                                        <div class="ms-thumbnail-caption-content">
-                                                            <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                                            <div class="mt-2">
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
-                                                                    <i class="zmdi zmdi-favorite"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
-                                                                    <i class="zmdi zmdi-star"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
-                                                                    <i class="zmdi zmdi-share"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption> -->
-                                                </figure>
-                                                <div class="card-block">
-                                                    <h2>
-                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
-                                                        </h2>
-                                                    <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                    <div class="row" id="serviceIcon">
-                                                        <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-futbol-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-shopping-bag" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
-                                                    </div>
-                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- container -->
-                                <!-- ms-paper-content -->
-                            </div>
-                            <!-- col-md-9 -->
-                        </div>
-                        <div role="tabpanel" id="bowling" ng-show="isSet(5)" class="tab-pane fade active in">
-                            <div>
-                                <div class="container">
-                                    <div class="row masonry-container">
-                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
-                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
-                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
-                                                    <!-- <figcaption class="ms-thumbnail-caption text-center">
-                                                        <div class="ms-thumbnail-caption-content">
-                                                            <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                                            <div class="mt-2">
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
-                                                                    <i class="zmdi zmdi-favorite"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
-                                                                    <i class="zmdi zmdi-star"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
-                                                                    <i class="zmdi zmdi-share"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption> -->
-                                                </figure>
-                                                <div class="card-block">
-                                                    <h2>
-                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
-                                                        </h2>
-                                                    <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                    <div class="row" id="serviceIcon">
-                                                        <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-futbol-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-shopping-bag" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
-                                                    </div>
-                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- container -->
-                                <!-- ms-paper-content -->
-                            </div>
-                            <!-- col-md-9 -->
-                        </div>
-                        <div role="tabpanel" id="restaurant" ng-show="isSet(6)" class="tab-pane fade active in">
-                            <div>
-                                <div class="container">
-                                    <div class="row masonry-container">
-                                    <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
-                                        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
-                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="" class="img-responsive" id="venueImages">
-                                                    <!-- <figcaption class="ms-thumbnail-caption text-center">
-                                                        <div class="ms-thumbnail-caption-content">
-                                                            <h3 class="ms-thumbnail-caption-title">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                                            <div class="mt-2">
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm mr-1 btn-circle-white color-danger">
-                                                                    <i class="zmdi zmdi-favorite"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 mr-1 btn-circle-white color-warning">
-                                                                    <i class="zmdi zmdi-star"></i>
-                                                                </a>
-                                                                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-circle-sm ml-1 btn-circle-white color-success">
-                                                                    <i class="zmdi zmdi-share"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </figcaption> -->
-                                                </figure>
-                                                <div class="card-block">
-                                                    <h2>
-                                                            <a href="" ng-click="selectVenue(venue)">{{venue.venueName | limitTo: 20 }}{{venue.venueName.length > 20 ? '...' :''}}</a>
-                                                        </h2>
-                                                    <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                    <div class="row" id="serviceIcon">
-                                                        <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-futbol-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="mr-2 fa fa-shopping-bag" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
-                                                    </div>
-                                                    <div>Distance in miles: {{selectedCityDistance | number : 2}} </div>
                                                 </div>
                                             </article>
                                         </div>

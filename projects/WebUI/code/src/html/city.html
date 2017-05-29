@@ -8,37 +8,6 @@
     <div class="container">
         <h2 class="text-center text-light wow fadeInDown animation-delay-5">{{"city.DISCOVER_FUN" | translate}}</h2>
         <h4 class="text-center text-light wow fadeInDown animation-delay-5">{{ "city.REAL_TIME_SERVICE" | translate}}</h4>
-        <!-- <div class="form-group" id="countryDropdown">
-            <label for="select111">Select your country:</label>
-            <select data-dropup-auto="false">
-                <option  ng-repeat="country in countries" value="{{country}}" ng-model="selectedCountry">{{country}}</option>
-            </select>
-        </div> -->
-
-        <!--<div class="form-group" id="countryMain">
-            <div for="select111" class="col-md-2 control-label" id="countryLabel">Country :</div>
-                <div class="btn-group bootstrap-select form-control" id="countrySelect" style="color:white;">
-                    <select id="select111" class="form-control selectpicker" data-dropup-auto="false" >
-                        <option ng-repeat="country in countries">{{country}}</option>
-                    </select>
-                </div>
-        </div>-->
-        <!--<div class="form-group">
-            <label for="country-dropdown" class="col-md-2 control-label">Country</label>
-            <div class="col-md-10">
-                <div class="btn-group bootstrap-select form-control">
-                    <button type="button" class="btn dropdown-toggle btn-default" style="color:white;" data-toggle="dropdown" role="button" data-id="country-dropdown" title="{{selectedcountry}}" aria-expanded="false"><span class="filter-option pull-left">{{selectedcountry}}</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span>
-                    </button>
-                    <div class="dropdown-menu open" role="combobox">
-                        <ul class="dropdown-menu inner" role="listbox" aria-expanded="false" >
-                            <li ng-repeat="country in countries" data-original-index="{{$index}}" ><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">{{country.name}}</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
-                        </ul>
-                    </div>
-                    <select id="country-dropdown" ng-options="item as item.name for item in countries track by item.id" class="form-control selectpicker" data-dropup-auto="false" tabindex="-98" ng-model="selectedCountry">
-                    </select>
-                </div>
-            </div>
-        </div>-->
         <div class="row">            
             <div class="form-group ">
 
@@ -49,34 +18,7 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
-            <!-- <div class="col-md-6 col-md-push-6 mb-4  center-block">
-                <img src="<%= assets %>/img/demo/mock.png" alt="" class="img-responsive center-block wow zoomIn animation-delay-12 ">
-            </div>
-            <div class="col-md-6 col-md-pull-6 pr-6">
-                <p class="wow fadeInLeft animation-delay-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam sint officiis odio tempora natus, sed voluptas facilis ullam suscipit. Ducimus quas, eius ut, dolores mollitia sapiente doloremque aliquid sequi eaque.</p>
-                <p class="wow fadeInLeft animation-delay-7">Adipisicing elit. Sapiente porro voluptatem rerum modi quibusdam accusantium nihil facere cupiditate quam! Ipsa.</p>
-                <p class="wow fadeInLeft animation-delay-8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque quasi voluptatem, similique corrupti necessitatibus nihil error, nemo delectus voluptates deserunt ducimus quaerat molestiae labore id repellat exercitationem asperiores neque quibusdam.</p>
-                <div class="text-center">
-                    <a href="javascript:void(0)" class="btn btn-warning btn-raised mr-1 wow flipInX animation-delay-14"><i class="zmdi zmdi-chart-donut"></i> Action here </a>
-                    <a href="javascript:void(0)" class="btn btn-info btn-raised wow flipInX animation-delay-16"><i class="zmdi zmdi-case"></i> Button</a>
-                </div>
-            </div> -->
-
-            <!-- Static grid for city -->
-            <!--<div class="row">
-                <ul class="col-md-4" ng-repeat="city in listOfCities">
-                    
-                    <li class="card" id="cityImage">
-                        <div class="image-block col-sm-4" style="background: url({{city.imageUrl}}) no-repeat center top;background-size:cover; width: 370px;" ng-click="selectCity(city.name)">
-                            <div class="content" style="margin-top: 85px;">
-                                <center><h2 id="cityName">{{city.name}}</h2></center>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>-->
             <div class="row" id="loadingCities">
                 <div class="progress progress-striped active">
                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -86,9 +28,9 @@
             </div>
             <div class="row">
                 <div id="cityImage" class="city-image-block col-sm-4" style="background: url({{city.imageUrl}}) no-repeat center top;background-size:cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)">
-                <p class="content"><font size="5"> {{city.name}} </font> </p>
+                    <p class="content"><font size="5"> {{city.name}} </font> </p>
+                </div>
             </div>
-
         </div>
     </div>
 </div>

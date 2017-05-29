@@ -6,7 +6,7 @@ app.service('VenueService', function() {
   this.selectedVenueType = '';
   this.selectedCity = '';
   this.cityDistance = '';
-
+  this.selectedCityInfo = '';
   this.sessionScope = {};
   this.stateScope = {};
 
