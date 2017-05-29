@@ -3,50 +3,57 @@
  * @date 18-MAY-2017
  */
 
-app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService',
-    function ($log, $scope, $http, $location, RestURL, VenueService) {
+app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', 'AjaxService',
+    function ($log, $scope, $http, $location, RestURL, VenueService, AjaxService) {
 
     		$log.log('Inside Home Controller.');
     		
     		var self = $scope;
 
+            self.gettingLocation = function(lat, long) {
+
+                AjaxService.gettingLocation(lat, long).then(function(response) {
+                    self.listOfCities = response;
+                    $log.info('Success getting cities.');
+
+                    document.getElementById('loadingCities').style.display = 'none';
+                });
+            };
+
             self.init = function() {
                 self.selectedCountry = 'North America';
                 self.countries = ['North America', 'Canada', 'South America', 'India'];
-				if (navigator && navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position){
-                        self.currentLat = position.coords.latitude; 
-                        self.currentLong = position.coords.longitude;
-                        VenueService.latitude = self.currentLat;
-                        VenueService.longitude = self.currentLong;
-                        self.afterGettingLocation(self.currentLat, self.currentLong);
-                        self.$apply(function(){
-                            self.position = position;
-                        });
-                    },
-                    function (error) { 
-                        self.populateAllCities();
-                    });
+
+                console.log('VenueService.latitude :'+VenueService.latitude);
+                console.log('VenueService.longitude :'+VenueService.longitude);
+
+                if(VenueService.latitude && VenueService.longitude && 
+                    VenueService.latitude != '' && VenueService.longitude != ''){
+
+                    self.gettingLocation(VenueService.latitude, VenueService.longitude);
                 } else{
 
-                    self.populateAllCities();
-                }
+                    if (navigator && navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position){
+                            VenueService.latitude = position.coords.latitude; 
+                            VenueService.longitude = position.coords.longitude;
+                            self.gettingLocation(VenueService.latitude, VenueService.longitude);
+                            self.$apply(function(){
+                                self.position = position;
+                            });
+                        },
+                        function (error) { 
+                            self.gettingLocation();
+                        });
+                    } else{
+
+                        self.gettingLocation();
+                    }    
+                }				
             };
 
             self.init();
 
-            self.populateAllCities = function(){
-                $http({
-                    method: 'GET',
-                    url: RestURL.baseURL + '/venues/cities'
-                }).then(function(success) {
-                    self.listOfCities = success.data.cities;
-                    $log.info('Success getting cities.');
-                    document.getElementById('loadingCities').style.display = 'none';
-                },function(error) {
-                    $log.error('Error: '+error);
-                });
-            }
     		self.selectCity = function(city) {
                 VenueService.cityDistance = city.distanceInMiles;
                 $location.url('/venues/'+city.name);
@@ -56,16 +63,5 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 $log.info('selectedCountry: '+country);
             };
     		
-            self.afterGettingLocation = function(lat, long) {
-                $http({
-                    method: 'GET',
-                    url: RestURL.baseURL + '/venues/cities?lat=' + lat + '&lng=' + long
-                }).then(function(success) {
-                    self.listOfCities = success.data.cities;
-                    $log.info('Success getting cities.');
-                    document.getElementById('loadingCities').style.display = 'none';
-                },function(error) {
-                    $log.error('Error: '+error);
-                });
-            };
+            
     }]);
