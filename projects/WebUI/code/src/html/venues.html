@@ -14,40 +14,10 @@
             <div class="card" id="venueListCard">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-6" role="tablist">
-                    <li role="presentation" ng-if="clubTab != 0">
-                        <a href ng-click="setTab('CLUB')"  ng-init="setTab('CLUB')" class="withoutripple" aria-controls="clubs" role="tab" data-toggle="tab">
+                    <li role="presentation" ng-repeat="type in serviceTypes">  <!-- ng-if="clubTab != 0" -->
+                        <a href ng-click="setTab(type)"  ng-init="$index == 0 ? setTab('CLUB') : ''" class="withoutripple" aria-controls="clubs" role="tab" data-toggle="tab">
                             <i class="zmdi zmdi-home"></i>
-                            <span class="hidden-xs">{{"venue.CLUBS" | translate}}</span>
-                        </a>
-                    </li>
-                    <li role="presentation" ng-if="casinoTab != 0">
-                        <a href ng-click="setTab('CASINO')" class="withoutripple" aria-controls="casinos" role="tab" data-toggle="tab">
-                            <i class="zmdi zmdi-account"></i>
-                            <span class="hidden-xs">{{"venue.CASINOS" | translate}}</span>
-                        </a>
-                    </li>
-                    <li role="presentation" ng-if="barTab != 0">
-                        <a href ng-click="setTab('BAR')" class="withoutripple" aria-controls="bars" role="tab" data-toggle="tab">
-                            <i class="zmdi zmdi-email"></i>
-                            <span class="hidden-xs">{{"venue.BARSTAB" | translate}}</span>
-                        </a>
-                    </li>
-                    <li role="presentation" ng-if="karaokeTab != 0">
-                        <a href ng-click="setTab('KARAOKE')" class="withoutripple" aria-controls="karaoke" role="tab" data-toggle="tab">
-                            <i class="zmdi zmdi-settings"></i>
-                            <span class="hidden-xs">{{"venue.KARAOKE" | translate}}</span>
-                        </a>
-                    </li>
-                    <li role="presentation" ng-if="bowlingTab != 0">
-                        <a href ng-click="setTab('BOWLING')" class="withoutripple" aria-controls="bowling" role="tab" data-toggle="tab">
-                            <i class="zmdi zmdi-settings"></i>
-                            <span class="hidden-xs">{{"venue.BOWLING" | translate}}</span>
-                        </a>
-                    </li>
-                    <li role="presentation" ng-if="restaurantTab != 0">
-                        <a href ng-click="setTab('RESTAURANT')" class="withoutripple" aria-controls="restaurant" role="tab" data-toggle="tab">
-                            <i class="zmdi zmdi-settings"></i>
-                            <span class="hidden-xs">{{"venue.RESTAURANT" | translate}}</span>
+                            <span class="hidden-xs">{{type}}</span>
                         </a>
                     </li>
                 </ul>
@@ -58,6 +28,7 @@
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
+                                        <center><h5 ng-show="!listOfVenuesByCity.length">Sorry there are no matching results. Please try clicking on other type of venues in the tab above</h5></center>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity" ng-if="venue.imageUrls[0].smallUrl">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
@@ -76,7 +47,7 @@
                                                             <a ng-click="selectedServices()" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
 
-                                                    <div ng-hide="selectedCityDistance == -1" class="col-lg-5">{{selectedCityDistance | number : 2}} miles</div><br/>
+                                                    <div ng-hide="selectedCityDistance == -1"  id="distance" class="col-lg-5">{{selectedCityDistance | number : 2}} miles</div><br/>
 
                                                 </div>
                                             </article>

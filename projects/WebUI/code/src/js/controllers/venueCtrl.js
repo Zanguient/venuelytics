@@ -2,7 +2,7 @@
  * @author Saravanakumar K
  * @date 18-MAY-2017
  */
-
+"use strict";
 app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','$routeParams', 'AjaxService',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService) {
 
@@ -10,8 +10,10 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
     		
     		var self = $scope;
 
-            self.init = function function_name(argument) {
+            self.init = function() {
                 
+                self.serviceTypes = ['CLUB', 'CASINO', 'BAR', 'KARAOKE', 'BOWLING', 'RESTAURANT'];
+
                 self.selectedCityName = $routeParams.cityName;
                 AjaxService.getCity(self.selectedCityName).then(function(response) {
                     console.log(response);
@@ -24,7 +26,7 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                     self.restaurantTab = self.cityInfo.counts.RESTAURANT;
                     self.casinoTab = self.cityInfo.counts.CASINO;    
                 });
-            }
+            };
 
             $scope.setTab = function(type){
                 //VenueService.selectedVenueType = type;
