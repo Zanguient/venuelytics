@@ -252,7 +252,7 @@ function generateNames() {
  * @desc   Read English JSON Dictionary and Write Pseudo JSON Dictionary File
  */
 gulp.task('i18n:pseudo', function() {
-  gulp.src(paths.src.i18n + '/en.json') // url to source file 
+  return gulp.src(paths.src.i18n + '/en.json') // url to source file 
   .pipe(jeditor(function(json) {
       return pseudoTranslator(json);
     }))
