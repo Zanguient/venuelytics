@@ -4,18 +4,43 @@
  */
 app.service('AjaxService', ['$http', 'RestURL', function($http, RestURL) {
 
-    //lat=' + lat + '&lng=' + long + '&
-    this.getVenuesByType = function(city, venueType, lat, long) {
+    this.getVenues = function(id, city, venueType) {
+
+        var url = RestURL.baseURL + '/venues?from=0&size=100';
+
+        if (city) {
+            url = url + '&city=' + city;
+        } 
+        if(id) {
+            url = RestURL.baseURL + '/venues/'+ id;
+        }
+        if(venueType){
+            url = url + '&type=' + venueType;
+        }
+
         return $http({
             method: 'GET',
-            url: RestURL.baseURL + '/venues?city=' + city + '&from=0&size=100&type=' + venueType
+            url: url
         }).then(function(success) {
-            return success.data.venues;
+            return success.data;
         }, function(error) {
             return error;
             $log.error('Error: ' + error);
         });
     };
+
+    this.getCity = function(cityName) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + '/venues/cities?name=' + cityName
+        }).then(function(success) {
+            return success.data.cities;
+        }, function(error) {
+            return error;
+            $log.error('Error: ' + error);
+        });
+    };
+
 
     this.gettingLocation = function(lat, long) {
 

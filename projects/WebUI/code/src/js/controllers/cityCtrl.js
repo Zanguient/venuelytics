@@ -24,9 +24,6 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 self.selectedCountry = 'North America';
                 self.countries = ['North America', 'Canada', 'South America', 'India'];
 
-                console.log('VenueService.latitude :'+VenueService.latitude);
-                console.log('VenueService.longitude :'+VenueService.longitude);
-
                 if(VenueService.latitude && VenueService.longitude && 
                     VenueService.latitude != '' && VenueService.longitude != ''){
 
@@ -55,8 +52,6 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             self.init();
 
     		self.selectCity = function(city) {
-                VenueService.selectedCityInfo = city;
-                VenueService.cityDistance = city.distanceInMiles;
                 $location.url('/venues/'+city.name);
     		};
 

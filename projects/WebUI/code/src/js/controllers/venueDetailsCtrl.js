@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 
-app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window) {
+app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService) {
 
     		$log.log('Inside Venue Details Controller.');
     		
@@ -12,20 +12,24 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
             self.init = function() {
 
-                self.selectedCity = VenueService.selectedCity;
-                self.selectedType = VenueService.selectedVenueType;
-                self.detailsOfVenue = VenueService.selectedVenueDetails;
-                self.venueName =    self.detailsOfVenue.venueName;
-                self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id;
+                self.venueid = $routeParams.venueid;
+                AjaxService.getVenues(self.venueid,null,null).then(function(response) {
+                    self.detailsOfVenue = response;
+                    self.selectedCity = $routeParams.cityName;
+                    debugger;
+                    //self.selectedType = VenueService.selectedVenueType;
+                    self.venueName =    self.detailsOfVenue.venueName;
+                    self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id;
 
-                iFrameResize({
-                        log                     : false,                  // Enable console logging
-                        inPageLinks             : false,
-                        heightCalculationMethod: 'max',
-                        widthCalculationMethod: 'min',
-                        sizeWidth: false,
-                        checkOrigin: false
-                    });
+                    iFrameResize({
+                            log                     : false,                  // Enable console logging
+                            inPageLinks             : false,
+                            heightCalculationMethod: 'max',
+                            widthCalculationMethod: 'min',
+                            sizeWidth: false,
+                            checkOrigin: false
+                        });
+                });
             };
 
             self.init();
