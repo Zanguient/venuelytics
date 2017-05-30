@@ -71,7 +71,7 @@
     margin-top: 0px;
   }
   #myFormClaim{
-    margin-left: 150px;
+    margin-left: 0px;
   }
   #claimTitle {
     padding-left: 10px;
@@ -84,6 +84,11 @@
   }
   #logoCollapsed {
     margin-top: 15px;
+  }
+  #distance {
+    margin-left: 26px;
+    padding-right: 0px;
+    width: 110px;
   }
 }
 @media only screen and (min-device-width: 320px) and (max-device-width:

@@ -1,8 +1,10 @@
+"use strict";
 var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies']);
 
 
 // configure our routes
-app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegateProvider', function($routeProvider, $httpProvider, $locationProvider, $sceDelegateProvider) {
+app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegateProvider', 
+    function($routeProvider, $httpProvider, $locationProvider, $sceDelegateProvider) {
     $locationProvider.hashPrefix('');
     $httpProvider.defaults.withCredentials = true;
 

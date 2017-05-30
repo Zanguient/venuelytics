@@ -1,7 +1,8 @@
 {
 	"city":{
 		"REAL_TIME_SERVICE":"Personalized Real-Time Premium Services to Consumers!",
-		"DISCOVER_FUN":"Discover fun Venues around You!"
+		"DISCOVER_FUN":"Discover fun Venues around You!",
+		"LOADING_CITIES":"Loading Cities"
 	},
 	"business":{
 		"CREATE_BUSINESS":"CREATE BUSINESS",
@@ -25,7 +26,15 @@
 		"LINK":"Link to your premium service",
 		"SCRIPT":"Script to include on your website",
 		"URL":"URL to include in your Facebook, Twitter, Instagram, Snapchat & other social media sites:",
-		"FREE_TRAIL":"Create a business account to start your 30-day free trail."
+		"FREE_TRAIL":"Create a business account to start your 30-day free trail.",
+		"FORM_NAME_REQUIRED":"Name is required",
+		"FORM_EMAIL_REQUIRED":"Email is required",
+		"FORM_PHONE_REQUIRED":"Phone no is required",
+		"FORM_BUSINESS_NAME_REQUIRED":"Business Name is required",
+		"FORM_ADDRESS_REQUIRED":"Address is required",
+		"FORM_ADDRESS2_REQUIRED":"Address2 is required",
+		"FORM_CITY_REQUIRED":"City is required"
+
 	},
 	"venue":{
 		"HOME":"Home",
@@ -35,6 +44,33 @@
 		"BARSTAB":"BARS",
 		"KARAOKE":"KARAOKE",
 		"BOWLING":"BOWLING",
-		"RESTAURANT":"RESTAURANT"
+		"RESTAURANT":"RESTAURANT",
+		"MILES":"miles"
+	},
+	"navbar":{
+		"HOME":"Home",
+		"BUSINESS":"Business",
+		"CONSUMERS":"Consumers"
+	},
+	"title":{
+		"TITLE_VENUE":"Venue",
+		"TITLE_LYTICS":"Lytics"
+	},
+	"country":{
+		"LOS_ANGELES":"Los Angeles",
+		"NEW_JERSEY":"New Jersey",
+		"FLORIDA":"Florida",
+		"CALIFORNIA":"California"
+	},
+	"category":{
+		"WEDDING":"Wedding",
+		"BIRTHDAY_PARTY":"BirthDay Party",
+		"EVENT":"Event",
+		"WEEKEND_PARTY":"WeekEnd Party"
+	},
+	"role":{
+		"ARTIST":"Artist",
+		"CUSTOMER":"Customer",
+		"ADMIN":"Admin"
 	}
 }

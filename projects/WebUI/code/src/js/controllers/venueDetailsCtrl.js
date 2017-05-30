@@ -2,7 +2,7 @@
  * @author Saravanakumar K
  * @date 19-MAY-2017
  */
-
+"use strict";
 app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService) {
 
@@ -16,7 +16,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
-                    debugger;
                     //self.selectedType = VenueService.selectedVenueType;
                     self.venueName =    self.detailsOfVenue.venueName;
                     self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id;

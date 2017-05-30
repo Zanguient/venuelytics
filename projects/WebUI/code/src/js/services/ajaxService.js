@@ -2,7 +2,8 @@
  * @author Saravanakumar K
  * @date MAR'24 2017
  */
-app.service('AjaxService', ['$http', 'RestURL', function($http, RestURL) {
+ "use strict";
+app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL, $log) {
 
     this.getVenues = function(id, city, venueType) {
 
@@ -24,8 +25,8 @@ app.service('AjaxService', ['$http', 'RestURL', function($http, RestURL) {
         }).then(function(success) {
             return success.data;
         }, function(error) {
-            return error;
             $log.error('Error: ' + error);
+            return error;
         });
     };
 
@@ -36,8 +37,8 @@ app.service('AjaxService', ['$http', 'RestURL', function($http, RestURL) {
         }).then(function(success) {
             return success.data.cities;
         }, function(error) {
-            return error;
             $log.error('Error: ' + error);
+            return error;
         });
     };
 
@@ -57,6 +58,19 @@ app.service('AjaxService', ['$http', 'RestURL', function($http, RestURL) {
             return success.data.cities;
         }, function(error) {
             $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
+    this.searchBusiness = function(businessName) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + '/venues?&search=' + businessName + '&from=0&size=10'
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
         });
     };
 

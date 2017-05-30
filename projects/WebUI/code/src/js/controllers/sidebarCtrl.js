@@ -2,7 +2,7 @@
  * @author Thomas
  * @date 28-MAY-2017
  */
-
+"use strict";
 app.controller('sidebarController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window) {
 
@@ -17,10 +17,10 @@ app.controller('sidebarController', ['$log', '$scope', '$http', '$location', 'Re
 
             self.navigateMenu = function(menu){
 
-                $log.debug('inside navigateMenu')
+                $log.debug('inside navigateMenu');
                 $('#ms-slidebar').toggle();
                 $location.url('/'+menu);
-            }
+            };
 
             self.init();
     		

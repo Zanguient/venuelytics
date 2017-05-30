@@ -72,7 +72,7 @@
 
                                     <div class="col-md-10">
                                         <input type="text" class="form-control" name="businessName" ng-model="claim.businessName" required>
-                    <span class="error-message" ng-show="showMessage(myFormClaim.businessName)">Name is required</span>
+                    <span class="error-message" ng-show="showMessage(myFormClaim.businessName)">{{"business.FORM_NAME_REQUIRED" | translate}}</span>
                                     </div>
                                 </div>
 
@@ -81,7 +81,7 @@
 
                                     <div class="col-md-10">
                                         <input type="email" class="form-control" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="claimEmailId" ng-model="claim.email" required>
-                    <span class="error-message" ng-show="showMessage(myFormClaim.claimEmailId)">Email is required</span>
+                    <span class="error-message" ng-show="showMessage(myFormClaim.claimEmailId)">{{"business.FORM_EMAIL_REQUIRED" | translate}}</span>
                                     </div>
                                 </div>  
                                 
@@ -90,12 +90,12 @@
 
                                     <div class="col-md-10">
                                         <input type="text" class="form-control" name="phone" ng-model="claim.phone" required>
-                    <span class="error-message" ng-show="showMessage(myFormClaim.phone)">Phone no is required</span>
+                    <span class="error-message" ng-show="showMessage(myFormClaim.phone)">{{"business.FORM_PHONE_REQUIRED" | translate}}</span>
                                     </div>
                                 </div> 
                             <center>
                                 <div class="form-group">
-                <div class="col-md-5 col-md-offset-2">
+                <div >
                     <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit(claim)" novalidate="novalidate">{{"business.SUBMIT" | translate}}</button>
                     <button type="button" class="btn btn-raised btn-danger" ng-click="cancel()">{{"business.CANCEL" | translate}}</button>
                 </div>
@@ -124,7 +124,7 @@
 
                                     <div class="col-md-10">
                                         <input type="text" id="ms-form-pass" class="form-control" id="inputEmail" name="businessName" ng-model="newUser.businessName" required>
-                                        <span class="error-message" ng-show="showMessage(myForm.businessName)">Business Name is required</span>
+                                        <span class="error-message" ng-show="showMessage(myForm.businessName)">{{"business.FORM_BUSINESS_NAME_REQUIRED" | translate}}</span>
                                     </div>
                                 </div>
 
@@ -133,7 +133,7 @@
 
                                     <div class="col-md-10">
                                         <input type="text" id="ms-form-pass" class="form-control" ng-model="newUser.address" required name="address">
-                                        <span class="error-message" ng-show="showMessage(myForm.address)">Address is required</span>
+                                        <span class="error-message" ng-show="showMessage(myForm.address)">{{"business.FORM_ADDRESS_REQUIRED" | translate}}</span>
                                     </div>
                                 </div>
 
@@ -142,7 +142,7 @@
 
                                     <div class="col-md-10">
                                         <input type="text" id="ms-form-pass" class="form-control" ng-model="newUser.address2" required name="address2">
-                                        <span class="error-message" ng-show="showMessage(myForm.address2)">Address2 is required</span>
+                                        <span class="error-message" ng-show="showMessage(myForm.address2)">{{"business.FORM_ADDRESS2_REQUIRED" | translate}}</span>
                                     </div>
                                 </div>
 
@@ -151,7 +151,7 @@
 
                                     <div class="col-md-10">
                                         <input type="text" id="ms-form-pass" class="form-control" ng-model="newUser.city" required name="city">
-                                        <span class="error-message" ng-show="showMessage(myForm.city)">City is required</span>
+                                        <span class="error-message" ng-show="showMessage(myForm.city)">{{"business.FORM_CITY_REQUIRED" | translate}}</span>
                                     </div>
                                 </div>
 
@@ -160,10 +160,10 @@
 
                                     <div class="col-md-10">
                                             <select class="btn  dropdown-toggle form-control" required ng-model="newUser.state">
-                                                <option>Los angles</option>
-                                                <option>New Jersey</option>
-                                                <option>Florida</option>
-                                                <option>California</option>
+                                                <option>{{"country.LOS_ANGELES" | translate}}</option>
+                                                <option>{{"country.NEW_JERSEY" | translate}}</option>
+                                                <option>{{"country.FLORIDA" | translate}}</option>
+                                                <option>{{"country.CALIFORNIA" | translate}}</option>
                                             </select> 
                                     </div>
                                 </div>
@@ -173,10 +173,10 @@
 
                                     <div class="col-md-10">
                                             <select class="btn  dropdown-toggle form-control" required ng-model="newUser.category">
-                                                <option>Wedding</option>
-                                                <option>BirthDay Party</option>
-                                                <option>Event</option>
-                                                <option>WeekEnd Party</option>
+                                                <option>{{"category.WEDDING" | translate}}</option>
+                                                <option>{{"category.BIRTHDAY_PARTY" | translate}}</option>
+                                                <option>{{"category.EVENT" | translate}}</option>
+                                                <option>{{"category.WEEKEND_PARTY" | translate}}</option>
                                             </select> 
                                     </div>
                                 </div>
@@ -186,9 +186,9 @@
 
                                     <div class="col-md-10">
                                             <select class="btn  dropdown-toggle form-control" required ng-model="newUser.role">
-                                                <option>Artist</option>
-                                                <option>Customer</option>
-                                                <option>Admin</option>
+                                                <option>{{"role.ARTIST" | translate}}</option>
+                                                <option>{{"role.CUSTOMER" | translate}}</option>
+                                                <option>{{"role.ADMIN" | translate}}</option>
                                             </select>
                                     </div>
                                 </div>
@@ -198,14 +198,14 @@
 
                                     <div class="col-md-10">
                                         <input type="text" id="ms-form-pass" class="form-control" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="emailId" ng-model="newUser.emailId" required>
-                                        <span class="error-message" ng-show="showMessage(myForm.emailId)">Email is required</span>
+                                        <span class="error-message" ng-show="showMessage(myForm.emailId)">{{"business.FORM_EMAIL_REQUIRED" | translate}}</span>
                                     </div>
                                 </div>
                                 
                             </fieldset>
                             <center>
                                 <div class="form-group">
-                                <div class="col-md-10">
+                                <div>
                                     <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-click="save(newUser)">{{"business.CREATE_ACCOUNT" | translate}}</button>
                                 </div>
                             </div>

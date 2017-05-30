@@ -2,7 +2,7 @@
  * @author Saravanakumar K
  * @date 18-MAY-2017
  */
-
+"use strict";
 app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', 'AjaxService',
     function ($log, $scope, $http, $location, RestURL, VenueService, AjaxService) {
 
@@ -25,7 +25,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 self.countries = ['North America', 'Canada', 'South America', 'India'];
 
                 if(VenueService.latitude && VenueService.longitude && 
-                    VenueService.latitude != '' && VenueService.longitude != ''){
+                    VenueService.latitude !== '' && VenueService.longitude !== ''){
 
                     self.gettingLocation(VenueService.latitude, VenueService.longitude);
                 } else{

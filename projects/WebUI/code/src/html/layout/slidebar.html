@@ -1,11 +1,6 @@
 <div class="ms-slidebar sb-slidebar sb-left sb-style-overlay" id="ms-slidebar" ng-controller="sidebarController">
     <div class="sb-slidebar-container">
         <header class="ms-slidebar-header">
-            <!--<div class="ms-slidebar-login">
-                <a href="javascript:void(0)" class="withripple"><i class="zmdi zmdi-account"></i> Login</a>
-                <a href="javascript:void(0)" class="withripple"><i class="zmdi zmdi-account-add"></i> Register</a>
-            </div>-->
-
             <div class="ms-slidebar-title">
                 <form class="search-form">
                     <input id="search-box-slidebar" type="text" class="search-input" placeholder="Search..." name="q" />
@@ -14,7 +9,7 @@
 
                 <div class="ms-slidebar-t">
                     <img class="ms-logo" src="assets/img/logo-collapsed.png" alt="">
-                    <span class="ms-title"><font color="white">Venue</font><strong><font color="green">Lytics</font></strong></span>
+                    <span class="ms-title"><font color="white">{{"title.TITLE_VENUE" | translate}}</font><strong><font color="green">{{"title.TITLE_LYTICS" | translate}}</font></strong></span>
                 </div>
             </div>
         </header>
@@ -22,89 +17,19 @@
         <ul class="ms-slidebar-menu" id="slidebar-menu" role="tablist" aria-multiselectable="true">
             <li class="panel" role="tabpanel" id="sch1" ng-click="navigateMenu('home')">
                 <a class="panel-collapse collapse" role="button" data-toggle="collapse" data-parent="#slidebar-menu" aria-expanded="false">
-                    <i class="zmdi zmdi-home"></i> Home
+                    <i class="zmdi zmdi-home"></i> {{"navbar.HOME" | translate}}
                 </a>
-                <!-- <ul id="sc1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch1">
-                    <li><a ng-href="/home">Home</a></li>
-                </ul> -->
             </li>
             <li class="panel" role="tab" id="sch4" ng-click="navigateMenu('searchBusiness')">
                 <a class="panel-collapse collapse" role="button" data-toggle="collapse" data-parent="#slidebar-menu" aria-expanded="false">
-                    <i class="zmdi zmdi-edit"></i> Business
+                    <i class="zmdi zmdi-edit"></i> {{"navbar.BUSINESS" | translate}}
                 </a>
-                <!-- <ul id="sc4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch4">
-                    <li><a href="blog-sidebar.html">Blog Sidebar 1</a></li>
-                    <li><a href="blog-sidebar2.html">Blog Sidebar 2</a></li>
-                    <li><a href="blog-masonry.html">Blog Masonry 1</a></li>
-                    <li><a href="blog-masonry2.html">Blog Masonry 2</a></li>
-                    <li><a href="blog-full.html">Blog Full Page 1</a></li>
-                    <li><a href="blog-full2.html">Blog Full Page 2</a></li>
-                    <li><a href="blog-post.html">Blog Post 1</a></li>
-                    <li><a href="blog-post2.html">Blog Post 2</a></li>
-                </ul> -->
             </li>
             <li class="panel" role="tab" id="sch2" ng-click="navigateMenu('cities')">
                 <a class="panel-collapse collapse" role="button" data-toggle="collapse" data-parent="#slidebar-menu" aria-expanded="false">
-                        <i class="zmdi zmdi-desktop-mac"></i> Consumers
+                        <i class="zmdi zmdi-desktop-mac"></i> {{"navbar.CONSUMERS" | translate}}
                     </a>
-                <!-- <ul id="sc2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch2">
-                    <li><a href="page-about.html">About US</a></li>
-                    <li><a href="page-team.html">Our Team</a></li>
-                    <li><a href="page-product.html">Products</a></li>
-                    <li><a href="page-services.html">Services</a></li>
-                    <li><a href="page-faq.html">FAQ</a></li>
-                    <li><a href="page-timeline_left.html">Timeline</a></li>
-                    <li><a href="page-contact.html">Contact Option</a></li>
-                    <li><a href="page-login.html">Login</a></li>
-                    <li><a href="page-pricing.html">Pricing</a></li>
-                    <li><a href="page-coming.html">Coming Soon</a></li>
-                </ul> -->
             </li>
-            
-            <!-- <li class="panel" role="tab" id="sch5">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#slidebar-menu" href="#sc5" aria-expanded="false" aria-controls="sc5">
-                    <i class="zmdi zmdi-shopping-basket"></i> E-Commerce
-                </a>
-                <ul id="sc5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch5">
-                    <li><a href="ecommerce-filters.html">E-Commerce Sidebar</a></li>
-                    <li><a href="ecommerce-filters-full.html">E-Commerce Sidebar Full</a></li>
-                    <li><a href="ecommerce-filters-full2.html">E-Commerce Topbar Full</a></li>
-                    <li><a href="ecommerce-item.html">E-Commerce Item</a></li>
-                    <li><a href="ecommerce-cart.html">E-Commerce Cart</a></li>
-                </ul>
-            </li> -->
-            <!-- <li class="panel" role="tab" id="sch6">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#slidebar-menu" href="#sc6" aria-expanded="false" aria-controls="sc6">
-                    <i class="zmdi zmdi-collection-image-o"></i> Portfolio
-                </a>
-                <ul id="sc6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="sch6">
-                    <li><a href="portfolio-filters_sidebar.html">Portfolio Sidebar Filters</a></li>
-                    <li><a href="portfolio-filters_topbar.html">Portfolio Topbar Filters</a></li>
-                    <li><a href="portfolio-filters_sidebar_fluid.html">Portfolio Sidebar Fluid</a></li>
-                    <li><a href="portfolio-filters_topbar_fluid.html">Portfolio Topbar Fluid</a></li>
-                    <li><a href="portfolio-cards.html">Porfolio Cards</a></li>
-                    <li><a href="portfolio-masonry.html">Porfolio Masonry</a></li>
-                    <li><a href="portfolio-item.html">Portfolio Item 1</a></li>
-                    <li><a href="portfolio-item2.html">Portfolio Item 2</a></li>
-                </ul>
-            </li> -->
-            <!-- <li>
-                <a class="link" href="component-typography.html"><i class="zmdi zmdi-view-compact"></i> UI Elements</a>
-            </li>
-            <li>
-                <a class="link" href="page-all.html"><i class="zmdi zmdi-link"></i> All Pages</a>
-            </li> -->
         </ul>
-
-
-        <!-- <div class="ms-slidebar-social ms-slidebar-block">
-            <h4 class="ms-slidebar-block-title">Social Links</h4>
-            <div class="ms-slidebar-social">
-                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-facebook"><i class="zmdi zmdi-facebook"></i> <span class="badge badge-pink">12</span><div class="ripple-container"></div></a>
-                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-twitter"><i class="zmdi zmdi-twitter"></i> <span class="badge badge-pink">4</span><div class="ripple-container"></div></a>
-                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-google"><i class="zmdi zmdi-google"></i><div class="ripple-container"></div></a>
-                <a href="javascript:void(0)" class="btn-circle btn-circle-raised btn-instagram"><i class="zmdi zmdi-instagram"></i><div class="ripple-container"></div></a>
-            </div>
-        </div> -->
     </div>
 </div>

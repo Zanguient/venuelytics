@@ -1,5 +1,6 @@
-app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','$routeParams',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams) {
+"use strict";
+app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','AjaxService',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $window, AjaxService) {
 
     		$log.log('Inside Business Controller.');
     		
@@ -26,20 +27,15 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.init();
 
             self.search = function(){
-            	$http({
-                    method: 'GET',
-                    url: RestURL.baseURL + '/venues?&search=' + self.searchBusiness + '&from=0&size=10'
-                }).then(function(success) {
-                    self.businessDetails = success.data.venues;
+
+                AjaxService.searchBusiness(self.searchBusiness).then(function(response) {
+                    self.businessDetails = response.data.venues;
                     self.businessDetailLength = self.businessDetails.length;
-                    if(self.businessDetailLength != 0) {
+                    if(self.businessDetailLength !== 0) {
                         self.businessImage = self.businessDetails[0].imageUrls[0].originalUrl;
                         self.venueName = self.businessDetails[0].venueName;
                         self.venueAddress = self.businessDetails[0].address;
                     }
-
-                },function(error) {
-                    $log.error('Error: '+error);
                 });
             };
             
