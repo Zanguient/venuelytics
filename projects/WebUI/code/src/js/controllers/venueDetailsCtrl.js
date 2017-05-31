@@ -28,6 +28,16 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                             sizeWidth: false,
                             checkOrigin: false
                         });
+
+                    $(function(){
+                        $('#venueReservationFrame').on('load', function(){
+                            $('#loadingVenueDetails').hide();
+                            $(this).show();
+                            console.log('laod the iframe')
+                        });
+                            
+                    });
+
                 });
             };
 

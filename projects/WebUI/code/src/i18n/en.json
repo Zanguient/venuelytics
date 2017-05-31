@@ -1,4 +1,10 @@
 {
+	"CLUB":"CLUB",
+	"CASINO":"CASINO",
+	"BAR":"BAR",
+	"KARAOKE":"KARAOKE",
+	"RESTAURANT":"RESTAURANT",
+	"BOWLING":"BOWLING",
 	"city":{
 		"REAL_TIME_SERVICE":"Personalized Real-Time Premium Services to Consumers!",
 		"DISCOVER_FUN":"Discover fun Venues around You!",
@@ -45,7 +51,8 @@
 		"KARAOKE":"KARAOKE",
 		"BOWLING":"BOWLING",
 		"RESTAURANT":"RESTAURANT",
-		"MILES":"miles"
+		"MILES":"miles",
+		"NO_MATCHING_RESULTS":"Sorry there are no matching results. Please try clicking on other type of venues in the tab above"
 	},
 	"navbar":{
 		"HOME":"Home",
