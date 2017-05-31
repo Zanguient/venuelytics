@@ -3,14 +3,17 @@
  * @date 25-MAY-2017
  */
 "use strict";
-app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService','$translate',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $translate) {
+app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService','$translate', 'APP_CLIENTS',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $translate, APP_CLIENTS) {
 
     		$log.log('Inside Home Controller.');
     		
     		var self = $scope;
 
     		self.homeTab = 'active';
+
+            self.clientImages = APP_CLIENTS.client_images;
+            $log.info("Client images: "+angular.toJson(self.clientImages));
 
             self.navBar = function(tab) {
                 if(tab === 1) {

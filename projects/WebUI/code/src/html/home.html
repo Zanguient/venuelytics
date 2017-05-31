@@ -1,6 +1,74 @@
 <div class="container" id="venueBanner">
     <div class="banner-fill-img">
-        <img src="assets/img/demo/landingpaage.jpg" id="forMobile">
+        <div class="card" style="width: 100%">
+                            <div id="carousel-example-generic" class="ms-carousel carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item">
+                                        <img src="<%= assets %>/img/2.jpg" alt="..." id="carouselImage">
+                                        <div class="carousel-caption">
+                                            <h3>{{"CAROUSEL_HEADING_1" | translate}}</h3>
+                                            <h3>{{"CAROUSEL_HEADING_2" | translate}}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <img src="<%= assets %>/img/19.jpg" alt="..." id="carouselImage">
+                                        <div class="carousel-caption">
+                                            <h3>{{"CAROUSEL_HEADING_3" | translate}}</h3>
+                                            <h3>{{"CAROUSEL_HEADING_4" | translate}}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <img src="<%= assets %>/img/6.jpg" alt="..." id="carouselImage">
+                                        <div class="carousel-caption">
+                                            <h3>{{"CAROUSEL_HEADING_5" | translate}}</h3>
+                                            <h3>{{"CAROUSEL_HEADING_6" | translate}}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <img src="<%= assets %>/img/31.jpg" alt="..." id="carouselImage">
+                                        <div class="carousel-caption">
+                                            <h3>{{"CAROUSEL_HEADING_7" | translate}}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <img src="<%= assets %>/img/41.jpg" alt="..." id="carouselImage">
+                                        <div class="carousel-caption">
+                                            <h3>{{"CAROUSEL_HEADING_8" | translate}}</h3>
+                                            <h3>{{"CAROUSEL_HEADING_9" | translate}}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="item active">
+                                        <img src="<%= assets %>/img/5.jpg" alt="..." id="carouselImage">
+                                        <div class="carousel-caption">
+                                            <h3>{{"CAROUSEL_HEADING_10" | translate}}</h3>
+                                            <h3>{{"CAROUSEL_HEADING_11" | translate}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Controls -->
+                                <a href="#carousel-example-generic" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control" role="button" data-slide="prev"><i class="zmdi zmdi-chevron-left"></i></a>
+                                <a href="#carousel-example-generic" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary right carousel-control" role="button" data-slide="next"><i class="zmdi zmdi-chevron-right"></i></a>
+                            </div>
+                        </div>
+    </div>
+    <div>
+        <center>
+        <h2 align="center" style="color: black;">{{"WELCOME_HEADING_1" | translate}}</h2>
+        <h2 align="center" style="color: black;">{{"WELCOME_HEADING_2" | translate}}</h2>
+        <p style="font-size: 18px;">{{"WELCOME_DESCRIPTION" | translate}}</p>
+    </center>
     </div>
 </div>
 
@@ -352,116 +420,12 @@
 </div>
 
 <div class="container mt-6">
-    <h2 class="text-center color-primary mb-4">Our Latest Works</h2>
-    <div class="owl-dots"></div>
-    <div class="owl-carousel owl-theme">
-        <div class="card animation-delay-6">
-            <div class="withripple zoom-img">
-                <a href="javascript:void()"><img src="<%= assets %>/img/demo/port4.jpg" alt="..." class="img-responsive"></a>
-            </div>
-            <div class="card-block">
-                <h3 class="color-primary">Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, repellat, vitae porro ex expedita cumque nulla.</p>
-                <p class="text-right">
-                    <a href="javascript:void()" class="btn btn-primary btn-raised text-right" role="button"><i class="zmdi zmdi-collection-image-o"></i> View More</a>
-                </p>
-            </div>
-        </div>
-        <div class="card card-dark-inverse animation-delay-8">
-            <div class="withripple zoom-img">
-                <a href="javascript:void()"><img src="<%= assets %>/img/demo/port24.jpg" alt="..." class="img-responsive"></a>
-            </div>
-            <div class="card-block">
-                <h3 class="">Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, repellat, vitae porro ex expedita cumque nulla.</p>
-                <p class="text-right">
-                    <a href="javascript:void()" class="btn btn-info btn-raised text-right" role="button"><i class="zmdi zmdi-collection-image-o"></i> View More</a>
-                </p>
-            </div>
-        </div>
-        <div class="card animation-delay-10">
-            <div class="withripple zoom-img">
-                <a href="javascript:void()"><img src="<%= assets %>/img/demo/port7.jpg" alt="..." class="img-responsive"></a>
-            </div>
-            <div class="card-block">
-                <h3 class="color-primary">Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, repellat, vitae porro ex expedita cumque nulla.</p>
-                <p class="text-right">
-                    <a href="javascript:void()" class="btn btn-primary btn-raised text-right" role="button"><i class="zmdi zmdi-collection-image-o"></i> View More</a>
-                </p>
-            </div>
-        </div>
-        <div class="card animation-delay-6">
-            <div class="withripple zoom-img">
-                <a href="javascript:void()"><img src="<%= assets %>/img/demo/port8.jpg" alt="..." class="img-responsive"></a>
-            </div>
-            <div class="card-block">
-                <h3 class="color-primary">Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, repellat, vitae porro ex expedita cumque nulla.</p>
-                <p class="text-right">
-                    <a href="javascript:void()" class="btn btn-primary btn-raised text-right" role="button"><i class="zmdi zmdi-collection-image-o"></i> View More</a>
-                </p>
-            </div>
-        </div>
-        <div class="card card-dark-inverse animation-delay-8">
-            <div class="withripple zoom-img">
-                <a href="javascript:void()"><img src="<%= assets %>/img/demo/port9.jpg" alt="..." class="img-responsive"></a>
-            </div>
-            <div class="card-block">
-                <h3 class="">Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, repellat, vitae porro ex expedita cumque nulla.</p>
-                <p class="text-right">
-                    <a href="javascript:void()" class="btn btn-info btn-raised text-right" role="button"><i class="zmdi zmdi-collection-image-o"></i> View More</a>
-                </p>
-            </div>
-        </div>
-        <div class="card animation-delay-10">
-            <div class="withripple zoom-img">
-                <a href="javascript:void()"><img src="<%= assets %>/img/demo/port5.jpg" alt="..." class="img-responsive"></a>
-            </div>
-            <div class="card-block">
-                <h3 class="color-primary">Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, repellat, vitae porro ex expedita cumque nulla.</p>
-                <p class="text-right">
-                    <a href="javascript:void()" class="btn btn-primary btn-raised text-right" role="button"><i class="zmdi zmdi-collection-image-o"></i> View More</a>
-                </p>
-            </div>
-        </div>
-        <div class="card animation-delay-6">
-            <div class="withripple zoom-img">
-                <a href="javascript:void()"><img src="<%= assets %>/img/demo/port11.jpg" alt="..." class="img-responsive"></a>
-            </div>
-            <div class="card-block">
-                <h3 class="color-primary">Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, repellat, vitae porro ex expedita cumque nulla.</p>
-                <p class="text-right">
-                    <a href="javascript:void()" class="btn btn-primary btn-raised text-right" role="button"><i class="zmdi zmdi-collection-image-o"></i> View More</a>
-                </p>
-            </div>
-        </div>
-        <div class="card card-dark-inverse animation-delay-8">
-            <div class="withripple zoom-img">
-                <a href="javascript:void()"><img src="<%= assets %>/img/demo/port3.jpg" alt="..." class="img-responsive"></a>
-            </div>
-            <div class="card-block">
-                <h3 class="">Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, repellat, vitae porro ex expedita cumque nulla.</p>
-                <p class="text-right">
-                    <a href="javascript:void()" class="btn btn-info btn-raised text-right" role="button"><i class="zmdi zmdi-collection-image-o"></i> View More</a>
-                </p>
-            </div>
-        </div>
-        <div class="card animation-delay-10">
-            <div class="withripple zoom-img">
-                <a href="javascript:void()"><img src="<%= assets %>/img/demo/port14.jpg" alt="..." class="img-responsive"></a>
-            </div>
-            <div class="card-block">
-                <h3 class="color-primary">Thumbnail label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, repellat, vitae porro ex expedita cumque nulla.</p>
-                <p class="text-right">
-                    <a href="javascript:void()" class="btn btn-primary btn-raised text-right" role="button"><i class="zmdi zmdi-collection-image-o"></i> View More</a>
-                </p>
-            </div>
-        </div>
-    </div>
+    <h2 class="text-center color-primary mb-4">{{"CLIENT_CAROUSEL_TITLE" | translate}}</h2>
+    <div class="owl-carousel image-carousel carousel-widget" data-autoplay="1000" data-items-lg="6" data-items-md="5" data-items-sm="4" data-items-xs="3" data-items-xxs="2" data-loop="true" data-margin="60" data-nav="false" data-pagi="false" id="oc-clients">
+            <div class="oc-item" style="width: 140px; margin-right: 60px;" ng-repeat="image in clientImages">
+                <a href="{{image.link}}" target="_new">
+                    <img alt="Clients" src="{{image.image}}">
+                    </a>
+                </div>
+          </div>
 </div>

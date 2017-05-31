@@ -17,7 +17,7 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                 self.selectedCityName = $routeParams.cityName;
                 AjaxService.getCity(self.selectedCityName).then(function(response) {
                     self.cityInfo = response[0];
-                    self.selectedCityDistance = self.cityInfo.distanceInMiles;
+                    self.selectedCityDistance = VenueService.cityDistance;
                     self.barTab = self.cityInfo.counts.BAR;
                     self.karaokeTab = self.cityInfo.counts.KARAOKE;
                     self.bowlingTab = self.cityInfo.counts.BOWLING;
@@ -40,7 +40,8 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
     			$location.url('/venues/'+self.selectedCityName+'/'+venue.id);
     		};
 
-            self.selectedServices = function() {
+            self.selectedServices = function(venue) {
+                $location.url('/venues/'+self.selectedCityName+'/'+venue.id);
                 $log.info('Inside selected services');
             };
     		self.init();

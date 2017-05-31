@@ -88,9 +88,17 @@
   #distance {
     margin-left: 26px;
     padding-right: 0px;
+    padding-left: 0px;
     width: 110px;
   }
+  #footbarWidth {
+    width: 370px;
+  }
+  #carouselImage {
+    height: 586px;
+  }
 }
+/*iPhone 5*/
 @media only screen and (min-device-width: 320px) and (max-device-width:
  480px) {
   #businessImage {
@@ -122,6 +130,13 @@
   #logoCollapsed {
     margin-top: 10px;
   }
+  #footbarWidth {
+    width: 316px;
+  }
+  #carouselImage {
+    height: 200px;
+  }
+  
 }
 
 /*For iPhone 6 plus*/
@@ -151,6 +166,12 @@
 
   #logoCollapsed {
     margin-top: 10px;
+  }
+  #footbarWidth {
+    width: 365px;
+  }
+  #carouselImage {
+    height: 200px;
   }
 }
 

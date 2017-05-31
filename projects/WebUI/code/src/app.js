@@ -33,7 +33,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller: 'VenueDetailsController'
         })
         .when('/searchBusiness', {
-            templateUrl: 'businessSearch.html',
+            templateUrl: 'business-search.html',
             controller: 'businessController'
         })
         .otherwise('/home');

@@ -29,6 +29,8 @@ module.exports = {
         jsConcat : [
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/jquery.cookie/jquery.cookie.js',
+			'bower_components/owl.carousel/dist/owl.carousel.min.js',
+			'bower_components/owl.carousel/docs/assets/vendors/jquery.mousewheel.min.js',
             'bower_components/bootstrap/dist/js/bootstrap.min.js',
             'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js',
             'bower_components/holderjs/holder.min.js',
@@ -63,6 +65,7 @@ module.exports = {
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js',
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
 			'src/app.js',
+			'src/constants.js',
 			'src/js/controllers/cityCtrl.js',
 			'src/js/controllers/homeCtrl.js',
 			'src/js/controllers/venueCtrl.js',
@@ -71,7 +74,8 @@ module.exports = {
             'src/js/controllers/sidebarCtrl.js',
 			'src/js/services/restUrlService.js',
 			'src/js/services/venueService.js',
-			'src/js/services/ajaxService.js'
+			'src/js/services/ajaxService.js',
+			'src/js/functions.js'
         ],
         css : [
             'bower_components/animate.css/animate.min.css',
@@ -87,6 +91,8 @@ module.exports = {
             'bower_components/owl.carousel/dist/assets/owl.theme.default.min.css',
             "bower_components/snackbar/dist/snackbar.min.css",
             "bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css.map",
+			'bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
+			'bower_components/owl.carousel/dist/assets/owl.theme.default.min.css',
 			'src/css/custom.css'
         ],
         fonts : [
