@@ -1,6 +1,6 @@
 //$(tabs());
 //$(window).resize(tabs());
-
+'use strict';
 window.onresize = tabs;
 
 var handler = window.onresize;

@@ -190,7 +190,9 @@ gulp.task('js', ['js:base', 'js:configurator'], function() {
 });
 
 gulp.task('js:base', function() {
-    const f = filter([ 'src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*', '!src/js/templates.js'], {restore: true});
+    const f = filter([ 'src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*', 
+        '!src/js/templates.js', '!src/js/dropdownhover.js', '!src/js/app.js',  '!src/js/material.js'
+        ,'!src/js/functions.js'], {restore: true});
     return gulp.src(['src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*'])
         .pipe(f)
         .pipe(jshint())
@@ -207,10 +209,6 @@ gulp.task('js:base', function() {
 
 gulp.task('js:configurator', function() {
     return gulp.src('src/js/configurator.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('gulp-jshint-html-reporter', {
-            filename: 'jshint-output.html'
-        }))
         .pipe(gulpif(config.compress, concat('configurator.min.js')))
         .pipe(gulpif(config.compress, uglify()))
         .pipe(cachebust.resources())
