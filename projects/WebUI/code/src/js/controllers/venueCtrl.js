@@ -16,7 +16,6 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
 
                 self.selectedCityName = $routeParams.cityName;
                 AjaxService.getCity(self.selectedCityName).then(function(response) {
-                    console.log(response);
                     self.cityInfo = response[0];
                     self.selectedCityDistance = self.cityInfo.distanceInMiles;
                     self.barTab = self.cityInfo.counts.BAR;

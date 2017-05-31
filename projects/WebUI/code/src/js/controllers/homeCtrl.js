@@ -13,11 +13,11 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     		self.homeTab = 'active';
 
             self.navBar = function(tab) {
-                if(tab == 1) {
+                if(tab === 1) {
                     self.homeTab = 'active';
                     self.businessTab = '';
                     self.consumerTab = '';
-                } else if(tab == 2) {
+                } else if(tab === 2) {
                     self.homeTab = '';
                     self.businessTab = 'active';
                     self.consumerTab = '';

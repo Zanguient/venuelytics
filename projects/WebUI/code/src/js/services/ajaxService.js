@@ -7,7 +7,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
 
     this.getVenues = function(id, city, venueType) {
 
-        var url = RestURL.baseURL + '/venues?from=0&size=100';
+        var url = RestURL.baseURL + '/venues?from=0';
 
         if (city) {
             url = url + '&city=' + city;
@@ -65,7 +65,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
     this.searchBusiness = function(businessName) {
         return $http({
             method: 'GET',
-            url: RestURL.baseURL + '/venues?&search=' + businessName + '&from=0&size=10'
+            url: RestURL.baseURL + '/venues?&search=' + businessName + '&from=0'
         }).then(function(success) {
             return success;
         }, function(error) {
