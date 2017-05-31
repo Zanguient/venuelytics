@@ -12,7 +12,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 
     		self.homeTab = 'active';
 
-            self.clientImages = APP_CLIENTS.client_images;
+            self.clientImages = APP_CLIENTS.clientImages;
             $log.info("Client images: "+angular.toJson(self.clientImages));
 
             self.navBar = function(tab) {

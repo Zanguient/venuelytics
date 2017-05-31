@@ -33,7 +33,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         $('#venueReservationFrame').on('load', function(){
                             $('#loadingVenueDetails').hide();
                             $(this).show();
-                            console.log('laod the iframe')
                         });
                             
                     });

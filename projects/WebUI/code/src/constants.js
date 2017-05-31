@@ -5,7 +5,7 @@
  =========================================================*/
 app
   .constant('APP_CLIENTS', {
-    'client_images': [{'image': 'assets/img/clients/1.png', 'link': 'http://www.rosiemccanns.com'},
+    'clientImages': [{'image': 'assets/img/clients/1.png', 'link': 'http://www.rosiemccanns.com'},
     				  {'image': 'assets/img/clients/4.png', 'link': 'http://www.montecarloniteclub.com'},
     				  {'image': 'assets/img/clients/5.png', 'link': 'https://www.facebook.com/myth.taverna/'},
     				  {'image': 'assets/img/clients/6.png', 'link': 'http://www.thecardifflounge.com/'},
