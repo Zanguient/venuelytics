@@ -30,4 +30,8 @@ app
     				  {'image': 'assets/img/clients/32.png', 'link': 'http://www.nightlifeunlocked.com'},
     				  {'image': 'assets/img/clients/noir-lounge.png', 'link': 'http://www.noir-sf.com/'},
     				  {'image': 'assets/img/clients/wine-jar.png', 'link': 'http://winejar-sf.com/'}]
+  })
+  .constant('APP_ARRAYS', {
+    'country': ['North America', 'Canada', 'South America', 'India'],
+    'serviceTabs': ['CLUB', 'CASINO', 'BAR', 'KARAOKE', 'BOWLING', 'RESTAURANT']
   });

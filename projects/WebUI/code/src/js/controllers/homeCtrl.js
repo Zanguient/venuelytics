@@ -13,7 +13,6 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     		self.homeTab = 'active';
 
             self.clientImages = APP_CLIENTS.clientImages;
-            $log.info("Client images: "+angular.toJson(self.clientImages));
 
             self.navBar = function(tab) {
                 if(tab === 1) {
@@ -31,6 +30,36 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                 }
             };
 
+            self.init = function() {
+                
+                $(document).ready(function () {
+                    $('#carousel-example-generic').carousel({
+                        interval: 3000
+                    });
+                    $('#carousel-example-generic').carousel('cycle');
+
+                    var owl = $('.owl-carousel');
+                        owl.owlCarousel({
+                            loop:true,
+                            autoplay:true,
+                            autoplayTimeout:1000,
+                            dots:false,
+                            mouseDrag:true,
+                            touchDrag:true,
+                            responsive: {
+                                0:{ items: 2},
+                                480:{ items: 3},
+                                768:{ items: 4},
+                                992:{ items: 5},
+                                1200:{ items: 6},
+                            },
+                            margin:60,
+                            nav:false
+                        });
+                });
+            };
+
+            self.init();
 
     		self.changeLanguage = function(lang){
    				$translate.use(lang); 

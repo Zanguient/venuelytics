@@ -5,9 +5,9 @@
  "use strict";
 app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL, $log) {
 
-    this.getVenues = function(id, city, venueType) {
+    this.getVenues = function(id, city, venueType, lat, long) {
 
-        var url = RestURL.baseURL + '/venues?from=0';
+        var url = RestURL.baseURL + '/venues?from=0&lat=' + lat + '&lng=' + long;
 
         if (city) {
             url = url + '&city=' + city;

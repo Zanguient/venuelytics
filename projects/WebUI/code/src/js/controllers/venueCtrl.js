@@ -3,8 +3,8 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','$routeParams', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService) {
+app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS) {
 
     		$log.log('Inside Venue Controller.');
     		
@@ -12,12 +12,12 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
 
             self.init = function() {
                 
-                self.serviceTypes = ['CLUB', 'CASINO', 'BAR', 'KARAOKE', 'BOWLING', 'RESTAURANT'];
+                self.serviceTypes = APP_ARRAYS.serviceTabs;
 
                 self.selectedCityName = $routeParams.cityName;
                 AjaxService.getCity(self.selectedCityName).then(function(response) {
                     self.cityInfo = response[0];
-                    self.selectedCityDistance = VenueService.cityDistance;
+                    self.selectedCityDistance = self.cityInfo.distanceInMiles;
                     self.barTab = self.cityInfo.counts.BAR;
                     self.karaokeTab = self.cityInfo.counts.KARAOKE;
                     self.bowlingTab = self.cityInfo.counts.BOWLING;
@@ -25,12 +25,33 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                     self.restaurantTab = self.cityInfo.counts.RESTAURANT;
                     self.casinoTab = self.cityInfo.counts.CASINO;    
                 });
+
+                if(VenueService.latitude && VenueService.longitude && 
+                    VenueService.latitude !== '' && VenueService.longitude !== ''){
+                    $log.info("Inside have data");
+                    self.setTab('CLUB');
+                } else{
+
+                    if (navigator && navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position){
+                            VenueService.latitude = position.coords.latitude; 
+                            VenueService.longitude = position.coords.longitude;
+                            self.setTab('CLUB');
+                            self.$apply(function(){
+                                self.position = position;
+                            });
+                        },
+                        function (error) { 
+                            self.setTab('CLUB');
+                        });
+                    }    
+                }
             };
 
-            $scope.setTab = function(type){
+            self.setTab = function(type){
                 //VenueService.selectedVenueType = type;
                 //VenueService.selectedCity = self.selectedCityName;
-                AjaxService.getVenues(null,self.selectedCityName, type).then(function(response) {
+                AjaxService.getVenues(null,self.selectedCityName, type, VenueService.latitude, VenueService.longitude).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
                 });
             };

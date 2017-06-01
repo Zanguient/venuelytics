@@ -15,7 +15,8 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-6" role="tablist">
                     <li role="presentation" ng-repeat="type in serviceTypes">  <!-- ng-if="clubTab != 0" -->
-                        <a href ng-click="setTab(type)"  ng-init="$index == 0 ? setTab('CLUB') : ''" class="withoutripple" aria-controls="clubs" role="tab" data-toggle="tab">
+                        <a href ng-click="setTab(type)" class="withoutripple" aria-controls="clubs" role="tab" data-toggle="tab">
+                        <!-- ng-init="$index == 0 ? setTab('CLUB') : ''" -->
                             <i class="zmdi zmdi-home"></i>
                             <span class="hidden-xs">{{type | translate}}</span>
                         </a>
@@ -28,7 +29,7 @@
                             <div>
                                 <div class="container">
                                     <div class="row masonry-container">
-                                        <center><h5 ng-show="!listOfVenuesByCity.length">{{"venue.NO_MATCHING_RESULTS" | translate}}</h5></center>
+                                        <center><h5 ng-show="listOfVenuesByCity.length == 0">{{"venue.NO_MATCHING_RESULTS" | translate}}</h5></center>
                                         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity" ng-if="venue.imageUrls[0].smallUrl">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" id="cityImage">
@@ -47,7 +48,7 @@
                                                             <a ng-click="selectedServices(venue)" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
 
-                                                    <div ng-hide="selectedCityDistance == -1"  id="distance" class="col-lg-5">{{selectedCityDistance | number : 2}} {{ "venue.MILES" | translate}}</div><br/>
+                                                    <div ng-hide="selectedCityDistance == -1"  id="distance" class="col-lg-5">{{venue.distanceInMiles | number : 2}} {{ "venue.MILES" | translate}}</div><br/>
 
                                                 </div>
                                             </article>

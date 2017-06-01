@@ -94,5 +94,18 @@
 		"ARTIST":"Artist",
 		"CUSTOMER":"Customer",
 		"ADMIN":"Admin"
+	},
+	"footBar": {
+		"ADDRESS1":"530 Lytton Avenue, 2nd Floor",
+		"ADDRESS2":"Palo Alto, CA 94304",
+		"EMAIL":"info@venuelytics.com",
+		"SOCIAL":"Social Media",
+		"SITEMAP":"Sitemap",
+		"ABOUT":"About Us",
+		"TERMS":"Terms of Use",
+		"PRIVACY":"Privacy Policy",
+		"SUBSCRIPBE":"Subscribe",
+		"DESCRIPTION":"We believe in Personalized, Real-Time Engaging Entertainment Experiances.",
+		"EMAIL_ADDRESS":"Email Adress"
 	}
 }

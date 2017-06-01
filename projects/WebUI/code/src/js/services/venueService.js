@@ -1,24 +1,27 @@
 "use strict";
 app.service('VenueService', function() {
-  this.venueByCityName = '';
-  this.selectedVenueDetails = '';
   this.latitude = '';
   this.longitude = '';
-  this.selectedVenueType = '';
-  this.selectedCity = '';
-  this.cityDistance = '';
-  this.selectedCityInfo = '';
-  this.sessionScope = {};
-  this.stateScope = {};
 
-  this.destroyStateScope = function(){
-  	this.stateScope = {};
-  };
+  /*this.getCurrentLocation = function() {
 
-  this.getStateScope = function(key){
-  	return this.stateScope[key];
-  };
-  this.putStateScope = function(key,value){
-  	this.stateScope[key] = value;
-  };
+    if (navigator && navigator.geolocation) {
+
+      navigator.geolocation.getCurrentPosition(function(position){
+        this.latitude = position.coords.latitude; 
+        this.longitude = position.coords.longitude;
+        var location = {
+          lat : this.latitude,
+          long : this.longitude
+        };
+        return location;
+      },
+    function (error) { 
+      return error;
+    });
+    }
+
+  };*/
+
+
 });

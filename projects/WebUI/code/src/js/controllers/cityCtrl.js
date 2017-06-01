@@ -3,8 +3,8 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, VenueService, AjaxService) {
+app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', 'AjaxService', 'APP_ARRAYS',
+    function ($log, $scope, $http, $location, RestURL, VenueService, AjaxService, APP_ARRAYS) {
 
     		$log.log('Inside Home Controller.');
     		
@@ -21,8 +21,8 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             };
 
             self.init = function() {
-                self.selectedCountry = 'North America';
-                self.countries = ['North America', 'Canada', 'South America', 'India'];
+                self.selectedCountry = APP_ARRAYS.country[0];
+                self.countries = APP_ARRAYS.country;
 
                 if(VenueService.latitude && VenueService.longitude && 
                     VenueService.latitude !== '' && VenueService.longitude !== ''){
@@ -52,7 +52,6 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             self.init();
 
     		self.selectCity = function(city) {
-                VenueService.cityDistance = city.distanceInMiles;
                 $location.url('/venues/'+city.name);
     		};
 
