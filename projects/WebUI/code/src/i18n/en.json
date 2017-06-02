@@ -20,7 +20,19 @@
 		"CAROUSEL_HEADING_8":"CREATE NEW SOURCES OF SUSTAINABLE REVENUE...",
 		"CAROUSEL_HEADING_9":"PREDICT & GAIN BUSINESS INSIGHTS",
 		"CAROUSEL_HEADING_10":"REWARD YOUR CUSTOMERS...",
-		"CAROUSEL_HEADING_11":"WITH LOYALTY MANAGEMENT"
+		"CAROUSEL_HEADING_11":"WITH LOYALTY MANAGEMENT",
+		"POWER_OF":"The Power of",
+		"TURNKEY":"Turnkey",
+		"CUSTOM":"Custom Integration",
+		"VENUE_DESCRIPTION":"VenueLytics platform integrates with a Venue's Website, Social Media Sites, Mobile Apps, ItzFun Consumer App and 3rd party Apps. Our consumer App 'ItzFun!,' provides access to an extensive level of information about the most important entertainment venues around the world. With ItzFun!, consumers can know, and see, what’s fun & happening, right now, at the very moment of decision.",
+		"BULLET_TITLE_1":"TABLE/BOTTLE SERVICE",
+		"BULLET1_DESCRIPTION":"Real-Time & Pre-Booking of Bottle Services with Mobile Web, Mobile App, SMS & Email",
+		"BULLET_TITLE_2":"GUEST LIST",
+		"BULLET2_DESCRIPTION":"Easy Access To New & Existing Customers. Grow the customer base.",
+		"BULLET_TITLE_3":"FOOD & BEVERAGE REQUESTS",
+		"BULLET3_DESCRIPTION":"Ordering Food & Beverage from Mobile Web, Website & Mobile app",
+		"BULLET_TITLE_4":"LOYALTY MANAGEMENT",
+		"BULLET4_DESCRIPTION":"Provide valuable, and relevant, real-time rewards and incentives via SMS, e-mail, & Mobile App"
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
@@ -114,6 +126,9 @@
 		"PRIVACY":"Privacy Policy",
 		"SUBSCRIPBE":"Subscribe",
 		"DESCRIPTION":"We believe in Personalized, Real-Time Engaging Entertainment Experiances.",
-		"EMAIL_ADDRESS":"Email Adress"
+		"EMAIL_ADDRESS":"Email Adress",
+		"COPY":"Copyrights",
+		"RIGHTS":"2017 All Rights Reserved by VenueLytics Inc"
+
 	}
 }
