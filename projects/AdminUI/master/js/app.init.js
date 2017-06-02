@@ -86,3 +86,5 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
        
             }
           ]);
+
+angular.module('templates', []);

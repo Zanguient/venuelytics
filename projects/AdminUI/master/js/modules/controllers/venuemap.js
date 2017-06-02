@@ -48,7 +48,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 	              		    		actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash" ng-click="deleteTable('+row+')"></button>';
 	              		    		
 	              		    		$(td).html(actionHtml);
-	              		    		$compile(td)($scope);
+	              		    		 $compile(td)($scope);
 	              		    	  }
 	              		    	/*"render": function (data, type, row, meta ) {
 	              		    		var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit" ng-click="editTable('+meta.row+','+meta.col+')"></button>&nbsp;&nbsp;';
@@ -119,7 +119,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     	$scope.newTable.id = -1;
     	ngDialog.openConfirm({
     	    template: 'app/templates/form-table-info.html',
-    	    // plain: true,
+    	     //plain: true,
     	    className: 'ngdialog-theme-default',
     	    scope : $scope 
     	  }).then(function (value) {

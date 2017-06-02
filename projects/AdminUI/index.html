@@ -12,9 +12,19 @@
    <link rel="stylesheet" href="app/css/app-rtl.css" data-ng-if="app.layout.isRTL">
    
    <base href="/">
+   <style type="text/css">
+      
+      body { 
+            background: url(app/img/hero_venuelytics_vip.jpg) no-repeat center center fixed ; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+         }
+   </style>
 </head>
 
-<body data-ng-class="{ 'layout-fixed' : app.layout.isFixed, 'aside-collapsed' : app.layout.isCollapsed, 'layout-boxed' : app.layout.isBoxed }"  ng-style="{'background-image':'url(app/img/hero_venuelytics_vip.jpg)'}">
+<body data-ng-class="{ 'layout-fixed' : app.layout.isFixed, 'aside-collapsed' : app.layout.isCollapsed, 'layout-boxed' : app.layout.isBoxed }" >
    <div data-ui-view="" data-autoscroll="false" data-ng-class="mainViewAnimation" class="wrapper"></div>
    <script src="app/js/base.js"></script>
    <script src="app/js/app.js"></script>

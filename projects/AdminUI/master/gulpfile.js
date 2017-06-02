@@ -88,7 +88,6 @@ var vendorBaseScripts = [
   '../vendor/spectrumcolor/angular-spectrum-color-min.js',
   '../vendor/ngDialog/js/ngDialog.min.js',
   '../vendor/ngImgMap/compile/ng-img-map.min.js'
-
 ];
 
 // also add in constants.js
@@ -151,8 +150,8 @@ var dynamicScriptFiles = [
     '../vendor/ngDialog/js/ngDialog.min.js', 
     '../vendor/ngDialog/css/ngDialog.min.css', 
     '../vendor/ngDialog/css/ngDialog-theme-default.min.css',
-    '../vendor/ngImgMap/compile/ng-img-map.min.js',
     '../vendor/ngImgMap/compile/ng-img-map.css',
+    '../vendor/ngImgMap/compile/ng-img-map.js',
     '../vendor/toaster/toaster.css',
     '../vendor/toaster/toaster.js',
     '../vendor/spectrumcolor/js/angular-spectrum-color-min.js',
@@ -427,7 +426,7 @@ gulp.task('bust-template', function () {
 	
 	return gulp.src(['../app/templates/**/*.html',  '../app/pages/**/*.html', '../app/views/**/*.html'])
 	 .pipe(templateCache())
-     .pipe(gulp.dest('../app/js/'));
+   .pipe(gulp.dest('../app/js/'));
     
 });
 

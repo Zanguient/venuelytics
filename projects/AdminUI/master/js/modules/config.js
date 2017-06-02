@@ -172,7 +172,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('venuemap-edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins')
+        resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins','ngImgMap','ngDialog')
     })
     .state('app.content-performance', {
         url: '/content-performance/:id',

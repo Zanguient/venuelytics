@@ -84,7 +84,8 @@ App
       'datatables-pugins':  ['vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js','vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js','vendor/datatable/extensions/ColVis/js/dataTables.colVis.min.js', 'vendor/datatable/extensions/ColVis/css/dataTables.colVis.css'],
       'flatdoc':            ['vendor/flatdoc/flatdoc.js'],
       'spectrum':            ['vendor/spectrumcolor/js/spectrum.js','vendor/spectrumcolor/css/spectrum.css'],
-      'ngDialog':			['vendor/ngDialog/js/ngDialog.min.js', 'vendor/ngDialog/css/ngDialog.min.css', 'vendor/ngDialog/css/ngDialog-theme-default.min.css']
+      'ngDialog':			['vendor/ngDialog/js/ngDialog.min.js', 'vendor/ngDialog/css/ngDialog.min.css', 'vendor/ngDialog/css/ngDialog-theme-default.min.css'],
+      'ngImgMap': ['vendor/ngImgMap/compile/ng-img-map.css']
      
   	// Also add in gulpfile.js 
     },
