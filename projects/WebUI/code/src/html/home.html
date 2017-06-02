@@ -111,24 +111,24 @@
     <div class="container">
         <h2 class="text-center text-light mb-6 wow fadeInDown animation-delay-3">{{"home.POWER_OF" | translate}} <strong>{{"home.TURNKEY" | translate}}</strong> {{"home.CUSTOM" | translate}}</h2>
 
-        <p class="text-center fadeInDown animation-delay-4">{{"home.VENUE_DESCRIPTION" | translate}}</p>
+        <p class="text-center text-light mb-6 wow fadeInDown animation-delay-3">{{"home.VENUE_DESCRIPTION" | translate}}</p>
 
         <div class="row">
             <div class="col-md-6 col-md-push-6 mb-4  center-block">
                 <img src="<%= assets %>/img/demo/mock1.png" alt="" class="img-responsive center-block wow zoomIn animation-delay-12 ">
             </div>
             <div class="col-md-6 col-md-pull-6 pr-6">
-                <h4 class="wow fadeInLeft animation-delay-5">{{"home.BULLET_TITLE_1" | translate}}</h4>
-                <p class="wow fadeInLeft animation-delay-6">{{"home.BULLET1_DESCRIPTION" | translate}}</p>
+                <p class="wow fadeInLeft animation-delay-5"><strong>{{"home.BULLET_TITLE_1" | translate}}</strong></p>
+                <p class="text-light wow fadeInLeft animation-delay-6">{{"home.BULLET1_DESCRIPTION" | translate}}</p>
 
-                <h4 class="wow fadeInLeft animation-delay-7">{{"home.BULLET_TITLE_2" | translate}}</h4>
-                <p class="wow fadeInLeft animation-delay-8">{{"home.BULLET2_DESCRIPTION" | translate}}</p>
+                <p class="wow fadeInLeft animation-delay-7"><strong>{{"home.BULLET_TITLE_2" | translate}}</strong></p>
+                <p class="text-light wow fadeInLeft animation-delay-8">{{"home.BULLET2_DESCRIPTION" | translate}}</p>
 
-                <h4 class="wow fadeInLeft animation-delay-9">{{"home.BULLET_TITLE_3" | translate}}</h4>
-                <p class="wow fadeInLeft animation-delay-10">{{"home.BULLET3_DESCRIPTION" | translate}}</p>
+                <p class="wow fadeInLeft animation-delay-9"><strong>{{"home.BULLET_TITLE_3" | translate}}</strong></p>
+                <p class="text-light wow fadeInLeft animation-delay-10">{{"home.BULLET3_DESCRIPTION" | translate}}</p>
 
-                <h4 class="wow fadeInLeft animation-delay-11">{{"home.BULLET_TITLE_4" | translate}}</h4>
-                <p class="wow fadeInLeft animation-delay-12">{{"home.BULLET4_DESCRIPTION" | translate}}</p>
+                <p class="wow fadeInLeft animation-delay-11"><strong>{{"home.BULLET_TITLE_4" | translate}}</strong></p>
+                <p class="text-light wow fadeInLeft animation-delay-12">{{"home.BULLET4_DESCRIPTION" | translate}}</p>
             </div>
         </div>
     </div>
@@ -426,7 +426,7 @@
 
 <div class="container mt-6" ng-init="init()">
     <h2 class="text-center color-primary mb-4">{{"home.CLIENT_CAROUSEL_TITLE" | translate}}</h2>
-    <div class="owl-carousel image-carousel carousel-widget" id="oc-clients">
+    <div class="owl-carousel image-carousel carousel-widget owl-loaded owl-drag" id="oc-clients">
             <div class="oc-item" style="width: 140px; margin-right: 60px;" ng-repeat="image in clientImages">
                 <a href="{{image.link}}" target="_new">
                     <img alt="Clients" src="{{image.image}}">

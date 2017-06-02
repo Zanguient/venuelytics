@@ -39,8 +39,9 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 });
             };
             
-            self.claim = function() {
+            self.claim = function(selectedVenue) {
                 $window.scrollTo(0, 0);
+                self.selectedVenueName = selectedVenue.venueName;
                 self.claimBusiness = true;
             };
 
@@ -51,6 +52,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
             
             self.cancel = function() {
+                self.claimB = {};
                 self.claimBusiness = false;
             };
             

@@ -21,6 +21,12 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             };
 
             self.init = function() {
+
+                $('.selectpicker').selectpicker({
+                    style: 'btn-info',
+                    size: 4
+                });
+
                 self.selectedCountry = APP_ARRAYS.country[0];
                 self.countries = APP_ARRAYS.country;
 

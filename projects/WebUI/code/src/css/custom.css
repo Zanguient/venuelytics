@@ -100,6 +100,10 @@
   #countryDropdown {
     width: 125px;
     color: black;
+    margin-left: 952px;
+  }
+  #contact {
+    margin-top: 40px;
   }
 }
 /*iPhone 5*/
@@ -140,6 +144,9 @@
   #carouselImage {
     height: 200px;
   }
+  #contact {
+    margin-top: 20px;
+  }
   
 }
 
@@ -176,6 +183,9 @@
   }
   #carouselImage {
     height: 200px;
+  }
+  #contact {
+    margin-top: 20px;
   }
 }
 
@@ -304,4 +314,152 @@
 }
 .bootstrap-select>.btn:first-child{
   color: white !important;
+}
+
+
+/* Justify Border Title
+-----------------------------------------------------------------*/
+
+.fancy-title {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.fancy-title h1,
+.fancy-title h2,
+.fancy-title h3,
+.fancy-title h4,
+.fancy-title h5,
+.fancy-title h6 {
+  position: relative;
+  display: inline-block;
+  background-color: #FFF;
+  padding-right: 15px;
+  margin-bottom: 0;
+}
+
+.fancy-title h4,
+.fancy-title h5,
+.fancy-title h6 { padding-right: 10px; }
+
+.fancy-title.title-double-border:before,
+.fancy-title.title-border:before,
+.fancy-title.title-border-color:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 0;
+  border-top: 3px double #E5E5E5;
+  left: auto;
+  top: 46%;
+  right: 0;
+}
+
+.fancy-title.title-border:before {
+  top: 49%;
+  border-top: 1px solid #EEE;
+}
+
+.fancy-title.title-border-color:before {
+  top: 49%;
+  border-top: 1px solid #1ABC9C;
+  opacity: 0.6;
+}
+
+/* Heading Block - with Subtitle
+-----------------------------------------------------------------*/
+
+.heading-block { margin-bottom: 50px; }
+
+.heading-block h1,
+.heading-block h2,
+.heading-block h3,
+.heading-block h4,
+.emphasis-title h1,
+.emphasis-title h2 {
+  margin-bottom: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #333;
+}
+
+.emphasis-title h1,
+.emphasis-title h2 {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.heading-block h1 { font-size: 32px; }
+
+.heading-block h2 { font-size: 30px; }
+
+.heading-block h3 { font-size: 26px; }
+
+.heading-block h4 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.heading-block > span:not(.before-heading) {
+  display: block;
+  margin-top: 10px;
+  font-weight: 300;
+  color: #777;
+}
+
+.heading-block .before-heading { margin-bottom: 7px; }
+
+.heading-block.center > span,
+.heading-block.title-center > span,
+.center .heading-block > span {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heading-block h1 + span { font-size: 24px; }
+
+.heading-block h2 + span { font-size: 22px; }
+
+.heading-block h3 + span,
+.heading-block h4 + span { font-size: 20px; }
+
+.heading-block ~ p:not(.lead) { font-size: 15px; }
+
+.heading-block:after {
+  content: '';
+  display: block;
+  margin-top: 30px;
+  width: 40px;
+  border-top: 2px solid #444;
+}
+
+.center .heading-block:after,
+.heading-block.center:after,
+.heading-block.title-center:after { margin: 30px auto 0; }
+
+.tright .heading-block,
+.heading-block.tright,
+.heading-block.title-right { direction: rtl; }
+
+.heading-block.noborder:after,
+.heading-block.nobottomborder:after { display: none; }
+
+.heading-block.border-color:after { border-color: #1ABC9C; }
+
+/* Fancy Title - Bottom Short Border
+-----------------------------------------------------------------*/
+
+.fancy-title.title-bottom-border h1,
+.fancy-title.title-bottom-border h2,
+.fancy-title.title-bottom-border h3,
+.fancy-title.title-bottom-border h4,
+.fancy-title.title-bottom-border h5,
+.fancy-title.title-bottom-border h6 {
+  display: block;
+  background: transparent;
+  padding: 0 0 10px;
+  border-bottom: 2px solid #1ABC9C;
 }

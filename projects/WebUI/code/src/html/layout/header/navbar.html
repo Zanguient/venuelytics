@@ -11,6 +11,10 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown {{homeTab}}" ng-click="navBar(1)">
                     <a ng-href="/home" class="dropdown-toggle animated fadeIn animation-delay-4" data-toggle="dropdown" data-hover="dropdown" role="button" data-name="home">{{"navbar.HOME" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
+                        <li><a href="/about" class="dropdown-link">{{"footBar.ABOUT" | translate}}</a></li>
+                        <li><a href="/contact" class="dropdown-link">{{"contact.CONTACT_US" | translate}}</a></li>
+                    </ul>
                     
                 </li>
                 <li class="dropdown {{businessTab}}" ng-click="navBar(2)">

@@ -48,7 +48,7 @@
                         <a href="{{business.website}}" target="_blank">{{business.website}}</a>
                     </div>
                     <div class="col-lg-4 col-md-5 col-sm-6 text-right">
-                            <button href="javascript:void(0)" class="btn btn-primary btn-raised btn-block animate-icon" ng-click="claim()"><i class="zmdi zmdi-wrench"></i>{{"business.CLAIM_BUSINESS" | translate}}</button>
+                            <button href="javascript:void(0)" class="btn btn-primary btn-raised btn-block animate-icon" ng-click="claim(business)"><i class="zmdi zmdi-wrench"></i>{{"business.CLAIM_BUSINESS" | translate}}</button>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
     	<div ng-show="claimBusiness == true">
         
         <div ng-hide="hideForm == true">
-            <center><h2>{{"business.CLAIM_BUSINESS" | translate}}</h2></center>
+            <center><h2>{{selectedVenueName}}</h2></center>
 
         <form class="search-form" id="myFormClaim" name="myFormClaim" novalidate ng-submit="submitForm()">
                             <fieldset>
@@ -71,7 +71,7 @@
                                     <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.BUSINESS_NAME" | translate}}:</font></label>
 
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="businessName" ng-model="claim.businessName" required>
+                                        <input type="text" class="form-control" name="businessName" ng-model="claimB.businessName" required>
                     <span class="error-message" ng-show="showMessage(myFormClaim.businessName)">{{"business.FORM_NAME_REQUIRED" | translate}}</span>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                                     <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.EMAIL" | translate}}:</font></label>
 
                                     <div class="col-md-10">
-                                        <input type="email" class="form-control" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="claimEmailId" ng-model="claim.email" required>
+                                        <input type="email" class="form-control" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="claimEmailId" ng-model="claimB.email" required>
                     <span class="error-message" ng-show="showMessage(myFormClaim.claimEmailId)">{{"business.FORM_EMAIL_REQUIRED" | translate}}</span>
                                     </div>
                                 </div>  
@@ -89,16 +89,14 @@
                                     <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.PHONE" | translate}}:</font></label>
 
                                     <div class="col-md-10">
-                                        <input type="text" class="form-control" name="phone" ng-model="claim.phone" required>
+                                        <input type="text" class="form-control" name="phone" ng-model="claimB.phoneNo" required>
                     <span class="error-message" ng-show="showMessage(myFormClaim.phone)">{{"business.FORM_PHONE_REQUIRED" | translate}}</span>
                                     </div>
                                 </div> 
                             <center>
-                                <div class="form-group">
                 <div >
-                    <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit(claim)" novalidate="novalidate">{{"business.SUBMIT" | translate}}</button>
+                    <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit(claimB)" novalidate="novalidate">{{"business.SUBMIT" | translate}}</button>
                     <button type="button" class="btn btn-raised btn-danger" ng-click="cancel()">{{"business.CANCEL" | translate}}</button>
-                </div>
             </div>                             
             </center>
                                 </fieldset>

@@ -130,5 +130,18 @@
 		"COPY":"Copyrights",
 		"RIGHTS":"2017 All Rights Reserved by VenueLytics Inc"
 
+	},
+	"contact": {
+		"CONTACT_US":"Contact Us",
+		"NAME":"Name",
+		"EMAIL":"Email",
+		"SUBJECT":"Subject",
+		"MESSAGE":"Message",
+		"SUBMIT":"Submit"
+	},
+	"about": {
+		"ABOUT_US":"About Us",
+		"DESCRIPTION_1":"VenueLytics provides Next-Generation Entertainment Experience & VIP services for consumers with Real Time Smart Data Technology and an innovative approach to provide detailed insights, social engagement & predictive intelligence for Venue Management. Our platform delivers engaging experience by leveraging consumers intent, interest, historical behavior & social signals along with enterprise scalable & secure solutions to venues. Our history and deep experience in building Mobile, IOT, Enterprise Class Applications helped in creating the best in-class Entertainment & Venue Management Platform.",
+		"DESCRIPTION_2":"We enable various Venues like Clubs, Casinos, Lounges, Karaoke Bars & Bowling Alleys with the solution to reach their new, millennial & loyal customers via omni-channel experience to drive loyalty, engagement & revenue. VenueLytics is founded by Senior executives, Industry experts from various social networking, enterprise, big-data, cloud computing, programmable logic & entertainment industries. The team includes senior architects, big-data experts, product and marketing leaders with several decades of experience in Mobile, Enterprise, Venue & Event Management, Big Data & Analytics and we are supported by some of the best brains in the Entertainment & Venue Management Industry."
 	}
 }

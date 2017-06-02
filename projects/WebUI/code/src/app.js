@@ -36,6 +36,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'business-search.html',
             controller: 'businessController'
         })
+        .when('/about', {
+            templateUrl: 'about.html'
+        })
+        .when('/contact', {
+            templateUrl: 'contact.html'
+        })
         .otherwise('/home');
 
     $locationProvider.html5Mode({
