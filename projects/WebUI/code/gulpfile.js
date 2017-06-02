@@ -257,7 +257,7 @@ gulp.task('i18n:pseudo', function() {
       return pseudoTranslator(json);
     }))
   .pipe(rename('pseudo.json')) // destination file name 
-  .pipe(gulp.dest(paths.src.i18n)); // destination folder 
+  .pipe(gulp.dest(paths.i18n)); // destination folder 
 });
 
 

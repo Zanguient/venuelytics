@@ -38,6 +38,8 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
                       {"displayName":"AWS secret",  "name":"aws.secretKey", "type":"text", "value":""},
                       {"displayName":"Email Control Set", "name":"email.controlset", "type" :"text", "value":""},
                       {"displayName":"Email Sink", "name":"email.sink", "type" :"text", "value":""},
+                      {"displayName":"Stripe Live Mode", "name":"stripe.live", "type" :"text", "value":""},
+                      {"displayName":"Stripe Secret", "name":"stripe.api", "type" :"text", "value":""},
                       
                      ];
   var externalSettings = [ 
@@ -49,6 +51,7 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
                           {"displayName":"IOS Team Identifier",  "name":"ios_team_identifier", "type":"text", "value":"" },
                           {"displayName":"SMS Account Id",  "name":"sms_account_id", "type":"text", "value":"" },
                           {"displayName":"SMS Authentication Token",  "name":"sms_auth_token", "type":"text", "value":"" },
+                          {"displayName":"SMS Account Number",  "name":"sms_account_number" , "type":"text", "value":""},
                           {"displayName":"SMS Account Number",  "name":"sms_account_number" , "type":"text", "value":""},
                          
                         ];
