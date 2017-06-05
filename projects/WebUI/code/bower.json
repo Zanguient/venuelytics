@@ -62,6 +62,7 @@
     "angular-translate-handler-log": "^2.15.1",
     "angular-dynamic-locale": "^0.1.32",
     "angular-i18n": "^1.6.4",
-    "angular-cookies": "^1.6.4"
+    "angular-cookies": "^1.6.4",
+    "ngclipboard": "^1.1.1"
   }
 }
