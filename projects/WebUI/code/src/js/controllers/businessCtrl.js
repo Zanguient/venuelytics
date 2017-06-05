@@ -47,6 +47,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
 
             self.createBusinessAccount = function(){
+                $window.scrollTo(0, 0);
                 self.businessData = true;
                 self.hideForm = true;
                 self.claimForm = false;

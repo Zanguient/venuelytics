@@ -107,6 +107,9 @@
   #venueReservationFrame {
     height: 1000px;
   }
+  #clipboardButton {
+    width : 13px; height: 14px;
+  }
 }
 /*iPhone 5*/
 @media only screen and (min-device-width: 320px) and (max-device-width:
