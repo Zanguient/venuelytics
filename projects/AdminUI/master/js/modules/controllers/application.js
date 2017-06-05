@@ -11,14 +11,14 @@ App.controller('ApplicationController', ['$scope', 'RestServiceFactory','$http',
 	
 	var promise = RestServiceFactory.AppSettingsService().get();
 	promise.$promise.then(function(data) {
-		data.settings.map(function(item){
+		/*data.settings.map(function(item){
 			
 			if (item.name == "companyLogoUrl") {
 				$scope.appLogo = item.value;
 				$rootScope.appLogo = item.value;
 				return;
 			}
-		});
+		});*/
 	});
 	
 	

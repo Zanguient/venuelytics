@@ -7,10 +7,10 @@ App.factory(
 		'DataTableService', function() {
 		'use strict';
 		return {
-			initDataTable : function (tableId, columnDefinitions, ordering) {
+			initDataTable : function (tableId, columnDefinitions, ordering, dom) {
 				ordering = typeof ordering !== 'undefined' ? ordering : true;
-				
-				var dtInstance2 = $('#'+tableId).dataTable({
+				dom = typeof dom !== 'undefined' ? dom : null;
+				var options = {
 					    'paging':   true,  // Table pagination
 					    'ordering': ordering,  // Column ordering 
 					    retrieve: true,
@@ -27,7 +27,11 @@ App.factory(
 					        infoEmpty:    'No records available',
 					        infoFiltered: '(filtered from _MAX_ total records)'
 					    }
-			     });
+			     };
+			     if (dom != null) {
+			     	options.dom = dom;
+			     }
+				var dtInstance2 = $('#'+tableId).dataTable(options);
 		  
 			    var inputSearchClass = 'datatable_input_col_search';
 			    var columnInputs = $('tfoot .'+inputSearchClass);

@@ -4,20 +4,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
 	
 	$scope.init=function(){
 		$log.log("Dash board controller has been initialized!");
-		/**
-		 * loading all stores
-		 */
 		
-		var baseUrl= contextService.contextName+"/v1/public/venues";
-		
-		$http.get(baseUrl).success(function(data){
-			$log.log("success :", data);
-			if(data && data.stores){
-				$scope.stores=data.stores;
-			}							
-		}).error(function(data){
-			$log.log("error :", data);				
-		});
 		$scope.selectedStore = null;
 		$scope.reload();
 	}
@@ -29,134 +16,273 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     	if ($scope.selectedStore != null && $scope.selectedStore.hasOwnProperty("storeNumber")) {
     		storeId = $scope.selectedStore.storeNumber;
     	}
-		var baseUrl=contextService.contextName+"/v1/dashboard/visitorStat/"+storeId;
-		$log.log("url:",baseUrl);
-		$http.get(baseUrl).success(function(data){
-			$log.log("success: ",data);
-			if(data && data.totalVisitors != null){
-				$scope.achievement=data;
-			}
-			
-		}).error(function(data){
-			$log.log("error ", data);
-		});
-			
-
-		
-		/**
-		 * Getting visitors by period
-		 */
-		
-		baseUrl=contextService.contextName+"/v1/dashboard/visitors/"+storeId;
-		$log.log("visitors: ",baseUrl);
-		
-		$http.get(baseUrl).success(function(data){
-			$log.log("success: ", data);
-			var res=DashboardService.resolveVisitors(data);
-			loadvisitorsGraph(res);
-		}).error(function(data){
-			$log.log("error: ", data);
-		});
-
-		
-		/**
-		 * Getting beacon engagement
-		 */
-		
-		var baseUrl=contextService.contextName+"/v1/dashboard/instoreEngagement/"+storeId;
-		$log.log("instore engagements: ",baseUrl);
-		
-		$http.get(baseUrl).success(function(data){
-			$log.log("success: ", data);
-			var res=DashboardService.resolveBeaconEngagement(data);
-			
-			if(res.length>0){
-				loadBeaconsEngagementGraph(res);
-			}
-		}).error(function(data){
-			$log.log("error: ", data);
-		});
-
-		/**
-		 * Channel engagement
-		 */
-
-		var baseUrl= contextService.contextName+"/v1/dashboard/channelEngagement/"+storeId;
-		$log.log("channel engagements: ",baseUrl);
-		$http.get(baseUrl).success(function(data){
-			$log.log("success: ", data);
-			var res=DashboardService.resolveChannelEngagement(data.channelEngagement);
-			loadChannelEngagement(res);
-		}).error(function(data){
-			$log.log("error: ", data);
-		});
-			
-
-		
-		/**
-		 * Device engagement
-		 */
-		
-		var baseUrl=contextService.contextName+"/v1/dashboard/deviceEngagement/"+storeId;
-		$log.log("device engagements: ",baseUrl);
-		$http.get(baseUrl).success(function(data){
-			$log.log("success: ", data);
-			var res=DashboardService.resolveDeviceEngagement(data.deviceEngagement);
-			
-			loadDeviceEngagement(res);
-		}).error(function(data){
-			$log.log("error: ", data);
-		});
-
-		/**
-		 * Load total customers
-		 */
-		var sampleDataConn = 'app/server/cust_connectivity.json';
-		sampleDataConn  = sampleDataConn + '?v=' + (new Date().getTime()); // jumps cache
-	    $http.get(sampleDataConn).success(function(data) {
-	    	loadConnectivityCustomers(data);
-	     }).error(function(data, status, headers, config) {
-	    	 loadConnectivityCustomers(null);
-	     });
-		
-	    /**
-		 * Load total customers optins
-		 */
-		sampleDataConn = 'app/server/cust_optins.json';
-		sampleDataConn  = sampleDataConn + '?v=' + (new Date().getTime()); // jumps cache
-	    $http.get(sampleDataConn).success(function(data) {
-	    	customersByOptins(data);
-	     }).error(function(data, status, headers, config) {
-	    	 customersByOptins(null);
-	     });
-	    
-		/**
-		 * Promotion KPI 
-		 */
-		var baseUrl=contextService.contextName+"/v1/dashboard/promotionKpi/"+storeId;
-		$log.log("promotion kpi: ",baseUrl);
-		$http.get(baseUrl).success(function(data){
-			$log.log("success: ", data);
-			var res=DashboardService.resolvePromotionKpi(data);
-			loadPromotionKpi(res);
-		}).error(function(data){
-			$log.log("error: ", data);
-		});
 		
 		
 		
 	};
 	
-	function loadPromotionKpi(srcdata){
-		var Selector = '.promotion-kpi';
+	
+	function labelFormatter(label, series) {
+        return '<div class="pie-label">' + Math.round(series.percent) + "%</div>";
+	}
+	
+	/**
+   * Global object to load data for charts using ajax 
+   * Request the chart data from the server via post
+   * Expects a response in JSON format to init the plugin
+   * Usage
+   *   chart = new floatChart(domSelector || domElement, 'server/chart-data.php')
+   *   ...
+   *   chart.requestData(options);
+   *
+   * @param  Chart element placeholder or selector
+   * @param  Url to get the data via post. Response in JSON format
+   */
+  $window.FlotChart = function (element, url) {
+    // Properties
+    this.element = $(element);
+    this.url = url;
+
+    // Public method
+    this.requestData = function (option, method, callback) {
+      var self = this;
+      
+      // support params (option), (option, method, callback) or (option, callback)
+      callback = (method && $.isFunction(method)) ? method : callback;
+      method = (method && typeof method == 'string') ? method : 'GET';
+
+      self.option = option; // save options
+
+      $http({
+          url:      self.url,
+          cache:    false,
+          method:   method
+      }).success(function (data) {
+          
+          $.plot( self.element, data, option );
+          
+          if(callback) callback();
+
+      }).error(function(){
+        $.error('Bad chart request.');
+      });
+
+      return this; // chain-ability
+
+    };
+
+    // Listen to refresh events
+    this.listen = function() {
+      var self = this,
+          chartPanel = this.element.parents('.panel').eq(0);
+      
+      // attach custom event
+      chartPanel.on('panel-refresh', function(event, panel) {
+        // request data and remove spinner when done
+        self.requestData(self.option, function(){
+          panel.removeSpinner();
+        });
+
+      });
+
+      return this; // chain-ability
+    };
+
+  };
+
+  //
+  // Start of Demo Script
+  // 
+  angular.element(document).ready(function () {
+
+    // Bar chart
+    (function () {
+        var Selector = '.chart-bar';
         $(Selector).each(function() {
-        	var source=null
-        	if(srcdata){
-        		source=srcdata;
-        	}else{
-        		source = $(this).data('source') || $.error('Line: No source defined.');
-        	}
-            var chart = new FlotChart(this, source, true),
+            var source = $(this).data('source') || $.error('Bar: No source defined.');
+            var chart = new FlotChart(this, source),
+                //panel = $(Selector).parents('.panel'),
+                option = {
+                    series: {
+                        bars: {
+                            align: 'center',
+                            lineWidth: 0,
+                            show: true,
+                            barWidth: 0.6,
+                            fill: 0.9
+                        }
+                    },
+                    grid: {
+                        borderColor: '#eee',
+                        borderWidth: 1,
+                        hoverable: true,
+                        backgroundColor: '#fcfcfc'
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: '%x : %y'
+                    },
+                    xaxis: {
+                        tickColor: '#fcfcfc',
+                        mode: 'categories'
+                    },
+                    yaxis: {
+                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                        tickColor: '#eee'
+                    },
+                    shadowSize: 0
+                };
+            // Send Request
+            chart.requestData(option);
+        });
+
+    })();
+    // Bar Stacked chart
+    (function () {
+        var Selector = '.chart-bar-stacked';
+        $(Selector).each(function() {
+            var source = $(this).data('source') || $.error('Bar Stacked: No source defined.');
+            var chart = new FlotChart(this, source),
+                option = {
+                    series: {
+                        stack: true,
+                        bars: {
+                            align: 'center',
+                            lineWidth: 0,
+                            show: true,
+                            barWidth: 0.6,
+                            fill: 0.9
+                        }
+                    },
+                    grid: {
+                        borderColor: '#eee',
+                        borderWidth: 1,
+                        hoverable: true,
+                        backgroundColor: '#fcfcfc'
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: '%x : %y'
+                    },
+                    xaxis: {
+                        tickColor: '#fcfcfc',
+                        mode: 'categories'
+                    },
+                    yaxis: {
+                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                        tickColor: '#eee'
+                    },
+                    shadowSize: 0
+                };
+            // Send Request
+            chart.requestData(option);
+        });
+    })();
+    // Spline chart
+    (function () {
+        var Selector = '.chart-spline';
+        $(Selector).each(function() {
+            var source = $(this).data('source') || $.error('Spline: No source defined.');
+            var chart = new FlotChart(this, source),
+                option = {
+                    series: {
+                        lines: {
+                            show: false
+                        },
+                        points: {
+                            show: true,
+                            radius: 4
+                        },
+                        splines: {
+                            show: true,
+                            tension: 0.4,
+                            lineWidth: 1,
+                            fill: 0.5
+                        }
+                    },
+                    grid: {
+                        borderColor: '#eee',
+                        borderWidth: 1,
+                        hoverable: true,
+                        backgroundColor: '#fcfcfc'
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: '%x : %y'
+                    },
+                    xaxis: {
+                        tickColor: '#fcfcfc',
+                        mode: 'categories'
+                    },
+                    yaxis: {
+                        min: 0,
+                        tickColor: '#eee',
+                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                        tickFormatter: function (v) {
+                            return v/* + ' visitors'*/;
+                        }
+                    },
+                    shadowSize: 0
+                };
+            
+            // Send Request and Listen for refresh events
+            chart.requestData(option).listen();
+
+        });
+    })();
+    // Area chart
+    (function () {
+        var Selector = '.chart-area';
+        $(Selector).each(function() {
+            var source = $(this).data('source') || $.error('Area: No source defined.');
+            var chart = new FlotChart(this, source),
+                option = {
+                    series: {
+                        lines: {
+                            show: true,
+                            fill: 0.8
+                        },
+                        points: {
+                            show: true,
+                            radius: 4
+                        }
+                    },
+                    grid: {
+                        borderColor: '#eee',
+                        borderWidth: 1,
+                        hoverable: true,
+                        backgroundColor: '#fcfcfc'
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: '%x : %y'
+                    },
+                    xaxis: {
+                        tickColor: '#fcfcfc',
+                        mode: 'categories'
+                    },
+                    yaxis: {
+                        min: 0,
+                        tickColor: '#eee',
+                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                        tickFormatter: function (v) {
+                            return v + ' visitors';
+                        }
+                    },
+                    shadowSize: 0
+                };
+            
+            // Send Request and Listen for refresh events
+            chart.requestData(option).listen();
+
+        });
+    })();
+    // Line chart
+    (function () {
+        var Selector = '.chart-line';
+        $(Selector).each(function() {
+            var source = $(this).data('source') || $.error('Line: No source defined.');
+            var chart = new FlotChart(this, source),
                 option = {
                     series: {
                         lines: {
@@ -184,405 +310,77 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                     },
                     yaxis: {
                         position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                        tickColor: '#eee',
-                        minTickSize: 1
+                        tickColor: '#eee'
                     },
                     shadowSize: 0
                 };
             // Send Request
             chart.requestData(option);
         });
-	}
-	
-	function loadChannelEngagement(srcdata){
-		 var Selector = '.chart-donut1';
-	        $(Selector).each(function() {
-	        	var source=null
-	        	if(srcdata){
-	        		source=srcdata;
-	        	}else{
-	        		source =$(this).data('source') || $.error('Donut: No source defined.');
-	        	}
-	        	createDoughutChart(this, source);
-	        });
-	}
-	
-	function loadDeviceEngagement(srcdata){
-		 var Selector = '.chart-donut2';
-	        $(Selector).each(function() {
-	        	var source=null
-	        	if(srcdata){
-	        		source=srcdata;
-	        	}else{
-	        		source =$(this).data('source') || $.error('Donut: No source defined.');
-	        	}
-	        	createDoughutChart(this, source);
-	        });
-	}
-	
-	function loadBeaconsEngagementGraph(srcdata){
-	        var Selector = '.chart-bar-stacked';
-	        $(Selector).each(function() {
-	        	var source=null
-	        	if(srcdata){
-	        		source=srcdata;
-	        	}else{
-	        		source = $(this).data('source') || $.error('Bar Stacked: No source defined.');
-	        	}
-	            var chart = new FlotChart(this, source, true),
-	                option = {
-	                    series: {
-	                        stack: true,
-	                        bars: {
-	                            align: 'center',
-	                            lineWidth: 0,
-	                            show: true,
-	                            barWidth: 0.6,
-	                            fill: 0.9
-	                        }
-	                    },
-	                    grid: {
-	                        borderColor: '#eee',
-	                        borderWidth: 1,
-	                        hoverable: true,
-	                        backgroundColor: '#fcfcfc'
-	                    },
-	                    tooltip: true,
-	                    tooltipOpts: {
-	                        content: '%x : %y'
-	                    },
-	                    xaxis: {
-	                        tickColor: '#fcfcfc',
-	                        mode: 'categories'
-	                    },
-	                    yaxis: {
-	                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-	                        tickColor: '#eee',
-	                        minTickSize: 1
-	                    },
-	                    shadowSize: 0
-	                };
-	            // Send Request
-	            chart.requestData(option);
-	        });
-	    
-	};
-	
-	function loadvisitorsGraph(srcdata){
-		
-		//chart spline
-		
-		 var Selector = '.chart-spline';
-	        $(Selector).each(function() {
-	        	var source=null
-	        	if(srcdata){
-	        		source=srcdata;
-	        	}else{
-	        		source = $(this).data('source') || $.error('Spline: No source defined.');
-	        	}
-	            var chart = new FlotChart(this, source, true),
-	                option = {
-	                    series: {
-	                        lines: {
-	                            show: false
-	                        },
-	                        points: {
-	                            show: true,
-	                            radius: 2
-	                        },
-	                        splines: {
-	                            show: true,
-	                            tension: 0.4,
-	                            lineWidth: 1,
-	                            fill: 0.5
-	                        }
-	                    },
-	                    grid: {
-	                        borderColor: '#eee',
-	                        borderWidth: 1,
-	                        hoverable: true,
-	                        backgroundColor: '#fcfcfc'
-	                    },
-	                    tooltip: true,
-	                    tooltipOpts: {
-	                        content: '%x : %y'
-	                    },
-	                    xaxis: {
-	                        tickColor: '#fcfcfc',
-	                        mode: 'categories'
-	                    },
-	                    yaxis: {
-	                        min: 0,
-	                        tickColor: '#eee',
-	                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-	                        tickFormatter: function (v) {
-	                            return v/* + ' visitors'*/;
-	                        },
-	                        minTickSize: 1
-	                    },
-	                    shadowSize: 0
-	                };
-	            
-	            // Send Request and Listen for refresh events
-	            chart.requestData(option).listen();
-
-	        });
-	    
-	       
-	}
-	function customersByOptins(srcdata) {
-		var Selector = '.customersByOptins';
+    })();
+    // Pïe
+    (function () {
+        var Selector = '.chart-pie';
         $(Selector).each(function() {
-        	var source=null
-        	if(srcdata){
-        		source=srcdata;
-        	}else{
-        		source =$(this).data('source') || $.error('Donut: No source defined.');
-        	}
-        	createDoughutChart(this, source);
+            var source = $(this).data('source') || $.error('Pie: No source defined.');
+            var chart = new FlotChart(this, source),
+                option = {
+                    series: {
+                        pie: {
+                            show: true,
+                            innerRadius: 0,
+                            label: {
+                                show: true,
+                                radius: 0.8,
+                                formatter: function (label, series) {
+                                    return '<div class="flot-pie-label">' +
+                                    //label + ' : ' +
+                                    Math.round(series.percent) +
+                                    '%</div>';
+                                },
+                                background: {
+                                    opacity: 0.8,
+                                    color: '#222'
+                                }
+                            }
+                        }
+                    }
+                };
+            // Send Request
+            chart.requestData(option);
         });
-	}
-	function loadConnectivityCustomers(srcdata){
-		 var Selector = '.engagementByConnectivity';
-	        $(Selector).each(function() {
-	        	var source=null
-	        	if(srcdata){
-	        		source=srcdata;
-	        	}else{
-	        		source =$(this).data('source') || $.error('Donut: No source defined.');
-	        	}
-	        	createDoughutChart(this, source);
-	        });
-	}
-	function labelFormatter(label, series) {
-        return '<div class="pie-label">' + Math.round(series.percent) + "%</div>";
-	}
-	function createDoughutChart(elem, source) {
-		 var chart = new FlotChart(elem, source, true),
-         option = {
-         	series: {
-                 pie: {
-                     show: true,
-                     innerRadius:0.5,
-                     radius: 1,
-                     label: {
-                         show: true,
-                         radius: 3/4,
-                         formatter: labelFormatter,
-                        /* background: {
-                             opacity: 0.5,
-                             color: '#000'
-                         }*/
-                     }
-                 }
-             },
-             legend: {
-                 show: true
-             }, 
-             grid: {
-                 hoverable: true,
-                 clickable: true
-             }
-         };
-     // Send Request
-     chart.requestData(option);
-		
-	}
-	$window.FlotChart = function (element, url, isData) {
-	    // Properties
-	    this.element = $(element);
-	    this.url = url;
-	    this.isData=isData;
+    })();
+    // Donut
+    $scope.donutInit = function () {
+        var Selector = '.chart-donut';
+        $(Selector).each(function() {
+            var source = $(this).data('source') || $.error('Donut: No source defined.');
+            var chart = new FlotChart(this, source),
+                option = {
+                    series: {
+                        pie: {
+                            show: true,
+                            innerRadius: 0.5 // This makes the donut shape,
 
-	    // Public method
-	    this.requestData = function (option, method, callback) {
-	      var self = this;
-	      
-	      // support params (option), (option, method, callback) or (option, callback)
-	      callback = (method && $.isFunction(method)) ? method : callback;
-	      method = (method && typeof method == 'string') ? method : 'POST';
-
-	      self.option = option; // save options
-
-	      if(self.isData){
-	    	  $.plot( self.element, self.url, option );
-	          
-	          if(callback) callback();
-	      }else{
-		      $http({
-		          url:      self.url,
-		          cache:    false,
-		          method:   method
-		      }).success(function (data) {
-		          
-		          $.plot( self.element, data, option );
-		          
-		          if(callback) callback();
-
-		      }).error(function(){
-		        $.error('Bad chart request.');
-		      });
-	      }
-	      
-	      return this; // chain-ability
-
-	    };
-
-	    // Listen to refresh events
-	    this.listen = function() {
-	      var self = this,
-	          chartPanel = this.element.parents('.panel').eq(0);
-	      
-	      // attach custom event
-	      chartPanel.on('panel-refresh', function(event, panel) {
-	        // request data and remove spinner when done
-	        self.requestData(self.option, function(){
-	          panel.removeSpinner();
-	        });
-
-	      });
-
-	      return this; // chain-ability
-	    };
-
-	  };
-
-	 $timeout(function(){
-		// Bar chart
-		 (function(){   
-		 var Selector = '.chart-bar';
-	        $(Selector).each(function() {
-	        	
-	        	var source= $(this).data('source') || $.error('Bar: No source defined.');
-	        	var chart = new FlotChart(this, source),
-	                //panel = $(Selector).parents('.panel'),
-	                option = {
-	                    series: {
-	                        bars: {
-	                            align: 'center',
-	                            lineWidth: 0,
-	                            show: true,
-	                            barWidth: 0.6,
-	                            fill: 0.9
-	                        }
-	                    },
-	                    grid: {
-	                        borderColor: '#eee',
-	                        borderWidth: 1,
-	                        hoverable: true,
-	                        backgroundColor: '#fcfcfc'
-	                    },
-	                    tooltip: true,
-	                    tooltipOpts: {
-	                        content: '%x : %y'
-	                    },
-	                    xaxis: {
-	                        tickColor: '#fcfcfc',
-	                        mode: 'categories'
-	                    },
-	                    yaxis: {
-	                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-	                        tickColor: '#eee'
-	                    },
-	                    shadowSize: 0
-	                };
-	            // Send Request
-	            chart.requestData(option);
-	        });
-	        
-		 });
-
-	    
-	    // Area chart
-	    (function () {
-	        var Selector = '.chart-area';
-	        $(Selector).each(function() {
-	            var source = $(this).data('source') || $.error('Area: No source defined.');
-	            var chart = new FlotChart(this, source),
-	                option = {
-	                    series: {
-	                        lines: {
-	                            show: true,
-	                            fill: 0.8
-	                        },
-	                        points: {
-	                            show: true,
-	                            radius: 4
-	                        }
-	                    },
-	                    grid: {
-	                        borderColor: '#eee',
-	                        borderWidth: 1,
-	                        hoverable: true,
-	                        backgroundColor: '#fcfcfc'
-	                    },
-	                    tooltip: true,
-	                    tooltipOpts: {
-	                        content: '%x : %y'
-	                    },
-	                    xaxis: {
-	                        tickColor: '#fcfcfc',
-	                        mode: 'categories'
-	                    },
-	                    yaxis: {
-	                        min: 0,
-	                        tickColor: '#eee',
-	                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-	                        tickFormatter: function (v) {
-	                            return v + ' visitors';
-	                        }
-	                    },
-	                    shadowSize: 0
-	                };
-	            
-	            // Send Request and Listen for refresh events
-	            chart.requestData(option).listen();
-
-	        });
-	    })();
-	    // Line chart
-	    (function () {
-	        var Selector = '.chart-line';
-	        $(Selector).each(function() {
-	            var source = $(this).data('source') || $.error('Line: No source defined.');
-	            var chart = new FlotChart(this, source),
-	                option = {
-	                    series: {
-	                        lines: {
-	                            show: true,
-	                            fill: 0.01
-	                        },
-	                        points: {
-	                            show: true,
-	                            radius: 4
-	                        }
-	                    },
-	                    grid: {
-	                        borderColor: '#eee',
-	                        borderWidth: 1,
-	                        hoverable: true,
-	                        backgroundColor: '#fcfcfc'
-	                    },
-	                    tooltip: true,
-	                    tooltipOpts: {
-	                        content: '%x : %y'
-	                    },
-	                    xaxis: {
-	                        tickColor: '#eee',
-	                        mode: 'categories'
-	                    },
-	                    yaxis: {
-	                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-	                        tickColor: '#eee'
-	                    },
-	                    shadowSize: 0
-	                };
-	            // Send Request
-	            chart.requestData(option);
-	        });
-	    })();
-	   
-	  },2000);	
+                        }
+                    },
+				    grid: {
+				        hoverable: true
+				    },
+				    tooltip: true,
+				    tooltipOpts: {
+				        cssClass: "flotTip",
+				        content: "%s: %p.0%",
+				        defaultTheme: false
+				    }
+                };
+            // Send Request
+            chart.requestData(option);
+        });
+    }
+    $scope.donutInit();
+  });
+	
 	  
 	  $scope.init();
 }]);

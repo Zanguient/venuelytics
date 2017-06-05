@@ -30,7 +30,7 @@ App.controller('FlotChartController', ['$scope', '$window','$http', function($sc
       
       // support params (option), (option, method, callback) or (option, callback)
       callback = (method && $.isFunction(method)) ? method : callback;
-      method = (method && typeof method == 'string') ? method : 'POST';
+      method = (method && typeof method == 'string') ? method : 'GET';
 
       self.option = option; // save options
 

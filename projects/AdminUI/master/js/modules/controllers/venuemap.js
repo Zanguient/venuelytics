@@ -118,7 +118,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     	$scope.newTable.enabled = 'Y';
     	$scope.newTable.id = -1;
     	ngDialog.openConfirm({
-    	    template: 'app/templates/form-table-info.html',
+    	    template: 'app/templates/product/form-table-info.html',
     	     //plain: true,
     	    className: 'ngdialog-theme-default',
     	    scope : $scope 

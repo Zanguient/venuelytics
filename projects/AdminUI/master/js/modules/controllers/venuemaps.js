@@ -46,17 +46,9 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
     
    
     
-  	$scope.deleteVenueMap = function(rowId, agencyId) {
+  	$scope.deleteVenueMap = function(rowId, mapId) {
   		
-  		var target = {id: userId};
-  		RestServiceFactory.AgencyService().delete(target,  function(success){
-    		var table = $('#agencies_table').dataTable();
-    		table.fnDeleteRow(rowId);
-    	},function(error){
-    		if (typeof error.data != 'undefined') { 
-    			toaster.pop('error', "Server Error", error.data.developerMessage);
-    		}
-    	});
+
   	}
   	$scope.createNewVenueMap = function() {
   		$state.go('app.venueMapedit', {id: 'new'});

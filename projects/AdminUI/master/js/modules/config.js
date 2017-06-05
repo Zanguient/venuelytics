@@ -156,7 +156,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('store_edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins')
+        resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins','ngDialog')
     })
     .state('app.editBanquetHall', {
         url: '/editBanquetHall/:venueNumber/:id',

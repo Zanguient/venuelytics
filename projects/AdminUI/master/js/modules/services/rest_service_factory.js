@@ -51,6 +51,7 @@ App.factory(
 				},
 				ProductService : function () {
 					return $resource(urlTemplate.replace("@context", "products"), {}, {
+						get : {method: 'GET',  params: { id: '@id' }, isArray:true},
 						getPrivateEvents : {method: 'GET',  params: { id: '@id' }, isArray:true, url: urlTemplate.replace("@context", "products")+"/type/BanquetHall"},
 						getPrivateEvent : {method: 'GET',  params: { id: '@id', productId : '@productId' }, url: urlTemplate.replace("@context", "products")+"/:productId"}
 						
@@ -76,6 +77,15 @@ App.factory(
 				},
 				ContentService: function () {
 					return $resource(urlTemplate.replace("@context", "content"),{},{
+							activate : {method: 'POST',  params: { id: '@id' }, url: contentActivateUrl.replace("@activate", "activate")},
+							deactivate : {method: 'POST',  params: { id: '@id' }, url: contentActivateUrl.replace("@activate", "deactivate")},
+							
+						}
+					);
+				},
+				CouponService: function () {
+					return $resource(urlTemplate.replace("@context", "coupons"),{},{
+							get : {method: 'GET',  params: { id: '@id' }, isArray:true},
 							activate : {method: 'POST',  params: { id: '@id' }, url: contentActivateUrl.replace("@activate", "activate")},
 							deactivate : {method: 'POST',  params: { id: '@id' }, url: contentActivateUrl.replace("@activate", "deactivate")},
 							
