@@ -1,0 +1,65 @@
+<center><h2>{{"business.DEPLOY_STEPS" | translate}}</h2></center>
+<form class="search-form">
+			    <div class="form-group">
+						<div class="col-md-10">
+							<table class="table-responsive">
+							<tr>
+								<td rowspan="3" id="businessDetails">
+								    <img src="{{businessImage}}" alt="" class="img-responsive">
+								</td>
+								<td id="claimTitle" ng-show="businessData == true">
+							    	    <h4 class="control-label" id="businessTitle">{{newUser.businessName || claimB.businessName}}</h4>
+                                         <span><label class="control-label">{{newUser.address}}</label>
+                                         <span><label class="control-label">{{newUser.address2}}</label></span></span>
+							    </td>
+                                <td id="claimTitle" ng-show="claimBusiness == true">
+                                        <h4 class="control-label" id="businessTitle">{{claim.businessName}}</h4>
+                                         <span><label class="control-label">{{claim.phone}}</label></span>
+                                </td>
+							</tr>
+							</table>
+                        </div>
+                </div>
+                 <div class="form-group">
+						<div class="col-md-10">
+						    <b class="control-label">{{"business.LINK" | translate}}</b>
+                            <input type="text" class="form-control">
+                        </div>
+                </div>
+                <div class="form-group">
+						<div class="col-md-10">
+							<b class="control-label">{{"business.SCRIPT" | translate}}</b>
+						    <table class="table-responsive">
+							<tr>
+								<td>
+                                    <input class="btn btn-info" type="button" value="Menu">
+								</td>
+								<td>
+							    	<!-- Target -->
+									<input id="foo" value="&ltembed width='100%' height='100%' src='http://bit.ly/MonteCarloVIPPremiumServices'/&gt" />
+
+									<!-- Trigger -->
+									<button class="btn" ngclipboard data-clipboard-target="#foo">
+									    <img src="assets/img/clippy.svg" alt="Copy to clipboard" style="width : 13px; height: 14px;">
+									</button>
+
+							    </td>
+							</tr>
+							<tr>
+							    <td>
+                                    <input class="btn btn-info" type="button" value="Button">
+							    </td>
+							    <td>
+							    	<label class="control-label" id="businessMenu">Button Items</label>
+							    </td>
+							</tr>
+							</table>
+                        </div>
+                </div>
+                <div class="form-group">
+						<div class="col-md-10">
+						    <b class="control-label">{{"business.URL" | translate}}</b>
+                            <input type="text" class="form-control">
+                        </div>
+                </div>
+            </form>

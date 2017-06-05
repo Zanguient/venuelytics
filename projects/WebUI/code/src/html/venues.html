@@ -41,11 +41,11 @@
                                                         </h2>
                                                     <p>{{venue.description | limitTo: 75 }}{{venue.description.length > 75 ? '...' :''}}</p>
                                                     <div class="row col-lg-8" id="serviceIcon">
-                                                        <a ng-click="selectedServices(venue)" id="cityImage"><i class="mr-2 fa fa-futbol-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices(venue)" id="cityImage"><i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices(venue)" id="cityImage"><i class="mr-2 fa fa-shopping-bag" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices(venue)" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
-                                                            <a ng-click="selectedServices(venue)" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
+                                                        <a ng-click="selectedServices(venue, 'b')" id="cityImage"><i class="mr-2 fa fa-futbol-o" ng-show="venue.info['Advance.Bowling.enable'] == 'Y'"></i></a>
+                                                            <a ng-click="selectedServices(venue, 'b')" id="cityImage"><i class="mr-2 fa fa-glass" ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i></a>
+                                                            <a ng-click="selectedServices(venue, 'd')" id="cityImage"><i class="mr-2 fa fa-shopping-bag" ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i></a>
+                                                            <a ng-click="selectedServices(venue, 'f')" id="cityImage"><i class="fa fa-cutlery" ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></i></a>
+                                                            <a ng-click="selectedServices(venue, 'g')" id="cityImage"><i class="fa fa-wpforms" ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></i></a>
                                                     </div>
 
                                                     <div ng-hide="selectedCityDistance == -1"  id="distance" class="col-lg-5">{{venue.distanceInMiles | number : 2}} {{ "venue.MILES" | translate}}</div><br/>

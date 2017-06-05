@@ -56,6 +56,8 @@ module.exports = {
             "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
 			'bower_components/angular/angular.min.js',
 			'bower_components/angular-route/angular-route.min.js',
+			'bower_components/clipboard/dist/clipboard.min.js',
+			'bower_components/ngclipboard/dist/ngclipboard.min.js',
             'bower_components/iframe-resizer/js/iframeResizer.min.js',
             'bower_components/angular-cookies/angular-cookies.min.js',
             'bower_components/angular-translate/angular-translate.min.js',

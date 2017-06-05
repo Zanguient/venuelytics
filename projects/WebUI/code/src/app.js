@@ -1,5 +1,5 @@
 "use strict";
-var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies']);
+var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies', 'ngclipboard']);
 
 
 // configure our routes
@@ -28,7 +28,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'venues.html',
             controller: 'VenueController'
         })
-        .when('/venues/:cityName/:venueid', {
+        .when('/venues/:cityName/:venueid/:serviceType', {
             templateUrl: 'venue-details.html',
             controller: 'VenueDetailsController'
         })

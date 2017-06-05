@@ -14,7 +14,8 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 address: '',
                 address2: '',
                 city: '',
-                emailId: ''
+                emailId: '',
+                phone:''
             };
             self.claim = {
                 name: '',

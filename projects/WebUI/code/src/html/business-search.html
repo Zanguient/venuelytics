@@ -65,42 +65,7 @@
         <div ng-hide="hideForm == true">
             <center><h2>{{selectedVenueName}}</h2></center>
 
-        <form class="search-form" id="myFormClaim" name="myFormClaim" novalidate ng-submit="submitForm()">
-                            <fieldset>
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.BUSINESS_NAME" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control" name="businessName" ng-model="claimB.businessName" required>
-                    <span class="error-message" ng-show="showMessage(myFormClaim.businessName)">{{"business.FORM_NAME_REQUIRED" | translate}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.EMAIL" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                        <input type="email" class="form-control" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="claimEmailId" ng-model="claimB.email" required>
-                    <span class="error-message" ng-show="showMessage(myFormClaim.claimEmailId)">{{"business.FORM_EMAIL_REQUIRED" | translate}}</span>
-                                    </div>
-                                </div>  
-                                
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.PHONE" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control" name="phone" ng-model="claimB.phoneNo" required>
-                    <span class="error-message" ng-show="showMessage(myFormClaim.phone)">{{"business.FORM_PHONE_REQUIRED" | translate}}</span>
-                                    </div>
-                                </div> 
-                            <center>
-                <div >
-                    <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit(claimB)" novalidate="novalidate">{{"business.SUBMIT" | translate}}</button>
-                    <button type="button" class="btn btn-raised btn-danger" ng-click="cancel()">{{"business.CANCEL" | translate}}</button>
-            </div>                             
-            </center>
-                                </fieldset>
-                                </form>
+            <div ng-include="'claim-business.html'"></div>
 
 
         
@@ -109,108 +74,7 @@
 
 
         <div ng-show="claimForm == true">
-        <center>
-            <h2>{{"business.CLAIM_BUSINESS" | translate}}</h2>
-        </center>
-        <div class="card-block">
-        <!-- <div class="tab-content"> -->
-        <form id="myForm" name="myForm" novalidate ng-submit="submitForm()">
-                            <h4 id="businessMessage">{{"business.FREE_TRAIL" | translate}}</h4> 
-                            <fieldset>
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.BUSINESS_NAME" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                        <input type="text" id="ms-form-pass" class="form-control" id="inputEmail" name="businessName" ng-model="newUser.businessName" required>
-                                        <span class="error-message" ng-show="showMessage(myForm.businessName)">{{"business.FORM_BUSINESS_NAME_REQUIRED" | translate}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.ADDRESS" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                        <input type="text" id="ms-form-pass" class="form-control" ng-model="newUser.address" required name="address">
-                                        <span class="error-message" ng-show="showMessage(myForm.address)">{{"business.FORM_ADDRESS_REQUIRED" | translate}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.ADDRESS" | translate}} 2:</font></label>
-
-                                    <div class="col-md-10">
-                                        <input type="text" id="ms-form-pass" class="form-control" ng-model="newUser.address2" required name="address2">
-                                        <span class="error-message" ng-show="showMessage(myForm.address2)">{{"business.FORM_ADDRESS2_REQUIRED" | translate}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.CITY" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                        <input type="text" id="ms-form-pass" class="form-control" ng-model="newUser.city" required name="city">
-                                        <span class="error-message" ng-show="showMessage(myForm.city)">{{"business.FORM_CITY_REQUIRED" | translate}}</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.STATE" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                            <select class="btn  dropdown-toggle form-control" required ng-model="newUser.state">
-                                                <option>{{"country.LOS_ANGELES" | translate}}</option>
-                                                <option>{{"country.NEW_JERSEY" | translate}}</option>
-                                                <option>{{"country.FLORIDA" | translate}}</option>
-                                                <option>{{"country.CALIFORNIA" | translate}}</option>
-                                            </select> 
-                                    </div>
-                                </div>
-
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.CATEGORY" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                            <select class="btn  dropdown-toggle form-control" required ng-model="newUser.category">
-                                                <option>{{"category.WEDDING" | translate}}</option>
-                                                <option>{{"category.BIRTHDAY_PARTY" | translate}}</option>
-                                                <option>{{"category.EVENT" | translate}}</option>
-                                                <option>{{"category.WEEKEND_PARTY" | translate}}</option>
-                                            </select> 
-                                    </div>
-                                </div>
-
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.ROLE" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                            <select class="btn  dropdown-toggle form-control" required ng-model="newUser.role">
-                                                <option>{{"role.ARTIST" | translate}}</option>
-                                                <option>{{"role.CUSTOMER" | translate}}</option>
-                                                <option>{{"role.ADMIN" | translate}}</option>
-                                            </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.EMAIL" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                        <input type="text" id="ms-form-pass" class="form-control" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="emailId" ng-model="newUser.emailId" required>
-                                        <span class="error-message" ng-show="showMessage(myForm.emailId)">{{"business.FORM_EMAIL_REQUIRED" | translate}}</span>
-                                    </div>
-                                </div>
-                                
-                            </fieldset>
-                            <center>
-                                <div class="form-group">
-                                <div>
-                                    <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-click="save(newUser)">{{"business.CREATE_ACCOUNT" | translate}}</button>
-                                </div>
-                            </div>
-                            </center>
-                        </form>
-                        <!-- </div> -->
-                        </div>
+            <div ng-include="'create-business.html'"></div>
         </div>
 
 
@@ -237,63 +101,7 @@
 
 
     	<div ng-show="businessData == true">
-			<form class="search-form">
-			    <div class="form-group">
-						<div class="col-md-10">
-							<table class="table-responsive">
-							<tr>
-								<td rowspan="3" id="businessDetails">
-								    <img src="{{businessImage}}" alt="" class="img-responsive">
-								</td>
-								<td id="claimTitle" ng-show="businessData == true">
-							    	    <h4 class="control-label" id="businessTitle">{{newUser.businessName}}</h4>
-                                         <span><label class="control-label">{{newUser.address}}</label>
-                                         <span><label class="control-label">{{newUser.address2}}</label></span></span>
-							    </td>
-                                <td id="claimTitle" ng-show="claimBusiness == true">
-                                        <h4 class="control-label" id="businessTitle">{{claim.businessName}}</h4>
-                                         <span><label class="control-label">{{claim.phone}}</label></span>
-                                </td>
-							</tr>
-							</table>
-                        </div>
-                </div>
-                 <div class="form-group">
-						<div class="col-md-10">
-						    <h4 class="control-label">{{"business.LINK" | translate}}</h4>
-                            <input type="text" class="form-control">
-                        </div>
-                </div>
-                <div class="form-group">
-						<div class="col-md-10">
-							<h4 class="control-label">{{"business.SCRIPT" | translate}}</h4>
-						    <table class="table-responsive">
-							<tr>
-								<td>
-                                    <input class="btn btn-info" type="button" value="Menu">
-								</td>
-								<td>
-							    	<label class="control-label" id="businessMenu">&ltembed width="100%" height="100%" src="http://bit.ly/MonteCarloVIPPremiumServices"/&gt</label>
-							    </td>
-							</tr>
-							<tr>
-							    <td>
-                                    <input class="btn btn-info" type="button" value="Button">
-							    </td>
-							    <td>
-							    	<label class="control-label" id="businessMenu">Button Items</label>
-							    </td>
-							</tr>
-							</table>
-                        </div>
-                </div>
-                <div class="form-group">
-						<div class="col-md-10">
-						    <h4 class="control-label">{{"business.URL" | translate}}:</h4>
-                            <input type="text" class="form-control">
-                        </div>
-                </div>
-            </form>
+			<div ng-include="'deployment-steps.html'"></div>
     	</div>
 
 

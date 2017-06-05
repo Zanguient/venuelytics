@@ -62,6 +62,21 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
+    this.getVenuesByCountry = function(countryName) {
+
+        var url = RestURL.baseURL + '/venues?country=' + countryName;
+        
+        return $http({
+            method: 'GET',
+            url: url
+        }).then(function(success) {
+            return success.data.venues;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
     this.searchBusiness = function(businessName) {
         return $http({
             method: 'GET',

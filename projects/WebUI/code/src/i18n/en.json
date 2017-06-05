@@ -33,7 +33,15 @@
 		"BULLET_TITLE_3":"FOOD & BEVERAGE REQUESTS",
 		"BULLET3_DESCRIPTION":"Ordering Food & Beverage from Mobile Web, Website & Mobile app",
 		"BULLET_TITLE_4":"LOYALTY MANAGEMENT",
-		"BULLET4_DESCRIPTION":"Provide valuable, and relevant, real-time rewards and incentives via SMS, e-mail, & Mobile App"
+		"BULLET4_DESCRIPTION":"Provide valuable, and relevant, real-time rewards and incentives via SMS, e-mail, & Mobile App",
+		"BULLET_TITLE_5":"BOOKING",
+		"BULLET5_DESCRIPTION":"Book Event Tickets, Banquet Halls & Karaoke rooms for private Events",
+		"BULLET_TITLE_6":"PERSONALIZED NOTIFICATIONS",
+		"BULLET6_DESCRIPTION":"Recommendations, Deals & Rewards",
+		"BULLET_TITLE_7":"EVENTS & CAMPAIGN MANAGEMENT",
+		"BULLET7_DESCRIPTION":"Communication, schedules and updates from promoters, hosts, artists and venues",
+		"BULLET_TITLE_8":"BUSINESS ANALYTICS",
+		"BULLET8_DESCRIPTION":"Customer insights, Prediction, Personalized Services, Cab & Limo Booking, Valet Parkings & VIP Access"
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
@@ -75,7 +83,8 @@
 		"FORM_BUSINESS_NAME_REQUIRED":"Business Name is required",
 		"FORM_ADDRESS_REQUIRED":"Address is required",
 		"FORM_ADDRESS2_REQUIRED":"Address2 is required",
-		"FORM_CITY_REQUIRED":"City is required"
+		"FORM_CITY_REQUIRED":"City is required",
+		"DEPLOY_STEPS":"Deployment Steps"
 
 	},
 	"venue":{

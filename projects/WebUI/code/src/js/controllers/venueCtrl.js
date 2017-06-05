@@ -28,7 +28,6 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
 
                 if(VenueService.latitude && VenueService.longitude && 
                     VenueService.latitude !== '' && VenueService.longitude !== ''){
-                    $log.info("Inside have data");
                     self.setTab('CLUB');
                 } else{
 
@@ -61,8 +60,8 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
     			$location.url('/venues/'+self.selectedCityName+'/'+venue.id);
     		};
 
-            self.selectedServices = function(venue) {
-                $location.url('/venues/'+self.selectedCityName+'/'+venue.id);
+            self.selectedServices = function(venue, serviceType) {
+                $location.url('/venues/'+self.selectedCityName+'/'+venue.id+'/'+serviceType);
                 $log.info('Inside selected services');
             };
     		self.init();

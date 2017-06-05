@@ -99,11 +99,13 @@
   }
   #countryDropdown {
     width: 125px;
-    color: black;
-    margin-left: 952px;
+    margin-right: : 10px;
   }
   #contact {
     margin-top: 40px;
+  }
+  #venueReservationFrame {
+    height: 1000px;
   }
 }
 /*iPhone 5*/
@@ -242,6 +244,10 @@
 
 #serviceIcon {
   padding-left: 15px;
+}
+
+#dropDownButton {
+  color: white;
 }
 
 .buttonNav {

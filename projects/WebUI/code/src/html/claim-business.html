@@ -1,0 +1,36 @@
+<form class="search-form" id="myFormClaim" name="myFormClaim" novalidate ng-submit="submitForm()">
+                            <fieldset>
+                                <div class="form-group is-empty">
+                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.BUSINESS_NAME" | translate}}:</font></label>
+
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" name="businessName" ng-model="newUser.businessName" required>
+                    <span class="error-message" ng-show="showMessage(myFormClaim.businessName)">{{"business.FORM_NAME_REQUIRED" | translate}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group is-empty">
+                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.EMAIL" | translate}}:</font></label>
+
+                                    <div class="col-md-10">
+                                        <input type="email" class="form-control" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" name="claimEmailId" ng-model="newUser.emailId" required>
+                    <span class="error-message" ng-show="showMessage(myFormClaim.claimEmailId)">{{"business.FORM_EMAIL_REQUIRED" | translate}}</span>
+                                    </div>
+                                </div>  
+                                
+                                <div class="form-group is-empty">
+                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.PHONE" | translate}}:</font></label>
+
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" name="phone" ng-model="newUser.phone" required>
+                    <span class="error-message" ng-show="showMessage(myFormClaim.phone)">{{"business.FORM_PHONE_REQUIRED" | translate}}</span>
+                                    </div>
+                                </div> 
+                            <center>
+                <div >
+                    <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit(claimB)" novalidate="novalidate">{{"business.SUBMIT" | translate}}</button>
+                    <button type="button" class="btn btn-raised btn-danger" ng-click="cancel()">{{"business.CANCEL" | translate}}</button>
+            </div>                             
+            </center>
+                                </fieldset>
+                                </form>

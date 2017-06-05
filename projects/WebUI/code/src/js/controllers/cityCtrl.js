@@ -6,7 +6,7 @@
 app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', 'AjaxService', 'APP_ARRAYS',
     function ($log, $scope, $http, $location, RestURL, VenueService, AjaxService, APP_ARRAYS) {
 
-    		$log.log('Inside Home Controller.');
+    		$log.log('Inside City Controller.');
     		
     		var self = $scope;
 
@@ -18,6 +18,13 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
 
                     document.getElementById('loadingCities').style.display = 'none';
                 });
+            };
+
+            $scope.getCountry = function (item) {
+                $scope.selectedCountry = item;
+                /*AjaxService.getVenuesByCountry(item).then(function(response) {
+                    self.listOfCities = response;
+                });*/
             };
 
             self.init = function() {
@@ -60,10 +67,4 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
     		self.selectCity = function(city) {
                 $location.url('/venues/'+city.name);
     		};
-
-            self.selectedCountry = function(country) {
-                $log.info('selectedCountry: '+country);
-            };
-    		
-            
     }]);
