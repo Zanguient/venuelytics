@@ -6,34 +6,44 @@
 <!-- container -->
 <div class="wrap wrap-mountain">
     <div class="container">
-        <h2 class="text-center text-light wow fadeInDown animation-delay-5">{{"city.DISCOVER_FUN" | translate}}</h2>
-        <h4 class="text-center text-light wow fadeInDown animation-delay-5">{{ "city.REAL_TIME_SERVICE" | translate}}</h4>
-        <div class="row">            
+        <h2 class="text-center text-light wow fadeInDown animation-delay-5">{{"city.DISCOVER_FUN"
+            | translate}}</h2>
+        <h4 class="text-center text-light wow fadeInDown animation-delay-5">{{
+            "city.REAL_TIME_SERVICE" | translate}}</h4>
+        <div class="row">
             <div class="form-group">
                 <div class="col-md-4 pull-right" id="countryDropdown">
                     <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropDownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            {{selectedCountry}}
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li ng-repeat="country in countries"><a ng-click="getCountry(country)">{{country}}</li>
-        </ul>
-    </div>
+                        <button class="btn btn-default dropdown-toggle" type="button"
+                            id="dropDownButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true">
+                            {{selectedCountry}} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="country in countries"><a
+                                ng-click="getCountry(country)">{{country}}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="row" id="loadingCities">
                 <div class="progress progress-striped active">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    <div class="progress-bar progress-bar-success" role="progressbar"
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                        style="width: 100%">
                         <span class="sr-only">{{"city.LOADING_CITIES" | translate}}</span>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div id="cityImage" class="city-image-block col-sm-4" style="background: url({{city.imageUrl}}) no-repeat center top;background-size:cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)">
-                    <p class="content"><font size="5"> {{city.name}} </font> </p>
+                <div id="cityImage" class="city-image-block col-sm-4"
+                    style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;"
+                    ng-repeat="city in listOfCities" ng-click="selectCity(city)">
+                    <p class="content">
+                        <font size="5"> {{city.name}} </font>
+                    </p>
                 </div>
             </div>
         </div>

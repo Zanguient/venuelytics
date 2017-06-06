@@ -1,76 +1,87 @@
-<center><h2>{{"business.DEPLOY_STEPS" | translate}}</h2></center>
+<center>
+	<h1 class="color-success">{{"business.DEPLOY_STEPS" | translate}}</h1>
+</center>
 <form class="search-form">
-			    <div class="form-group">
-						<div class="col-md-10">
-							<table class="table-responsive">
-							<tr>
-								<td rowspan="3" id="businessDetails">
-								    <img src="{{businessImage}}" alt="" class="img-responsive">
-								</td>
-								<td id="claimTitle" ng-show="businessData == true">
-							    	    <h4 class="control-label" id="businessTitle">{{newUser.businessName || claimB.businessName}}</h4>
-                                         <span><label class="control-label">{{newUser.address}}</label>
-                                         <span><label class="control-label">{{newUser.address2}}</label></span></span>
-							    </td>
-                                <td id="claimTitle" ng-show="claimBusiness == true">
-                                        <h4 class="control-label" id="businessTitle">{{claim.businessName}}</h4>
-                                         <span><label class="control-label">{{claim.phone}}</label></span>
-                                </td>
-							</tr>
-							</table>
-                        </div>
-                </div>
-                 <div class="form-group">
-						<div class="col-md-10">
-						    <b class="control-label">{{"business.LINK" | translate}}</b>
-                            <input type="text" class="form-control">
-                        </div>
-                </div>
-                <div class="form-group">
-						<div class="col-md-10">
-							<b class="control-label">{{"business.SCRIPT" | translate}}</b>
-						    <table class="table-responsive">
-							<tr>
-								<td>
-                                    <input class="btn btn-info" type="button" value="Menu">
-								</td>
-								<td>
-							    	<!-- Target -->
-									<input id="foo" value="&ltembed width='100%' height='100%' src='http://bit.ly/MonteCarloVIPPremiumServices'/&gt" />
+	<div class="form-group">
+		<div class="col-md-10">
+			<!-- <table class="table-responsive">
+				<tr>
+						<td rowspan="3" id="businessDetails">
+							<img src="{{businessImage}}" alt="" class="img-responsive">
+						</td>
+						<td id="claimTitle" ng-show="businessData == true">
+							<h4 class="control-label" id="businessTitle">{{newUser.businessName || claimB.businessName}}</h4>
+							<span>
+								<label class="control-label">{{newUser.address}}</label>
+								<span>
+									<label class="control-label">{{newUser.address2}}</label>
+								</span>
+							</span>
+						</td>
+						<td id="claimTitle" ng-show="claimBusiness == true">
+							<h4 class="control-label" id="businessTitle">{{claim.businessName}}</h4>
+							<span>
+								<label class="control-label">{{claim.phone}}</label>
+							</span>
+						</td>
+				</tr>
+			</table> -->
 
-									<!-- Trigger -->
-									<button class="btn" ngclipboard data-clipboard-target="#foo">
-									    <img src="assets/img/clippy.svg" title="Copy to clipboard" id="clipboardButton">
-									</button>
+			<div class="post-container">                
+			    <div class="post-thumb"><img src="{{businessImage}}" style="width: 100px; height: 100px;" /></div>
+			    <div class="post-content">
+			        <h3 class="post-title">{{selectedVenueName || newUser.businessName}}</h3>
+			        <p>{{newUser.address}}</p>
+			    </div>
+			</div>
 
-							    </td>
-							</tr>
-							<tr>
-							    <td>
-                                    <input class="btn btn-info" type="button" value="Button">
-							    </td>
-							    <td>
-							    	<label class="control-label" id="businessMenu">Button Items</label>
-							    </td>
-							</tr>
-							<tr>
-							    <td>
-                                    <input class="btn btn-info" type="button" value="Send By Email">
-							    </td>
-							    <td>
-							    	<input type="text" class="control-label" id="businessMenu"></input>
-							    </td>
-							    <td>
-							    	<input class="btn btn-info" type="button" value="Send">
-							    </td>
-							</tr>
-							</table>
-                        </div>
-                </div>
-                <div class="form-group">
-						<div class="col-md-10">
-						    <b class="control-label">{{"business.URL" | translate}}</b>
-                            <input type="text" class="form-control">
-                        </div>
-                </div>
-            </form>
+
+
+		</div>
+	</div>
+		<div class="form-group">
+			<div class="col-md-10">
+				<br>
+				<b class="control-label">{{"business.LINK" | translate}}</b>
+				<br>
+				<label>http://bit.ly/1RmnUT</label>
+				<hr style="margin-top: 0px;">
+			</div>
+		</div>
+			<div class="form-group">
+				<div class="col-md-10">
+					<b class="control-label">{{"business.SCRIPT" | translate}}</b>
+					<div class="form-group is-empty" id="formMargin">
+					    <label id="deployStepsLabel">{{"business.DEPLOY_MENU" | translate}}</label>
+					    <input id="deployStepsInput" value="&ltembed width='100%' height='100%' src='http://bit.ly/MonteCarloVIPPremiumServices'/&gt" />
+						<!-- Trigger -->
+						<button class="btn btn-raised btn-success" ngclipboard data-clipboard-target="#deployStepsInput">
+							{{"business.DEPLOY_COPY" | translate}}
+						</button>
+					</div>
+					<div class="form-group is-empty" id="formMargin">
+					    <label id="deployStepsLabel">{{"business.DEPLOY_BUTTON" | translate}}</label>
+					    <input id="deployStepsInput1" value="&ltembed width='100%' height='100%' src='http://bit.ly/MonteCarloVIPPremiumServices'/&gt" />
+						<!-- Trigger -->
+						<button class="btn btn-raised btn-success" ngclipboard data-clipboard-target="#deployStepsInput1">
+							{{"business.DEPLOY_COPY" | translate}}
+						</button>
+					</div>
+					<div class="form-group is-empty" id="formMargin">
+					    <label id="deployStepsLabel">{{"business.DEPLOY_EMAIL" | translate}}</label>
+					    <input id="deployStepsInput" type="text" />
+					    <button class="btn btn-raised btn-success">{{"business.DEPLOY_SEND" | translate}}</button>
+					</div>
+
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-md-10">
+					<br>
+					<b class="control-label">{{"business.URL" | translate}}</b>
+					<br>
+					<label>http://bit.ly/1RmnUT</label>
+					<hr style="margin-top: 0px;">
+				</div>
+			</div>
+</form>

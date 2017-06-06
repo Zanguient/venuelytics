@@ -84,7 +84,13 @@
 		"FORM_ADDRESS_REQUIRED":"Address is required",
 		"FORM_ADDRESS2_REQUIRED":"Address2 is required",
 		"FORM_CITY_REQUIRED":"City is required",
-		"DEPLOY_STEPS":"Deployment Steps"
+		"DEPLOY_STEPS":"Deployment Steps",
+		"SEARCH_BUSINESS_MESSAGE":"Sorry, the matching business profile is not available currently. Please click on Create Business button below to update your business details.",
+		"DEPLOY_MENU":"MENU",
+		"DEPLOY_BUTTON":"BUTTON",
+		"DEPLOY_EMAIL":"SEND BY EMAIL",
+		"DEPLOY_COPY":"COPY",
+		"DEPLOY_SEND":"SEND"
 
 	},
 	"venue":{

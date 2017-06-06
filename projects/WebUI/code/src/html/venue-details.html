@@ -5,12 +5,13 @@
         </div>
     </div>
 </div>
-
 <div class="container">
-    <h3><a href="/cities" id="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} </a> <a href="venues/{{selectedCity}}"> > {{selectedCity}}</a></h3>
+    <h3>
+        <a href="/cities" id="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} </a>
+        <a href="venues/{{selectedCity}}"> > {{selectedCity}}</a>
+    </h3>
     <div class="row" id="venueTabs">
         <div class="col-md-12">
-
             <article class="card card-primary wow zoomInRight animation-delay-5 mb-4">
                 <div class="card-block card-block-big">
                     <div class="row">
@@ -22,7 +23,7 @@
                             </div>
                         </div>
                         <!-- <iframe style="display: none;" ng-src="{{resevationURL}}" id='venueReservationFrame' width="100%"></iframe> -->
-                        <embed ng-src="{{resevationURL}}" id='venueReservationFrame' width="100%" height="100%"></embed>
+                        <embed ng-src="{{resevationURL}}" id='venueReservationFrame' width="100%"></embed>
                     </div>
                 </div>
             </article>

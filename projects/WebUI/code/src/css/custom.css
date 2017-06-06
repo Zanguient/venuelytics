@@ -110,13 +110,43 @@
   #clipboardButton {
     width : 13px; height: 14px;
   }
+  #deployStepsInput {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block; 
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    vertical-align:middle;
+    margin-left:20px;
+}
+
+#deployStepsInput1 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block; 
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    vertical-align:middle;
+    margin-left:20px;
+}
+
+#deployStepsLabel {
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    float: left;
+    padding-top: 5px;
+    text-align: right;
+    width: 140px;
+    margin-top: 10px;
+}
 }
 /*iPhone 5*/
 @media only screen and (min-device-width: 320px) and (max-device-width:
  480px) {
   #businessImage {
     height: 200px;
-    width: 365px;
+    width: 375px;
   }
   #sliderThumb{
     width:40px;
@@ -152,7 +182,48 @@
   #contact {
     margin-top: 20px;
   }
-  
+  #venueReservationFrame {
+    height: 1000px;
+  }
+  #businessSearchForm {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  #imgContainer {
+    width: 460px;
+    height: 55px;
+  }
+  #deployStepsInput {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block; 
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    vertical-align:middle;
+    margin-left:2px;
+    width: 76px;
+}
+#deployStepsInput1 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block; 
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    vertical-align:middle;
+    margin-left:2px;
+    width: 76px;
+}
+#deployStepsLabel {
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    float: left;
+    padding-top: 5px;
+    text-align: center;
+    margin-top: 10px;
+    width: 74px;
+}
+
 }
 
 /*For iPhone 6 plus*/
@@ -162,6 +233,10 @@
     and (orientation : landscape) 
     and (-webkit-min-device-pixel-ratio : 3) 
 { 
+  #businessImage {
+    height: 200px;
+    width: 375px;
+  }
 
   #countryMain {
     margin-left: 0px;
@@ -192,6 +267,47 @@
   #contact {
     margin-top: 20px;
   }
+  #venueReservationFrame {
+    height: 1000px;
+  }
+  #businessSearchForm {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  #imgContainer {
+    width: 460px;
+    height: 55px;
+  }
+  #deployStepsInput {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block; 
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    vertical-align:middle;
+    margin-left:2px;
+    width: 76px;
+}
+#deployStepsInput1 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block; 
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    vertical-align:middle;
+    margin-left:2px;
+    width: 76px;
+}
+#deployStepsLabel {
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    float: left;
+    padding-top: 5px;
+    text-align: center;
+    margin-top: 10px;
+    width: 74px;
+}
 }
 
 #venueBanner {
@@ -251,6 +367,10 @@
 
 #dropDownButton {
   color: white;
+}
+
+#formMargin {
+  margin-top: 0px;
 }
 
 .buttonNav {
@@ -471,4 +591,40 @@
   background: transparent;
   padding: 0 0 10px;
   border-bottom: 2px solid #1ABC9C;
+}
+
+
+.post-container {
+    margin: 20px 20px 0 0;
+}
+.post-thumb {
+    float: left
+}
+.post-thumb img {
+    display: block
+}
+.post-content {
+    margin-left: 110px
+}
+.post-title {
+    font-weight: bold;
+    font-size: 100%,
+    margin-top: 5px;
+}
+
+.img-container {
+  width: 500px;
+  height: 55px;
+}
+
+.img-singleline {
+  width: 45%;
+  display: inline-block;
+  float: left;
+  padding: 0 10px;
+}
+
+#img-social {
+  width: 179px;
+  height: 55px;
 }

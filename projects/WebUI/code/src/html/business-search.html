@@ -1,109 +1,122 @@
 <div class="container">
-	<div class="row">
-		<div ng-hide="claimBusiness == true">
+    <div class="row">
+        <div ng-hide="claimBusiness == true">
             <center>
-            <h2>{{"business.BUSINESS_SEARCH" | translate}}</h2>
+                <h1 class="color-success">{{"business.BUSINESS_SEARCH" |
+                    translate}}</h1>
             </center>
-            
-            <form class="form-horizontal">
-                            <fieldset>
-                            <div class="form-group is-empty">
-                                    <label for="searchBusiness" class="col-md-2 control-label"><font size="3">{{"business.BUSINESS_NAME" | translate}}:</font></label>
-
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control" id="search" ng-model="searchBusiness" name="searchBox">
-                                    </div>
-                                </div>
-                                </fieldset>
-                                <center>
-                                <button type="submit" class="btn btn-raised btn-primary" ng-click="search()">{{"business.SEARCH" | translate}}</button>
-                                </center>
-                                </form>
-
-
-    	</div>
-        <div id="claimCard">
-    	<div ng-repeat="business in businessDetails" ng-hide="claimBusiness == true">
-		<article class="card wow fadeInLeft animation-delay-5 mb-4">
-            <div class="card-block">
-                <div class="row">
-                    <div class="col-lg-8 col-md-7 col-sm-6">
-                        <div class="slider">
-                            <img id="businessImage" ng-repeat="slide in business.imageUrls" class="slide" ng-swipe-right="showPrev(slide)" ng-swipe-left="showNext(slide)" ng-show="isActive($index)" style="width: 100%; margin: auto;" ng-src="{{slide.originalUrl}}" />
-                            <ul class="buttonNav">
-                                <li ng-repeat="slide in business.imageUrls" ng-class="{'active':isActive($index)}">
-                                <img id="sliderThumb" src="{{slide.originalUrl}}" class="img-responsive" ng-click="showPhoto(slide,$index);" />
-                                </li>
-                            </ul>
+            <form class="form-horizontal" id="businessSearchForm">
+                <fieldset>
+                    <div class="form-group is-empty">
+                        <label for="searchBusiness" class="col-md-2 control-label">
+                            <font size="3">{{"business.BUSINESS_NAME" | translate}}:</font>
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="search"
+                                ng-model="searchBusiness" name="searchBox">
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-6">
-                        <h3 class="no-mt">{{business.venueName}}</h3>
-                        <p class="mb-4">{{business.description | limitTo: 200 }}{{business.description.length > 200 ? '...' :''}}</p>
+                </fieldset>
+                <center>
+                    <button type="submit" class="btn btn-raised btn-primary"
+                        ng-click="search()">{{"business.SEARCH" | translate}}</button>
+                </center>
+            </form>
+        </div>
+        <div id="claimCard">
+            <center>
+                <h5 ng-show="businessDetailLength == 0">{{"business.SEARCH_BUSINESS_MESSAGE"
+                    | translate}}</h5>
+            </center>
+
+            <div ng-repeat="business in businessDetails"
+                ng-hide="claimBusiness == true">
+                <article class="card wow fadeInLeft animation-delay-5 mb-4">
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-7 col-sm-6">
+                                <div class="slider">
+                                    <img id="businessImage" ng-repeat="slide in business.imageUrls"
+                                        class="slide" ng-swipe-right="showPrev(slide)"
+                                        ng-swipe-left="showNext(slide)" ng-show="isActive($index)"
+                                        ng-src="{{slide.originalUrl}}" />
+                                    <ul class="buttonNav">
+                                        <li ng-repeat="slide in business.imageUrls"
+                                            ng-class="{'active':isActive($index)}"><img
+                                            id="sliderThumb" src="{{slide.originalUrl}}"
+                                            class="img-responsive" ng-click="showPhoto(slide,$index);" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-6">
+                                <h3 class="no-mt">{{business.venueName}}</h3>
+                                <p class="mb-4">{{business.description | limitTo: 200
+                                    }}{{business.description.length > 200 ? '...' :''}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-7 col-sm-6">
+                                <label><b style="color: black;">{{business.address}}</b></label>
+                                <br /> <a href="{{business.website}}" target="_blank">{{business.website}}</a>
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-6 text-right">
+                                <button href="javascript:void(0)"
+                                    class="btn btn-primary btn-raised btn-block animate-icon"
+                                    ng-click="claim(business)">
+                                    <i class="zmdi zmdi-wrench"></i>{{"business.CLAIM_BUSINESS" |
+                                    translate}}
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 col-md-7 col-sm-6">
-                        <label>{{business.address}}</label> <br/>
-                        <a href="{{business.website}}" target="_blank">{{business.website}}</a>
-                    </div>
-                    <div class="col-lg-4 col-md-5 col-sm-6 text-right">
-                            <button href="javascript:void(0)" class="btn btn-primary btn-raised btn-block animate-icon" ng-click="claim(business)"><i class="zmdi zmdi-wrench"></i>{{"business.CLAIM_BUSINESS" | translate}}</button>
-                    </div>
-                </div>
+                </article>
             </div>
-        </article>
-    	</div>
         </div>
-    	<div class="form-group" ng-hide="claimBusiness == true">
-    	<center>
-        <button type="submit" class="btn btn-raised btn-primary" ng-if="businessDetails" ng-click="createBusinessMethod()">{{"business.CREATE_BUSINESS" | translate}}</button>
-        </center>
-    	</div>
-    	<div ng-show="claimBusiness == true">
-        
-        <div ng-hide="hideForm == true">
-            <center><h2>{{selectedVenueName}}</h2></center>
-
-            <div ng-include="'claim-business.html'"></div>
-
-
-        
+        <div class="form-group" ng-hide="claimBusiness == true">
+            <center>
+                <button type="submit" class="btn btn-raised btn-primary"
+                    ng-if="businessDetails" ng-click="createBusinessMethod()">{{"business.CREATE_BUSINESS"
+                    | translate}}</button>
+            </center>
         </div>
+        <div ng-show="claimBusiness == true">
+            <div ng-hide="hideForm == true">
+                <center>
+                    <h1 class="color-success">{{selectedVenueName}}</h1>
+                </center>
+                <div ng-include="'claim-business.html'"></div>
+            </div>
         </div>
-
-
         <div ng-show="claimForm == true">
             <div ng-include="'create-business.html'"></div>
         </div>
-
-
         <div id="successView" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <label class="modal-title">{{"business.REGISTERED" | translate}}</label>
+                        <label class="modal-title">{{"business.REGISTERED" |
+                            translate}}</label>
                     </div>
-                <div class="modal-body">
-                <center>
-                    <p>{{"business.SUCCESS" | translate}}</p>
-                </center>
-                <br>
-                <center>
-                     <button type="submit" class="btn btn-success" data-dismiss="modal" ng-click="createBusinessAccount()">{{"business.OK" | translate}}</button>
-                     <button type="submit" class="btn btn-danger" data-dismiss="modal">{{"business.CANCEL" | translate}}</button>
-                </center>
-                </div>
+                    <div class="modal-body">
+                        <center>
+                            <p>{{"business.SUCCESS" | translate}}</p>
+                        </center>
+                        <br>
+                        <center>
+                            <button type="submit" class="btn btn-success"
+                                data-dismiss="modal" ng-click="createBusinessAccount()">{{"business.OK"
+                                | translate}}</button>
+                            <button type="submit" class="btn btn-danger" data-dismiss="modal">{{"business.CANCEL"
+                                | translate}}</button>
+                        </center>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-    	<div ng-show="businessData == true">
-			<div ng-include="'deployment-steps.html'"></div>
-    	</div>
-
-
+        <div ng-show="businessData == true">
+            <div ng-include="'deployment-steps.html'"></div>
+        </div>
     </div>
-	</div>
+</div>
