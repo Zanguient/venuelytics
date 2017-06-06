@@ -32,6 +32,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'venue-details.html',
             controller: 'VenueDetailsController'
         })
+        .when('/venues/:cityName/:venueid', {
+            templateUrl: 'venue-details.html',
+            controller: 'VenueDetailsController'
+        })
         .when('/searchBusiness', {
             templateUrl: 'business-search.html',
             controller: 'businessController'
