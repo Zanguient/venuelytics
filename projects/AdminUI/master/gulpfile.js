@@ -25,6 +25,7 @@ var gulp        = require('gulp'),
     CacheBuster  = require('gulp-cachebust'),
     templateCache = require('gulp-angular-templatecache'),
     del = require('del'),
+    connect = require('gulp-connect'),
     PluginError = gutil.PluginError;
 
 
@@ -399,7 +400,13 @@ gulp.task('dev',[
           'templates:pages',
           'templates:views',
           'watch'
-        ]);
+        ], function (){
+
+         return connect.server({
+            root: '../',
+            port:8888
+         });
+ });
 
 gulp.task('build', gulpSequence([
                       'scripts:vendor',
