@@ -33,5 +33,20 @@ app
   })
   .constant('APP_ARRAYS', {
     'country': ['North America', 'Canada', 'South America', 'India'],
-    'serviceTabs': ['CLUB', 'CASINO', 'BAR', 'KARAOKE', 'BOWLING', 'RESTAURANT']
+    'serviceTabs': ['CLUB', 'CASINO', 'BAR', 'KARAOKE', 'BOWLING', 'RESTAURANT'],
+    'serviceTabs1': [{'title': 'CLUB', 'icon': 'fa fa-diamond'},
+                    {'title': 'CASINO', 'icon': 'fa fa-diamond'},
+                    {'title': 'BAR', 'icon': 'fa fa-glass'},
+                    {'title': 'KARAOKE', 'icon': 'fa fa-music'},
+                    {'title': 'BOWLING', 'icon': 'fa fa-futbol-o'},
+                    {'title': 'RESTAURANT', 'icon': ''}],
+    'features': [{'title': 'Real-Time Reservations', 'description':'In-Venue & Pre-Booking of Table, Bottle Services over Mobile Web, App, Notifications, SMS & Email', 'icon': 'zmdi zmdi-cloud-outline', 'color': 'color-info'},
+                 {'title': 'Food & Drink Services', 'description':'Ordering Food & Drinks for Delivery & Pickup at the Venue', 'icon': 'zmdi zmdi-desktop-mac', 'color': 'color-warning'},
+                 {'title': 'Guest List', 'description':'Easy Access To New & Existing Customers. Grow the customer base with Guest Registration & WIFI', 'icon': 'zmdi zmdi-download', 'color': 'color-success'},
+                 {'title': 'Order & Pay', 'description':'Request for Premium Services with instant Mobile Pay', 'icon': 'zmdi zmdi-flower-alt', 'color': 'color-danger'},
+                 {'title': 'Bussiness Analytics', 'description':'Customer Insights, Predictive Analytics & Patent Pending Machine Learning', 'icon': 'zmdi zmdi-cloud-outline', 'color': 'color-info'},
+                 {'title': 'WIFI & White Label Solution', 'description':'Access to the reservations, ordering & payment via white label app & WIFI Hotspot', 'icon': 'zmdi zmdi-desktop-mac', 'color': 'color-warning'},
+                 {'title': 'Private Events', 'description':'Book Banquet Halls, Karaoke Rooms & Event Tickets', 'icon': 'zmdi zmdi-download', 'color': 'color-success'},
+                 {'title': 'Campaign & Loyalty Management', 'description':'Personalized Deals, Offers, Digital Rewards, Events and Booking.', 'icon': 'zmdi zmdi-flower-alt', 'color': 'color-danger'}]
+
   });

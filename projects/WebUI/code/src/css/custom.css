@@ -6,32 +6,35 @@
   font-size: 16px;
   font-weight: bold;
 }
+
 .image-block {
-    border: 3px solid white ;
-    background-color: black;
-    padding: 0px;    
-    margin: 0px;
-    height:200px;
-    text-align: center;
-    vertical-align: bottom;
+  border: 3px solid white;
+  background-color: black;
+  padding: 0px;
+  margin: 0px;
+  height: 200px;
+  text-align: center;
+  vertical-align: bottom;
 }
+
 .image-block > p {
-    width: 100%;
-    height: 100%;
-    font-weight: normal;
-    font-size: 19px;
-    padding-top: 150px;
-    background-color: rgba(3,3,3,0.0);
-    color: rgba(6,6,6,0.0);
+  width: 100%;
+  height: 100%;
+  font-weight: normal;
+  font-size: 19px;
+  padding-top: 150px;
+  background-color: rgba(3,3,3,0.0);
+  color: rgba(6,6,6,0.0);
 }
+
 .image-block:hover > p {
-    background-color: rgba(3,3,3,0.5);    
-    color: white;    
+  background-color: rgba(3,3,3,0.5);
+  color: white;
 }
 
 #cityImage {
   list-style-type: none;
-  cursor: pointer; 
+  cursor: pointer;
   cursor: hand;
 }
 
@@ -40,7 +43,7 @@
 }
 
 .error-message {
-  color:red;
+  color: red;
 }
 
 @media screen and (min-device-width: 1200px) and (max-device-width:
@@ -49,124 +52,159 @@
     height: 300px;
     width: 565px;
   }
-  #sliderThumb{
-    width:40px;
-    height:22px;
+
+  #sliderThumb {
+    width: 40px;
+    height: 22px;
   }
+
   .slider {
     height: 300px;
     width: 550px;
   }
+
   #forMobile {
     height: 690px;
   }
-  #businessMessage{
+
+  #businessMessage {
     margin-left: 12px;
   }
+
   #businessTitle {
     margin-bottom: 0px;
     margin-top: 0px;
   }
+
   #businessMenu {
     margin-top: 0px;
   }
-  #myFormClaim{
+
+  #myFormClaim {
     margin-left: 0px;
   }
+
   #claimTitle {
     padding-left: 10px;
   }
+
   #venueBackground {
     height: 280px;
   }
+
   #venueCardBlock {
-  padding-left: 0px;
+    padding-left: 0px;
   }
+
   #logoCollapsed {
     margin-top: 15px;
   }
+
   #distance {
     margin-left: 26px;
     padding-right: 0px;
     padding-left: 0px;
     width: 110px;
   }
+
   #footbarWidth {
     width: 370px;
   }
+
   #carouselImage {
     height: 586px;
   }
+
   #countryDropdown {
     width: 125px;
     margin-right: : 10px;
   }
+
   #contact {
     margin-top: 40px;
   }
+
   #venueReservationFrame {
     height: 1000px;
   }
+
   #clipboardButton {
-    width : 13px; height: 14px;
+    width: 13px;
+    height: 14px;
   }
+
   #deployStepsInput {
     margin-top: 5px;
     margin-bottom: 5px;
-    display:inline-block; 
-    *display: inline;     /* for IE7*/
-    zoom:1;              /* for IE7*/
-    vertical-align:middle;
-    margin-left:20px;
-}
+    display: inline-block;
+    *display: inline;
+     /* for IE7*/
+    zoom: 1;
+              /* for IE7*/
+    vertical-align: middle;
+    margin-left: 20px;
+  }
 
-#deployStepsInput1 {
+  #deployStepsInput1 {
     margin-top: 5px;
     margin-bottom: 5px;
-    display:inline-block; 
-    *display: inline;     /* for IE7*/
-    zoom:1;              /* for IE7*/
-    vertical-align:middle;
-    margin-left:20px;
-}
+    display: inline-block;
+    *display: inline;
+     /* for IE7*/
+    zoom: 1;
+              /* for IE7*/
+    vertical-align: middle;
+    margin-left: 20px;
+  }
 
-#deployStepsLabel {
-    display:inline-block;
-    *display: inline;     /* for IE7*/
-    zoom:1;              /* for IE7*/
+  #deployStepsLabel {
+    display: inline-block;
+    *display: inline;
+     /* for IE7*/
+    zoom: 1;
+              /* for IE7*/
     float: left;
     padding-top: 5px;
     text-align: right;
     width: 140px;
     margin-top: 10px;
-}
-#outer {
-  width:70%;/* demo*/
-  margin:auto;/* demo*/
-  display:flex;
-  flex-wrap:wrap;
-}
-#outer>div {flex:1;}
-#outer>div>img {
-  width:100%;
-  min-width:200px;/* demo*/
-}
-.img-container {
-  width: 500px;
-  height: 55px;
-}
+  }
 
-.img-singleline {
-  width: 45%;
-  display: inline-block;
-  float: left;
-  padding: 0 10px;
-}
+  #outer {
+    width: 70%;
+/* demo*/
+    margin: auto;
+/* demo*/
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-#img-social {
-  width: 179px;
-  height: 55px;
-}
+  #outer>div {
+    flex: 1;
+  }
+
+  #outer>div>img {
+    width: 100%;
+    min-width: 200px;
+/* demo*/;
+  }
+
+  .img-container {
+    width: 500px;
+    height: 55px;
+  }
+
+  .img-singleline {
+    width: 45%;
+    display: inline-block;
+    float: left;
+    padding: 0 10px;
+  }
+
+  #img-social {
+    width: 179px;
+    height: 55px;
+  }
 }
 /*iPhone 5*/
 @media only screen and (min-device-width: 320px) and (max-device-width:
@@ -175,94 +213,117 @@
     height: 200px;
     width: 375px;
   }
-  #sliderThumb{
-    width:40px;
-    height:22px;
+
+  #sliderThumb {
+    width: 40px;
+    height: 22px;
   }
+
   #forMobile {
     width: 100%;
     height: 100%;
   }
+
   #countryMain {
     margin-left: 0px;
     left: 50px;
   }
+
   .slider {
     width: 350px;
     height: 200px;
   }
+
   #venueBackground {
     height: 190px;
   }
+
   #navigation {
     margin-left: 10px;
   }
+
   #logoCollapsed {
     margin-top: 10px;
   }
+
   #footbarWidth {
     width: 316px;
   }
+
   #carouselImage {
     height: 200px;
   }
+
   #contact {
     margin-top: 20px;
   }
+
   #venueReservationFrame {
     height: 1000px;
   }
+
   #businessSearchForm {
     padding-left: 15px;
     padding-right: 15px;
   }
+
   #imgContainer {
     width: 460px;
     height: 55px;
   }
+
   #deployStepsInput {
     margin-top: 5px;
     margin-bottom: 5px;
-    display:inline-block; 
-    *display: inline;     /* for IE7*/
-    zoom:1;              /* for IE7*/
-    vertical-align:middle;
-    margin-left:2px;
+    display: inline-block;
+    *display: inline;
+     /* for IE7*/
+    zoom: 1;
+              /* for IE7*/
+    vertical-align: middle;
+    margin-left: 2px;
     width: 76px;
-}
-#deployStepsInput1 {
+  }
+
+  #deployStepsInput1 {
     margin-top: 5px;
     margin-bottom: 5px;
-    display:inline-block; 
-    *display: inline;     /* for IE7*/
-    zoom:1;              /* for IE7*/
-    vertical-align:middle;
-    margin-left:2px;
+    display: inline-block;
+    *display: inline;
+     /* for IE7*/
+    zoom: 1;
+              /* for IE7*/
+    vertical-align: middle;
+    margin-left: 2px;
     width: 76px;
-}
-#deployStepsLabel {
-    display:inline-block;
-    *display: inline;     /* for IE7*/
-    zoom:1;              /* for IE7*/
+  }
+
+  #deployStepsLabel {
+    display: inline-block;
+    *display: inline;
+     /* for IE7*/
+    zoom: 1;
+              /* for IE7*/
     float: left;
     padding-top: 5px;
     text-align: center;
     margin-top: 10px;
     width: 74px;
-}
+  }
 
-.img-singleline {
-  float: left;
-}
-#img-social {
-  width: 160px;
-  height: 55px;
-}
-.img-container {
-  width: 460px;
-  height: 55px;
-}
+  .img-singleline {
+    float: left;
+  }
 
+  #img-social {
+    width: 160px;
+    height: 55px;
+  }
+
+  .img-container {
+    width: 460px;
+    height: 55px;
+  }
 }
 
 /*iPhone 6*/
@@ -270,21 +331,21 @@
     and (min-device-width : 375px) 
     and (max-device-width : 667px) {
 
-      .img-singleline {
-        float: left;
-      }
-      #img-social {
-        width: 187px;
-        height: 55px;
-      }
+  .img-singleline {
+    float: left;
+  }
 
-    }
+  #img-social {
+    width: 187px;
+    height: 55px;
+  }
+}
 
 /*For iPhone 6 plus*/
 @media only screen 
     and (min-device-width : 414px) 
-    and (max-device-width : 736px) 
-{ 
+    and (max-device-width : 736px) {
+ 
   #businessImage {
     height: 200px;
     width: 375px;
@@ -310,70 +371,87 @@
   #logoCollapsed {
     margin-top: 10px;
   }
+
   #footbarWidth {
     width: 365px;
   }
+
   #carouselImage {
     height: 200px;
   }
+
   #contact {
     margin-top: 20px;
   }
+
   #venueReservationFrame {
     height: 1000px;
   }
+
   #businessSearchForm {
     padding-left: 15px;
     padding-right: 15px;
   }
+
   #imgContainer {
     width: 460px;
     height: 55px;
   }
+
   #deployStepsInput {
     margin-top: 5px;
     margin-bottom: 5px;
-    display:inline-block; 
-    *display: inline;     /* for IE7*/
-    zoom:1;              /* for IE7*/
-    vertical-align:middle;
-    margin-left:2px;
+    display: inline-block;
+    *display: inline;
+     /* for IE7*/
+    zoom: 1;
+              /* for IE7*/
+    vertical-align: middle;
+    margin-left: 2px;
     width: 76px;
-}
-#deployStepsInput1 {
+  }
+
+  #deployStepsInput1 {
     margin-top: 5px;
     margin-bottom: 5px;
-    display:inline-block; 
-    *display: inline;     /* for IE7*/
-    zoom:1;              /* for IE7*/
-    vertical-align:middle;
-    margin-left:2px;
+    display: inline-block;
+    *display: inline;
+     /* for IE7*/
+    zoom: 1;
+              /* for IE7*/
+    vertical-align: middle;
+    margin-left: 2px;
     width: 76px;
-}
-#deployStepsLabel {
-    display:inline-block;
-    *display: inline;     /* for IE7*/
-    zoom:1;              /* for IE7*/
+  }
+
+  #deployStepsLabel {
+    display: inline-block;
+    *display: inline;
+     /* for IE7*/
+    zoom: 1;
+              /* for IE7*/
     float: left;
     padding-top: 5px;
     text-align: center;
     margin-top: 10px;
     width: 74px;
-}
-.img-singleline {
-  float: left;
-  width: 205px;
-  height: 55px;
-}
-#img-social {
-  width: 212px;
-  height: 55px;
-}
-.img-container {
-  width: 460px;
-  height: 55px;
-}
+  }
 
+  .img-singleline {
+    float: left;
+    width: 205px;
+    height: 55px;
+  }
+
+  #img-social {
+    width: 212px;
+    height: 55px;
+  }
+
+  .img-container {
+    width: 460px;
+    height: 55px;
+  }
 }
 
 #venueBanner {
@@ -388,8 +466,8 @@
 }
 
 #businessDetails {
-  width:100px;
-  height:100px;
+  width: 100px;
+  height: 100px;
 }
 
 #countryDropdown {
@@ -418,17 +496,24 @@
 }
 
 #countryLabel {
-  width: 132px; 
+  width: 132px;
   margin-top: 6px;
 }
 
 #countrySelect {
-  width: 200px; 
+  width: 200px;
   margin-top: 0px;
 }
 
 #serviceIcon {
   padding-left: 15px;
+}
+
+#serviceSmallIcon {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  cursor: hand;
 }
 
 #dropDownButton {
@@ -473,41 +558,46 @@
 }
 
 .city-image-block {
-    border: 3px solid white ;
-    background-color: black;
-    padding: 0px;    
-    margin: 0px;
-    height:200px;
-    text-align: center;
-    vertical-align: bottom;
+  border: 3px solid white;
+  background-color: black;
+  padding: 0px;
+  margin: 0px;
+  height: 200px;
+  text-align: center;
+  vertical-align: bottom;
 }
+
 .city-image-block > p {
-    width: 100%;
-    height: 100%;
-    font-weight: normal;
-    font-size: 19px;
-    padding-top: 150px;
-    background-color: rgba(3,3,3,0.0);
-    color: white;
-    text-shadow: 2px 0px #000000;
+  width: 100%;
+  height: 100%;
+  font-weight: normal;
+  font-size: 19px;
+  padding-top: 150px;
+  background-color: rgba(3,3,3,0.0);
+  color: white;
+  text-shadow: 2px 0px #000000;
 }
+
 .city-image-block:hover > p {
-    background-color: rgba(3,3,3,0.5);    
-    color: white;    
+  background-color: rgba(3,3,3,0.5);
+  color: white;
 }
+
 .banner-fill-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
+
 .banner-fill-img img {
-    vertical-align: middle;
-    height: 500px;
-    object-fit: cover;
-    min-width: 100%
+  vertical-align: middle;
+  height: 500px;
+  object-fit: cover;
+  min-width: 100%;
 }
-.bootstrap-select>.btn:first-child{
+
+.bootstrap-select>.btn:first-child {
   color: white !important;
 }
 
@@ -535,7 +625,9 @@
 
 .fancy-title h4,
 .fancy-title h5,
-.fancy-title h6 { padding-right: 10px; }
+.fancy-title h6 {
+  padding-right: 10px;
+}
 
 .fancy-title.title-double-border:before,
 .fancy-title.title-border:before,
@@ -564,7 +656,9 @@
 /* Heading Block - with Subtitle
 -----------------------------------------------------------------*/
 
-.heading-block { margin-bottom: 50px; }
+.heading-block {
+  margin-bottom: 50px;
+}
 
 .heading-block h1,
 .heading-block h2,
@@ -586,11 +680,17 @@
   text-transform: none;
 }
 
-.heading-block h1 { font-size: 32px; }
+.heading-block h1 {
+  font-size: 32px;
+}
 
-.heading-block h2 { font-size: 30px; }
+.heading-block h2 {
+  font-size: 30px;
+}
 
-.heading-block h3 { font-size: 26px; }
+.heading-block h3 {
+  font-size: 26px;
+}
 
 .heading-block h4 {
   font-size: 20px;
@@ -604,7 +704,9 @@
   color: #777;
 }
 
-.heading-block .before-heading { margin-bottom: 7px; }
+.heading-block .before-heading {
+  margin-bottom: 7px;
+}
 
 .heading-block.center > span,
 .heading-block.title-center > span,
@@ -614,14 +716,22 @@
   margin-right: auto;
 }
 
-.heading-block h1 + span { font-size: 24px; }
+.heading-block h1 + span {
+  font-size: 24px;
+}
 
-.heading-block h2 + span { font-size: 22px; }
+.heading-block h2 + span {
+  font-size: 22px;
+}
 
 .heading-block h3 + span,
-.heading-block h4 + span { font-size: 20px; }
+.heading-block h4 + span {
+  font-size: 20px;
+}
 
-.heading-block ~ p:not(.lead) { font-size: 15px; }
+.heading-block ~ p:not(.lead) {
+  font-size: 15px;
+}
 
 .heading-block:after {
   content: '';
@@ -633,16 +743,24 @@
 
 .center .heading-block:after,
 .heading-block.center:after,
-.heading-block.title-center:after { margin: 30px auto 0; }
+.heading-block.title-center:after {
+  margin: 30px auto 0;
+}
 
 .tright .heading-block,
 .heading-block.tright,
-.heading-block.title-right { direction: rtl; }
+.heading-block.title-right {
+  direction: rtl;
+}
 
 .heading-block.noborder:after,
-.heading-block.nobottomborder:after { display: none; }
+.heading-block.nobottomborder:after {
+  display: none;
+}
 
-.heading-block.border-color:after { border-color: #1ABC9C; }
+.heading-block.border-color:after {
+  border-color: #1ABC9C;
+}
 
 /* Fancy Title - Bottom Short Border
 -----------------------------------------------------------------*/
@@ -659,23 +777,43 @@
   border-bottom: 2px solid #1ABC9C;
 }
 
-
 .post-container {
-    margin: 20px 20px 0 0;
+  margin: 20px 20px 0 0;
 }
+
 .post-thumb {
-    float: left
+  float: left;
 }
+
 .post-thumb img {
-    display: block
+  display: block;
 }
+
 .post-content {
-    margin-left: 110px
+  margin-left: 110px;
 }
+
 .post-title {
-    font-weight: bold;
-    font-size: 100%,
+  font-weight: bold;
+  font-size: 100%,
     margin-top: 5px;
+}
+
+.custom-carousel {
+  position: absolute;
+  right: 15%;
+  bottom: 0px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 20px;
+/* padding-bottom:20px; */
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 0;
+  right: 0;
+  transition: all ease 0.5s;
 }
 
 

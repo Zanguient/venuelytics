@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /.settings/
+Disallow: /docs/
+Disallow: /framework/
+Disallow: /code/bower_components/
+Disallow: /code/node_modules
+Disallow: /code/src/img
+Disallow: /code/src/media
+Disallow: /code/src/i189
+Disallow: /code/src/css
+Disallow: /code/src/scss
