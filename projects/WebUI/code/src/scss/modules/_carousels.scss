@@ -8,7 +8,7 @@
         bottom: auto;
         height: auto;
         position: absolute;
-        //opacity: 0.3;
+        opacity: 0.3;
         transition: all ease 0.3s;
 
         &.left {
@@ -51,7 +51,7 @@
         .item {
             .carousel-caption {
                 background-color: rgba(0, 0, 0, 0.4);
-                bottom: -100%;
+                //bottom: -100%;
                 left: 0;
                 right: 0;
                 transition: all ease 0.5s;

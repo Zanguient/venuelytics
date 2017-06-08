@@ -3,8 +3,8 @@
  * @date 25-MAY-2017
  */
 "use strict";
-app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService','$translate', 'APP_CLIENTS',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $translate, APP_CLIENTS) {
+app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService','$translate', 'APP_CLIENTS', 'APP_ARRAYS',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $translate, APP_CLIENTS, APP_ARRAYS) {
 
     		$log.log('Inside Home Controller.');
     		
@@ -31,6 +31,8 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             };
 
             self.init = function() {
+
+                self.venueLyticsFeatures = APP_ARRAYS.features;
                 
                 $(document).ready(function () {
                     $('#carousel-example-generic').carousel({
