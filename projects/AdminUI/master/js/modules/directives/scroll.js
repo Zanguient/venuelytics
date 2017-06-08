@@ -4,6 +4,7 @@
  =========================================================*/
 
 App.directive('scrollable', function(){
+	'use strict' ;
   return {
     restrict: 'EA',
     link: function(scope, elem, attrs) {

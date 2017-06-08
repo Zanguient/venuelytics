@@ -4,6 +4,7 @@
  =========================================================*/
 
 App.directive("now", ['dateFilter', '$interval', function(dateFilter, $interval){
+   'use strict' ;
     return {
       restrict: 'E',
       link: function(scope, element, attrs){

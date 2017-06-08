@@ -3,8 +3,9 @@
  * smangipudi =========================================================
  */
 
-App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams','ngDialog',
-                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams, ngDialog) {
+App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 
+  'toaster', '$stateParams','ngDialog', function($scope, $state, $compile, $timeout, RestServiceFactory,
+   DataTableService, toaster, $stateParams, ngDialog) {
   'use strict';
   
   $scope.img = {};
@@ -132,7 +133,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
          });
         	 
         
-    }
+    };
     
     function _addArea(img) {
     	
@@ -179,21 +180,22 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
          	},function(error){
          		
          });
-  	}
+  	};
     
     $scope.doneEditing = function() {
   		$scope.img.maps.map(function(area){
   			area.editMode = true;
   		});
-  	}
+  	};
     
   	$scope.deleteTable = function(rowId) {
   		var table = $('#tables_table').dataTable();
     	table.fnDeleteRow(rowId);
-  	}
+  	};
+
   	$scope.createNewVenueMap = function() {
   		$state.go('app.venueMapedit', {id: 'new'});
-  	}
+  	};
   	
   	 
 

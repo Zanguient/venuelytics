@@ -7,7 +7,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
 		
 		$scope.selectedStore = null;
 		$scope.reload();
-	}
+	};
 		/**
 		 * loading visitor states
 		 */
@@ -49,7 +49,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
       
       // support params (option), (option, method, callback) or (option, callback)
       callback = (method && $.isFunction(method)) ? method : callback;
-      method = (method && typeof method == 'string') ? method : 'GET';
+      method = (method && typeof method === 'string') ? method : 'GET';
 
       self.option = option; // save options
 
@@ -377,7 +377,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             // Send Request
             chart.requestData(option);
         });
-    }
+    };
     $scope.donutInit();
   });
 	

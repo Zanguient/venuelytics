@@ -4,7 +4,7 @@
  =========================================================*/
 
 App.directive('sidebar', ['$window', 'APP_MEDIAQUERY', function($window, mq) {
-  
+  'use strict' ;
   var $win  = $($window);
   var $html = $('html');
   var $body = $('body');

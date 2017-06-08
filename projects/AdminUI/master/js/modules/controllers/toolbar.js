@@ -3,7 +3,8 @@
  * smangipudi
  =========================================================*/
 
-App.controller('ToolbarController', ['$rootScope', '$scope','$state', 'AuthService', 'AUTH_EVENTS', function ($rootScope, $scope, $state, AuthService, AUTH_EVENTS) {
+App.controller('ToolbarController', ['$rootScope', '$scope','$state', 'AuthService', 'AUTH_EVENTS', 
+	function ($rootScope, $scope, $state, AuthService, AUTH_EVENTS) {
 
 	'use strict';
 	$scope.logout = function() {
@@ -14,8 +15,8 @@ App.controller('ToolbarController', ['$rootScope', '$scope','$state', 'AuthServi
 			    $state.go("page.login");
 		  });
 		
-	} 
+	};
 	$scope.showUserProfile = function() {
 		$state.go("app.myprofile");
-	}
+	};
 }]);

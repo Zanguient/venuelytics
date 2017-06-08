@@ -10,9 +10,9 @@ App.service('APIServer',['$http', function($http) {
 	};
 	var self = this;
 	this.get = function() {
-		init("//dev.api.venuelytics.com/WebServices/rsapi");
+		this.init("//dev.api.venuelytics.com/WebServices/rsapi");
 		return this;
-	}
+	};
 	this.getURL = function() {
 		return this.URL;
 		/*var promise = this.get();
@@ -20,6 +20,6 @@ App.service('APIServer',['$http', function($http) {
 			self.init(response.data.URL);
 		});
 		return promise;*/
-	}
+	};
 	return this;
 }]);

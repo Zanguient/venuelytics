@@ -4,6 +4,7 @@
  =========================================================*/
 
 App.directive('uiSlider', function() {
+  'use strict' ;
   return {
     restrict: 'A',
     controller: function($scope, $element) {

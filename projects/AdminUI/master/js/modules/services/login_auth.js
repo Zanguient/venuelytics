@@ -39,17 +39,20 @@ App.factory(
 			if (!angular.isArray(authorizedRoles)) {
 				authorizedRoles = [ authorizedRoles ];
 			}
-			return (authorizedRoles.indexOf(USER_ROLES.any) == -1);
+			return (authorizedRoles.indexOf(USER_ROLES.any) === -1);
 		};
 		authService.isAuthorized = function(authorizedRoles) {
 			if (!angular.isArray(authorizedRoles)) {
 				authorizedRoles = [ authorizedRoles ];
 			}
-			return true;//(authorizedRoles.indexOf(USER_ROLES.any) !== -1 || ( authService.isAuthenticated() && authorizedRoles.indexOf(Session.userRole) !== -1));
+			return true;
+			//(authorizedRoles.indexOf(USER_ROLES.any) !== -1 ||
+			// ( authService.isAuthenticated() && authorizedRoles.indexOf(Session.userRole) !== -1));
 		};
 
 		return authService;
 	}]).service('Session', function() {
+		'use strict' ;
 		this.create = function(sessionId, userId, userName, userRole) {
 		this.id = sessionId;
 		this.userId = userId;
@@ -72,6 +75,7 @@ App.factory(
 });
 
 App.factory('AuthInterceptor', ['$rootScope','$q','AUTH_EVENTS',function ($rootScope, $q, AUTH_EVENTS) {
+	'use strict' ;
 	return {
 			responseError: function (response) { 
 					$rootScope.$broadcast({

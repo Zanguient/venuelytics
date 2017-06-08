@@ -18,10 +18,13 @@ App.controller('AgenciesController', ['$scope', '$state','$compile','$timeout', 
 		    	"targets": [6],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" ng-click="editAgency('+cellData+')"></button>&nbsp;&nbsp;';
-		    		actionHtml += '<button title="Associate Venue" class="btn btn-default btn-oval fa fa-users" ng-click="agencyUsers(' +row +','+cellData+')"></button>';
-		    		if (rowData[5] != 1) {
-		    			actionHtml += '<button title="Delete User" class="btn btn-default btn-oval fa fa-trash" ng-click="deleteAgency(' +row +','+cellData+')"></button>';
+		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" ' +
+		    		'ng-click="editAgency('+cellData+')"></button>&nbsp;&nbsp;';
+		    		actionHtml += '<button title="Associate Venue" class="btn btn-default btn-oval fa fa-users" ' + 
+		    		'ng-click="agencyUsers(' +row +','+cellData+')"></button>';
+		    		if (rowData[5] !== 1) {
+		    			actionHtml += '<button title="Delete User" class="btn btn-default btn-oval fa fa-trash" ' + 
+		    							'ng-click="deleteAgency(' +row +','+cellData+')"></button>';
 		    		}
 		    		
 		    		$(td).html(actionHtml);
@@ -34,7 +37,7 @@ App.controller('AgenciesController', ['$scope', '$state','$compile','$timeout', 
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		
 		    		var actionHtml = '<em class="fa fa-check-square-o"></em>';
-		    		if (cellData != 'Y'){
+		    		if (cellData !== 'Y'){
 		    			actionHtml = '<em class="fa fa-square-o"></em>';
 		    		}
 		    		$(td).html(actionHtml);
@@ -56,26 +59,26 @@ App.controller('AgenciesController', ['$scope', '$state','$compile','$timeout', 
     });
     $scope.editAgency = function(userId) {
   		$state.go('app.agencyedit', {id: userId});
-  	}
+  	};
     
     $scope.agencyUsers = function(rowId, userId) {
   		$state.go('app.agencyUsers', {id: userId});
-  	}
+  	};
     
   	$scope.deleteAgency = function(rowId, agencyId) {
   		
-  		var target = {id: userId};
+  		var target = {id: agencyId};
   		RestServiceFactory.AgencyService().delete(target,  function(success){
     		var table = $('#agencies_table').dataTable();
     		table.fnDeleteRow(rowId);
     	},function(error){
-    		if (typeof error.data != 'undefined') { 
+    		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
-  	}
+  	};
   	$scope.createNewUser = function() {
   		$state.go('app.agencyedit', {id: 'new'});
-  	}
+  	};
   });
 }]);

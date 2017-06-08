@@ -2,8 +2,9 @@
  * Module: agencyusers.js
  *smangipudi
  =========================================================*/
-App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS', 
-                                  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS) {
+App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService',
+  'RestServiceFactory', 'toaster', 'FORMATS', function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
+    RestServiceFactory, toaster, FORMATS) {
   'use strict';
   
   $timeout(function(){
@@ -74,7 +75,7 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
-  	}
+  	};
   	
   	$scope.setAsManager = function(rowId, agentId) {
   		
@@ -89,7 +90,7 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
-  	}
+  	};
   	
   	$scope.search = function(venueName) {
   		var promise = RestServiceFactory.StoreService().get({search: venueName});
@@ -98,10 +99,10 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
   			$scope.venues = data.venues;
 	    	
   		});
-  	}
+  	};
   	$scope.doneAction = function() {
   		$state.go('app.uservenues', {id:$stateParams.id});
-  	}
+  	};
   	
   	
   	$scope.addUserVenue = function(venue) {

@@ -4,7 +4,7 @@
  =========================================================*/
 
 App.directive('skycon', function(){
-
+'use strict' ;
   return {
     restrict: 'A',
     link: function(scope, element, attrs) {

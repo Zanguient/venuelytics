@@ -4,8 +4,9 @@
  =========================================================*/
 
 App.controller('AppController',
-  ['$rootScope', '$scope', '$state', '$translate', '$window', '$localStorage', '$timeout', 'toggleStateService', 'colors', 'browser', 'cfpLoadingBar',
-  'USER_ROLES', 'AuthService',function($rootScope, $scope, $state, $translate, $window, $localStorage, $timeout, toggle, colors, browser, cfpLoadingBar, USER_ROLES, AuthService) {
+  ['$rootScope', '$scope', '$state', '$translate', '$window', '$localStorage', '$timeout', 'toggleStateService', 'colors', 
+  'browser', 'cfpLoadingBar', 'USER_ROLES', 'AuthService',function($rootScope, $scope, $state, $translate, $window, $localStorage, 
+    $timeout, toggle, colors, browser, cfpLoadingBar, USER_ROLES, AuthService) {
     "use strict";
     
     // Loading bar transition

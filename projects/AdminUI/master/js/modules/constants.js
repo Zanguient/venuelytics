@@ -43,7 +43,7 @@ App
 		 bartender: {id: 3, name: 'Bartender'},
 		 waitress: {id: 4, name: 'Waitress'},
 		 dj: {id: 5, name: 'DJ'},
-		 karaoke_mgr:  {id: 6, name: 'Karaoke Manager'},
+		 karaokeManager:  {id: 6, name: 'Karaoke Manager'},
 		 artist:  {id: 7, name: 'Artist'},
 		 manager:  {id: 100, name: 'Manager'},
 		 owner:  {id: 500, name: 'Owner'},
@@ -84,13 +84,16 @@ App
       'inputmask':          ['vendor/inputmask/jquery.inputmask.bundle.min.js'],
       'bwizard':            ['vendor/wizard/js/bwizard.min.js'],
       'parsley':            ['vendor/parsley/parsley.min.js'],
-      'datatables':         ['vendor/datatable/media/js/jquery.dataTables.min.js', 'vendor/datatable/extensions/datatable-bootstrap/css/dataTables.bootstrap.css'],
+      'datatables':         ['vendor/datatable/media/js/jquery.dataTables.min.js', 
+                              'vendor/datatable/extensions/datatable-bootstrap/css/dataTables.bootstrap.css'],
       'datatables-pugins':  ['vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js',
-                             'vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js','vendor/datatable/extensions/ColVis/js/dataTables.colVis.min.js',
+                             'vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js',
+                             'vendor/datatable/extensions/ColVis/js/dataTables.colVis.min.js',
                               'vendor/datatable/extensions/ColVis/css/dataTables.colVis.css'],
       'flatdoc':            ['vendor/flatdoc/flatdoc.js'],
       'spectrum':            ['vendor/spectrumcolor/js/spectrum.js','vendor/spectrumcolor/css/spectrum.css'],
-      'ngDialog':			['vendor/ngDialog/js/ngDialog.min.js', 'vendor/ngDialog/css/ngDialog.min.css', 'vendor/ngDialog/css/ngDialog-theme-default.min.css'],
+      'ngDialog':			['vendor/ngDialog/js/ngDialog.min.js', 'vendor/ngDialog/css/ngDialog.min.css', 
+                      'vendor/ngDialog/css/ngDialog-theme-default.min.css'],
       'ngImgMap': ['vendor/ngImgMap/compile/ng-img-map.css']
      
   	// Also add in gulpfile.js 

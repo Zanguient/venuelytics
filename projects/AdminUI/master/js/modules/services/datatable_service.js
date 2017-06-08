@@ -41,6 +41,6 @@ App.factory(
 			    	dtInstance2.fnFilter(this.value, columnInputs.index(this));
 			    });
 			}
-		}
+		};
 	});
 

@@ -11,14 +11,14 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     if($stateParams.id !== 'new') {
 	    var promise = RestServiceFactory.UserService().get({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
-	    	if (data.phone != null) {
+	    	if (data.phone !== null) {
 	    		data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
 	    	}
 	    	data.enabled = data.enabled ? "true" : "false";
 	    	$scope.data = data;
 	    });
     } else {
-    	var data = {}
+    	var data = {};
     	data.enabled = "false";
     	data.role = 'marketing';
     	$scope.data = data;
@@ -46,7 +46,7 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     
     $scope.storeAddress = function(store) {
     	return store.address.concat(", ", store.city, ", " , store.state);
-    }
+    };
     $scope.update = function(isValid, data) {
     	if (!isValid) {
     		return;
@@ -63,5 +63,5 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
-    }
+    };
 }]);

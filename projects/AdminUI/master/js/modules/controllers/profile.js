@@ -10,7 +10,7 @@ App.controller('ProfileController', ['$scope', '$state', 'RestServiceFactory', '
 
     var promise = RestServiceFactory.ProfileService().get({id: "L"+Session.userId});
     promise.$promise.then(function(data) {
-    	if (data.phone != null) {
+    	if (data.phone !== null) {
     		data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
     	}
     	$scope.data = data;
@@ -26,9 +26,9 @@ App.controller('ProfileController', ['$scope', '$state', 'RestServiceFactory', '
     	RestServiceFactory.ProfileService().save(target,payload, function(success){
     		toaster.pop('sucess', "Profile saved successfully.");
     	},function(error){
-    		if (typeof error.data != 'undefined') { 
+    		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
-    }
+    };
 }]);

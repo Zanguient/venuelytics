@@ -7,12 +7,22 @@ App.factory(
 		'RestServiceFactory',['$resource','Session','USER_ROLES', 'ContextService', 
 		function($resource, Session, USER_ROLES,  ContextService) {
 			'use strict';
-			var storeProperties = ['address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip','vendorId', 'vendorName','enableGeoConquest', 'website', 'email'];//
-			var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 'udid','enabled', 'departmentName', 'aisleName'];
-			var userProperties = ['badgeNumber', 'businessName','email', 'loginId', 'roleId', 'userName', 'phone','storeNumber', 'enabled', 'password'];
+			var storeProperties = ['address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip','vendorId', 'vendorName',
+			'enableGeoConquest', 'website', 'email'];//
+			
+			var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 
+			'udid','enabled', 'departmentName', 'aisleName'];
+			
+			var userProperties = ['badgeNumber', 'businessName','email', 'loginId', 'roleId', 'userName', 'phone',
+			'storeNumber', 'enabled', 'password'];
+			
 			var loyalityProperties = ['name', 'rewardText', 'condition','displayAttributes', 'conditionType'];
-			var profileProperties = ['badgeNumber', 'email', 'loginId', 'userName', 'phone', 'password','newpassword','confirmnewpassword'];
-			var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip', "enabled"];
+			
+			var profileProperties = ['badgeNumber', 'email', 'loginId', 'userName', 'phone', 'password','newpassword',
+			'confirmnewpassword'];
+			
+			var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',
+			 "enabled"];
 			var REQ_PROP= {};
 			REQ_PROP['StoreService'] = storeProperties;
 			REQ_PROP['BeaconService'] = beaconProperties;
