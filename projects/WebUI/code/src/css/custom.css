@@ -140,6 +140,33 @@
     width: 140px;
     margin-top: 10px;
 }
+#outer {
+  width:70%;/* demo*/
+  margin:auto;/* demo*/
+  display:flex;
+  flex-wrap:wrap;
+}
+#outer>div {flex:1;}
+#outer>div>img {
+  width:100%;
+  min-width:200px;/* demo*/
+}
+.img-container {
+  width: 500px;
+  height: 55px;
+}
+
+.img-singleline {
+  width: 45%;
+  display: inline-block;
+  float: left;
+  padding: 0 10px;
+}
+
+#img-social {
+  width: 179px;
+  height: 55px;
+}
 }
 /*iPhone 5*/
 @media only screen and (min-device-width: 320px) and (max-device-width:
@@ -224,14 +251,39 @@
     width: 74px;
 }
 
+.img-singleline {
+  float: left;
 }
+#img-social {
+  width: 160px;
+  height: 55px;
+}
+.img-container {
+  width: 460px;
+  height: 55px;
+}
+
+}
+
+/*iPhone 6*/
+@media only screen 
+    and (min-device-width : 375px) 
+    and (max-device-width : 667px) {
+
+      .img-singleline {
+        float: left;
+      }
+      #img-social {
+        width: 187px;
+        height: 55px;
+      }
+
+    }
 
 /*For iPhone 6 plus*/
 @media only screen 
     and (min-device-width : 414px) 
     and (max-device-width : 736px) 
-    and (orientation : landscape) 
-    and (-webkit-min-device-pixel-ratio : 3) 
 { 
   #businessImage {
     height: 200px;
@@ -308,6 +360,20 @@
     margin-top: 10px;
     width: 74px;
 }
+.img-singleline {
+  float: left;
+  width: 205px;
+  height: 55px;
+}
+#img-social {
+  width: 212px;
+  height: 55px;
+}
+.img-container {
+  width: 460px;
+  height: 55px;
+}
+
 }
 
 #venueBanner {
@@ -612,19 +678,4 @@
     margin-top: 5px;
 }
 
-.img-container {
-  width: 500px;
-  height: 55px;
-}
 
-.img-singleline {
-  width: 45%;
-  display: inline-block;
-  float: left;
-  padding: 0 10px;
-}
-
-#img-social {
-  width: 179px;
-  height: 55px;
-}
