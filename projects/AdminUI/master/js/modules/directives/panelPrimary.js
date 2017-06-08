@@ -4,6 +4,7 @@
 *
  =========================================================*/
 App.directive('panelPrimary', function() {
+  'use strict';
   return {
     restrict: 'E',
     scope:{

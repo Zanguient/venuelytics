@@ -6,11 +6,11 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
                                   function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS) {
   'use strict';
   
-  var user_roles = [];
-  user_roles['admin'] = 'Administrator';
-  user_roles['director'] = 'Store Director';
-  user_roles['manager'] = 'Manager';
-  user_roles['marketing'] = 'Marketing';
+  var userRoles = [];
+  userRoles['admin'] = 'Administrator';
+  userRoles['director'] = 'Store Director';
+  userRoles['manager'] = 'Manager';
+  userRoles['marketing'] = 'Marketing';
   $timeout(function(){
 
     if ( ! $.fn.dataTable ) return;
@@ -49,7 +49,7 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
     	var table = $('#users_table').DataTable();
     	
     	data.users.map(function(user) {
-    		var role = user_roles[user.role];
+    		var role = userRoles[user.role];
     		if (role == null) {
     			role = user.role;
     		}

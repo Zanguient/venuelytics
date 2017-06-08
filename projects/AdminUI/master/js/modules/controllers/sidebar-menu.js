@@ -6,7 +6,7 @@
  =========================================================*/
 App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$location', '$http', '$timeout', 'APP_MEDIAQUERY', 'Session',
   function($rootScope, $scope, $state, $location, $http, $timeout, mq, Session){
-
+    'use strict';
     var currentState = $rootScope.$state.current.name;
     var $win = $(window);
     var $html = $('html');

@@ -5,6 +5,7 @@
 
 App.controller('RegisterFormController', ['$scope', '$http', '$state', function($scope, $http, $state) {
 
+  'use strict';
   // bind here all data from the form
   $scope.account = {};
   // place the message if something goes wrong

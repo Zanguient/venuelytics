@@ -4,7 +4,7 @@
  =========================================================*/
 
 App.service('toggleStateService', ['$rootScope', function($rootScope) {
-
+  'use strict';
   var storageKeyName  = 'toggleState';
 
   // Helper object to check for words in a phrase //

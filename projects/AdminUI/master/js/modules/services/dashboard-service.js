@@ -1,6 +1,6 @@
  
 App.service("DashboardService", ["$log",function($log) {
-			
+	'use strict';	
 	var self=this;
 	
 	//SMS = 1, EMAIL=2, AD = 4, NOTIFICATION =8 and PASS = 16

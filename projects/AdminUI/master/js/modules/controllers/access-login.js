@@ -6,9 +6,12 @@
  * =========================================================
  */
 
-App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$rootScope', '$location','AUTH_EVENTS','AuthService', '$cookies', 'Session', 'ContextService',
-                                     function ($state, $stateParams, $scope, $rootScope, $location, AUTH_EVENTS, AuthService, $cookies, Session, ContextService) {
+App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$rootScope', '$location','AUTH_EVENTS',
+										'AuthService', '$cookies', 'Session', 'ContextService',
+                                     function ($state, $stateParams, $scope, $rootScope, $location, AUTH_EVENTS, 
+                                     	AuthService, $cookies, Session, ContextService) {
   // bind here all data from the form
+  'use strict';
   $scope.account = {};
   $scope.account.loginId = $rootScope.$storage.userName;
   $scope.account.remember = $rootScope.$storage.remember;
@@ -23,7 +26,7 @@ App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$roo
 	  $scope.authMsg = '';
 	  $rootScope.cookies = $cookies;
 	  $scope.loginAction = true;
-	  if(account.remember == "true") {
+	  if(account.remember === "true") {
 		  $rootScope.$storage.userName = account.loginId;
 		  $rootScope.$storage.remember = account.remember;
 	  } else {

@@ -8,7 +8,7 @@
 
 App.controller('ContentImageViewController',  ['$scope','$log','$window','$http','ContextService','$timeout' ,
                                      function ( $scope,$log,$window, $http, ContextService, $timeout) {
-
+    'use strict';
 	$scope.promotion=[];
 	$scope.promotionsList=[];
 	

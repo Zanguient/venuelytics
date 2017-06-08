@@ -3,8 +3,10 @@
  * App routes and resources configuration
  =========================================================*/
 
-App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide', '$ocLazyLoadProvider', 'APP_REQUIRES','USER_ROLES','$locationProvider',
-function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $ocLazyLoadProvider, appRequires,USER_ROLES,$locationProvider) {
+App.config(['$stateProvider','$urlRouterProvider', '$controllerProvider', '$compileProvider', '$filterProvider', 
+    '$provide', '$ocLazyLoadProvider', 'APP_REQUIRES','USER_ROLES','$locationProvider',
+function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, 
+    $ocLazyLoadProvider, appRequires,USER_ROLES,$locationProvider) {
   'use strict';
 
   App.controller = $controllerProvider.register;
@@ -36,8 +38,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('app.html'),
         controller: 'AppController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.owner, USER_ROLES.manager]},
-        resolve: angular.extend(resolveFor('fastclick', 'modernizr', 'icons', 'screenfull', 'animo', 'sparklines', 'slimscroll', 'classyloader', 'toaster', 'csspiner',
-        				'angularSpectrumColorpicker', 'spectrum'))
+        resolve: angular.extend(resolveFor('fastclick', 'modernizr', 'icons', 'screenfull', 'animo', 'sparklines', 
+            'slimscroll', 'classyloader', 'toaster', 'csspiner', 'angularSpectrumColorpicker', 'spectrum'))
         	
        
     })
@@ -75,7 +77,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('create-content.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
-        resolve: resolveFor('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'google-map', 'parsley','inputmask', 'taginput','chosen', 'slider') 
+        resolve: resolveFor('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'google-map', 'parsley',
+            'inputmask', 'taginput','chosen', 'slider') 
     }).state('app.masonry', {
         url: '/content',
         title: 'Content Image View',
@@ -244,7 +247,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('app_settings.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('parsley','codemirror', 'codemirror-plugins', 'moment', 'taginput','inputmask','chosen', 'slider', 'ngWig', 'filestyle')
+        resolve: resolveFor('parsley','codemirror', 'codemirror-plugins', 'moment', 'taginput','inputmask','chosen', 
+            'slider', 'ngWig', 'filestyle')
     })
     .state('app.documentation', {
         url: '/documentation',
@@ -328,7 +332,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
           // creates promise to chain dynamically
           function andThen(_arg) {
             // also support a function that returns a promise
-            if(typeof _arg == 'function')
+            if(typeof _arg === 'function')
                 return promise.then(_arg);
             else
                 return promise.then(function() {
@@ -355,7 +359,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }
 
 }]).config(['$translateProvider', function ($translateProvider) {
-
+    'use strict';
     $translateProvider.useStaticFilesLoader({
         prefix : 'app/i18n/',
         suffix : '.json'
@@ -364,6 +368,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     $translateProvider.useLocalStorage();
 
 }]).config(['$httpProvider', function($httpProvider) {
+    'use strict';
 	$httpProvider.defaults.headers.delete = { "Content-Type": "application/json;charset=utf-8" };
 	$httpProvider.interceptors.push(['$q', 'Session', '$injector', function($q, Session, $injector) {
 		return {
@@ -374,12 +379,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 				return config || $q.when(config);
 			},
 			responseError: function(rejection) {
-				if (rejection.status == 0){
+				if (rejection.status === 0){
 					$injector.get('$state').go('page.login');
 					 return $q.reject(rejection);
 				}
 			}
-		}
+		};
 	}]);
 	$httpProvider.interceptors.push([
      '$injector',
@@ -388,6 +393,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
      }
    ]);
 }]).config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+    'use strict';
     cfpLoadingBarProvider.includeBar = true;
     cfpLoadingBarProvider.includeSpinner = false;
     cfpLoadingBarProvider.latencyThreshold = 300;

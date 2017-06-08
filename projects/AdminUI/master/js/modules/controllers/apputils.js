@@ -4,6 +4,7 @@
  =========================================================*/
 
 (function($){
+	'use strict';
 	$.Apputil = {};
 	$.Apputil.copy = function(data, properties) {
 		var retdata = {};
@@ -20,5 +21,5 @@
 			mapData[item.name] = item;
 		});
 		return mapData;
-	} 
+	};
 }(jQuery));

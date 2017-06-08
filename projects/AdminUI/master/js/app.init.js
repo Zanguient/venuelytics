@@ -14,10 +14,13 @@ if (typeof $ === 'undefined') { throw new Error('This application\'s JavaScript 
 // APP START
 // ----------------------------------- 
 
-var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','ngAnimate', 'ngStorage', 'ngCookies', 'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'angular-loading-bar','ngDialog','ngImgMap'])
-          .run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache','AUTH_EVENTS', 'AuthService', 'FORMATS', 'Session','$timeout','$log','$cookies',
-                function ($rootScope, $state, $stateParams, $window, $templateCache, AUTH_EVENTS, AuthService, FORMATS, Session, $timeout, $log,$cookies) {
-        	  
+var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','ngAnimate', 'ngStorage', 'ngCookies', 
+          'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'angular-loading-bar','ngDialog','ngImgMap'])
+          .run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache','AUTH_EVENTS', 'AuthService', 'FORMATS',
+           'Session','$timeout','$log','$cookies', 
+               function ($rootScope, $state, $stateParams, $window, $templateCache, AUTH_EVENTS, AuthService, FORMATS,
+                 Session, $timeout, $log,$cookies) {
+        	   'use strict';
               // Set reference to access them from any scope
               $rootScope.$state = $state;
               $rootScope.$stateParams = $stateParams;
@@ -79,7 +82,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                 },
                 viewAnimation: 'ng-fadeInUp'
               };
-              if (session != null && typeof session != 'undefined' && session.hasOwnProperty("sessionId")) {
+              if (session !== null && typeof session !== 'undefined' && session.hasOwnProperty("sessionId")) {
          		 Session.init(session);
          		 $state.go('app.dashboard');
          	  }

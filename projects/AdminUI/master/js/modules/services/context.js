@@ -14,6 +14,7 @@ App.service('ContextService',['$location', function($location) {
 			   }
 			}*/
 	//dev.api.venuelytics.com
+			'use strict';
 			this.serverName = 'dev.api.venuelytics.com';
 			this.contextName = '//dev.api.venuelytics.com/WebServices/rsapi';
 			return this;

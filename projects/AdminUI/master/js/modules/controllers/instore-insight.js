@@ -8,11 +8,10 @@
 
 App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'ContextService','$http',
                                      function ($scope, $rootScope, $log,  contextService, $http) {
-
+    'use strict';
 	$scope.instoreCards=[];
 	$scope.instoreAchievements=[];
 	$scope.stores=[];
-	$scope.store;
 	
 	$scope.getInStoreInfoInProgress=false;
 
@@ -60,7 +59,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 	};
 	$scope.dayNameFormatter = function(sparkline, options, fields) {
 		return "Thrusday";
-	}
+	};
 	$scope.getInstoreData=function(storeId){
 		
 		$scope.instoreAchievements=[];
@@ -75,13 +74,13 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 			var mostShoppedTime = null;	
 			$scope.instoreCards=[];
 			if(data && data.segmentation){
-				for (pIndex = 0; pIndex <  data.segmentation.length; pIndex++) {
+				for (var pIndex = 0; pIndex <  data.segmentation.length; pIndex++) {
 					var selectedPalatte = colorPalattes[pIndex%colorPalattes.length];
 					var po = createPDO(selectedPalatte, data.segmentation[pIndex]);
-					if (po.id == "mostShoppedDay") {
+					if (po.id === "mostShoppedDay") {
 						mostShoppedDay = data.segmentation[pIndex];
 					}
-					if (po.id == "mostShoppedTime"){
+					if (po.id === "mostShoppedTime"){
 						mostShoppedTime = data.segmentation[pIndex];
 					}
 					$scope.instoreCards.push(po); 			  
@@ -98,7 +97,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 						labels:[]
 				};
 				if(mostShoppedDay.valueSet){
-					for(vIdx = 0; vIdx < mostShoppedDay.valueSet.length; vIdx++){
+					for(var vIdx = 0; vIdx < mostShoppedDay.valueSet.length; vIdx++){
 						var dayIdx = WEEKDAYS[mostShoppedDay.valueSet[vIdx].key];
 						if ( dayIdx != null && dayIdx >=0 && dayIdx < 7){
 							$scope.mostShoppedDay.array[dayIdx] = mostShoppedDay.valueSet[vIdx].value;
@@ -119,7 +118,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 						labels:[]
 				};
 				if(mostShoppedTime.valueSet){
-					for(vIdx = 0; vIdx < mostShoppedTime.valueSet.length; vIdx++){
+					for(var vIdx = 0; vIdx < mostShoppedTime.valueSet.length; vIdx++){
 						var timeIdx = mostShoppedTime.valueSet[vIdx].key/3;
 						if ( timeIdx != null && timeIdx >=0 && timeIdx < 8){
 							$scope.mostShoppedTime.array[timeIdx] = mostShoppedTime.valueSet[vIdx].value;
@@ -164,7 +163,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 					} else {
 						offset = len-1;
 					}
-					for(vIdx = 0; vIdx < data.traffic.valueSet.length && vIdx < 7; vIdx++){
+					for(var vIdx = 0; vIdx < data.traffic.valueSet.length && vIdx < 7; vIdx++){
 						$scope.traffic.array[offset-vIdx] = data.traffic.valueSet[vIdx].value;
 						$scope.traffic.labels[vIdx] = data.traffic.valueSet[vIdx].key;
 					}
@@ -179,7 +178,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 						labels:[]
 				};
 				if(data.topCompetitorByVisit.valueSet){
-					for(vIdx = 0; vIdx < data.topCompetitorByVisit.valueSet.length && vIdx < 7; vIdx++){
+					for(var vIdx = 0; vIdx < data.topCompetitorByVisit.valueSet.length && vIdx < 7; vIdx++){
 						$scope.topCompetitorByVisit.array[vIdx] = data.topCompetitorByVisit.valueSet[vIdx].value;
 						$scope.topCompetitorByVisit.labels[vIdx] = data.topCompetitorByVisit.valueSet[vIdx].key;
 					}

@@ -4,7 +4,7 @@
 
 App.controller("PerformanceAnalyticsController",["$scope", "$log", "ContextService", "$http","$stateParams",
               function($scope, $log, contextService, $http){
-	
+	'use strict';
 	var self=$scope;
 	
 	self.locations=[];

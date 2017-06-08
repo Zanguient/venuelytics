@@ -1,6 +1,6 @@
 App.controller("ContentPerformanceController",["$scope","$log","$window","$http", 
                    function($scope, $log, $window, $http){
-	
+	'use strict';
 	var self=$scope;
 	
 	/**
@@ -192,7 +192,7 @@ App.controller("ContentPerformanceController",["$scope","$log","$window","$http"
 		$log.log("loading line chart");
 		var Selector = className;
         $(Selector).each(function() {
-        	var source=null
+        	var source=null;
         	if(srcdata){
         		source=srcdata;
         	}else{
@@ -234,7 +234,7 @@ App.controller("ContentPerformanceController",["$scope","$log","$window","$http"
             // Send Request
             chart.requestData(option);
         });
-	}
+	};
 	
 	
 	
@@ -253,7 +253,7 @@ App.controller("ContentPerformanceController",["$scope","$log","$window","$http"
 	      
 	      // support params (option), (option, method, callback) or (option, callback)
 	      callback = (method && $.isFunction(method)) ? method : callback;
-	      method = (method && typeof method == 'string') ? method : 'POST';
+	      method = (method && typeof method === 'string') ? method : 'POST';
 
 	      self.option = option; // save options
 

@@ -5,7 +5,7 @@
 
 App.controller('ApplicationController', ['$scope', 'RestServiceFactory','$http', '$state','$log','$rootScope', 
                                          function($scope, RestServiceFactory, $http, $state, $log, $rootScope) {
-
+    'use strict';
 	$scope.appLogo = "app/img/itzfun_logo.png";
 	$scope.appLogoSingle = "app/img/itzfun_logo.png";
 	

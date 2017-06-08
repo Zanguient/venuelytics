@@ -26,6 +26,8 @@ var gulp        = require('gulp'),
     templateCache = require('gulp-angular-templatecache'),
     del = require('del'),
     connect = require('gulp-connect'),
+    jshint = require('gulp-jshint'),
+    jeditor = require('gulp-json-editor');
     PluginError = gutil.PluginError;
 
 
@@ -245,9 +247,21 @@ gulp.task('clean', function () {
 // JS APP
 gulp.task('scripts:app', function() {
     // Minify and copy all JavaScript (except vendor scripts)
+    const f = filter(['js/app.init.js',
+              'js/modules/*.js',
+              'js/modules/controllers/*.js',
+              'js/modules/directives/*.js',
+              'js/modules/services/*.js',
+              'js/modules/filters/*.js', '!js/custom/**/*.js' ], {restore: true});
     return gulp.src(source.scripts.app)
      	.pipe(gulpif('*.js',replace('dev.api.venuelytics.com',baseUrl())))
      //	.pipe(uglify()) 
+        .pipe(f)
+        .pipe(jshint())
+        .pipe(jshint.reporter('gulp-jshint-html-reporter', {
+            filename: 'jshint-output.html'
+        }))
+        .pipe(f.restore)
         .pipe(concat(build.scripts.app.main))
         .pipe(gulp.dest(build.scripts.app.dir));
 });

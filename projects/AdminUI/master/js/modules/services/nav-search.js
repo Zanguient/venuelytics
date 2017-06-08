@@ -4,6 +4,7 @@
  =========================================================*/
  
 App.service('navSearch', function() {
+  'use strict';
   var navbarFormSelector = 'form.navbar-form';
   return {
     toggle: function() {

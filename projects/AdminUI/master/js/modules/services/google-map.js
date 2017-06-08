@@ -4,7 +4,7 @@
  =========================================================*/
 
 App.service('gmap', function() {
-
+  'use strict';
   return {
     setStyle: function(style) {
       this.MapStyles = style;

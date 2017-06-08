@@ -8,7 +8,7 @@
 
 App.controller('ContentsController',  ['$scope','$log','$window', 
                                      function ( $scope,$log,$window) {
-
+    'use strict';
 	$scope.promotion=[];
 	$scope.promotionsList=[];
 	

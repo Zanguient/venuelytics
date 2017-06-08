@@ -1,7 +1,7 @@
 
 App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','DashboardService',
                                       function($log, $scope, $window, $http, $timeout, contextService, DashboardService){
-	
+	'use strict';
 	$scope.init=function(){
 		$log.log("Dash board controller has been initialized!");
 		

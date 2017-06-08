@@ -3,10 +3,12 @@
  * smangipudi
  =========================================================*/
 
-App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS) {
-  'use strict';
+App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', 
+    function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS) {
+   
+   'use strict';
     
-    if($stateParams.id != 'new') {
+    if($stateParams.id !== 'new') {
 	    var promise = RestServiceFactory.UserService().get({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
 	    	if (data.phone != null) {
@@ -22,19 +24,19 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     	$scope.data = data;
     }
 	 
-    $scope.user_roles = {};
-    $scope.user_roles['USER'] = 'Basic User';
-    $scope.user_roles['BOUNCER'] = 'Bouncer';
-    $scope.user_roles['BARTENDER'] = 'Bartender';
-    $scope.user_roles['WAITRESS'] = 'Waitress';
-    $scope.user_roles['DJ'] = 'DJ';
-    $scope.user_roles['KAROKE_MGR'] = 'Karaoke Manager';
-    $scope.user_roles['ARTIST'] = 'Artist';
-    $scope.user_roles['MANAGER'] = 'Manager';
-    $scope.user_roles['OWNER'] = 'Owner';
-    $scope.user_roles['ADMIN'] = 'Administrator';
-    $scope.user_roles['AGENT'] = 'Agent';
-    $scope.user_roles['AGENT_MANAGER'] = 'Administrator';
+    $scope.userRoles = {};
+    $scope.userRoles['USER'] = 'Basic User';
+    $scope.userRoles['BOUNCER'] = 'Bouncer';
+    $scope.userRoles['BARTENDER'] = 'Bartender';
+    $scope.userRoles['WAITRESS'] = 'Waitress';
+    $scope.userRoles['DJ'] = 'DJ';
+    $scope.userRoles['KAROKE_MGR'] = 'Karaoke Manager';
+    $scope.userRoles['ARTIST'] = 'Artist';
+    $scope.userRoles['MANAGER'] = 'Manager';
+    $scope.userRoles['OWNER'] = 'Owner';
+    $scope.userRoles['ADMIN'] = 'Administrator';
+    $scope.userRoles['AGENT'] = 'Agent';
+    $scope.userRoles['AGENT_MANAGER'] = 'Administrator';
     
     $scope.stores = [];
    // var storePromise = RestServiceFactory.StoreService().get();
@@ -51,13 +53,13 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     	}
     	var payload = RestServiceFactory.cleansePayload('UserService', data);
     	var target = {id: data.id};
-    	if ($stateParams.id == 'new'){
+    	if ($stateParams.id === 'new'){
     		target = {};
     	}
     	RestServiceFactory.UserService().save(target,payload, function(success){
     		$state.go('app.users');
     	},function(error){
-    		if (typeof error.data != 'undefined') { 
+    		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
