@@ -6,6 +6,7 @@
  =========================================================*/
 
 App.directive('paneltool', function(){
+  "use strict";
   var templates = {
     /* jshint multistr: true */
     collapse:"<a href='#' panel-collapse='' data-toggle='tooltip' title='Collapse Panel' ng-click='{{panelId}} = !{{panelId}}' ng-init='{{panelId}}=false'> \

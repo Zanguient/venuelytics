@@ -4,7 +4,7 @@
 *
  =========================================================*/
 App.directive('simpleTime', function() {
-  
+  "use strict";
   return {
     restrict: 'EA',
     scope:{

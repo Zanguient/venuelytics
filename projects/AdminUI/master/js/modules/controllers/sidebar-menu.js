@@ -34,7 +34,7 @@ App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$locatio
 
       if(!item) return;
 
-      if( !item.sref || item.sref == '#') {
+      if( !item.sref || item.sref === '#') {
         var foundActive = false;
         angular.forEach(item.submenu, function(value, key) {
           if(isActive(value)) foundActive = true;
@@ -60,7 +60,7 @@ App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$locatio
     	//var userRole = Session.userRole.toUpperCase();
     	//return (roles.indexOf("ALL") > -1) || (roles.indexOf(userRole) > -1);
     	return true;
-    }
+    };
     $scope.loadSidebarMenu = function() {
 
       var menuJson = 'app/menu/sidebar-menu.json',

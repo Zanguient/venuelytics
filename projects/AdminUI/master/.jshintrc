@@ -64,6 +64,8 @@
 		"App": false,
         "loadGoogleMapsJS":false,
         "loadGoogleMaps":false,
-        "FlotChart": false
+        "FlotChart": false,
+        "alert":false,
+        "Skycons": false
     }
 }

@@ -4,7 +4,7 @@
  =========================================================*/
 
 App.directive('href', function() {
-
+  'use strict';
   return {
     restrict: 'A',
     compile: function(element, attr) {

@@ -3,7 +3,8 @@
  * smangipudi
  =========================================================*/
 
-App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory', 'toaster','$rootScope','$log', function($scope,RestServiceFactory, toaster, $rootScope, $log) {
+App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory', 'toaster','$rootScope','$log', 
+  function($scope,RestServiceFactory, toaster, $rootScope, $log) {
   'use strict';
   
   $scope.appLogo=null;
@@ -11,15 +12,17 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
   $scope.islogoChanged=false;
   
   var channelSettings = [ 
-                             {"displayName":"Max EMAIL per customer per day:",  "name":"max_emails", "type":"select", "value":"1" },
-                             {"displayName":"Max PUSH per customer per day:",  "name":"max_push", "type":"select", "value":"1" },
-                             {"displayName":"Max SMS per customer per day:",  "name":"max_sms" , "type":"select", "value":"1"},
-                             {"displayName":"Max PASS per customer per day:",  "name":"max_passes", "type":"select", "value":"1" },
-                             {"displayName":"Retire Ads/Offers after sending:",  "name":"retire_sends_time_based", "unit": "times" , "type":"select", "value":"1"},
-                            ];
-  
+                           {"displayName":"Max EMAIL per customer per day:",  "name":"max_emails", "type":"select", "value":"1" },
+                           {"displayName":"Max PUSH per customer per day:",  "name":"max_push", "type":"select", "value":"1" },
+                           {"displayName":"Max SMS per customer per day:",  "name":"max_sms" , "type":"select", "value":"1"},
+                           {"displayName":"Max PASS per customer per day:",  "name":"max_passes", "type":"select", "value":"1" },
+                           {"displayName":"Retire Ads/Offers after sending:",  "name":"retire_sends_time_based", "unit": "times" , 
+                           "type":"select", "value":"1"},
+                          ];
+
   var timeSettings = [ 
-                            {"displayName":"Minimum time gap between 2 Ads, Offers reaching the same customer:",  "name":"time_based_mtbt", "type":"timegap", "value":"1" },
+                            {"displayName":"Minimum time gap between 2 Ads, Offers reaching the same customer:",  "name":"time_based_mtbt", 
+                            "type":"timegap", "value":"1" },
                             {"displayName":"Do not send anything before:",  "name":"start_time", "type":"timepicker", "value":"09:00"},
                             {"displayName":"Do not send anything after:",  "name":"end_time", "type":"timepicker", "value":"21:00" },
                             {"displayName":"Time Zone:",  "name":"timezone", "type":"timezone", "value":"PST" },
@@ -65,17 +68,17 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
 	  
 	  for (var itemKey in data){
 		  var setting = $scope.channelSettings[itemKey];
-		  if (setting != null && typeof setting != 'undefined') {
+		  if (setting != null && typeof setting !== 'undefined') {
 			  setting.value = data[itemKey];
 			  $scope.channelSettings[itemKey] = setting;
-		  } else if ($scope.timeSettings[itemKey] != null){
-			  var setting = $scope.timeSettings[itemKey];
+		  } else if ($scope.timeSettings[itemKey] !== null){
+			  setting = $scope.timeSettings[itemKey];
 			  setting.value = data[itemKey];
-		  } else if ($scope.generalSettings[itemKey] != null){
-			  var setting = $scope.generalSettings[itemKey];
+		  } else if ($scope.generalSettings[itemKey] !== null){
+			  setting = $scope.generalSettings[itemKey];
 			  setting.value = data[itemKey];
-		  } else if ($scope.externalSettings[itemKey] != null){
-			  var setting = $scope.externalSettings[itemKey];
+		  } else if ($scope.externalSettings[itemKey] !== null){
+			  setting = $scope.externalSettings[itemKey];
 			  setting.value = data[itemKey];
 		  }
 		  
@@ -88,7 +91,7 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
   $scope.updateMultiple = function(isValid, data, data1) {
 	  $scope.update(isValid, data);
 	  $scope.update(isValid, data1);
-  }
+  };
   $scope.update = function(isValid, data) {
   	if (!isValid) {
   		return;
@@ -103,7 +106,7 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
   		obj.value = data[type].value;
   		
   		arr.push(obj);*/
-  	}
+  	};
   	RestServiceFactory.AppSettingsService().save(arr, function(success){
   		
   		$log.log("success: ",data);
@@ -113,7 +116,7 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
   		  }
   		
   	},function(error){
-  		if (typeof error.data != 'undefined') { 
+  		if (typeof error.data !== 'undefined') { 
   			toaster.pop('error', "Server Error", error.data.developerMessage);
   		}
   	});
@@ -121,7 +124,7 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
   
   $rootScope.$on("FileUploaded",function(ev, data){
 	 
-	  if("APP_LOGO"==data.type){
+	  if("APP_LOGO"=== data.type){
 		  $scope.appLogo=data.url;
 		  //$scope.generalSettings.companyLogoUrl.value=data.url;
 		  $log.log("App logo has been uploaded!", $scope.generalSettings);

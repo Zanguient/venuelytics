@@ -23,7 +23,7 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		
 		    		var actionHtml = '<em class="fa fa-check-square-o"></em>';
-		    		if (cellData == false){
+		    		if (cellData === false){
 		    			actionHtml = '<em class="fa fa-square-o"></em>';
 		    		}
 		    		$(td).html(actionHtml);
@@ -34,9 +34,11 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
 		    	"targets": [4],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Unlink User " class="btn btn-default btn-oval fa fa-unlink" ng-click="removeUser(' +row +','+cellData+')"></button>';
-		    		if (rowData[3] == 'AGENT_MANAGER') {
-		    			actionHtml += '<button title="Set As Manager " class="btn btn-default btn-oval fa fa-black-tie" ng-click="setAsManager(' +row +','+cellData+')"></button>';
+		    		var actionHtml = '<button title="Unlink User " class="btn btn-default btn-oval fa fa-unlink" '+
+            'ng-click="removeUser(' +row +','+cellData+')"></button>';
+		    		if (rowData[3] === 'AGENT_MANAGER') {
+		    			actionHtml += '<button title="Set As Manager " class="btn btn-default btn-oval fa fa-black-tie" '+
+              'ng-click="setAsManager(' +row +','+cellData+')"></button>';
 		    		}
 		    		
 		    		$(td).html(actionHtml);
@@ -71,7 +73,7 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
     		var table = $('#agency_user_table').dataTable();
     		table.fnDeleteRow(rowId);
     	},function(error){
-    		if (typeof error.data != 'undefined') { 
+    		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
@@ -86,7 +88,7 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
     		//var table = $('#agency_user_table').dataTable();
     		//table.fnDeleteRow(rowId);
     	},function(error){
-    		if (typeof error.data != 'undefined') { 
+    		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
@@ -113,11 +115,11 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
   			var index = $scope.venues.indexOf(venue);
   			$scope.venues.splice(index, 1);
     	},function(error){
-    		if (typeof error.data != 'undefined') { 
+    		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
   		
-  	}
+  	};
   });
 }]);

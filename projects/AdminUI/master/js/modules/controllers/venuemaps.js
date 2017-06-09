@@ -20,7 +20,8 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
 		    	"targets": [3],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" ng-click="editVenueMap('+cellData+')"></button>&nbsp;&nbsp;';
+		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" '+
+            'ng-click="editVenueMap('+cellData+')"></button>&nbsp;&nbsp;';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
@@ -42,16 +43,16 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
     
     $scope.editVenueMap = function(venueMapId) {
   		$state.go('app.editVenueMap', {venueNumber: $stateParams.id, id: venueMapId});
-  	}
+  	};
     
    
     
   	$scope.deleteVenueMap = function(rowId, mapId) {
   		
 
-  	}
+  	};
   	$scope.createNewVenueMap = function() {
   		$state.go('app.venueMapedit', {id: 'new'});
-  	}
+  	};
   });
 }]);

@@ -9,8 +9,10 @@
 	$.Apputil.copy = function(data, properties) {
 		var retdata = {};
     	for (var propIndex in properties) {
-    		var propName = properties[propIndex];
-    		retdata[propName] = data[propName];
+    		if (properties.hasOwnProperty(propIndex)) {
+    			var propName = properties[propIndex];
+    			retdata[propName] = data[propName];
+    		}
     	}
     	return retdata;
 	};

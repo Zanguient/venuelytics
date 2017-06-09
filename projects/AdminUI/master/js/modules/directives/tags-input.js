@@ -4,6 +4,7 @@
  =========================================================*/
 
 App.directive('tagsinput', ["$timeout",function($timeout) {
+	"use strict";
   return {
     restrict: 'A',
     controller: function($scope, $element) {

@@ -4,6 +4,7 @@
 *
  =========================================================*/
 App.directive('tabButtons', function() {
+  "use strict";
   return {
     restrict: 'E',
     scope:{
@@ -16,11 +17,11 @@ App.directive('tabButtons', function() {
   	},
   	controller: [ '$scope', function ($scope) {
   		$scope.onClick = function(id) {
-  			if (typeof $scope.onselect == 'function'){
+  			if (typeof $scope.onselect === 'function'){
   				$scope.onselect()(id);
   			}
   			
-  		}
+  		};
   		
   	}],
   	templateUrl: 'app/templates/tabbuttons-template.html'

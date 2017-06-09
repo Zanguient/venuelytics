@@ -118,7 +118,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 						labels:[]
 				};
 				if(mostShoppedTime.valueSet){
-					for(var vIdx = 0; vIdx < mostShoppedTime.valueSet.length; vIdx++){
+					for(vIdx = 0; vIdx < mostShoppedTime.valueSet.length; vIdx++){
 						var timeIdx = mostShoppedTime.valueSet[vIdx].key/3;
 						if ( timeIdx != null && timeIdx >=0 && timeIdx < 8){
 							$scope.mostShoppedTime.array[timeIdx] = mostShoppedTime.valueSet[vIdx].value;
@@ -139,7 +139,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 		/**
 		 *  instore analytics
 		 */
-		var baseUrl=contextService.contextName+"/v1/performance/instore/"+storeId;
+		baseUrl=contextService.contextName+"/v1/performance/instore/"+storeId;
 		
 		$http.get(baseUrl).success(function(data){
 			$log.log("success data:", data);		
@@ -178,7 +178,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 						labels:[]
 				};
 				if(data.topCompetitorByVisit.valueSet){
-					for(var vIdx = 0; vIdx < data.topCompetitorByVisit.valueSet.length && vIdx < 7; vIdx++){
+					for(vIdx = 0; vIdx < data.topCompetitorByVisit.valueSet.length && vIdx < 7; vIdx++){
 						$scope.topCompetitorByVisit.array[vIdx] = data.topCompetitorByVisit.valueSet[vIdx].value;
 						$scope.topCompetitorByVisit.labels[vIdx] = data.topCompetitorByVisit.valueSet[vIdx].key;
 					}
