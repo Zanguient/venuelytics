@@ -21,10 +21,25 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             };
 
             $scope.getCountry = function (item) {
+                self.listOfCities = '';
                 $scope.selectedCountry = item;
-                /*AjaxService.getVenuesByCountry(item).then(function(response) {
-                    self.listOfCities = response;
-                });*/
+                if(item === 'North America') {
+                    AjaxService.getVenuesByCountry('NA').then(function(response) {
+                        self.listOfCities = response;
+                    });
+                } else if(item === 'South America') {
+                    AjaxService.getVenuesByCountry('SA').then(function(response) {
+                        self.listOfCities = response;
+                    });
+                } else if(item === 'Canada') {
+                    AjaxService.getVenuesByCountry('CA').then(function(response) {
+                        self.listOfCities = response;
+                    });
+                } else {
+                    AjaxService.getVenuesByCountry('IND').then(function(response) {
+                        self.listOfCities = response;
+                    });
+                }
             };
 
             self.init = function() {

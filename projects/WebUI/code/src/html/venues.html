@@ -81,7 +81,7 @@
                                                             ng-show="venue.info['Advance.BookBanqetHall.enable'] == 'Y'"></img></a>
                                                     </div>
 
-                                                    <div ng-hide="selectedCityDistance == -1" id="distance"
+                                                    <div ng-hide="!venue.distanceInMiles" id="distance"
                                                         class="col-lg-5">{{venue.distanceInMiles | number :
                                                         2}} {{ "venue.MILES" | translate}}</div>
                                                     <br />
