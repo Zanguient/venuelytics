@@ -3014,7 +3014,7 @@ var SEMICOLON = SEMICOLON || {};
 					navText: ['<i class="icon-angle-left"></i>','<i class="icon-angle-right"></i>'],
 					autoplay: elementAutoPlay,
 					autoplayTimeout: elementAutoPlayTime,
-					autoplayHoverPause: true,
+					autoplayHoverPause: false,
 					dots: elementPagi,
 					smartSpeed: Number(elementSpeed),
 					fluidSpeed: Number(elementSpeed),

@@ -514,6 +514,7 @@
   height: 15px;
   cursor: pointer;
   cursor: hand;
+  margin-right: 10px;
 }
 
 #dropDownButton {

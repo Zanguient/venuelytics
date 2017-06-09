@@ -11,20 +11,41 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
     		var self = $scope;
 
             self.gettingLocation = function(lat, long) {
-
+                self.loadingBar = true;
                 AjaxService.gettingLocation(lat, long).then(function(response) {
                     self.listOfCities = response;
+                    self.loadingBar = false;
                     $log.info('Success getting cities.');
 
-                    document.getElementById('loadingCities').style.display = 'none';
+                    // document.getElementById('loadingCities').style.display = 'none';
                 });
             };
 
             $scope.getCountry = function (item) {
+                self.loadingBar = true;
+                self.listOfCities = '';
                 $scope.selectedCountry = item;
-                /*AjaxService.getVenuesByCountry(item).then(function(response) {
-                    self.listOfCities = response;
-                });*/
+                if(item === 'North America') {
+                    AjaxService.getVenuesByCountry('NA').then(function(response) {
+                        self.listOfCities = response;
+                        self.loadingBar = false;
+                    });
+                } else if(item === 'South America') {
+                    AjaxService.getVenuesByCountry('SA').then(function(response) {
+                        self.listOfCities = response;
+                        self.loadingBar = false;
+                    });
+                } else if(item === 'Canada') {
+                    AjaxService.getVenuesByCountry('CA').then(function(response) {
+                        self.listOfCities = response;
+                        self.loadingBar = false;
+                    });
+                } else {
+                    AjaxService.getVenuesByCountry('IND').then(function(response) {
+                        self.listOfCities = response;
+                        self.loadingBar = false;
+                    });
+                }
             };
 
             self.init = function() {
