@@ -27,7 +27,8 @@ var templateHtmlCache = require('gulp-angular-templatecache');
 var filter = require('gulp-filter');
 var pseudoTranslator = require('gulp-pseudo-translate-angular-json');
 var jeditor = require('gulp-json-editor');
-
+var jscpd = require('gulp-jscpd');
+ 
 
 var paths = {
     src : {
@@ -188,7 +189,13 @@ gulp.task('js', ['js:base', 'js:configurator'], function() {
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
 });
-
+gulp.task('js:cpd', function() {
+       return gulp.src([ 'src/js/controllers/*.js',  'src/js/services/*.js'])
+        .pipe(jscpd({
+                'min-lines': 5,
+                verbose    : true
+        }));       
+});
 gulp.task('js:base', function() {
     const f = filter([ 'src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*', 
         '!src/js/templates.js', '!src/js/dropdownhover.js', '!src/js/app.js',  '!src/js/material.js'
