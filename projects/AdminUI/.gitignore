@@ -1,7 +1,6 @@
 /app/css/theme*.css
 /app/css/theme-a.css
 /app/views/colors.html
-/app/views/dashboard.html
 /app/pages/lock.html
 /app/pages/login.html
 /app/views/partials/offsidebar.html

@@ -1,0 +1,485 @@
+<h3>
+   <!-- START Language list-->
+   <div class="pull-right">
+ 	  
+      <div dropdown="" is-open="language.listIsOpen" class="btn-group">
+         <button type="button" class="btn btn-default dropdown-toggle">{{language.selected}}
+            <span class="caret"></span>
+         </button>
+         <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort">
+            <li ng-repeat="(localeId, langName) in language.available"><a ng-click="language.set(localeId, $event)" href="#">{{langName}}</a>
+            </li>
+         </ul>
+      </div>
+   </div>
+   <!-- END Language list    -->
+   <div class="row">
+	   <div class="col-lg-9">
+	   Dashboard - <strong>{{ 'dashboard.WELCOME' | translate:{ appName: app.name } }} !</strong>
+	   </div>
+   	<div class="col-lg-3 pull-right">
+	           <div class="col-lg-3 h4 mt0">Venue:</div>
+	           <select class="col-lg-7 h4 mt0" ng-model="venueId">
+	              <option value="521">Monte Carlo</option>
+	              <option value="1006">Pure Lounge</option>
+	               <option value="14">Test</option>
+	           </select>
+	    </div>
+    </div>
+</h3>
+<!-- START widgets box-->
+<div class="row">
+   <div class="col-lg-3 col-sm-6">
+      <!-- START widget-->
+      <div class="panel widget bg-primary">
+         <div class="row row-table">
+            <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+               <em class="icon-users fa-3x"></em>
+            </div>
+            <div class="col-xs-8 pv-lg">
+               <div class="h2 mt0">1700</div>
+               <div class="text-uppercase">Visitors</div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-3 col-sm-6">
+      <!-- START widget-->
+      <div class="panel widget bg-purple">
+         <div class="row row-table">
+            <div class="col-xs-4 text-center bg-purple-dark pv-lg">
+               <em class="fa fa-dollar fa-3x"></em>
+            </div>
+            <div class="col-xs-8 pv-lg">
+               <div class="h2 mt0">2373.00
+                  <small>USD</small>
+               </div>
+               <div class="text-uppercase">Order</div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-sm-12">
+      <!-- START widget-->
+      <div class="panel widget bg-green">
+         <div class="row row-table">
+            <div class="col-xs-4 text-center bg-green-dark pv-lg">
+               <em class="icon-bubbles fa-3x"></em>
+            </div>
+            <div class="col-xs-8 pv-lg">
+               <div class="h2 mt0">372</div>
+               <div class="text-uppercase">CheckIn</div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-sm-12">
+      <!-- START date widget-->
+      <div class="panel widget">
+         <div class="row row-table">
+            <div class="col-xs-4 text-center bg-green pv-lg">
+               <!-- See formats: https://docs.angularjs.org/api/ng/filter/date-->
+               <now format="MMMM" class="text-sm"></now>
+               <br/>
+               <now format="d" class="h2 mt0"></now>
+            </div>
+            <div class="col-xs-8 pv-lg">
+               <now format="EEEE" class="text-uppercase"></now>
+               <br/>
+               <now format="h:mm" class="h2 mt0"></now>
+               <now format="a" class="text-muted text-sm"></now>
+            </div>
+         </div>
+      </div>
+      <!-- END date widget    -->
+   </div>
+</div>
+<!-- END widgets box-->
+<div class="row">
+   <!-- START dashboard main content-->
+   <div class="col-lg-6">
+      <!-- START chart-->
+      <div class="row">
+         <div class="col-lg-12">
+            <!-- START widget-->
+            <div id="panelChart9" ng-controller="DashBoardController" class="panel panel-default">
+               <div class="panel-heading">
+                  <paneltool tool-collapse="tool-collapse" tool-refresh="traditional"></paneltool>
+                  <div class="panel-title">Monthly Reservation Requests</div>
+               </div>
+               <div collapse="panelChart9" class="panel-wrapper">
+                  <div class="panel-body">
+                     <div data-source="app/server/reservation_requests.json?a=1" class="chart-bar-stacked flot-chart"></div>
+                  </div>
+               </div>
+            </div>
+            <!-- END widget-->
+         </div>
+      </div>
+      <!-- END chart-->
+      
+      <div class="row">
+        
+         <div class="col-lg-12">
+            <div class="panel panel-default">
+               <div class="panel-heading">
+                  <div class="pull-right label label-danger">5</div>
+                  <div class="pull-right label label-success">12</div>
+                  <div class="panel-title">Reservation Requests</div>
+               </div>
+               <!-- START list group-->
+               <scrollable height="180" class="list-group">
+                  <!-- START list group item-->
+                  <a href="#" class="list-group-item">
+                     <div class="media">
+                        <div class="pull-left">
+                           <img src="app/img/user/02.jpg" alt="Image" class="media-object img-circle thumb32" />
+                        </div>
+                        <div class="media-body clearfix">
+                           <small class="pull-right">2h</small>
+                           <strong class="media-heading text-primary">
+                              <span class="circle circle-success circle-lg text-left"></span>Catherine Ellis</strong>
+                           <p class="mb-sm">
+                              <small>Cras sit amet nibh libero, in gravida nulla. Nulla...</small>
+                           </p>
+                        </div>
+                     </div>
+                  </a>
+                  <!-- END list group item-->
+                  <!-- START list group item-->
+                  <a href="#" class="list-group-item">
+                     <div class="media">
+                        <div class="pull-left">
+                           <img src="app/img/user/03.jpg" alt="Image" class="media-object img-circle thumb32" />
+                        </div>
+                        <div class="media-body clearfix">
+                           <small class="pull-right">3h</small>
+                           <strong class="media-heading text-primary">
+                              <span class="circle circle-success circle-lg text-left"></span>Jessica Silva</strong>
+                           <p class="mb-sm">
+                              <small>Cras sit amet nibh libero, in gravida nulla. Nulla facilisi.</small>
+                           </p>
+                        </div>
+                     </div>
+                  </a>
+                  <!-- END list group item-->
+                  <!-- START list group item-->
+                  <a href="#" class="list-group-item">
+                     <div class="media">
+                        <div class="pull-left">
+                           <img src="app/img/user/09.jpg" alt="Image" class="media-object img-circle thumb32" />
+                        </div>
+                        <div class="media-body clearfix">
+                           <small class="pull-right">4h</small>
+                           <strong class="media-heading text-primary">
+                              <span class="circle circle-danger circle-lg text-left"></span>Jessie Wells</strong>
+                           <p class="mb-sm">
+                              <small>Cras sit amet nibh libero, in gravida nulla. Nulla...</small>
+                           </p>
+                        </div>
+                     </div>
+                  </a>
+                  <!-- END list group item-->
+                  <!-- START list group item-->
+                  <a href="#" class="list-group-item">
+                     <div class="media">
+                        <div class="pull-left">
+                           <img src="app/img/user/12.jpg" alt="Image" class="media-object img-circle thumb32" />
+                        </div>
+                        <div class="media-body clearfix">
+                           <small class="pull-right">1d</small>
+                           <strong class="media-heading text-primary">
+                              <span class="circle circle-danger circle-lg text-left"></span>Rosa Burke</strong>
+                           <p class="mb-sm">
+                              <small>Cras sit amet nibh libero, in gravida nulla. Nulla...</small>
+                           </p>
+                        </div>
+                     </div>
+                  </a>
+                  <!-- END list group item-->
+                  <!-- START list group item-->
+                  <a href="#" class="list-group-item">
+                     <div class="media">
+                        <div class="pull-left">
+                           <img src="app/img/user/10.jpg" alt="Image" class="media-object img-circle thumb32" />
+                        </div>
+                        <div class="media-body clearfix">
+                           <small class="pull-right">2d</small>
+                           <strong class="media-heading text-primary">
+                              <span class="circle circle-danger circle-lg text-left"></span>Michelle Lane</strong>
+                           <p class="mb-sm">
+                              <small>Mauris eleifend, libero nec cursus lacinia...</small>
+                           </p>
+                        </div>
+                     </div>
+                  </a>
+                  <!-- END list group item-->
+               </scrollable>
+               <!-- END list group-->
+               <!-- START panel footer-->
+               <div class="panel-footer clearfix">
+                  <div class="input-group">
+                     <input type="text" placeholder="Search message .." class="form-control input-sm" />
+                     <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-search"></i>
+                        </button>
+                     </span>
+                  </div>
+               </div>
+               <!-- END panel-footer-->
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- END dashboard main content-->
+   <!-- START dashboard sidebar-->
+   <aside class="col-lg-3">
+      <!-- START loader widget-->
+      <div ng-include="'app/templates/chart/sparkline-progress.html'" onload="" ></div>
+      <!-- END loader widget-->
+      <!-- START messages and activity-->
+      <div class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">Today's GuestList</div>
+         </div>
+         <!-- START list group-->
+         <div class="list-group">
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-purple"></em>
+                        <em class="fa fa-cloud-upload fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">15m</small>
+                     <div class="media-heading"><a href="#" class="text-purple m0">NEW FILE</a>
+                     </div>
+                     <p class="m0">
+                        <small><a href="#">Bootstrap.xls</a>
+                        </small>
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-info"></em>
+                        <em class="fa fa-file-text-o fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">2h</small>
+                     <div class="media-heading"><a href="#" class="text-info m0">NEW DOCUMENT</a>
+                     </div>
+                     <p class="m0">
+                        <small><a href="#">Bootstrap.doc</a>
+                        </small>
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-danger"></em>
+                        <em class="fa fa-exclamation fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">5h</small>
+                     <div class="media-heading"><a href="#" class="text-danger m0">BROADCAST</a>
+                     </div>
+                     <p class="m0"><a href="#">Read</a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-success"></em>
+                        <em class="fa fa-clock-o fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">15h</small>
+                     <div class="media-heading"><a href="#" class="text-success m0">NEW MEETING</a>
+                     </div>
+                     <p class="m0">
+                        <small>On
+                           <em>10/12/2015 09:00 am</em>
+                        </small>
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-warning"></em>
+                        <em class="fa fa-tasks fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">1w</small>
+                     <div class="media-heading"><a href="#" class="text-warning m0">TASKS COMPLETION</a>
+                     </div>
+                     <progressbar value="22" type="warning" class="progress-xs m0">22%</progressbar>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+         </div>
+         <!-- END list group-->
+         <!-- START panel footer-->
+         <div class="panel-footer clearfix">
+            <a href="#" class="pull-left">
+               <small>Load more</small>
+            </a>
+         </div>
+         <!-- END panel-footer-->
+      </div>
+      <!-- END messages and activity-->
+   </aside>
+   <aside class="col-lg-3">
+      <!-- START loader widget-->
+      <div ng-include="'app/templates/chart/donut-panel.html'" onload="donutInit()" ></div>
+      <!-- END loader widget-->
+      <!-- START messages and activity-->
+      <div class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">Latest activities</div>
+         </div>
+         <!-- START list group-->
+         <div class="list-group">
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-purple"></em>
+                        <em class="fa fa-cloud-upload fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">15m</small>
+                     <div class="media-heading"><a href="#" class="text-purple m0">NEW FILE</a>
+                     </div>
+                     <p class="m0">
+                        <small><a href="#">Bootstrap.xls</a>
+                        </small>
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-info"></em>
+                        <em class="fa fa-file-text-o fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">2h</small>
+                     <div class="media-heading"><a href="#" class="text-info m0">NEW DOCUMENT</a>
+                     </div>
+                     <p class="m0">
+                        <small><a href="#">Bootstrap.doc</a>
+                        </small>
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-danger"></em>
+                        <em class="fa fa-exclamation fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">5h</small>
+                     <div class="media-heading"><a href="#" class="text-danger m0">BROADCAST</a>
+                     </div>
+                     <p class="m0"><a href="#">Read</a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-success"></em>
+                        <em class="fa fa-clock-o fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">15h</small>
+                     <div class="media-heading"><a href="#" class="text-success m0">NEW MEETING</a>
+                     </div>
+                     <p class="m0">
+                        <small>On
+                           <em>10/12/2015 09:00 am</em>
+                        </small>
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+            <!-- START list group item-->
+            <div class="list-group-item">
+               <div class="media">
+                  <div class="pull-left">
+                     <span class="fa-stack">
+                        <em class="fa fa-circle fa-stack-2x text-warning"></em>
+                        <em class="fa fa-tasks fa-stack-1x fa-inverse text-white"></em>
+                     </span>
+                  </div>
+                  <div class="media-body clearfix">
+                     <small class="text-muted pull-right ml">1w</small>
+                     <div class="media-heading"><a href="#" class="text-warning m0">TASKS COMPLETION</a>
+                     </div>
+                     <progressbar value="22" type="warning" class="progress-xs m0">22%</progressbar>
+                  </div>
+               </div>
+            </div>
+            <!-- END list group item-->
+         </div>
+         <!-- END list group-->
+         <!-- START panel footer-->
+         <div class="panel-footer clearfix">
+            <a href="#" class="pull-left">
+               <small>Load more</small>
+            </a>
+         </div>
+         <!-- END panel-footer-->
+      </div>
+      <!-- END messages and activity-->
+   </aside>
+   <!-- END dashboard sidebar-->
+</div>
