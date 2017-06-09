@@ -547,9 +547,8 @@
 <div class="container mt-6" ng-init="init()">
     <h2 class="text-center color-primary mb-4">{{"home.CLIENT_CAROUSEL_TITLE"
         | translate}}</h2>
-    <div
-        class="owl-carousel image-carousel carousel-widget owl-loaded owl-drag"
-        id="oc-clients">
+        
+    <div class="owl-carousel image-carousel carousel-widget " data-autoplay="1000" data-items-lg="6" data-items-md="5" data-items-sm="4" data-items-xs="3" data-items-xxs="2" data-loop="true" data-margin="60" data-nav="false" data-pagi="false" id="oc-clients">
         <div class="oc-item" style="width: 140px; margin-right: 60px;"
             ng-repeat="image in clientImages">
             <a href="{{image.link}}" target="_new"> <img alt="Clients"

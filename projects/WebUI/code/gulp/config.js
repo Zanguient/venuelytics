@@ -76,7 +76,8 @@ module.exports = {
             'src/js/controllers/sidebarCtrl.js',
 			'src/js/services/restUrlService.js',
 			'src/js/services/venueService.js',
-			'src/js/services/ajaxService.js'
+			'src/js/services/ajaxService.js',
+			'src/js/functions.js'
         ],
         css : [
             'bower_components/animate.css/animate.min.css',

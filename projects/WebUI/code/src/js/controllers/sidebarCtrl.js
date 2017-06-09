@@ -6,7 +6,7 @@
 app.controller('sidebarController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window) {
 
-    		$log.log('Inside Venue Details Controller.');
+    		$log.log('Inside Sidebar Controller.');
     		
     		var self = $scope;
 
