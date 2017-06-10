@@ -199,6 +199,7 @@
     display: inline-block;
     float: left;
     padding: 0 10px;
+    margin-bottom: 10px;
   }
 
   #img-social {
@@ -270,6 +271,7 @@
   #imgContainer {
     width: 460px;
     height: 55px;
+    margin-bottom: 10px;
   }
 
   #deployStepsInput {
@@ -313,6 +315,7 @@
 
   .img-singleline {
     float: left;
+    margin-bottom: 10px;
   }
 
   #img-social {
@@ -441,6 +444,7 @@
     float: left;
     width: 205px;
     height: 55px;
+    margin-bottom: 10px;
   }
 
   #img-social {

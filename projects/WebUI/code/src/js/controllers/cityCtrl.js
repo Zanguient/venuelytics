@@ -26,7 +26,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 self.listOfCities = '';
                 $scope.selectedCountry = item;
                 if(item === 'North America') {
-                    AjaxService.getVenuesByCountry('NA').then(function(response) {
+                    AjaxService.getVenuesByCountry('USA').then(function(response) {
                         self.listOfCities = response;
                         self.loadingBar = false;
                     });
@@ -36,7 +36,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                         self.loadingBar = false;
                     });
                 } else if(item === 'Canada') {
-                    AjaxService.getVenuesByCountry('CA').then(function(response) {
+                    AjaxService.getVenuesByCountry('CANADA').then(function(response) {
                         self.listOfCities = response;
                         self.loadingBar = false;
                     });

@@ -124,12 +124,22 @@
 		"WEDDING":"Wedding",
 		"BIRTHDAY_PARTY":"BirthDay Party",
 		"EVENT":"Event",
-		"WEEKEND_PARTY":"WeekEnd Party"
+		"WEEKEND_PARTY":"WeekEnd Party",
+		"BARS":"Bars",
+		"CLUBS":"Clubs",
+		"LOUNGE":"Lounge",
+		"CASINO":"Casino",
+		"RESTAURANT":"Restaurant",
+		"HOTEL":"Hotel",
+		"KARAOKE":"Karaoke",
+		"BOWLING":"Bowling"
 	},
 	"role":{
 		"ARTIST":"Artist",
 		"CUSTOMER":"Customer",
-		"ADMIN":"Admin"
+		"ADMIN":"Admin",
+		"MANAGER":"Manager",
+		"OWNER":"Owner"
 	},
 	"footBar": {
 		"ADDRESS1":"530 Lytton Avenue, 2nd Floor",
