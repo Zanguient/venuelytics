@@ -4,6 +4,10 @@
   "SMS_OPEN" : "SMS Open",
   "PASSBOOK_OPEN": "Passbook Open",
   "OFFER_OPEN" : "Offer Open",
+  "DAILY" : "Daily",
+  "WEEKLY" :"Weekly",
+  "MONTHLY" :"Monthly",
+  "YEARLY" : "Yearly",
   "login" : {
   		"LOGIN" :  "Login",
   		"FAILED" : "Login Failed",

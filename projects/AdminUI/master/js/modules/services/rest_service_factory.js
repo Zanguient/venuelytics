@@ -59,6 +59,12 @@ App.factory(
 						
 					});
 				},
+				NotificationService: function () {
+					return $resource(urlTemplate.replace("@context", "notifications"), {}, {
+						getActiveNotifications : {method: 'GET',  params: { venueNumber: '@venueNumber' }, url: urlTemplate.replace("@context", "notifications")+"/:venueNumber/active"},
+						getUnreadNotificationCount : {method: 'GET',  params: { venueNumber: '@venueNumber' }, url: urlTemplate.replace("@context", "notifications")+"/:venueNumber/count"}
+					});
+				},
 				ProductService : function () {
 					return $resource(urlTemplate.replace("@context", "products"), {}, {
 						get : {method: 'GET',  params: { id: '@id' }, isArray:true},

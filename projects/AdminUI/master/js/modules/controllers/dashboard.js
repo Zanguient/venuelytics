@@ -1,26 +1,84 @@
 
-App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','DashboardService',
-                                      function($log, $scope, $window, $http, $timeout, contextService, DashboardService){
+App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','RestServiceFactory',
+                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory){
 	'use strict';
+    $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
+    $scope.selectedPeriod = 'WEEKLY';
+    $scope.notificationCount = 0;
 	$scope.init=function(){
 		$log.log("Dash board controller has been initialized!");
-		
+		$scope.userVenues = {
+            selectedVenueNumber: 521,
+            selectedVenueName :"Monte Carlo",
+            listIsOpen : false,
+            available: {
+                    'Monte Carlo' : 521,
+                    'Myth': 832,
+                    'Test Venue' : 170568
+            },
+            set: function (venueName, venueNumber) {
+                $scope.userVenues.listIsOpen = ! $scope.userVenues.listIsOpen;
+                $scope.userVenues.selectedVenueNumber = venueNumber;
+                $scope.userVenues.selectedVenueName = venueName;
+                $scope.reload();
+            }
+        }
+        $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)", "rgb(255,196,13)", "rgb(0,171,169)","#f05050", "rgb(135,206,250)"];
+    
 		$scope.selectedStore = null;
+        $scope.top3Stats = [];
+
+        $scope.top3Stats.push(createPDO($scope.colorPalattes[0],{"label":"Visitors", "value":1700, "icon":"icon-users"}));
+        $scope.top3Stats.push(createPDO($scope.colorPalattes[1],{"label":"New Orders", "value":356, "icon":"fa fa-shopping-cart"}));
+        $scope.top3Stats.push(createPDO($scope.colorPalattes[2],{"label":"CheckIns", "value":234, "icon":"icon-login"}));
+        
 		$scope.reload();
 	};
-		/**
-		 * loading visitor states
-		 */
+
+    $scope.setPeriod = function(period) {
+        $scope.selectedPeriod = period;
+    }
+
+    $scope.getNotificationIconClass = function(n) {
+        if (n.serviceType === 'BanquetHall'){
+            return "fa icon-diamond";
+        } else if(n.serviceType === 'Bottle'){
+            return "fa fa-glass";
+        } else if(n.serviceType === 'GuestList') {
+            return "fa icon-book-open";
+        } else {
+           return "fa icon-envelope-letter";
+       }
+    }
+
+    /**
+     * loading visitor states
+     */
     $scope.reload = function() {
-    	var storeId = 0;
-    	if ($scope.selectedStore != null && $scope.selectedStore.hasOwnProperty("storeNumber")) {
-    		storeId = $scope.selectedStore.storeNumber;
-    	}
-		
-		
-		
+       var promise = RestServiceFactory.NotificationService().getActiveNotifications({venueNumber: $scope.userVenues.selectedVenueNumber});	
+        promise.$promise.then(function(data) {
+            $scope.notifications = data.notifications;
+        });
+
+        var promise2 = RestServiceFactory.NotificationService().getUnreadNotificationCount({venueNumber: $scope.userVenues.selectedVenueNumber});   
+        promise2.$promise.then(function(data) {
+            $scope.notificationCount = data.count;
+        });
 	};
-	
+	function createPDO( color, dataObject){
+        
+        var obj={
+                id: dataObject.id,
+                value: dataObject.value || 0,
+                name: dataObject.label,
+                icon: dataObject.icon,
+                link: "instore-insight",
+                linkDescription: "View Details",
+                contentColorCode : { "color": "#fff", "background-color": color, "border-color": "#cfdbe2"},
+                linkColorCode :  { "background-color":"#3a3f51"}
+            };
+        return obj;
+    }
 	
 	function labelFormatter(label, series) {
         return '<div class="pie-label">' + Math.round(series.percent) + "%</div>";

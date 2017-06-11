@@ -4,12 +4,12 @@
  * ===========================
  */
 
-App.directive('instoreCardWidget', function() {
+App.directive('cardWidget', function() {
   return {
     restrict: 'E',
     scope:{
-	  instorecard: '='
+	  card: '='
   	},
-    templateUrl: 'app/templates/instore-card-widget.html'
+    templateUrl: 'app/templates/card-widget.html'
   };
 });
