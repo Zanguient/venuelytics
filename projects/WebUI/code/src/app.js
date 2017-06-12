@@ -46,6 +46,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/contact', {
             templateUrl: 'contact.html'
         })
+        .when('/privacy', {
+            templateUrl: 'privacy.html'
+        })
         .otherwise('/home');
 
     $locationProvider.html5Mode({
