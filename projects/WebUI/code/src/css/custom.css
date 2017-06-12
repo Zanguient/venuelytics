@@ -213,7 +213,7 @@
  480px) {
   #businessImage {
     height: 200px;
-    width: 375px;
+    width: 340px;
   }
 
   #sliderThumb {
@@ -232,12 +232,16 @@
   }
 
   .slider {
-    width: 350px;
+    width: 340px;
     height: 200px;
   }
 
   #venueBackground {
     height: 190px;
+  }
+
+  #businessMessage {
+    margin-left: 21px;
   }
 
   #navigation {

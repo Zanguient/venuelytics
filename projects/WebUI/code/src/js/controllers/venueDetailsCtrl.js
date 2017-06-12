@@ -18,7 +18,14 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     self.selectedCity = $routeParams.cityName;
                     //self.selectedType = VenueService.selectedVenueType;
                     self.venueName =    self.detailsOfVenue.venueName;
-                    self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?t=' + $routeParams.serviceType;
+                    if($routeParams.serviceType == 'p' || $routeParams.serviceType == 'b' || $routeParams.serviceType == 'g') {
+                        self.row = 1;
+                    } else if($routeParams.serviceType == 't' || $routeParams.serviceType == 'f' || $routeParams.serviceType == 'd') {
+                        self.row = 2;    
+                    } else {
+                        self.row = 4;
+                    }
+                    self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType;
                     iFrameResize({
                             log                     : false,                  // Enable console logging
                             inPageLinks             : false,
