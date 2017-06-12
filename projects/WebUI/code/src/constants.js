@@ -53,6 +53,11 @@ app
                          {"title":"Deals", "tab":"o", "image":"assets/img/food.png", "fieldName":"Advance.deals.enable"},
                          {"title":"Food", "tab":"f", "image":"assets/img/food.png", "fieldName":"Advance.FoodRequest.enable"},
                          {"title":"GuestList", "tab":"g", "image":"assets/img/guest.png", "fieldName":"Advance.GuestList.enable"},
-                         {"title":"Private Event", "tab":"p", "image":"assets/img/private.png", "fieldName":"Advance.BookBanqetHall.enable"}]
+                         {"title":"Private Event", "tab":"p", "image":"assets/img/private.png", "fieldName":"Advance.BookBanqetHall.enable"}],
+    'cityName': [{"city":"LOS ANGELES"}, {"city":"NEW JERSEY"}, {"city":"FLORIDA"}, {"city":"CALIFORNIA"}],
+    'categories': [{"category":"WEDDING"}, {"category":"BIRTHDAY PARTY"}, {"category":"EVENT"}, {"category":"BARS"},
+                   {"category":"CLUBS"}, {"category":"LOUNGE"}, {"category":"CASINO"}, {"category":"RESTAURANT"},
+                   {"category":"HOTEL"}, {"category":"KARAOKE"}, {"category":"BOWLING"}],
+    'roles': [{"role":"MANAGER"}, {"role":"OWNER"}]
 
   });

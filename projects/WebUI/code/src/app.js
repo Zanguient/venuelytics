@@ -49,6 +49,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/privacy', {
             templateUrl: 'privacy.html'
         })
+        .when('/terms', {
+            templateUrl: 'terms-of-use.html'
+        })
         .otherwise('/home');
 
     $locationProvider.html5Mode({

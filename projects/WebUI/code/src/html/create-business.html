@@ -61,11 +61,7 @@
 
                 <div class="col-md-10">
                     <select class="btn  dropdown-toggle form-control" required
-                        ng-model="newUser.state">
-                        <option>{{"country.LOS_ANGELES" | translate}}</option>
-                        <option>{{"country.NEW_JERSEY" | translate}}</option>
-                        <option>{{"country.FLORIDA" | translate}}</option>
-                        <option>{{"country.CALIFORNIA" | translate}}</option>
+                        ng-model="newUser.state" ng-options="c.city for c in cityNames">
                     </select>
                 </div>
             </div>
@@ -76,18 +72,7 @@
 
                 <div class="col-md-10">
                     <select class="btn  dropdown-toggle form-control" required
-                        ng-model="newUser.category">
-                        <option>{{"category.WEDDING" | translate}}</option>
-                        <option>{{"category.BIRTHDAY_PARTY" | translate}}</option>
-                        <option>{{"category.EVENT" | translate}}</option>
-                        <option>{{"category.BARS" | translate}}</option>
-                        <option>{{"category.CLUBS" | translate}}</option>
-                        <option>{{"category.LOUNGE" | translate}}</option>
-                        <option>{{"category.CASINO" | translate}}</option>
-                        <option>{{"category.RESTAURANT" | translate}}</option>
-                        <option>{{"category.HOTEL" | translate}}</option>
-                        <option>{{"category.KARAOKE" | translate}}</option>
-                        <option>{{"category.BOWLING" | translate}}</option>
+                        ng-model="newUser.category" ng-options="c.category for c in listOfCategory">
                     </select>
                 </div>
             </div>
@@ -98,9 +83,7 @@
 
                 <div class="col-md-10">
                     <select class="btn  dropdown-toggle form-control" required
-                        ng-model="newUser.role">
-                        <option>{{"role.MANAGER" | translate}}</option>
-                        <option>{{"role.OWNER" | translate}}</option>
+                        ng-model="newUser.role" ng-options="r.role for r in listOfRoles">
                     </select>
                 </div>
             </div>
