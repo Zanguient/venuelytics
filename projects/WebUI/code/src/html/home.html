@@ -1,6 +1,6 @@
 <div class="container" id="venueBanner">
     <div class="banner-fill-img">
-        <div class="card" style="width: 100%">
+        <div class="card" id="venueCard">
             <div id="carousel-example-generic" class="ms-carousel carousel slide"
                 data-ride="carousel">
                 <!-- Indicators -->
@@ -219,7 +219,7 @@
         numquam iusto eum illum, ea quisquam.
     </p> -->
     <div
-        class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4" ng-repeat="feature in venueLyticsFeatures" style="height: 370px;">
+        class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4" ng-repeat="feature in venueLyticsFeatures" id="features">
         <div class="text-center card-block">
             <span class="ms-icon ms-icon-circle ms-icon-xxlg {{feature.color}}"><i
                 class="{{feature.icon}}"></i></span>
@@ -549,7 +549,7 @@
         | translate}}</h2>
         
     <div class="owl-carousel image-carousel carousel-widget " data-autoplay="1000" data-items-lg="6" data-items-md="5" data-items-sm="4" data-items-xs="3" data-items-xxs="2" data-loop="true" data-margin="60" data-nav="false" data-pagi="false" id="oc-clients">
-        <div class="oc-item" style="width: 140px; margin-right: 60px;"
+        <div class="oc-item" id="owlCarousel"
             ng-repeat="image in clientImages">
             <a href="{{image.link}}" target="_new"> <img alt="Clients"
                 src="{{image.image}}">

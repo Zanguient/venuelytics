@@ -126,6 +126,7 @@
 
   #venueReservationFrame {
     height: 1000px;
+    display: none;
   }
 
   #clipboardButton {
@@ -261,6 +262,7 @@
 
   #venueReservationFrame {
     height: 1000px;
+    display: none;
   }
 
   #businessSearchForm {
@@ -389,6 +391,7 @@
 
   #venueReservationFrame {
     height: 1000px;
+    display: none;
   }
 
   #businessSearchForm {
@@ -821,4 +824,32 @@
   transition: all ease 0.5s;
 }
 
+#progressBar {
+  width: 100%;
+}
 
+#deployPost {
+  width: 100px;
+  height: 100px;
+}
+
+#underLine {
+  margin-top: 0px;
+}
+
+#businessSearchAddress {
+  color: black;
+}
+
+#venueCard {
+  width: 100%;
+}
+
+#features {
+  height: 370px;
+}
+
+#owlCarousel {
+  width: 140px;
+  margin-right: 60px;
+}

@@ -6,7 +6,7 @@
 		<div class="col-md-10">
 
 			<div class="post-container">                
-			    <div class="post-thumb"><img src="{{businessImage}}" style="width: 100px; height: 100px;" /></div>
+			    <div class="post-thumb"><img src="{{businessImage}}" id="deployPost"/></div>
 			    <div class="post-content">
 			        <h3 class="post-title">{{selectedVenueName || newUser.businessName}}</h3>
 			        <p>{{newUser.address}}</p>
@@ -23,7 +23,7 @@
 				<b class="control-label">{{"business.LINK" | translate}}</b>
 				<br>
 				<label>http://bit.ly/1RmnUT</label>
-				<hr style="margin-top: 0px;">
+				<hr id="underLine">
 			</div>
 		</div>
 			<div class="form-group">
@@ -59,7 +59,7 @@
 					<b class="control-label">{{"business.URL" | translate}}</b>
 					<br>
 					<label>http://bit.ly/1RmnUT</label>
-					<hr style="margin-top: 0px;">
+					<hr id="underLine">
 				</div>
 			</div>
 </form>
