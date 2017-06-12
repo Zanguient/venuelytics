@@ -19,9 +19,9 @@
                     <div class="item active">
                         <img src="<%= assets %>/img/2.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
-                            <p><b><font size="3">{{"home.NEXT_GENERATION" |
+                            <p ng-cloak><b><font size="3">{{"home.NEXT_GENERATION" |
                                 translate}}</font></b></p>
-                            <p><b><font size="3">{{"home.REAL_TIME" |
+                            <p ng-cloak><b><font size="3">{{"home.REAL_TIME" |
                                 translate}}</font></b></p>
                             <center>
                                 <div class="img-container" id="imgContainer">
@@ -47,9 +47,9 @@
                     <div class="item">
                         <img src="<%= assets %>/img/19.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
-                            <p><b><font size="3">{{"home.CUSTOMER_SERVICE" |
+                            <p ng-cloak><b><font size="3">{{"home.CUSTOMER_SERVICE" |
                                 translate}}</font></b></p>
-                            <p><b><font size="3">{{"home.EXPERIENCE" |
+                            <p ng-cloak><b><font size="3">{{"home.EXPERIENCE" |
                                 translate}}</font></b></p>
                             <center>
                                 <div class="img-container" id="imgContainer">
@@ -74,9 +74,9 @@
                     <div class="item">
                         <img src="<%= assets %>/img/6.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
-                            <p><b><font size="3">{{"home.MOBILE_SOLUTION" |
+                            <p ng-cloak><b><font size="3">{{"home.MOBILE_SOLUTION" |
                                 translate}}</font></b></p>
-                            <p><b><font size="3">{{"home.RESORTS" |
+                            <p ng-cloak><b><font size="3">{{"home.RESORTS" |
                                 translate}}</font></b></p>
                             <center>
                                 <div class="img-container" id="imgContainer">
@@ -102,7 +102,7 @@
                     <div class="item">
                         <img src="<%= assets %>/img/31.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
-                            <p><b><font size="3">{{"home.ORDER_AND_PAY" |
+                            <p ng-cloak><b><font size="3">{{"home.ORDER_AND_PAY" |
                                 translate}}</font></b></p>
                             <center>
                                 <div class="img-container" id="imgContainer">
@@ -128,9 +128,9 @@
                     <div class="item">
                         <img src="<%= assets %>/img/41.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
-                            <p><b><font size="3">{{"home.CREATE_NEW_SOURCES" |
+                            <p ng-cloak><b><font size="3">{{"home.CREATE_NEW_SOURCES" |
                                 translate}}</font></b></p>
-                            <p><b><font size="3">{{"home.PREDICT_AND_GAIN" |
+                            <p ng-cloak><b><font size="3">{{"home.PREDICT_AND_GAIN" |
                                 translate}}</font></b></p>
                             <center>
                                 <div class="img-container" id="imgContainer">
@@ -156,9 +156,9 @@
                     <div class="item">
                         <img src="<%= assets %>/img/5.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
-                            <p><b><font size="3">{{"home.REWARD" |
+                            <p ng-cloak><b><font size="3">{{"home.REWARD" |
                                 translate}}</font></b></p>
-                            <p><b><font size="3">{{"home.LOYALTY_MANAGEMENT" |
+                            <p ng-cloak><b><font size="3">{{"home.LOYALTY_MANAGEMENT" |
                                 translate}}</font></b></p>
                             <center>
                                 <div class="img-container" id="imgContainer">
@@ -196,20 +196,20 @@
     </div>
     <div class="container mt-4">
         <h2
-            class="text-center color-primary mb-2 wow fadeInDown animation-delay-3">{{"home.WELCOME_HEADING_1"
+            class="text-center color-primary mb-2 wow fadeInDown animation-delay-3" ng-cloak>{{"home.WELCOME_HEADING_1"
             | translate}}</h2>
         <h3
-            class="text-center text-light mb-6 wow fadeInDown animation-delay-4">{{"home.WELCOME_HEADING_2"
+            class="text-center text-light mb-6 wow fadeInDown animation-delay-4" ng-cloak>{{"home.WELCOME_HEADING_2"
             | translate}}</h3>
         <p
-            class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4">{{"home.WELCOME_DESCRIPTION"
+            class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4" ng-cloak>{{"home.WELCOME_DESCRIPTION"
             | translate}}</p>
     </div>
 </div>
 
 <div class="container mt-4">
     <h2
-        class="text-center color-primary mb-2 wow fadeInDown animation-delay-3">{{"home.KNOW_OUR_FEATURES"
+        class="text-center color-primary mb-2 wow fadeInDown animation-delay-3" ng-cloak>{{"home.KNOW_OUR_FEATURES"
         | translate}}</h2>
     <!-- <p
         class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4"
@@ -223,8 +223,8 @@
         <div class="text-center card-block">
             <span class="ms-icon ms-icon-circle ms-icon-xxlg {{feature.color}}"><i
                 class="{{feature.icon}}"></i></span>
-            <h4 class="{{feature.color}}">{{feature.title}}</h4>
-            <p class="">{{feature.description}}</p>
+            <h4 class="{{feature.color}}" ng-cloak>{{feature.title}}</h4>
+            <p class="" ng-cloak>{{feature.description}}</p>
         </div>
     </div>
 </div>
@@ -232,12 +232,12 @@
 <div class="wrap wrap-mountain mt-6">
     <div class="container">
         <h2
-            class="text-center text-light mb-6 wow fadeInDown animation-delay-3">
+            class="text-center text-light mb-6 wow fadeInDown animation-delay-3" ng-cloak>
             {{"home.POWER_OF" | translate}} <strong>{{"home.TURNKEY" |
                 translate}}</strong> {{"home.CUSTOM" | translate}}
         </h2>
 
-        <p class="text-center mb-6 wow fadeInDown animation-delay-3">{{"home.VENUE_DESCRIPTION"
+        <p class="text-center mb-6 wow fadeInDown animation-delay-3" ng-cloak>{{"home.VENUE_DESCRIPTION"
             | translate}}</p>
 
         <div class="row">
@@ -545,7 +545,7 @@
 </div>
 
 <div class="container mt-6" ng-init="init()">
-    <h2 class="text-center color-primary mb-4">{{"home.CLIENT_CAROUSEL_TITLE"
+    <h2 class="text-center color-primary mb-4" ng-cloak>{{"home.CLIENT_CAROUSEL_TITLE"
         | translate}}</h2>
         
     <div class="owl-carousel image-carousel carousel-widget " data-autoplay="1000" data-items-lg="6" data-items-md="5" data-items-sm="4" data-items-xs="3" data-items-xxs="2" data-loop="true" data-margin="60" data-nav="false" data-pagi="false" id="oc-clients">
