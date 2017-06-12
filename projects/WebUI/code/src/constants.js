@@ -47,6 +47,12 @@ app
                  {'title': 'Business Analytics', 'description':'Customer Insights, Predictive Analytics & Patent Pending Machine Learning Technology', 'icon': 'zmdi zmdi-cloud-outline', 'color': 'color-info'},
                  {'title': 'WIFI & White Label Solution', 'description':'Access to the reservations, ordering & payment via white label app & WIFI Hotspot', 'icon': 'zmdi zmdi-desktop-mac', 'color': 'color-warning'},
                  {'title': 'Private Events', 'description':'Book Banquet Halls, Karaoke Rooms & Event Tickets', 'icon': 'zmdi zmdi-download', 'color': 'color-success'},
-                 {'title': 'Campaign & Loyalty Management', 'description':'Personalized Deals, Offers, Digital Rewards, Events and Booking.', 'icon': 'zmdi zmdi-flower-alt', 'color': 'color-danger'}]
+                 {'title': 'Campaign & Loyalty Management', 'description':'Personalized Deals, Offers, Digital Rewards, Events and Booking.', 'icon': 'zmdi zmdi-flower-alt', 'color': 'color-danger'}],
+    'serviceSmallIcons': [{"title":"Karaoke", "tab":"k", "image":"assets/img/karaoke.png", "fieldName":"Advance.KarokeRequest.enable"},
+                         {"title":"BottleService", "tab":"b", "image":"assets/img/karaoke.png", "fieldName":"Advance.BottleService.enable"},
+                         {"title":"Deals", "tab":"o", "image":"assets/img/food.png", "fieldName":"Advance.deals.enable"},
+                         {"title":"Food", "tab":"f", "image":"assets/img/food.png", "fieldName":"Advance.FoodRequest.enable"},
+                         {"title":"GuestList", "tab":"g", "image":"assets/img/guest.png", "fieldName":"Advance.GuestList.enable"},
+                         {"title":"Private Event", "tab":"p", "image":"assets/img/private.png", "fieldName":"Advance.BookBanqetHall.enable"}]
 
   });

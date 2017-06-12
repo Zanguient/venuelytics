@@ -13,6 +13,7 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
             self.init = function() {
                 
                 self.serviceTypes = APP_ARRAYS.serviceTabs;
+                self.serviceIcons = APP_ARRAYS.serviceSmallIcons;
 
                 self.selectedCityName = $routeParams.cityName;
                 AjaxService.getCity(self.selectedCityName).then(function(response) {
