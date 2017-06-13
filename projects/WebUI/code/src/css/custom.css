@@ -126,6 +126,7 @@
 
   #venueReservationFrame {
     height: 1000px;
+    display: none;
   }
 
   #clipboardButton {
@@ -195,7 +196,6 @@
   }
 
   .img-singleline {
-    width: 45%;
     display: inline-block;
     float: left;
     padding: 0 10px;
@@ -203,8 +203,17 @@
   }
 
   #img-social {
-    width: 179px;
-    height: 55px;
+    width: 90px;
+    height: 28px;
+  }
+
+  .sendEmailButton {
+    width: 200px !important;
+    margin-left: 10px !important;
+  }
+
+  #imgContainer {
+    margin-left: 250px;
   }
 }
 /*iPhone 5*/
@@ -212,7 +221,7 @@
  480px) {
   #businessImage {
     height: 200px;
-    width: 375px;
+    width: 340px;
   }
 
   #sliderThumb {
@@ -231,12 +240,16 @@
   }
 
   .slider {
-    width: 350px;
+    width: 340px;
     height: 200px;
   }
 
   #venueBackground {
     height: 190px;
+  }
+
+  #businessMessage {
+    margin-left: 21px;
   }
 
   #navigation {
@@ -261,6 +274,7 @@
 
   #venueReservationFrame {
     height: 1000px;
+    display: none;
   }
 
   #businessSearchForm {
@@ -270,8 +284,8 @@
 
   #imgContainer {
     width: 460px;
-    height: 55px;
-    margin-bottom: 10px;
+    height: 35px;
+    margin-left: 75px;
   }
 
   #deployStepsInput {
@@ -316,16 +330,26 @@
   .img-singleline {
     float: left;
     margin-bottom: 10px;
+    margin-right: 5px;
   }
 
   #img-social {
-    width: 160px;
-    height: 55px;
+    width: 90px;
+    height: 28px;
   }
 
   .img-container {
     width: 460px;
     height: 55px;
+  }
+
+  .sendEmailButton {
+    width: 200px !important;
+    margin-left: 10px !important;
+  }
+
+  .paragraph-bottom {
+    margin-bottom: 0px;
   }
 }
 
@@ -336,11 +360,27 @@
 
   .img-singleline {
     float: left;
+    margin-right: 5px;
   }
 
   #img-social {
-    width: 187px;
-    height: 55px;
+    width: 90px;
+    height: 28px;
+  }
+
+  .sendEmailButton {
+    width: 200px !important;
+    margin-left: 10px !important;
+  }
+
+  #imgContainer {
+    margin-left: 95px;
+    width: 460px;
+    height: 35px;
+  }
+
+  .paragraph-bottom {
+    margin-bottom: 0px;
   }
 }
 
@@ -389,6 +429,7 @@
 
   #venueReservationFrame {
     height: 1000px;
+    display: none;
   }
 
   #businessSearchForm {
@@ -397,8 +438,9 @@
   }
 
   #imgContainer {
+    margin-left: 115px;
     width: 460px;
-    height: 55px;
+    height: 35px;
   }
 
   #deployStepsInput {
@@ -442,19 +484,29 @@
 
   .img-singleline {
     float: left;
-    width: 205px;
-    height: 55px;
+    width: 90px;
+    height: 28px;
     margin-bottom: 10px;
+    margin-right: 5px;
   }
 
   #img-social {
-    width: 212px;
-    height: 55px;
+    width: 90px;
+    height: 28px;
   }
 
   .img-container {
     width: 460px;
     height: 55px;
+  }
+
+  .sendEmailButton {
+    width: 200px !important;
+    margin-left: 10px !important;
+  }
+
+  .paragraph-bottom {
+    margin-bottom: 0px;
   }
 }
 
@@ -821,4 +873,32 @@
   transition: all ease 0.5s;
 }
 
+#progressBar {
+  width: 100%;
+}
 
+#deployPost {
+  width: 100px;
+  height: 100px;
+}
+
+#underLine {
+  margin-top: 0px;
+}
+
+.businessSearchAddress {
+  color: black;
+}
+
+.venueCard {
+  width: 100%;
+}
+
+.features {
+  height: 370px;
+}
+
+.owlCarousel {
+  width: 140px;
+  margin-right: 60px;
+}

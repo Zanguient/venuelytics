@@ -1,6 +1,6 @@
-<div class="container" id="venueBanner">
+<div class="container" id="venueBanner" ng-cloak>
     <div class="banner-fill-img">
-        <div class="card" style="width: 100%">
+        <div class="card venueCard">
             <div id="carousel-example-generic" class="ms-carousel carousel slide"
                 data-ride="carousel">
                 <!-- Indicators -->
@@ -17,25 +17,31 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="<%= assets %>/img/2.jpg" alt="..." id="carouselImage">
+                        <img ng-src="<%= assets %>/img/2.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
-                            <p><b><font size="3">{{"home.NEXT_GENERATION" |
+                            <p class="paragraph-bottom"><b><font size="4">{{"home.NEXT_GENERATION" |
                                 translate}}</font></b></p>
-                            <p><b><font size="3">{{"home.REAL_TIME" |
+                                &
+                            <p class="paragraph-bottom"><b><font size="4">{{"home.REAL_TIME" |
+                                translate}}</font></b></p>
+                            <p class="paragraph-bottom"><b><font size="4">{{"home.PERSONALIZED_SERVICES" |
+                                translate}}</font></b></p>
+
+                            <p class="paragraph-bottom"><b><font size="4">{{"home.REALTIME_INSIGHTS" |
                                 translate}}</font></b></p>
                             <center>
                                 <div class="img-container" id="imgContainer">
                                     <div class="img-singleline">
                                         <a
                                             href="https://itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8"
-                                            target="_new"> <img src="assets/img/th1.jpg"
+                                            target="_new"> <img ng-src="assets/img/apple-store.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
                                     <div class="img-singleline">
                                         <a
                                             href="https://play.google.com/store/apps/details?id=com.itzfun.biz&hl=en"
-                                            target="_new"> <img src="assets/img/th2.jpg"
+                                            target="_new"> <img ng-src="assets/img/android.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
@@ -56,14 +62,14 @@
                                     <div class="img-singleline">
                                         <a
                                             href="https://itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8"
-                                            target="_new"> <img src="assets/img/th1.jpg"
+                                            target="_new"> <img ng-src="assets/img/apple-store.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
                                     <div class="img-singleline">
                                         <a
                                             href="https://play.google.com/store/apps/details?id=com.itzfun.biz&hl=en"
-                                            target="_new"> <img src="assets/img/th2.jpg"
+                                            target="_new"> <img ng-src="assets/img/android.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
@@ -72,7 +78,7 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="<%= assets %>/img/6.jpg" alt="..." id="carouselImage">
+                        <img ng-src="<%= assets %>/img/6.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
                             <p><b><font size="3">{{"home.MOBILE_SOLUTION" |
                                 translate}}</font></b></p>
@@ -83,14 +89,14 @@
                                     <div class="img-singleline">
                                         <a
                                             href="https://itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8"
-                                            target="_new"> <img src="assets/img/th1.jpg"
+                                            target="_new"> <img ng-src="assets/img/apple-store.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
                                     <div class="img-singleline">
                                         <a
                                             href="https://play.google.com/store/apps/details?id=com.itzfun.biz&hl=en"
-                                            target="_new"> <img src="assets/img/th2.jpg"
+                                            target="_new"> <img ng-src="assets/img/android.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
@@ -100,7 +106,7 @@
 
                     </div>
                     <div class="item">
-                        <img src="<%= assets %>/img/31.jpg" alt="..." id="carouselImage">
+                        <img ng-src="<%= assets %>/img/31.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
                             <p><b><font size="3">{{"home.ORDER_AND_PAY" |
                                 translate}}</font></b></p>
@@ -109,14 +115,14 @@
                                     <div class="img-singleline">
                                         <a
                                             href="https://itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8"
-                                            target="_new"> <img src="assets/img/th1.jpg"
+                                            target="_new"> <img ng-src="assets/img/apple-store.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
                                     <div class="img-singleline">
                                         <a
                                             href="https://play.google.com/store/apps/details?id=com.itzfun.biz&hl=en"
-                                            target="_new"> <img src="assets/img/th2.jpg"
+                                            target="_new"> <img ng-src="assets/img/android.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
@@ -126,7 +132,7 @@
 
                     </div>
                     <div class="item">
-                        <img src="<%= assets %>/img/41.jpg" alt="..." id="carouselImage">
+                        <img ng-src="<%= assets %>/img/41.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
                             <p><b><font size="3">{{"home.CREATE_NEW_SOURCES" |
                                 translate}}</font></b></p>
@@ -137,14 +143,14 @@
                                     <div class="img-singleline">
                                         <a
                                             href="https://itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8"
-                                            target="_new"> <img src="assets/img/th1.jpg"
+                                            target="_new"> <img ng-src="assets/img/apple-store.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
                                     <div class="img-singleline">
                                         <a
                                             href="https://play.google.com/store/apps/details?id=com.itzfun.biz&hl=en"
-                                            target="_new"> <img src="assets/img/th2.jpg"
+                                            target="_new"> <img ng-src="assets/img/android.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
@@ -154,7 +160,7 @@
 
                     </div>
                     <div class="item">
-                        <img src="<%= assets %>/img/5.jpg" alt="..." id="carouselImage">
+                        <img ng-src="<%= assets %>/img/5.jpg" alt="..." id="carouselImage">
                         <div class="custom-carousel">
                             <p><b><font size="3">{{"home.REWARD" |
                                 translate}}</font></b></p>
@@ -165,14 +171,14 @@
                                     <div class="img-singleline">
                                         <a
                                             href="https://itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8"
-                                            target="_new"> <img src="assets/img/th1.jpg"
+                                            target="_new"> <img ng-src="assets/img/apple-store.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
                                     <div class="img-singleline">
                                         <a
                                             href="https://play.google.com/store/apps/details?id=com.itzfun.biz&hl=en"
-                                            target="_new"> <img src="assets/img/th2.jpg"
+                                            target="_new"> <img ng-src="assets/img/android.jpg"
                                             id="img-social" />
                                         </a>
                                     </div>
@@ -207,7 +213,7 @@
     </div>
 </div>
 
-<div class="container mt-4">
+<div class="container mt-4" ng-cloak>
     <h2
         class="text-center color-primary mb-2 wow fadeInDown animation-delay-3">{{"home.KNOW_OUR_FEATURES"
         | translate}}</h2>
@@ -219,7 +225,7 @@
         numquam iusto eum illum, ea quisquam.
     </p> -->
     <div
-        class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4" ng-repeat="feature in venueLyticsFeatures" style="height: 370px;">
+        class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
         <div class="text-center card-block">
             <span class="ms-icon ms-icon-circle ms-icon-xxlg {{feature.color}}"><i
                 class="{{feature.icon}}"></i></span>
@@ -229,15 +235,15 @@
     </div>
 </div>
 <!-- container -->
-<div class="wrap wrap-mountain mt-6">
+<div class="wrap wrap-mountain mt-6" ng-cloak>
     <div class="container">
         <h2
-            class="text-center text-light mb-6 wow fadeInDown animation-delay-3">
+            class="text-center text-light mb-6 wow fadeInDown animation-delay-3" >
             {{"home.POWER_OF" | translate}} <strong>{{"home.TURNKEY" |
                 translate}}</strong> {{"home.CUSTOM" | translate}}
         </h2>
 
-        <p class="text-center mb-6 wow fadeInDown animation-delay-3">{{"home.VENUE_DESCRIPTION"
+        <p class="text-center mb-6 wow fadeInDown animation-delay-3" >{{"home.VENUE_DESCRIPTION"
             | translate}}</p>
 
         <div class="row">
@@ -407,7 +413,7 @@
                             <div class="col-md-4">
                                 <div class="card animated flipInX animation-delay-2">
                                     <blockquote class="blockquote-avatar withripple">
-                                        <img src="<%= assets %>/img/demo/avatar.png" alt=""
+                                        <img ng-src="<%= assets %>/img/demo/avatar.png" alt=""
                                             class="avatar hidden-xs">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit. Integer posuere erat a ante ultricies nisi vel augue
@@ -419,7 +425,7 @@
                             <div class="col-md-4">
                                 <div class="card animated flipInX animation-delay-3">
                                     <blockquote class="blockquote-avatar withripple">
-                                        <img src="<%= assets %>/img/demo/avatar.png" alt=""
+                                        <img ng-src="<%= assets %>/img/demo/avatar.png" alt=""
                                             class="avatar hidden-xs">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit. Integer posuere erat a ante ultricies nisi vel augue
@@ -431,7 +437,7 @@
                             <div class="col-md-4">
                                 <div class="card animated flipInX animation-delay-4">
                                     <blockquote class="blockquote-avatar withripple">
-                                        <img src="<%= assets %>/img/demo/avatar.png" alt=""
+                                        <img ng-src="<%= assets %>/img/demo/avatar.png" alt=""
                                             class="avatar hidden-xs">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit. Integer posuere erat a ante ultricies nisi vel augue
@@ -451,7 +457,7 @@
                             <div class="col-md-4">
                                 <div class="card animated flipInX animation-delay-2">
                                     <blockquote class="blockquote-avatar withripple">
-                                        <img src="<%= assets %>/img/demo/avatar.png" alt=""
+                                        <img ng-src="<%= assets %>/img/demo/avatar.png" alt=""
                                             class="avatar hidden-xs">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit. Integer posuere erat a ante ultricies nisi vel augue
@@ -463,7 +469,7 @@
                             <div class="col-md-4">
                                 <div class="card animated flipInX animation-delay-3">
                                     <blockquote class="blockquote-avatar withripple">
-                                        <img src="<%= assets %>/img/demo/avatar.png" alt=""
+                                        <img ng-src="<%= assets %>/img/demo/avatar.png" alt=""
                                             class="avatar hidden-xs">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit. Integer posuere erat a ante ultricies nisi vel augue
@@ -475,7 +481,7 @@
                             <div class="col-md-4">
                                 <div class="card animated flipInX animation-delay-4">
                                     <blockquote class="blockquote-avatar withripple">
-                                        <img src="<%= assets %>/img/demo/avatar.png" alt=""
+                                        <img ng-src="<%= assets %>/img/demo/avatar.png" alt=""
                                             class="avatar hidden-xs">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit. Integer posuere erat a ante ultricies nisi vel augue
@@ -495,7 +501,7 @@
                             <div class="col-md-4">
                                 <div class="card animated flipInX animation-delay-2">
                                     <blockquote class="blockquote-avatar withripple">
-                                        <img src="<%= assets %>/img/demo/avatar.png" alt=""
+                                        <img ng-src="<%= assets %>/img/demo/avatar.png" alt=""
                                             class="avatar hidden-xs">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit. Integer posuere erat a ante ultricies nisi vel augue
@@ -507,7 +513,7 @@
                             <div class="col-md-4">
                                 <div class="card animated flipInX animation-delay-3">
                                     <blockquote class="blockquote-avatar withripple">
-                                        <img src="<%= assets %>/img/demo/avatar.png" alt=""
+                                        <img ng-src="<%= assets %>/img/demo/avatar.png" alt=""
                                             class="avatar hidden-xs">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit. Integer posuere erat a ante ultricies nisi vel augue
@@ -519,7 +525,7 @@
                             <div class="col-md-4">
                                 <div class="card animated flipInX animation-delay-4">
                                     <blockquote class="blockquote-avatar withripple">
-                                        <img src="<%= assets %>/img/demo/avatar.png" alt=""
+                                        <img ng-src="<%= assets %>/img/demo/avatar.png" alt=""
                                             class="avatar hidden-xs">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit. Integer posuere erat a ante ultricies nisi vel augue
@@ -544,15 +550,15 @@
     </div>
 </div>
 
-<div class="container mt-6" ng-init="init()">
+<div class="container mt-6" ng-init="init()" ng-cloak>
     <h2 class="text-center color-primary mb-4">{{"home.CLIENT_CAROUSEL_TITLE"
         | translate}}</h2>
         
     <div class="owl-carousel image-carousel carousel-widget " data-autoplay="1000" data-items-lg="6" data-items-md="5" data-items-sm="4" data-items-xs="3" data-items-xxs="2" data-loop="true" data-margin="60" data-nav="false" data-pagi="false" id="oc-clients">
-        <div class="oc-item" style="width: 140px; margin-right: 60px;"
+        <div class="oc-item owlCarousel"
             ng-repeat="image in clientImages">
             <a href="{{image.link}}" target="_new"> <img alt="Clients"
-                src="{{image.image}}">
+                ng-src="{{image.image}}">
             </a>
         </div>
     </div>

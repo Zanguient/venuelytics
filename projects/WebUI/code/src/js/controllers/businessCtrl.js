@@ -1,6 +1,6 @@
 "use strict";
-app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','AjaxService',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, AjaxService) {
+app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','AjaxService', 'APP_ARRAYS',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $window, AjaxService, APP_ARRAYS) {
 
     		$log.log('Inside Business Controller.');
     		
@@ -23,6 +23,9 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 phone: ''
             };
             self.init = function() {
+                self.cityNames = APP_ARRAYS.cityName;
+                self.listOfCategory = APP_ARRAYS.categories;
+                self.listOfRoles = APP_ARRAYS.roles;
             };
 
             self.init();

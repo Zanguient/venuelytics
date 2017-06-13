@@ -31,7 +31,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                         self.loadingBar = false;
                     });
                 } else if(item === 'South America') {
-                    AjaxService.getVenuesByCountry('SA').then(function(response) {
+                    AjaxService.getVenuesByCountry('SAM').then(function(response) {
                         self.listOfCities = response;
                         self.loadingBar = false;
                     });

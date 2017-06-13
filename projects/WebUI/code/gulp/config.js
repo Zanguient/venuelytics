@@ -67,7 +67,7 @@ module.exports = {
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js',
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
 			'src/app.js',
-			'src/constants.js',
+			'src/js/constants/constants.js',
 			'src/js/controllers/cityCtrl.js',
 			'src/js/controllers/homeCtrl.js',
 			'src/js/controllers/venueCtrl.js',

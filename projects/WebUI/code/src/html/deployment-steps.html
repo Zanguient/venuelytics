@@ -1,20 +1,17 @@
 <center>
-	<h1 class="color-success">{{"business.DEPLOY_STEPS" | translate}}</h1>
+	<h1 class="color-success" ng-cloak>{{"business.DEPLOY_STEPS" | translate}}</h1>
 </center>
-<form class="search-form">
+<form class="search-form" ng-cloak>
 	<div class="form-group">
 		<div class="col-md-10">
 
 			<div class="post-container">                
-			    <div class="post-thumb"><img src="{{businessImage}}" style="width: 100px; height: 100px;" /></div>
+			    <div class="post-thumb"><img ng-src="{{businessImage}}" id="deployPost"/></div>
 			    <div class="post-content">
 			        <h3 class="post-title">{{selectedVenueName || newUser.businessName}}</h3>
 			        <p>{{newUser.address}}</p>
 			    </div>
 			</div>
-
-
-
 		</div>
 	</div>
 		<div class="form-group">
@@ -23,7 +20,7 @@
 				<b class="control-label">{{"business.LINK" | translate}}</b>
 				<br>
 				<label>http://bit.ly/1RmnUT</label>
-				<hr style="margin-top: 0px;">
+				<hr id="underLine">
 			</div>
 		</div>
 			<div class="form-group">
@@ -45,11 +42,6 @@
 							{{"business.DEPLOY_COPY" | translate}}
 						</button>
 					</div>
-					<div class="form-group is-empty" id="formMargin">
-					    <label id="deployStepsLabel">{{"business.DEPLOY_EMAIL" | translate}}</label>
-					    <input id="deployStepsInput" type="text" />
-					    <button class="btn btn-raised btn-success">{{"business.DEPLOY_SEND" | translate}}</button>
-					</div>
 
 				</div>
 			</div>
@@ -59,7 +51,9 @@
 					<b class="control-label">{{"business.URL" | translate}}</b>
 					<br>
 					<label>http://bit.ly/1RmnUT</label>
-					<hr style="margin-top: 0px;">
+					<hr id="underLine">
 				</div>
+			<button class="btn btn-raised btn-success sendEmailButton">SEND BY EMAIL</button>
 			</div>
+			
 </form>

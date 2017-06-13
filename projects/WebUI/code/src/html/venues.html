@@ -1,4 +1,4 @@
-<div class="ms-hero-page ms-hero-img-keyboard">
+<div class="ms-hero-page ms-hero-img-keyboard" ng-cloak>
     <div class="container">
         <div class="text-center">
             <h1
@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div class="container container-full">
+<div class="container container-full" ng-cloak>
     <a href="/cities" id="navigation"><h3>{{"venue.HOME" |
             translate}} > {{"venue.CITIES" | translate}}</h3></a>
     <div class="ms-paper">
@@ -58,27 +58,10 @@
                                                     <p>{{venue.description | limitTo: 75
                                                         }}{{venue.description.length > 75 ? '...' :''}}</p>
                                                     <div class="row col-lg-8" id="serviceIcon">
-                                                        <a ng-click="selectedServices(venue, 'k')"><img
-                                                            src="assets/img/karaoke.png" id="serviceSmallIcon" title="Bowling"
-                                                            ng-show="venue.info['Advance.KarokeRequest.enable'] == 'Y'"></img></a>
-                                                        <a ng-click="selectedServices(venue, 'b')" id="cityImage"><i
-                                                            class="fa fa-glass"
-                                                            ng-show="venue.info['Advance.BottleService.enable'] == 'Y'"></i></a>
-                                                        <a ng-click="selectedServices(venue, 'o')" id="cityImage"><i
-                                                            class="fa fa-shopping-bag"
-                                                            ng-show="venue.info['Advance.deals.enable'] == 'Y'"></i></a>
-                                                        <a ng-click="selectedServices(venue, 'f')"><img
-                                                            src="assets/img/food.png" id="serviceSmallIcon" title="Food"
-                                                            ng-show="venue.info['Advance.FoodRequest.enable'] == 'Y'"></img></a>
-                                                        <a ng-click="selectedServices(venue, 'g')"><img
-                                                            src="assets/img/guest.png" id="serviceSmallIcon" title="GuestList"
-                                                            ng-show="venue.info['Advance.GuestList.enable'] == 'Y'"></img></a>
-                                                        <a ng-click="selectedServices(venue, 'l')"><img
-                                                            src="assets/img/lostfound.png" id="serviceSmallIcon" title="Lost & Found"
-                                                            ng-show="venue.info['Advance.LostFacus.enable'] == 'Y'"></img></a>
-                                                        <a ng-click="selectedServices(venue, 'p')"><img
-                                                            src="assets/img/private.png" id="serviceSmallIcon" title="Private Event"
-                                                            ng-show="venue.info['Advance.BookBanqetHall.enable'] == 'Y'"></img></a>
+                                                        <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
+                                                            ng-src="{{service.image}}" id="serviceSmallIcon" title="{{service.title}}"
+                                                            ng-show="venue.info['{{service.fieldName}}'] == 'Y'"></img>
+                                                            </a>
                                                     </div>
 
                                                     <div ng-hide="!venue.distanceInMiles" id="distance"
