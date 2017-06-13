@@ -33,7 +33,7 @@ app
   })
   .constant('APP_ARRAYS', {
     'country': ['North America', 'Canada', 'South America', 'India'],
-    'serviceTabs': ['CLUB', 'CASINO', 'BAR', 'KARAOKE', 'BOWLING', 'RESTAURANT'],
+    'serviceTabs': ['CLUBS', 'CASINOS', 'BARS', 'KARAOKES', 'BOWLINGS', 'RESTAURANTS'],
     'serviceTabs1': [{'title': 'CLUB', 'icon': 'fa fa-diamond'},
                     {'title': 'CASINO', 'icon': 'fa fa-diamond'},
                     {'title': 'BAR', 'icon': 'fa fa-glass'},

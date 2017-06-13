@@ -207,6 +207,11 @@
     width: 179px;
     height: 55px;
   }
+
+  .sendEmailButton {
+    width: 200px !important;
+    margin-left: 10px !important;
+  }
 }
 /*iPhone 5*/
 @media only screen and (min-device-width: 320px) and (max-device-width:
@@ -333,6 +338,11 @@
     width: 460px;
     height: 55px;
   }
+
+  .sendEmailButton {
+    width: 200px !important;
+    margin-left: 10px !important;
+  }
 }
 
 /*iPhone 6*/
@@ -347,6 +357,11 @@
   #img-social {
     width: 187px;
     height: 55px;
+  }
+
+  .sendEmailButton {
+    width: 200px !important;
+    margin-left: 10px !important;
   }
 }
 
@@ -462,6 +477,11 @@
   .img-container {
     width: 460px;
     height: 55px;
+  }
+
+  .sendEmailButton {
+    width: 200px !important;
+    margin-left: 10px !important;
   }
 }
 
@@ -841,19 +861,19 @@
   margin-top: 0px;
 }
 
-#businessSearchAddress {
+.businessSearchAddress {
   color: black;
 }
 
-#venueCard {
+.venueCard {
   width: 100%;
 }
 
-#features {
+.features {
   height: 370px;
 }
 
-#owlCarousel {
+.owlCarousel {
   width: 140px;
   margin-right: 60px;
 }

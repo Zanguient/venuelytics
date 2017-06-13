@@ -1,6 +1,6 @@
 <div class="container" id="venueBanner" ng-cloak>
     <div class="banner-fill-img">
-        <div class="card" id="venueCard">
+        <div class="card venueCard">
             <div id="carousel-example-generic" class="ms-carousel carousel slide"
                 data-ride="carousel">
                 <!-- Indicators -->
@@ -21,7 +21,13 @@
                         <div class="custom-carousel">
                             <p><b><font size="3">{{"home.NEXT_GENERATION" |
                                 translate}}</font></b></p>
+                                &
                             <p><b><font size="3">{{"home.REAL_TIME" |
+                                translate}}</font></b></p>
+                            <p><b><font size="3">{{"home.PERSONALIZED_SERVICES" |
+                                translate}}</font></b></p>
+
+                            <p><b><font size="3">{{"home.REALTIME_INSIGHTS" |
                                 translate}}</font></b></p>
                             <center>
                                 <div class="img-container" id="imgContainer">
@@ -219,7 +225,7 @@
         numquam iusto eum illum, ea quisquam.
     </p> -->
     <div
-        class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4" ng-repeat="feature in venueLyticsFeatures" id="features">
+        class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
         <div class="text-center card-block">
             <span class="ms-icon ms-icon-circle ms-icon-xxlg {{feature.color}}"><i
                 class="{{feature.icon}}"></i></span>
@@ -549,7 +555,7 @@
         | translate}}</h2>
         
     <div class="owl-carousel image-carousel carousel-widget " data-autoplay="1000" data-items-lg="6" data-items-md="5" data-items-sm="4" data-items-xs="3" data-items-xxs="2" data-loop="true" data-margin="60" data-nav="false" data-pagi="false" id="oc-clients">
-        <div class="oc-item" id="owlCarousel"
+        <div class="oc-item owlCarousel"
             ng-repeat="image in clientImages">
             <a href="{{image.link}}" target="_new"> <img alt="Clients"
                 ng-src="{{image.image}}">
