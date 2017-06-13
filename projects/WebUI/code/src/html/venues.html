@@ -1,4 +1,4 @@
-<div class="ms-hero-page ms-hero-img-keyboard">
+<div class="ms-hero-page ms-hero-img-keyboard" ng-cloak>
     <div class="container">
         <div class="text-center">
             <h1
@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div class="container container-full">
+<div class="container container-full" ng-cloak>
     <a href="/cities" id="navigation"><h3>{{"venue.HOME" |
             translate}} > {{"venue.CITIES" | translate}}</h3></a>
     <div class="ms-paper">
@@ -59,7 +59,7 @@
                                                         }}{{venue.description.length > 75 ? '...' :''}}</p>
                                                     <div class="row col-lg-8" id="serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
-                                                            src="{{service.image}}" id="serviceSmallIcon" title="{{service.title}}"
+                                                            ng-src="{{service.image}}" id="serviceSmallIcon" title="{{service.title}}"
                                                             ng-show="venue.info['{{service.fieldName}}'] == 'Y'"></img>
                                                             </a>
                                                     </div>

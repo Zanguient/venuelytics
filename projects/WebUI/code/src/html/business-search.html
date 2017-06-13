@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-cloak>
     <div class="row">
         <div ng-hide="claimBusiness == true">
             <center>
@@ -43,7 +43,7 @@
                                     <ul class="buttonNav">
                                         <li ng-repeat="slide in business.imageUrls"
                                             ng-class="{'active':isActive($index)}"><img
-                                            id="sliderThumb" src="{{slide.originalUrl}}"
+                                            id="sliderThumb" ng-src="{{slide.originalUrl}}"
                                             class="img-responsive" ng-click="showPhoto(slide,$index);" />
                                         </li>
                                     </ul>
@@ -92,23 +92,7 @@
             <div ng-include="'create-business.html'"></div>
         </div>
 
-        <div class="modal modal-warning" id="successView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-            <div class="modal-dialog animated zoomIn animated-3x" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-                        <h3 class="modal-title" id="myModalLabel6" ng-cloak>{{"business.REGISTERED" |
-                            translate}}</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p ng-cloak>{{"business.SUCCESS" | translate}}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
-                        <button type="button" class="btn  btn-warning" ng-click="createBusinessAccount()" data-dismiss="modal">Continue</button>
-                    </div>
-                </div>
-            </div>
+        <div ng-include="'partials/modal-dialog.html'">
         </div>
 
 

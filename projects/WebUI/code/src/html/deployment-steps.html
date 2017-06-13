@@ -1,12 +1,12 @@
 <center>
-	<h1 class="color-success">{{"business.DEPLOY_STEPS" | translate}}</h1>
+	<h1 class="color-success" ng-cloak>{{"business.DEPLOY_STEPS" | translate}}</h1>
 </center>
-<form class="search-form">
+<form class="search-form" ng-cloak>
 	<div class="form-group">
 		<div class="col-md-10">
 
 			<div class="post-container">                
-			    <div class="post-thumb"><img src="{{businessImage}}" id="deployPost"/></div>
+			    <div class="post-thumb"><img ng-src="{{businessImage}}" id="deployPost"/></div>
 			    <div class="post-content">
 			        <h3 class="post-title">{{selectedVenueName || newUser.businessName}}</h3>
 			        <p>{{newUser.address}}</p>
