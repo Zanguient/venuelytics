@@ -55,8 +55,8 @@
                                                             | limitTo: 20 }}{{venue.venueName.length > 20 ? '...'
                                                             :''}}</a>
                                                     </h2>
-                                                    <p>{{venue.description | limitTo: 75
-                                                        }}{{venue.description.length > 75 ? '...' :''}}</p>
+                                                    <p>{{venue.description | limitTo: 90
+                                                        }}{{venue.description.length > 90 ? '...' :''}}</p>
                                                     <div class="row col-lg-8" id="serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
                                                             ng-src="{{service.image}}" id="serviceSmallIcon" title="{{service.title}}"
