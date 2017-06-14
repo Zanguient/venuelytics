@@ -5,6 +5,22 @@
 	"KARAOKE":"KARAOKE",
 	"RESTAURANTS":"RESTAURANT",
 	"BOWLING":"BOWLING",
+	"FEATURE_REAL_TIME_RES": "Real-Time Reservations",
+	"FEATURE_REAL_TIME_DESC": "In-Venue & Pre-Booking of Table, Bottle Services over Mobile Web, App, Notifications, SMS & Email",
+	"FEATURE_FOOD_DRINK": "Food & Drink Services",
+	"FEATURE_FOOD_DRINK_DESC": "Ordering Food & Drinks for Delivery & Pickup at the Venue",
+	"FEATURE_GUEST_LIST":"Guest List",
+	"FEATURE_GUEST_LIST_DESC": "Easy Access To New & Existing Customers. Grow the customer base with Guest Registration & WIFI",
+	"FEATURE_ORDER_PAY": "Order & Pay",
+	"FEATURE_ORDER_PAY_DESC": "Request for Premium Services with instant Mobile Pay",
+	"FEATURE_BUSINESS":"Business Analytics",
+	"FEATURE_BUSINESS_DESC":"Customer Insights, Predictive Analytics & Patent Pending Machine Learning Technology",
+	"FEATURE_WIFI":"WIFI & White Label Solution",
+	"FEATURE_WIFI_DESC":"Access to the reservations, ordering & payment via white label app & WIFI Hotspot",
+	"FEATURE_LOYALTY":"Campaign & Loyalty Management",
+	"FEATURE_LOYALTY_DESC":"Personalized Deals, Offers, Digital Rewards, Events and Booking.",
+	"FEATURE_PRIVATE_EVENT":"Private Events",
+	"FEATURE_PRIVATE_EVENT_DESC":"Book Banquet Halls, Karaoke Rooms & Event Tickets",
 	"home":{
 		"CLIENT_CAROUSEL_TITLE":"OUR CUSTOMERS, PARTNERS & FEATURED VENUES",
 		"WELCOME_HEADING_1":"Welcome to VenueLytics!",
@@ -44,7 +60,9 @@
 		"EVENTS_DESCRIPTION":"Communication, schedules and updates from promoters, hosts, artists and venues",
 		"BUSINESS_ANALYTICS":"BUSINESS ANALYTICS",
 		"BUSINESS_ANALYTICS_DESCRIPTION":"Customer insights, Prediction, Personalized Services, Cab & Limo Booking, Valet Parkings & VIP Access",
-		"OUR_PRICING":"OUR PRICING"
+		"OUR_PRICING":"OUR PRICING",
+		"NEXT_BUTTON":"Next",
+		"PREVIOUS_BUTTON":"Previous"
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
@@ -157,7 +175,8 @@
 		"DESCRIPTION":"We believe in Personalized, Real-Time Engaging Entertainment Experiences.",
 		"EMAIL_ADDRESS":"Email Adress",
 		"COPY":"Copyrights",
-		"RIGHTS":"2017 All Rights Reserved by VenueLytics Inc"
+		"RIGHTS":"2017 All Rights Reserved by VenueLytics Inc",
+		"SITE_MAP": "Sitemap"
 
 	},
 	"contact": {

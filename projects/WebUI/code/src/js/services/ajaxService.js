@@ -2,7 +2,7 @@
  * @author Saravanakumar K
  * @date MAR'24 2017
  */
- "use strict";
+"use strict";
 app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL, $log) {
 
     this.getVenues = function(id, city, venueType, lat, long) {
@@ -43,13 +43,13 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
     };
 
 
-    this.gettingLocation = function(lat, long) {
+    this.gettingLocation = function(lat, long, country) {
 
         var url = null;
         if (lat && long) {
             url = RestURL.baseURL + '/venues/cities?lat=' + lat + '&lng=' + long;
         } else {
-            url = RestURL.baseURL + '/venues/cities';
+            url = RestURL.baseURL + '/venues/cities?size=50&country=' + country;
         }
         return $http({
             method: 'GET',
@@ -62,9 +62,13 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
-    this.getVenuesByCountry = function(countryName) {
+    this.getVenuesByCountry = function(countryName, from) {
 
-        var url = RestURL.baseURL + '/venues/cities?country=' + countryName;
+        var url = RestURL.baseURL + '/venues/cities?country=' + countryName + '&size=50';
+
+        if(from !== 0) {
+            url = url + '&from=' + from;
+        }
         
         return $http({
             method: 'GET',

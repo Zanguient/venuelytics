@@ -9,10 +9,12 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
     		$log.log('Inside City Controller.');
     		
     		var self = $scope;
+            var nextPageSize = 0;
+            var previousPageSize = 0;
 
-            self.gettingLocation = function(lat, long) {
+            self.gettingLocation = function(lat, long, country) {
                 self.loadingBar = true;
-                AjaxService.gettingLocation(lat, long).then(function(response) {
+                AjaxService.gettingLocation(lat, long, country).then(function(response) {
                     self.listOfCities = response;
                     self.loadingBar = false;
                     $log.info('Success getting cities.');
@@ -21,31 +23,14 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 });
             };
 
-            $scope.getCountry = function (item) {
+            $scope.getCountry = function (countryObject) {
                 self.loadingBar = true;
                 self.listOfCities = '';
-                $scope.selectedCountry = item;
-                if(item === 'North America') {
-                    AjaxService.getVenuesByCountry('USA').then(function(response) {
-                        self.listOfCities = response;
-                        self.loadingBar = false;
-                    });
-                } else if(item === 'South America') {
-                    AjaxService.getVenuesByCountry('SAM').then(function(response) {
-                        self.listOfCities = response;
-                        self.loadingBar = false;
-                    });
-                } else if(item === 'Canada') {
-                    AjaxService.getVenuesByCountry('CANADA').then(function(response) {
-                        self.listOfCities = response;
-                        self.loadingBar = false;
-                    });
-                } else {
-                    AjaxService.getVenuesByCountry('IND').then(function(response) {
-                        self.listOfCities = response;
-                        self.loadingBar = false;
-                    });
-                }
+                self.selectedCountry = countryObject;
+                AjaxService.getVenuesByCountry(countryObject.shortName, 0).then(function(response) {
+                    self.listOfCities = response;
+                    self.loadingBar = false;
+                });
             };
 
             self.init = function() {
@@ -74,11 +59,11 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                             });
                         },
                         function (error) { 
-                            self.gettingLocation();
+                            // self.gettingLocation();
                         });
                     } else{
-
-                        self.gettingLocation();
+                        $log.info("Do nothing");
+                        // self.gettingLocation();
                     }    
                 }				
             };
@@ -88,4 +73,26 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
     		self.selectCity = function(city) {
                 $location.url('/venues/'+city.name);
     		};
+
+            self.previousPage = function() {
+                $log.info('Inside previousPage');
+                $log.info("Previous page size: "+previousPageSize);
+                if(nextPageSize > 0) {
+                    nextPageSize = nextPageSize - 50;
+                    AjaxService.getVenuesByCountry(self.selectedCountry.shortName, nextPageSize).then(function(response) {
+                    self.listOfCities = response;
+                    self.loadingBar = false;
+                });
+                }
+            };
+
+            self.nextPage = function() {
+                nextPageSize = nextPageSize + 50;
+                $log.info("Next page size: "+nextPageSize);
+                AjaxService.getVenuesByCountry(self.selectedCountry.shortName, nextPageSize).then(function(response) {
+                    self.listOfCities = response;
+                    self.loadingBar = false;
+                });
+                $log.info('Inside nextPage');
+            };
     }]);

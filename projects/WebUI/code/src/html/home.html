@@ -228,8 +228,8 @@
         class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
         <div class="text-center card-block">
             <img ng-src="{{feature.image}}" class="ms-icon ms-icon-xxlg ms-icon-circle"></img>
-            <h4 class="{{feature.color}}">{{feature.title}}</h4>
-            <p class="">{{feature.description}}</p>
+            <h4 class="{{feature.color}}">{{feature.title | translate}}</h4>
+            <p class="">{{feature.description | translate}}</p>
         </div>
     </div>
 </div>
@@ -308,7 +308,7 @@
     <div class="text-center mb-4">
         <h2 class="uppercase color-primary">{{'home.OUR_PRICING' | translate}}</h2>
         <div class="text-center">
-                    <a href="javascript:void(0)" class="btn btn-success btn-raised"><i class="fa fa-address-book"></i> Contact Us</a>
+                    <a href="javascript:void(0)" class="btn btn-success btn-raised"><i class="fa fa-address-book"></i> {{'contact.CONTACT_US' | translate}}</a>
                 </div>
     </div>
     <!-- <div class="row">

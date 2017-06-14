@@ -116,8 +116,7 @@
   }
 
   #countryDropdown {
-    width: 125px;
-    margin-right: : 10px;
+    background-color: aliceblue;
   }
 
   #contact {
@@ -531,8 +530,7 @@
 }
 
 #countryDropdown {
-  margin-left: 75%;
-  color: black;
+  background-color: aliceblue;
 }
 
 #venueImages {
