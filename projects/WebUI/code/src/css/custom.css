@@ -215,6 +215,10 @@
   #imgContainer {
     margin-left: 250px;
   }
+
+  .paragraph-bottom {
+    margin-bottom: 0px;
+  }
 }
 /*iPhone 5*/
 @media only screen and (min-device-width: 320px) and (max-device-width:
@@ -901,4 +905,19 @@
 .owlCarousel {
   width: 140px;
   margin-right: 60px;
+}
+
+.serviceTabIcons {
+  width: 15px;
+  height: 15px;
+  margin-bottom: 5px;
+}
+
+.required label {
+    font-weight: bold;
+}
+.required label:after {
+    color: #e32;
+    content: ' *';
+    display:inline;
 }

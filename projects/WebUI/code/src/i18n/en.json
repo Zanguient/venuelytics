@@ -1,9 +1,9 @@
 {
-	"CLUB":"CLUB",
-	"CASINO":"CASINO",
-	"BAR":"BAR",
+	"CLUBS":"CLUB",
+	"CASINOS":"CASINO",
+	"BARS":"BAR",
 	"KARAOKE":"KARAOKE",
-	"RESTAURANT":"RESTAURANT",
+	"RESTAURANTS":"RESTAURANT",
 	"BOWLING":"BOWLING",
 	"home":{
 		"CLIENT_CAROUSEL_TITLE":"OUR CUSTOMERS, PARTNERS & FEATURED VENUES",
@@ -43,7 +43,8 @@
 		"EVENTS":"EVENTS & CAMPAIGN MANAGEMENT",
 		"EVENTS_DESCRIPTION":"Communication, schedules and updates from promoters, hosts, artists and venues",
 		"BUSINESS_ANALYTICS":"BUSINESS ANALYTICS",
-		"BUSINESS_ANALYTICS_DESCRIPTION":"Customer insights, Prediction, Personalized Services, Cab & Limo Booking, Valet Parkings & VIP Access"
+		"BUSINESS_ANALYTICS_DESCRIPTION":"Customer insights, Prediction, Personalized Services, Cab & Limo Booking, Valet Parkings & VIP Access",
+		"OUR_PRICING":"OUR PRICING"
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
