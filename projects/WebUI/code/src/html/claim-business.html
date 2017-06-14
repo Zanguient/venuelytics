@@ -5,7 +5,7 @@
                 <font size="3">{{"business.EMAIL" | translate}}:</font>
             </label>
             <div class="col-md-10">
-                <input type="email" id="ms-form-pass" ng-model="newUser.emailId" name="claimEmailId" class="form-control" required ng-pattern="/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/"> 
+                <input type="email" id="ms-form-pass" ng-model="claimNewBusiness.emailId" name="claimEmailId" class="form-control" required ng-pattern="/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/"> 
                 <span class="error-message" ng-show="myFormClaim.claimEmailId.$error.pattern">{{"business.FORM_EMAIL_REQUIRED" | translate}}</span> 
             </div>
         </div>
@@ -14,7 +14,7 @@
                 <font size="3">{{"business.PHONE" | translate}}:</font>
             </label>
             <div class="col-md-10">
-                <input type="text" id="ms-form-pass" class="form-control" name="phone" ng-model="newUser.phone" required>
+                <input type="number" id="ms-form-pass" class="form-control" name="phone" ng-model="claimNewBusiness.phone" required>
                     <span class="error-message" ng-show="showMessage(myFormClaim.phone)">{{"business.FORM_PHONE_REQUIRED" | translate}}</span>
             </div>
         </div>
@@ -24,7 +24,7 @@
 
                 <div class="col-md-10">
                     <select class="btn  dropdown-toggle form-control" required
-                        ng-model="newUser.role">
+                        ng-model="claimNewBusiness.role">
                         <option>{{"role.MANAGER" | translate}}</option>
                         <option>{{"role.OWNER" | translate}}</option>
                     </select>
@@ -32,7 +32,7 @@
             </div>
         <center>
             <div >
-                <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit(claimB)" novalidate="novalidate" ng-disabled="myFormClaim.$invalid">{{"business.SUBMIT" | translate}}</button>
+                <button type="submit" class="btn btn-raised btn-primary" ng-click="businessSubmit(claimNewBusiness)" novalidate="novalidate" ng-disabled="myFormClaim.$invalid">{{"business.SUBMIT" | translate}}</button>
                 <button type="button" class="btn btn-raised btn-danger" ng-click="cancel()">{{"business.CANCEL" | translate}}</button>
             </div>
         </center>

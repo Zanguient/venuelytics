@@ -93,4 +93,17 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
+    this.claimBusiness = function(venueId, claimBusinessObject) {
+        return $http({
+            method: 'POST',
+            url: RestURL.baseURL + '/venues/' + venueId,
+            data: claimBusinessObject
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
 }]);

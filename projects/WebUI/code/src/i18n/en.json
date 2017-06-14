@@ -1,9 +1,9 @@
 {
-	"CLUBS":"CLUB",
-	"CASINOS":"CASINO",
-	"BARS":"BAR",
+	"CLUBS":"CLUBS",
+	"CASINOS":"CASINOS",
+	"BARS":"BARS",
 	"KARAOKE":"KARAOKE",
-	"RESTAURANTS":"RESTAURANT",
+	"RESTAURANTS":"RESTAURANTS",
 	"BOWLING":"BOWLING",
 	"FEATURE_REAL_TIME_RES": "Real-Time Reservations",
 	"FEATURE_REAL_TIME_DESC": "In-Venue & Pre-Booking of Table, Bottle Services over Mobile Web, App, Notifications, SMS & Email",
