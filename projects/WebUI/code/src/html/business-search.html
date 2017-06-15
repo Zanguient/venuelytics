@@ -2,13 +2,13 @@
     <div class="row">
         <div ng-hide="claimBusiness == true">
             <center>
-                <h1 class="color-success" ng-cloak>{{"business.BUSINESS_SEARCH" |
+                <h1 class="color-success">{{"business.BUSINESS_SEARCH" |
                     translate}}</h1>
             </center>
             <form class="form-horizontal" id="businessSearchForm">
                 <fieldset>
                     <div class="form-group is-empty">
-                        <label for="searchBusiness" class="col-md-2 control-label" ng-cloak>
+                        <label for="searchBusiness" class="col-md-2 control-label">
                             <font size="3">{{"business.BUSINESS_NAME" | translate}}:</font>
                         </label>
                         <div class="col-md-10">
@@ -25,7 +25,7 @@
         </div>
         <div id="claimCard">
             <center>
-                <h5 ng-show="businessDetailLength == 0" ng-cloak>{{"business.SEARCH_BUSINESS_MESSAGE"
+                <h5 ng-show="businessDetailLength == 0">{{"business.SEARCH_BUSINESS_MESSAGE"
                     | translate}}</h5>
             </center>
 
@@ -50,14 +50,14 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-5 col-sm-6">
-                                <h3 class="no-mt" ng-cloak>{{business.venueName}}</h3>
-                                <p class="mb-4" ng-cloak>{{business.description | limitTo: 200
+                                <h3 class="no-mt">{{business.venueName}}</h3>
+                                <p class="mb-4">{{business.description | limitTo: 200
                                     }}{{business.description.length > 200 ? '...' :''}}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-8 col-md-7 col-sm-6">
-                                <label ng-cloak><b class="businessSearchAddress" >{{business.address}}</b></label>
+                                <i class="mr-1 fa fa-map-marker"></i><label><b class="businessSearchAddress" >{{business.address}}</b></label>
                                 <br /> <a href="{{business.website}}" target="_blank">{{business.website}}</a>
                             </div>
                             <div class="col-lg-4 col-md-5 col-sm-6 text-right">
@@ -83,7 +83,7 @@
         <div ng-show="claimBusiness == true">
             <div ng-hide="hideForm == true">
                 <center>
-                    <h1 class="color-success" ng-cloak>{{selectedVenueName}}</h1>
+                    <h1 class="color-success">{{selectedVenueName}}</h1>
                 </center>
                 <div ng-include="'claim-business.html'"></div>
             </div>
@@ -92,7 +92,9 @@
             <div ng-include="'create-business.html'"></div>
         </div>
 
-        <div ng-include="'partials/modal-dialog.html'">
+        <div ng-include="'custom-dialog.html'">
+        </div>
+        
         </div>
 
 

@@ -18,9 +18,9 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     self.selectedCity = $routeParams.cityName;
                     //self.selectedType = VenueService.selectedVenueType;
                     self.venueName =    self.detailsOfVenue.venueName;
-                    if($routeParams.serviceType == 'p' || $routeParams.serviceType == 'b' || $routeParams.serviceType == 'g') {
+                    if($routeParams.serviceType === 'p' || $routeParams.serviceType === 'b' || $routeParams.serviceType === 'g') {
                         self.row = 1;
-                    } else if($routeParams.serviceType == 't' || $routeParams.serviceType == 'f' || $routeParams.serviceType == 'd') {
+                    } else if($routeParams.serviceType === 't' || $routeParams.serviceType === 'f' || $routeParams.serviceType === 'd') {
                         self.row = 2;    
                     } else {
                         self.row = 4;

@@ -64,7 +64,6 @@ module.exports = {
             'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
             'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
             'bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js',
-            'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js',
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
             'bower_components/parsleyjs/dist/parsley.min.js',

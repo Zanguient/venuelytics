@@ -17,9 +17,9 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 emailId: '',
                 phone:''
             };
-            self.claim = {
-                name: '',
-                email: '',
+            self.claimNewBusiness = {
+                role: '',
+                emailId: '',
                 phone: ''
             };
             self.init = function() {
@@ -46,6 +46,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.claim = function(selectedVenue) {
                 $window.scrollTo(0, 0);
                 self.selectedVenueName = selectedVenue.venueName;
+                self.selectedVenueId = selectedVenue.id;
                 self.claimBusiness = true;
             };
 
@@ -61,7 +62,17 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.claimBusiness = false;
             };
             
-            self.businessSubmit = function() {
+            self.businessSubmit = function(businessClaim) {
+                var businessObject = {
+                    "business.contactName": self.selectedVenueName,
+                    "business.contactEmail": businessClaim.emailId,
+                    "business.contactPhone": businessClaim.phone,
+                    "business.contactRole": businessClaim.role
+                };
+
+                AjaxService.claimBusiness(self.selectedVenueId, businessObject).then(function(response) {
+                    $log.info("Claim business response: "+angular.toJson(response));
+                });
                 self.businessData = true;
                 self.hideForm = true;
             };
@@ -78,9 +89,9 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.claimForm = true;
             };
             self.submitForm = function() {
-                angular.forEach(self.myForm.$error.required, function(field) {
+                /*angular.forEach(self.myFormClaim.$error.required, function(field) {
                     field.$setDirty();
-                });
+                });*/
             };
             self.showMessage = function(input) {
                 var show = input.$invalid && (input.$dirty || input.$touched);

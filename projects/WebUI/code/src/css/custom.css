@@ -116,8 +116,7 @@
   }
 
   #countryDropdown {
-    width: 125px;
-    margin-right: : 10px;
+    background-color: aliceblue;
   }
 
   #contact {
@@ -214,6 +213,10 @@
 
   #imgContainer {
     margin-left: 250px;
+  }
+
+  .paragraph-bottom {
+    margin-bottom: 0px;
   }
 }
 /*iPhone 5*/
@@ -527,8 +530,7 @@
 }
 
 #countryDropdown {
-  margin-left: 75%;
-  color: black;
+  background-color: aliceblue;
 }
 
 #venueImages {
@@ -901,4 +903,19 @@
 .owlCarousel {
   width: 140px;
   margin-right: 60px;
+}
+
+.serviceTabIcons {
+  width: 15px;
+  height: 15px;
+  margin-bottom: 5px;
+}
+
+.required label {
+    font-weight: bold;
+}
+.required label:after {
+    color: #e32;
+    content: ' *';
+    display:inline;
 }

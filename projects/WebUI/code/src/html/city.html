@@ -12,22 +12,15 @@
             "city.REAL_TIME_SERVICE" | translate}}</h4>
         <div class="row">
             <div class="form-group">
-                <div class="col-md-4 pull-right" id="countryDropdown">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button"
-                            id="dropDownButton" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="true" ng-bind="selectedCountry">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li ng-repeat="country in countries"><a
-                                ng-click="getCountry(country)">{{country}}</li>
-                        </ul>
-                    </div>
+                <div class="col-md-2 pull-right">
+                    <select class="btn dropdown-toggle form-control" required id="countryDropdown"
+                        ng-model="selectedCountry" ng-options="c.countryName for c in countries" ng-change="getCountry(selectedCountry)">
+                    </select>
+
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-init="gettingLocation(null, null, selectedCountry.shortName)">
             <div class="row" id="loadingCities" ng-show="loadingBar">
                 <div class="progress progress-striped active">
                     <div class="progress-bar progress-bar-success" role="progressbar"
@@ -46,6 +39,24 @@
                     </p>
                 </div>
             </div>
+            <center ng-show="listOfCities.length == 0"><strong>No more cities found.</strong></center>
         </div>
+
+        <nav aria-label="...">
+            <ul class="pager pager-success">
+                <li>
+                    <button ng-click="previousPage()" class="btn btn-raised btn-success">
+                        <span aria-hidden="true">«</span> {{'home.PREVIOUS_BUTTON' | translate}}
+                    </button>
+                </li>
+                <li>
+                    <button ng-click="nextPage()" class="btn btn-raised btn-success">{{'home.NEXT_BUTTON' | translate}}
+                                      
+                        <span aria-hidden="true">»</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
     </div>
 </div>

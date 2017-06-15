@@ -19,10 +19,10 @@
                     class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-6"
                     role="tablist">
                     <li role="presentation" ng-repeat="type in serviceTypes">
-                        <!-- ng-if="clubTab != 0" --> <a href ng-click="setTab(type)"
+                        <!-- ng-if="clubTab != 0" --> <a href ng-click="setTab(type.title)"
                         class="withoutripple" aria-controls="clubs" role="tab"
                         data-toggle="tab"> <!-- ng-init="$index == 0 ? setTab('CLUB') : ''" -->
-                            <i class="zmdi zmdi-home"></i> <span class="hidden-xs">{{type
+                            <img ng-src="{{type.icon}}" class="serviceTabIcons"></img> <span class="hidden-xs">{{type.title
                                 | translate}}</span>
                     </a>
                     </li>
@@ -55,8 +55,8 @@
                                                             | limitTo: 20 }}{{venue.venueName.length > 20 ? '...'
                                                             :''}}</a>
                                                     </h2>
-                                                    <p>{{venue.description | limitTo: 75
-                                                        }}{{venue.description.length > 75 ? '...' :''}}</p>
+                                                    <p>{{venue.description | limitTo: 70
+                                                        }}{{venue.description.length > 70 ? '...' :''}}</p>
                                                     <div class="row col-lg-8" id="serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
                                                             ng-src="{{service.image}}" id="serviceSmallIcon" title="{{service.title}}"
