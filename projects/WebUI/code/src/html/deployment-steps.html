@@ -10,6 +10,8 @@
 			    <div class="post-content">
 			        <h3 class="post-title">{{selectedVenueName || newUser.businessName}}</h3>
 			        <p>{{newUser.address}}</p>
+			        <p>{{selectedVenueAddress}}</p>
+			        <p><a href="{{selectedVenueWebsite}}">{{selectedVenueWebsite}}</a></p>
 			    </div>
 			</div>
 		</div>
@@ -45,7 +47,7 @@
 
 				</div>
 			</div>
-			<div class="form-group">
+			<div>
 				<div class="col-md-10">
 					<br>
 					<b class="control-label">{{"business.URL" | translate}}</b>

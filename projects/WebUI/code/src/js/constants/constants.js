@@ -60,6 +60,6 @@ app
     'categories': [{"category":"WEDDING"}, {"category":"BIRTHDAY PARTY"}, {"category":"EVENT"}, {"category":"BARS"},
                    {"category":"CLUBS"}, {"category":"LOUNGE"}, {"category":"CASINO"}, {"category":"RESTAURANT"},
                    {"category":"HOTEL"}, {"category":"KARAOKE"}, {"category":"BOWLING"}],
-    'roles': [{"role":"MANAGER"}, {"role":"OWNER"}]
+    'roles': [{"role":"GENERAL MANAGER"}, {"role":"OWNER"}, {"role":"MARKETER"}]
 
   });

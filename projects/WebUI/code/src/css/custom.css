@@ -46,6 +46,7 @@
   color: red;
 }
 
+/*Desktop*/
 @media screen and (min-device-width: 1200px) and (max-device-width:
  1600px) {
   #businessImage {
@@ -218,6 +219,11 @@
   .paragraph-bottom {
     margin-bottom: 0px;
   }
+
+  .get-started {
+    width: 500px;
+    margin-left: 320px;
+  }
 }
 /*iPhone 5*/
 @media only screen and (min-device-width: 320px) and (max-device-width:
@@ -354,6 +360,11 @@
   .paragraph-bottom {
     margin-bottom: 0px;
   }
+
+  .get-started {
+    width: 300px;
+    margin-left: 0px;
+  }
 }
 
 /*iPhone 6*/
@@ -384,6 +395,11 @@
 
   .paragraph-bottom {
     margin-bottom: 0px;
+  }
+
+  .get-started {
+    width: 345px;
+    margin-left: 0px;
   }
 }
 
@@ -510,6 +526,11 @@
 
   .paragraph-bottom {
     margin-bottom: 0px;
+  }
+
+  .get-started {
+    width: 380px;
+    margin-left: 0px;
   }
 }
 

@@ -62,7 +62,9 @@
 		"BUSINESS_ANALYTICS_DESCRIPTION":"Customer insights, Prediction, Personalized Services, Cab & Limo Booking, Valet Parkings & VIP Access",
 		"OUR_PRICING":"OUR PRICING",
 		"NEXT_BUTTON":"Next",
-		"PREVIOUS_BUTTON":"Previous"
+		"PREVIOUS_BUTTON":"Previous",
+		"FREE_TRAIL":"Start your 30-day free trial today and claim your business!",
+		"GET_STARTED":"Get Started"
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
@@ -96,11 +98,11 @@
 		"SUCCESS":"Your info are Registered Successfully. You will receive mail for verification",
 		"LINK":"Link to your premium service",
 		"SCRIPT":"Script to include on your website",
-		"URL":"URL to include in your Facebook, Twitter, Instagram, Snapchat & other social media sites:",
+		"URL":"URL to include on your Facebook, Twitter, Instagram, Snapchat & other social media sites:",
 		"FREE_TRAIL":"Create a business account to start your 30-days free trail.",
 		"FORM_NAME_REQUIRED":"Name is required",
 		"FORM_EMAIL_REQUIRED":"Email is required",
-		"FORM_PHONE_REQUIRED":"Phone no is required",
+		"FORM_PHONE_REQUIRED":"Phone number is required",
 		"FORM_BUSINESS_NAME_REQUIRED":"Business Name is required",
 		"FORM_ADDRESS_REQUIRED":"Address is required",
 		"FORM_ADDRESS2_REQUIRED":"Address2 is required",

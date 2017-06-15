@@ -3,55 +3,47 @@
 </center>
 <div class="card-block" ng-cloak>
     <!-- <div class="tab-content"> -->
-    <form id="myForm" name="myForm" novalidate ng-submit="submitForm()">
+    <form id="myForm" name="myForm" novalidate ng-submit="save(newUser)" parsley-validate validate-form="">
         <h4 id="businessMessage" ng-cloak>{{"business.FREE_TRAIL" | translate}}</h4>
         <fieldset>
             <div class="form-group is-empty required">
-                <label for="searchBusiness" class="col-md-2 control-label" ng-cloak><font
+                <label for="businessName" class="col-md-2 control-label" ng-cloak><font
                     size="3">{{"business.BUSINESS_NAME" | translate}}:</font></label>
 
                 <div class="col-md-10">
                     <input type="text" id="ms-form-pass" class="form-control"
                         id="inputEmail" name="businessName"
-                        ng-model="newUser.businessName" required> <span
-                        class="error-message" ng-show="showMessage(myForm.businessName)">{{"business.FORM_BUSINESS_NAME_REQUIRED"
-                        | translate}}</span>
+                        ng-model="newUser.businessName" required="">
                 </div>
             </div>
 
             <div class="form-group is-empty required">
-                <label for="searchBusiness" class="col-md-2 control-label" ng-cloak><font
+                <label for="address" class="col-md-2 control-label" ng-cloak><font
                     size="3">{{"business.ADDRESS" | translate}}:</font></label>
 
                 <div class="col-md-10">
                     <input type="text" id="ms-form-pass" class="form-control"
-                        ng-model="newUser.address" required name="address"> <span
-                        class="error-message" ng-show="showMessage(myForm.address)">{{"business.FORM_ADDRESS_REQUIRED"
-                        | translate}}</span>
+                        ng-model="newUser.address" required="" name="address"> 
                 </div>
             </div>
 
             <div class="form-group is-empty required">
-                <label for="searchBusiness" class="col-md-2 control-label" ng-cloak><font
+                <label for="address2" class="col-md-2 control-label" ng-cloak><font
                     size="3">{{"business.ADDRESS" | translate}} 2:</font></label>
 
                 <div class="col-md-10">
                     <input type="text" id="ms-form-pass" class="form-control"
-                        ng-model="newUser.address2" required name="address2"> <span
-                        class="error-message" ng-show="showMessage(myForm.address2)">{{"business.FORM_ADDRESS2_REQUIRED"
-                        | translate}}</span>
+                        ng-model="newUser.address2" required="" name="address2">
                 </div>
             </div>
 
             <div class="form-group is-empty required">
-                <label for="searchBusiness" class="col-md-2 control-label" ng-cloak><font
+                <label for="city" class="col-md-2 control-label" ng-cloak><font
                     size="3">{{"business.CITY" | translate}}:</font></label>
 
                 <div class="col-md-10">
                     <input type="text" id="ms-form-pass" class="form-control"
-                        ng-model="newUser.city" required name="city"> <span
-                        class="error-message" ng-show="showMessage(myForm.city)">{{"business.FORM_CITY_REQUIRED"
-                        | translate}}</span>
+                        ng-model="newUser.city" required="" name="city">
                 </div>
             </div>
 
@@ -60,7 +52,7 @@
                     size="3">{{"business.STATE" | translate}}:</font></label>
 
                 <div class="col-md-10">
-                    <select class="btn  dropdown-toggle form-control" required
+                    <select class="btn  dropdown-toggle form-control" required=""
                         ng-model="newUser.state" ng-options="c.city for c in cityNames">
                     </select>
                 </div>
@@ -71,7 +63,7 @@
                     size="3">{{"business.CATEGORY" | translate}}:</font></label>
 
                 <div class="col-md-10">
-                    <select class="btn  dropdown-toggle form-control" required
+                    <select class="btn  dropdown-toggle form-control" required=""
                         ng-model="newUser.category" ng-options="c.category for c in listOfCategory">
                     </select>
                 </div>
@@ -82,19 +74,19 @@
                     size="3">{{"business.ROLE" | translate}}:</font></label>
 
                 <div class="col-md-10">
-                    <select class="btn  dropdown-toggle form-control" required
+                    <select class="btn  dropdown-toggle form-control" required=""
                         ng-model="newUser.role" ng-options="r.role for r in listOfRoles">
                     </select>
                 </div>
             </div>
 
             <div class="form-group is-empty required">
-                <label for="searchBusiness" class="col-md-2 control-label" ng-cloak><font
+                <label for="email" class="col-md-2 control-label" ng-cloak><font
                     size="3">{{"business.EMAIL" | translate}}:</font></label>
 
                 <div class="col-md-10">
-                    <input type="email" id="ms-form-pass" ng-model="newUser.emailId" name="emailId" class="form-control" required ng-pattern="/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/"> 
-                    <span class="error-message" ng-show="myForm.emailId.$error.pattern">{{"business.FORM_EMAIL_REQUIRED" | translate}}</span> 
+                    <input type="email" id="ms-form-pass" ng-model="newUser.emailId" name="email" class="form-control" required="" data-parsley-trigger="change"> 
+                     
                 </div>
             </div>
 
@@ -103,7 +95,7 @@
             <div class="form-group">
                 <div>
                     <button type="submit" class="btn btn-raised btn-success"
-                        novalidate="novalidate" ng-click="save(newUser)" ng-disabled="myForm.$invalid">{{"business.CREATE_ACCOUNT"
+                        novalidate="novalidate" ng-disabled="myForm.$invalid">{{"business.CREATE_ACCOUNT"
                         | translate}}</button>
                 </div>
             </div>

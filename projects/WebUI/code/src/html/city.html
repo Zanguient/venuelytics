@@ -42,7 +42,7 @@
             <center ng-show="listOfCities.length == 0"><strong>No more cities found.</strong></center>
         </div>
 
-        <nav aria-label="...">
+        <nav aria-label="..." ng-hide="listOfCities.length < 50">
             <ul class="pager pager-success">
                 <li>
                     <button ng-click="previousPage()" class="btn btn-raised btn-success">

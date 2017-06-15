@@ -47,6 +47,8 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 $window.scrollTo(0, 0);
                 self.selectedVenueName = selectedVenue.venueName;
                 self.selectedVenueId = selectedVenue.id;
+                self.selectedVenueWebsite = selectedVenue.website;
+                self.selectedVenueAddress = selectedVenue.address;
                 self.claimBusiness = true;
             };
 
