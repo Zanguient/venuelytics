@@ -66,18 +66,11 @@ module.exports = {
             'bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js',
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js',
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
-			'src/app.js',
-			'src/js/constants/constants.js',
-			'src/js/controllers/cityCtrl.js',
-			'src/js/controllers/homeCtrl.js',
-			'src/js/controllers/venueCtrl.js',
-			'src/js/controllers/venueDetailsCtrl.js',
-			'src/js/controllers/businessCtrl.js',
-            'src/js/controllers/sidebarCtrl.js',
-			'src/js/services/restUrlService.js',
-			'src/js/services/venueService.js',
-			'src/js/services/ajaxService.js',
-			'src/js/functions.js'
+            'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
+            'bower_components/parsleyjs/dist/parsley.min.js',
+            'bower_components/parsleyjs/dist/parsley.min.js',
+            'bower_components/inputmask/dist/min/jquery.inputmask.bundle.min.js'               
+
         ],
         css : [
             'bower_components/animate.css/animate.min.css',

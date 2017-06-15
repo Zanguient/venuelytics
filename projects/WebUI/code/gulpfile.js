@@ -190,7 +190,7 @@ gulp.task('js', ['js:base', 'js:configurator'], function() {
         .pipe(connect.reload());
 });
 gulp.task('js:cpd', function() {
-       return gulp.src([ 'src/js/controllers/*.js',  'src/js/services/*.js'])
+       return gulp.src([ 'src/js/controllers/*.js',  'src/js/services/*.js','src/js/directives/*.js'])
         .pipe(jscpd({
                 'min-lines': 5,
                 verbose    : true
