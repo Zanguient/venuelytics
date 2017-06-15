@@ -159,7 +159,8 @@ gulp.task('html:dist', function() {
     const f = filter([ 'src/html/*.html', '!src/html/index.html'], {restore: true});
     const indexFilter =  filter([ 'src/html/index.html'], {restore: true});
     return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
-        .pipe(processhtml({
+         .pipe(changed(path.join(paths.html)))
+         .pipe(processhtml({
             recursive: true,
             process: true,
             strip: true,
