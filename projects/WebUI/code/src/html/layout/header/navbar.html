@@ -9,7 +9,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse" ng-controller="HomeController">
             <ul class="nav navbar-nav">
-                <li class="dropdown {{homeTab}}" ng-click="navBar(1)">
+                <li class="dropdown {{$root.homeTab}}" ng-click="navBar(1)">
                     <a ng-href="/home" class="dropdown-toggle animated fadeIn animation-delay-4" data-toggle="dropdown" data-hover="dropdown" role="button" data-name="home" ng-cloak>{{"navbar.HOME" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
                         <li><a href="/about" class="dropdown-link">{{"footBar.ABOUT" | translate}}</a></li>
@@ -17,11 +17,11 @@
                     </ul>
                     
                 </li>
-                <li class="dropdown {{businessTab}}" ng-click="navBar(2)">
+                <li class="dropdown {{$root.businessTab}}" ng-click="navBar(2)">
                     <a ng-href="/searchBusiness" class="dropdown-toggle animated fadeIn animation-delay-6" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-cloak>{{"navbar.BUSINESS" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     
                 </li>
-                <li class="dropdown {{consumerTab}}" ng-click="navBar(3)">
+                <li class="dropdown {{$root.consumerTab}}" ng-click="navBar(3)">
                     <a href="/cities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities" ng-cloak>{{"navbar.CONSUMERS" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li>

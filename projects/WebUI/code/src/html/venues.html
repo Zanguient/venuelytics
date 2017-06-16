@@ -50,12 +50,14 @@
                                                         class="img-responsive" id="venueImages">
                                                 </figure>
                                                 <div class="card-block">
-                                                    <h2>
+                                                    <h2 class="venueTitle">
                                                         <a href="" ng-click="selectVenue(venue)">{{venue.venueName
                                                             | limitTo: 20 }}{{venue.venueName.length > 20 ? '...'
                                                             :''}}</a>
                                                     </h2>
-                                                    <p>{{venue.description | limitTo: 70
+                                                    <p class="venueTitle">{{venue.address}}</p>
+                                                    <a href="{{venue.website}}" target="_blank" class="venueTitle"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
+                                                    <p class="venueDescription">{{venue.description | limitTo: 70
                                                         }}{{venue.description.length > 70 ? '...' :''}}</p>
                                                     <div class="row col-lg-8" id="serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img

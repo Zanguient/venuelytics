@@ -5,9 +5,9 @@
                 <div class="ms-footbar-block" id="footbarWidth">
                     <h3 class="ms-footbar-title">{{'footBar.SITE_MAP' | translate}}</h3>
                     <ul class="list-unstyled ms-icon-list three_cols">
-                        <li><a href="/home"><i class="zmdi zmdi-home"></i> {{"navbar.HOME" | translate}}</a></li>
-                        <li><a href="/searchBusiness"><i class="zmdi zmdi-edit"></i> {{"navbar.BUSINESS" | translate}}</a></li>
-                        <li><a href="/cities"><i class="zmdi zmdi-image-o"></i> {{"navbar.CONSUMERS" | translate}}</a></li>
+                        <li ng-click="navBar(1)"><a href="/home"><i class="zmdi zmdi-home"></i> {{"navbar.HOME" | translate}}</a></li>
+                        <li ng-click="navBar(2)"><a href="/searchBusiness"><i class="zmdi zmdi-edit"></i> {{"navbar.BUSINESS" | translate}}</a></li>
+                        <li ng-click="navBar(3)"><a href="/cities"><i class="zmdi zmdi-image-o"></i> {{"navbar.CONSUMERS" | translate}}</a></li>
                         <li><a href="/about"><i class="zmdi zmdi-favorite-outline"></i> {{"footBar.ABOUT" | translate}}</a></li>
                         <li><a href="/terms"><i class="zmdi zmdi-case"></i> {{"footBar.TERMS" | translate}}</a></li>
                         <li><a href="/privacy"><i class="zmdi zmdi-time"></i> {{"footBar.PRIVACY" | translate}}</a></li>

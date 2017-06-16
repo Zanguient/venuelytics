@@ -22,10 +22,8 @@
                     size="3">{{"business.ROLE" | translate}}:</font></label>
 
                 <div class="col-md-10">
-                    <select class="btn  dropdown-toggle form-control" required
-                        ng-model="claimNewBusiness.role">
-                        <option>{{"role.MANAGER" | translate}}</option>
-                        <option>{{"role.OWNER" | translate}}</option>
+                    <select class="btn  dropdown-toggle form-control" required=""
+                        ng-model="claimNewBusiness.role" ng-options="r.role for r in listOfRoles">
                     </select>
                 </div>
             </div>

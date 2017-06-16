@@ -3,30 +3,30 @@
  * @date 25-MAY-2017
  */
 "use strict";
-app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService','$translate', 'APP_CLIENTS', 'APP_ARRAYS',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $translate, APP_CLIENTS, APP_ARRAYS) {
+app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService','$translate', 'APP_CLIENTS', 'APP_ARRAYS', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope) {
 
     		$log.log('Inside Home Controller.');
     		
     		var self = $scope;
 
-    		self.homeTab = 'active';
+    		$rootScope.homeTab = 'active';
 
             self.clientImages = APP_CLIENTS.clientImages;
 
             self.navBar = function(tab) {
                 if(tab === 1) {
-                    self.homeTab = 'active';
-                    self.businessTab = '';
-                    self.consumerTab = '';
+                    $rootScope.homeTab = 'active';
+                    $rootScope.businessTab = '';
+                    $rootScope.consumerTab = '';
                 } else if(tab === 2) {
-                    self.homeTab = '';
-                    self.businessTab = 'active';
-                    self.consumerTab = '';
+                    $rootScope.homeTab = '';
+                    $rootScope.businessTab = 'active';
+                    $rootScope.consumerTab = '';
                 } else {
-                    self.homeTab = '';
-                    self.businessTab = '';
-                    self.consumerTab = 'active';
+                    $rootScope.homeTab = '';
+                    $rootScope.businessTab = '';
+                    $rootScope.consumerTab = 'active';
                 }
             };
 
