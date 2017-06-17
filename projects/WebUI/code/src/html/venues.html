@@ -27,6 +27,7 @@
                     </a>
                     </li>
                 </ul>
+                <label class="venueSearch">Search Venue: <input type="text" name="search" ng-model="venueSearch"> </label>
                 <div class="card-block" id="venueCardBlock">
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -40,7 +41,7 @@
                                         </center>
                                         <div
                                             class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
-                                            ng-repeat="venue in listOfVenuesByCity"
+                                            ng-repeat="venue in listOfVenuesByCity | filter : venueSearch"
                                             ng-if="venue.imageUrls[0].smallUrl">
                                             <article
                                                 class="card card-info mb-4 wow materialUp animation-delay-5">
@@ -55,7 +56,7 @@
                                                             | limitTo: 20 }}{{venue.venueName.length > 20 ? '...'
                                                             :''}}</a>
                                                     </h2>
-                                                    <p class="venueTitle">{{venue.address}}</p>
+                                                    <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address}}</p>
                                                     <a href="{{venue.website}}" target="_blank" class="venueTitle"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
                                                     <p class="venueDescription">{{venue.description | limitTo: 70
                                                         }}{{venue.description.length > 70 ? '...' :''}}</p>

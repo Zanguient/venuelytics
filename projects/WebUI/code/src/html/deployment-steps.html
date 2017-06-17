@@ -1,5 +1,6 @@
-<center>
-	<h1 class="color-success" ng-cloak>{{"business.DEPLOY_STEPS" | translate}}</h1>
+<center ng-cloak>
+	<h1 class="color-success">{{"business.DEPLOY_STEPS" | translate}}</h1>
+	<h4 class="color-success"> {{"business.FINAL_STEPS" | translate}} </h4>
 </center>
 <form class="search-form" ng-cloak>
 	<div class="form-group">
@@ -9,53 +10,54 @@
 			    <div class="post-thumb"><img ng-src="{{businessImage}}" id="deployPost"/></div>
 			    <div class="post-content">
 			        <h3 class="post-title">{{selectedVenueName || newUser.businessName}}</h3>
-			        <p>{{newUser.address}}</p>
-			        <p>{{selectedVenueAddress}}</p>
-			        <p><a href="{{selectedVenueWebsite}}">{{selectedVenueWebsite}}</a></p>
+			        <i class="fa fa-map-marker"></i>{{newUser.address}}
+			        {{selectedVenueAddress}}
+			        <p><a href="{{selectedVenueWebsite}}"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a></p>
 			    </div>
 			</div>
 		</div>
 	</div>
+	<br>
 		<div class="form-group">
 			<div class="col-md-10">
+				<b class="control-label"><font size="4">{{"business.FOR_SHARING" | translate}}</font></b>
 				<br>
-				<b class="control-label">{{"business.LINK" | translate}}</b>
-				<br>
-				<label>http://bit.ly/1RmnUT</label>
+				<p class="control-label"><font size="2">{{"business.LINK" | translate}}</font></p>
+				<label><font color="black">https://bit.ly/MonteCarloVIPPremiumServices</font></label>
+				<hr id="underLine">
+				<p class="control-label"><font size="2">{{"business.URL" | translate}}</font></p>
+				<label><font color="black">https://bit.ly/MonteCarloVIPPremiumServices</font></label>
 				<hr id="underLine">
 			</div>
+
 		</div>
 			<div class="form-group">
 				<div class="col-md-10">
-					<b class="control-label">{{"business.SCRIPT" | translate}}</b>
+					<b class="control-label"><font size="4">{{"business.CONFIG_SCRIPT" | translate}}</font></b>
 					<div class="form-group is-empty" id="formMargin">
-					    <label id="deployStepsLabel">{{"business.DEPLOY_MENU" | translate}}</label>
-					    <textarea id="deployStepsInput">&ltembed width='100%' height='100%' src='http://bit.ly/MonteCarloVIPPremiumServices'/&gt</textarea>
-						<!-- Trigger -->
-						<button class="btn btn-raised btn-success" ngclipboard data-clipboard-target="#deployStepsInput">
-							{{"business.DEPLOY_COPY" | translate}}
-						</button>
+					    <label><font size="2">{{"business.MENU_OPTIONS" | translate}}</font></label>
+					    <br>
+					    <label><font color="black">&ltembed width="100%" height="100%" src="https://bit.ly/MonteCarloVIPPremiumServices?t=b"/&gt</font></label>
+					    <hr id="underLine">
+
 					</div>
 					<div class="form-group is-empty" id="formMargin">
-					    <label id="deployStepsLabel">{{"business.DEPLOY_BUTTON" | translate}}</label>
-					    <textarea id="deployStepsInput1">&ltembed width='100%' height='100%' src='http://bit.ly/MonteCarloVIPPremiumServices'/&gt</textarea>
-						<!-- Trigger -->
-						<button class="btn btn-raised btn-success" ngclipboard data-clipboard-target="#deployStepsInput1">
-							{{"business.DEPLOY_COPY" | translate}}
-						</button>
+					    <label><font size="2">{{"business.DASHBOARD_BUTTONS" | translate}}</font></label>
+					    <br>
+					    <label><font color="black">&ltdiv class="textwidget"&gt</font></label>
+					    <label><font color="black">&ltp style="text-align:center"&gt</font></label>
+					    <label><font color="black">&lta class="book-VPS-btn" href="https://prod.api.venueLytics.com/WebServices/reservation/1006" target="_blank"&gt</font></label>
+					    <label><font color="black">&ltp style="text-align:center"&gt</font></label>
+					    <label><font color="black">&lta class="book-ES-btn" href="https://prod.api.venueLytics.com/WebServices/reservation/1006" target="_blank"&gtB&ltsmall&gtPowered By&lt/small&gt&ltbr&gt&lta href="//www.venuelytics.com/" target="_blank"&gt&ltimg src="http://rosiemccanr</font></label>
+					    <label><font color="black">&lt/div&gt</font></label>
+					    <label><font color="black">&lt/div&gt</font></label>
+						<hr id="underLine">
 					</div>
 
 				</div>
 			</div>
 			<div>
-				<div class="col-md-10">
-					<br>
-					<b class="control-label">{{"business.URL" | translate}}</b>
-					<br>
-					<label>http://bit.ly/1RmnUT</label>
-					<hr id="underLine">
-				</div>
-			<button class="btn btn-raised btn-success sendEmailButton">{{"business.DEPLOY_EMAIL" | translate}}</button>
+				<button class="btn btn-raised btn-success sendEmailButton">{{"business.DEPLOY_EMAIL" | translate}}</button>
 			</div>
 			
 </form>

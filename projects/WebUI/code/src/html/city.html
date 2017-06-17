@@ -12,6 +12,7 @@
             "city.REAL_TIME_SERVICE" | translate}}</h4>
         <div class="row">
             <div class="form-group">
+                <label class="citySearchLabel">Search City: <input type="text" name="search" ng-model="citySearch"> </label>
                 <div class="col-md-2 pull-right">
                     <select class="btn dropdown-toggle form-control" required id="countryDropdown"
                         ng-model="selectedCountry" ng-options="c.countryName for c in countries" ng-change="getCountry(selectedCountry)">
@@ -33,7 +34,7 @@
             <div class="row">
                 <div id="cityImage" class="city-image-block col-sm-4"
                     style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;"
-                    ng-repeat="city in listOfCities" ng-click="selectCity(city)">
+                    ng-repeat="city in listOfCities | filter: citySearch" ng-click="selectCity(city)">
                     <p class="content">
                         <font size="5"> {{city.name}} </font>
                     </p>

@@ -58,9 +58,22 @@
   margin-top: 10px;
 }
 
+.turnkey {
+  background-color: white;
+}
+
 /*Desktop*/
 @media screen and (min-device-width: 1200px) and (max-device-width:
  1600px) {
+
+  .venueSearch {
+    margin-top: 10px;
+    margin-left: 16px;
+  }
+
+  .citySearchLabel {
+    margin-top: 15px;
+  }
 
   #businessImage {
     height: 300px;
@@ -241,6 +254,16 @@
 /*iPhone 5*/
 @media only screen and (min-device-width: 320px) and (max-device-width:
  480px) {
+
+  .venueSearch {
+    margin-top: 10px;
+    margin-left: 55px;
+  }
+
+  .citySearchLabel {
+    margin-left: 32px;
+  }
+
   #businessImage {
     height: 200px;
     width: 340px;
@@ -385,6 +408,15 @@
     and (min-device-width : 375px) 
     and (max-device-width : 667px) {
 
+  .venueSearch {
+    margin-top: 10px;
+    margin-left: 35px;
+  }
+
+  .citySearchLabel {
+    margin-left: 85px;
+  }
+
   .img-singleline {
     float: left;
     margin-right: 5px;
@@ -420,6 +452,15 @@
 @media only screen 
     and (min-device-width : 414px) 
     and (max-device-width : 736px) {
+
+  .venueSearch {
+    margin-top: 10px;
+    margin-left: 55px;
+  }
+
+  .citySearchLabel {
+    margin-left: 125px;
+  }
  
   #businessImage {
     height: 200px;
@@ -975,4 +1016,29 @@
   list-style: none;
   color: #f05050;
 }
-/*-----------------*/
+
+.ms-hero-turnkey {
+  background-image: url("../img/test.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 128px;
+  //min-height: 400px;
+}
+
+.ms-hero-text {
+  padding-top: 47px;
+  color: white;
+}
+
+.text-description {
+  margin-top: 20px;
+}
+
+.fontSize4 {
+  font-size: 4;
+}
+
+.locationIcon {
+  margin-right: 5px;
+}
