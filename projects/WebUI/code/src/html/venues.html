@@ -22,12 +22,22 @@
                         <!-- ng-if="clubTab != 0" --> <a href ng-click="setTab(type.title)"
                         class="withoutripple" aria-controls="clubs" role="tab"
                         data-toggle="tab"> <!-- ng-init="$index == 0 ? setTab('CLUB') : ''" -->
-                            <img ng-src="{{type.icon}}" class="serviceTabIcons"></img> <span class="hidden-xs">{{type.title
-                                | translate}}</span>
+                            <img ng-src="{{type.icon}}" class="serviceTabIcons"></img> <span class="hidden-xs">{{type.title | translate}}</span>
                     </a>
                     </li>
                 </ul>
-                <label class="venueSearch">Search Venue: <input type="text" name="search" ng-model="venueSearch"> </label>
+                <div class="form-group label-floating is-empty col-md-12">
+                    <div class="input-group col-md-3 pull-right">
+                      <span></span>
+                      <label class="control-label" for="addon3a">Search Venues...</label>
+                      <input class="form-control" type="text" ng-model="venueSearch">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-fab btn-fab-mini">
+                          <i class="zmdi zmdi-search"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
                 <div class="card-block" id="venueCardBlock">
                     <!-- Tab panes -->
                     <div class="tab-content">

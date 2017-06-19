@@ -142,10 +142,7 @@
     height: 586px;
   }
 
-  #countryDropdown {
-    background-color: aliceblue;
-  }
-
+  
   #contact {
     margin-top: 40px;
   }
@@ -605,7 +602,8 @@
 }
 
 #countryDropdown {
-  background-color: aliceblue;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
 }
 
 #venueImages {
@@ -1041,4 +1039,8 @@
 
 .locationIcon {
   margin-right: 5px;
+}
+
+.searchCityText {
+    color: white;
 }
