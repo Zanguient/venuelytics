@@ -10,22 +10,22 @@
             | translate}}</h2>
         <h4 class="text-center text-light wow fadeInDown animation-delay-5">{{
             "city.REAL_TIME_SERVICE" | translate}}</h4>
-            <form>
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-3 pull-left">
-                <input class="form-control" name="search" placeholder="Search City" ng-model="citySearch" type="text">
-                </div>                
-                <div class="col-md-2 pull-right">
-                    <select class="btn dropdown-toggle form-control" required id="countryDropdown"
-                        ng-model="selectedCountry" ng-options="c.countryName for c in countries" ng-change="getCountry(selectedCountry)">
-                    </select>
-
+        <form>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <input class="form-control" name="search" placeholder="Search City" ng-model="citySearch" 
+                        type="text">
+                    </div>                
+                    <div class="col-md-3 pull-right">
+                        <select class="btn dropdown-toggle form-control" required id="countryDropdown"
+                            ng-model="selectedCountry" ng-options="c.countryName for c in countries" ng-change="getCountry(selectedCountry)">
+                        </select>
+                    </div>
+                  
                 </div>
-              
             </div>
-        </div>
-          </form>
+        </form>
         <div class="row" ng-init="gettingLocation(null, null, selectedCountry.shortName)">
             <div class="row" id="loadingCities" ng-show="loadingBar">
                 <div class="progress progress-striped active">
