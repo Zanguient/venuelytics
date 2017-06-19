@@ -33,6 +33,14 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 });
             };
 
+            $scope.getCity = function (citySearch) {
+                self.loadingBar = true;
+                AjaxService.getVenuesByCity(VenueService.latitude, VenueService.longitude, citySearch).then(function(response) {
+                    self.listOfCities = response;
+                    self.loadingBar = false;
+                });
+            };
+
             self.init = function() {
 
                 $('.selectpicker').selectpicker({

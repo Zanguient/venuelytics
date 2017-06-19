@@ -4,9 +4,9 @@
     </div>
 </div>
 <!-- container -->
-<div class="wrap wrap-mountain" ng-cloak>
+<div class="city" ng-cloak>
     <div class="container">
-        <h2 class="text-center text-light wow fadeInDown animation-delay-5">{{"city.DISCOVER_FUN"
+        <strong><h2 class="text-center wow fadeInDown animation-delay-5">{{"city.DISCOVER_FUN"
             | translate}}</h2>
         <h4 class="text-center text-light wow fadeInDown animation-delay-5">{{
             "city.REAL_TIME_SERVICE" | translate}}</h4>
@@ -14,9 +14,8 @@
         <div class="row">
             <div class="form-group">
                 <div class="col-md-3 pull-left">
-                <input class="form-control searchCityText" name="search" placeholder="Search City" ng-model="citySearch" type="text">
-                </div>
-                
+                <input class="form-control" name="search" placeholder="Search City" ng-model="citySearch" type="text">
+                </div>                
                 <div class="col-md-2 pull-right">
                     <select class="btn dropdown-toggle form-control" required id="countryDropdown"
                         ng-model="selectedCountry" ng-options="c.countryName for c in countries" ng-change="getCountry(selectedCountry)">
@@ -40,7 +39,7 @@
             <div class="row">
                 <div id="cityImage" class="city-image-block col-sm-4"
                     style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;"
-                    ng-repeat="city in listOfCities | filter: citySearch" ng-click="selectCity(city)">
+                    ng-repeat="city in listOfCities" ng-click="selectCity(city)">
                     <p class="content">
                         <font size="5"> {{city.name}} </font>
                     </p>

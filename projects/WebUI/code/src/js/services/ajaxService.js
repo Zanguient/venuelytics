@@ -62,6 +62,32 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
+     this.getVenuesByCity = function(lat, long, city) {
+        var url = RestURL.baseURL + '/venues/cities?name=' + city + '&lat=' + lat + '&lng=' + long;
+        return $http({
+            method: 'GET',
+            url: url
+        }).then(function(success) {
+            return success.data.cities;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
+    this.getVenueBySearch = function(lat, long, venue) {
+        var url = RestURL.baseURL + '/venues/q?lat=' + lat + '&lng=' + long + '&dist=20000&search=' + venue;
+        return $http({
+            method: 'GET',
+            url: url
+        }).then(function(success) {
+            return success.data;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
     this.getVenuesByCountry = function(countryName, from) {
 
         var url = RestURL.baseURL + '/venues/cities?country=' + countryName + '&size=50';

@@ -29,15 +29,16 @@
                 <div class="form-group label-floating is-empty col-md-12">
                     <div class="input-group col-md-3 pull-right">
                       <span></span>
-                      <label class="control-label" for="addon3a">Search Venues...</label>
+                      <label class="control-label" for="addon3a">{{"venue.SEARCH_VENUE" | translate}}... </label>
                       <input class="form-control" type="text" ng-model="venueSearch">
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-fab btn-fab-mini">
+                        <button type="button" class="btn btn-fab btn-fab-mini" ng-click="getVenueBySearch(venueSearch)">
                           <i class="zmdi zmdi-search"></i>
                         </button>
                       </span>
                     </div>
                   </div>
+
                 <div class="card-block" id="venueCardBlock">
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -51,7 +52,7 @@
                                         </center>
                                         <div
                                             class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
-                                            ng-repeat="venue in listOfVenuesByCity | filter : venueSearch"
+                                            ng-repeat="venue in listOfVenuesByCity"
                                             ng-if="venue.imageUrls[0].smallUrl">
                                             <article
                                                 class="card card-info mb-4 wow materialUp animation-delay-5">
@@ -66,7 +67,8 @@
                                                             | limitTo: 20 }}{{venue.venueName.length > 20 ? '...'
                                                             :''}}</a>
                                                     </h2>
-                                                    <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address}}</p>
+                                                    <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address | limitTo: 40
+                                                        }}{{venue.address.length > 40 ? '...' :''}}</p>
                                                     <a href="{{venue.website}}" target="_blank" class="venueTitle"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
                                                     <p class="venueDescription">{{venue.description | limitTo: 70
                                                         }}{{venue.description.length > 70 ? '...' :''}}</p>
