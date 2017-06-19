@@ -56,6 +56,12 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                 });
             };
 
+            self.getVenueBySearch = function(venueSearch){
+                AjaxService.getVenueBySearch(VenueService.latitude, VenueService.longitude, venueSearch).then(function(response) {
+                    self.listOfVenuesByCity = response.venues;
+                });
+            };
+
     		self.selectVenue = function(venue) {
                 //VenueService.selectedVenueDetails = venue;
     			$location.url('/venues/'+self.selectedCityName+'/'+venue.id);

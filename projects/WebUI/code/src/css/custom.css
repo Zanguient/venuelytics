@@ -62,6 +62,11 @@
   background-color: white;
 }
 
+.city {
+  background-color: #fff;
+  color: #000;
+}
+
 /*Desktop*/
 @media screen and (min-device-width: 1200px) and (max-device-width:
  1600px) {
