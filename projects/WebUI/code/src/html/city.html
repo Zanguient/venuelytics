@@ -13,10 +13,10 @@
         <form>
             <div class="row">
                 <div class="form-group col-md-3">
-                        <input class="form-control" name="search" ng-model="citySearch" placeholder="Search City"> 
+                        <input class="form-control" name="search" ng-model="citySearch" placeholder="Search By City Name"> 
                         <button type="button" class="btn btn-fab btn-fab-mini" ng-click="getCity(citySearch)">
                           <i class="zmdi zmdi-search"></i>
-                        </button>          
+                        </button>
                 </div>
                 <div class="col-md-3 pull-right">
                         <select class="btn dropdown-toggle form-control" required id="countryDropdown"
@@ -56,7 +56,7 @@
                 </li>
                 <li>
                     <button ng-click="nextPage()" class="btn btn-raised btn-success">{{'home.NEXT_BUTTON' | translate}}
-                                      
+
                         <span aria-hidden="true">»</span>
                     </button>
                 </li>
