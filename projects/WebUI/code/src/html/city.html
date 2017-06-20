@@ -8,21 +8,20 @@
     <div class="container">
         <strong><h2 class="text-center wow fadeInDown animation-delay-5">{{"city.DISCOVER_FUN"
             | translate}}</h2>
-        <h4 class="text-center text-light wow fadeInDown animation-delay-5">{{
+        <h4 class="text-center wow fadeInDown animation-delay-5">{{
             "city.REAL_TIME_SERVICE" | translate}}</h4>
         <form>
             <div class="row">
-                <div class="form-group">
-                    <div class="col-md-3">
-                        <input class="form-control" name="search" placeholder="Search City" ng-model="citySearch" 
-                        type="text">
-                    </div>                
-                    <div class="col-md-3 pull-right">
+                <div class="form-group col-md-3">
+                        <input class="form-control" name="search" ng-model="citySearch" placeholder="Search City"> 
+                        <button type="button" class="btn btn-fab btn-fab-mini" ng-click="getCity(citySearch)">
+                          <i class="zmdi zmdi-search"></i>
+                        </button>          
+                </div>
+                <div class="col-md-3 pull-right">
                         <select class="btn dropdown-toggle form-control" required id="countryDropdown"
                             ng-model="selectedCountry" ng-options="c.countryName for c in countries" ng-change="getCountry(selectedCountry)">
                         </select>
-                    </div>
-                  
                 </div>
             </div>
         </form>

@@ -69,7 +69,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                     "business.contactName": self.selectedVenueName,
                     "business.contactEmail": businessClaim.emailId,
                     "business.contactPhone": businessClaim.phone,
-                    "business.contactRole": businessClaim.role
+                    "business.contactRole": businessClaim.role.role
                 };
 
                 AjaxService.claimBusiness(self.selectedVenueId, businessObject).then(function(response) {

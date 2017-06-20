@@ -122,7 +122,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
     this.claimBusiness = function(venueId, claimBusinessObject) {
         return $http({
             method: 'POST',
-            url: RestURL.baseURL + '/venues/' + venueId,
+            url: RestURL.baseURL + '/venues/' + venueId + '/claimBusiness',
             data: claimBusinessObject
         }).then(function(success) {
             return success;
