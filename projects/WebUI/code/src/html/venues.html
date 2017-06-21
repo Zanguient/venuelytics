@@ -9,7 +9,7 @@
 
 <div class="container container-full" ng-cloak>
     <a href="/cities" id="navigation"><h3>{{"venue.HOME" |
-            translate}} > {{"venue.CITIES" | translate}}</h3></a>
+            translate}} > {{"venue.CITIES" | translate}} - {{selectedVenueType}}</h3></a>
     <div class="ms-paper">
         <div class="row" id="venueTabs">
             <!-- For Horizontal tabs -->
@@ -67,8 +67,8 @@
                                                             | limitTo: 20 }}{{venue.venueName.length > 20 ? '...'
                                                             :''}}</a>
                                                     </h2>
-                                                    <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address | limitTo: 40
-                                                        }}{{venue.address.length > 40 ? '...' :''}}</p>
+                                                    <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address | limitTo: 38
+                                                    }}{{venue.address.length > 38 ? '...' :''}}</p>
                                                     <a href="{{venue.website}}" target="_blank" class="venueTitle"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
                                                     <p class="venueDescription">{{venue.description | limitTo: 70
                                                         }}{{venue.description.length > 70 ? '...' :''}}</p>

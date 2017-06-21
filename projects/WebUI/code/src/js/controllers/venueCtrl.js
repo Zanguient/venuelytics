@@ -7,11 +7,11 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
     function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS) {
 
     		$log.log('Inside Venue Controller.');
-    		
+
     		var self = $scope;
 
             self.init = function() {
-                
+
                 self.serviceTypes = APP_ARRAYS.serviceTabs;
                 self.serviceIcons = APP_ARRAYS.serviceSmallIcons;
 
@@ -24,32 +24,32 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                     self.bowlingTab = self.cityInfo.counts.BOWLING;
                     self.clubTab = self.cityInfo.counts.CLUB;
                     self.restaurantTab = self.cityInfo.counts.RESTAURANT;
-                    self.casinoTab = self.cityInfo.counts.CASINO;    
+                    self.casinoTab = self.cityInfo.counts.CASINO;
                 });
 
-                if(VenueService.latitude && VenueService.longitude && 
+                if(VenueService.latitude && VenueService.longitude &&
                     VenueService.latitude !== '' && VenueService.longitude !== ''){
                     self.setTab('CLUB');
                 } else{
 
                     if (navigator && navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function(position){
-                            VenueService.latitude = position.coords.latitude; 
+                            VenueService.latitude = position.coords.latitude;
                             VenueService.longitude = position.coords.longitude;
                             self.setTab('CLUB');
                             self.$apply(function(){
                                 self.position = position;
                             });
                         },
-                        function (error) { 
+                        function (error) {
                             self.setTab('CLUB');
                         });
-                    }    
+                    }
                 }
             };
 
             self.setTab = function(type){
-                //VenueService.selectedVenueType = type;
+                self.selectedVenueType = type;
                 //VenueService.selectedCity = self.selectedCityName;
                 AjaxService.getVenues(null,self.selectedCityName, type, VenueService.latitude, VenueService.longitude).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
