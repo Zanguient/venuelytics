@@ -67,6 +67,14 @@
   color: #000;
 }
 
+#loadingCities {
+  margin-top: 16px;
+}
+
+#discover {
+  margin-top: 35px;
+}
+
 /*Desktop*/
 @media screen and (min-device-width: 1200px) and (max-device-width:
  1600px) {

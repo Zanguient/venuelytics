@@ -124,8 +124,12 @@
 		"DEPLOY_BUTTON":"BUTTON",
 		"DEPLOY_EMAIL":"SEND BY EMAIL",
 		"DEPLOY_COPY":"COPY",
-		"DEPLOY_SEND":"SEND"
-
+		"DEPLOY_SEND":"SEND",
+		"DOWNLOAD_VENUELYTICS":"Download VenueLytics for Apple & Google Play Store",
+		"DOWNLOAD_VENUELYTICS_URL":"http://onelink.to/xw558c",
+		"LINK_DOWNLOAD":"Link",
+		"DOWNLOAD_VENUELYTICS_WHITE":"Download VenueLytics White Label Consumer App",
+		"DOWNLOAD_VENUELYTICS_WHITE_URL":"http://onelink.to/98dmnv"
 	},
 	"venue":{
 		"HOME":"Home",

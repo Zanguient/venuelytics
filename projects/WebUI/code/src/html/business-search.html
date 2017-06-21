@@ -80,14 +80,6 @@
                     | translate}}</button>
             </center>
         </div>
-        <div ng-show="claimBusiness == true">
-            <div ng-hide="hideForm == true">
-                <center>
-                    <h1 class="color-success">{{selectedVenueName}}</h1>
-                </center>
-                <div ng-include="'claim-business.html'"></div>
-            </div>
-        </div>
         <div ng-show="claimForm == true">
             <div ng-include="'create-business.html'"></div>
         </div>
@@ -95,11 +87,6 @@
         <div ng-include="'custom-dialog.html'">
         </div>
         
-        </div>
-
-
-        <div ng-show="businessData == true">
-            <div ng-include="'deployment-steps.html'"></div>
         </div>
     </div>
 </div>

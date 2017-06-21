@@ -2,6 +2,10 @@
 app.service('VenueService', function() {
   this.latitude = '';
   this.longitude = '';
+  this.venueNumber = '';
+  this.venueName = '';
+  this.businessImage = '';
+  this.venueAddress = '';
 
   /*this.getCurrentLocation = function() {
 

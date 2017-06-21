@@ -22,6 +22,9 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 emailId: '',
                 phone: ''
             };
+            self.selectedVenueName = VenueService.venueName;
+            self.selectedVenueAddress = VenueService.venueAddress;
+            self.businessImage = VenueService.businessImage;
             self.init = function() {
                 self.cityNames = APP_ARRAYS.cityName;
                 self.listOfCategory = APP_ARRAYS.categories;
@@ -45,11 +48,16 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             
             self.claim = function(selectedVenue) {
                 $window.scrollTo(0, 0);
+                VenueService.businessImage = selectedVenue.imageUrls[0].originalUrl;
                 self.selectedVenueName = selectedVenue.venueName;
+                VenueService.venueName = selectedVenue.venueName;
                 self.selectedVenueId = selectedVenue.id;
+                VenueService.venueNumber = selectedVenue.id;
                 self.selectedVenueWebsite = selectedVenue.website;
                 self.selectedVenueAddress = selectedVenue.address;
+                VenueService.venueAddress = self.selectedVenueAddress;
                 self.claimBusiness = true;
+                $location.path("/claimBusiness/"+self.selectedVenueId);
             };
 
             self.createBusinessAccount = function(){
@@ -66,17 +74,18 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             
             self.businessSubmit = function(businessClaim) {
                 var businessObject = {
-                    "business.contactName": self.selectedVenueName,
+                    "business.contactName": VenueService.venueName,
                     "business.contactEmail": businessClaim.emailId,
                     "business.contactPhone": businessClaim.phone,
                     "business.contactRole": businessClaim.role.role
                 };
 
-                AjaxService.claimBusiness(self.selectedVenueId, businessObject).then(function(response) {
+                AjaxService.claimBusiness(VenueService.venueNumber, businessObject).then(function(response) {
                     $log.info("Claim business response: "+angular.toJson(response));
                 });
                 self.businessData = true;
                 self.hideForm = true;
+                $location.path("/deployment/"+VenueService.venueNumber);
             };
 
             self.save = function(newUser) {

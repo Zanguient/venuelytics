@@ -52,6 +52,14 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/terms', {
             templateUrl: 'terms-of-use.html'
         })
+        .when('/claimBusiness/:venueid', {
+            templateUrl: 'claim-business.html',
+            controller: 'businessController'
+        })
+        .when('/deployment/:venueid', {
+            templateUrl: 'deployment-steps.html',
+            controller: 'businessController'
+        })
         .otherwise('/home');
 
     $locationProvider.html5Mode({
