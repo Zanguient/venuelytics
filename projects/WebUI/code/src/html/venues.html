@@ -11,9 +11,9 @@
     <a href="/cities" id="navigation"><h3>{{"venue.HOME" |
             translate}} > {{"venue.CITIES" | translate}} - {{selectedVenueType}}</h3></a>
     <div class="ms-paper">
-        <div class="row" id="venueTabs">
+        <div class="row venueTabs">
             <!-- For Horizontal tabs -->
-            <div class="card" id="venueListCard">
+            <div class="card venueListCard">
                 <!-- Nav tabs -->
                 <ul
                     class="nav nav-tabs nav-tabs-transparent indicator-primary nav-tabs-full nav-tabs-6"
@@ -39,7 +39,7 @@
                     </div>
                   </div>
 
-                <div class="card-block" id="venueCardBlock">
+                <div class="card-block venueCardBlock">
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" id="clubs" class="tab-pane fade active in">
@@ -72,9 +72,9 @@
                                                     <a href="{{venue.website}}" target="_blank" class="venueTitle"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
                                                     <p class="venueDescription">{{venue.description | limitTo: 70
                                                         }}{{venue.description.length > 70 ? '...' :''}}</p>
-                                                    <div class="row col-lg-8" id="serviceIcon">
+                                                    <div class="row col-lg-8 serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
-                                                            ng-src="{{service.image}}" id="serviceSmallIcon" title="{{service.title}}"
+                                                            ng-src="{{service.image}}" class="serviceSmallIcon" title="{{service.title}}"
                                                             ng-show="venue.info['{{service.fieldName}}'] == 'Y'"></img>
                                                             </a>
                                                     </div>

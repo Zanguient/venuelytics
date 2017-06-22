@@ -11,7 +11,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
     		var self = $scope;
             var nextPageSize = 0;
             var previousPageSize = 0;
-
+            self.next = false;
             self.gettingLocation = function(lat, long, country) {
                 self.loadingBar = true;
                 AjaxService.gettingLocation(lat, long, country).then(function(response) {
@@ -85,6 +85,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             self.previousPage = function() {
                 $log.info('Inside previousPage');
                 $log.info("Previous page size: "+previousPageSize);
+                self.next = false;
                 if(nextPageSize > 0) {
                     nextPageSize = nextPageSize - 50;
                     AjaxService.getVenuesByCountry(self.selectedCountry.shortName, nextPageSize).then(function(response) {
@@ -95,6 +96,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             };
 
             self.nextPage = function() {
+                self.next = true;
                 nextPageSize = nextPageSize + 50;
                 $log.info("Next page size: "+nextPageSize);
                 AjaxService.getVenuesByCountry(self.selectedCountry.shortName, nextPageSize).then(function(response) {

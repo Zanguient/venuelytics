@@ -5,7 +5,7 @@
                 <h1 class="color-success">{{"business.BUSINESS_SEARCH" |
                     translate}}</h1>
             </center>
-            <form class="form-horizontal" id="businessSearchForm">
+            <form class="form-horizontal businessSearchForm">
                 <fieldset>
                     <div class="form-group is-empty">
                         <label for="searchBusiness" class="col-md-2 control-label">
@@ -23,7 +23,7 @@
                 </center>
             </form>
         </div>
-        <div id="claimCard">
+        <div class="claimCard">
             <center>
                 <h5 ng-show="businessDetailLength == 0">{{"business.SEARCH_BUSINESS_MESSAGE"
                     | translate}}</h5>
@@ -36,15 +36,15 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="slider">
-                                    <img id="businessImage" ng-repeat="slide in business.imageUrls"
-                                        class="slide" ng-swipe-right="showPrev(slide)"
+                                    <img ng-repeat="slide in business.imageUrls"
+                                        class="slide businessImage" ng-swipe-right="showPrev(slide)"
                                         ng-swipe-left="showNext(slide)" ng-show="isActive($index)"
                                         ng-src="{{slide.originalUrl}}" />
                                     <ul class="buttonNav">
                                         <li ng-repeat="slide in business.imageUrls"
                                             ng-class="{'active':isActive($index)}"><img
-                                            id="sliderThumb" ng-src="{{slide.originalUrl}}"
-                                            class="img-responsive" ng-click="showPhoto(slide,$index);" />
+                                            ng-src="{{slide.originalUrl}}"
+                                            class="img-responsive sliderThumb" ng-click="showPhoto(slide,$index);" />
                                         </li>
                                     </ul>
                                 </div>

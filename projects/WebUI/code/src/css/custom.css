@@ -17,8 +17,14 @@
   vertical-align: bottom;
 }
 
+#footerMargin {
+  margin-top: 0px;
+}
+
 .pricingBorder {
   border: 1px solid #4CAF50;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 .image-block > p {
@@ -36,13 +42,13 @@
   color: white;
 }
 
-#cityImage {
+.cityImage {
   list-style-type: none;
   cursor: pointer;
   cursor: hand;
 }
 
-#claimCard {
+.claimCard {
   margin-top: 65px;
 }
 
@@ -67,11 +73,11 @@
   color: #000;
 }
 
-#loadingCities {
+.loadingCities {
   margin-top: 16px;
 }
 
-#discover {
+.discover {
   margin-top: 35px;
 }
 
@@ -88,12 +94,12 @@
     margin-top: 15px;
   }
 
-  #businessImage {
+  .businessImage {
     height: 300px;
     width: 565px;
   }
 
-  #sliderThumb {
+  .sliderThumb {
     width: 40px;
     height: 22px;
   }
@@ -132,7 +138,7 @@
     height: 280px;
   }
 
-  #venueCardBlock {
+  .venueCardBlock {
     padding-left: 0px;
   }
 
@@ -156,7 +162,7 @@
   }
 
   
-  #contact {
+  .contact {
     margin-top: 40px;
   }
 
@@ -248,7 +254,7 @@
     margin-left: 10px !important;
   }
 
-  #imgContainer {
+  .imgContainer {
     margin-left: 250px;
   }
 
@@ -274,12 +280,12 @@
     margin-left: 32px;
   }
 
-  #businessImage {
+  .businessImage {
     height: 200px;
     width: 340px;
   }
 
-  #sliderThumb {
+  .sliderThumb {
     width: 40px;
     height: 22px;
   }
@@ -311,7 +317,7 @@
     margin-left: 21px;
   }
 
-  #navigation {
+  .navigation {
     margin-left: 10px;
   }
 
@@ -327,7 +333,7 @@
     height: 200px;
   }
 
-  #contact {
+  .contact {
     margin-top: 20px;
   }
 
@@ -336,12 +342,12 @@
     display: none;
   }
 
-  #businessSearchForm {
+  .businessSearchForm {
     padding-left: 15px;
     padding-right: 15px;
   }
 
-  #imgContainer {
+  .imgContainer {
     width: 460px;
     height: 35px;
     margin-left: 75px;
@@ -446,7 +452,7 @@
     margin-left: 10px !important;
   }
 
-  #imgContainer {
+  .imgContainer {
     margin-left: 95px;
     width: 460px;
     height: 35px;
@@ -476,7 +482,7 @@
     margin-left: 125px;
   }
  
-  #businessImage {
+  .businessImage {
     height: 200px;
     width: 375px;
   }
@@ -486,7 +492,7 @@
     left: 50px;
   }
 
-  #venueCardBlock {
+  .venueCardBlock {
     padding-left: 20px;
   }
 
@@ -494,7 +500,7 @@
     height: 190px;
   }
 
-  #navigation {
+  .navigation {
     margin-left: 10px;
   }
 
@@ -510,7 +516,7 @@
     height: 200px;
   }
 
-  #contact {
+  .contact {
     margin-top: 20px;
   }
 
@@ -519,12 +525,12 @@
     display: none;
   }
 
-  #businessSearchForm {
+  .businessSearchForm {
     padding-left: 15px;
     padding-right: 15px;
   }
 
-  #imgContainer {
+  .imgContainer {
     margin-left: 115px;
     width: 460px;
     height: 35px;
@@ -602,14 +608,14 @@
   }
 }
 
-#venueBanner {
+.venueBanner {
   height: 100%;
   width: 100%;
   padding-left: 0px;
   padding-right: 0px;
 }
 
-#venueListCard {
+.venueListCard {
   margin-bottom: 0px;
 }
 
@@ -627,7 +633,7 @@
   margin-bottom: 0px;
 }
 
-#venueTabs {
+.venueTabs {
   margin-top: 40px;
 }
 
@@ -649,11 +655,11 @@
   margin-top: 0px;
 }
 
-#serviceIcon {
+.serviceIcon {
   padding-left: 15px;
 }
 
-#serviceSmallIcon {
+.serviceSmallIcon {
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -965,16 +971,16 @@
   transition: all ease 0.5s;
 }
 
-#progressBar {
+.progressBar {
   width: 100%;
 }
 
-#deployPost {
+.deployPost {
   width: 100px;
   height: 100px;
 }
 
-#underLine {
+.underLine {
   margin-top: 0px;
 }
 

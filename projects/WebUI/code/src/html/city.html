@@ -1,4 +1,4 @@
-<div class="container" id="venueBanner">
+<div class="container venueBanner">
     <div class="banner-fill-img">
         <img ng-src="assets/img/demo/banner.jpg" id="forMobile">
     </div>
@@ -6,7 +6,7 @@
 <!-- container -->
 <div class="city" ng-cloak>
     <div class="container">
-        <strong><h2 id="discover" class="text-center wow fadeInDown animation-delay-5">{{"city.DISCOVER_FUN" | translate}}</h2>
+        <strong><h2 class="text-center wow fadeInDown animation-delay-5 discover">{{"city.DISCOVER_FUN" | translate}}</h2>
         <h4 class="text-center wow fadeInDown animation-delay-5">{{
             "city.REAL_TIME_SERVICE" | translate}}</h4>
         <div class="form-group label-floating is-empty col-md-12">
@@ -28,17 +28,16 @@
                   </div>
                   <br><br><br>
         <div class="row" ng-init="gettingLocation(null, null, selectedCountry.shortName)">
-            <div class="row" id="loadingCities" ng-show="loadingBar">
+            <div class="row loadingCities" ng-show="loadingBar">
                 <div class="progress progress-striped active">
-                    <div class="progress-bar progress-bar-success" role="progressbar"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                        id="progressBar">
+                    <div class="progress-bar progress-bar-success progressBar" role="progressbar"
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                         <span class="sr-only">{{"city.LOADING_CITIES" | translate}}</span>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div id="cityImage" class="city-image-block col-sm-4"
+                <div class="cityImage city-image-block col-sm-4"
                     style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;"
                     ng-repeat="city in listOfCities" ng-click="selectCity(city)">
                     <p class="content">
@@ -48,14 +47,21 @@
             </div>
             <center ng-show="listOfCities.length == 0"><strong>No more cities found.</strong></center>
         </div>
-
-        <nav aria-label="..." ng-hide="listOfCities.length < 50">
+        <center>
+            <button ng-click="previousPage()" class="btn btn-raised btn-success" ng-if="next == true">
+                <span aria-hidden="true">«</span> {{'home.PREVIOUS_BUTTON' | translate}}
+            </button>
+            <button ng-click="nextPage()" class="btn btn-raised btn-success" ng-hide="listOfCities.length < 50">{{'home.NEXT_BUTTON' | translate}}
+                <span aria-hidden="true">»</span>
+            </button>
+        </center>
+        <!-- <nav aria-label="..." ng-hide="listOfCities.length < 50">
             <ul class="pager pager-success">
-                <li>
+               <!--  <li>
                     <button ng-click="previousPage()" class="btn btn-raised btn-success">
                         <span aria-hidden="true">«</span> {{'home.PREVIOUS_BUTTON' | translate}}
                     </button>
-                </li>
+                </li> 
                 <li>
                     <button ng-click="nextPage()" class="btn btn-raised btn-success">{{'home.NEXT_BUTTON' | translate}}
 
@@ -64,6 +70,15 @@
                 </li>
             </ul>
         </nav>
+        <nav aria-label="..." ng-if="next == true">
+            <ul class="pager pager-success">
+                <li>
+                    <button ng-click="previousPage()" class="btn btn-raised btn-success">
+                        <span aria-hidden="true">«</span> {{'home.PREVIOUS_BUTTON' | translate}}
+                    </button>
+                </li>
+            </ul>
+        </nav> -->
 
     </div>
 </div>
