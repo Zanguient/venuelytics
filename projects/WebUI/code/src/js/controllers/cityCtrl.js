@@ -95,6 +95,12 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 }
             };
 
+            self.getCityKeyEnter = function(keyEvent,citySearch) {
+                if (keyEvent.which === 13){
+                    self.getCity(citySearch);
+                }
+            }
+
             self.nextPage = function() {
                 self.next = true;
                 nextPageSize = nextPageSize + 50;

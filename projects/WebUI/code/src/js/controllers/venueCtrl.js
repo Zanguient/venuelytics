@@ -62,6 +62,12 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                 });
             };
 
+            self.getVenuesKeyEnter = function(keyEvent,venueSearch) {
+                if (keyEvent.which === 13){
+                    self.getVenueBySearch(venueSearch);
+                }
+            }
+
     		self.selectVenue = function(venue) {
                 //VenueService.selectedVenueDetails = venue;
     			$location.url('/venues/'+self.selectedCityName+'/'+venue.id);

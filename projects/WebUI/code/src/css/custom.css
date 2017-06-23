@@ -19,6 +19,7 @@
 
 #footerMargin {
   margin-top: 0px;
+  position: initial;
 }
 
 .pricingBorder {

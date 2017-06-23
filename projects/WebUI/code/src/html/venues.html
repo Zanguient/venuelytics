@@ -9,7 +9,7 @@
 
 <div class="container container-full" ng-cloak>
     <a href="/cities" id="navigation"><h3>{{"venue.HOME" |
-            translate}} > {{"venue.CITIES" | translate}} - {{selectedVenueType}}</h3></a>
+            translate}} > {{"venue.CITIES" | translate}} -> {{selectedVenueType}}</h3></a>
     <div class="ms-paper">
         <div class="row venueTabs">
             <!-- For Horizontal tabs -->
@@ -30,7 +30,7 @@
                     <div class="input-group col-md-3 pull-right">
                       <span></span>
                       <label class="control-label" for="addon3a">{{"venue.SEARCH_VENUE" | translate}}... </label>
-                      <input class="form-control" type="text" ng-model="venueSearch">
+                      <input class="form-control" type="text" ng-model="venueSearch" ng-keypress="getVenuesKeyEnter($event,venueSearch)">
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-fab btn-fab-mini" ng-click="getVenueBySearch(venueSearch)">
                           <i class="zmdi zmdi-search"></i>
