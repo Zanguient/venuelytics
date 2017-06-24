@@ -158,7 +158,7 @@
     width: 370px;
   }
 
-  #carouselImage {
+  .carousel-inner .item img {
     height: 586px;
   }
 
@@ -329,7 +329,7 @@
     width: 316px;
   }
 
-  #carouselImage {
+  .carousel-inner .item img {
     height: 200px;
   }
 
@@ -510,7 +510,7 @@
     width: 365px;
   }
 
-  #carouselImage {
+  .carousel-inner .item img {
     height: 200px;
   }
 
