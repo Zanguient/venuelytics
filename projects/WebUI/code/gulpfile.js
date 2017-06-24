@@ -357,19 +357,19 @@ gulp.task('dist',['dist:pre'], function(cb) {
      .pipe(gulp.dest(config.folders.dist));
 });
 
-gulp.task('dev', function() {
+gulp.task('dev', function(cb) {
     config.environment = 'dev';
     config.compress = false;
     return runSequence(
-        'clean', ['plugins', 'html',  'i18n', 'scss', 'img', 'fonts', 'media', 'revolution'], 'js', 'dist'
+        'clean', ['plugins', 'html',  'i18n', 'scss', 'img', 'fonts', 'media', 'revolution'], 'js', 'dist', cb
     );
 });
 
-gulp.task('work', function() {
+gulp.task('work', function(cb) {
     config.environment = 'dev';
     config.compress = false;
     return runSequence(
-        'dev', ['connect', 'watch']
+        'dev', ['connect', 'watch'], cb
     );
 });
 

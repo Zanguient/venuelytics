@@ -244,11 +244,10 @@
     padding: 0 10px;
     margin-bottom: 10px;
   }
-
-  #img-social {
-    width: 90px;
-    height: 28px;
+  .img-singleline img {
+    height: 28px !important;;
   }
+  
 
   .sendEmailButton {
     width: 200px !important;
@@ -399,9 +398,8 @@
     margin-right: 5px;
   }
 
-  #img-social {
-    width: 90px;
-    height: 28px;
+  .img-singleline img {
+    height: 28px !important;;
   }
 
   .img-container {
@@ -443,9 +441,8 @@
     margin-right: 5px;
   }
 
-  #img-social {
-    width: 90px;
-    height: 28px;
+  .img-singleline img {
+    height: 28px !important;;
   }
 
   .sendEmailButton {
@@ -583,12 +580,10 @@
     margin-bottom: 10px;
     margin-right: 5px;
   }
-
-  #img-social {
-    width: 90px;
-    height: 28px;
+  .img-singleline img {
+    height: 28px !important;
   }
-
+  
   .img-container {
     width: 460px;
     height: 55px;
