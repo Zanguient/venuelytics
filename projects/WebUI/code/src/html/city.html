@@ -36,16 +36,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="cityImage city-image-block col-sm-4"
-                    style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;"
-                    ng-repeat="city in listOfCities" ng-click="selectCity(city)">
-                    <p class="content">
-                        <font size="5"> {{city.name}} </font>
-                    </p>
-                </div>
+            
+            <div class="cityImage city-image-block col-md-4 col-sm-6 city_card" style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)">
+                <p class="content">
+                    <font size="5"> {{city.name}} </font>
+                </p>
             </div>
-            <center ng-show="listOfCities.length == 0"><strong>No more cities found.</strong></center>
+        <center ng-show="listOfCities.length == 0"><strong>No more cities found.</strong></center>
         </div>
         <center>
             <button ng-click="previousPage()" class="btn btn-raised btn-success" ng-if="next == true">
