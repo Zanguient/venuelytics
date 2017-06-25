@@ -66,7 +66,7 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                 if (keyEvent.which === 13){
                     self.getVenueBySearch(venueSearch);
                 }
-            }
+            };
 
     		self.selectVenue = function(venue) {
                 //VenueService.selectedVenueDetails = venue;

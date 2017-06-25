@@ -9,8 +9,9 @@ app.directive('validateForm', function() {
     restrict: 'A',
     controller: function($scope, $element) {
       var $elem = $($element);
-      if($.fn.parsley)
+      if($.fn.parsley) {
         $elem.parsley();
+     }
     }
   };
 });

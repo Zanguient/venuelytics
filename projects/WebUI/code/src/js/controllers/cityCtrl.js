@@ -99,7 +99,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 if (keyEvent.which === 13){
                     self.getCity(citySearch);
                 }
-            }
+            };
 
             self.nextPage = function() {
                 self.next = true;

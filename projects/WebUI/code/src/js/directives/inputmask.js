@@ -8,8 +8,9 @@ app.directive('masked', function() {
     restrict: 'A',
     controller: function($scope, $element) {
       var $elem = $($element);
-      if($.fn.inputmask)
-        $elem.inputmask();
+      if($.fn.inputmask) {
+        	$elem.inputmask();
+      }
     }
   };
 });
