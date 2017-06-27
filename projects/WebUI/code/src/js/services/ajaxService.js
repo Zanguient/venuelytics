@@ -119,6 +119,18 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
+    this.getClaimBusiness = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + '/venues/' + venueId + '/claimBusiness'
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
     this.claimBusiness = function(venueId, claimBusinessObject) {
         return $http({
             method: 'POST',

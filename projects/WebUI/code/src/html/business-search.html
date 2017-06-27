@@ -60,13 +60,16 @@
                                 <i class="mr-1 fa fa-map-marker"></i><label><b class="businessSearchAddress" >{{business.address}}</b></label>
                                 <br /> <a href="{{business.website}}" target="_blank"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
                             </div>
-                            <div class="col-lg-4 col-md-5 col-sm-6 text-right">
+                            <div class="col-lg-4 col-md-5 col-sm-6 text-right" ng-if="business.flag == false">
                                 <button href="javascript:void(0)"
                                     class="btn btn-primary btn-raised btn-block animate-icon"
                                     ng-click="claim(business)">
                                     <i class="zmdi zmdi-wrench"></i>{{"business.CLAIM_BUSINESS" |
                                     translate}}
                                 </button>
+                            </div>
+                            <div class="col-lg-4 col-md-5 col-sm-6 text-right" ng-if="business.flag == true">
+                                <label>Claimed Business</label>
                             </div>
                         </div>
                     </div>

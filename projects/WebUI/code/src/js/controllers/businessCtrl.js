@@ -38,6 +38,15 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 AjaxService.searchBusiness(self.searchBusiness).then(function(response) {
                     self.businessDetails = response.data.venues;
                     self.businessDetailLength = self.businessDetails.length;
+                    angular.forEach(self.businessDetails, function(value, key) {
+                        var dataInfo = value.info;
+                        var businessClaimed = "Y" === dataInfo["business.claimed"];
+                            if(businessClaimed == true){
+                                value.flag = true;
+                            } else {
+                                value.flag = false; 
+                            }
+                    });
                     if(self.businessDetailLength !== 0) {
                         self.businessImage = self.businessDetails[0].imageUrls[0].originalUrl;
                         self.venueName = self.businessDetails[0].venueName;
@@ -82,11 +91,18 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
 
                 AjaxService.claimBusiness(VenueService.venueNumber, businessObject).then(function(response) {
                     $log.info("Claim business response: "+angular.toJson(response));
+                    self.getClaimBusiness();
                 });
                 self.businessData = true;
                 self.hideForm = true;
                 $location.path("/deployment/"+VenueService.venueNumber);
             };
+
+             self.getClaimBusiness = function(){
+                AjaxService.getClaimBusiness(self.selectedVenueId).then(function(response) {
+                    $log.info("Claim business response: "+angular.toJson(response));
+                });
+            }
 
             self.save = function(newUser) {
                $('#successView').modal('show');

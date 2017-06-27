@@ -283,6 +283,14 @@
     margin-left: 55px;
   }
 
+  .cityBox {
+    margin-top: 30px;
+  }
+
+  .venueListCard {
+    margin-top: 40px;
+  }
+
   .citySearchLabel {
     margin-left: 32px;
   }
@@ -438,6 +446,14 @@
     margin-top: 10px;
     margin-left: 35px;
   }
+  
+  .cityBox {
+    margin-top: 30px;
+  }
+
+  .venueListCard {
+    margin-top: 40px;
+  }
 
   .citySearchLabel {
     margin-left: 85px;
@@ -491,7 +507,15 @@
     height: 200px;
     width: 375px;
   }
+  
+  .cityBox {
+    margin-top: 30px;
+  }
 
+  .venueListCard {
+    margin-top: 40px;
+  }
+  
   #countryMain {
     margin-left: 0px;
     left: 50px;
@@ -634,10 +658,6 @@
 
 #navBar {
   margin-bottom: 0px;
-}
-
-.venueTabs {
-  margin-top: 40px;
 }
 
 #cityName {
