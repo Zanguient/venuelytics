@@ -23,21 +23,55 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                 $scope.reload();
             }
         }
-        $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)", "rgb(255,196,13)", "rgb(0,171,169)","#f05050", "rgb(135,206,250)"];
+        $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
     
 		$scope.selectedStore = null;
         $scope.top3Stats = [];
 
-        $scope.top3Stats.push(createPDO($scope.colorPalattes[0],{"label":"Visitors", "value":1700, "icon":"icon-users"}));
-        $scope.top3Stats.push(createPDO($scope.colorPalattes[1],{"label":"New Orders", "value":356, "icon":"fa fa-shopping-cart"}));
-        $scope.top3Stats.push(createPDO($scope.colorPalattes[2],{"label":"CheckIns", "value":234, "icon":"icon-login"}));
+        $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"New Visitors", "value":0, "icon":"icon-users"});
+        $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Total Visitors", "value":0, "icon":"icon-users"});
+        $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"New Orders", "value":0, "icon":"fa fa-shopping-cart"});
+        $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"});
+        
+
+        var target = {id:$scope.userVenues.selectedVenueNumber};
+        
+        RestServiceFactory.VenueService().getAnalytics(target, function(data){
+            $scope.processAnalytics(data);
+        },function(error){
+            if (typeof error.data !== 'undefined') { 
+                toaster.pop('error', "Server Error", error.data.developerMessage);
+            }
+        });
+    
         
 		$scope.reload();
 	};
 
+    $scope.processAnalytics = function(data) {
+        if (typeof data.VENUE_NEW_VISITOR_COUNT != 'undefined' && data.VENUE_NEW_VISITOR_COUNT.length > 0) {
+            $scope.venueNewVisitors = data.VENUE_NEW_VISITOR_COUNT[0];
+            $scope.top3Stats[0].value =  $scope.venueNewVisitors.lastYearValue;
+        } else {
+            $scope.venueNewVisitors = null;
+            $scope.top3Stats[0].value = 0;
+
+        }
+
+        if (typeof data.VENUE_ALL_VISITOR_COUNT != 'undefined') {
+            $scope.venueAllVisitors = data.VENUE_ALL_VISITOR_COUNT[0];
+            $scope.top3Stats[1].value = $scope.venueAllVisitors.lastYearValue;
+        } else {
+            $scope.venueAllVisitors = null;
+            $scope.top3Stats[1].value = 0;
+
+        }
+    };
     $scope.setPeriod = function(period) {
-        $scope.selectedPeriod = period;
-    }
+        if ($scope.selectedPeriod = period){
+
+        }
+    };
 
     $scope.getNotificationIconClass = function(n) {
         if (n.serviceType === 'BanquetHall'){

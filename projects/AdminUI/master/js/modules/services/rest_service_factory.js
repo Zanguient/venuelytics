@@ -24,7 +24,7 @@ App.factory(
 			var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',
 			 "enabled"];
 			var REQ_PROP= {};
-			REQ_PROP['StoreService'] = storeProperties;
+			REQ_PROP['VenueService'] = storeProperties;
 			REQ_PROP['BeaconService'] = beaconProperties;
 			REQ_PROP['UserService'] = userProperties;
 			REQ_PROP['LoyaltyService'] = loyalityProperties;
@@ -53,10 +53,10 @@ App.factory(
 				BeaconService:  function () {	
 					return $resource(urlTemplate.replace("@context", "sensors"));
 				} , 
-				StoreService: function () {
+				VenueService: function () {
 					return $resource(urlTemplate.replace("@context", "venues"), {}, {
-						updateAttribute : {method: 'POST',  params: { id: '@id' }, url: urlTemplate.replace("@context", "venues")+"/info"}
-						
+						updateAttribute : {method: 'POST',  params: { id: '@id' }, url: urlTemplate.replace("@context", "venues")+"/info"},
+						getAnalytics : {method: 'GET',  params: { id: '@id' }, url: urlTemplate.replace("@context", "venues") +"/analytics"}
 					});
 				},
 				NotificationService: function () {
@@ -85,6 +85,7 @@ App.factory(
 				LoyaltyService: function () {
 					return $resource(urlTemplate.replace("@context", "loyalty"));
 				},
+				
 				AppSettingsService: function () {
 					return $resource(urlTemplate.replace("@context", "settings"));
 				},
@@ -108,9 +109,7 @@ App.factory(
 						}
 					);
 				},
-				ControlGroupService: function () {
-					return $resource(urlTemplate.replace("@context", "cgconfigurations/active"));
-				},
+				
 				cleansePayload : function(serviceName, payload) {
 					var rProps = REQ_PROP[serviceName];
 					if (typeof rProps != 'undefined') {
