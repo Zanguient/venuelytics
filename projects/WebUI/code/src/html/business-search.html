@@ -69,7 +69,10 @@
                                 </button>
                             </div>
                             <div class="col-lg-4 col-md-5 col-sm-6 text-right" ng-if="business.flag == true">
-                                <label>Claimed Business</label>
+                                <button href="javascript:void(0)" class="btn btn-primary btn-raised btn-block animate-icon" ng-click="getClaimBusiness(business)">
+                                    <i class="zmdi zmdi-wrench"></i>{{"business.CLAIMED_BUSINESS" |
+                                    translate}}
+                                </button>
                             </div>
                         </div>
                     </div>

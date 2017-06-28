@@ -283,6 +283,10 @@
     margin-left: 55px;
   }
 
+  .carouselImage {
+    height: 600px;
+  }
+
   .cityBox {
     margin-top: 30px;
   }
@@ -298,6 +302,14 @@
   .businessImage {
     height: 200px;
     width: 340px;
+  }
+
+  #carousel-example-generic {
+    height: 600px;
+  }
+ 
+  .carousel-inner-class {
+    height: 600px;
   }
 
   .sliderThumb {
@@ -345,7 +357,7 @@
   }
 
   .carousel-inner .item img {
-    height: 200px;
+    height: 600px;
   }
 
   .contact {
@@ -451,6 +463,18 @@
     margin-top: 30px;
   }
 
+  .carouselImage {
+    height: 600px;
+  }
+
+  #carousel-example-generic {
+    height: 600px;
+  }
+
+  .carousel-inner-class {
+    height: 600px;
+  }
+
   .venueListCard {
     margin-top: 40px;
   }
@@ -502,10 +526,22 @@
   .citySearchLabel {
     margin-left: 125px;
   }
+
+  .carouselImage {
+    height: 600px;
+  }
  
   .businessImage {
     height: 200px;
     width: 375px;
+  }
+
+  #carousel-example-generic {
+    height: 600px;
+  }
+
+  .carousel-inner-class {
+    height: 600px;
   }
   
   .cityBox {
@@ -542,7 +578,7 @@
   }
 
   .carousel-inner .item img {
-    height: 200px;
+    height: 600px;
   }
 
   .contact {

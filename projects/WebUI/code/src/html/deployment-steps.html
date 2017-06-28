@@ -29,6 +29,44 @@
 				<p class="control-label"><font size="2">{{"business.URL" | translate}}</font></p>
 				<label><font color="black">https://bit.ly/MonteCarloVIPPremiumServices</font></label>
 				<hr class="underLine">
+				<p class="control-label" ng-if="bottleUrl"><font size="2">{{"business.BOTTLE_URL" | translate}}</font></p>
+ 				<label ng-if="bottleUrl"><font color="black">{{bottleUrl}}</font></label>
+ 				<hr class="underLine" ng-if="bottleUrl">
+ 				<p class="control-label" ng-if="privateUrl"><font size="2">{{"business.PRIVATE_URL" | translate}}</font></p>
+ 				<label ng-if="privateUrl"><font color="black">{{privateUrl}}</font></label>
+ 				<hr class="underLine" ng-if="privateUrl">
+ 				<p class="control-label" ng-if="foodUrl"><font size="2">{{"business.FOOD_URL" | translate}}</font></p>
+ 				<label ng-if="foodUrl"><font color="black">{{foodUrl}}</font></label>
+ 				<hr class="underLine" ng-if="foodUrl">
+ 				<p class="control-label" ng-if="premiumUrl"><font size="2">{{"business.PREMIUM_URL" | translate}}</font></p>
+ 				<label ng-if="premiumUrl"><font color="black">{{premiumUrl}}</font></label>
+ 				<hr class="underLine" ng-if="premiumUrl">
+ 				<p class="control-label" ng-if="drinksUrl"><font size="2">{{"business.DRINKS_URL" | translate}}</font></p>
+ 				<label ng-if="drinksUrl"><font color="black">{{drinksUrl}}</font></label>
+ 				<hr class="underLine" ng-if="drinksUrl">
+ 				<p class="control-label" ng-if="guestList"><font size="2">{{"business.GUEST_URL" | translate}}</font></p>
+ 				<label ng-if="guestList"><font color="black">{{guestList}}</font></label>
+ 				<hr class="underLine" ng-if="guestList">
+			</div>
+
+		</div>
+		<div class="form-group">
+			<div class="col-md-10">
+				<b class="control-label"><font size="4">{{"business.DOWNLOAD_VENUELYTICS" | translate}}</font></b>
+				<br>
+				<label><font size="2">{{"business.LINK_DOWNLOAD" | translate}}:</font></label>
+				<a href="http://onelink.to/xw558c" target="_blank">{{"business.DOWNLOAD_VENUELYTICS_URL" | translate}}</a><br>
+				<hr class="underLine">
+			</div>
+
+		</div>
+		<div class="form-group">
+			<div class="col-md-10">
+				<b class="control-label"><font size="4">{{"business.DOWNLOAD_VENUELYTICS_WHITE" | translate}}</font></b>
+				<br>
+				<label><font size="2">{{"business.LINK_DOWNLOAD" | translate}}:</font></label>
+				<a href="http://onelink.to/98dmnv" target="_blank">{{"business.DOWNLOAD_VENUELYTICS_WHITE_URL" | translate}}</a><br>
+				<hr class="underLine">
 			</div>
 
 		</div>
@@ -57,26 +95,6 @@
 
 				</div>
 			</div>
-		<div class="form-group">
-			<div class="col-md-10">
-				<b class="control-label"><font size="4">{{"business.DOWNLOAD_VENUELYTICS" | translate}}</font></b>
-				<br>
-				<label><font size="2">{{"business.LINK_DOWNLOAD" | translate}}:</font></label>
-				<a href="http://onelink.to/xw558c" target="_blank">{{"business.DOWNLOAD_VENUELYTICS_URL" | translate}}</a><br>
-				<hr class="underLine">
-			</div>
-
-		</div>
-		<div class="form-group">
-			<div class="col-md-10">
-				<b class="control-label"><font size="4">{{"business.DOWNLOAD_VENUELYTICS_WHITE" | translate}}</font></b>
-				<br>
-				<label><font size="2">{{"business.LINK_DOWNLOAD" | translate}}:</font></label>
-				<a href="http://onelink.to/98dmnv" target="_blank">{{"business.DOWNLOAD_VENUELYTICS_WHITE_URL" | translate}}</a><br>
-				<hr class="underLine">
-			</div>
-
-		</div>
 			<div>
 				<button class="btn btn-raised btn-success sendEmailButton">{{"business.DEPLOY_EMAIL" | translate}}</button>
 			</div>

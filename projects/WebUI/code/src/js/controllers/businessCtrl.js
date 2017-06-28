@@ -91,18 +91,24 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
 
                 AjaxService.claimBusiness(VenueService.venueNumber, businessObject).then(function(response) {
                     $log.info("Claim business response: "+angular.toJson(response));
-                    self.getClaimBusiness();
                 });
                 self.businessData = true;
                 self.hideForm = true;
                 $location.path("/deployment/"+VenueService.venueNumber);
             };
 
-             self.getClaimBusiness = function(){
-                AjaxService.getClaimBusiness(self.selectedVenueId).then(function(response) {
-                    $log.info("Claim business response: "+angular.toJson(response));
-                });
-            }
+            self.getClaimBusiness = function(selectedVenue){
+                 AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
+                      $log.info("Claim business response: "+angular.toJson(response));
+                     self.privateUrl = response["business.privateUrl"];
+                     self.foodUrl = response["business.foodUrl"];
+                     self.premiumUrl = response["business.premiumUrl"];
+                     self.drinksUrl = response["business.drinksUrl"];
+                     self.guestList = response["business.guestList"];
+                     self.bottleUrl = response["business.bottleUrl"];
+                     $location.path("/deployment/"+selectedVenue.id);
+                  });
+              }
 
             self.save = function(newUser) {
                $('#successView').modal('show');
