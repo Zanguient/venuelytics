@@ -45,7 +45,7 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     $('#stores_table_filter input').bind('keyup', function(e) {
     	if(e.keyCode == 13) {
     		
-    		var promise = RestServiceFactory.StoreService().get({search:  $('#stores_table_filter input').val()});
+    		var promise = RestServiceFactory.VenueService().get({search:  $('#stores_table_filter input').val()});
     	    
     	    promise.$promise.then(function(data) {
     	    	 var table = $('#stores_table').DataTable();
@@ -59,7 +59,7 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     	}
     });
     
-    var promise = RestServiceFactory.StoreService().get();
+    var promise = RestServiceFactory.VenueService().get();
     
     promise.$promise.then(function(data) {
     	 var table = $('#stores_table').DataTable();
@@ -75,7 +75,7 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
   	$scope.deleteStore = function(rowId, storeId) {
 
   		var target = {id: storeId};
-  		RestServiceFactory.StoreService().delete(target,  function(success){
+  		RestServiceFactory.VenueService().delete(target,  function(success){
     		var table = $('#stores_table').dataTable();
     		table.fnDeleteRow(rowId);
     	},function(error){
