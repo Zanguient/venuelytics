@@ -39,7 +39,7 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     $scope.userRoles['AGENT_MANAGER'] = 'Administrator';
     
     $scope.stores = [];
-   // var storePromise = RestServiceFactory.StoreService().get();
+   // var storePromise = RestServiceFactory.VenueService().get();
     //storePromise.$promise.then(function(data) {
     //	$scope.stores = data.stores;
   //  });

@@ -57,7 +57,7 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
     	});
   	}
   	$scope.search = function(venueName) {
-  		var promise = RestServiceFactory.StoreService().get({search: venueName});
+  		var promise = RestServiceFactory.VenueService().get({search: venueName});
   		promise.$promise.then(function(data) {
     	
   			$scope.venues = data.venues;

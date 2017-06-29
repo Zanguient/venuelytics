@@ -5,10 +5,45 @@
 
 App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
                                    function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout,DataTableService, $compile, ngDialog) {
-  'use strict';
+    'use strict';
   
+    $scope.initInfoTable = function() {
+         if ( ! $.fn.dataTable || $stateParams.id == 'new') {
+            return;
+        }
+        var columnDefinitions = [
+           {
+               "sWidth" : "50%", aTargets:[1],
+               "sWidth" : "20%", aTargets:[0,2]
+              
+           },
+           {
+                "targets": [0,1,2],
+                "orderable": false,
+            },
+            {
+                "targets": [2],
+                "orderable": false,
+                "orderable": false,
+                "createdCell": function (td, cellData, rowData, row, col) {
+                    var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ng-click="updateAttribute(\'' + row + '\'  )"></button>';
+                    
+                    $(td).html(actionHtml);
+                    $compile(td)($scope);
+                  }
+            } ];
+     
+        DataTableService.initDataTable('venue_info_table', columnDefinitions);
+        var table = $('#venue_info_table').DataTable();
+        
+        $.each($scope.data.info, function (k,v) {
+            table.row.add([k, v, k]);
+        });
+        table.draw();
+    };
+    
     if($stateParams.id != 'new') {
-	    var promise = RestServiceFactory.StoreService().get({id:$stateParams.id});
+	    var promise = RestServiceFactory.VenueService().get({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
 	    	
 	    	data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
@@ -45,38 +80,7 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
 	
    
 
-   $scope.initInfoTable = function() {
-	     if ( ! $.fn.dataTable || $stateParams.id == 'new') return;
- 	    var columnDefinitions = [
- 	       {
- 	    	   "sWidth" : "50%", aTargets:[1],
- 	    	   "sWidth" : "20%", aTargets:[0,2]
- 	    	  
- 	       },
- 	       {
- 	        	"targets": [0,1,2],
- 	        	"orderable": false,
- 	        },
- 	        {
- 		    	"targets": [2],
- 		    	"orderable": false,
- 		    	"orderable": false,
- 		    	"createdCell": function (td, cellData, rowData, row, col) {
- 		    		var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ng-click="updateAttribute(\'' + row + '\'  )"></button>';
- 		    		
- 		    		$(td).html(actionHtml);
- 		    		$compile(td)($scope);
- 		    	  }
- 	    	} ];
-     
- 	    DataTableService.initDataTable('venue_info_table', columnDefinitions);
- 	    var table = $('#venue_info_table').DataTable();
-     	
-     	$.each($scope.data.info, function (k,v) {
-     		table.row.add([k, v, k]);
-     	});
-     	table.draw();
-   }
+
     $scope.isVenueType = function(code) {
     	if (typeof $scope.venueType == 'undefined'){
     		return true;
@@ -84,6 +88,7 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
     	var val = $scope.venueType[code]; 
     	return val == 1;
     }
+    
     $scope.updateAttribute = function (rowId) {
     	var table = $('#venue_info_table').DataTable();
     	var rowData = table.row(rowId).data();
@@ -94,7 +99,7 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
         }).then(function (value) {
         	 var payload = {};
         	 payload[rowData[0]] = value;
-        	 var promise = RestServiceFactory.StoreService().updateAttribute({id:$stateParams.id}, payload, function(data){
+        	 var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
          		$scope.data.info[rowData[0]] = value;
          		
          		table.clear();
@@ -117,12 +122,12 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
     	if (!isValid) {
     		return;
     	}
-    	var payload = RestServiceFactory.cleansePayload('StoreService', data);
+    	var payload = RestServiceFactory.cleansePayload('VenueService', data);
     	var target = {id: data.id};
     	if ($stateParams.id == 'new'){
     		target = {};
     	}
-    	RestServiceFactory.StoreService().save(target,payload, function(success){
+    	RestServiceFactory.VenueService().save(target,payload, function(success){
     		$state.go('app.stores');
     	},function(error){
     		if (typeof error.data != 'undefined') { 

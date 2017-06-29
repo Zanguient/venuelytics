@@ -14,7 +14,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
 
         $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"New Visitors", "value":0, "icon":"icon-users"});
         $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Total Visitors", "value":0, "icon":"icon-users"});
-        $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"New Orders", "value":0, "icon":"fa fa-shopping-cart"});
+        $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"Total Bookings", "value":0, "icon":"fa fa-shopping-cart"});
         $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"});
         
 
@@ -34,8 +34,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
 
     $scope.processAnalytics = function(data) {
         if (typeof data.VENUE_NEW_VISITOR_COUNT !== 'undefined' && data.VENUE_NEW_VISITOR_COUNT.length > 0) {
-            $scope.venueNewVisitors = data.VENUE_NEW_VISITOR_COUNT[0];
-            $scope.top3Stats[0].value =  $scope.venueNewVisitors.lastYearValue;
+            $scope.venueNewVisitors = data.VENUE_NEW_VISITOR_COUNT;
+            $scope.top3Stats[0].value =  addForType($scope.venueNewVisitors, $scope.selectedPeriod);
         } else {
             $scope.venueNewVisitors = null;
             $scope.top3Stats[0].value = 0;
@@ -43,14 +43,40 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         }
 
         if (typeof data.VENUE_ALL_VISITOR_COUNT !== 'undefined') {
-            $scope.venueAllVisitors = data.VENUE_ALL_VISITOR_COUNT[0];
-            $scope.top3Stats[1].value = $scope.venueAllVisitors.lastYearValue;
+            $scope.venueAllVisitors = data.VENUE_ALL_VISITOR_COUNT;
+            $scope.top3Stats[1].value = addForType($scope.venueAllVisitors, $scope.selectedPeriod);
         } else {
             $scope.venueAllVisitors = null;
             $scope.top3Stats[1].value = 0;
 
         }
+
+        if (typeof data.VENUE_BOOKINGS_COUNT !== 'undefined') {
+            $scope.venueBookings = data.VENUE_BOOKINGS_COUNT;
+            $scope.top3Stats[2].value = addForType($scope.venueBookings, $scope.selectedPeriod);
+        } else {
+            $scope.venueBookings = null;
+            $scope.top3Stats[2].value = 0;
+
+        }
     };
+
+    function addForType(dataArray, type) {
+        var sum = 0;
+        for (var i = 0; i < dataArray.length; i++) {
+            if (type === 'YEARLY') {
+                sum += dataArray[i].lastYearValue;
+            } else if (type === 'MONTHLY') {
+                sum += dataArray[i].lastYearValue;
+            } else if (type === 'WEEKLY') {
+                sum += dataArray[i].lastYearValue;
+            } else if (type === 'DAILY') {
+                sum += dataArray[i].lastYearValue;
+            }
+        }
+        return sum;
+    }
+
     $scope.setPeriod = function(period) {
         if ($scope.selectedPeriod !== period){
             $scope.selectedPeriod = period;
