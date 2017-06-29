@@ -7,8 +7,8 @@ App.factory(
 		'RestServiceFactory',['$resource','Session','USER_ROLES', 'ContextService', 
 		function($resource, Session, USER_ROLES,  ContextService) {
 			'use strict';
-			var storeProperties = ['address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip','vendorId', 'vendorName',
-			'enableGeoConquest', 'website', 'email'];//
+			var storeProperties = ['address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip',
+			'vendorId', 'vendorName', 'enableGeoConquest', 'website', 'email'];//
 			
 			var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 
 			'udid','enabled', 'departmentName', 'aisleName'];
@@ -39,15 +39,20 @@ App.factory(
 				},
 				AgencyService: function () {
 					return $resource(urlTemplate.replace("@context", "agencies"), {}, {
-						getUsers : {method: 'GET',  params: { id: '@id' }, url: urlTemplate.replace("@context", "agencies") +"/users"},
-						addAgent : {method: 'POST',  params: { id: '@id' }, url: urlTemplate.replace("@context", "agencies") +"/user"},
-						deleteAgents: {method: 'DELETE',  params: { id: '@id', userId: '@userId' }, url: urlTemplate.replace("@context", "agencies") +"/user/:userId"},
-						setAsManager: {method: 'POST',  params: { id: '@id', userId: '@userId' }, url: urlTemplate.replace("@context", "agencies") +"/manager/:userId"}
+						getUsers : {method: 'GET',  params: { id: '@id' }, 
+							url: urlTemplate.replace("@context", "agencies") +"/users"},
+						addAgent : {method: 'POST',  params: { id: '@id' }, 
+							url: urlTemplate.replace("@context", "agencies") +"/user"},
+						deleteAgents: {method: 'DELETE',  params: { id: '@id', userId: '@userId' }, 
+							url: urlTemplate.replace("@context", "agencies") +"/user/:userId"},
+						setAsManager: {method: 'POST',  params: { id: '@id', userId: '@userId' }, 
+							url: urlTemplate.replace("@context", "agencies") +"/manager/:userId"}
 					});
 				},
 				UserVenueService: function () {
 					return $resource(urlTemplate.replace("@context", "users")+"/venues",{},{
-						deleteVenues : {method: 'DELETE',  params: { id: '@id', venueNumber: '@venueNumber' }, url:  urlTemplate.replace("@context", "users")+"/venues/:venueNumber"},					
+						deleteVenues : {method: 'DELETE',  params: { id: '@id', venueNumber: '@venueNumber' }, 
+							url:  urlTemplate.replace("@context", "users")+"/venues/:venueNumber"},					
 					});
 				},
 				BeaconService:  function () {	
@@ -55,21 +60,27 @@ App.factory(
 				} , 
 				VenueService: function () {
 					return $resource(urlTemplate.replace("@context", "venues"), {}, {
-						updateAttribute : {method: 'POST',  params: { id: '@id' }, url: urlTemplate.replace("@context", "venues")+"/info"},
-						getAnalytics : {method: 'GET',  params: { id: '@id' }, url: urlTemplate.replace("@context", "venues") +"/analytics"}
+						updateAttribute : {method: 'POST',  params: { id: '@id' }, 
+							url: urlTemplate.replace("@context", "venues")+"/info"},
+						getAnalytics : {method: 'GET',  params: { id: '@id' }, 
+							url: urlTemplate.replace("@context", "venues") +"/analytics"}
 					});
 				},
 				NotificationService: function () {
 					return $resource(urlTemplate.replace("@context", "notifications"), {}, {
-						getActiveNotifications : {method: 'GET',  params: { venueNumber: '@venueNumber' }, url: urlTemplate.replace("@context", "notifications")+"/:venueNumber/active"},
-						getUnreadNotificationCount : {method: 'GET',  params: { venueNumber: '@venueNumber' }, url: urlTemplate.replace("@context", "notifications")+"/:venueNumber/count"}
+						getActiveNotifications : {method: 'GET',  params: { venueNumber: '@venueNumber' }, 
+							url: urlTemplate.replace("@context", "notifications")+"/:venueNumber/active"},
+						getUnreadNotificationCount : {method: 'GET',  params: { venueNumber: '@venueNumber' }, 
+							url: urlTemplate.replace("@context", "notifications")+"/:venueNumber/count"}
 					});
 				},
 				ProductService : function () {
 					return $resource(urlTemplate.replace("@context", "products"), {}, {
 						get : {method: 'GET',  params: { id: '@id' }, isArray:true},
-						getPrivateEvents : {method: 'GET',  params: { id: '@id' }, isArray:true, url: urlTemplate.replace("@context", "products")+"/type/BanquetHall"},
-						getPrivateEvent : {method: 'GET',  params: { id: '@id', productId : '@productId' }, url: urlTemplate.replace("@context", "products")+"/:productId"}
+						getPrivateEvents : {method: 'GET',  params: { id: '@id' }, isArray:true, 
+							url: urlTemplate.replace("@context", "products")+"/type/BanquetHall"},
+						getPrivateEvent : {method: 'GET',  params: { id: '@id', productId : '@productId' }, 
+							url: urlTemplate.replace("@context", "products")+"/:productId"}
 						
 					});
 				},
@@ -94,8 +105,10 @@ App.factory(
 				},
 				ContentService: function () {
 					return $resource(urlTemplate.replace("@context", "content"),{},{
-							activate : {method: 'POST',  params: { id: '@id' }, url: contentActivateUrl.replace("@activate", "activate")},
-							deactivate : {method: 'POST',  params: { id: '@id' }, url: contentActivateUrl.replace("@activate", "deactivate")},
+							activate : {method: 'POST',  params: { id: '@id' }, 
+								url: contentActivateUrl.replace("@activate", "activate")},
+							deactivate : {method: 'POST',  params: { id: '@id' }, 
+								url: contentActivateUrl.replace("@activate", "deactivate")},
 							
 						}
 					);
@@ -103,8 +116,10 @@ App.factory(
 				CouponService: function () {
 					return $resource(urlTemplate.replace("@context", "coupons"),{},{
 							get : {method: 'GET',  params: { id: '@id' }, isArray:true},
-							activate : {method: 'POST',  params: { id: '@id' }, url: contentActivateUrl.replace("@activate", "activate")},
-							deactivate : {method: 'POST',  params: { id: '@id' }, url: contentActivateUrl.replace("@activate", "deactivate")},
+							activate : {method: 'POST',  params: { id: '@id' }, 
+								url: contentActivateUrl.replace("@activate", "activate")},
+							deactivate : {method: 'POST',  params: { id: '@id' }, 
+								url: contentActivateUrl.replace("@activate", "deactivate")},
 							
 						}
 					);
@@ -112,7 +127,7 @@ App.factory(
 				
 				cleansePayload : function(serviceName, payload) {
 					var rProps = REQ_PROP[serviceName];
-					if (typeof rProps != 'undefined') {
+					if (typeof rProps !== 'undefined') {
 						return  $.Apputil.copy(payload, rProps);
 					}
 					return payload;

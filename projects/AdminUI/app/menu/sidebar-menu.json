@@ -14,6 +14,13 @@
 	 "submenu": []
   },
   {
+  	"text": "Reservations",
+	"sref": "app.reservations",
+	 "icon": "icon-calendar",
+	 "translate": "sidebar.nav.pages.RESERVATIONS",
+	 "submenu": []
+  },
+  {
 	"text": "Users Management",
 	"sref": "app.users",
 	"icon": "icon-users",

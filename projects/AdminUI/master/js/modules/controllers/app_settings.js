@@ -67,20 +67,22 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
   promise.$promise.then(function(data) {
 	  
 	  for (var itemKey in data){
-		  var setting = $scope.channelSettings[itemKey];
-		  if (setting != null && typeof setting !== 'undefined') {
-			  setting.value = data[itemKey];
-			  $scope.channelSettings[itemKey] = setting;
-		  } else if ($scope.timeSettings[itemKey] !== null){
-			  setting = $scope.timeSettings[itemKey];
-			  setting.value = data[itemKey];
-		  } else if ($scope.generalSettings[itemKey] !== null){
-			  setting = $scope.generalSettings[itemKey];
-			  setting.value = data[itemKey];
-		  } else if ($scope.externalSettings[itemKey] !== null){
-			  setting = $scope.externalSettings[itemKey];
-			  setting.value = data[itemKey];
-		  }
+      if (data.hasOwnProperty(itemKey)) {
+  		  var setting =  $scope.channelSettings[itemKey];
+  		  if (setting != null && typeof setting !== 'undefined') {
+  			  setting.value = data[itemKey];
+  			  $scope.channelSettings[itemKey] = setting;
+  		  } else if ($scope.timeSettings[itemKey] !== null){
+  			  setting = $scope.timeSettings[itemKey];
+  			  setting.value = data[itemKey];
+  		  } else if ($scope.generalSettings[itemKey] !== null){
+  			  setting = $scope.generalSettings[itemKey];
+  			  setting.value = data[itemKey];
+  		  } else if ($scope.externalSettings[itemKey] !== null){
+  			  setting = $scope.externalSettings[itemKey];
+  			  setting.value = data[itemKey];
+  		  }
+      }
 		  
 	  }
 	  /*if ($scope.generalSettings.companyLogoUrl.value != "") {
@@ -92,6 +94,7 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
 	  $scope.update(isValid, data);
 	  $scope.update(isValid, data1);
   };
+
   $scope.update = function(isValid, data) {
   	if (!isValid) {
   		return;
@@ -99,14 +102,16 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
   	
   	var arr = {};
   	for (var type in data) {
-  		arr[type] = data[type].value;
+      if (data.hasOwnProperty(type)) {
+  		  arr[type] = data[type].value;
+      }
   		/*var obj = {};
   		obj.id = data[type].id;
   		obj.name = data[type].name;
   		obj.value = data[type].value;
   		
   		arr.push(obj);*/
-  	};
+  	}
   	RestServiceFactory.AppSettingsService().save(arr, function(success){
   		
   		$log.log("success: ",data);
@@ -120,7 +125,7 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
   			toaster.pop('error', "Server Error", error.data.developerMessage);
   		}
   	});
-  }
+  };
   
   $rootScope.$on("FileUploaded",function(ev, data){
 	 

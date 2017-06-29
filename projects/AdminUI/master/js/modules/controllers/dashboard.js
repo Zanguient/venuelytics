@@ -5,27 +5,11 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.selectedPeriod = 'WEEKLY';
     $scope.notificationCount = 0;
+    $scope.contextService = contextService;
 	$scope.init=function(){
 		$log.log("Dash board controller has been initialized!");
-		$scope.userVenues = {
-            selectedVenueNumber: 521,
-            selectedVenueName :"Monte Carlo",
-            listIsOpen : false,
-            available: {
-                    'Monte Carlo' : 521,
-                    'Myth': 832,
-                    'Test Venue' : 170568
-            },
-            set: function (venueName, venueNumber) {
-                $scope.userVenues.listIsOpen = ! $scope.userVenues.listIsOpen;
-                $scope.userVenues.selectedVenueNumber = venueNumber;
-                $scope.userVenues.selectedVenueName = venueName;
-                $scope.reload();
-            }
-        }
+		
         $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
-    
-		$scope.selectedStore = null;
         $scope.top3Stats = [];
 
         $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"New Visitors", "value":0, "icon":"icon-users"});
@@ -34,7 +18,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"});
         
 
-        var target = {id:$scope.userVenues.selectedVenueNumber};
+        var target = {id:contextService.userVenues.selectedVenueNumber};
         
         RestServiceFactory.VenueService().getAnalytics(target, function(data){
             $scope.processAnalytics(data);
@@ -49,7 +33,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
 	};
 
     $scope.processAnalytics = function(data) {
-        if (typeof data.VENUE_NEW_VISITOR_COUNT != 'undefined' && data.VENUE_NEW_VISITOR_COUNT.length > 0) {
+        if (typeof data.VENUE_NEW_VISITOR_COUNT !== 'undefined' && data.VENUE_NEW_VISITOR_COUNT.length > 0) {
             $scope.venueNewVisitors = data.VENUE_NEW_VISITOR_COUNT[0];
             $scope.top3Stats[0].value =  $scope.venueNewVisitors.lastYearValue;
         } else {
@@ -58,7 +42,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
 
         }
 
-        if (typeof data.VENUE_ALL_VISITOR_COUNT != 'undefined') {
+        if (typeof data.VENUE_ALL_VISITOR_COUNT !== 'undefined') {
             $scope.venueAllVisitors = data.VENUE_ALL_VISITOR_COUNT[0];
             $scope.top3Stats[1].value = $scope.venueAllVisitors.lastYearValue;
         } else {
@@ -68,8 +52,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         }
     };
     $scope.setPeriod = function(period) {
-        if ($scope.selectedPeriod = period){
-
+        if ($scope.selectedPeriod !== period){
+            $scope.selectedPeriod = period;
         }
     };
 
@@ -83,18 +67,18 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         } else {
            return "fa icon-envelope-letter";
        }
-    }
+    };
 
     /**
      * loading visitor states
      */
     $scope.reload = function() {
-       var promise = RestServiceFactory.NotificationService().getActiveNotifications({venueNumber: $scope.userVenues.selectedVenueNumber});	
+       var promise = RestServiceFactory.NotificationService().getActiveNotifications({venueNumber: contextService.userVenues.selectedVenueNumber});	
         promise.$promise.then(function(data) {
             $scope.notifications = data.notifications;
         });
 
-        var promise2 = RestServiceFactory.NotificationService().getUnreadNotificationCount({venueNumber: $scope.userVenues.selectedVenueNumber});   
+        var promise2 = RestServiceFactory.NotificationService().getUnreadNotificationCount({venueNumber: contextService.userVenues.selectedVenueNumber});   
         promise2.$promise.then(function(data) {
             $scope.notificationCount = data.count;
         });

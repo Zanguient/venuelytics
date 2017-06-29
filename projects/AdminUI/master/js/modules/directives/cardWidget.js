@@ -5,6 +5,7 @@
  */
 
 App.directive('cardWidget', function() {
+  "use strict";
   return {
     restrict: 'E',
     scope:{

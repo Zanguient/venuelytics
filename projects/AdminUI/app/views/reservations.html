@@ -1,0 +1,36 @@
+<h3>
+   <div class="row">
+      <div class="col-lg-11">
+         Reservations - <small>Managers view of all reservations</small>
+      </div>
+      <div class="col-lg-1">
+         <div dropdown="" is-open="userVenues.listIsOpen" class="btn-group pull-right">
+            <button type="button" class="btn btn-default dropdown-toggle" >
+               {{contextService.userVenues.selectedVenueName}}<span class="caret"></span>
+            </button>
+            <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort">
+               <li ng-repeat="(venueName, venueNumber) in contextService.userVenues.available">
+                  <a ng-click="contextService.userVenues.set(venueName, venueNumber)" href="#" ng-bind="venueName"></a>
+               </li>
+            </ul>
+         </div>
+      </div>
+    </div>
+</h3>
+<!-- START row-->
+<div class="calendar-app">
+   <div class="row">
+      <div class="col-lg-6 col-md-6">
+         <!-- START panel-->
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <!-- START calendar-->
+               <div id="calendar"></div>
+               <!-- END calendar-->
+            </div>
+         </div>
+         <!-- END panel-->
+      </div>
+   </div>
+   <!-- END row-->
+</div>

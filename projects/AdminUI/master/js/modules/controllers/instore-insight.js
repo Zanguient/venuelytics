@@ -66,7 +66,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 		var baseUrl=contextService.contextName+'/v1/posinsight/shopping/'+storeId;
 		
 		$log.log("Url:", baseUrl);
-		
+		var vIdx = 0;
 		$http.get(baseUrl).success(function(data){
 			$log.log("Success callback:", data);
 			//var data=msT;
@@ -97,7 +97,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 						labels:[]
 				};
 				if(mostShoppedDay.valueSet){
-					for(var vIdx = 0; vIdx < mostShoppedDay.valueSet.length; vIdx++){
+					for(vIdx = 0; vIdx < mostShoppedDay.valueSet.length; vIdx++){
 						var dayIdx = WEEKDAYS[mostShoppedDay.valueSet[vIdx].key];
 						if ( dayIdx != null && dayIdx >=0 && dayIdx < 7){
 							$scope.mostShoppedDay.array[dayIdx] = mostShoppedDay.valueSet[vIdx].value;
@@ -143,7 +143,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 		
 		$http.get(baseUrl).success(function(data){
 			$log.log("success data:", data);		
-			
+			var vIdx = 0;	
 			/**
 			 * setting traffic related data's
 			 */
@@ -163,7 +163,7 @@ App.controller('InstoreInsightController',  ['$scope', '$rootScope','$log', 'Con
 					} else {
 						offset = len-1;
 					}
-					for(var vIdx = 0; vIdx < data.traffic.valueSet.length && vIdx < 7; vIdx++){
+					for(vIdx = 0; vIdx < data.traffic.valueSet.length && vIdx < 7; vIdx++){
 						$scope.traffic.array[offset-vIdx] = data.traffic.valueSet[vIdx].value;
 						$scope.traffic.labels[vIdx] = data.traffic.valueSet[vIdx].key;
 					}

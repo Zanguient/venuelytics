@@ -132,7 +132,8 @@
         "AGENCIES":"Agency Management",
         "BEACONS": "Beacon Management",
         "LOYALTY": "Loyalty Management",
-        "SETTINGS": "Application Settings"
+        "SETTINGS": "Application Settings",
+         "RESERVATIONS": "Reservations"
       }
     }
   }

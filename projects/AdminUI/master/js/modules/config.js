@@ -250,6 +250,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: resolveFor('parsley','codemirror', 'codemirror-plugins', 'moment', 'taginput','inputmask','chosen', 
             'slider', 'ngWig', 'filestyle')
     })
+     .state('app.reservations', {
+        url: '/reservations',
+        title: 'Reservations',
+        templateUrl: basepath('reservations.html'),
+        controller: 'ReservationsController',
+        data: { authorizedRoles: [USER_ROLES.admin]},
+        resolve: resolveFor('jquery-ui', 'moment','fullcalendar')
+    })
     .state('app.documentation', {
         url: '/documentation',
         title: 'Documentation',
