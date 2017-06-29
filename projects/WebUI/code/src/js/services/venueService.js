@@ -6,6 +6,7 @@ app.service('VenueService', function() {
   this.venueName = '';
   this.businessImage = '';
   this.venueAddress = '';
+  this.businessUrl = '';
 
   /*this.getCurrentLocation = function() {
 
