@@ -2,7 +2,7 @@
 app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','AjaxService', 'APP_ARRAYS',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window, AjaxService, APP_ARRAYS) {
 
-    		$log.log('Inside Business Controller.');
+    		$log.log('Inside Business Controller');
     		
     		var self = $scope;
             self.claimBusiness = false;
@@ -25,6 +25,15 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.selectedVenueName = VenueService.venueName;
             self.selectedVenueAddress = VenueService.venueAddress;
             self.businessImage = VenueService.businessImage;
+            var response = VenueService.businessUrl;
+            if(VenueService.businessUrl) {
+                self.privateUrl = response.data["business.privateUrl"];
+                self.foodUrl = response.data["business.foodUrl"];
+                self.premiumUrl = response.data["business.premiumUrl"];
+                self.drinksUrl = response.data["business.drinksUrl"];
+                self.guestList = response.data["business.guestList"];
+                self.bottleUrl = response.data["business.bottleUrl"];
+            }
             self.init = function() {
                 self.cityNames = APP_ARRAYS.cityName;
                 self.listOfCategory = APP_ARRAYS.categories;
@@ -98,14 +107,12 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
 
             self.getClaimBusiness = function(selectedVenue){
+                 VenueService.businessImage = selectedVenue.imageUrls[0].originalUrl;
+                 VenueService.venueName = selectedVenue.venueName;
+                 VenueService.venueAddress = selectedVenue.address;
                  AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
-                      $log.info("Claim business response: "+angular.toJson(response));
-                     self.privateUrl = response["business.privateUrl"];
-                     self.foodUrl = response["business.foodUrl"];
-                     self.premiumUrl = response["business.premiumUrl"];
-                     self.drinksUrl = response["business.drinksUrl"];
-                     self.guestList = response["business.guestList"];
-                     self.bottleUrl = response["business.bottleUrl"];
+                     $log.info("Claim business response: "+angular.toJson(response));
+                     VenueService.businessUrl = response;
                      $location.path("/deployment/"+selectedVenue.id);
                   });
               }

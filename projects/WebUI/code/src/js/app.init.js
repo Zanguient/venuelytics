@@ -20,6 +20,14 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'home.html',
             controller: 'HomeController'
         })
+        .when('/home*', {
+            templateUrl: 'home.html',
+            controller: 'HomeController'
+        })
+        .when('/home?sb&orgId', {
+            templateUrl: 'home.html',
+            controller: 'HomeController'
+        })
         .when('/cities', {
             templateUrl: 'city.html',
             controller: 'CityController'
