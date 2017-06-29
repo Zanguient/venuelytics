@@ -26,7 +26,7 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
                 "orderable": false,
                 "orderable": false,
                 "createdCell": function (td, cellData, rowData, row, col) {
-                    var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ng-click="updateAttribute(\'' + row + '\'  )"></button>';
+                    var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ng-click="updateAttribute(\'' + row + '\'  )"></button>&nbsp;&nbsp;<button class="btn btn-default btn-oval fa fa-trash" ng-click="deleteAttribute(' +row +','+cellData+')"></button>';
                     
                     $(td).html(actionHtml);
                     $compile(td)($scope);
@@ -115,6 +115,17 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
         	 
         }, function (reason) {
         	//mostly cancelled
+        });
+      };
+
+      $scope.createAttribute = function () {   
+        ngDialog.openConfirm({
+          template: 'createModalDialogId',
+          className: 'ngdialog-theme-default',
+        }).then(function (value) {         
+          
+        }, function (reason) {
+          //mostly cancelled
         });
       };
       

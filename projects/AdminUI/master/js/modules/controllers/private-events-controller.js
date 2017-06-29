@@ -21,7 +21,7 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
 		    	"targets": [6],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-link" ng-click="editPE(' +row +','+cellData+')"></button>&nbsp;&nbsp;';
+		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-link" ng-click="editPE(' +row +','+cellData+')"></button>&nbsp;&nbsp;<button title="Delete User" class="btn btn-default btn-oval fa fa-trash" ng-click="deleteUser(' +row +','+cellData+')"></button>';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
@@ -67,5 +67,9 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
 	
   $scope.editPE = function(rowId, productId) {
 	  $state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:productId});
+	}
+
+	$scope.createPrivateEvent = function(rowId){
+		$state.go('app.editBanquetHall', {venueNumber: $stateParams.id});
 	}
 }]);
