@@ -31,47 +31,63 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         
 		$scope.reload();
 	};
-
+    $scope.setDisplayData = function() {
+        $scope.top3Stats[0].value =  addForType($scope.venueNewVisitors, $scope.selectedPeriod);
+        $scope.top3Stats[1].value = addForType($scope.venueAllVisitors, $scope.selectedPeriod);
+        $scope.top3Stats[2].value = addForType($scope.venueBookings, $scope.selectedPeriod);
+        $scope.top3Stats[3].value = addForType($scope.venueCheckin, $scope.selectedPeriod);
+        $scope.top3Stats[3].value += addForType($scope.visitorCheckin, $scope.selectedPeriod);
+    };
+    
     $scope.processAnalytics = function(data) {
         if (typeof data.VENUE_NEW_VISITOR_COUNT !== 'undefined' && data.VENUE_NEW_VISITOR_COUNT.length > 0) {
             $scope.venueNewVisitors = data.VENUE_NEW_VISITOR_COUNT;
-            $scope.top3Stats[0].value =  addForType($scope.venueNewVisitors, $scope.selectedPeriod);
         } else {
             $scope.venueNewVisitors = null;
-            $scope.top3Stats[0].value = 0;
-
         }
 
-        if (typeof data.VENUE_ALL_VISITOR_COUNT !== 'undefined') {
+        if (typeof data.VENUE_ALL_VISITOR_COUNT !== 'undefined' && data.VENUE_ALL_VISITOR_COUNT.length > 0) {
             $scope.venueAllVisitors = data.VENUE_ALL_VISITOR_COUNT;
-            $scope.top3Stats[1].value = addForType($scope.venueAllVisitors, $scope.selectedPeriod);
         } else {
             $scope.venueAllVisitors = null;
-            $scope.top3Stats[1].value = 0;
 
         }
 
-        if (typeof data.VENUE_BOOKINGS_COUNT !== 'undefined') {
+        if (typeof data.VENUE_BOOKINGS_COUNT !== 'undefined' && data.VENUE_BOOKINGS_COUNT.length > 0) {
             $scope.venueBookings = data.VENUE_BOOKINGS_COUNT;
-            $scope.top3Stats[2].value = addForType($scope.venueBookings, $scope.selectedPeriod);
         } else {
             $scope.venueBookings = null;
-            $scope.top3Stats[2].value = 0;
-
         }
+
+        if (typeof data.VENUE_CHECKIN !== 'undefined' && data.VENUE_CHECKIN.length > 0) {
+            $scope.venueCheckin = data.VENUE_CHECKIN;
+        } else {
+            $scope.venueCheckin = null;
+        }
+
+        if (typeof data.VENUE_VISITOR_CHECKIN !== 'undefined' && data.VENUE_VISITOR_CHECKIN.length > 0) {
+            $scope.visitorCheckin = data.VENUE_VISITOR_CHECKIN;
+        } else {
+            $scope.visitorCheckin = null;
+        }
+        $scope.setDisplayData();
+
     };
 
     function addForType(dataArray, type) {
         var sum = 0;
+        if (dataArray == null || typeof dataArray === 'undefined') {
+            return sum;
+        }
         for (var i = 0; i < dataArray.length; i++) {
             if (type === 'YEARLY') {
                 sum += dataArray[i].lastYearValue;
             } else if (type === 'MONTHLY') {
-                sum += dataArray[i].lastYearValue;
+                sum += dataArray[i].lastMonthValue;
             } else if (type === 'WEEKLY') {
-                sum += dataArray[i].lastYearValue;
+                sum += dataArray[i].lastWeekValue;
             } else if (type === 'DAILY') {
-                sum += dataArray[i].lastYearValue;
+                sum += dataArray[i].lastDayValue;
             }
         }
         return sum;
@@ -80,6 +96,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.setPeriod = function(period) {
         if ($scope.selectedPeriod !== period){
             $scope.selectedPeriod = period;
+            $scope.setDisplayData();
         }
     };
 
