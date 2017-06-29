@@ -2,8 +2,9 @@
  * Module: useragency.js
  *smangipudi
  =========================================================*/
-App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS', 
-                                  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS) {
+App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService',
+	'RestServiceFactory', 'toaster', 'FORMATS', function($scope, $state, $stateParams, $compile, $timeout, DataTableService,
+	 RestServiceFactory, toaster, FORMATS) {
   'use strict';
   
   var userRoles = [];
@@ -21,7 +22,8 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
 		    	"targets": [4],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-link" ng-click="addAgencyUser(' +row +','+cellData+')"></button>&nbsp;&nbsp;';
+		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-link" '+
+		    		'ng-click="addAgencyUser(' +row +','+cellData+')"></button>&nbsp;&nbsp;';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
@@ -33,33 +35,33 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		
 		    		var actionHtml = '<em class="fa fa-check-square-o"></em>';
-		    		if (cellData == false || cellData === 'N' || cellData === "false"){
+		    		if (cellData === false || cellData === 'N' || cellData === "false") {
 		    			actionHtml = '<em class="fa fa-square-o"></em>';
 		    		}
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
 		    	}
-		 } ];
+		 	} ];
     
 	    DataTableService.initDataTable('users_table', columnDefinitions);
    
 	    var promise = RestServiceFactory.UserService().get();
 	    promise.$promise.then(function(data) {
-	    $scope.data = data;
-    	var table = $('#users_table').DataTable();
-    	
-    	data.users.map(function(user) {
-    		var role = userRoles[user.role];
-    		if (role == null) {
-    			role = user.role;
-    		}
-    		
-    		table.row.add([user.userName, user.loginId, user.enabled, role, user.id]);
+		    $scope.data = data;
+	    	var table = $('#users_table').DataTable();
+	    	
+	    	data.users.map(function(user) {
+	    		var role = userRoles[user.role];
+	    		if (role == null) {
+	    			role = user.role;
+	    		}
+	    		
+	    		table.row.add([user.userName, user.loginId, user.enabled, role, user.id]);
+	    	});
+	    	table.draw();
     	});
-    	table.draw();
-    });
   	
-    var promise = RestServiceFactory.AgencyService().get({id:$stateParams.id});
+    promise = RestServiceFactory.AgencyService().get({id:$stateParams.id});
     promise.$promise.then(function(data) {
     	$scope.data.name = data.name;
     });
@@ -68,7 +70,7 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
   
   $scope.doneAction = function() {
 	  $state.go('app.agencyUsers', {id:$stateParams.id});
-  }
+  };
 	
 	
   $scope.addAgencyUser = function(rowId, userId) {
@@ -79,10 +81,10 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
 			var table = $('#users_table').dataTable();
 			table.fnDeleteRow(rowId);
 		},function(error){
-			if (typeof error.data != 'undefined') { 
-  			toaster.pop('error', "Server Error", error.data.developerMessage);
+			if (typeof error.data !== 'undefined') { 
+  				toaster.pop('error', "Server Error", error.data.developerMessage);
 			}
 		});
 		
-	}
+	};
 }]);

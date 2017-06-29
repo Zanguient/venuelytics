@@ -20,7 +20,8 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
 	    	"targets": [6],
 	    	"orderable": false,
 	    	"createdCell": function (td, cellData, rowData, row, col) {
-	    		 $(td).html('<button class="btn btn-default btn-oval fa fa-edit" ng-click="editStore('+cellData+')"></button>&nbsp;&nbsp;<button class="btn btn-default btn-oval fa fa-trash" ng-click="deleteStore(' +row +','+cellData+')"></button>');
+	    		 $(td).html('<button class="btn btn-default btn-oval fa fa-edit" ng-click="editStore('+cellData+')"></button>&nbsp;&nbsp;'+
+            '<button class="btn btn-default btn-oval fa fa-trash" ng-click="deleteStore(' +row +','+cellData+')"></button>');
 	    		 $compile(td)($scope);
 	    		}
         },
@@ -30,7 +31,7 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
 	    	"createdCell": function (td, cellData, rowData, row, col) {
 	    		
 	    		var actionHtml = '<em class="fa fa-check-square-o"></em>';
-	    		if (cellData != 'Y'){
+	    		if (cellData !== 'Y'){
 	    			actionHtml = '<em class="fa fa-square-o"></em>';
 	    		}
 	    		$(td).html(actionHtml);
@@ -43,7 +44,7 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     $('#stores_table_filter input').unbind();
     
     $('#stores_table_filter input').bind('keyup', function(e) {
-    	if(e.keyCode == 13) {
+    	if(e.keyCode === 13) {
     		
     		var promise = RestServiceFactory.VenueService().get({search:  $('#stores_table_filter input').val()});
     	    
@@ -71,7 +72,8 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     
     $scope.editStore = function(storeId) {
   		$state.go('app.storeedit', {id: storeId});
-  	}
+  	};
+
   	$scope.deleteStore = function(rowId, storeId) {
 
   		var target = {id: storeId};
@@ -79,14 +81,15 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     		var table = $('#stores_table').dataTable();
     		table.fnDeleteRow(rowId);
     	},function(error){
-    		if (typeof error.data != 'undefined') { 
-    			toaster.pop('error', "Server Error", error.data.developerMessage);
+    		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
-  	}
+  	};
+
   	$scope.createNewStore = function() {
   		$state.go('app.storeedit', {id: 'new'});
-  	}
+  	};
+
   });
 }]);

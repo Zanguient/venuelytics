@@ -2,7 +2,7 @@
  * Module: storeInfo.js
  * smangipudi
  =========================================================*/
-
+/*jshint bitwise: false*/
 App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
                                    function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout,DataTableService, $compile, ngDialog) {
     'use strict';
