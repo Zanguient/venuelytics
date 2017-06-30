@@ -102,6 +102,10 @@
     margin-top: 15px;
   }
 
+  .backColor {
+    top: 240px;
+  }
+
   .businessImage {
     height: 300px;
     width: 565px;
@@ -288,7 +292,6 @@
   }
 
   .backColor {
-    background-color: none;
     top: 220px;
   }
 
@@ -477,7 +480,6 @@
   }
 
   .backColor {
-    background-color: none;
     top: 220px;
   }
 
@@ -542,7 +544,6 @@
   }
 
   .backColor {
-    background-color: none;
     top: 220px;
   }
  
@@ -1067,7 +1068,7 @@
 }
 
 .features {
-  height: 370px;
+  height: 330px;
 }
 
 .owlCarousel {
