@@ -1137,3 +1137,10 @@
 .searchCityText {
     color: white;
 }
+
+.ms-icon.ms-icon-xsm {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 11px; 
+}

@@ -58,6 +58,7 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
   	$scope.createNewVenueMap = function() {
   		$state.go('app.venueMapedit', {id: 'new'});
   	};
-    
+
   });
+  
 }]);

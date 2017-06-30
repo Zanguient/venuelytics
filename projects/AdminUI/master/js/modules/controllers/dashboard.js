@@ -38,7 +38,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[3].value = addForType($scope.venueCheckin, $scope.selectedPeriod);
         $scope.top3Stats[3].value += addForType($scope.visitorCheckin, $scope.selectedPeriod);
     };
-    
+
     $scope.processAnalytics = function(data) {
         if (typeof data.VENUE_NEW_VISITOR_COUNT !== 'undefined' && data.VENUE_NEW_VISITOR_COUNT.length > 0) {
             $scope.venueNewVisitors = data.VENUE_NEW_VISITOR_COUNT;
