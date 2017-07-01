@@ -132,11 +132,13 @@
 		"DOWNLOAD_VENUELYTICS_WHITE":"Download VenueLytics White Label Consumer App",
 		"DOWNLOAD_VENUELYTICS_WHITE_URL":"http://onelink.to/98dmnv",
 		"BOTTLE_URL":"Link to Bottle Service",
- 		"PRIVATE_URL":"Link to Private Service",
+ 		"PRIVATE_URL":"Link to Private Event Booking",
  		"PREMIUM_URL":"Link to Premium Service",
  		"FOOD_URL":"Link to Food Service",
  		"DRINKS_URL":"Link to Drink Service",
- 		"GUEST_URL":"Link to Guest Service"
+ 		"GUEST_URL":"Link to Guest List",
+ 		"EMAIL_VERIFICATION":"Email Verification",
+ 		"PLEASE_CHECK_EMAIL":"Please check your email and click on the activate link to complete the claiming process"
 	},
 	"venue":{
 		"HOME":"Home",

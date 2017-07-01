@@ -1,6 +1,6 @@
 "use strict";
-app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','AjaxService', 'APP_ARRAYS',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, AjaxService, APP_ARRAYS) {
+app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','AjaxService', 'APP_ARRAYS', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $window, AjaxService, APP_ARRAYS, $rootScope) {
 
     		$log.log('Inside Business Controller');
     		
@@ -75,6 +75,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.selectedVenueAddress = selectedVenue.address;
                 VenueService.venueAddress = self.selectedVenueAddress;
                 self.claimBusiness = true;
+                $rootScope.title = 'Venuelytics-ClaimBusiness-'+selectedVenue.venueName;
                 $location.path("/claimBusiness/"+self.selectedVenueId);
             };
 
@@ -90,6 +91,10 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.claimBusiness = false;
             };
             
+            self.email = function() {
+                $location.path("/deployment/"+VenueService.venueNumber);
+            };
+
             self.businessSubmit = function(businessClaim) {
                 var businessObject = {
                     "business.contactName": VenueService.venueName,
@@ -103,7 +108,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 });
                 self.businessData = true;
                 self.hideForm = true;
-                $location.path("/deployment/"+VenueService.venueNumber);
+                $location.path("/emailVerification/"+VenueService.venueNumber);
             };
 
             self.getClaimBusiness = function(selectedVenue){
@@ -127,6 +132,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.claimBusiness = true;
                 self.hideForm = true;
                 self.claimForm = true;
+                $rootScope.title = 'Venuelytics-CreateBusiness';
             };
             self.submitForm = function() {
                 /*angular.forEach(self.myFormClaim.$error.required, function(field) {

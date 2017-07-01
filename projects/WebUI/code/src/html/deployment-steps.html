@@ -44,9 +44,12 @@
 			<div class="col-md-10">
 				<b class="control-label"><font size="4">{{"business.FOR_SHARING" | translate}}</font></b>
 				<br>
-				<p class="control-label"><font size="2">{{"business.LINK" | translate}}</font></p>
+				<!-- <p class="control-label"><font size="2">{{"business.LINK" | translate}}</font></p>
 				<label><font color="black">https://bit.ly/MonteCarloVIPPremiumServices</font></label>
-				<hr class="underLine">
+				<hr class="underLine"> -->
+				<p class="control-label" ng-if="premiumUrl"><font size="2">{{"business.PREMIUM_URL" | translate}}</font></p>
+ 				<label ng-if="premiumUrl"><font color="black">{{premiumUrl}}</font></label>
+ 				<hr class="underLine" ng-if="premiumUrl">
 				<p class="control-label"><font size="2">{{"business.URL" | translate}}</font></p>
 				<label><font color="black">https://bit.ly/MonteCarloVIPPremiumServices</font></label>
 				<hr class="underLine">
@@ -59,9 +62,6 @@
  				<p class="control-label" ng-if="foodUrl"><font size="2">{{"business.FOOD_URL" | translate}}</font></p>
  				<label ng-if="foodUrl"><font color="black">{{foodUrl}}</font></label>
  				<hr class="underLine" ng-if="foodUrl">
- 				<p class="control-label" ng-if="premiumUrl"><font size="2">{{"business.PREMIUM_URL" | translate}}</font></p>
- 				<label ng-if="premiumUrl"><font color="black">{{premiumUrl}}</font></label>
- 				<hr class="underLine" ng-if="premiumUrl">
  				<p class="control-label" ng-if="drinksUrl"><font size="2">{{"business.DRINKS_URL" | translate}}</font></p>
  				<label ng-if="drinksUrl"><font color="black">{{drinksUrl}}</font></label>
  				<hr class="underLine" ng-if="drinksUrl">
