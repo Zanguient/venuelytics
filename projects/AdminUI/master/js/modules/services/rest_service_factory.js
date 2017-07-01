@@ -7,8 +7,8 @@ App.factory(
 		'RestServiceFactory',['$resource','Session','USER_ROLES', 'ContextService', 
 		function($resource, Session, USER_ROLES,  ContextService) {
 			'use strict';
-			var storeProperties = ['address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip',
-			'vendorId', 'vendorName', 'enableGeoConquest', 'website', 'email'];//
+			var storeProperties = ['venueName','address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip',
+			'vendorId', 'vendorName', 'enableGeoConquest', 'website', 'email','venueType','venueTypeCode'];//
 			
 			var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 
 			'udid','enabled', 'departmentName', 'aisleName'];
@@ -83,7 +83,7 @@ App.factory(
 							url: urlTemplate.replace("@context", "products")+"/:productId"}
 						
 					});
-				},
+				},				
 				VenueMapService : function () {
 						return $resource(urlTemplate.replace("@context", "venuemap"),{}, {
 							getAll: {

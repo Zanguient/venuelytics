@@ -90,18 +90,18 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
     }
     
     $scope.updateAttribute = function (rowId) {
+      if(rowId == undefined){
     	var table = $('#venue_info_table').DataTable();
-    	var rowData = table.row(rowId).data();
+      var rowData = '';
         ngDialog.openConfirm({
           template: 'modalDialogId',
           className: 'ngdialog-theme-default',
-          data: {key: rowData[0], value: rowData[1]}
-        }).then(function (value) {
+          data: {key: rowData[1], value: rowData[1]}
+        }).then(function (value, key) {
         	 var payload = {};
         	 payload[rowData[0]] = value;
         	 var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
          		$scope.data.info[rowData[0]] = value;
-         		
          		table.clear();
          		$.each($scope.data.info, function (k,v) {
              		table.row.add([k, v, k]);
@@ -116,19 +116,34 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
         }, function (reason) {
         	//mostly cancelled
         });
-      };
-
-      $scope.createAttribute = function () {   
+      } else {
+      var table = $('#venue_info_table').DataTable();
+      var rowData = table.row(rowId).data();
         ngDialog.openConfirm({
-          template: 'createModalDialogId',
+          template: 'modalDialogId',
           className: 'ngdialog-theme-default',
-        }).then(function (value) {         
-          
+          data: {key: rowData[0], value: rowData[1]}
+        }).then(function (value, key) {
+           var payload = {};
+           payload[rowData[0]] = value;
+           var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
+            $scope.data.info[rowData[0]] = value;
+            table.clear();
+            $.each($scope.data.info, function (k,v) {
+                table.row.add([k, v, k]);
+              });
+            table.draw();
+          },function(error){
+            if (typeof error.data != 'undefined') { 
+              toaster.pop('error', "Server Error", error.data.developerMessage);
+            }
+          });
+           
         }, function (reason) {
           //mostly cancelled
         });
-      };
-      
+      }
+      };      
     $scope.update = function(isValid, data) {
     	if (!isValid) {
     		return;
