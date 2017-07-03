@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /assets/
+Allow: /
+
+Sitemap: http://dev.webui.s3-website-us-west-1.amazonaws.com/sitemap.xml

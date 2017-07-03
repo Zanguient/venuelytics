@@ -38,24 +38,24 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'city.html',
             controller: 'CityController',
             title: 'Venuelytics-City',
-            description: 'Venuelytics - a real time venue experience platform enabling City Information'
+            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
 
         })
         .when('/venues/:cityName', {
             templateUrl: 'venues.html',
             controller: 'VenueController',
-            description: 'Venuelytics - a real time venue experience platform enabling Particular City Information'
+            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/venues/:cityName/:venueid/:serviceType', {
             templateUrl: 'venue-details.html',
             controller: 'VenueDetailsController',
             title: 'Venuelytics-Service',
-            description: 'Venuelytics - a real time venue experience platform enabling Particular City Service'
+            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/venues/:cityName/:venueid', {
             templateUrl: 'venue-details.html',
             controller: 'VenueDetailsController',
-            description: 'Venuelytics - a real time venue experience platform enabling Particular City Details'
+            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/searchBusiness', {
             templateUrl: 'business-search.html',
