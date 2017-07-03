@@ -1,0 +1,207 @@
+<!-- <style type="text/css">
+	
+	.input-icon{
+    position: absolute;
+    left: 865px;
+    top: calc(50% - 1.5em); /* Keep icon in center of input, regardless of the input height */
+  }
+  input{
+    padding-left: 17px;
+  }
+  .input-wrapper{
+    position: relative;
+  }
+
+</style> -->
+
+<div id="carousel-example-generic" class="ms-carousel carousel slide"
+                data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="carousel-example-generic" data-slide-to="0"
+                        class="active"></li>
+                    <li data-target="carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="carousel-example-generic" data-slide-to="2"></li>
+                    <li data-target="carousel-example-generic" data-slide-to="3"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner carousel-inner-class" role="listbox">
+                    <div class="item active">
+                        <img ng-src="<%= assets %>/img/2.jpg" alt="..." class="carouselImage">
+                        <div class="custom-carousel backColor">
+                            <p class="paragraph-bottom"><b><font size="4">{{"home.NEXT_GENERATION" |
+                                translate}}</font></b></p>
+                                <span>&amp;</span>
+                            <p class="paragraph-bottom"><b><font size="4">{{"home.REAL_TIME_HOME" |
+                                translate}}</font></b></p>
+                            <p class="paragraph-bottom"><b><font size="4">{{"home.PERSONALIZED_SERVICES" |
+                                translate}}</font></b></p>
+                            <p class="paragraph-bottom"><b><font size="4">{{"home.REALTIME_INSIGHTS" |
+                                translate}}</font></b></p>
+                            <ng-include src="'home-apps-image.html'" scope="" onload=""></ng-include>
+
+                        </div>
+                    </div>
+                    
+                    <div class="item">
+                        <img src="<%= assets %>/img/screen2.jpg" alt="..." class="carouselImage">
+                        <div class="custom-carousel backColor">
+                            <p><b><font size="4">{{"home.REAL_TIME" |
+                                translate}}</font></b></p>
+                            <p><b><font size="4">{{"home.RESERVATION_FOOD_DRINK" |
+                                translate}}</font></b></p>
+                              <ng-include src="'home-apps-image.html'" scope="" onload=""></ng-include>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img ng-src="<%= assets %>/img/41.jpg" alt="..." class="carouselImage">
+                        <div class="custom-carousel backColor">
+                            <p><b><font size="4">{{"home.CREATE_NEW_SOURCES" |
+                                translate}}</font></b></p>
+                            <p><b><font size="4">{{"home.WIFI_IN_VENUE_ORDERING" |
+                                translate}}</font></b></p>
+                              <ng-include src="'home-apps-image.html'" scope="" onload=""></ng-include>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <span data-target="#carousel-example-generic"
+                    class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control"
+                    role="button" data-slide="prev"><i
+                    class="zmdi zmdi-chevron-left"></i></span> <span
+                    data-target="#carousel-example-generic"
+                    class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary right carousel-control"
+                    role="button" data-slide="next"><i
+                    class="zmdi zmdi-chevron-right"></i></span>
+            </div>
+
+<div id="rowOne">
+	<center>
+		<div id="serviceTabs" class="btn-group btn-group-justified"
+			style="border: 1px solid #fff;">
+			<div id="bottleTab" class="btn-group" style="border: 1px solid #fff;">
+				<button id="bottle" type="button"
+					class="btn btn-success btn-responsive"
+					ng-click="bottle('Bottle')"
+					style="white-space: normal; height: 80px;">
+					<i class="fa fa-glass fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;<span
+						>Bottle Service</span>
+				</button>
+			</div>
+			<div id="privateEventTab" class="btn-group"
+				style="border: 1px solid #fff;">
+				<button id="private" type="button"
+					class="btn btn-success btn-responsive"
+					ng-click="event('Private Event')"
+					style="white-space: normal; height: 80px;">
+					<i class="fa fa-diamond fa-2x"></i>&nbsp;&nbsp;<span
+						>Private Events</span>
+				</button>
+			</div>
+			<div id="guestlistTab" class="btn-group"
+				style="border: 1px solid #fff;">
+				<button id="glist" type="button"
+					class="btn btn-success btn-responsive"
+					ng-click="glist('Guest List')"
+					style="white-space: normal; height: 80px;">
+					<i class= "fa fa-wpforms fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span
+						>Guest</span> <span translate="LIST"></span>
+				</button>
+			</div>
+		</div>
+	</center>
+</div>
+
+<!-- Private Event START row-->
+<div ng-show="bottleServiceTab">
+<form class="form-horizontal">
+	<fieldset>
+		<div class="col-md-10 form-group is-empty">
+            <input type="date" class="form-control" id="inputEmail" placeholder="Date">
+            <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="table" placeholder="Table">
+            <!-- <label for="table" class="fa fa-calendar"></label> -->
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="email" class="form-control" id="email" placeholder="Email">
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="mobile" placeholder="Mobile">
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="zipcode" placeholder="Zipcode">
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="zipcode" placeholder="Special Instructions">
+        </div>
+
+        <div class="col-md-10 form-group is-empty">
+        	<div class="input-group">
+        		<label for="inputEmail">Total Guest</label>
+	            <span>
+	                <button type="button" class="btn btn-success btn-number" ng-click="minus()">
+	                    <span class="glyphicon glyphicon-minus"></span>
+	                </button>
+	            </span>
+	            {{totalGuest}}
+	            <span>
+	                <button type="button" class="btn btn-success btn-number" ng-click="plus()">
+	                  <span class="glyphicon glyphicon-plus"></span>
+	                </button>
+	            </span>
+	        </div>
+        </div>
+
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="zipcode" placeholder="Occasion">
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="zipcode" placeholder="Host/Hostess">
+        </div>
+     	<div class="col-md-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> I authorize emails, Event notifications and special invites for Rosie McCann's Irish Pub.
+                </label>                            
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> I agree to Rosie McCann's Irish Pub Privacy Policy
+                </label>                            
+            </div>
+        </div>
+        <a href="javascript:void(0)" class="btn btn-raised btn-success" style="
+    border-radius: 10px; width: 630px;"><font size="5"> CHECKOUT </font><div class="ripple-container"></div></a>
+	</fieldset>
+</form>
+
+<div class="col-md-7">
+	<p><font color="#4caf50">Minimum Requirements:</font></p> <br/>
+	<p>2 Bottles minimum purchase for Table 1 through 4. Minimum 3 bottles purchase required for VIP Booth #20. All purchases include a 18% service fee.</p> <br/>
+	<p><font color="#4caf50">Dress Code:</font></p> <br/>
+	<p>2 Bottles minimum purchase for Table 1 through 4. Minimum 3 bottles purchase required for VIP Booth #20. All purchases include a 18% service fee.</p>
+</div>
+</div>
+
+<div ng-show="eventServiceTab">
+	<h1>Event Service</h1>
+</div>
+
+<div ng-show="guestServiceTab">
+	<h1>Guest Service</h1>
+</div>
+
+
