@@ -11,6 +11,13 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
     		var self = $scope;
 
             self.init = function() {
+                self.bottleServiceTab = true;
+                $("#privateEventTab").css('background-color','white');
+                $('#private').css('color', '#4caf50');
+                $("#guestlistTab").css('background-color','white');
+                $('#glist').css('color', '#4caf50');
+                $("#bottleTab").css('background-color','#4caf50');
+                $('#bottle').css('color', 'white');
                 self.venueid = $routeParams.venueid;
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
@@ -47,6 +54,54 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
                 });
             };
+
+            self.totalGuest = 1;
+
+            self.minus = function() {
+                if(self.totalGuest > 1) {
+                    self.totalGuest = self.totalGuest - 1;
+                }
+             };
+            
+            self.plus = function() {
+                self.totalGuest = self.totalGuest + 1;
+             };
+
+             self.bottle = function(service) {
+                $("#privateEventTab").css('background-color','white');
+                $('#private').css('color', '#4caf50');
+                $("#guestlistTab").css('background-color','white');
+                $('#glist').css('color', '#4caf50');
+                $("#bottleTab").css('background-color','#4caf50');
+                $('#bottle').css('color', 'white');
+                self.bottleServiceTab = true;
+                self.eventServiceTab = false;
+                self.guestServiceTab = false;
+             };
+
+             self.event = function(service) {
+                $("#privateEventTab").css('background-color','#4caf50');
+                $('#private').css('color', 'white');
+                $("#guestlistTab").css('background-color','white');
+                $('#glist').css('color', '#4caf50');
+                $("#bottleTab").css('background-color','white');
+                $('#bottle').css('color', '#4caf50');
+                self.bottleServiceTab = false;
+                self.eventServiceTab = true;
+                self.guestServiceTab = false;
+             };
+
+             self.glist = function(service) {
+                $("#privateEventTab").css('background-color','white');
+                $('#private').css('color', '#4caf50');
+                $("#guestlistTab").css('background-color','#4caf50');
+                $('#glist').css('color', 'white');
+                $("#bottleTab").css('background-color','white');
+                $('#bottle').css('color', '#4caf50');
+                self.bottleServiceTab = false;
+                self.eventServiceTab = false;
+                self.guestServiceTab = true;
+             };
 
             self.init();
     		

@@ -282,6 +282,18 @@
 @media only screen and (min-device-width: 320px) and (max-device-width:
  480px) {
 
+  .input-icon{
+    position: absolute;
+    left: 270px;
+    top: calc(50% - 1.5em); /* Keep icon in center of input, regardless of the input height */
+  }
+  input{
+    padding-left: 17px;
+  }
+  .input-wrapper{
+    position: relative;
+  }
+
   .venueSearch {
     margin-top: 10px;
     margin-left: 55px;
@@ -462,6 +474,18 @@
     and (min-device-width : 375px) 
     and (max-device-width : 667px) {
 
+  .input-icon{
+    position: absolute;
+    left: 320px;
+    top: calc(50% - 1.5em); /* Keep icon in center of input, regardless of the input height */
+  }
+  input{
+    padding-left: 17px;
+  }
+  .input-wrapper{
+    position: relative;
+  }
+
   .venueSearch {
     margin-top: 10px;
     margin-left: 35px;
@@ -529,6 +553,18 @@
 @media only screen 
     and (min-device-width : 414px) 
     and (max-device-width : 736px) {
+
+  .input-icon{
+    position: absolute;
+    left: 356px;
+    top: calc(50% - 1.5em); /* Keep icon in center of input, regardless of the input height */
+  }
+  input{
+    padding-left: 17px;
+  }
+  .input-wrapper{
+    position: relative;
+  }
 
   .venueSearch {
     margin-top: 10px;
