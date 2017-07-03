@@ -96,10 +96,12 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
         ngDialog.openConfirm({
           template: 'modalDialogId',
           className: 'ngdialog-theme-default',
-          data: {key: rowData[1], value: rowData[1]}
-        }).then(function (value, key) {
+          //data: {key: rowData[0], value: rowData[1]}
+        }).then(function (value) {
+          var values = value.value;
+          var keys =value.key;
         	 var payload = {};
-        	 payload[rowData[0]] = value;
+        	 payload[keys]= values;
         	 var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
          		$scope.data.info[rowData[0]] = value;
          		table.clear();
@@ -114,7 +116,7 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
          	});
         	 
         }, function (reason) {
-        	//mostly cancelled
+        	//mostly cancelled  
         });
       } else {
       var table = $('#venue_info_table').DataTable();
@@ -123,7 +125,8 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
           template: 'modalDialogId',
           className: 'ngdialog-theme-default',
           data: {key: rowData[0], value: rowData[1]}
-        }).then(function (value, key) {
+        }).then(function (value) {  
+          value = value.value;
            var payload = {};
            payload[rowData[0]] = value;
            var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){

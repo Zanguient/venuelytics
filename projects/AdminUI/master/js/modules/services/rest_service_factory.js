@@ -23,6 +23,7 @@ App.factory(
 			
 			var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',
 			 "enabled"];
+			 var productProperties = ['productType','name', 'venueNumber', 'price', 'servingSize', 'size', 'enabled', 'description','imageUrls[{"id":1}]'];
 			var REQ_PROP= {};
 			REQ_PROP['VenueService'] = storeProperties;
 			REQ_PROP['BeaconService'] = beaconProperties;
@@ -30,6 +31,7 @@ App.factory(
 			REQ_PROP['LoyaltyService'] = loyalityProperties;
 			REQ_PROP['ProfileService'] = profileProperties;
 			REQ_PROP['AgencyService'] = agencyProperties;
+			REQ_PROP['ProductService'] = productProperties;
 			var urlTemplate =  ContextService.contextName + "/v1/@context/:id";
 			var contentActivateUrl = ContextService.contextName + "/v1/content/:id/@activate";
 
@@ -63,7 +65,9 @@ App.factory(
 						updateAttribute : {method: 'POST',  params: { id: '@id' }, 
 							url: urlTemplate.replace("@context", "venues")+"/info"},
 						getAnalytics : {method: 'GET',  params: { id: '@id' }, 
-							url: urlTemplate.replace("@context", "venues") +"/analytics"}
+							url: urlTemplate.replace("@context", "venues") +"/analytics"},
+						delete : {method: 'DELETE',  params: { id: '@id'}, 
+							url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"}
 					});
 				},
 				NotificationService: function () {
