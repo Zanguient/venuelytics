@@ -17,6 +17,10 @@
   vertical-align: bottom;
 }
 
+.borderLine {
+  border: 1px solid #000
+}
+
 #footerMargin {
   margin-top: 0px;
   position: initial;
@@ -26,6 +30,29 @@
   border: 1px solid #4CAF50;
   margin-bottom: 0px;
   margin-top: 0px;
+}
+
+.search {
+  position: relative;
+  color: #aaa;
+  font-size: 16px;
+}
+
+.search input {
+  width: 250px;
+  height: 32px;
+
+  background: #fcfcfc;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+}
+
+.search input { text-indent: 32px;}
+.search .fa-search { 
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
 .image-block > p {
@@ -106,6 +133,12 @@
     margin-top: 10px;
     margin-left: 16px;
   }
+  
+  .eventImage{
+    height: 100px;
+    width: 100px;
+  }
+
 
   .citySearchLabel {
     margin-top: 15px;
@@ -294,6 +327,16 @@
   .chk-button {
     border-radius: 10px; 
     width: 100%;
+  }
+  
+   .eventImage{
+    height: 100px;
+    width: 100px;
+  }
+
+  .eventImageWidth {
+    width: 100px;
+    height: 100px;
   }
 
   .input-icon{
@@ -493,6 +536,16 @@
     border-radius: 10px; 
     width: 100%;
   }
+  
+  .eventImage{
+    height: 100px;
+    width: 100px;
+  }
+
+  .eventImageWidth {
+    width: 100px;
+    height: 100px;
+  }
 
   .input-icon{
     position: absolute;
@@ -578,6 +631,16 @@
   .chk-button {
     border-radius: 10px; 
     width: 100%;
+  }
+  
+  .eventImage{
+    height: 100px;
+    width: 100px;
+  }
+
+  .eventImageWidth {
+    width: 100px;
+    height: 100px;
   }
 
   .input-icon{

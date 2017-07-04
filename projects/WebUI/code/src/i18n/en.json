@@ -383,6 +383,8 @@
 		"ZIPCODE":"Zipcode",
 		"INSTRUCTIONS":"Special Instructions",
 		"TOTAL_GUEST":"Total Guest",
+		"GUEST_MEN":"# of Men",
+		"GUEST_WOMEN":"# of Women",
 		"OCCASION":"Occasion",
 		"HOST":"Host/Hostess",
 		"AUTHORIZE":"I authorize emails, Event notifications and special invites for Rosie McCann's Irish Pub.",

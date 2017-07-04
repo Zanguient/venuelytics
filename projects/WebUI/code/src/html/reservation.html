@@ -157,11 +157,133 @@
 </div>
 
 <div ng-show="eventServiceTab">
-	<h1>Event Service</h1>
+    <div class="col-md-4 form-group is-empty">
+        <div class="search">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" class="form-control" id="search" placeholder="  Search">
+        </div>
+    </div>
+        <div class="col-md-10">
+        <div class="borderLine">
+        <table class="table table-no-border">
+            <tr>
+                <td rowspan="2" class="eventImageWidth">
+                    <img class="img-responsive eventImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCxUhgaE_yYczXsTujclB_jvqLt-aWbqklchEflWJYyDrW9i75">
+                </td>
+                <td rowspan="2" class="eventImageWidth">
+                    <img class="img-responsive eventImage" src="http://www.montecarlosbm.com/wp-content/uploads/2017/06/maona-220x124.jpg">
+                </td>
+                <td>The Temptations</td>
+                <td class="pull-right">
+                    <button class="btn btn-raised btn-success btn-xs" type="button">TICKETS</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Doors: 9:30 PM</td>
+                <td class="pull-right">$15.00</td>
+            </tr>
+        </table>
+        </div><br>
+        <div class="borderLine">
+        <table class="table table-no-border">
+            <tr>
+                <td rowspan="2" class="eventImageWidth">
+                    <img class="img-responsive eventImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCxUhgaE_yYczXsTujclB_jvqLt-aWbqklchEflWJYyDrW9i75">
+                </td>
+                <td rowspan="2" class="eventImageWidth">
+                    <img class="img-responsive eventImage" src="http://www.montecarlosbm.com/wp-content/uploads/2017/06/maona-220x124.jpg">
+                </td>
+                <td>The Temptations</td>
+                <td class="pull-right">
+                    <button class="btn btn-raised btn-success btn-xs" type="button">TICKETS</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Doors: 9:30 PM</td>
+                <td class="pull-right">$15.00</td>
+            </tr>
+        </table>
+        </div><br>
+        <div class="borderLine">
+        <table class="table table-no-border">
+            <tr>
+                <td rowspan="2" class="eventImageWidth">
+                    <img class="img-responsive eventImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCxUhgaE_yYczXsTujclB_jvqLt-aWbqklchEflWJYyDrW9i75">
+                </td>
+                <td rowspan="2" class="eventImageWidth">
+                    <img class="img-responsive eventImage" src="http://www.montecarlosbm.com/wp-content/uploads/2017/06/maona-220x124.jpg">
+                </td>
+                <td>The Temptations</td>
+                <td class="pull-right">
+                    <button class="btn btn-raised btn-success btn-xs" type="button">TICKETS</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Doors: 9:30 PM</td>
+                <td class="pull-right">$15.00</td>
+            </tr>
+        </table>
+        </div>
+        </div>
 </div>
 
 <div ng-show="guestServiceTab">
-	<h1>Guest Service</h1>
+    <form class="form-horizontal">
+        <fieldset>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="date" class="form-control" id="inputEmail" placeholder="{{'reservation.DATE' | translate}}">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="guestTotalGuests" name="guestTotalGuests" placeholder="{{'reservation.TOTAL_GUEST' | translate}}" ng-model="guestTotalGuests" numbers-only class="form-control">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" placeholder="{{'reservation.GUEST_MEN' | translate}}" id="guestMen" name="guestMen" class="form-control" numbers-only ng-model="guestMen">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" placeholder="{{'reservation.GUEST_WOMEN' | translate}}" id="guestWomen" name="guestWomen" class="form-control" numbers-only ng-model="guestWomen">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="guestMobileNumber" name="guestMobileNumber" placeholder="{{'reservation.MOBILE' | translate}}" class="form-control" ng-model="guestMobileNumber">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="email" id="guestEmailId" name="guestEmailId" placeholder="{{'reservation.EMAIL' | translate}}" class="form-control" ng-model="guestEmailId">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="guestFirstName" name="guestFirstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" class="form-control" ng-model="guestFirstName">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="guestLastName" name="guestLastName" placeholder="{{'reservation.LAST_NAME' | translate}}" class="form-control" ng-model="guestLastName">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="guestZip" name="guestZip" placeholder="{{'reservation.ZIPCODE' | translate}}" class="form-control" ng-model="guestZip">
+            </div>
+            <div class="col-lg-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AUTHORIZE" | translate}}
+                </label>                            
+            </div>
+            </div>
+            <div class="col-lg-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AGREE" | translate}}
+                </label>                            
+            </div>
+            </div>
+            <br><br>
+            <div>
+                <center>
+                    <button type="submit" class="btn btn-raised btn-success">
+                        <span translate="APPLY"></span>
+                    </button>
+                    <button class="btn btn-raised btn-success">
+                        <span translate="CANCEL"></span>
+                    </button>
+                </center>
+            </div>
+        </fieldset>
+    </form>
 </div>
 
 
