@@ -11,13 +11,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
     		var self = $scope;
 
             self.init = function() {
-                self.bottleServiceTab = true;
-                $("#privateEventTab").css('background-color','white');
-                $('#private').css('color', '#4caf50');
-                $("#guestlistTab").css('background-color','white');
-                $('#glist').css('color', '#4caf50');
-                $("#bottleTab").css('background-color','#4caf50');
-                $('#bottle').css('color', 'white');
                 self.venueid = $routeParams.venueid;
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
