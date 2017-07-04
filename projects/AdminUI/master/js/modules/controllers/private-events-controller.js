@@ -2,11 +2,9 @@
  * Module: private-event-controller.js
  *smangipudi
  =========================================================*/
-App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS', 
-                                  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS) {
+App.controller('PrivateEventsController', ['dataShare','$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS', 
+                                  function(dataShare, $scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS) {
   'use strict';
-  
- 
   $timeout(function(){
 
     if ( ! $.fn.dataTable ) return;
@@ -65,13 +63,23 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
   $scope.doneAction = function() {
 	  $state.go('app.agencyUsers', {id:$stateParams.id});
   }
-	
-	
+		
   $scope.editPE = function(rowId, productId) {
 	  $state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:productId});
 	}
-
-	$scope.createPrivateEvent = function(rowId){
+	$scope.createPrivateEvent = function(rowId, productId){
+		dataShare.venueNumber = $stateParams.id;
 		$state.go('app.editBanquetHall', {venueNumber: $stateParams.id});
 	}
+	$scope.deletePE = function(rowId, productId) {
+  		//var target = {id: storeId};
+  		var target = {id: $stateParams.id ,productId:productId};
+  		RestServiceFactory.ProductService().delete(target,  function(success){
+  			$state.go('app.stores');
+    	},function(error){
+    		if (typeof error.data !== 'undefined') { 
+    			toaster.pop('error', "Server Error", error.data.developerMessage);
+    		}
+    	});
+  	};
 }]);

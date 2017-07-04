@@ -164,4 +164,14 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
     		}
     	});
     }
+    $scope.deleteAttribute = function(rowId, productId) {
+      var target = {id: $stateParams.id};
+      RestServiceFactory.VenueService().deleteAttribute(target,  function(success){
+        $state.go('app.stores');
+      },function(error){
+        if (typeof error.data !== 'undefined') { 
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+    };
 }]);

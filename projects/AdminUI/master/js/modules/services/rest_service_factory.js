@@ -23,7 +23,7 @@ App.factory(
 			
 			var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',
 			 "enabled"];
-			 var productProperties = ['productType','name', 'venueNumber', 'price', 'servingSize', 'size', 'enabled', 'description','imageUrls[{"id":1}]'];
+			 var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls[{"id":1}]', 'servingSize', 'productType', 'BanquetHall','category','brand','enabled','price'];
 			var REQ_PROP= {};
 			REQ_PROP['VenueService'] = storeProperties;
 			REQ_PROP['BeaconService'] = beaconProperties;
@@ -66,8 +66,10 @@ App.factory(
 							url: urlTemplate.replace("@context", "venues")+"/info"},
 						getAnalytics : {method: 'GET',  params: { id: '@id' }, 
 							url: urlTemplate.replace("@context", "venues") +"/analytics"},
-						delete : {method: 'DELETE',  params: { id: '@id'}, 
-							url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"}
+						delete : {method: 'DELETE',  params: { id: '@id'},
+							url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"},
+						deleteAttribute : {method: 'DELETE',  params: { id: '@id'}, 
+							url:  urlTemplate.replace("@context", "venues")+"/info"}
 					});
 				},
 				NotificationService: function () {
@@ -83,8 +85,12 @@ App.factory(
 						get : {method: 'GET',  params: { id: '@id' }, isArray:true},
 						getPrivateEvents : {method: 'GET',  params: { id: '@id' }, isArray:true, 
 							url: urlTemplate.replace("@context", "products")+"/type/BanquetHall"},
-						getPrivateEvent : {method: 'GET',  params: { id: '@id', productId : '@productId' }, 
-							url: urlTemplate.replace("@context", "products")+"/:productId"}
+						getPrivateEvent : {method: 'GET',  params: { id: '@id', productId : '@productId'}, 
+							url: urlTemplate.replace("@context", "products")+"/:productId"},
+						updatePrivateEvent : {method: 'POST',  params: { id: '@id', productId : '@productId'}, 
+							url: urlTemplate.replace("@context", "products")+"/:productId"},
+						delete : {method: 'DELETE',  params: { id: '@id', productId : '@productId'}, 
+							url:  urlTemplate.replace("@context", "products")+"/:productId"}
 						
 					});
 				},				
