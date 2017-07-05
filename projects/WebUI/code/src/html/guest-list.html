@@ -1,0 +1,71 @@
+<form class="form-horizontal" ng-controller="VenueDetailsController">
+        <fieldset>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="date" class="form-control" id="inputEmail" placeholder="{{'reservation.DATE' | translate}}">
+            </div>
+            <div class="col-md-10 form-group is-empty">
+            <div class="input-group">
+                <label for="inputEmail" class="sameRow fontRegular">{{"reservation.TOTAL_GUEST" | translate}}</label>
+                <div class="sameRow guestBorder">
+                    <span>
+                    <button type="button" class="btn btn-success btn-number" ng-click="minus()">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </span>
+                {{totalGuest}}
+                <span>
+                    <button type="button" class="btn btn-success btn-number" ng-click="plus()">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </span>
+                </div>
+            </div>
+        </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" placeholder="{{'reservation.GUEST_MEN' | translate}}" id="guestMen" name="guestMen" class="form-control fontRegular" numbers-only ng-model="guestMen">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" placeholder="{{'reservation.GUEST_WOMEN' | translate}}" id="guestWomen" name="guestWomen" class="form-control fontRegular" numbers-only ng-model="guestWomen">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="ms-form-pass" class="form-control fontRegular" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="guestMobileNumber" placeholder="{{'reservation.MOBILE' | translate}}" required="" data-parsley-trigger="change">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="email" id="guestEmailId" name="guestEmailId" placeholder="{{'reservation.EMAIL' | translate}}" class="form-control fontRegular" ng-model="guestEmailId">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="guestFirstName" name="guestFirstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" class="form-control fontRegular" ng-model="guestFirstName">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="guestLastName" name="guestLastName" placeholder="{{'reservation.LAST_NAME' | translate}}" class="form-control fontRegular" ng-model="guestLastName">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="number" id="guestZip" name="guestZip" pattern="[0-9]{5}" placeholder="{{'reservation.ZIPCODE' | translate}}" class="form-control fontRegular" ng-model="guestZip">
+            </div>
+            <div class="col-lg-12">
+            <div class="checkbox">
+                <label class="fontRegular" style="font-size: 15px;">
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AUTHORIZE" | translate}}
+                </label>                            
+            </div>
+            </div>
+            <div class="col-lg-12">
+            <div class="checkbox">
+                <label class="fontRegular" style="font-size: 15px;">
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AGREE" | translate}}
+                </label>                            
+            </div>
+            </div>
+            <br><br>
+            <div class="col-lg-12">
+                <center>
+                    <button type="submit" class="btn btn-raised btn-success">
+                        <span class="fontRegular">APPLY</span>
+                    </button>
+                    <button class="btn btn-raised btn-success">
+                        <span class="fontRegular">CANCEL</span>
+                    </button>
+                </center>
+            </div>
+        </fieldset>
+    </form>

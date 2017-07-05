@@ -99,7 +99,10 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.confirmBottleService = function() {
-                $scope.serviceJSON = {
+
+                var fullName = self.userFirstName + " " + self.userLastName;
+                $log.info("Full name->", fullName);
+                self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,
                     "reason": self.occasion,
@@ -113,10 +116,10 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "hostEmployeeId": null,
                     "hasBid": "N",
                     "bidStatus": null,
-                    "serviceInstructions": $scope.specialInstruction,
+                    "serviceInstructions": self.instructions,
                     "status": "REQUEST",
                     "serviceDetail": null,
-                    "fulfillmentDate": $scope.startDate,
+                    "fulfillmentDate": self.date,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
                     "deliveryAddress": null,
@@ -125,14 +128,17 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "ratingComment": null,
                     "ratingDateTime": null,
                     "order": {
-                        "venueNumber": $scope.venueNumber,
-                        "orderDate": $scope.startDate,
+                        "venueNumber": self.venueid,
+                        "orderDate": self.date,
                         "orderItems": []
                     },
                     "prebooking": false,
                     "employeeName": "",
-                    "visitorName": name
+                    "visitorName": fullName
                 };
+                $log.info("Service JSON->", angular.toJson(self.serviceJSON));
+
+
              };
 
             self.init();
