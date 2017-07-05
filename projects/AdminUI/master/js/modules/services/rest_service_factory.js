@@ -8,7 +8,7 @@ App.factory(
 		function($resource, Session, USER_ROLES,  ContextService) {
 			'use strict';
 			var storeProperties = ['venueName','address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip',
-			'vendorId', 'vendorName', 'enableGeoConquest', 'website', 'email','venueType','venueTypeCode'];//
+			'vendorId', 'vendorName', 'enableGeoConquest', 'website', 'email','venueType','venueTypeCode','description','managerName','imageUrls[]'];//
 			
 			var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 
 			'udid','enabled', 'departmentName', 'aisleName'];
@@ -67,9 +67,9 @@ App.factory(
 						getAnalytics : {method: 'GET',  params: { id: '@id' }, 
 							url: urlTemplate.replace("@context", "venues") +"/analytics"},
 						delete : {method: 'DELETE',  params: { id: '@id'},
-							url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"},
-						deleteAttribute : {method: 'DELETE',  params: { id: '@id'}, 
-							url:  urlTemplate.replace("@context", "venues")+"/info"}
+							url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"}
+						/*deleteAttribute : {method: 'DELETE',  params: { id: '@id', productId : '@productId'}, 
+							url:  urlTemplate.replace("@context", "venues")+"/info"}*/
 					});
 				},
 				NotificationService: function () {

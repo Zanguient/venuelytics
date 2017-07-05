@@ -15,10 +15,10 @@
 <script type="text/ng-template" id="modalDialogId">
 <div class="ngdialog-message">
 	<p>	
-		<h4> <div ng-hide = "createAttribute === true">Update Venue Attribute</div></h4>
-		<h4> <div ng-show = "createAttribute === true">Create Venue Attribute</div></h4>
-		<!-- <label class="control-label nowrap col-sm-12">{{ngDialogData.key}} </label> -->
-		<input type="text" name="" ng-model="ngDialogData.key" class="control-label nowrap col-sm-12"><br/><br/>
+		<h4> <div ng-if="!ngDialogData.key">Create Venue Attribute</div></h4>
+		<h4> <div ng-if="ngDialogData.key">Update Venue Attribute</div></h4>
+		<div ng-if="ngDialogData.key"> <label class="control-label nowrap col-sm-12">{{ngDialogData.key}} </label></div> 
+		<div ng-if="!ngDialogData.key">	<input type="text" name="value" placeholder="Enter key" required="required" class="form-control" ng-model="ngDialogData.key"/></div><br/>
         <input type="text" name="value" placeholder="Enter value" required="required" class="form-control" ng-model="ngDialogData.value"/>
 		<p/>
 		<div>
