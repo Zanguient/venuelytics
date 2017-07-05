@@ -144,4 +144,48 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
+    this.createGuestList = function(venueId, object, authBase64Str) {
+        return $http({
+                method: 'POST',
+                url: RestURL.baseURL + 'venues/' + venueId + '/guests',
+                data: object,
+                headers: {
+                    "Authorization": "Anonymous " + authBase64Str
+                }
+            }).then(function(response) {
+                return response;
+            }, function(error) {
+                $log.error('Error: ' + error);
+                return error;
+        });
+    };
+
+    this.getPrivateEvent = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'products/' + venueId + '/type/BanquetHall'
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
+    this.createPrivateEvent = function(venueId, object, authBase64Str) {
+        return $http({
+                method: 'POST',
+                url: RestURL.baseURL + 'vas' + '/' + venueId + '/orders',
+                data: object,
+                headers: {
+                    "Authorization": "Anonymous " + authBase64Str
+                }
+            }).then(function(response) {
+                return response;
+            }, function(error) {
+                $log.error('Error: ' + error);
+                return error;
+        });
+    };
+
 }]);

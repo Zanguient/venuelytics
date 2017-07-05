@@ -9,11 +9,13 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
     		$log.log('Inside Venue Details Controller.');
     		
     		var self = $scope;
-
+            self.test = {};
+            self.private = {};
             self.init = function() {
                 self.venueid = $routeParams.venueid;
                 self.reservationTime = APP_ARRAYS.time;
                 self.eventTypes = APP_ARRAYS.eventyType;
+                self.getBanquetHall(self.venueid);
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
@@ -51,6 +53,12 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             };
 
             self.totalGuest = 1;
+
+            self.getBanquetHall = function(venueId) {
+                AjaxService.getPrivateEvent(venueId).then(function(response) {
+                    $scope.privateEventValueArray = response.data;
+                });
+            }
 
             self.minus = function() {
                 if(self.totalGuest > 1) {
@@ -97,6 +105,83 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 self.eventServiceTab = false;
                 self.guestServiceTab = true;
              };
+
+             self.glistSave = function(test) {
+                var name = test.guestFirstName + " " + test.guestLastName;
+                var authBase64Str = window.btoa(name + ':' + test.guestEmailId + ':' + test.guestMobileNumber);
+                var object = {
+                     "venueNumber" : VenueService.venueNumber,
+                     "email" : test.guestEmailId,
+                     "phone" : test.guestMobileNumber,
+                     "zip" : test.guestZip,
+                     "eventDay" : test.guestStartDate,
+                     "totalCount" : self.totalGuest,
+                     "maleCount" : test.guestMen,
+                     "femaleCount" : test.guestWomen,
+                     "visitorName" : name
+                }
+                AjaxService.createGuestList(VenueService.venueNumber, object, authBase64Str).then(function(response) {
+                    //$log.info("GuestList response: "+angular.toJson(response));
+                    self.test={};
+                    $('#guestListModal').modal('show');
+                });
+             }
+
+             self.privateSave = function(value) {
+           /*     var name = self.privateFirstName + " " + self.privateLastName;
+                var authBase64Str = window.btoa(name + ':' + self.privateEmail + ':' + self.privateMobileNumber);
+                var object = {
+                    "serviceType": 'BanquetHall',
+                    "venueNumber": VenueService.venueNumber,
+                    "reason": self.privateEvent,
+                    "contactNumber": self.privateMobileNumber,
+                    "contactEmail": self.privateEmail,
+                "contactZipcode": "",
+            "noOfGuests": self.totalGuest,
+            //"noOfMaleGuests": $scope.privateNoOfMen,
+            //"noOfFemaleGuests": $scope.privateNoOfWomen,
+            "budget": self.privateBudget,
+            "hostEmployeeId": -1,
+            "hasBid": "N",
+            "bidStatus": "",
+            "serviceInstructions": self.privateComment,
+            "status": "REQUEST",
+            "serviceDetail": null,
+            "fulfillmentDate": self.privateStartDate,
+            "durationInMinutes": null,
+            "deliveryType": "Pickup",
+            "deliveryAddress": null,
+            "deliveryInstructions": null,
+            "rating": -1,
+            "ratingComment": null,
+            "ratingDateTime": null,
+            "order": {
+                "venueNumber": VenueService.venueNumber,
+                "orderDate": self.privateStartDate,
+                "orderItems": []
+            },
+            "prebooking": false,
+            "employeeName": "",
+            "visitorName": name
+        }
+        if(value.size == '-') {
+          value.size = 0;
+        }
+        if(value != '') {
+          var items = {
+                    "venueNumber": VenueService.venueNumber,
+                    "productId": value.productId,
+                    "productType": value.productType,
+                    "quantity": value.size,
+                    "name": "private room"
+                }
+
+         object.order.orderItems.push(items);
+        }
+
+                AjaxService.createPrivateEvent(VenueService.venueNumber, object, authBase64Str).then(function(response) {                    $('#privateEventModal').modal('show');
+                });*/
+             }
 
              self.confirmBottleService = function() {
 
