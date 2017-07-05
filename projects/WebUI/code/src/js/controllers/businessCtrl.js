@@ -112,15 +112,15 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
 
             self.getClaimBusiness = function(selectedVenue){
-                 VenueService.businessImage = selectedVenue.imageUrls[0].originalUrl;
-                 VenueService.venueName = selectedVenue.venueName;
-                 VenueService.venueAddress = selectedVenue.address;
-                 AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
-                     $log.info("Claim business response: "+angular.toJson(response));
-                     VenueService.businessUrl = response;
-                     $location.path("/deployment/"+selectedVenue.id);
-                  });
-              }
+                $('#mailValidation').modal('show');
+                VenueService.businessImage = selectedVenue.imageUrls[0].originalUrl;
+                VenueService.venueName = selectedVenue.venueName;
+                VenueService.venueAddress = selectedVenue.address;
+                AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
+                    VenueService.businessUrl = response;
+                    // $location.path("/deployment/"+selectedVenue.id);
+                });
+              };
 
             self.save = function(newUser) {
                $('#successView').modal('show');

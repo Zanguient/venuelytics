@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService) {
+app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS) {
 
     		$log.log('Inside Venue Details Controller.');
     		
@@ -12,6 +12,8 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
             self.init = function() {
                 self.venueid = $routeParams.venueid;
+                self.reservationTime = APP_ARRAYS.time;
+                self.eventTypes = APP_ARRAYS.eventyType;
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
@@ -94,6 +96,43 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
                 self.guestServiceTab = true;
+             };
+
+             self.confirmBottleService = function() {
+                $scope.serviceJSON = {
+                    "serviceType": 'Bottle',
+                    "venueNumber": self.venueid,
+                    "reason": self.occasion,
+                    "contactNumber": self.mobile,
+                    "contactEmail": self.email,
+                    "contactZipcode": self.zipcode,
+                    "noOfGuests": self.totalGuest,
+                    "noOfMaleGuests": null,
+                    "noOfFemaleGuests": null,
+                    "budget": null,
+                    "hostEmployeeId": null,
+                    "hasBid": "N",
+                    "bidStatus": null,
+                    "serviceInstructions": $scope.specialInstruction,
+                    "status": "REQUEST",
+                    "serviceDetail": null,
+                    "fulfillmentDate": $scope.startDate,
+                    "durationInMinutes": 0,
+                    "deliveryType": "Pickup",
+                    "deliveryAddress": null,
+                    "deliveryInstructions": null,
+                    "rating": -1,
+                    "ratingComment": null,
+                    "ratingDateTime": null,
+                    "order": {
+                        "venueNumber": $scope.venueNumber,
+                        "orderDate": $scope.startDate,
+                        "orderItems": []
+                    },
+                    "prebooking": false,
+                    "employeeName": "",
+                    "visitorName": name
+                };
              };
 
             self.init();

@@ -14,28 +14,24 @@
 
 </style> -->
 
-<div id="carousel-example-generic" class="ms-carousel carousel slide"
-                data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="carousel-example-generic" data-slide-to="0"
-                        class="active"></li>
-                </ol>
+<div id="carousel-example-generic" class="ms-carousel carousel slide" data-ride="carousel" ng-controller="VenueDetailsController">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="carousel-example-generic" data-slide-to="0" class="active"></li>
+    </ol>
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner carousel-inner-class" role="listbox">
-                    <div class="item active">
-                        <img src="<%= assets %>/img/rosie-mccanns.jpg" alt="..." class="carouselImage">
-                        <div class="reservationCarousel backColor">
-                            <p><b><font size="4">{{"home.REAL_TIME" |
-                                translate}}</font></b></p>
-                            <p><b><font size="4">{{"home.RESERVATION_FOOD_DRINK" |
-                                translate}}</font></b></p>
-                              <ng-include src="'home-apps-image.html'" scope="" onload=""></ng-include>
-                        </div>
-                    </div>
-                </div>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner carousel-inner-class" role="listbox">
+        <div class="item active">
+            <img src="<%= assets %>/img/rosie-mccanns.jpg" alt="..." class="carouselImage">
+            <div class="reservationCarousel backColor" style="top: 480px;">
+                <p style="margin-left: 30px;">Reservations / <b><font size="4">{{venueName}}</font></b></p>
+                <p style="margin-left: 30px;"><b><font size="4">Hours: 11:30 AM - 11:00 AM</font></b></p>
+                <ng-include src="'home-apps-image.html'" scope="" onload=""></ng-include>
             </div>
+        </div>
+    </div>
+</div>
 
 <div id="rowOne" ng-init="bottle()">
 	<center>
@@ -76,10 +72,10 @@
 
 <!-- Private Event START row-->
 <div ng-show="bottleServiceTab">
-<form class="form-horizontal">
+<form class="form-horizontal" parsley-validate validate-form="">
 	<fieldset>
 		<div class="col-md-10 form-group is-empty">
-            <input type="date" class="form-control" id="inputEmail" placeholder="{{reservation.DATE | translate}}">
+            <input type="date" class="form-control" id="date" placeholder="{{reservation.DATE | translate}}">
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
         <div class="col-md-10 form-group is-empty">
@@ -93,13 +89,13 @@
             <input type="text" class="form-control" id="lastName" placeholder="{{'reservation.LAST_NAME' | translate}}">
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="email" class="form-control" id="email" placeholder="{{'reservation.EMAIL' | translate}}">
+            <input type="email" class="form-control" id="email" ng-model="email" placeholder="{{'reservation.EMAIL' | translate}}" data-parsley-trigger="change" required="required">
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control" id="mobile" placeholder="{{'reservation.MOBILE' | translate}}">
+            <input type="text" id="ms-form-pass" class="form-control" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="mobile" placeholder="{{'reservation.MOBILE' | translate}}" required="" data-parsley-trigger="change">
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control" id="zipcode" placeholder="{{'reservation.ZIPCODE' | translate}}">
+            <input type="number" class="form-control" id="zipcode" pattern="[0-9]{5}" ng-model="zipcode" placeholder="{{'reservation.ZIPCODE' | translate}}">
         </div>
         <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control" id="instructions" placeholder="{{'reservation.INSTRUCTIONS' | translate}}">
@@ -125,11 +121,11 @@
         </div>
 
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control" id="zipcode" placeholder="{{'reservation.OCCASION' | translate}}">
+            <input type="text" class="form-control" id="zipcode" ng-model="occasion" placeholder="{{'reservation.OCCASION' | translate}}">
         </div>
-        <div class="col-md-10 form-group is-empty">
+        <!-- <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control" id="zipcode" placeholder="{{'reservation.HOST' | translate}}">
-        </div>
+        </div> -->
      	<div class="col-md-10">
             <div class="checkbox">
                 <label class="check-box">
@@ -154,9 +150,12 @@
 	<p><font color="#4caf50">{{"reservation.DRESS_CODE" | translate}}</font></p>
 	<p>{{"reservation.DRESS_CODE_DESC" | translate}}</p>
 </div>
+
 </div>
 
-<div ng-show="eventServiceTab">
+
+<!-- Event Service -->
+<!-- <div ng-show="eventServiceTab">
     <div class="col-md-4 form-group is-empty">
         <div class="search">
             <span class="fa fa-search form-control-feedback"></span>
@@ -225,7 +224,7 @@
         </table>
         </div>
         </div>
-</div>
+</div> -->
 
 <div ng-show="guestServiceTab">
     <form class="form-horizontal">
@@ -284,6 +283,11 @@
             </div>
         </fieldset>
     </form>
+</div>
+
+<div ng-show="eventServiceTab">
+	<div ng-include="'private-event.html'">
+	</div>
 </div>
 
 
