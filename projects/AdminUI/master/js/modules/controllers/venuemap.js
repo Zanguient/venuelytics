@@ -168,7 +168,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     	$scope.newTable.enabled = d[4];
     	$scope.newTable.id = d[5];
     	ngDialog.openConfirm({
-    	    template: 'app/templates/form-table-info.html',
+    	    template: 'app/templates/product/form-table-info.html',
     	    // plain: true,
     	    className: 'ngdialog-theme-default',
     	    scope : $scope 
@@ -223,4 +223,40 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 		  return [$scope.originalWidth, $scope.originalHeight];
 	  }
   }
+  $scope.update = function(isValid, data) {
+    angular.forEach(data.imageUrls, function(value1, key1) {
+        delete value1.originalUrl;
+        delete value1.type;
+        delete value1.name;
+        delete value1.smallUrl;
+        delete value1.mediumUrl;
+        delete value1.originalWidth;
+        delete value1.originalHeight;
+        delete value1.smallWidth;
+        delete value1.smallHeight;
+        delete value1.mediumWidth;
+        delete value1.mediumHeight;
+        delete value1.largeUrl;
+        delete value1.largeHeight;
+        delete value1.largeWidth;
+        //console.log("value.imageUrls...."+angular.toJson(value.imageUrls));
+        //console.log("Id...."+angular.toJson($rootScope.venueMapImages));
+      });
+      /*if (!isValid) {
+        console.log("inside>>>>>>>>>>>>>");
+        return;
+      }*/
+      var payload = RestServiceFactory.cleansePayload('updateVenueMap', data);
+      var target = {id: data.venueNumber};
+      if ($stateParams.id == 'new'){
+        target = {};
+      }
+      RestServiceFactory.VenueMapService().updateVenueMap(target,payload, function(success){
+        $state.go('app.stores');
+      },function(error){
+        if (typeof error.data != 'undefined') {
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+    }
 }]);

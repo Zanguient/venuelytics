@@ -17,8 +17,8 @@
 	<p>	
 		<h4> <div ng-if="!ngDialogData.key">Create Venue Attribute</div></h4>
 		<h4> <div ng-if="ngDialogData.key">Update Venue Attribute</div></h4>
-		<div ng-if="ngDialogData.key"> <label class="control-label nowrap col-sm-12">{{ngDialogData.key}} </label></div> 
-		<div ng-if="!ngDialogData.key">	<input type="text" name="value" placeholder="Enter key" required="required" class="form-control" ng-model="ngDialogData.key"/></div><br/>
+		<!-- <div ng-if="ngDialogData.key"> <label class="control-label nowrap col-sm-12">{{ngDialogData.key}} </label></div> -->
+		<input type="text" name="value" placeholder="Enter key" required="required" class="form-control" ng-model="ngDialogData.key"/><br/>
         <input type="text" name="value" placeholder="Enter value" required="required" class="form-control" ng-model="ngDialogData.value"/>
 		<p/>
 		<div>

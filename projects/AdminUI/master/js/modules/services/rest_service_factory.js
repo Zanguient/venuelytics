@@ -8,7 +8,7 @@ App.factory(
 		function($resource, Session, USER_ROLES,  ContextService) {
 			'use strict';
 			var storeProperties = ['venueName','address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip',
-			'vendorId', 'vendorName', 'enableGeoConquest', 'website', 'email','venueType','venueTypeCode','description','managerName','imageUrls[]'];//
+			'vendorId', 'vendorName', 'enableGeoConquest','enabled','website', 'email','cleansed','venueTypeCode','description','managerName','imageUrls[]'];//
 			
 			var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 
 			'udid','enabled', 'departmentName', 'aisleName'];
@@ -20,10 +20,9 @@ App.factory(
 			
 			var profileProperties = ['badgeNumber', 'email', 'loginId', 'userName', 'phone', 'password','newpassword',
 			'confirmnewpassword'];
-			
-			var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',
-			 "enabled"];
+			var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',"enabled"];
 			 var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls[{"id":1}]', 'servingSize', 'productType', 'BanquetHall','category','brand','enabled','price'];
+			 var venueMapProperties = ['id','type','section','imageMap','days','updatedAt','elements','imageUrls[{"id":}]'];
 			var REQ_PROP= {};
 			REQ_PROP['VenueService'] = storeProperties;
 			REQ_PROP['BeaconService'] = beaconProperties;
@@ -32,6 +31,7 @@ App.factory(
 			REQ_PROP['ProfileService'] = profileProperties;
 			REQ_PROP['AgencyService'] = agencyProperties;
 			REQ_PROP['ProductService'] = productProperties;
+			REQ_PROP['VenueMapService'] = venueMapProperties;
 			var urlTemplate =  ContextService.contextName + "/v1/@context/:id";
 			var contentActivateUrl = ContextService.contextName + "/v1/content/:id/@activate";
 
@@ -99,8 +99,9 @@ App.factory(
 							getAll: {
 						        method: 'GET',
 						        isArray: true
-						    }
-						
+						    },
+						updateVenueMap : {method: 'POST',  params: { id: '@id'}, 
+							url: urlTemplate.replace("@context", "venuemap")}
 						});
 				},
 				LoyaltyService: function () {

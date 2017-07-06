@@ -6,7 +6,9 @@
 App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
                                    function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout,DataTableService, $compile, ngDialog) {
     'use strict';
+    //$scope.VenueImageArray = [];
     $scope.initInfoTable = function() {
+      //$scope.VenueImageArray.push($scope.getVenueImages());
          if ( ! $.fn.dataTable || $stateParams.id == 'new') {
             return;
         }
@@ -48,14 +50,65 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
 	    	data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
 	    	
 	    	$scope.barType = (data.venueTypeCode & 1)  > 0 ? 'Y' : 'N';
+        if($scope.barType == 'Y'){
+        $scope.barNum =1;
+      } else {
+        $scope.barNum =0;
+      }
 	    	$scope.clubType = (data.venueTypeCode & 2) > 0 ? 'Y' : 'N';
-	    	$scope.loungeype = (data.venueTypeCode & 4) > 0 ? 'Y' : 'N';
+        if($scope.clubType == 'Y'){
+          $scope.clubNum =2;
+        } else {
+          $scope.clubNum =0;
+        }       
+	    	$scope.loungeType = (data.venueTypeCode & 4) > 0 ? 'Y' : 'N';
+        if($scope.loungeType == 'Y'){
+          $scope.loungeNum=4;
+        } else {
+          $scope.loungeNum =0;
+        }
 	    	$scope.casinoType = (data.venueTypeCode & 8) >0 ? 'Y' : 'N';
+        if($scope.casinoType== 'Y'){
+          $scope.casinoNum =8;
+        } else {
+          $scope.casinoNum =0;
+        }
 	    	$scope.nightClubType = (data.venueTypeCode & 32) > 0? 'Y' : 'N';
+        if($scope.nightClubType == 'Y'){
+          $scope.nightClubNum =32;
+        } else {
+          $scope.nightClubNum =0;
+        }
 	    	$scope.restaurantType = (data.venueTypeCode & 64) > 0 ? 'Y' : 'N';
+        if($scope.restaurantType == 'Y'){
+          $scope.restaurantNum =64;
+        } else {
+          $scope.restaurantNum =0;
+        }
 	    	$scope.bowlingType = (data.venueTypeCode & 128) > 0 ? 'Y' : 'N';
-	    	$scope.karaokeType = (data.venueTypeCode & 256) > 0 ? 'Y' : 'N';	    	
-	    	
+        if($scope.bowlingType == 'Y'){
+          $scope.bowlingNum =128;
+        } else {
+          $scope.bowlingNum =0;
+        }
+	    	$scope.karaokeType = (data.venueTypeCode & 256) > 0 ? 'Y' : 'N';	
+        if($scope.karaokeType== 'Y'){
+          $scope.karaokeNum =256;
+        } else {
+          $scope.karaokeNum =0;
+        }
+        $scope.venueEnabled = data.enabled;
+        if($scope.venueEnabled == 'Y'){
+          $scope.venueEnabled ='Y';
+        } else {
+          $scope.venueEnabled ='N';
+        }
+        $scope.cleansed =data.cleansed;
+        if($scope.cleansed== true){
+          $scope.cleansed =true;
+        } else {
+          $scope.cleansed =false;
+        }
 	    	$scope.data = data;
 	    	$scope.initInfoTable();
 	    });
@@ -76,8 +129,26 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
     	$scope.data = data;
     	$scope.initInfoTable();
     }
-	
-
+    /*$scope.getVenueImages = function() {
+         return { id : "", originalUrl: "", uploadImage : true, editImage : false };
+    }
+    $scope.addVenueImage = function(arrayObj) {
+        arrayObj.push($scope.getVenueImages());
+    }
+    $scope.removeVenueImage = function(index, arrayObj, value) {
+        arrayObj.splice(index, 1);
+        var id= {
+            "id" : value.id
+        }
+        var target = {id: $stateParams.id ,productId:productId};
+      RestServiceFactory.ProductService().delete(target,  function(success){
+        $state.go('app.stores');
+      },function(error){
+        if (typeof error.data !== 'undefined') { 
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+    }*/
     $scope.isVenueType = function(code) {
     	if (typeof $scope.venueType == 'undefined'){
     		return true;
@@ -147,78 +218,94 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
     $scope.bartypes = function(barType){
       if(barType == 'Y'){
         $scope.barTypes ='N';
-        $scope.bar = '';
+        $scope.barNum = 0;
       } else {
         $scope.barTypes ='Y';
-        $scope.bar = 'BAR';
+        $scope.barNum =1;
       }
     }
        $scope.clubtypes = function(clubType){
         if(clubType == 'Y'){
           $scope.clubType ='N';
-          $scope.club = '';
+          $scope.clubNum = 0;
         } else {
           $scope.clubType ='Y';
-          $scope.club = 'CLUB';
+          $scope.clubNum =2;
         }
        }
       $scope.loungetypes = function(loungeType){
         if(loungeType == 'Y'){
           $scope.loungeType ='N';
-          $scope.lounge = '';
+          $scope.loungeNum=0;
         } else {
           $scope.loungeType ='Y';
-          $scope.lounge = 'LOUNGE';
+          $scope.loungeNum=4;
         }
       }   
       $scope.casinotypes = function(casinoType){
         if(casinoType== 'Y'){
           $scope.casinoType ='N';
-          $scope.casino = '';
+          $scope.casinoNum =0;
         } else {
           $scope.casinoType ='Y';
-          $scope.casino = 'CASINO';
+          $scope.casinoNum =8;
         }
       }  
       $scope.nightClubtypes = function(nightClubType){
         if(nightClubType == 'Y'){
           $scope.nightClubType ='N';
-          $scope.nightClub = '';
+          $scope.nightClubNum =0;
         } else {
           $scope.nightClubType ='Y';
-          $scope.nightClub = 'NIGHTCLUB';
+          $scope.nightClubNum =32;
         }
       }
       $scope.bowlingtypes = function(bowlingType){
         if(bowlingType == 'Y'){
           $scope.bowlingType ='N';
-          $scope.bowling = 'BOWLING';
+          $scope.bowlingNum =0;
         } else {
           $scope.bowlingType ='Y';
-          $scope.bowling = 'BOWLING';
+          $scope.bowlingNum =128;
         }
       }
       $scope.karaoketypes = function(karaokeType){
         if(karaokeType== 'Y'){
           $scope.karaokeType ='N';
-          $scope.karaoke = '';
+          $scope.karaokeNum =0;
         } else {
           $scope.karaokeType ='Y';
-          $scope.karaoke = 'KARAOKE';
+          $scope.karaokeNum =256;
         }
       }
     $scope.restaurantypes = function(restaurantType){
         if(restaurantType == 'Y'){
           $scope.restaurantType ='N';
-          $scope.restaurant ='';
+          $scope.restaurantNum =0;
         } else {
           $scope.restaurantType ='Y';
-          $scope.restaurant ='RESTAURANT';
+          $scope.restaurantNum =64;
       }
     }
+    $scope.enabledVenue = function(venueEnabled){
+      if(venueEnabled == 'Y'){
+          $scope.venueEnabled ='N';
+        } else {
+          $scope.venueEnabled ='Y';
+      }
+    }
+    $scope.enableCleansed = function(cleansed){
+      if(cleansed== true){
+          $scope.cleansed =false;
+        } else {
+          $scope.cleansed =true;
+        }
+    }
     $scope.update = function(isValid, data) {
-      //var venueTypes = [$scope.bar,$scope.club,$scope.lounge,$scope.casino,$scope.nightClub,$scope.bowling,$scope.karaoke,$scope.restaurant];
-      //data.venueType = venueTypes;
+      data.enabled = $scope.venueEnabled;
+      data.cleansed = $scope.cleansed;
+      var venueNumber = (($scope.restaurantNum)+($scope.karaokeNum)+($scope.nightClubNum)+($scope.bowlingNum)+($scope.casinoNum)+($scope.loungeNum)+($scope.clubNum)+($scope.barNum));
+      data.venueTypeCode = venueNumber;
     	if (!isValid) {
     		return;
     	}
