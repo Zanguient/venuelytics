@@ -7,8 +7,8 @@ App.factory(
 		'RestServiceFactory',['$resource','Session','USER_ROLES', 'ContextService', 
 		function($resource, Session, USER_ROLES,  ContextService) {
 			'use strict';
-			var storeProperties = ['address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip',
-			'vendorId', 'vendorName', 'enableGeoConquest', 'website', 'email'];//
+			var storeProperties = ['venueName','address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip',
+			'vendorId', 'vendorName', 'enableGeoConquest', 'website', 'email','venueType','venueTypeCode','description','managerName','imageUrls[]'];//
 			
 			var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 
 			'udid','enabled', 'departmentName', 'aisleName'];
@@ -23,6 +23,7 @@ App.factory(
 			
 			var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',
 			 "enabled"];
+			 var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls[{"id":1}]', 'servingSize', 'productType', 'BanquetHall','category','brand','enabled','price'];
 			var REQ_PROP= {};
 			REQ_PROP['VenueService'] = storeProperties;
 			REQ_PROP['BeaconService'] = beaconProperties;
@@ -30,6 +31,7 @@ App.factory(
 			REQ_PROP['LoyaltyService'] = loyalityProperties;
 			REQ_PROP['ProfileService'] = profileProperties;
 			REQ_PROP['AgencyService'] = agencyProperties;
+			REQ_PROP['ProductService'] = productProperties;
 			var urlTemplate =  ContextService.contextName + "/v1/@context/:id";
 			var contentActivateUrl = ContextService.contextName + "/v1/content/:id/@activate";
 
@@ -63,7 +65,11 @@ App.factory(
 						updateAttribute : {method: 'POST',  params: { id: '@id' }, 
 							url: urlTemplate.replace("@context", "venues")+"/info"},
 						getAnalytics : {method: 'GET',  params: { id: '@id' }, 
-							url: urlTemplate.replace("@context", "venues") +"/analytics"}
+							url: urlTemplate.replace("@context", "venues") +"/analytics"},
+						delete : {method: 'DELETE',  params: { id: '@id'},
+							url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"}
+						/*deleteAttribute : {method: 'DELETE',  params: { id: '@id', productId : '@productId'}, 
+							url:  urlTemplate.replace("@context", "venues")+"/info"}*/
 					});
 				},
 				NotificationService: function () {
@@ -79,11 +85,15 @@ App.factory(
 						get : {method: 'GET',  params: { id: '@id' }, isArray:true},
 						getPrivateEvents : {method: 'GET',  params: { id: '@id' }, isArray:true, 
 							url: urlTemplate.replace("@context", "products")+"/type/BanquetHall"},
-						getPrivateEvent : {method: 'GET',  params: { id: '@id', productId : '@productId' }, 
-							url: urlTemplate.replace("@context", "products")+"/:productId"}
+						getPrivateEvent : {method: 'GET',  params: { id: '@id', productId : '@productId'}, 
+							url: urlTemplate.replace("@context", "products")+"/:productId"},
+						updatePrivateEvent : {method: 'POST',  params: { id: '@id', productId : '@productId'}, 
+							url: urlTemplate.replace("@context", "products")+"/:productId"},
+						delete : {method: 'DELETE',  params: { id: '@id', productId : '@productId'}, 
+							url:  urlTemplate.replace("@context", "products")+"/:productId"}
 						
 					});
-				},
+				},				
 				VenueMapService : function () {
 						return $resource(urlTemplate.replace("@context", "venuemap"),{}, {
 							getAll: {

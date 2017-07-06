@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="fragment" content="!">
     <meta name="theme-color" content="#333">
-    <meta name="description" content="Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...">
+    <meta name="google-site-verification" content="SKw3L8Qjuwx-wApZnWkzt_LwE7pIGY7lZpUduwLx8eY" />
+    <meta content="VenueLytics,Venue Analytics,ItzFun,Milennial,itsfun,Venuenow,Bars,Club,Lounge,Resorts,Stadium,Casino,Hospitality,Karaoke,Entertainment,Venue Management,Experience,Table Service,Fast Pass,Drink,Food,Bottle Service,Private Events,Night Life" name="keywords">
+    <meta name="description" ng-bind="description">
     
     <base href="/">
-    <title>VenueLytics</title>
+    <title ng-bind="title"></title>
     <link rel="shortcut icon" href="<%= assets %>/img/logo-collapsed.png">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -43,6 +45,16 @@
         <script src="<%= assets %>/js/html5shiv.min.js"></script>
         <script src="<%= assets %>/js/respond.min.js"></script>
     <![endif]-->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-101906980-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
 </head>
 
 <body>

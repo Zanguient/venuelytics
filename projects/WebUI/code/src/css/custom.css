@@ -7,6 +7,33 @@
   font-weight: bold;
 }
 
+.fontRegular {
+  font-family: 'Source Sans Pro', 'sans-serif';
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+.fontBold {
+  font-family: 'Source Sans Pro', 'sans-serif';
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+.fontLight {
+  font-family: 'Source Sans Pro', 'sans-serif';
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+.fontXLarge {
+  font-size: x-large;
+}
+
+
+
 .image-block {
   border: 3px solid white;
   background-color: black;
@@ -15,6 +42,10 @@
   height: 200px;
   text-align: center;
   vertical-align: bottom;
+}
+
+.borderLine {
+  border: 1px solid #000
 }
 
 #footerMargin {
@@ -26,6 +57,29 @@
   border: 1px solid #4CAF50;
   margin-bottom: 0px;
   margin-top: 0px;
+}
+
+.search {
+  position: relative;
+  color: #aaa;
+  font-size: 16px;
+}
+
+.search input {
+  width: 250px;
+  height: 32px;
+
+  background: #fcfcfc;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+}
+
+.search input { text-indent: 32px;}
+.search .fa-search { 
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
 .image-block > p {
@@ -93,10 +147,25 @@
 @media screen and (min-device-width: 1200px) and (max-device-width:
  1600px) {
 
+  .carouselImage {
+    width: 100%;
+  }
+
+  .chk-button {
+    border-radius: 10px; 
+    width: 630px;
+  }
+
   .venueSearch {
     margin-top: 10px;
     margin-left: 16px;
   }
+  
+  .eventImage{
+    height: 100px;
+    width: 100px;
+  }
+
 
   .citySearchLabel {
     margin-top: 15px;
@@ -282,6 +351,33 @@
 @media only screen and (min-device-width: 320px) and (max-device-width:
  480px) {
 
+  .chk-button {
+    border-radius: 10px; 
+    width: 100%;
+  }
+  
+   .eventImage{
+    height: 100px;
+    width: 100px;
+  }
+
+  .eventImageWidth {
+    width: 100px;
+    height: 100px;
+  }
+
+  .input-icon{
+    position: absolute;
+    left: 270px;
+    top: calc(50% - 1.5em); /* Keep icon in center of input, regardless of the input height */
+  }
+  input{
+    padding-left: 17px;
+  }
+  .input-wrapper{
+    position: relative;
+  }
+
   .venueSearch {
     margin-top: 10px;
     margin-left: 55px;
@@ -289,6 +385,7 @@
 
   .carouselImage {
     height: 600px;
+    width: 100%;
   }
 
   .backColor {
@@ -462,6 +559,33 @@
     and (min-device-width : 375px) 
     and (max-device-width : 667px) {
 
+  .chk-button {
+    border-radius: 10px; 
+    width: 100%;
+  }
+  
+  .eventImage{
+    height: 100px;
+    width: 100px;
+  }
+
+  .eventImageWidth {
+    width: 100px;
+    height: 100px;
+  }
+
+  .input-icon{
+    position: absolute;
+    left: 320px;
+    top: calc(50% - 1.5em); /* Keep icon in center of input, regardless of the input height */
+  }
+  input{
+    padding-left: 17px;
+  }
+  .input-wrapper{
+    position: relative;
+  }
+
   .venueSearch {
     margin-top: 10px;
     margin-left: 35px;
@@ -473,6 +597,7 @@
 
   .carouselImage {
     height: 600px;
+    width: 100%;
   }
 
   #carousel-example-generic {
@@ -530,6 +655,33 @@
     and (min-device-width : 414px) 
     and (max-device-width : 736px) {
 
+  .chk-button {
+    border-radius: 10px; 
+    width: 100%;
+  }
+  
+  .eventImage{
+    height: 100px;
+    width: 100px;
+  }
+
+  .eventImageWidth {
+    width: 100px;
+    height: 100px;
+  }
+
+  .input-icon{
+    position: absolute;
+    left: 356px;
+    top: calc(50% - 1.5em); /* Keep icon in center of input, regardless of the input height */
+  }
+  input{
+    padding-left: 17px;
+  }
+  .input-wrapper{
+    position: relative;
+  }
+
   .venueSearch {
     margin-top: 10px;
     margin-left: 55px;
@@ -541,6 +693,7 @@
 
   .carouselImage {
     height: 600px;
+    width: 100%;
   }
 
   .backColor {
@@ -685,6 +838,20 @@
     width: 380px;
     margin-left: 0px;
   }
+}
+
+.check-box {
+  text-align: left;
+}
+
+.sameRow {
+  display: inline-block;
+}
+
+.guestBorder {
+  border: 1px solid;
+  border-radius: 13px;
+  margin-left: 10px;
 }
 
 .venueBanner {
@@ -1030,6 +1197,23 @@
 }
 
 .custom-carousel {
+  position: absolute;
+  right: 15%;
+  bottom: 0px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 20px;
+/* padding-bottom:20px; */
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 0;
+  right: 0;
+  transition: all ease 0.5s;
+}
+
+.reservationCarousel {
   position: absolute;
   right: 15%;
   bottom: 0px;

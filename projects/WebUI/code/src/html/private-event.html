@@ -1,0 +1,202 @@
+<div class="col-lg-6">
+<form class="form-horizontal" name="privateForm" ng-controller="VenueDetailsController" parsley-validate validate-form="" ng-cloak>
+    <fieldset>
+        <div class="col-md-10 form-group is-empty">
+            <input type="date" class="form-control" id="inputEmail" placeholder="{{reservation.DATE | translate}}" required="required" data-parsley-trigger="change">
+            <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
+        </div>
+        
+        <div class="col-md-10 form-group is-empty">
+            <select class="btn  dropdown-toggle form-control" required=""
+                ng-model="private.privateStartTime" ng-options="x.key as x.value for x in reservationTime">
+                <option value="">{{"reservation.START_TIME"  | translate}}</option>
+            </select>
+        </div>
+
+        <div class="col-md-10 form-group is-empty">
+            <select class="btn  dropdown-toggle form-control" required=""
+                ng-model="private.privateEndTime" ng-options="x.key as x.value for x in reservationTime">
+                <option value="">{{"reservation.END_TIME"  | translate}}</option>
+            </select>
+        </div>
+
+
+        <div class="col-md-10 form-group is-empty">
+            <div class="input-group">
+                <label for="inputEmail" class="sameRow">{{"reservation.TOTAL_GUEST" | translate}}</label>
+                <div class="sameRow guestBorder">
+                    <span>
+                    <button type="button" class="btn btn-success btn-number" ng-click="minus()">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </span>
+                {{totalGuest}}
+                <span>
+                    <button type="button" class="btn btn-success btn-number" ng-click="plus()">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="budget" placeholder="{{'reservation.BUDGET' | translate}}" ng-model="private.privateBudget" required="required" data-parsley-trigger="change">
+            <!-- <label for="table" class="fa fa-calendar"></label> -->
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="firstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" ng-model="private.privateFirstName" required="required" data-parsley-trigger="change">
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="lastName" placeholder="{{'reservation.LAST_NAME' | translate}}" ng-model="private.privateLastName" required="required" data-parsley-trigger="change">
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="email" class="form-control" id="email" ng-model="private.privateEmail" placeholder="{{'reservation.EMAIL' | translate}}" required="required" data-parsley-trigger="change" >
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" id="ms-form-pass" class="form-control" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" placeholder="{{'reservation.MOBILE' | translate}}" required="" data-parsley-trigger="change">
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <select class="btn  dropdown-toggle form-control" required=""
+                ng-model="private.privateEvent" ng-options="t.type for t in eventTypes">
+                <option value="">{{"reservation.EVENT_TYPE"  | translate}}</option>
+            </select>
+        </div>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control" id="instructions" placeholder="{{'reservation.COMMENT' | translate}}" ng-model="private.privateComment" required="required" data-parsley-trigger="change">
+        </div>
+        <div class="col-md-10">
+            <div class="checkbox">
+                <label class="check-box">
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
+                </label>                            
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="checkbox">
+                <label class="check-box">
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
+                </label>                            
+            </div>
+        </div>
+    </fieldset>
+</form>
+<hr>
+<div>
+    <center>
+        <button class="btn btn-success">{{"reservation.VIEW_PRIVATE" | translate}}</button><br>
+        <button class="btn btn-success">{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</button><br>
+        <button class="btn btn-success">{{"reservation.VIEW_VIDEO" | translate}}</button>
+    </center>
+</div>
+<hr>
+<h4>{{"reservation.PRIVATE_DETAILS" | translate}}</h4>
+<div class="ng-scope" ng-repeat="privateEvent in privateEventValueArray">
+    <table class="table table-responsive" style="border: 1px solid #ddd; margin-top: 23px;">
+        <tbody>
+            <tr>
+                <td>
+                    <label style="margin-left: 8px; color: #9ea2f4" class="ng-scope">Event Space</label>
+                </td>
+                <td>
+                    <label class="ng-binding">{{privateEvent.name}}</label>
+                </td>
+            </tr>
+            <tr ng-hide="privateEvent.flag" class="">
+                <td>
+                    <label ng-hide="privateEvent.flag" style="margin-left: 8px; color: #9ea2f4" class="ng-scope">Capacity</label>
+                </td>
+                <td>
+                    <label class="ng-binding">{{privateEvent.servingSize}} people</label>
+                </td>
+            </tr>
+            <tr ng-hide="privateEvent.size==0" class="">
+                <td>
+                    <label style="margin-left: 8px; color: #9ea2f4" class="ng-scope">Size</label>
+                </td>
+                <td>
+                    <label class="ng-binding">{{privateEvent.size}} sq.ft</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="margin-left: 8px; color: #9ea2f4" class="ng-scope">Description</label>
+                </td>
+                <td>
+                    <label  class="ng-binding">{{privateEvent.description| limitTo: 70 }}{{privateEvent.description.length > 70 ? '...' : ''}}</label>
+                    <a class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateDescription(privateEvent.description)">Read More</a></td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="margin-left: 8px; color: #9ea2f4" translate="IMAGE" class="ng-scope">Image(s)</label>
+                </td>
+                <td>
+                    <div ng-mouseenter="pause()" ng-mouseleave="play()" class="carousel ng-isolate-scope" ng-swipe-right="prev()" ng-swipe-left="next()" interval="myInterval" active="active" no-wrap="false" style="height:150px;width:150px">
+                        <div class="carousel-inner" ng-transclude="">
+                            <div ng-class="{
+    'active': active
+  }" class="item text-center ng-scope ng-isolate-scope" ng-transclude="" data-ng-repeat="value in privateEvent.imageUrls" index="$index"> <img data-ng-src="https://d3pkfw29jtj7v6.cloudfront.net/banquetVenueImg/image/cef7/Pure+Silicon+Valley.jpg" data-toggle="modal" data-target="#myModal" ng-click="previewUpload(privateEvent.imageUrls)" style="height: 150px; width: 150px" class="ng-scope" src="https://d3pkfw29jtj7v6.cloudfront.net/banquetVenueImg/image/cef7/Pure+Silicon+Valley.jpg"> </div>
+                        </div>
+                        <a role="button" href="" class="left carousel-control" ng-click="prev()" ng-show="slides.length > 1">
+                            <span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">previous</span>
+                        </a>
+                        <a role="button" href="" class="right carousel-control" ng-click="next()" ng-show="slides.length > 1">
+                            <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">next</span>
+                        </a>
+                        <ol class="carousel-indicators" ng-show="slides.length > 1">
+                            <li ng-repeat="slide in slides | orderBy:indexOfSlide track by $index" ng-class="{ active: isActive(slide) }" ng-click="select(slide)" class="ng-scope" style="">
+                                <span class="sr-only ng-binding">slide 1 of 3</span>
+                            </li>
+                        </ol>
+                    </div>
+                </td>
+            </tr>
+            <tr style="border: 1px solid #ddd; height: 50px;">
+                <td>
+                    <button id="privatePreview" class="btn btn-success btn-md ng-scope" data-toggle="modal" data-target="#myModal" ng-click="previewUpload(privateEvent.imageUrls)" type="button" style="margin-left: 11px;font-size:4;">Preview</button>
+                </td>
+                <td ng-hide="privateEvent.reserve == true" class="">
+                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md pull-right ng-scope" ng-disabled="privateForm.$invalid" style="margin-right: 11px;font-size:4;" ng-click="privateSave(privateEvent)" disabled="disabled">Enquire</button>
+                </td>
+                <td ng-show="privateEvent.reserve == true" class="ng-hide">
+                    <label class="pull-right" style="margin-right: 11px;font-size:4;">Not Available</label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<div class="col-lg-6">
+    <legend>Description</legend>
+    <div class="form-group ">
+                                    <p id="banquetHallData" style="padding-top: 0px;" class="ng-binding">Located in the heart of Silicon Valley, Pure Lounge offers a luxurious, modern, upscale setting for various occasions.  Featuring dramatic, classical architecture, and complemented with modern decor, our lounge transcends “pure” sophisticated style.
+
+We welcome small groups in our Red Room on the 2nd floor (accommodates groups of up to Our venue measures 8,000 Sq ft. Spacious and comfortable, we have built-in LED cocktail tables which set the mood for every occasion. Large scale parties on our glittering first floor are perfect where we offer maximum flexibility to create your perfect event. Step away from the dull, gray drawing board, and into the brilliance of Pure Lounge! Pure Lounge offers
+Multiple bars serving liquor, crafted cocktails, wine &amp; beer
+State of Art sound &amp; lighting, dj booth, LED panel for visuals demo
+Delicious catering options, Live DJs, Creative elements &amp; party themes, Photo booth, dancers, entertainers options
+Full in-house staff
+Nearby parking &amp; Walking distance from cal-train</p>
+                                </div>
+
+</div>
+
+<!-- Success Private Event Modal -->
+<div class="modal modal-success" id="privateEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="myModalLabel6">Private Event</h3>
+            </div>
+            <div class="modal-body">
+                <p>Private Event Details Successfully Saved.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
