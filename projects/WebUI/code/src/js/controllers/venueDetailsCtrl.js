@@ -11,6 +11,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
     		var self = $scope;
             self.test = {};
             self.private = {};
+            self.selectionTableItems = [];
             self.init = function() {
                 self.venueid = $routeParams.venueid;
                 self.reservationTime = APP_ARRAYS.time;
@@ -53,6 +54,238 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             };
 
             self.totalGuest = 1;
+
+            $(window).resize(function() {
+                var divHeight = $('#imagemap').height(); 
+                var divWidth = $('#imagemap').width();                    
+                    setTimeout(function() { 
+                        $('#imagemap').maphilight();
+                            if (divHeight > 0) {
+                            $('div.map.img-responsive').css('width',divWidth +'px');
+                            $('div.map.img-responsive').css('height',divHeight +'px');
+                            $('canvas').css('height', divHeight +'px');
+                            $('canvas').css('width', divWidth +'px');
+                            $('#imagemap').css('height', divHeight +'px');
+                            $('#imagemap').css('width', divWidth +'px');
+                        }
+                    }, 200);
+                });
+                self.startDate = moment().format('YYYY-MM-DD');
+                self.date = self.startDate;
+                self.$watch('startDate', function() {
+                    if((self.startDate != "") || (self.startDate != undefined))
+                        {
+                            self.paintVenueTableMap();
+                        }
+                    });
+
+            self.totalGuest = 1;
+
+            self.paintVenueTableMap = function() {
+
+                self.bottleStartDate = self.startDate;
+                var current_day = (moment(new Date(self.startDate)).format("ddd")).toUpperCase();
+
+                // Date in YYYYMMDD format
+                self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
+                console.log("boottleServiceDate:" + self.bottleServiceDate);
+                AjaxService.getVenueMap(VenueService.venueNumber).then(function(response) {
+                    self.venueImageMapData = response.data;
+                    angular.forEach(self.venueImageMapData, function(value, key1) {
+                        if(value.days == "*") {
+                            value.days = "SUN,MON,TUE,WED,THU,FRI,SAT";
+                        }
+                        var total_days = value.days.split(",")
+                        angular.forEach(total_days, function(day, key2) {
+                        VenueService.elements = self.venueImageMapData[key1].elements;
+                        self.venueImageMapData[0].elements = VenueService.elements;
+                        if(self.venueImageMapData[key1].imageUrls != '') {
+                        VenueService.imageMapping.pic_url = self.venueImageMapData[key1].imageUrls[0].originalUrl;
+                        VenueService.imageMapping.pic_url_thumbnail = self.venueImageMapData[key1].imageUrls[0].originalUrl;
+                        }
+                        if (self.venueImageMapData[key1].imageMap != "") {
+                            var object = angular.fromJson(self.venueImageMapData[key1].imageMap);
+                            console.log("object is" + object)
+                            var maps = [];
+                            if (object) {
+                                for (var i = 0; i < object.length; i++) {
+                                    var array = object[i].coordinates.split(',').map(Number);
+                                    var coords = []
+                                    coords[0] = array[0]
+                                    coords[1] = array[1]
+                                    coords[2] = array[4]
+                                    coords[3] = array[5]
+                                    var objectMapping = { "name": object[i].name, "coords": coords }
+                                    maps.push(objectMapping)
+                                }
+                            }
+                            VenueService.imageMapping.maps = maps;
+                            self.img = angular.copy(VenueService.imageMapping);
+                            if(self.img.pic_url != '') {
+                                self.imageFlag = false;
+                            } else {
+                                self.imageFlag = true;
+                            }
+                        } else {
+                            VenueService.imageMapping.maps = [];
+                        }
+                });
+                });
+                });
+
+                AjaxService.getVenueMapForADate(VenueService.venueNumber,self.bottleServiceDate).then(function(response) {
+                    self.reservations = response.data;
+                    self.setReservationColor();
+                });
+            }
+
+        self.setReservationColor = function() {
+            var venueImageMapData = [];
+            angular.forEach(VenueService.elements, function(key, value) {
+            var breakBoolean = false;
+            angular.forEach(self.reservations, function(key1, value1) {
+                if (!breakBoolean) {
+                    if (key.id == key1.productId) {
+                        if(self.realTimeStatus == true) {
+                            key.fillColor = "FF0000";
+                            key.strokeColor = "C60000";
+                            console.log("This object is reserved");
+                            breakBoolean = true;
+                        } else {
+                            key.fillColor = "08FF00";
+                            key.strokeColor = "06B500";
+                        }
+                    }
+                    venueImageMapData.push(key);
+                }
+            });
+            if (!breakBoolean) {
+                key.fillColor = "08FF00";
+                key.strokeColor = "06B500";
+            }
+        });
+        $('img[usemap]').jMap();
+        
+        var delay = 1000;
+        var divHeight = $('#imagemap').height(); 
+        var divWidth = $('#imagemap').width();                  
+            
+        setTimeout(function() { 
+            $('#imagemap').maphilight();
+            if(divHeight > 0) {
+                $('div.map.img-responsive').css('width',divWidth +'px');
+                $('div.map.img-responsive').css('height',divHeight +'px');
+                $('canvas').css('height', divHeight +'px');
+                $('canvas').css('width', divWidth +'px');
+                $('#imagemap').css('height', divHeight +'px');
+                $('#imagemap').css('width', divWidth +'px');
+            }
+        }, delay);
+    }
+
+    self.selectTable = function(id, index, dataValueObj) {
+        self.tablePopup = false;
+        var data = $('#' + id).mouseout().data('maphilight') || {};
+        if (data.fillColor === "08FF00") {
+            $('#tableView').modal('show');
+            angular.forEach(self.minimumBottleRequirement, function(value, key) {
+                     if(value.onObjectId == dataValueObj.id) {
+                           self.dataValue = self.dataValue + value.value;
+                     }
+            });    
+        }
+        if (data.fillColor === "FF0000") {
+            $('#reservedView').modal('show');
+        }
+        else if (data.fillColor === "FFFF00") {
+            //data.fillColor = "08FF00";
+            //data.strokeColor = "06B500";
+             angular.forEach(self.minimumBottleRequirement, function(value, key) {
+                     if(value.onObjectId == dataValueObj.id) {
+                           self.dataValue = self.dataValue - value.value;
+                     }
+            }); 
+             var selectedTable = VenueService.elements[index];
+             if (!selectedTable) {
+                 return;
+             }
+             var indexArray = -1;
+             for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
+                 var item = self.selectionTableItems[itemIndex];
+                 if (item.id === selectedTable.id){
+                     indexArray = itemIndex;
+                     break;
+                 }
+             }
+             if (indexArray >=0) {
+                 self.removeSelectedTables(indexArray, selectedTable, self.tableSelection);
+             }
+             return;
+         } else {
+            data.fillColor = "FFFF00";
+            data.strokeColor = "E3E300";
+         
+        }
+        $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
+        self.showPreview(dataValueObj);
+    }
+
+    self.removeSelectedTables = function(index,arrayObj,table) {
+        angular.forEach(VenueService.elements, function(value, key) {
+            if(arrayObj.name == value.name) {
+               var id = value.id;
+               var data = $('#' + id).mouseout().data('maphilight') || {};
+               if (data.fillColor === "FFFF00") {
+                   data.fillColor = "08FF00";
+                   data.strokeColor = "06B500";
+               } else {
+                    data.fillColor = "FFFF00";
+                    data.strokeColor = "E3E300";
+               }
+               $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
+            }
+        });
+        self.sum = self.sum - arrayObj.size;
+        self.dataValue = self.dataValue - arrayObj.minimumRequirement;
+        table.splice(index, 1);
+        self.selectionTableItems.splice(index, 1);
+    }
+
+    self.showPreview = function(object) {
+        var selectedTable = object;
+        if (!selectedTable) {
+            self.selectedTable = {};
+            self.selectedTable.name = null;
+
+            return;
+        }
+        self.selectedTable = selectedTable;
+        self.imageUrls = selectedTable.imageUrls;
+        if(self.realTimeStatus == true) {
+            var resIndex = 0;
+            for (resIndex = 0; resIndex < self.reservations.length; resIndex++) {
+            if (selectedTable.id == self.reservations[resIndex].productId) {
+                self.imageUrl = true;
+                return;
+            }
+        }
+        }
+        self.imageUrl = false;
+        self.selectionTableItems.push(selectedTable);
+                    self.tableSelection = [];
+                    for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
+                        var table = {
+                            "id": self.selectionTableItems[itemIndex].id,
+                            "productType": self.selectionTableItems[itemIndex].productType,
+                            "name": self.selectionTableItems[itemIndex].name,
+                            "size": self.selectionTableItems[itemIndex].size,
+                            "imageUrls": self.selectionTableItems[itemIndex].imageUrls,
+                            "description": self.selectionTableItems[itemIndex].description,
+                            "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
+                        }
+                        self.tableSelection.push(table);
+                    }
+        }
 
             self.getBanquetHall = function(venueId) {
                 AjaxService.getPrivateEvent(venueId).then(function(response) {

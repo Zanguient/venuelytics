@@ -7,6 +7,12 @@ app.service('VenueService', function() {
   this.businessImage = '';
   this.venueAddress = '';
   this.businessUrl = '';
+  this.imageMapping={
+      "pic_url": "",
+      "pic_url_thumbnail":"",
+          "maps": []
+  };
+  this.elements=[];
 
   /*this.getCurrentLocation = function() {
 
