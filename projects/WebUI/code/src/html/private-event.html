@@ -2,7 +2,7 @@
 <form class="form-horizontal" name="privateForm" ng-controller="VenueDetailsController" parsley-validate validate-form="" ng-cloak>
     <fieldset>
         <div class="col-md-10 form-group is-empty">
-            <input type="date" class="form-control" id="inputEmail" placeholder="{{reservation.DATE | translate}}" required="required" data-parsley-trigger="change">
+            <input type="date" class="form-control fontRegular" id="inputEmail" ng-model="private.orderDate" placeholder="{{reservation.DATE | translate}}" required="required" data-parsley-trigger="change">
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
         
@@ -23,7 +23,7 @@
 
         <div class="col-md-10 form-group is-empty">
             <div class="input-group">
-                <label for="inputEmail" class="sameRow">{{"reservation.TOTAL_GUEST" | translate}}</label>
+                <label for="inputEmail" class="sameRow fontRegular">{{"reservation.TOTAL_GUEST" | translate}}</label>
                 <div class="sameRow guestBorder">
                     <span>
                     <button type="button" class="btn btn-success btn-number" ng-click="minus()">
@@ -41,54 +41,51 @@
         </div>
 
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control" id="budget" placeholder="{{'reservation.BUDGET' | translate}}" ng-model="private.privateBudget" required="required" data-parsley-trigger="change">
+            <input type="text" class="form-control fontRegular" id="budget" placeholder="{{'reservation.BUDGET' | translate}}" ng-model="private.budget" required="required" data-parsley-trigger="change">
             <!-- <label for="table" class="fa fa-calendar"></label> -->
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control" id="firstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" ng-model="private.privateFirstName" required="required" data-parsley-trigger="change">
+            <input type="text" class="form-control fontRegular" id="firstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" ng-model="private.privateFirstName" required="required" data-parsley-trigger="change">
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control" id="lastName" placeholder="{{'reservation.LAST_NAME' | translate}}" ng-model="private.privateLastName" required="required" data-parsley-trigger="change">
+            <input type="text" class="form-control fontRegular" id="lastName" placeholder="{{'reservation.LAST_NAME' | translate}}" ng-model="private.privateLastName" required="required" data-parsley-trigger="change">
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="email" class="form-control" id="email" ng-model="private.privateEmail" placeholder="{{'reservation.EMAIL' | translate}}" required="required" data-parsley-trigger="change" >
+            <input type="email" class="form-control fontRegular" id="email" ng-model="private.privateEmail" placeholder="{{'reservation.EMAIL' | translate}}" required="required" data-parsley-trigger="change" >
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="text" id="ms-form-pass" class="form-control" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" placeholder="{{'reservation.MOBILE' | translate}}" required="" data-parsley-trigger="change">
+            <input type="text" id="ms-form-pass" class="form-control fontRegular" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" placeholder="{{'reservation.MOBILE' | translate}}" required="" data-parsley-trigger="change">
         </div>
         <div class="col-md-10 form-group is-empty">
-            <select class="btn  dropdown-toggle form-control" required=""
+            <select class="btn  dropdown-toggle form-control fontRegular" required=""
                 ng-model="private.privateEvent" ng-options="t.type for t in eventTypes">
                 <option value="">{{"reservation.EVENT_TYPE"  | translate}}</option>
             </select>
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control" id="instructions" placeholder="{{'reservation.COMMENT' | translate}}" ng-model="private.privateComment" required="required" data-parsley-trigger="change">
+            <input type="text" class="form-control fontRegular" id="instructions" placeholder="{{'reservation.COMMENT' | translate}}" ng-model="private.privateComment" required="required" data-parsley-trigger="change">
         </div>
         <div class="col-md-10">
             <div class="checkbox">
-                <label class="check-box">
+                <label class="check-box fontRegular">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
                 </label>                            
             </div>
         </div>
         <div class="col-md-10">
             <div class="checkbox">
-                <label class="check-box">
+                <label class="check-box fontRegular">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
                 </label>                            
             </div>
         </div>
     </fieldset>
+    <a href="javascript:void(0)" class="btn btn-raised btn-success chk-button fontXLarge" ng-click="createPrivateEvent()"><font size="5"> {{"reservation.CHECKOUT" | translate}} </font><div class="ripple-container"></div></a>
 </form>
 <hr>
-<div>
-    <center>
-        <button class="btn btn-success">{{"reservation.VIEW_PRIVATE" | translate}}</button><br>
-        <button class="btn btn-success">{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</button><br>
-        <button class="btn btn-success">{{"reservation.VIEW_VIDEO" | translate}}</button>
-    </center>
-</div>
+
+<br>
+        
 <hr>
 <h4>{{"reservation.PRIVATE_DETAILS" | translate}}</h4>
 <div class="ng-scope" ng-repeat="privateEvent in privateEventValueArray">
@@ -96,34 +93,34 @@
         <tbody>
             <tr>
                 <td>
-                    <label style="margin-left: 8px; color: #9ea2f4" class="ng-scope">Event Space</label>
+                    <label style="margin-left: 8px; color: #9ea2f4" class="fontRegular">Event Space</label>
                 </td>
                 <td>
-                    <label class="ng-binding">{{privateEvent.name}}</label>
+                    <label class="fontRegular">{{privateEvent.name}}</label>
                 </td>
             </tr>
             <tr ng-hide="privateEvent.flag" class="">
                 <td>
-                    <label ng-hide="privateEvent.flag" style="margin-left: 8px; color: #9ea2f4" class="ng-scope">Capacity</label>
+                    <label ng-hide="privateEvent.flag" style="margin-left: 8px; color: #9ea2f4" class="fontRegular">Capacity</label>
                 </td>
                 <td>
-                    <label class="ng-binding">{{privateEvent.servingSize}} people</label>
+                    <label class="fontRegular">{{privateEvent.servingSize}} people</label>
                 </td>
             </tr>
             <tr ng-hide="privateEvent.size==0" class="">
                 <td>
-                    <label style="margin-left: 8px; color: #9ea2f4" class="ng-scope">Size</label>
+                    <label style="margin-left: 8px; color: #9ea2f4" class="fontRegular">Size</label>
                 </td>
                 <td>
-                    <label class="ng-binding">{{privateEvent.size}} sq.ft</label>
+                    <label class="fontRegular">{{privateEvent.size}} sq.ft</label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label style="margin-left: 8px; color: #9ea2f4" class="ng-scope">Description</label>
+                    <label style="margin-left: 8px; color: #9ea2f4" class="fontRegular">Description</label>
                 </td>
                 <td>
-                    <label  class="ng-binding">{{privateEvent.description| limitTo: 70 }}{{privateEvent.description.length > 70 ? '...' : ''}}</label>
+                    <label  class="fontRegular">{{privateEvent.description| limitTo: 70 }}{{privateEvent.description.length > 70 ? '...' : ''}}</label>
                     <a class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateDescription(privateEvent.description)">Read More</a></td>
             </tr>
             <tr>
@@ -169,18 +166,41 @@
 </div>
 </div>
 <div class="col-lg-6">
-    <legend>Description</legend>
+    <legend class="fontRegular">Description</legend>
     <div class="form-group ">
-                                    <p id="banquetHallData" style="padding-top: 0px;" class="ng-binding">Located in the heart of Silicon Valley, Pure Lounge offers a luxurious, modern, upscale setting for various occasions.  Featuring dramatic, classical architecture, and complemented with modern decor, our lounge transcends “pure” sophisticated style.
-
-We welcome small groups in our Red Room on the 2nd floor (accommodates groups of up to Our venue measures 8,000 Sq ft. Spacious and comfortable, we have built-in LED cocktail tables which set the mood for every occasion. Large scale parties on our glittering first floor are perfect where we offer maximum flexibility to create your perfect event. Step away from the dull, gray drawing board, and into the brilliance of Pure Lounge! Pure Lounge offers
-Multiple bars serving liquor, crafted cocktails, wine &amp; beer
-State of Art sound &amp; lighting, dj booth, LED panel for visuals demo
-Delicious catering options, Live DJs, Creative elements &amp; party themes, Photo booth, dancers, entertainers options
-Full in-house staff
-Nearby parking &amp; Walking distance from cal-train</p>
+                                    <p id="banquetHallData" style="padding-top: 0px;" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
                                 </div>
 
+</div>
+
+<div class="col-md-12">
+    <center>
+        <h1 class="color-success fontRegular">Info Sheet</h1>
+        <button class="btn btn-success fontRegular btn-raised">{{"reservation.VIEW_PRIVATE" | translate}}</button><br>
+        
+    </center>
+</div>
+
+<div class="col-md-12">
+    <center>
+        <h1 class="color-success fontRegular">Private Events Menu</h1>
+        <button class="btn btn-success btn-raised fontRegular">{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</button>
+        
+    </center>
+</div>
+
+<div class="col-md-12">
+    <center>
+        <h1 class="color-success fontRegular">Video</h1>
+        <button class="btn btn-success btn-raised fontRegular">{{"reservation.VIEW_VIDEO" | translate}}</button>
+    </center>
+</div>
+
+<div class="col-md-12">
+    <center>
+        <h1 class="color-success fontRegular">Floor Plan</h1>
+        <button class="btn btn-success btn-raised fontRegular">{{"reservation.VIEW_VIDEO" | translate}}</button>
+    </center>
 </div>
 
 <!-- Success Private Event Modal -->

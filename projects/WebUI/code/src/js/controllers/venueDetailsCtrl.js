@@ -123,6 +123,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 AjaxService.createGuestList(VenueService.venueNumber, object, authBase64Str).then(function(response) {
                     //$log.info("GuestList response: "+angular.toJson(response));
                     self.test={};
+                    self.totalGuest = 1;
                     $('#guestListModal').modal('show');
                 });
              }
@@ -186,7 +187,9 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              self.confirmBottleService = function() {
 
                 var fullName = self.userFirstName + " " + self.userLastName;
+                var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
                 $log.info("Full name->", fullName);
+
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,
@@ -195,10 +198,10 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "contactEmail": self.email,
                     "contactZipcode": self.zipcode,
                     "noOfGuests": self.totalGuest,
-                    "noOfMaleGuests": null,
-                    "noOfFemaleGuests": null,
-                    "budget": null,
-                    "hostEmployeeId": null,
+                    "noOfMaleGuests": 0,
+                    "noOfFemaleGuests": 0,
+                    "budget": 0,
+                    "hostEmployeeId": -1,
                     "hasBid": "N",
                     "bidStatus": null,
                     "serviceInstructions": self.instructions,
@@ -223,6 +226,58 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 };
                 $log.info("Service JSON->", angular.toJson(self.serviceJSON));
 
+                AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
+                    $log.info("Bottle response: "+angular.toJson(response));
+                    $('#bottleServiceModal').modal('show');
+                });
+
+             };
+
+             self.createPrivateEvent = function() {
+
+                var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
+                var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
+                $log.info("Full name->", fullName);
+
+                self.serviceJSON = {
+                    "serviceType": 'BanquetHall',
+                    "venueNumber": self.venueid,
+                    "reason": self.occasion,
+                    "contactNumber": self.private.privateMobileNumber,
+                    "contactEmail": self.private.privateEmail,
+                    "contactZipcode": self.zipcode,
+                    "noOfGuests": self.totalGuest,
+                    "noOfMaleGuests": 0,
+                    "noOfFemaleGuests": 0,
+                    "budget": 0,
+                    "hostEmployeeId": -1,
+                    "hasBid": "N",
+                    "bidStatus": null,
+                    "serviceInstructions": self.instructions,
+                    "status": "REQUEST",
+                    "serviceDetail": null,
+                    "fulfillmentDate": self.date,
+                    "durationInMinutes": 0,
+                    "deliveryType": "Pickup",
+                    "deliveryAddress": null,
+                    "deliveryInstructions": null,
+                    "rating": -1,
+                    "ratingComment": null,
+                    "ratingDateTime": null,
+                    "order": {
+                        "venueNumber": self.venueid,
+                        "orderDate": self.date,
+                        "orderItems": []
+                    },
+                    "prebooking": false,
+                    "employeeName": "",
+                    "visitorName": fullName
+                };
+
+                AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
+                    $log.info("Bottle response: "+angular.toJson(response));
+                    $('#privateEventModal').modal('show');
+                });
 
              };
 

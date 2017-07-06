@@ -188,4 +188,20 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
+    this.createBottleService = function(venueId, object, authBase64Str) {
+        return $http({
+                method: 'POST',
+                url: RestURL.baseURL + 'vas/' + venueId + '/orders',
+                data: object,
+                headers: {
+                    "Authorization": "Anonymous " + authBase64Str
+                }
+            }).then(function(response) {
+                return response;
+            }, function(error) {
+                $log.error('Error: ' + error);
+                return error;
+        });
+    };
+
 }]);

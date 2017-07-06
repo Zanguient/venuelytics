@@ -152,12 +152,16 @@
 </div> <br/>
 
 <div class="col-md-12">
+
     <center>
-        <h1 class="color-success">{{'reservation.BOTTLE_MENU' | translate}}</h1>
-        <a class="btn btn-success" href="http://purelounge408.com/bottle-service/" target="_blank" style="
-    background-color: #4caf50;
-    color: white;
-"><span class="ng-scope">{{'reservation.VIEW_BOTTLE' | translate}}</span></a>
+        <h1 class="fontLight color-success">{{'reservation.POLICIES' | translate}}</h1>
+    </center>
+    <hr/>
+
+    <center>
+        <h1 class="color-success fontRegular">{{'reservation.BOTTLE_MENU' | translate}}</h1>
+        <a href="http://purelounge408.com/bottle-service/" target="_blank" class="btn btn-raised btn-success">
+                         {{'reservation.VIEW_BOTTLE' | translate}}<div class="ripple-container"></div></a>
     </center>
 </div> <br/>
 
@@ -250,6 +254,24 @@
         </div>
         </div>
 </div> -->
+
+<!-- Success Guest List Modal -->
+<div class="modal modal-success" id="bottleServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="myModalLabel6">{{'reservation.BOTTLE_DIALOG' | translate}}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{{'reservation.BOTTLE_DIALOG_DESC' | translate}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div ng-show="guestServiceTab">
     <div ng-include="'guest-list.html'"></div>
