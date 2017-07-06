@@ -204,4 +204,31 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
+    this.getVenueMap = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'venuemap/' + venueId
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
+    this.getVenueMapForADate = function(venueId,date) {
+        return $http({
+            method: 'GET',
+            headers: {
+                    "X-XSRF-TOKEN": "XX-YY-XX-V"
+                },
+            url: RestURL.baseURL + 'reservations/' + venueId + '/date/' + date
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
 }]);

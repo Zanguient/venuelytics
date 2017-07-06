@@ -76,12 +76,90 @@
 	<fieldset>
 		<div class="col-md-10 form-group is-empty">
             <input type="date" class="form-control fontRegular" id="date" ng-model="date" placeholder="{{reservation.DATE | translate}}">
-            <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
+        </div>
+        <div class="col-md-10 form-group is-empty" ng-if="tableSelection">
+            Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control fontRegular" id="table" placeholder="{{'reservation.TABLE' | translate}}">
-            <!-- <label for="table" class="fa fa-calendar"></label> -->
-        </div>
+         <div style="text-align: center; margin-top: 0px;"
+                    ng-if="imageFlag == false">
+                    <div id="mapSection">
+                    <center>
+                    <div ng-if="imageFlag == false">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h4>
+                                        <span class="label label-warning"
+                                            style="background-color: #FFFF00;" translate="SELECTED"></span>
+                                    </h4>
+                                </td>
+                                <td>
+                                    <h4>
+                                        <span class="label label-success" translate="AVAILABLE"></span>
+                                    </h4>
+                                </td>
+                                <td>
+                                    <h4>
+                                        <span class="label label-danger" translate="BOOKED"></span>
+                                    </h4>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </center>
+                <center>
+                    <img id="imagemap" ng-src="{{img.pic_url}}" usemap="#ImgExam" class="map img-responsive">
+                </center>
+                    <map name="ImgExam">
+                            <area id="{{venueImageMapData[0].elements[$index].id}}"
+                                style="outline: red solid 2px;" shape="rect"
+                                coords="{{area.coords.join()}}" ng-repeat="area in img.maps"
+                                ng-href="{{area.link_url || 'javascript:void(0)'}}"
+                                ng-click="selectTable(venueImageMapData[0].elements[$index].id, $index, venueImageMapData[0].elements[$index])"
+                                data-maphilight='{"fillColor":"{{venueImageMapData[0].elements[$index].fillColor}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{venueImageMapData[0].elements[$index].strokeColor}}","strokeWidth":2}'></area>
+                    </map>
+                </div>
+                </div>
+                </div>
+                <br>
+                <div class="col-md-10 form-group is-empty">
+                    <div ng-if="tableSelection">
+                        <h3 style="margin-top: 0px;">
+                            <font size="4">Selected Table(s)</font>
+                        </h3>
+                    </div>              
+                    <div class="form-group" ng-repeat="table in tableSelection">
+                        <center>
+                        <table>
+                            <tr>
+                                <td><label style="color: #fff">#{{$index+1}}</label></td>
+                                <td><label style="color: #fff">:&nbsp;&nbsp;{{table.name}}</label>
+                                </td>
+                                <td><label ng-hide="table.size <= 0"
+                                    style="margin-left: 15px; color: #fff">Capacity</label>
+                                </td>
+                                <td><label ng-hide="table.size <= 0" style="color: #fff">:&nbsp;&nbsp;{{table.size}}</label>
+                                </td>
+                            </tr>
+                        </table>
+                        </center>                   
+                        <uib-carousel interval="-1" active="active" no-wrap="false">
+                        <uib-slide
+                            data-ng-repeat="slide in table.imageUrls track by slide.id"
+                            index="$index"> <img style="width: auto;"
+                            class="img-responsive center-block" data-ng-src="{{slide.originalUrl}}"
+                            ng-click="imageView(slide.originalUrl)"> </uib-slide> </uib-carousel>
+                        <br> <label ng-hide="table.description == null">Description</label> <br> <label
+                            style="margin-left: 15px; color: #fff"
+                            ng-hide="table.description == null">{{table.description}}</label>
+                        <button type="button" class="btn btn-danger pull-right"
+                            ng-click="removeSelectedTables($index,table,tableSelection) ">Remove</button>
+                        <br> <br>
+                        <br> <br>                   
+                    </div>
+                </div>
+                <br>
         <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control fontRegular" ng-model="userFirstName" id="firstName" placeholder="{{'reservation.FIRST_NAME' | translate}}">
         </div>
