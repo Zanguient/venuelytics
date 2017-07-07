@@ -29,20 +29,20 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
 
                 if(VenueService.latitude && VenueService.longitude &&
                     VenueService.latitude !== '' && VenueService.longitude !== ''){
-                    self.setTab('CLUBS');
+                    self.setTab('CLUB');
                 } else{
 
                     if (navigator && navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function(position){
                             VenueService.latitude = position.coords.latitude;
                             VenueService.longitude = position.coords.longitude;
-                            self.setTab('CLUBS');
+                            self.setTab('CLUB');
                             self.$apply(function(){
                                 self.position = position;
                             });
                         },
                         function (error) {
-                            self.setTab('CLUBS');
+                            self.setTab('CLUB');
                         });
                     }
                 }
