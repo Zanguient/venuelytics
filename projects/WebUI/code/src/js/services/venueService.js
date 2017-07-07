@@ -7,6 +7,11 @@ app.service('VenueService', function() {
   this.businessImage = '';
   this.venueAddress = '';
   this.businessUrl = '';
+  this.selectedVenue = '';
+  this.bottleServiceData = { };
+  this.privateEventData = { };
+  this.totalNoOfGuest = '';
+  this.tab = '';
   this.imageMapping={
       "pic_url": "",
       "pic_url_thumbnail":"",

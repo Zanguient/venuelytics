@@ -1,3 +1,4 @@
+
 <div class="col-lg-6">
 <form class="form-horizontal" name="privateForm" ng-controller="VenueDetailsController" parsley-validate validate-form="" ng-cloak>
     <fieldset>
@@ -129,10 +130,10 @@
                 </td>
                 <td>
                     <div ng-mouseenter="pause()" ng-mouseleave="play()" class="carousel ng-isolate-scope" ng-swipe-right="prev()" ng-swipe-left="next()" interval="myInterval" active="active" no-wrap="false" style="height:150px;width:150px">
-                        <div class="carousel-inner" ng-transclude="">
+                        <div class="carousel-inner">
                             <div ng-class="{
     'active': active
-  }" class="item text-center ng-scope ng-isolate-scope" ng-transclude="" data-ng-repeat="value in privateEvent.imageUrls" index="$index"> <img data-ng-src="https://d3pkfw29jtj7v6.cloudfront.net/banquetVenueImg/image/cef7/Pure+Silicon+Valley.jpg" data-toggle="modal" data-target="#myModal" ng-click="previewUpload(privateEvent.imageUrls)" style="height: 150px; width: 150px" class="ng-scope" src="https://d3pkfw29jtj7v6.cloudfront.net/banquetVenueImg/image/cef7/Pure+Silicon+Valley.jpg"> </div>
+  }" class="item text-center ng-scope ng-isolate-scope"  data-ng-repeat="value in privateEvent.imageUrls" index="$index"> <img data-ng-src="https://d3pkfw29jtj7v6.cloudfront.net/banquetVenueImg/image/cef7/Pure+Silicon+Valley.jpg" data-toggle="modal" data-target="#myModal" ng-click="previewUpload(privateEvent.imageUrls)" style="height: 150px; width: 150px" class="ng-scope" src="https://d3pkfw29jtj7v6.cloudfront.net/banquetVenueImg/image/cef7/Pure+Silicon+Valley.jpg"> </div>
                         </div>
                         <a role="button" href="" class="left carousel-control" ng-click="prev()" ng-show="slides.length > 1">
                             <span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span>
@@ -199,7 +200,7 @@
 <div class="col-md-12">
     <center>
         <h1 class="color-success fontRegular">Floor Plan</h1>
-        <button class="btn btn-success btn-raised fontRegular">{{"reservation.VIEW_VIDEO" | translate}}</button>
+        <button class="btn btn-success btn-raised fontRegular">{{"reservation.FLOOR" | translate}}</button>
     </center>
 </div>
 

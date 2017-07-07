@@ -1,5 +1,5 @@
 "use strict";
-var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies', 'ngclipboard']);
+var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies', 'ngclipboard', 'daterangepicker']);
 
 
 // configure our routes
@@ -99,6 +99,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'emailVerification.html',
             controller: 'businessController',
             title: 'Venuelytics-EmailVerfication',
+            description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
+        })
+        .when('/confirm/:cityName/:venueid', {
+            templateUrl: 'confirm-reservation.html',
+            controller: 'ConfirmReservationController',
+            title: 'Venuelytics-ConfirmReservation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .otherwise('/home');

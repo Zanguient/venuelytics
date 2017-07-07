@@ -70,6 +70,7 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
 
     		self.selectVenue = function(venue) {
                 //VenueService.selectedVenueDetails = venue;
+                VenueService.selectedVenue = venue;
                 VenueService.venueNumber = venue.id;
     			$location.url('/venues/'+self.selectedCityName+'/'+venue.id);
     		};

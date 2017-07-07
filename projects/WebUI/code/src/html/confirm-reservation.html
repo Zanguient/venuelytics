@@ -1,0 +1,69 @@
+<div class="container">
+	
+	<center>
+		<h1 class="color-success fontRegular">{{'reservation.CONFIRM_DETAILS' | translate}}</h1>
+	</center>
+
+	<div class="form-group">
+		<table class="table table-responsive table-no-border">
+                     
+                      <tbody>
+                        <tr>
+                          <td> Requested Date </td>
+                          <td>07-07-2017</td>
+                        </tr>
+                        <tr>
+                          <td> First Name </td>
+                          <td>{{userData.userFirstName}}</td>
+                        </tr>
+                        <tr>
+                          <td> Last Name </td>
+                          <td>{{userData.userLastName}}</td>
+                        </tr>
+                        <tr>
+                          <td> E-mail </td>
+                          <td>{{userData.email}}</td>
+                        </tr>
+                        <tr>
+                          <td> Mobile Number </td>
+                          <td>{{userData.mobile}}</td>
+                        </tr>
+                        <tr>
+                          <td> Zipcode </td>
+                          <td>{{userData.zipcode}}</td>
+                        </tr>
+                        <tr>
+                          <td> Total Guests </td>
+                          <td>{{guests}}</td>
+                        </tr>
+                        <tr>
+                          <td> Special Instructions </td>
+                          <td>{{userData.instructions}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <h4 class="color-success">Selected Table(s)</h4>
+                    <table class="table table-responsive table-no-border">
+                    	<thead>
+                    		<tr>
+                    			<th>Table Name(s):</th>
+                    			<th>Capacity</th>
+                    		</tr>
+                    	</thead>
+                    	<tbody>
+                    		<tr>
+	                          <td> Table 15 </td>
+	                          <td>5</td>
+	                        </tr>
+                    	</tbody>
+                    </table>
+	    <center>
+	        <div >
+	            <button type="submit" class="btn btn-raised btn-primary">Confirm</button>
+	            <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">Edit</button>
+	        </div>
+	    </center>
+	</div>
+
+</div>

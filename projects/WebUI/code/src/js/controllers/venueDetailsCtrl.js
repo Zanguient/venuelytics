@@ -8,15 +8,38 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
     		$log.log('Inside Venue Details Controller.');
     		
+            $scope.startDate = moment().format('YYYY-MM-DD');
+            $scope.dateOptions = {
+                minDate: new Date(),
+                singleDatePicker: true
+            };
+
+
     		var self = $scope;
+
             self.test = {};
             self.private = {};
             self.selectionTableItems = [];
             self.init = function() {
+                self.bottle = VenueService.bottleServiceData;
+                self.totalGuest = VenueService.totalNoOfGuest | 1;
                 self.venueid = $routeParams.venueid;
                 self.reservationTime = APP_ARRAYS.time;
                 self.eventTypes = APP_ARRAYS.eventyType;
+                self.venueImage = VenueService.selectedVenue.imageUrls[0].largeUrl;
+                self.restoreTab = VenueService.tab;
                 self.getBanquetHall(self.venueid);
+                if(!self.restoreTab) {
+                    self.restoreTab = 'B';
+                }
+                if(self.restoreTab === 'B') {
+                    self.bottleService();
+                } else if(self.restoreTab === 'P') {
+                    self.event();
+                } else if(self.restoreTab === 'G'){
+                    self.glist();
+                }
+
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
@@ -32,7 +55,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         self.row = 1;
                     }
                     self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType +'&i=y';
-                    $log.info("Reservation URL: "+self.resevationURL);
+                    // $log.info("Reservation URL: "+self.resevationURL);
                     iFrameResize({
                             log                     : false,                  // Enable console logging
                             inPageLinks             : false,
@@ -79,8 +102,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         }
                     });
 
-            self.totalGuest = 1;
-
             self.paintVenueTableMap = function() {
 
                 self.bottleStartDate = self.startDate;
@@ -88,7 +109,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
                 // Date in YYYYMMDD format
                 self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
-                console.log("boottleServiceDate:" + self.bottleServiceDate);
                 AjaxService.getVenueMap(VenueService.venueNumber).then(function(response) {
                     self.venueImageMapData = response.data;
                     angular.forEach(self.venueImageMapData, function(value, key1) {
@@ -105,7 +125,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         }
                         if (self.venueImageMapData[key1].imageMap != "") {
                             var object = angular.fromJson(self.venueImageMapData[key1].imageMap);
-                            console.log("object is" + object)
                             var maps = [];
                             if (object) {
                                 for (var i = 0; i < object.length; i++) {
@@ -149,7 +168,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         if(self.realTimeStatus == true) {
                             key.fillColor = "FF0000";
                             key.strokeColor = "C60000";
-                            console.log("This object is reserved");
                             breakBoolean = true;
                         } else {
                             key.fillColor = "08FF00";
@@ -218,7 +236,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                  }
              }
              if (indexArray >=0) {
-                 self.removeSelectedTables(indexArray, selectedTable, self.tableSelection);
+                 self.removeSelectedTables(indexArray, selectedTable, self.bottle.tableSelection);
              }
              return;
          } else {
@@ -272,7 +290,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
         }
         self.imageUrl = false;
         self.selectionTableItems.push(selectedTable);
-                    self.tableSelection = [];
+                    self.bottle.tableSelection = [];
                     for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
                         var table = {
                             "id": self.selectionTableItems[itemIndex].id,
@@ -283,7 +301,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                             "description": self.selectionTableItems[itemIndex].description,
                             "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
                         }
-                        self.tableSelection.push(table);
+                        self.bottle.tableSelection.push(table);
                     }
         }
 
@@ -303,10 +321,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 self.totalGuest = self.totalGuest + 1;
              };
 
-             self.bottle = function(service) {
-                $("#privateEventTab").css('background-color','white');
+             self.bottleService = function(service) {
+                self.totalGuest = 1;
+                $("#privateEventTab").css('background-color','#cccccc');
                 $('#private').css('color', '#4caf50');
-                $("#guestlistTab").css('background-color','white');
+                $("#guestlistTab").css('background-color','#cccccc');
                 $('#glist').css('color', '#4caf50');
                 $("#bottleTab").css('background-color','#4caf50');
                 $('#bottle').css('color', 'white');
@@ -316,11 +335,12 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.event = function(service) {
+                self.totalGuest = 1;
                 $("#privateEventTab").css('background-color','#4caf50');
                 $('#private').css('color', 'white');
-                $("#guestlistTab").css('background-color','white');
+                $("#guestlistTab").css('background-color','#cccccc');
                 $('#glist').css('color', '#4caf50');
-                $("#bottleTab").css('background-color','white');
+                $("#bottleTab").css('background-color','#cccccc');
                 $('#bottle').css('color', '#4caf50');
                 self.bottleServiceTab = false;
                 self.eventServiceTab = true;
@@ -328,11 +348,12 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.glist = function(service) {
-                $("#privateEventTab").css('background-color','white');
+                self.totalGuest = 1;
+                $("#privateEventTab").css('background-color','#cccccc');
                 $('#private').css('color', '#4caf50');
                 $("#guestlistTab").css('background-color','#4caf50');
                 $('#glist').css('color', 'white');
-                $("#bottleTab").css('background-color','white');
+                $("#bottleTab").css('background-color','#cccccc');
                 $('#bottle').css('color', '#4caf50');
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
@@ -340,6 +361,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.glistSave = function(test) {
+                VenueService.tab = 'G';
                 var name = test.guestFirstName + " " + test.guestLastName;
                 var authBase64Str = window.btoa(name + ':' + test.guestEmailId + ':' + test.guestMobileNumber);
                 var object = {
@@ -361,75 +383,21 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 });
              }
 
-             self.privateSave = function(value) {
-           /*     var name = self.privateFirstName + " " + self.privateLastName;
-                var authBase64Str = window.btoa(name + ':' + self.privateEmail + ':' + self.privateMobileNumber);
-                var object = {
-                    "serviceType": 'BanquetHall',
-                    "venueNumber": VenueService.venueNumber,
-                    "reason": self.privateEvent,
-                    "contactNumber": self.privateMobileNumber,
-                    "contactEmail": self.privateEmail,
-                "contactZipcode": "",
-            "noOfGuests": self.totalGuest,
-            //"noOfMaleGuests": $scope.privateNoOfMen,
-            //"noOfFemaleGuests": $scope.privateNoOfWomen,
-            "budget": self.privateBudget,
-            "hostEmployeeId": -1,
-            "hasBid": "N",
-            "bidStatus": "",
-            "serviceInstructions": self.privateComment,
-            "status": "REQUEST",
-            "serviceDetail": null,
-            "fulfillmentDate": self.privateStartDate,
-            "durationInMinutes": null,
-            "deliveryType": "Pickup",
-            "deliveryAddress": null,
-            "deliveryInstructions": null,
-            "rating": -1,
-            "ratingComment": null,
-            "ratingDateTime": null,
-            "order": {
-                "venueNumber": VenueService.venueNumber,
-                "orderDate": self.privateStartDate,
-                "orderItems": []
-            },
-            "prebooking": false,
-            "employeeName": "",
-            "visitorName": name
-        }
-        if(value.size == '-') {
-          value.size = 0;
-        }
-        if(value != '') {
-          var items = {
-                    "venueNumber": VenueService.venueNumber,
-                    "productId": value.productId,
-                    "productType": value.productType,
-                    "quantity": value.size,
-                    "name": "private room"
-                }
-
-         object.order.orderItems.push(items);
-        }
-
-                AjaxService.createPrivateEvent(VenueService.venueNumber, object, authBase64Str).then(function(response) {                    $('#privateEventModal').modal('show');
-                });*/
-             }
-
-             self.confirmBottleService = function() {
-
-                var fullName = self.userFirstName + " " + self.userLastName;
+            self.confirmBottleService = function() {
+                VenueService.tab = 'B';
+                var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
-                $log.info("Full name->", fullName);
+                VenueService.bottleServiceData = self.bottle;
+                VenueService.totalNoOfGuest = self.totalGuest;
+                $log.info("User data-->"+angular.toJson(self.bottle));
 
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,
-                    "reason": self.occasion,
-                    "contactNumber": self.mobile,
-                    "contactEmail": self.email,
-                    "contactZipcode": self.zipcode,
+                    "reason": self.bottle.occasion,
+                    "contactNumber": self.bottle.mobile,
+                    "contactEmail": self.bottle.email,
+                    "contactZipcode": self.bottle.zipcode,
                     "noOfGuests": self.totalGuest,
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
@@ -437,10 +405,10 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "hostEmployeeId": -1,
                     "hasBid": "N",
                     "bidStatus": null,
-                    "serviceInstructions": self.instructions,
+                    "serviceInstructions": self.bottle.instructions,
                     "status": "REQUEST",
                     "serviceDetail": null,
-                    "fulfillmentDate": self.date,
+                    "fulfillmentDate": self.bottle.date,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
                     "deliveryAddress": null,
@@ -450,27 +418,44 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "ratingDateTime": null,
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": self.date,
+                        "orderDate": self.bottle.date,
                         "orderItems": []
                     },
                     "prebooking": false,
                     "employeeName": "",
                     "visitorName": fullName
                 };
-                $log.info("Service JSON->", angular.toJson(self.serviceJSON));
 
-                AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
+                 if (self.bottle.tableSelection != undefined) {
+                    angular.forEach(self.bottle.tableSelection, function(value, key) {
+                        var items = {
+                            "venueNumber": self.venueid,
+                            "productId": value.id,
+                            "productType": value.productType,
+                            "quantity": $scope.quantity,
+                            "comments": value.comments,
+                            "name": value.name
+                        }
+                        self.serviceJSON.order.orderItems.push(items);
+                    });
+                }
+
+                $log.info("Service JSON->", angular.toJson(self.serviceJSON));
+                $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
+                /*AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
                     $log.info("Bottle response: "+angular.toJson(response));
                     $('#bottleServiceModal').modal('show');
-                });
+                });*/
 
              };
 
              self.createPrivateEvent = function() {
-
+                VenueService.tab = 'P';
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
                 $log.info("Full name->", fullName);
+                VenueService.privateEventData = self.private;
+                $log.info("Private Event service data-->"+angular.toJson(VenueService.privateEventData));
 
                 self.serviceJSON = {
                     "serviceType": 'BanquetHall',
@@ -489,7 +474,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "serviceInstructions": self.instructions,
                     "status": "REQUEST",
                     "serviceDetail": null,
-                    "fulfillmentDate": self.date,
+                    "fulfillmentDate": self.private.orderDate,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
                     "deliveryAddress": null,
@@ -499,7 +484,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "ratingDateTime": null,
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": self.date,
+                        "orderDate": self.private.orderDate,
                         "orderItems": []
                     },
                     "prebooking": false,
@@ -507,10 +492,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "visitorName": fullName
                 };
 
-                AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
+                $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
+                /*AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
                     $log.info("Bottle response: "+angular.toJson(response));
                     $('#privateEventModal').modal('show');
-                });
+                });*/
 
              };
 

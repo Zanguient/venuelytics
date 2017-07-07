@@ -32,7 +32,9 @@
   font-size: x-large;
 }
 
-
+select {
+  -moz-appearance: none;
+}
 
 .image-block {
   border: 3px solid white;
