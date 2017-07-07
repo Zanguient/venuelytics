@@ -104,6 +104,12 @@ App.factory(
 							url: urlTemplate.replace("@context", "venuemap")}
 						});
 				},
+				VenueImage : function () {
+						return $resource(urlTemplate.replace("@context", "upload"),{}, {
+						uploadVenueImage : {method: 'POST',  params: {}, 
+							url: urlTemplate.replace("@context", "upload")+"/VenueImg"}
+						});
+				},
 				LoyaltyService: function () {
 					return $resource(urlTemplate.replace("@context", "loyalty"));
 				},

@@ -301,6 +301,21 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
           $scope.cleansed =true;
         }
     }
+    $scope.venueUploadFile = function(venueImage) {
+      var file = venueImage;
+      console.dir(file);
+      var fd = new FormData();
+      fd.append('file', file, $scope.finalName);
+
+      var payload = RestServiceFactory.cleansePayload('uploadVenueImage', fd);
+      RestServiceFactory.VenueImage().uploadVenueImage(payload, function(success){
+        $state.go('app.stores');
+      },function(error){
+        if (typeof error.data != 'undefined') {
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+    }
     $scope.update = function(isValid, data) {
       data.enabled = $scope.venueEnabled;
       data.cleansed = $scope.cleansed;

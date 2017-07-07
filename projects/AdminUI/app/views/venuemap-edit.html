@@ -17,9 +17,13 @@
 							<label class="control-label">Section Name *</label> 
 							<input type="text" name="name" required="required" class="form-control" ng-model="data.section" />
 						</div>
-						<div class="form-group col-sm-4">
+						<div ng-hide ="venueNumbers != ''" class="form-group col-sm-4">
 							<label class="control-label">Venue Number</label> 
 							<input type="text" name="description" data-parsley-type="integer" readonly class="form-control" ng-model="data.venueNumber" />
+						</div>
+						<div ng-show ="venueNumbers != ''" class="form-group col-sm-4">
+							<label class="control-label">Venue Number</label> 
+							<input type="text" name="description" data-parsley-type="integer" readonly class="form-control" ng-model="venueNumbers" />
 						</div>
 					</div>
 					<div class="row">
@@ -83,6 +87,14 @@
 				<div>
 					<div id="venueMapImg" class="col-lg-12" img-responsive img-rounded ng-img-map ng-img-map-fns="mapFns" ng-model="img" ng-show="img.pic_url != ''" ></div>
 				</div>
+				<br />
+				<div class="row">
+			        <center>
+			          <!-- <input class="file-upload" type="file" id="fileUpload" class="btn btn-default" file-model="venueImage.originalUrl" required> -->
+			          <input class="btn btn-default btn-file col-sm-2" id="venuefile" type="file" file-model="venueImage.originalUrl" style="margin-left: 18px; display: block;padding-left: 5px;padding-right: 5px;width: 202.22222px;">
+			          <button type="button" class="btn btn-info btn-md" style="margin-left: 18px;" ng-click="venueUploadFile(venueImage)">Upload</button>
+			        </center>
+			    </div>
 			</div>
 		</div>
 	</div>

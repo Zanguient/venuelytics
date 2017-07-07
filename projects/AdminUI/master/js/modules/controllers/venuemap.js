@@ -3,14 +3,14 @@
  * smangipudi =========================================================
  */
 
-App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 
-  'toaster', '$stateParams','ngDialog', function($scope, $state, $compile, $timeout, RestServiceFactory,
+App.controller('VenueMapController', ['dataShare','$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 
+  'toaster', '$stateParams','ngDialog', function(dataShare, $scope, $state, $compile, $timeout, RestServiceFactory,
    DataTableService, toaster, $stateParams, ngDialog) {
   'use strict';
   
   $scope.img = {};
   $scope.img.pic_url = "";
-
+  $scope.venueNumbers = '';
   $timeout(function(){
 
     if ( ! $.fn.dataTable ) return;
@@ -68,7 +68,6 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 	                                return actionHtml;
 	                            }*/
 	              		    	"createdCell": function (td, cellData, rowData, row, col) {
-	              		    		
 	              		    		var actionHtml = '<em class="fa fa-check-square-o"></em>';
 	              		    		if (cellData == false){
 	              		    			actionHtml = '<em class="fa fa-square-o"></em>';
@@ -83,6 +82,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 	DataTableService.initDataTable('tables_table', columnDefinitions, false);
 	
     var promise = RestServiceFactory.VenueMapService().getAll({id: $stateParams.venueNumber});
+    if($stateParams.id != ""){
     promise.$promise.then(function(data) {
     	data.map(function(venueMap) {
     		if (venueMap.id == $stateParams.id) {
@@ -111,9 +111,12 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     	    		table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id]);
     	    	});
     	    	table.draw();
-    		}
-    	});
-	});
+      		}        
+      	});      
+      });
+    } else {
+      $scope.venueNumbers = dataShare.venueNumber;
+    }
     $scope.addTable = function () {
     	$scope.newTable = {};
     	$scope.newTable.enabled = 'Y';
@@ -224,7 +227,28 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 	  }
   }
   $scope.update = function(isValid, data) {
-    angular.forEach(data.imageUrls, function(value1, key1) {
+    //var table = $('#tables_table').dataTable();
+    data.elements =$scope.img.maps;
+    angular.forEach(data.imageUrls, function(value, key) {
+        delete value.originalUrl;
+        delete value.type;
+        delete value.name;
+        delete value.smallUrl;
+        delete value.mediumUrl;
+        delete value.originalWidth;
+        delete value.originalHeight;
+        delete value.smallWidth;
+        delete value.smallHeight;
+        delete value.mediumWidth;
+        delete value.mediumHeight;
+        delete value.largeUrl;
+        delete value.largeHeight;
+        delete value.largeWidth;
+    });
+    angular.forEach(data.elements, function(value2, key2) {
+      delete value2.imageUrl;
+      delete value2.thumbnailImageUrl;
+      angular.forEach(value2.imageUrls, function(value1, key1) {
         delete value1.originalUrl;
         delete value1.type;
         delete value1.name;
@@ -239,9 +263,12 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         delete value1.largeUrl;
         delete value1.largeHeight;
         delete value1.largeWidth;
+        //console.log("value.imageUrls....." + angular.toJson(value2.imageUrls));
         //console.log("value.imageUrls...."+angular.toJson(value.imageUrls));
         //console.log("Id...."+angular.toJson($rootScope.venueMapImages));
       });
+    });
+
       /*if (!isValid) {
         console.log("inside>>>>>>>>>>>>>");
         return;

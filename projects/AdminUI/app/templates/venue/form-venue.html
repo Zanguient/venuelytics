@@ -152,39 +152,11 @@
       </slide>
   </carousel>
        <br /> 
-  <!-- <div class="form-group">
-    <div ng-repeat = "venueImage in VenueImageArray">
-      <div class="form-group" ng-show="venueImage.uploadImage">
-        <label class="control-label col-sm-2">Image URL {{$index+1}}</label>
-        <input class="btn btn-default btn-file col-sm-2" id="venuefile" type="file" file-model="venueImage.originalUrl" style="display: block;padding-left: 5px;padding-right: 5px;width: 202.22222px;">
-        <button type="button" class="btn btn-info btn-md" style="margin-left: 18px;" ng-click="venueUploadFile(venueImage)" ng-disabled="!venueImage.originalUrl">Upload</button>
-        <button class="btn btn-danger" type="button" ng-click="removeVenueImage($index, VenueImageArray, venueImage) "><i class="fa fa-trash-o" aria-hidden="true"></i></button> 
+       <br />
+      <div class="row">
+        <center>
+          <input class="btn btn-default btn-file col-sm-2" id="venuefile" type="file" file-model="venueImage" style="margin-left: 18px; display: block;padding-left: 5px;padding-right: 5px;width: 202.22222px;">
+          <button type="button" class="btn btn-info btn-md" style="margin-left: 18px;" ng-click="venueUploadFile(venueImage)">Upload</button>
+        </center>
       </div>
-      <div class="form-group" ng-show="venueImage.editImage">
-       <label class="control-label col-sm-2">Image URL {{$index+1}}</label>
-        <button class="btn btn-info btn-md " data-toggle="modal" data-target="#myModal" ng-click="previewUpload(venueImage.originalUrl)" ng-hide="!venueImage.id" type="button">Preview Image</button>
-        <button class="btn btn-info btn-md" style="margin-left: 18px;" ng-click="clearVenueImage(venueImage)" type="button">Clear</button> 
-        <button class="btn btn-danger" type="button" ng-click="removeVenueImage($index, VenueImageArray, venueImage) "><i class="fa fa-trash-o" aria-hidden="true"></i></button> 
-      </div> 
-    </div>
-    <button type="button" class="btn btn-primary " ng-click="addVenueImage(VenueImageArray) "><span class="glyphicon glyphicon-plus " formnovalidate></span>add image</button>
-  </div>
-  <div class="col-sm-3" style="width: 0px; padding-left: 0px;padding-right: 0px;">
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Preview Image</h4>
-                </div>
-                <div class="modal-body" style="overflow:scroll;max-height:80vh;">
-                    <img ng-src="{{previewSingleImage}}" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div> -->
 </div>
