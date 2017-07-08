@@ -181,7 +181,7 @@
             <input type="text" id="ms-form-pass" class="form-control fontRegular" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="bottle.mobile" placeholder="{{'reservation.MOBILE' | translate}}" required="" data-parsley-trigger="change">
         </div>
         <div class="col-md-10 form-group is-empty">
-            <input type="number" class="form-control fontRegular" id="zipcode" pattern="[0-9]{6}" ng-model="bottle.zipcode" placeholder="{{'reservation.ZIPCODE' | translate}}">
+            <input type="number" class="form-control fontRegular" id="zipcode" ng-model="bottle.bottleZipcode" placeholder="{{'reservation.ZIPCODE' | translate}}">
         </div>
         <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="instructions" ng-model="bottle.instructions" placeholder="{{'reservation.INSTRUCTIONS' | translate}}">
@@ -207,7 +207,7 @@
         </div>
 
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control fontRegular" id="zipcode" ng-model="bottle.occasion" placeholder="{{'reservation.OCCASION' | translate}}">
+            <input type="text" class="form-control fontRegular" id="occasion" ng-model="bottle.bottleOccasion" placeholder="{{'reservation.OCCASION' | translate}}">
         </div>
         <!-- <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control" id="zipcode" placeholder="{{'reservation.HOST' | translate}}">

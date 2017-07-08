@@ -102,8 +102,14 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .when('/confirm/:cityName/:venueid', {
-            templateUrl: 'confirm-reservation.html',
+            templateUrl: 'bottle-reservation.html',
             controller: 'ConfirmReservationController',
+            title: 'Venuelytics-ConfirmReservation',
+            description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
+        })
+        .when('/confirmEvent/:cityName/:venueid', {
+            templateUrl: 'private-reservation.html',
+            controller: 'PrivateReservationController',
             title: 'Venuelytics-ConfirmReservation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })

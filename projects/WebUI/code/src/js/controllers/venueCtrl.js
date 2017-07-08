@@ -11,7 +11,8 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
     		var self = $scope;
 
             self.init = function() {
-
+                VenueService.bottleServiceData = {};
+                VenueService.totalNoOfGuest = 1;
                 self.serviceTypes = APP_ARRAYS.serviceTabs;
                 self.serviceIcons = APP_ARRAYS.serviceSmallIcons;
 

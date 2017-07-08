@@ -1,0 +1,65 @@
+<div class="container">
+	
+	<center>
+		<h1 class="color-success fontRegular">{{'reservation.CONFIRM_DETAILS' | translate}}</h1>
+	</center>
+
+	<div class="form-group">
+		<table class="table table-responsive table-no-border">
+                     
+                      <tbody>
+                        <tr>
+                          <td> Requested Date </td>
+                          <td>{{privateEventData.orderDate}}</td>
+                        </tr>
+                        <tr>
+                          <td> Start Time </td>
+                          <td>{{privateEventData.privateStartTime}}</td>
+                        </tr>
+                        <tr>
+                          <td> End Time </td>
+                          <td>{{privateEventData.privateEndTime}}</td>
+                        </tr>
+                        <tr>
+                          <td> First Name </td>
+                          <td>{{privateEventData.privateFirstName}}</td>
+                        </tr>
+                        <tr>
+                          <td> Last Name </td>
+                          <td>{{privateEventData.privateLastName}}</td>
+                        </tr>
+                        <tr>
+                          <td> E-mail </td>
+                          <td>{{privateEventData.privateEmail}}</td>
+                        </tr>
+                        <tr>
+                          <td> Mobile Number </td>
+                          <td>{{privateEventData.privateMobileNumber}}</td>
+                        </tr>
+                        <tr>
+                          <td> Budget </td>
+                          <td>{{privateEventData.budget}}</td>
+                        </tr>
+                        <tr>
+                          <td> Total Guests </td>
+                          <td>{{guests}}</td>
+                        </tr>
+                        <tr>
+                          <td> Comment </td>
+                          <td>{{privateEventData.privateComment}}</td>
+                        </tr>
+                        <tr>
+                          <td> Event Type </td>
+                          <td>{{privateEventData.privateEvent.type}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+	    <center>
+	        <div >
+	            <button type="submit" class="btn btn-raised btn-primary">Confirm</button>
+	            <button type="button" class="btn btn-raised btn-danger" ng-click="editPrivatePage()">Edit</button>
+	        </div>
+	    </center>
+	</div>
+
+</div>

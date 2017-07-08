@@ -23,6 +23,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             self.init = function() {
                 self.bottle = VenueService.bottleServiceData;
                 self.totalGuest = VenueService.totalNoOfGuest | 1;
+                $log.info("Total no of guest-->"+self.totalGuest);
                 self.venueid = $routeParams.venueid;
                 self.reservationTime = APP_ARRAYS.time;
                 self.eventTypes = APP_ARRAYS.eventyType;
@@ -75,8 +76,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
                 });
             };
-
-            self.totalGuest = 1;
 
             $(window).resize(function() {
                 var divHeight = $('#imagemap').height(); 
@@ -236,7 +235,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                  }
              }
              if (indexArray >=0) {
-                 self.removeSelectedTables(indexArray, selectedTable, self.bottle.tableSelection);
+                 self.removeSelectedTables(indexArray, selectedTable, self.tableSelection);
              }
              return;
          } else {
@@ -290,7 +289,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
         }
         self.imageUrl = false;
         self.selectionTableItems.push(selectedTable);
-                    self.bottle.tableSelection = [];
+                    self.tableSelection = [];
                     for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
                         var table = {
                             "id": self.selectionTableItems[itemIndex].id,
@@ -301,7 +300,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                             "description": self.selectionTableItems[itemIndex].description,
                             "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
                         }
-                        self.bottle.tableSelection.push(table);
+                        self.tableSelection.push(table);
                     }
         }
 
@@ -322,7 +321,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.bottleService = function(service) {
-                self.totalGuest = 1;
+                // self.totalGuest = 1;
                 $("#privateEventTab").css('background-color','#cccccc');
                 $('#private').css('color', '#4caf50');
                 $("#guestlistTab").css('background-color','#cccccc');
@@ -335,7 +334,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.event = function(service) {
-                self.totalGuest = 1;
+                // self.totalGuest = 1;
                 $("#privateEventTab").css('background-color','#4caf50');
                 $('#private').css('color', 'white');
                 $("#guestlistTab").css('background-color','#cccccc');
@@ -348,7 +347,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.glist = function(service) {
-                self.totalGuest = 1;
+                // self.totalGuest = 1;
                 $("#privateEventTab").css('background-color','#cccccc');
                 $('#private').css('color', '#4caf50');
                 $("#guestlistTab").css('background-color','#4caf50');
@@ -389,15 +388,18 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
                 VenueService.bottleServiceData = self.bottle;
                 VenueService.totalNoOfGuest = self.totalGuest;
+                VenueService.bottleZip = self.bottle.bottleZipcode;
                 $log.info("User data-->"+angular.toJson(self.bottle));
+                $log.info("zip code-->"+angular.toJson(self.bottle.bottleZipcode));
+                $log.info("occasion code-->"+angular.toJson(self.bottle.bottleOccasion));
 
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,
-                    "reason": self.bottle.occasion,
+                    "reason": self.bottle.bottleOccasion,
                     "contactNumber": self.bottle.mobile,
                     "contactEmail": self.bottle.email,
-                    "contactZipcode": self.bottle.zipcode,
+                    "contactZipcode": self.bottle.bottleZipcode,
                     "noOfGuests": self.totalGuest,
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
@@ -426,8 +428,8 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "visitorName": fullName
                 };
 
-                 if (self.bottle.tableSelection != undefined) {
-                    angular.forEach(self.bottle.tableSelection, function(value, key) {
+                 if (self.tableSelection != undefined) {
+                    angular.forEach(self.tableSelection, function(value, key) {
                         var items = {
                             "venueNumber": self.venueid,
                             "productId": value.id,
@@ -492,7 +494,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "visitorName": fullName
                 };
 
-                $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
+                $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
                 /*AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
                     $log.info("Bottle response: "+angular.toJson(response));
                     $('#privateEventModal').modal('show');
