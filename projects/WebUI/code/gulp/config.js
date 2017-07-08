@@ -89,6 +89,7 @@ module.exports = {
             'bower_components/owl.carousel/dist/assets/owl.theme.default.min.css',
             "bower_components/snackbar/dist/snackbar.min.css",
             "bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css.map",
+            'bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
 			'bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
 			'bower_components/owl.carousel/dist/assets/owl.theme.default.min.css',
 			'src/css/custom.css'

@@ -3,7 +3,7 @@
 <form class="form-horizontal" name="privateForm" parsley-validate validate-form="" ng-cloak>
     <fieldset>
         <div class="col-md-10 form-group is-empty">
-            <input type="date" class="form-control fontRegular" id="inputEmail" ng-model="private.orderDate" placeholder="{{reservation.DATE | translate}}" required="required" data-parsley-trigger="change">
+            <input type="text" class="form-control fontRegular" id="privateDate" ng-model="private.orderDate" placeholder="{{'reservation.DATE' | translate}}">
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
         
@@ -81,7 +81,6 @@
             </div>
         </div>
     </fieldset>
-    <a href="javascript:void(0)" class="btn btn-raised btn-success chk-button fontXLarge" ng-click="createPrivateEvent()"><font size="5"> {{"reservation.CHECKOUT" | translate}} </font><div class="ripple-container"></div></a>
 </form>
 <hr>
 
@@ -122,7 +121,7 @@
                 </td>
                 <td>
                     <label  class="fontRegular">{{privateEvent.description| limitTo: 70 }}{{privateEvent.description.length > 70 ? '...' : ''}}</label>
-                    <a class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateDescription(privateEvent.description)">Read More</a></td>
+                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateDescription(privateEvent.description)">Read More</a></td>
             </tr>
             <tr>
                 <td>
@@ -153,10 +152,10 @@
             </tr>
             <tr style="border: 1px solid #ddd; height: 50px;">
                 <td>
-                    <button id="privatePreview" class="btn btn-success btn-md ng-scope" data-toggle="modal" data-target="#myModal" ng-click="previewUpload(privateEvent.imageUrls)" type="button" style="margin-left: 11px;font-size:4;">Preview</button>
+                    <button id="privatePreview" class="btn btn-success btn-raised btn-md ng-scope" data-toggle="modal" data-target="#myModal" ng-click="previewUpload(privateEvent.imageUrls)" type="button" style="margin-left: 11px;font-size:4;">Preview</button>
                 </td>
                 <td ng-hide="privateEvent.reserve == true" class="">
-                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md pull-right ng-scope" ng-disabled="privateForm.$invalid" style="margin-right: 11px;font-size:4;" ng-click="createPrivateEvent(privateEvent)" disabled="disabled">Enquire</button>
+                    <button type="submit" id="privateEnquire" class="btn btn-success btn-raised btn-md pull-right ng-scope" ng-disabled="privateForm.$invalid" style="margin-right: 11px;font-size:4;" ng-click="createPrivateEvent(privateEvent)" disabled="disabled">Enquire</button>
                 </td>
                 <td ng-show="privateEvent.reserve == true" class="ng-hide">
                     <label class="pull-right" style="margin-right: 11px;font-size:4;">Not Available</label>

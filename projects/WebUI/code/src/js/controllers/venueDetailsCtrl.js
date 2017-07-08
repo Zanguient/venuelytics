@@ -14,6 +14,10 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             self.private = {};
             self.selectionTableItems = [];
             self.init = function() {
+                $(function() {
+                    $( "#inputDate, #privateDate" ).datepicker();
+                });
+                
                 self.bottle = VenueService.bottleServiceData;
                 self.guest = VenueService.guestListData;
                 self.private = VenueService.privateEventData;

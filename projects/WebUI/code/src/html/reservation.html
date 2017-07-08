@@ -60,7 +60,7 @@
 <form class="form-horizontal" parsley-validate validate-form="">
 	<fieldset>
 		<div class="col-md-10 form-group is-empty">
-            <input class="form-control date-picker" type="text" required="">
+            <input type="text" class="form-control fontRegular" id="inputDate" ng-model="bottle.requestedDate" placeholder="Date">
         </div>
         <div class="col-md-10 form-group is-empty" ng-if="tableSelection">
             Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
