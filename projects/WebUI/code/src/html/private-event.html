@@ -1,6 +1,6 @@
-
+<div  ng-controller="VenueDetailsController">
 <div class="col-lg-6">
-<form class="form-horizontal" name="privateForm" ng-controller="VenueDetailsController" parsley-validate validate-form="" ng-cloak>
+<form class="form-horizontal" name="privateForm" parsley-validate validate-form="" ng-cloak>
     <fieldset>
         <div class="col-md-10 form-group is-empty">
             <input type="date" class="form-control fontRegular" id="inputEmail" ng-model="private.orderDate" placeholder="{{reservation.DATE | translate}}" required="required" data-parsley-trigger="change">
@@ -156,7 +156,7 @@
                     <button id="privatePreview" class="btn btn-success btn-md ng-scope" data-toggle="modal" data-target="#myModal" ng-click="previewUpload(privateEvent.imageUrls)" type="button" style="margin-left: 11px;font-size:4;">Preview</button>
                 </td>
                 <td ng-hide="privateEvent.reserve == true" class="">
-                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md pull-right ng-scope" ng-disabled="privateForm.$invalid" style="margin-right: 11px;font-size:4;" ng-click="privateSave(privateEvent)" disabled="disabled">Enquire</button>
+                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md pull-right ng-scope" ng-disabled="privateForm.$invalid" style="margin-right: 11px;font-size:4;" ng-click="createPrivateEvent(privateEvent)" disabled="disabled">Enquire</button>
                 </td>
                 <td ng-show="privateEvent.reserve == true" class="ng-hide">
                     <label class="pull-right" style="margin-right: 11px;font-size:4;">Not Available</label>
@@ -169,7 +169,7 @@
 <div class="col-lg-6">
     <legend class="fontRegular">Description</legend>
     <div class="form-group ">
-                                    <p id="banquetHallData" style="padding-top: 0px;" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
+        <p id="banquetHallData" style="padding-top: 0px;" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
                                 </div>
 
 </div>
@@ -203,21 +203,4 @@
         <button class="btn btn-success btn-raised fontRegular">{{"reservation.FLOOR" | translate}}</button>
     </center>
 </div>
-
-<!-- Success Private Event Modal -->
-<div class="modal modal-success" id="privateEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-    <div class="modal-dialog animated zoomIn animated-3x" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-                <h3 class="modal-title" id="myModalLabel6">Private Event</h3>
-            </div>
-            <div class="modal-body">
-                <p>Private Event Details Successfully Saved.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>

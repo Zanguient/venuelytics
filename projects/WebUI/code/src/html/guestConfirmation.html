@@ -1,0 +1,75 @@
+<div class="container">
+	
+	<center>
+		<h1 class="color-success fontRegular">{{'reservation.GUEST_CONFIRM' | translate}}</h1>
+	</center>
+
+	<div class="form-group">
+		<table class="table table-responsive table-no-border">
+                     
+                      <tbody>
+                        <tr>
+                          <td> Requested Date </td>
+                          <td>{{parsedend}}</td>
+                        </tr>
+                         <tr>
+                          <td> Total Guests </td>
+                          <td>{{guests}}</td>
+                        </tr>
+                        <tr>
+                          <td> No of Men </td>
+                          <td>{{guestListData.guestMen}}</td>
+                        </tr>
+                        <tr>
+                          <td> No of Women </td>
+                          <td>{{guestListData.guestWomen}}</td>
+                        </tr>
+                        <tr>
+                          <td> Mobile Number </td>
+                          <td>{{guestListData.guestMobileNumber}}</td>
+                        </tr>
+                        <tr>
+                          <td> Email Id </td>
+                          <td>{{guestListData.guestEmailId}}</td>
+                        </tr>
+                        <tr>
+                          <td> First Name </td>
+                          <td>{{guestListData.guestFirstName}}</td>
+                        </tr>
+                        <tr>
+                          <td> Last Name </td>
+                          <td>{{guestListData.guestLastName}}</td>
+                        </tr>
+                        <tr>
+                          <td> ZipCode </td>
+                          <td>{{guestListData.guestZip}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+	    <center>
+	        <div >
+	            <button type="submit" class="btn btn-raised btn-primary" ng-click="guestListSave()">Confirm</button>
+	            <button type="button" class="btn btn-raised btn-danger" ng-click="editGuestPage()">Edit</button>
+	        </div>
+	    </center>
+	</div>
+
+</div>
+
+<!-- Success Guest List Modal -->
+<div class="modal modal-success" id="guestListModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="myModalLabel6">Guest List</h3>
+            </div>
+            <div class="modal-body">
+                <p>Guest List Details Successfully Saved.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

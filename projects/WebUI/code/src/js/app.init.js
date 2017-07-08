@@ -98,7 +98,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/emailVerification/:venueid', {
             templateUrl: 'emailVerification.html',
             controller: 'businessController',
-            title: 'Venuelytics-EmailVerfication',
+            title: 'Venuelytics-EmailVerification',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .when('/confirm/:cityName/:venueid', {
@@ -111,6 +111,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'private-reservation.html',
             controller: 'PrivateReservationController',
             title: 'Venuelytics-ConfirmReservation',
+            description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
+        })
+        .when('/confirmGuestList/:cityName/:venueid', {
+            templateUrl: 'guestConfirmation.html',
+            controller: 'GuestListController',
+            title: 'Venuelytics-GuestListConfirmation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .otherwise('/home');

@@ -12,6 +12,8 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
 
             self.init = function() {
                 VenueService.bottleServiceData = {};
+                VenueService.guestListData = {};
+                VenueService.privateEventData = {};
                 VenueService.totalNoOfGuest = 1;
                 self.serviceTypes = APP_ARRAYS.serviceTabs;
                 self.serviceIcons = APP_ARRAYS.serviceSmallIcons;

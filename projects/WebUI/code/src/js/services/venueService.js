@@ -10,8 +10,11 @@ app.service('VenueService', function() {
   this.selectedVenue = '';
   this.bottleServiceData = { };
   this.privateEventData = { };
+  this.guestListData = { };
+  this.authBase64Str = { };
   this.totalNoOfGuest = '';
   this.bottleZip = '';
+  this.payloadObject = '';
   this.tab = '';
   this.imageMapping={
       "pic_url": "",

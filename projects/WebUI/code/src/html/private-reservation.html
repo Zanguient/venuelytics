@@ -1,24 +1,24 @@
 <div class="container">
-	
-	<center>
-		<h1 class="color-success fontRegular">{{'reservation.CONFIRM_DETAILS' | translate}}</h1>
-	</center>
+  
+  <center>
+    <h1 class="color-success fontRegular">{{'reservation.PRIVATE_EVENT_CONFIRM' | translate}}</h1>
+  </center>
 
-	<div class="form-group">
-		<table class="table table-responsive table-no-border">
+  <div class="form-group">
+    <table class="table table-responsive table-no-border">
                      
                       <tbody>
                         <tr>
                           <td> Requested Date </td>
-                          <td>{{privateEventData.orderDate}}</td>
+                          <td>{{parsedend}}</td>
                         </tr>
                         <tr>
                           <td> Start Time </td>
-                          <td>{{privateEventData.privateStartTime}}</td>
+                          <td>{{time24to12(privateEventData.privateStartTime)}}</td>
                         </tr>
                         <tr>
                           <td> End Time </td>
-                          <td>{{privateEventData.privateEndTime}}</td>
+                          <td>{{time24to12(privateEventData.privateEndTime)}}</td>
                         </tr>
                         <tr>
                           <td> First Name </td>
@@ -54,12 +54,29 @@
                         </tr>
                       </tbody>
                     </table>
-	    <center>
-	        <div >
-	            <button type="submit" class="btn btn-raised btn-primary">Confirm</button>
-	            <button type="button" class="btn btn-raised btn-danger" ng-click="editPrivatePage()">Edit</button>
-	        </div>
-	    </center>
-	</div>
+      <center>
+          <div >
+              <button type="submit" class="btn btn-raised btn-primary" ng-click="privateEventSave()">Confirm</button>
+              <button type="button" class="btn btn-raised btn-danger" ng-click="editPrivatePage()">Edit</button>
+          </div>
+      </center>
+  </div>
+</div>
 
+<!-- Success Private Event Modal -->
+<div class="modal modal-success" id="privateEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="myModalLabel6">Private Event</h3>
+            </div>
+            <div class="modal-body">
+                <p>Private Event Details Successfully Saved.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

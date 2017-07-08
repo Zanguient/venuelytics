@@ -10,13 +10,14 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
     		
             var self = $scope;
 
-            self.test = {};
+            self.guest = {};
             self.private = {};
             self.selectionTableItems = [];
             self.init = function() {
                 self.bottle = VenueService.bottleServiceData;
+                self.guest = VenueService.guestListData;
+                self.private = VenueService.privateEventData;
                 self.totalGuest = VenueService.totalNoOfGuest | 1;
-                $log.info("Total no of guest-->"+self.totalGuest);
                 self.venueid = $routeParams.venueid;
                 self.reservationTime = APP_ARRAYS.time;
                 self.eventTypes = APP_ARRAYS.eventyType;
@@ -350,27 +351,27 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 self.guestServiceTab = true;
              };
 
-             self.glistSave = function(test) {
+             self.glistSave = function(guest) {
                 VenueService.tab = 'G';
-                var name = test.guestFirstName + " " + test.guestLastName;
-                var authBase64Str = window.btoa(name + ':' + test.guestEmailId + ':' + test.guestMobileNumber);
+                var name = guest.guestFirstName + " " + guest.guestLastName;
+                var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
+
                 var object = {
                      "venueNumber" : VenueService.venueNumber,
-                     "email" : test.guestEmailId,
-                     "phone" : test.guestMobileNumber,
-                     "zip" : test.guestZip,
-                     "eventDay" : test.guestStartDate,
+                     "email" : guest.guestEmailId,
+                     "phone" : guest.guestMobileNumber,
+                     "zip" : guest.guestZip,
+                     "eventDay" : guest.guestStartDate,
                      "totalCount" : self.totalGuest,
-                     "maleCount" : test.guestMen,
-                     "femaleCount" : test.guestWomen,
+                     "maleCount" : guest.guestMen,
+                     "femaleCount" : guest.guestWomen,
                      "visitorName" : name
                 }
-                AjaxService.createGuestList(VenueService.venueNumber, object, authBase64Str).then(function(response) {
-                    //$log.info("GuestList response: "+angular.toJson(response));
-                    self.test={};
-                    self.totalGuest = 1;
-                    $('#guestListModal').modal('show');
-                });
+                VenueService.guestListData = self.guest;
+                VenueService.totalNoOfGuest = self.totalGuest;
+                VenueService.authBase64Str = authBase64Str;
+                VenueService.payloadObject = object;
+                $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
              }
 
             self.confirmBottleService = function() {
@@ -442,13 +443,13 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
              };
 
-             self.createPrivateEvent = function() {
+             self.createPrivateEvent = function(value) {
                 VenueService.tab = 'P';
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
-                var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
-                $log.info("Full name->", fullName);
+                var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
                 VenueService.privateEventData = self.private;
-                $log.info("Private Event service data-->"+angular.toJson(VenueService.privateEventData));
+                VenueService.authBase64Str = authBase64Str;
+                VenueService.totalNoOfGuest = self.totalGuest;
 
                 self.serviceJSON = {
                     "serviceType": 'BanquetHall',
@@ -456,7 +457,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "reason": self.occasion,
                     "contactNumber": self.private.privateMobileNumber,
                     "contactEmail": self.private.privateEmail,
-                    "contactZipcode": self.zipcode,
+                    "contactZipcode": null,
                     "noOfGuests": self.totalGuest,
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
@@ -464,7 +465,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "hostEmployeeId": -1,
                     "hasBid": "N",
                     "bidStatus": null,
-                    "serviceInstructions": self.instructions,
+                    "serviceInstructions": self.private.privateComment,
                     "status": "REQUEST",
                     "serviceDetail": null,
                     "fulfillmentDate": self.private.orderDate,
@@ -485,13 +486,20 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "visitorName": fullName
                 };
 
-                $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
-                /*AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
-                    $log.info("Bottle response: "+angular.toJson(response));
-                    $('#privateEventModal').modal('show');
-                });*/
+                var items = {
+                            "venueNumber": self.venueid,
+                            "productId": value.id,
+                            "productType": value.productType,
+                            "quantity": value.size,
+                            "comments": value.comments,
+                            "name": value.name
+                        }
 
+                self.serviceJSON.order.orderItems.push(items);
+                VenueService.payloadObject = self.serviceJSON;
+                $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
              };
+
 
             self.init();
     		
