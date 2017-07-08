@@ -3,19 +3,12 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS) {
+app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
     		$log.log('Inside Venue Details Controller.');
     		
-            $scope.startDate = moment().format('YYYY-MM-DD');
-            $scope.dateOptions = {
-                minDate: new Date(),
-                singleDatePicker: true
-            };
-
-
-    		var self = $scope;
+            var self = $scope;
 
             self.test = {};
             self.private = {};
@@ -55,7 +48,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     } else {
                         self.row = 1;
                     }
-                    self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType +'&i=y';
+                    /*self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType +'&i=y';
                     // $log.info("Reservation URL: "+self.resevationURL);
                     iFrameResize({
                             log                     : false,                  // Enable console logging
@@ -72,7 +65,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                             $(this).show();
                         });
                             
-                    });
+                    });*/
 
                 });
             };
@@ -165,20 +158,20 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 if (!breakBoolean) {
                     if (key.id == key1.productId) {
                         if(self.realTimeStatus == true) {
-                            key.fillColor = "FF0000";
-                            key.strokeColor = "C60000";
+                            key.fillColor = APP_COLORS.red;
+                            key.strokeColor = APP_COLORS.guardsmanRed;
                             breakBoolean = true;
                         } else {
-                            key.fillColor = "08FF00";
-                            key.strokeColor = "06B500";
+                            key.fillColor = APP_COLORS.lightGreen;
+                            key.strokeColor = APP_COLORS.darkGreen;
                         }
                     }
                     venueImageMapData.push(key);
                 }
             });
             if (!breakBoolean) {
-                key.fillColor = "08FF00";
-                key.strokeColor = "06B500";
+                key.fillColor = APP_COLORS.lightGreen;
+                key.strokeColor = APP_COLORS.darkGreen;
             }
         });
         $('img[usemap]').jMap();
@@ -203,7 +196,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
     self.selectTable = function(id, index, dataValueObj) {
         self.tablePopup = false;
         var data = $('#' + id).mouseout().data('maphilight') || {};
-        if (data.fillColor === "08FF00") {
+        if (data.fillColor === APP_COLORS.lightGreen) {
             $('#tableView').modal('show');
             angular.forEach(self.minimumBottleRequirement, function(value, key) {
                      if(value.onObjectId == dataValueObj.id) {
@@ -211,12 +204,10 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                      }
             });    
         }
-        if (data.fillColor === "FF0000") {
+        if (data.fillColor === APP_COLORS.red) {
             $('#reservedView').modal('show');
         }
-        else if (data.fillColor === "FFFF00") {
-            //data.fillColor = "08FF00";
-            //data.strokeColor = "06B500";
+        else if (data.fillColor === APP_COLORS.darkYellow) {
              angular.forEach(self.minimumBottleRequirement, function(value, key) {
                      if(value.onObjectId == dataValueObj.id) {
                            self.dataValue = self.dataValue - value.value;
@@ -239,8 +230,8 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              }
              return;
          } else {
-            data.fillColor = "FFFF00";
-            data.strokeColor = "E3E300";
+            data.fillColor = APP_COLORS.darkYellow;
+            data.strokeColor = APP_COLORS.turbo;
          
         }
         $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
@@ -252,12 +243,12 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             if(arrayObj.name == value.name) {
                var id = value.id;
                var data = $('#' + id).mouseout().data('maphilight') || {};
-               if (data.fillColor === "FFFF00") {
-                   data.fillColor = "08FF00";
-                   data.strokeColor = "06B500";
+               if (data.fillColor === APP_COLORS.darkYellow) {
+                   data.fillColor = APP_COLORS.lightGreen;
+                   data.strokeColor = APP_COLORS.darkGreen;
                } else {
-                    data.fillColor = "FFFF00";
-                    data.strokeColor = "E3E300";
+                    data.fillColor = APP_COLORS.darkYellow;
+                    data.strokeColor = APP_COLORS.turbo;
                }
                $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
             }
@@ -322,11 +313,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
              self.bottleService = function(service) {
                 // self.totalGuest = 1;
-                $("#privateEventTab").css('background-color','#cccccc');
-                $('#private').css('color', '#4caf50');
-                $("#guestlistTab").css('background-color','#cccccc');
-                $('#glist').css('color', '#4caf50');
-                $("#bottleTab").css('background-color','#4caf50');
+                $("#privateEventTab").css('background-color', APP_COLORS.silver);
+                $('#private').css('color', APP_COLORS.fruitSalad);
+                $("#guestlistTab").css('background-color', APP_COLORS.silver);
+                $('#glist').css('color', APP_COLORS.fruitSalad);
+                $("#bottleTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#bottle').css('color', 'white');
                 self.bottleServiceTab = true;
                 self.eventServiceTab = false;
@@ -335,12 +326,12 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
              self.event = function(service) {
                 // self.totalGuest = 1;
-                $("#privateEventTab").css('background-color','#4caf50');
+                $("#privateEventTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#private').css('color', 'white');
-                $("#guestlistTab").css('background-color','#cccccc');
-                $('#glist').css('color', '#4caf50');
-                $("#bottleTab").css('background-color','#cccccc');
-                $('#bottle').css('color', '#4caf50');
+                $("#guestlistTab").css('background-color',APP_COLORS.silver);
+                $('#glist').css('color', APP_COLORS.fruitSalad);
+                $("#bottleTab").css('background-color',APP_COLORS.silver);
+                $('#bottle').css('color', APP_COLORS.fruitSalad);
                 self.bottleServiceTab = false;
                 self.eventServiceTab = true;
                 self.guestServiceTab = false;
@@ -348,12 +339,12 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
              self.glist = function(service) {
                 // self.totalGuest = 1;
-                $("#privateEventTab").css('background-color','#cccccc');
-                $('#private').css('color', '#4caf50');
-                $("#guestlistTab").css('background-color','#4caf50');
+                $("#privateEventTab").css('background-color',APP_COLORS.silver);
+                $('#private').css('color', APP_COLORS.fruitSalad);
+                $("#guestlistTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#glist').css('color', 'white');
-                $("#bottleTab").css('background-color','#cccccc');
-                $('#bottle').css('color', '#4caf50');
+                $("#bottleTab").css('background-color',APP_COLORS.silver);
+                $('#bottle').css('color', APP_COLORS.fruitSalad);
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
                 self.guestServiceTab = true;

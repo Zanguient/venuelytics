@@ -116,5 +116,31 @@ app
     "eventyType": [{"type":"Corporate Event"}, {"type":"Birthday Party"}, {"type":"Wedding"}, {"type":"Bachelorette Party"},
                    {"type":"Batchelor Party"}, {"type":"Reception"}, {"type":"Product Launch"}, {"type":"Private Party"},
                    {"type":"Charity Event"}, {"type":"ALL"}]
+  })
 
+.constant('APP_COLORS', {
+    'primary':                '#5d9cec',
+    'success':                '#27c24c',
+    'info':                   '#23b7e5',
+    'warning':                '#ff902b',
+    'danger':                 '#f05050',
+    'inverse':                '#131e26',
+    'green':                  '#37bc9b',
+    'pink':                   '#f532e5',
+    'purple':                 '#7266ba',
+    'dark':                   '#3a3f51',
+    'yellow':                 '#fad732',
+    'gray-darker':            '#232735',
+    'gray-dark':              '#3a3f51',
+    'gray':                   '#dde6e9',
+    'gray-light':             '#e4eaec',
+    'gray-lighter':           '#edf1f2',
+    'silver':                 '#cccccc',
+    'fruitSalad':             '#4caf50',
+    'darkYellow':            'FFFF00',
+    'darkGreen':             '06B500',
+    'red':                    'FF0000',
+    'guardsmanRed':           'C60000',
+    'lightGreen':            '08FF00',
+    'turbo':                  '#E3E300'
   });

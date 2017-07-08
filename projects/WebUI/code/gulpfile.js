@@ -41,6 +41,7 @@ var paths = {
     jsConcat: path.join(config.folders.dist, config.folders.assets, 'js'),
     fonts: path.join(config.folders.dist, config.folders.assets, 'fonts'),
     media: path.join(config.folders.dist, config.folders.assets, 'media'),
+    seo: path.join(config.folders.dist),
     css: path.join(config.folders.dist, config.folders.assets, 'css'),
     img: path.join(config.folders.dist, config.folders.assets, 'img'),
     plugins: path.join(config.folders.dist, config.folders.assets, config.folders.plugins),
@@ -315,6 +316,12 @@ gulp.task('media', function() {
         .pipe(connect.reload());
 });
 
+gulp.task('seo', function() {
+    return gulp.src('src/seo/**/*')
+        .pipe(gulp.dest(paths.seo))
+        .pipe(connect.reload());
+});
+
 gulp.task('clean', function() {
     return del.sync([
         paths.dist,
@@ -330,6 +337,7 @@ gulp.task('watch', function() {
     gulp.watch(['src/img/**/*'], ['img']);
     gulp.watch(['src/fonts/**/*'], ['fonts']);
     gulp.watch(['src/media/**/*'], ['media']);
+    gulp.watch(['src/seo/**/*']);
 });
 
 gulp.task('connect', function() {
@@ -348,7 +356,7 @@ gulp.task('default', function() {
 });
 
 gulp.task('dist:pre', function(cb) {
-   return runSequence('themes', ['plugins', 'html:dist', 'i18n','scss', 'img', 'fonts', 'media', 'revolution'], 'js',cb);
+   return runSequence('themes', ['plugins', 'html:dist', 'i18n','scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js',cb);
 });
 
 gulp.task('dist',['dist:pre'], function(cb) {
@@ -361,7 +369,7 @@ gulp.task('dev', function(cb) {
     config.environment = 'dev';
     config.compress = false;
     return runSequence(
-        'clean', ['plugins', 'html',  'i18n', 'scss', 'img', 'fonts', 'media', 'revolution'], 'js', 'dist', cb
+        'clean', ['plugins', 'html',  'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js', 'dist', cb
     );
 });
 

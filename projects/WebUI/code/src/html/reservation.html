@@ -27,7 +27,7 @@
 					class="btn btn-success btn-responsive"
 					ng-click="bottleService('Bottle')"
 					style="white-space: normal; height: 80px;">
-					<i class="fa fa-glass fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;<span
+					<img ng-src="assets/img/ic_bottle.png" style="width: 28px; height: 28px;"></img> &nbsp;&nbsp;<span
 						class="fontRegular fontXLarge">{{"reservation.BOTTLE" | translate}}</span>
 				</button>
 			</div>
@@ -47,7 +47,7 @@
 					class="btn btn-success btn-responsive"
 					ng-click="glist('Guest List')"
 					style="white-space: normal; height: 80px;">
-					<i class= "fa fa-wpforms fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span
+					<img ng-src="assets/img/guest.png" style="width: 28px; height: 28px;"></img>&nbsp;&nbsp;&nbsp;&nbsp;<span
 						class="fontRegular fontXLarge">{{"reservation.GUEST" | translate}}</span>
 				</button>
 			</div>
@@ -60,7 +60,7 @@
 <form class="form-horizontal" parsley-validate validate-form="">
 	<fieldset>
 		<div class="col-md-10 form-group is-empty">
-            <input date-range-picker="" class="form-control date-picker" type="text" options="dateOptions" ng-model="startDate" required="">
+            <input class="form-control date-picker" type="text" required="">
         </div>
         <div class="col-md-10 form-group is-empty" ng-if="tableSelection">
             Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
