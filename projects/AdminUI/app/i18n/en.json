@@ -8,6 +8,9 @@
   "WEEKLY" :"Weekly",
   "MONTHLY" :"Monthly",
   "YEARLY" : "Yearly",
+  "WEB_USER" :"Web",
+  "BY_PHONE": "Phone",
+  "APP_USER":"App",
   "login" : {
   		"LOGIN" :  "Login",
   		"FAILED" : "Login Failed",

@@ -1,6 +1,6 @@
 
-App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','RestServiceFactory',
-                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory){
+App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','RestServiceFactory','$translate',
+                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate){
 	'use strict';
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.selectedPeriod = 'WEEKLY';
@@ -27,7 +27,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                 toaster.pop('error', "Server Error", error.data.developerMessage);
             }
         });
-    
+        $scope.bookingRequestChart();
         
 		$scope.reload();
 	};
@@ -37,6 +37,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[2].value = addForType($scope.venueBookings, $scope.selectedPeriod);
         $scope.top3Stats[3].value = addForType($scope.venueCheckin, $scope.selectedPeriod);
         $scope.top3Stats[3].value += addForType($scope.visitorCheckin, $scope.selectedPeriod);
+        $scope.bookingRequestChart();
     };
 
     $scope.processAnalytics = function(data) {
@@ -157,7 +158,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
    * @param  Chart element placeholder or selector
    * @param  Url to get the data via post. Response in JSON format
    */
-  $window.FlotChart = function (element, url) {
+  $window.FlotChart = function (element, url, processData) {
     // Properties
     this.element = $(element);
     this.url = url;
@@ -171,13 +172,15 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
       method = (method && typeof method === 'string') ? method : 'GET';
 
       self.option = option; // save options
-
+      self.processData = processData;
       $http({
           url:      self.url,
           cache:    false,
           method:   method
       }).success(function (data) {
-          
+          if (typeof self.processData !== 'undefined') {
+            data = self.processData(data);
+          }
           $.plot( self.element, data, option );
           
           if(callback) callback();
@@ -257,12 +260,16 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
 
     })();
     // Bar Stacked chart
-    (function () {
-        var Selector = '.chart-bar-stacked';
-        $(Selector).each(function() {
-            var source = $(this).data('source') || $.error('Bar Stacked: No source defined.');
-            var chart = new FlotChart(this, source),
-                option = {
+    $scope.bookingRequestChart = function() {
+           
+        var temp = $scope.selectedPeriod.toLowerCase();
+        var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
+        var sourceUrl = RestServiceFactory.getAnalyticsUrl(contextService.userVenues.selectedVenueNumber, 
+                            'ServiceTypeByModeBy2', aggPeriodType, 'scodes=BPK');
+        var Selector = '#bookingRequestChart';
+        $(Selector).each(function () {
+            var chart = new FlotChart(this, sourceUrl, formatStackData);
+            var option = {
                     series: {
                         stack: true,
                         bars: {
@@ -296,7 +303,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             // Send Request
             chart.requestData(option);
         });
-    })();
+    };
     // Spline chart
     (function () {
         var Selector = '.chart-spline';
@@ -500,6 +507,29 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.donutInit();
   });
 	
-	  
-	  $scope.init();
+   function formatStackData(data) {
+    var retData = [];
+    var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
+    var colorIndex = 0;
+    for (var index in data[0].series) {
+        var d = data[0].series[index];
+        var elem = {};
+        elem.label = $translate.instant(d.subName);
+        elem.color = colors[colorIndex % colors.length];
+        colorIndex++;
+
+        elem.data = d.data;
+        /*for (var i =0; i < d.data.length; i++){
+            var from = d.data[i][0].split("-");
+            var f = new Date(from[0], from[1] - 1, from[2]);
+            var dataElem = [f.getTime(), d.data[i][1]];
+            elem.data.push(dataElem);
+
+        }*/
+        retData.push(elem);
+    }
+    return retData;
+   }
+
+   $scope.init();
 }]);
