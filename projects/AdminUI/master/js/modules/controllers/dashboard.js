@@ -158,13 +158,13 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
    * @param  Chart element placeholder or selector
    * @param  Url to get the data via post. Response in JSON format
    */
-  $window.FlotChart = function (element, url, processData) {
+  $window.FlotChart = function (element, url) {
     // Properties
     this.element = $(element);
     this.url = url;
 
     // Public method
-    this.requestData = function (option, method, callback) {
+    this.requestData = function (option, method, callback, processData) {
       var self = this;
       
       // support params (option), (option, method, callback) or (option, callback)
@@ -178,7 +178,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
           cache:    false,
           method:   method
       }).success(function (data) {
-          if (typeof self.processData !== 'undefined') {
+          if ( self.processData !== null && typeof self.processData !== 'undefined') {
             data = self.processData(data);
           }
           $.plot( self.element, data, option );
@@ -259,6 +259,34 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         });
 
     })();
+
+    function formatStackData(data) {
+    var retData = [];
+    var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
+    var colorIndex = 0;
+    for (var index in data[0].series) {
+        var d = data[0].series[index];
+        var elem = {};
+        elem.label = $translate.instant(d.subName);
+        elem.color = colors[colorIndex % colors.length];
+        colorIndex++;
+
+        if ($scope.selectedPeriod !== 'DAILY') {
+            elem.data = d.data;
+        }
+        else {
+            elem.data = [];
+            for (var i =0; i < d.data.length; i++){
+                var from = d.data[i][0].split("-");
+                var f = new Date(from[0], from[1] - 1, from[2]);
+                var dataElem = [f.getTime(), d.data[i][1]];
+                elem.data.push(dataElem);
+            }
+        }
+        retData.push(elem);
+    }
+    return retData;
+   }
     // Bar Stacked chart
     $scope.bookingRequestChart = function() {
            
@@ -268,7 +296,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                             'ServiceTypeByModeBy2', aggPeriodType, 'scodes=BPK');
         var Selector = '#bookingRequestChart';
         $(Selector).each(function () {
-            var chart = new FlotChart(this, sourceUrl, formatStackData);
+            var chart = new FlotChart(this, sourceUrl);
             var option = {
                     series: {
                         stack: true,
@@ -299,9 +327,14 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                         tickColor: '#eee'
                     },
                     shadowSize: 0
-                };
+            };
+            
+            if ($scope.selectedPeriod === 'DAILY') {
+                option.xaxis.mode = 'time';
+                option.series.bars.lineWidth = 1;
+            }
             // Send Request
-            chart.requestData(option);
+            chart.requestData(option, 'GET', null, formatStackData);
         });
     };
     // Spline chart
@@ -506,30 +539,6 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     };
     $scope.donutInit();
   });
-	
-   function formatStackData(data) {
-    var retData = [];
-    var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
-    var colorIndex = 0;
-    for (var index in data[0].series) {
-        var d = data[0].series[index];
-        var elem = {};
-        elem.label = $translate.instant(d.subName);
-        elem.color = colors[colorIndex % colors.length];
-        colorIndex++;
-
-        elem.data = d.data;
-        /*for (var i =0; i < d.data.length; i++){
-            var from = d.data[i][0].split("-");
-            var f = new Date(from[0], from[1] - 1, from[2]);
-            var dataElem = [f.getTime(), d.data[i][1]];
-            elem.data.push(dataElem);
-
-        }*/
-        retData.push(elem);
-    }
-    return retData;
-   }
 
    $scope.init();
 }]);
