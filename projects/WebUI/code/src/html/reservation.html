@@ -1,5 +1,5 @@
-<div ng-controller="VenueDetailsController">
-<div id="carousel-example-generic" class="ms-carousel carousel slide" data-ride="carousel" ng-controller="VenueDetailsController">
+<div>
+<div id="carousel-example-generic" class="ms-carousel carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -9,9 +9,9 @@
     <div class="carousel-inner carousel-inner-class" role="listbox">
         <div class="item active">
             <img ng-src={{venueImage}} alt="..." class="carouselImage">
-            <div class="reservationCarousel backColor" style="top: 480px;">
-                <p style="margin-left: 30px;">Reservations / <b><font size="4">{{venueName}}</font></b></p>
-                <p style="margin-left: 30px;"><b><font size="4">Hours: 11:30 AM - 11:00 AM</font></b></p>
+            <div class="reservationCarousel backColor">
+                <p class="reservation-carousel fontBold">Reservations / <b><font size="4">{{venueName}}</font></b></p>
+                <p class="reservation-carousel fontBold"><b><font size="4">Hours: 11:30 AM - 11:00 AM</font></b></p>
                 <ng-include src="'home-apps-image.html'" scope="" onload=""></ng-include>
             </div>
         </div>
@@ -21,34 +21,31 @@
 <div id="rowOne">
 	<center>
 		<div id="serviceTabs" class="btn-group btn-group-justified"
-			style="border: 1px solid #fff;">
-			<div id="bottleTab" class="btn-group" style="border: 1px solid #fff;">
+			class="reservation-tab">
+			<div id="bottleTab" class="btn-group" class="reservation-tab">
 				<button id="bottle" type="button"
-					class="btn btn-success btn-responsive"
-					ng-click="bottleService('Bottle')"
-					style="white-space: normal; height: 80px;">
-					<img ng-src="assets/img/ic_bottle.png" style="width: 28px; height: 28px;"></img> &nbsp;&nbsp;<span
-						class="fontRegular fontXLarge">{{"reservation.BOTTLE" | translate}}</span>
+					class="btn btn-success btn-responsive reservation-button"
+					ng-click="bottleService('Bottle')" ng-init="bottleService('Bottle')">
+					<img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img> &nbsp;&nbsp;<span
+						class="fontRegular">{{"reservation.BOTTLE" | translate}}</span>
 				</button>
 			</div>
 			<div id="privateEventTab" class="btn-group"
-				style="border: 1px solid #fff;">
+				class="reservation-tab">
 				<button id="private" type="button"
-					class="btn btn-success btn-responsive"
-					ng-click="event('Private Event')"
-					style="white-space: normal; height: 80px;">
-					<img ng-src="assets/img/private.png" style="width: 28px; height: 28px;"></img>&nbsp;&nbsp;<span
-						class="fontRegular fontXLarge">{{"reservation.EVENTS" | translate}}</span>
+					class="btn btn-success btn-responsive reservation-button"
+					ng-click="event('Private Event')">
+					<img ng-src="assets/img/private.png" class="reservation-icon"></img>&nbsp;&nbsp;<span
+						class="fontRegular">{{"reservation.EVENTS" | translate}}</span>
 				</button>
 			</div>
 			<div id="guestlistTab" class="btn-group"
-				style="border: 1px solid #fff;">
+				class="reservation-tab">
 				<button id="glist" type="button"
-					class="btn btn-success btn-responsive"
-					ng-click="glist('Guest List')"
-					style="white-space: normal; height: 80px;">
-					<img ng-src="assets/img/guest.png" style="width: 28px; height: 28px;"></img>&nbsp;&nbsp;&nbsp;&nbsp;<span
-						class="fontRegular fontXLarge">{{"reservation.GUEST" | translate}}</span>
+					class="btn btn-success btn-responsive reservation-button"
+					ng-click="glist('Guest List')">
+					<img ng-src="assets/img/guest.png" class="reservation-icon"></img>&nbsp;&nbsp;&nbsp;&nbsp;<span
+						class="fontRegular">{{"reservation.GUEST" | translate}}</span>
 				</button>
 			</div>
 		</div>
@@ -66,7 +63,7 @@
             Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
         </div>
         <div class="col-md-10 form-group is-empty">
-         <div style="text-align: center; margin-top: 0px;"
+         <div class="table-map-info" 
                     ng-if="img.pic_url">
                     <div id="mapSection">
                     <center>
@@ -121,7 +118,7 @@
                             </span></label>
                         </div>
                         <div class="col-md-3 col-sm-4">
-                            <img style="width: auto;" class="img-responsive"
+                            <img class="table-carousel" class="img-responsive"
                                 data-ng-src="{{table.imageUrls[0].smallUrl}}">
                         </div>
                         <div class="col-md-6 col-sm-12">
@@ -134,7 +131,7 @@
 
                 <div class="col-md-10 form-group is-empty">
                     <div ng-if="tableSelection">
-                        <h3 style="margin-top: 0px;">
+                        <h3 class="selected-table">
                             <font size="4">Selected Table(s)</font>
                         </h3>
                     </div>              
@@ -142,13 +139,13 @@
                         <center>
                         <table>
                             <tr>
-                                <td><label style="color: #fff">#{{$index+1}}</label></td>
-                                <td><label style="color: #fff">:&nbsp;&nbsp;{{table.name}}</label>
+                                <td><label class="table-map-color">#{{$index+1}}</label></td>
+                                <td><label class="table-map-color">:&nbsp;&nbsp;{{table.name}}</label>
                                 </td>
                                 <td><label ng-hide="table.size <= 0"
-                                    style="margin-left: 15px; color: #fff">Capacity</label>
+                                    class="table-capacity">Capacity</label>
                                 </td>
-                                <td><label ng-hide="table.size <= 0" style="color: #fff">:&nbsp;&nbsp;{{table.size}}</label>
+                                <td><label ng-hide="table.size <= 0" class="table-map-color">:&nbsp;&nbsp;{{table.size}}</label>
                                 </td>
                             </tr>
                         </table>
@@ -156,11 +153,11 @@
                         <uib-carousel interval="-1" active="active" no-wrap="false">
                         <uib-slide
                             data-ng-repeat="slide in table.imageUrls track by slide.id"
-                            index="$index"> <img style="width: auto;"
-                            class="img-responsive center-block" data-ng-src="{{slide.originalUrl}}"
+                            index="$index"> <img
+                            class="img-responsive center-block table-carousel" data-ng-src="{{slide.originalUrl}}"
                             ng-click="imageView(slide.originalUrl)"> </uib-slide> </uib-carousel>
                         <br> <label ng-hide="table.description == null">Description</label> <br> <label
-                            style="margin-left: 15px; color: #fff"
+                            class="table-capacity"
                             ng-hide="table.description == null">{{table.description}}</label>
                         <button type="button" class="btn btn-danger btn-raised pull-right"
                             ng-click="removeSelectedTables($index,table,tableSelection) ">Remove</button>
@@ -206,22 +203,71 @@
 	        </div>
         </div>
 
-        <div class="col-md-10 form-group is-empty">
+        <!-- <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="occasion" ng-model="bottle.bottleOccasion" placeholder="{{'reservation.OCCASION' | translate}}">
+        </div> -->
+        <div class="col-md-10 form-group is-empty">
+            <select class="btn  dropdown-toggle form-control fontRegular" required=""
+                ng-model="bottle.bottleOccasion" ng-options="t.type for t in eventTypes">
+                <option value="">{{"reservation.OCCASION"  | translate}}</option>
+            </select>
         </div>
         <!-- <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control" id="zipcode" placeholder="{{'reservation.HOST' | translate}}">
         </div> -->
+        <div class="col-md-10">
+            <table class="table" style="border: 1px solid #000;">
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div>{{"reservation.BOTTLE" | translate}}</div>
+                                    <div>
+                                        <select ng-change="brandMethod(bottleName)" class="form-control col-xs-3" ng-options="x.name as x.name for x in allBottle" ng-model="bottleName"></select>
+                                    </div>
+                             </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div>{{"reservation.BRAND" | translate}}</div>
+                                    <div>
+                                        <select class="form-control" ng-options="x.brand as x.brand for x in brandData" ng-model="brandName"></select>
+                                    </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div>{{"reservation.PRICE" | translate}}</div>
+                                    <div>
+                                        <input type="text" placeholder="Price" class="form-control" ng-model="price">
+                                    </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div>{{"reservation.QUANTITY" | translate}}</div>
+                                    <div>
+                                        <table>
+                                        <tr>
+                                            <td><a class="btn btn-default btn-sm btn-responsive" ng-click="minusValue()"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                            </a></td>
+                                            <td><input type="text" placeholder="Quantity" class="form-control" ng-model="count"></td>
+                                            <td><a class="btn btn-default btn-sm btn-responsive" ng-click="addValue()" > <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </a></td>
+                                        </tr>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><a class="btn btn-success btn-lg btn-responsive" ng-click="selectValue()" ng-disabled="bottleName == undefined || bottleName == ''"><span>{{"reservation.ADD" | translate}}</span></a></td>
+                </tr>
+            </table>
+        </div>
      	<div class="col-md-10">
             <div class="checkbox">
-                <label class="check-box fontRegular" style="font-size: 15px;">
+                <label class="check-box fontRegular table-font">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AUTHORIZE" | translate}}
                 </label>                            
             </div>
         </div>
         <div class="col-md-10">
             <div class="checkbox">
-                <label class="check-box fontRegular" style="font-size: 15px;">
+                <label class="check-box fontRegular table-font">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AGREE" | translate}}
                 </label>                            
             </div>
@@ -230,11 +276,11 @@
 	</fieldset>
 </form> <br/>
 
-<div class="col-md-7" style="border: 1px solid;">
-	<p class="fontRegular" style="font-size: 15px;"><font color="#4caf50">{{"reservation.MIN_REQ" | translate}}</font></p>
-	<p class="fontRegular" style="font-size: 15px;">{{"reservation.MIN_REQ_DESC" | translate}}</p>
-	<p class="fontRegular" style="font-size: 15px;"><font color="#4caf50">{{"reservation.DRESS_CODE" | translate}}</font></p>
-	<p class="fontRegular" style="font-size: 15px;">{{"reservation.DRESS_CODE_DESC" | translate}}</p>
+<div class="col-md-7 req-border">
+	<p class="fontRegular table-font"><font color="#4caf50">{{"reservation.MIN_REQ" | translate}}</font></p>
+	<p class="fontRegular table-font">{{"reservation.MIN_REQ_DESC" | translate}}</p>
+	<p class="fontRegular table-font"><font color="#4caf50">{{"reservation.DRESS_CODE" | translate}}</font></p>
+	<p class="fontRegular table-font">{{"reservation.DRESS_CODE_DESC" | translate}}</p>
 </div> <br/>
 
 <div class="col-md-12">

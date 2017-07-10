@@ -142,5 +142,5 @@ app
     'red':                    'FF0000',
     'guardsmanRed':           'C60000',
     'lightGreen':            '08FF00',
-    'turbo':                  '#E3E300'
+    'turbo':                  'E3E300'
   });

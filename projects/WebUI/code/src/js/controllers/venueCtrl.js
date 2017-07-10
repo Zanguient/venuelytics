@@ -3,8 +3,8 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS) {
+app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, $translate) {
 
     		$log.log('Inside Venue Controller.');
 
@@ -52,7 +52,7 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
             };
 
             self.setTab = function(type){
-                self.selectedVenueType = type;
+                self.selectedVenueType = $translate.instant(type);
                 //VenueService.selectedCity = self.selectedCityName;
                 AjaxService.getVenues(null,self.selectedCityName, type, VenueService.latitude, VenueService.longitude).then(function(response) {
                     self.listOfVenuesByCity = response.venues;

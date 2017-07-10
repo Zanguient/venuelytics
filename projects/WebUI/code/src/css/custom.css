@@ -36,6 +36,62 @@ select {
   -moz-appearance: none;
 }
 
+.reservation-carousel {
+  margin-left: 30px;
+}
+
+.reservation-icon {
+  width: 28px; 
+  height: 28px;
+}
+
+.reservation-tab {
+  border: 1px solid #fff;
+}
+
+.req-border {
+  border: 1px solid;
+}
+
+.reservation-button {
+  white-space: normal; 
+  height: 80px;
+}
+
+.table-map-info {
+  text-align: center; 
+  margin-top: 0px;
+}
+
+.table-map-area {
+  outline: red solid 2px;
+}
+
+.selected-table {
+  margin-top: 0px;
+}
+
+.table-map-color {
+  color: #fff;
+}
+
+.table-capacity {
+  margin-left: 15px; 
+  color: #fff;
+}
+
+.table-carousel {
+  width: auto;
+}
+
+.table-color {
+  background-color: #FFFF00;
+}
+
+.table-font {
+  font-size: 15px;
+}
+
 .image-block {
   border: 3px solid white;
   background-color: black;
@@ -1213,6 +1269,7 @@ select {
   left: 0;
   right: 0;
   transition: all ease 0.5s;
+  top: 480px;
 }
 
 .reservationCarousel {

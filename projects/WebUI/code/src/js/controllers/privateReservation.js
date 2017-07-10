@@ -14,7 +14,7 @@ app.controller('PrivateReservationController', ['$log', '$scope', '$http', '$loc
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
                 self.privateEventData = VenueService.privateEventData;
-                self.parsedend = moment(self.privateEventData.orderDate).format("MM-DD-YYYY");
+                self.privateSelectedDate = moment(self.privateEventData.orderDate).format("MM-DD-YYYY");
                 self.guests = VenueService.totalNoOfGuest;
                 self.authBase64Str = VenueService.authBase64Str;
                 self.object = VenueService.payloadObject;
@@ -30,7 +30,7 @@ app.controller('PrivateReservationController', ['$log', '$scope', '$http', '$loc
                     $log.info("response: "+angular.toJson(response));
                     $('#privateEventModal').modal('show');
                 });
-            }
+            };
 
              self.time24to12 = function(timeString) {
                 var H = +timeString.substr(0, 2);
@@ -38,7 +38,7 @@ app.controller('PrivateReservationController', ['$log', '$scope', '$http', '$loc
                 var ampm = H < 12 ? " AM" : " PM";
                 timeString = h + timeString.substr(2, 3) + ampm;
                 return timeString;
-            }
+            };
 
             self.init();
             

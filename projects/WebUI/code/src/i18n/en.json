@@ -425,6 +425,15 @@
 		"FLOOR":"Floor Plan",
 		"CONFIRM_DETAILS":"Confirm your Reservation Details",
 		"GUEST_CONFIRM":"Confirm your Guest List Details",
-		"PRIVATE_EVENT_CONFIRM":"Confirm your Private Event Details"
+		"PRIVATE_EVENT_CONFIRM":"Confirm your Private Event Details",
+		"SELECT_BOTTLE":"Select Bottle",
+		"BOTTLE":"Bottle",
+		"BRAND":"Brand",
+		"QUANTITY":"Quantity",
+		"PRICE":"Price",
+		"ADD":"Add",
+		"TABLE_NAME":"Table Name",
+		"CAPACITY":"Capacity"
+
 	}
 }

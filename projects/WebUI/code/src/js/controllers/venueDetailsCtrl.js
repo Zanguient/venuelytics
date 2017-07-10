@@ -13,6 +13,9 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             self.guest = {};
             self.private = {};
             self.selectionTableItems = [];
+            self.count = 0;
+            self.countValue = 0;
+            self.bottleMinimum = [];
             self.init = function() {
                 $(function() {
                     $( "#inputDate, #privateDate" ).datepicker();
@@ -28,6 +31,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 self.venueImage = VenueService.selectedVenue.imageUrls[0].largeUrl;
                 self.restoreTab = VenueService.tab;
                 self.getBanquetHall(self.venueid);
+                self.getBottleProducts();
                 if(!self.restoreTab) {
                     self.restoreTab = 'B';
                 }
@@ -99,6 +103,54 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         }
                     });
 
+            self.getBottleProducts = function() {
+                AjaxService.getProductOfBottle(VenueService.venueNumber).then(function(response) {
+                    self.allBottle = response.data;
+                });
+            };
+
+            self.removeBottleMinimum = function(index,value,arrayObj) {
+                arrayObj.splice(index, 1);
+                self.countValue = self.countValue - value.price;
+            };
+
+            self.minusValue = function() {
+                if(self.count > 0) {
+                self.count--;
+                }
+            };
+
+            self.addValue = function() {
+                self.count++;
+            };
+
+            self.brandMethod = function(value) {
+                angular.forEach(self.allBottle, function(value1, key1) {
+                if(value1.name == value) {
+                    self.brandData = [];
+                    self.price = value1.price;
+                    self.brandName = value1.category;
+                    self.brandData.push(value1);
+                    }
+                });
+            };
+
+            self.selectValue = function() {
+                self.totalValue = self.price * self.count;
+                var valueData = {
+                    "price" : self.totalValue,
+                    "bottle" : self.bottleName,
+                    "brand" : self.brandName,
+                    "quantity": self.count
+                }
+                self.bottleMinimum.push(valueData);
+                self.countValue = self.countValue + self.totalValue;
+                self.bottleName = "";
+                self.brandName = "";
+                self.count = 1;
+                self.price = "";
+            };
+
             self.paintVenueTableMap = function() {
 
                 self.bottleStartDate = self.startDate;
@@ -153,7 +205,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     self.reservations = response.data;
                     self.setReservationColor();
                 });
-            }
+            };
 
         self.setReservationColor = function() {
             var venueImageMapData = [];
@@ -162,7 +214,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             angular.forEach(self.reservations, function(key1, value1) {
                 if (!breakBoolean) {
                     if (key.id == key1.productId) {
-                        if(self.realTimeStatus == true) {
                             key.fillColor = APP_COLORS.red;
                             key.strokeColor = APP_COLORS.guardsmanRed;
                             breakBoolean = true;
@@ -170,7 +221,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                             key.fillColor = APP_COLORS.lightGreen;
                             key.strokeColor = APP_COLORS.darkGreen;
                         }
-                    }
                     venueImageMapData.push(key);
                 }
             });
@@ -196,52 +246,15 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 $('#imagemap').css('width', divWidth +'px');
             }
         }, delay);
-    }
+    };
 
     self.selectTable = function(id, index, dataValueObj) {
-        self.tablePopup = false;
         var data = $('#' + id).mouseout().data('maphilight') || {};
-        if (data.fillColor === APP_COLORS.lightGreen) {
-            $('#tableView').modal('show');
-            angular.forEach(self.minimumBottleRequirement, function(value, key) {
-                     if(value.onObjectId == dataValueObj.id) {
-                           self.dataValue = self.dataValue + value.value;
-                     }
-            });    
-        }
-        if (data.fillColor === APP_COLORS.red) {
-            $('#reservedView').modal('show');
-        }
-        else if (data.fillColor === APP_COLORS.darkYellow) {
-             angular.forEach(self.minimumBottleRequirement, function(value, key) {
-                     if(value.onObjectId == dataValueObj.id) {
-                           self.dataValue = self.dataValue - value.value;
-                     }
-            }); 
-             var selectedTable = VenueService.elements[index];
-             if (!selectedTable) {
-                 return;
-             }
-             var indexArray = -1;
-             for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
-                 var item = self.selectionTableItems[itemIndex];
-                 if (item.id === selectedTable.id){
-                     indexArray = itemIndex;
-                     break;
-                 }
-             }
-             if (indexArray >=0) {
-                 self.removeSelectedTables(indexArray, selectedTable, self.tableSelection);
-             }
-             return;
-         } else {
-            data.fillColor = APP_COLORS.darkYellow;
-            data.strokeColor = APP_COLORS.turbo;
-         
-        }
+        data.fillColor = APP_COLORS.darkYellow;
+        data.strokeColor = APP_COLORS.turbo;
         $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
         self.showPreview(dataValueObj);
-    }
+    };
 
     self.removeSelectedTables = function(index,arrayObj,table) {
         angular.forEach(VenueService.elements, function(value, key) {
@@ -258,11 +271,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
             }
         });
-        self.sum = self.sum - arrayObj.size;
-        self.dataValue = self.dataValue - arrayObj.minimumRequirement;
+        //self.sum = self.sum - arrayObj.size;
+        //self.dataValue = self.dataValue - arrayObj.minimumRequirement;
         table.splice(index, 1);
         self.selectionTableItems.splice(index, 1);
-    }
+    };
 
     self.showPreview = function(object) {
         var selectedTable = object;
@@ -298,13 +311,13 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         }
                         self.tableSelection.push(table);
                     }
-        }
+        };
 
             self.getBanquetHall = function(venueId) {
                 AjaxService.getPrivateEvent(venueId).then(function(response) {
                     $scope.privateEventValueArray = response.data;
                 });
-            }
+            };
 
             self.minus = function() {
                 if(self.totalGuest > 1) {
@@ -370,13 +383,13 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                      "maleCount" : guest.guestMen,
                      "femaleCount" : guest.guestWomen,
                      "visitorName" : name
-                }
+                };
                 VenueService.guestListData = self.guest;
                 VenueService.totalNoOfGuest = self.totalGuest;
                 VenueService.authBase64Str = authBase64Str;
                 VenueService.payloadObject = object;
                 $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
-             }
+             };
 
             self.confirmBottleService = function() {
                 VenueService.tab = 'B';
@@ -385,9 +398,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 VenueService.bottleServiceData = self.bottle;
                 VenueService.totalNoOfGuest = self.totalGuest;
                 VenueService.bottleZip = self.bottle.bottleZipcode;
-                $log.info("User data-->"+angular.toJson(self.bottle));
-                $log.info("zip code-->"+angular.toJson(self.bottle.bottleZipcode));
-                $log.info("occasion code-->"+angular.toJson(self.bottle.bottleOccasion));
+                VenueService.authBase64Str = authBase64Str;
 
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
@@ -430,7 +441,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                             "venueNumber": self.venueid,
                             "productId": value.id,
                             "productType": value.productType,
-                            "quantity": $scope.quantity,
+                            "quantity": value.size,
                             "comments": value.comments,
                             "name": value.name
                         }
@@ -439,12 +450,8 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 }
 
                 $log.info("Service JSON->", angular.toJson(self.serviceJSON));
+                VenueService.payloadObject = self.serviceJSON;
                 $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
-                /*AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
-                    $log.info("Bottle response: "+angular.toJson(response));
-                    $('#bottleServiceModal').modal('show');
-                });*/
-
              };
 
              self.createPrivateEvent = function(value) {
@@ -497,7 +504,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                             "quantity": value.size,
                             "comments": value.comments,
                             "name": value.name
-                        }
+                        };
 
                 self.serviceJSON.order.orderItems.push(items);
                 VenueService.payloadObject = self.serviceJSON;

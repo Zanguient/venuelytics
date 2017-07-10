@@ -40,7 +40,8 @@
                     </table>
 
                     <h4 class="color-success">Selected Table(s)</h4>
-                    <table class="table table-responsive table-no-border">
+                    <div>
+                    <table class="table table-responsive table-no-border" ng-repeat="table in selectTables">
                     	<thead>
                     		<tr>
                     			<th>Table Name(s):</th>
@@ -49,14 +50,15 @@
                     	</thead>
                     	<tbody>
                     		<tr>
-	                          <td> Table 15 </td>
-	                          <td>5</td>
+	                          <td>{{table.name}}</td>
+	                          <td>{{table.quantity}}</td>
 	                        </tr>
                     	</tbody>
                     </table>
+                    </div>
 	    <center>
 	        <div >
-	            <button type="submit" class="btn btn-raised btn-primary">Confirm</button>
+	            <button type="submit" class="btn btn-raised btn-primary" ng-click="createBottleSave()">Confirm</button>
 	            <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">Edit</button>
 	        </div>
 	    </center>

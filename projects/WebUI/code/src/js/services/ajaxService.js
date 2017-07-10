@@ -231,4 +231,40 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
+    this.getTaxType = function(venueId,taxDate) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + '/vas/'+ venueId + '/taxNfees/' + taxDate
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    }
+
+    this.getProductOfBottle = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'products/' + venueId + '/type/Bottle'
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    }
+
+    this.createTransaction = function(venueId,orderId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'vas' + '/' + venueId + '/charge/' + orderId
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    }
+
 }]);

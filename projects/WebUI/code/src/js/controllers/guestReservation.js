@@ -10,7 +10,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
                 self.guestListData = VenueService.guestListData;
-                self.parsedend = moment(self.guestListData.guestStartDate).format("MM-DD-YYYY");
+                self.guestSelectedDate = moment(self.guestListData.guestStartDate).format("MM-DD-YYYY");
                 self.guests = VenueService.totalNoOfGuest;
                 self.authBase64Str = VenueService.authBase64Str;
                 self.object = VenueService.payloadObject;
@@ -24,7 +24,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                     AjaxService.createGuestList(VenueService.venueNumber, self.object, self.authBase64Str).then(function(response) {
                     $('#guestListModal').modal('show');
                 });
-            }
+            };
 
             self.init();
     		
