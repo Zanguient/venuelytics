@@ -34,7 +34,6 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
                     $compile(td)($scope);
                   }
             } ];
-     
         DataTableService.initDataTable('venue_info_table', columnDefinitions);
         var table = $('#venue_info_table').DataTable();
         
@@ -50,61 +49,25 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
 	    	data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
 	    	
 	    	$scope.barType = (data.venueTypeCode & 1)  > 0 ? 'Y' : 'N';
-        if($scope.barType == 'Y'){
-        $scope.barNum =1;
-      } else {
-        $scope.barNum =0;
-      }
+        $scope.barNum = $scope.barType == 'Y' ? 1 : 0 ;
 	    	$scope.clubType = (data.venueTypeCode & 2) > 0 ? 'Y' : 'N';
-        if($scope.clubType == 'Y'){
-          $scope.clubNum =2;
-        } else {
-          $scope.clubNum =0;
-        }       
+        $scope.clubNum = $scope.clubType == 'Y' ? 2 : 0 ;
 	    	$scope.loungeType = (data.venueTypeCode & 4) > 0 ? 'Y' : 'N';
-        if($scope.loungeType == 'Y'){
-          $scope.loungeNum=4;
-        } else {
-          $scope.loungeNum =0;
-        }
+        $scope.loungeNum = $scope.loungeType == 'Y' ? 4 : 0 ;
 	    	$scope.casinoType = (data.venueTypeCode & 8) >0 ? 'Y' : 'N';
-        if($scope.casinoType== 'Y'){
-          $scope.casinoNum =8;
-        } else {
-          $scope.casinoNum =0;
-        }
+        $scope.casinoNum = $scope.casinoType== 'Y' ? 8 : 0 ;
 	    	$scope.nightClubType = (data.venueTypeCode & 32) > 0? 'Y' : 'N';
-        if($scope.nightClubType == 'Y'){
-          $scope.nightClubNum =32;
-        } else {
-          $scope.nightClubNum =0;
-        }
+        $scope.nightClubNum = $scope.nightClubType == 'Y' ? 32 : 0 ;
 	    	$scope.restaurantType = (data.venueTypeCode & 64) > 0 ? 'Y' : 'N';
-        if($scope.restaurantType == 'Y'){
-          $scope.restaurantNum =64;
-        } else {
-          $scope.restaurantNum =0;
-        }
+        $scope.restaurantNum = $scope.restaurantType == 'Y' ? 64 : 0 ;
 	    	$scope.bowlingType = (data.venueTypeCode & 128) > 0 ? 'Y' : 'N';
-        if($scope.bowlingType == 'Y'){
-          $scope.bowlingNum =128;
-        } else {
-          $scope.bowlingNum =0;
-        }
-	    	$scope.karaokeType = (data.venueTypeCode & 256) > 0 ? 'Y' : 'N';	
-        if($scope.karaokeType== 'Y'){
-          $scope.karaokeNum =256;
-        } else {
-          $scope.karaokeNum =0;
-        }
+        $scope.bowlingNum = $scope.bowlingType == 'Y' ? 128 : 0 ;
+	    	$scope.karaokeType = (data.venueTypeCode & 256) > 0 ? 'Y' : 'N';
+        $scope.karaokeNum = $scope.karaokeType== 'Y' ? 256 : 0 ;
         $scope.venueEnabled = data.enabled;
-        if($scope.venueEnabled == 'Y'){
-          $scope.venueEnabled ='Y';
-        } else {
-          $scope.venueEnabled ='N';
-        }
+        $scope.venueEnabled = $scope.venueEnabled == 'Y' ? 'Y' : 'N';
         $scope.cleansed =data.cleansed;
-        if($scope.cleansed== true){
+        if($scope.cleansed == true){
           $scope.cleansed =true;
         } else {
           $scope.cleansed =false;
@@ -156,165 +119,72 @@ App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServ
     	var val = $scope.venueType[code]; 
     	return val == 1;
     }
-    
     $scope.updateAttribute = function (rowId) {
+      var table = $('#venue_info_table').DataTable();
       if(rowId == undefined){
-    	var table = $('#venue_info_table').DataTable();
-      var rowData = '';
-        ngDialog.openConfirm({
-          template: 'modalDialogId',
-          className: 'ngdialog-theme-default',
-          //data: {key: rowData[0], value: rowData[1]}
-        }).then(function (value) {
+        var rowData = '';
+      } else {
+        var rowData = table.row(rowId).data();
+      }
+      ngDialog.openConfirm({
+        template: 'modalDialogId',
+        className: 'ngdialog-theme-default',
+        data: {key: rowData[0], value: rowData[1]}
+      }).then(function (value) {
+        var payload = {};
+        if (rowId == undefined) {
           var values = value.value;
           var keys =value.key;
-        	 var payload = {};
-        	 payload[keys]= values;
-        	 var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
-         		$scope.data.info[rowData[0]] = value;
-         		table.clear();
-         		$.each($scope.data.info, function (k,v) {
-             		table.row.add([k, v, k]);
-             	});
-         		table.draw();
-         	},function(error){
-         		if (typeof error.data != 'undefined') { 
-         			toaster.pop('error', "Server Error", error.data.developerMessage);
-         		}
-         	});
-        	 
-        }, function (reason) {
-        	//mostly cancelled  
-        });
-      } else {  
-      var table = $('#venue_info_table').DataTable();
-      var rowData = table.row(rowId).data();
-        ngDialog.openConfirm({
-          template: 'modalDialogId',
-          className: 'ngdialog-theme-default',
-          data: {key: rowData[0], value: rowData[1]}
-        }).then(function (value) {  
+          payload[keys]= values;
+        } else {
           value = value.value;
-           var payload = {};
-           payload[rowData[0]] = value;
-           var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
-            $scope.data.info[rowData[0]] = value;
-            table.clear();
-            $.each($scope.data.info, function (k,v) {
-                table.row.add([k, v, k]);
-              });
-            table.draw();
-          },function(error){
-            if (typeof error.data != 'undefined') { 
-              toaster.pop('error', "Server Error", error.data.developerMessage);
-            }
+          payload[rowData[0]] = value;
+        }          
+      	var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
+       		$scope.data.info[rowData[0]] = value;
+       		table.clear();
+       		$.each($scope.data.info, function (k,v) {
+           	table.row.add([k, v, k]);
           });
-           
-        }, function (reason) {
-          //mostly cancelled
-        });
-      }
-      };
+       		table.draw();
+     	  },function(error){
+          if (typeof error.data != 'undefined') {
+     			toaster.pop('error', "Server Error", error.data.developerMessage);
+          }
+     	  });
+      }, function (reason) {
+    	//mostly cancelled  
+      });
+    };
     $scope.bartypes = function(barType){
-      if(barType == 'Y'){
-        $scope.barTypes ='N';
-        $scope.barNum = 0;
-      } else {
-        $scope.barTypes ='Y';
-        $scope.barNum =1;
-      }
+      $scope.barNum = $scope.barType == 'Y' ? 0 : 1;
     }
-       $scope.clubtypes = function(clubType){
-        if(clubType == 'Y'){
-          $scope.clubType ='N';
-          $scope.clubNum = 0;
-        } else {
-          $scope.clubType ='Y';
-          $scope.clubNum =2;
-        }
-       }
-      $scope.loungetypes = function(loungeType){
-        if(loungeType == 'Y'){
-          $scope.loungeType ='N';
-          $scope.loungeNum=0;
-        } else {
-          $scope.loungeType ='Y';
-          $scope.loungeNum=4;
-        }
-      }   
-      $scope.casinotypes = function(casinoType){
-        if(casinoType== 'Y'){
-          $scope.casinoType ='N';
-          $scope.casinoNum =0;
-        } else {
-          $scope.casinoType ='Y';
-          $scope.casinoNum =8;
-        }
-      }  
-      $scope.nightClubtypes = function(nightClubType){
-        if(nightClubType == 'Y'){
-          $scope.nightClubType ='N';
-          $scope.nightClubNum =0;
-        } else {
-          $scope.nightClubType ='Y';
-          $scope.nightClubNum =32;
-        }
-      }
-      $scope.bowlingtypes = function(bowlingType){
-        if(bowlingType == 'Y'){
-          $scope.bowlingType ='N';
-          $scope.bowlingNum =0;
-        } else {
-          $scope.bowlingType ='Y';
-          $scope.bowlingNum =128;
-        }
-      }
-      $scope.karaoketypes = function(karaokeType){
-        if(karaokeType== 'Y'){
-          $scope.karaokeType ='N';
-          $scope.karaokeNum =0;
-        } else {
-          $scope.karaokeType ='Y';
-          $scope.karaokeNum =256;
-        }
-      }
+    $scope.clubtypes = function(clubType){
+      $scope.clubNum = clubType == 'Y' ? 0 : 2;
+    }
+    $scope.loungetypes = function(loungeType){
+      $scope.loungeNum = loungeType == 'Y' ? 0 : 4;
+    }   
+    $scope.casinotypes = function(casinoType){
+      $scope. casinoNum = casinoType== 'Y' ? 0 : 8;
+    }  
+    $scope.nightClubtypes = function(nightClubType){
+      $scope.nightClubNum = nightClubType == 'Y' ? 0 : 32;
+    }
+    $scope.bowlingtypes = function(bowlingType){
+      $scope.bowlingNum = bowlingType == 'Y' ? 0 : 128;
+    }
+    $scope.karaoketypes = function(karaokeType){
+      $scope.karaokeNum = karaokeType == 'Y' ? 0 : 256;
+    }
     $scope.restaurantypes = function(restaurantType){
-        if(restaurantType == 'Y'){
-          $scope.restaurantType ='N';
-          $scope.restaurantNum =0;
-        } else {
-          $scope.restaurantType ='Y';
-          $scope.restaurantNum =64;
-      }
+      $scope. restaurantNum = restaurantType == 'Y' ? 0 : 64;
     }
     $scope.enabledVenue = function(venueEnabled){
-      if(venueEnabled == 'Y'){
-          $scope.venueEnabled ='N';
-        } else {
-          $scope.venueEnabled ='Y';
-      }
+      $scope.venueEnabled = venueEnabled == 'Y' ? 'N' : 'Y';
     }
     $scope.enableCleansed = function(cleansed){
-      if(cleansed== true){
-          $scope.cleansed =false;
-        } else {
-          $scope.cleansed =true;
-        }
-    }
-    $scope.venueUploadFile = function(venueImage) {
-      var file = venueImage;
-      console.dir(file);
-      var fd = new FormData();
-      fd.append('file', file, $scope.finalName);
-
-      var payload = RestServiceFactory.cleansePayload('uploadVenueImage', fd);
-      RestServiceFactory.VenueImage().uploadVenueImage(payload, function(success){
-        $state.go('app.stores');
-      },function(error){
-        if (typeof error.data != 'undefined') {
-          toaster.pop('error', "Server Error", error.data.developerMessage);
-        }
-      });
+      $scope.cleansed = cleansed== true ? false : true;
     }
     $scope.update = function(isValid, data) {
       data.enabled = $scope.venueEnabled;
