@@ -15,6 +15,7 @@ app.service('VenueService', function() {
   this.totalNoOfGuest = '';
   this.bottleZip = '';
   this.payloadObject = '';
+  this.selectBottle = '';
   this.tab = '';
   this.imageMapping={
       "pic_url": "",

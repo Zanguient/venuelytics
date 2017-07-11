@@ -384,7 +384,7 @@
 		"MOBILE":"Mobile",
 		"ZIPCODE":"Zipcode",
 		"INSTRUCTIONS":"Special Instructions",
-		"TOTAL_GUEST":"Total Guest(s)",
+		"TOTAL_GUEST":"Estimated # of Guests",
 		"GUEST_MEN":"# of Men",
 		"GUEST_WOMEN":"# of Women",
 		"OCCASION":"Occasion",
@@ -426,14 +426,17 @@
 		"CONFIRM_DETAILS":"Confirm your Reservation Details",
 		"GUEST_CONFIRM":"Confirm your Guest List Details",
 		"PRIVATE_EVENT_CONFIRM":"Confirm your Private Event Details",
-		"SELECT_BOTTLE":"Select Bottle",
+		"SELECT_BOTTLE":"Select Bottle(s)",
+		"SELECT_TABLE":"Select Table(s)",
+		"SELECT_BOTTLES":"Select Bottle",
 		"BOTTLE":"Bottle",
 		"BRAND":"Brand",
 		"QUANTITY":"Quantity",
 		"PRICE":"Price",
 		"ADD":"Add",
-		"TABLE_NAME":"Table Name",
-		"CAPACITY":"Capacity"
+		"TABLE_NAME":"Table Name(s)",
+		"CAPACITY":"Capacity",
+		"DESCRIPTION_MOBILE":"Located in the heart of Silicon Valley, Pure Lounge offers a luxurious, modern, upscale setting for various occasions. Featuring dramatic, classical architecture, ..."
 
 	}
 }

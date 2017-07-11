@@ -7,55 +7,76 @@
 	<div class="form-group">
 		<table class="table table-responsive table-no-border">
                      
-                      <tbody>
-                        <tr>
-                          <td> Requested Date </td>
-                          <td>{{userData.requestedDate}}</td>
-                        </tr>
-                        <tr>
-                          <td> First Name </td>
-                          <td>{{userData.userFirstName}}</td>
-                        </tr>
-                        <tr>
-                          <td> Last Name </td>
-                          <td>{{userData.userLastName}}</td>
-                        </tr>
-                        <tr>
-                          <td> E-mail </td>
-                          <td>{{userData.email}}</td>
-                        </tr>
-                        <tr>
-                          <td> Mobile Number </td>
-                          <td>{{userData.mobile}}</td>
-                        </tr>
-                        <tr>
-                          <td> Total Guests </td>
-                          <td>{{guests}}</td>
-                        </tr>
-                        <tr>
-                          <td> Special Instructions </td>
-                          <td>{{userData.instructions}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-
-                    <h4 class="color-success">Selected Table(s)</h4>
-                    <div>
-                    <table class="table table-responsive table-no-border" ng-repeat="table in selectTables">
-                    	<thead>
-                    		<tr>
-                    			<th>Table Name(s):</th>
-                    			<th>Capacity</th>
-                    		</tr>
-                    	</thead>
-                    	<tbody>
-                    		<tr>
-	                          <td>{{table.name}}</td>
-	                          <td>{{table.quantity}}</td>
-	                        </tr>
-                    	</tbody>
-                    </table>
-                    </div>
+        <tbody>
+            <tr>
+                <td> Requested Date </td>
+                <td>{{userData.requestedDate}}</td>
+            </tr>
+            <tr>
+                <td> First Name </td>
+                <td>{{userData.userFirstName}}</td>
+            </tr>
+            <tr>
+                <td> Last Name </td>
+                <td>{{userData.userLastName}}</td>
+            </tr>
+            <tr>
+                <td> E-mail </td>
+                <td>{{userData.email}}</td>
+            </tr>
+            <tr>
+                <td> Mobile Number </td>
+                <td>{{userData.mobile}}</td>
+            </tr>
+            <tr>
+                <td> Total Guests </td>
+                <td>{{guests}}</td>
+            </tr>
+            <tr>
+                <td> Special Instructions </td>
+                <td>{{userData.instructions}}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  <div class="form-group">
+      <h4 class="color-success">{{"reservation.SELECT_TABLE"  | translate}}</h4>
+          <table class="table table-responsive table-no-border">
+              <thead>
+                <tr>
+                  <th>{{"reservation.TABLE_NAME"  | translate}}</th>
+                  <th>{{"reservation.CAPACITY"  | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="table in selectTables">
+                  <td>{{table.name}}</td>
+                  <td>{{table.quantity}}</td>
+                </tr>
+              </tbody>
+          </table>
+  </div>
+  <div class="form-group">
+      <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
+          <table class="table table-responsive table-no-border">
+              <thead>
+                <tr>
+                  <th>{{"reservation.BOTTLE"  | translate}}</th>
+                  <th>{{"reservation.BRAND"  | translate}}</th>
+                  <th>{{"reservation.QUANTITY"  | translate}}</th>
+                  <th>{{"reservation.PRICE"  | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="bottle in selectBottleOrders">
+                  <td><label>{{bottle.bottle}}</label></td>
+                  <td><label>{{bottle.brand}}</label></td>
+                  <td><label>{{bottle.quantity}}</label></td>
+                  <td>$<label>{{bottle.price}}</label></td>
+                </tr>
+              </tbody>
+          </table>
+  </div>
 	    <center>
 	        <div >
 	            <button type="submit" class="btn btn-raised btn-primary" ng-click="createBottleSave()">Confirm</button>
@@ -63,5 +84,3 @@
 	        </div>
 	    </center>
 	</div>
-
-</div>

@@ -255,10 +255,11 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     }
 
-    this.createTransaction = function(venueId,orderId) {
+    this.createTransaction = function(venueId,orderId,object) {
         return $http({
-            method: 'GET',
-            url: RestURL.baseURL + 'vas' + '/' + venueId + '/charge/' + orderId
+            method: 'POST',
+            url: RestURL.baseURL + 'vas' + '/' + venueId + '/charge/' + orderId,
+            data: object
         }).then(function(success) {
             return success;
         }, function(error) {

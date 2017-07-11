@@ -9,7 +9,9 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
     		$log.log('Inside Confirm Reservation Controller.');
     		
     		var self = $scope;
-
+            self.selectTables = [];
+            self.selectBottleOrders = [];
+            self.availableAmount = 0;
             self.init = function() {
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
@@ -18,7 +20,22 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 self.authBase64Str = VenueService.authBase64Str;
                 self.object = VenueService.payloadObject;
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');
-                self.selectTables = self.object.order.orderItems;
+                self.selectBottleOrders = VenueService.selectBottle;
+                angular.forEach(self.selectBottleOrders, function(value1, key1) {
+                    self.availableAmount = self.availableAmount + value1.price;
+                });
+                angular.forEach(self.object.order.orderItems, function(value, key) {
+                    if(value.productType == 'VenueMap') {
+                        var items = {
+                            "venueNumber": value.venueNumber,
+                            "productId": value.productId,
+                            "productType": value.productType,
+                            "quantity": value.quantity,
+                            "name": value.name
+                        }
+                        self.selectTables.push(items);
+                    } 
+                    });
                 self.getTax();
             };
 
@@ -27,7 +44,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.getTax = function() {
                 AjaxService.getTaxType(self.editVenueID,self.taxDate).then(function(response) {
                     self.tax = response.data;
-                    var amount = 123;
+                    var amount = self.availableAmount;
                     if(self.tax.length != 0) {
                         angular.forEach(self.tax, function(value, key) {
                             if(value.type == 'tax') {
@@ -67,7 +84,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             var pay,chargeAmountValue;
             pay = self.chargedAmount * 100;
             chargeAmountValue = self.chargedAmount.toFixed(2);
-            var amount = 123;
+            var amount = self.availableAmount;
             var handler = StripeCheckout.configure({
                 key: 'pk_test_v3iaPvbv4UeKkRWrH3O5etYU',
                 image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -97,10 +114,9 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                                     "paymentType":"CREDIT_CARD",
                                     "chargedAmount":parseFloat(chargeAmountValue)
                                 }
-                    console.log(">>>>>>>>>>>>."+angular.toJson(payment));
                     //Save Payment Transaction for card                  
                     
-                    AjaxService.createTransaction(self.editVenueID, self.orderId).then(function(response) {
+                    AjaxService.createTransaction(self.editVenueID, self.orderId, payment).then(function(response) {
                         $('#bottleServiceModal').modal('show');
                     });
                 }
@@ -117,19 +133,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 handler.close();
             });
         }
-
-        $scope.PayPalPayment = function() {
-            var popup = window.open("","directories=no,height=100,width=100,menubar=no,resizable=no,scrollbars=no,status=no,titlebar=no,top=0,location=no");
-            if (!popup || popup.closed || typeof popup.closed=='undefined'){
-            //Worked For IE and Firefox
-                alert("Popup Blocker is enabled!");
-            } else {
-                //Popup Allowed
-                var paypalElement = document.getElementById('paypal-button');
-                jQuery(paypalElement).trigger('click');
-                window.top.close();
-            } 
-        } 
+        
             self.init();
     		
     }]);
