@@ -13,8 +13,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             self.guest = {};
             self.private = {};
             self.selectionTableItems = [];
-            self.count = 0;
-            self.countValue = 0;
+            self.count = 1;
             self.bottleMinimum = [];
             self.init = function() {
                 $(function() {
@@ -111,7 +110,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
             self.removeBottleMinimum = function(index,value,arrayObj) {
                 arrayObj.splice(index, 1);
-                self.countValue = self.countValue - value.price;
             };
 
             self.minusValue = function() {
@@ -125,9 +123,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             };
 
             self.brandMethod = function(value) {
+                self.bottleName = value;
                 angular.forEach(self.allBottle, function(value1, key1) {
                 if(value1.name == value) {
                     self.brandData = [];
+                    self.productId =value1.id;
                     self.price = value1.price;
                     self.brandName = value1.category;
                     self.brandData.push(value1);
@@ -141,10 +141,10 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "price" : self.totalValue,
                     "bottle" : self.bottleName,
                     "brand" : self.brandName,
-                    "quantity": self.count
+                    "quantity": self.count,
+                    "productId": self.productId
                 }
                 self.bottleMinimum.push(valueData);
-                self.countValue = self.countValue + self.totalValue;
                 self.bottleName = "";
                 self.brandName = "";
                 self.count = 1;
@@ -197,13 +197,12 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         } else {
                             VenueService.imageMapping.maps = [];
                         }
+                        });
+                    });
+                    self.setReservationColor();
                 });
-                });
-                });
-
                 AjaxService.getVenueMapForADate(VenueService.venueNumber,self.bottleServiceDate).then(function(response) {
                     self.reservations = response.data;
-                    self.setReservationColor();
                 });
             };
 
@@ -271,8 +270,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
             }
         });
-        //self.sum = self.sum - arrayObj.size;
-        //self.dataValue = self.dataValue - arrayObj.minimumRequirement;
         table.splice(index, 1);
         self.selectionTableItems.splice(index, 1);
     };
@@ -399,11 +396,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 VenueService.totalNoOfGuest = self.totalGuest;
                 VenueService.bottleZip = self.bottle.bottleZipcode;
                 VenueService.authBase64Str = authBase64Str;
-
+                VenueService.selectBottle = self.bottleMinimum;
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,
-                    "reason": self.bottle.bottleOccasion,
+                    "reason": self.bottle.bottleOccasion.type,
                     "contactNumber": self.bottle.mobile,
                     "contactEmail": self.bottle.email,
                     "contactZipcode": self.bottle.bottleZipcode,
@@ -449,7 +446,19 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     });
                 }
 
-                $log.info("Service JSON->", angular.toJson(self.serviceJSON));
+                if (self.bottleMinimum != undefined) {
+                    angular.forEach(self.bottleMinimum, function(value1, key1) {
+                        var items = {
+                            "venueNumber": self.venueid,
+                            "productId": value1.productId,
+                            "productType": 'Bottle',
+                            "quantity": value1.quantity,
+                            "name": value1.bottle
+                        }
+                        self.serviceJSON.order.orderItems.push(items);
+                    });
+                }
+
                 VenueService.payloadObject = self.serviceJSON;
                 $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
              };
@@ -510,6 +519,10 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 VenueService.payloadObject = self.serviceJSON;
                 $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
              };
+
+             self.privateDescription = function() {
+                self.desc = "Description";
+             }
 
 
             self.init();

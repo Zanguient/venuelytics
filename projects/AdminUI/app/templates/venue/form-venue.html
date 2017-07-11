@@ -145,18 +145,22 @@
 <div class="col-lg-6" animate-enabled="false">
 	<carousel interval="5000" >
     <slide ng-repeat="slide in data.imageUrls" active="slide.active">
-       <img ng-src="{{slide.originalUrl}}" style="margin: auto;" alt="" />
-          <div class="carousel-caption">
-             <h4>Image {{$index + 1}}</h4>
-          </div>
-      </slide>
+      <img ng-src="{{slide.originalUrl}}" style="margin: auto;" alt="" />
+        <div class="carousel-caption">
+          <h4>Image {{$index + 1}}</h4>
+        </div>
+    </slide>
   </carousel>
-       <br /> 
-       <br />
-      <div class="row">
-        <center>
-          <input class="btn btn-default btn-file col-sm-2" id="venuefile" type="file" file-model="venueImage" style="margin-left: 18px; display: block;padding-left: 5px;padding-right: 5px;width: 202.22222px;">
-          <button type="button" class="btn btn-info btn-md" style="margin-left: 18px;" ng-click="venueUploadFile(venueImage)">Upload</button>
-        </center>
-      </div>
+   <br />
+   <br />
+  <div class="row" ng-repeat = "venueImage in VenueImageArray">
+    <div class="form-group" ng-show="venueImage.uploadImage">
+      <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+    </div>
+    <div class="form-group" ng-show="venueImage.editImage">
+      <label class="control-label col-sm-2">Image {{$index+1}}</label>
+        <button class="btn btn-danger" type="button" ng-click="removeVenueImage($index, VenueImageArray, venueImage) "><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+    </div>
+  </div>
+    <button type="button" class="btn btn-primary " ng-click="addVenueImage(VenueImageArray) "><span class="fa fa-plus" formnovalidate></span></button>
 </div>

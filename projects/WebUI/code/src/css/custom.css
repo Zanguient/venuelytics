@@ -214,14 +214,30 @@ select {
     width: 630px;
   }
 
+  #alignmentTime {
+    margin-left: 25px;
+  }
+
+  #guestWomen {
+    margin-left: 25px;
+  }
+
   .venueSearch {
     margin-top: 10px;
     margin-left: 16px;
+  }
+
+  .alignmentInWeb {
+    margin-left: 27px;
   }
   
   .eventImage{
     height: 100px;
     width: 100px;
+  }
+
+  .showInMobile {
+    display:none;
   }
 
 
@@ -419,9 +435,21 @@ select {
     width: 100px;
   }
 
+  #alignmentTime {
+    margin-left: 13px;
+  }
+
+  #guestWomen {
+    margin-left: 13px;
+  }
+
   .eventImageWidth {
     width: 100px;
     height: 100px;
+  }
+
+  .showInWeb {
+    display:none;
   }
 
   .input-icon{
@@ -627,9 +655,21 @@ select {
     width: 100px;
   }
 
+  #alignmentTime {
+    margin-left: 13px;
+  }
+
+  #guestWomen {
+    margin-left: 13px;
+  }
+
   .eventImageWidth {
     width: 100px;
     height: 100px;
+  }
+
+  .showInWeb {
+    display:none;
   }
 
   .input-icon{
@@ -723,9 +763,21 @@ select {
     width: 100px;
   }
 
+  #alignmentTime {
+    margin-left: 13px;
+  }
+
+  #guestWomen {
+    margin-left: 13px;
+  }
+
   .eventImageWidth {
     width: 100px;
     height: 100px;
+  }
+
+  .showInWeb {
+    display:none;
   }
 
   .input-icon{

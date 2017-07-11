@@ -62,7 +62,7 @@
         <div class="col-md-10 form-group is-empty" ng-if="tableSelection">
             Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
         </div>
-        <div class="col-md-10 form-group is-empty">
+        <div class="col-md-10 form-group is-empty" ng-if="img.pic_url">
          <div class="table-map-info" 
                     ng-if="img.pic_url">
                     <div id="mapSection">
@@ -104,7 +104,6 @@
                 </div>
                 </div>
                 </div>
-                <br>
 
                 <div id="mapSection" ng-if="!img.pic_url" class="form-group"
                     ng-repeat="table in venueImageMapData[0].elements">
@@ -127,10 +126,9 @@
                         <div class="col-md-4" />
                     </div>
                 </div>
-                <br>
 
-                <div class="col-md-10 form-group is-empty">
-                    <div ng-if="tableSelection">
+                <div class="col-md-10 form-group is-empty" ng-if="tableSelection">
+                    <div>
                         <h3 class="selected-table">
                             <font size="4">Selected Table(s)</font>
                         </h3>
@@ -160,11 +158,10 @@
                             class="table-capacity"
                             ng-hide="table.description == null">{{table.description}}</label>
                         <button type="button" class="btn btn-danger btn-raised pull-right"
-                            ng-click="removeSelectedTables($index,table,tableSelection) ">Remove</button>
-                        <br>                   
+                            ng-click="removeSelectedTables($index,table,tableSelection) ">Remove</button>                  
                     </div>
                 </div>
-                <br>
+        <div class="showInMobile">
         <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control fontRegular" ng-model="bottle.userFirstName" id="firstName" placeholder="{{'reservation.FIRST_NAME' | translate}}">
         </div>
@@ -176,6 +173,26 @@
         </div>
         <div class="col-md-10 form-group is-empty">
             <input type="text" id="ms-form-pass" class="form-control fontRegular" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="bottle.mobile" placeholder="{{'reservation.MOBILE' | translate}}" required="" data-parsley-trigger="change">
+        </div>
+        </div>
+
+        <div class="showInWeb">
+        <div>
+        <div class="col-md-5 form-group is-empty">
+            <input type="text" class="form-control fontRegular" ng-model="bottle.userFirstName" id="firstName" placeholder="{{'reservation.FIRST_NAME' | translate}}">
+        </div>
+        <div class="col-md-5 form-group is-empty">
+            <input type="text" class="form-control fontRegular alignmentInWeb" ng-model="bottle.userLastName" id="lastName" placeholder="{{'reservation.LAST_NAME' | translate}}">
+        </div>
+        </div>
+        <div>
+        <div class="col-md-5 form-group is-empty">
+            <input type="email" class="form-control fontRegular" id="email" ng-model="bottle.email" placeholder="{{'reservation.EMAIL' | translate}}" data-parsley-trigger="change" required="required">
+        </div>
+        <div class="col-md-5 form-group is-empty">
+            <input type="text" id="ms-form-pass" class="form-control fontRegular alignmentInWeb" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="bottle.mobile" placeholder="{{'reservation.MOBILE' | translate}}" required="" data-parsley-trigger="change">
+        </div>
+        </div>
         </div>
         <div class="col-md-10 form-group is-empty">
             <input type="number" class="form-control fontRegular" id="zipcode" ng-model="bottle.bottleZipcode" placeholder="{{'reservation.ZIPCODE' | translate}}">
@@ -202,10 +219,6 @@
 	            </div>
 	        </div>
         </div>
-
-        <!-- <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control fontRegular" id="occasion" ng-model="bottle.bottleOccasion" placeholder="{{'reservation.OCCASION' | translate}}">
-        </div> -->
         <div class="col-md-10 form-group is-empty">
             <select class="btn  dropdown-toggle form-control fontRegular" required=""
                 ng-model="bottle.bottleOccasion" ng-options="t.type for t in eventTypes">
@@ -215,6 +228,30 @@
         <!-- <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control" id="zipcode" placeholder="{{'reservation.HOST' | translate}}">
         </div> -->
+        <div class="col-md-10 form-group is-empty">
+        <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
+        </div>
+        <div class="col-md-10 form-group is-empty" ng-if="bottleMinimum != ''">
+        <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
+            <table class="table table-responsive table-no-border">
+                <thead>
+                    <tr>
+                        <th>{{"reservation.BOTTLE"  | translate}}</th>
+                        <th>{{"reservation.BRAND"  | translate}}</th>
+                        <th>{{"reservation.QUANTITY"  | translate}}</th>
+                        <th>{{"reservation.PRICE"  | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="bottle in bottleMinimum">
+                        <td><label>{{bottle.bottle}}</label></td>
+                        <td><label>{{bottle.brand}}</label></td>
+                        <td><label>{{bottle.quantity}}</label></td>
+                        <td>$<label>{{bottle.price}}</label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="col-md-10">
             <table class="table" style="border: 1px solid #000;">
                 <tr>
@@ -245,7 +282,7 @@
                                         <tr>
                                             <td><a class="btn btn-default btn-sm btn-responsive" ng-click="minusValue()"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                                             </a></td>
-                                            <td><input type="text" placeholder="Quantity" class="form-control" ng-model="count"></td>
+                                            <td>{{count}}</td>
                                             <td><a class="btn btn-default btn-sm btn-responsive" ng-click="addValue()" > <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                             </a></td>
                                         </tr>

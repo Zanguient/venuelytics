@@ -1,26 +1,43 @@
 <div>
-<div class="col-lg-6">
+<!-- <div class="col-lg-6"> -->
+<div class="showInWeb">
+ <legend class="fontRegular">Description</legend>
+    <div class="form-group ">
+        <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
+    </div>
+</div>
+<div class="showInMobile">
+ <legend class="fontRegular">Description</legend>
+    <div class="form-group " ng-if="!desc">
+        <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION_MOBILE" | translate}}</p>
+        <a class="btn btn-default btn-raised btn-xs pull-right" ng-click="privateDescription()">Read More</a>
+    </div>
+    <div class="form-group " ng-if="desc">
+        <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
+    </div>
+</div>
 <form class="form-horizontal" name="privateForm" parsley-validate validate-form="" ng-cloak>
     <fieldset>
         <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="privateDate" ng-model="private.orderDate" placeholder="{{'reservation.DATE' | translate}}">
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
-        
-        <div class="col-md-10 form-group is-empty">
+
+        <div class="col-md-5 form-group is-empty">
+        <table>
+        <tr><td>
             <select class="btn  dropdown-toggle form-control" required=""
                 ng-model="private.privateStartTime" ng-options="x.key as x.value for x in reservationTime">
                 <option value="">{{"reservation.START_TIME"  | translate}}</option>
-            </select>
-        </div>
+            </select></td><td>
 
-        <div class="col-md-10 form-group is-empty">
-            <select class="btn  dropdown-toggle form-control" required=""
+            <select id="alignmentTime" class="btn  dropdown-toggle form-control" required=""
                 ng-model="private.privateEndTime" ng-options="x.key as x.value for x in reservationTime">
                 <option value="">{{"reservation.END_TIME"  | translate}}</option>
-            </select>
+            </select></td>
+        </tr>
+        </table>
         </div>
-
 
         <div class="col-md-10 form-group is-empty">
             <div class="input-group">
@@ -83,96 +100,6 @@
     </fieldset>
 </form>
 <hr>
-
-<br>
-        
-<hr>
-<h4>{{"reservation.PRIVATE_DETAILS" | translate}}</h4>
-<div class="ng-scope" ng-repeat="privateEvent in privateEventValueArray">
-    <table class="table table-responsive" style="border: 1px solid #ddd; margin-top: 23px;">
-        <tbody>
-            <tr>
-                <td>
-                    <label style="margin-left: 8px; color: #9ea2f4" class="fontRegular">Event Space</label>
-                </td>
-                <td>
-                    <label class="fontRegular">{{privateEvent.name}}</label>
-                </td>
-            </tr>
-            <tr ng-hide="privateEvent.flag" class="">
-                <td>
-                    <label ng-hide="privateEvent.flag" style="margin-left: 8px; color: #9ea2f4" class="fontRegular">Capacity</label>
-                </td>
-                <td>
-                    <label class="fontRegular">{{privateEvent.servingSize}} people</label>
-                </td>
-            </tr>
-            <tr ng-hide="privateEvent.size==0" class="">
-                <td>
-                    <label style="margin-left: 8px; color: #9ea2f4" class="fontRegular">Size</label>
-                </td>
-                <td>
-                    <label class="fontRegular">{{privateEvent.size}} sq.ft</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="margin-left: 8px; color: #9ea2f4" class="fontRegular">Description</label>
-                </td>
-                <td>
-                    <label  class="fontRegular">{{privateEvent.description| limitTo: 70 }}{{privateEvent.description.length > 70 ? '...' : ''}}</label>
-                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateDescription(privateEvent.description)">Read More</a></td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="margin-left: 8px; color: #9ea2f4" translate="IMAGE" class="ng-scope">Image(s)</label>
-                </td>
-                <td>
-                    <div ng-mouseenter="pause()" ng-mouseleave="play()" class="carousel ng-isolate-scope" ng-swipe-right="prev()" ng-swipe-left="next()" interval="myInterval" active="active" no-wrap="false" style="height:150px;width:150px">
-                        <div class="carousel-inner">
-                            <div ng-class="{
-    'active': active
-  }" class="item text-center ng-scope ng-isolate-scope"  data-ng-repeat="value in privateEvent.imageUrls" index="$index"> <img data-ng-src="https://d3pkfw29jtj7v6.cloudfront.net/banquetVenueImg/image/cef7/Pure+Silicon+Valley.jpg" data-toggle="modal" data-target="#myModal" ng-click="previewUpload(privateEvent.imageUrls)" style="height: 150px; width: 150px" class="ng-scope" src="https://d3pkfw29jtj7v6.cloudfront.net/banquetVenueImg/image/cef7/Pure+Silicon+Valley.jpg"> </div>
-                        </div>
-                        <a role="button" href="" class="left carousel-control" ng-click="prev()" ng-show="slides.length > 1">
-                            <span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span>
-                            <span class="sr-only">previous</span>
-                        </a>
-                        <a role="button" href="" class="right carousel-control" ng-click="next()" ng-show="slides.length > 1">
-                            <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span>
-                            <span class="sr-only">next</span>
-                        </a>
-                        <ol class="carousel-indicators" ng-show="slides.length > 1">
-                            <li ng-repeat="slide in slides | orderBy:indexOfSlide track by $index" ng-class="{ active: isActive(slide) }" ng-click="select(slide)" class="ng-scope" style="">
-                                <span class="sr-only ng-binding">slide 1 of 3</span>
-                            </li>
-                        </ol>
-                    </div>
-                </td>
-            </tr>
-            <tr style="border: 1px solid #ddd; height: 50px;">
-                <td>
-                    <button id="privatePreview" class="btn btn-success btn-raised btn-md ng-scope" data-toggle="modal" data-target="#myModal" ng-click="previewUpload(privateEvent.imageUrls)" type="button" style="margin-left: 11px;font-size:4;">Preview</button>
-                </td>
-                <td ng-hide="privateEvent.reserve == true" class="">
-                    <button type="submit" id="privateEnquire" class="btn btn-success btn-raised btn-md pull-right ng-scope" ng-disabled="privateForm.$invalid" style="margin-right: 11px;font-size:4;" ng-click="createPrivateEvent(privateEvent)" disabled="disabled">Enquire</button>
-                </td>
-                <td ng-show="privateEvent.reserve == true" class="ng-hide">
-                    <label class="pull-right" style="margin-right: 11px;font-size:4;">Not Available</label>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-</div>
-<div class="col-lg-6">
-    <legend class="fontRegular">Description</legend>
-    <div class="form-group ">
-        <p id="banquetHallData" style="padding-top: 0px;" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
-                                </div>
-
-</div>
-
 <div class="col-md-12">
     <center>
         <h1 class="color-success fontRegular">Info Sheet</h1>
@@ -202,4 +129,70 @@
         <button class="btn btn-success btn-raised fontRegular">{{"reservation.FLOOR" | translate}}</button>
     </center>
 </div>
+<br>
+        
+<hr>
+<div class="col-md-12">
+<h4>{{"reservation.PRIVATE_DETAILS" | translate}}</h4>
+<div class="container container-full" ng-cloak>
+    <div class="ms-paper">
+        <div class="row">
+            <!-- For Horizontal tabs -->
+            <div class="card venueListCard">
+                <div class="card-block venueCardBlock">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" id="clubs" class="tab-pane fade active in">
+                            <div>
+                                <div class="container">
+                                    <div class="row masonry-container">
+                                        <div
+                                            class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
+                                            ng-repeat="privateEvent in privateEventValueArray"
+                                            ng-if="privateEvent.imageUrls[0].smallUrl">
+                                            <article id="articleCart"
+                                                class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                <figure class="ms-thumbnail ms-thumbnail-left">
+                                                    <img ng-src="{{privateEvent.imageUrls[0].smallUrl}}" alt=""
+                                                        class="img-responsive" id="venueImages">
+                                                </figure>
+                                                <div class="card-block">
+                                                    <h2 class="venueTitle">
+                                                        <a href="#">{{privateEvent.name
+                                                            | limitTo: 20 }}{{privateEvent.name.length > 20 ? '...'
+                                                            :''}}</a>
+                                                    </h2>
+                                                    <p ng-if="privateEvent.servingSize != 0">{{privateEvent.servingSize}} people</p>
+                                                    <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
+                                                    <p style="text-align: justify;text-justify: inter-word;">{{privateEvent.description | limitTo: 70
+                                                        }}{{privateEvent.description.length > 70 ? '...' :''}}</p> 
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- container -->
+                                <!-- ms-paper-content -->
+                            </div>
+                            <!-- col-md-9 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- card -->
+            <!-- </section> -->
+            <!-- </div> -->
+            <!-- </div> -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- ms-paper -->
+</div>
+<!-- container -->
+
+
+
+
+
+
+                    </div>
 </div>
