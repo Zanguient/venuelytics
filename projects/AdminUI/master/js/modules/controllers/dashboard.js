@@ -6,6 +6,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.selectedPeriod = 'WEEKLY';
     $scope.notificationCount = 0;
     $scope.contextService = contextService;
+    $scope.reservedBookings = {};
 	$scope.init=function(){
 		$log.log("Dash board controller has been initialized!");
 		
@@ -28,7 +29,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             }
         });
         $scope.bookingRequestChart();
-        
+        $scope.reservedBookingChart();
 		$scope.reload();
 	};
     $scope.setDisplayData = function() {
@@ -38,6 +39,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[3].value = addForType($scope.venueCheckin, $scope.selectedPeriod);
         $scope.top3Stats[3].value += addForType($scope.visitorCheckin, $scope.selectedPeriod);
         $scope.bookingRequestChart();
+        $scope.reservedBookingChart();
+
     };
 
     $scope.processAnalytics = function(data) {
@@ -287,6 +290,27 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     }
     return retData;
    }
+    $scope.reservedBookingChart = function() {
+        var temp = $scope.selectedPeriod.toLowerCase();
+        var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
+        $scope.reservedBookings  = {};
+         RestServiceFactory.getAnalyticsService(contextService.userVenues.selectedVenueNumber, 
+                            'ReservedBookings', aggPeriodType, 'scodes=BPK').get(contextService.userVenues.selectedVenueNumber, function(data){
+            $scope.reservedBookings = data;
+            $('#pie_rb').ClassyLoader({
+               lineColor: "#23b7e5",
+               remainingLineColor: "rgba(200,200,200,0.4)",
+               lineWidth: 10,
+               roundedLine : true
+            }).draw(data.currentBookingPercentage);
+            //$('#bar_rb').sparkline(data.barData, { height:30, barWidth:5, barSpacing: 2 });
+            $('#bar_rb').setAttribute("data", data.barData);
+        },function(error){
+            if (typeof error.data !== 'undefined') { 
+                toaster.pop('error', "Server Error", error.data.developerMessage);
+            }
+        });
+    };
     // Bar Stacked chart
     $scope.bookingRequestChart = function() {
            

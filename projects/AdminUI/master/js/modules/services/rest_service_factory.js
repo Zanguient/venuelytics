@@ -144,6 +144,10 @@ App.factory(
 				getAnalyticsUrl : function (venueNumber, anaType, aggPreriodType, filter) {
 					return ContextService.contextName + "/v1/analytics/" + venueNumber + "/"+anaType +"/"+aggPreriodType+"?"+ filter;
 				},
+				getAnalyticsService : function (venueNumber, anaType, aggPreriodType, filter) {
+					var url = ContextService.contextName + "/v1/analytics/" + venueNumber + "/"+anaType +"/"+aggPreriodType+"?"+ filter;
+					return $resource(url);
+				},
 				cleansePayload : function(serviceName, payload) {
 					var rProps = REQ_PROP[serviceName];
 					if (typeof rProps !== 'undefined') {

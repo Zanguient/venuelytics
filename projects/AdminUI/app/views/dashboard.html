@@ -88,7 +88,7 @@
    <!-- START dashboard sidebar-->
    <aside class="col-lg-3">
       <!-- START loader widget-->
-      <div ng-include="'app/templates/chart/sparkline-progress.html'" onload="" ></div>
+      <sparkline-pie-chart id="rb" title="Reserved Bookings" piedata="{{reservedBookings.currentBookingPercentage}}" barlabel="This {{reservedBookings.aggregateType}}" bartotal="{{reservedBookings.maxPossibleBookings}}"></sparkline-pie-chart>
       <!-- END loader widget-->
       <!-- START messages and activity-->
       <div class="panel panel-default">
