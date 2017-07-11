@@ -7,8 +7,7 @@ App.factory(
 		'RestServiceFactory',['$resource','Session','USER_ROLES', 'ContextService', 
 		function($resource, Session, USER_ROLES,  ContextService) {
 			'use strict';
-			var storeProperties = ['venueName','address', 'city', 'phone', 'state', 'storeNumber', 'vendorPersonName', 'zip',
-			'vendorId', 'vendorName', 'enableGeoConquest','enabled','website', 'email','cleansed','venueTypeCode','description','managerName','imageUrls[]'];//
+			var storeProperties = ['href','id','venueName','managerName','address','city','state','country','zip','phone','mobile','email','website','enabled','venueNumber','venueTypeCode','venueType','description','cleansed','imageUrls','info','options'];
 			
 			var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 
 			'udid','enabled', 'departmentName', 'aisleName'];
@@ -68,8 +67,6 @@ App.factory(
 							url: urlTemplate.replace("@context", "venues") +"/analytics"},
 						delete : {method: 'DELETE',  params: { id: '@id'},
 							url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"}
-						/*deleteAttribute : {method: 'DELETE',  params: { id: '@id', productId : '@productId'}, 
-							url:  urlTemplate.replace("@context", "venues")+"/info"}*/
 					});
 				},
 				NotificationService: function () {
@@ -106,8 +103,10 @@ App.factory(
 				},
 				VenueImage : function () {
 						return $resource(urlTemplate.replace("@context", "upload"),{}, {
-						uploadVenueImage : {method: 'POST',  params: {}, 
-							url: urlTemplate.replace("@context", "upload")+"/VenueImg"}
+						uploadVenueImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
+							url: urlTemplate.replace("@context", "upload")+"/VenueImg"},
+						deleteVenueImage : {method: 'DELETE',headers: {}, 
+							url: urlTemplate.replace("@context", "upload")}
 						});
 				},
 				LoyaltyService: function () {
