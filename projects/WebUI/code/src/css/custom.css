@@ -36,6 +36,14 @@ select {
   -moz-appearance: none;
 }
 
+.fontColorForText {
+  color: #181818;
+}
+
+.cardHeight {
+  height:550px;
+}
+
 .reservation-carousel {
   margin-left: 30px;
 }
@@ -56,6 +64,18 @@ select {
 .reservation-button {
   white-space: normal; 
   height: 80px;
+}
+
+#bottle {
+  white-space: normal;
+}
+
+#private {
+  white-space: normal;
+}
+
+#glist {
+  white-space: normal;
 }
 
 .table-map-info {
@@ -207,6 +227,10 @@ select {
 
   .carouselImage {
     width: 100%;
+  }
+
+  .wrapingSpace {
+    margin-left: 15px;
   }
 
   .chk-button {

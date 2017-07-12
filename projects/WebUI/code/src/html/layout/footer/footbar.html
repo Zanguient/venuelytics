@@ -22,10 +22,10 @@
                         <div class="form-group label-floating mt-2 mb-1">
                             <div class="input-group ms-input-subscribe">
                                 <label class="control-label" for="ms-subscribe"><i class="zmdi zmdi-email"></i> {{"footBar.EMAIL_ADDRESS" | translate}}</label>
-                                <input type="email" id="ms-subscribe" class="form-control">
+                                <input type="email" id="ms-subscribe" class="form-control" ng-model="emailToSend">
                             </div>
                         </div>
-                        <button class="ms-subscribre-btn" type="button">{{"footBar.SUBSCRIPBE" | translate}}</button>
+                        <button class="ms-subscribre-btn" type="button" ng-click="sendEmail(emailToSend)">{{"footBar.SUBSCRIPBE" | translate}}</button>
                     </form>
                 </div>
             </div>

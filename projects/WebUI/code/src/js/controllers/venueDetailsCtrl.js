@@ -26,11 +26,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 self.totalGuest = VenueService.totalNoOfGuest | 1;
                 self.venueid = $routeParams.venueid;
                 self.reservationTime = APP_ARRAYS.time;
-                self.eventTypes = APP_ARRAYS.eventyType;
                 self.venueImage = VenueService.selectedVenue.imageUrls[0].largeUrl;
                 self.restoreTab = VenueService.tab;
                 self.getBanquetHall(self.venueid);
                 self.getBottleProducts();
+                self.getEventType();
                 if(!self.restoreTab) {
                     self.restoreTab = 'B';
                 }
@@ -45,7 +45,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
-                    //self.selectedType = VenueService.selectedVenueType;
                     self.venueName =    self.detailsOfVenue.venueName;
                     if($routeParams.serviceType === 'p' || $routeParams.serviceType === 'b' || $routeParams.serviceType === 'g') {
                         self.row = 1;
@@ -56,48 +55,22 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     } else {
                         self.row = 1;
                     }
-                    /*self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType +'&i=y';
-                    // $log.info("Reservation URL: "+self.resevationURL);
-                    iFrameResize({
-                            log                     : false,                  // Enable console logging
-                            inPageLinks             : false,
-                            heightCalculationMethod: 'max',
-                            widthCalculationMethod: 'min',
-                            sizeWidth: false,
-                            checkOrigin: false
-                        });
-
-                    $(function(){
-                        $('#venueReservationFrame').on('load', function(){
-                            $('#loadingVenueDetails').hide();
-                            $(this).show();
-                        });
-                            
-                    });*/
-
                 });
             };
 
-            $(window).resize(function() {
-                var divHeight = $('#imagemap').height(); 
-                var divWidth = $('#imagemap').width();                    
+                $(window).resize(function() {                   
                     setTimeout(function() { 
                         $('#imagemap').maphilight();
-                            if (divHeight > 0) {
-                            $('div.map.img-responsive').css('width',divWidth +'px');
-                            $('div.map.img-responsive').css('height',divHeight +'px');
-                            $('canvas').css('height', divHeight +'px');
-                            $('canvas').css('width', divWidth +'px');
-                            $('#imagemap').css('height', divHeight +'px');
-                            $('#imagemap').css('width', divWidth +'px');
-                        }
                     }, 200);
                 });
                 self.startDate = moment().format('YYYY-MM-DD');
                 self.date = self.startDate;
-                self.$watch('startDate', function() {
-                    if((self.startDate != "") || (self.startDate != undefined))
+                self.$watch('bottle.requestedDate', function() {
+                    if((self.bottle.requestedDate != "") || (self.bottle.requestedDate != undefined))
                         {
+                            if(self.bottle.requestedDate) {
+                                self.startDate = moment(self.bottle.requestedDate).format('YYYY-MM-DD');
+                            }
                             self.paintVenueTableMap();
                         }
                     });
@@ -111,6 +84,12 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             self.removeBottleMinimum = function(index,value,arrayObj) {
                 arrayObj.splice(index, 1);
             };
+
+            self.getEventType = function() {
+                AjaxService.getTypeOfEvents(VenueService.venueNumber).then(function(response) {
+                    self.eventTypes = response.data;
+                });
+            }
 
             self.minusValue = function() {
                 if(self.count > 0) {
@@ -206,95 +185,86 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
-        self.setReservationColor = function() {
-            var venueImageMapData = [];
-            angular.forEach(VenueService.elements, function(key, value) {
-            var breakBoolean = false;
-            angular.forEach(self.reservations, function(key1, value1) {
+            self.setReservationColor = function() {
+                var venueImageMapData = [];
+                angular.forEach(VenueService.elements, function(key, value) {
+                    var breakBoolean = false;
+                    angular.forEach(self.reservations, function(key1, value1) {
+                        if (!breakBoolean) {
+                            if (key.id == key1.productId) {
+                                key.fillColor = APP_COLORS.red;
+                                key.strokeColor = APP_COLORS.guardsmanRed;
+                                breakBoolean = true;
+                            } else {
+                                key.fillColor = APP_COLORS.lightGreen;
+                                key.strokeColor = APP_COLORS.darkGreen;
+                            }
+                        venueImageMapData.push(key);
+                    }
+                });
                 if (!breakBoolean) {
-                    if (key.id == key1.productId) {
-                            key.fillColor = APP_COLORS.red;
-                            key.strokeColor = APP_COLORS.guardsmanRed;
-                            breakBoolean = true;
-                        } else {
-                            key.fillColor = APP_COLORS.lightGreen;
-                            key.strokeColor = APP_COLORS.darkGreen;
-                        }
-                    venueImageMapData.push(key);
+                    key.fillColor = APP_COLORS.lightGreen;
+                    key.strokeColor = APP_COLORS.darkGreen;
                 }
             });
-            if (!breakBoolean) {
-                key.fillColor = APP_COLORS.lightGreen;
-                key.strokeColor = APP_COLORS.darkGreen;
-            }
-        });
-        $('img[usemap]').jMap();
+            $('img[usemap]').jMap();
         
-        var delay = 1000;
-        var divHeight = $('#imagemap').height(); 
-        var divWidth = $('#imagemap').width();                  
+            var delay = 1000;                
             
-        setTimeout(function() { 
-            $('#imagemap').maphilight();
-            if(divHeight > 0) {
-                $('div.map.img-responsive').css('width',divWidth +'px');
-                $('div.map.img-responsive').css('height',divHeight +'px');
-                $('canvas').css('height', divHeight +'px');
-                $('canvas').css('width', divWidth +'px');
-                $('#imagemap').css('height', divHeight +'px');
-                $('#imagemap').css('width', divWidth +'px');
-            }
-        }, delay);
-    };
+            setTimeout(function() { 
+                $('#imagemap').maphilight();
+            }, delay);
+        };
 
-    self.selectTable = function(id, index, dataValueObj) {
-        var data = $('#' + id).mouseout().data('maphilight') || {};
-        data.fillColor = APP_COLORS.darkYellow;
-        data.strokeColor = APP_COLORS.turbo;
-        $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
-        self.showPreview(dataValueObj);
-    };
-
-    self.removeSelectedTables = function(index,arrayObj,table) {
-        angular.forEach(VenueService.elements, function(value, key) {
-            if(arrayObj.name == value.name) {
-               var id = value.id;
-               var data = $('#' + id).mouseout().data('maphilight') || {};
-               if (data.fillColor === APP_COLORS.darkYellow) {
-                   data.fillColor = APP_COLORS.lightGreen;
-                   data.strokeColor = APP_COLORS.darkGreen;
-               } else {
+        self.selectTable = function(id, index, dataValueObj) {
+            var data = $('#' + id).mouseout().data('maphilight') || {};
+                if(data.fillColor === APP_COLORS.lightGreen) {
                     data.fillColor = APP_COLORS.darkYellow;
                     data.strokeColor = APP_COLORS.turbo;
-               }
-               $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
-            }
-        });
-        table.splice(index, 1);
-        self.selectionTableItems.splice(index, 1);
-    };
+                } else if (data.fillColor === APP_COLORS.darkYellow) {
+                    var selectedTable = VenueService.elements[index];
+                    if (!selectedTable) {
+                        return;
+                    }
+                    var indexArray = -1;
+                    for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
+                        var item = self.selectionTableItems[itemIndex];
+                        if (item.id === selectedTable.id){
+                            indexArray = itemIndex;
+                            break;
+                        }
+                    }
+                    if (indexArray >=0) {
+                        self.removeSelectedTables(indexArray, selectedTable, self.tableSelection);
+                    }
+                } else {} 
+                $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
+                self.showPreview(dataValueObj);
+            };
 
-    self.showPreview = function(object) {
-        var selectedTable = object;
-        if (!selectedTable) {
-            self.selectedTable = {};
-            self.selectedTable.name = null;
+        self.removeSelectedTables = function(index,arrayObj,table) {
+            angular.forEach(VenueService.elements, function(value, key) {
+                if(arrayObj.name == value.name) {
+                    var id = value.id;
+                    var data = $('#' + id).mouseout().data('maphilight') || {};
+                    if (data.fillColor === APP_COLORS.darkYellow) {
+                        data.fillColor = APP_COLORS.lightGreen;
+                        data.strokeColor = APP_COLORS.darkGreen;
+                    } else {
+                        data.fillColor = APP_COLORS.darkYellow;
+                        data.strokeColor = APP_COLORS.turbo;
+                    }
+                    $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
+                }
+            });
+            table.splice(index, 1);
+            self.selectionTableItems.splice(index, 1);
+        };
 
-            return;
-        }
-        self.selectedTable = selectedTable;
-        self.imageUrls = selectedTable.imageUrls;
-        if(self.realTimeStatus == true) {
-            var resIndex = 0;
-            for (resIndex = 0; resIndex < self.reservations.length; resIndex++) {
-            if (selectedTable.id == self.reservations[resIndex].productId) {
-                self.imageUrl = true;
-                return;
-            }
-        }
-        }
-        self.imageUrl = false;
-        self.selectionTableItems.push(selectedTable);
+            self.showPreview = function(object) {
+                    var selectedTable = object;
+                    self.imageUrl = false;
+                    self.selectionTableItems.push(selectedTable);
                     self.tableSelection = [];
                     for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
                         var table = {
@@ -308,7 +278,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         }
                         self.tableSelection.push(table);
                     }
-        };
+            };
 
             self.getBanquetHall = function(venueId) {
                 AjaxService.getPrivateEvent(venueId).then(function(response) {
@@ -327,7 +297,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.bottleService = function(service) {
-                // self.totalGuest = 1;
                 $("#privateEventTab").css('background-color', APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color', APP_COLORS.silver);
@@ -340,7 +309,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.event = function(service) {
-                // self.totalGuest = 1;
                 $("#privateEventTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#private').css('color', 'white');
                 $("#guestlistTab").css('background-color',APP_COLORS.silver);
@@ -353,7 +321,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.glist = function(service) {
-                // self.totalGuest = 1;
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color',APP_COLORS.fruitSalad);
@@ -369,20 +336,19 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 VenueService.tab = 'G';
                 var name = guest.guestFirstName + " " + guest.guestLastName;
                 var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
-
+                guest.guestStartDate = moment(guest.guestStartDate).format('YYYY-MM-DD');
                 var object = {
                      "venueNumber" : VenueService.venueNumber,
                      "email" : guest.guestEmailId,
                      "phone" : guest.guestMobileNumber,
                      "zip" : guest.guestZip,
                      "eventDay" : guest.guestStartDate,
-                     "totalCount" : self.totalGuest,
+                     "totalCount" : guest.totalGuest,
                      "maleCount" : guest.guestMen,
                      "femaleCount" : guest.guestWomen,
                      "visitorName" : name
                 };
                 VenueService.guestListData = self.guest;
-                VenueService.totalNoOfGuest = self.totalGuest;
                 VenueService.authBase64Str = authBase64Str;
                 VenueService.payloadObject = object;
                 $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
@@ -393,7 +359,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
                 VenueService.bottleServiceData = self.bottle;
-                VenueService.totalNoOfGuest = self.totalGuest;
                 VenueService.bottleZip = self.bottle.bottleZipcode;
                 VenueService.authBase64Str = authBase64Str;
                 VenueService.selectBottle = self.bottleMinimum;
@@ -404,7 +369,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "contactNumber": self.bottle.mobile,
                     "contactEmail": self.bottle.email,
                     "contactZipcode": self.bottle.bottleZipcode,
-                    "noOfGuests": self.totalGuest,
+                    "noOfGuests": self.bottle.totalGuest,
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
                     "budget": 0,
@@ -469,7 +434,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
                 VenueService.privateEventData = self.private;
                 VenueService.authBase64Str = authBase64Str;
-                VenueService.totalNoOfGuest = self.totalGuest;
 
                 self.serviceJSON = {
                     "serviceType": 'BanquetHall',
@@ -478,7 +442,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "contactNumber": self.private.privateMobileNumber,
                     "contactEmail": self.private.privateEmail,
                     "contactZipcode": null,
-                    "noOfGuests": self.totalGuest,
+                    "noOfGuests": self.private.totalGuest,
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
                     "budget": 0,
@@ -488,7 +452,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "serviceInstructions": self.private.privateComment,
                     "status": "REQUEST",
                     "serviceDetail": null,
-                    "fulfillmentDate": self.private.orderDate,
+                    "fulfillmentDate": self.private.date,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
                     "deliveryAddress": null,
@@ -498,7 +462,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     "ratingDateTime": null,
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": self.private.orderDate,
+                        "orderDate": self.private.date,
                         "orderItems": []
                     },
                     "prebooking": false,
@@ -522,7 +486,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
              self.privateDescription = function() {
                 self.desc = "Description";
-             }
+             };
 
 
             self.init();

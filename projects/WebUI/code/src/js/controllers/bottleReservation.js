@@ -16,7 +16,6 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
                 self.userData = VenueService.bottleServiceData;
-                self.guests = VenueService.totalNoOfGuest;
                 self.authBase64Str = VenueService.authBase64Str;
                 self.object = VenueService.payloadObject;
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');

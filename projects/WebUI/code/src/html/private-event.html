@@ -22,6 +22,25 @@
             <input type="text" class="form-control fontRegular" id="privateDate" ng-model="private.orderDate" placeholder="{{'reservation.DATE' | translate}}">
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
+        <div class="col-md-12">
+            <table>
+                <tr>
+                    <td>
+                        <button class="btn btn-success fontRegular btn-raised"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.VIEW_PRIVATE" | translate}}</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-heart"></span> {{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</button> 
+                    </td>
+                    <td>
+                        <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-play"></span> {{"reservation.VIEW_VIDEO" | translate}}</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-home"></span> {{"reservation.FLOOR" | translate}}</button>
+                    </td>
+                </tr>
+            </table>
+                
+        </div> 
 
         <div class="col-md-5 form-group is-empty">
         <table>
@@ -38,26 +57,9 @@
         </tr>
         </table>
         </div>
-
         <div class="col-md-10 form-group is-empty">
-            <div class="input-group">
-                <label for="inputEmail" class="sameRow fontRegular">{{"reservation.TOTAL_GUEST" | translate}}</label>
-                <div class="sameRow guestBorder">
-                    <span>
-                    <button type="button" class="btn btn-success btn-number" ng-click="minus()">
-                        <span class="glyphicon glyphicon-minus"></span>
-                    </button>
-                </span>
-                {{totalGuest}}
-                <span>
-                    <button type="button" class="btn btn-success btn-number" ng-click="plus()">
-                      <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </span>
-                </div>
-            </div>
+            <input type="text" class="form-control fontRegular" id="privateTotalGuest" ng-model="private.totalGuest" placeholder="{{'reservation.TOTAL_GUEST' | translate}}">
         </div>
-
         <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="budget" placeholder="{{'reservation.BUDGET' | translate}}" ng-model="private.budget" required="required" data-parsley-trigger="change">
             <!-- <label for="table" class="fa fa-calendar"></label> -->
@@ -76,7 +78,7 @@
         </div>
         <div class="col-md-10 form-group is-empty">
             <select class="btn  dropdown-toggle form-control fontRegular" required=""
-                ng-model="private.privateEvent" ng-options="t.type for t in eventTypes">
+                ng-model="private.privateEvent" ng-options="t.name for t in eventTypes">
                 <option value="">{{"reservation.EVENT_TYPE"  | translate}}</option>
             </select>
         </div>
@@ -85,73 +87,41 @@
         </div>
         <div class="col-md-10">
             <div class="checkbox">
-                <label class="check-box fontRegular">
+                <label class="check-box fontRegular fontColorForText">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
                 </label>                            
             </div>
         </div>
         <div class="col-md-10">
             <div class="checkbox">
-                <label class="check-box fontRegular">
+                <label class="check-box fontRegular fontColorForText">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
                 </label>                            
             </div>
         </div>
     </fieldset>
-</form>
-<hr>
-<div class="col-md-12">
-    <center>
-        <h1 class="color-success fontRegular">Info Sheet</h1>
-        <button class="btn btn-success fontRegular btn-raised">{{"reservation.VIEW_PRIVATE" | translate}}</button><br>
-        
-    </center>
-</div>
-
-<div class="col-md-12">
-    <center>
-        <h1 class="color-success fontRegular">Private Events Menu</h1>
-        <button class="btn btn-success btn-raised fontRegular">{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</button>
-        
-    </center>
-</div>
-
-<div class="col-md-12">
-    <center>
-        <h1 class="color-success fontRegular">Video</h1>
-        <button class="btn btn-success btn-raised fontRegular">{{"reservation.VIEW_VIDEO" | translate}}</button>
-    </center>
-</div>
-
-<div class="col-md-12">
-    <center>
-        <h1 class="color-success fontRegular">Floor Plan</h1>
-        <button class="btn btn-success btn-raised fontRegular">{{"reservation.FLOOR" | translate}}</button>
-    </center>
-</div>
-<br>
-        
+</form>   
 <hr>
 <div class="col-md-12">
 <h4>{{"reservation.PRIVATE_DETAILS" | translate}}</h4>
 <div class="container container-full" ng-cloak>
     <div class="ms-paper">
-        <div class="row">
+        <div>
             <!-- For Horizontal tabs -->
-            <div class="card venueListCard">
-                <div class="card-block venueCardBlock">
+            <div>
+                <div>
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" id="clubs" class="tab-pane fade active in">
                             <div>
-                                <div class="container">
-                                    <div class="row masonry-container">
+                                <div>
+                                    <div>
                                         <div
                                             class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
                                             ng-repeat="privateEvent in privateEventValueArray"
                                             ng-if="privateEvent.imageUrls[0].smallUrl">
                                             <article id="articleCart"
-                                                class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                class="card card-info mb-4 wow materialUp animation-delay-5 cardHeight">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
                                                     <img ng-src="{{privateEvent.imageUrls[0].smallUrl}}" alt=""
                                                         class="img-responsive" id="venueImages">
@@ -165,34 +135,19 @@
                                                     <p ng-if="privateEvent.servingSize != 0">{{privateEvent.servingSize}} people</p>
                                                     <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
                                                     <p style="text-align: justify;text-justify: inter-word;">{{privateEvent.description | limitTo: 70
-                                                        }}{{privateEvent.description.length > 70 ? '...' :''}}</p> 
+                                                        }}{{privateEvent.description.length > 70 ? '...' :''}}</p>
+                                                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY"></button>
                                             </article>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- container -->
-                                <!-- ms-paper-content -->
                             </div>
-                            <!-- col-md-9 -->
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- card -->
-            <!-- </section> -->
-            <!-- </div> -->
-            <!-- </div> -->
         </div>
-        <!-- row -->
     </div>
-    <!-- ms-paper -->
 </div>
-<!-- container -->
-
-
-
-
-
-
-                    </div>
+</div>
 </div>

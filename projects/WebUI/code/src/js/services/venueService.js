@@ -12,7 +12,6 @@ app.service('VenueService', function() {
   this.privateEventData = { };
   this.guestListData = { };
   this.authBase64Str = { };
-  this.totalNoOfGuest = '';
   this.bottleZip = '';
   this.payloadObject = '';
   this.selectBottle = '';
