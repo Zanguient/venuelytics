@@ -1321,7 +1321,6 @@ select {
   left: 0;
   right: 0;
   transition: all ease 0.5s;
-  top: 480px;
 }
 
 .reservationCarousel {
