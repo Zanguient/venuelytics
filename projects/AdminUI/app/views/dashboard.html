@@ -96,114 +96,29 @@
             <div class="panel-title">Today's GuestList</div>
          </div>
          <!-- START list group-->
-         <div class="list-group">
+         <div class="list-group" ng-init="guests.total = 0">
             <!-- START list group item-->
-            <div class="list-group-item">
+            <div class="list-group-item" ng-repeat="item in guests">
                <div class="media">
-                  <div class="pull-left">
-                     <span class="fa-stack">
-                        <em class="fa fa-circle fa-stack-2x text-purple"></em>
-                        <em class="fa fa-cloud-upload fa-stack-1x fa-inverse text-white"></em>
-                     </span>
-                  </div>
+                  
                   <div class="media-body clearfix">
-                     <small class="text-muted pull-right ml">15m</small>
-                     <div class="media-heading"><a href="#" class="text-purple m0">NEW FILE</a>
+                     <small class="text-muted pull-right ml" ng-init="guests.total = guests.total + item.totalCount">{{item.totalCount}} people</small>
+                     <div class="media-heading"><a href="#" class="text-purple m0">{{item.visitorName}}</a>
                      </div>
                      <p class="m0">
-                        <small><a href="#">Bootstrap.xls</a>
-                        </small>
+                        <small>{{item.email}} | {{item.phone}}</small>
                      </p>
                   </div>
                </div>
             </div>
             <!-- END list group item-->
-            <!-- START list group item-->
-            <div class="list-group-item">
-               <div class="media">
-                  <div class="pull-left">
-                     <span class="fa-stack">
-                        <em class="fa fa-circle fa-stack-2x text-info"></em>
-                        <em class="fa fa-file-text-o fa-stack-1x fa-inverse text-white"></em>
-                     </span>
-                  </div>
-                  <div class="media-body clearfix">
-                     <small class="text-muted pull-right ml">2h</small>
-                     <div class="media-heading"><a href="#" class="text-info m0">NEW DOCUMENT</a>
-                     </div>
-                     <p class="m0">
-                        <small><a href="#">Bootstrap.doc</a>
-                        </small>
-                     </p>
-                  </div>
-               </div>
-            </div>
-            <!-- END list group item-->
-            <!-- START list group item-->
-            <div class="list-group-item">
-               <div class="media">
-                  <div class="pull-left">
-                     <span class="fa-stack">
-                        <em class="fa fa-circle fa-stack-2x text-danger"></em>
-                        <em class="fa fa-exclamation fa-stack-1x fa-inverse text-white"></em>
-                     </span>
-                  </div>
-                  <div class="media-body clearfix">
-                     <small class="text-muted pull-right ml">5h</small>
-                     <div class="media-heading"><a href="#" class="text-danger m0">BROADCAST</a>
-                     </div>
-                     <p class="m0"><a href="#">Read</a>
-                     </p>
-                  </div>
-               </div>
-            </div>
-            <!-- END list group item-->
-            <!-- START list group item-->
-            <div class="list-group-item">
-               <div class="media">
-                  <div class="pull-left">
-                     <span class="fa-stack">
-                        <em class="fa fa-circle fa-stack-2x text-success"></em>
-                        <em class="fa fa-clock-o fa-stack-1x fa-inverse text-white"></em>
-                     </span>
-                  </div>
-                  <div class="media-body clearfix">
-                     <small class="text-muted pull-right ml">15h</small>
-                     <div class="media-heading"><a href="#" class="text-success m0">NEW MEETING</a>
-                     </div>
-                     <p class="m0">
-                        <small>On
-                           <em>10/12/2015 09:00 am</em>
-                        </small>
-                     </p>
-                  </div>
-               </div>
-            </div>
-            <!-- END list group item-->
-            <!-- START list group item-->
-            <div class="list-group-item">
-               <div class="media">
-                  <div class="pull-left">
-                     <span class="fa-stack">
-                        <em class="fa fa-circle fa-stack-2x text-warning"></em>
-                        <em class="fa fa-tasks fa-stack-1x fa-inverse text-white"></em>
-                     </span>
-                  </div>
-                  <div class="media-body clearfix">
-                     <small class="text-muted pull-right ml">1w</small>
-                     <div class="media-heading"><a href="#" class="text-warning m0">TASKS COMPLETION</a>
-                     </div>
-                     <progressbar value="22" type="warning" class="progress-xs m0">22%</progressbar>
-                  </div>
-               </div>
-            </div>
-            <!-- END list group item-->
+            
          </div>
          <!-- END list group-->
          <!-- START panel footer-->
          <div class="panel-footer clearfix">
             <a href="#" class="pull-left">
-               <small>Load more</small>
+               <small>Total Guests: {{guests.total }}</small>
             </a>
          </div>
          <!-- END panel-footer-->

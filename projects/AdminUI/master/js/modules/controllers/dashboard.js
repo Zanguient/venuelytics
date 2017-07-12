@@ -1,12 +1,13 @@
 
-App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','RestServiceFactory','$translate',
-                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate){
+App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','RestServiceFactory','$translate','colors',
+                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors){
 	'use strict';
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.selectedPeriod = 'WEEKLY';
     $scope.notificationCount = 0;
     $scope.contextService = contextService;
     $scope.reservedBookings = {};
+    $scope.requestByStatus = {};
 	$scope.init=function(){
 		$log.log("Dash board controller has been initialized!");
 		
@@ -28,6 +29,13 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                 toaster.pop('error', "Server Error", error.data.developerMessage);
             }
         });
+        RestServiceFactory.VenueService().getGuests(target, function(data){
+           $scope.guests = data;
+        },function(error){
+            if (typeof error.data !== 'undefined') { 
+                toaster.pop('error', "Server Error", error.data.developerMessage);
+            }
+        });
         $scope.bookingRequestChart();
         $scope.reservedBookingChart();
 		$scope.reload();
@@ -40,7 +48,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[3].value += addForType($scope.visitorCheckin, $scope.selectedPeriod);
         $scope.bookingRequestChart();
         $scope.reservedBookingChart();
-
+        $scope.donutInit();
     };
 
     $scope.processAnalytics = function(data) {
@@ -74,10 +82,54 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         } else {
             $scope.visitorCheckin = null;
         }
+        if (typeof data.VENUE_SERVICE_TYPE !== 'undefined' && data.VENUE_SERVICE_TYPE.length > 0) {
+            $scope.requestByStatus = processRequestsByStatus(data.VENUE_SERVICE_TYPE);
+        } else {
+            $scope.requestByStatus = {};
+        }
         $scope.setDisplayData();
 
     };
+    function processRequestsByStatus(data) {
+        var requestByStatus = [];
+        
 
+        for (var i =0; i < data.length; i++) {
+            var elem = requestByStatus[data[i].valueText];
+            if (elem == null) {
+                elem = {daily: 0, weekly: 0, monthly: 0, yearly: 0};
+                requestByStatus[data[i].valueText] = elem;
+            }
+            elem.daily += data[i].lastDayValue;
+            elem.weekly += data[i].lastWeekValue;
+            elem.monthly += data[i].lastMonthValue;
+            elem.yearly += data[i].lastYearValue;
+               
+        }
+        var returnData = [];
+        returnData['DAILY'] =[];
+        returnData['WEEKLY'] =[];
+        returnData['MONTHLY'] =[];
+        returnData['YEARLY'] =[];
+        var colorIndex = 0;
+        for(var key in requestByStatus) {
+            var elem = requestByStatus[key];
+            var pieElem = {};
+
+            returnData['DAILY'].push(createPieElem($scope.colorPalattes[colorIndex % $scope.colorPalattes.length],key,elem.daily));
+            returnData['WEEKLY'].push(createPieElem($scope.colorPalattes[colorIndex % $scope.colorPalattes.length],key,elem.weekly));
+            returnData['MONTHLY'].push(createPieElem($scope.colorPalattes[colorIndex % $scope.colorPalattes.length],key,elem.monthly));
+            returnData['YEARLY'].push(createPieElem($scope.colorPalattes[colorIndex % $scope.colorPalattes.length],key,elem.yearly));
+            colorIndex++;
+        }
+        return returnData;
+    }
+    function createPieElem(color, label, value) {
+        return {    "color" : color,
+                    "data" : value,
+                    "label" : label
+                };
+    }
     function addForType(dataArray, type) {
         var sum = 0;
         if (dataArray == null || typeof dataArray === 'undefined') {
@@ -196,6 +248,11 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
 
     };
 
+    this.setData = function(option, data) {
+        $.plot( this.element, data, option );
+        return this;
+    };
+
     // Listen to refresh events
     this.listen = function() {
       var self = this,
@@ -303,8 +360,15 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                lineWidth: 10,
                roundedLine : true
             }).draw(data.currentBookingPercentage);
-            //$('#bar_rb').sparkline(data.barData, { height:30, barWidth:5, barSpacing: 2 });
-            $('#bar_rb').setAttribute("data", data.barData);
+            $('#bar_rb').sparkline(data.barData, {
+                type: "bar",
+                height: 50,
+                barWidth: 7,
+                barSpacing: 3,
+                barColor: '#23b7e5'
+            });
+            
+            //$('#bar_rb').attr("values", );
         },function(error){
             if (typeof error.data !== 'undefined') { 
                 toaster.pop('error', "Server Error", error.data.developerMessage);
@@ -505,8 +569,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     (function () {
         var Selector = '.chart-pie';
         $(Selector).each(function() {
-            var source = $(this).data('source') || $.error('Pie: No source defined.');
-            var chart = new FlotChart(this, source),
+            var chart = new FlotChart(this, null),
                 option = {
                     series: {
                         pie: {
@@ -530,15 +593,15 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                     }
                 };
             // Send Request
-            chart.requestData(option);
+            chart.setData(option, $scope.requestByStatus[$scope.selectedPeriod]);
         });
     })();
     // Donut
     $scope.donutInit = function () {
         var Selector = '.chart-donut';
         $(Selector).each(function() {
-            var source = $(this).data('source') || $.error('Donut: No source defined.');
-            var chart = new FlotChart(this, source),
+            //var source = $(this).data('source') || $.error('Donut: No source defined.');
+            var chart = new FlotChart(this, null),
                 option = {
                     series: {
                         pie: {
@@ -558,7 +621,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
 				    }
                 };
             // Send Request
-            chart.requestData(option);
+             chart.setData(option, $scope.requestByStatus[$scope.selectedPeriod]);
         });
     };
     $scope.donutInit();
