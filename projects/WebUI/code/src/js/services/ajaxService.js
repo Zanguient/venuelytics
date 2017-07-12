@@ -268,4 +268,28 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     }
 
+    this.sendSubscriptionMail = function(venueId,emailId) {
+        return $http({
+            method: 'POST',
+            url: RestURL.baseURL + 'venues' + '/' + venueId + '/subscribeBusiness?email=' + emailId
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    }
+
+    this.getTypeOfEvents = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'vas/' + venueId + '/categories?st=Bottle&type=EVENT'
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    }
+
 }]);

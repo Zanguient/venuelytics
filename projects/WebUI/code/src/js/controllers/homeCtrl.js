@@ -3,8 +3,8 @@
  * @date 25-MAY-2017
  */
 "use strict";
-app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService','$translate', 'APP_CLIENTS', 'APP_ARRAYS', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope) {
+app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService','$translate', 'APP_CLIENTS', 'APP_ARRAYS', '$rootScope', 'AjaxService',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope, AjaxService) {
 
     		$log.log('Inside Home Controller.');
     		
@@ -67,4 +67,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     		self.changeLanguage = function(lang){
    				$translate.use(lang); 
    			};
+
+            self.sendEmail = function(value) {
+                AjaxService.sendSubscriptionMail(521, value).then(function(response) {
+                });
+            };
     }])	;

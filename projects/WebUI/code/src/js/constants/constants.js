@@ -112,10 +112,7 @@ app
         { key: "22:30", value: "10:30 PM" },
         { key: "23:00", value: "11:00 PM" },
         { key: "23:30", value: "11:30 PM" },
-    ],
-    "eventyType": [{"type":"Corporate Event"}, {"type":"Birthday Party"}, {"type":"Wedding"}, {"type":"Bachelorette Party"},
-                   {"type":"Batchelor Party"}, {"type":"Reception"}, {"type":"Product Launch"}, {"type":"Private Party"},
-                   {"type":"Charity Event"}, {"type":"ALL"}]
+    ]
   })
 
 .constant('APP_COLORS', {

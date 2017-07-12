@@ -15,7 +15,6 @@ app.controller('PrivateReservationController', ['$log', '$scope', '$http', '$loc
                 self.editVenueID = $routeParams.venueid;
                 self.privateEventData = VenueService.privateEventData;
                 self.privateSelectedDate = moment(self.privateEventData.orderDate).format("MM-DD-YYYY");
-                self.guests = VenueService.totalNoOfGuest;
                 self.authBase64Str = VenueService.authBase64Str;
                 self.object = VenueService.payloadObject;
             };

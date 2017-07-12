@@ -11,7 +11,6 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 self.editVenueID = $routeParams.venueid;
                 self.guestListData = VenueService.guestListData;
                 self.guestSelectedDate = moment(self.guestListData.guestStartDate).format("MM-DD-YYYY");
-                self.guests = VenueService.totalNoOfGuest;
                 self.authBase64Str = VenueService.authBase64Str;
                 self.object = VenueService.payloadObject;
             };
