@@ -88,7 +88,7 @@
                <div class="form-group col-sm-3">
                    <div class="checkbox c-checkbox">
                      <label>
-                        <input type="checkbox" name="nightClubType"  ng-model="nightClubType" ng-true-value="Y"  ng-false-value="N"  ng-checked="nightClubType == 'Y'"/>
+                        <input type="checkbox" name="nightClubType" ng-model="nightClubType" ng-true-value="Y"  ng-false-value="N"  ng-checked="nightClubType == 'Y'"/>
                         <span class="fa fa-check"></span>Night Club
                         </label>
                   </div>
@@ -124,7 +124,7 @@
                <div class="form-group col-sm-6">
                    <div class="checkbox c-checkbox">
                      <label>
-                        <input type="checkbox" name="enable_venue" value="Y" ng-model="venueEnabled" ng-true-value="Y"  ng-false-value="N" ng-click="enabledVenue(venueEnabled)" ng-checked="venueEnabled=='Y'"/>
+                        <input type="checkbox" name="enable_venue" value="Y" ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N" ng-checked="venueEnabled=='Y'"/>
                         <span class="fa fa-check"></span>Enable Venue
                         </label>
                   </div>
@@ -132,7 +132,7 @@
                <div class="form-group col-sm-6">
                    <div class="checkbox c-checkbox">
                      <label>
-                        <input type="checkbox" name="cleansed_venue" value="true" ng-model="cleansed" ng-true-value="true"  ng-false-value="false" ng-click="enableCleansed(cleansed)" ng-checked="cleansed==true"/>
+                        <input type="checkbox" name="cleansed_venue" value="true" ng-model="data.cleansed" ng-true-value="true"  ng-false-value="false" ng-checked="cleansed==true"/>
                         <span class="fa fa-check"></span>Cleansed
                         </label>
                   </div>
@@ -153,14 +153,7 @@
   </carousel>
    <br />
    <br />
-  <div class="row" ng-repeat = "venueImage in VenueImageArray">
-    <div class="form-group" ng-show="venueImage.uploadImage">
-      <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+      <div class="form-group">
+        <input type="file" id="control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
     </div>
-    <div class="form-group" ng-show="venueImage.editImage">
-      <label class="control-label col-sm-2">Image {{$index+1}}</label>
-        <button class="btn btn-danger" type="button" ng-click="removeVenueImage($index, VenueImageArray, venueImage) "><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-    </div>
-  </div>
-    <button type="button" class="btn btn-primary " ng-click="addVenueImage(VenueImageArray) "><span class="fa fa-plus" formnovalidate></span></button>
 </div>

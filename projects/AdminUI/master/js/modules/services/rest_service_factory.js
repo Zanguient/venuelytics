@@ -92,7 +92,7 @@
  					url:  urlTemplate.replace("@context", "products")+"/:productId"}
 
  				});
- 			},				
+ 			},
  			VenueMapService : function () {
  				return $resource(urlTemplate.replace("@context", "venuemap"),{}, {
  					getAll: { method: 'GET', isArray: true },
@@ -102,7 +102,7 @@
  			},
  			VenueImage : function () {
  				return $resource(urlTemplate.replace("@context", "upload"),{}, {
- 					uploadVenueImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
+ 					uploadVenueImage : {method: 'POST',transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
  					url: urlTemplate.replace("@context", "upload")+"/VenueImg"},
  					deleteVenueImage : {method: 'DELETE',headers: {},  url: urlTemplate.replace("@context", "upload")}
  				});
