@@ -7,14 +7,15 @@ App.controller('PrivateEventController', ['dataShare','$scope', '$state', '$stat
 								RestServiceFactory, toaster, FORMATS) {
   'use strict';
    	$scope.venueNumbers = '';
- var promise = RestServiceFactory.ProductService().getPrivateEvent({id:0, productId: $stateParams.id});
-  if($stateParams.id != ''){
- promise.$promise.then(function(data) {
- 	$scope.data = data;
- });
-}else {
-	$scope.venueNumbers = dataShare.venueNumber;
-}
+    var promise = RestServiceFactory.ProductService().getPrivateEvent({id:0, productId: $stateParams.id});
+    if($stateParams.id != ''){
+        promise.$promise.then(function(data) {
+        $scope.venueNumbers = data.venueNumber;
+ 	    $scope.data = data;
+        });
+    } else {
+	   $scope.venueNumbers = dataShare.venueNumber;
+    }
 
 	$scope.update = function(isValid, data, num) {
 		data.brand = "BanquetHall";
@@ -30,7 +31,7 @@ App.controller('PrivateEventController', ['dataShare','$scope', '$state', '$stat
     		target = {id: num}, {};
     	}
     	RestServiceFactory.ProductService().updatePrivateEvent(target,payload, function(success){
-    		$state.go('app.stores');
+            $state.go('app.storeedit', {id : $scope.venueNumbers});
     	},function(error){
     		if (typeof error.data != 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);

@@ -60,6 +60,7 @@
     });
   } else {
     var data = {};
+    $scope.imageUrl = [];
     data.country = "USA";
     data.venueTypeCode = 0;
     $scope.venueTypeCodes(data);
@@ -75,42 +76,50 @@
   }
   $scope.updateAttribute = function (rowId) {
     var table = $('#venue_info_table').DataTable();
+    var createTitle;
     if(rowId == undefined){
       var rowData = '';
+      createTitle = "Create Venue Attribute";
     } else {
       var rowData = table.row(rowId).data();
+      createTitle = "Update Venue Attribute";
     }
     ngDialog.openConfirm({
       template: 'modalDialogId',
       className: 'ngdialog-theme-default',
-      data: {key: rowData[0], value: rowData[1]}
+      data: {key: rowData[0], value: rowData[1], title: createTitle},
     }).then(function (value) {
       var payload = {};
       if (rowId == undefined) {
-        var attributevalue = value.value;
-        var attributekey =value.key;
-        payload[attributekey]= attributevalue;
+        var attributeValue = value.value;
+        var attributeKey =value.key;
+        payload[attributeKey]= attributeValue;
+        $scope.updateAttributeAjaxCall(payload);
+        $scope.data.info[attributeKey] = attributeValue;
       } else {
         value = value.value;
         payload[rowData[0]] = value;
-      }          
-      var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
+        $scope.updateAttributeAjaxCall(payload)
         $scope.data.info[rowData[0]] = value;
-        table.clear();
-        $.each($scope.data.info, function (k,v) {
-          table.row.add([k, v, k]);
-        });
-        table.draw();
-        $state.go('app.stores');
-        },function(error){
-          if (typeof error.data != 'undefined') {
-            toaster.pop('error', "Server Error", error.data.developerMessage);
-          }
-        });
-      }, function (reason) {
+      }
+      table.clear();
+      $.each($scope.data.info, function (k,v) {
+        table.row.add([k, v, k]);
+      });
+      table.draw();    
+    }, function (reason) {
   	//mostly cancelled  
     });
   };
+  $scope.updateAttributeAjaxCall = function(payload){
+    var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
+      toaster.pop('data', "Attribute updated successfull");
+    },function(error){
+      if (typeof error.data != 'undefined') {
+        toaster.pop('error', "Server Error", error.data.developerMessage);
+      }
+    });
+  }
   $scope.update = function(isValid, data) {
     if (!isValid) {
       return;
@@ -127,10 +136,10 @@
     data.venueTypeCode = venueTypeCode;
     $scope.imageId = [];
     angular.forEach($scope.imageUrl, function(value, key){ 
-      var test = {
+      var venueImageId = {
         "id" : value.id
       }
-      $scope.imageId.push(test);
+      $scope.imageId.push(venueImageId);
     });
     data.imageUrls = $scope.imageId;
     var payload = RestServiceFactory.cleansePayload('VenueService', data);
@@ -139,6 +148,11 @@
       target = {};
     }
     RestServiceFactory.VenueService().save(target,payload, function(success){
+      ngDialog.openConfirm({
+        template: '<p>venue information update successfull</p>',
+        plain: true,
+        className: 'ngdialog-theme-default'
+      });
       $state.go('app.stores');
     },function(error){
       if (typeof error.data != 'undefined') {
@@ -153,7 +167,7 @@
     RestServiceFactory.VenueImage().uploadVenueImage(payload, function(success){
       if(success != {}){
         $scope.imageUrl.push(success);
-        alert("image upload success");
+        toaster.pop('success', "Image upload successfull");
         document.getElementById("control").value = "";
       }
     },function(error){
