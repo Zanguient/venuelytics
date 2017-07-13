@@ -37,11 +37,11 @@
                 </div>
             </div>
             <div class="row cityBox">
-            <a class="cityImage city-image-block col-md-4 col-sm-6 city_card" style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)" href="/venues/{{city.name}}">
+            <div class="cityImage city-image-block col-md-4 col-sm-6 city_card" style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)" href="/venues/{{city.name}}">
                 <p class="content">
                     <font size="5"> {{city.name}} </font>
                 </p>
-            </a>
+            </div>
             </div>
         <center ng-show="listOfCities.length == 0"><strong>No more cities found.</strong></center>
         </div>

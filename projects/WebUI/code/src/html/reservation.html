@@ -7,11 +7,11 @@
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner carousel-inner-class" role="listbox">
-        <div class="item active">
-            <img ng-src={{venueImage}} alt="..." class="carouselImage">
+        <div>
+            <img ng-src={{venueImage}} alt="..." class="imageHeight carouselImageWidth">
             <div class="reservationCarousel">
-                <p class="reservation-carousel fontBold">Reservations / <b><font size="4">{{venueName}}</font></b></p>
-                <p class="reservation-carousel fontBold"><b><font size="4">Hours: 11:30 AM - 11:00 AM</font></b></p>
+                <p id="venueImageName" class="fontBold reservation-carousel">Reservations / <b><font size="4">{{venueName}}</font></b></p>
+                <p id="venueImageHours" class="fontBold reservation-carousel"><b><font size="4">Hours: 11:30 AM - 11:00 AM</font></b></p>
             </div>
         </div>
     </div>
@@ -203,7 +203,7 @@
             <input type="text" class="form-control fontBold" id="totalGuest" ng-model="bottle.totalGuest" placeholder="{{'reservation.TOTAL_GUEST' | translate}}">
         </div>
         <div class="col-md-10 form-group is-empty">
-            <select class="btn  dropdown-toggle form-control fontBold" required=""
+            <select class="form-control fontBold" required=""
                 ng-model="bottle.bottleOccasion" ng-options="t.name for t in eventTypes">
                 <option value="">{{"reservation.OCCASION"  | translate}}</option>
             </select>

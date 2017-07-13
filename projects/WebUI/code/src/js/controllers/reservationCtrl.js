@@ -3,17 +3,45 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
+app.controller('ReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
-    		$log.log('Inside Venue Details Controller.');
+    		$log.log('Inside Reservation Controller.');
     		
             var self = $scope;
+
+            self.guest = {};
+            self.private = {};
+            self.selectionTableItems = [];
+            self.count = 1;
+            self.bottleMinimum = [];
             self.init = function() {
                 $(function() {
                     $( "#inputDate, #privateDate" ).datepicker();
                 });
+                
+                self.bottle = VenueService.bottleServiceData;
+                self.guest = VenueService.guestListData;
+                self.private = VenueService.privateEventData;
+                self.totalGuest = VenueService.totalNoOfGuest | 1;
                 self.venueid = $routeParams.venueid;
+                self.reservationTime = APP_ARRAYS.time;
+                self.venueImage = VenueService.selectedVenue.imageUrls[0].largeUrl;
+                self.restoreTab = VenueService.tab;
+                self.getBanquetHall(self.venueid);
+                self.getBottleProducts();
+                self.getEventType();
+                if(!self.restoreTab) {
+                    self.restoreTab = 'B';
+                }
+                if(self.restoreTab === 'B') {
+                    self.bottleService();
+                } else if(self.restoreTab === 'P') {
+                    self.event();
+                } else if(self.restoreTab === 'G'){
+                    self.glist();
+                }
+
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
@@ -28,7 +56,8 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         self.row = 1;
                     }
 
-                    self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType;
+                    /*self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType;
+                    console.log("self.resevationURL>>>>>>>>>>>>>>>>>"+self.resevationURL);
                     iFrameResize({
                             log                     : false,                  // Enable console logging
                             inPageLinks             : false,
@@ -44,11 +73,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                             $(this).show();
                         });
                             
-                    });
+                    });*/
                 });
             };
 
-               /* $(window).resize(function() {                   
+                $(window).resize(function() {                   
                     setTimeout(function() { 
                         $('#imagemap').maphilight();
                     }, 200);
@@ -476,7 +505,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
              self.privateDescription = function() {
                 self.desc = "Description";
-             };*/
+             };
 
 
             self.init();
