@@ -1,4 +1,21 @@
-<div>
+<div class="ms-hero-page ms-hero-img-keyboard" ng-cloak>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{detailsOfVenue.venueName}} - {{selectedCity}}</h1>
+        </div>
+    </div>
+</div>
+<div class="container" ng-cloak>
+    <h3>
+        <a href="/newCities" class="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} </a>
+        <a href="newCities/{{selectedCity}}"> > {{selectedCity}}</a>
+    </h3>
+    <div class="row venueTabs">
+        <div class="col-md-12">
+            <article class="card card-primary wow zoomInRight animation-delay-5 mb-4">
+                <div class="card-block card-block-big">
+                    <div class="row">
+                        <div>
 <div id="carousel-example-generic" class="ms-carousel carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -18,44 +35,44 @@
 </div>
 
 <div id="rowOne">
-	<center>
-		<div id="serviceTabs" class="btn-group btn-group-justified"
-			class="reservation-tab">
-			<div id="bottleTab" class="btn-group" class="reservation-tab">
-				<button id="bottle" type="button"
-					class="btn btn-success btn-responsive reservation-button"
-					ng-click="bottleService('Bottle')" ng-init="bottleService('Bottle')">
-					<img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img> <br class="showInMobile"><span
-						class="fontRegular">{{"reservation.BOTTLE" | translate}}</span>
-				</button>
-			</div>
-			<div id="privateEventTab" class="btn-group"
-				class="reservation-tab">
-				<button id="private" type="button"
-					class="btn btn-success btn-responsive reservation-button"
-					ng-click="event('Private Event')">
-					<img ng-src="assets/img/private.png" class="reservation-icon"></img><br class="showInMobile"><span
-						class="fontRegular wrapingSpace">{{"reservation.EVENTS" | translate}}</span>
-				</button>
-			</div>
-			<div id="guestlistTab" class="btn-group"
-				class="reservation-tab">
-				<button id="glist" type="button"
-					class="btn btn-success btn-responsive reservation-button"
-					ng-click="glist('Guest List')">
-					<img ng-src="assets/img/guest.png" class="reservation-icon"></img><br class="showInMobile"><span
-						class="fontRegular wrapingSpace">{{"reservation.GUEST" | translate}}</span>
-				</button>
-			</div>
-		</div>
-	</center>
+    <center>
+        <div id="serviceTabs" class="btn-group btn-group-justified"
+            class="reservation-tab">
+            <div id="bottleTab" class="btn-group" class="reservation-tab">
+                <button id="bottle" type="button"
+                    class="btn btn-success btn-responsive reservation-button"
+                    ng-click="bottleService('Bottle')" ng-init="bottleService('Bottle')">
+                    <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img> <br class="showInMobile"><span
+                        class="fontRegular">{{"reservation.BOTTLE" | translate}}</span>
+                </button>
+            </div>
+            <div id="privateEventTab" class="btn-group"
+                class="reservation-tab">
+                <button id="private" type="button"
+                    class="btn btn-success btn-responsive reservation-button"
+                    ng-click="event('Private Event')">
+                    <img ng-src="assets/img/private.png" class="reservation-icon"></img><br class="showInMobile"><span
+                        class="fontRegular wrapingSpace">{{"reservation.EVENTS" | translate}}</span>
+                </button>
+            </div>
+            <div id="guestlistTab" class="btn-group"
+                class="reservation-tab">
+                <button id="glist" type="button"
+                    class="btn btn-success btn-responsive reservation-button"
+                    ng-click="glist('Guest List')">
+                    <img ng-src="assets/img/guest.png" class="reservation-icon"></img><br class="showInMobile"><span
+                        class="fontRegular wrapingSpace">{{"reservation.GUEST" | translate}}</span>
+                </button>
+            </div>
+        </div>
+    </center>
 </div>
 
 <!-- Bottle Service START row-->
 <div ng-show="bottleServiceTab">
 <form class="form-horizontal" parsley-validate validate-form="">
-	<fieldset>
-		<div class="col-md-10 form-group is-empty">
+    <fieldset>
+        <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control fontBold" id="inputDate" ng-model="bottle.requestedDate" placeholder="Date">
         </div>
         <div class="col-md-10 form-group is-empty" ng-if="tableSelection">
@@ -279,7 +296,7 @@
                 </tr>
             </table>
         </div>
-     	<div class="col-md-10">
+        <div class="col-md-10">
             <div class="checkbox">
                 <label class="check-box fontRegular table-font">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AUTHORIZE" | translate}}
@@ -294,14 +311,14 @@
             </div>
         </div>
         <a href="javascript:void(0)" class="btn btn-raised btn-success chk-button fontXLarge" ng-click="confirmBottleService()"><font size="5"> {{"reservation.CHECKOUT" | translate}} </font><div class="ripple-container"></div></a>
-	</fieldset>
+    </fieldset>
 </form> <br/>
 
 <div class="col-md-7 req-border">
-	<p class="fontRegular table-font"><font color="#4caf50">{{"reservation.MIN_REQ" | translate}}</font></p>
-	<p class="fontRegular table-font">{{"reservation.MIN_REQ_DESC" | translate}}</p>
-	<p class="fontRegular table-font"><font color="#4caf50">{{"reservation.DRESS_CODE" | translate}}</font></p>
-	<p class="fontRegular table-font">{{"reservation.DRESS_CODE_DESC" | translate}}</p>
+    <p class="fontRegular table-font"><font color="#4caf50">{{"reservation.MIN_REQ" | translate}}</font></p>
+    <p class="fontRegular table-font">{{"reservation.MIN_REQ_DESC" | translate}}</p>
+    <p class="fontRegular table-font"><font color="#4caf50">{{"reservation.DRESS_CODE" | translate}}</font></p>
+    <p class="fontRegular table-font">{{"reservation.DRESS_CODE_DESC" | translate}}</p>
 </div> <br/>
 
 <div class="col-md-12">
@@ -431,8 +448,16 @@
 </div>
 
 <div ng-show="eventServiceTab">
-	<div ng-include="'private-event.html'">
-	</div>
+    <div ng-include="'private-event.html'">
+    </div>
 </div>
 </div>
 
+
+                        <!-- <embed ng-src="{{resevationURL}}" id='venueReservationFrame' width="100%"></embed> -->
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>

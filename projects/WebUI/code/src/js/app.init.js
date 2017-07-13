@@ -57,6 +57,23 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller: 'VenueDetailsController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
+        .when('/newCities', {
+            templateUrl: 'new-city.html',
+            controller: 'NewCityController',
+            title: 'Venuelytics-City',
+            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
+
+        })
+        .when('/newCities/:cityName', {
+            templateUrl: 'new-venues.html',
+            controller: 'NewVenueController',
+            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
+        })
+        .when('/newCities/:cityName/:venueid', {
+            templateUrl: 'reservation.html',
+            controller: 'ReservationController',
+            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
+        })
         .when('/searchBusiness', {
             templateUrl: 'business-search.html',
             controller: 'businessController',

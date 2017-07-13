@@ -3,7 +3,7 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate',
+app.controller('NewVenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, $translate) {
 
     		$log.log('Inside Venue Controller.');
@@ -75,11 +75,11 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                 //VenueService.selectedVenueDetails = venue;
                 VenueService.selectedVenue = venue;
                 VenueService.venueNumber = venue.id;
-    			$location.url('/cities/'+self.selectedCityName+'/'+venue.id);
+    			$location.url('/newCities/'+self.selectedCityName+'/'+venue.id);
     		};
 
             self.selectedServices = function(venue, serviceType) {
-                $location.url('/cities/'+self.selectedCityName+'/'+venue.id+'/'+serviceType);
+                $location.url('/newCities/'+self.selectedCityName+'/'+venue.id+'/'+serviceType);
             };
     		self.init();
     }])

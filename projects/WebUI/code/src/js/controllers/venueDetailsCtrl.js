@@ -10,7 +10,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
     		
             var self = $scope;
             self.init = function() {
-                $(function() {
+                /*$(function() {
                     $( "#inputDate, #privateDate" ).datepicker();
                 });
                 
@@ -33,7 +33,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     self.event();
                 } else if(self.restoreTab === 'G'){
                     self.glist();
-                }
+                }*/
 
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;

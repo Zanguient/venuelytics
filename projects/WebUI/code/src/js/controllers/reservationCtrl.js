@@ -23,10 +23,9 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                 self.bottle = VenueService.bottleServiceData;
                 self.guest = VenueService.guestListData;
                 self.private = VenueService.privateEventData;
-                self.totalGuest = VenueService.totalNoOfGuest | 1;
+                self.totalGuest = VenueService.totalNoOfGuest;
                 self.venueid = $routeParams.venueid;
                 self.reservationTime = APP_ARRAYS.time;
-                self.venueImage = VenueService.selectedVenue.imageUrls[0].largeUrl;
                 self.restoreTab = VenueService.tab;
                 self.getBanquetHall(self.venueid);
                 self.getBottleProducts();
@@ -42,10 +41,11 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                     self.glist();
                 }
 
-                AjaxService.getVenues(self.venueid,null,null).then(function(response) {
+                AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
                     self.venueName =    self.detailsOfVenue.venueName;
+                    self.venueImage = response.imageUrls[0].largeUrl
                     if($routeParams.serviceType === 'p' || $routeParams.serviceType === 'b' || $routeParams.serviceType === 'g') {
                         self.row = 1;
                     } else if($routeParams.serviceType === 't' || $routeParams.serviceType === 'f' || $routeParams.serviceType === 'd') {
