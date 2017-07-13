@@ -36,6 +36,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                 toaster.pop('error', "Server Error", error.data.developerMessage);
             }
         });
+        $scope.top3FavItems();
         $scope.bookingRequestChart();
         $scope.reservedBookingChart();
 		$scope.reload();
@@ -46,9 +47,18 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[2].value = addForType($scope.venueBookings, $scope.selectedPeriod);
         $scope.top3Stats[3].value = addForType($scope.venueCheckin, $scope.selectedPeriod);
         $scope.top3Stats[3].value += addForType($scope.visitorCheckin, $scope.selectedPeriod);
+        $scope.top3FavItems();
         $scope.bookingRequestChart();
         $scope.reservedBookingChart();
         $scope.donutInit();
+    };
+    $scope.top3FavItems = function () {
+        var temp = $scope.selectedPeriod.toLowerCase();
+        var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
+        var promise = RestServiceFactory.AnalyticsService().getTopNFavItems({id: contextService.userVenues.selectedVenueNumber, aggPeriodType: aggPeriodType, n: 3});   
+        promise.$promise.then(function(data) {
+            $scope.topItemsList = data;
+        });
     };
 
     $scope.processAnalytics = function(data) {
@@ -156,12 +166,12 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         }
     };
 
-    $scope.getNotificationIconClass = function(n) {
-        if (n.serviceType === 'BanquetHall'){
+    $scope.getNotificationIconClass = function(type) {
+        if (type === 'BanquetHall'){
             return "fa icon-diamond";
-        } else if(n.serviceType === 'Bottle'){
+        } else if(type === 'Bottle'){
             return "fa fa-glass";
-        } else if(n.serviceType === 'GuestList') {
+        } else if(type === 'GuestList') {
             return "fa icon-book-open";
         } else {
            return "fa icon-envelope-letter";
@@ -351,8 +361,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         var temp = $scope.selectedPeriod.toLowerCase();
         var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
         $scope.reservedBookings  = {};
-         RestServiceFactory.getAnalyticsService(contextService.userVenues.selectedVenueNumber, 
-                            'ReservedBookings', aggPeriodType, 'scodes=BPK').get(contextService.userVenues.selectedVenueNumber, function(data){
+         RestServiceFactory.AnalyticsService().get({id: contextService.userVenues.selectedVenueNumber, 
+                            anaType: 'ReservedBookings', aggPeriodType: aggPeriodType, filter: 'scodes=BPK'}, function(data){
             $scope.reservedBookings = data;
             $('#pie_rb').ClassyLoader({
                lineColor: "#23b7e5",

@@ -92,7 +92,7 @@
  					url:  urlTemplate.replace("@context", "products")+"/:productId"}
 
  				});
- 			},
+ 			},				
  			VenueMapService : function () {
  				return $resource(urlTemplate.replace("@context", "venuemap"),{}, {
  					getAll: { method: 'GET', isArray: true },
@@ -102,7 +102,7 @@
  			},
  			VenueImage : function () {
  				return $resource(urlTemplate.replace("@context", "upload"),{}, {
- 					uploadVenueImage : {method: 'POST',transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
+ 					uploadVenueImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
  					url: urlTemplate.replace("@context", "upload")+"/VenueImg"},
  					deleteVenueImage : {method: 'DELETE',headers: {},  url: urlTemplate.replace("@context", "upload")}
  				});
@@ -124,7 +124,7 @@
  					deactivate : {method: 'POST',  params: { id: '@id' }, 
  					url: contentActivateUrl.replace("@activate", "deactivate")},
 
- 				}
+ 					}
  				);
  			},
  			CouponService: function () {
@@ -135,15 +135,22 @@
  					deactivate : {method: 'POST',  params: { id: '@id' }, 
  					url: contentActivateUrl.replace("@activate", "deactivate")},
 
- 				}
+ 					}
  				);
  			},
  			getAnalyticsUrl : function (venueNumber, anaType, aggPreriodType, filter) {
  				return ContextService.contextName + "/v1/analytics/" + venueNumber + "/"+anaType +"/"+aggPreriodType+"?"+ filter;
  			},
- 			getAnalyticsService : function (venueNumber, anaType, aggPreriodType, filter) {
- 				var url = ContextService.contextName + "/v1/analytics/" + venueNumber + "/"+anaType +"/"+aggPreriodType+"?"+ filter;
- 				return $resource(url);
+ 			AnalyticsService : function () {
+ 			
+ 				return $resource(urlTemplate.replace("@context", "analytics"),{},{
+ 					get : { method: 'GET',  params: { id: '@id', anaType: '@anaType', aggPreriodType : '@aggPreriodType', filter: '@filter' }, 
+ 						url: urlTemplate.replace("@context", "analytics") + "/:anaType/:aggPreriodType?:filter", isArray:true},
+ 					getTopNFavItems : {method: 'GET',  params: { id: '@id', aggPeriodType : '@aggPeriodType' }, 
+ 						url: urlTemplate.replace("@context", "analytics") +"/favitems/:aggPeriodType"},
+ 					
+ 					}
+ 				);
  			},
  			cleansePayload : function(serviceName, payload) {
  				var rProps = REQ_PROP[serviceName];

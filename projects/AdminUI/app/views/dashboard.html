@@ -96,7 +96,7 @@
             <div class="panel-title">Today's GuestList</div>
          </div>
          <!-- START list group-->
-         <div class="list-group" ng-init="guests.total = 0">
+         <scrollable height="290" class="list-group" ng-init="guests.total = 0">
             <!-- START list group item-->
             <div class="list-group-item" ng-repeat="item in guests">
                <div class="media">
@@ -117,7 +117,7 @@
             </div>
             <!-- END list group item-->
             
-         </div>
+         </scrollable>
          <!-- END list group-->
          <!-- START panel footer-->
          <div class="panel-footer clearfix">
@@ -136,38 +136,35 @@
       <!-- START messages and activity-->
       <div class="panel panel-default">
          <div class="panel-heading">
-            <div class="panel-title">Latest activities</div>
+            <div class="panel-title">Top 3 Favorites</div>
          </div>
          <!-- START list group-->
-         <div class="list-group">
+         <scrollable height="290" class="list-group">
             <!-- START list group item-->
-            <div class="list-group-item" ng-repeat="activity in activities">
+            <div class="list-group-item" ng-repeat="(name, value) in topItemsList">
                <div class="media">
                   <div class="pull-left">
                      <span class="fa-stack">
-                        <em class="fa fa-circle fa-stack-2x text-purple"></em>
-                        <em class="fa fa-cloud-upload fa-stack-1x fa-inverse text-white"></em>
+                        <em ng-class="getNotificationIconClass(name)"></em>
                      </span>
                   </div>
                   <div class="media-body clearfix">
-                     <small class="text-muted pull-right ml">15m</small>
-                     <div class="media-heading"><a href="#" class="text-purple m0">NEW FILE</a>
+                     <div class="media-heading"><a href="#" class="text-purple m0">{{name}}</a>
                      </div>
-                     <p class="m0">
-                        <small><a href="#">Bootstrap.xls</a>
-                        </small>
+                     <p class="m0" ng-repeat="item in value.split(',')">
+                        <small>{{item}}</small>
                      </p>
                   </div>
                </div>
             </div>
             <!-- END list group item-->
             
-         </div>
+         </scrollable>
          <!-- END list group-->
          <!-- START panel footer-->
          <div class="panel-footer clearfix">
             <a href="#" class="pull-left">
-               <small>Load more</small>
+               <small>**</small>
             </a>
          </div>
          <!-- END panel-footer-->
