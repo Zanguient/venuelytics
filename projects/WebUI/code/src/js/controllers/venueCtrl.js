@@ -75,12 +75,11 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                 //VenueService.selectedVenueDetails = venue;
                 VenueService.selectedVenue = venue;
                 VenueService.venueNumber = venue.id;
-    			$location.url('/venues/'+self.selectedCityName+'/'+venue.id);
+    			$location.url('/cities/'+self.selectedCityName+'/'+venue.id);
     		};
 
             self.selectedServices = function(venue, serviceType) {
-                $location.url('/venues/'+self.selectedCityName+'/'+venue.id+'/'+serviceType);
-                $log.info('Inside selected services');
+                $location.url('/cities/'+self.selectedCityName+'/'+venue.id+'/'+serviceType);
             };
     		self.init();
     }]);

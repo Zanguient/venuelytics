@@ -80,7 +80,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
 
     		self.selectCity = function(city) {
                 $rootScope.title = 'Venuelytics-City-'+city.name;
-                $location.url('/venues/'+city.name);
+                $location.url('/cities/'+city.name);
     		};
 
             self.previousPage = function() {

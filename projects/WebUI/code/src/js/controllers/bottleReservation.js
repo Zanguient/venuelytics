@@ -69,7 +69,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             }
 
             self.editConfirmPage = function() {
-                $location.url("/venues/" + self.editCity + "/" + self.editVenueID);
+                $location.url("/cities/" + self.editCity + "/" + self.editVenueID);
             };
 
             self.createBottleSave = function() {

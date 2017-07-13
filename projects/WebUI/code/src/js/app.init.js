@@ -41,18 +41,18 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
 
         })
-        .when('/venues/:cityName', {
+        .when('/cities/:cityName', {
             templateUrl: 'venues.html',
             controller: 'VenueController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
-        .when('/venues/:cityName/:venueid/:serviceType', {
+        .when('/cities/:cityName/:venueid/:serviceType', {
             templateUrl: 'venue-details.html',
             controller: 'VenueDetailsController',
             title: 'Venuelytics-Service',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
-        .when('/venues/:cityName/:venueid', {
+        .when('/cities/:cityName/:venueid', {
             templateUrl: 'venue-details.html',
             controller: 'VenueDetailsController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
@@ -126,6 +126,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         requireBase: true,
         rewriteLinks: true
     });
+    $locationProvider.hashPrefix('!');
 
 }]).config(['$translateProvider', function ($translateProvider) {
 
