@@ -28,6 +28,8 @@ var filter = require('gulp-filter');
 var pseudoTranslator = require('gulp-pseudo-translate-angular-json');
 var jeditor = require('gulp-json-editor');
 var jscpd = require('gulp-jscpd');
+var sitemap = require('gulp-sitemap');
+var save = require('gulp-save');
  
 
 var paths = {
@@ -153,7 +155,14 @@ gulp.task('html', function() {
             indent_size: 2
         })))
         .pipe(gulp.dest(path.join(paths.html)))
-        .pipe(connect.reload());
+        .pipe(connect.reload())
+        .pipe(save('before-sitemap'))
+        .pipe(sitemap({
+            siteUrl: 'http://dev.webui.s3-website-us-west-1.amazonaws.com',
+            lastmod: Date.now()
+        }))
+        .pipe(gulp.dest('./dist'))
+        .pipe(save.restore('before-sitemap'));
 });
 
 gulp.task('html:dist', function() {
