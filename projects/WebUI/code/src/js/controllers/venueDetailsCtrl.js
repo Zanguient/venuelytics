@@ -13,11 +13,33 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                 $(function() {
                     $( "#inputDate, #privateDate" ).datepicker();
                 });
+                
+                self.bottle = VenueService.bottleServiceData;
+                self.guest = VenueService.guestListData;
+                self.private = VenueService.privateEventData;
+                self.totalGuest = VenueService.totalNoOfGuest;
                 self.venueid = $routeParams.venueid;
-                AjaxService.getVenues(self.venueid,null,null).then(function(response) {
+                self.reservationTime = APP_ARRAYS.time;
+                self.restoreTab = VenueService.tab;
+                self.getBanquetHall(self.venueid);
+                self.getBottleProducts();
+                self.getEventType();
+                if(!self.restoreTab) {
+                    self.restoreTab = 'B';
+                }
+                if(self.restoreTab === 'B') {
+                    self.bottleService();
+                } else if(self.restoreTab === 'P') {
+                    self.event();
+                } else if(self.restoreTab === 'G'){
+                    self.glist();
+                }
+
+                AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
                     self.venueName =    self.detailsOfVenue.venueName;
+                    self.venueImage = response.imageUrls[0].largeUrl;
                     if($routeParams.serviceType === 'p' || $routeParams.serviceType === 'b' || $routeParams.serviceType === 'g') {
                         self.row = 1;
                     } else if($routeParams.serviceType === 't' || $routeParams.serviceType === 'f' || $routeParams.serviceType === 'd') {
@@ -127,7 +149,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
                 // Date in YYYYMMDD format
                 self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
-                AjaxService.getVenueMap(VenueService.venueNumber).then(function(response) {
+                AjaxService.getVenueMap($routeParams.venueid).then(function(response) {
                     self.venueImageMapData = response.data;
                     angular.forEach(self.venueImageMapData, function(value, key1) {
                         if(value.days == "*") {
@@ -170,7 +192,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     });
                     self.setReservationColor();
                 });
-                AjaxService.getVenueMapForADate(VenueService.venueNumber,self.bottleServiceDate).then(function(response) {
+                AjaxService.getVenueMapForADate($routeParams.venueid,self.bottleServiceDate).then(function(response) {
                     self.reservations = response.data;
                 });
             };

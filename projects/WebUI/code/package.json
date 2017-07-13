@@ -54,6 +54,8 @@
     "merge-stream": "^1.0.1",
     "path": "^0.12.7",
     "run-sequence": "^1.2.2",
-    "yargs": "^7.1.0"
+    "yargs": "^7.1.0",
+    "gulp-sitemap": "^4.2.0",
+    "gulp-save": "^1.2.1"
   }
 }
