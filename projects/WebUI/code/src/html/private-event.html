@@ -16,83 +16,73 @@
         <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
     </div>
 </div>
-<form class="form-horizontal" name="privateForm" parsley-validate validate-form="" ng-cloak>
+<form class="form-horizontal privateFormHeight" name="privateForm" parsley-validate validate-form="" ng-cloak>
     <fieldset>
-        <div class="col-md-10 form-group is-empty">
+        <div class="col-md-12 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="privateDate" ng-model="private.orderDate" placeholder="{{'reservation.DATE' | translate}}">
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
         <div class="col-md-12">
-            <table>
-                <tr>
-                    <td>
-                        <button class="btn btn-success fontRegular btn-raised"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.VIEW_PRIVATE" | translate}}</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-heart"></span> {{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</button> 
-                    </td>
-                    <td>
-                        <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-play"></span> {{"reservation.VIEW_VIDEO" | translate}}</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-home"></span> {{"reservation.FLOOR" | translate}}</button>
-                    </td>
-                </tr>
-            </table>
-                
+            <center>
+                <button class="btn btn-success fontRegular btn-raised"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE" | translate}}</button>&nbsp;&nbsp;<br class="showInMobile">
+                <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</button> &nbsp;&nbsp;<br class="showInMobile">
+                <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.VIEW_VIDEO" | translate}}</button>&nbsp;&nbsp;<br class="showInMobile">
+                <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FLOOR" | translate}}</button>
+            </center>
         </div> 
-
+        <div class="col-md-12">
         <div class="col-md-5 form-group is-empty">
         <table>
         <tr><td>
-            <select class="btn  dropdown-toggle form-control" required=""
+            <select class="form-control" required=""
                 ng-model="private.privateStartTime" ng-options="x.key as x.value for x in reservationTime">
                 <option value="">{{"reservation.START_TIME"  | translate}}</option>
             </select></td><td>
 
-            <select id="alignmentTime" class="btn  dropdown-toggle form-control" required=""
+            <select id="alignmentTime" class="form-control" required=""
                 ng-model="private.privateEndTime" ng-options="x.key as x.value for x in reservationTime">
                 <option value="">{{"reservation.END_TIME"  | translate}}</option>
             </select></td>
         </tr>
         </table>
         </div>
-        <div class="col-md-10 form-group is-empty">
+        </div>
+        <div class="col-md-12 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="privateTotalGuest" ng-model="private.totalGuest" placeholder="{{'reservation.TOTAL_GUEST' | translate}}">
         </div>
-        <div class="col-md-10 form-group is-empty">
+        <div class="col-md-12 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="budget" placeholder="{{'reservation.BUDGET' | translate}}" ng-model="private.budget" required="required" data-parsley-trigger="change">
             <!-- <label for="table" class="fa fa-calendar"></label> -->
         </div>
-        <div class="col-md-10 form-group is-empty">
+        <div class="col-md-12 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="firstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" ng-model="private.privateFirstName" required="required" data-parsley-trigger="change">
         </div>
-        <div class="col-md-10 form-group is-empty">
+        <div class="col-md-12 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="lastName" placeholder="{{'reservation.LAST_NAME' | translate}}" ng-model="private.privateLastName" required="required" data-parsley-trigger="change">
         </div>
-        <div class="col-md-10 form-group is-empty">
+        <div class="col-md-12 form-group is-empty">
             <input type="email" class="form-control fontRegular" id="email" ng-model="private.privateEmail" placeholder="{{'reservation.EMAIL' | translate}}" required="required" data-parsley-trigger="change" >
         </div>
-        <div class="col-md-10 form-group is-empty">
+        <div class="col-md-12 form-group is-empty">
             <input type="text" id="ms-form-pass" class="form-control fontRegular" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" placeholder="{{'reservation.MOBILE' | translate}}" required="" data-parsley-trigger="change">
         </div>
-        <div class="col-md-10 form-group is-empty">
-            <select class="btn  dropdown-toggle form-control fontRegular" required=""
+        <div class="col-md-12 form-group is-empty">
+            <select class="form-control fontRegular" required=""
                 ng-model="private.privateEvent" ng-options="t.name for t in eventTypes">
                 <option value="">{{"reservation.EVENT_TYPE"  | translate}}</option>
             </select>
         </div>
-        <div class="col-md-10 form-group is-empty">
+        <div class="col-md-12 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="instructions" placeholder="{{'reservation.COMMENT' | translate}}" ng-model="private.privateComment" required="required" data-parsley-trigger="change">
         </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="checkbox">
                 <label class="check-box fontRegular fontColorForText">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
                 </label>                            
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="checkbox">
                 <label class="check-box fontRegular fontColorForText">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}

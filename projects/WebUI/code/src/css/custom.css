@@ -48,6 +48,14 @@ select {
   margin-left: 30px;
 }
 
+#venueImageName {
+  margin-bottom: 15px;
+}
+
+#venueImageHours {
+  margin-bottom: 15px;
+}
+
 .reservation-icon {
   width: 28px; 
   height: 28px;
@@ -340,7 +348,10 @@ select {
     height: 586px;
   }
 
-  
+  .carouselImageWidth {
+    width:1100px;
+  }
+
   .contact {
     margin-top: 40px;
   }
@@ -453,6 +464,10 @@ select {
     border-radius: 10px; 
     width: 100%;
   }
+
+  .privateFormHeight {
+    margin-top: 38px;
+  }
   
    .eventImage{
     height: 100px;
@@ -517,14 +532,6 @@ select {
   .businessImage {
     height: 200px;
     width: 340px;
-  }
-
-  #carousel-example-generic {
-    height: 600px;
-  }
- 
-  .carousel-inner-class {
-    height: 600px;
   }
 
   .sliderThumb {
@@ -662,6 +669,11 @@ select {
     width: 300px;
     margin-left: 0px;
   }
+
+  .imageHeight {
+    height: 300px;
+  }
+
 }
 
 /*iPhone 6*/
@@ -674,6 +686,10 @@ select {
     width: 100%;
   }
   
+  .privateFormHeight {
+    margin-top: 38px;
+  }
+
   .eventImage{
     height: 100px;
     width: 100px;
@@ -722,16 +738,8 @@ select {
     width: 100%;
   }
 
-  #carousel-example-generic {
-    height: 600px;
-  }
-
   .backColor {
     top: 220px;
-  }
-
-  .carousel-inner-class {
-    height: 600px;
   }
 
   .venueListCard {
@@ -770,6 +778,11 @@ select {
     width: 345px;
     margin-left: 0px;
   }
+
+  .imageHeight {
+    height: 300px;
+  }
+
 }
 
 /*For iPhone 6 plus*/
@@ -780,6 +793,10 @@ select {
   .chk-button {
     border-radius: 10px; 
     width: 100%;
+  }
+
+  .privateFormHeight {
+    margin-top: 38px;
   }
   
   .eventImage{
@@ -838,14 +855,6 @@ select {
     height: 200px;
     width: 375px;
   }
-
-  #carousel-example-generic {
-    height: 600px;
-  }
-
-  .carousel-inner-class {
-    height: 600px;
-  }
   
   .cityBox {
     margin-top: 30px;
@@ -882,6 +891,10 @@ select {
 
   .carousel-inner .item img {
     height: 600px;
+  }
+
+  .imageHeight {
+    height: 300px;
   }
 
   .contact {
@@ -971,6 +984,10 @@ select {
   .get-started {
     width: 380px;
     margin-left: 0px;
+  }
+
+  .imageHeight {
+    height: 300px;
   }
 }
 

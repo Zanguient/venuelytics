@@ -3,7 +3,7 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', 'AjaxService', 'APP_ARRAYS', '$rootScope',
+app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', 'AjaxService', 'APP_ARRAYS', '$rootScope',
     function ($log, $scope, $http, $location, RestURL, VenueService, AjaxService, APP_ARRAYS, $rootScope) {
 
     		$log.log('Inside City Controller.');
@@ -80,7 +80,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
 
     		self.selectCity = function(city) {
                 $rootScope.title = 'Venuelytics-City-'+city.name;
-                $location.url('/cities/'+city.name);
+                $location.url('/newCities/'+city.name);
     		};
 
             self.previousPage = function() {

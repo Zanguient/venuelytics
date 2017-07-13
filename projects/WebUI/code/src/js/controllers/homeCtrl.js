@@ -20,14 +20,22 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     $rootScope.homeTab = 'active';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = '';
+                    $rootScope.newConsumerTab = '';
                 } else if(tab === 2) {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = 'active';
                     $rootScope.consumerTab = '';
-                } else {
+                    $rootScope.newConsumerTab = '';
+                } else if(tab === 3) {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = 'active';
+                    $rootScope.newConsumerTab = '';
+                } else {
+                    $rootScope.homeTab = '';
+                    $rootScope.businessTab = '';
+                    $rootScope.consumerTab = '';
+                    $rootScope.newConsumerTab = 'active';
                 }
             };
 

@@ -384,7 +384,7 @@
 		"MOBILE":"Mobile",
 		"ZIPCODE":"Zipcode",
 		"INSTRUCTIONS":"Special Instructions",
-		"TOTAL_GUEST":"Estimated # of Guests",
+		"TOTAL_GUEST":"No of Guests",
 		"GUEST_MEN":"# of Men",
 		"GUEST_WOMEN":"# of Women",
 		"OCCASION":"Occasion",

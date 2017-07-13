@@ -16,7 +16,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             };
 
             self.editGuestPage = function() {
-                $location.url("/venues/" + self.editCity + "/" + self.editVenueID);
+                $location.url("/cities/" + self.editCity + "/" + self.editVenueID);
             };
 
             self.guestListSave = function() {

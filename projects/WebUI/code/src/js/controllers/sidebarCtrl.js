@@ -11,8 +11,8 @@ app.controller('sidebarController', ['$log', '$scope', '$http', '$location', 'Re
     		var self = $scope;
 
             self.init = function() {
-
-                
+                var data = $location.search().sb;
+                self.showBusinessTab = parseInt(data);
             };
 
             self.navigateMenu = function(menu){

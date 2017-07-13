@@ -144,7 +144,7 @@
 </div>
 <div class="col-lg-6" animate-enabled="false">
 	<carousel interval="5000" >
-    <slide ng-repeat="slide in data.imageUrls" active="slide.active">
+    <slide ng-repeat="slide in imageUrl" active="slide.active">
       <img ng-src="{{slide.originalUrl}}" style="margin: auto;" alt="" />
         <div class="carousel-caption">
           <h4>Image {{$index + 1}}</h4>

@@ -3,14 +3,20 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
+app.controller('ReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
-    		$log.log('Inside Venue Details Controller.');
+    		$log.log('Inside Reservation Controller.');
     		
             var self = $scope;
+
+            self.guest = {};
+            self.private = {};
+            self.selectionTableItems = [];
+            self.count = 1;
+            self.bottleMinimum = [];
             self.init = function() {
-                /*$(function() {
+                $(function() {
                     $( "#inputDate, #privateDate" ).datepicker();
                 });
                 
@@ -33,13 +39,13 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     self.event();
                 } else if(self.restoreTab === 'G'){
                     self.glist();
-                }*/
+                }
 
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
                     self.venueName =    self.detailsOfVenue.venueName;
-                    self.venueImage = response.imageUrls[0].largeUrl;
+                    self.venueImage = response.imageUrls[0].largeUrl
                     if($routeParams.serviceType === 'p' || $routeParams.serviceType === 'b' || $routeParams.serviceType === 'g') {
                         self.row = 1;
                     } else if($routeParams.serviceType === 't' || $routeParams.serviceType === 'f' || $routeParams.serviceType === 'd') {
@@ -50,7 +56,8 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         self.row = 1;
                     }
 
-                    self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType;
+                    /*self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType;
+                    console.log("self.resevationURL>>>>>>>>>>>>>>>>>"+self.resevationURL);
                     iFrameResize({
                             log                     : false,                  // Enable console logging
                             inPageLinks             : false,
@@ -66,11 +73,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                             $(this).show();
                         });
                             
-                    });
+                    });*/
                 });
             };
 
-               /* $(window).resize(function() {                   
+                $(window).resize(function() {                   
                     setTimeout(function() { 
                         $('#imagemap').maphilight();
                     }, 200);
@@ -149,7 +156,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
                 // Date in YYYYMMDD format
                 self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
-                AjaxService.getVenueMap($routeParams.venueid).then(function(response) {
+                AjaxService.getVenueMap(VenueService.venueNumber).then(function(response) {
                     self.venueImageMapData = response.data;
                     angular.forEach(self.venueImageMapData, function(value, key1) {
                         if(value.days == "*") {
@@ -192,7 +199,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     });
                     self.setReservationColor();
                 });
-                AjaxService.getVenueMapForADate($routeParams.venueid,self.bottleServiceDate).then(function(response) {
+                AjaxService.getVenueMapForADate(VenueService.venueNumber,self.bottleServiceDate).then(function(response) {
                     self.reservations = response.data;
                 });
             };
@@ -498,7 +505,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
              self.privateDescription = function() {
                 self.desc = "Description";
-             };*/
+             };
 
 
             self.init();
