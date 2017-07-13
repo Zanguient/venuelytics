@@ -15,7 +15,7 @@ if (typeof $ === 'undefined') { throw new Error('This application\'s JavaScript 
 // ----------------------------------- 
 
 var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','ngAnimate', 'ngStorage', 'ngCookies', 
-          'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'angular-loading-bar','ngDialog','ngImgMap'])
+          'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'angular-loading-bar','ngDialog','ngImgMap', 'templates'])
           .run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache','AUTH_EVENTS', 'AuthService', 'FORMATS',
            'Session','$timeout','$log','$cookies', 
                function ($rootScope, $state, $stateParams, $window, $templateCache, AUTH_EVENTS, AuthService, FORMATS,
@@ -49,10 +49,12 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
               
              $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             	  // Uncomment this to disables template cache
+               /* if (typeof(toState) !== 'undefined'){
+                      $templateCache.remove(toState.templateUrl);
+                }*/
             	 if (typeof(toState) !== 'undefined' && toState.name !== 'page.login'){
-	                  if (typeof(toState) !== 'undefined'){
-	                    $templateCache.remove(toState.templateUrl);
-	                  }
+                   
+	                 
 	                  
 	            	  var authorizedRoles = toState.data.authorizedRoles;
 	            	  if (AuthService.needAuthorization(authorizedRoles) && !AuthService.isAuthenticated()) {

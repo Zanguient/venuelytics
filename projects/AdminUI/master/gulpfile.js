@@ -446,7 +446,7 @@ gulp.task('package:src', ['build'], function () {
 gulp.task('bust-template', function () {
 	
 	return gulp.src(['../app/templates/**/*.html',  '../app/pages/**/*.html', '../app/views/**/*.html'])
-	 .pipe(templateCache())
+	 .pipe(templateCache('templates.js', {root: 'app/views/'}))
    .pipe(gulp.dest('../app/js/'));
     
 });
