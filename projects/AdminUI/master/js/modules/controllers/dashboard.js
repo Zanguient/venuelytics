@@ -1,6 +1,6 @@
 
 App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '$http', '$timeout','ContextService','RestServiceFactory','$translate','colors',
-                                      function($log, $scope, $rootScope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors){
+                                      function($log, $scope, $rootScope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors) {
 	'use strict';
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.selectedPeriod = 'WEEKLY';
@@ -8,8 +8,17 @@ App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '
     $scope.contextService = contextService;
     $scope.reservedBookings = {};
     $scope.requestByStatus = {};
+    $scope.listIsOpen = false;
+    $scope.getNotificationIconClass = $rootScope.getNotificationIconClass;
+    $scope.openVenueDropdown = function () {
+        //$('#venueMenuId').scrollTop();
+        $('#venueMenuId').animate({ scrollTop: 0 }, 'slow', function () {});
+    }
 	$scope.init=function(){
-		$log.log("Dash board controller has been initialized!");
+	   $('.dropdown-menu').find('input').click(function(e) {
+            e.stopPropagation();
+        });
+    	$log.log("Dash board controller has been initialized!");
 		
         $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
         $scope.top3Stats = [];
@@ -166,7 +175,7 @@ App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '
         }
     };
 
-    $scope.getNotificationIconClass = $rootScope.getNotificationIconClass;
+    
     
     /**
      * loading visitor states
@@ -255,11 +264,11 @@ App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '
 
     // Listen to refresh events
     this.listen = function() {
-      var self = this,
-          chartPanel = this.element.parents('.panel').eq(0);
+        var self = this,
+        chartPanel = this.element.parents('.panel').eq(0);
       
       // attach custom event
-      chartPanel.on('panel-refresh', function(event, panel) {
+        chartPanel.on('panel-refresh', function(event, panel) {
         // request data and remove spinner when done
         self.requestData(self.option, function(){
           panel.removeSpinner();
@@ -320,111 +329,7 @@ App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '
 
     })();
 
-    function formatStackData(data) {
-    var retData = [];
-    var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
-    var colorIndex = 0;
-    for (var index in data[0].series) {
-        var d = data[0].series[index];
-        var elem = {};
-        elem.label = $translate.instant(d.subName);
-        elem.color = colors[colorIndex % colors.length];
-        colorIndex++;
-
-        if ($scope.selectedPeriod !== 'DAILY') {
-            elem.data = d.data;
-        }
-        else {
-            elem.data = [];
-            for (var i =0; i < d.data.length; i++){
-                var from = d.data[i][0].split("-");
-                var f = new Date(from[0], from[1] - 1, from[2]);
-                var dataElem = [f.getTime(), d.data[i][1]];
-                elem.data.push(dataElem);
-            }
-        }
-        retData.push(elem);
-    }
-    return retData;
-   }
-    $scope.reservedBookingChart = function() {
-        var temp = $scope.selectedPeriod.toLowerCase();
-        var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
-        $scope.reservedBookings  = {};
-         RestServiceFactory.AnalyticsService().get({id: contextService.userVenues.selectedVenueNumber, 
-                            anaType: 'ReservedBookings', aggPeriodType: aggPeriodType, filter: 'scodes=BPK'}, function(data){
-            $scope.reservedBookings = data;
-            $('#pie_rb').ClassyLoader({
-               lineColor: "#23b7e5",
-               remainingLineColor: "rgba(200,200,200,0.4)",
-               lineWidth: 10,
-               roundedLine : true
-            }).draw(data.currentBookingPercentage);
-            $('#bar_rb').sparkline(data.barData, {
-                type: "bar",
-                height: 50,
-                barWidth: 7,
-                barSpacing: 3,
-                barColor: '#23b7e5'
-            });
-            
-            //$('#bar_rb').attr("values", );
-        },function(error){
-            if (typeof error.data !== 'undefined') { 
-                toaster.pop('error', "Server Error", error.data.developerMessage);
-            }
-        });
-    };
-    // Bar Stacked chart
-    $scope.bookingRequestChart = function() {
-           
-        var temp = $scope.selectedPeriod.toLowerCase();
-        var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
-        var sourceUrl = RestServiceFactory.getAnalyticsUrl(contextService.userVenues.selectedVenueNumber, 
-                            'ServiceTypeByModeBy2', aggPeriodType, 'scodes=BPK');
-        var Selector = '#bookingRequestChart';
-        $(Selector).each(function () {
-            var chart = new FlotChart(this, sourceUrl);
-            var option = {
-                    series: {
-                        stack: true,
-                        bars: {
-                            align: 'center',
-                            lineWidth: 0,
-                            show: true,
-                            barWidth: 0.6,
-                            fill: 0.9
-                        }
-                    },
-                    grid: {
-                        borderColor: '#eee',
-                        borderWidth: 1,
-                        hoverable: true,
-                        backgroundColor: '#fcfcfc'
-                    },
-                    tooltip: true,
-                    tooltipOpts: {
-                        content: '%x : %y'
-                    },
-                    xaxis: {
-                        tickColor: '#fcfcfc',
-                        mode: 'categories'
-                    },
-                    yaxis: {
-                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                        tickColor: '#eee'
-                    },
-                    shadowSize: 0
-            };
-            
-            if ($scope.selectedPeriod === 'DAILY') {
-                option.xaxis.mode = 'time';
-                option.series.bars.lineWidth = 1;
-            }
-            // Send Request
-            chart.requestData(option, 'GET', null, formatStackData);
-        });
-    };
+    
     // Spline chart
     (function () {
         var Selector = '.chart-spline';
@@ -596,6 +501,118 @@ App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '
             chart.setData(option, $scope.requestByStatus[$scope.selectedPeriod]);
         });
     })();
+    
+  });
+  $scope.setVenue = function(venueName, venueNumber) {
+        $scope.contextService.setVenue(venueName, venueNumber);
+        $scope.init();
+        $scope.listIsOpen = ! $scope.listIsOpen;
+   };
+   function formatStackData(data) {
+        var retData = [];
+        var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
+        var colorIndex = 0;
+        for (var index in data[0].series) {
+            var d = data[0].series[index];
+            var elem = {};
+            elem.label = $translate.instant(d.subName);
+            elem.color = colors[colorIndex % colors.length];
+            colorIndex++;
+
+            if ($scope.selectedPeriod !== 'DAILY') {
+                elem.data = d.data;
+            }
+            else {
+                elem.data = [];
+                for (var i =0; i < d.data.length; i++){
+                    var from = d.data[i][0].split("-");
+                    var f = new Date(from[0], from[1] - 1, from[2]);
+                    var dataElem = [f.getTime(), d.data[i][1]];
+                    elem.data.push(dataElem);
+                }
+            }
+            retData.push(elem);
+        }
+        return retData;
+    }
+    $scope.reservedBookingChart = function() {
+        var temp = $scope.selectedPeriod.toLowerCase();
+        var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
+        $scope.reservedBookings  = {};
+         RestServiceFactory.AnalyticsService().get({id: contextService.userVenues.selectedVenueNumber, 
+                            anaType: 'ReservedBookings', aggPeriodType: aggPeriodType, filter: 'scodes=BPK'}, function(data){
+            $scope.reservedBookings = data;
+            $('#pie_rb').ClassyLoader({
+               lineColor: "#23b7e5",
+               remainingLineColor: "rgba(200,200,200,0.4)",
+               lineWidth: 10,
+               roundedLine : true
+            }).draw(data.currentBookingPercentage);
+            $('#bar_rb').sparkline(data.barData, {
+                type: "bar",
+                height: 50,
+                barWidth: 7,
+                barSpacing: 3,
+                barColor: '#23b7e5'
+            });
+            
+            //$('#bar_rb').attr("values", );
+        },function(error){
+            if (typeof error.data !== 'undefined') { 
+                toaster.pop('error', "Server Error", error.data.developerMessage);
+            }
+        });
+    };
+    // Bar Stacked chart
+    $scope.bookingRequestChart = function() {
+           
+        var temp = $scope.selectedPeriod.toLowerCase();
+        var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
+        var sourceUrl = RestServiceFactory.getAnalyticsUrl(contextService.userVenues.selectedVenueNumber, 
+                            'ServiceTypeByModeBy2', aggPeriodType, 'scodes=BPK');
+        var Selector = '#bookingRequestChart';
+        $(Selector).each(function () {
+            var chart = new FlotChart(this, sourceUrl);
+            var option = {
+                    series: {
+                        stack: true,
+                        bars: {
+                            align: 'center',
+                            lineWidth: 0,
+                            show: true,
+                            barWidth: 0.6,
+                            fill: 0.9
+                        }
+                    },
+                    grid: {
+                        borderColor: '#eee',
+                        borderWidth: 1,
+                        hoverable: true,
+                        backgroundColor: '#fcfcfc'
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: '%x : %y'
+                    },
+                    xaxis: {
+                        tickColor: '#fcfcfc',
+                        mode: 'categories'
+                    },
+                    yaxis: {
+                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                        tickColor: '#eee'
+                    },
+                    shadowSize: 0
+            };
+            
+            if ($scope.selectedPeriod === 'DAILY') {
+                option.xaxis.mode = 'time';
+                option.series.bars.lineWidth = 1;
+            }
+            // Send Request
+            chart.requestData(option, 'GET', null, formatStackData);
+        });
+    };
     // Donut
     $scope.donutInit = function () {
         var Selector = '.chart-donut';
@@ -610,22 +627,20 @@ App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '
 
                         }
                     },
-				    grid: {
-				        hoverable: true
-				    },
-				    tooltip: true,
-				    tooltipOpts: {
-				        cssClass: "flotTip",
-				        content: "%s: %p.0%",
-				        defaultTheme: false
-				    }
+                    grid: {
+                        hoverable: true
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        cssClass: "flotTip",
+                        content: "%s: %p.0%",
+                        defaultTheme: false
+                    }
                 };
             // Send Request
              chart.setData(option, $scope.requestByStatus[$scope.selectedPeriod]);
         });
     };
     $scope.donutInit();
-  });
-
-   $scope.init();
+    $scope.init();
 }]);

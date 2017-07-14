@@ -3,10 +3,14 @@
  * smangipudi
  =========================================================*/
  
- App.factory(
- 	'RestServiceFactory',['$resource','Session','USER_ROLES', 'ContextService', 
- 	function($resource, Session, USER_ROLES,  ContextService) {
+ App.factory('RestServiceFactory',['$resource','Session','USER_ROLES',  function($resource, Session, USER_ROLES) {
  		'use strict';
+ 		var BASE_URL = "//dev.api.venuelytics.com/WebServices/rsapi";
+
+ 		this.serverName = "dev.api.venuelytics.com";
+ 		this.contextName = BASE_URL;
+ 		
+
  		var storeProperties = ['id','venueName','managerName','address','city','state','country','zip','phone','mobile','email','website','enabled','venueNumber','venueTypeCode','venueType','description','cleansed','imageUrls','info','options'];
 
  		var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 
@@ -23,6 +27,7 @@
  		var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls[{"id":1}]', 'servingSize', 'productType', 'BanquetHall','category','brand','enabled','price'];
  		var venueMapProperties = ['id','type','section','imageMap','days','updatedAt','elements','imageUrls[{"id":}]'];
  		var REQ_PROP= {};
+ 		
  		REQ_PROP['VenueService'] = storeProperties;
  		REQ_PROP['BeaconService'] = beaconProperties;
  		REQ_PROP['UserService'] = userProperties;
@@ -31,10 +36,12 @@
  		REQ_PROP['AgencyService'] = agencyProperties;
  		REQ_PROP['ProductService'] = productProperties;
  		REQ_PROP['VenueMapService'] = venueMapProperties;
- 		var urlTemplate =  ContextService.contextName + "/v1/@context/:id";
- 		var contentActivateUrl = ContextService.contextName + "/v1/content/:id/@activate";
-
+ 		var urlTemplate =  BASE_URL + "/v1/@context/:id";
+ 		var contentActivateUrl = BASE_URL + "/v1/content/:id/@activate";
+ 		self = this;
  		return {
+ 			contextName : self.contextName,
+ 			serverName : self.serverName,
  			UserService: function () {
  				return $resource(urlTemplate.replace("@context", "users"));
  			},
@@ -62,13 +69,13 @@
  			VenueService: function () {
  				return $resource(urlTemplate.replace("@context", "venues"), {}, {
  					updateAttribute : {method: 'POST',  params: { id: '@id' }, 
- 					url: urlTemplate.replace("@context", "venues")+"/info"},
+ 						url: urlTemplate.replace("@context", "venues")+"/info"},
  					getAnalytics : {method: 'GET',  params: { id: '@id' }, 
- 					url: urlTemplate.replace("@context", "venues") +"/analytics"},
+ 						url: urlTemplate.replace("@context", "venues") +"/analytics"},
  					delete : {method: 'DELETE',  params: { id: '@id'},
- 					url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"},
+ 						url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"},
  					getGuests : {method: 'GET',  params: { id: '@id' }, isArray:true,
- 					url: urlTemplate.replace("@context", "venues") +"/guests/20170708"}
+ 						url: urlTemplate.replace("@context", "venues") +"/guests/20170708"}
  				});
  			},
  			NotificationService: function () {
@@ -141,7 +148,7 @@
  				);
  			},
  			getAnalyticsUrl : function (venueNumber, anaType, aggPreriodType, filter) {
- 				return ContextService.contextName + "/v1/analytics/" + venueNumber + "/"+anaType +"/"+aggPreriodType+"?"+ filter;
+ 				return BASE_URL + "/v1/analytics/" + venueNumber + "/"+anaType +"/"+aggPreriodType+"?"+ filter;
  			},
  			AnalyticsService : function () {
  			

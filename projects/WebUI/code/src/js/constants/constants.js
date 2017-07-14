@@ -30,7 +30,11 @@ app
     				  {'image': 'assets/img/clients/31.png', 'link': 'https://www.crawllv.com'},
     				  {'image': 'assets/img/clients/32.png', 'link': 'http://www.nightlifeunlocked.com'},
     				  {'image': 'assets/img/clients/noir-lounge.png', 'link': 'http://www.noir-sf.com/'},
-    				  {'image': 'assets/img/clients/wine-jar.png', 'link': 'http://winejar-sf.com/'}]
+    				  {'image': 'assets/img/clients/wine-jar.png', 'link': 'http://winejar-sf.com/'},
+                      {'image': 'assets/img/clients/mayes.png', 'link': 'http://www.mayessf.com/'},
+                      {'image': 'assets/img/clients/fan.png', 'link': 'https://www.spriza.com/'},
+                      {'image': 'assets/img/clients/shboom.jpg', 'link': 'http://www.shboomnightclub.com/'}
+                      ]
   })
   .constant('APP_ARRAYS', {
     'country': [{"countryName": "North America", "shortName": "USA"},
