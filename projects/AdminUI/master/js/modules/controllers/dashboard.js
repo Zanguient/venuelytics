@@ -1,6 +1,6 @@
 
-App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','RestServiceFactory','$translate','colors',
-                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors){
+App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '$http', '$timeout','ContextService','RestServiceFactory','$translate','colors',
+                                      function($log, $scope, $rootScope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors){
 	'use strict';
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.selectedPeriod = 'WEEKLY';
@@ -166,28 +166,18 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         }
     };
 
-    $scope.getNotificationIconClass = function(type) {
-        if (type === 'BanquetHall'){
-            return "fa icon-diamond";
-        } else if(type === 'Bottle'){
-            return "fa fa-glass";
-        } else if(type === 'GuestList') {
-            return "fa icon-book-open";
-        } else {
-           return "fa icon-envelope-letter";
-       }
-    };
-
+    $scope.getNotificationIconClass = $rootScope.getNotificationIconClass;
+    
     /**
      * loading visitor states
      */
     $scope.reload = function() {
-       var promise = RestServiceFactory.NotificationService().getActiveNotifications({venueNumber: contextService.userVenues.selectedVenueNumber});	
+       var promise = RestServiceFactory.NotificationService().getActiveNotifications({id: contextService.userVenues.selectedVenueNumber});	
         promise.$promise.then(function(data) {
             $scope.notifications = data.notifications;
         });
 
-        var promise2 = RestServiceFactory.NotificationService().getUnreadNotificationCount({venueNumber: contextService.userVenues.selectedVenueNumber});   
+        var promise2 = RestServiceFactory.NotificationService().getUnreadNotificationCount({id: contextService.userVenues.selectedVenueNumber});   
         promise2.$promise.then(function(data) {
             $scope.notificationCount = data.count;
         });

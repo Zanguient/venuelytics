@@ -73,10 +73,12 @@
  			},
  			NotificationService: function () {
  				return $resource(urlTemplate.replace("@context", "notifications"), {}, {
- 					getActiveNotifications : {method: 'GET',  params: { venueNumber: '@venueNumber' }, 
- 					url: urlTemplate.replace("@context", "notifications")+"/:venueNumber/active"},
- 					getUnreadNotificationCount : {method: 'GET',  params: { venueNumber: '@venueNumber' }, 
- 					url: urlTemplate.replace("@context", "notifications")+"/:venueNumber/count"}
+ 					getActiveNotifications : {method: 'GET',  params: { id: '@id' }, 
+ 					url: urlTemplate.replace("@context", "notifications")+"/active"},
+ 					getUnreadNotificationCount : {method: 'GET',  params: { id: '@id' }, 
+ 					url: urlTemplate.replace("@context", "notifications")+"/count"},
+ 					getNotificationSummary : {method: 'GET', params: { id: '@id' }, 
+ 					url: urlTemplate.replace("@context", "notifications")+"/summary"}
  				});
  			},
  			ProductService : function () {
@@ -144,8 +146,8 @@
  			AnalyticsService : function () {
  			
  				return $resource(urlTemplate.replace("@context", "analytics"),{},{
- 					get : { method: 'GET',  params: { id: '@id', anaType: '@anaType', aggPreriodType : '@aggPreriodType', filter: '@filter' }, 
- 						url: urlTemplate.replace("@context", "analytics") + "/:anaType/:aggPreriodType?:filter", isArray:true},
+ 					get : { method: 'GET',  params: { id: '@id', anaType: '@anaType', aggPeriodType : '@aggPeriodType', filter: '@filter' }, 
+ 						url: urlTemplate.replace("@context", "analytics") + "/:anaType/:aggPeriodType?:filter", isArray:true},
  					getTopNFavItems : {method: 'GET',  params: { id: '@id', aggPeriodType : '@aggPeriodType' }, 
  						url: urlTemplate.replace("@context", "analytics") +"/favitems/:aggPeriodType"},
  					

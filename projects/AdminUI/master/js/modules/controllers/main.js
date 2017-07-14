@@ -104,6 +104,17 @@ App.controller('AppController',
         $scope.language.listIsOpen = ! $scope.language.listIsOpen;
       }
     };
+    $rootScope.getNotificationIconClass = function(type) {
+        if (type === 'BanquetHall'){
+            return "fa icon-diamond";
+        } else if(type === 'Bottle'){
+            return "fa fa-glass";
+        } else if(type === 'GuestList') {
+            return "fa icon-book-open";
+        } else {
+           return "fa icon-envelope-letter";
+       }
+    };
 
     $scope.language.init();
 

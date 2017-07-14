@@ -3,24 +3,37 @@
 
  =========================================================*/
 
-App.controller('ApplicationController', ['$scope', 'RestServiceFactory','$http', '$state','$log','$rootScope', 
-                                         function($scope, RestServiceFactory, $http, $state, $log, $rootScope) {
+App.controller('ApplicationController', ['$scope','RestServiceFactory','$http', '$state','$log','$rootScope', 'ContextService',
+                                         function($scope, RestServiceFactory, $http, $state, $log, $rootScope, contextService) {
     'use strict';
 	$scope.appLogo = "app/img/itzfun_logo.png";
 	$scope.appLogoSingle = "app/img/itzfun_logo.png";
+	$scope.serverName = contextService.serverName;
+	$scope.unreadMessages = 0;
+	$scope.notificationSummaries = {};
 	
-	var promise = RestServiceFactory.AppSettingsService().get();
-	promise.$promise.then(function(data) {
-		/*data.settings.map(function(item){
-			
-			if (item.name == "companyLogoUrl") {
-				$scope.appLogo = item.value;
-				$rootScope.appLogo = item.value;
-				return;
+	$scope.getNotificationIconClass = $rootScope.getNotificationIconClass;
+    
+	$scope.notificationSummary = function() {
+		var target = {id:contextService.userVenues.selectedVenueNumber};
+		var promise = RestServiceFactory.NotificationService().getNotificationSummary(target);
+
+		promise.$promise.then(function(data) {
+			$scope.unreadMessages = 0;
+			$scope.notificationSummaries = data.summary;
+			for(var key in $scope.notificationSummaries) {
+				if ($scope.notificationSummaries.hasOwnProperty(key)){
+					$scope.unreadMessages += $scope.notificationSummaries[key];
+				}
 			}
-		});*/
-	});
+		});
+	};
 	
+	$scope.notificationSummary();
+
+	setInterval(function(){
+  		$scope.notificationSummary();
+	}, 30000);
 	
 	$rootScope.$on("onLogoChange",function(ev, data){
 		$log.log("Logo has changed!", data);		
@@ -29,4 +42,13 @@ App.controller('ApplicationController', ['$scope', 'RestServiceFactory','$http',
 		
 	});
 	
+	$scope.logout = function() {
+	  
+	  AuthService.logout().then(function (user) {
+		  $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+		  $state.go("page.login");
+	  }, function () {
+		    $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+	  });
+  };
 }]);

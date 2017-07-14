@@ -43,13 +43,5 @@ App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$roo
 		    $scope.loginAction = false;
 	  });
   };
-  $scope.logout = function() {
-	  
-	  AuthService.logout().then(function (user) {
-		  $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-		  $state.go("page.login");
-	  }, function () {
-		    $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-	  });
-  };
+  
 }]);
