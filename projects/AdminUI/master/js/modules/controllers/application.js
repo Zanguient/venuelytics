@@ -11,7 +11,7 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','$http', 
 	$scope.serverName = contextService.serverName;
 	$scope.unreadMessages = 0;
 	$scope.notificationSummaries = {};
-	
+	$scope.totalTypes = 0;
 	$scope.getNotificationIconClass = $rootScope.getNotificationIconClass;
     
 	$scope.notificationSummary = function() {
@@ -21,9 +21,11 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','$http', 
 		promise.$promise.then(function(data) {
 			$scope.unreadMessages = 0;
 			$scope.notificationSummaries = data.summary;
+			$scope.totalTypes = 0;
 			for(var key in $scope.notificationSummaries) {
 				if ($scope.notificationSummaries.hasOwnProperty(key)){
 					$scope.unreadMessages += $scope.notificationSummaries[key];
+					$scope.totalTypes++;
 				}
 			}
 		});

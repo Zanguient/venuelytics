@@ -7,6 +7,13 @@
     "icon": "icon-speedometer"
   },
   {
+  	"text": "Inbox",
+	"sref": "app.inbox",
+	 "icon": "fa fa-inbox",
+	 "translate": "sidebar.nav.pages.INBOX",
+	 "submenu": []
+  },
+  {
   	"text": "Venue Management",
 	"sref": "app.stores",
 	 "icon": "icon-home",

@@ -136,7 +136,8 @@
         "BEACONS": "Beacon Management",
         "LOYALTY": "Loyalty Management",
         "SETTINGS": "Application Settings",
-         "RESERVATIONS": "Reservations"
+         "RESERVATIONS": "Reservations",
+         "INBOX": "Inbox"
       }
     }
   }
