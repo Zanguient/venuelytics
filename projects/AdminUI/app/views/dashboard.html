@@ -1,6 +1,6 @@
 <h3>
    <div class="row">
-	   <div class="col-lg-8">
+	   <div class="col-lg-7">
 	   Dashboard - <strong>{{ 'dashboard.WELCOME' | translate:{ appName: app.name } }} !</strong>
 	   </div>
    	<div class="col-lg-3">
@@ -9,13 +9,13 @@
               
          </div>  
       </div>
-      <div class="col-lg-1">
+      <div class="col-lg-2">
          <div dropdown="" is-open="listIsOpen" class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle" ng-click="openVenueDropdown()">
                {{contextService.userVenues.selectedVenueName}}<span class="caret"></span>
             </button>
            
-            <ul role="menu" id="venueMenuId" class="dropdown-menu dropdown-menu-right animated fadeInUpShort " style="width: 250px; max-height:500px !important; overflow: auto">
+            <ul role="menu" id="venueMenuId" class="dropdown-menu dropdown-menu-right animated fadeInUpShort " style="width: 200px; max-height:500px !important; overflow: auto">
                <li style="padding-left: 5px; padding-right: 5px;">
                <div class="input-group input-group-sm"> 
                   <span class="input-group-addon">
