@@ -3,14 +3,13 @@
  * smangipudi =========================================================
  */
 
-App.controller('VenueMapController', ['dataShare','$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 
-  'toaster', '$stateParams','ngDialog', function(dataShare, $scope, $state, $compile, $timeout, RestServiceFactory,
+App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 
+  'toaster', '$stateParams','ngDialog', function( $scope, $state, $compile, $timeout, RestServiceFactory,
    DataTableService, toaster, $stateParams, ngDialog) {
   'use strict';
   
   $scope.img = {};
   $scope.img.pic_url = "";
-  $scope.venueNumbers = '';
   $timeout(function(){
 
     if ( ! $.fn.dataTable ) return;
@@ -115,7 +114,6 @@ App.controller('VenueMapController', ['dataShare','$scope', '$state','$compile',
       	});      
       });
     } else {
-      $scope.venueNumbers = dataShare.venueNumber;
     }
     $scope.addTable = function () {
     	$scope.newTable = {};
@@ -130,7 +128,7 @@ App.controller('VenueMapController', ['dataShare','$scope', '$state','$compile',
     		  var table = $('#tables_table').DataTable();
     		  table.row.add([$scope.newTable.name, $scope.newTable.price, $scope.newTable.servingSize, $scope.newTable.description,  $scope.newTable.enabled,   $scope.newTable.id]);
     		  table.page( 'last' ).draw( false );
-    		  _addArea($scope.img);
+    		  _addArea($scope.img, value);
          	},function(error){
          		
          });
@@ -227,48 +225,25 @@ App.controller('VenueMapController', ['dataShare','$scope', '$state','$compile',
 	  }
   }
   $scope.update = function(isValid, data) {
-    //var table = $('#tables_table').dataTable();
-    data.elements =$scope.img.maps;
+    $scope.imageUrls = [];
     angular.forEach(data.imageUrls, function(value, key) {
-        delete value.originalUrl;
-        delete value.type;
-        delete value.name;
-        delete value.smallUrl;
-        delete value.mediumUrl;
-        delete value.originalWidth;
-        delete value.originalHeight;
-        delete value.smallWidth;
-        delete value.smallHeight;
-        delete value.mediumWidth;
-        delete value.mediumHeight;
-        delete value.largeUrl;
-        delete value.largeHeight;
-        delete value.largeWidth;
+      var venueImageId = {
+          "id" : value.id
+      }
+      $scope.imageUrls.push(venueImageId);
     });
+    data.imageUrls = $scope.imageUrls;
     angular.forEach(data.elements, function(value2, key2) {
-      delete value2.imageUrl;
-      delete value2.thumbnailImageUrl;
-      angular.forEach(value2.imageUrls, function(value1, key1) {
-        delete value1.originalUrl;
-        delete value1.type;
-        delete value1.name;
-        delete value1.smallUrl;
-        delete value1.mediumUrl;
-        delete value1.originalWidth;
-        delete value1.originalHeight;
-        delete value1.smallWidth;
-        delete value1.smallHeight;
-        delete value1.mediumWidth;
-        delete value1.mediumHeight;
-        delete value1.largeUrl;
-        delete value1.largeHeight;
-        delete value1.largeWidth;
-        //console.log("value.imageUrls....." + angular.toJson(value2.imageUrls));
-        //console.log("value.imageUrls...."+angular.toJson(value.imageUrls));
-        //console.log("Id...."+angular.toJson($rootScope.venueMapImages));
+      var tableImageUrl = value2.imageUrls;
+      value2.imageUrls = [];
+      angular.forEach(tableImageUrl, function(value1, key1) {
+        var tableImageId = {
+        "id": value1.id
+        }
+        value2.imageUrls.push(tableImageId);
       });
+     
     });
-
       /*if (!isValid) {
         console.log("inside>>>>>>>>>>>>>");
         return;
@@ -279,7 +254,7 @@ App.controller('VenueMapController', ['dataShare','$scope', '$state','$compile',
         target = {};
       }
       RestServiceFactory.VenueMapService().updateVenueMap(target,payload, function(success){
-        $state.go('app.stores');
+        $state.go('app.storeedit', {id : data.venueNumber});
       },function(error){
         if (typeof error.data != 'undefined') {
           toaster.pop('error', "Server Error", error.data.developerMessage);

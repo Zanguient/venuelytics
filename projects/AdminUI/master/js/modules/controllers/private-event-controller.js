@@ -2,21 +2,17 @@
  * Module: private-event-controller.js
  *smangipudi
  =========================================================*/
-App.controller('PrivateEventController', ['dataShare','$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService',
-							'RestServiceFactory', 'toaster', 'FORMATS',  function(dataShare, $scope, $state, $stateParams, $compile, $timeout, DataTableService, 
+App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService',
+							'RestServiceFactory', 'toaster', 'FORMATS',  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
 								RestServiceFactory, toaster, FORMATS) {
-  'use strict';
-   	$scope.venueNumbers = '';
-    var promise = RestServiceFactory.ProductService().getPrivateEvent({id:0, productId: $stateParams.id});
-    if($stateParams.id != ''){
+    'use strict';
+    var promise = RestServiceFactory.ProductService().getPrivateEvent({id:$stateParams.venueNumber, productId: $stateParams.id});
+    $scope.venueNumber = $stateParams.venueNumber;
+    if($stateParams.id == ''){
         promise.$promise.then(function(data) {
-        $scope.venueNumbers = data.venueNumber;
- 	    $scope.data = data;
+     	    $scope.data = data;
         });
-    } else {
-	   $scope.venueNumbers = dataShare.venueNumber;
     }
-
 	$scope.update = function(isValid, data, num) {
 		data.brand = "BanquetHall";
 		data.productType = "BanquetHall";
@@ -31,7 +27,7 @@ App.controller('PrivateEventController', ['dataShare','$scope', '$state', '$stat
     		target = {id: num}, {};
     	}
     	RestServiceFactory.ProductService().updatePrivateEvent(target,payload, function(success){
-            $state.go('app.storeedit', {id : $scope.venueNumbers});
+            $state.go('app.storeedit', {id : $scope.venueNumber});
     	},function(error){
     		if (typeof error.data != 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
