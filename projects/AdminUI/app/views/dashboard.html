@@ -14,11 +14,13 @@
             <button type="button" class="btn btn-default dropdown-toggle" >
                {{contextService.userVenues.selectedVenueName}}<span class="caret"></span>
             </button>
-            <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort">
+           
+            <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort" style="max-height:500px !important; overflow: auto">
                <li ng-repeat="(venueName, venueNumber) in contextService.userVenues.available">
                   <a ng-click="contextService.setVenue(venueName, venueNumber)" href="#" ng-bind="venueName"></a>
                </li>
             </ul>
+            
          </div>
       </div>
     </div>
