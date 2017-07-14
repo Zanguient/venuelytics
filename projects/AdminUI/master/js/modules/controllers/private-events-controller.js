@@ -2,8 +2,8 @@
  * Module: private-event-controller.js
  *smangipudi
  =========================================================*/
-App.controller('PrivateEventsController', ['dataShare','$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS', 
-                                  function(dataShare, $scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS) {
+App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS', 
+                                  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS) {
   'use strict';
   $timeout(function(){
 
@@ -19,7 +19,7 @@ App.controller('PrivateEventsController', ['dataShare','$scope', '$state', '$sta
 		    	"targets": [6],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-link" ng-click="editPE(' +row +','+cellData+')">' + 
+		    		var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ng-click="editPE(' +row +','+cellData+')">' + 
 		    		'</button>&nbsp;&nbsp;<button title="Delete" class="btn btn-default btn-oval fa fa-trash" '+
 		    		'ng-click="deletePE(' +row +','+cellData+')"></button>';
 		    		
@@ -47,7 +47,7 @@ App.controller('PrivateEventsController', ['dataShare','$scope', '$state', '$sta
 	    promise.$promise.then(function(data) {
 	    $scope.data = data;
     	var table = $('#events_table').DataTable();
-  
+
     	data.map(function(room) {
     		var d = room.description;
     		if (d.length > 150) {
@@ -68,7 +68,6 @@ App.controller('PrivateEventsController', ['dataShare','$scope', '$state', '$sta
 	  $state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:productId});
 	}
 	$scope.createPrivateEvent = function(rowId, productId){
-		dataShare.venueNumber = $stateParams.id;
 		$state.go('app.editBanquetHall', {venueNumber: $stateParams.id});
 	}
 	$scope.deletePE = function(rowId, productId) {

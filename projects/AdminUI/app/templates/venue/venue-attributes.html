@@ -15,14 +15,9 @@
 <script type="text/ng-template" id="modalDialogId">
 	<div class="ngdialog-message">
 		<p>	
-			<h4> <div ng-if="ngDialogData.title == 'Create Venue Attribute'">{{ngDialogData.title}}</div></h4>
-			<h4> <div ng-if="ngDialogData.title == 'Update Venue Attribute'">{{ngDialogData.title}}</div></h4>
-			<div ng-if="ngDialogData.title == 'Update Venue Attribute'"> 
-				<label class="control-label nowrap col-sm-12">{{ngDialogData.key}} </label>
-			</div>
-			<div ng-if="ngDialogData.title == 'Create Venue Attribute'">
-				<input type="text" name="value" placeholder="Enter key" required="required" class="form-control" ng-model="ngDialogData.key"/><br/>
-			</div>
+			<h4> 
+			<div>{{ngDialogData.title}}</div></h4>
+			<input type="text" name="value" placeholder="Enter key" required="required" class="form-control" ng-model="ngDialogData.key" ng-disabled = "ngDialogData.text"/><br/>
 	        <input type="text" name="value" placeholder="Enter value" required="required" class="form-control" ng-model="ngDialogData.value"/>
 			<p/>
 			<div>

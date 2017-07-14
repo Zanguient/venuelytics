@@ -18,15 +18,10 @@
 								type="text" name="name" required="required" class="form-control"
 								ng-model="data.name" />
 						</div>
-						<div ng-hide ="venueNumbers != ''" class="form-group col-sm-4">
+						<div class="form-group col-sm-4">
 							<label class="control-label">Venue Number</label> <input
 								type="text" name="description" data-parsley-type="integer"
-								readonly class="form-control" ng-model="data.venueNumber" />
-						</div>
-						<div ng-show ="venueNumbers != ''" class="form-group col-sm-4">
-							<label class="control-label">Venue Number</label> <input
-								type="text" name="description" data-parsley-type="integer"
-								readonly class="form-control" ng-model="venueNumbers" />
+								readonly class="form-control" ng-model="venueNumber" />
 						</div>
 					</div>
 					<div class="row">
@@ -65,7 +60,7 @@
 							class="form-control ng-pristine ng-valid"></textarea>
 					</div>
 
-					<div class="row" ng-hide = "true">
+					<div class="row">
 						<div class="form-group col-sm-6">
 							<div class="checkbox c-checkbox">
 								<label> <input type="checkbox" name="enable_hall"
@@ -78,7 +73,7 @@
 					</div>
 					<div class="required">* Required fields</div>
 					<button type="submit" class="btn btn-primary"
-						ng-click="update(storeInfo.$valid,data,venueNumbers)">Save</button>
+						ng-click="update(storeInfo.$valid,data,venueNumber)">Save</button>
 				</form>
 			</div>
 			<div class="col-lg-6" animate-enabled="false">

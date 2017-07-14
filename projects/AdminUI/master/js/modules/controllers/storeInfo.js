@@ -83,23 +83,24 @@
     } else {
       var rowData = table.row(rowId).data();
       createTitle = "Update Venue Attribute";
+      var hideKeyText = true;
     }
     ngDialog.openConfirm({
       template: 'modalDialogId',
       className: 'ngdialog-theme-default',
-      data: {key: rowData[0], value: rowData[1], title: createTitle},
+      data: {key: rowData[0], value: rowData[1], title: createTitle, text:hideKeyText},
     }).then(function (value) {
       var payload = {};
       if (rowId == undefined) {
         var attributeValue = value.value;
         var attributeKey =value.key;
         payload[attributeKey]= attributeValue;
-        $scope.updateAttributeAjaxCall(payload);
+        $scope.updateServices(payload);
         $scope.data.info[attributeKey] = attributeValue;
       } else {
         value = value.value;
         payload[rowData[0]] = value;
-        $scope.updateAttributeAjaxCall(payload)
+        $scope.updateServices(payload)
         $scope.data.info[rowData[0]] = value;
       }
       table.clear();
@@ -111,7 +112,7 @@
   	//mostly cancelled  
     });
   };
-  $scope.updateAttributeAjaxCall = function(payload){
+  $scope.updateServices = function(payload){
     var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
       toaster.pop('data', "Attribute updated successfull");
     },function(error){

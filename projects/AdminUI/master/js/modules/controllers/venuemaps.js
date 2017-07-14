@@ -5,8 +5,8 @@
  * =========================================================
  */
 
-App.controller('VenueMapsController', ['dataShare','$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams',
-                                   function(dataShare, $scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams) {
+App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams',
+                                   function( $scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams) {
   'use strict';
   
   $timeout(function(){
@@ -47,7 +47,6 @@ App.controller('VenueMapsController', ['dataShare','$scope', '$state','$compile'
   	};
 
     $scope.createBottle = function(venueMapId) {
-      dataShare.venueNumber = $stateParams.id;
       $state.go('app.editVenueMap', {venueNumber: $stateParams.id, id: venueMapId});
     };
   	$scope.deleteVenueMap = function(rowId, mapId) {
