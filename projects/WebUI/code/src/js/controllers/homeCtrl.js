@@ -76,8 +76,16 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
    				$translate.use(lang); 
    			};
 
-            self.sendEmail = function(value) {
-                AjaxService.sendSubscriptionMail(521, value).then(function(response) {
+            self.sendEmail = function(email) {
+                var subscribeEmail = {
+                    "email": email,
+                     "utmSource" : "dev.webui.venuelytics.com",
+                     "utmCampaign" :"homepage",
+                     "utmMedium": "subscribe"
+                }
+
+                AjaxService.sendSubscriptionMail(subscribeEmail).then(function(response) {
+                    alert('Successfully subscribed!');
                 });
             };
     }])	;
