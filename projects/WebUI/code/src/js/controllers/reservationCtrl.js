@@ -17,7 +17,7 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
             self.bottleMinimum = [];
             self.init = function() {
                 $(function() {
-                    $( "#inputDate, #privateDate" ).datepicker();
+                    $( "#inputDate, #privateDate" ).datepicker({autoclose:true});
                 });
                 
                 self.bottle = VenueService.bottleServiceData;
