@@ -381,10 +381,11 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                 VenueService.bottleZip = self.bottle.bottleZipcode;
                 VenueService.authBase64Str = authBase64Str;
                 VenueService.selectBottle = self.bottleMinimum;
+                console.log("Full object-->"+angular.toJson(self.bottle.bottleOccasion.name));
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,
-                    "reason": self.bottle.bottleOccasion.type,
+                    "reason": self.bottle.bottleOccasion.name,
                     "contactNumber": self.bottle.mobile,
                     "contactEmail": self.bottle.email,
                     "contactZipcode": self.bottle.bottleZipcode,
