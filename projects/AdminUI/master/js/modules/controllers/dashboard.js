@@ -5,19 +5,13 @@ App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.selectedPeriod = 'WEEKLY';
     $scope.notificationCount = 0;
-    $scope.contextService = contextService;
     $scope.reservedBookings = {};
     $scope.requestByStatus = {};
-    $scope.listIsOpen = false;
+    
     $scope.getNotificationIconClass = $rootScope.getNotificationIconClass;
-    $scope.openVenueDropdown = function () {
-        //$('#venueMenuId').scrollTop();
-        $('#venueMenuId').animate({ scrollTop: 0 }, 'slow', function () {});
-    }
+    
 	$scope.init=function(){
-	   $('.dropdown-menu').find('input').click(function(e) {
-            e.stopPropagation();
-        });
+	   
     	$log.log("Dash board controller has been initialized!");
 		
         $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
@@ -504,9 +498,7 @@ App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '
     
   });
   $scope.setVenue = function(venueName, venueNumber) {
-        $scope.contextService.setVenue(venueName, venueNumber);
         $scope.init();
-        $scope.listIsOpen = ! $scope.listIsOpen;
    };
    function formatStackData(data) {
         var retData = [];

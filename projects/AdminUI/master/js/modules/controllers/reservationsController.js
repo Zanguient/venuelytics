@@ -11,7 +11,6 @@ App.controller('ReservationsController',  ['$state', '$stateParams','$scope', '$
                                      function ($state, $stateParams, $scope, $rootScope, $location, AUTH_EVENTS, 
                                      	AuthService, $cookies, Session, contextService) {
     "use strict";
-    $scope.contextService = contextService;
    
    /**
    * Invoke full calendar plugin and attach behavior
@@ -21,7 +20,7 @@ App.controller('ReservationsController',  ['$state', '$stateParams','$scope', '$
  	$scope.initCalendar = function () {
 		 var calElement = $('#calendar');
 	  	// check to remove elements from the list
-	  
+	     
 	  	calElement.fullCalendar({
 	      isRTL: $scope.app.layout.isRTL,
 	      header: {
@@ -72,7 +71,9 @@ App.controller('ReservationsController',  ['$state', '$stateParams','$scope', '$
 	      //events: events
 	  });
 	};
-
+	$scope.setVenue = function(venueName, venueNumber) {
+     
+   	};
 	$scope.initCalendar();
                                      	
 }]);

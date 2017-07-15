@@ -15,8 +15,14 @@ App.service('ContextService',['$location','RestServiceFactory', '$rootScope',fun
 	this.userVenues = {
         selectedVenueNumber: 0,
         selectedVenueName : "",
+        listIsOpen : false,
         available: {}
 	};
+
+	this.openVenueDropdown = function (selector) {
+        $(selector).animate({ scrollTop: 0 }, 'slow', function () {});
+    }
+
 	var self = this;
 	var promise = RestServiceFactory.VenueService().get();
 	promise.$promise.then(function(data) {
@@ -45,6 +51,7 @@ App.service('ContextService',['$location','RestServiceFactory', '$rootScope',fun
 	this.setVenue = function (venueName, venueNumber) {
         this.userVenues.selectedVenueNumber = venueNumber;
         this.userVenues.selectedVenueName = venueName;
+        this.userVenues.listIsOpen = !this.userVenues.listIsOpen;
         $rootScope.$storage.selectedVenueNumber = venueNumber;
       	$rootScope.$storage.selectedVenueName = venueName;
           

@@ -4,16 +4,7 @@
          Reservations - <small>Managers view of all reservations</small>
       </div>
       <div class="col-lg-1">
-         <div dropdown="" is-open="userVenues.listIsOpen" class="btn-group pull-right">
-            <button type="button" class="btn btn-default dropdown-toggle" >
-               {{contextService.userVenues.selectedVenueName}}<span class="caret"></span>
-            </button>
-            <ul role="menu" class="dropdown-menu dropdown-menu-right animated fadeInUpShort">
-               <li ng-repeat="(venueName, venueNumber) in contextService.userVenues.available">
-                  <a ng-click="contextService.userVenues.set(venueName, venueNumber)" href="#" ng-bind="venueName"></a>
-               </li>
-            </ul>
-         </div>
+          <venue-dropdown callback="setVenue(venueName, venueId)"/>
       </div>
     </div>
 </h3>
