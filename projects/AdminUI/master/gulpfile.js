@@ -404,7 +404,7 @@ gulp.task('watch', function() {
 // DEFAULT TASK
 //---------------
 
-gulp.task('dev',[
+gulp.task('dev',gulpSequence([
           'scripts:vendor',
           'scripts:app',
           'styles:app',
@@ -414,7 +414,9 @@ gulp.task('dev',[
           'templates:pages',
           'templates:views',
           'watch'
-        ], function (){
+        ], 'remove-template-cache', 'start_server'));
+
+gulp.task('start_server', function (cb){
 
          return connect.server({
             root: '../',
@@ -422,6 +424,9 @@ gulp.task('dev',[
          });
  });
 
+gulp.task('remove-template-cache', function(cb) {
+  return del.sync(['../app/js/templates.js'], {force: true});
+});
 gulp.task('build', gulpSequence([
                       'scripts:vendor',
                       'scripts:app',
@@ -465,7 +470,7 @@ gulp.task('package:build', ['package:src', 'package:vendor'], function () {
     .pipe(gulp.dest('../dist'));
 });
 
-gulp.task('package', gulpSequence('clean','package:build'));
+gulp.task('dist', gulpSequence('clean','package:build'));
 
 gulp.task('aws:deploy', ['package'], function () {
       
