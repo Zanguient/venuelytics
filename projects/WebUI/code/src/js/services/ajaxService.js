@@ -268,10 +268,11 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     }
 
-    this.sendSubscriptionMail = function(venueId,emailId) {
+    this.sendSubscriptionMail = function(object) {
         return $http({
             method: 'POST',
-            url: RestURL.baseURL + 'venues' + '/' + venueId + '/subscribeBusiness?email=' + emailId
+            url: RestURL.baseURL + 'venues/subscribeBusiness',
+            data: object
         }).then(function(success) {
             return success;
         }, function(error) {
