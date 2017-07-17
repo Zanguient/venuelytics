@@ -245,9 +245,18 @@ select {
     margin-left: 15px;
   }
 
+  .downloadIcon{
+    padding-top: 25px;
+  }
+
   .chk-button {
     border-radius: 10px; 
     width: 630px;
+  }
+
+  #container {
+    height: 690px;
+    width: 1349px;
   }
 
   #alignmentTime {
@@ -467,6 +476,10 @@ select {
   .chk-button {
     border-radius: 10px; 
     width: 100%;
+  }
+
+  .alignUrl {
+    margin-top: 40px;
   }
 
   .privateFormHeight {
@@ -699,6 +712,10 @@ select {
     width: 100px;
   }
 
+  .alignUrl {
+    margin-top: 40px;
+  }
+
   #alignmentTime {
     margin-left: 13px;
   }
@@ -801,6 +818,10 @@ select {
 
   .privateFormHeight {
     margin-top: 38px;
+  }
+
+  .alignUrl {
+    margin-top: 40px;
   }
   
   .eventImage{

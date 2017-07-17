@@ -16,13 +16,21 @@
         <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
     </div>
 </div>
+<div class="col-md-12 showInMobile alignUrl">
+    <center>
+        <button class="btn btn-success fontRegular btn-raised"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE" | translate}}</button>&nbsp;&nbsp;<br class="showInMobile">
+        <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</button> &nbsp;&nbsp;<br class="showInMobile">
+        <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.VIEW_VIDEO" | translate}}</button>&nbsp;&nbsp;<br class="showInMobile">
+        <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FLOOR" | translate}}</button>
+    </center>
+</div> 
 <form class="form-horizontal privateFormHeight" name="privateForm" parsley-validate validate-form="" ng-cloak>
     <fieldset>
         <div class="col-md-12 form-group is-empty">
             <input type="text" class="form-control fontRegular" id="privateDate" ng-model="private.orderDate" placeholder="{{'reservation.DATE' | translate}}">
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 showInWeb">
             <center>
                 <button class="btn btn-success fontRegular btn-raised"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE" | translate}}</button>&nbsp;&nbsp;<br class="showInMobile">
                 <button class="btn btn-success btn-raised fontRegular"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</button> &nbsp;&nbsp;<br class="showInMobile">
