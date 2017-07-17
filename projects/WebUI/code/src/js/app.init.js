@@ -136,7 +136,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics-GuestListConfirmation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
-        .otherwise('/home');
+        .otherwise('/cities');
 
     $locationProvider.html5Mode({
         enabled: true,

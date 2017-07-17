@@ -416,7 +416,7 @@ gulp.task('dev',gulpSequence([
           'watch'
         ], 'remove-template-cache', 'start_server'));
 
-gulp.task('start_server', function (cb){
+gulp.task('start_server', function (){
 
          return connect.server({
             root: '../',
@@ -424,7 +424,7 @@ gulp.task('start_server', function (cb){
          });
  });
 
-gulp.task('remove-template-cache', function(cb) {
+gulp.task('remove-template-cache', function() {
   return del.sync(['../app/js/templates.js'], {force: true});
 });
 gulp.task('build', gulpSequence([

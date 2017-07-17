@@ -17,6 +17,10 @@ App.controller('ReservationsController',  ['$state', '$stateParams','$scope', '$
    * @param  jQuery [calElement] The calendar dom element wrapped into jQuery
    * @param  EventObject [events] An object with the event list to load when the calendar displays
    */
+  	$scope.events = [];
+  	$scope.getReservationSummary = function() {
+
+  	}
  	$scope.initCalendar = function () {
 		 var calElement = $('#calendar');
 	  	// check to remove elements from the list
@@ -71,9 +75,11 @@ App.controller('ReservationsController',  ['$state', '$stateParams','$scope', '$
 	      //events: events
 	  });
 	};
+
 	$scope.setVenue = function(venueName, venueNumber) {
      
    	};
+	
 	$scope.initCalendar();
                                      	
 }]);
