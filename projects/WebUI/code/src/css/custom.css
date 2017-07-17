@@ -237,6 +237,10 @@ select {
     height: 730px;
   }
 
+  .cardAlignment{
+    margin-right: 20px;
+  }
+
   .carouselImage {
     width: 100%;
   }
