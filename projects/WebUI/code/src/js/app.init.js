@@ -34,6 +34,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
+        .when('/home?nc&orgId', {
+            templateUrl: 'home.html',
+            controller: 'HomeController',
+            title: 'Venuelytics',
+            description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
+        })
         .when('/cities', {
             templateUrl: 'city.html',
             controller: 'CityController',

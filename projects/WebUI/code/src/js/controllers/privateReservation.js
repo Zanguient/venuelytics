@@ -20,7 +20,7 @@ app.controller('PrivateReservationController', ['$log', '$scope', '$http', '$loc
             };
 
             self.editPrivatePage = function() {
-                $location.url("/cities/" + self.editCity + "/" + self.editVenueID);
+                $location.url("/newCities/" + self.editCity + "/" + self.editVenueID);
             };
 
             self.privateEventSave = function() {

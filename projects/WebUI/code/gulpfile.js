@@ -159,7 +159,13 @@ gulp.task('html', function() {
         .pipe(save('before-sitemap'))
         .pipe(sitemap({
             siteUrl: 'http://dev.webui.s3-website-us-west-1.amazonaws.com',
-            lastmod: Date.now()
+            lastmod: Date.now(),
+            changefreq: ['daily'],
+            mappings: [{
+            	pages: ['about.html', 'city.html', 'contact.html', 'home.html', 'privacy.html', 'terms-of-use.html'],
+            	changefreq: ['hourly'],
+            	lastmod: Date.now()
+            }]
         }))
         .pipe(gulp.dest('./dist'))
         .pipe(save.restore('before-sitemap'));

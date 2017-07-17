@@ -15,6 +15,8 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             self.clientImages = APP_CLIENTS.clientImages;
             var data = $location.search().sb;
             self.showBusinessTab = parseInt(data);
+            var newConsumer = $location.search().nc;
+            self.showNewConsumer = parseInt(newConsumer);
             self.navBar = function(tab) {
                 if(tab === 1) {
                     $rootScope.homeTab = 'active';
