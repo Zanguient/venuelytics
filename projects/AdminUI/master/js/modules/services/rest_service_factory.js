@@ -113,7 +113,9 @@
  				return $resource(urlTemplate.replace("@context", "upload"),{}, {
  					uploadVenueImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
  					url: urlTemplate.replace("@context", "upload")+"/VenueImg"},
- 					deleteVenueImage : {method: 'DELETE',headers: {},  url: urlTemplate.replace("@context", "upload")}
+ 					deleteVenueImage : {method: 'DELETE',headers: {},  url: urlTemplate.replace("@context", "upload")},
+ 					uploadTableImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
+ 					url: urlTemplate.replace("@context", "upload")+"/venueImgElements"},
  				});
  			},
  			LoyaltyService: function () {

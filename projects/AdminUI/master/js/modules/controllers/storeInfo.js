@@ -3,8 +3,8 @@
  * smangipudi
  =========================================================*/
  /*jshint bitwise: false*/
- App.controller('StoreController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
-   function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout,DataTableService, $compile, ngDialog) {
+ App.controller('StoreController', ['$translate','$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
+   function($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout,DataTableService, $compile, ngDialog) {
   'use strict';
   $scope.initInfoTable = function() {
     if ( ! $.fn.dataTable || $stateParams.id == 'new') {
@@ -35,7 +35,7 @@
     var table = $('#venue_info_table').DataTable();
 
     $.each($scope.data.info, function (k,v) {
-      table.row.add([k, v, k]);
+      table.row.add([$translate.instant(k), v, k]);
     });
     table.draw();
   };
