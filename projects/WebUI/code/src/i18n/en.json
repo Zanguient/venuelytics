@@ -69,7 +69,9 @@
 		"REAL_TIME":"Real-Time Premium Services...",
 		"RESERVATION_FOOD_DRINK":"Reservations, Food & Drink Ordering, WayFinding, Deals, Rewards...",
 		"VIP_PERSONALLY":"Go Well-Beyond Loyalty…Know Your VIP’s Personally",
-		"CONSISTENTLY_REWARD":"Interact with Them Consistently and Reward Them Often"
+		"CONSISTENTLY_REWARD":"Interact with Them Consistently and Reward Them Often",
+		"SUBSCRIPBE_MAIL":"Subscribe Mail",
+		"SUBSCRIPBE_TO_VENUELYTICS":"Thank you for subscribing to VenueLytics. Please check your email for more details."
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
@@ -216,6 +218,9 @@
 		"MESSAGE":"Message",
 		"SUBMIT":"Submit",
 		"ADDRESS":"530 Lytton Avenue, 2nd Floor"
+	},
+	"blog": {
+		"BLOG":"Blog"
 	},
 	"about": {
 		"ABOUT_US":"About Us",

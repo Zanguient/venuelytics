@@ -244,7 +244,7 @@ select {
   .carouselImage {
     width: 100%;
   }
-
+  
   .wrapingSpace {
     margin-left: 15px;
   }
@@ -462,6 +462,7 @@ select {
 
   .imgContainer {
     margin-left: 250px;
+    margin-top: 190px;
   }
 
   .paragraph-bottom {

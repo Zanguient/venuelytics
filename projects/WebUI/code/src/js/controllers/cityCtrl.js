@@ -12,6 +12,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             var nextPageSize = 0;
             var previousPageSize = 0;
             self.next = false;
+            $rootScope.videoUrl = "https://www.youtube.com/watch?v=ruy7kCuPpV4";
             self.gettingLocation = function(lat, long, country) {
                 self.loadingBar = true;
                 AjaxService.gettingLocation(lat, long, country).then(function(response) {

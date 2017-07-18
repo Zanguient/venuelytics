@@ -45,7 +45,10 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
                     self.venueName =    self.detailsOfVenue.venueName;
-                    self.venueImage = response.imageUrls[0].largeUrl
+                    self.imageParam = $location.search().i;
+                    if(self.imageParam === 'Y') {
+                        self.venueImage = response.imageUrls[0].largeUrl;
+                    } 
                     if($routeParams.serviceType === 'p' || $routeParams.serviceType === 'b' || $routeParams.serviceType === 'g') {
                         self.row = 1;
                     } else if($routeParams.serviceType === 't' || $routeParams.serviceType === 'f' || $routeParams.serviceType === 'd') {

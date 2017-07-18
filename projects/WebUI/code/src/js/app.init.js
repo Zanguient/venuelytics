@@ -147,6 +147,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics-GuestListConfirmation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
+        .when('/blog', {
+            templateUrl: 'blog.html',
+            title: 'Venuelytics-Blog',
+            description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
+        })
         .otherwise('/home');
 
     $locationProvider.html5Mode({

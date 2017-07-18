@@ -1,6 +1,10 @@
-
+<style>
+ .playVideo {
+    z-index: 100;position: absolute;left: 350px;top: 200px;
+  }
+</style> 
 <div id="container" class="container venueBanner venueContainer">
-        <ng-include src="'home-apps-image.html'" scope="" onload="" style="z-index: 100;position: absolute;left: 350px;top: 200px;"></ng-include>
+        <ng-include class="playVideo" src="'home-apps-image.html'" scope="" onload=""></ng-include>
     <div class="banner-fill-img">
         <img ng-src="assets/img/demo/banner.jpg" id="forMobile">
     </div>
@@ -82,3 +86,4 @@
 
     </div>
 </div>
+

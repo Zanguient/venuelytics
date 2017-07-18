@@ -9,7 +9,6 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     		$log.log('Inside Home Controller.');
     		
     		var self = $scope;
-
     		$rootScope.homeTab = 'active';
 
             self.clientImages = APP_CLIENTS.clientImages;
@@ -17,28 +16,65 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             self.showBusinessTab = parseInt(data);
             var newConsumer = $location.search().nc;
             self.showNewConsumer = parseInt(newConsumer);
+            $rootScope.videoUrl = "https://www.youtube.com/watch?v=0tP_B61gTM8";
             self.navBar = function(tab) {
                 if(tab === 1) {
                     $rootScope.homeTab = 'active';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = '';
                     $rootScope.newConsumerTab = '';
+                    $rootScope.aboutTab = '';
+                    $rootScope.contactTab = '';
+                    $rootScope.blogTab = '';
                 } else if(tab === 2) {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = 'active';
                     $rootScope.consumerTab = '';
                     $rootScope.newConsumerTab = '';
+                    $rootScope.aboutTab = '';
+                    $rootScope.contactTab = '';
+                    $rootScope.blogTab = '';
                 } else if(tab === 3) {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = 'active';
                     $rootScope.newConsumerTab = '';
-                } else {
+                    $rootScope.aboutTab = '';
+                    $rootScope.contactTab = '';
+                    $rootScope.blogTab = '';
+                } else if(tab === 4) {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = '';
                     $rootScope.newConsumerTab = 'active';
-                }
+                    $rootScope.aboutTab = '';
+                    $rootScope.contactTab = '';
+                    $rootScope.blogTab = '';
+                } else if(tab === 5) {
+                    $rootScope.homeTab = '';
+                    $rootScope.businessTab = '';
+                    $rootScope.consumerTab = '';
+                    $rootScope.newConsumerTab = '';
+                    $rootScope.aboutTab = 'active';
+                    $rootScope.contactTab = '';
+                    $rootScope.blogTab = '';
+                } else if(tab === 6) {
+                    $rootScope.homeTab = '';
+                    $rootScope.businessTab = '';
+                    $rootScope.consumerTab = '';
+                    $rootScope.newConsumerTab = '';
+                    $rootScope.aboutTab = '';
+                    $rootScope.contactTab = 'active';
+                    $rootScope.blogTab = '';
+                } else if(tab === 7) {
+                    $rootScope.homeTab = '';
+                    $rootScope.businessTab = '';
+                    $rootScope.consumerTab = '';
+                    $rootScope.newConsumerTab = '';
+                    $rootScope.aboutTab = '';
+                    $rootScope.contactTab = '';
+                    $rootScope.blogTab = 'active';
+                } else {}
             };
 
             self.init = function() {
@@ -87,7 +123,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                 }
 
                 AjaxService.sendSubscriptionMail(subscribeEmail).then(function(response) {
-                    alert('Successfully subscribed!');
+                    $('#subscribeModal').modal('show');
                 });
             };
     }])	;
