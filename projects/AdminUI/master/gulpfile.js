@@ -472,7 +472,7 @@ gulp.task('package:build', ['package:src', 'package:vendor'], function () {
 
 gulp.task('dist', gulpSequence('clean','package:build'));
 
-gulp.task('aws:deploy', ['package'], function () {
+gulp.task('aws:deploy', ['dist'], function () {
       
     var publisher = awspublish.create({
         region: 'us-west-1',
