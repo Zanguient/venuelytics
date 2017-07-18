@@ -16,6 +16,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     ]);
 
     $routeProvider
+        .when('/', {
+            templateUrl: 'home.html',
+            controller: 'HomeController',
+            title: 'Venuelytics',
+            description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
+        })
         .when('/home', {
             templateUrl: 'home.html',
             controller: 'HomeController',
@@ -159,7 +165,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         requireBase: true,
         rewriteLinks: true
     });
-    $locationProvider.hashPrefix('!');
+   // $locationProvider.hashPrefix('!');
 
 }]).config(['$translateProvider', function ($translateProvider) {
 
