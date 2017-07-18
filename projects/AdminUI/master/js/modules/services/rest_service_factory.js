@@ -156,7 +156,7 @@
  			
  				return $resource(urlTemplate.replace("@context", "analytics"),{},{
  					get : { method: 'GET',  params: { id: '@id', anaType: '@anaType', aggPeriodType : '@aggPeriodType', filter: '@filter' }, 
- 						url: urlTemplate.replace("@context", "analytics") + "/:anaType/:aggPeriodType?:filter", isArray:true},
+ 						url: urlTemplate.replace("@context", "analytics") + "/:anaType/:aggPeriodType?:filter"},
  					getTopNFavItems : {method: 'GET',  params: { id: '@id', aggPeriodType : '@aggPeriodType' }, 
  						url: urlTemplate.replace("@context", "analytics") +"/favitems/:aggPeriodType"},
  					

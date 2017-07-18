@@ -531,7 +531,7 @@ App.controller('DashBoardController',['$log','$scope', '$rootScope','$window', '
         var temp = $scope.selectedPeriod.toLowerCase();
         var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
         $scope.reservedBookings  = {};
-         RestServiceFactory.AnalyticsService().get({id: contextService.userVenues.selectedVenueNumber, 
+        RestServiceFactory.AnalyticsService().get({id: contextService.userVenues.selectedVenueNumber, 
                             anaType: 'ReservedBookings', aggPeriodType: aggPeriodType, filter: 'scodes=BPK'}, function(data){
             $scope.reservedBookings = data;
             $('#pie_rb').ClassyLoader({
