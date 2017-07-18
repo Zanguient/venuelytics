@@ -10,6 +10,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   
   $scope.img = {};
   $scope.img.pic_url = "";
+  $scope.createElements = [];
   $timeout(function(){
 
     if ( ! $.fn.dataTable ) return;
@@ -19,7 +20,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 		$scope.originalWidth = this.width;
 		$scope.originalHeight = this.height;
 		$scope.img.pic_url = this.src;
-		      
+		        
 	}; 
 	$('#venueMapImg').bind('resize', function(){
 		
@@ -43,7 +44,25 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 	              	        {
 	              		    	"targets": [5],
 	              		    	"orderable": false,
-	              		    	"createdCell": function (td, cellData, rowData, row, col) {
+	              		    	"createdCell": function (td, cellData, rowData, row, col) { 
+                            var d = rowData;
+                            var splitElement ={
+                              "productType": "VenueMap",
+                              "category": "category",
+                              "subCategory": null,
+                              "itemCategory": null,
+                              "name": d[0],
+                              "brand": "brand",
+                              "by": null,
+                              "description": d[3],
+                              "size": d[2],
+                              "unit": "people",
+                              "price": d[1],
+                              "enabled": "Y",
+                              "servingSize": d[2],
+                              "imageUrls": d[6]
+                            }
+                            $scope.createElements.push(splitElement);
 	              		    		var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit" ng-click="editTable('+row+','+cellData+')"></button>&nbsp;&nbsp;';
 	              		    		actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash" ng-click="deleteTable('+row+')"></button>';
 	              		    		
@@ -107,7 +126,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     			});
     			var table = $('#tables_table').DataTable();
     			venueMap.elements.map(function(t) {
-    	    		table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id]);
+    	    		table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id, t.imageUrls]);
     	    	});
     	    	table.draw();
       		}        
@@ -119,6 +138,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     	$scope.newTable = {};
     	$scope.newTable.enabled = 'Y';
     	$scope.newTable.id = -1;
+      $scope.newTable.imageUrls =[];
     	ngDialog.openConfirm({
     	    template: 'app/templates/product/form-table-info.html',
     	     //plain: true,
@@ -126,7 +146,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     	    scope : $scope 
     	  }).then(function (value) {
     		  var table = $('#tables_table').DataTable();
-    		  table.row.add([$scope.newTable.name, $scope.newTable.price, $scope.newTable.servingSize, $scope.newTable.description,  $scope.newTable.enabled,   $scope.newTable.id]);
+    		  table.row.add([$scope.newTable.name, $scope.newTable.price, $scope.newTable.servingSize, $scope.newTable.description,  $scope.newTable.enabled,   $scope.newTable.id, $scope.newTable.imageUrls]);
     		  table.page( 'last' ).draw( false );
     		  _addArea($scope.img, value);
          	},function(error){
@@ -136,7 +156,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         
     };
     
-    function _addArea(img) {
+    function _addArea(img, value) {
     	
         if (!img || !img.maps || !angular.isArray(img.maps)) {
             img = angular.isObject(img) ? img : {};
@@ -152,7 +172,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
             newImgCoords = [lastImgLeft + 30, lastImgTop + 30, lastImgLeft + 100, lastImgTop + 100];
 
         if (calculation) {
-            img.maps.push({editMode: true, coords: calculation.checkCoords(newImgCoords) });
+            img.maps.push({editMode: true, coords: calculation.checkCoords(newImgCoords), description:value.name });
         } else {
             img.maps.push({editMode: true, coords: newImgCoords });
         }
@@ -168,6 +188,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     	$scope.newTable.description = d[3];
     	$scope.newTable.enabled = d[4];
     	$scope.newTable.id = d[5];
+      $scope.newTable.imageUrls = d[6];
     	ngDialog.openConfirm({
     	    template: 'app/templates/product/form-table-info.html',
     	    // plain: true,
@@ -176,7 +197,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     	  }).then(function (value) {
     		  $('#tables_table').dataTable().fnDeleteRow(rowId);
     		  var t = $scope.newTable;
-    		  table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id]);
+    		  table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id, t.imageUrls]);
     		  table.draw();
          	},function(error){
          		
@@ -225,6 +246,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 	  }
   }
   $scope.update = function(isValid, data) {
+    data.elements = $scope.createElements;
     $scope.imageUrls = [];
     angular.forEach(data.imageUrls, function(value, key) {
       var venueImageId = {
@@ -245,7 +267,6 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
      
     });
       /*if (!isValid) {
-        console.log("inside>>>>>>>>>>>>>");
         return;
       }*/
       var payload = RestServiceFactory.cleansePayload('updateVenueMap', data);
@@ -261,4 +282,21 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         }
       });
     }
+    $scope.uploadFile = function(venueImage) {
+    var fd = new FormData();
+    fd.append("file", venueImage[0]);
+    var payload = RestServiceFactory.cleansePayload('venueImage', fd);
+    RestServiceFactory.VenueImage().uploadTableImage(payload, function(success){
+      if(success != {}){
+        var t = $scope.newTable;
+        t.imageUrls.push(success);
+        toaster.pop('success', "Image upload successfull");
+        document.getElementById("clear").value = "";
+      }
+    },function(error){
+      if (typeof error.data != 'undefined') {
+       toaster.pop('error', "Server Error", error.data.developerMessage);
+      }
+    });
+  };
 }]);
