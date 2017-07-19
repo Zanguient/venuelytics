@@ -52,6 +52,10 @@ select {
   margin-bottom: 15px;
 }
 
+.budgetPadding {
+   padding-left: 15px;
+}
+
 #venueImageHours {
   margin-bottom: 15px;
 }

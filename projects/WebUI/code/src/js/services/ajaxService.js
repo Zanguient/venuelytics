@@ -255,11 +255,14 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     }
 
-    this.createTransaction = function(venueId,orderId,object) {
+    this.createTransaction = function(venueId,orderId,object,authBase64Str) {
         return $http({
             method: 'POST',
             url: RestURL.baseURL + 'vas' + '/' + venueId + '/charge/' + orderId,
-            data: object
+            data: object,
+            headers: {
+                    "Authorization": "Anonymous " + authBase64Str
+                }
         }).then(function(success) {
             return success;
         }, function(error) {

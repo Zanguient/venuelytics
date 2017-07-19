@@ -41,7 +41,7 @@
             <div id="bottleTab" class="btn-group" class="reservation-tab">
                 <button id="bottle" type="button"
                     class="btn btn-success btn-responsive reservation-button"
-                    ng-click="bottleService('Bottle')">
+                    ng-click="bottleService('Bottle')" ng-init="bottleService('Bottle')">
                     <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img> <br class="showInMobile"><span
                         class="fontRegular">{{"reservation.BOTTLE_SERVICE" | translate}}</span>
                 </button>
@@ -424,24 +424,6 @@
         </div>
         </div>
 </div> -->
-
-<!-- Success Guest List Modal -->
-<div class="modal modal-success" id="bottleServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-    <div class="modal-dialog animated zoomIn animated-3x" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-                <h3 class="modal-title" id="myModalLabel6">{{'reservation.BOTTLE_DIALOG' | translate}}</h3>
-            </div>
-            <div class="modal-body">
-                <p>{{'reservation.BOTTLE_DIALOG_DESC' | translate}}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div ng-show="guestServiceTab">
     <div ng-include="'guest-list.html'"></div>

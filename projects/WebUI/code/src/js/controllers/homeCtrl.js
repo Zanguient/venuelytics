@@ -16,7 +16,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             self.showBusinessTab = parseInt(data);
             var newConsumer = $location.search().nc;
             self.showNewConsumer = parseInt(newConsumer);
-            $rootScope.videoUrl = "https://www.youtube.com/watch?v=0tP_B61gTM8";
+            $rootScope.videoUrl = "https://www.youtube.com/watch?v=ruy7kCuPpV4";
             self.navBar = function(tab) {
                 if(tab === 1) {
                     $rootScope.homeTab = 'active';

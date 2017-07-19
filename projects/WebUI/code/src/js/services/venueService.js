@@ -15,6 +15,7 @@ app.service('VenueService', function() {
   this.bottleZip = '';
   this.payloadObject = '';
   this.selectBottle = '';
+  this.tableSelection = '';
   this.tab = '';
   this.imageMapping={
       "pic_url": "",

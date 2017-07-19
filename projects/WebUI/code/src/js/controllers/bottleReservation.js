@@ -114,8 +114,9 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                                     "chargedAmount":parseFloat(chargeAmountValue)
                                 }
                     //Save Payment Transaction for card                  
-                    
-                    AjaxService.createTransaction(self.editVenueID, self.orderId, payment).then(function(response) {
+                    var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
+                    var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
+                    AjaxService.createTransaction(self.editVenueID, self.orderId, payment, authBase64Str).then(function(response) {
                         $('#bottleServiceModal').modal('show');
                     });
                 }

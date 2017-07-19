@@ -19,17 +19,27 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                 $(function() {
                     $( "#inputDate, #privateDate" ).datepicker({autoclose:true});
                 });
-                
-                self.bottle = VenueService.bottleServiceData;
+                self.venueid = $routeParams.venueid;
+                if((Object.keys(VenueService.bottleServiceData).length) == 0) {
+                    self.getEventType();
+                } else {
+                    self.bottle = VenueService.bottleServiceData;
+                    self.eventTypes = [];
+                    self.eventTypes.push(self.bottle.bottleOccasion);
+                }
                 self.guest = VenueService.guestListData;
                 self.private = VenueService.privateEventData;
                 self.totalGuest = VenueService.totalNoOfGuest;
-                self.venueid = $routeParams.venueid;
+                if(VenueService.selectBottle) {
+                    self.bottleMinimum = VenueService.selectBottle;
+                }
+                if(VenueService.tableSelection) {
+                    self.tableSelection = VenueService.tableSelection;
+                }
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = VenueService.tab;
                 self.getBanquetHall(self.venueid);
                 self.getBottleProducts();
-                self.getEventType();
                 if(!self.restoreTab) {
                     self.restoreTab = 'B';
                 }
@@ -98,7 +108,7 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                     });
 
             self.getBottleProducts = function() {
-                AjaxService.getProductOfBottle(VenueService.venueNumber).then(function(response) {
+                AjaxService.getProductOfBottle(self.venueid).then(function(response) {
                     self.allBottle = response.data;
                 });
             };
@@ -108,7 +118,7 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
             };
 
             self.getEventType = function() {
-                AjaxService.getTypeOfEvents(VenueService.venueNumber).then(function(response) {
+                AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
                 });
             }
@@ -159,7 +169,7 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
 
                 // Date in YYYYMMDD format
                 self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
-                AjaxService.getVenueMap(VenueService.venueNumber).then(function(response) {
+                AjaxService.getVenueMap(self.venueid).then(function(response) {
                     self.venueImageMapData = response.data;
                     angular.forEach(self.venueImageMapData, function(value, key1) {
                         if(value.days == "*") {
@@ -202,7 +212,7 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                     });
                     self.setReservationColor();
                 });
-                AjaxService.getVenueMapForADate(VenueService.venueNumber,self.bottleServiceDate).then(function(response) {
+                AjaxService.getVenueMapForADate(self.venueid,self.bottleServiceDate).then(function(response) {
                     self.reservations = response.data;
                 });
             };
@@ -228,6 +238,19 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                     key.fillColor = APP_COLORS.lightGreen;
                     key.strokeColor = APP_COLORS.darkGreen;
                 }
+                if(VenueService.tableSelection) {
+                angular.forEach(VenueService.tableSelection, function(value2, key2) {
+                    if(value2.name == key.name) {
+                        if (data.fillColor === APP_COLORS.darkYellow) {
+                            data.fillColor = APP_COLORS.lightGreen;
+                            data.strokeColor = APP_COLORS.darkGreen;
+                        } else {
+                            data.fillColor = APP_COLORS.darkYellow;
+                            data.strokeColor = APP_COLORS.turbo;
+                    }
+                   }
+                });
+            }
             });
             $('img[usemap]').jMap();
         
@@ -360,7 +383,7 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                 var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
                 guest.guestStartDate = moment(guest.guestStartDate).format('YYYY-MM-DD');
                 var object = {
-                     "venueNumber" : VenueService.venueNumber,
+                     "venueNumber" : self.venueid,
                      "email" : guest.guestEmailId,
                      "phone" : guest.guestMobileNumber,
                      "zip" : guest.guestZip,
@@ -384,6 +407,7 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                 VenueService.bottleZip = self.bottle.bottleZipcode;
                 VenueService.authBase64Str = authBase64Str;
                 VenueService.selectBottle = self.bottleMinimum;
+                VenueService.tableSelection = self.tableSelection;
                 console.log("Full object-->"+angular.toJson(self.bottle.bottleOccasion.name));
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
