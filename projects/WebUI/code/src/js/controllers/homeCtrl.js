@@ -126,4 +126,22 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     $('#subscribeModal').modal('show');
                 });
             };
+
+            self.playVideo = function() {
+                $('#venueLyticsVideo').modal('show');
+                var div = document.getElementById("stop-video");
+                var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+                // div.style.display = state == 'hide' ? 'none' : '';
+                // func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+                iframe.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
+            };
+
+            self.stopVideo = function(state) {
+                // if state == 'hide', hide. Else: show video
+                var div = document.getElementById("stop-video");
+                var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+                // div.style.display = state == 'hide' ? 'none' : '';
+                // func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+                iframe.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+            };
     }])	;
