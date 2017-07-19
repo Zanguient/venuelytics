@@ -156,19 +156,20 @@ gulp.task('html', function() {
         })))
         .pipe(gulp.dest(path.join(paths.html)))
         .pipe(connect.reload())
-        .pipe(save('before-sitemap'))
+        /*.pipe(save('before-sitemap'))
         .pipe(sitemap({
             siteUrl: 'http://dev.webui.s3-website-us-west-1.amazonaws.com',
             lastmod: Date.now(),
-            changefreq: ['daily'],
+            changefreq: ['hourly'],
             mappings: [{
-            	pages: ['about.html', 'city.html', 'contact.html', 'home.html', 'privacy.html', 'terms-of-use.html'],
-            	changefreq: ['hourly'],
+            	pages: ['about.html', 'city.html', 'contact.html', 'home.html', 'privacy.html', 'terms-of-use.html',
+            	'business-search.html', 'new-city.html', 'new-venues.html'],
+            	changefreq: ['daily'],
             	lastmod: Date.now()
             }]
         }))
         .pipe(gulp.dest('./dist'))
-        .pipe(save.restore('before-sitemap'));
+        .pipe(save.restore('before-sitemap'))*/;
 });
 
 gulp.task('html:dist', function() {

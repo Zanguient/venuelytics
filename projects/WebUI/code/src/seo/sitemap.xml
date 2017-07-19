@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/about</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/business-search</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/city</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/claim-business</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/contact</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/create-business</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/guestConfirmation</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/home</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/new-city</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/new-venues</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/privacy</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/private-event</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/private-reservation</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/terms-of-use</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/venue-details</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+    <url>
+        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/venues</loc>
+        <lastmod>2017-07-17T13:17:58.365Z</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Albany</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Atlanta</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Atlantic City</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Austin</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Berkeley</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Boston</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Brooklyn</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Campbell</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Chicago</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Cleveland</loc>
+		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Dallas</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Denver</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Detroit</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Fremont</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Fresno</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Hallandale Beach</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Hayward</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Henderson</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Honolulu</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Houston</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Las Vegas</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Long Beach</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Los Angeles</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Los Gatos</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Memphis</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Metairie</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Miami</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Miami Beach</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Modesto</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Mountain View</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Nashville</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/New Orleans</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/New York City</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Oakland</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Oklahoma City</loc>
+		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/PHILADELPHIA</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Phoenix</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Portland</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Providence</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Redwood City</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Reno</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Sacramento</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/San Antonio</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/San Diego</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/San Francisco</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/San Jose</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Santa Cruz</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Santa Monica</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Savannah</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Scottsdale</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Seattle</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Sunnyvale</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Tampa</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Tempe</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Washington</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+
+	<url>
+		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/West Hollywood</loc>
+		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+</urlset>
