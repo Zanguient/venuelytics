@@ -100,12 +100,10 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 	
 	
 	DataTableService.initDataTable('tables_table', columnDefinitions, false);
-	
     var promise = RestServiceFactory.VenueMapService().getAll({id: $stateParams.venueNumber});
     $scope.venueNumber = $stateParams.venueNumber;
-    //if($stateParams.id != ""){
+    if($stateParams.id != ""){
     promise.$promise.then(function(data) {
-      $scope.imageUrls = data[0].imageUrls;
     	data.map(function(venueMap) {
     		if (venueMap.id == $stateParams.id) {
     			$scope.data = venueMap;
@@ -136,8 +134,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       		}        
       	});      
       });
-    /*} else {
-    }*/
+    }
     $scope.addTable = function () {
     	$scope.newTable = {};
     	$scope.newTable.enabled = 'Y';
@@ -212,22 +209,6 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   		$scope.img.maps.map(function(area){
       area.editMode = true;
   		});
-      for (var i = 0; i < $scope.img.maps.length; i++) {
-        var coordinates = [];
-        var print = ($scope.img.maps[i].coords)
-        coordinates[0] = print[0];
-        coordinates[1] = print[1];
-        coordinates[2] = print[2];
-        coordinates[3] = print[1];
-        coordinates[4] = print[2];
-        coordinates[5] = print[3];
-        coordinates[6] = print[0];
-        coordinates[7] = print[3];
-        var s_coordinates = coordinates.toString();
-        var objectMappingDecoupling = { "TableName": $scope.createElements[i].name, "coordinates": s_coordinates };
-        $scope.addMapsforSave.push(objectMappingDecoupling);
-      }
-          $scope.addMapsforSave = JSON.stringify($scope.addMapsforSave);
     };    
   	$scope.deleteTable = function(rowId) {
   		var table = $('#tables_table').dataTable();
@@ -240,7 +221,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   	
   	 
 
-  });
+  
   $scope.$watch('img', function(nVal, oVal){
       $scope.imgJson = angular.toJson(nVal, true);
   }, true);
@@ -265,12 +246,28 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 	  }
   }
   $scope.update = function(isValid, data, venueNumber) {
-    //data.elements = [];
-    //data.imageMap = [];
-    data.imageMap = $scope.addMapsforSave;
+    for (var i = 0; i < $scope.img.maps.length; i++) {
+      var coordinates = [];
+      var print = ($scope.img.maps[i].coords)
+      coordinates[0] = print[0];
+      coordinates[1] = print[1];
+      coordinates[2] = print[2];
+      coordinates[3] = print[1];
+      coordinates[4] = print[2];
+      coordinates[5] = print[3];
+      coordinates[6] = print[0];
+      coordinates[7] = print[3];
+      var s_coordinates = coordinates.toString();
+      var objectMappingDecoupling = { "TableName": $scope.createElements[i].name, "coordinates": s_coordinates };
+      $scope.addMapsforSave.push(objectMappingDecoupling);
+    }
+    data.imageMap = JSON.stringify($scope.addMapsforSave);
+    console.log("data.imageMap>>>>>>>>>"+angular.toJson(data.imageMap));
     data.elements = $scope.createElements;
-    data.imageUrls = $scope.imageUrls;
-    $scope.imageUrls = [];
+    if($scope.imageUrls !=""){
+      data.imageUrls = $scope.imageUrls;
+      $scope.imageUrls = [];
+    }
     angular.forEach(data.imageUrls, function(value, key) {
       var venueImageId = {
           "id" : value.id
@@ -317,9 +314,10 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
             t.imageUrls.push(success);
             document.getElementById("clear").value = "";
           } else {
-            $scope.imageUrls = [];
+            $scope.img.pic_url = success.originalUrl;
+            $scope.originalWidth = success.largeWidth;
+            $scope.originalHeight = success.largeHeight;
             $scope.imageUrls.push(success);
-            document.getElementById("bottleClear").value = "";
           }
           toaster.pop('success', "Image upload successfull");
         }
@@ -329,4 +327,5 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         }
       });
     };
+  });
 }]);

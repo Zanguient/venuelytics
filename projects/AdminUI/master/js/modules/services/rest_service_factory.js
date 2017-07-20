@@ -106,7 +106,9 @@
  				return $resource(urlTemplate.replace("@context", "venuemap"),{}, {
  					getAll: { method: 'GET', isArray: true },
  					updateVenueMap : {method: 'POST',  params: { id: '@id'}, 
- 					url: urlTemplate.replace("@context", "venuemap")}
+ 					url: urlTemplate.replace("@context", "venuemap")},
+ 					delete : {method: 'DELETE',  params: { id: '@id', tableId : '@tableId'}, 
+ 					url:  urlTemplate.replace("@context", "venuemap")+"/:tableId"}
  				});
  			},
  			VenueImage : function () {

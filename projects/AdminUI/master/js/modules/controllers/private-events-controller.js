@@ -68,7 +68,7 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
 	  $state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:productId});
 	}
 	$scope.createPrivateEvent = function(rowId, productId){
-		$state.go('app.editBanquetHall', {venueNumber: $stateParams.id});
+		$state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:'new'});
 	}
 	$scope.deletePE = function(rowId, productId) {
   		//var target = {id: storeId};

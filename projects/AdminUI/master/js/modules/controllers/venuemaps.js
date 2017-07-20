@@ -47,7 +47,7 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
   	};
 
     $scope.createBottle = function(venueMapId) {
-      $state.go('app.editVenueMap', {venueNumber: $stateParams.id, id: venueMapId});
+      $state.go('app.editVenueMap', {venueNumber: $stateParams.id, id: 'new'});
     };
   	$scope.deleteVenueMap = function(rowId, mapId) {
   		
@@ -56,6 +56,17 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
   	$scope.createNewVenueMap = function() {
   		$state.go('app.venueMapedit', {id: 'new'});
   	};
+    
+    $scope.deleteBottle = function(rowId, cellData){
+      var target = {id: $stateParams.id ,tableId:cellData};
+      RestServiceFactory.VenueMapService().delete(target,  function(success){
+        $state.go('app.stores');
+      },function(error){
+        if (typeof error.data !== 'undefined') { 
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+    };
 
   });
   
