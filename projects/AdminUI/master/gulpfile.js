@@ -90,7 +90,9 @@ var vendorBaseScripts = [
   // color spectrum
   '../vendor/spectrumcolor/angular-spectrum-color-min.js',
   '../vendor/ngDialog/js/ngDialog.min.js',
-  '../vendor/ngImgMap/compile/ng-img-map.min.js'
+  '../vendor/ngImgMap/compile/ng-img-map.min.js',
+  '../vendor/maphilight/jquery.maphilight.js',
+  '../vendor/jMap/jquery.jmap.min.js'
 ];
 
 // also add in constants.js

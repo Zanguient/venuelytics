@@ -11,7 +11,7 @@
 <!-- START row-->
 <div class="calendar-app">
    <div class="row">
-      <div class="col-lg-6 col-md-6">
+      <div class="col-lg-7 col-md-7">
          <!-- START panel-->
          <div class="panel panel-default">
             <div class="panel-body">
@@ -22,6 +22,21 @@
          </div>
          <!-- END panel-->
       </div>
+      <div class="col-lg-5 col-md-5">
+         <div ng-show="selectedVenueMap.imageUrls && selectedVenueMap.imageUrls[0].originalUrl != ''" >
+            <center>
+               <img id="imageMap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#imageMapCoordinates" class="map img-responsive">
+               <map name="imageMapCoordinates">
+                  <area id="{{area.id}}" style="outline: red solid 2px;" shape="rect"
+                     coords="{{area.coords.join()}}" ng-repeat="area in selectedVenueMap.coordinates" 
+                     ng-href="{{area.link_url || 'javascript:void(0)'}}"
+                     ng-click="selectTable(area.id, $index)"
+                     data-maphilight='{"fillColor":"{{fillColor(area.id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{selectedVenueMap.elements[$index].strokeColor}}","strokeWidth":2}'></area>
+               </map>
+            </center>
+         </div>
+   </div>
+
    </div>
    <!-- END row-->
 </div>
