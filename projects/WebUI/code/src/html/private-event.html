@@ -156,7 +156,7 @@
                                                     </h2>
                                                     <p ng-if="privateEvent.servingSize != 0">{{privateEvent.servingSize}} people</p>
                                                     <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
-                                                    <p style="text-align: justify;text-justify: inter-word;">{{privateEvent.description | limitTo: 70
+                                                    <p class="privateEventBox">{{privateEvent.description | limitTo: 70
                                                         }}{{privateEvent.description.length > 70 ? '...' :''}}</p>
                                                     <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY"></button>
                                             </article>
