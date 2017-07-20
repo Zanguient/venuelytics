@@ -1,60 +1,60 @@
 <form class="search-form" name="guestForm" validate-form="" parsley-validate novalidate ng-submit="glistSave(guest)" ng-cloak>
         <fieldset>
             <div class="col-lg-12 form-group is-empty">
-                <input type="text" class="form-control fontRegular" id="inputDate" ng-model="guest.guestStartDate" placeholder="{{'reservation.DATE' | translate}}">
+                <input type="text" class="form-control fontBold" id="inputDate" ng-model="guest.guestStartDate" placeholder="{{'reservation.DATE' | translate}}">
             </div>
             <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control fontRegular" id="privateTotalGuest" ng-model="guest.totalGuest" placeholder="{{'reservation.TOTAL_GUEST' | translate}}">
+            <input type="text" class="form-control fontBold" id="privateTotalGuest" ng-model="guest.totalGuest" placeholder="{{'reservation.TOTAL_GUEST' | translate}}">
             </div>
             <div class="col-lg-12 form-group is-empty">
             <table>
                 <tr>
                     <td>
-                        <input type="text" placeholder="{{'reservation.GUEST_MEN' | translate}}" id="guestMen" name="guestMen" class="form-control fontRegular" ng-model="guest.guestMen" required="" data-parsley-trigger="change">
+                        <input type="text" placeholder="{{'reservation.GUEST_MEN' | translate}}" id="guestMen" name="guestMen" class="form-control fontBold" ng-model="guest.guestMen" required="" data-parsley-trigger="change">
                     </td>
                     <td>
-                        <input type="text" placeholder="{{'reservation.GUEST_WOMEN' | translate}}" id="guestWomen" name="guestWomen" class="form-control fontRegular" ng-model="guest.guestWomen" required="" data-parsley-trigger="change">
+                        <input type="text" placeholder="{{'reservation.GUEST_WOMEN' | translate}}" id="guestWomen" name="guestWomen" class="form-control fontBold" ng-model="guest.guestWomen" required="" data-parsley-trigger="change">
                     </td>
                 </tr>
             </table>
             </div>
             <div class="col-lg-12 form-group is-empty">
-                <input type="text" id="ms-form-pass" class="form-control fontRegular" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" placeholder="{{'reservation.MOBILE' | translate}}" ng-model="guest.guestMobileNumber" required="" data-parsley-trigger="change">
+                <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" placeholder="{{'reservation.MOBILE' | translate}}" ng-model="guest.guestMobileNumber" required="" data-parsley-trigger="change">
             </div>
             <div class="col-lg-12 form-group is-empty">
-                <input type="email" id="guestEmailId" name="guestEmailId" data-parsley-type="email" placeholder="{{'reservation.EMAIL' | translate}}" class="form-control fontRegular" ng-model="guest.guestEmailId" required="" data-parsley-trigger="change">
+                <input type="email" id="guestEmailId" name="guestEmailId" data-parsley-type="email" placeholder="{{'reservation.EMAIL' | translate}}" class="form-control fontBold" ng-model="guest.guestEmailId" required="" data-parsley-trigger="change">
             </div>
             <div class="showInMobile">
             <div class="col-lg-12 form-group is-empty">
-                <input type="text" id="guestFirstName" name="guestFirstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" class="form-control fontRegular" ng-model="guest.guestFirstName" required="" data-parsley-trigger="change">
+                <input type="text" id="guestFirstName" name="guestFirstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" class="form-control fontBold" ng-model="guest.guestFirstName" required="" data-parsley-trigger="change">
             </div>
             <div class="col-lg-12 form-group is-empty">
-                <input type="text" id="guestLastName" name="guestLastName" placeholder="{{'reservation.LAST_NAME' | translate}}" class="form-control fontRegular" ng-model="guest.guestLastName" required="" data-parsley-trigger="change">
+                <input type="text" id="guestLastName" name="guestLastName" placeholder="{{'reservation.LAST_NAME' | translate}}" class="form-control fontBold" ng-model="guest.guestLastName" required="" data-parsley-trigger="change">
             </div>
             </div>
 
             <div class="showInWeb">
             <div class="col-lg-5 form-group is-empty">
-                <input type="text" id="guestFirstName" name="guestFirstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" class="form-control fontRegular" ng-model="guest.guestFirstName" required="" data-parsley-trigger="change">
+                <input type="text" id="guestFirstName" name="guestFirstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" class="form-control fontBold" ng-model="guest.guestFirstName" required="" data-parsley-trigger="change">
             </div>
             <div class="col-lg-5 form-group is-empty">
-                <input type="text" id="guestLastName" name="guestLastName" placeholder="{{'reservation.LAST_NAME' | translate}}" class="form-control fontRegular" ng-model="guest.guestLastName" required="" data-parsley-trigger="change">
+                <input type="text" id="guestLastName" name="guestLastName" placeholder="{{'reservation.LAST_NAME' | translate}}" class="form-control fontBold" ng-model="guest.guestLastName" required="" data-parsley-trigger="change">
             </div>
             </div>
             <div class="col-lg-12 form-group is-empty">
-                <input type="number" id="guestZip" name="guestZip" pattern="[0-9]{5}" placeholder="{{'reservation.ZIPCODE' | translate}}" class="form-control fontRegular" ng-model="guest.guestZip" required="" data-parsley-trigger="change">
+                <input type="number" id="guestZip" name="guestZip" pattern="[0-9]{5}" placeholder="{{'reservation.ZIPCODE' | translate}}" class="form-control fontBold" ng-model="guest.guestZip" required="" data-parsley-trigger="change">
             </div>
             <div class="col-lg-12">
             <div class="checkbox">
                 <label class="fontRegular" style="font-size: 15px;">
-                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AUTHORIZE" | translate}}
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
                 </label>                            
             </div>
             </div>
             <div class="col-lg-12">
             <div class="checkbox">
                 <label class="fontRegular" style="font-size: 15px;">
-                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AGREE" | translate}}
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
                 </label>                            
             </div>
             </div>

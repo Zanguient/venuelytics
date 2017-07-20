@@ -13,6 +13,8 @@ app.controller('sidebarController', ['$log', '$scope', '$http', '$location', 'Re
             self.init = function() {
                 var data = $location.search().sb;
                 self.showBusinessTab = parseInt(data);
+                var newConsumer = $location.search().nc;
+                self.showNewConsumer = parseInt(newConsumer);
             };
 
             self.navigateMenu = function(menu){
