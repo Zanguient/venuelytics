@@ -40,6 +40,7 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                 self.restoreTab = VenueService.tab;
                 self.getBanquetHall(self.venueid);
                 self.getBottleProducts();
+                self.getMenus();
                 if(!self.restoreTab) {
                     self.restoreTab = 'B';
                 }
@@ -113,6 +114,19 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                 });
             };
 
+            self.getMenus = function() {
+                AjaxService.getInfo(self.venueid).then(function(response) {
+                    self.privateMenu = response.data["BanquetHall.Menu"];
+                    self.privateInfoSheet = response.data["BanquetHall.Details"];
+                    self.privateVideo = response.data["BanqueHall.Video"];
+                    self.privateFloorPlan = response.data["BanquetHall.FloorMap"];
+                    self.bottleMenuUrl = response.data["Bottle.menuUrl"];
+                    self.bottleVIPPolicy = response.data["Bottle.BottleVIPPolicy"];
+                    self.dressCode =  response.data["Advance.dressCode"];
+                    self.enabledPayment =  response.data["Advance.enabledPayment"];
+                });
+            };
+
             self.removeBottleMinimum = function(index,value,arrayObj) {
                 arrayObj.splice(index, 1);
             };
@@ -162,8 +176,23 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                 self.price = "";
             };
 
-            self.paintVenueTableMap = function() {
+            self.menuUrlSelection = function(value) {
+                var data = value.split(".");
+                var splitLength = data.length;
+                if(data[0] == "www") {
+                    value = 'http://' + value;
+                    $window.open(value, '_blank');
+                } else if(data[splitLength-1] == "jpg" || data[splitLength-1] == "png") {
+                    self.menuImageUrl = value;
+                    $('#menuModal').modal('show');
+                } else {
+                    $window.open(value, '_blank');
+                }
+            }
 
+            self.paintVenueTableMap = function() {
+                self.tableSelection = [];
+                self.selectionTableItems = [];
                 self.bottleStartDate = self.startDate;
                 var current_day = (moment(new Date(self.startDate)).format("ddd")).toUpperCase();
 

@@ -296,4 +296,16 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     }
 
+    this.getInfo = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + '/venues/' + venueId + '/info'
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
 }]);

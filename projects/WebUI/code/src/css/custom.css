@@ -80,10 +80,12 @@ select {
 
 #bottle {
   white-space: normal;
+  border-right:2px solid #ffffff;
 }
 
 #private {
   white-space: normal;
+  border-right:2px solid #ffffff;
 }
 
 #glist {
