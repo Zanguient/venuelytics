@@ -262,7 +262,6 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       $scope.addMapsforSave.push(objectMappingDecoupling);
     }
     data.imageMap = JSON.stringify($scope.addMapsforSave);
-    console.log("data.imageMap>>>>>>>>>"+angular.toJson(data.imageMap));
     data.elements = $scope.createElements;
     if($scope.imageUrls !=""){
       data.imageUrls = $scope.imageUrls;
