@@ -262,7 +262,6 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       $scope.addMapsforSave.push(objectMappingDecoupling);
     }
     data.imageMap = JSON.stringify($scope.addMapsforSave);
-    console.log("data.imageMap>>>>>>>>>"+angular.toJson(data.imageMap));
     data.elements = $scope.createElements;
     if($scope.imageUrls !=""){
       data.imageUrls = $scope.imageUrls;
@@ -291,9 +290,9 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       }*/
       var payload = RestServiceFactory.cleansePayload('updateVenueMap', data);
       var target = {id: venueNumber};
-      if ($stateParams.id == 'new'){
+      /*if ($stateParams.id == 'new'){
         target = {};
-      }
+      }*/
       RestServiceFactory.VenueMapService().updateVenueMap(target,payload, function(success){
         $state.go('app.storeedit', {id : venueNumber});
       },function(error){
@@ -318,6 +317,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
             $scope.originalWidth = success.largeWidth;
             $scope.originalHeight = success.largeHeight;
             $scope.imageUrls.push(success);
+            document.getElementById("bottleClear").value = "";
           }
           toaster.pop('success', "Image upload successfull");
         }
