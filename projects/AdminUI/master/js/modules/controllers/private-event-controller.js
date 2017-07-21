@@ -8,11 +8,9 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
     'use strict';
     var promise = RestServiceFactory.ProductService().getPrivateEvent({id:$stateParams.venueNumber, productId: $stateParams.id});
     $scope.venueNumber = $stateParams.venueNumber;
-    if($stateParams.id == ''){
-        promise.$promise.then(function(data) {
-     	    $scope.data = data;
-        });
-    }
+    promise.$promise.then(function(data) {
+ 	    $scope.data = data;
+    });
 	$scope.update = function(isValid, data, num) {
 		data.brand = "BanquetHall";
 		data.productType = "BanquetHall";
@@ -23,7 +21,7 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
     	var payload = RestServiceFactory.cleansePayload('ProductService', data);
     	//var target = {id: data.id};
     	var target = {id:data.venueNumber, productId: $stateParams.id};
-    	if ($stateParams.id == ''){
+    	if ($stateParams.id == 'new'){
     		target = {id: num}, {};
     	}
     	RestServiceFactory.ProductService().updatePrivateEvent(target,payload, function(success){
