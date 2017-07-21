@@ -46,9 +46,10 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
                           {
                           "targets": [5],
                           "orderable": false,
-                          "createdCell": function (td, cellData, rowData, row, col) { 
+                          "createdCell": function (td, cellData, rowData, row, col) {
                             var d = rowData;
                             var splitElement ={
+                              "id":d[5],
                               "productType": "VenueMap",
                               "category": "category",
                               "subCategory": null,
