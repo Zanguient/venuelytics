@@ -38,6 +38,7 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                 }
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = VenueService.tab;
+                self.tabParam = $routeParams.tabParam;
                 self.getBanquetHall(self.venueid);
                 self.getBottleProducts();
                 self.getMenus();
@@ -50,7 +51,16 @@ app.controller('ReservationController', ['$log', '$scope', '$http', '$location',
                     self.event();
                 } else if(self.restoreTab === 'G'){
                     self.glist();
-                }
+                }else {}
+
+                if(self.tabParam === 'B') {
+                    self.bottleService();
+                } else if(self.tabParam === 'P') {
+                    self.event();
+                } else if(self.tabParam === 'G'){
+                    self.glist();
+                } else {}
+
 
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
