@@ -24,8 +24,8 @@
  		var profileProperties = ['badgeNumber', 'email', 'loginId', 'userName', 'phone', 'password','newpassword',
  		'confirmnewpassword'];
  		var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',"enabled"];
- 		var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls[{"id":1}]', 'servingSize', 'productType', 'BanquetHall','category','brand','enabled','price'];
- 		var venueMapProperties = ['id','type','section','imageMap','days','updatedAt','elements','imageUrls[{"id":}]'];
+ 		var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls', 'servingSize', 'productType', 'BanquetHall','category','brand','enabled','price'];
+ 		var venueMapProperties = ['id','type','section','imageMap','days','updatedAt','elements','imageUrls'];
  		var REQ_PROP= {};
  		
  		REQ_PROP['VenueService'] = storeProperties;
@@ -59,7 +59,7 @@
  			},
  			UserVenueService: function () {
  				return $resource(urlTemplate.replace("@context", "users")+"/venues",{},{
- 					deleteVenues : {method: 'DELETE',  params: { id: '@id', venueNumber: '@venueNumber' }, 
+ 					deleteVenues : {method: 'DELETE',  params: { id: '@id', venueNumber: '@venueNumber'}, 
  					url:  urlTemplate.replace("@context", "users")+"/venues/:venueNumber"},					
  				});
  			},
@@ -118,6 +118,8 @@
  					deleteVenueImage : {method: 'DELETE',headers: {},  url: urlTemplate.replace("@context", "upload")},
  					uploadTableImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
  					url: urlTemplate.replace("@context", "upload")+"/venueImgElements"},
+ 					uploadPrivateImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
+ 					url: urlTemplate.replace("@context", "upload")+"/banquetVenueImg"},
  				});
  			},
  			LoyaltyService: function () {
