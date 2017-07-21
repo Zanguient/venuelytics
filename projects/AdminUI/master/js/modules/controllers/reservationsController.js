@@ -15,6 +15,7 @@
   $scope.selectedDate = null;
   $scope.selectedVenueMap = {};
   $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
+  $scope.selectedTable = {};
  /**
  * Invoke full calendar plugin and attach behavior
  * @param  jQuery [calElement] The calendar dom element wrapped into jQuery
@@ -27,31 +28,31 @@
    anaType: 'ReservedBookings', aggPeriodType: 'Yearly', filter: 'scodes=BPK&aggTypeFilter=2017'}, function(data){
      $scope.reservedBookings = data;
      $scope.events = [];
-     var bottleCount = $scope.reservedBookings['Bottle.count'];
+     var tableCount = $scope.reservedBookings['VenueMap.count'];
      var banquetCount = $scope.reservedBookings['BanquetHall.count'];
 
      for( var dateKey in $scope.reservedBookings.calendar){
        if ($scope.reservedBookings.calendar.hasOwnProperty(dateKey)) {
-        if (typeof bottleCount !== 'undefined' && bottleCount > 0) {
-         var reservedBottle = $scope.reservedBookings.calendar[dateKey].VenueMap;
-         if (typeof reservedBottle === 'undefined') {
-          reservedBottle = 0;
+        if (typeof tableCount !== 'undefined' && tableCount > 0) {
+         var reservedTables = $scope.reservedBookings.calendar[dateKey].VenueMap;
+         if (typeof reservedTables === 'undefined') {
+          reservedTables = 0;
         }
         var from = dateKey.split("-");
         var f = new Date(from[0], from[1] - 1, from[2]);
-        var remaining = (bottleCount - reservedBottle);
+        var remaining = (tableCount - reservedTables);
         if (remaining < 0) {
           remaining = 0	
         }
         var obj = {};
-        obj.title = 'Available: ' + remaining;	
+        obj.title = 'A: ' + remaining;	
         obj.serviceType = 'BottleService';
         obj.start = f;
         if (remaining == 0) 	{
           obj.title = 'Fully Booked';	
                 obj.backgroundColor = '#f56954'; //red 
                 obj.borderColor = '#f56954'; //red
-              } else if (remaining >= bottleCount/2 ) {
+              } else if (remaining >= tableCount/2 ) {
                 obj.backgroundColor = '#00a65a'; //red 
                 obj.borderColor = '#00a65a'; //red
               } else {
@@ -123,6 +124,11 @@ $scope.initCalendar = function () {
           $scope.selectedDate = date;
           $scope.setVenueMapImage();
         },
+        eventClick: function( event, jsEvent, view ) {
+          $scope.selectedDate = event.start;
+          calElement.fullCalendar('select',$scope.selectedDate);
+          $scope.setVenueMapImage();
+        },
         eventDragStart: function (event, js, ui) {
 	        //draggingEvent = event;
 	      },
@@ -146,6 +152,9 @@ $scope.initCalendar = function () {
 
     $scope.setVenue = function(venueName, venueNumber) {
 
+    };
+    $scope.selectTable = function(tableId, name) {
+      $scope.selectedTable =  $scope.selectedVenueMap.productsByName[name];
     };
     $scope.setVenueMapImage = function() {
       if ($scope.selectedDate != null) {
