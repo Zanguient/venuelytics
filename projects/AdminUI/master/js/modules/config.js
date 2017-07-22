@@ -267,6 +267,35 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     })
     // Mailbox
     // ----------------------------------- 
+     // Mailbox
+    // ----------------------------------- 
+    .state('app.mailbox', {
+        url: '/mailbox',
+        title: 'Mailbox',
+        abstract: true,
+        templateUrl: basepath('mailbox.html'),
+        controller: 'MailboxController'
+    })
+    .state('app.mailbox.folder', {
+        url: '/folder/:folder',
+        title: 'Mailbox',
+        templateUrl: basepath('mailbox-inbox.html'),
+        controller: 'NullController'
+    })
+    .state('app.mailbox.view', {
+        url : "/{mid:[0-9]{1,4}}",
+        title: 'View mail',
+        templateUrl: basepath('mailbox-view.html'),
+        controller: 'NullController',
+        resolve: resolveFor('ngWig')
+    })
+    .state('app.mailbox.compose', {
+        url: '/compose',
+        title: 'Mailbox',
+        templateUrl: basepath('mailbox-compose.html'),
+        controller: 'NullController',
+        resolve: resolveFor('ngWig')
+    })
     // 
     // Single Page Routes
     // ----------------------------------- 

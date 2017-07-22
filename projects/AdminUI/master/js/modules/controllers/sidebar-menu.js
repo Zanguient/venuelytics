@@ -53,13 +53,12 @@ App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$locatio
              (isActive(item) ? ' active' : '') ;
     };
     var filterFx = function(item) {
-    	//if (typeof item.roles == 'undefined') {
-    	//	return 0;
-    //	}
-    	//var roles = item.roles.toUpperCase();
-    	//var userRole = Session.userRole.toUpperCase();
-    	//return (roles.indexOf("ALL") > -1) || (roles.indexOf(userRole) > -1);
-    	return true;
+    	if (typeof item.roleId == 'undefined') {
+    		return 0;
+    	}
+
+      return item.roleId <= Session.roleId;
+
     };
     $scope.loadSidebarMenu = function() {
 

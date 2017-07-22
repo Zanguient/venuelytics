@@ -4,13 +4,13 @@
          Reservations - <small>Managers view of all reservations</small>
       </div>
       <div class="col-lg-1">
-          <venue-dropdown callback="setVenue(venueName, venueId)"/>
+          <venue-dropdown callback="setVenue(venueName, venueId)"></venue-dropdown>
       </div>
     </div>
 </h3>
 <!-- START row-->
 <div class="calendar-app">
-   <div class="row">
+   <div class="row gutter-2">
       <div class="col-lg-5 col-md-5">
          <!-- START panel-->
          <div class="panel panel-default">
@@ -23,8 +23,8 @@
          <!-- END panel-->
       </div>
       <div class="col-lg-4 col-md-4">
-         <label>Selected Date: {{selectedDate.format('DD-MMM YYYY')}}</label>
-         <div ng-show="selectedVenueMap.imageUrls && selectedVenueMap.imageUrls[0].originalUrl != ''" >
+         <label style="padding-left: 10px;">Selected Date: {{selectedDate.format('DD-MMM YYYY')}}</label>
+         <div ng-show="selectedVenueMap.imageUrls && selectedVenueMap.imageUrls[0].originalUrl != ''" ng-class="loading ? 'csspinner ringed' : ''">
             <center>
                <img id="imageMap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#imageMapCoordinates" class="map img-responsive">
                <map name="imageMapCoordinates">
@@ -36,10 +36,98 @@
                </map>
             </center>
          </div>
-   </div>
-   <div class="col-lg-3 col-md-3">
-      <label>{{selectedTable}}</label>
-   </div>
+      </div>
+      <div class="col-lg-3 col-md-3">
+         <form  name="userInfo" validate-form="" novalidate role="form">
+            <!-- START panel-->
+            <div class="panel panel-default" >
+               <div class="panel-heading">
+                  <div class="panel-title">Reservation Information <span class="pull-right"><b>Status:</b><span ng-class="'circle-' + getStatusColor(order.type)" class="circle circle-xl "></span></span></div>
+               </div>
+               <div class="panel-body">
+                  <toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+                  <div class="row">
+                     <div class="form-group col-sm-6">
+                        <label class="control-label nowrap">Table Name* </label>
+                        <input type="text" name="city"  class="form-control" ng-model="selectedTable.name" readOnly="true"/>
+                     </div>
+                     <div class="form-group col-sm-6">
+                        <label class="control-label nowrap">Capacity</label>
+                        <input type="text" name="country"  class="form-control" ng-model="selectedTable.servingSize" readOnly="true"/>
+                     </div>
+                  </div>
+
+                  <div ng-show="isCurrSelReserved">
+                     <div class="form-group">
+                        <label class="control-label">Reserved By *</label>
+                        <input type="text" name="name" required="required" class="form-control" ng-model="order.visitorName" readOnly="true"/>
+                     </div>
+                     <div class="row">
+                        <div class="form-group col-sm-6">
+                           <label class="control-label">Email</label>
+                           <input type="text" name="email" class="form-control" ng-model="order.contactEmail" readOnly = "true"/>
+                        </div>
+                        <div class="form-group col-sm-6">
+                           <label class="control-label nowrap">Phone</label>
+                           <input type="text" masked="" data-inputmask="'mask': '(999) 999-9999'" name="phone" class="form-control" ng-model="order.contactNumber" readOnly="true"/>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                           <label class="control-label nowrap">ZIP</label>
+                           <input type="text" name="zip"  class="form-control" ng-model="order.contactZipcode" readOnly="true"/>
+                     </div>
+                     <div class="row">
+                        <div class="form-group col-sm-6">
+                           <label class="control-label">Guests</label>
+                           <input type="text" name="guests" class="form-control" ng-model="order.noOfGuests" readOnly = "true"/>
+                        </div>
+                        <div class="form-group col-sm-6">
+                           <label class="control-label nowrap">Host Name</label>
+                           <input type="text" name="host" class="form-control" ng-model="order.employeeName" readOnly="true"/>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="form-group col-sm-6">
+                           <label class="control-label nowrap">Event Type</label>
+                           <input type="text" name="eventType" class="form-control" ng-model="order.reason" readOnly="true"/>
+                        </div>
+                        
+                        <div class="form-group col-sm-6">
+                           <label class="control-label nowrap">Budget</label>
+                           <input type="text" name="budget"  class="form-control" ng-model="order.budget" readOnly="true"/>
+                        </div>
+                     </div>
+                     <div class="table-responsive table-bordered mb-lg">
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th>Item #</th>
+                                 <th>Description</th>
+                                 <th>Quantity</th>
+                                 <th>Unit Price</th>
+                                 <th class="text-right">Total</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr ng-repeat="item in order.order.orderItems">
+                                 <td>{{item.productId}}</td>
+                                 <td>{{item.name}}</td>
+                                 <td>{{item.quantity}}</td>
+                                 <td ng-show="item.finalItemPrice > 0">$ {{item.finalItemPrice}}</td>
+                                 <td ng-show="item.finalItemPrice <= 0">N/A</td>
+                                 <td ng-show="item.finalItemPrice > 0" class="text-right">$ {{item.totalPrice}}</td>
+                                 <td ng-show="item.finalItemPrice <= 0" class="text-right">N/A</td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- END panel-->
+         </form>
+      </div>
    </div>
    <!-- END row-->
 </div>
+

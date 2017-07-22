@@ -4,49 +4,56 @@
     "sref":"app.dashboard",
     "submenu": [],
     "translate": "Dashboard",
-    "icon": "icon-speedometer"
+    "icon": "icon-speedometer",
+    "roleId": 100
   },
   {
   	"text": "Inbox",
-	"sref": "app.inbox",
+	"sref": "app.mailbox.folder",
 	 "icon": "fa fa-inbox",
 	 "translate": "sidebar.nav.pages.INBOX",
-	 "submenu": []
+	 "submenu": [],
+	 "roleId": 100
   },
   {
   	"text": "Venue Management",
 	"sref": "app.stores",
 	 "icon": "icon-home",
 	 "translate": "sidebar.nav.pages.STORES",
-	 "submenu": []
+	 "submenu": [],
+	 "roleId": 100
   },
   {
   	"text": "Reservations",
 	"sref": "app.reservations",
 	 "icon": "icon-calendar",
 	 "translate": "sidebar.nav.pages.RESERVATIONS",
-	 "submenu": []
+	 "submenu": [],
+	 "roleId": 100
   },
   {
 	"text": "Users Management",
 	"sref": "app.users",
 	"icon": "icon-users",
 	"translate": "sidebar.nav.pages.USERS",
-	"submenu": []
+	"submenu": [],
+	"roleId": 1000
  }, 
   {
 	"text": "Agency Management",
 	"sref": "app.agencies",
 	"icon": "fa fa-building-o",
 	"translate": "sidebar.nav.pages.AGENCIES",
-	"submenu": []
+	"submenu": [],
+	"roleId": 1000
  }, 
  {
 	"text": "Application Settings",
 	"sref": "app.settings",
 	"icon": "icon-settings",
 	"translate": "sidebar.nav.pages.SETTINGS",
-	"submenu": []
+	"submenu": [],
+	"roleId": 1000
  }
  
 ]

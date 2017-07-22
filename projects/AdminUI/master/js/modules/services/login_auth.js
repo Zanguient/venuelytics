@@ -14,7 +14,7 @@ App.factory(
 			var baseUrl = ContextService.contextName + "/v1/auth/";
 			return $http.post(baseUrl + 'login', credentials).then(
 					function(result) {
-						Session.create(result.data.sessionId, result.data.userId, result.data.userName,result.data.userType);
+						Session.create(result.data.sessionId, result.data.userId, result.data.userName,result.data.roleId);
 						$rootScope.$storage.sessionData = JSON.stringify(result.data);
 						return result.data;
 					});
@@ -53,23 +53,23 @@ App.factory(
 		return authService;
 	}]).service('Session', function() {
 		'use strict' ;
-		this.create = function(sessionId, userId, userName, userRole) {
+		this.create = function(sessionId, userId, userName, roleId) {
 		this.id = sessionId;
 		this.userId = userId;
 		this.userName = userName;
-		this.userRole = userRole;
+		this.roleId = roleId;
 	};
 	this.init = function(session) {
 		this.id = session.sessionId;
 		this.userId = session.userId;
 		this.userName = session.userName;
-		this.userRole = session.role;
+		this.roleId = session.roleId;
 	};
 	this.destroy = function() {
 		this.id = null;
 		this.userId = null;
 		this.userName = null;
-		this.userRole = null;
+		this.roleId = null;
 	};
 	return this;
 });
