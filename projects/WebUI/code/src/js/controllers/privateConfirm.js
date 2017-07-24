@@ -3,10 +3,10 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('PrivateReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService',
+app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService) {
 
-            $log.log('Inside Private Reservation Controller.');
+            $log.log('Inside Private Confirm Controller.');
             
             var self = $scope;
 

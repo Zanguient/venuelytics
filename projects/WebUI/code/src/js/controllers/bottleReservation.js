@@ -24,17 +24,17 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                     self.availableAmount = self.availableAmount + value1.price;
                 });
                 angular.forEach(self.object.order.orderItems, function(value, key) {
-                    if(value.productType == 'VenueMap') {
+                    if(value.productType === 'VenueMap') {
                         var items = {
                             "venueNumber": value.venueNumber,
                             "productId": value.productId,
                             "productType": value.productType,
                             "quantity": value.quantity,
                             "name": value.name
-                        }
+                        };
                         self.selectTables.push(items);
                     } 
-                    });
+                });
                 self.getTax();
             };
 
@@ -44,19 +44,21 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 AjaxService.getTaxType(self.editVenueID,self.taxDate).then(function(response) {
                     self.tax = response.data;
                     var amount = self.availableAmount;
-                    if(self.tax.length != 0) {
+                    if(self.tax.length !== 0) {
                         angular.forEach(self.tax, function(value, key) {
-                            if(value.type == 'tax') {
+                            if(value.type === 'tax') {
                                 var taxData = value.value;
                                 self.taxAmount = (amount * taxData)/100;
                                 self.chargedAmount = amount + self.taxAmount; 
-                            } else if(value.type == 'convenience-fee'){
+                            } else if(value.type === 'convenience-fee'){
                                     self.processingFee = value.value;
-                            } else if(value.type == 'discount'){
+                            } else if(value.type === 'discount'){
                                     self.discount = value.value;
-                            } else if(value.type == 'service-fee'){
+                            } else if(value.type === 'service-fee'){
                                     self.gratuity = value.value;
-                            } else{}
+                            } else{
+                                $log.info("Else block:");
+                            }
                         });
                     } else {
                         self.chargedAmount = self.payAmount;
@@ -66,7 +68,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                         self.processingFee = 0;
                     } 
                 });
-            }
+            };
 
             self.editConfirmPage = function() {
                 $location.url("/newCities/" + self.editCity + "/" + self.editVenueID);
@@ -77,7 +79,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                     self.orderId = response.data.id;
                     self.creditCardPayment();
                 });
-            }
+            };
 
             self.creditCardPayment = function() {
             var pay,chargeAmountValue;
@@ -89,12 +91,12 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
                 locale: 'auto',
                 token: function(token) {
-                    if(token.card.country == 'US') {
+                    if(token.card.country === 'US') {
                         var currencyType = 'USD';
                     } else {
                         var currencyType = 'INR';
                     }
-                    if(self.taxAmount == 0) {
+                    if(self.taxAmount === 0) {
                         var taxValue = 0;
                     } else {
                         var taxValue = self.taxAmount.toFixed(2);
@@ -112,7 +114,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                                     "discountAmount":self.discount,
                                     "paymentType":"CREDIT_CARD",
                                     "chargedAmount":parseFloat(chargeAmountValue)
-                                }
+                                };
                     //Save Payment Transaction for card                  
                     var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
@@ -132,8 +134,6 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             window.addEventListener('popstate', function() {
                 handler.close();
             });
-        }
-        
+        };
             self.init();
-    		
     }]);

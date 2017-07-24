@@ -241,7 +241,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
             $log.error('Error: ' + error);
             return error;
         });
-    }
+    };
 
     this.getProductOfBottle = function(venueId) {
         return $http({
@@ -253,7 +253,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
             $log.error('Error: ' + error);
             return error;
         });
-    }
+    };
 
     this.createTransaction = function(venueId,orderId,object,authBase64Str) {
         return $http({
@@ -269,7 +269,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
             $log.error('Error: ' + error);
             return error;
         });
-    }
+    };
 
     this.sendSubscriptionMail = function(object) {
         return $http({
@@ -282,7 +282,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
             $log.error('Error: ' + error);
             return error;
         });
-    }
+    };
 
     this.getTypeOfEvents = function(venueId) {
         return $http({
@@ -294,7 +294,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
             $log.error('Error: ' + error);
             return error;
         });
-    }
+    };
 
     this.getInfo = function(venueId) {
         return $http({

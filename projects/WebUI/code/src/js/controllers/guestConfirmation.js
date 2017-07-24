@@ -1,5 +1,5 @@
 "use strict";
-app.controller('GuestListController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService',
+app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService',
     function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService) {
 
     		$log.log('Inside Guest List Controller.');
@@ -7,8 +7,8 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
     		var self = $scope;
 
             self.init = function() {
-                self.editCity = $routeParams.cityName;
-                self.editVenueID = $routeParams.venueid;
+                self.city = $routeParams.cityName;
+                self.selectedVenueID = $routeParams.venueid;
                 self.guestListData = VenueService.guestListData;
                 self.guestSelectedDate = moment(self.guestListData.guestStartDate).format("MM-DD-YYYY");
                 self.authBase64Str = VenueService.authBase64Str;
@@ -16,7 +16,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             };
 
             self.editGuestPage = function() {
-                $location.url("/newCities/" + self.editCity + "/" + self.editVenueID);
+                $location.url("/newCities/" + self.city + "/" + self.selectedVenueID);
             };
 
             self.guestListSave = function() {
@@ -24,7 +24,5 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                     $('#guestListModal').modal('show');
                 });
             };
-
             self.init();
-    		
     }]);
