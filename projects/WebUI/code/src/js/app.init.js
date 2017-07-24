@@ -173,10 +173,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
    // $locationProvider.hashPrefix('!');
 
 }]).config(['$translateProvider', function ($translateProvider) {
-
+    var version = new Date().getTime();
     $translateProvider.useStaticFilesLoader({
         prefix : 'assets/i18n/',
-        suffix : '.json'
+        suffix : '.json?v=' + version
     });
     $translateProvider.preferredLanguage('en');
     $translateProvider.useLocalStorage();
