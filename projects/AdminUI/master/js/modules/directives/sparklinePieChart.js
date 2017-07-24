@@ -1,6 +1,6 @@
 /**=========================================================
 * smangipudi
- * Module: primarypanel.js
+ * Module: sparklinePieChart.js
 *
  =========================================================*/
 App.directive('sparklinePieChart',   function() {

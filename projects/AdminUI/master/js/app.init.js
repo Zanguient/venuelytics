@@ -17,9 +17,9 @@ if (typeof $ === 'undefined') { throw new Error('This application\'s JavaScript 
 var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','ngAnimate', 'ngStorage', 'ngCookies', 
           'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'angular-loading-bar','ngDialog','ngImgMap', 'templates'])
           .run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache','AUTH_EVENTS', 'AuthService', 'FORMATS',
-           'Session','$timeout','$log','$cookies', 
+           'Session','$timeout','$log','$cookies', '$http',
                function ($rootScope, $state, $stateParams, $window, $templateCache, AUTH_EVENTS, AuthService, FORMATS,
-                 Session, $timeout, $log,$cookies) {
+                 Session, $timeout, $log,$cookies, $http) {
         	   'use strict';
               // Set reference to access them from any scope
               $rootScope.$state = $state;
@@ -84,10 +84,88 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                 },
                 viewAnimation: 'ng-fadeInUp'
               };
+              /**
+               * Global object to load data for charts using ajax 
+               * Request the chart data from the server via post
+               * Expects a response in JSON format to init the plugin
+               * Usage
+               *   chart = new floatChart(domSelector || domElement, 'server/chart-data.php')
+               *   ...
+               *   chart.requestData(options);
+               *
+               * @param  Chart element placeholder or selector
+               * @param  Url to get the data via post. Response in JSON format
+               */
+              $window.FlotChart = function (element, url) {
+                // Properties
+                this.element = $(element);
+                this.url = url;
+
+                this.setDataUrl = function(dataUrl) {
+                  this.url = dataUrl;
+                  return this;
+                }
+                // Public method
+                this.requestData = function (option, method, callback, processData) {
+                  var self = this;
+                  
+                  // support params (option), (option, method, callback) or (option, callback)
+                  callback = (method && $.isFunction(method)) ? method : callback;
+                  method = (method && typeof method === 'string') ? method : 'GET';
+
+                  self.option = option; // save options
+                  self.processData = processData;
+                  $http({
+                      url:      self.url,
+                      cache:    false,
+                      method:   method
+                  }).success(function (data) {
+                      if ( self.processData !== null && typeof self.processData !== 'undefined') {
+                        data = self.processData()(data);
+                      }
+                      $.plot( self.element, data, option );
+                      
+                      if(callback) callback();
+
+                  }).error(function(){
+                    $.error('Bad chart request.');
+                  });
+
+                  return this; // chain-ability
+
+                };
+
+                this.setData = function(option, data) {
+                    $.plot( this.element, data, option );
+                    return this;
+                };
+
+                // Listen to refresh events
+                this.listen = function() {
+                    var self = this,
+                    chartPanel = this.element.parents('.panel').eq(0);
+                  
+                  // attach custom event
+                    chartPanel.on('panel-refresh', function(event, panel) {
+                    // request data and remove spinner when done
+                    self.requestData(self.option, function(){
+                      panel.removeSpinner();
+                    });
+
+                  });
+
+                  return this; // chain-ability
+                };
+
+              };
+
+
+
+              /// initialize session
               if (session !== null && typeof session !== 'undefined' && session.hasOwnProperty("sessionId")) {
-         		 Session.init(session);
-         		 $state.go('app.dashboard');
-         	  }
+         		     Session.init(session);
+         		     $state.go('app.dashboard');
+         	    }
        
             }
           ]);

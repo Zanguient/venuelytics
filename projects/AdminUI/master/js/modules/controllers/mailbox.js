@@ -8,16 +8,17 @@
 
   $scope.folders = [
     {name: 'Inbox',   folder: '',        alert: 42, icon: "fa-inbox" },
-    {name: 'Starred', folder: 'starred', alert: 10, icon: "fa-star" },
-    {name: 'Sent',    folder: 'sent',    alert: 0,  icon: "fa-paper-plane-o" },
-    {name: 'Draft',   folder: 'draft',   alert: 5,  icon: "fa-edit" },
-    {name: 'Trash',   folder: 'trash',   alert: 0,  icon: "fa-trash"}
+    {name: 'Confirmed', folder: 'starred', alert: 10, icon: "fa-star" },
+    {name: 'OnHold',    folder: 'sent',    alert: 0,  icon: "fa-paper-plane-o" },
+    {name: 'Bottle',   folder: 'draft',   alert: 5,  icon: "fa-edit" },
+    {name: 'Private Events',   folder: 'trash',   alert: 0,  icon: "fa-trash"},
+    {name: 'Others',   folder: 'trash',   alert: 0,  icon: "fa-trash"}
   ];
 
   $scope.labels = [
-    {name: 'Red',     color: 'danger'},
-    {name: 'Pink',    color: 'pink'},
-    {name: 'Blue',    color: 'info'},
+    {name: 'RESERVED',     color: 'danger'},
+    {name: 'OPEN',    color: 'success'},
+    {name: 'COMFIRMED',    color: 'info'},
     {name: 'Yellow',  color: 'warning'}
   ];
 

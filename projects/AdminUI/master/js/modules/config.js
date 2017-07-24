@@ -397,9 +397,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 
 }]).config(['$translateProvider', function ($translateProvider) {
     'use strict';
+    var version = new Date().getTime();
     $translateProvider.useStaticFilesLoader({
         prefix : 'app/i18n/',
-        suffix : '.json'
+        suffix : '.json?v='+version
     });
     $translateProvider.preferredLanguage('en');
     $translateProvider.useLocalStorage();

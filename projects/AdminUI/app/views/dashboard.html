@@ -36,7 +36,8 @@
                </div>
                <div collapse="panelReservationBarChart" class="panel-wrapper">
                   <div class="panel-body">
-                     <div id="bookingRequestChart" class="chart-bar-stacked flot-chart"></div>
+                     <stacked-bar-chart id="bookingRequestChart" url="{{bookingRequestUrl}}" format-data-fx="formatStackData"
+                     class="chart-bar-stacked flot-chart" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
                   </div>
                </div>
             </div>

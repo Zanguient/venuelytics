@@ -479,10 +479,10 @@ gulp.task('aws:deploy', ['dist'], function () {
     var publisher = awspublish.create({
         region: 'us-west-1',
         params: {
-          Bucket: 'dev.admin'
+          Bucket: 'dev.admin.itzfun.com'
         }
       }, {
-        cacheFileName: '../cache/dev.admin.cache'
+        cacheFileName: '../cache/dev.admin.itzfun.com.cache'
       });
      
       // define custom headers 
