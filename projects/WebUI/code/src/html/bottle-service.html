@@ -1,79 +1,8 @@
-<div class="ms-hero-page ms-hero-img-keyboard" ng-cloak>
-    <div class="container">
-        <div class="text-center">
-            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{detailsOfVenue.venueName}} - {{selectedCity}}</h1>
-        </div>
-    </div>
-</div>
-<div class="container" ng-cloak>
-    <h3>
-        <a href="/newCities" class="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} </a>
-        <a href="newCities/{{selectedCity}}"> > {{selectedCity}}</a>
-    </h3>
-    <div class="row venueTabs">
-        <div class="col-md-12">
-            <article class="card card-primary wow zoomInRight animation-delay-5 mb-4">
-                <div class="card-block card-block-big">
-                    <div class="row">
-                        <div>
-<div id="carousel-example-generic" class="ms-carousel carousel slide" data-ride="carousel" ng-if="imageParam == 'Y'">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="carousel-example-generic" data-slide-to="0" class="active"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner carousel-inner-class" role="listbox">
-        <div>
-            <img ng-src={{venueImage}} alt="..." class="imageHeight carouselImageWidth">
-            <div class="reservationCarousel">
-                <p id="venueImageName" class="fontBold reservation-carousel">Reservations / <b><font size="4">{{venueName}}</font></b></p>
-                <p id="venueImageHours" class="fontBold reservation-carousel"><b><font size="4">Hours: 11:30 AM - 11:00 AM</font></b></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="rowOne">
-    <center>
-        <div id="serviceTabs" class="btn-group btn-group-justified"
-            class="reservation-tab">
-            <div id="bottleTab" class="btn-group" class="reservation-tab">
-                <button id="bottle" type="button"
-                    class="btn btn-success btn-responsive reservation-button"
-                    ng-click="bottleService('Bottle')">
-                    <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img> <br class="showInMobile"><span
-                        class="fontRegular"><strong>{{"reservation.BOTTLE_SERVICE" | translate}}</strong></span>
-                </button>
-            </div>
-            <div id="privateEventTab" class="btn-group"
-                class="reservation-tab">
-                <button id="private" type="button"
-                    class="btn btn-success btn-responsive reservation-button"
-                    ng-click="event('Private Event')">
-                    <img ng-src="assets/img/private.png" class="reservation-icon"></img><br class="showInMobile"><span
-                        class="fontRegular wrapingSpace"><strong>{{"reservation.EVENTS" | translate}}</strong></span>
-                </button>
-            </div>
-            <div id="guestlistTab" class="btn-group"
-                class="reservation-tab">
-                <button id="glist" type="button"
-                    class="btn btn-success btn-responsive reservation-button"
-                    ng-click="glist('Guest List')">
-                    <img ng-src="assets/img/guest.png" class="reservation-icon"></img><br class="showInMobile"><span
-                        class="fontRegular wrapingSpace"><strong>{{"reservation.GUEST" | translate}}</strong></span>
-                </button>
-            </div>
-        </div>
-    </center>
-</div>
-
-<!-- Bottle Service START row-->
-<div ng-show="bottleServiceTab">
+<div  ng-controller="BottleServiceController">
 <form class="form-horizontal" parsley-validate validate-form="">
     <fieldset>
         <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control fontBold" id="inputDate" ng-model="bottle.requestedDate" placeholder="Date">
+            <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate" placeholder="{{'reservation.DATE' | translate}}">
         </div>
         <div class="col-md-10 form-group is-empty" ng-if="tableSelection">
             Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
@@ -143,12 +72,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-10 form-group is-empty" ng-if="tableSelection">
-                    <div>
-                        <h3 class="selected-table">
-                            <font size="4">Selected Table(s)</font>
-                        </h3>
-                    </div>              
+                <div class="col-md-10 form-group is-empty" ng-if="tableSelection">            
                     <div class="form-group" ng-repeat="table in tableSelection">
                         <center>
                         <table>
@@ -349,123 +273,4 @@
     </center>
 </div>
 
-
 </div>
-
-
-<!-- Event Service -->
-<!-- <div ng-show="eventServiceTab">
-    <div class="col-md-4 form-group is-empty">
-        <div class="search">
-            <span class="fa fa-search form-control-feedback"></span>
-            <input type="text" class="form-control" id="search" placeholder="  Search">
-        </div>
-    </div>
-        <div class="col-md-10">
-        <div class="borderLine">
-        <table class="table table-no-border">
-            <tr>
-                <td rowspan="2" class="eventImageWidth">
-                    <img class="img-responsive eventImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCxUhgaE_yYczXsTujclB_jvqLt-aWbqklchEflWJYyDrW9i75">
-                </td>
-                <td rowspan="2" class="eventImageWidth">
-                    <img class="img-responsive eventImage" src="http://www.montecarlosbm.com/wp-content/uploads/2017/06/maona-220x124.jpg">
-                </td>
-                <td>The Temptations</td>
-                <td class="pull-right">
-                    <button class="btn btn-raised btn-success btn-xs" type="button">TICKETS</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Doors: 9:30 PM</td>
-                <td class="pull-right">$15.00</td>
-            </tr>
-        </table>
-        </div><br>
-        <div class="borderLine">
-        <table class="table table-no-border">
-            <tr>
-                <td rowspan="2" class="eventImageWidth">
-                    <img class="img-responsive eventImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCxUhgaE_yYczXsTujclB_jvqLt-aWbqklchEflWJYyDrW9i75">
-                </td>
-                <td rowspan="2" class="eventImageWidth">
-                    <img class="img-responsive eventImage" src="http://www.montecarlosbm.com/wp-content/uploads/2017/06/maona-220x124.jpg">
-                </td>
-                <td>The Temptations</td>
-                <td class="pull-right">
-                    <button class="btn btn-raised btn-success btn-xs" type="button">TICKETS</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Doors: 9:30 PM</td>
-                <td class="pull-right">$15.00</td>
-            </tr>
-        </table>
-        </div><br>
-        <div class="borderLine">
-        <table class="table table-no-border">
-            <tr>
-                <td rowspan="2" class="eventImageWidth">
-                    <img class="img-responsive eventImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCxUhgaE_yYczXsTujclB_jvqLt-aWbqklchEflWJYyDrW9i75">
-                </td>
-                <td rowspan="2" class="eventImageWidth">
-                    <img class="img-responsive eventImage" src="http://www.montecarlosbm.com/wp-content/uploads/2017/06/maona-220x124.jpg">
-                </td>
-                <td>The Temptations</td>
-                <td class="pull-right">
-                    <button class="btn btn-raised btn-success btn-xs" type="button">TICKETS</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Doors: 9:30 PM</td>
-                <td class="pull-right">$15.00</td>
-            </tr>
-        </table>
-        </div>
-        </div>
-</div> -->
-
-<div ng-show="guestServiceTab">
-    <div ng-include="'guest-list.html'"></div>
-</div>
-
-<div ng-show="eventServiceTab">
-    <div ng-include="'private-event.html'">
-    </div>
-</div>
-</div>
-
-
-                        <!-- <embed ng-src="{{resevationURL}}" id='venueReservationFrame' width="100%"></embed> -->
-                    </div>
-                </div>
-            </article>
-        </div>
-    </div>
-</div>
-
-<!-- <div class="modal modal-success" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-    <div class="modal-dialog animated zoomIn animated-3x" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-                <h3 class="modal-title" id="myModalLabel6">{{'reservation.BOTTLE_DIALOG' | translate}}</h3>
-            </div>
-            <div class="modal-body">
-                <center>
-                    <img class="img-responsive" data-ng-src="{{menuImageUrl}}">
-                </center>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-<div class="modal" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13">
-                            <div class="modal-dialog animated zoomIn animated-3x" role="document">
-                                <div class="modal-content">
-                                    <img src="{{menuImageUrl}}" alt="" class="img-responsive">
-                                </div>
-                            </div>
-                        </div>

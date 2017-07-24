@@ -1,0 +1,91 @@
+<div class="ms-hero-page ms-hero-img-keyboard" ng-cloak>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{detailsOfVenue.venueName}} - {{selectedCity}}</h1>
+        </div>
+    </div>
+</div>
+<div class="container" ng-cloak>
+    <h3>
+        <a href="/newCities" class="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} </a>
+        <a href="newCities/{{selectedCity}}"> > {{selectedCity}}</a>
+    </h3>
+    <div class="row venueTabs">
+        <div class="col-md-12">
+            <article class="card card-primary wow zoomInRight animation-delay-5 mb-4">
+                <div class="card-block card-block-big">
+                    <div class="row">
+                        <div>
+                            <div id="carousel-example-generic" class="ms-carousel carousel slide" data-ride="carousel" ng-if="imageParam == 'Y'">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="carousel-example-generic" data-slide-to="0" class="active"></li>
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner carousel-inner-class" role="listbox">
+                                    <div>
+                                        <img ng-src={{venueImage}} alt="..." class="imageHeight carouselImageWidth">
+                                        <div class="reservationCarousel">
+                                            <p id="venueImageName" class="fontBold reservation-carousel">Reservations / <b><font size="4">{{venueName}}</font></b></p>
+                                            <p id="venueImageHours" class="fontBold reservation-carousel"><b><font size="4">Hours: 11:30 AM - 11:00 AM</font></b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="rowOne">
+                                <center>
+                                    <div id="serviceTabs" class="btn-group btn-group-justified" class="reservation-tab">
+                                        <div id="bottleTab" class="btn-group" class="reservation-tab">
+                                            <button id="bottle" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="bottleService('Bottle')">
+                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
+                                                <br class="showInMobile"><span class="fontRegular"><strong>{{"reservation.BOTTLE_SERVICE" | translate}}</strong></span>
+                                            </button>
+                                        </div>
+                                        <div id="privateEventTab" class="btn-group" class="reservation-tab">
+                                            <button id="private" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="event('Private Event')">
+                                                <img ng-src="assets/img/private.png" class="reservation-icon"></img>
+                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.EVENTS" | translate}}</strong></span>
+                                            </button>
+                                        </div>
+                                        <div id="guestlistTab" class="btn-group" class="reservation-tab">
+                                            <button id="glist" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="glist('Guest List')">
+                                                <img ng-src="assets/img/guest.png" class="reservation-icon"></img>
+                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.GUEST" | translate}}</strong></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </center>
+                            </div>
+
+                            <!-- Bottle Service START row-->
+                            <div ng-show="bottleServiceTab">
+                                <div ng-include="'bottle-service.html'"></div>
+                            </div>
+
+                            <div ng-show="guestServiceTab">
+                                <div ng-include="'guest-list.html'"></div>
+                            </div>
+
+                            <div ng-show="eventServiceTab">
+                                <div ng-include="'private-event.html'">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <embed ng-src="{{resevationURL}}" id='venueReservationFrame' width="100%"></embed> -->
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <img src="{{menuImageUrl}}" alt="" class="img-responsive">
+        </div>
+    </div>
+</div>

@@ -50,7 +50,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                     angular.forEach(self.businessDetails, function(value, key) {
                         var dataInfo = value.info;
                         var businessClaimed = "Y" === dataInfo["business.claimed"];
-                            if(businessClaimed == true){
+                            if(businessClaimed === true){
                                 value.flag = true;
                             } else {
                                 value.flag = false; 
@@ -132,12 +132,6 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.claimBusiness = true;
                 self.hideForm = true;
                 self.claimForm = true;
-                $rootScope.title = 'Venuelytics-CreateBusiness';
-            };
-            self.submitForm = function() {
-                /*angular.forEach(self.myFormClaim.$error.required, function(field) {
-                    field.$setDirty();
-                });*/
             };
             self.showMessage = function(input) {
                 var show = input.$invalid && (input.$dirty || input.$touched);

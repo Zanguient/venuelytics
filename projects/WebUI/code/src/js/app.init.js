@@ -87,13 +87,13 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/newCities/:cityName/:venueid', {
-            templateUrl: 'reservation.html',
-            controller: 'ReservationController',
+            templateUrl: 'service-tabs.html',
+            controller: 'ServiceTabController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/newCities/:cityName/:venueid/:tabParam', {
-            templateUrl: 'reservation.html',
-            controller: 'ReservationController',
+            templateUrl: 'service-tabs.html',
+            controller: 'ServiceTabController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/searchBusiness', {
@@ -147,14 +147,14 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .when('/confirmEvent/:cityName/:venueid', {
-            templateUrl: 'private-reservation.html',
-            controller: 'PrivateReservationController',
+            templateUrl: 'private-confirm.html',
+            controller: 'PrivateConfirmController',
             title: 'Venuelytics-ConfirmReservation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .when('/confirmGuestList/:cityName/:venueid', {
-            templateUrl: 'guestConfirmation.html',
-            controller: 'GuestListController',
+            templateUrl: 'guest-confirmation.html',
+            controller: 'GuestConfirmController',
             title: 'Venuelytics-GuestListConfirmation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })

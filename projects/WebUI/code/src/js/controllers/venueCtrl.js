@@ -51,7 +51,8 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                 }
             };
 
-            self.setTab = function(type){
+            self.setTab = function(type) {
+                $(window).trigger('resize');
                 self.selectedVenueType = $translate.instant(type);
                 //VenueService.selectedCity = self.selectedCityName;
                 AjaxService.getVenues(null,self.selectedCityName, type, VenueService.latitude, VenueService.longitude).then(function(response) {
