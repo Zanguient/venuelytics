@@ -3,7 +3,7 @@ var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.trans
 
 
 // configure our routes
-app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegateProvider', 
+app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegateProvider',
     function($routeProvider, $httpProvider, $locationProvider, $sceDelegateProvider) {
     $locationProvider.hashPrefix('');
     $httpProvider.defaults.withCredentials = true;
@@ -14,7 +14,8 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         // Allow loading from Google maps
         "http://dev.api.venuelytics.com/WebServices**"
     ]);
-
+    
+    
     $routeProvider
         .when('/', {
             templateUrl: 'home.html',
@@ -181,7 +182,18 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $translateProvider.preferredLanguage('en');
     $translateProvider.useLocalStorage();
 
-}]).run(['$location', '$rootScope', function($location, $rootScope) {
+}]).run(['$location', '$rootScope',function($location, $rootScope) {
+    
+    var hostName = $location.host();
+    if (typeof hostName !== 'undefined') {
+        hostName = '';
+    }
+    hostName = hostName.toLowerCase();
+    var defaultPage = '/home';
+    if (hostName.indexOf("itzfun.com") >= 0){
+        defaultPage = '/cities';
+    }
+    
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 
         if (current.hasOwnProperty('$$route')) {
@@ -189,6 +201,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
                 $rootScope.title = current.$$route.title;
                 $rootScope.description = current.$$route.description;
             }
+        }
+        if (typeof previous == 'undefined' && current.templateUrl  === 'home.html') {
+             $location.path( defaultPage );
         }
     });
 }]);
