@@ -18,7 +18,7 @@
                                 <td>
                                     <h4>
                                         <span class="label label-warning"
-                                            style="background-color: #e3e300;" translate="SELECTED"></span>
+                                            style="background-color: #efef0e;" translate="SELECTED"></span>
                                     </h4>
                                 </td>
                                 <td>
@@ -138,6 +138,9 @@
             <input type="number" class="form-control fontBold" id="zipcode" ng-model="bottle.bottleZipcode" placeholder="{{'reservation.ZIPCODE' | translate}}">
         </div>
         <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control fontBold" id="instructions" ng-model="bottle.instructions" placeholder="{{'reservation.INSTRUCTIONS' | translate}}">
+        </div>
+        <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control fontBold" id="totalGuest" ng-model="bottle.totalGuest" placeholder="{{'reservation.TOTAL_GUEST' | translate}}">
         </div>
         <div class="col-md-10 form-group is-empty">
@@ -145,9 +148,6 @@
                 ng-model="bottle.bottleOccasion" ng-options="t.name for t in eventTypes">
                 <option value="">{{"reservation.OCCASION"  | translate}}</option>
             </select>
-        </div>
-        <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control fontBold" id="instructions" ng-model="bottle.instructions" placeholder="{{'reservation.INSTRUCTIONS' | translate}}">
         </div>
         <!-- <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control" id="zipcode" placeholder="{{'reservation.HOST' | translate}}">
@@ -185,7 +185,7 @@
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <div>{{"reservation.BOTTLE" | translate}}</div>
                                     <div>
-                                        <select ng-change="getBrandByBottleName(bottleName)" class="form-control col-xs-3" ng-options="x.name as x.name for x in allBottle" ng-model="bottleName"></select>
+                                        <select ng-change="brandMethod(bottleName)" class="form-control col-xs-3" ng-options="x.name as x.name for x in allBottle" ng-model="bottleName"></select>
                                     </div>
                              </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -207,7 +207,7 @@
                                         <tr>
                                             <td><a class="btn btn-default btn-sm btn-responsive" ng-click="minusValue()"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                                             </a></td>
-                                            <td>{{bottleCount}}</td>
+                                            <td>{{count}}</td>
                                             <td><a class="btn btn-default btn-sm btn-responsive" ng-click="addValue()" > <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                             </a></td>
                                         </tr>
@@ -216,7 +216,7 @@
                             </div>
                         </div>
                     </td>
-                    <td><a class="btn btn-success btn-raised btn-lg btn-responsive" ng-click="selectedBottles()" ng-disabled="bottleName == undefined || bottleName == ''"><span>{{"reservation.ADD" | translate}}</span></a></td>
+                    <td><a class="btn btn-success btn-raised btn-lg btn-responsive" ng-click="selectValue()" ng-disabled="bottleName == undefined || bottleName == ''"><span>{{"reservation.ADD" | translate}}</span></a></td>
                 </tr>
             </table>
         </div>

@@ -14,7 +14,9 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 self.venueID = self.venueid = $routeParams.venueid;
                 self.getBanquetHall(self.venueID);
                 self.getMenus();
-                $( "#privateDate" ).datepicker({autoclose:true});
+                $(function() {
+                    $( "#privateDate" ).datepicker({autoclose:true});
+                });
 
                 if((Object.keys(VenueService.bottleServiceData).length) === 0) {
                     self.getEventType();

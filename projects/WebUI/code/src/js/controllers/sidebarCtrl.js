@@ -3,8 +3,8 @@
  * @date 28-MAY-2017
  */
 "use strict";
-app.controller('sidebarController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $rootScope) {
+app.controller('sidebarController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window',
+    function ($log, $scope, $http, $location, RestURL, VenueService, $window) {
 
     		$log.log('Inside Sidebar Controller.');
     		
@@ -12,9 +12,9 @@ app.controller('sidebarController', ['$log', '$scope', '$http', '$location', 'Re
 
             self.init = function() {
                 var data = $location.search().sb;
-                $rootScope.showBusinessTab = parseInt(data);
+                self.showBusinessTab = parseInt(data);
                 var newConsumer = $location.search().nc;
-                $rootScope.showNewConsumer = parseInt(newConsumer);
+                self.showNewConsumer = parseInt(newConsumer);
             };
 
             self.navigateMenu = function(menu){

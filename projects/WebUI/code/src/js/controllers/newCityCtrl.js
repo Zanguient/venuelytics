@@ -84,6 +84,8 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
     		};
 
             self.previousPage = function() {
+                $log.info('Inside previousPage');
+                $log.info("Previous page size: "+previousPageSize);
                 self.next = false;
                 if(nextPageSize > 0) {
                     nextPageSize = nextPageSize - 50;
@@ -103,9 +105,11 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             self.nextPage = function() {
                 self.next = true;
                 nextPageSize = nextPageSize + 50;
+                $log.info("Next page size: "+nextPageSize);
                 AjaxService.getVenuesByCountry(self.selectedCountry.shortName, nextPageSize).then(function(response) {
                     self.listOfCities = response;
                     self.loadingBar = false;
                 });
+                $log.info('Inside nextPage');
             };
     }]);
