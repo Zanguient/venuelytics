@@ -12,13 +12,13 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     		$rootScope.homeTab = 'active';
 
             self.clientImages = APP_CLIENTS.clientImages;
-            var data = $location.search().sb;
+            /*var data = $location.search().sb;
             self.showBusinessTab = parseInt(data);
             var newConsumer = $location.search().nc;
-            self.showNewConsumer = parseInt(newConsumer);
+            self.showNewConsumer = parseInt(newConsumer);*/
             $rootScope.videoUrl = "https://www.youtube.com/watch?v=ruy7kCuPpV4";
             self.navBar = function(tab) {
-                if(tab === 1) {
+                if(tab === 'home') {
                     $rootScope.homeTab = 'active';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = '';
@@ -26,7 +26,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     $rootScope.aboutTab = '';
                     $rootScope.contactTab = '';
                     $rootScope.blogTab = '';
-                } else if(tab === 2) {
+                } else if(tab === 'searchBusiness') {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = 'active';
                     $rootScope.consumerTab = '';
@@ -34,7 +34,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     $rootScope.aboutTab = '';
                     $rootScope.contactTab = '';
                     $rootScope.blogTab = '';
-                } else if(tab === 3) {
+                } else if(tab === 'cities') {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = 'active';
@@ -42,7 +42,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     $rootScope.aboutTab = '';
                     $rootScope.contactTab = '';
                     $rootScope.blogTab = '';
-                } else if(tab === 4) {
+                } else if(tab === 'newCities') {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = '';
@@ -50,7 +50,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     $rootScope.aboutTab = '';
                     $rootScope.contactTab = '';
                     $rootScope.blogTab = '';
-                } else if(tab === 5) {
+                } else if(tab === 'about') {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = '';
@@ -58,7 +58,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     $rootScope.aboutTab = 'active';
                     $rootScope.contactTab = '';
                     $rootScope.blogTab = '';
-                } else if(tab === 6) {
+                } else if(tab === 'contact') {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = '';
@@ -66,7 +66,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     $rootScope.aboutTab = '';
                     $rootScope.contactTab = 'active';
                     $rootScope.blogTab = '';
-                } else if(tab === 7) {
+                } else if(tab === 'blog') {
                     $rootScope.homeTab = '';
                     $rootScope.businessTab = '';
                     $rootScope.consumerTab = '';
@@ -74,11 +74,17 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                     $rootScope.aboutTab = '';
                     $rootScope.contactTab = '';
                     $rootScope.blogTab = 'active';
-                } else {}
+                } else {
+                    $log.info("Else block");
+                }
             };
 
-            self.init = function() {
+            $scope.$on('$locationChangeStart', function(event) {
+                var userSelectedTab = $location.absUrl().split('/').pop().split('?');
+                self.navBar(userSelectedTab[0]);
+            });
 
+            self.init = function() {
                 self.venueLyticsFeatures = APP_ARRAYS.features;
                 
                 $(document).ready(function () {

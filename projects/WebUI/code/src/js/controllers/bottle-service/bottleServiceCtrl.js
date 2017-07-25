@@ -11,12 +11,10 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             var self = $scope;
 
             self.selectionTableItems = [];
-            self.count = 1;
+            self.bottleCount = 1;
             self.bottleMinimum = [];
             self.init = function() {
-                $(function() {
-                    $( "#requestDate" ).datepicker({autoclose:true});
-                });
+                $( "#requestDate" ).datepicker({autoclose:true});
                 self.venueid = $routeParams.venueid;
                 if((Object.keys(VenueService.bottleServiceData).length) === 0) {
                     self.getEventType();
@@ -60,7 +58,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                             if(self.bottle.requestedDate) {
                                 self.startDate = moment(self.bottle.requestedDate).format('YYYY-MM-DD');
                             }
-                            self.paintVenueTableMap();
+                            self.showFloorMapByDate();
                         }
                     });
 
@@ -94,16 +92,16 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             };
 
             self.minusValue = function() {
-                if(self.count > 0) {
-                self.count--;
+                if(self.bottleCount > 0) {
+                self.bottleCount--;
                 }
             };
 
             self.addValue = function() {
-                self.count++;
+                self.bottleCount++;
             };
 
-            self.brandMethod = function(selectedBottleName) {
+            self.getBrandByBottleName = function(selectedBottleName) {
                 self.bottleName = selectedBottleName;
                 angular.forEach(self.allBottle, function(value, key) {
                 if(value.name === selectedBottleName) {
@@ -116,19 +114,19 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 });
             };
 
-            self.selectValue = function() {
-                self.totalValue = self.price * self.count;
+            self.selectedBottles = function() {
+                self.totalValue = self.price * self.bottleCount;
                 var valueData = {
                     "price" : self.totalValue,
                     "bottle" : self.bottleName,
                     "brand" : self.brandName,
-                    "quantity": self.count,
+                    "quantity": self.bottleCount,
                     "productId": self.productId
                 };
                 self.bottleMinimum.push(valueData);
                 self.bottleName = "";
                 self.brandName = "";
-                self.count = 1;
+                self.bottleCount = 1;
                 self.price = "";
             };
 
@@ -146,11 +144,14 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
             };
 
-            self.paintVenueTableMap = function() {
-                self.tableSelection = [];
-                self.selectionTableItems = [];
-                self.bottleStartDate = self.startDate;
-                var current_day = (moment(new Date(self.startDate)).format("ddd")).toUpperCase();
+            self.showFloorMapByDate = function() {
+                if(!VenueService.tableSelection) {
+                    self.tableSelection = [];
+                    self.selectionTableItems = [];
+                }
+
+                //self.bottleStartDate = self.startDate;
+                //var current_day = (moment(new Date(self.startDate)).format("ddd")).toUpperCase();
 
                 // Date in YYYYMMDD format
                 self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
@@ -224,14 +225,14 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     key.strokeColor = APP_COLORS.darkGreen;
                 }
                 if(VenueService.tableSelection) {
-                angular.forEach(VenueService.tableSelection, function(value2, key2) {
-                    if(value2.name === key.name) {
-                        if (data.fillColor === APP_COLORS.darkYellow) {
-                            data.fillColor = APP_COLORS.lightGreen;
-                            data.strokeColor = APP_COLORS.darkGreen;
+                angular.forEach(VenueService.tableSelection, function(key2, value2) {
+                    if(key2.name === key.name) {
+                        if (key.fillColor === APP_COLORS.darkYellow) {
+                            key.fillColor = APP_COLORS.lightGreen;
+                            key.strokeColor = APP_COLORS.darkGreen;
                         } else {
-                            data.fillColor = APP_COLORS.darkYellow;
-                            data.strokeColor = APP_COLORS.turbo;
+                            key.fillColor = APP_COLORS.darkYellow;
+                            key.strokeColor = APP_COLORS.turbo;
                     }
                    }
                 });
@@ -271,7 +272,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     $log.info('Else');
                 } 
                 $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
-                self.showPreview(dataValueObj);
+                self.showSelectedTableImage(dataValueObj);
             };
 
         self.removeSelectedTables = function(index,arrayObj,table) {
@@ -293,7 +294,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.selectionTableItems.splice(index, 1);
         };
 
-            self.showPreview = function(object) {
+            self.showSelectedTableImage = function(object) {
                     var selectedTable = object;
                     self.imageUrl = false;
                     self.selectionTableItems.push(selectedTable);
@@ -309,22 +310,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                             "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
                         };
                         self.tableSelection.push(table);
+                        
                     }
             };
 
-            self.minus = function() {
-                if(self.totalGuest > 1) {
-                    self.totalGuest = self.totalGuest - 1;
-                }
-             };
-            
-            self.plus = function() {
-                self.totalGuest = self.totalGuest + 1;
-             };
-
             self.confirmBottleService = function() {
                 VenueService.tab = 'B';
-                $log.info("Bottle object: ", angular.toJson(self.bottle));
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
                 VenueService.bottleServiceData = self.bottle;
@@ -393,11 +384,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         self.serviceJSON.order.orderItems.push(items);
                     });
                 }
-
                 VenueService.payloadObject = self.serviceJSON;
                 $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
              };
-
             self.init();
-            
     }]);

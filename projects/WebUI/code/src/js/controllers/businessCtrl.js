@@ -111,15 +111,15 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 $location.path("/emailVerification/"+VenueService.venueNumber);
             };
 
-            self.getClaimBusiness = function(selectedVenue){
-                $('#mailValidation').modal('show');
+            self.getClaimBusiness = function(selectedVenue) {
+                $location.url('/emailVerification/' + selectedVenue.id);
                 VenueService.businessImage = selectedVenue.imageUrls[0].originalUrl;
                 VenueService.venueName = selectedVenue.venueName;
                 VenueService.venueAddress = selectedVenue.address;
-                AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
+                /*AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
                     VenueService.businessUrl = response;
                     // $location.path("/deployment/"+selectedVenue.id);
-                });
+                });*/
               };
 
             self.save = function(newUser) {

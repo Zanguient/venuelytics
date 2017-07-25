@@ -11,9 +11,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             var self = $scope;
 
             self.init = function() {
-                $(function() {
-                    $("#requestedDate").datepicker({autoclose:true});
-                });
+                $("#requestedDate").datepicker({autoclose:true});
             };
 
             self.glistSave = function(guest) {

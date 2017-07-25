@@ -7,9 +7,9 @@
                 <span class="ms-title" ng-cloak><font color="black">{{"title.TITLE_VENUE" | translate}}</font><strong><font color="green">{{"title.TITLE_LYTICS" | translate}}</font></strong></span>
             </a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse" ng-controller="HomeController">
+        <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="dropdown {{$root.homeTab}}" ng-click="navBar(1)">
+                <li class="dropdown {{$root.homeTab}}">
                     <a ng-href="/home" class="dropdown-toggle animated fadeIn animation-delay-4" data-toggle="dropdown" data-hover="dropdown" role="button" data-name="home" ng-cloak>{{"navbar.HOME" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     <!-- <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
                         <li><a href="/about" class="dropdown-link">{{"footBar.ABOUT" | translate}}</a></li>
@@ -17,11 +17,11 @@
                     </ul> -->
                     
                 </li>
-                <li class="dropdown {{$root.businessTab}}" ng-click="navBar(2)" ng-show="showBusinessTab == 1">
+                <li class="dropdown {{$root.businessTab}}" ng-show="$root.showBusinessTab == 1">
                     <a ng-href="/searchBusiness" class="dropdown-toggle animated fadeIn animation-delay-6" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-cloak>{{"navbar.BUSINESS" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     
                 </li>
-                <li class="dropdown {{$root.consumerTab}}" ng-click="navBar(3)">
+                <li class="dropdown {{$root.consumerTab}}">
                     <a href="/cities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities" ng-cloak>{{"navbar.CONSUMERS" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -29,7 +29,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown {{$root.newConsumerTab}}" ng-click="navBar(4)" ng-show="showNewConsumer == 1">
+                <li class="dropdown {{$root.newConsumerTab}}" ng-show="$root.showNewConsumer == 1">
                     <a href="/newCities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities" ng-cloak>New Consumer<i class="zmdi zmdi-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -37,15 +37,15 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown {{$root.aboutTab}}" ng-click="navBar(5)">
+                <li class="dropdown {{$root.aboutTab}}">
                     <a ng-href="/about" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-cloak>{{"footBar.ABOUT" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     
                 </li>
-                <li class="dropdown {{$root.contactTab}}" ng-click="navBar(6)">
+                <li class="dropdown {{$root.contactTab}}">
                     <a ng-href="/contact" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-cloak>{{"contact.CONTACT_US" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     
                 </li>
-                <li class="dropdown {{$root.blogTab}}" ng-click="navBar(7)">
+                <li class="dropdown {{$root.blogTab}}">
                     <a ng-href="/blog" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-cloak>{{"blog.BLOG" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     
                 </li>
