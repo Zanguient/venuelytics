@@ -416,10 +416,10 @@ gulp.task('aws:deploy',['dist:clean'],function() {
     var publisher = awspublish.create({
         region: 'us-west-1',
         params: {
-            Bucket: 'dev.webui'
+            Bucket: 'www.itzfun.com'
         }
     }, {
-        cacheFileName: 'cache/release.webui.cache'
+        cacheFileName: 'cache/release.itzfun.com.cache'
     });
 
     // define custom headers 

@@ -185,7 +185,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
 }]).run(['$location', '$rootScope',function($location, $rootScope) {
     
     var hostName = $location.host();
-    if (typeof hostName !== 'undefined') {
+    if (typeof hostName == 'undefined') {
         hostName = '';
     }
     hostName = hostName.toLowerCase();
@@ -193,7 +193,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     if (hostName.indexOf("itzfun.com") >= 0){
         defaultPage = '/cities';
     }
-    
+
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 
         if (current.hasOwnProperty('$$route')) {
