@@ -1,6 +1,6 @@
 <div ng-controller="VenueMapsController" class="container-fluid">
 
-<span> <a class="btn btn-default pull-right" style="margin-top: -75px;" ng-click="createBottle()"><em class="fa fa-plus"></em>Add Bottle</a></span>
+<span> <a class="btn btn-default pull-right" style="margin-top: -160px;" ng-click="createBottle()"><em class="fa fa-plus"></em>Add Bottle</a></span>
   
   <!-- START DATATABLE 2 -->
   <div class="row">
@@ -28,3 +28,8 @@
   <!-- END DATATABLE 2 -->
   
 </div>
+<script type="text/ng-template" id="deleteBottleId">
+  <div class="ngdialog-message"><h3>Are Your Want to Delete </h3>
+    <button type="button" ng-click="confirm(confirmValue)" class="btn btn-primary mr">Confirm</button><button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancel</button>
+  </div>
+</script>

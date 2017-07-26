@@ -1,6 +1,14 @@
-<h3>
+<h3 ng-show="createPartySplit == 'private'">
 	Add / Edit Banquet Hall <small>Add a new Banquet Hall or Edit
 		an existing Banquet Hall.</small>
+</h3>
+<h3 ng-show="createPartySplit == 'party'">
+	Add / Edit Party Hall <small>Add a new Party Hall or Edit
+		an existing Party Hall.</small>
+</h3>
+<h3 ng-show="createPartySplit == 'Bparty'">
+	Add / Edit Bachelor Party Hall <small>Add a new Bachelor Party Hall or Edit
+		an existing Bachelor Party Hall.</small>
 </h3>
 <!-- START row-->
 <div class="row" ng-controller="PrivateEventController">
@@ -14,7 +22,9 @@
 
 					<div class="row">
 						<div class="form-group col-sm-8">
-							<label class="control-label">Banquet Hall Name *</label> <input
+							<label ng-show="createPartySplit == 'private'" class="control-label">Banquet Hall Name *</label>
+							<label ng-show="createPartySplit == 'party'" class="control-label">Party Hall Name *</label>
+							<label ng-show="createPartySplit == 'Bparty'" class="control-label">Bachelor Party Hall Name *</label> <input
 								type="text" name="name" required="required" class="form-control"
 								ng-model="data.name" />
 						</div>

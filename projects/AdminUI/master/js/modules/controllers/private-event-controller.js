@@ -3,8 +3,8 @@
  *smangipudi
  =========================================================*/
 App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService',
-							'RestServiceFactory', 'toaster', 'FORMATS',  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
-								RestServiceFactory, toaster, FORMATS) {
+							'RestServiceFactory', 'toaster', 'FORMATS','$rootScope',  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
+								RestServiceFactory, toaster, FORMATS, $rootScope) {
     'use strict';
     var promise = RestServiceFactory.ProductService().getPrivateEvent({id:0, productId: $stateParams.id});
     $scope.venueNumber = $stateParams.venueNumber;
@@ -13,9 +13,15 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
         $scope.imageUrl = data.imageUrls;
     });
 	$scope.update = function(isValid, data, num) {
-		data.brand = "BanquetHall";
-		data.productType = "BanquetHall";
-       	data.category = "BanquetHall";
+        if($rootScope.createPartySplit == 'private'){
+            data.brand = "BanquetHall";
+            data.productType = "BanquetHall";
+            data.category = "BanquetHall";
+        } else {
+            data.brand = "PartyHall";
+            data.productType = "PartyHall";
+            data.category = "PartyHall";
+        }
     	if (!isValid) {
     		return;
     	}

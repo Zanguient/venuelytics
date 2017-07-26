@@ -162,7 +162,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins','ngDialog')
     })
     .state('app.editBanquetHall', {
-        url: '/editBanquetHall/:venueNumber/:id',
+        url: '/edit/:venueNumber/:id',
         title: 'Edit BanquetHall',
         templateUrl: basepath('banquet-hall-edit.html'),
         controller: 'NullController',

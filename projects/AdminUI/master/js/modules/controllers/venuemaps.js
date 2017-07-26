@@ -5,8 +5,8 @@
  * =========================================================
  */
 
-App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams',
-                                   function( $scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams) {
+App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams','ngDialog',
+                                   function( $scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams, ngDialog) {
   'use strict';
   
   $timeout(function(){
@@ -58,6 +58,10 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
   	};
     
     $scope.deleteBottle = function(rowId, cellData){
+      ngDialog.openConfirm({
+      template: 'deleteBottleId',
+      className: 'ngdialog-theme-default'
+    }).then(function (value) {
       var target = {id: $stateParams.id ,tableId:cellData};
       RestServiceFactory.VenueMapService().delete(target,  function(success){
         $state.go('app.stores');
@@ -66,8 +70,8 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
           toaster.pop('error', "Server Error", error.data.developerMessage);
         }
       });
+    }, function (reason) {
+    });
     };
-
-  });
-  
+  });  
 }]);

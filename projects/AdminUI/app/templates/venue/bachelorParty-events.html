@@ -1,6 +1,6 @@
-<div ng-controller="PrivateEventsController" class="container-fluid">
+<div ng-controller="bachelorPartyEventsController" class="container-fluid">
   
-  <span> <a class="btn btn-default pull-right" style="margin-top: -160px;" ng-click = "createPrivateEvent()"><em class="fa fa-plus"></em>Add Private Event</a></span>
+  <span> <a class="btn btn-default pull-right" style="margin-top: -160px;" ng-click = "createBachelorPartyEvent()"><em class="fa fa-plus"></em>Add Bachelor Party Event</a></span>
 
   <!-- START DATATABLE 2 -->
   <div class="row">
@@ -8,7 +8,7 @@
         <div class="panel panel-default">
            <div class="panel-body">
            <toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
-              <table id="events_table"  class="table table-striped table-hover">
+              <table id="Bachelorarty_events_table"  class="table table-striped table-hover">
                  <thead>
                     <tr>
                        <th >Name</th>
@@ -31,7 +31,7 @@
   <!-- END DATATABLE 2 -->
   
 </div>
-<script type="text/ng-template" id="deletePrivateId">
+<script type="text/ng-template" id="deletePartyId">
   <div class="ngdialog-message"><h3>Are Your Want to Delete </h3>
     <button type="button" ng-click="confirm(confirmValue)" class="btn btn-primary mr">Confirm</button><button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancel</button>
   </div>

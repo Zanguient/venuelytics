@@ -93,6 +93,8 @@
  					get : {method: 'GET',  params: { id: '@id' }, isArray:true},
  					getPrivateEvents : {method: 'GET',  params: { id: '@id' }, isArray:true, 
  					url: urlTemplate.replace("@context", "products")+"/type/BanquetHall"},
+ 					getPartyEvents : {method: 'GET',  params: { id: '@id' }, isArray:true, 
+ 					url: urlTemplate.replace("@context", "products")+"/type/partyHall"},
  					getPrivateEvent : {method: 'GET',  params: { id: '@id', productId : '@productId'}, 
  					url: urlTemplate.replace("@context", "products")+"/:productId"},
  					updatePrivateEvent : {method: 'POST',  params: { id: '@id', productId : '@productId'}, 

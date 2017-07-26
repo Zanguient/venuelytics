@@ -3,8 +3,8 @@
  * smangipudi
  =========================================================*/
 
-App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory', 'DataTableService', 'toaster', 
-                                    function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster) {
+App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory', 'DataTableService', 'toaster','ngDialog', 
+                                    function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, ngDialog) {
   'use strict';
   
   $timeout(function(){
@@ -75,7 +75,10 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
   	};
 
   	$scope.deleteStore = function(rowId, storeId) {
-
+      ngDialog.openConfirm({
+      template: 'deleteVenueId',
+      className: 'ngdialog-theme-default'
+    }).then(function (value) {
   		var target = {id: storeId};
   		RestServiceFactory.VenueService().delete(target,  function(success){
     		var table = $('#stores_table').dataTable();
@@ -85,6 +88,8 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
+      }, function (reason) {
+    });
   	};
 
   	$scope.createNewStore = function() {

@@ -1,8 +1,8 @@
 /**=========================================================
- * Module: private-event-controller.js
+ * Module: BachelorParty-event-controller.js
  *smangipudi
  =========================================================*/
-App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','ngDialog','$rootScope', 
+App.controller('bachelorPartyEventsController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','ngDialog','$rootScope', 
                                   function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS, ngDialog, $rootScope) {
   'use strict';
   $timeout(function(){
@@ -19,9 +19,9 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
 		    	"targets": [6],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ng-click="editPE(' +row +','+cellData+')">' + 
+		    		var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ng-click="editBachelorPartyEvent(' +row +','+cellData+')">' + 
 		    		'</button>&nbsp;&nbsp;<button title="Delete" class="btn btn-default btn-oval fa fa-trash" '+
-		    		'ng-click="deletePE(' +row +','+cellData+')"></button>';
+		    		'ng-click="deleteBachelorPartyEvent(' +row +','+cellData+')"></button>';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
@@ -41,12 +41,12 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
 		    	}
 		 } ];
     
-	    DataTableService.initDataTable('events_table', columnDefinitions, false);
+	    DataTableService.initDataTable('Bachelorarty_events_table', columnDefinitions, false);
    
-	    var promise = RestServiceFactory.ProductService().getPrivateEvents({id:$stateParams.id});
+	    var promise = RestServiceFactory.ProductService().getPartyEvents({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
 	    $scope.data = data;
-    	var table = $('#events_table').DataTable();
+    	var table = $('#Bachelorarty_events_table').DataTable();
 
     	data.map(function(room) {
     		var d = room.description;
@@ -64,17 +64,17 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
 	  $state.go('app.agencyUsers', {id:$stateParams.id});
   }
 		
-  $scope.editPE = function(rowId, productId) {
-  		$rootScope.createPartySplit = "private";
+  $scope.editBachelorPartyEvent = function(rowId, productId) {
+  		$rootScope.createPartySplit = "Bparty";
 	  	$state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:productId});
 	}
-	$scope.createPrivateEvent = function(rowId, productId){
-		$rootScope.createPartySplit = "private";
+	$scope.createBachelorPartyEvent = function(rowId, productId){
+		$rootScope.createPartySplit = "Bparty";
 		$state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:'new'});
 	}
-  	$scope.deletePE = function (rowId, productId) {
+  	$scope.deleteBachelorPartyEvent = function (rowId, productId) {
     ngDialog.openConfirm({
-      template: 'deletePrivateId',
+      template: 'deletePartyId',
       className: 'ngdialog-theme-default'
     }).then(function (value) {
       var target = {id: $stateParams.id ,productId:productId};
