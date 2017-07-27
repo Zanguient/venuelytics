@@ -49,6 +49,10 @@ select {
   color: #181818;
 }
 
+.bottleSelect {
+  background-color: #FAFAFA
+}
+
 .cardHeight {
   height:550px;
 }

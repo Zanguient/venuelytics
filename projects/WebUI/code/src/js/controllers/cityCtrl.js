@@ -3,8 +3,8 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', 'AjaxService', 'APP_ARRAYS', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, VenueService, AjaxService, APP_ARRAYS, $rootScope) {
+app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, DataShare, AjaxService, APP_ARRAYS, $rootScope) {
 
     		$log.log('Inside City Controller.');
     		
@@ -36,7 +36,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
 
             $scope.getCity = function (citySearch) {
                 self.loadingBar = true;
-                AjaxService.getVenuesByCity(VenueService.latitude, VenueService.longitude, citySearch).then(function(response) {
+                AjaxService.getVenuesByCity(DataShare.latitude, DataShare.longitude, citySearch).then(function(response) {
                     self.listOfCities = response;
                     self.loadingBar = false;
                 });
@@ -52,17 +52,17 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                 self.selectedCountry = APP_ARRAYS.country[0];
                 self.countries = APP_ARRAYS.country;
 
-                if(VenueService.latitude && VenueService.longitude && 
-                    VenueService.latitude !== '' && VenueService.longitude !== ''){
+                if(DataShare.latitude && DataShare.longitude && 
+                    DataShare.latitude !== '' && DataShare.longitude !== ''){
 
-                    self.gettingLocation(VenueService.latitude, VenueService.longitude);
+                    self.gettingLocation(DataShare.latitude, DataShare.longitude);
                 } else{
 
                     if (navigator && navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function(position){
-                            VenueService.latitude = position.coords.latitude; 
-                            VenueService.longitude = position.coords.longitude;
-                            self.gettingLocation(VenueService.latitude, VenueService.longitude);
+                            DataShare.latitude = position.coords.latitude; 
+                            DataShare.longitude = position.coords.longitude;
+                            self.gettingLocation(DataShare.latitude, DataShare.longitude);
                             self.$apply(function(){
                                 self.position = position;
                             });

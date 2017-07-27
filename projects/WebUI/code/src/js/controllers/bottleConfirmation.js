@@ -3,11 +3,11 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService) {
+app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService) {
 
     		$log.log('Inside Confirm Reservation Controller.');
-    		
+
     		var self = $scope;
             self.selectTables = [];
             self.selectBottleOrders = [];
@@ -15,11 +15,11 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.init = function() {
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
-                self.userData = VenueService.bottleServiceData;
-                self.authBase64Str = VenueService.authBase64Str;
-                self.object = VenueService.payloadObject;
+                self.userData = DataShare.bottleServiceData;
+                self.authBase64Str = DataShare.authBase64Str;
+                self.object = DataShare.payloadObject;
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');
-                self.selectBottleOrders = VenueService.selectBottle;
+                self.selectBottleOrders = DataShare.selectBottle;
                 angular.forEach(self.selectBottleOrders, function(value1, key1) {
                     self.availableAmount = self.availableAmount + value1.price;
                 });
@@ -33,7 +33,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                             "name": value.name
                         };
                         self.selectTables.push(items);
-                    } 
+                    }
                 });
                 self.getTax();
             };
@@ -49,7 +49,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                             if(value.type === 'tax') {
                                 var taxData = value.value;
                                 self.taxAmount = (amount * taxData)/100;
-                                self.chargedAmount = amount + self.taxAmount; 
+                                self.chargedAmount = amount + self.taxAmount;
                             } else if(value.type === 'convenience-fee'){
                                     self.processingFee = value.value;
                             } else if(value.type === 'discount'){
@@ -66,7 +66,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                         self.gratuity = 0;
                         self.discount = 0;
                         self.processingFee = 0;
-                    } 
+                    }
                 });
             };
 
@@ -84,7 +84,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.creditCardPayment = function() {
             var pay,chargeAmountValue;
             pay = self.chargedAmount * 100;
-            chargeAmountValue = self.chargedAmount.toFixed(2);
+            chargeAmountValue = parseFloat(self.chargedAmount).toFixed(2);
             var amount = self.availableAmount;
             var handler = StripeCheckout.configure({
                 key: 'pk_test_v3iaPvbv4UeKkRWrH3O5etYU',
@@ -115,7 +115,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                                     "paymentType":"CREDIT_CARD",
                                     "chargedAmount":parseFloat(chargeAmountValue)
                                 };
-                    //Save Payment Transaction for card                  
+                    //Save Payment Transaction for card
                     var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
                     AjaxService.createTransaction(self.editVenueID, self.orderId, payment, authBase64Str).then(function(response) {

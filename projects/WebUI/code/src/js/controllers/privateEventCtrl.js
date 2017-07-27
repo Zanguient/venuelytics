@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
+app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
     		$log.log('Inside PrivateEvent Controller.');
     		
@@ -14,25 +14,23 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 self.venueID = self.venueid = $routeParams.venueid;
                 self.getBanquetHall(self.venueID);
                 self.getMenus();
-                $(function() {
-                    $( "#privateDate" ).datepicker({autoclose:true});
-                });
+                $( "#privateDate" ).datepicker({autoclose:true});
 
-                if((Object.keys(VenueService.bottleServiceData).length) === 0) {
+                if((Object.keys(DataShare.bottleServiceData).length) === 0) {
                     self.getEventType();
                 } else {
-                    self.bottle = VenueService.bottleServiceData;
+                    self.bottle = DataShare.bottleServiceData;
                     self.eventTypes = [];
                     self.eventTypes.push(self.bottle.bottleOccasion);
                 }
             };
 
             self.createPrivateEvent = function(value) {
-                VenueService.tab = 'P';
+                DataShare.tab = 'P';
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
-                VenueService.privateEventData = self.private;
-                VenueService.authBase64Str = authBase64Str;
+                DataShare.privateEventData = self.private;
+                DataShare.authBase64Str = authBase64Str;
 
                 self.serviceJSON = {
                     "serviceType": 'BanquetHall',
@@ -79,7 +77,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                         };
 
                 self.serviceJSON.order.orderItems.push(items);
-                VenueService.payloadObject = self.serviceJSON;
+                DataShare.payloadObject = self.serviceJSON;
                 $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
              };
 

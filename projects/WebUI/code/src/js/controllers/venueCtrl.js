@@ -3,18 +3,18 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, $translate) {
+app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $translate) {
 
     		$log.log('Inside Venue Controller.');
 
     		var self = $scope;
 
             self.init = function() {
-                VenueService.bottleServiceData = {};
-                VenueService.guestListData = {};
-                VenueService.privateEventData = {};
-                VenueService.totalNoOfGuest = 1;
+                DataShare.bottleServiceData = {};
+                DataShare.guestListData = {};
+                DataShare.privateEventData = {};
+                DataShare.totalNoOfGuest = 1;
                 self.serviceTypes = APP_ARRAYS.serviceTabs;
                 self.serviceIcons = APP_ARRAYS.serviceSmallIcons;
 
@@ -30,15 +30,15 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                     self.casinoTab = self.cityInfo.counts.CASINO;
                 });
 
-                if(VenueService.latitude && VenueService.longitude &&
-                    VenueService.latitude !== '' && VenueService.longitude !== ''){
+                if(DataShare.latitude && DataShare.longitude &&
+                    DataShare.latitude !== '' && DataShare.longitude !== ''){
                     self.setTab('CLUB');
                 } else{
 
                     if (navigator && navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function(position){
-                            VenueService.latitude = position.coords.latitude;
-                            VenueService.longitude = position.coords.longitude;
+                            DataShare.latitude = position.coords.latitude;
+                            DataShare.longitude = position.coords.longitude;
                             self.setTab('CLUB');
                             self.$apply(function(){
                                 self.position = position;
@@ -53,15 +53,15 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
 
             self.setTab = function(type) {
                 $(window).trigger('resize');
-                self.selectedVenueType = $translate.instant(type);
-                //VenueService.selectedCity = self.selectedCityName;
-                AjaxService.getVenues(null,self.selectedCityName, type, VenueService.latitude, VenueService.longitude).then(function(response) {
+                self.selectedVenueType1 = $translate.instant(type);
+                //DataShare.selectedCity = self.selectedCityName;
+                AjaxService.getVenues(null,self.selectedCityName, type, DataShare.latitude, DataShare.longitude).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
                 });
             };
 
             self.getVenueBySearch = function(venueSearch){
-                AjaxService.getVenueBySearch(VenueService.latitude, VenueService.longitude, venueSearch).then(function(response) {
+                AjaxService.getVenueBySearch(DataShare.latitude, DataShare.longitude, venueSearch).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
                 });
             };
@@ -73,9 +73,9 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
             };
 
     		self.selectVenue = function(venue) {
-                //VenueService.selectedVenueDetails = venue;
-                VenueService.selectedVenue = venue;
-                VenueService.venueNumber = venue.id;
+                //DataShare.selectedVenueDetails = venue;
+                DataShare.selectedVenue = venue;
+                DataShare.venueNumber = venue.id;
     			$location.url('/cities/'+self.selectedCityName+'/'+venue.id);
     		};
 

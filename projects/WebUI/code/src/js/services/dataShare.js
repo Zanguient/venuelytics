@@ -1,5 +1,5 @@
 "use strict";
-app.service('VenueService', function() {
+app.service('DataShare', function() {
   this.latitude = '';
   this.longitude = '';
   this.venueNumber = '';
@@ -17,6 +17,7 @@ app.service('VenueService', function() {
   this.selectBottle = '';
   this.tableSelection = '';
   this.tab = '';
+  this.userselectedTables = '';
   this.imageMapping={
       "pic_url": "",
       "pic_url_thumbnail":"",
@@ -29,7 +30,7 @@ app.service('VenueService', function() {
     if (navigator && navigator.geolocation) {
 
       navigator.geolocation.getCurrentPosition(function(position){
-        this.latitude = position.coords.latitude; 
+        this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         var location = {
           lat : this.latitude,
@@ -37,7 +38,7 @@ app.service('VenueService', function() {
         };
         return location;
       },
-    function (error) { 
+    function (error) {
       return error;
     });
     }

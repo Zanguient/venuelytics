@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
+app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
     		$log.log('Inside Venue Details Controller.');
     		
@@ -14,13 +14,13 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     $( "#inputDate, #privateDate" ).datepicker();
                 });
                 
-                self.bottle = VenueService.bottleServiceData;
-                self.guest = VenueService.guestListData;
-                self.private = VenueService.privateEventData;
-                self.totalGuest = VenueService.totalNoOfGuest;
+                self.bottle = DataShare.bottleServiceData;
+                self.guest = DataShare.guestListData;
+                self.private = DataShare.privateEventData;
+                self.totalGuest = DataShare.totalNoOfGuest;
                 self.venueid = $routeParams.venueid;
                 self.reservationTime = APP_ARRAYS.time;
-                self.restoreTab = VenueService.tab;
+                self.restoreTab = DataShare.tab;
                 self.getBanquetHall(self.venueid);
                 self.getBottleProducts();
                 self.getEventType();
@@ -93,7 +93,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     });
 
             self.getBottleProducts = function() {
-                AjaxService.getProductOfBottle(VenueService.venueNumber).then(function(response) {
+                AjaxService.getProductOfBottle(DataShare.venueNumber).then(function(response) {
                     self.allBottle = response.data;
                 });
             };
@@ -103,7 +103,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             };
 
             self.getEventType = function() {
-                AjaxService.getTypeOfEvents(VenueService.venueNumber).then(function(response) {
+                AjaxService.getTypeOfEvents(DataShare.venueNumber).then(function(response) {
                     self.eventTypes = response.data;
                 });
             }
@@ -162,11 +162,11 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         }
                         var total_days = value.days.split(",")
                         angular.forEach(total_days, function(day, key2) {
-                        VenueService.elements = self.venueImageMapData[key1].elements;
-                        self.venueImageMapData[0].elements = VenueService.elements;
+                        DataShare.elements = self.venueImageMapData[key1].elements;
+                        self.venueImageMapData[0].elements = DataShare.elements;
                         if(self.venueImageMapData[key1].imageUrls != '') {
-                        VenueService.imageMapping.pic_url = self.venueImageMapData[key1].imageUrls[0].originalUrl;
-                        VenueService.imageMapping.pic_url_thumbnail = self.venueImageMapData[key1].imageUrls[0].originalUrl;
+                        DataShare.imageMapping.pic_url = self.venueImageMapData[key1].imageUrls[0].originalUrl;
+                        DataShare.imageMapping.pic_url_thumbnail = self.venueImageMapData[key1].imageUrls[0].originalUrl;
                         }
                         if (self.venueImageMapData[key1].imageMap != "") {
                             var object = angular.fromJson(self.venueImageMapData[key1].imageMap);
@@ -183,15 +183,15 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                                     maps.push(objectMapping)
                                 }
                             }
-                            VenueService.imageMapping.maps = maps;
-                            self.img = angular.copy(VenueService.imageMapping);
+                            DataShare.imageMapping.maps = maps;
+                            self.img = angular.copy(DataShare.imageMapping);
                             if(self.img.pic_url != '') {
                                 self.imageFlag = false;
                             } else {
                                 self.imageFlag = true;
                             }
                         } else {
-                            VenueService.imageMapping.maps = [];
+                            DataShare.imageMapping.maps = [];
                         }
                         });
                     });
@@ -204,7 +204,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
 
             self.setReservationColor = function() {
                 var venueImageMapData = [];
-                angular.forEach(VenueService.elements, function(key, value) {
+                angular.forEach(DataShare.elements, function(key, value) {
                     var breakBoolean = false;
                     angular.forEach(self.reservations, function(key1, value1) {
                         if (!breakBoolean) {
@@ -239,7 +239,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     data.fillColor = APP_COLORS.darkYellow;
                     data.strokeColor = APP_COLORS.turbo;
                 } else if (data.fillColor === APP_COLORS.darkYellow) {
-                    var selectedTable = VenueService.elements[index];
+                    var selectedTable = DataShare.elements[index];
                     if (!selectedTable) {
                         return;
                     }
@@ -260,7 +260,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             };
 
         self.removeSelectedTables = function(index,arrayObj,table) {
-            angular.forEach(VenueService.elements, function(value, key) {
+            angular.forEach(DataShare.elements, function(value, key) {
                 if(arrayObj.name == value.name) {
                     var id = value.id;
                     var data = $('#' + id).mouseout().data('maphilight') || {};
@@ -350,12 +350,12 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
              };
 
              self.glistSave = function(guest) {
-                VenueService.tab = 'G';
+                DataShare.tab = 'G';
                 var name = guest.guestFirstName + " " + guest.guestLastName;
                 var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
                 guest.guestStartDate = moment(guest.guestStartDate).format('YYYY-MM-DD');
                 var object = {
-                     "venueNumber" : VenueService.venueNumber,
+                     "venueNumber" : DataShare.venueNumber,
                      "email" : guest.guestEmailId,
                      "phone" : guest.guestMobileNumber,
                      "zip" : guest.guestZip,
@@ -365,20 +365,20 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                      "femaleCount" : guest.guestWomen,
                      "visitorName" : name
                 };
-                VenueService.guestListData = self.guest;
-                VenueService.authBase64Str = authBase64Str;
-                VenueService.payloadObject = object;
+                DataShare.guestListData = self.guest;
+                DataShare.authBase64Str = authBase64Str;
+                DataShare.payloadObject = object;
                 $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
              };
 
             self.confirmBottleService = function() {
-                VenueService.tab = 'B';
+                DataShare.tab = 'B';
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
-                VenueService.bottleServiceData = self.bottle;
-                VenueService.bottleZip = self.bottle.bottleZipcode;
-                VenueService.authBase64Str = authBase64Str;
-                VenueService.selectBottle = self.bottleMinimum;
+                DataShare.bottleServiceData = self.bottle;
+                DataShare.bottleZip = self.bottle.bottleZipcode;
+                DataShare.authBase64Str = authBase64Str;
+                DataShare.selectBottle = self.bottleMinimum;
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,
@@ -441,16 +441,16 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     });
                 }
 
-                VenueService.payloadObject = self.serviceJSON;
+                DataShare.payloadObject = self.serviceJSON;
                 $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
              };
 
              self.createPrivateEvent = function(value) {
-                VenueService.tab = 'P';
+                DataShare.tab = 'P';
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
-                VenueService.privateEventData = self.private;
-                VenueService.authBase64Str = authBase64Str;
+                DataShare.privateEventData = self.private;
+                DataShare.authBase64Str = authBase64Str;
 
                 self.serviceJSON = {
                     "serviceType": 'BanquetHall',
@@ -497,7 +497,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         };
 
                 self.serviceJSON.order.orderItems.push(items);
-                VenueService.payloadObject = self.serviceJSON;
+                DataShare.payloadObject = self.serviceJSON;
                 $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
              };
 

@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService) {
+app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService) {
 
             $log.log('Inside Private Confirm Controller.');
             
@@ -13,10 +13,10 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
             self.init = function() {
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
-                self.privateEventData = VenueService.privateEventData;
+                self.privateEventData = DataShare.privateEventData;
                 self.privateSelectedDate = moment(self.privateEventData.orderDate).format("MM-DD-YYYY");
-                self.authBase64Str = VenueService.authBase64Str;
-                self.object = VenueService.payloadObject;
+                self.authBase64Str = DataShare.authBase64Str;
+                self.object = DataShare.payloadObject;
             };
 
             self.editPrivatePage = function() {

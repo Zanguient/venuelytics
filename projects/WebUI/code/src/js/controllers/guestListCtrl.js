@@ -3,21 +3,19 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('GuestListController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
+app.controller('GuestListController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
     		$log.log('Inside ServiceTab Controller.');
     		
             var self = $scope;
 
             self.init = function() {
-                $(function() {
-                    $("#requestedDate").datepicker({autoclose:true});
-                });
+                $("#requestedDate").datepicker({autoclose:true});
             };
 
             self.glistSave = function(guest) {
-                VenueService.tab = 'G';
+                DataShare.tab = 'G';
                 var name = guest.guestFirstName + " " + guest.guestLastName;
                 var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
                 guest.guestStartDate = moment(guest.guestStartDate).format('YYYY-MM-DD');
@@ -32,9 +30,9 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                      "femaleCount" : guest.guestWomen,
                      "visitorName" : name
                 };
-                VenueService.guestListData = self.guest;
-                VenueService.authBase64Str = authBase64Str;
-                VenueService.payloadObject = object;
+                DataShare.guestListData = self.guest;
+                DataShare.authBase64Str = authBase64Str;
+                DataShare.payloadObject = object;
                 $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
             };
 

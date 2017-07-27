@@ -14,8 +14,8 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         // Allow loading from Google maps
         "http://dev.api.venuelytics.com/WebServices**"
     ]);
-    
-    
+
+
     $routeProvider
         .when('/', {
             templateUrl: 'home.html',
@@ -162,6 +162,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/blog', {
             templateUrl: 'blog.html',
             title: 'Venuelytics-Blog',
+            controller:'BlogController',
             description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
         })
         .otherwise('/home');
@@ -183,7 +184,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $translateProvider.useLocalStorage();
 
 }]).run(['$location', '$rootScope',function($location, $rootScope) {
-    
+
     var hostName = $location.host();
     if (typeof hostName == 'undefined') {
         hostName = '';

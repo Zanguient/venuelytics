@@ -3,46 +3,39 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
+app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
     		$log.log('Inside ServiceTab Controller.');
-    		
+
             var self = $scope;
 
             self.selectionTableItems = [];
-            self.count = 1;
             self.bottleMinimum = [];
             self.init = function() {
                 self.venueid = $routeParams.venueid;
-                self.guest = VenueService.guestListData;
-                self.private = VenueService.privateEventData;
-                self.totalGuest = VenueService.totalNoOfGuest;
-                self.restoreTab = VenueService.tab;
+                self.guest = DataShare.guestListData;
+                self.private = DataShare.privateEventData;
+                self.totalGuest = DataShare.totalNoOfGuest;
+                self.restoreTab = DataShare.tab;
                 self.tabParams = $routeParams.tabParam;
 
-                if(VenueService.selectBottle) {
-                    self.bottleMinimum = VenueService.selectBottle;
+                if(DataShare.selectBottle) {
+                    self.bottleMinimum = DataShare.selectBottle;
                 }
-                if(VenueService.tableSelection) {
-                    self.tableSelection = VenueService.tableSelection;
+                if(DataShare.tableSelection) {
+                    self.tableSelection = DataShare.tableSelection;
                 }
                 if(self.restoreTab === 'B' || self.tabParams === 'B') {
-                    $log.info("Inside B");
                     self.bottleService();
                 } else if(self.restoreTab === 'P' || self.tabParams === 'P') {
-                    $log.info("Inside P");
                     self.event();
                 } else if(self.restoreTab === 'G' || self.tabParams === 'G'){
-                    $log.info("Inside G");
                     self.glist();
                 }else {
                     self.bottleService();
-                    $log.info("Else");
                 }
-
                 self.reservationTime = APP_ARRAYS.time;
-
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;
@@ -56,7 +49,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
             /*For bottle service tab highlight*/
             self.bottleService = function(service) {
-                $log.info("Inside bottle");
                 $("#privateEventTab").css('background-color', APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color', APP_COLORS.silver);
@@ -70,7 +62,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
             /*For private event service tab highlight*/
              self.event = function(service) {
-                $log.info("Inside event");
                 $("#privateEventTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#private').css('color', 'white');
                 $("#guestlistTab").css('background-color',APP_COLORS.silver);
@@ -84,7 +75,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
             /*For guest list service tab highlight*/
              self.glist = function(service) {
-                $log.info("Inside glist");
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color',APP_COLORS.fruitSalad);
@@ -96,7 +86,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.guestServiceTab = true;
              };
 
-
             self.init();
-    		
+
     }]);

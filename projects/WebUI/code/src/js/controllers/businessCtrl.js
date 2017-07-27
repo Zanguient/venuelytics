@@ -1,6 +1,6 @@
 "use strict";
-app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'VenueService', '$window','AjaxService', 'APP_ARRAYS', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, VenueService, $window, AjaxService, APP_ARRAYS, $rootScope) {
+app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope) {
 
     		$log.log('Inside Business Controller');
     		
@@ -22,11 +22,11 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 emailId: '',
                 phone: ''
             };
-            self.selectedVenueName = VenueService.venueName;
-            self.selectedVenueAddress = VenueService.venueAddress;
-            self.businessImage = VenueService.businessImage;
-            var response = VenueService.businessUrl;
-            if(VenueService.businessUrl) {
+            self.selectedVenueName = DataShare.venueName;
+            self.selectedVenueAddress = DataShare.venueAddress;
+            self.businessImage = DataShare.businessImage;
+            var response = DataShare.businessUrl;
+            if(DataShare.businessUrl) {
                 self.privateUrl = response.data["business.privateUrl"];
                 self.foodUrl = response.data["business.foodUrl"];
                 self.premiumUrl = response.data["business.premiumUrl"];
@@ -66,14 +66,14 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             
             self.claim = function(selectedVenue) {
                 $window.scrollTo(0, 0);
-                VenueService.businessImage = selectedVenue.imageUrls[0].originalUrl;
+                DataShare.businessImage = selectedVenue.imageUrls[0].originalUrl;
                 self.selectedVenueName = selectedVenue.venueName;
-                VenueService.venueName = selectedVenue.venueName;
+                DataShare.venueName = selectedVenue.venueName;
                 self.selectedVenueId = selectedVenue.id;
-                VenueService.venueNumber = selectedVenue.id;
+                DataShare.venueNumber = selectedVenue.id;
                 self.selectedVenueWebsite = selectedVenue.website;
                 self.selectedVenueAddress = selectedVenue.address;
-                VenueService.venueAddress = self.selectedVenueAddress;
+                DataShare.venueAddress = self.selectedVenueAddress;
                 self.claimBusiness = true;
                 $rootScope.title = 'Venuelytics-ClaimBusiness-'+selectedVenue.venueName;
                 $location.path("/claimBusiness/"+self.selectedVenueId);
@@ -92,34 +92,34 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
             
             self.email = function() {
-                $location.path("/deployment/"+VenueService.venueNumber);
+                $location.path("/deployment/"+DataShare.venueNumber);
             };
 
             self.businessSubmit = function(businessClaim) {
                 var businessObject = {
-                    "business.contactName": VenueService.venueName,
+                    "business.contactName": DataShare.venueName,
                     "business.contactEmail": businessClaim.emailId,
                     "business.contactPhone": businessClaim.phone,
                     "business.contactRole": businessClaim.role.role
                 };
 
-                AjaxService.claimBusiness(VenueService.venueNumber, businessObject).then(function(response) {
+                AjaxService.claimBusiness(DataShare.venueNumber, businessObject).then(function(response) {
                     $log.info("Claim business response: "+angular.toJson(response));
                 });
                 self.businessData = true;
                 self.hideForm = true;
-                $location.path("/emailVerification/"+VenueService.venueNumber);
+                $location.path("/emailVerification/"+DataShare.venueNumber);
             };
 
-            self.getClaimBusiness = function(selectedVenue){
-                $('#mailValidation').modal('show');
-                VenueService.businessImage = selectedVenue.imageUrls[0].originalUrl;
-                VenueService.venueName = selectedVenue.venueName;
-                VenueService.venueAddress = selectedVenue.address;
-                AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
-                    VenueService.businessUrl = response;
+            self.getClaimBusiness = function(selectedVenue) {
+                $location.url('/emailVerification/' + selectedVenue.id);
+                DataShare.businessImage = selectedVenue.imageUrls[0].originalUrl;
+                DataShare.venueName = selectedVenue.venueName;
+                DataShare.venueAddress = selectedVenue.address;
+                /*AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
+                    DataShare.businessUrl = response;
                     // $location.path("/deployment/"+selectedVenue.id);
-                });
+                });*/
               };
 
             self.save = function(newUser) {
