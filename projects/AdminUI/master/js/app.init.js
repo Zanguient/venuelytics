@@ -136,8 +136,11 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                 };
 
                 this.setData = function(option, data) {
-                    $.plot( this.element, data, option );
-                    return this;
+                    var self = this;
+                    if (typeof data !== 'undefined') {
+                      $.plot(self.element, data, option );
+                    }
+                    return self;
                 };
 
                 // Listen to refresh events

@@ -13,20 +13,30 @@ App.directive('stackedBarChart',   function() {
       id: '@',
       mode: '@',
       formatDataFx : '&',
-      yPos: '@'
+      yPos: '@',
+      chartData: '@'
   	},
     link: function(scope, element, attrs) {
-      scope.$watch('url',function(newValue,oldValue) {
-        if (!newValue || angular.equals(newValue, oldValue)) {
-          return;
-        }
+      if (typeof scope.url !== 'undefined' && scope.url.length > 0) {
+        scope.$watch('url',function(newValue,oldValue) {
+          if (!newValue || angular.equals(newValue, oldValue)) {
+            return;
+          }
 
-        scope.drawChart();
-      });
+          scope.drawChart();
+        });
+      } else {
+        scope.$watch('chartData',function(newValue,oldValue) {
+          if (!newValue || angular.equals(newValue, oldValue)) {
+            return;
+          }
+          scope.drawChart();
+        });
+      }
     },
   	controller: function ($scope) {
-     $scope.chart = new FlotChart($('#'+$scope.id), $scope.url);
-     $scope.option = {
+      $scope.chart = new FlotChart($('#'+$scope.id), null);
+      $scope.option = {
           series: {
               stack: true,
               bars: {
@@ -45,11 +55,11 @@ App.directive('stackedBarChart',   function() {
           },
           tooltip: true,
           tooltipOpts: {
-              content: '%x : %y'
+              content: '%y'
           },
           xaxis: {
               tickColor: '#fcfcfc',
-              mode: 'catagories'
+              mode: 'categories'
           },
           yaxis: {
               position: $scope.yPos,
@@ -63,8 +73,13 @@ App.directive('stackedBarChart',   function() {
         if ($scope.mode === 'time') {
           $scope.option.series.bars.lineWidth = 1;
         }
-        $scope.chart.setDataUrl($scope.url);
-        $scope.chart.requestData($scope.option, 'GET', null, $scope.formatDataFx);
+        if (typeof $scope.url !== 'undefined' && $scope.url.length > 0) {
+          $scope.chart.setDataUrl($scope.url);
+          $scope.chart.requestData($scope.option, 'GET', null, $scope.formatDataFx);
+        } else {
+           $scope.chart.setData($scope.option, JSON.parse($scope.chartData));
+        }
+
       };
       $scope.drawChart();
     }

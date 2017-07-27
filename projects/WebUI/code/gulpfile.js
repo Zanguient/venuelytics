@@ -413,7 +413,7 @@ gulp.task('aws:deploy',['dist:clean'],function() {
         config.environment = 'navbar';
     }
 
-    var publisher = awspublish.create({
+    var publisherItzFun = awspublish.create({
         region: 'us-west-1',
         params: {
             Bucket: 'www.itzfun.com'
@@ -422,15 +422,25 @@ gulp.task('aws:deploy',['dist:clean'],function() {
         cacheFileName: 'cache/release.itzfun.com.cache'
     });
 
+
+    var publisher = awspublish.create({
+        region: 'us-west-1',
+        params: {
+            Bucket: 'dev.webui'
+        }
+    }, {
+        cacheFileName: 'cache/release.webui.cache'
+    });
+
     // define custom headers 
     var headers = {
         'Cache-Control': 'max-age=315360000, no-transform, public'
             // ... 
     };
 
-    return gulp.src(['dist/**'])
+   /* gulp.src(['dist/**'])
         // gzip, Set Content-Encoding headers and add .gz extension 
-        .pipe(awspublish.gzip())
+    .pipe(awspublish.gzip())
 
     // publisher will add Content-Length, Content-Type and headers specified above 
     // If not specified it will set x-amz-acl to public-read by default 
@@ -438,6 +448,20 @@ gulp.task('aws:deploy',['dist:clean'],function() {
 
     // create a cache file to speed up consecutive uploads 
     .pipe(publisher.cache())
+
+    // print upload updates to console 
+    .pipe(awspublish.reporter());*/
+
+    return gulp.src(['dist/**'])
+        // gzip, Set Content-Encoding headers and add .gz extension 
+    .pipe(awspublish.gzip())
+
+    // publisher will add Content-Length, Content-Type and headers specified above 
+    // If not specified it will set x-amz-acl to public-read by default 
+    .pipe(publisherItzFun.publish(headers))
+
+    // create a cache file to speed up consecutive uploads 
+    .pipe(publisherItzFun.cache())
 
     // print upload updates to console 
     .pipe(awspublish.reporter());

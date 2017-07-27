@@ -9,7 +9,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.requestByStatus = {};
     $scope.bookingRequestUrl = '';
     $scope.xAxisMode = 'categories';
-
+    $scope.requestByStatusZip =[];
+    $scope.bookingRequestByZipcodeData = [];
 	$scope.init=function(){
 	   
     	$log.log("Dash board controller has been initialized!");
@@ -50,7 +51,16 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[2].value = addForType($scope.venueBookings, $scope.selectedPeriod);
         $scope.top3Stats[3].value = addForType($scope.venueCheckin, $scope.selectedPeriod);
         $scope.top3Stats[3].value += addForType($scope.visitorCheckin, $scope.selectedPeriod);
-        $scope.top3FavItems();
+        var stackedBarDataStage =  $scope.requestByStatusZip[$scope.selectedPeriod];
+        $scope.bookingRequestByZipcodeData=  [];
+        for (var key in stackedBarDataStage) {
+            if (stackedBarDataStage.hasOwnProperty(key)){
+                 $scope.bookingRequestByZipcodeData.push(stackedBarDataStage[key]);
+            }
+        }
+        
+        console.log(JSON.stringify($scope.bookingRequestByZipcodeData));
+        $scope.top3FavItems(); 
         $scope.bookingRequestChart();
         $scope.reservedBookingChart();
         $scope.donutInit();
@@ -100,9 +110,118 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         } else {
             $scope.requestByStatus = {};
         }
+        if (typeof data.VENUE_BOOKINGS_BYZIP_COUNT   !== 'undefined' && data.VENUE_BOOKINGS_BYZIP_COUNT .length > 0) {
+            processRequestsByZip(data.VENUE_BOOKINGS_BYZIP_COUNT);
+        } else {
+            $scope.requestByStatusZip = {};
+        }
+        
         $scope.setDisplayData();
 
     };
+    
+    function processRequestByZipPeriod(period, data, attrName) {
+        var colors = ["#36af12", "#51bff2", "#4a8ef1", "#f0693a", "#a869f2", "#b8e902", "#c119f2","#bde902","#f149c8", "#bbccce"];
+
+        var series = $scope.requestByStatusZip[period];
+        var serie = series[data.analyticsLabel];
+        if (serie == null) {
+            serie = {label: data.analyticsLabel, color: colors[Object.keys(series).length % colors.length], data: []};
+            series[data.analyticsLabel] = serie;
+        }
+        var val = data[attrName];
+        if ( val > 0) {
+            serie.data.push([data.valueText, val]);
+        }
+        
+    }
+    function processRequestsByZip(data) {
+        $scope.requestByStatusZip = [];
+        $scope.requestByStatusZip['DAILY'] = [];
+        $scope.requestByStatusZip['WEEKLY'] = [];
+        $scope.requestByStatusZip['MONTHLY'] = [];
+        $scope.requestByStatusZip['YEARLY'] = [];
+
+        for (var i =0; i < data.length; i++) {
+            processRequestByZipPeriod('DAILY', data[i], 'lastDayValue');
+            processRequestByZipPeriod('WEEKLY', data[i], 'lastWeekValue');
+            processRequestByZipPeriod('MONTHLY', data[i], 'lastMonthValue');
+            processRequestByZipPeriod('YEARLY', data[i], 'lastYearValue');
+        }
+
+        sortAndNormalizeData($scope.requestByStatusZip['DAILY']);
+        sortAndNormalizeData($scope.requestByStatusZip['WEEKLY']);
+        sortAndNormalizeData($scope.requestByStatusZip['MONTHLY']);
+        sortAndNormalizeData($scope.requestByStatusZip['YEARLY']);
+
+        console.log(JSON.stringify($scope.requestByStatusZip));
+        
+    }
+    
+    function sortAndNormalizeData(series) {
+
+        var zips = [];
+        for (var key in series) {
+            if (series.hasOwnProperty(key)) {
+                var serie = series[key];
+
+                for (var i = 0; i < serie.data.length; i++) {
+                    var zip = serie.data[i][0];
+                    var value = serie.data[i][1];
+
+                    if (typeof zips[zip] === 'undefined') {
+                        zips[zip] = 0;
+                    }
+                    zips[zip] = zips[zip] + value;
+                }
+            }
+        }
+        
+        var tuples = [];
+        for (var key in zips) {
+            if (zips.hasOwnProperty(key)) {
+                tuples.push([key, zips[key]]);
+            }
+        }
+
+        tuples.sort(function(b, a) {
+            a = a[1];
+            b = b[1];
+            return a < b ? -1 : (a > b ? 1 : 0);
+        });
+        
+        // keep only top 10.
+        tuples = tuples.slice(0, 10);
+        var top10Zip = [];
+        for (var k in tuples) {
+            var obj = tuples[k];
+            top10Zip[obj[0]] = 1;
+        }
+        
+        // populate normalized data
+        for (var key in series) {
+            var others = 0;
+            if (series.hasOwnProperty(key)) {
+                var serie = series[key];
+
+                for (var i = serie.data.length -1; i >=0; i--) {
+                    var zip = serie.data[i][0];
+                    if (top10Zip[zip] !== 1) {
+                        others += serie.data[i][1];
+                        serie.data.splice(i, 1);
+                    }
+                }
+                if(others > 0) {
+                    serie.data.push(["Others", others]);
+                }
+
+                if (serie.data.length === 0) {
+                    delete series[key];
+                }
+            }
+        }
+    }
+
     function processRequestsByStatus(data) {
         var requestByStatus = [];
         
@@ -433,26 +552,28 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         var retData = [];
         var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
         var colorIndex = 0;
-        for (var index in data[0].series) {
-            var d = data[0].series[index];
-            var elem = {};
-            elem.label = $translate.instant(d.subName);
-            elem.color = colors[colorIndex % colors.length];
-            colorIndex++;
+        if (data.length > 0){
+            for (var index in data[0].series) {
+                var d = data[0].series[index];
+                var elem = {};
+                elem.label = $translate.instant(d.subName);
+                elem.color = colors[colorIndex % colors.length];
+                colorIndex++;
 
-            if ($scope.selectedPeriod !== 'DAILY') {
-                elem.data = d.data;
-            }
-            else {
-                elem.data = [];
-                for (var i =0; i < d.data.length; i++){
-                    var from = d.data[i][0].split("-");
-                    var f = new Date(from[0], from[1] - 1, from[2]);
-                    var dataElem = [f.getTime(), d.data[i][1]];
-                    elem.data.push(dataElem);
+                if ($scope.selectedPeriod !== 'DAILY') {
+                    elem.data = d.data;
                 }
+                else {
+                    elem.data = [];
+                    for (var i =0; i < d.data.length; i++){
+                        var from = d.data[i][0].split("-");
+                        var f = new Date(from[0], from[1] - 1, from[2]);
+                        var dataElem = [f.getTime(), d.data[i][1]];
+                        elem.data.push(dataElem);
+                    }
+                }
+                retData.push(elem);
             }
-            retData.push(elem);
         }
         return retData;
     };
@@ -506,8 +627,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         var Selector = '.chart-donut';
         $(Selector).each(function() {
             //var source = $(this).data('source') || $.error('Donut: No source defined.');
-            var chart = new FlotChart(this, null),
-                option = {
+            var chart = new FlotChart(this, null);
+            var option = {
                     series: {
                         pie: {
                             show: true,
@@ -526,7 +647,9 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                     }
                 };
             // Send Request
-             chart.setData(option, $scope.requestByStatus[$scope.selectedPeriod]);
+            if ($scope.requestByStatus[$scope.selectedPeriod] !== 'undefined') {
+                chart.setData(option, $scope.requestByStatus[$scope.selectedPeriod]);
+            }
         });
     };
     $scope.donutInit();
