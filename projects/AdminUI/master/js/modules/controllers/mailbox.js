@@ -32,37 +32,35 @@
 
 });
 
-App.controller('MailFolderController', ['$scope', 'mails', '$stateParams', function($scope, mails, $stateParams) {
+App.controller('MailFolderController', ['$scope', 'RestServiceFactory', '$stateParams', 'ContextService',
+  function($scope, RestServiceFactory, $stateParams, contextService) {
   $scope.folder = $stateParams.folder;
-  mails.all().then(function(mails){
-    $scope.mails = mails;
-  });
-}]);
-
-App.controller('MailViewController', ['$scope', 'mails', '$stateParams', function($scope, mails, $stateParams) {
-  mails.get($stateParams.mid).then(function(mail){
-    $scope.mail = mail;
-  });
-}]);
-
-// A RESTful factory for retreiving mails from 'mails.json'
-App.factory('mails', ['$http', function ($http) {
-  var path = 'app/server/mails.json';
-  var mails = $http.get(path).then(function (resp) {
-    return resp.data.mails;
-  });
-
-  var factory = {};
-  factory.all = function () {
-    return mails;
-  };
-  factory.get = function (id) {
-    return mails.then(function(mails){
-      for (var i = 0; i < mails.length; i++) {
-        if (mails[i].id == id) return mails[i];
+  $scope.notifications = [];
+  
+  $scope.init = function() {
+  var target = {id:contextService.userVenues.selectedVenueNumber};
+    RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data){
+      $scope.notifications = data.notifications;
+      $scope.visitors =[];
+      for (var i = 0; i < data.visitors.length; i++){
+        var visitor = data.visitors[i];
+        $scope.visitors[visitor.id] = visitor;
       }
-      return null;
+      
     });
   };
-  return factory;
+  $scope.getAvatar = function(vid) {
+    var visitor = $scope.visitors[vid];
+    if (visitor && visitor.profileImageThumbnail) {
+      return visitor.profileImageThumbnail
+    } 
+    return '';
+  };
+
+  $scope.init();
 }]);
+
+App.controller('MailViewController', ['$scope', 'RestServiceFactory', '$stateParams', function($scope, RestServiceFactory, $stateParams) {
+  
+}]);
+

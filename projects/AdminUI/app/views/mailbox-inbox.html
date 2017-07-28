@@ -23,10 +23,10 @@
 <!-- END action buttons-->
 <div ng-controller="MailFolderController" class="panel panel-default">
    <div class="panel-body">
-      <p ng-if="!(mails | filter:folder).length" class="lead text-center">No mails here</p>
-      <table ng-if="(mails | filter:folder).length" class="table table-hover mb-mails">
+      <p ng-if="!(notifications | filter:folder).length" class="lead text-center">No mails here</p>
+      <table ng-if="(notifications | filter:folder).length" class="table table-hover mb-mails">
          <tbody>
-            <tr ng-repeat="mail in mails | filter:folder" ng-class="{'mb-mail-active': mail.unread}">
+            <tr ng-repeat="note in notifications | filter:folder" ng-class="{'mb-mail-active': note.userRead === 'N'}">
                <td>
                   <div class="checkbox c-checkbox">
                      <label>
@@ -36,15 +36,15 @@
                   </div>
                </td>
                <td class="text-center">
-                  <em ng-class="mail.folder=='starred'?'fa-star text-warning':'fa-star-o text-muted'" class="fa fa-lg"></em>
+                  <em ng-class="note.folder=='starred'?'fa-star text-warning':'fa-star-o text-muted'" class="fa fa-lg"></em>
                </td>
-               <td ui-sref="app.mailbox.view({mid: mail.id})">
-                  <img ng-src="{{mail.from.avatar}}" alt="Mail Avatar" class="mb-mail-avatar pull-left" />
-                  <div class="mb-mail-date pull-right">{{mail.date}}</div>
+               <td ui-sref="app.mailbox.view({mid: note.id})">
+                  <img ng-src="{{getAvatar(note.visitorId)}}" alt="" class="mb-mail-avatar pull-left" />
+                  <div class="mb-mail-date pull-right">{{note.vaService.fulfillmentDate}}</div>
                   <div class="mb-mail-meta">
                      <div class="pull-left">
-                        <div class="mb-mail-subject">{{mail.subject}}</div>
-                        <div class="mb-mail-from">{{mail.from.name}}</div>
+                        <div class="mb-mail-subject">{{note.vaService.reason}}</div>
+                        <div class="mb-mail-from">{{note.vaService.visitorName}}</div>
                      </div>
                      <div ng-bind-html="mail.content | limitTo:100" class="mb-mail-preview"></div>
                   </div>
