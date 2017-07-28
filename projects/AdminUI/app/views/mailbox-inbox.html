@@ -35,19 +35,28 @@
                      </label>
                   </div>
                </td>
-               <td class="text-center">
-                  <em ng-class="note.folder=='starred'?'fa-star text-warning':'fa-star-o text-muted'" class="fa fa-lg"></em>
+               <td>
+                  <em ng-class="getNotificationIconClass(note.vaService.serviceType)"
+                  style=" margin-left: 15px;"></em>
                </td>
                <td ui-sref="app.mailbox.view({mid: note.id})">
-                  <img ng-src="{{getAvatar(note.visitorId)}}" alt="" class="mb-mail-avatar pull-left" />
-                  <div class="mb-mail-date pull-right">{{note.vaService.fulfillmentDate}}</div>
+                  <div ng-if="getAvatar(note.visitorId)">
+                     <img ng-src="{{getAvatar(note.visitorId)}}" alt="" class="media-object img-circle thumb32 pull-left" style="margin-right: 10px;" />
+                  </div>
+                  <div ng-if="!getAvatar(note.visitorId)" class="fa fa-user-circle-o fa-2x thumb32 pull-left" style="margin-right: 10px;">
+                  </div>
+                  <div class="mb-mail-date pull-right">{{note.vaService.fulfillmentDate | date : 'MMM d, y'}}</div>
                   <div class="mb-mail-meta">
                      <div class="pull-left">
                         <div class="mb-mail-subject">{{note.vaService.reason}}</div>
                         <div class="mb-mail-from">{{note.vaService.visitorName}}</div>
                      </div>
-                     <div ng-bind-html="mail.content | limitTo:100" class="mb-mail-preview"></div>
+                     <div ng-bind-html="mail.content | limitTo:100" class="mb-mail-preview">
+                     </div>
                   </div>
+               </td>
+               <td class="mb-mail-date">
+                  <medium class="pull-right">{{note.vaService.noOfGuests}} Guests</medium>
                </td>
             </tr>
          </tbody>
