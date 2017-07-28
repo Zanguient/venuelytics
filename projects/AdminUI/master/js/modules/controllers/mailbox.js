@@ -7,7 +7,7 @@
 
 
   $scope.folders = [
-    {name: 'Inbox',   folder: '',        alert: 42, icon: "fa-inbox" },
+    {name: 'Inbox',   folder: '',        alert: 100, icon: "fa-inbox" },
     {name: 'Confirmed', folder: 'starred', alert: 10, icon: "fa-star" },
     {name: 'OnHold',    folder: 'sent',    alert: 0,  icon: "fa-paper-plane-o" },
     {name: 'Bottle',   folder: 'draft',   alert: 5,  icon: "fa-edit" },

@@ -111,6 +111,14 @@ App.controller('AppController',
             return "fa fa-glass";
         } else if(type === 'GuestList') {
             return "fa icon-book-open";
+        } else if(type == 'PartyPackageService'){
+          return "fa fa-trophy";
+        } else if(type === 'Drinks'){
+          return "fa fa-beer";
+        } else if(type === 'GuestList'){
+          return "fa fa-wpforms";
+        } else if(type === 'Food'){
+          return "fa fa-cutlery";
         } else {
            return "fa icon-envelope-letter";
        }
