@@ -135,5 +135,9 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 handler.close();
             });
         };
+
+        self.closeBottleModal = function() {
+          $location.url('/orderConfirm');
+        };
             self.init();
     }]);

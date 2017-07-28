@@ -7,9 +7,15 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
     function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_ARRAYS, $rootScope, AjaxService) {
 
     		$log.log('Inside Blog Controller.');
-    		
+
     		var self = $scope;
 
-            self.blogs = APP_ARRAYS.blogs;
-    		
+        self.blogs = APP_ARRAYS.blogs;
+
+        self.readMore = function(blogPost) {
+          DataShare.selectedBlog = blogPost;
+          $log.info("Readmore:", angular.toJson(DataShare.selectedBlog));
+          $location.url('/blogPost');
+        };
+
     }]);

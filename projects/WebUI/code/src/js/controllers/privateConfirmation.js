@@ -7,7 +7,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService) {
 
             $log.log('Inside Private Confirm Controller.');
-            
+
             var self = $scope;
 
             self.init = function() {
@@ -24,7 +24,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
             };
 
             self.privateEventSave = function() {
-                
+
                   AjaxService.createBottleService(self.editVenueID, self.object, self.authBase64Str).then(function(response) {
                     $log.info("response: "+angular.toJson(response));
                     $('#privateEventModal').modal('show');
@@ -39,6 +39,10 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
                 return timeString;
             };
 
+            self.closePrivateEventModal = function() {
+              $location.url('/orderConfirm');
+            };
+
             self.init();
-            
+
     }]);

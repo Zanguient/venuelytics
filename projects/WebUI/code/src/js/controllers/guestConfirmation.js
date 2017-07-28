@@ -3,7 +3,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService) {
 
     		$log.log('Inside Guest List Controller.');
-    		
+
     		var self = $scope;
 
             self.init = function() {
@@ -23,6 +23,10 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
                     AjaxService.createGuestList(DataShare.venueNumber, self.object, self.authBase64Str).then(function(response) {
                     $('#guestListModal').modal('show');
                 });
+            };
+
+            self.closeGuestListModal = function() {
+              $location.url('/orderConfirm');
             };
             self.init();
     }]);

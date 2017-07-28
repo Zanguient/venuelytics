@@ -7,7 +7,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope, AjaxService) {
 
     		$log.log('Inside Home Controller.');
-    		
+
     		var self = $scope;
     		$rootScope.homeTab = 'active';
 
@@ -81,12 +81,13 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 
             $scope.$on('$locationChangeStart', function(event) {
                 var userSelectedTab = $location.absUrl().split('/').pop().split('?');
+                $rootScope.canonicalURL = $location.absUrl();
                 self.navBar(userSelectedTab[0]);
             });
 
             self.init = function() {
                 self.venueLyticsFeatures = APP_ARRAYS.features;
-                
+
                 $(document).ready(function () {
                     $('#carousel-example-generic').carousel({
                         interval: 3000
@@ -117,7 +118,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             self.init();
 
     		self.changeLanguage = function(lang){
-   				$translate.use(lang); 
+   				$translate.use(lang);
    			};
 
             self.sendEmail = function(email) {

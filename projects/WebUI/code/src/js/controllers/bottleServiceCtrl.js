@@ -181,12 +181,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                             maps.push(elem);
                           });
                           DataShare.imageMapping.maps = maps;
-                                  self.img = angular.copy(DataShare.imageMapping);
-                                  if(self.img.pic_url !== '') {
-                                      self.imageFlag = false;
-                                  } else {
-                                      self.imageFlag = true;
-                                  }
+                          self.img = angular.copy(DataShare.imageMapping);
+                          if(self.img.pic_url !== '') {
+                             self.imageFlag = false;
+                          } else {
+                             self.imageFlag = true;
+                          }
                           $scope.selectedVenueMap.coordinates = maps;
                           break;
                         }

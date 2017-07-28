@@ -134,6 +134,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller: 'businessController',
             title: 'Venuelytics-Deployment',
             description: 'Venuelytics - a real time venue experience platform enabling Deployment Information'
+
         })
         .when('/emailVerification/:venueid', {
             templateUrl: 'emailVerification.html',
@@ -164,6 +165,18 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics-Blog',
             controller:'BlogController',
             description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
+        })
+        .when('/blogPost', {
+            templateUrl: 'blog-post.html',
+            title: 'Venuelytics-Blog-Post',
+            controller:'BlogPostController',
+            description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
+        })
+        .when('/orderConfirm', {
+            templateUrl: 'order-confirm.html',
+            title: 'Venuelytics-Order-Confirm',
+            controller:'OrderConfirmController',
+            description: 'Venuelytics - a real time venue experience platform enabling Order'
         })
         .otherwise('/home');
 

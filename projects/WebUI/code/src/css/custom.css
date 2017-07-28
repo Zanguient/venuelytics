@@ -74,7 +74,7 @@ select {
 }
 
 .reservation-icon {
-  width: 28px; 
+  width: 28px;
   height: 28px;
 }
 
@@ -87,7 +87,7 @@ select {
 }
 
 .reservation-button {
-  white-space: normal; 
+  white-space: normal;
   height: 80px;
 }
 
@@ -106,7 +106,7 @@ select {
 }
 
 .table-map-info {
-  text-align: center; 
+  text-align: center;
   margin-top: 0px;
 }
 
@@ -123,7 +123,7 @@ select {
 }
 
 .table-capacity {
-  margin-left: 15px; 
+  margin-left: 15px;
   color: #fff;
 }
 
@@ -181,7 +181,7 @@ select {
 }
 
 .search input { text-indent: 32px;}
-.search .fa-search { 
+.search .fa-search {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -206,6 +206,7 @@ select {
   list-style-type: none;
   cursor: pointer;
   cursor: hand;
+  display: block;
 }
 
 .claimCard {
@@ -263,7 +264,7 @@ select {
   .carouselImage {
     width: 100%;
   }
-  
+
   .wrapingSpace {
     margin-left: 15px;
   }
@@ -273,7 +274,7 @@ select {
   }
 
   .chk-button {
-    border-radius: 10px; 
+    border-radius: 10px;
     width: 630px;
   }
 
@@ -298,7 +299,7 @@ select {
   .alignmentInWeb {
     margin-left: 27px;
   }
-  
+
   .eventImage{
     height: 100px;
     width: 100px;
@@ -472,7 +473,7 @@ select {
   .img-singleline img {
     height: 28px !important;;
   }
-  
+
 
   .sendEmailButton {
     width: 200px !important;
@@ -498,7 +499,7 @@ select {
  480px) {
 
   .chk-button {
-    border-radius: 10px; 
+    border-radius: 10px;
     width: 100%;
   }
 
@@ -509,7 +510,7 @@ select {
   .privateFormHeight {
     margin-top: 38px;
   }
-  
+
    .eventImage{
     height: 100px;
     width: 100px;
@@ -718,15 +719,15 @@ select {
 }
 
 /*iPhone 6*/
-@media only screen 
-    and (min-device-width : 375px) 
+@media only screen
+    and (min-device-width : 375px)
     and (max-device-width : 667px) {
 
   .chk-button {
-    border-radius: 10px; 
+    border-radius: 10px;
     width: 100%;
   }
-  
+
   .privateFormHeight {
     margin-top: 38px;
   }
@@ -773,7 +774,7 @@ select {
     margin-top: 10px;
     margin-left: 35px;
   }
-  
+
   .cityBox {
     margin-top: 30px;
   }
@@ -831,12 +832,12 @@ select {
 }
 
 /*For iPhone 6 plus*/
-@media only screen 
-    and (min-device-width : 414px) 
+@media only screen
+    and (min-device-width : 414px)
     and (max-device-width : 736px) {
 
   .chk-button {
-    border-radius: 10px; 
+    border-radius: 10px;
     width: 100%;
   }
 
@@ -847,7 +848,7 @@ select {
   .alignUrl {
     margin-top: 40px;
   }
-  
+
   .eventImage{
     height: 100px;
     width: 100px;
@@ -899,12 +900,12 @@ select {
   .backColor {
     top: 0px;
   }
- 
+
   .businessImage {
     height: 200px;
     width: 375px;
   }
-  
+
   .cityBox {
     margin-top: 30px;
   }
@@ -912,7 +913,7 @@ select {
   .venueListCard {
     margin-top: 40px;
   }
-  
+
   #countryMain {
     margin-left: 0px;
     left: 50px;
@@ -1015,7 +1016,7 @@ select {
   .img-singleline img {
     height: 28px !important;
   }
-  
+
   .img-container {
     width: 460px;
     height: 55px;
@@ -1527,7 +1528,7 @@ select {
     width: 15px;
     height: 15px;
     line-height: 15px;
-    font-size: 9px; 
+    font-size: 9px;
     border-radius: 2px;
     display: inline-block;
     margin: 0 5px 5px 0;

@@ -18,6 +18,7 @@ app.service('DataShare', function() {
   this.tableSelection = '';
   this.tab = '';
   this.userselectedTables = '';
+  this.selectedBlog = {};
   this.imageMapping={
       "pic_url": "",
       "pic_url_thumbnail":"",

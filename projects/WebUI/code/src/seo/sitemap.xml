@@ -1,378 +1,462 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/about</loc>
+        <loc>http://www.itzfun.com/about</loc>
         <lastmod>2017-07-17T13:17:58.365Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
     <url>
-        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/searchBusiness</loc>
+        <loc>http://www.itzfun.com/searchBusiness</loc>
         <lastmod>2017-07-17T13:17:58.365Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
     <url>
-        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities</loc>
+        <loc>http://www.itzfun.com/cities</loc>
         <lastmod>2017-07-17T13:17:58.365Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
     <url>
-        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/contact</loc>
+        <loc>http://www.itzfun.com/contact</loc>
         <lastmod>2017-07-17T13:17:58.365Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
     <url>
-        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/home</loc>
+        <loc>http://www.itzfun.com/home</loc>
         <lastmod>2017-07-17T13:17:58.365Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
     <url>
-        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/newCities</loc>
+        <loc>http://www.itzfun.com/newCities</loc>
         <lastmod>2017-07-17T13:17:58.365Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
     <url>
-        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/privacy</loc>
+        <loc>http://www.itzfun.com/privacy</loc>
         <lastmod>2017-07-17T13:17:58.365Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
     <url>
-        <loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/terms-of-use</loc>
+        <loc>http://www.itzfun.com/terms-of-use</loc>
         <lastmod>2017-07-17T13:17:58.365Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Albany</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Albany</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Atlanta</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Atlanta</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Atlantic City</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Atlantic City</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Austin</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Austin</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Berkeley</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Berkeley</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Boston</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Boston</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Brooklyn</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Brooklyn</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Campbell</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Campbell</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Chicago</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Chicago</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Cleveland</loc>
-		<lastmod>Mon Jul 17 17:55:39 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Cleveland</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Dallas</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Dallas</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Denver</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Denver</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Detroit</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Detroit</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Fremont</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Fremont</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Fresno</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Fresno</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Hallandale Beach</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Hallandale Beach</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Hayward</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Hayward</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Henderson</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Henderson</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Honolulu</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Honolulu</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Houston</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Houston</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Las Vegas</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Las Vegas</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Long Beach</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Long Beach</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Los Angeles</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Los Angeles</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Los Gatos</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Los Gatos</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Memphis</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Memphis</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Metairie</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Metairie</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Miami</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Miami</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Miami Beach</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Miami Beach</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Modesto</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Modesto</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Mountain View</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Mountain View</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Nashville</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Nashville</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/New Orleans</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/New Orleans</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/New York City</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/New York City</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Oakland</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Oakland</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Oklahoma City</loc>
-		<lastmod>Mon Jul 17 17:55:40 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Oklahoma City</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/PHILADELPHIA</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/PHILADELPHIA</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Phoenix</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Phoenix</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Portland</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Portland</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Providence</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Providence</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Redwood City</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Redwood City</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Reno</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Reno</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Sacramento</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Sacramento</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/San Antonio</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/San Antonio</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/San Diego</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/San Diego</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/San Francisco</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/San Francisco</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/San Jose</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/San Jose</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Santa Cruz</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Santa Cruz</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Santa Monica</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Santa Monica</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Savannah</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Savannah</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Scottsdale</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Scottsdale</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Seattle</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Seattle</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Sunnyvale</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Sunnyvale</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Tampa</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Tampa</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Tempe</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Tempe</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/Washington</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/Washington</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 
 	<url>
-		<loc>http://dev.webui.s3-website-us-west-1.amazonaws.com/cities/West Hollywood</loc>
-		<lastmod>Mon Jul 17 17:55:41 IST 2017</lastmod>
+		<loc>http://www.itzfun.com/cities/West Hollywood</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Calgary</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Toronto</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Vancouver</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Bogota</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Santiago</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Anjuna</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Bengaluru</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Chennai</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Kolkata</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Mumbai</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/New Delhi</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Noida</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Pune</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
+		<changefreq>hourly</changefreq>
+	</url>
+	
+	<url>
+		<loc>http://www.itzfun.com/cities/Vagator</loc>
+		<lastmod>2017-07-17T13:17:58.365Z</lastmod>
 		<changefreq>hourly</changefreq>
 	</url>
 </urlset>

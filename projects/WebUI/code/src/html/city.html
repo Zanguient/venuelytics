@@ -8,14 +8,14 @@
 }
 
 /*iPhone 6*/
-@media only screen 
-    and (min-device-width : 375px) 
+@media only screen
+    and (min-device-width : 375px)
     and (max-device-width : 667px) {
   .playVideo {
     z-index: 100;position: absolute;top: 176px;
   }
 }
-</style> 
+</style>
 <div id="container" class="container venueBanner venueContainer">
         <ng-include class="playVideo" src="'home-apps-image.html'" scope="" onload=""></ng-include>
     <div class="banner-fill-img">
@@ -56,11 +56,11 @@
                 </div>
             </div>
             <div class="row cityBox">
-            <div class="cityImage city-image-block col-md-4 col-sm-6 city_card" style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)" href="/venues/{{city.name}}">
+            <a class="cityImage city-image-block col-md-4 col-sm-6 city_card" style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)" ng-href="/venues/{{city.name}}">
                 <p class="content">
                     <font size="5"> {{city.name}} </font>
                 </p>
-            </div>
+            </a>
             </div>
         <center ng-show="listOfCities.length == 0"><strong>No more cities found.</strong></center>
         </div>
@@ -78,7 +78,7 @@
                     <button ng-click="previousPage()" class="btn btn-raised btn-success">
                         <span aria-hidden="true">«</span> {{'home.PREVIOUS_BUTTON' | translate}}
                     </button>
-                </li> 
+                </li>
                 <li>
                     <button ng-click="nextPage()" class="btn btn-raised btn-success">{{'home.NEXT_BUTTON' | translate}}
 
@@ -99,4 +99,3 @@
 
     </div>
 </div>
-
