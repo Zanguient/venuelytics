@@ -249,6 +249,40 @@ select {
  margin-bottom:10px !important;
  margin-bottom:2rem !importnt;
 }
+
+/*Desktop*/
+@media screen and (min-device-width: 1600px) and (max-device-width:
+ 1990px) {
+  .downloadIcon{
+    padding-top: 250px;
+    margin-left: 137px;
+  }
+
+  .img-singleline {
+    display: inline-block;
+    float: left;
+    padding: 0 10px;
+    margin-bottom: 10px;
+  }
+
+  .img-singleline img {
+    height: 28px !important;;
+  }
+
+  .img-container {
+    width: 500px;
+    height: 55px;
+  }
+
+  .imgContainer {
+    margin-left: 250px;
+  }
+
+  #forMobile {
+    height: 690px;
+  }
+}
+
 /*Desktop*/
 @media screen and (min-device-width: 1200px) and (max-device-width:
  1600px) {
@@ -456,7 +490,6 @@ select {
   #outer>div>img {
     width: 100%;
     min-width: 200px;
-/* demo*/;
   }
 
   .img-container {
