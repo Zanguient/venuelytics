@@ -275,11 +275,14 @@ select {
   }
 
   .imgContainer {
-    margin-left: 250px;
+    margin-left: 300px;
   }
 
   #forMobile {
     height: 690px;
+  }
+  .container {
+    width: 1800px;
   }
 }
 
