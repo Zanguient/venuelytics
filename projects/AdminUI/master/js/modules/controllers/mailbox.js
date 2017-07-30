@@ -19,7 +19,7 @@
     {name: 'RESERVED',     color: 'danger'},
     {name: 'OPEN',    color: 'success'},
     {name: 'COMFIRMED',    color: 'info'},
-    {name: 'Yellow',  color: 'warning'}
+    {name: 'ONHOLD',  color: 'warning'}
   ];
 
   $scope.mail = {
@@ -32,35 +32,47 @@
 
 });
 
-App.controller('MailFolderController', ['$scope', 'RestServiceFactory', '$stateParams', 'ContextService',
+ App.controller('MailFolderController', ['$scope', 'RestServiceFactory', '$stateParams', 'ContextService',
   function($scope, RestServiceFactory, $stateParams, contextService) {
-  $scope.folder = $stateParams.folder;
-  $scope.notifications = [];
-  
-  $scope.init = function() {
-  var target = {id:contextService.userVenues.selectedVenueNumber};
-    RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data){
-      $scope.notifications = data.notifications;
-      $scope.visitors =[];
-      for (var i = 0; i < data.visitors.length; i++){
-        var visitor = data.visitors[i];
-        $scope.visitors[visitor.id] = visitor;
+    $scope.folder = $stateParams.folder;
+    $scope.notifications = [];
+
+    $scope.init = function() {
+      var target = {id:contextService.userVenues.selectedVenueNumber};
+      RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data){
+        $scope.notifications = data.notifications;
+        $scope.visitors =[];
+        for (var i = 0; i < data.visitors.length; i++){
+          var visitor = data.visitors[i];
+          $scope.visitors[visitor.id] = visitor;
+        }
+
+      });
+    };
+    $scope.getAvatar = function(vid) {
+      var visitor = $scope.visitors[vid];
+      if (visitor && visitor.profileImageThumbnail) {
+        return visitor.profileImageThumbnail
+      } 
+      return '';
+    };
+
+    $scope.getStatusColor = function(status) {
+      if (status === 'RESERVED') {
+        return 'circle-danger ';
+      } else if (status === 'COMFIRMED') {
+        return 'circle-info';
+      } else if (status === 'ONHOLD') {
+        return 'circle-warning';
+      } else if(status === 'REQUEST') {
+        return 'circle-success';
       }
-      
-    });
-  };
-  $scope.getAvatar = function(vid) {
-    var visitor = $scope.visitors[vid];
-    if (visitor && visitor.profileImageThumbnail) {
-      return visitor.profileImageThumbnail
-    } 
-    return '';
-  };
+    };
 
-  $scope.init();
-}]);
+    $scope.init();
+  }]);
 
-App.controller('MailViewController', ['$scope', 'RestServiceFactory', '$stateParams', function($scope, RestServiceFactory, $stateParams) {
-  
-}]);
+ App.controller('MailViewController', ['$scope', 'RestServiceFactory', '$stateParams', function($scope, RestServiceFactory, $stateParams) {
+
+ }]);
 

@@ -47,27 +47,27 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/dashboard',
         title: 'Dashboard',
         controller:'DashBoardController',
-        templateUrl: basepath('dashboard.html'),
+        templateUrl: basepath('analytics/dashboard.html'),
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
         resolve: resolveFor('flot-chart','flot-chart-plugins')
     }).state('app.customer', {
         url: '/customer-insight',
         title: 'Customer Insight',
-        templateUrl: basepath('customer-insights.html'),
+        templateUrl: basepath('analytics/customer-insights.html'),
         controller: 'CustomerInsightController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
         resolve: resolveFor('flot-chart','flot-chart-plugins')
     }).state('app.instore', {
         url: '/instore-insight',
         title: 'Instore Insight',
-        templateUrl: basepath('instore-insights.html'),
+        templateUrl: basepath('analytics/instore-insights.html'),
         controller: 'InstoreInsightController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
         resolve: resolveFor('flot-chart','flot-chart-plugins')
     }).state('app.performance', {
         url: '/performance-analytics',
         title: 'Performance Analytics',
-        templateUrl: basepath('performance-analytics.html'),
+        templateUrl: basepath('analytics/performance-analytics.html'),
         controller: 'PerformanceAnalyticsController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
         resolve: resolveFor('flot-chart','flot-chart-plugins')
@@ -89,14 +89,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.trackcontent', {
         url: '/trackcontent',
         title: 'Track Contents',
-        templateUrl: basepath('trackcontent.html'),
+        templateUrl: basepath('analytics/trackcontent.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
         resolve: resolveFor('flot-chart','flot-chart-plugins')
     }).state('app.stores', {
         url: '/venues',
         title: 'Venues',
-        templateUrl: basepath('stores.html'),
+        templateUrl: basepath('venue/stores.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
@@ -110,29 +110,22 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     }).state('app.users', {
         url: '/users',
         title: 'Users',
-        templateUrl: basepath('users.html'),
+        templateUrl: basepath('user/users.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
     }).state('app.agencies', {
         url: '/agencies',
         title: 'Agencies',
-        templateUrl: basepath('agencies.html'),
+        templateUrl: basepath('agency/agencies.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
     })
-    .state('app.beacons', {
-        url: '/beacons',
-        title: 'Beacons',
-        templateUrl: basepath('beacons.html'),
-        controller: 'NullController',
-        data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('datatables', 'datatables-pugins')
-    }) .state('app.loyalty', {
+     .state('app.loyalty', {
         url: '/loyalty',
         title: 'Loyalty',
-        templateUrl: basepath('loyalty.html'),
+        templateUrl: basepath('loyalty/loyalty.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
@@ -140,15 +133,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
      .state('app.loyaltyedit', {
         url: '/loyaltyedit/:id',
         title: 'Edit Loyalty',
-        templateUrl: basepath('loyalty_edit.html'),
-        controller: 'NullController',
-        data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('parsley')
-    })
-    .state('app.beaconedit', {
-        url: '/beaconedit/:id',
-        title: 'Edit Beacon',
-        templateUrl: basepath('beacon_edit.html'),
+        templateUrl: basepath('loyalty/loyalty_edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley')
@@ -156,7 +141,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.storeedit', {
         url: '/storeedit/:id',
         title: 'Edit Store',
-        templateUrl: basepath('store_edit.html'),
+        templateUrl: basepath('venue/store_edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins','ngDialog')
@@ -164,7 +149,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.editBanquetHall', {
         url: '/edit/:venueNumber/:id',
         title: 'Edit BanquetHall',
-        templateUrl: basepath('banquet-hall-edit.html'),
+        templateUrl: basepath('venue/banquet-hall-edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins')
@@ -180,7 +165,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.content-performance', {
         url: '/content-performance/:id',
         title: 'Content Performance',
-        templateUrl: basepath('content-performance.html'),
+        templateUrl: basepath('analytics/content-performance.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
         resolve: resolveFor('flot-chart','flot-chart-plugins')
@@ -188,7 +173,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.useredit', {
         url: '/useredit/:id',
         title: 'Edit User',
-        templateUrl: basepath('user_edit.html'),
+        templateUrl: basepath('user/user_edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask')
@@ -196,7 +181,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.agencyedit', {
         url: '/agencyedit/:id',
         title: 'Edit Agency',
-        templateUrl: basepath('agency_edit.html'),
+        templateUrl: basepath('agency/agency_edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask')
@@ -204,7 +189,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.uservenues', {
         url: '/uservenue/:id',
         title: 'Manage User Venues',
-        templateUrl: basepath('user_venue.html'),
+        templateUrl: basepath('user/user_venue.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
@@ -212,7 +197,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.agencyUsers', {
         url: '/agencyUsers/:id',
         title: 'Manage Agency Users',
-        templateUrl: basepath('agency_users.html'),
+        templateUrl: basepath('agency/agency_users.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
@@ -220,7 +205,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.newuservenues', {
         url: '/newuservenue/:id',
         title: 'Add User Venue',
-        templateUrl: basepath('new_user_venue.html'),
+        templateUrl: basepath('user/new_user_venue.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
@@ -228,7 +213,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.newagencyuser', {
         url: '/newagencyuser/:id',
         title: 'Add Agency User',
-        templateUrl: basepath('new_agency_user.html'),
+        templateUrl: basepath('agency/new_agency_user.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
@@ -258,13 +243,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('jquery-ui', 'moment','fullcalendar')
     })
-    .state('app.documentation', {
-        url: '/documentation',
-        title: 'Documentation',
-        templateUrl: basepath('documentation.html'),
-        controller: 'NullController',
-        resolve: resolveFor('flatdoc')
-    })
     // Mailbox
     // ----------------------------------- 
      // Mailbox
@@ -273,26 +251,26 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/mailbox',
         title: 'Mailbox',
         abstract: true,
-        templateUrl: basepath('mailbox.html'),
+        templateUrl: basepath('inbox/mailbox.html'),
         controller: 'MailboxController'
     })
     .state('app.mailbox.folder', {
         url: '/folder/:folder',
         title: 'Mailbox',
-        templateUrl: basepath('mailbox-inbox.html'),
+        templateUrl: basepath('inbox/mailbox-inbox.html'),
         controller: 'NullController'
     })
     .state('app.mailbox.view', {
         url : "/{mid:[0-9]{1,4}}",
         title: 'View mail',
-        templateUrl: basepath('mailbox-view.html'),
+        templateUrl: basepath('inbox/mailbox-view.html'),
         controller: 'NullController',
         resolve: resolveFor('ngWig')
     })
     .state('app.mailbox.compose', {
         url: '/compose',
         title: 'Mailbox',
-        templateUrl: basepath('mailbox-compose.html'),
+        templateUrl: basepath('inbox/mailbox-compose.html'),
         controller: 'NullController',
         resolve: resolveFor('ngWig')
     })
