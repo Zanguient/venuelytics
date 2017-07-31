@@ -12,6 +12,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
             self.selectionTableItems = [];
             self.bottleCount = 1;
+            $scope.selectedVenueMap = {};
             self.bottleMinimum = [];
             self.init = function() {
                 $( "#requestDate" ).datepicker({autoclose:true});
@@ -140,7 +141,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     $window.open(bottleMenu, '_blank');
                 }
             };
-            $scope.selectedVenueMap = {};
+
             self.showFloorMapByDate = function() {
                 if(!DataShare.tableSelection) {
                     self.tableSelection = [];
@@ -157,50 +158,76 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     } else {
                       for (var index = 0; index < self.venueImageMapData.length; index++) {
                         var venueMap = $scope.venueImageMapData[index];
-                        DataShare.elements = self.venueImageMapData[index].elements;
-                        DataShare.imageMapping.pic_url = self.venueImageMapData[index].imageUrls[0].originalUrl;
-                        DataShare.imageMapping.pic_url_thumbnail = self.venueImageMapData[index].imageUrls[0].originalUrl;
-                        if(venueMap.days === '*' || venueMap.days.indexOf(day) !== -1) {
-                          $scope.selectedVenueMap = venueMap;
-                          $scope.selectedVenueMap.productsByName = [];
-                          angular.forEach(venueMap.elements, function(obj, key){
-                            $scope.selectedVenueMap.productsByName[obj.name] = obj;
-                          });
-                          var tableMaps = JSON.parse(venueMap.imageMap);
-                          var maps =[];
-                          tableMaps.map(function(t){
-                            var arc = JSON.parse("["+t.coordinates+"]");
-                            var elem = {};
-                            elem.name = t.TableName;
-                            elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
-                            elem.coords = [];
-                            elem.coords[0] = arc[0];
-                            elem.coords[1] = arc[1];
-                            elem.coords[2] = arc[4];
-                            elem.coords[3] = arc[5];
-                            maps.push(elem);
-                          });
-                          DataShare.imageMapping.maps = maps;
-                          self.img = angular.copy(DataShare.imageMapping);
-                          if(self.img.pic_url !== '') {
-                             self.imageFlag = false;
-                          } else {
-                             self.imageFlag = true;
+                        if(venueMap.elements.length !== 0 && venueMap.imageUrls.length !== 0) {
+                          DataShare.elements = self.venueImageMapData[index].elements;
+                          if(self.venueImageMapData[index].imageUrls.length !== 0) {
+                            $log.info("imageURl:", angular.toJson(self.venueImageMapData[index].imageUrls[0].originalUrl));
+                            DataShare.imageMapping.pic_url = self.venueImageMapData[index].imageUrls[0].originalUrl;
+                            DataShare.imageMapping.pic_url_thumbnail = self.venueImageMapData[index].imageUrls[0].originalUrl;
                           }
-                          $scope.selectedVenueMap.coordinates = maps;
-                          break;
+                          if(venueMap.days === '*' || venueMap.days.indexOf(day) !== -1) {
+                            $scope.selectedVenueMap = venueMap;
+                            $scope.selectedVenueMap.productsByName = [];
+                            angular.forEach(venueMap.elements, function(obj, key){
+                              $log.info("Obj name:", angular.toJson(obj.name));
+                              $scope.selectedVenueMap.productsByName[obj.name] = obj;
+                            });
+                            var tableMaps = JSON.parse(venueMap.imageMap);
+                            var maps =[];
+                            tableMaps.map(function(t){
+                              var arc = JSON.parse("["+t.coordinates+"]");
+                              var elem = {};
+                              elem.name = t.TableName;
+                              $log.info("productsByName:", angular.toJson(self.selectedVenueMap));
+                              elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
+                              elem.coords = [];
+                              elem.coords[0] = arc[0];
+                              elem.coords[1] = arc[1];
+                              elem.coords[2] = arc[4];
+                              elem.coords[3] = arc[5];
+                              maps.push(elem);
+                            });
+                            DataShare.imageMapping.maps = maps;
+                            self.img = angular.copy(DataShare.imageMapping);
+
+                            if(self.img.pic_url !== '') {
+                               self.imageFlag = false;
+                            } else {
+                               self.imageFlag = true;
+                            }
+                            $scope.selectedVenueMap.coordinates = maps;
+                            break;
+                          }
                         }
                       }
                     }
                     self.setReservationColor();
                 });
+                $scope.reservationData = [];
                 AjaxService.getVenueMapForADate(self.venueid,self.bottleServiceDate).then(function(response) {
                     self.reservations = response.data;
+                    angular.forEach(response, function(obj, key) {
+                      $scope.reservationData[obj.productId] = obj;
+                    });
                 });
             };
 
+            // $scope.fillColor = function(id) {
+            //   $log.info("FillColor:", id);
+            //   $log.info("Reservation data:", angular.toJson($scope.reservationData));
+            //
+            //  var obj = $scope.reservationData[id];
+            //  if (typeof obj == 'undefined') {
+            //   return "00FF00";
+            //  } else {
+            //   return "FF0000";
+            //  }
+            //
+            // };
+
             self.setReservationColor = function() {
                 var venueImageMapData = [];
+                //Check the table is reserved or not
                 angular.forEach(DataShare.elements, function(key, value) {
                     var breakBoolean = false;
                     angular.forEach(self.reservations, function(key1, value1) {
@@ -220,24 +247,25 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     key.fillColor = APP_COLORS.lightGreen;
                     key.strokeColor = APP_COLORS.darkGreen;
                 }
+
+                //For edit flow. To restore user selected table
                 if(DataShare.tableSelection) {
-                angular.forEach(DataShare.tableSelection, function(key2, value2) {
-                    if(key2.name === key.name) {
-                        if (key.fillColor === APP_COLORS.darkYellow) {
-                            key.fillColor = APP_COLORS.lightGreen;
-                            key.strokeColor = APP_COLORS.darkGreen;
-                        } else {
-                            key.fillColor = APP_COLORS.darkYellow;
-                            key.strokeColor = APP_COLORS.turbo;
-                    }
-                   }
-                });
-            }
+                  angular.forEach(DataShare.tableSelection, function(key2, value2) {
+                      if(key2.name === key.name) {
+                          if (key.fillColor === APP_COLORS.darkYellow) {
+                              key.fillColor = APP_COLORS.lightGreen;
+                              key.strokeColor = APP_COLORS.darkGreen;
+                          } else {
+                              key.fillColor = APP_COLORS.darkYellow;
+                              key.strokeColor = APP_COLORS.turbo;
+                          }
+                     }
+                  });
+                }
             });
+
             $('img[usemap]').jMap();
-
             var delay = 1000;
-
             setTimeout(function() {
                 $('#imagemap').maphilight();
             }, delay);

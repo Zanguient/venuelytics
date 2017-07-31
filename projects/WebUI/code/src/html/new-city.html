@@ -2,7 +2,7 @@
  .playVideo {
     z-index: 100;position: absolute;left: 350px;top: 200px;
   }
-</style> 
+</style>
 <div id="container" class="container venueBanner venueContainer">
         <ng-include class="playVideo" src="'home-apps-image.html'" scope="" onload=""></ng-include>
     <div class="banner-fill-img">
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="row cityBox">
-            <div class="cityImage city-image-block col-md-4 col-sm-6 city_card" style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)" href="/venues/{{city.name}}">
+            <div class="cityImage city-image-block col-md-4 col-sm-6 city_card" style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)" href="/newCities/{{city.name}}">
                 <p class="content">
                     <font size="5"> {{city.name}} </font>
                 </p>
@@ -65,7 +65,7 @@
                     <button ng-click="previousPage()" class="btn btn-raised btn-success">
                         <span aria-hidden="true">«</span> {{'home.PREVIOUS_BUTTON' | translate}}
                     </button>
-                </li> 
+                </li>
                 <li>
                     <button ng-click="nextPage()" class="btn btn-raised btn-success">{{'home.NEXT_BUTTON' | translate}}
 

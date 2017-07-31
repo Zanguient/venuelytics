@@ -266,7 +266,8 @@ select {
   }
 
   .img-singleline img {
-    height: 28px !important;;
+    width: 90px !important;
+    height: 28px !important;
   }
 
   .img-container {
@@ -285,6 +286,43 @@ select {
     width: 1800px;
   }
 }
+
+@media screen and (min-device-width: 730px) and (max-device-width:
+  1200px) {
+
+    .downloadIcon{
+      padding-top: 20px;
+    }
+
+    .img-singleline-image {
+      width: 90px !important;
+      height: 28px !important;
+    }
+
+    .img-container {
+      width: 500px;
+      height: 55px;
+    }
+
+    .img-singleline {
+      display: inline-block;
+      float: left;
+      padding: 0 10px;
+      margin-bottom: 10px;
+    }
+
+    .imgContainer {
+      margin-left: 150px;
+    }
+
+    #forMobile {
+     height: 690px;
+    }
+
+    .backColor {
+      top: 0px;
+    }
+  }
 
 /*Desktop*/
 @media screen and (min-device-width: 1200px) and (max-device-width:
@@ -506,7 +544,8 @@ select {
     padding: 0 10px;
     margin-bottom: 10px;
   }
-  .img-singleline img {
+  .img-singleline-image {
+    width: 90px !important;
     height: 28px !important;;
   }
 
@@ -725,7 +764,8 @@ select {
     margin-right: 5px;
   }
 
-  .img-singleline img {
+  .img-singleline-image {
+    width: 90px !important;
     height: 28px !important;;
   }
 
@@ -837,7 +877,8 @@ select {
     margin-right: 5px;
   }
 
-  .img-singleline img {
+  .img-singleline-image {
+    width: 90px !important;
     height: 28px !important;;
   }
 
@@ -1049,7 +1090,8 @@ select {
     margin-bottom: 10px;
     margin-right: 5px;
   }
-  .img-singleline img {
+  .img-singleline-image {
+    width: 90px !important;
     height: 28px !important;
   }
 

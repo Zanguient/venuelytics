@@ -14,6 +14,13 @@
   }
 }
 
+@media screen and (min-device-width: 730px) and (max-device-width:
+ 1200px) {
+ .playVideo {
+    z-index: 100;position: absolute;left: 250px;top: 200px;
+  }
+}
+
 /*iPhone 6*/
 @media only screen
     and (min-device-width : 375px)
@@ -63,7 +70,8 @@
                 </div>
             </div>
             <div class="row cityBox">
-            <a class="cityImage city-image-block col-md-4 col-sm-6 city_card" style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;" ng-repeat="city in listOfCities" ng-click="selectCity(city)" ng-href="/cities/{{city.name}}">
+            <a class="cityImage city-image-block col-md-4 col-sm-6 city_card img-responsive" style="background: url({{city.imageUrl}}) no-repeat center top; background-size: cover;"
+            ng-repeat="city in listOfCities" ng-click="selectCity(city)" ng-href="/cities/{{city.name}}">
                 <p class="content">
                     <font size="5"> {{city.name}} </font>
                 </p>
