@@ -3,15 +3,14 @@
  * Provides a simple demo for pagination
  =========================================================*/
 
- App.controller('MailboxController', function($scope, colors) {
-
+ App.controller('MailboxController', function($scope, colors, $rootScope) {
 
   $scope.folders = [
-    {name: 'Inbox',   folder: '',        alert: 100, icon: "fa-inbox" },
-    {name: 'Confirmed', folder: 'starred', alert: 10, icon: "fa-star" },
-    {name: 'OnHold',    folder: 'sent',    alert: 0,  icon: "fa-paper-plane-o" },
-    {name: 'Bottle',   folder: 'draft',   alert: 5,  icon: "fa-edit" },
-    {name: 'Private Events',   folder: 'trash',   alert: 0,  icon: "fa-trash"},
+    {name: 'Inbox',   folder: '',        alert:$rootScope.unreadMessages, icon: "fa-inbox" },
+    {name: 'Confirmed', folder: 'COMPLETED', alert: $scope.comfirmedCount, icon: "fa-star" },
+    {name: 'OnHold',    folder: 'REQUEST',    alert: $scope.requestCount,  icon: "fa-paper-plane-o" },
+    {name: 'Bottle',   folder: 'Bottle',   alert: $rootScope.bottleCount,  icon: "fa-edit" },
+    {name: 'Private Events',   folder: 'BanquetHall',   alert: $rootScope.banquetHallCount,  icon: "fa-trash"},
     {name: 'Others',   folder: 'trash',   alert: 0,  icon: "fa-trash"}
   ];
 
@@ -33,7 +32,7 @@
 });
 
  App.controller('MailFolderController', ['$scope', 'RestServiceFactory', '$stateParams', 'ContextService',
-  function($scope, RestServiceFactory, $stateParams, contextService) {
+  function($scope, RestServiceFactory, $stateParams, contextService, ) {
     $scope.folder = $stateParams.folder;
     $scope.notifications = [];
 
@@ -46,7 +45,6 @@
           var visitor = data.visitors[i];
           $scope.visitors[visitor.id] = visitor;
         }
-
       });
     };
     $scope.getAvatar = function(vid) {
