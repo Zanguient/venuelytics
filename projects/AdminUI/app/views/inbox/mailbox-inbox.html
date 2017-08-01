@@ -23,7 +23,7 @@
 <!-- END action buttons-->
 <div ng-controller="MailFolderController" class="panel panel-default">
    <div class="panel-body">
-      <p ng-if="!(notifications | filter:folder).length" class="lead text-center">No mails here</p>
+      <p ng-if="!(notifications | filter:folder).length" class="panel-body csspinner duo"></p>
       <table ng-if="(notifications | filter:folder).length" class="table table-hover mb-mails">
          <tbody>
             <tr ng-repeat="note in notifications | filter:folder" ng-class="{'mb-mail-active': note.userRead === 'N'}">

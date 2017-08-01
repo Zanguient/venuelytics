@@ -7,8 +7,8 @@
 
   $scope.folders = [
     {name: 'Inbox',   folder: '',        alert:$rootScope.unreadMessages, icon: "fa-inbox" },
-    {name: 'Confirmed', folder: 'COMPLETED', alert: $scope.comfirmedCount, icon: "fa-star" },
-    {name: 'OnHold',    folder: 'REQUEST',    alert: $scope.requestCount,  icon: "fa-paper-plane-o" },
+    {name: 'Confirmed', folder: 'COMPLETED', alert: $rootScope.comfirmedCount, icon: "fa-star" },
+    {name: 'OnHold',    folder: 'REQUEST',    alert: $rootScope.requestCount,  icon: "fa-paper-plane-o" },
     {name: 'Bottle',   folder: 'Bottle',   alert: $rootScope.bottleCount,  icon: "fa-edit" },
     {name: 'Private Events',   folder: 'BanquetHall',   alert: $rootScope.banquetHallCount,  icon: "fa-trash"},
     {name: 'Others',   folder: 'trash',   alert: 0,  icon: "fa-trash"}
