@@ -158,7 +158,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     } else {
                       for (var index = 0; index < self.venueImageMapData.length; index++) {
                         var venueMap = $scope.venueImageMapData[index];
-                        if(venueMap.elements.length !== 0 && venueMap.imageUrls.length !== 0) {
                           DataShare.elements = self.venueImageMapData[index].elements;
                           if(self.venueImageMapData[index].imageUrls.length !== 0) {
                             $log.info("imageURl:", angular.toJson(self.venueImageMapData[index].imageUrls[0].originalUrl));
@@ -189,7 +188,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                             });
                             DataShare.imageMapping.maps = maps;
                             self.img = angular.copy(DataShare.imageMapping);
-
                             if(self.img.pic_url !== '') {
                                self.imageFlag = false;
                             } else {
@@ -198,81 +196,81 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                             $scope.selectedVenueMap.coordinates = maps;
                             break;
                           }
-                        }
+
                       }
                     }
-                    self.setReservationColor();
+                    // self.setReservationColor();
                 });
                 $scope.reservationData = [];
                 AjaxService.getVenueMapForADate(self.venueid,self.bottleServiceDate).then(function(response) {
                     self.reservations = response.data;
-                    angular.forEach(response, function(obj, key) {
+                    $log.info("response:", angular.toJson(response));
+                    angular.forEach(self.reservations, function(obj, key) {
                       $scope.reservationData[obj.productId] = obj;
                     });
                 });
+                self.showSelectedVenueMap();
             };
 
-            // $scope.fillColor = function(id) {
-            //   $log.info("FillColor:", id);
-            //   $log.info("Reservation data:", angular.toJson($scope.reservationData));
-            //
-            //  var obj = $scope.reservationData[id];
-            //  if (typeof obj == 'undefined') {
-            //   return "00FF00";
-            //  } else {
-            //   return "FF0000";
-            //  }
-            //
-            // };
+            self.fillColor = function(id) {
 
-            self.setReservationColor = function() {
-                var venueImageMapData = [];
-                //Check the table is reserved or not
-                angular.forEach(DataShare.elements, function(key, value) {
-                    var breakBoolean = false;
-                    angular.forEach(self.reservations, function(key1, value1) {
-                        if (!breakBoolean) {
-                            if (key.id === key1.productId) {
-                                key.fillColor = APP_COLORS.red;
-                                key.strokeColor = APP_COLORS.guardsmanRed;
-                                breakBoolean = true;
-                            } else {
-                                key.fillColor = APP_COLORS.lightGreen;
-                                key.strokeColor = APP_COLORS.darkGreen;
-                            }
-                        venueImageMapData.push(key);
-                    }
-                });
-                if (!breakBoolean) {
-                    key.fillColor = APP_COLORS.lightGreen;
-                    key.strokeColor = APP_COLORS.darkGreen;
-                }
+              var obj = $scope.reservationData[id];
 
-                //For edit flow. To restore user selected table
-                if(DataShare.tableSelection) {
-                  angular.forEach(DataShare.tableSelection, function(key2, value2) {
-                      if(key2.name === key.name) {
-                          if (key.fillColor === APP_COLORS.darkYellow) {
-                              key.fillColor = APP_COLORS.lightGreen;
-                              key.strokeColor = APP_COLORS.darkGreen;
-                          } else {
-                              key.fillColor = APP_COLORS.darkYellow;
-                              key.strokeColor = APP_COLORS.turbo;
-                          }
-                     }
-                  });
-                }
-            });
+              if (self.tableSelection.length !== 0) {
+                  for (var i = 0; i < self.tableSelection.length; i++) {
+                      var obj2 = self.tableSelection[i].id;
+                      if (obj2 === id) {
+                          $log.info("Inside yellow");
+                          return APP_COLORS.darkYellow;
+                      }
+                      $log.info("tableSelection obj:", angular.toJson(self.tableSelection[0].id));
+                  }
+                  return APP_COLORS.lightGreen;
+              } else {
+                  if (typeof obj == 'undefined') {
+                      return APP_COLORS.lightGreen;
+                  } else {
+                      return APP_COLORS.red;
+                  }
+              }
+              self.showSelectedVenueMap();
+          };
 
-            $('img[usemap]').jMap();
-            var delay = 1000;
+          self.showSelectedVenueMap = function() {
             setTimeout(function() {
+              $("img[usemap]").jMap();
+              setTimeout(function(){
                 $('#imagemap').maphilight();
-            }, delay);
-        };
+              }, 200);
+            }, 200);
+          };
+
+            self.strokeColor = function(id) {
+              var obj = $scope.reservationData[id];
+
+            	if(self.tableSelection.length !== 0) {
+                  for(var i = 0; i < self.tableSelection.length; i++) {
+                      var obj2 = self.tableSelection[i].id;
+                      if(obj2 === id) {
+                        $log.info("Inside yellow");
+                        return APP_COLORS.turbo;
+                      }
+                      $log.info("tableSelection obj:", angular.toJson(self.tableSelection[0].id));
+                    }
+                    return APP_COLORS.darkGreen;
+             } else {
+               if (typeof obj == 'undefined') {
+                  return APP_COLORS.darkGreen;
+               } else {
+                  return APP_COLORS.guardsmanRed;
+               }
+              }
+            };
 
         self.selectTable = function(id, index, dataValueObj) {
+          $log.info("Select table:", id, index, angular.toJson(dataValueObj));
             var data = $('#' + id).mouseout().data('maphilight') || {};
+            $log.info("Data fillColor:", data.fillColor);
                 if(data.fillColor === APP_COLORS.lightGreen) {
                     data.fillColor = APP_COLORS.darkYellow;
                     data.strokeColor = APP_COLORS.turbo;

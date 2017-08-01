@@ -63,7 +63,7 @@
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2 class="venueTitle">
-                                                        <a href="" ng-click="selectVenue(venue)">{{venue.venueName
+                                                        <a href="/newCities/{{selectedCityName}}/{{venue.id}}" ng-click="selectVenue(venue)">{{venue.venueName
                                                             | limitTo: 20 }}{{venue.venueName.length > 20 ? '...'
                                                             :''}}</a>
                                                     </h2>
