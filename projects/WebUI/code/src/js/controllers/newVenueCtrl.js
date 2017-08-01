@@ -15,7 +15,7 @@ app.controller('NewVenueController', ['$log', '$scope', '$http', '$location', 'R
                 DataShare.guestListData = {};
                 DataShare.privateEventData = {};
                 DataShare.selectBottle = [];
-                DataShare.tableSelection = [];
+                DataShare.tableSelection = '';
                 DataShare.totalNoOfGuest = 1;
                 self.serviceTypes = APP_ARRAYS.serviceTabs;
                 self.serviceIcons = APP_ARRAYS.serviceSmallIcons;
