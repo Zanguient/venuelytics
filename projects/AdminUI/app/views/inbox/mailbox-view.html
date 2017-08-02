@@ -71,50 +71,6 @@
 </div>
 <!-- END action buttons-->
 <div ng-controller="MailViewController" class="panel panel-default">
-   <div class="panel-body">
-      <table class="table mb-mails mb-view">
-         <tbody>
-            <tr>
-               <td>
-                  <div class="clearfix">
-                     <div class="mb-mail-date">{{mail.date}}</div>
-                     <img ng-src="{{mail.from.avatar}}" alt="Mail Avatar" class="mb-mail-avatar" />
-                     <div class="pull-left">
-                        <span>From:</span>
-                        <span class="mb-mail-from">{{mail.from.name}} &lt;{{mail.from.email}}&gt;</span>
-                        <p class="mb-mail-to-list">To: <a href="#" title="mailto: {{to.email}}" ng-repeat="to in mail.to">{{to.name}}</a>
-                        </p>
-                     </div>
-                  </div>
-                  <div class="mb-mail-preview mt-lg">
-                     <h4>{{mail.subject}}</h4>
-                     <div ng-bind-html="mail.content"></div>
-                  </div>
-                  <div class="mb-attachment">
-                     <p ng-if="mail.attach.length">
-                        <span>
-                           <em class="fa fa-paperclip fa-fw"></em>{{mail.attach.length}} attachments —</span><a href="#" class="mr br pr"> Download all attachments</a><a href="#">View all images</a>
-                     </p>
-                     <ul class="list-inline">
-                        <li ng-repeat="att in mail.attach">
-                           <a href="{{att.url}}">
-                              <img ng-src="{{att.url}}" class="thumb64 img-responsive img-thumbnail" />
-                           </a>
-                           <p>{{att.name}}</p>
-                        </li>
-                     </ul>
-                  </div>
-                  <div class="media">
-                     <a href="#" class="pull-left">
-                        <img alt="" ng-src="{{user.picture}}" class="media-object img-rounded thumb32" />
-                     </a>
-                     <div class="media-body">
-                        <textarea placeholder="Reply here..." class="form-control"></textarea>
-                     </div>
-                  </div>
-               </td>
-            </tr>
-         </tbody>
-      </table>
-   </div>
+   <div ng-show="selectedObj.serviceType == 'Bottle'" ng-include="'app/views/inbox/bottle-view.html'"></div>
+   <div ng-show="selectedObj.serviceType == 'BanquetHall'" ng-include="'app/views/inbox/private-view.html'"></div>
 </div>

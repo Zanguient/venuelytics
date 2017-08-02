@@ -23,7 +23,8 @@
 <!-- END action buttons-->
 <div ng-controller="MailFolderController" class="panel panel-default">
    <div class="panel-body">
-      <p ng-if="!(notifications | filter:folder).length" class="panel-body csspinner duo"></p>
+      <p ng-hide="notificationsList == true" ng-if="!(notifications | filter:folder).length" class="panel-body csspinner duo"></p>
+      <p ng-show="notificationsList == true" class="lead text-center"> No mails here</p>
       <table ng-if="(notifications | filter:folder).length" class="table table-hover mb-mails">
          <tbody>
             <tr ng-repeat="note in notifications | filter:folder" ng-class="{'mb-mail-active': note.userRead === 'N'}">
@@ -38,7 +39,7 @@
                <td>
                   <em ng-class="getNotificationIconClass(note.vaService.serviceType)" ></em>
                </td>
-               <td ui-sref="app.mailbox.view({mid: note.id})" class="col-md-5">
+               <td ui-sref="app.mailbox.view({mid: note.id})" ng-click="getMailArray(note)" class="col-md-5">
                                  
                   <div ng-if="getAvatar(note.visitorId)">
                      <img ng-src="{{getAvatar(note.visitorId)}}" alt="" class="media-object img-circle thumb32 pull-left"  />

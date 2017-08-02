@@ -21,7 +21,7 @@
                      </li>
                      <li ui-sref-active="active" ng-repeat="fold in folders">
                         <a ui-sref="app.mailbox.folder({folder: fold.folder})">
-                           <span ng-if="fold.alert" class="label label-green pull-right">{{fold.alert}}</span>
+                           <span ng-if="fold.alert" ng-class="'label-'+fold.color" class="label pull-right">{{fold.alert}}</span>
                            <em ng-class="fold.icon" class="fa fa-fw fa-lg"></em>
                            <span>{{fold.name}}</span>
                         </a>
