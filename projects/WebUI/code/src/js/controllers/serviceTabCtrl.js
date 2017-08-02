@@ -25,11 +25,11 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 if(DataShare.tableSelection) {
                     self.tableSelection = DataShare.tableSelection;
                 }
-                if(self.restoreTab === 'B' || self.tabParams === 'B') {
+                if(self.restoreTab === 'B' || self.tabParams === 'B' || self.tabParams === 'bottle-service') {
                     self.bottleService();
-                } else if(self.restoreTab === 'P' || self.tabParams === 'P') {
+                } else if(self.restoreTab === 'P' || self.tabParams === 'P' || self.tabParams === 'private-event') {
                     self.event();
-                } else if(self.restoreTab === 'G' || self.tabParams === 'G'){
+                } else if(self.restoreTab === 'G' || self.tabParams === 'G' || self.tabParams === 'guest-list'){
                     self.glist();
                 }else {
                     self.bottleService();
