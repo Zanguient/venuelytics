@@ -15,7 +15,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             $scope.selectedVenueMap = {};
             self.bottleMinimum = [];
             self.init = function() {
-                $( "#requestDate" ).datepicker({autoclose:true});
+                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueid = $routeParams.venueid;
                 if(DataShare.userselectedTables) {
                   self.selectionTableItems = DataShare.userselectedTables;
@@ -33,6 +33,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
                 if(DataShare.tableSelection) {
                     self.tableSelection = DataShare.tableSelection;
+                    self.showSelectedVenueMap();
                 }
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
@@ -168,7 +169,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                             $scope.selectedVenueMap = venueMap;
                             $scope.selectedVenueMap.productsByName = [];
                             angular.forEach(venueMap.elements, function(obj, key){
-                              $log.info("Obj name:", angular.toJson(obj.name));
                               $scope.selectedVenueMap.productsByName[obj.name] = obj;
                             });
                             var tableMaps = JSON.parse(venueMap.imageMap);
@@ -177,7 +177,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                               var arc = JSON.parse("["+t.coordinates+"]");
                               var elem = {};
                               elem.name = t.TableName;
-                              $log.info("productsByName:", angular.toJson(self.selectedVenueMap));
                               elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
                               elem.coords = [];
                               elem.coords[0] = arc[0];
@@ -215,7 +214,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.fillColor = function(id) {
 
               var obj = $scope.reservationData[id];
-
+              $log.info("fillColor id:", id);
+              $log.info("tableSelection data:", angular.toJson(self.tableSelection));
               if (self.tableSelection.length !== 0) {
                   for (var i = 0; i < self.tableSelection.length; i++) {
                       var obj2 = self.tableSelection[i].id;
@@ -223,8 +223,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                           $log.info("Inside yellow");
                           return APP_COLORS.darkYellow;
                       }
-                      $log.info("tableSelection obj:", angular.toJson(self.tableSelection[0].id));
                   }
+                  $log.info("Inside green");
                   return APP_COLORS.lightGreen;
               } else {
                   if (typeof obj == 'undefined') {
@@ -233,7 +233,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                       return APP_COLORS.red;
                   }
               }
-              self.showSelectedVenueMap();
           };
 
           self.showSelectedVenueMap = function() {
@@ -255,7 +254,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         $log.info("Inside yellow");
                         return APP_COLORS.turbo;
                       }
-                      $log.info("tableSelection obj:", angular.toJson(self.tableSelection[0].id));
                     }
                     return APP_COLORS.darkGreen;
              } else {

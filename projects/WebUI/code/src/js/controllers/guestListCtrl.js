@@ -7,11 +7,11 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
     		$log.log('Inside ServiceTab Controller.');
-    		
+
             var self = $scope;
 
             self.init = function() {
-                $("#requestedDate").datepicker({autoclose:true});
+                $("#requestedDate").datepicker({autoclose:true, todayHighlight: true});
             };
 
             self.glistSave = function(guest) {
@@ -37,5 +37,5 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             };
 
             self.init();
-    		
+
     }]);

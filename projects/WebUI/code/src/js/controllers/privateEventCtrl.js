@@ -7,14 +7,14 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
     		$log.log('Inside PrivateEvent Controller.');
-    		
+
             var self = $scope;
 
             self.init = function() {
                 self.venueID = self.venueid = $routeParams.venueid;
                 self.getBanquetHall(self.venueID);
                 self.getMenus();
-                $( "#privateDate" ).datepicker({autoclose:true});
+                $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true});
 
                 if((Object.keys(DataShare.bottleServiceData).length) === 0) {
                     self.getEventType();
@@ -111,5 +111,5 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             };
 
             self.init();
-    		
+
     }]);

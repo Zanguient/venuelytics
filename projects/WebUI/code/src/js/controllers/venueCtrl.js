@@ -72,15 +72,17 @@ app.controller('VenueController', ['$log', '$scope', '$http', '$location', 'Rest
                 }
             };
 
-    		self.selectVenue = function(venue) {
+        		self.selectVenue = function(venue) {
                 //DataShare.selectedVenueDetails = venue;
+                self.selectedCityName = venue.city;
                 DataShare.selectedVenue = venue;
                 DataShare.venueNumber = venue.id;
-    			$location.url('/cities/'+self.selectedCityName+'/'+venue.id);
-    		};
+        			  $location.url('/cities/' + self.selectedCityName + '/' + venue.id);
+        		};
 
             self.selectedServices = function(venue, serviceType) {
-                $location.url('/cities/'+self.selectedCityName+'/'+venue.id+'/'+serviceType);
+                self.selectedCityName = venue.city;
+                $location.url('/cities/' + self.selectedCityName + '/' + venue.id + '/' + serviceType);
             };
     		self.init();
     }])
