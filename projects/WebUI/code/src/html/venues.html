@@ -64,7 +64,7 @@
                                                 <div class="card-block">
                                                     <h2 class="venueTitle">
                                                         <a ng-href="/cities/{{selectedCityName}}/{{venue.id}}" ng-click="selectVenue(venue)">{{venue.venueName
-                                                            | limitTo: 20 }}{{venue.venueName.length > 20 ? '...'
+                                                            | limitTo: 16 }}{{venue.venueName.length > 16 ? '...'
                                                             :''}}</a>
                                                     </h2>
                                                     <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address | limitTo: 38

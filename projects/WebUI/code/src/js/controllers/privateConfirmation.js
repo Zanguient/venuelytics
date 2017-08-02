@@ -40,6 +40,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
             };
 
             self.closePrivateEventModal = function() {
+              $('.modal-backdrop').remove();
               $location.url('/orderConfirm');
             };
 

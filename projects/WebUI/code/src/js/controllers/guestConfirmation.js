@@ -26,6 +26,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
             };
 
             self.closeGuestListModal = function() {
+              $('.modal-backdrop').remove();
               $location.url('/orderConfirm');
             };
             self.init();
