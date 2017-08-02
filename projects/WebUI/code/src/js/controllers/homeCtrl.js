@@ -89,6 +89,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                 self.venueLyticsFeatures = APP_ARRAYS.features;
 
                 $(document).ready(function () {
+                    $.slidebars();
                     $('#carousel-example-generic').carousel({
                         interval: 3000
                     });
