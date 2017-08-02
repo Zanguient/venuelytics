@@ -19,7 +19,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.totalGuest = DataShare.totalNoOfGuest;
                 self.restoreTab = DataShare.tab;
                 self.tabParams = $routeParams.tabParam;
-
                 if(DataShare.selectBottle) {
                     self.bottleMinimum = DataShare.selectBottle;
                 }
@@ -58,6 +57,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bottleServiceTab = true;
                 self.eventServiceTab = false;
                 self.guestServiceTab = false;
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bottle-service");
              };
 
             /*For private event service tab highlight*/
@@ -71,6 +71,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bottleServiceTab = false;
                 self.eventServiceTab = true;
                 self.guestServiceTab = false;
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/private-event");
              };
 
             /*For guest list service tab highlight*/
@@ -84,6 +85,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
                 self.guestServiceTab = true;
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/guest-list");
              };
 
             self.init();
