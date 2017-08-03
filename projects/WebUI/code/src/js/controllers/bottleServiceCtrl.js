@@ -17,6 +17,13 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.init = function() {
                 $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueid = $routeParams.venueid;
+                if(DataShare.amount) {
+                    DataShare.bottleServiceData = '';
+                    DataShare.tableSelection = '';
+                    DataShare.selectBottle = '';
+                    self.startDate = moment().format('YYYY-MM-DD');
+                    self.showFloorMapByDate();
+                }
                 if(DataShare.userselectedTables) {
                   self.selectionTableItems = DataShare.userselectedTables;
                 }
@@ -151,6 +158,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 // Date in YYYYMMDD format
                 self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
                 var day = moment(self.startDate).format('ddd').toUpperCase();
+
+                if(DataShare.selectedDateForBottle !== self.bottleServiceDate) {
+                  self.tableSelection = [];
+                  self.selectionTableItems = [];
+                }
 
                 AjaxService.getVenueMap(self.venueid).then(function(response) {
                     self.venueImageMapData = response.data;
@@ -325,7 +337,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
         };
 
             self.confirmBottleService = function() {
-                DataShare.tab = 'B';
+                DataShare.selectedDateForBottle = self.bottleServiceDate;
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
                 DataShare.bottleServiceData = self.bottle;
@@ -395,6 +407,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     });
                 }
                 DataShare.payloadObject = self.serviceJSON;
+                DataShare.enablePayment = self.enabledPayment;
+                DataShare.venueName = self.venueName;
                 $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
              };
             self.init();

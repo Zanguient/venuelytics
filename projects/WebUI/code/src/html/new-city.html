@@ -18,10 +18,18 @@
         <div class="form-group label-floating is-empty col-md-12">
                     <div class="input-group col-md-3 pull-left">
                       <span></span>
-                      <label class="control-label" for="addon3a">{{"city.SEARCH_CITY" | translate}}... </label>
-                      <input class="form-control" type="text" ng-model="citySearch" ng-keypress="getCityKeyEnter($event,citySearch)">
+                      <input class="form-control" type="text" ng-model="citySearch" ng-keypress="getCityKeyEnter($event,citySearch)" placeholder="{{'city.SEARCH_CITY' | translate}}... ">
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-fab btn-fab-mini" ng-click="getCity(citySearch)">
+                          <i class="zmdi zmdi-search"></i>
+                        </button>
+                      </span>
+                    </div>
+                    <div class="input-group col-md-3 searchVenue pull-left">
+                      <span></span>
+                      <input class="form-control" type="text" ng-model="venueSearch" ng-keypress="getVenuesKeyEnter($event,venueSearch)" placeholder="{{'venue.SEARCH_VENUE' | translate}}...">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-fab btn-fab-mini" ng-click="getVenueBySearch(venueSearch)">
                           <i class="zmdi zmdi-search"></i>
                         </button>
                       </span>
@@ -49,9 +57,9 @@
                 </p>
             </a>
             </div>
-        <center ng-show="listOfCities.length == 0"><strong>No more cities found.</strong></center>
+        <!-- <center ng-show="listOfCities.length == 0"><strong>No more cities found.</strong></center> -->
         </div>
-        <center>
+        <center ng-hide="listOfVenuesByCity">
             <button ng-click="previousPage()" class="btn btn-raised btn-success" ng-if="next == true">
                 <span aria-hidden="true">«</span> {{'home.PREVIOUS_BUTTON' | translate}}
             </button>
@@ -84,5 +92,8 @@
             </ul>
         </nav> -->
 
+    </div>
+    <div ng-if="listOfVenuesByCity">
+        <div ng-include="'venue-in-newcity.html'"></div>
     </div>
 </div>

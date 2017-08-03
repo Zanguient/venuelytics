@@ -1,0 +1,69 @@
+    <div>
+        <div>
+            <center>
+                <h1>{{"reservation.PAYMENT"  | translate}}</h1>
+            </center>
+        </div>
+        <div class="form-group">
+        <center>
+            <table>
+                <tr>
+                    <td>
+                        <label>{{"reservation.VENUE_NAME"  | translate}} :</label>
+                    </td>
+                    <td>
+                        <label>&nbsp;&nbsp;{{venueName}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{"reservation.AMOUNT"  | translate}} :</label>
+                    </td>
+                    <td>
+                        &nbsp;&nbsp;$<label>{{availableAmount | number:2}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{"reservation.SALES_TAX"  | translate}} :</label>
+                    </td>
+                    <td>
+                        &nbsp;&nbsp;$<label>{{taxAmount | number:2}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{"reservation.TOTAL"  | translate}} :</label>
+                    </td>
+                    <td>
+                        &nbsp;&nbsp;$<label>{{chargedAmount | number:2}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{"reservation.PAYMENT"  | translate}}</label>
+                    </td>
+                    <td style="white-space: nowrap">&nbsp;&nbsp;
+                        <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>&nbsp;&nbsp;
+                        <label>
+                            <font size="3">{{"reservation.PAYPAL"  | translate}}</font>
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>&nbsp;&nbsp;
+                        <label>
+                            <font size="3">{{"reservation.CREDIT_CARD"  | translate}}</font>
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="type" ng-model="phoneInVenue" value="Phone/In Venue"/>&nbsp;&nbsp;
+                        <label>
+                            <font size="3">{{"reservation.PAY_AT_VENUE"  | translate}}</font>
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            </center>
+        </div>
+    </div>
+    <div>
+        <center>
+            <input type="button" class="btn btn-success btn-raised" ng-click="createBottleSave()" value="Pay Now">
+        </center>
+    </div>

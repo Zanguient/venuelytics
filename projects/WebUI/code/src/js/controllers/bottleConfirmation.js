@@ -12,17 +12,24 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.selectTables = [];
             self.selectBottleOrders = [];
             self.availableAmount = 0;
+            self.paypal = false;
+            self.cardPayment = false;
             self.init = function() {
                 self.editCity = $routeParams.cityName;
-                self.editVenueID = $routeParams.venueid;
+                self.venueID = $routeParams.venueid;
                 self.userData = DataShare.bottleServiceData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');
                 self.selectBottleOrders = DataShare.selectBottle;
+                self.enablePayment = DataShare.enablePayment;
+                self.venueName = DataShare.venueName;
                 angular.forEach(self.selectBottleOrders, function(value1, key1) {
                     self.availableAmount = self.availableAmount + value1.price;
                 });
+                if(DataShare.amount) {
+                    self.availableAmount = DataShare.amount;
+                }
                 angular.forEach(self.object.order.orderItems, function(value, key) {
                     if(value.productType === 'VenueMap') {
                         var items = {
@@ -41,7 +48,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             //Get Tax
 
             self.getTax = function() {
-                AjaxService.getTaxType(self.editVenueID,self.taxDate).then(function(response) {
+                AjaxService.getTaxType(self.venueID,self.taxDate).then(function(response) {
                     self.tax = response.data;
                     var amount = self.availableAmount;
                     if(self.tax.length !== 0) {
@@ -61,7 +68,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                             }
                         });
                     } else {
-                        self.chargedAmount = self.payAmount;
+                        self.chargedAmount = self.availableAmount;
                         self.taxAmount = 0;
                         self.gratuity = 0;
                         self.discount = 0;
@@ -71,13 +78,35 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             };
 
             self.editConfirmPage = function() {
-                $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/bottle-service');
+                $location.url("/newCities/" + self.editCity + "/" + self.venueID);
             };
 
+            self.paymentEnable = function() {
+                $location.url(self.editCity +"/bottlePayment/" + self.venueID);
+            };
+
+            self.backToReservation = function() {
+                $location.url('/newCities/' + self.editCity + '/' + self.venueID + '/bottle-service');
+            };
+
+            self.cardPaymentData = function(value) {
+                $scope.cardPayment = true;
+                $scope.paypal = false;
+            }
+
+            self.paypalData = function(value) {
+                $scope.paypal = true;
+                $scope.cardPayment = false;
+            }
+
             self.createBottleSave = function() {
-                AjaxService.createBottleService(self.editVenueID, self.object, self.authBase64Str).then(function(response) {
+                AjaxService.createBottleService(self.venueID, self.object, self.authBase64Str).then(function(response) {
                     self.orderId = response.data.id;
-                    self.creditCardPayment();
+                    if (self.cardPayment == true) {
+                        self.creditCardPayment();
+                    } else {
+                        $('#bottleServiceModal').modal('show');
+                    }
                 });
             };
 
@@ -115,11 +144,12 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                                     "paymentType":"CREDIT_CARD",
                                     "chargedAmount":parseFloat(chargeAmountValue)
                                 };
+                    DataShare.amount = chargeAmountValue;
                     //Save Payment Transaction for card
                     var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
-                    AjaxService.createTransaction(self.editVenueID, self.orderId, payment, authBase64Str).then(function(response) {
-                        $('#bottleServiceModal').modal('show');
+                    AjaxService.createTransaction(self.venueID, self.orderId, payment, authBase64Str).then(function(response) {
+                        $location.url(self.editCity +"/paymentSuccess/" + self.venueID);
                     });
                 }
             });
