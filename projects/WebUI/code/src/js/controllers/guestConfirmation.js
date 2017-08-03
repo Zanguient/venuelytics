@@ -10,13 +10,13 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.guestListData = DataShare.guestListData;
-                self.guestSelectedDate = moment(self.guestListData.guestStartDate).format("MM-DD-YYYY");
+                self.guestSelectedDate = moment(self.guestListData.guestStartDate).format('MM-DD-YYYY');
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
             };
 
             self.editGuestPage = function() {
-                $location.url("/newCities/" + self.city + "/" + self.selectedVenueID);
+                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
             };
 
             self.guestListSave = function() {

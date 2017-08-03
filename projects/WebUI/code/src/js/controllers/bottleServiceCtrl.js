@@ -161,7 +161,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         var venueMap = $scope.venueImageMapData[index];
                           DataShare.elements = self.venueImageMapData[index].elements;
                           if(self.venueImageMapData[index].imageUrls.length !== 0) {
-                            $log.info("imageURl:", angular.toJson(self.venueImageMapData[index].imageUrls[0].originalUrl));
+                            // $log.info("imageURl:", angular.toJson(self.venueImageMapData[index].imageUrls[0].originalUrl));
                             DataShare.imageMapping.pic_url = self.venueImageMapData[index].imageUrls[0].originalUrl;
                             DataShare.imageMapping.pic_url_thumbnail = self.venueImageMapData[index].imageUrls[0].originalUrl;
                           }
@@ -203,7 +203,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 $scope.reservationData = [];
                 AjaxService.getVenueMapForADate(self.venueid,self.bottleServiceDate).then(function(response) {
                     self.reservations = response.data;
-                    $log.info("response:", angular.toJson(response));
+                    // $log.info("response:", angular.toJson(response));
                     angular.forEach(self.reservations, function(obj, key) {
                       $scope.reservationData[obj.productId] = obj;
                     });
@@ -214,17 +214,17 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.fillColor = function(id) {
 
               var obj = $scope.reservationData[id];
-              $log.info("fillColor id:", id);
-              $log.info("tableSelection data:", angular.toJson(self.tableSelection));
+              // $log.info("fillColor id:", id);
+              // $log.info("tableSelection data:", angular.toJson(self.tableSelection));
               if (self.tableSelection.length !== 0) {
                   for (var i = 0; i < self.tableSelection.length; i++) {
                       var obj2 = self.tableSelection[i].id;
                       if (obj2 === id) {
-                          $log.info("Inside yellow");
+                          // $log.info("Inside yellow");
                           return APP_COLORS.darkYellow;
                       }
                   }
-                  $log.info("Inside green");
+                  // $log.info("Inside green");
                   return APP_COLORS.lightGreen;
               } else {
                   if (typeof obj == 'undefined') {
@@ -251,7 +251,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                   for(var i = 0; i < self.tableSelection.length; i++) {
                       var obj2 = self.tableSelection[i].id;
                       if(obj2 === id) {
-                        $log.info("Inside yellow");
+                        // $log.info("Inside yellow");
                         return APP_COLORS.turbo;
                       }
                     }
@@ -266,9 +266,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             };
 
         self.selectTable = function(id, index, dataValueObj) {
-          $log.info("Select table:", id, index, angular.toJson(dataValueObj));
+          // $log.info("Select table:", id, index, angular.toJson(dataValueObj));
             var data = $('#' + id).mouseout().data('maphilight') || {};
-            $log.info("Data fillColor:", data.fillColor);
+            // $log.info("Data fillColor:", data.fillColor);
                 if(data.fillColor === APP_COLORS.lightGreen) {
                     data.fillColor = APP_COLORS.darkYellow;
                     data.strokeColor = APP_COLORS.turbo;

@@ -14,17 +14,16 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
                 self.privateEventData = DataShare.privateEventData;
-                self.privateSelectedDate = moment(self.privateEventData.orderDate).format("MM-DD-YYYY");
+                self.privateSelectedDate = moment(self.privateEventData.orderDate).format('MM-DD-YYYY');
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
             };
 
             self.editPrivatePage = function() {
-                $location.url("/newCities/" + self.editCity + "/" + self.editVenueID);
+                $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events');
             };
 
             self.privateEventSave = function() {
-
                   AjaxService.createBottleService(self.editVenueID, self.object, self.authBase64Str).then(function(response) {
                     $log.info("response: "+angular.toJson(response));
                     $('#privateEventModal').modal('show');
