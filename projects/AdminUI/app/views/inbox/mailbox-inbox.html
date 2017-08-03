@@ -1,33 +1,12 @@
-<!-- START action buttons-->
-<div class="clearfix mb">
-   <div class="btn-group pull-left">
-      <button type="button" class="btn btn-default btn-sm">
-         <em class="fa fa-mail-reply text-gray-dark"></em>
-      </button>
-      <button type="button" class="btn btn-default btn-sm">
-         <em class="fa fa-mail-reply-all text-gray-dark"></em>
-      </button>
-      <button type="button" class="btn btn-default btn-sm">
-         <em class="fa fa-mail-forward text-gray-dark"></em>
-      </button>
-   </div>
-   <div class="btn-group pull-right">
-      <button type="button" class="btn btn-default btn-sm">
-         <em class="fa fa-exclamation text-gray-dark"></em>
-      </button>
-      <button type="button" class="btn btn-default btn-sm">
-         <em class="fa fa-times text-gray-dark"></em>
-      </button>
-   </div>
-</div>
-<!-- END action buttons-->
+<!-- Start inbox list-->
 <div ng-controller="MailFolderController" class="panel panel-default">
    <div class="panel-body">
       <p ng-hide="notificationsList == true" ng-if="!(notifications | filter:folder).length" class="panel-body csspinner duo"></p>
       <p ng-show="notificationsList == true" class="lead text-center"> No mails here</p>
       <table ng-if="(notifications | filter:folder).length" class="table table-hover mb-mails">
          <tbody>
-            <tr ng-repeat="note in notifications | filter:folder" ng-class="{'mb-mail-active': note.userRead === 'N'}">
+            <tr ng-repeat="note in notifications | filter:{serviceType:folder}" ng-class="{'mb-mail-active': note.userRead === 'N'}">
+            <!-- <tr ng-repeat="note in notifications | filter:folder" ng-class="{'mb-mail-active': note.userRead === 'N'}"> -->
                <td>
                   <div class="checkbox c-checkbox">
                      <label>
@@ -64,7 +43,7 @@
                   <medium class="pull-right">{{note.vaService.noOfGuests}} Guests</medium>
                </td>
                 <td class="col-md-3"> <em class="circle circle-xl" ng-class="getStatusColor(note.vaService.status)"></em></td>
-            </tr>
+            </tr>    
          </tbody>
       </table>
    </div>

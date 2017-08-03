@@ -6,10 +6,10 @@
  App.controller('MailboxController', function($scope, colors, $rootScope) {
 
   $scope.folders = [
-    {name: 'Inbox', folder: '', alert:$rootScope.unreadMessages, icon: "fa-inbox",color: 'success' },
+    {name: 'Inbox', folder: '', alert:$rootScope.unreadMessages, icon: "fa-inbox",color: 'success',},
     {name: 'Confirmed', folder: 'COMPLETED', alert: $rootScope.comfirmedCount, icon: "fa-star",color: 'info' },
-    {name: 'OnHold', folder: 'REQUEST', alert: $rootScope.requestCount, icon: "fa-paper-plane-o", color: 'warning' },
-    {name: 'Bottle', folder: 'Bottle', alert: $rootScope.bottleCount, icon: "fa-edit", color: 'success' },
+    {name: 'OnHold', folder: 'REQUEST', alert: $rootScope.requestCount, icon: "fa-paper-plane-o", color: 'warning'},
+    {name: 'Bottle', folder: 'Bottle', alert: $rootScope.bottleCount, icon: "fa-edit", color: 'success'},
     {name: 'Private Events',   folder: 'BanquetHall', alert: $rootScope.banquetHallCount, icon: "fa-trash",color: 'success'},
     {name: 'Others', folder: 'trash', alert: 0,  icon: "fa-trash"}
   ];
@@ -51,7 +51,7 @@
         }
       });
     };
-    $scope.getAvatar = function(vid) {
+    $rootScope.getAvatar = function(vid) {
       var visitor = $scope.visitors[vid];
       if (visitor && visitor.profileImageThumbnail) {
         return visitor.profileImageThumbnail
@@ -67,10 +67,16 @@
       if (status === 'RESERVED') {
         return 'circle-danger ';
       } else if (status === 'COMFIRMED') {
-        return 'circle-info';
-      } else if (status === 'ONHOLD') {
-        return 'circle-warning';
+        return 'circle-success';
+      } else if (status === 'CANCELED') {
+        return 'circle-danger';
       } else if(status === 'REQUEST') {
+        return 'circle-warning';
+      } else if(status === 'ASSIGNED') {
+        return 'circle-success';
+      } else if(status === 'REJECTED') {
+        return 'circle-danger';
+      } else if(status === 'COMPLETED') {
         return 'circle-success';
       }
     };
@@ -80,6 +86,7 @@
 
  App.controller('MailViewController', ['$scope', 'RestServiceFactory', '$stateParams','$rootScope', function($scope, RestServiceFactory, $stateParams, $rootScope) {
     $scope.selectOrderItems = [];
+    $scope.prifileImage = $rootScope.selectedObj.visitorId;
     angular.forEach($rootScope.selectedObj.vaService.order.orderItems, function(value, key) {
       var venueImageId = {
         "orderId": value.orderId,

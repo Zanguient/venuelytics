@@ -7,40 +7,43 @@
          <div class="row mb-lg">
             <div class="col-lg-4 col-xs-6 br pv">
                <div class="row">
-                  <div class="col-md-2 text-center visible-md visible-lg">
-                     <em class="fa fa-plane fa-4x text-muted"></em>
+                  <div class="col-md-2 visible-md visible-lg">
+                     <div ng-if="getAvatar(prifileImage)">
+                     <img ng-src="{{getAvatar(prifileImage)}}" alt="" class="media-object img-circle thumb32 pull-left"  />
+                  </div>
+                     <div ng-if="!getAvatar(prifileImage)" class="fa fa-user-circle-o fa-2x thumb32 pull-left">
+                     </div>
                   </div>
                   <div class="col-md-10">
                      <h4>{{selectedObj.vaService.visitorName}}</h4>
-                     <address></address>{{selectedObj.vaService.reason}}
-                     <br/>{{selectedObj.vaService.contactEmail}}
+                     <address></address>{{selectedObj.vaService.contactEmail}}
                      <br/>{{selectedObj.vaService.contactNumber}}
                      <br/>{{selectedObj.vaService.contactZipcode}}</div>
                </div>
             </div>
-            <div class="col-lg-4 col-xs-6 br pv">
+            <!-- <div class="col-lg-4 col-xs-6 br pv">
                <div class="row">
                   <div class="col-md-2 text-center visible-md visible-lg">
                      <em class="fa fa-truck fa-4x text-muted"></em>
                   </div>
                   <div class="col-md-10">
-                     <h4>Lloyd Gonzales</h4>
+                     <h4>{{selectedObj.vaService.reason}}</h4>
                      <address></address>Basilisa 2145
                      <br/>Mate, Cliff., 20145
                      <br/>Moon</div>
                </div>
-            </div>
+            </div> -->
             <div class="clearfix hidden-md hidden-lg">
                <hr/>
             </div>
-            <div class="col-lg-4 col-xs-12 pv">
+            <div class="col-lg-4 col-xs-12 pv pull-right">
                <div class="clearfix">
                   <p class="pull-left">INVOICE NO.</p>
                   <p class="pull-right mr">{{selectedObj.id}}</p>
                </div>
                <div class="clearfix">
-                  <p class="pull-left">Date</p>
-                  <p class="pull-right mr">{{selectedObj.fulfillmentDate | date : 'MMM d, y'}}</p>
+                  <p class="pull-left">Type</p>
+                  <p class="pull-right mr">{{selectedObj.vaService.reason}}</p>
                </div>
                <div class="clearfix">
                   <p class="pull-left">Order Date</p>
@@ -54,7 +57,7 @@
                   <tr>
                      <th>Order Id</th>
                      <th>Product Id</th>
-                     <th ng-if="!orderIdem.description == null || orderIdem.description == ''">Description</th>
+                     <th>Description</th>
                      <th>Name</th>
                      <th>Brand</th>
                      <th class="text-right">Price</th>
@@ -62,37 +65,25 @@
                </thead>
                <tbody ng-repeat ="orderIdem in selectOrderItems">
                   <tr>
-                     <td>{{orderIdem.orderId}}</td>
-                     <td>{{orderIdem.productId}}</td>
-                     <td ng-if="!orderIdem.description == null || orderIdem.description == ''">{{orderIdem.description}}</td>
-                     <td>{{orderIdem.name}}</td>
-                     <td>{{orderIdem.brand}}</td>
-                     <td class="text-right">{{orderIdem.totalPrice}}</td>
+                     <td ng-if="!(orderIdem.orderId == null || orderIdem.orderId == '')">{{orderIdem.orderId}}</td>
+                     <td ng-if="orderIdem.orderId == null || orderIdem.orderId == ''">-</td>
+                     <td ng-if="!(orderIdem.productId == null || orderIdem.productId == '')">{{orderIdem.productId}}</td>
+                     <td ng-if="orderIdem.productId == null || orderIdem.productId == ''">-</td>
+                     <td ng-if="!(orderIdem.description == null || orderIdem.description == '')">{{orderIdem.description}}</td>
+                     <td ng-if="orderIdem.description == null || orderIdem.description == ''">-</td>
+                     <td ng-if="!(orderIdem.name == null || orderIdem.name == '')">{{orderIdem.name}}</td>
+                     <td ng-if="orderIdem.name == null || orderIdem.name == ''">-</td>
+                     <td ng-if="!(orderIdem.brand == null || orderIdem.brand == '')">{{orderIdem.brand}}</td>
+                     <td ng-if="orderIdem.brand == null || orderIdem.brand == ''">-</td>
+                     <td ng-if="!(orderIdem.totalPrice == null || orderIdem.totalPrice == '')" class="text-right">{{orderIdem.totalPrice}}</td>
+                     <td ng-if="orderIdem.totalPrice == null || orderIdem.totalPrice == ''">-</td>
                   </tr>
                </tbody>
             </table>
          </div>
-         <div class="row">
-            <div class="col-sm-offset-8 col-sm-4 pv">
-               <div class="clearfix">
-                  <p class="pull-left">Subtotal</p>
-                  <p class="pull-right mr">$ 10300</p>
-               </div>
-               <div class="clearfix">
-                  <p class="pull-left">Tax (21%)</p>
-                  <p class="pull-right mr">$ 2700</p>
-               </div>
-               <div class="clearfix">
-                  <p class="pull-left h3">GRAND TOTAL</p>
-                  <p class="pull-right mr h3">$ 13000</p>
-               </div>
-            </div>
-         </div>
          <hr class="hidden-print" />
          <div class="clearfix">
-            <button type="button" class="btn btn-info pull-left mr">Edit</button>
             <button type="button" onclick="window.print();" class="btn btn-default pull-left">Print</button>
-            <button type="button" class="btn btn-success pull-right">Send Invoice</button>
          </div>
       </div>
    </div>
