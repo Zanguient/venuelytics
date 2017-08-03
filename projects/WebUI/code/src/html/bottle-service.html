@@ -77,13 +77,13 @@
                         <center>
                         <table>
                             <tr>
-                                <td><label class="table-map-color">#{{$index+1}}</label></td>
-                                <td><label class="table-map-color">:&nbsp;&nbsp;{{table.name}}</label>
+                                <td><label class="table-map-color" style="color: black;"><b>#{{$index+1}}</b></label></td>
+                                <td><label>:&nbsp;&nbsp;{{table.name}}</label>
                                 </td>
                                 <td><label ng-hide="table.size <= 0"
-                                    class="table-capacity">Capacity</label>
+                                    class="table-capacity" style="color: black;"><b>{{'bottleServiceTab.CAPACITY' | translate}}</b></label>
                                 </td>
-                                <td><label ng-hide="table.size <= 0" class="table-map-color">:&nbsp;&nbsp;{{table.size}}</label>
+                                <td><label ng-hide="table.size <= 0">:&nbsp;&nbsp;{{table.size}}</label>
                                 </td>
                             </tr>
                         </table>
@@ -94,11 +94,11 @@
                             index="$index"> <img
                             class="img-responsive center-block table-carousel" data-ng-src="{{slide.originalUrl}}"
                             ng-click="imageView(slide.originalUrl)"> </uib-slide> </uib-carousel>
-                        <br> <label ng-hide="table.description == null">Description</label> <br> <label
+                        <br> <label class="table-capacity" ng-hide="table.description == null"><b>{{'bottleServiceTab.DESC' | translate}}</b></label> <br> <label
                             class="table-capacity"
                             ng-hide="table.description == null">{{table.description}}</label>
                         <button type="button" class="btn btn-danger btn-raised pull-right"
-                            ng-click="removeSelectedTables($index,table,tableSelection) ">Remove</button>
+                            ng-click="removeSelectedTables($index,table,tableSelection) ">{{'bottleServiceTab.REMOVE' | translate}}</button>
                     </div>
                 </div>
         <div class="showInMobile">

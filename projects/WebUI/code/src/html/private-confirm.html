@@ -9,48 +9,48 @@
 
                       <tbody>
                         <tr>
-                          <td> Requested Date </td>
+                          <td> {{'bottleServiceTab.DATE' | translate}} </td>
                           <td>{{privateSelectedDate}}</td>
                         </tr>
                         <tr>
-                          <td> Start Time </td>
+                          <td> {{"reservation.START_TIME"  | translate}} </td>
                           <td>{{time24to12(privateEventData.privateStartTime)}}</td>
                         </tr>
                         <tr>
-                          <td> End Time </td>
+                          <td> {{"reservation.END_TIME"  | translate}} </td>
                           <td>{{time24to12(privateEventData.privateEndTime)}}</td>
                         </tr>
                         <tr>
-                          <td> First Name </td>
+                          <td> {{'reservation.FIRST_NAME' | translate}} </td>
                           <td>{{privateEventData.privateFirstName}}</td>
                         </tr>
                         <tr>
-                          <td> Last Name </td>
+                          <td> {{'reservation.LAST_NAME' | translate}} </td>
                           <td>{{privateEventData.privateLastName}}</td>
                         </tr>
                         <tr>
-                          <td> E-mail </td>
+                          <td> {{'reservation.EMAIL' | translate}} </td>
                           <td>{{privateEventData.privateEmail}}</td>
                         </tr>
                         <tr>
-                          <td> Mobile Number </td>
+                          <td> {{'reservation.MOBILE' | translate}} </td>
                           <td>{{privateEventData.privateMobileNumber}}</td>
                         </tr>
                         <tr>
-                          <td> Budget </td>
+                          <td> {{'reservation.BUDGET' | translate}} </td>
                           <td>{{privateEventData.budget}}</td>
                         </tr>
                         <tr>
-                          <td> Total Guests </td>
+                          <td> {{'reservation.TOTAL_GUEST' | translate}} </td>
                           <td>{{privateEventData.totalGuest}}</td>
                         </tr>
                         <tr>
-                          <td> Comment </td>
+                          <td> {{'reservation.COMMENT' | translate}} </td>
                           <td>{{privateEventData.privateComment}}</td>
                         </tr>
                         <tr>
-                          <td> Event Type </td>
-                          <td>{{privateEventData.privateEvent.type}}</td>
+                          <td> {{"reservation.EVENT_TYPE"  | translate}} </td>
+                          <td>{{privateEventData.privateEvent.name}}</td>
                         </tr>
                       </tbody>
                     </table>
