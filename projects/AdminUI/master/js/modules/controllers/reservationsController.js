@@ -7,8 +7,8 @@
  */
 
  App.controller('ReservationsController',  ['$state', '$stateParams','$scope', '$rootScope', '$location','AUTH_EVENTS',
-  'AuthService', '$cookies', 'Session', 'ContextService', 'RestServiceFactory', function ($state, $stateParams, $scope, $rootScope, $location, AUTH_EVENTS, 
-    AuthService, $cookies, Session, contextService, RestServiceFactory) {
+  'AuthService', '$cookies', 'Session', 'ContextService', 'RestServiceFactory', 'APP_EVENTS',function ($state, $stateParams, $scope, $rootScope, $location, AUTH_EVENTS, 
+    AuthService, $cookies, Session, contextService, RestServiceFactory, APP_EVENTS) {
     "use strict";
 
   $scope.venueMapData = [];
@@ -152,11 +152,11 @@ $scope.initCalendar = function () {
         $scope.setVenueMapImage();     
       });
     };
+    $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
+        // register on venue change;
+       $scope.init();
+    });
 
-    $scope.setVenue = function(venueName, venueNumber) {
-
-    };
-    
     $scope.selectTable = function(tableId, name) {
       
       $scope.selectedTable =  $scope.selectedVenueMap.productsByName[name];
