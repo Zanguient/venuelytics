@@ -1,0 +1,70 @@
+<div class="container container-full" ng-cloak>
+    <div class="">
+        <div class="">
+            <!-- For Horizontal tabs -->
+            <div class="">
+                <!-- Nav tabs -->
+                <div class="card-block venueCardBlock">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" id="clubs" class="tab-pane fade active in">
+                            <div>
+                                <div class="">
+                                    <div class="cardAlignment">
+                                        <div
+                                            class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
+                                            ng-repeat="venue in listOfVenuesByCity"
+                                            ng-if="venue.imageUrls[0].smallUrl">
+                                            <article id="articleCart"
+                                                class="card card-info mb-4 wow materialUp animation-delay-5">
+                                                <figure class="ms-thumbnail ms-thumbnail-left"
+                                                    ng-click="selectVenue(venue)" id="cityImage">
+                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt=""
+                                                        class="img-responsive" id="venueImages">
+                                                </figure>
+                                                <div class="card-block">
+                                                    <h2 class="venueTitle">
+                                                        <a ng-href="/cities/{{selectedCityName}}/{{venue.id}}" ng-click="selectVenue(venue)">{{venue.venueName
+                                                            | limitTo: 16 }}{{venue.venueName.length > 16 ? '...'
+                                                            :''}}</a>
+                                                    </h2>
+                                                    <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address | limitTo: 38
+                                                    }}{{venue.address.length > 38 ? '...' :''}}</p>
+                                                    <a href="{{venue.website}}" target="_blank" class="venueTitle"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
+                                                    <p class="venueDescription">{{venue.description | limitTo: 70
+                                                        }}{{venue.description.length > 70 ? '...' :''}}</p>
+                                                    <div class="row col-lg-8 serviceIcon">
+                                                        <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
+                                                            ng-src="{{service.image}}" class="serviceSmallIcon" title="{{service.title}}"
+                                                            ng-show="venue.info['{{service.fieldName}}'] == 'Y'"></img>
+                                                            </a>
+                                                    </div>
+
+                                                    <div ng-hide="!venue.distanceInMiles" id="distance"
+                                                        class="col-lg-5">{{venue.distanceInMiles | number :
+                                                        2}} {{ "venue.MILES" | translate}}</div>
+                                                    <br />
+
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- container -->
+                                <!-- ms-paper-content -->
+                            </div>
+                            <!-- col-md-9 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- card -->
+            <!-- </section> -->
+            <!-- </div> -->
+            <!-- </div> -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- ms-paper -->
+</div>
+<!-- container -->

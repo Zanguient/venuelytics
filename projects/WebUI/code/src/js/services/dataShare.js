@@ -19,12 +19,14 @@ app.service('DataShare', function() {
   this.tab = '';
   this.userselectedTables = '';
   this.selectedBlog = {};
+  this.enablePayment = '';
   this.imageMapping={
       "pic_url": "",
       "pic_url_thumbnail":"",
           "maps": []
   };
   this.elements=[];
+  this.amount = '';
 
   /*this.getCurrentLocation = function() {
 

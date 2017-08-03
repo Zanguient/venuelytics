@@ -178,6 +178,30 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller:'OrderConfirmController',
             description: 'Venuelytics - a real time venue experience platform enabling Order'
         })
+        .when('/:cityName/bottlePayment/:venueid', {
+            templateUrl: 'bottle-payment.html',
+            title: 'Venuelytics-Bottle-Payment',
+            controller:'ConfirmReservationController',
+            description: 'Venuelytics - a real time venue experience platform for bottle payment'
+        })
+        .when('/:cityName/paymentSuccess/:venueid', {
+            templateUrl: 'payment-success.html',
+            title: 'Venuelytics-Payment-Success',
+            controller:'ConfirmReservationController',
+            description: 'Venuelytics - a real time venue experience platform for payment success'
+        })
+        .when('/:cityName/private-success/:venueid', {
+            templateUrl: 'private-success.html',
+            title: 'Venuelytics-Private-Success',
+            controller:'PrivateConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for private success'
+        })
+        .when('/:cityName/guest-success/:venueid', {
+            templateUrl: 'guest-success.html',
+            title: 'Venuelytics-Guest-Success',
+            controller:'GuestConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for guest success'
+        })
         .otherwise('/home');
 
     $locationProvider.html5Mode({

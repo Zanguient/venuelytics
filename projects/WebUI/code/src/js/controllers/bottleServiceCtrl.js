@@ -17,6 +17,13 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.init = function() {
                 $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueid = $routeParams.venueid;
+                if(DataShare.amount) {
+                    DataShare.bottleServiceData = '';
+                    DataShare.tableSelection = '';
+                    DataShare.selectBottle = '';
+                    self.startDate = moment().format('YYYY-MM-DD');
+                    self.showFloorMapByDate();
+                }
                 if(DataShare.userselectedTables) {
                   self.selectionTableItems = DataShare.userselectedTables;
                 }
@@ -395,6 +402,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     });
                 }
                 DataShare.payloadObject = self.serviceJSON;
+                DataShare.enablePayment = self.enabledPayment;
+                DataShare.venueName = self.venueName;
                 $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
              };
             self.init();

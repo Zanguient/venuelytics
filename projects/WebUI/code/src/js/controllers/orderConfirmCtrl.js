@@ -10,7 +10,7 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location'
 
     		var self = $scope;
 
-        self.gotoHome = function() {
-          $location.url('/home');
+        self.backToReservation = function() {
+            $location.url('/newCities/' + self.selectedCityName + '/' + venue.id + '/bottle-service');
         };
     }]);

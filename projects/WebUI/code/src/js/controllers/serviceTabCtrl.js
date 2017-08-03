@@ -27,7 +27,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 }
                 if(self.restoreTab === 'B' || self.tabParams === 'B' || self.tabParams === 'bottle-service') {
                     self.bottleService();
-                } else if(self.restoreTab === 'P' || self.tabParams === 'P' || self.tabParams === 'private-event') {
+                } else if(self.restoreTab === 'P' || self.tabParams === 'P' || self.tabParams === 'private-events') {
                     self.event();
                 } else if(self.restoreTab === 'G' || self.tabParams === 'G' || self.tabParams === 'guest-list'){
                     self.glist();
@@ -71,7 +71,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bottleServiceTab = false;
                 self.eventServiceTab = true;
                 self.guestServiceTab = false;
-                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/private-event");
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/private-events");
              };
 
             /*For guest list service tab highlight*/

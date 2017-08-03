@@ -45,6 +45,10 @@ select {
   -moz-appearance: none;
 }
 
+.ui-helper-center {
+  text-align: center;
+}
+
 .fontColorForText {
   color: #181818;
 }
@@ -55,6 +59,14 @@ select {
 
 .cardHeight {
   height:550px;
+}
+
+.thankYouHeight {
+  height: 750px;
+}
+
+.thankYouAlign {
+  margin-top: 160px;
 }
 
 .reservation-carousel {
@@ -635,7 +647,11 @@ select {
   }
 
   .cityBox {
-    margin-top: 30px;
+    margin-top: 75px;
+  }
+
+  .searchVenue {
+    margin-top: 15px;
   }
 
   .venueListCard {
@@ -852,7 +868,11 @@ select {
   }
 
   .cityBox {
-    margin-top: 30px;
+    margin-top: 75px;
+  }
+
+  .searchVenue {
+    margin-top: 15px;
   }
 
   .carouselImage {
@@ -984,7 +1004,11 @@ select {
   }
 
   .cityBox {
-    margin-top: 30px;
+    margin-top: 75px;
+  }
+
+  .searchVenue {
+    margin-top: 15px;
   }
 
   .venueListCard {

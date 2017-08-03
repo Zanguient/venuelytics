@@ -31,6 +31,10 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
                 });
             };
 
+            self.backToPrivate = function() {
+                $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events');
+            };
+
              self.time24to12 = function(timeString) {
                 var H = +timeString.substr(0, 2);
                 var h = (H % 12) || 12;
@@ -41,7 +45,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
 
             self.closePrivateEventModal = function() {
               $('.modal-backdrop').remove();
-              $location.url('/orderConfirm');
+              $location.url(self.editCity + '/private-success' + self.editVenueID);
             };
 
             self.init();

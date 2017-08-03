@@ -34,6 +34,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             };
 
             $scope.getCity = function (citySearch) {
+                self.listOfVenuesByCity = [];
                 self.loadingBar = true;
                 AjaxService.getVenuesByCity(DataShare.latitude, DataShare.longitude, citySearch).then(function(response) {
                     self.listOfCities = response;
@@ -94,7 +95,29 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 }
             };
 
+            self.getVenueBySearch = function(venueSearch){
+                self.listOfCities = [];
+                AjaxService.getVenueBySearch(DataShare.latitude, DataShare.longitude, venueSearch).then(function(response) {
+                    self.listOfVenuesByCity = response.venues;
+                });
+            };
+
+            self.getVenuesKeyEnter = function(keyEvent,venueSearch) {
+                self.listOfCities = [];
+                if (keyEvent.which === 13){
+                    self.getVenueBySearch(venueSearch);
+                }
+            };
+
+            self.selectVenue = function(venue) {
+                self.selectedCityName = venue.city;
+                DataShare.selectedVenue = venue;
+                DataShare.venueNumber = venue.id;
+                $location.url('/newCities/' + self.selectedCityName + '/' + venue.id + '/bottle-service');
+            };
+
             self.getCityKeyEnter = function(keyEvent,citySearch) {
+                self.listOfVenuesByCity = [];
                 if (keyEvent.which === 13){
                     self.getCity(citySearch);
                 }

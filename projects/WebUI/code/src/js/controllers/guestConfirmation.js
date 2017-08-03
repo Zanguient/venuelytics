@@ -25,9 +25,13 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
+            self.backToGuest = function() {
+                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
+            };
+
             self.closeGuestListModal = function() {
               $('.modal-backdrop').remove();
-              $location.url('/orderConfirm');
+              $location.url(self.city + '/guest-success' + self.selectedVenueID);
             };
             self.init();
     }]);
