@@ -3,14 +3,11 @@
 	   <div class="col-lg-7">
 	   Dashboard - <strong>{{ 'dashboard.WELCOME' | translate:{ appName: app.name } }} !</strong>
 	   </div>
-   	<div class="col-lg-3">
+   	<div class="col-lg-3 pull-right">
          <div class="btn-group">
                <button type="button" class="btn" ng-repeat="period in PERIODS" ng-class="selectedPeriod == period ? 'btn-primary':'btn-default'" ng-click="setPeriod(period)">{{period | translate}}</button>
               
          </div>  
-      </div>
-      <div class="col-lg-2">
-         <venue-dropdown callback="setVenue(venueName, venueId)"/>
       </div>
     </div>
 </h3>

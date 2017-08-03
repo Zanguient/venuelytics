@@ -35,7 +35,9 @@ App
 	  sessionTimeout: 'auth-session-timeout',
 	  notAuthenticated: 'auth-not-authenticated',
 	  notAuthorized: 'auth-not-authorized'
-	})
+	}).constant('APP_EVENTS', {
+    venueSelectionChange: 'venueSelectionChange'
+  })
 	.constant('USER_ROLES', {
 		 any: {id: 0, name: 'Public'},
 		 user: {id: 1, name: 'Basic User'},

@@ -3,14 +3,11 @@
  * Init jQuery Vector Map plugin
  =========================================================*/
 
-App.directive('venueDropdown',  ['ContextService',function(contextService){
+App.directive('venueDropdown',  ['ContextService','$rootScope','APP_EVENTS', function(contextService, $rootScope, APP_EVENTS){
   'use strict';
 
   return {
     restrict: 'EA',
-    scope:{
-      callback: '&'
-    },
     templateUrl: 'app/templates/venue/venue-dropdown.html',
     controller: function($scope, $element) {
 
@@ -21,9 +18,7 @@ App.directive('venueDropdown',  ['ContextService',function(contextService){
       $scope.contextService = contextService;
       $scope.setVenue = function(venueName, venueId) {
         $scope.contextService.setVenue(venueName, venueId);
-        if (typeof $scope.callback !== 'undefined'){
-          $scope.callback(venueName, venueId);
-        }
+        $rootScope.$broadcast(APP_EVENTS.venueSelectionChange, {venueName: venueName, venueId: venueId});
       };
     }
   };

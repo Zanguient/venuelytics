@@ -1,6 +1,6 @@
 
-App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','RestServiceFactory','$translate','colors',
-                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors) {
+App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','RestServiceFactory','$translate','colors', 'APP_EVENTS',
+                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors, APP_EVENTS) {
 	'use strict';
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.selectedPeriod = 'WEEKLY';
@@ -11,6 +11,12 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.xAxisMode = 'categories';
     $scope.requestByStatusZip =[];
     $scope.bookingRequestByZipcodeData = [];
+
+    $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
+        // register on venue change;
+       $scope.init();
+    });
+    
 	$scope.init=function(){
 	   
     	$log.log("Dash board controller has been initialized!");
@@ -545,6 +551,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     })();
     
   });
+    
   $scope.setVenue = function(venueName, venueNumber) {
         $scope.init();
    };
