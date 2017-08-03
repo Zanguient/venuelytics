@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService) {
+app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
 
             $log.log('Inside Private Confirm Controller.');
 
@@ -31,6 +31,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
             };
 
             self.backToPrivate = function() {
+                $rootScope.serviceName = 'PrivateEvent';
                 $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events');
             };
 
@@ -44,7 +45,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
 
             self.closePrivateEventModal = function() {
               $('.modal-backdrop').remove();
-              $location.url(self.editCity + '/private-success' + self.editVenueID);
+              $location.url(self.editCity + '/private-success/' + self.editVenueID);
             };
 
             self.init();

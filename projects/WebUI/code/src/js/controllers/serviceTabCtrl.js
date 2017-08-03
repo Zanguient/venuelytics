@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
+app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
 
     		$log.log('Inside ServiceTab Controller.');
 
@@ -14,6 +14,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.bottleMinimum = [];
             self.init = function() {
                 self.venueid = $routeParams.venueid;
+                if($rootScope.serviceName == 'GuestList') {
+                    DataShare.guestListData = '';
+                }
+                if($rootScope.serviceName == 'PrivateEvent') {
+                    DataShare.privateEventData = '';
+                }
                 self.guest = DataShare.guestListData;
                 self.private = DataShare.privateEventData;
                 self.totalGuest = DataShare.totalNoOfGuest;
@@ -25,7 +31,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 if(DataShare.tableSelection) {
                     self.tableSelection = DataShare.tableSelection;
                 }
-                $log.error("tabParams:", self.tabParams);
                 if(self.tabParams === 'bottle-service') {
                     self.bottleService();
                 } else if(self.tabParams === 'private-events') {

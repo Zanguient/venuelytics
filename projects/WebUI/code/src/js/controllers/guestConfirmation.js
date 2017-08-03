@@ -1,6 +1,6 @@
 "use strict";
-app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService) {
+app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
 
     		$log.log('Inside Guest List Controller.');
 
@@ -26,12 +26,13 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
             };
 
             self.backToGuest = function() {
+                $rootScope.serviceName = 'GuestList';
                 $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
             };
 
             self.closeGuestListModal = function() {
               $('.modal-backdrop').remove();
-              $location.url(self.city + '/guest-success' + self.selectedVenueID);
+              $location.url(self.city + '/guest-success/' + self.selectedVenueID);
             };
             self.init();
     }]);
