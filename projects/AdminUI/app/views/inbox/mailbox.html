@@ -2,15 +2,6 @@
 <div ng-controller="MailboxController" class="table-grid table-grid-desktop">
    <div class="col col-md">
       <div class="pr">
-         <div ng-hide="$state.is('app.mailbox.compose')" class="clearfix mb">
-            <button type="button" ng-click="mailboxMenuCollapsed = !mailboxMenuCollapsed" ng-init="mailboxMenuCollapsed = true" class="btn btn-sm btn-default mb-toggle-button pull-right">
-               <em class="fa fa-bars fa-fw fa-lg"></em>
-            </button>
-            <a ui-sref="app.mailbox.compose" class="btn btn-purple btn-sm mb-compose-button">
-               <em class="fa fa-pencil"></em>
-               <span>Compose</span>
-            </a>
-         </div>
          <!-- START mailbox list-->
          <div collapse="mailboxMenuCollapsed" class="mb-boxes">
             <div class="panel panel-default">

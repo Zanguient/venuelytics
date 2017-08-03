@@ -20,10 +20,10 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthServ
 		var target = {id:contextService.userVenues.selectedVenueNumber};
 		RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data1){
 	        angular.forEach(data1.notifications, function(value, key) {
-	          if(value.vaService.status == 'REQUEST'){
+	          if(value.status == 'REQUEST'){
 	            $rootScope.requestCount += 1;
 	          }
-	          if(value.vaService.status == 'COMFIRMED'){
+	          if(value.status == 'COMPLETED'){
 	            $rootScope.comfirmedCount += 1;
 	          }
 	        });

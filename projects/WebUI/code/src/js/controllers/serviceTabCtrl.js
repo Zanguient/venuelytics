@@ -25,13 +25,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 if(DataShare.tableSelection) {
                     self.tableSelection = DataShare.tableSelection;
                 }
-                if(self.restoreTab === 'B' || self.tabParams === 'B' || self.tabParams === 'bottle-service') {
+                $log.error("tabParams:", self.tabParams);
+                if(self.tabParams === 'bottle-service') {
                     self.bottleService();
-                } else if(self.restoreTab === 'P' || self.tabParams === 'P' || self.tabParams === 'private-events') {
+                } else if(self.tabParams === 'private-events') {
                     self.event();
-                } else if(self.restoreTab === 'G' || self.tabParams === 'G' || self.tabParams === 'guest-list'){
+                } else if(self.tabParams === 'guest-list'){
                     self.glist();
-                }else {
+                } else {
                     self.bottleService();
                 }
                 self.reservationTime = APP_ARRAYS.time;
@@ -47,7 +48,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             };
 
             /*For bottle service tab highlight*/
-            self.bottleService = function(service) {
+            self.bottleService = function() {
                 $("#privateEventTab").css('background-color', APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color', APP_COLORS.silver);
@@ -61,7 +62,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
              };
 
             /*For private event service tab highlight*/
-             self.event = function(service) {
+             self.event = function() {
                 $("#privateEventTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#private').css('color', 'white');
                 $("#guestlistTab").css('background-color',APP_COLORS.silver);
@@ -75,7 +76,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
              };
 
             /*For guest list service tab highlight*/
-             self.glist = function(service) {
+             self.glist = function() {
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color',APP_COLORS.fruitSalad);

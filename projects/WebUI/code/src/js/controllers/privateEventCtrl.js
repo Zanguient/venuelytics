@@ -16,12 +16,12 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 self.getMenus();
                 $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true});
 
-                if((Object.keys(DataShare.bottleServiceData).length) === 0) {
+                if((Object.keys(DataShare.privateEventData).length) === 0) {
                     self.getEventType();
                 } else {
-                    self.bottle = DataShare.bottleServiceData;
+                    self.private = DataShare.privateEventData;
                     self.eventTypes = [];
-                    self.eventTypes.push(self.bottle.bottleOccasion);
+                    self.eventTypes.push(self.private.privateEvent);
                 }
             };
 

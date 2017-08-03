@@ -454,6 +454,13 @@
 		"BACK_PRIVATE":"Back To Private Event",
 		"BACK_GUEST":"Back To GUEST LIST",
 		"DESCRIPTION_MOBILE":"Located in the heart of Silicon Valley, Pure Lounge offers a luxurious, modern, upscale setting for various occasions. Featuring dramatic, classical architecture, ..."
-
+	},
+	"bottleServiceTab": {
+		"DATE":"Requested Date",
+		"MEN":"Number of Men",
+		"WOMEN":"Number of Women",
+		"CAPACITY":"Capacity",
+		"DESC":"Description",
+		"REMOVE":"Remove"
 	}
 }
