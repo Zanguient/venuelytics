@@ -78,15 +78,11 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             };
 
             self.editConfirmPage = function() {
-<<<<<<< HEAD
                 $location.url("/newCities/" + self.editCity + "/" + self.venueID);
             };
 
             self.paymentEnable = function() {
                 $location.url(self.editCity +"/bottlePayment/" + self.venueID);
-=======
-                $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/bottle-service');
->>>>>>> 128130e9cd1cf57d1cbc566cccae936f4d787d98
             };
 
             self.backToReservation = function() {

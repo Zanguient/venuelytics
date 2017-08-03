@@ -15,6 +15,7 @@ app.service('DataShare', function() {
   this.bottleZip = '';
   this.payloadObject = '';
   this.selectBottle = '';
+  this.selectedDateForBottle = '';
   this.tableSelection = '';
   this.tab = '';
   this.userselectedTables = '';

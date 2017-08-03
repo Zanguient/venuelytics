@@ -159,6 +159,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
                 var day = moment(self.startDate).format('ddd').toUpperCase();
 
+                if(DataShare.selectedDateForBottle !== self.bottleServiceDate) {
+                  self.tableSelection = [];
+                  self.selectionTableItems = [];
+                }
+
                 AjaxService.getVenueMap(self.venueid).then(function(response) {
                     self.venueImageMapData = response.data;
                     if(self.venueImageMapData.length === 0) {
@@ -332,7 +337,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
         };
 
             self.confirmBottleService = function() {
-                DataShare.tab = 'B';
+                DataShare.selectedDateForBottle = self.bottleServiceDate;
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
                 DataShare.bottleServiceData = self.bottle;
