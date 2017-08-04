@@ -15,28 +15,22 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthServ
 	$rootScope.requestCount = 0;
     $rootScope.comfirmedCount = 0;
 	$scope.getNotificationIconClass = $rootScope.getNotificationIconClass;
-    
+    var statusArray = ['REQUEST', 'COMPLETED', 'ASSIGNED', 'CANCELED', 'REJECTED'];
 	$scope.notificationSummary = function() {
 		var target = {id:contextService.userVenues.selectedVenueNumber};
-		RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data1){
-	        angular.forEach(data1.notifications, function(value, key) {
-	          if(value.status == 'REQUEST'){
-	            $rootScope.requestCount += 1;
-	          }
-	          if(value.status == 'COMPLETED'){
-	            $rootScope.comfirmedCount += 1;
-	          }
-	        });
-	    });
+		
 		var promise = RestServiceFactory.NotificationService().getNotificationSummary(target);
 
 		promise.$promise.then(function(data) {
 			$scope.notificationSummaries = data.summary;
 			$scope.totalTypes = 0;
+			$rootScope.unreadMessages = 0;
 			for(var key in $scope.notificationSummaries) {
 				if ($scope.notificationSummaries.hasOwnProperty(key)){
-					$rootScope.unreadMessages += $scope.notificationSummaries[key];
-					$scope.totalTypes++;
+					if($.inArray(key, statusArray) === -1) {
+						$rootScope.unreadMessages += $scope.notificationSummaries[key];
+						$scope.totalTypes++;
+					}
 				}
 			}
 			$rootScope.banquetHallCount = data.summary["BanquetHall"];
@@ -49,7 +43,7 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthServ
 
 	setInterval(function(){
   		$scope.notificationSummary();
-	}, 30000);
+	}, 300000);
 	
 	$rootScope.$on("onLogoChange",function(ev, data){
 		$log.log("Logo has changed!", data);		

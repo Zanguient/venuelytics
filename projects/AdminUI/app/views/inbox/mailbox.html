@@ -1,4 +1,4 @@
-<h3>MailBox</h3>
+<h3>Service Notifications</h3>
 <div ng-controller="MailboxController" class="table-grid table-grid-desktop">
    <div class="col col-md">
       <div class="pr">
@@ -8,7 +8,7 @@
                <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked">
                      <li class="p">
-                        <small class="text-muted">MAILBOXES</small>
+                        <small class="text-muted">INBOXES</small>
                      </li>
                      <li ui-sref-active="active" ng-repeat="fold in folders">
                         <a ui-sref="app.mailbox.folder({folder: fold.folder})">
@@ -22,7 +22,7 @@
                      </li>
                      <li ng-repeat="lable in labels" class="p-h">
                         <a href="#" class="pv-sm">
-                           <span ng-class="'circle-' + lable.color" class="circle"></span>
+                           <span ng-class="'circle-' + lable.color" class="circle circle-lg"></span>
                            <span>{{lable.name}}</span>
                         </a>
                      </li>

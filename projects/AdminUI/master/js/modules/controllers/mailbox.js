@@ -6,19 +6,22 @@
  App.controller('MailboxController', function($scope, colors, $rootScope) {
 
   $scope.folders = [
-    {name: 'Inbox', folder: '', alert:$rootScope.unreadMessages, icon: "fa-inbox",color: 'success',},
-    {name: 'Confirmed', folder: 'COMPLETED', alert: $rootScope.comfirmedCount, icon: "fa-star",color: 'info' },
-    {name: 'OnHold', folder: 'REQUEST', alert: $rootScope.requestCount, icon: "fa-paper-plane-o", color: 'warning'},
+    {name: 'Inbox', folder: 'all', alert:$rootScope.unreadMessages, icon: "fa-inbox",color: 'success',},
+    {name: 'New Requests', folder: 'REQUEST', alert: $rootScope.comfirmedCount, icon: "fa-star",color: 'info' },
+    {name: 'OnHold', folder: 'ONHOLD', alert: $rootScope.requestCount, icon: "fa-paper-plane-o", color: 'warning'},
     {name: 'Bottle', folder: 'Bottle', alert: $rootScope.bottleCount, icon: "fa-edit", color: 'success'},
     {name: 'Private Events',   folder: 'BanquetHall', alert: $rootScope.banquetHallCount, icon: "fa-trash",color: 'success'},
-    {name: 'Others', folder: 'trash', alert: 0,  icon: "fa-trash"}
+   // {name: 'Others', folder: 'trash', alert: 0,  icon: "fa-trash"}
   ];
 
   $scope.labels = [
-    {name: 'RESERVED',     color: 'danger'},
-    {name: 'OPEN',    color: 'success'},
-    {name: 'COMFIRMED',    color: 'info'},
-    {name: 'ONHOLD',  color: 'warning'}
+    {name: 'REQUEST',    color: 'info'},
+    {name: 'CONFIRMED',    color: 'green'},
+    {name: 'ONHOLD',  color: 'warning'},
+    {name: 'COMPLETED',  color: 'success'},
+    {name: 'ASSIGNED',  color: 'pink'},
+    {name: 'REJECTED',  color: 'danger'},
+     {name: 'CANCELED',  color: 'danger'}
   ];
 
   $scope.mail = {
@@ -38,7 +41,13 @@
     $scope.notificationsList = false;
 
     $scope.init = function() {
+
       var target = {id:contextService.userVenues.selectedVenueNumber};
+      if ($scope.folder === 'REQUEST' || $scope.folder === 'ONHOLD') {
+        target.type = $scope.folder;
+      } else if ($scope.folder !== 'all'){
+        target.serviceType = $scope.folder;
+      }
       RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data){
         $scope.notifications = data.notifications;
         if($scope.notifications == ""){
@@ -64,16 +73,14 @@
     }
 
     $scope.getStatusColor = function(status) {
-      if (status === 'RESERVED') {
-        return 'circle-danger ';
-      } else if (status === 'COMFIRMED') {
+       if (status === 'CONFIRMED') {
         return 'circle-success';
       } else if (status === 'CANCELED') {
         return 'circle-danger';
       } else if(status === 'REQUEST') {
-        return 'circle-warning';
+        return 'circle-info';
       } else if(status === 'ASSIGNED') {
-        return 'circle-success';
+        return 'circle-pink';
       } else if(status === 'REJECTED') {
         return 'circle-danger';
       } else if(status === 'COMPLETED') {

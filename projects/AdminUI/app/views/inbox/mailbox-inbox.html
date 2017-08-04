@@ -3,9 +3,9 @@
    <div class="panel-body">
       <p ng-hide="notificationsList == true" ng-if="!(notifications | filter:folder).length" class="panel-body csspinner duo"></p>
       <p ng-show="notificationsList == true" class="lead text-center"> No mails here</p>
-      <table ng-if="(notifications | filter:folder).length" class="table table-hover mb-mails">
+      <table ng-if="(notifications).length" class="table table-hover mb-mails">
          <tbody>
-            <tr ng-repeat="note in notifications | filter:{serviceType:folder}" ng-class="{'mb-mail-active': note.userRead === 'N'}">
+            <tr ng-repeat="note in notifications " ng-class="{'mb-mail-active': note.userRead === 'N'}">
             <!-- <tr ng-repeat="note in notifications | filter:folder" ng-class="{'mb-mail-active': note.userRead === 'N'}"> -->
                <td>
                   <div class="checkbox c-checkbox">

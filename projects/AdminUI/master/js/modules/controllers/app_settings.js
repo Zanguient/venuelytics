@@ -69,16 +69,17 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
 	  for (var itemKey in data){
       if (data.hasOwnProperty(itemKey)) {
   		  var setting =  $scope.channelSettings[itemKey];
+
   		  if (setting != null && typeof setting !== 'undefined') {
   			  setting.value = data[itemKey];
   			  $scope.channelSettings[itemKey] = setting;
-  		  } else if ($scope.timeSettings[itemKey] !== null){
+  		  } else if (typeof $scope.timeSettings[itemKey] !== 'undefined'){
   			  setting = $scope.timeSettings[itemKey];
   			  setting.value = data[itemKey];
-  		  } else if ($scope.generalSettings[itemKey] !== null){
+  		  } else if (typeof  $scope.generalSettings[itemKey] !== 'undefined'){
   			  setting = $scope.generalSettings[itemKey];
   			  setting.value = data[itemKey];
-  		  } else if ($scope.externalSettings[itemKey] !== null){
+  		  } else if (typeof  $scope.externalSettings[itemKey] !== 'undefined'){
   			  setting = $scope.externalSettings[itemKey];
   			  setting.value = data[itemKey];
   		  }
