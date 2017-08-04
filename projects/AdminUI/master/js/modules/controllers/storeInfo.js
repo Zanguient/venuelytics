@@ -6,6 +6,11 @@
  App.controller('StoreController', ['$translate','$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
    function($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout,DataTableService, $compile, ngDialog) {
   'use strict';
+  $scope.switches = {
+    enableBottleService: true,
+    enablePrivateEvents: false
+    
+  };
   $scope.initInfoTable = function() {
     if ( ! $.fn.dataTable || $stateParams.id == 'new') {
       return;

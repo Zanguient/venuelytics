@@ -1,0 +1,11 @@
+<div>
+	<div class="row col-sm-2" ng-repeat="(key, value) in switches">
+		<div class="col-xs-8"><strong>{{key | translate}}</strong></div>
+		<div class="col-xs-4">
+        	<label class="switch switch-md">
+            	<input type="checkbox" ng-model="value"/>
+            	<span></span>
+          	</label>
+      	</div>
+   </div>
+</div>

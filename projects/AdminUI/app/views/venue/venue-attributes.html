@@ -1,16 +1,23 @@
-<span> <a class="btn btn-default pull-right" style="margin-top: -160px;" ng-click="updateAttribute()"><em class="fa fa-plus"></em>Add Attribute</a></span>
-<table id="venue_info_table" class="table table-striped table-hover">
-	<thead>
-		<tr>
-			<th >Name</th>
-			<th >Value</th>
-			<th>Actions</th>
-		</tr>
-	</thead>
-	<tbody>
+<span> <a class="btn btn-default pull-right" style="margin-top: -160px;" ng-click="updateAttribute()"><em class="fa fa-plus"></em>Add / Edit Attribute</a></span>
+<div class="col-sm-12">
+	<label>Advance Attributes</label>
+	<switch-panel switches="switches"></switch-panel>
+</div>
+<div class="col-sm-12">
+	<label>General Attributes</label>
+	<table id="venue_info_table" class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th >Name</th>
+				<th >Value</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
 
-	</tbody>
-</table>
+		</tbody>
+	</table>
+</div>
 
 <script type="text/ng-template" id="modalDialogId">
 	<div class="ngdialog-message">
