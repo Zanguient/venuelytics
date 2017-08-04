@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
+app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
 
             $log.log('Inside Bottle Service Controller.');
 
@@ -17,7 +17,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.init = function() {
                 $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueid = $routeParams.venueid;
-                if(DataShare.amount) {
+                if((DataShare.amount) || ($rootScope.serviceName == 'BottleService')) {
                     DataShare.bottleServiceData = '';
                     DataShare.tableSelection = '';
                     DataShare.selectBottle = '';
@@ -86,6 +86,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.bottleVIPPolicy = response.data["Bottle.BottleVIPPolicy"];
                     self.dressCode =  response.data["Advance.dressCode"];
                     self.enabledPayment =  response.data["Advance.enabledPayment"];
+                    self.reservationFee =  response.data["Bottle.BottleReservationFee"];
                 });
             };
 

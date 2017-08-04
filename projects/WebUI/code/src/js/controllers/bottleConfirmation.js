@@ -168,7 +168,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
 
         self.closeBottleModal = function() {
           $('.modal-backdrop').remove();
-          $location.url('/orderConfirm');
+          $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
         };
             self.init();
     }]);
