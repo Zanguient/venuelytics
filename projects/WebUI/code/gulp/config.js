@@ -28,6 +28,7 @@ module.exports = {
         ],
         jsConcat : [
             'bower_components/jquery/dist/jquery.min.js',
+            'bower_components/jquery-ui/jquery-ui.min.js',
             'bower_components/jquery.cookie/jquery.cookie.js',
 			'bower_components/owl.carousel/dist/owl.carousel.min.js',
 			'bower_components/owl.carousel/docs/assets/vendors/jquery.mousewheel.min.js',
