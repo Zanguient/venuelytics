@@ -35,6 +35,7 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthServ
 			}
 			$rootScope.banquetHallCount = data.summary["BanquetHall"];
 			$rootScope.bottleCount = data.summary["Bottle"];
+			$rootScope.GuestCount = data.summary["GuestList"];
 			
 		});
 	};

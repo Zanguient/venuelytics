@@ -21,18 +21,26 @@
                      <br/>{{selectedObj.vaService.contactZipcode}}</div>
                </div>
             </div>
-            <!-- <div class="col-lg-4 col-xs-6 br pv">
-               <div class="row">
-                  <div class="col-md-2 text-center visible-md visible-lg">
-                     <em class="fa fa-truck fa-4x text-muted"></em>
-                  </div>
-                  <div class="col-md-10">
-                     <h4>{{selectedObj.vaService.reason}}</h4>
-                     <address></address>Basilisa 2145
-                     <br/>Mate, Cliff., 20145
-                     <br/>Moon</div>
+            <div class="col-lg-4 col-xs-6 br pv">
+               <div class="clearfix">
+                  <p class="pull-left">Service Type.</p>
+                  <p class="pull-right mr">{{selectedObj.serviceType}}</p>
                </div>
-            </div> -->
+               <div class="clearfix">
+                  <p class="pull-left">Total Guest</p>
+                  <p class="pull-right mr">{{selectedObj.vaService.noOfGuests}}</p>
+               </div>
+               <div class="clearfix">
+                  <p class="pull-left">Budget</p>
+                  <p ng-if="!(selectedObj.vaService.budget == null || selectedObj.vaService.budget == '')" class="pull-right mr">{{selectedObj.vaService.budget}}</p>
+                   <p ng-if="(selectedObj.vaService.budget == null || selectedObj.vaService.budget == '')" class="pull-right mr">-</p>
+               </div>
+               <div class="clearfix">
+                  <p class="pull-left">Total Ordering Item</p>
+                  <p ng-if="!(selectedObj.vaService.order.totalItems == null || selectedObj.vaService.order.totalItems == '')" class="pull-right mr">{{selectedObj.vaService.order.totalItems}}</p>
+                   <p ng-if="(selectedObj.vaService.order.totalItems == null || selectedObj.vaService.order.totalItems == '')" class="pull-right mr">-</p>
+               </div>
+            </div>
             <div class="clearfix hidden-md hidden-lg">
                <hr/>
             </div>
@@ -48,6 +56,10 @@
                <div class="clearfix">
                   <p class="pull-left">Order Date</p>
                   <p class="pull-right mr">{{selectedObj.vaService.order.orderDate | date : 'MMM d, y'}}</p>
+               </div>
+               <div class="clearfix">
+                  <p class="pull-left">Ordering Date</p>
+                  <p class="pull-right mr">{{selectedObj.vaService.fulfillmentDate | date : 'MMM d, y'}}</p>
                </div>
             </div>
          </div>

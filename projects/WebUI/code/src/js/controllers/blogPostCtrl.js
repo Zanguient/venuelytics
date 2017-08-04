@@ -11,7 +11,7 @@ app.controller('BlogPostController', ['$log', '$scope', '$http', '$location', 'R
     		var self = $scope;
 
         self.init = function() {
-          self.blogPost = DataShare.selectedBlog;
+          self.blogPost = APP_ARRAYS.nightlife;
           $log.info("Readmore blog post:", angular.toJson(self.blogPost));
         };
 

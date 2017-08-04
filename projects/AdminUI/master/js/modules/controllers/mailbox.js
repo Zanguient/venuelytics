@@ -10,7 +10,8 @@
     {name: 'New Requests', folder: 'REQUEST', alert: $rootScope.comfirmedCount, icon: "fa-star",color: 'info' },
     {name: 'OnHold', folder: 'ONHOLD', alert: $rootScope.requestCount, icon: "fa-paper-plane-o", color: 'warning'},
     {name: 'Bottle', folder: 'Bottle', alert: $rootScope.bottleCount, icon: "fa-edit", color: 'success'},
-    {name: 'Private Events',   folder: 'BanquetHall', alert: $rootScope.banquetHallCount, icon: "fa-trash",color: 'success'},
+    {name: 'Private Events',   folder: 'BanquetHall', alert: $rootScope.banquetHallCount, icon: "fa-diamond",color: 'success'},
+    {name: 'Guest List',   folder: 'GuestList', alert: $rootScope.GuestCount, icon: "fa-wpforms",color: 'success'},
    // {name: 'Others', folder: 'trash', alert: 0,  icon: "fa-trash"}
   ];
 

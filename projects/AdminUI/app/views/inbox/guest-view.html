@@ -59,57 +59,11 @@
                   <p class="pull-right mr">{{selectedObj.vaService.reason}}</p>
                </div>
                <div class="clearfix">
-                  <p class="pull-left">Ordered Date</p>
-                  <p class="pull-right mr">{{selectedObj.vaService.order.orderDate | date : 'MMM d, y'}}</p>
-               </div>
-               <div class="clearfix">
                   <p class="pull-left">Ordering Date</p>
                   <p class="pull-right mr">{{selectedObj.vaService.fulfillmentDate | date : 'MMM d, y'}}</p>
                </div>
             </div>
          </div>
-         <div class="table-responsive table-bordered mb-lg">
-            <table class="table">
-               <thead>
-                  <tr>
-                     <th>Order Id</th>
-                     <th>Product Id</th>
-                     <th>Table Name</th>
-                     <th>Description</th>
-                     <th>Quantity</th>
-                     <th>Brand</th>
-                     <th>Price</th>
-                  </tr>
-               </thead> 
-               <tbody ng-repeat ="orderIdem in selectOrderItems">
-                  <tr>
-                     <td ng-if="!(orderIdem.orderId == null || orderIdem.orderId == '')">{{orderIdem.orderId}}</td>
-                     <td ng-if="(orderIdem.orderId == null || orderIdem.orderId == '')">-</td>
-                     <td ng-if="!(orderIdem.productId == null || orderIdem.productId == '')">{{orderIdem.productId}}</td>
-                     <td ng-if="(orderIdem.productId == null || orderIdem.productId == '')">-</td>
-                     <td ng-if="!(orderIdem.name == null || orderIdem.name == '')">{{orderIdem.name}}</td>
-                     <td ng-if="(orderIdem.name == null || orderIdem.name == '')">-</td>
-                     <td ng-if="!(orderIdem.description == null || orderIdem.description == '')">{{orderIdem.description}}</td>
-                     <td ng-if="(orderIdem.description == null || orderIdem.description == '')">-</td>
-                     <td ng-if="!(orderIdem.quantity == null || orderIdem.quantity == '')">{{orderIdem.quantity}}</td>
-                     <td ng-if="(orderIdem.quantity == null || orderIdem.quantity == '')">-</td>
-                     <td ng-if="!(orderIdem.brand == null || orderIdem.brand == '')">{{orderIdem.brand}}</td>
-                     <td ng-if="(orderIdem.brand == null || orderIdem.brand == '')">-</td>
-                     <td ng-if="!(orderIdem.totalPrice == null || orderIdem.totalPrice == '')" class="text-right">{{orderIdem.totalPrice}}</td>
-                     <td ng-if="(orderIdem.totalPrice == null || orderIdem.totalPrice == '')">-</td>
-                  </tr>
-               </tbody>
-            </table>
-         </div>
-         <div class="row">
-         <div class="col-sm-offset-8 col-sm-4 pv">
-            <div class="clearfix">
-               <p class="pull-left h3">GRAND TOTAL</p>
-               <p ng-if="!(selectedObj.vaService.order.totalCost == null || selectedObj.vaService.order.totalCost == '')" class="pull-right mr h3">$ {{selectedObj.vaService.order.totalCost}}</p>
-               <p ng-if="(selectedObj.vaService.order.totalCost == null || selectedObj.vaService.order.totalCost == '')" class="pull-right mr h3">-</p>
-            </div>
-         </div>
-      </div>
          <hr class="hidden-print" />
          <div class="clearfix">
             <button type="button" onclick="window.print();" class="btn btn-info pull-left"> Print</button>

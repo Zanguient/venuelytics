@@ -14,7 +14,6 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
 
         self.readMore = function(blogPost) {
           DataShare.selectedBlog = blogPost;
-          $log.info("Readmore:", angular.toJson(DataShare.selectedBlog));
           $location.url('/blogPost');
         };
 
