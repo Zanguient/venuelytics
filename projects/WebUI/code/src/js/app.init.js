@@ -167,12 +167,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
         })
         .when('/blogPost/bottle-service', {
-            templateUrl: 'blog/bottle-service.html',
+            templateUrl: 'blog-bottle-service.html',
             title: 'Venuelytics-Blog-Post',
             description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
         })
         .when('/blogPost/guest-list', {
-            templateUrl: 'blog/guest-list.html',
+            templateUrl: 'blog-guest-list.html',
             title: 'Venuelytics-Blog-Post',
             description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
         })
