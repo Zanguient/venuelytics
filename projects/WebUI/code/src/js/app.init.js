@@ -182,7 +182,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics-Blog-Post',
             description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
         })
-        .when('/orderConfirm', {
+        .when('/:cityName/orderConfirm/:venueid', {
             templateUrl: 'order-confirm.html',
             title: 'Venuelytics-Order-Confirm',
             controller:'OrderConfirmController',
