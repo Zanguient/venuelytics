@@ -34,7 +34,7 @@ module.exports = {
             'bower_components/bootstrap/dist/js/bootstrap.min.js',
             'bower_components/bootstrap-select/dist/js/bootstrap-select.min.js',
             'bower_components/holderjs/holder.min.js',
-            'bower_components/Slidebars/dist/Slidebars.min.js',
+            'bower_components/Slidebars/dist/slidebars.min.js',
             'bower_components/matchHeight/dist/jquery.matchHeight-min.js',
             'bower_components/prism/prism.js',
             'bower_components/prism/plugins/line-numbers/prism-line-numbers.min.js',
