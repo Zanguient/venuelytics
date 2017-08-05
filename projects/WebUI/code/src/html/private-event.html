@@ -104,14 +104,14 @@
         <div class="col-md-12">
             <div class="checkbox">
                 <label class="check-box fontRegular fontColorForText">
-                    <input type="checkbox" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}</input>
+                    <input type="checkbox" ng-model="private.authorize" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}</input>
                 </label>
             </div>
         </div>
         <div class="col-md-12">
             <div class="checkbox">
                 <label class="check-box fontRegular fontColorForText">
-                    <input type="checkbox" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}</input>
+                    <input type="checkbox" ng-model="private.agree" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}</input>
                 </label>
             </div>
         </div>
@@ -152,7 +152,8 @@
                                                     <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
                                                     <p class="privateEventBox">{{privateEvent.description | limitTo: 70
                                                         }}{{privateEvent.description.length > 70 ? '...' :''}}</p>
-                                                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY"></button>
+                                                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right"
+                                                    novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY"></button>
                                             </article>
                                         </div>
                                     </div>
