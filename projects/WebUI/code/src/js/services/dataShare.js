@@ -10,6 +10,7 @@ app.service('DataShare', function() {
   this.selectedVenue = '';
   this.bottleServiceData = { };
   this.privateEventData = { };
+  this.partyServiceData = { };
   this.guestListData = { };
   this.authBase64Str = { };
   this.bottleZip = '';

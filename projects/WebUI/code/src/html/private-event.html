@@ -37,7 +37,7 @@
                 </tr>
             </table> </center>
 </div>
-<form class="form-horizontal privateFormHeight" name="privateForm" parsley-validate validate-form="" ng-cloak>
+<form class="form-horizontal privateFormHeight" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
     <fieldset>
         <div class="col-md-12 form-group is-empty">
             <input type="text" class="form-control fontBold" id="privateDate" ng-model="private.orderDate" placeholder="{{'reservation.DATE' | translate}}">
@@ -99,19 +99,19 @@
             </select>
         </div>
         <div class="col-md-12 form-group is-empty">
-            <input type="text" class="form-control fontBold" id="instructions" placeholder="{{'reservation.COMMENT' | translate}}" ng-model="private.privateComment" required="required" data-parsley-trigger="change">
+            <input type="text" class="form-control fontBold" id="instructions" placeholder="{{'reservation.COMMENT' | translate}}" ng-model="private.privateComment" required="required" data-parsley-trigger="change" required>
         </div>
         <div class="col-md-12">
             <div class="checkbox">
                 <label class="check-box fontRegular fontColorForText">
-                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
+                    <input type="checkbox" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}</input>
                 </label>
             </div>
         </div>
         <div class="col-md-12">
             <div class="checkbox">
                 <label class="check-box fontRegular fontColorForText">
-                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
+                    <input type="checkbox" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}</input>
                 </label>
             </div>
         </div>

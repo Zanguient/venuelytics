@@ -381,6 +381,8 @@
 		"VENUELYTICS_INC":"VenueLytics Inc - ItzFun Consumer & VenueLytics Business App Version v1.8(Build 18027)"
 	},
 	"reservation": {
+		"PROCESS_FEE": "Process Fee",
+		"PARTY":"Party Packages",
 		"DATE":"Date",
 		"TABLE":"Table",
 		"FIRST_NAME":"First Name",
@@ -415,6 +417,7 @@
 		"PRIVACY_POLICY":"Privacy Policy",
 		"ENQUIRY":"Enquiry",
 		"PRIVATE_DETAILS":"Private Event Details",
+		"PARTY_PACKAGE":"Party Package Details",
 		"VIEW_PRIVATE":"Info Sheet",
 		"VIEW_PRIVATE_EVENTS":"View Private Events",
 		"VIEW_VIDEO":"View Video",
@@ -452,6 +455,7 @@
 		"THANK_YOU":"Thank you",
 		"BACK_RESERVE":"Back To Reservations",
 		"BACK_PRIVATE":"Back To Private Event",
+		"BACK_PARTY":"Back To Party Package",
 		"BACK_GUEST":"Back To GUEST LIST",
 		"DESCRIPTION_MOBILE":"Located in the heart of Silicon Valley, Pure Lounge offers a luxurious, modern, upscale setting for various occasions. Featuring dramatic, classical architecture, ..."
 	},

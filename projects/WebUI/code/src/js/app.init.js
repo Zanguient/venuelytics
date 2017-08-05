@@ -148,6 +148,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics-ConfirmReservation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
+        .when('/confirmPartyPackage/:cityName/:venueid', {
+            templateUrl: 'party-confirm.html',
+            controller: 'PartyConfirmController',
+            title: 'Venuelytics-ConfirmPartyPackage',
+            description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
+        })
         .when('/confirmEvent/:cityName/:venueid', {
             templateUrl: 'private-confirm.html',
             controller: 'PrivateConfirmController',
@@ -194,6 +200,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller:'ConfirmReservationController',
             description: 'Venuelytics - a real time venue experience platform for bottle payment'
         })
+        .when('/:cityName/partyPackagePayment/:venueid', {
+            templateUrl: 'party-payment.html',
+            title: 'Venuelytics-Bottle-Payment',
+            controller:'PartyConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for bottle payment'
+        })
         .when('/:cityName/paymentSuccess/:venueid', {
             templateUrl: 'payment-success.html',
             title: 'Venuelytics-Payment-Success',
@@ -204,6 +216,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'private-success.html',
             title: 'Venuelytics-Private-Success',
             controller:'PrivateConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for private success'
+        })
+        .when('/:cityName/party-success/:venueid', {
+            templateUrl: 'party-success.html',
+            title: 'Venuelytics-Private-Success',
+            controller:'PartyConfirmController',
             description: 'Venuelytics - a real time venue experience platform for private success'
         })
         .when('/:cityName/guest-success/:venueid', {
