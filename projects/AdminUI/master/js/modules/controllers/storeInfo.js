@@ -6,11 +6,36 @@
  App.controller('StoreController', ['$translate','$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
    function($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout,DataTableService, $compile, ngDialog) {
   'use strict';
-  $scope.switches = {
-    enableBottleService: true,
-    enablePrivateEvents: false
-    
+  
+  $scope.advanceSwitches = {
+    "Advance.BottleService.enable" : false,
+    "Advance.BookBanqetHall.enable": false,
+    "Advance.tableService.enable": false,
+    "Advance.DrinksService.enable": false,
+     "Advance.FoodRequest.enable": false,
+    "Advance.BookKaroakeRoom.enable": false,
+    "Advance.Bowling.enable": false,
+    "Advance.ClickerOption.enable": false,
+    "Advance.deals.enable": false,
+    "Advance.DJRequest.enable": false,
+    "Advance.enabledPayment": false,
+    "Advance.FastPass.enable": false,
+    "Advance.game.enable": false,
+    "Advance.LostFacus.enable": false,
+    "Advanced.tournaments.enable": false,
+    "Advance.GuestList.enable": false,
+    "Advance.KarokeRequest.enable": false 
   };
+  
+  $scope.onUpdate = function() {
+    var payload = {};
+    angular.forEach($scope.advanceSwitches, function(v, k, o) {
+      $scope.data.info[k] = v ? 'Y' : 'N';
+      payload[k] = v ? 'Y' : 'N';
+    });
+    $scope.updateServices(payload);
+  };
+
   $scope.initInfoTable = function() {
     if ( ! $.fn.dataTable || $stateParams.id == 'new') {
       return;
@@ -40,7 +65,11 @@
     var table = $('#venue_info_table').DataTable();
 
     $.each($scope.data.info, function (k,v) {
-      table.row.add([$translate.instant(k), v, k]);
+      if ($scope.advanceSwitches.hasOwnProperty(k)) {
+        $scope.advanceSwitches[k] = (v == 'Y' ? true : false);
+      } else {
+        table.row.add([$translate.instant(k), v, k]);
+      }
     });
     table.draw();
   };
@@ -54,24 +83,7 @@
     $scope.bowlingType = (data.venueTypeCode & 128) > 0 ? 'Y' : 'N';
     $scope.karaokeType = (data.venueTypeCode & 256) > 0 ? 'Y' : 'N';
   }
-  if($stateParams.id != 'new') {
-    var promise = RestServiceFactory.VenueService().get({id:$stateParams.id});
-    promise.$promise.then(function(data) {
-      data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
-      $scope.imageUrl = data.imageUrls;
-      $scope.venueTypeCodes(data);
-      $scope.data = data; 
-      $scope.initInfoTable();
-    });
-  } else {
-    var data = {};
-    $scope.imageUrl = [];
-    data.country = "USA";
-    data.venueTypeCode = 0;
-    $scope.venueTypeCodes(data);
-    $scope.data = data;
-    $scope.initInfoTable();
-  }
+  
   $scope.isVenueType = function(code) {
   	if (typeof $scope.venueType == 'undefined'){
   		return true;
@@ -182,4 +194,25 @@
       }
     });
   };
+
+  $timeout(function () {
+    if($stateParams.id != 'new') {
+      var promise = RestServiceFactory.VenueService().get({id:$stateParams.id});
+      promise.$promise.then(function(data) {
+        data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
+        $scope.imageUrl = data.imageUrls;
+        $scope.venueTypeCodes(data);
+        $scope.data = data; 
+        $scope.initInfoTable();
+      });
+    } else {
+      var data = {};
+      $scope.imageUrl = [];
+      data.country = "USA";
+      data.venueTypeCode = 0;
+      $scope.venueTypeCodes(data);
+      $scope.data = data;
+      $scope.initInfoTable();
+    }
+  });
 }]);
