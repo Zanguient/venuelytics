@@ -37,7 +37,7 @@
                 </tr>
             </table> </center>
 </div>
-<form class="form-horizontal privateFormHeight" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
+<form class="form-horizontal privateFormHeight" name="privateForm" parsley-validate validate-form="" ng-cloak>
     <fieldset>
         <div class="col-md-12 form-group is-empty">
             <input type="text" class="form-control fontBold" id="privateDate" ng-model="private.orderDate" placeholder="{{'reservation.DATE' | translate}}">
@@ -99,19 +99,19 @@
             </select>
         </div>
         <div class="col-md-12 form-group is-empty">
-            <input type="text" class="form-control fontBold" id="instructions" placeholder="{{'reservation.COMMENT' | translate}}" ng-model="private.privateComment" required="required" data-parsley-trigger="change" required>
+            <input type="text" class="form-control fontBold" id="instructions" placeholder="{{'reservation.COMMENT' | translate}}" ng-model="private.privateComment" required="required" data-parsley-trigger="change">
         </div>
         <div class="col-md-12">
             <div class="checkbox">
                 <label class="check-box fontRegular fontColorForText">
-                    <input type="checkbox" ng-model="private.authorize" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}</input>
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
                 </label>
             </div>
         </div>
         <div class="col-md-12">
             <div class="checkbox">
                 <label class="check-box fontRegular fontColorForText">
-                    <input type="checkbox" ng-model="private.agree" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}</input>
+                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
                 </label>
             </div>
         </div>
@@ -152,8 +152,7 @@
                                                     <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
                                                     <p class="privateEventBox">{{privateEvent.description | limitTo: 70
                                                         }}{{privateEvent.description.length > 70 ? '...' :''}}</p>
-                                                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right"
-                                                    novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY"></button>
+                                                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY"></button>
                                             </article>
                                         </div>
                                     </div>

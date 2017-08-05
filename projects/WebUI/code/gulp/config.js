@@ -7,7 +7,7 @@ module.exports = {
     navbarClass: 'ms-navbar-white',
     navbarMode: false,
     allColors: false,
-    compress: false,
+    compress: true,
 
     themes : ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey'],
     shines : ['300', '400', '500', '600', '700', '800'],
@@ -81,7 +81,7 @@ module.exports = {
             'bower_components/bootstrap-select/dist/css/bootstrap-select.min.css',
             'bower_components/font-awesome/css/font-awesome.min.css',
             'bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css',
-            'bower_components/Slidebars/dist/Slidebars.min.css',
+            'bower_components/Slidebars/dist/slidebars.min.css',
             'bower_components/prism-theme-one-dark/prism-onedark.css',
             'bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css',
             'bower_components/Yamm3/yamm/yamm.css',

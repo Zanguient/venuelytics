@@ -14,17 +14,27 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.bottleMinimum = [];
             self.init = function() {
                 self.venueid = $routeParams.venueid;
+                self.tabParams = $routeParams.tabParam;
                 if($rootScope.serviceName == 'GuestList') {
                     DataShare.guestListData = '';
                 }
                 if($rootScope.serviceName == 'PrivateEvent') {
                     DataShare.privateEventData = '';
                 }
+                if ((self.venueid == 70008) || (self.venueid == 170637)) {
+                    if(self.tabParams === 'guest-list') {
+                      self.partyFlag = false;
+                    } else {
+                      self.partyFlag = true;
+                    }
+                }
+                if (self.venueid == 170639) {
+                    self.bachelorFlag = true;
+                }
                 self.guest = DataShare.guestListData;
                 self.private = DataShare.privateEventData;
                 self.totalGuest = DataShare.totalNoOfGuest;
                 self.restoreTab = DataShare.tab;
-                self.tabParams = $routeParams.tabParam;
                 if(DataShare.selectBottle) {
                     self.bottleMinimum = DataShare.selectBottle;
                 }
@@ -35,8 +45,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                     self.bottleService();
                 } else if(self.tabParams === 'private-events') {
                     self.event();
-                } else if(self.tabParams === 'guest-list'){
+                } else if(self.tabParams === 'guest-list') {
                     self.glist();
+                } else if(self.tabParams === 'bachelor-party') {
+                    self.bachelorFunction();
+                } else if(self.tabParams === 'party-packages') {
+                    self.partyFunction();
                 } else {
                     self.bottleService();
                 }
@@ -54,44 +68,109 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
             /*For bottle service tab highlight*/
             self.bottleService = function() {
+              self.myClass = 'partBackgroundNotSelected';
+              self.tabButtonColor = 'partyBackgroundButtonNotSelected';
+              $log.info("Inside bottle function:");
                 $("#privateEventTab").css('background-color', APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color', APP_COLORS.silver);
                 $('#glist').css('color', APP_COLORS.fruitSalad);
                 $("#bottleTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#bottle').css('color', 'white');
+                $("#bachelorEventTab").css('background-color',APP_COLORS.silver);
+                $('#bachelor').css('color', APP_COLORS.fruitSalad);
+                $("#partyEventTab").css('background-color',APP_COLORS.silver);
+                $('#party').css('color', APP_COLORS.fruitSalad);
                 self.bottleServiceTab = true;
                 self.eventServiceTab = false;
                 self.guestServiceTab = false;
+                self.partyPackageTab = false;
+                self.bachelorPartyTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bottle-service");
              };
 
             /*For private event service tab highlight*/
              self.event = function() {
+               self.myClass = 'partBackgroundNotSelected';
+               self.tabButtonColor = 'partyBackgroundButtonNotSelected';
+               $log.info("Inside event function:");
                 $("#privateEventTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#private').css('color', 'white');
                 $("#guestlistTab").css('background-color',APP_COLORS.silver);
                 $('#glist').css('color', APP_COLORS.fruitSalad);
                 $("#bottleTab").css('background-color',APP_COLORS.silver);
                 $('#bottle').css('color', APP_COLORS.fruitSalad);
+                $("#bachelorEventTab").css('background-color',APP_COLORS.silver);
+                $('#bachelor').css('color', APP_COLORS.fruitSalad);
+                $("#partyEventTab").css('background-color',APP_COLORS.silver);
+                $('#party').css('color', APP_COLORS.fruitSalad);
                 self.bottleServiceTab = false;
                 self.eventServiceTab = true;
                 self.guestServiceTab = false;
+                self.partyPackageTab = false;
+                self.bachelorPartyTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/private-events");
              };
 
             /*For guest list service tab highlight*/
              self.glist = function() {
+               $log.info("Inside glist function:");
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#glist').css('color', 'white');
                 $("#bottleTab").css('background-color',APP_COLORS.silver);
                 $('#bottle').css('color', APP_COLORS.fruitSalad);
+                $("#bachelorEventTab").css('background-color',APP_COLORS.silver);
+                $('#bachelor').css('color', APP_COLORS.fruitSalad);
+                $("#partyEventTab").css('background-color',APP_COLORS.silver);
+                $('#party').css('color', APP_COLORS.fruitSalad);
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
                 self.guestServiceTab = true;
+                self.partyPackageTab = false;
+                self.bachelorPartyTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/guest-list");
+             };
+
+             /*For bachelor party service tab highlight*/
+             self.bachelorFunction = function() {
+               $log.info("Inside bachelor function:");
+                $("#privateEventTab").css('background-color',APP_COLORS.silver);
+                $('#private').css('color', APP_COLORS.fruitSalad);
+                $("#bachelorEventTab").css('background-color',APP_COLORS.fruitSalad);
+                $('#bachelor').css('color', 'white');
+                $("#bottleTab").css('background-color',APP_COLORS.silver);
+                $('#bottle').css('color', APP_COLORS.fruitSalad);
+                $("#guestlistTab").css('background-color',APP_COLORS.silver);
+                $('#glist').css('color', APP_COLORS.fruitSalad);
+                $("#partyEventTab").css('background-color',APP_COLORS.silver);
+                $('#party').css('color', APP_COLORS.fruitSalad);
+                self.bottleServiceTab = false;
+                self.eventServiceTab = false;
+                self.guestServiceTab = false;
+                self.partyPackageTab = false;
+                self.bachelorPartyTab = true;
+                self.partyPackageTab = false;
+                self.bachelorPartyTab = true;
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bachelor-party");
+             };
+
+             /*For party packages service tab highlight*/
+             self.partyFunction = function() {
+               $log.info("Inside party function:");
+                $("#privateEventTab").css('background-color',APP_COLORS.silver);
+                $('#private').css('color', APP_COLORS.fruitSalad);
+                $("#bottleTab").css('background-color',APP_COLORS.silver);
+                $('#bottle').css('color', APP_COLORS.fruitSalad);
+                self.myClass = 'partyBackgroundSelected';
+                self.tabButtonColor = 'partyBackgroundButtonSelected';
+                self.bottleServiceTab = false;
+                self.eventServiceTab = false;
+                self.guestServiceTab = false;
+                self.partyPackageTab = true;
+                self.bachelorPartyTab = false;
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/party-packages");
              };
 
             self.init();

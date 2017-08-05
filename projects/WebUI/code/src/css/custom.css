@@ -57,6 +57,22 @@ select {
   background-color: #FAFAFA
 }
 
+.partyBackgroundSelected {
+  background-color: #4CAF50;
+}
+
+.partyBackgroundButtonSelected {
+  color: white;
+}
+
+.partyBackgroundButtonNotSelected {
+  color: #4CAF50;
+}
+
+.partBackgroundNotSelected {
+  background-color: #CCCBCC;
+}
+
 .cardHeight {
   height:550px;
 }
@@ -109,6 +125,16 @@ select {
 }
 
 #private {
+  white-space: normal;
+  border-right:2px solid #ffffff;
+}
+
+#bachelor {
+  white-space: normal;
+  border-right:2px solid #ffffff;
+}
+
+#party {
   white-space: normal;
   border-right:2px solid #ffffff;
 }

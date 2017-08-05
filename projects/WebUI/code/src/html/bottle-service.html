@@ -1,5 +1,5 @@
 <div  ng-controller="BottleServiceController">
-<form class="form-horizontal" parsley-validate validate-form="">
+<form class="form-horizontal" parsley-validate validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>
     <fieldset>
         <div class="col-md-10 form-group is-empty">
             <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate" placeholder="{{'reservation.DATE' | translate}}">
@@ -223,18 +223,21 @@
         <div class="col-md-10">
             <div class="checkbox">
                 <label class="check-box fontRegular table-font">
-                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
+                    <input type="checkbox" ng-model="bottle.authorize" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AUTHORIZE" | translate}} {{venueName}}.</input>
                 </label>
             </div>
         </div>
         <div class="col-md-10">
             <div class="checkbox">
                 <label class="check-box fontRegular table-font fontColorForText">
-                    <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
+                    <input type="checkbox" ng-model="bottle.agree" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}</input>
                 </label>
             </div>
         </div>
-        <a href="javascript:void(0)" class="btn btn-raised btn-success chk-button fontXLarge" ng-click="confirmBottleService()"><font size="5"> {{"reservation.CHECKOUT" | translate}} </font><div class="ripple-container"></div></a>
+        <button class="btn btn-raised btn-success chk-button fontXLarge" type="submit" novalidate="novalidate" ng-disabled="bottleForm.$invalid">
+          <font size="5">{{"reservation.CHECKOUT" | translate}}</font>
+          <div class="ripple-container"></div>
+        </button>
     </fieldset>
 </form> <br/>
 
