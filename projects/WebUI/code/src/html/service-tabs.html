@@ -43,13 +43,25 @@
                                                 <br class="showInMobile"><span class="fontRegular"><strong>{{"reservation.BOTTLE_SERVICE" | translate}}</strong></span>
                                             </button>
                                         </div>
+                                        <div id="bachelorEventTab" class="btn-group" class="reservation-tab" ng-if="bachelorFlag == true">
+                                            <button id="bachelor" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="bachelorFunction()">
+                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
+                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.BACHELOR" | translate}}</strong></span>
+                                            </button>
+                                        </div>
+                                        <div id="partyEventTab" class="btn-group" class="reservation-tab" ng-if="partyFlag == true">
+                                            <button id="party" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="partyFunction()">
+                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
+                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.PARTY" | translate}}</strong></span>
+                                            </button>
+                                        </div>
                                         <div id="privateEventTab" class="btn-group" class="reservation-tab">
                                             <button id="private" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="event()">
                                                 <img ng-src="assets/img/private.png" class="reservation-icon"></img>
                                                 <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.EVENTS" | translate}}</strong></span>
                                             </button>
                                         </div>
-                                        <div id="guestlistTab" class="btn-group" class="reservation-tab">
+                                        <div id="guestlistTab" class="btn-group" class="reservation-tab" ng-hide="((partyFlag == true)||(bachelorFlag == true))">
                                             <button id="glist" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="glist()">
                                                 <img ng-src="assets/img/guest.png" class="reservation-icon"></img>
                                                 <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.GUEST" | translate}}</strong></span>
@@ -69,8 +81,15 @@
                             </div>
 
                             <div ng-show="eventServiceTab">
-                                <div ng-include="'private-event.html'">
-                                </div>
+                                <div ng-include="'private-event.html'"></div>
+                            </div>
+
+                            <div ng-show="partyPackageTab">
+                                <div ng-include="'party-packages.html'"></div>
+                            </div>
+
+                            <div ng-show="bachelorPartyTab">
+                                <div ng-include="'bachelor-party.html'"></div>
                             </div>
                         </div>
 

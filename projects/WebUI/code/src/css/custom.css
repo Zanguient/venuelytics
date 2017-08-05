@@ -113,6 +113,16 @@ select {
   border-right:2px solid #ffffff;
 }
 
+#bachelor {
+  white-space: normal;
+  border-right:2px solid #ffffff;
+}
+
+#party {
+  white-space: normal;
+  border-right:2px solid #ffffff;
+}
+
 #glist {
   white-space: normal;
 }
