@@ -19,11 +19,11 @@
     "undef": true,
     "unused": false,
     "strict": true,
-    "maxparams": 10,
+    "maxparams": 15,
     "maxdepth": 5,
-    "maxstatements": 40,
+    "maxstatements": 80,
     "maxcomplexity": 8,
-    "maxlen": 160,
+    "maxlen": 200,
 
     "asi": false,
     "boss": false,
@@ -62,6 +62,7 @@
 		"jQuery": false,
 		"WOW": false,
 		"app": false,
-		"iFrameResize": false
+		"iFrameResize": false,
+		"moment": false
     }
 }

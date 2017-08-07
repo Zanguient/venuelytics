@@ -123,9 +123,10 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
                 locale: 'auto',
                 token: function(token) {
-                    if(token.card.country === 'INR') 
+                    if(token.card.country === 'INR') {
                         currencyType = 'INR';
                     }
+                    
                     
                     taxValue = self.taxAmount.toFixed(2);
                     

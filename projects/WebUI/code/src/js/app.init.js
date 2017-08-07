@@ -251,7 +251,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
 }]).run(['$location', '$rootScope',function($location, $rootScope) {
 
     var hostName = $location.host();
-    if (typeof hostName == 'undefined') {
+    if (typeof hostName === 'undefined') {
         hostName = '';
     }
     hostName = hostName.toLowerCase();
@@ -268,7 +268,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
                 $rootScope.description = current.$$route.description;
             }
         }
-        if (typeof previous == 'undefined' && current.templateUrl  === 'home.html') {
+        if (typeof previous === 'undefined' && current.templateUrl  === 'home.html') {
              $location.path( defaultPage );
         }
     });

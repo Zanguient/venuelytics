@@ -7,12 +7,12 @@
         <div class="col-md-10 form-group is-empty" ng-if="tableSelection">
             Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
         </div>
-        <div class="col-md-10 form-group is-empty" ng-if="img.pic_url">
+        <div class="col-md-10 form-group is-empty" ng-if="img.pictureURL">
          <div class="table-map-info"
-                    ng-if="img.pic_url">
+                    ng-if="img.pictureURL">
                     <div id="mapSection">
                     <center>
-                    <div ng-if="img.pic_url">
+                    <div ng-if="img.pictureURL">
                         <table>
                             <tr>
                                 <td>
@@ -36,7 +36,7 @@
                     </div>
                 </center>
                 <center>
-                    <img id="imagemap" ng-src="{{img.pic_url}}" usemap="#ImgExam" class="map img-responsive">
+                    <img id="imagemap" ng-src="{{img.pictureURL}}" usemap="#ImgExam" class="map img-responsive">
                 </center>
                     <map name="ImgExam">
                             <area id="{{venueImageMapData[0].elements[$index].id}}"
@@ -50,7 +50,7 @@
                 </div>
                 </div>
 
-                <div id="mapSection" ng-if="!img.pic_url" class="form-group"
+                <div id="mapSection" ng-if="!img.pictureURL" class="form-group"
                     ng-repeat="table in venueImageMapData[0].elements">
                     <div class="col-md-12 col-sm-12 tableItem">
                         <div class="col-md-3 col-sm-4">

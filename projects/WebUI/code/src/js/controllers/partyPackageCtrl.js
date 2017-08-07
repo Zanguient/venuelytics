@@ -41,7 +41,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 });
                 self.imageParam = $location.search().i;
                 if(self.imageParam === 'Y') {
-                    self.venueImage = response.imageUrls[0].largeUrl;
+                    self.venueImage = self.detailsOfVenue.imageUrls[0].largeUrl;
                 }
             };
 

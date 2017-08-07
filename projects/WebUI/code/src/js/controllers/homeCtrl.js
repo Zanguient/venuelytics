@@ -127,7 +127,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
                      "utmSource" : "dev.webui.venuelytics.com",
                      "utmCampaign" :"homepage",
                      "utmMedium": "subscribe"
-                }
+                };
 
                 AjaxService.sendSubscriptionMail(subscribeEmail).then(function(response) {
                     $('#subscribeModal').modal('show');

@@ -23,8 +23,8 @@ app.service('DataShare', function() {
   this.selectedBlog = {};
   this.enablePayment = '';
   this.imageMapping={
-      "pic_url": "",
-      "pic_url_thumbnail":"",
+      "pictureURL": "",
+      "pictureURLThumbnail":"",
           "maps": []
   };
   this.elements=[];
