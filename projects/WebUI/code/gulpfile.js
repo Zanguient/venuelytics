@@ -434,7 +434,7 @@ gulp.task('aws:deploy',['dist:clean'],function() {
 
     // define custom headers 
     var headers = {
-        'Cache-Control': 'max-age=315360000, no-transform, public'
+       // 'Cache-Control': 'max-age=315360000, no-transform, public'
             // ... 
     };
 
