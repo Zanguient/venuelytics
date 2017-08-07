@@ -3,8 +3,8 @@
 
  =========================================================*/
 
-App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthService','$http', '$state','$log','$rootScope', 'ContextService', 'AUTH_EVENTS',
-                                         function($scope, RestServiceFactory, AuthService, $http, $state, $log, $rootScope, contextService, AUTH_EVENTS) {
+App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthService','Session','$http', '$state','$log','$rootScope', 'ContextService', 'AUTH_EVENTS',
+                                         function($scope, RestServiceFactory, AuthService, Session,$http, $state, $log, $rootScope, contextService, AUTH_EVENTS) {
     'use strict';
 	$scope.appLogo = "app/img/itzfun_logo.png";
 	$scope.appLogoSingle = "app/img/itzfun_logo.png";
@@ -14,6 +14,7 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthServ
 	$rootScope.unreadMessages = 0;
 	$rootScope.requestCount = 0;
     $rootScope.comfirmedCount = 0;
+    $scope.session = Session;
 	$scope.getNotificationIconClass = $rootScope.getNotificationIconClass;
     var statusArray = ['REQUEST', 'COMPLETED', 'ASSIGNED', 'CANCELED', 'REJECTED'];
 	$scope.notificationSummary = function() {

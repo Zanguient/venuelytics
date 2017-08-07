@@ -116,10 +116,10 @@ App.controller('ApplicationSettingsController', ['$scope', 'RestServiceFactory',
   	RestServiceFactory.AppSettingsService().save(arr, function(success){
   		
   		$log.log("success: ",data);
-  		  if($scope.islogoChanged){
-  			//  $rootScope.$broadcast("onLogoChange",{"url":$scope.generalSettings.companyLogoUrl.value});
-  			  $scope.islogoChanged=false;
-  		  }
+		  if($scope.islogoChanged){
+			//  $rootScope.$broadcast("onLogoChange",{"url":$scope.generalSettings.companyLogoUrl.value});
+			  $scope.islogoChanged=false;
+		  }
   		
   	},function(error){
   		if (typeof error.data !== 'undefined') { 

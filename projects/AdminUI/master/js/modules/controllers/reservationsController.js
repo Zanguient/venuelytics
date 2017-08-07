@@ -191,7 +191,7 @@ $scope.initCalendar = function () {
               var arc = JSON.parse("["+t.coordinates+"]");
               var elem = {};
               elem.name = t.TableName;
-              elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
+              elem.id =  $scope.selectedVenueMap.productsByName[elem.name].sku;
               elem.coords = [];
               elem.coords[0] = arc[0];
               elem.coords[1] = arc[1]; 
@@ -207,6 +207,9 @@ $scope.initCalendar = function () {
         RestServiceFactory.ReservationService().getForDate({id: $scope.venueNumber, date: $scope.selectedDate.format("YYYYMMDD")}, function(data){
           angular.forEach(data, function(obj, key) {
             $scope.reservationData[obj.productId] = obj;
+            if (typeof obj.product !== 'undefined') {
+              $scope.reservationData[obj.product.sku] = obj;
+            }
           });
           $scope.paintVenueMapItems();
           $scope.loading = false;  

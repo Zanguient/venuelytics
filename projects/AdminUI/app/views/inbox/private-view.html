@@ -1,8 +1,7 @@
 <div ng-controller="MailViewController" class="panel panel-default">
    <div class="panel">
       <div class="panel-body">
-         <button type="button" class="pull-right btn btn-default btn-sm">Copy this invoice</button>
-         <h3 class="mt0">{{selectedObj.serviceType}}</h3>
+         <h3 class="mt0"><em ng-class="getNotificationIconClass(selectedObj.serviceType)" ></em> {{selectedObj.serviceType | translate}}</h3>
          <hr/>
          <div class="row mb-lg">
             <div class="col-lg-4 col-xs-6 br pv">
@@ -23,8 +22,20 @@
             </div>
             <div class="col-lg-4 col-xs-6 br pv">
                <div class="clearfix">
-                  <p class="pull-left">Service Type.</p>
+                  <p class="pull-left">Service Type</p>
                   <p class="pull-right mr">{{selectedObj.serviceType}}</p>
+               </div>
+               <div class="clearfix">
+                  <p class="pull-left">Status</p>
+                  <p class="pull-right mr">{{selectedObj.status}}</p>
+               </div>
+               <div class="clearfix">
+                  <p class="pull-left">Event Type</p>
+                  <p class="pull-right mr">{{selectedObj.vaService.reason}}</p>
+               </div>
+               <div class="clearfix">
+                  <p class="pull-left">Status</p>
+                  <p class="pull-right mr">{{selectedObj.status}}</p>
                </div>
                <div class="clearfix">
                   <p class="pull-left">Total Guest</p>
@@ -50,15 +61,11 @@
                   <p class="pull-right mr">{{selectedObj.id}}</p>
                </div>
                <div class="clearfix">
-                  <p class="pull-left">Type</p>
-                  <p class="pull-right mr">{{selectedObj.vaService.reason}}</p>
-               </div>
-               <div class="clearfix">
-                  <p class="pull-left">Order Date</p>
+                  <p class="pull-left">Ordered Date</p>
                   <p class="pull-right mr">{{selectedObj.vaService.order.orderDate | date : 'MMM d, y'}}</p>
                </div>
                <div class="clearfix">
-                  <p class="pull-left">Ordering Date</p>
+                  <p class="pull-left">Fulfillment Date</p>
                   <p class="pull-right mr">{{selectedObj.vaService.fulfillmentDate | date : 'MMM d, y'}}</p>
                </div>
             </div>
@@ -71,7 +78,6 @@
                      <th>Product Id</th>
                      <th>Description</th>
                      <th>Name</th>
-                     <th>Brand</th>
                      <th class="text-right">Price</th>
                   </tr>
                </thead>
@@ -85,8 +91,6 @@
                      <td ng-if="orderIdem.description == null || orderIdem.description == ''">-</td>
                      <td ng-if="!(orderIdem.name == null || orderIdem.name == '')">{{orderIdem.name}}</td>
                      <td ng-if="orderIdem.name == null || orderIdem.name == ''">-</td>
-                     <td ng-if="!(orderIdem.brand == null || orderIdem.brand == '')">{{orderIdem.brand}}</td>
-                     <td ng-if="orderIdem.brand == null || orderIdem.brand == ''">-</td>
                      <td ng-if="!(orderIdem.totalPrice == null || orderIdem.totalPrice == '')" class="text-right">{{orderIdem.totalPrice}}</td>
                      <td ng-if="orderIdem.totalPrice == null || orderIdem.totalPrice == ''">-</td>
                   </tr>

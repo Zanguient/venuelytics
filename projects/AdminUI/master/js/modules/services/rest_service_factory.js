@@ -81,7 +81,7 @@
  			NotificationService: function () {
  				return $resource(urlTemplate.replace("@context", "notifications"), {}, {
  					getActiveNotifications : {method: 'GET',  params: { id: '@id' }, 
- 					url: urlTemplate.replace("@context", "notifications")+"/active?from=100"},
+ 					url: urlTemplate.replace("@context", "notifications")+"/active"},
  					getUnreadNotificationCount : {method: 'GET',  params: { id: '@id' }, 
  					url: urlTemplate.replace("@context", "notifications")+"/count"},
  					getNotificationSummary : {method: 'GET', params: { id: '@id' }, 

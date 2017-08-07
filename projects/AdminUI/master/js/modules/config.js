@@ -233,7 +233,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','codemirror', 'codemirror-plugins', 'moment', 'taginput','inputmask','chosen', 
-            'slider', 'ngWig', 'filestyle')
+            'slider', 'filestyle')
     })
      .state('app.reservations', {
         url: '/reservations',

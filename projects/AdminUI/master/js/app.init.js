@@ -52,10 +52,12 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                /* if (typeof(toState) !== 'undefined'){
                       $templateCache.remove(toState.templateUrl);
                 }*/
-            	 if (typeof(toState) !== 'undefined' && toState.name !== 'page.login'){
-                   
-	                 
-	                  
+
+            	  if (typeof(toState) !== 'undefined' && toState.name !== 'page.login'){
+                  $rootScope.hideNavVenueDropdown = false;
+                  if (toState.name == 'app.storeedit' || toState.name == 'app.stores') {
+                    $rootScope.hideNavVenueDropdown = true;
+                  }       
 	            	  var authorizedRoles = toState.data.authorizedRoles;
 	            	  if (AuthService.needAuthorization(authorizedRoles) && !AuthService.isAuthenticated()) {
 	        	    	  // user is not logged in
@@ -67,7 +69,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
 	              	         $rootScope.$broadcast(AUTH_EVENTS.notAuthorized, 'User is not authorized to access this resource.');  
 	              	         event.preventDefault();
 	            	  }
-                  }
+                }
               });
 				
               // Scope Globals

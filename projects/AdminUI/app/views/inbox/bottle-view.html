@@ -1,8 +1,7 @@
 <div ng-controller="MailViewController" class="panel panel-default">
    <div class="panel">
       <div class="panel-body">
-         <button type="button" class="pull-right btn btn-default btn-sm">Copy this invoice</button>
-         <h3 class="mt0">{{selectedObj.serviceType}}</h3>
+         <h3 class="mt0"><em ng-class="getNotificationIconClass(selectedObj.serviceType)" ></em> {{selectedObj.serviceType | translate}}</h3>
          <hr/>
          <div class="row mb-lg">
             <div class="col-lg-4 col-xs-6 br pv">
@@ -23,8 +22,16 @@
             </div>
             <div class="col-lg-4 col-xs-6 br pv">
                <div class="clearfix">
-                  <p class="pull-left">Service Type.</p>
+                  <p class="pull-left">Service Type</p>
                   <p class="pull-right mr">{{selectedObj.serviceType}}</p>
+               </div>
+               <div class="clearfix">
+                  <p class="pull-left">Status</p>
+                  <p class="pull-right mr">{{selectedObj.status}}</p>
+               </div>
+               <div class="clearfix">
+                  <p class="pull-left">Event Type</p>
+                  <p class="pull-right mr">{{selectedObj.vaService.reason}}</p>
                </div>
                <div class="clearfix">
                   <p class="pull-left">Budget</p>
@@ -32,18 +39,8 @@
                    <p ng-if="(selectedObj.vaService.budget == null || selectedObj.vaService.budget == '')" class="pull-right mr">-</p>
                </div>
                <div class="clearfix">
-                  <p class="pull-left">Total Male</p>
-                  <p ng-if="!(selectedObj.vaService.noOfMaleGuests == null || selectedObj.vaService.noOfMaleGuests == '')" class="pull-right mr">{{selectedObj.vaService.noOfMaleGuests}}</p>
-                   <p ng-if="(selectedObj.vaService.noOfMaleGuests == null || selectedObj.vaServicenoOfMaleGuests == '')" class="pull-right mr">-</p>
-               </div>
-               <div class="clearfix">
-                  <p class="pull-left">Total Female</p>
-                  <p ng-if="!(selectedObj.vaService.noOfFemaleGuests == null || selectedObj.vaService.noOfFemaleGuests == '')" class="pull-right mr">{{selectedObj.vaService.noOfFemaleGuests}}</p>
-                   <p ng-if="(selectedObj.vaService.noOfFemaleGuests == null || selectedObj.vaService.noOfFemaleGuests == '')" class="pull-right mr">-</p>
-               </div>
-               <div class="clearfix">
-                  <p class="pull-left">Total Guest</p>
-                  <p class="pull-right mr">{{selectedObj.vaService.noOfGuests}}</p>
+                  <p class="pull-left">Total Guest (Males / Females)</p>
+                  <p class="pull-right mr">{{selectedObj.vaService.noOfGuests}} <span ng-show="selectedObj.vaService.noOfMaleGuests + selectedObj.vaService.noOfFemaleGuests > 0">({{selectedObj.vaService.noOfMaleGuests / selectedObj.vaService.noOfFemaleGuests}})</span></p>
                </div>
             </div>
             <div class="clearfix hidden-md hidden-lg">
@@ -54,16 +51,13 @@
                   <p class="pull-left">INVOICE NO.</p>
                   <p class="pull-right mr">{{selectedObj.id}}</p>
                </div>
-               <div class="clearfix">
-                  <p class="pull-left">Event Type</p>
-                  <p class="pull-right mr">{{selectedObj.vaService.reason}}</p>
-               </div>
+               
                <div class="clearfix">
                   <p class="pull-left">Ordered Date</p>
-                  <p class="pull-right mr">{{selectedObj.vaService.order.orderDate | date : 'MMM d, y'}}</p>
+                  <p class="pull-right mr">{{selectedObj.createdDate | date : 'MMM d, y'}}</p>
                </div>
                <div class="clearfix">
-                  <p class="pull-left">Ordering Date</p>
+                  <p class="pull-left">Fulfillment Date</p>
                   <p class="pull-right mr">{{selectedObj.vaService.fulfillmentDate | date : 'MMM d, y'}}</p>
                </div>
             </div>
@@ -77,26 +71,17 @@
                      <th>Table Name</th>
                      <th>Description</th>
                      <th>Quantity</th>
-                     <th>Brand</th>
                      <th>Price</th>
                   </tr>
                </thead> 
-               <tbody ng-repeat ="orderIdem in selectOrderItems">
+               <tbody ng-repeat ="orderItem in selectOrderItems">
                   <tr>
-                     <td ng-if="!(orderIdem.orderId == null || orderIdem.orderId == '')">{{orderIdem.orderId}}</td>
-                     <td ng-if="(orderIdem.orderId == null || orderIdem.orderId == '')">-</td>
-                     <td ng-if="!(orderIdem.productId == null || orderIdem.productId == '')">{{orderIdem.productId}}</td>
-                     <td ng-if="(orderIdem.productId == null || orderIdem.productId == '')">-</td>
-                     <td ng-if="!(orderIdem.name == null || orderIdem.name == '')">{{orderIdem.name}}</td>
-                     <td ng-if="(orderIdem.name == null || orderIdem.name == '')">-</td>
-                     <td ng-if="!(orderIdem.description == null || orderIdem.description == '')">{{orderIdem.description}}</td>
-                     <td ng-if="(orderIdem.description == null || orderIdem.description == '')">-</td>
-                     <td ng-if="!(orderIdem.quantity == null || orderIdem.quantity == '')">{{orderIdem.quantity}}</td>
-                     <td ng-if="(orderIdem.quantity == null || orderIdem.quantity == '')">-</td>
-                     <td ng-if="!(orderIdem.brand == null || orderIdem.brand == '')">{{orderIdem.brand}}</td>
-                     <td ng-if="(orderIdem.brand == null || orderIdem.brand == '')">-</td>
-                     <td ng-if="!(orderIdem.totalPrice == null || orderIdem.totalPrice == '')" class="text-right">{{orderIdem.totalPrice}}</td>
-                     <td ng-if="(orderIdem.totalPrice == null || orderIdem.totalPrice == '')">-</td>
+                     <td ng-bind="orderItem.orderId"></td>
+                     <td ng-bind="orderItem.productId"></td>
+                     <td ng-bind="orderItem.name"></td>
+                     <td ng-bind="orderItem.description"></td>
+                     <td ng-bind="orderItem.quantity"></td>
+                     <td ng-bind="orderItem.totalPrice > 0 ? orderItem.totalPrice : ''"></td>
                   </tr>
                </tbody>
             </table>

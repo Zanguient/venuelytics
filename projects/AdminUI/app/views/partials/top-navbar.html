@@ -28,14 +28,14 @@
             </a>
          </li>
          <!-- START lock screen-->
-         <li>
+         <!--li>
             <a ui-sref="page.lock" title="Lock screen">
                <em class="icon-lock"></em>
             </a>
-         </li>
+         </li-->
          <li class="visible-lg">
             <a href="#">
-               <em class="fa fa-server">{{serverName}}</em>
+               <em class="fa fa-server"></em> {{serverName}} | <em class="fa fa-user"></em> {{session.userName}}
             </a>
          </li>
          <!-- END lock screen-->
@@ -95,7 +95,7 @@
          <!-- END Contacts menu-->
       </ul>
       <!-- END Right Navbar-->
-      <ul class="nav navbar-nav navbar-right" style="padding-top: 8px; padding-right: 25px;">
+      <ul class="nav navbar-nav navbar-right" style="padding-top: 8px; padding-right: 25px;" ng-hide="hideNavVenueDropdown">
          <li>
             <venue-dropdown/>
          </li>

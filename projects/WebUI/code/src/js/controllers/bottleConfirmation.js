@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService) {
+app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService','StripeCheckout',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, StripeCheckout) {
 
     		$log.log('Inside Confirm Reservation Controller.');
 
@@ -92,17 +92,17 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.cardPaymentData = function(value) {
                 $scope.cardPayment = true;
                 $scope.paypal = false;
-            }
+            };
 
             self.paypalData = function(value) {
                 $scope.paypal = true;
                 $scope.cardPayment = false;
-            }
+            };
 
             self.createBottleSave = function() {
                 AjaxService.createBottleService(self.venueID, self.object, self.authBase64Str).then(function(response) {
                     self.orderId = response.data.id;
-                    if (self.cardPayment == true) {
+                    if (self.cardPayment === true) {
                         self.creditCardPayment();
                     } else {
                         $('#bottleServiceModal').modal('show');
@@ -115,23 +115,22 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             pay = self.chargedAmount * 100;
             chargeAmountValue = parseFloat(self.chargedAmount).toFixed(2);
             var amount = self.availableAmount;
+            var currencyType = 'USD';
+            var taxValue = 0;
+            var orderAmount = 0;
             var handler = StripeCheckout.configure({
                 key: 'pk_test_v3iaPvbv4UeKkRWrH3O5etYU',
                 image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
                 locale: 'auto',
                 token: function(token) {
-                    if(token.card.country === 'US') {
-                        var currencyType = 'USD';
-                    } else {
-                        var currencyType = 'INR';
+                    if(token.card.country === 'INR') 
+                        currencyType = 'INR';
                     }
-                    if(self.taxAmount === 0) {
-                        var taxValue = 0;
-                    } else {
-                        var taxValue = self.taxAmount.toFixed(2);
-                    }
-                    var orderAmount = amount.toFixed(2);
-                    var taxValue = self.taxAmount.toFixed(2);
+                    
+                    taxValue = self.taxAmount.toFixed(2);
+                    
+                    orderAmount = amount.toFixed(2);
+                    
                     var payment = {
                                     "gatewayId":1,
                                     "token":token.id,
