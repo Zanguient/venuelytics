@@ -166,7 +166,8 @@ var dynamicScriptFiles = [
     '../vendor/fontawesome/fonts/fontawesome-webfont.woff',
     '../vendor/fontawesome/fonts/fontawesome-webfont.woff2',
     '../vendor/weathericons/fonts/weathericons-regular-webfont.woff',
-    '../vendor/simplelineicons/fonts/Simple-Line-Icons.woff'
+    '../vendor/simplelineicons/fonts/Simple-Line-Icons.woff',
+    '../vendor/ngwig/ng-wig.min.js'
 ];
 
 
