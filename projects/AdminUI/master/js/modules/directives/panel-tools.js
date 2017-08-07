@@ -155,7 +155,7 @@ App.directive('paneltool', function(){
 
       // method to clear the spinner when done
       function removeSpinner() {
-        this.removeClass(csspinnerClass);
+        removeClass(csspinnerClass);
       }
 
       // catch clicks to toggle panel refresh

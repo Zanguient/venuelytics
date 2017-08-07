@@ -45,7 +45,7 @@
           var f = new Date(from[0], from[1] - 1, from[2]);
           var remaining = (tableCount - reservedTables);
           if (remaining < 0) {
-            remaining = 0	
+            remaining = 0;
           }
           var obj = {};
           obj.title = 'A: ' + remaining;	
@@ -70,9 +70,9 @@
     }
     $scope.initCalendar();
     },function(error){
-      if (typeof error.data !== 'undefined') { 
+      /*if (typeof error.data !== 'undefined') { 
           //toaster.pop('error', "Server Error", error.data.developerMessage);
-      }
+      }*/
     });
 };
 
@@ -221,7 +221,7 @@ $scope.initCalendar = function () {
     };
     $scope.fillColor = function(id) {
      var obj = $scope.reservationData[id];
-     if (typeof obj == 'undefined') {
+     if (typeof obj === 'undefined') {
       return "00FF00";
      } else {
       return "FF0000";
@@ -230,16 +230,16 @@ $scope.initCalendar = function () {
     };
 
     $scope.getStatusColor = function(type) {
-      if (typeof type == 'undefined') {
+      if (typeof type === 'undefined') {
         return 'gray';
-      } else if ( type == 'OPEN') {
+      } else if ( type === 'OPEN') {
         return 'success';
-      } else if (type == 'HOLDON') {
+      } else if (type === 'HOLDON') {
         return 'warning';
       } else {
         return 'danger';
       }
-    }
+    };
     $scope.paintVenueMapItems = function() {
 
       var divHeight = $('#imageMap').height();

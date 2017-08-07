@@ -5,7 +5,7 @@
  =========================================================*/
 
 App.directive('notify', function($window){
-
+  'use strict';
   return {
     restrict: 'A',
     controller: function ($scope, $element) {
@@ -40,7 +40,7 @@ App.directive('notify', function($window){
  */
 
 (function($, window, document){
-
+    'use strict';
     var containers = {},
         messages   = {},
 

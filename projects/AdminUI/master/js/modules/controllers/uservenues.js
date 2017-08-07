@@ -55,7 +55,8 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
-  	}
+  	};
+
   	$scope.search = function(venueName) {
   		var promise = RestServiceFactory.VenueService().get({search: venueName});
   		promise.$promise.then(function(data) {
@@ -63,10 +64,11 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
   			$scope.venues = data.venues;
 	    	
   		});
-  	}
+  	};
+
   	$scope.doneAction = function() {
   		$state.go('app.uservenues', {id:$stateParams.id});
-  	}
+  	};
   	
   	
   	$scope.addUserVenue = function(venue) {
@@ -77,11 +79,11 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
   			var index = $scope.venues.indexOf(venue);
   			$scope.venues.splice(index, 1);
     	},function(error){
-    		if (typeof error.data != 'undefined') { 
+    		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});
   		
-  	}
+  	};
   });
 }]);

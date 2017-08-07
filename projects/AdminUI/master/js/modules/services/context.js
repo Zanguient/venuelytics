@@ -27,11 +27,12 @@ App.service('ContextService',['$location','RestServiceFactory', '$rootScope',fun
 	var promise = RestServiceFactory.VenueService().get();
 	promise.$promise.then(function(data) {
 		self.userVenues.available = [];
+		var venue = null;
 		var selectedVenueFound = false;
 		for (var index in data.venues) {
-			var venue = data.venues[index];
+			venue = data.venues[index];
 			self.userVenues.available.push({name: venue.venueName, id: venue.id});
-			if ($rootScope.$storage.selectedVenueNumber == venue.id){
+			if ($rootScope.$storage.selectedVenueNumber === venue.id){
 				$rootScope.$storage.selectedVenueName = venue.venueName;
 				selectedVenueFound = true;
 			}
@@ -41,7 +42,7 @@ App.service('ContextService',['$location','RestServiceFactory', '$rootScope',fun
 			self.userVenues.selectedVenueNumber = $rootScope.$storage.selectedVenueNumber;
 			self.userVenues.selectedVenueName = $rootScope.$storage.selectedVenueName;
 		} else {
-			var venue = data.venues[0];
+			venue = data.venues[0];
 			self.userVenues.selectedVenueNumber = venue.id;
 			self.userVenues.selectedVenueName = venue.venueName;
 			$rootScope.$storage.selectedVenueNumber = venue.id;

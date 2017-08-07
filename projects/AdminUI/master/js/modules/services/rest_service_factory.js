@@ -38,7 +38,7 @@
  		REQ_PROP['VenueMapService'] = venueMapProperties;
  		var urlTemplate =  BASE_URL + "/v1/@context/:id";
  		var contentActivateUrl = BASE_URL + "/v1/content/:id/@activate";
- 		self = this;
+ 		var self = this;
  		return {
  			contextName : self.contextName,
  			serverName : self.serverName,
@@ -180,5 +180,5 @@
  				}
  				return payload;
  			}
- 		}
+ 		};
  	}]);

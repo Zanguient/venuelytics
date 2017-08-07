@@ -55,7 +55,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
 
             	  if (typeof(toState) !== 'undefined' && toState.name !== 'page.login'){
                   $rootScope.hideNavVenueDropdown = false;
-                  if (toState.name == 'app.storeedit' || toState.name == 'app.stores') {
+                  if (toState.name === 'app.storeedit' || toState.name === 'app.stores') {
                     $rootScope.hideNavVenueDropdown = true;
                   }       
 	            	  var authorizedRoles = toState.data.authorizedRoles;
@@ -106,7 +106,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                 this.setDataUrl = function(dataUrl) {
                   this.url = dataUrl;
                   return this;
-                }
+                };
                 // Public method
                 this.requestData = function (option, method, callback, processData) {
                   var self = this;

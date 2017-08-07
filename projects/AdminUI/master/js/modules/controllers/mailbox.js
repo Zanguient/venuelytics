@@ -4,7 +4,7 @@
  =========================================================*/
 
  App.controller('MailboxController', function($scope, colors, $rootScope) {
-
+ 'use strict';
   $scope.folders = [
     {name: 'Inbox', folder: 'all', alert:$rootScope.unreadMessages, icon: "fa-inbox",color: 'success',},
     {name: 'New Requests', folder: 'REQUEST', alert: $rootScope.comfirmedCount, icon: "fa-star",color: 'info' },
@@ -37,6 +37,7 @@
 
  App.controller('MailFolderController', ['$scope', 'RestServiceFactory', '$stateParams', 'ContextService','$rootScope',
   function($scope, RestServiceFactory, $stateParams, contextService, $rootScope) {
+    'use strict';
     $scope.folder = $stateParams.folder;
     $scope.notifications = [];
     $scope.notificationsList = false;
@@ -51,7 +52,7 @@
       }
       RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data){
         $scope.notifications = data.notifications;
-        if($scope.notifications == ""){
+        if($scope.notifications === ""){
           $scope.notificationsList = true;
         }
         $scope.visitors =[];
@@ -64,14 +65,14 @@
     $rootScope.getAvatar = function(vid) {
       var visitor = $scope.visitors[vid];
       if (visitor && visitor.profileImageThumbnail) {
-        return visitor.profileImageThumbnail
+        return visitor.profileImageThumbnail;
       } 
       return '';
     };
 
     $scope.getMailArray = function(value){
       $rootScope.selectedObj = value;
-    }
+    };
 
     $scope.getStatusColor = function(status) {
        if (status === 'CONFIRMED') {
@@ -93,6 +94,7 @@
   }]);
 
  App.controller('MailViewController', ['$scope', 'RestServiceFactory', '$stateParams','$rootScope', function($scope, RestServiceFactory, $stateParams, $rootScope) {
+    'use strict';
     $scope.selectOrderItems = [];
     $scope.prifileImage = $rootScope.selectedObj.visitorId;
     angular.forEach($rootScope.selectedObj.vaService.order.orderItems, function(value, key) {
@@ -106,7 +108,7 @@
         "name":value.name,
         "category":value.category,
         "description":value.description
-      }
+      };
       $scope.selectOrderItems.push(venueImageId);
     });
  }]);

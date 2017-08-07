@@ -35,16 +35,16 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         RestServiceFactory.VenueService().getAnalytics(target, function(data){
             $scope.processAnalytics(data);
         },function(error){
-            if (typeof error.data !== 'undefined') { 
+            /*if (typeof error.data !== 'undefined') { 
                 toaster.pop('error', "Server Error", error.data.developerMessage);
-            }
+            }*/
         });
         RestServiceFactory.VenueService().getGuests(target, function(data){
            $scope.guests = data;
         },function(error){
-            if (typeof error.data !== 'undefined') { 
+            /*if (typeof error.data !== 'undefined') { 
                 toaster.pop('error', "Server Error", error.data.developerMessage);
-            }
+            }*/
         });
         $scope.top3FavItems();
         $scope.bookingRequestChart();
@@ -167,12 +167,13 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     function sortAndNormalizeData(series) {
 
         var zips = [];
-        for (var key in series) {
+        var key, i, serie, zip = null;
+        for (key in series) {
             if (series.hasOwnProperty(key)) {
-                var serie = series[key];
+                serie = series[key];
 
-                for (var i = 0; i < serie.data.length; i++) {
-                    var zip = serie.data[i][0];
+                for (i = 0; i < serie.data.length; i++) {
+                    zip = serie.data[i][0];
                     var value = serie.data[i][1];
 
                     if (typeof zips[zip] === 'undefined') {
@@ -184,7 +185,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         }
         
         var tuples = [];
-        for (var key in zips) {
+        for (key in zips) {
             if (zips.hasOwnProperty(key)) {
                 tuples.push([key, zips[key]]);
             }
@@ -199,19 +200,19 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         // keep only top 10.
         tuples = tuples.slice(0, 10);
         var top10Zip = [];
-        for (var k in tuples) {
+        for (var k = 0; k < tuples.length; k++) {
             var obj = tuples[k];
             top10Zip[obj[0]] = 1;
         }
         
         // populate normalized data
-        for (var key in series) {
-            var others = 0;
+        for (key in series) {
+            
             if (series.hasOwnProperty(key)) {
-                var serie = series[key];
-
-                for (var i = serie.data.length -1; i >=0; i--) {
-                    var zip = serie.data[i][0];
+                serie = series[key];
+                var others = 0;
+                for (i = serie.data.length -1; i >=0; i--) {
+                    zip = serie.data[i][0];
                     if (top10Zip[zip] !== 1) {
                         others += serie.data[i][1];
                         serie.data.splice(i, 1);
@@ -608,9 +609,9 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             
             //$('#bar_rb').attr("values", );
         },function(error){
-            if (typeof error.data !== 'undefined') { 
+            /*if (typeof error.data !== 'undefined') { 
                 toaster.pop('error', "Server Error", error.data.developerMessage);
-            }
+            }*/
         });
     };
     // Bar Stacked chart

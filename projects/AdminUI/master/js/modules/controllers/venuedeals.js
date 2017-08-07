@@ -65,7 +65,7 @@ App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout'
     $scope.editDeal = function(rowId, colId) {
   		var table = $('#deals_table').DataTable();
       var d = table.row(rowId).data();
-      $scope.deal = $scope.dealMap[d[8]]
+      $scope.deal = $scope.dealMap[d[8]];
       
       ngDialog.openConfirm({
           template: 'app/templates/content/form-deal-info.html',
@@ -80,13 +80,13 @@ App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout'
           },function(error){
             
          });
-  	}
+  	};
     
   	$scope.deleteProduct = function(rowId, productId) {
   			
-  	}
+  	};
   	$scope.createNewDeal = function() {
   		$state.go('app.venueMapedit', {id: 'new'});
-  	}
+  	};
   });
 }]);
