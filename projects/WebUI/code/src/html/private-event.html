@@ -151,7 +151,9 @@
                                                     <p ng-if="privateEvent.servingSize != 0">{{privateEvent.servingSize}} people</p>
                                                     <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
                                                     <p class="privateEventBox">{{privateEvent.description | limitTo: 70
-                                                        }}{{privateEvent.description.length > 70 ? '...' :''}}</p>
+                                                        }}{{privateEvent.description.length > 70 ? '...' :''}}
+                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDesc(privateEvent.description)">Read More</a>
+                                                    </p><br>
                                                     <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right"
                                                     novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY"></button>
                                             </article>
@@ -168,4 +170,21 @@
 </div>
 </div>
 </div>
+</div>
+
+<div class="modal modal-success" id="privateDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="myModalLabel6">{{'bottleServiceTab.DESC' | translate}}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{{description}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

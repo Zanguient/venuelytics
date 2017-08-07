@@ -18,21 +18,17 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueID = $routeParams.venueid;
                 self.getBanquetHall(self.venueID);
-                if((Object.keys(DataShare.partyServiceData).length) === 0) {
-                    self.getEventType();
-                } else if($rootScope.backToPartyPackage === true) {
-                  DataShare.partyServiceData = { };
-                } else {
-                  self.party = DataShare.partyServiceData;
-                  self.eventTypes = [];
-                  self.eventTypes.push(self.party.partyEventType);
+                if($rootScope.serviceName == 'PartyPackages') {
+                  DataShare.partyServiceData = '';
                 }
+                self.party = DataShare.partyServiceData;
                 self.totalGuest = DataShare.totalNoOfGuest;
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
                 self.tabParam = $routeParams.tabParam;
                 self.getBottleProducts();
                 self.getMenus();
+                self.getEventType();
 
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
@@ -71,9 +67,16 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
+            self.partyEventDesc = function(value) {
+                $rootScope.description1 = value;
+            };
+
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
+                    if((Object.keys(self.party).length) !== 0) {
+                      self.eventTypes.push(self.party.partyEventType);
+                    }
                 });
             };
 

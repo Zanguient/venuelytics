@@ -14,15 +14,9 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 self.venueID = self.venueid = $routeParams.venueid;
                 self.getBanquetHall(self.venueID);
                 self.getMenus();
+                self.getEventType();
                 $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true});
-
-                if((Object.keys(DataShare.privateEventData).length) === 0) {
-                    self.getEventType();
-                } else {
-                    self.private = DataShare.privateEventData;
-                    self.eventTypes = [];
-                    self.eventTypes.push(self.private.privateEvent);
-                }
+                self.private = DataShare.privateEventData;
             };
 
             self.createPrivateEvent = function(value) {
@@ -85,6 +79,10 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 self.desc = "Description";
              };
 
+             self.privateEventDesc = function(value) {
+                self.description = value;
+             };
+
             self.getBanquetHall = function(venueId) {
                 AjaxService.getPrivateEvent(venueId).then(function(response) {
                     $scope.privateEventValueArray = response.data;
@@ -107,6 +105,9 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
+                    if((Object.keys(self.private).length) !== 0) {
+                      self.eventTypes.push(self.private.privateEvent);
+                    }
                 });
             };
 

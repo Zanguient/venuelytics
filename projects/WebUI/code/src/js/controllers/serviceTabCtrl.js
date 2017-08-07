@@ -22,7 +22,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 if($rootScope.serviceName === 'PrivateEvent') {
                     DataShare.privateEventData = '';
                 }
-                if ((self.venueid === 70008) || (self.venueid === 170637)) {
+                if ((self.venueid == 70008) || (self.venueid == 170637)) {
                     if(self.tabParams === 'guest-list') {
                       self.partyFlag = false;
                     } else {
@@ -150,8 +150,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
                 self.guestServiceTab = false;
-                self.partyPackageTab = false;
-                self.bachelorPartyTab = true;
                 self.partyPackageTab = false;
                 self.bachelorPartyTab = true;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bachelor-party");

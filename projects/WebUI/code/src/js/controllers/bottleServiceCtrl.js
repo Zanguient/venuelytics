@@ -23,16 +23,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     DataShare.selectBottle = '';
                     self.startDate = moment().format('YYYY-MM-DD');
                     self.showFloorMapByDate();
+                } else {
+                    self.bottle = DataShare.bottleServiceData;
                 }
                 if(DataShare.userselectedTables) {
                   self.selectionTableItems = DataShare.userselectedTables;
-                }
-                if((Object.keys(DataShare.bottleServiceData).length) === 0) {
-                    self.getEventType();
-                } else {
-                    self.bottle = DataShare.bottleServiceData;
-                    self.eventTypes = [];
-                    self.eventTypes.push(self.bottle.bottleOccasion);
                 }
                 self.totalGuest = DataShare.totalNoOfGuest;
                 if(DataShare.selectBottle) {
@@ -47,6 +42,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 self.tabParam = $routeParams.tabParam;
                 self.getBottleProducts();
                 self.getMenus();
+                self.getEventType();
 
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
@@ -97,6 +93,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
+                    if((Object.keys(self.bottle).length) !== 0) {
+                      self.eventTypes.push(self.bottle.bottleOccasion);
+                    }
                 });
             };
 
