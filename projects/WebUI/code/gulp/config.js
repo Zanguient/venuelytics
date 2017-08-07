@@ -7,7 +7,7 @@ module.exports = {
     navbarClass: 'ms-navbar-white',
     navbarMode: false,
     allColors: false,
-    compress: true,
+    compress: false,
 
     themes : ['red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'yellow', 'amber', 'orange', 'deep-orange', 'brown', 'grey', 'blue-grey'],
     shines : ['300', '400', '500', '600', '700', '800'],
