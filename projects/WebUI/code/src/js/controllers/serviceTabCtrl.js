@@ -13,22 +13,23 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.selectionTableItems = [];
             self.bottleMinimum = [];
             self.init = function() {
+                /*jshint maxcomplexity:14 */
                 self.venueid = $routeParams.venueid;
                 self.tabParams = $routeParams.tabParam;
-                if($rootScope.serviceName == 'GuestList') {
+                if($rootScope.serviceName === 'GuestList') {
                     DataShare.guestListData = '';
                 }
-                if($rootScope.serviceName == 'PrivateEvent') {
+                if($rootScope.serviceName === 'PrivateEvent') {
                     DataShare.privateEventData = '';
                 }
-                if ((self.venueid == 70008) || (self.venueid == 170637)) {
+                if ((self.venueid === 70008) || (self.venueid === 170637)) {
                     if(self.tabParams === 'guest-list') {
                       self.partyFlag = false;
                     } else {
                       self.partyFlag = true;
                     }
                 }
-                if (self.venueid == 170639) {
+                if (self.venueid === 170639) {
                     self.bachelorFlag = true;
                 }
                 self.guest = DataShare.guestListData;

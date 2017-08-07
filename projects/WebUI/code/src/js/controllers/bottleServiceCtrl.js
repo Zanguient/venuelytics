@@ -17,7 +17,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.init = function() {
                 $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueid = $routeParams.venueid;
-                if((DataShare.amount) || ($rootScope.serviceName == 'BottleService')) {
+                if((DataShare.amount) || ($rootScope.serviceName === 'BottleService')) {
                     DataShare.bottleServiceData = '';
                     DataShare.tableSelection = '';
                     DataShare.selectBottle = '';
@@ -55,7 +55,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 });
                 self.imageParam = $location.search().i;
                 if(self.imageParam === 'Y') {
-                    self.venueImage = response.imageUrls[0].largeUrl;
+                    self.venueImage = self.detailsOfVenue.imageUrls[0].largeUrl;
                 }
             };
 
@@ -175,8 +175,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                           DataShare.elements = self.venueImageMapData[index].elements;
                           if(self.venueImageMapData[index].imageUrls.length !== 0) {
                             // $log.info("imageURl:", angular.toJson(self.venueImageMapData[index].imageUrls[0].originalUrl));
-                            DataShare.imageMapping.pic_url = self.venueImageMapData[index].imageUrls[0].originalUrl;
-                            DataShare.imageMapping.pic_url_thumbnail = self.venueImageMapData[index].imageUrls[0].originalUrl;
+                            DataShare.imageMapping.pictureURL = self.venueImageMapData[index].imageUrls[0].originalUrl;
+                            DataShare.imageMapping.pictureURLThumbnail = self.venueImageMapData[index].imageUrls[0].originalUrl;
                           }
                           if(venueMap.days === '*' || venueMap.days.indexOf(day) !== -1) {
                             $scope.selectedVenueMap = venueMap;
@@ -200,7 +200,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                             });
                             DataShare.imageMapping.maps = maps;
                             self.img = angular.copy(DataShare.imageMapping);
-                            if(self.img.pic_url !== '') {
+                            if(self.img.pictureURL !== '') {
                                self.imageFlag = false;
                             } else {
                                self.imageFlag = true;
@@ -240,7 +240,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                   // $log.info("Inside green");
                   return APP_COLORS.lightGreen;
               } else {
-                  if (typeof obj == 'undefined') {
+                  if (typeof obj === 'undefined') {
                       return APP_COLORS.lightGreen;
                   } else {
                       return APP_COLORS.red;
@@ -270,7 +270,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     }
                     return APP_COLORS.darkGreen;
              } else {
-               if (typeof obj == 'undefined') {
+               if (typeof obj === 'undefined') {
                   return APP_COLORS.darkGreen;
                } else {
                   return APP_COLORS.guardsmanRed;

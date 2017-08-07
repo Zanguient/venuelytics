@@ -19,7 +19,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
 
             self.editPartyPackage = function() {
               $location.url("/newCities/" + self.city + "/" + self.selectedVenueID + '/party-packages');
-            }
+            };
 
             self.paymentEnable = function() {
                 $location.url(self.city +"/partyPackagePayment/" + self.venueID);
@@ -37,12 +37,12 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
                     $location.url('/' + self.city + '/party-success/' + self.selectedVenueID);
                 });
               }
-            }
+            };
 
             self.backToParty = function() {
               $rootScope.backToPartyPackage = true;
               $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/party-packages');
-            }
+            };
 
 
             self.init();
