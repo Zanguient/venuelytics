@@ -9,7 +9,7 @@
   },
   {
   	"text": "Inbox",
-	"sref": "app.mailbox.folder",
+	"sref": "app.mailbox.all",
 	 "icon": "fa fa-inbox",
 	 "translate": "sidebar.nav.pages.INBOX",
 	 "submenu": [],

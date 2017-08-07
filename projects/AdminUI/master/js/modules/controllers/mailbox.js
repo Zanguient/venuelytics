@@ -52,7 +52,7 @@
       }
       RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data){
         $scope.notifications = data.notifications;
-        if($scope.notifications === ""){
+        if($scope.notifications == ""){
           $scope.notificationsList = true;
         }
         $scope.visitors =[];
@@ -96,7 +96,7 @@
  App.controller('MailViewController', ['$scope', 'RestServiceFactory', '$stateParams','$rootScope', function($scope, RestServiceFactory, $stateParams, $rootScope) {
     'use strict';
     $scope.selectOrderItems = [];
-    $scope.prifileImage = $rootScope.selectedObj.visitorId;
+    $scope.profileImage = $rootScope.selectedObj.visitorId;
     angular.forEach($rootScope.selectedObj.vaService.order.orderItems, function(value, key) {
       var venueImageId = {
         "orderId": value.orderId,

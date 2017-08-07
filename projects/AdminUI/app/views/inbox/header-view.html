@@ -1,0 +1,63 @@
+<div ng-controller="MailViewController">
+   <h3 class="mt0"><em ng-class="getNotificationIconClass(selectedObj.serviceType)" ></em> {{selectedObj.serviceType | translate}}</h3>
+   <hr/>
+   <div class="row mb-lg">
+      <div class="col-lg-4 col-xs-6 br pv">
+         <div class="row">
+            <div class="col-md-2 visible-md visible-lg">
+               <div ng-if="getAvatar(profileImage)">
+               <img ng-src="{{getAvatar(profileImage)}}" alt="" class="media-object img-circle thumb32 pull-left"  />
+            </div>
+               <div ng-if="!getAvatar(profileImage)" class="fa fa-user-circle-o fa-2x thumb32 pull-left">
+               </div>
+            </div>
+            <div class="col-md-10">
+               <h4>{{selectedObj.vaService.visitorName}}</h4>
+               <address></address>{{selectedObj.vaService.contactEmail}}
+               <br/>{{selectedObj.vaService.contactNumber}}
+               <br/>{{selectedObj.vaService.contactZipcode}}</div>
+         </div>
+      </div>
+      <div class="col-lg-4 col-xs-6 br pv">
+         <div class="clearfix">
+            <p class="pull-left">Service Type</p>
+            <p class="pull-right mr">{{selectedObj.serviceType}}</p>
+         </div>
+         <div class="clearfix">
+            <p class="pull-left">Status</p>
+            <p class="pull-right mr">{{selectedObj.status}}</p>
+         </div>
+         <div class="clearfix">
+            <p class="pull-left">Event Type</p>
+            <p class="pull-right mr">{{selectedObj.vaService.reason}}</p>
+         </div>
+         <div class="clearfix">
+            <p class="pull-left">Budget</p>
+            <p ng-if="!(selectedObj.vaService.budget == null || selectedObj.vaService.budget == '')" class="pull-right mr">{{selectedObj.vaService.budget}}</p>
+             <p ng-if="(selectedObj.vaService.budget == null || selectedObj.vaService.budget == '')" class="pull-right mr">-</p>
+         </div>
+         <div class="clearfix">
+            <p class="pull-left">Total Guest (Males / Females)</p>
+            <p class="pull-right mr">{{selectedObj.vaService.noOfGuests}} <span ng-show="selectedObj.vaService.noOfMaleGuests + selectedObj.vaService.noOfFemaleGuests > 0">({{selectedObj.vaService.noOfMaleGuests / selectedObj.vaService.noOfFemaleGuests}})</span></p>
+         </div>
+      </div>
+      <div class="clearfix hidden-md hidden-lg">
+         <hr/>
+      </div>
+      <div class="col-lg-4 col-xs-12 pv pull-right">
+         <div class="clearfix">
+            <p class="pull-left">INVOICE NO.</p>
+            <p class="pull-right mr">{{selectedObj.id}}</p>
+         </div>
+         
+         <div class="clearfix">
+            <p class="pull-left">Ordered Date</p>
+            <p class="pull-right mr">{{selectedObj.createdDate | date : 'MMM d, y'}}</p>
+         </div>
+         <div class="clearfix">
+            <p class="pull-left">Fulfillment Date</p>
+            <p class="pull-right mr">{{selectedObj.vaService.fulfillmentDate | date : 'MMM d, y'}}</p>
+         </div>
+      </div>
+   </div>
+</div>

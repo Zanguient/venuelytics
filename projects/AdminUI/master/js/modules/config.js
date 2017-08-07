@@ -260,6 +260,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('inbox/mailbox-inbox.html'),
         controller: 'NullController'
     })
+    .state('app.mailbox.all', {
+        url: '/folder/all',
+        title: 'Mailbox',
+        templateUrl: basepath('inbox/mailbox-inbox.html'),
+        controller: 'NullController'
+    })
     .state('app.mailbox.view', {
         url : "/{mid:[0-9]{1,4}}",
         title: 'View mail',
