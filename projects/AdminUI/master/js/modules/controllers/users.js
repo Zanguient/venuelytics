@@ -6,11 +6,11 @@
 App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster',
                                    function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster) {
   'use strict';
-  var user_roles = [];
-  user_roles['admin'] = 'Administrator';
-  user_roles['director'] = 'Store Director';
-  user_roles['manager'] = 'Manager';
-  user_roles['marketing'] = 'Marketing';
+  var userRoles = [];
+  userRoles['admin'] = 'Administrator';
+  userRoles['director'] = 'Store Director';
+  userRoles['manager'] = 'Manager';
+  userRoles['marketing'] = 'Marketing';
   $timeout(function(){
 
     if ( ! $.fn.dataTable ) return;
@@ -24,7 +24,7 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" ng-click="editUser('+cellData+')"></button>&nbsp;&nbsp;';
 		    		actionHtml += '<button title="Associate Venue" class="btn btn-default btn-oval fa fa-home" ng-click="associateVenue(' +row +','+cellData+')"></button>';
-		    		if (rowData[5] != 1) {
+		    		if (rowData[5] !== 1) {
 		    			actionHtml += '<button title="Delete User" class="btn btn-default btn-oval fa fa-trash" ng-click="deleteUser(' +row +','+cellData+')"></button>';
 		    		}
 		    		
@@ -38,7 +38,7 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		
 		    		var actionHtml = '<em class="fa fa-check-square-o"></em>';
-		    		if (cellData == false){
+		    		if (cellData === false){
 		    			actionHtml = '<em class="fa fa-square-o"></em>';
 		    		}
 		    		$(td).html(actionHtml);
@@ -54,7 +54,7 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
     	var table = $('#users_table').DataTable();
     	
     	data.users.map(function(user) {
-    		var role = user_roles[user.role];
+    		var role = userRoles[user.role];
     		if (role == null) {
     			role = user.role;
     		}
@@ -71,11 +71,11 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
   
   $scope.editUser = function(userId) {
 		$state.go('app.useredit', {id: userId});
-  }
+  };
   
   $scope.associateVenue = function(rowId, userId) {
 		$state.go('app.uservenues', {id: userId});
-  }
+  };
   
   
   $scope.deleteUser = function(rowId, userId) {	
@@ -84,13 +84,13 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
   		var table = $('#users_table').dataTable();
   		table.fnDeleteRow(rowId);
   	},function(error){
-  		if (typeof error.data != 'undefined') { 
+  		if (typeof error.data !== 'undefined') { 
   			toaster.pop('error', "Server Error", error.data.developerMessage);
   		}
   	});
-	}
+	};
   
   $scope.createNewUser = function() {
 		$state.go('app.useredit', {id: 'new'});
-	}
+	};
 }]);

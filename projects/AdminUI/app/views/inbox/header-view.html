@@ -29,16 +29,15 @@
          </div>
          <div class="clearfix">
             <p class="pull-left">Event Type</p>
-            <p class="pull-right mr">{{selectedObj.vaService.reason}}</p>
+            <p class="pull-right mr" ng-bind = "selectedObj.vaService.reason != null ? selectedObj.vaService.reason : '-'" ></p>
          </div>
          <div class="clearfix">
             <p class="pull-left">Budget</p>
-            <p ng-if="!(selectedObj.vaService.budget == null || selectedObj.vaService.budget == '')" class="pull-right mr">{{selectedObj.vaService.budget}}</p>
-             <p ng-if="(selectedObj.vaService.budget == null || selectedObj.vaService.budget == '')" class="pull-right mr">-</p>
+             <p class="pull-right mr " ng-bind = "selectedObj.vaService.budget != '0.0' ? selectedObj.vaService.budget :'-'"></p>
          </div>
          <div class="clearfix">
             <p class="pull-left">Total Guest (Males / Females)</p>
-            <p class="pull-right mr">{{selectedObj.vaService.noOfGuests}} <span ng-show="selectedObj.vaService.noOfMaleGuests + selectedObj.vaService.noOfFemaleGuests > 0">({{selectedObj.vaService.noOfMaleGuests / selectedObj.vaService.noOfFemaleGuests}})</span></p>
+            <p class="pull-right mr">{{selectedObj.vaService.noOfGuests}} <span ng-show="selectedObj.vaService.noOfMaleGuests + selectedObj.vaService.noOfFemaleGuests > 0">({{selectedObj.vaService.noOfMaleGuests}} / {{selectedObj.vaService.noOfFemaleGuests}})</span></p>
          </div>
       </div>
       <div class="clearfix hidden-md hidden-lg">

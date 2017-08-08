@@ -33,7 +33,7 @@ App.service("DashboardService", ["$log",function($log) {
 			
 			var loopDate=new Date();
 			loopDate.setDate(1);
-			if(currentDate.getMonth()-i==1){
+			if(currentDate.getMonth()-i===1){
 				loopDate.setMonth(1);
 			}else{
 				loopDate.setMonth(currentDate.getMonth()-i);
@@ -62,7 +62,7 @@ App.service("DashboardService", ["$log",function($log) {
 	
 	self.findVisitorsCountBasedOnMonth=function(month, year, newVisitors){
 		for(var idx in newVisitors){
-			if(month == newVisitors[idx].eventMonth && year == newVisitors[idx].eventYear){
+			if(month === newVisitors[idx].eventMonth && year === newVisitors[idx].eventYear){
 				return newVisitors[idx].eventCount;
 			}			
 		}
@@ -73,6 +73,7 @@ App.service("DashboardService", ["$log",function($log) {
 		var responseObj=[];
 		var aisles=[];
 		var currentDate=new Date();
+		var idx = '';
 		$log.log("current Date: ", currentDate);
 		
 		var limit=12;
@@ -84,7 +85,7 @@ App.service("DashboardService", ["$log",function($log) {
 		/**
 		 * finding aisle
 		 */
-		for(var idx in data.instoreEngagement){
+		for(idx in data.instoreEngagement){
 			if(aisles.join(',').indexOf(data.instoreEngagement[idx].aisle)<0){
 				responseObj.push({
 					"label":data.instoreEngagement[idx].aisle,
@@ -104,7 +105,7 @@ App.service("DashboardService", ["$log",function($log) {
 				var loopDate=new Date();
 				loopDate.setDate(1);
 				//$log.log("comp : ",currentDate.getMonth()-i," = ", 1);
-				if((currentDate.getMonth()-i)==1){
+				if((currentDate.getMonth()-i)===1){
 					//$log.log("true", loopDate);
 					loopDate.setMonth(1);
 					//$log.log(loopDate);
@@ -118,7 +119,7 @@ App.service("DashboardService", ["$log",function($log) {
 				var loopMonth=loopDate.toLocaleString("en-US",{month:'long'});
 				var loopYear=loopDate.getFullYear();
 				
-				for(var idx in responseObj){					
+				for(idx in responseObj){					
 					var count=self.getCountBasedOnMonthAndYearAndAisle(loopYear,loopMonth, responseObj[idx].label, data.instoreEngagement);
 					responseObj[idx].data.push([loopMonth, count]);
 				}
@@ -134,7 +135,7 @@ App.service("DashboardService", ["$log",function($log) {
 		
 		for(var idx in array){
 			//$log.log("checking ", array[idx].month, array[idx].year, array[idx].aisle," with ", year, month, aisle);
-			if(month==array[idx].month && year == array[idx].year && aisle.localeCompare(array[idx].aisle)==0){
+			if(month===array[idx].month && year === array[idx].year && aisle.localeCompare(array[idx].aisle)===0){
 				//$log.log("match found!", array[idx].month, array[idx].year);
 				return array[idx].count;
 			}			
@@ -151,13 +152,13 @@ App.service("DashboardService", ["$log",function($log) {
 			
 			var chType='';
 			if(data[idx].channelType>2){
-				if(data[idx].channelType==4){
+				if(data[idx].channelType===4){
 					chType=self.channel[2];
 				}
-				if(data[idx].channelType==8){
+				if(data[idx].channelType===8){
 					chType=self.channel[3];
 				}
-				if(data[idx].channelType==16){
+				if(data[idx].channelType===16){
 					chType=self.channel[4];
 				}
 				
@@ -223,7 +224,7 @@ App.service("DashboardService", ["$log",function($log) {
 					
 			var loopDate=new Date();
 			loopDate.setDate(1);
-			if(currentDate.getMonth()-i==1){
+			if(currentDate.getMonth()-i===1){
 				loopDate.setMonth(1);
 			}else{
 				loopDate.setMonth(currentDate.getMonth()-i);
@@ -250,7 +251,7 @@ App.service("DashboardService", ["$log",function($log) {
 	
 	self.getPromotionCountBasedOnMonth=function(month, array){
 		for(var idx in array){
-			if(month==array[idx].month){
+			if(month===array[idx].month){
 				return array[idx].count;
 			}			
 		}

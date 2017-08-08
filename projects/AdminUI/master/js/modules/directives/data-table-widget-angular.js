@@ -22,13 +22,13 @@ App.directive("tableWidget", [ '$log', function($log) {
 		controller : [ '$scope', function($scope) {
 			$scope.init=function(){
 				$log.log("Data table Controller has been initialized..");
-			}
+			};
 		
 			$scope.init();
 			
 		} ],
 		templateUrl : 'app/templates/data-table-widget.html',
 		controllerAs:'dataTab'
-	}
+	};
 
 } ]);

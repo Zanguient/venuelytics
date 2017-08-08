@@ -46,12 +46,12 @@ App.directive('notify', function($window){
 
         notify     =  function(options){
 
-            if ($.type(options) == 'string') {
+            if ($.type(options) === 'string') {
                 options = { message: options };
             }
 
             if (arguments[1]) {
-                options = $.extend(options, $.type(arguments[1]) == 'string' ? {status:arguments[1]} : arguments[1]);
+                options = $.extend(options, $.type(arguments[1]) === 'string' ? {status:arguments[1]} : arguments[1]);
             }
 
             return (new Message(options)).show();

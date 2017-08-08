@@ -52,7 +52,7 @@
       }
       RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data){
         $scope.notifications = data.notifications;
-        if($scope.notifications == ""){
+        if($scope.notifications === ''){
           $scope.notificationsList = true;
         }
         $scope.visitors =[];

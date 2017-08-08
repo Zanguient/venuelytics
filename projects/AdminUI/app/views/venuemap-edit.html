@@ -81,10 +81,10 @@
 				<button type="button" class="btn btn-primary  btn-lg pull-right" ng-click="doneEditing()">Done Editing</button>
 				</div>
 				<div>
-					<div id="venueMapImg" class="col-lg-12" img-responsive img-rounded ng-img-map ng-img-map-fns="mapFns" ng-model="img" ng-show="img.pic_url != ''" ></div>
+					<div id="venueMapImg" class="col-lg-12" img-responsive img-rounded ng-img-map ng-img-map-fns="mapFns" ng-model="img" ng-show="img.picUrl != ''" ></div>
 				</div>
 				<br />
-				<div class="form-group" ng-show="img.pic_url == ''">
+				<div class="form-group" ng-show="img.picUrl == ''">
     				<input type="file" id="bottleClear" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
 				</div>
 			</div>

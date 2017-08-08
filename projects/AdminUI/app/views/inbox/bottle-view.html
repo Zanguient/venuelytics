@@ -31,8 +31,7 @@
          <div class="col-sm-offset-8 col-sm-4 pv">
             <div class="clearfix">
                <p class="pull-left h3">GRAND TOTAL</p>
-               <p ng-if="!(selectedObj.vaService.order.totalCost == null || selectedObj.vaService.order.totalCost == '')" class="pull-right mr h3">$ {{selectedObj.vaService.order.totalCost}}</p>
-               <p ng-if="(selectedObj.vaService.order.totalCost == null || selectedObj.vaService.order.totalCost == '')" class="pull-right mr h3">-</p>
+               <p class="pull-right h3 mr" ng-bind="selectedObj.vaService.order.totalCost != '0.0' ? selectedObj.vaService.order.totalCost : '-'"></p>
             </div>
          </div>
       </div>
