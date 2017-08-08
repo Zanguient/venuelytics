@@ -318,7 +318,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                 value: dataObject.value || 0,
                 name: dataObject.label,
                 icon: dataObject.icon,
-                link: "instore-insight",
+                link: "#",
                 linkDescription: "View Details",
                 contentColorCode : { "color": "#fff", "background-color": color, "border-color": "#cfdbe2"},
                 linkColorCode :  { "background-color":"#3a3f51"}

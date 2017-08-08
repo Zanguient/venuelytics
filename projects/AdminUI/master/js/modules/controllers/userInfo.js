@@ -25,18 +25,21 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     }
 	 
     $scope.userRoles = {};
-    $scope.userRoles['USER'] = 'Basic User';
-    $scope.userRoles['BOUNCER'] = 'Bouncer';
-    $scope.userRoles['BARTENDER'] = 'Bartender';
-    $scope.userRoles['WAITRESS'] = 'Waitress';
-    $scope.userRoles['DJ'] = 'DJ';
-    $scope.userRoles['KAROKE_MGR'] = 'Karaoke Manager';
-    $scope.userRoles['ARTIST'] = 'Artist';
-    $scope.userRoles['MANAGER'] = 'Manager';
-    $scope.userRoles['OWNER'] = 'Owner';
-    $scope.userRoles['ADMIN'] = 'Administrator';
-    $scope.userRoles['AGENT'] = 'Agent';
-    $scope.userRoles['AGENT_MANAGER'] = 'Administrator';
+    $scope.userRoles[1] = 'Basic User';
+    $scope.userRoles[2] = 'Bouncer';
+    $scope.userRoles[3] = 'Bartender';
+    $scope.userRoles[4] = 'Waitress';
+    $scope.userRoles[5] = 'DJ';
+    $scope.userRoles[6] = 'Karaoke Manager';
+    $scope.userRoles[7] = 'Artist';
+    $scope.userRoles[8] = 'Host';
+    $scope.userRoles[50] = 'Promotor';
+    $scope.userRoles[50] = 'Service Manager';
+    $scope.userRoles[100] = 'Manager';
+    $scope.userRoles[500] = 'Owner';
+    $scope.userRoles[1000] = 'Administrator';
+    $scope.userRoles[10] = 'Agent';
+    $scope.userRoles[11] = 'Agent Manager';
     
     $scope.stores = [];
    // var storePromise = RestServiceFactory.VenueService().get();
