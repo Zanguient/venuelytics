@@ -9,7 +9,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   'use strict';
   
   $scope.img = {};
-  $scope.img.pic_url = "";
+  $scope.img.picUrl = "";
   $scope.createElements = [];
   $scope.addMapsforSave = [];
   $scope.imageUrls = [];
@@ -21,18 +21,18 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   image.onload = function(){
     $scope.originalWidth = this.width;
     $scope.originalHeight = this.height;
-    $scope.img.pic_url = this.src;
+    $scope.img.picUrl = this.src;
             
   }; 
   $('#venueMapImg').bind('resize', function(){
     
-    if ($scope.displayWidth != $('#venueMapImg').width() || $scope.displayHeight != $('#venueMapImg').height()) {
+    if ($scope.displayWidth !== $('#venueMapImg').width() || $scope.displayHeight !== $('#venueMapImg').height()) {
       $scope.displayWidth = $('#venueMapImg').width();
       $scope.displayHeight = $('#venueMapImg').height();
-      var a = $scope.img.pic_url;
-      $scope.img.pic_url = "";
+      var a = $scope.img.picUrl;
+      $scope.img.picUrl = "";
       $timeout(function(){
-        $scope.img.pic_url =a;
+        $scope.img.picUrl =a;
       }, 200);
     }
     });
@@ -64,7 +64,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
                               "enabled": "Y",
                               "servingSize": d[2],
                               "imageUrls": d[6]
-                            }
+                            };
                             $scope.createElements.push(splitElement);
                             var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit" ng-click="editTable('+row+','+cellData+')"></button>&nbsp;&nbsp;';
                             actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash" ng-click="deleteTable('+row+')"></button>';
@@ -90,7 +90,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
                               }*/
                           "createdCell": function (td, cellData, rowData, row, col) {
                             var actionHtml = '<em class="fa fa-check-square-o"></em>';
-                            if (cellData == false){
+                            if (cellData === false){
                               actionHtml = '<em class="fa fa-square-o"></em>';
                             }
                             $(td).html(actionHtml);
@@ -103,10 +103,10 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   DataTableService.initDataTable('tables_table', columnDefinitions, false);
     var promise = RestServiceFactory.VenueMapService().getAll({id: $stateParams.venueNumber});
     $scope.venueNumber = $stateParams.venueNumber;
-    if($stateParams.id != ""){
+    if($stateParams.id !== ""){
     promise.$promise.then(function(data) {
       data.map(function(venueMap) {
-        if (venueMap.id == $stateParams.id) {
+        if (venueMap.id === $stateParams.id) {
           $scope.data = venueMap;
           image.src = venueMap.imageUrls[0].originalUrl;
           $scope.img.maps = [];
@@ -163,7 +163,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         if (!img || !img.maps || !angular.isArray(img.maps)) {
             img = angular.isObject(img) ? img : {};
             img.maps = [];
-        };
+        }
         img.maps.map( function(area) {
           area.editMode = false;
         });
@@ -178,7 +178,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         } else {
             img.maps.push({editMode: true, coords: newImgCoords });
         }
-    };
+    }
     //name, price, capacity, description, enabled, action
     $scope.editTable = function(rowId, colId) {
       var table = $('#tables_table').DataTable();
@@ -231,7 +231,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
               return [$scope.displayWidth, $scope.displayHeight];
           },
           getImgSize: function(img) {
-                return _getImgSize(img.pic_url) || [10, 10];
+                return _getImgSize(img.picUrl) || [10, 10];
             },
             removeArea : function(area, index) {
               var table = $('#tables_table').dataTable();
@@ -240,7 +240,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   };
   function _getImgSize(url) {
      
-    if (typeof $scope.originalHeight == 'undefined') {
+    if (typeof $scope.originalHeight === 'undefined') {
       return false;
     } else {
       return [$scope.originalWidth, $scope.originalHeight];
@@ -249,7 +249,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   $scope.update = function(isValid, data, venueNumber) {
     for (var i = 0; i < $scope.img.maps.length; i++) {
       var coordinates = [];
-      var print = ($scope.img.maps[i].coords)
+      var print = ($scope.img.maps[i].coords);
       coordinates[0] = print[0];
       coordinates[1] = print[1];
       coordinates[2] = print[2];
@@ -258,20 +258,20 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       coordinates[5] = print[3];
       coordinates[6] = print[0];
       coordinates[7] = print[3];
-      var s_coordinates = coordinates.toString();
-      var objectMappingDecoupling = { "TableName": $scope.createElements[i].name, "coordinates": s_coordinates };
+      var splitCoordinates = coordinates.toString();
+      var objectMappingDecoupling = { "TableName": $scope.createElements[i].name, "coordinates": splitCoordinates };
       $scope.addMapsforSave.push(objectMappingDecoupling);
     }
     data.imageMap = JSON.stringify($scope.addMapsforSave);
     data.elements = $scope.createElements;
-    if($scope.imageUrls !=""){
+    if($scope.imageUrls !==""){
       data.imageUrls = $scope.imageUrls;
       $scope.imageUrls = [];
     }
     angular.forEach(data.imageUrls, function(value, key) {
       var venueImageId = {
           "id" : value.id
-      }
+      };
       $scope.imageUrls.push(venueImageId);
     });
     data.imageUrls = $scope.imageUrls;
@@ -281,7 +281,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       angular.forEach(tableImageUrl, function(value1, key1) {
         var tableImageId = {
         "id": value1.id
-        }
+        };
         value2.imageUrls.push(tableImageId);
       });
      
@@ -297,24 +297,24 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       RestServiceFactory.VenueMapService().updateVenueMap(target,payload, function(success){
         $state.go('app.storeedit', {id : venueNumber});
       },function(error){
-        if (typeof error.data != 'undefined') {
+        if (typeof error.data !== 'undefined') {
           toaster.pop('error', "Server Error", error.data.developerMessage);
         }
       });
-    }
+    };
     $scope.uploadFile = function(venueImage) {
       var fd = new FormData();
       fd.append("file", venueImage[0]);
       var payload = RestServiceFactory.cleansePayload('venueImage', fd);
       RestServiceFactory.VenueImage().uploadTableImage(payload, function(success){
-        if(success != {}){
+        if(success !== {}){
           var splitImage = $("#bottleClear").val();
-          if(splitImage == ""){
+          if(splitImage === ""){
             var t = $scope.newTable;
             t.imageUrls.push(success);
             document.getElementById("clear").value = "";
           } else {
-            $scope.img.pic_url = success.originalUrl;
+            $scope.img.picUrl = success.originalUrl;
             $scope.originalWidth = success.largeWidth;
             $scope.originalHeight = success.largeHeight;
             $scope.imageUrls.push(success);
@@ -323,7 +323,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
           toaster.pop('success', "Image upload successfull");
         }
       },function(error){
-        if (typeof error.data != 'undefined') {
+        if (typeof error.data !== 'undefined') {
          toaster.pop('error', "Server Error", error.data.developerMessage);
         }
       });

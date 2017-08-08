@@ -21,7 +21,7 @@ App.service('ContextService',['$location','RestServiceFactory', '$rootScope',fun
 
 	this.openVenueDropdown = function (selector) {
         $(selector).animate({ scrollTop: 0 }, 'slow', function () {});
-    }
+    };
 
 	var self = this;
 	var promise = RestServiceFactory.VenueService().get();

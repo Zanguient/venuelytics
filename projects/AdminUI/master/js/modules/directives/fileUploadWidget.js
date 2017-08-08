@@ -37,7 +37,7 @@ App.directive('formUpload', [ '$log','$timeout','Session','ContextService','$htt
 	        		var head=e.target.result.split(';')[0];
 	        		var imageType=head.split(':')[1];
 	        		
-	        		$log.log("image type is: ",imageType)
+	        		$log.log("image type is: ",imageType);
 	        		
 	        		var baseUrl= contextService.contextName+"/v1/upload/"+imageType.split('/')[1];
 	        		

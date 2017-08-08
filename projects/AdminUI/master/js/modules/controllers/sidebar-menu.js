@@ -53,7 +53,7 @@ App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$locatio
              (isActive(item) ? ' active' : '') ;
     };
     var filterFx = function(item) {
-    	if (typeof item.roleId == 'undefined') {
+    	if (typeof item.roleId === 'undefined') {
     		return 0;
     	}
 

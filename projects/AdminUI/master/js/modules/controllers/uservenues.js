@@ -51,7 +51,7 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
     		var table = $('#users_venue_table').dataTable();
     		table.fnDeleteRow(rowId);
     	},function(error){
-    		if (typeof error.data != 'undefined') { 
+    		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	});

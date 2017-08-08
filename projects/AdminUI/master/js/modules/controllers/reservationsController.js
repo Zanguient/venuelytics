@@ -51,7 +51,7 @@
           obj.title = 'A: ' + remaining;	
           obj.serviceType = 'BottleService';
           obj.start = f;
-          if (remaining == 0) 	{
+          if (remaining === 0) 	{
             obj.title = 'Fully Booked';	
             obj.backgroundColor = '#f56954'; //red 
             obj.borderColor = '#f56954'; //red
@@ -160,9 +160,9 @@ $scope.initCalendar = function () {
     $scope.selectTable = function(tableId, name) {
       
       $scope.selectedTable =  $scope.selectedVenueMap.productsByName[name];
-      $scope.isCurrSelReserved = typeof $scope.reservationData[$scope.selectedTable.id] != 'undefined';
+      $scope.isCurrSelReserved = typeof $scope.reservationData[$scope.selectedTable.id] !== 'undefined';
       $scope.order = {};
-      if (typeof $scope.reservationData[$scope.selectedTable.id] == 'undefined') {
+      if (typeof $scope.reservationData[$scope.selectedTable.id] === 'undefined') {
         $scope.order.type = 'OPEN';
       } else {
         $scope.order = $scope.reservationData[$scope.selectedTable.id].serviceInfo;

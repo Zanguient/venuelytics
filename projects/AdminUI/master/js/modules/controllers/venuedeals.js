@@ -24,7 +24,7 @@ App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout'
           "createdCell": function (td, cellData, rowData, row, col) {
           
               var actionHtml = '<em class="fa fa-check-square-o"></em>';
-              if (cellData != true){
+              if (cellData !== true){
                 actionHtml = '<em class="fa fa-square-o"></em>';
               }
               $(td).html(actionHtml);

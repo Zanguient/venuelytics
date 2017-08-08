@@ -33,7 +33,7 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		
 		    		var actionHtml = '<em class="fa fa-check-square-o"></em>';
-		    		if (cellData == false || cellData === 'N' || cellData === "false"){
+		    		if (cellData === false || cellData === 'N' || cellData === "false"){
 		    			actionHtml = '<em class="fa fa-square-o"></em>';
 		    		}
 		    		$(td).html(actionHtml);
@@ -60,18 +60,18 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
   	
   });
   
-  $scope.doneAction = function() {
-	  $state.go('app.agencyUsers', {id:$stateParams.id});
-  }
+  	$scope.doneAction = function() {
+	  	$state.go('app.agencyUsers', {id:$stateParams.id});
+  	};
 		
-  $scope.editPE = function(rowId, productId) {
+  	$scope.editPE = function(rowId, productId) {
   		$rootScope.createPartySplit = "private";
 	  	$state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:productId});
-	}
+	};
 	$scope.createPrivateEvent = function(rowId, productId){
 		$rootScope.createPartySplit = "private";
 		$state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:'new'});
-	}
+	};
   	$scope.deletePE = function (rowId, productId) {
     ngDialog.openConfirm({
       template: 'deletePrivateId',

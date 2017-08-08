@@ -252,7 +252,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         returnData['YEARLY'] =[];
         var colorIndex = 0;
         for(var key in requestByStatus) {
-            var elem = requestByStatus[key];
+            elem = requestByStatus[key];
             var pieElem = {};
 
             returnData['DAILY'].push(createPieElem($scope.colorPalattes[colorIndex % $scope.colorPalattes.length],key,elem.daily));

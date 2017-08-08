@@ -113,7 +113,7 @@ App.directive('markdownarea', function() {
                 codeContent      = this.code.find('.CodeMirror-sizer'),
                 codeScroll       = this.code.find('.CodeMirror-scroll').on('scroll',$.Utils.debounce(function() {
 
-                    if($this.markdownarea.attr("data-mode")=="tab") return;
+                    if($this.markdownarea.attr("data-mode")==="tab") return;
 
                     // calc position
                     var codeHeight       = codeContent.height()   - codeScroll.height(),
@@ -129,7 +129,7 @@ App.directive('markdownarea', function() {
 
                 e.preventDefault();
 
-                if($this.markdownarea.attr("data-mode")=="tab") {
+                if($this.markdownarea.attr("data-mode")==="tab") {
 
                     $this.markdownarea.find(".uk-markdown-button-markdown, .uk-markdown-button-preview").removeClass("uk-active").filter(this).addClass("uk-active");
 
@@ -216,7 +216,7 @@ App.directive('markdownarea', function() {
             this.markdownarea.on("click", "a[data-markdownarea-cmd]", function(){
                 var cmd = $(this).data("markdownareaCmd");
 
-                if(cmd && Markdownarea.commands[cmd] && (!$this.activetab || $this.activetab=="code" || cmd=="fullscreen")) {
+                if(cmd && Markdownarea.commands[cmd] && (!$this.activetab || $this.activetab==="code" || cmd==="fullscreen")) {
                     Markdownarea.commands[cmd].action.apply($this, [$this.editor]);
                 }
 
@@ -227,11 +227,11 @@ App.directive('markdownarea', function() {
 
             var mode = this.options.mode;
 
-            if(mode=="split" && this.markdownarea.width() < this.options.maxsplitsize) {
+            if(mode==="split" && this.markdownarea.width() < this.options.maxsplitsize) {
                 mode = "tab";
             }
 
-            if(mode=="tab") {
+            if(mode==="tab") {
 
                 if(!this.activetab) {
                     this.activetab = "code";
@@ -239,7 +239,7 @@ App.directive('markdownarea', function() {
                 }
 
                 this.markdownarea.find(".uk-markdown-button-markdown, .uk-markdown-button-preview").removeClass("uk-active")
-                                 .filter(this.activetab=="code" ? '.uk-markdown-button-markdown':'.uk-markdown-button-preview').addClass("uk-active");
+                                 .filter(this.activetab==="code" ? '.uk-markdown-button-markdown':'.uk-markdown-button-preview').addClass("uk-active");
 
             }
 
@@ -333,56 +333,56 @@ App.directive('markdownarea', function() {
             "label"  : '<i class="fa fa-bold"></i>',
             "shortcut": ['Ctrl-B', 'Cmd-B'],
             "action" : function(editor){
-                baseReplacer(this.getMode() == 'html' ? "<strong>$1</strong>":"**$1**", editor);
+                baseReplacer(this.getMode() === 'html' ? "<strong>$1</strong>":"**$1**", editor);
             }
         },
         "italic" : {
             "title"  : "Italic",
             "label"  : '<i class="fa fa-italic"></i>',
             "action" : function(editor){
-                baseReplacer(this.getMode() == 'html' ? "<em>$1</em>":"*$1*", editor);
+                baseReplacer(this.getMode() === 'html' ? "<em>$1</em>":"*$1*", editor);
             }
         },
         "strike" : {
             "title"  : "Strikethrough",
             "label"  : '<i class="fa fa-strikethrough"></i>',
             "action" : function(editor){
-                baseReplacer(this.getMode() == 'html' ? "<del>$1</del>":"~~$1~~", editor);
+                baseReplacer(this.getMode() === 'html' ? "<del>$1</del>":"~~$1~~", editor);
             }
         },
         "blockquote" : {
             "title"  : "Blockquote",
             "label"  : '<i class="fa fa-quote-right"></i>',
             "action" : function(editor){
-                baseReplacer(this.getMode() == 'html' ? "<blockquote><p>$1</p></blockquote>":"> $1", editor);
+                baseReplacer(this.getMode() === 'html' ? "<blockquote><p>$1</p></blockquote>":"> $1", editor);
             }
         },
         "link" : {
             "title"  : "Link",
             "label"  : '<i class="fa fa-link"></i>',
             "action" : function(editor){
-                baseReplacer(this.getMode() == 'html' ? '<a href="http://">$1</a>':"[$1](http://)", editor);
+                baseReplacer(this.getMode() === 'html' ? '<a href="http://">$1</a>':"[$1](http://)", editor);
             }
         },
         "picture" : {
             "title"  : "Picture",
             "label"  : '<i class="fa fa-picture-o"></i>',
             "action" : function(editor){
-                baseReplacer(this.getMode() == 'html' ? '<img src="http://" alt="$1">':"![$1](http://)", editor);
+                baseReplacer(this.getMode() === 'html' ? '<img src="http://" alt="$1">':"![$1](http://)", editor);
             }
         },
         "listUl" : {
             "title"  : "Unordered List",
             "label"  : '<i class="fa fa-list-ul"></i>',
             "action" : function(editor){
-                if(this.getMode() == 'markdown') baseReplacer("* $1", editor);
+                if(this.getMode() === 'markdown') baseReplacer("* $1", editor);
             }
         },
         "listOl" : {
             "title"  : "Ordered List",
             "label"  : '<i class="fa fa-list-ol"></i>',
             "action" : function(editor){
-                if(this.getMode() == 'markdown') baseReplacer("1. $1", editor);
+                if(this.getMode() === 'markdown') baseReplacer("1. $1", editor);
             }
         }
     };

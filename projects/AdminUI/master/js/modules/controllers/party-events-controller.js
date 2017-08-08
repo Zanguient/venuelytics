@@ -33,7 +33,7 @@ App.controller('partyEventsController', ['$scope', '$state', '$stateParams', '$c
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		
 		    		var actionHtml = '<em class="fa fa-check-square-o"></em>';
-		    		if (cellData == false || cellData === 'N' || cellData === "false"){
+		    		if (cellData === false || cellData === 'N' || cellData === "false"){
 		    			actionHtml = '<em class="fa fa-square-o"></em>';
 		    		}
 		    		$(td).html(actionHtml);
@@ -60,18 +60,18 @@ App.controller('partyEventsController', ['$scope', '$state', '$stateParams', '$c
   	
   });
   
-  $scope.doneAction = function() {
-	  $state.go('app.agencyUsers', {id:$stateParams.id});
-  }
+  	$scope.doneAction = function() {
+	  	$state.go('app.agencyUsers', {id:$stateParams.id});
+  	};
 		
-  $scope.editPartyEvent = function(rowId, productId) {
+  	$scope.editPartyEvent = function(rowId, productId) {
   		$rootScope.createPartySplit = "party";
 	  	$state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:productId});
-	}
+	};
 	$scope.createPartyEvent = function(rowId, productId){
 		$rootScope.createPartySplit = "party";
 		$state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:'new'});
-	}
+	};
   	$scope.deletePartyEvent = function (rowId, productId) {
     ngDialog.openConfirm({
       template: 'deletePartyId',
