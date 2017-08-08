@@ -10,7 +10,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown {{$root.homeTab}}">
-                    <a ng-href="/home" class="dropdown-toggle animated fadeIn animation-delay-4" data-toggle="dropdown" data-hover="dropdown" role="button" data-name="home">{{"navbar.HOME" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
+                    <a ng-href="home" class="dropdown-toggle animated fadeIn animation-delay-4" data-toggle="dropdown" data-hover="dropdown" role="button" data-name="home">{{"navbar.HOME" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     <!-- <ul class="dropdown-menu dropdown-menu-left animated-2x animated fadeIn">
                         <li><a href="/about" class="dropdown-link">{{"footBar.ABOUT" | translate}}</a></li>
                         <li><a href="/contact" class="dropdown-link">{{"contact.CONTACT_US" | translate}}</a></li>
@@ -18,11 +18,11 @@
 
                 </li>
                 <li class="dropdown {{$root.businessTab}}" ng-show="$root.showBusinessTab == 1">
-                    <a ng-href="/searchBusiness" class="dropdown-toggle animated fadeIn animation-delay-6" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">{{"navbar.BUSINESS" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
+                    <a ng-href="searchBusiness" class="dropdown-toggle animated fadeIn animation-delay-6" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">{{"navbar.BUSINESS" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
 
                 </li>
                 <li class="dropdown {{$root.consumerTab}}">
-                    <a href="/cities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities">{{"navbar.CONSUMERS" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
+                    <a href="cities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities">{{"navbar.CONSUMERS" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li>
 
@@ -30,7 +30,7 @@
                     </ul>
                 </li>
                 <li class="dropdown {{$root.newConsumerTab}}" ng-show="$root.showNewConsumer == 1">
-                    <a href="/newCities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities">New Consumer<i class="zmdi zmdi-chevron-down"></i></a>
+                    <a href="newCities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities">New Consumer<i class="zmdi zmdi-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li>
 
@@ -38,15 +38,15 @@
                     </ul>
                 </li>
                 <li class="dropdown {{$root.aboutTab}}">
-                    <a ng-href="/about" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">{{"footBar.ABOUT" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
+                    <a ng-href="about" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">{{"footBar.ABOUT" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
 
                 </li>
                 <li class="dropdown {{$root.contactTab}}">
-                    <a ng-href="/contact" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">{{"contact.CONTACT_US" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
+                    <a ng-href="contact" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">{{"contact.CONTACT_US" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
 
                 </li>
                 <li class="dropdown {{$root.blogTab}}">
-                    <a ng-href="/blog" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">{{"blog.BLOG" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
+                    <a ng-href="blog" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio">{{"blog.BLOG" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
 
                 </li>
             </ul>
