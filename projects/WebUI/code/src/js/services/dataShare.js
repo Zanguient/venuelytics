@@ -12,6 +12,7 @@ app.service('DataShare', function() {
   this.privateEventData = { };
   this.partyServiceData = { };
   this.guestListData = { };
+  this.foodServiceData = { };
   this.authBase64Str = { };
   this.bottleZip = '';
   this.payloadObject = '';

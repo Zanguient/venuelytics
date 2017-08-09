@@ -71,6 +71,26 @@
                                 </center>
                             </div>
 
+                             <div id="rowTwo">
+                                <center>
+                                    <div id="serviceTabTwo" class="btn-group btn-group-justified" class="reservation-tab">
+                                        <div id="foodServiceTab" class="btn-group" class="reservation-tab" ng-class="[myClass]">
+                                            <button id="foodTab" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="foodFunction()">
+                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
+                                                <br class="showInMobile"><span class="fontRegular"><strong ng-class="[tabButtonColor]">{{"reservation.FOOD_SERVICE" | translate}}</strong></span>
+                                            </button>
+                                        </div>
+                                        <div id="drinkServiceTab" class="btn-group" class="reservation-tab" ng-class="[myClass]">
+                                            <button id="drink" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="drinkFunction()">
+                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
+                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong ng-class="[tabButtonColor]">{{"reservation.DRINK_SERVICE" | translate}}</strong></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </center>
+                            </div>
+
+
                             <!-- Bottle Service START row-->
                             <div ng-show="bottleServiceTab">
                                 <div ng-include="'bottle-service.html'"></div>
@@ -90,6 +110,12 @@
 
                             <div ng-show="bachelorPartyTab">
                                 <div ng-include="'bachelor-party.html'"></div>
+                            </div>
+                            <div ng-show="foodServiceTab">
+                                <div ng-include="'food-service.html'"></div>
+                            </div>
+                            <div ng-show="drinkServiceTab">
+                                <div ng-include="'drink-service.html'"></div>
                             </div>
                         </div>
 

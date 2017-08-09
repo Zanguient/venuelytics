@@ -52,6 +52,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                     self.bachelorFunction();
                 } else if(self.tabParams === 'party-packages') {
                     self.partyFunction();
+                } else if(self.tabParams === 'food-services') {
+                    self.foodFunction();
+                } else if(self.tabParams === 'drink-services') {
+                    self.drinkFunction();
                 } else {
                     self.bottleService();
                 }
@@ -110,6 +114,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.guestServiceTab = false;
                 self.partyPackageTab = false;
                 self.bachelorPartyTab = false;
+                self.foodServiceTab = false;
+                self.drinkServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/private-events");
              };
 
@@ -131,6 +137,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.guestServiceTab = true;
                 self.partyPackageTab = false;
                 self.bachelorPartyTab = false;
+                self.foodServiceTab = false;
+                self.drinkServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/guest-list");
              };
 
@@ -152,6 +160,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.guestServiceTab = false;
                 self.partyPackageTab = false;
                 self.bachelorPartyTab = true;
+                self.foodServiceTab = false;
+                self.drinkServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bachelor-party");
              };
 
@@ -169,7 +179,46 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.guestServiceTab = false;
                 self.partyPackageTab = true;
                 self.bachelorPartyTab = false;
+                self.foodServiceTab = false;
+                self.drinkServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/party-packages");
+             };
+
+             /*For food service tab highlight*/
+             self.foodFunction = function() {
+
+                $("#privateEventTab").css('background-color',APP_COLORS.silver);
+                $('#private').css('color', APP_COLORS.fruitSalad);
+                $("#bottleTab").css('background-color',APP_COLORS.silver);
+                $('#bottle').css('color', APP_COLORS.fruitSalad);
+                self.myClass = 'partyBackgroundSelected';
+                self.tabButtonColor = 'partyBackgroundButtonSelected';
+                self.bottleServiceTab = false;
+                self.eventServiceTab = false;
+                self.guestServiceTab = false;
+                self.partyPackageTab = false;
+                self.bachelorPartyTab = false;
+                self.foodServiceTab = true;
+                self.drinkServiceTab = false;
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/food-services");
+             };
+
+             /*For drink service tab highlight*/
+             self.drinkFunction = function() {
+                $("#privateEventTab").css('background-color',APP_COLORS.silver);
+                $('#private').css('color', APP_COLORS.fruitSalad);
+                $("#bottleTab").css('background-color',APP_COLORS.silver);
+                $('#bottle').css('color', APP_COLORS.fruitSalad);
+                self.myClass = 'partyBackgroundSelected';
+                self.tabButtonColor = 'partyBackgroundButtonSelected';
+                self.bottleServiceTab = false;
+                self.eventServiceTab = false;
+                self.guestServiceTab = false;
+                self.partyPackageTab = false;
+                self.bachelorPartyTab = false;
+                self.foodServiceTab = false;
+                self.drinkServiceTab = true;
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/drink-services");
              };
 
             self.init();

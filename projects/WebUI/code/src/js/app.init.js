@@ -212,6 +212,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller:'PartyConfirmController',
             description: 'Venuelytics - a real time venue experience platform for bottle payment'
         })
+        .when('/confirmFoodService/:cityName/:venueid', {
+            templateUrl: 'food-confirmation.html',
+            title: 'Venuelytics-Food-Confirmation',
+            controller:'FoodConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for food confirmation'
+        })
         .when('/:cityName/paymentSuccess/:venueid', {
             templateUrl: 'payment-success.html',
             title: 'Venuelytics-Payment-Success',

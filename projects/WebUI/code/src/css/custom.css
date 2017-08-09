@@ -139,6 +139,11 @@ select {
   border-right:2px solid #ffffff;
 }
 
+#foodTab {
+  white-space: normal;
+  border-right:2px solid #ffffff;
+}
+
 #glist {
   white-space: normal;
 }

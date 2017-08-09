@@ -1,0 +1,123 @@
+<div ng-controller="foodServiceController">
+<form class="search-form" name="foodForm" validate-form="" parsley-validate novalidate ng-cloak>
+        <fieldset>
+        	<div class="col-lg-12 form-group is-empty">
+                <input type="text" id="foodFirstName" name="foodFirstName" placeholder="{{'reservation.FIRST_NAME' | translate}}" class="form-control fontBold" ng-model="food.firstName" required="" data-parsley-trigger="change">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="foodLastName" name="foodLastName" placeholder="{{'reservation.LAST_NAME' | translate}}" class="form-control fontBold" ng-model="food.lastName" required="" data-parsley-trigger="change">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="email" id="foodEmailId" name="foodEmailId" data-parsley-type="email" placeholder="{{'reservation.EMAIL' | translate}}" class="form-control fontBold" ng-model="food.emailId" required="" data-parsley-trigger="change">
+            </div>
+            <div class="col-lg-12 form-group is-empty">
+                <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="foodMobile" placeholder="{{'reservation.MOBILE' | translate}}" ng-model="food.mobileNumber" required="" data-parsley-trigger="change">
+            </div>
+        <div class="col-md-12">
+        <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
+        </div>
+        <div class="col-md-12" ng-if="bottleMinimum != ''">
+        <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
+            <table class="table table-responsive table-no-border">
+                <thead>
+                    <tr>
+                        <th>{{"reservation.BOTTLE"  | translate}}</th>
+                        <th>{{"reservation.BRAND"  | translate}}</th>
+                        <th>{{"reservation.QUANTITY"  | translate}}</th>
+                        <th>{{"reservation.PRICE"  | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="bottle in bottleMinimum">
+                        <td><label>{{bottle.bottle}}</label></td>
+                        <td><label>{{bottle.brand}}</label></td>
+                        <td><label>{{bottle.quantity}}</label></td>
+                        <td>$<label>{{bottle.price}}</label></td>
+                        <td><a class="btn btn-danger btn-sm btn-raised btn-responsive" ng-click="removeBottleMinimum($index,bottle,bottleMinimum)" >X</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+		 <div class="col-md-10">
+            <table class="table table-no-border bottleSelect">
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div>{{"reservation.BOTTLE" | translate}}</div>
+                                    <div>
+                                        <select ng-change="getBrandByBottleName(chooseBottles.bottleName)" class="form-control col-xs-3" ng-options="x.name as x.name for x in allBottle" ng-model="chooseBottles.bottleName"></select>
+                                    </div>
+                             </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div>{{"reservation.BRAND" | translate}}</div>
+                                    <div>
+                                        <select class="form-control" ng-options="x.brand as x.brand for x in brandData" ng-model="chooseBottles.brandName"></select>
+                                    </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div>{{"reservation.PRICE" | translate}}</div>
+                                    <div>
+                                        <input type="text" placeholder="Price" class="form-control" ng-model="chooseBottles.price">
+                                    </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div>{{"reservation.QUANTITY" | translate}}</div>
+                                    <div>
+                                        <table>
+                                        <tr>
+                                            <td><a class="btn btn-default btn-sm btn-responsive" ng-click="minusValue()"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                            </a></td>
+                                            <td>{{bottleCount}}</td>
+                                            <td><a class="btn btn-default btn-sm btn-responsive" ng-click="addValue()" > <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            </a></td>
+                                        </tr>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td><a class="btn btn-success btn-raised btn-lg btn-responsive" ng-click="selectedBottles()" ng-disabled="chooseBottles.bottleName == undefined || chooseBottles.bottleName == ''"><span>{{"reservation.ADD" | translate}}</span></a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-12">
+    		<center>
+        		<a href="" class="btn btn-success fontRegular btn-raised" ng-if="foodBreakFastUrl" ng-click="menuUrlSelection(foodBreakFastUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.BREAK_FAST" | translate}}</a>&nbsp;&nbsp;
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodBranchUrl" ng-click="menuUrlSelection(foodBranchUrl)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.FOOD_BRANCH" | translate}}</a> &nbsp;&nbsp;
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodStartersUrl" ng-click="menuUrlSelection(foodStartersUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_STARTERS" | translate}}</a>&nbsp;&nbsp;
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodMenuUrl" ng-click="menuUrlSelection(foodMenuUrl)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FOOD_MENU" | translate}}</a>
+                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="foodHappyHourUrl" ng-click="menuUrlSelection(foodHappyHourUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.FOOD_HAPPY_HOUR" | translate}}</a>&nbsp;&nbsp;
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodDinnerUrl" ng-click="menuUrlSelection(foodDinnerUrl)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.FOOD_DINNER" | translate}}</a> &nbsp;&nbsp;
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodLunchUrl" ng-click="menuUrlSelection(foodLunchUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_LUNCH" | translate}}</a>&nbsp;&nbsp;
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodDessertsUrl" ng-click="menuUrlSelection(foodDessertsUrl)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FOOD_DESSERTS" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodAppetizsersUrl" ng-click="menuUrlSelection(foodAppetizsersUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_APPETIZSER" | translate}}</a>&nbsp;&nbsp;
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodGlutenfree" ng-click="menuUrlSelection(foodGlutenfree)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FOOD_GLUTEN" | translate}}</a>
+    		</center>
+		</div> <br/>
+        <div class="col-md-10 form-group is-empty">
+            <input type="text" class="form-control fontBold" id="foodInstructions" ng-model="food.instructions" placeholder="{{'reservation.SPECIAL_INSTRUCTION' | translate}}">
+       	</div>
+       	<br><br>
+            <div class="col-lg-12">
+                <center>
+                    <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-disabled="foodForm.$invalid" ng-click="foodSave()">
+                        <span class="fontRegular">APPLY</span>
+                    </button>
+                    <button class="btn btn-raised btn-success">
+                        <span class="fontRegular">CANCEL</span>
+                    </button>
+                </center>
+            </div>
+        </fieldset>
+</form>
+</div>
+
+<div class="modal" id="foodMenuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <img src="{{menuImageUrl}}" alt="" class="img-responsive">
+        </div>
+    </div>
+</div>
