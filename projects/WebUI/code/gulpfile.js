@@ -30,7 +30,9 @@ var jeditor = require('gulp-json-editor');
 var jscpd = require('gulp-jscpd');
 var sitemap = require('gulp-sitemap');
 var save = require('gulp-save');
- 
+var gutil       = require('gulp-util');
+
+var webserver = require('gulp-webserver');
 
 var paths = {
     src : {
@@ -66,7 +68,8 @@ var targets = {
             assets: config.folders.assets,
             primaryColor: themeOptions.primaryColor + '-' + themeOptions.shineColor,
             headerClass: themeOptions.headerClass,
-            navbarClass: themeOptions.navbarClass
+            navbarClass: themeOptions.navbarClass,
+            context: '/'+getContextPath() +'/'
         },
     },
     navbar: {
@@ -75,25 +78,19 @@ var targets = {
             assets: config.folders.assets,
             primaryColor: themeOptions.primaryColor + '-' + themeOptions.shineColor,
             headerClass: themeOptions.headerClass,
-            navbarClass: themeOptions.navbarClass + ' navbar-mode'
+            navbarClass: themeOptions.navbarClass + ' navbar-mode',
+            context: '/'+getContextPath() +'/'
         },
     },
-    demo: {
-        environment: 'demo',
-        data: {
-            assets: config.folders.assets,
-            primaryColor: themeOptions.primaryColor + '-' + themeOptions.shineColor,
-            headerClass: themeOptions.headerClass,
-            navbarClass: themeOptions.navbarClass
-        },
-    },
+   
     dev: {
         environment: 'dev',
         data: {
             assets: config.folders.assets,
             primaryColor: themeOptions.primaryColor + '-' + themeOptions.shineColor,
             headerClass: themeOptions.headerClass,
-            navbarClass: themeOptions.navbarClass
+            navbarClass: themeOptions.navbarClass,
+            context: '/'+getContextPath() +'/'
         },
     },
 };
@@ -226,6 +223,7 @@ gulp.task('js:base', function() {
             filename: 'jshint-output.html'
         }))
         .pipe(f.restore)
+        .pipe(gulpif('*.js',replace('https://dev.api.venuelytics.com',baseUrl())))
         .pipe(gulpif(config.compress, concat('app.min.js')))
         .pipe(gulpif(config.compress, uglify()))
         .pipe(cachebust.resources())
@@ -357,13 +355,16 @@ gulp.task('watch', function() {
     gulp.watch(['src/seo/**/*']);
 });
 
+
 gulp.task('connect', function() {
-    return connect.server({
-        root: config.folders.dist,
-        port: 8080,
-        livereload: true,
-        fallback: config.folders.dist + '/index.html'
-    });
+  gulp.src(config.folders.dist)
+    .pipe(webserver({
+      livereload: true,
+      path: '/webui',
+      directoryListing: false,
+      open: 'http://localhost:8000/' + getContextPath(),
+      fallback: 'index.html'
+    }));
 });
 
 gulp.task('default', function() {
@@ -468,3 +469,18 @@ gulp.task('aws:deploy',['dist:clean'],function() {
     .pipe(awspublish.reporter());
 
 });
+
+function getContextPath() {
+    if (gutil.env.context) {
+        return gutil.env.context;
+    } 
+    return "webui";
+}
+function baseUrl() {
+    if (gutil.env.build === 'prod') {
+        return "https://prod.api.venuelytics.com";
+    } else if (gutil.env.build === 'dev') {
+        return "https://dev.api.venuelytics.com";
+    } 
+    return "http://localhost:8080";
+}
