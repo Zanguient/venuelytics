@@ -50,9 +50,9 @@
                                             </button>
                                         </div>
                                         <div id="partyEventTab" class="btn-group" class="reservation-tab" ng-if="partyFlag == true" ng-class="[myClass]">
-                                            <button id="party" type="button" class="btn btn-succes btn-responsive reservation-button" ng-click="partyFunction()" ng-class="[tabButtonColor]">
+                                            <button id="party" type="button" class="btn btn-succes btn-responsive reservation-button" ng-click="partyFunction()">
                                                 <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
-                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.PARTY" | translate}}</strong></span>
+                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong ng-class="[tabButtonColor]">{{"reservation.PARTY" | translate}}</strong></span>
                                             </button>
                                         </div>
                                         <div id="privateEventTab" class="btn-group" class="reservation-tab">
