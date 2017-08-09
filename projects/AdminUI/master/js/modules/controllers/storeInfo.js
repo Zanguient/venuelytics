@@ -3,8 +3,10 @@
  * smangipudi
  =========================================================*/
  /*jshint bitwise: false*/
- App.controller('StoreController', ['$translate','$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
-   function($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout,DataTableService, $compile, ngDialog) {
+ App.controller('StoreController', ['$translate','$scope', '$state', '$stateParams',
+  'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
+      function($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
+        $timeout,DataTableService, $compile, ngDialog) {
   'use strict';
   
   $scope.advanceSwitches = {
@@ -54,7 +56,8 @@
       "targets": [2],
       "orderable": false,
       "createdCell": function (td, cellData, rowData, row, col) {
-        var actionHtml = ('<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ng-click="updateAttribute(\'' + row + '\'  )"></button>&nbsp;&nbsp;');
+        var actionHtml = ('<button title="Edit" class="btn btn-default btn-oval fa fa-edit" '+
+            'ng-click="updateAttribute(\'' + row + '\'  )"></button>&nbsp;&nbsp;');
 
         $(td).html(actionHtml);
         $compile(td)($scope);

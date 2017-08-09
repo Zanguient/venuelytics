@@ -57,10 +57,11 @@ App.directive('notify', function($window){
             return (new Message(options)).show();
         },
         closeAll  = function(group, instantly){
+            var id = '';
             if(group) {
-                for(var id in messages) { if(group===messages[id].group) messages[id].close(instantly); }
+                for(id in messages) { if(group===messages[id].group) messages[id].close(instantly); }
             } else {
-                for(var id in messages) { messages[id].close(instantly); }
+                for(id in messages) { messages[id].close(instantly); }
             }
         };
 
@@ -91,7 +92,8 @@ App.directive('notify', function($window){
         messages[this.uuid] = this;
 
         if(!containers[this.options.pos]) {
-            containers[this.options.pos] = $('<div class="uk-notify uk-notify-'+this.options.pos+'"></div>').appendTo('body').on("click", ".uk-notify-message", function(){
+            containers[this.options.pos] = $('<div class="uk-notify uk-notify-'+this.options.pos+'"></div>')
+            .appendTo('body').on("click", ".uk-notify-message", function(){
                 $(this).data("notifyMessage").close();
             });
         }
@@ -116,7 +118,8 @@ App.directive('notify', function($window){
 
             var marginbottom = parseInt(this.element.css("margin-bottom"), 10);
 
-            this.element.css({"opacity":0, "margin-top": -1*this.element.outerHeight(), "margin-bottom":0}).animate({"opacity":1, "margin-top": 0, "margin-bottom":marginbottom}, function(){
+            this.element.css({"opacity":0, "margin-top": -1*this.element.outerHeight(),
+                "margin-bottom":0}).animate({"opacity":1, "margin-top": 0, "margin-bottom":marginbottom}, function(){
 
                 if ($this.options.timeout) {
 

@@ -2,8 +2,10 @@
  * Module: uservenues.js
  *smangipudi
  =========================================================*/
-App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS', 
-                                  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS) {
+App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$compile', '$timeout',
+  'DataTableService','RestServiceFactory', 'toaster', 'FORMATS', 
+          function($scope, $state, $stateParams, $compile, $timeout, DataTableService,
+            RestServiceFactory, toaster, FORMATS) {
   'use strict';
   
   $timeout(function(){
@@ -21,7 +23,8 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
 		    	"targets": [4],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Unlink Venue " class="btn btn-default btn-oval fa fa-unlink" ng-click="deleteUserVenue(' +row +','+cellData+')"></button>';
+		    		var actionHtml = '<button title="Unlink Venue " class="btn btn-default btn-oval fa fa-unlink" '+
+                ' ng-click="deleteUserVenue(' +row +','+cellData+')"></button>';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);

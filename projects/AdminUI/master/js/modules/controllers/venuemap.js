@@ -66,15 +66,19 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
                               "imageUrls": d[6]
                             };
                             $scope.createElements.push(splitElement);
-                            var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit" ng-click="editTable('+row+','+cellData+')"></button>&nbsp;&nbsp;';
-                            actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash" ng-click="deleteTable('+row+')"></button>';
+                            var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit"'+
+                              ' ng-click="editTable('+row+','+cellData+')"></button>&nbsp;&nbsp;';
+                            actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash"'+
+                              ' ng-click="deleteTable('+row+')"></button>';
                             
                             $(td).html(actionHtml);
                              $compile(td)($scope);
                             }
                           /*"render": function (data, type, row, meta ) {
-                            var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit" ng-click="editTable('+meta.row+','+meta.col+')"></button>&nbsp;&nbsp;';
-                            actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash" ng-click="deleteTable('+meta.row+')"></button>';
+                            var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit" '+
+                              ' ng-click="editTable('+meta.row+','+meta.col+')"></button>&nbsp;&nbsp;';
+                            actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash"'+
+                              ' ng-click="deleteTable('+meta.row+')"></button>';
                             
                             return actionHtml;
                           }*/                       },
@@ -148,7 +152,8 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
           scope : $scope 
         }).then(function (value) {
           var table = $('#tables_table').DataTable();
-          table.row.add([$scope.newTable.name, $scope.newTable.price, $scope.newTable.servingSize, $scope.newTable.description,  $scope.newTable.enabled,   $scope.newTable.id, $scope.newTable.imageUrls]);
+          table.row.add([$scope.newTable.name, $scope.newTable.price, $scope.newTable.servingSize,
+              $scope.newTable.description,  $scope.newTable.enabled,   $scope.newTable.id, $scope.newTable.imageUrls]);
           table.page( 'last' ).draw( false );
           _addArea($scope.img);
           },function(error){

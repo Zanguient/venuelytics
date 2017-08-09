@@ -2,8 +2,9 @@
  * Module: private-event-controller.js
  *smangipudi
  =========================================================*/
-App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService',
-							'RestServiceFactory', 'toaster', 'FORMATS','$rootScope',  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
+App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$compile',
+ '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','$rootScope',  
+            function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
 								RestServiceFactory, toaster, FORMATS, $rootScope) {
     'use strict';
     var promise = RestServiceFactory.ProductService().getPrivateEvent({id:0, productId: $stateParams.id});

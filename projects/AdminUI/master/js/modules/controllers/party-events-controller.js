@@ -2,8 +2,10 @@
  * Module: party-event-controller.js
  *smangipudi
  =========================================================*/
-App.controller('partyEventsController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','ngDialog','$rootScope', 
-                                  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS, ngDialog, $rootScope) {
+App.controller('partyEventsController', ['$scope', '$state', '$stateParams', '$compile', '$timeout',
+ 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','ngDialog','$rootScope', 
+            function($scope, $state, $stateParams, $compile, $timeout,
+                DataTableService, RestServiceFactory, toaster, FORMATS, ngDialog, $rootScope) {
   'use strict';
   $timeout(function(){
 
