@@ -5,8 +5,10 @@
  * =========================================================
  */
 
-App.controller('VenueProductsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams','ngDialog',
-                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams, ngDialog) {
+App.controller('VenueProductsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory',
+  'DataTableService', 'toaster', '$stateParams','ngDialog',
+        function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster,
+            $stateParams, ngDialog) {
   'use strict';
   
   $timeout(function(){
@@ -20,14 +22,16 @@ App.controller('VenueProductsController', ['$scope', '$state','$compile','$timeo
 		    	"targets": [8],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit Product" class="btn btn-default btn-oval fa fa-edit" ng-click="editProduct('+row +"," +cellData+')"></button>&nbsp;&nbsp;';
+		    		var actionHtml = '<button title="Edit Product" class="btn btn-default btn-oval fa fa-edit"'+
+            ' ng-click="editProduct('+row +"," +cellData+')"></button>&nbsp;&nbsp;';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
 		    	  }
 	        }];
     
-	    DataTableService.initDataTable('products_table', columnDefinitions, false, "<'row'<'col-xs-6'l<'product_type_selector'>><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>");
+	    DataTableService.initDataTable('products_table', columnDefinitions, false,
+         "<'row'<'col-xs-6'l<'product_type_selector'>><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>");
    
       $('.product_type_selector').html('<label>Show Products:</label> <select id="product_type" name="products_type" '+
         'aria-controls="products_type" class="form-control input-sm">' + 

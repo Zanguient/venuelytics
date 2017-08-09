@@ -35,16 +35,16 @@
 
 });
 
- App.controller('MailFolderController', ['$scope', 'RestServiceFactory', '$stateParams', 'ContextService','$rootScope',
-  function($scope, RestServiceFactory, $stateParams, contextService, $rootScope) {
+ App.controller('MailFolderController', ['$cookieStore','$window','$scope', 'RestServiceFactory', '$stateParams', 'ContextService','$rootScope',
+  function($cookieStore, $window, $scope, RestServiceFactory, $stateParams, contextService, $rootScope) {
     'use strict';
     $scope.folder = $stateParams.folder;
     $scope.notifications = [];
     $scope.notificationsList = false;
-
     $scope.init = function() {
 
       var target = {id:contextService.userVenues.selectedVenueNumber};
+      $cookieStore.put("venueNumber", contextService.userVenues.selectedVenueNumber);
       if ($scope.folder === 'REQUEST' || $scope.folder === 'ONHOLD') {
         target.type = $scope.folder;
       } else if ($scope.folder !== 'all'){
@@ -52,7 +52,7 @@
       }
       RestServiceFactory.NotificationService().getActiveNotifications( target ,function(data){
         $scope.notifications = data.notifications;
-        if($scope.notifications === ''){
+        if($scope.notifications == ''){
           $scope.notificationsList = true;
         }
         $scope.visitors =[];
@@ -93,22 +93,28 @@
     $scope.init();
   }]);
 
- App.controller('MailViewController', ['$scope', 'RestServiceFactory', '$stateParams','$rootScope', function($scope, RestServiceFactory, $stateParams, $rootScope) {
+ App.controller('MailViewController', ['$cookieStore','$scope','RestServiceFactory', '$stateParams','$rootScope', 
+          function($cookieStore, $scope, RestServiceFactory, $stateParams, $rootScope) {
     'use strict';
-    $scope.selectOrderItems = [];
-    $scope.profileImage = $rootScope.selectedObj.visitorId;
-    angular.forEach($rootScope.selectedObj.vaService.order.orderItems, function(value, key) {
-      var venueImageId = {
-        "orderId": value.orderId,
-        "productId":value.productId,
-        "productType":value.productType,
-        "quantity": value.quantity,
-        "totalPrice": value.totalPrice,
-        "brand": value.brand,
-        "name":value.name,
-        "category":value.category,
-        "description":value.description
-      };
-      $scope.selectOrderItems.push(venueImageId);
+    var target = {id: $cookieStore.get('venueNumber')};
+    target.productId = $stateParams.mid;
+    RestServiceFactory.NotificationService().getCurrentNotifications(target ,function(data){
+      $scope.notifications = data;
+      $scope.selectOrderItems = [];
+      $scope.profileImage = $scope.notifications.visitorId;
+      angular.forEach($scope.notifications.vaService.order.orderItems, function(value, key) {
+        var venueImageId = {
+          "orderId": value.orderId,
+          "productId":value.productId,
+          "productType":value.productType,
+          "quantity": value.quantity,
+          "totalPrice": value.totalPrice,
+          "brand": value.brand,
+          "name":value.name,
+          "category":value.category,
+          "description":value.description
+        };
+        $scope.selectOrderItems.push(venueImageId);
+      });
     });
  }]);

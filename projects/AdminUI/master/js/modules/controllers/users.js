@@ -34,10 +34,13 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
 		    	"targets": [5],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" ng-click="editUser('+cellData+')"></button>&nbsp;&nbsp;';
-		    		actionHtml += '<button title="Associate Venue" class="btn btn-default btn-oval fa fa-home" ng-click="associateVenue(' +row +','+cellData+')"></button>';
+		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" '+
+		    			'ng-click="editUser('+cellData+')"></button>&nbsp;&nbsp;';
+		    		actionHtml += '<button title="Associate Venue" class="btn btn-default btn-oval fa fa-home"'+
+		    			' ng-click="associateVenue(' +row +','+cellData+')"></button>';
 		    		if (rowData[5] !== 1) {
-		    			actionHtml += '<button title="Delete User" class="btn btn-default btn-oval fa fa-trash" ng-click="deleteUser(' +row +','+cellData+')"></button>';
+		    			actionHtml += '<button title="Delete User" class="btn btn-default btn-oval fa fa-trash"'+
+		    			' ng-click="deleteUser(' +row +','+cellData+')"></button>';
 		    		}
 		    		
 		    		$(td).html(actionHtml);

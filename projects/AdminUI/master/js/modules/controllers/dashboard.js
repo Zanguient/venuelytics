@@ -1,6 +1,8 @@
 
-App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService','RestServiceFactory','$translate','colors', 'APP_EVENTS',
-                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors, APP_EVENTS) {
+App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService',
+    'RestServiceFactory','$translate','colors', 'APP_EVENTS',
+                                      function($log, $scope, $window, $http, $timeout, contextService,
+                                       RestServiceFactory, $translate, colors, APP_EVENTS) {
 	'use strict';
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.selectedPeriod = 'WEEKLY';

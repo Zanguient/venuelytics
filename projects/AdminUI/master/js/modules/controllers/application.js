@@ -3,8 +3,10 @@
 
  =========================================================*/
 
-App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthService','Session','$http', '$state','$log','$rootScope', 'ContextService', 'AUTH_EVENTS',
-                                         function($scope, RestServiceFactory, AuthService, Session,$http, $state, $log, $rootScope, contextService, AUTH_EVENTS) {
+App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthService','Session',
+	'$http', '$state','$log','$rootScope', 'ContextService', 'AUTH_EVENTS',
+     	function($scope, RestServiceFactory, AuthService, Session,$http, $state, $log, $rootScope,
+      	contextService, AUTH_EVENTS) {
     'use strict';
 	$scope.appLogo = "app/img/itzfun_logo.png";
 	$scope.appLogoSingle = "app/img/itzfun_logo.png";

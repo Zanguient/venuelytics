@@ -11,7 +11,8 @@
  		this.contextName = BASE_URL;
  		
 
- 		var storeProperties = ['id','venueName','managerName','address','city','state','country','zip','phone','mobile','email','website','enabled','venueNumber','venueTypeCode','venueType','description','cleansed','imageUrls','info','options'];
+ 		var storeProperties = ['id','venueName','managerName','address','city','state','country','zip','phone',
+ 			'mobile','email','website','enabled','venueNumber','venueTypeCode','venueType','description','cleansed','imageUrls','info','options'];
 
  		var beaconProperties = ['beaconName', 'description', 'majorLocCode', 'minorLocCode', 'storeNumber', 
  		'udid','enabled', 'departmentName', 'aisleName'];
@@ -24,7 +25,8 @@
  		var profileProperties = ['badgeNumber', 'email', 'loginId', 'userName', 'phone', 'password','newpassword',
  		'confirmnewpassword'];
  		var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',"enabled"];
- 		var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls', 'servingSize', 'productType', 'BanquetHall','category','brand','enabled','price'];
+ 		var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls', 'servingSize',
+ 			'productType', 'BanquetHall','category','brand','enabled','price'];
  		var venueMapProperties = ['id','type','section','imageMap','days','updatedAt','elements','imageUrls'];
  		var REQ_PROP= {};
  		
@@ -82,6 +84,8 @@
  				return $resource(urlTemplate.replace("@context", "notifications"), {}, {
  					getActiveNotifications : {method: 'GET',  params: { id: '@id' }, 
  					url: urlTemplate.replace("@context", "notifications")+"/active"},
+ 					getCurrentNotifications : {method: 'GET',  params: { id: '@id' }, 
+ 					url: urlTemplate.replace("@context", "notifications")+"/:productId"},
  					getUnreadNotificationCount : {method: 'GET',  params: { id: '@id' }, 
  					url: urlTemplate.replace("@context", "notifications")+"/count"},
  					getNotificationSummary : {method: 'GET', params: { id: '@id' }, 
