@@ -6,12 +6,24 @@
 App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster',
                                    function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster) {
   'use strict';
-  var userRoles = [];
-  userRoles['admin'] = 'Administrator';
-  userRoles['director'] = 'Store Director';
-  userRoles['manager'] = 'Manager';
-  userRoles['marketing'] = 'Marketing';
-  $timeout(function(){
+
+   	var userRoles = [];
+	userRoles[1] = 'Basic User';
+	userRoles[2] = 'Bouncer';
+	userRoles[3] = 'Bartender';
+	userRoles[4] = 'Waitress';
+	userRoles[5] = 'DJ';
+	userRoles[6] = 'Karaoke Manager';
+	userRoles[7] = 'Artist';
+	userRoles[8] = 'Host';
+	userRoles[50] = 'Promotor';
+	userRoles[50] = 'Service Manager';
+	userRoles[100] = 'Manager';
+	userRoles[500] = 'Owner';
+	userRoles[1000] = 'Administrator';
+	userRoles[10] = 'Agent';
+	userRoles[11] = 'Agent Manager';
+  	$timeout(function(){
 
     if ( ! $.fn.dataTable ) return;
 	    var columnDefinitions = [
@@ -54,7 +66,8 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
     	var table = $('#users_table').DataTable();
     	
     	data.users.map(function(user) {
-    		var role = userRoles[user.role];
+    		var role = userRoles[user.roleId];
+
     		if (role == null) {
     			role = user.role;
     		}

@@ -24,15 +24,15 @@
                                                 </figure>
                                                 <div class="card-block">
                                                     <h3 class="venueTitle">
-                                                        <a ng-href="/cities/{{selectedCityName}}/{{venue.id}}" ng-click="selectVenue(venue)">{{venue.venueName
+                                                        <a ng-href="cities/{{selectedCityName}}/{{venue.id}}" ng-click="selectVenue(venue)">{{venue.venueName
                                                             | limitTo: 25 }}{{venue.venueName.length > 25 ? '...'
                                                             :''}}</a>
                                                     </h3>
                                                     <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address | limitTo: 38
                                                     }}{{venue.address.length > 38 ? '...' :''}}</p>
                                                     <a href="{{venue.website}}" target="_blank" class="venueTitle"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
-                                                    <p class="venueDescription">{{venue.description | limitTo: 120
-                                                        }}{{venue.description.length > 120 ? '...' :''}}</p>
+                                                    <p class="venueDescription">{{venue.description | limitTo: 70
+                                                        }}{{venue.description.length > 70 ? '...' :''}}</p>
                                                     <div class="row col-lg-8 serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
                                                             ng-src="{{service.image}}" class="serviceSmallIcon" title="{{service.title}}"

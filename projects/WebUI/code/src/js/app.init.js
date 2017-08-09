@@ -11,6 +11,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $sceDelegateProvider.resourceUrlWhitelist([
         // Allow same origin resource loads.
         "self",
+        "127.0.0.1",
         // Allow loading from Google maps
         "http://dev.api.venuelytics.com/WebServices**"
     ]);

@@ -257,8 +257,8 @@ gulp.task('scripts:app', function() {
               'js/modules/services/*.js',
               'js/modules/filters/*.js', '!js/custom/**/*.js' ], {restore: true});
     return gulp.src(source.scripts.app)
-     	.pipe(gulpif('*.js',replace('dev.api.venuelytics.com',baseUrl())))
-     //	.pipe(uglify()) 
+     	  .pipe(gulpif('*.js',replace('dev.api.venuelytics.com',baseUrl())))
+      	.pipe(uglify()) 
         .pipe(f)
         .pipe(jshint())
         .pipe(jshint.reporter('gulp-jshint-html-reporter', {
