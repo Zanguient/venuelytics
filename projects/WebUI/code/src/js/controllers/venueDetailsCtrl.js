@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
+app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$sce',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $sce) {
 
     		$log.log('Inside Venue Details Controller.');
     		
@@ -19,7 +19,8 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                     self.venueImage = response.imageUrls[0].largeUrl;
                     var imageParam = $location.search().i;
                     if(imageParam === 'Y') {
-                        self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?i=' + imageParam;
+                        var URL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?i=' + imageParam;
+                        self.reservationURL = $sce.trustAsResourceUrl(URL);
                     } else {
                         if($routeParams.serviceType === 'p' || $routeParams.serviceType === 'b' || $routeParams.serviceType === 'g') {
                             self.row = 1;
@@ -30,7 +31,9 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
                         } else {
                             self.row = 1;
                         }
-                        self.resevationURL = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType;
+                        var url = RestURL.adminURL+'reservation/'+self.detailsOfVenue.id + '?r=' + self.row + '&t=' + $routeParams.serviceType;
+                        self.reservationURL = $sce.trustAsResourceUrl(url);
+                        $log.info("URL:", self.reservationURL);
                     }
                    
                     iFrameResize({
