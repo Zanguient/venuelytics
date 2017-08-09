@@ -69,7 +69,7 @@ var targets = {
             primaryColor: themeOptions.primaryColor + '-' + themeOptions.shineColor,
             headerClass: themeOptions.headerClass,
             navbarClass: themeOptions.navbarClass,
-            context: '/'+getContextPath() +'/'
+            context: '/'
         },
     },
     navbar: {
@@ -79,7 +79,7 @@ var targets = {
             primaryColor: themeOptions.primaryColor + '-' + themeOptions.shineColor,
             headerClass: themeOptions.headerClass,
             navbarClass: themeOptions.navbarClass + ' navbar-mode',
-            context: '/'+getContextPath() +'/'
+            context: '/'
         },
     },
    
@@ -90,7 +90,7 @@ var targets = {
             primaryColor: themeOptions.primaryColor + '-' + themeOptions.shineColor,
             headerClass: themeOptions.headerClass,
             navbarClass: themeOptions.navbarClass,
-            context: '/'+getContextPath() +'/'
+            context: '/'
         },
     },
 };
@@ -362,7 +362,7 @@ gulp.task('connect', function() {
       livereload: true,
       path: '/webui',
       directoryListing: false,
-      open: 'http://localhost:8000/' + getContextPath(),
+      open: 'http://localhost:8000/',
       fallback: 'index.html'
     }));
 });
@@ -470,12 +470,6 @@ gulp.task('aws:deploy',['dist:clean'],function() {
 
 });
 
-function getContextPath() {
-    if (gutil.env.context) {
-        return gutil.env.context;
-    } 
-    return "webui";
-}
 function baseUrl() {
     if (gutil.env.build === 'prod') {
         return "https://prod.api.venuelytics.com";
