@@ -628,6 +628,10 @@ select {
     width: 100px;
   }
 
+  .playVideo {
+    z-index: 100;position: absolute;top: 150px;
+  }
+
   #alignmentTime {
     margin-left: 13px;
   }
@@ -757,7 +761,7 @@ select {
   .imgContainer {
     width: 460px;
     height: 35px;
-    margin-left: 75px;
+    margin-left: 50px;
   }
 
   #deployStepsInput {
