@@ -131,7 +131,8 @@ App.directive('markdownarea', function() {
 
                 if($this.markdownarea.attr("data-mode")==="tab") {
 
-                    $this.markdownarea.find(".uk-markdown-button-markdown, .uk-markdown-button-preview").removeClass("uk-active").filter(this).addClass("uk-active");
+                    $this.markdownarea.find(".uk-markdown-button-markdown, .uk-markdown-button-preview")
+                        .removeClass("uk-active").filter(this).addClass("uk-active");
 
                     $this.activetab = $(this).hasClass("uk-markdown-button-markdown") ? "code":"preview";
                     $this.markdownarea.attr("data-active-tab", $this.activetab);
@@ -310,7 +311,8 @@ App.directive('markdownarea', function() {
 
                 if(editor.markdownarea.markdownarea.hasClass("uk-markdownarea-fullscreen")) {
 
-                    editor.state.fullScreenRestore = {scrollTop: window.pageYOffset, scrollLeft: window.pageXOffset, width: wrap.style.width, height: wrap.style.height};
+                    editor.state.fullScreenRestore = {scrollTop: window.pageYOffset, scrollLeft: 
+                        window.pageXOffset, width: wrap.style.width, height: wrap.style.height};
                     wrap.style.width  = "";
                     wrap.style.height = editor.markdownarea.content.height()+"px";
                     document.documentElement.style.overflow = "hidden";
@@ -404,7 +406,8 @@ App.directive('markdownarea', function() {
                                         '<ul class="uk-markdownarea-navbar-nav">' +
                                             '<li class="uk-markdown-button-markdown"><a>{:lblCodeview}</a></li>' +
                                             '<li class="uk-markdown-button-preview"><a>{:lblPreview}</a></li>' +
-                                            '<li><a data-markdownarea-cmd="fullscreen" data-toggle="tooltip" title="Zen Mode"><i class="fa fa-expand"></i></a></li>' +
+                                            '<li><a data-markdownarea-cmd="fullscreen" data-toggle="tooltip" title="Zen Mode">'+
+                                            '<i class="fa fa-expand"></i></a></li>' +
                                         '</ul>' +
                                     '</div>' +
                                 '</div>' +

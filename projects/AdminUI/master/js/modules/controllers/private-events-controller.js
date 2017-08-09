@@ -2,8 +2,10 @@
  * Module: private-event-controller.js
  *smangipudi
  =========================================================*/
-App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','ngDialog','$rootScope', 
-                                  function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS, ngDialog, $rootScope) {
+App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '$compile',
+ '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','ngDialog','$rootScope', 
+            function($scope, $state, $stateParams, $compile, $timeout, DataTableService,
+             RestServiceFactory, toaster, FORMATS, ngDialog, $rootScope) {
   'use strict';
   $timeout(function(){
 

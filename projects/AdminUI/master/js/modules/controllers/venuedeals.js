@@ -35,7 +35,8 @@ App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout'
 		    	"targets": [8],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit Deals" class="btn btn-default btn-oval fa fa-edit" ng-click="editDeal('+row +"," +cellData+')"></button>&nbsp;&nbsp;';
+		    		var actionHtml = '<button title="Edit Deals" class="btn btn-default btn-oval fa fa-edit"'+
+              ' ng-click="editDeal('+row +"," +cellData+')"></button>&nbsp;&nbsp;';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
@@ -53,7 +54,8 @@ App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout'
       $scope.dealMap = [];
       data.map(function(deal) {
           $scope.dealMap[deal.id] = deal;
-    		  table.row.add([ deal.title, deal.description, deal.couponType, deal.discountAmount, deal.actionUrl, formatDate(new Date(deal.startDate)), formatDate(new Date(deal.expiryDate)), deal.enabled, deal.id]);
+    		  table.row.add([ deal.title, deal.description, deal.couponType, deal.discountAmount, deal.actionUrl, 
+              formatDate(new Date(deal.startDate)), formatDate(new Date(deal.expiryDate)), deal.enabled, deal.id]);
     	});
     	
       table.draw(); 
