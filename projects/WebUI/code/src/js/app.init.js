@@ -13,6 +13,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         "self",
         "127.0.0.1",
         // Allow loading from Google maps
+        "https://dev.api.venuelytics.com/WebServices**",
         "http://dev.api.venuelytics.com/WebServices**"
     ]);
 
@@ -267,9 +268,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         hostName = '';
     }
     hostName = hostName.toLowerCase();
+    $rootScope.showBusinessLink = true;
     var defaultPage = '/home';
     if (hostName.indexOf("itzfun.com") >= 0){
         defaultPage = '/cities';
+        $rootScope.showBusinessLink = false;
     }
 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {

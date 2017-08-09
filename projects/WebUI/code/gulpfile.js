@@ -223,7 +223,7 @@ gulp.task('js:base', function() {
             filename: 'jshint-output.html'
         }))
         .pipe(f.restore)
-        .pipe(gulpif('*.js',replace('https://dev.api.venuelytics.com',baseUrl())))
+        .pipe(gulpif('*.js',replace('dev.api.venuelytics.com',baseUrl())))
         .pipe(gulpif(config.compress, concat('app.min.js')))
         .pipe(gulpif(config.compress, uglify()))
         .pipe(cachebust.resources())
@@ -360,7 +360,7 @@ gulp.task('connect', function() {
   gulp.src(config.folders.dist)
     .pipe(webserver({
       livereload: true,
-      path: '/webui',
+      path: '/',
       directoryListing: false,
       open: 'http://localhost:8000/',
       fallback: 'index.html'
@@ -472,9 +472,9 @@ gulp.task('aws:deploy',['dist:clean'],function() {
 
 function baseUrl() {
     if (gutil.env.build === 'prod') {
-        return "https://prod.api.venuelytics.com";
+        return "prod.api.venuelytics.com";
     } else if (gutil.env.build === 'dev') {
-        return "https://dev.api.venuelytics.com";
+        return "dev.api.venuelytics.com";
     } 
-    return "http://localhost:8080";
+    return "localhost:8080";
 }
