@@ -309,8 +309,8 @@ select {
   }
 
   .img-singleline img {
-    width: 90px !important;
-    height: 28px !important;
+    /*width: 90px !important;*/
+    height: 40px !important;
   }
 
   .img-container {
@@ -338,8 +338,8 @@ select {
     }
 
     .img-singleline-image {
-      width: 90px !important;
-      height: 28px !important;
+      /*width: 90px !important;*/
+      height: 40px !important;
     }
 
     .img-container {
@@ -587,8 +587,8 @@ select {
     margin-bottom: 10px;
   }
   .img-singleline-image {
-    width: 90px !important;
-    height: 28px !important;;
+    /*width: 90px !important;*/
+    height: 40px !important;;
   }
 
 
@@ -598,7 +598,7 @@ select {
   }
 
   .imgContainer {
-    margin-left: 250px;
+    margin-left: 100px;
     margin-top: 160px;
   }
 
