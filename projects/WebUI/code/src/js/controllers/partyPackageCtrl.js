@@ -6,19 +6,13 @@
 app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
 
-            $log.log('Inside Bottle Service Controller.');
 
             var self = $scope;
-
-            self.selectionTableItems = [];
-            self.bottleCount = 1;
-            $scope.selectedVenueMap = {};
-            self.bottleMinimum = [];
             self.init = function() {
                 $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueID = $routeParams.venueid;
-                self.getBanquetHall(self.venueID);
-                if($rootScope.serviceName == 'PartyPackages') {
+                self.getPartyHall(self.venueID);
+                if($rootScope.serviceName === 'PartyPackages') {
                   DataShare.partyServiceData = '';
                 }
                 self.party = DataShare.partyServiceData;
@@ -26,48 +20,23 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
                 self.tabParam = $routeParams.tabParam;
-                self.getBottleProducts();
                 self.getMenus();
                 self.getEventType();
-
-                AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
-                    self.detailsOfVenue = response;
-                    self.selectedCity = $routeParams.cityName;
-                    self.venueName =    self.detailsOfVenue.venueName;
-                });
-                self.imageParam = $location.search().i;
-                if(self.imageParam === 'Y') {
-                    self.venueImage = self.detailsOfVenue.imageUrls[0].largeUrl;
-                }
-            };
-
-
-                self.startDate = moment().format('YYYY-MM-DD');
-                self.$watch('bottle.requestedDate', function() {
-                    if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
-                            if(self.bottle.requestedDate) {
-                                self.startDate = moment(self.bottle.requestedDate).format('YYYY-MM-DD');
-                            }
-                        }
-                    });
-
-            self.getBottleProducts = function() {
-                AjaxService.getProductOfBottle(self.venueid).then(function(response) {
-                    self.allBottle = response.data;
-                });
             };
 
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
-                    self.bottleMenuUrl = response.data["Bottle.menuUrl"];
-                    self.bottleVIPPolicy = response.data["Bottle.BottleVIPPolicy"];
-                    self.dressCode =  response.data["Advance.dressCode"];
-                    self.enabledPayment =  response.data["Advance.enabledPayment"];
-                    self.reservationFee =  response.data["Bottle.BottleReservationFee"];
+                    self.partyCateringMenu = response.data["BanquetHall.cateringMenuUrl"];
+                    self.partyMenu = response.data["BanquetHall.Menu"];
+                    self.partyInfoSheet = response.data["BanquetHall.Details"];
+                    self.partyVideo = response.data["BanqueHall.Video"];
+                    self.partyFloorPlan = response.data["BanquetHall.FloorMap"];
+                    //self.enabledPayment = response.data["Advance.enabledPayment"];
+                    self.enabledPayment = 'Y';
                 });
             };
 
-            self.partyEventDesc = function(value) {
+            self.partyEventDescription = function(value) {
                 $rootScope.description1 = value;
             };
 
@@ -80,23 +49,23 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
-            self.menuUrlSelection = function(bottleMenu) {
-                var data = bottleMenu.split(".");
+            self.menuUrlSelection = function(menu) {
+                var data = menu.split(".");
                 var splitLength = data.length;
                 if(data[0] === "www") {
-                    bottleMenu = 'http://' + bottleMenu;
-                    $window.open(bottleMenu, '_blank');
+                    menu = 'http://' + menu;
+                    $window.open(menu, '_blank');
                 } else if(data[splitLength-1] === "jpg" || data[splitLength-1] === "png") {
-                    self.menuImageUrl = bottleMenu;
+                    self.menuImageUrl = menu;
                     $('#menuModal').modal('show');
                 } else {
-                    $window.open(bottleMenu, '_blank');
+                    $window.open(menu, '_blank');
                 }
             };
 
-            self.getBanquetHall = function(venueId) {
+            self.getPartyHall = function(venueId) {
                 AjaxService.getPrivateEvent(venueId).then(function(response) {
-                    $scope.privateEventValueArray = response.data;
+                    $scope.partyHall = response.data;
                 });
             };
 

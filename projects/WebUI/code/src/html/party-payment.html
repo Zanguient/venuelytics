@@ -25,18 +25,10 @@
             </tr>
             <tr>
                 <td>
-                    <label>{{"reservation.PROCESS_FEE"  | translate}} :</label>
-                </td>
-                <td>
-                    &nbsp;&nbsp;$<label>{{0.00}}</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <label>{{"reservation.SALES_TAX"  | translate}} :</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{0.00}}</label>
+                    &nbsp;&nbsp;$<label>{{taxAmount | number:2}}</label>
                 </td>
             </tr>
             <tr>
@@ -44,7 +36,7 @@
                     <label>{{"reservation.TOTAL"  | translate}} :</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{availableAmount | number:2}}</label>
+                    &nbsp;&nbsp;$<label>{{chargedAmount | number:2}}</label>
                 </td>
             </tr>
             <tr>
@@ -72,19 +64,19 @@
 </div>
 <div>
     <center>
-        <input type="button" class="btn btn-success btn-raised" ng-click="partyPayment()" value="Pay Now">
+        <input type="button" class="btn btn-success btn-raised" ng-click="savePartyPackage()" value="Pay Now">
     </center>
 </div>
 
-<div class="modal modal-success" id="bottleServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+<div class="modal modal-success" id="partyEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
 <div class="modal-dialog animated zoomIn animated-3x" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-            <h3 class="modal-title" id="myModalLabel6">{{'reservation.BOTTLE_DIALOG' | translate}}</h3>
+            <h3 class="modal-title" id="myModalLabel6">{{'reservation.PARTY_EVENT_CONFIRM' | translate}}</h3>
         </div>
         <div class="modal-body">
-            <p>{{'reservation.BOTTLE_DIALOG_DESC' | translate}}</p>
+            <p>{{'reservation.PARTY_DIALOG_DESC' | translate}}</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>

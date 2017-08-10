@@ -85,27 +85,27 @@
                                     <div>
                                         <div
                                             class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
-                                            ng-repeat="privateEvent in privateEventValueArray"
-                                            ng-if="privateEvent.imageUrls[0].smallUrl">
+                                            ng-repeat="partyObj in partyHall"
+                                            ng-if="partyObj.imageUrls[0].smallUrl">
                                             <article id="articleCart"
                                                 class="card card-info mb-4 wow materialUp animation-delay-5 cardHeight">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
-                                                    <img ng-src="{{privateEvent.imageUrls[0].smallUrl}}" alt=""
+                                                    <img ng-src="{{partyObj.imageUrls[0].smallUrl}}" alt=""
                                                         class="img-responsive" id="venueImages">
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2 class="venueTitle">
-                                                        <a href="#">{{privateEvent.name
-                                                            | limitTo: 20 }}{{privateEvent.name.length > 20 ? '...'
+                                                        <a href="#">{{partyObj.name
+                                                            | limitTo: 20 }}{{partyObj.name.length > 20 ? '...'
                                                             :''}}</a>
                                                     </h2>
-                                                    <p ng-if="privateEvent.servingSize != 0">{{privateEvent.servingSize}} people</p>
-                                                    <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
-                                                    <p class="privateEventBox">{{privateEvent.description | limitTo: 70
-                                                        }}{{privateEvent.description.length > 70 ? '...' :''}}
-                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyEventDesc(privateEvent.description)">Read More</a>
+                                                    <p ng-if="partyObj.servingSize != 0">{{partyObj.servingSize}} people</p>
+                                                    <p ng-if="partyObj.size != 0">{{partyObj.size}} sq.ft</p>
+                                                    <p class="privateEventBox">{{partyObj.description | limitTo: 70
+                                                        }}{{partyObj.description.length > 70 ? '...' :''}}
+                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyEventDescription(partyObj.description)">Read More</a>
                                                     </p><br>
-                                                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="confirmPartyPackage(privateEvent)" translate="ENQUIRY"></button>
+                                                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="confirmPartyPackage(partyObj)" translate="ENQUIRY"></button>
                                             </article>
                                         </div>
                                     </div>
