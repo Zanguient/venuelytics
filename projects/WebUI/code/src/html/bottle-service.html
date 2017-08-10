@@ -39,11 +39,11 @@
                     <img id="imagemap" ng-src="{{img.pictureURL}}" usemap="#ImgExam" class="map img-responsive">
                 </center>
                     <map name="ImgExam">
-                            <area id="{{venueImageMapData[0].elements[$index].id}}"
+                            <area id="{{area.id}}"
                                 style="outline: red solid 2px;" shape="rect"
-                                coords="{{area.coords.join()}}" ng-repeat="area in img.maps"
+                                coords="{{area.coords.join()}}" ng-repeat="area in selectedVenueMap.coordinates"
                                 ng-href="{{area.link_url || 'javascript:void(0)'}}"
-                                ng-click="selectTable(venueImageMapData[0].elements[$index].id, $index, venueImageMapData[0].elements[$index])"
+                                ng-click="selectTable(area.id, area.name)"
                                 data-maphilight='{"fillColor":"{{fillColor(area.id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{strokeColor(area.id)}}","strokeWidth":2}'></area>
                     </map>
                 </div>
@@ -56,7 +56,7 @@
                         <div class="col-md-3 col-sm-4">
                             <input type="checkbox" id="checkData" name="{{table.name}}"
                                 ng-checked="isSelected(table)" ng-disabled="isReserved(table)"
-                                ng-click="selectTable(table.id, $index,table)" /> <label>&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
+                                ng-click="selectTable(table.id, table.name)" /> <label>&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
                                 ng-hide="table.size <= 0">({{table.size}}&nbsp;<i
                                     class="fa fa-user" aria-hidden="true" />)
                             </span></label>

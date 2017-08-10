@@ -166,49 +166,42 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
                 AjaxService.getVenueMap(self.venueid).then(function(response) {
                     self.venueImageMapData = response.data;
-                    if(self.venueImageMapData.length === 0) {
-                      DataShare.imageMapping.maps = [];
-                    } else {
-                      for (var index = 0; index < self.venueImageMapData.length; index++) {
-                        var venueMap = $scope.venueImageMapData[index];
-                          DataShare.elements = self.venueImageMapData[index].elements;
-                          if(self.venueImageMapData[index].imageUrls.length !== 0) {
-                            // $log.info("imageURl:", angular.toJson(self.venueImageMapData[index].imageUrls[0].originalUrl));
-                            DataShare.imageMapping.pictureURL = self.venueImageMapData[index].imageUrls[0].originalUrl;
-                            DataShare.imageMapping.pictureURLThumbnail = self.venueImageMapData[index].imageUrls[0].originalUrl;
-                          }
-                          if(venueMap.days === '*' || venueMap.days.indexOf(day) !== -1) {
-                            $scope.selectedVenueMap = venueMap;
-                            $scope.selectedVenueMap.productsByName = [];
-                            angular.forEach(venueMap.elements, function(obj, key){
-                              $scope.selectedVenueMap.productsByName[obj.name] = obj;
-                            });
-                            var tableMaps = JSON.parse(venueMap.imageMap);
-                            var maps =[];
-                            tableMaps.map(function(t){
-                              var arc = JSON.parse("["+t.coordinates+"]");
-                              var elem = {};
-                              elem.name = t.TableName;
-                              elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
-                              elem.coords = [];
-                              elem.coords[0] = arc[0];
-                              elem.coords[1] = arc[1];
-                              elem.coords[2] = arc[4];
-                              elem.coords[3] = arc[5];
-                              maps.push(elem);
-                            });
-                            DataShare.imageMapping.maps = maps;
-                            self.img = angular.copy(DataShare.imageMapping);
-                            if(self.img.pictureURL !== '') {
-                               self.imageFlag = false;
-                            } else {
-                               self.imageFlag = true;
-                            }
-                            $scope.selectedVenueMap.coordinates = maps;
-                            break;
-                          }
-
+                    DataShare.imageMapping.maps = [];
+                    
+                    for (var index = 0; index < self.venueImageMapData.length; index++) {
+                      var venueMap = self.venueImageMapData[index];
+                      DataShare.elements = venueMap.elements;
+                      if(venueMap.imageUrls.length !== 0) {
+                        // $log.info("imageURl:", angular.toJson(self.venueImageMapData[index].imageUrls[0].originalUrl));
+                        DataShare.imageMapping.pictureURL = venueMap.imageUrls[0].originalUrl;
+                        DataShare.imageMapping.pictureURLThumbnail = venueMap.imageUrls[0].smallUrl;
                       }
+                      if(venueMap.days === '*' || venueMap.days.indexOf(day) !== -1) {
+                        self.selectedVenueMap = venueMap;
+                        self.selectedVenueMap.productsByName = [];
+                        angular.forEach(venueMap.elements, function(obj, key){
+                          self.selectedVenueMap.productsByName[obj.name] = obj;
+                        });
+                        var tableMaps = JSON.parse(venueMap.imageMap);
+                        var maps =[];
+                        tableMaps.map(function(t){
+                          var arc = JSON.parse("["+t.coordinates+"]");
+                          var elem = {};
+                          elem.name = t.TableName;
+                          elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
+                          elem.coords = [];
+                          elem.coords[0] = arc[0];
+                          elem.coords[1] = arc[1];
+                          elem.coords[2] = arc[4];
+                          elem.coords[3] = arc[5];
+                          maps.push(elem);
+                        });
+                        DataShare.imageMapping.maps = maps;
+                        
+                        self.selectedVenueMap.coordinates = maps;
+                        break;
+                      }
+
                     }
                     // self.setReservationColor();
                 });
@@ -277,9 +270,10 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
               }
             };
 
-        self.selectTable = function(id, index, dataValueObj) {
+        self.selectTable = function(id, name) {
           // $log.info("Select table:", id, index, angular.toJson(dataValueObj));
             var data = $('#' + id).mouseout().data('maphilight') || {};
+            var dataValueObj = self.selectedVenueMap.productsByName[name]
             // $log.info("Data fillColor:", data.fillColor);
                 if(data.fillColor === APP_COLORS.lightGreen) {
                     data.fillColor = APP_COLORS.darkYellow;
@@ -307,13 +301,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     data.strokeColor = APP_COLORS.darkGreen;
                     angular.forEach(self.tableSelection, function(key, value) {
                         if(dataValueObj.id === key.id) {
-                    self.tableSelection.splice(value, 1);
-                    self.selectionTableItems.splice(value, 1);
-                }
-            });
-                } else {
-                    $log.debug('Else');
-                }
+                          self.tableSelection.splice(value, 1);
+                          self.selectionTableItems.splice(value, 1);
+                        }
+                    });
+                } 
                 $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
             };
 
