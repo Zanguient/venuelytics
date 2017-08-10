@@ -6,7 +6,7 @@
 app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
 
-            $log.log('Inside Bottle Service Controller.');
+            $log.debug('Inside Bottle Service Controller.');
 
             var self = $scope;
 
@@ -249,7 +249,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
           self.showSelectedVenueMap = function() {
             setTimeout(function() {
-              $("img[usemap]").jMap();
+              $("img[usemap]").rwdImageMaps();
               setTimeout(function(){
                 $('#imagemap').maphilight();
               }, 200);
@@ -312,7 +312,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
             });
                 } else {
-                    $log.info('Else');
+                    $log.debug('Else');
                 }
                 $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
             };

@@ -6,7 +6,7 @@
 app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'APP_ARRAYS', '$rootScope', 'AjaxService', '$routeParams',
     function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_ARRAYS, $rootScope, AjaxService, $routeParams) {
 
-    		$log.log('Inside Blog Post Controller.');
+    		$log.log('Inside Order confirm Controller.');
 
     		var self = $scope;
     		self.selectedCityName = $routeParams.cityName;

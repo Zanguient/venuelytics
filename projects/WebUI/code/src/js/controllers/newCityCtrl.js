@@ -6,7 +6,7 @@
 app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope',
     function ($log, $scope, $http, $location, RestURL, DataShare, AjaxService, APP_ARRAYS, $rootScope) {
 
-    		$log.log('Inside City Controller.');
+    		$log.log('Inside New City Controller.');
     		
     		var self = $scope;
             var nextPageSize = 0;

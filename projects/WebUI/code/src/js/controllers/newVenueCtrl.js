@@ -6,7 +6,7 @@
 app.controller('NewVenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $translate) {
 
-    		$log.log('Inside Venue Controller.');
+    		$log.log('Inside New Venue Controller.');
 
     		var self = $scope;
 

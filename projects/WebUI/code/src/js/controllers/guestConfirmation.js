@@ -2,7 +2,7 @@
 app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
 
-    		$log.log('Inside Guest List Controller.');
+    		$log.log('Inside Guest Confirm Controller.');
 
     		var self = $scope;
 

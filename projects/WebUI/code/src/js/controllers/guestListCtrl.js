@@ -6,7 +6,7 @@
 app.controller('GuestListController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
 
-    		$log.log('Inside ServiceTab Controller.');
+    		$log.log('Inside GuestList Controller.');
 
             var self = $scope;
 

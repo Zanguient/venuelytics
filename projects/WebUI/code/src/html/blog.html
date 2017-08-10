@@ -16,7 +16,7 @@
                     <img src="{{blog.image}}" alt="" class="img-responsive">
                 </figure>
                 <div class="card-block">
-                    <h3><a href=javascript:void(0)>{{blog.title}}</a></h3>
+                    <h3><a href="blogPost/{{blog.link}}">{{blog.title}}</a></h3>
                     <p>{{blog.description | limitTo: 150 }}{{blog.description.length > 150 ? '...' :''}}</p>
 
                     <div class="row">

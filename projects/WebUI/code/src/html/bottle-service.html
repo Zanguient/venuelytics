@@ -44,7 +44,7 @@
                                 coords="{{area.coords.join()}}" ng-repeat="area in img.maps"
                                 ng-href="{{area.link_url || 'javascript:void(0)'}}"
                                 ng-click="selectTable(venueImageMapData[0].elements[$index].id, $index, venueImageMapData[0].elements[$index])"
-                                data-maphilight='{"fillColor":"{{fillColor(venueImageMapData[0].elements[$index].id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{strokeColor(venueImageMapData[0].elements[$index].id)}}","strokeWidth":2}'></area>
+                                data-maphilight='{"fillColor":"{{fillColor(area.id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{strokeColor(area.id)}}","strokeWidth":2}'></area>
                     </map>
                 </div>
                 </div>
