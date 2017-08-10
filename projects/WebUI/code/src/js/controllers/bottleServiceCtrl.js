@@ -55,20 +55,20 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
             };
 
-                $(window).resize(function() {
-                    setTimeout(function() {
-                        $('#imagemap').maphilight();
-                    }, 200);
-                });
-                self.startDate = moment().format('YYYY-MM-DD');
-                self.$watch('bottle.requestedDate', function() {
-                    if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
-                            if(self.bottle.requestedDate) {
-                                self.startDate = moment(self.bottle.requestedDate).format('YYYY-MM-DD');
-                            }
-                            self.showFloorMapByDate();
-                        }
-                    });
+            $(window).resize(function() {
+                setTimeout(function() {
+                    $('#imagemap').maphilight();
+                }, 200);
+            });
+            self.startDate = moment().format('YYYY-MM-DD');
+            self.$watch('bottle.requestedDate', function() {
+                if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
+                    if(self.bottle.requestedDate) {
+                        self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
+                    }
+                    self.showFloorMapByDate();
+                }
+            });
 
             self.getBottleProducts = function() {
                 AjaxService.getProductOfBottle(self.venueid).then(function(response) {
@@ -212,8 +212,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     angular.forEach(self.reservations, function(obj, key) {
                       $scope.reservationData[obj.productId] = obj;
                     });
+                    self.showSelectedVenueMap();
                 });
-                self.showSelectedVenueMap();
+                
             };
 
             self.fillColor = function(id) {
