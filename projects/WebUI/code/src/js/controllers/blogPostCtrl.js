@@ -3,16 +3,18 @@
  * @date 28-JULY-2017
  */
 "use strict";
-app.controller('BlogPostController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'APP_ARRAYS', '$rootScope', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_ARRAYS, $rootScope, AjaxService) {
+app.controller('BlogPostController', ['$log', '$scope', 'DataShare','$translate', '$routeParams','APP_ARRAYS', 
+    function ($log, $scope, DataShare, $translate, $routeParams, APP_ARRAYS) {
 
-    		$log.log('Inside Blog Post Controller.');
+    	$log.log('Inside Blog Post Controller.');
 
-    		var self = $scope;
-
+    	var self = $scope;
+	    self.blogPostUrl ='';
         self.init = function() {
+          self.postId = $routeParams.postId;	
           self.blogPost = APP_ARRAYS.nightlife;
-          $log.info("Readmore blog post:", angular.toJson(self.blogPost));
+          self.blogPostUrl = APP_ARRAYS.blogPosts[self.postId];
+          $log.info("Readmore blog post:", self.blogPostUrl);
         };
 
         self.init();

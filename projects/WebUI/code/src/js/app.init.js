@@ -169,29 +169,14 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .when('/blog', {
-            templateUrl: 'blog.html',
+            templateUrl: 'blogs/blogs.html',
             title: 'Venuelytics-Blog',
             controller:'BlogController',
             description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
         })
-        .when('/blogPost/bottle-service', {
-            templateUrl: 'blog-bottle-service.html',
-            title: 'Venuelytics-Blog-Post',
-            description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
-        })
-        .when('/blogPost/guest-list', {
-            templateUrl: 'blog-guest-list.html',
-            title: 'Venuelytics-Blog-Post',
-            description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
-        })
-        .when('/blogPost/nightlife', {
-            templateUrl: 'blog-post.html',
+        .when('/blogPost/:postId', {
+            templateUrl: 'blogs/blog-post.html',
             controller: 'BlogPostController',
-            title: 'Venuelytics-Blog-Post',
-            description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
-        })
-        .when('/blogPost/nightlife-trends', {
-            templateUrl: 'blog-nightlife-trends.html',
             title: 'Venuelytics-Blog-Post',
             description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
         })

@@ -8,7 +8,7 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
 
     		$log.log('Inside Blog Controller.');
 
-    		var self = $scope;
+    	var self = $scope;
 
         self.blogs = APP_ARRAYS.blogs;
 
