@@ -7,9 +7,9 @@
  */
 
 App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$rootScope', '$location','AUTH_EVENTS',
-										'AuthService', '$cookies', 'Session', 'ContextService',
+										'AuthService', '$cookies', 'Session', 'ContextService','$timeout',
                                      function ($state, $stateParams, $scope, $rootScope, $location, AUTH_EVENTS, 
-                                     	AuthService, $cookies, Session, ContextService) {
+                                     	AuthService, $cookies, Session, ContextService, timeout) {
   // bind here all data from the form
   'use strict';
   $scope.account = {};
@@ -22,7 +22,9 @@ App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$roo
   $scope.authMsg = '';
   $scope.loginAction = true;
   $scope.userName = Session.userName;
+
   $scope.login = function(account) {
+
 	  $scope.authMsg = '';
 	  $rootScope.cookies = $cookies;
 	  $scope.loginAction = true;
@@ -33,10 +35,24 @@ App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$roo
 		  $rootScope.$storage.userName = "";
 		  $rootScope.$storage.remember = false;
 	  }
+
+	  function retryCall( fx) {
+	  	timeout(fx, 200);
+	  }
+	  $scope.fx = function() {
+		if (ContextService.userVenues.available.length > 0) {
+	  		$state.go("app.dashboard");
+	  		$rootScope.exitDashboardRetry = true;
+	  	} else {
+	  		retryCall($scope.fx);
+	  	}
+	  };
+	  
 	  AuthService.login(account).then(function (user) {
-		  $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-		  $state.go("app.dashboard");
-		  $scope.loginAction = false;
+		$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+		$rootScope.exitDashboardRetry = false; 
+		retryCall($scope.fx);
+		$scope.loginAction = false;
 	  }, function () {
 		    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 		    $scope.authMsg = "login.FAILED";
