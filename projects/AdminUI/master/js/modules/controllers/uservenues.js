@@ -23,8 +23,7 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
 		    	"targets": [4],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Unlink Venue " class="btn btn-default btn-oval fa fa-unlink" '+
-                ' ng-click="deleteUserVenue(' +row +','+cellData+')"></button>';
+		    		var actionHtml = '<button type="button" class="btn btn-default btn-oval fa fa-unlink"></button>';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
@@ -42,23 +41,24 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
     		table.row.add([venue.venueName, venue.address, venue.city, venue.country, venue.venueNumber]);
     	});
     	table.draw();
+      $('#users_venue_table').on('click', '.fa-unlink',function() {
+        $scope.deleteUserVenue(this, table);
+      });
     });
-     
-  	$scope.deleteUserVenue = function(rowId, venueNumber) {
-  		
-  		var venues = [];
-  		venues[0] = venueNumber;
-  		var target = {id:$stateParams.id, venueNumber: venueNumber};
-	
-  		RestServiceFactory.UserVenueService().deleteVenues(target, function(success){
-    		var table = $('#users_venue_table').dataTable();
-    		table.fnDeleteRow(rowId);
-    	},function(error){
-    		if (typeof error.data !== 'undefined') { 
-    			toaster.pop('error', "Server Error", error.data.developerMessage);
-    		}
-    	});
-  	};
+
+    $scope.deleteUserVenue = function(button, tableAPI) {
+
+      var targetRow = $(button).closest("tr");
+      var rowData = tableAPI.row( targetRow).data();   
+      var target = {id:$stateParams.id, venueNumber: rowData[4]};   
+      RestServiceFactory.UserVenueService().deleteVenues(target, function(success){
+        tableAPI.row(targetRow).remove().draw();
+      },function(error){
+        if (typeof error.data !== 'undefined') { 
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+    };
 
   	$scope.search = function(venueName) {
   		var promise = RestServiceFactory.VenueService().get({search: venueName});
