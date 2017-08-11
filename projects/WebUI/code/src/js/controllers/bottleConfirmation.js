@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService','StripeCheckout',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, StripeCheckout) {
+app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService) {
 
     		$log.log('Inside Confirm Reservation Controller.');
 

@@ -93,7 +93,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
-                    if((Object.keys(self.bottle).length) !== 0) {
+                    if((self.bottle.bottleOccasion !== undefined) && (self.bottle.bottleOccasion !== '')) {
                       self.eventTypes.push(self.bottle.bottleOccasion);
                     }
                 });

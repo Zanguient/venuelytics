@@ -145,7 +145,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
 
         self.closeBottleModal = function() {
           $('.modal-backdrop').remove();
-          $location.url(self.city +'/orderConfirm/'+ self.selectedVenueID);
+          $location.url(self.city +'/party-success/'+ self.selectedVenueID);
         };
 
         self.init();

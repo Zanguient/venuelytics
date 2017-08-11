@@ -94,7 +94,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                   "serviceInstructions": self.party.instructions,
                   "status": "REQUEST",
                   "serviceDetail": null,
-                  "fulfillmentDate": self.party.date,
+                  "fulfillmentDate": self.party.orderDate,
                   "durationInMinutes": 0,
                   "deliveryType": "Pickup",
                   "deliveryAddress": null,
@@ -104,7 +104,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                   "ratingDateTime": null,
                   "order": {
                       "venueNumber": self.venueid,
-                      "orderDate": self.party.date,
+                      "orderDate": self.party.orderDate,
                       "orderItems": []
                   },
                   "prebooking": false,
