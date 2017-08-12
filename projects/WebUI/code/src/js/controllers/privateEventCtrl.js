@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
+app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
 
     		$log.log('Inside PrivateEvent Controller.');
 
@@ -17,6 +17,8 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 self.getEventType();
                 $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.private = DataShare.privateEventData;
+                self.private.authorize = false;
+                self.private.agree = false;
             };
 
             self.createPrivateEvent = function(value) {
@@ -80,7 +82,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
              };
 
              self.privateEventDesc = function(value) {
-                self.description = value;
+                $rootScope.privateEventDescription = value;
              };
 
             self.getBanquetHall = function(venueId) {

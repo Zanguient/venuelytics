@@ -101,8 +101,8 @@
                                                     </h2>
                                                     <p ng-if="partyObj.servingSize != 0">{{partyObj.servingSize}} people</p>
                                                     <p ng-if="partyObj.size != 0">{{partyObj.size}} sq.ft</p>
-                                                    <p class="privateEventBox">{{partyObj.description | limitTo: 70
-                                                        }}{{partyObj.description.length > 70 ? '...' :''}}
+                                                    <p class="privateEventBox">{{partyObj.description | limitTo: 120
+                                                        }}{{partyObj.description.length > 120 ? '...' :''}}
                                                     <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyEventDescription(partyObj.description)">Read More</a>
                                                     </p><br>
                                                     <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="confirmPartyPackage(partyObj)" translate="ENQUIRY"></button>
@@ -129,7 +129,7 @@
                 <h3 class="modal-title" id="myModalLabel6">{{'bottleServiceTab.DESC' | translate}}</h3>
             </div>
             <div class="modal-body">
-                <p ng-bind="description1"></p>
+                <p>{{partyDescription}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>

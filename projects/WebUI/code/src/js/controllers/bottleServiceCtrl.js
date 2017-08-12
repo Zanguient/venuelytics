@@ -15,7 +15,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             $scope.selectedVenueMap = {};
             self.bottleMinimum = [];
             self.init = function() {
-                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
+                var date = new Date();
+                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                $( "#requestDate" ).datepicker({format: "mm/dd/yyyy", autoclose:true, todayHighlight: true, startDate: today});
                 self.venueid = $routeParams.venueid;
                 if((DataShare.amount) || ($rootScope.serviceName === 'BottleService')) {
                     DataShare.bottleServiceData = '';
@@ -25,6 +27,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.showFloorMapByDate();
                 } else {
                     self.bottle = DataShare.bottleServiceData;
+                    self.bottle.authorize = false;
+                    self.bottle.agree = false;
                 }
                 if(DataShare.userselectedTables) {
                   self.selectionTableItems = DataShare.userselectedTables;
@@ -220,7 +224,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.fillColor = function(id) {
 
               var obj = $scope.reservationData[id];
-              // $log.info("fillColor id:", id);
+              // $log.info("fillColor obj:", obj);
               // $log.info("tableSelection data:", angular.toJson(self.tableSelection));
               if (self.tableSelection.length !== 0) {
                   for (var i = 0; i < self.tableSelection.length; i++) {
@@ -236,6 +240,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                   if (typeof obj === 'undefined') {
                       return APP_COLORS.lightGreen;
                   } else {
+                      // $log.info("Inside red color");
                       return APP_COLORS.red;
                   }
               }
@@ -272,10 +277,17 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             };
 
         self.selectTable = function(id, name) {
-          // $log.info("Select table:", id, index, angular.toJson(dataValueObj));
+          
             var data = $('#' + id).mouseout().data('maphilight') || {};
-            var dataValueObj = self.selectedVenueMap.productsByName[name]
-            // $log.info("Data fillColor:", data.fillColor);
+            var dataValueObj = self.selectedVenueMap.productsByName[name];
+
+            // $log.info("Data :", data);
+
+            if(data.fillColor === APP_COLORS.red) {
+              // $log.info("Reserved table clicked");
+              $('#reservedTable').modal('show');
+            }
+
                 if(data.fillColor === APP_COLORS.lightGreen) {
                     data.fillColor = APP_COLORS.darkYellow;
                     data.strokeColor = APP_COLORS.turbo;

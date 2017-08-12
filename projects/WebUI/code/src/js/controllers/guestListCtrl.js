@@ -33,6 +33,8 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 DataShare.guestListData = self.guest;
                 DataShare.authBase64Str = authBase64Str;
                 DataShare.payloadObject = object;
+                self.guest.authorize = false;
+                self.guest.agree = false;
                 $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
             };
 

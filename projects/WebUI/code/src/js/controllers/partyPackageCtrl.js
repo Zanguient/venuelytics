@@ -16,6 +16,8 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                   DataShare.partyServiceData = '';
                 }
                 self.party = DataShare.partyServiceData;
+                self.party.authorize = false;
+                self.party.agree = false;
                 self.totalGuest = DataShare.totalNoOfGuest;
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
@@ -37,7 +39,8 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             };
 
             self.partyEventDescription = function(value) {
-                $rootScope.description1 = value;
+                // $log.info("Value:", value);
+                $rootScope.partyDescription = value;
             };
 
             self.getEventType = function() {

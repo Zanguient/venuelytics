@@ -171,7 +171,8 @@ select {
 }
 
 .table-carousel {
-  width: auto;
+  width: 320px;
+  height: 213px;
 }
 
 .table-color {

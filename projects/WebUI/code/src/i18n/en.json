@@ -484,6 +484,8 @@
 		"WOMEN":"Number of Women",
 		"CAPACITY":"Capacity",
 		"DESC":"Description",
-		"REMOVE":"Remove"
+		"REMOVE":"Remove",
+		"RESERVED":"Reserved Table",
+		"ALREADY_SELECTED":"This table has already been reserved."
 	}
 }
