@@ -53,7 +53,7 @@
                 <div class="col-md-3 col-sm-4">
                     <input type="checkbox" id="checkData" name="{{table.name}}"
                         ng-checked="isSelected(table)" ng-disabled="isReserved(table)"
-                        ng-click="selectTable(table.id, table.name)" /> <label>&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
+                        ng-click="selectTableForWithOutFloorMap(table)" /> <label>&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
                         ng-hide="table.size <= 0">({{table.size}}&nbsp;<i
                             class="fa fa-user" aria-hidden="true" />)
                     </span></label>

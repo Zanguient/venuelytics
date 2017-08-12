@@ -285,6 +285,44 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
               }
             };
 
+        self.selectTableForWithOutFloorMap = function(data) {
+            self.selectionTableItems.push(data);
+            self.tableSelection = [];
+            for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
+                var table = {
+                    "id": self.selectionTableItems[itemIndex].id,
+                    "productType": self.selectionTableItems[itemIndex].productType,
+                    "name": self.selectionTableItems[itemIndex].name,
+                    "size": self.selectionTableItems[itemIndex].size,
+                    "imageUrls": self.selectionTableItems[itemIndex].imageUrls,
+                    "description": self.selectionTableItems[itemIndex].description,
+                    "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
+                  };
+                  self.tableSelection.push(table);
+              }
+        }
+
+        self.isReserved = function (table) {
+        if (self.reservations && typeof self.reservations != 'undefined') {
+            for (var resIndex = 0; resIndex < self.reservations.length; resIndex++) {
+                if (table.id == self.reservations[resIndex].productId) {
+                    return true;
+                }
+            }
+        }
+          return false;
+        }
+
+        $scope.isSelected = function (table) {
+        if (self.tableSelection && typeof self.tableSelection != 'undefined') {
+            for (var resIndex = 0; resIndex < self.tableSelection.length; resIndex++) {
+                if (table.id == self.tableSelection[resIndex].id) {
+                    return true;
+                }
+            }
+        }
+          return false;
+        }
         self.selectTable = function(id, name) {
           
             var data = $('#' + id).mouseout().data('maphilight') || {};
