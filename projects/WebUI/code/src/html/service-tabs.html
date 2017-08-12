@@ -36,32 +36,32 @@
 
                             <div id="rowOne">
                                 <center>
-                                    <div id="serviceTabs" class="btn-group btn-group-justified" class="reservation-tab">
+                                    <div id="serviceTabs" class="btn-group btn-group-justified">
                                         <div id="bottleTab" class="btn-group" class="reservation-tab">
                                             <button id="bottle" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="bottleService()">
                                                 <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
                                                 <br class="showInMobile"><span class="fontRegular"><strong>{{"reservation.BOTTLE_SERVICE" | translate}}</strong></span>
                                             </button>
                                         </div>
-                                        <div id="bachelorEventTab" class="btn-group" class="reservation-tab" ng-if="bachelorFlag == true">
+                                        <div id="bachelorEventTab" class="btn-group" ng-if="bachelorFlag == true">
                                             <button id="bachelor" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="bachelorFunction()">
                                                 <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
                                                 <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.BACHELOR" | translate}}</strong></span>
                                             </button>
                                         </div>
-                                        <div id="partyEventTab" class="btn-group" class="reservation-tab" ng-if="partyFlag == true" ng-class="[myClass]">
+                                        <div id="partyEventTab" class="btn-group" ng-if="partyFlag == true" ng-class="[myClass]">
                                             <button id="party" type="button" class="btn btn-succes btn-responsive reservation-button" ng-click="partyFunction()">
                                                 <img ng-src="assets/img/ic_party(2).png" class="reservation-icon"></img>
                                                 <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong ng-class="[tabButtonColor]">{{"reservation.PARTY" | translate}}</strong></span>
                                             </button>
                                         </div>
-                                        <div id="privateEventTab" class="btn-group" class="reservation-tab">
+                                        <div id="privateEventTab" class="btn-group">
                                             <button id="private" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="event()">
                                                 <img ng-src="assets/img/private.png" class="reservation-icon"></img>
                                                 <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.EVENTS" | translate}}</strong></span>
                                             </button>
                                         </div>
-                                        <div id="guestlistTab" class="btn-group" class="reservation-tab" ng-hide="((partyFlag == true)||(bachelorFlag == true))">
+                                        <div id="guestlistTab" class="btn-group" ng-hide="((partyFlag == true)||(bachelorFlag == true))">
                                             <button id="glist" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="glist()">
                                                 <img ng-src="assets/img/guest.png" class="reservation-icon"></img>
                                                 <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.GUEST" | translate}}</strong></span>
@@ -74,13 +74,13 @@
                              <div id="rowTwo" ng-hide="true">
                                 <center>
                                     <div id="serviceTabTwo" class="btn-group btn-group-justified" class="reservation-tab">
-                                        <div id="foodServiceTab" class="btn-group" class="reservation-tab" ng-class="[myClass]">
+                                        <div id="foodServiceTab" class="btn-group" ng-class="[myClass]">
                                             <button id="foodTab" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="foodFunction()">
                                                 <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
                                                 <br class="showInMobile"><span class="fontRegular"><strong ng-class="[tabButtonColor]">{{"reservation.FOOD_SERVICE" | translate}}</strong></span>
                                             </button>
                                         </div>
-                                        <div id="drinkServiceTab" class="btn-group" class="reservation-tab" ng-class="[myClass]">
+                                        <div id="drinkServiceTab" class="btn-group" ng-class="[myClass]">
                                             <button id="drink" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="drinkFunction()">
                                                 <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
                                                 <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong ng-class="[tabButtonColor]">{{"reservation.DRINK_SERVICE" | translate}}</strong></span>

@@ -14,7 +14,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.bottleCount = 1;
             $scope.selectedVenueMap = {};
             self.bottleMinimum = [];
+
             self.init = function() {
+                $("div.form-group").add("style", "margin-left: auto");
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
