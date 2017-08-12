@@ -82,11 +82,11 @@
           </table>
   </div>
 	    <center>
-	        <div ng-if="!enablePayment">
+	        <div ng-if="enabledPayment != 'Y'">
 	            <button type="submit" class="btn btn-raised btn-primary" ng-click="createBottleSave()">Confirm</button>
 	            <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">Edit</button>
 	        </div>
-          <div ng-if="enablePayment">
+          <div ng-if="enabledPayment == 'Y'">
               <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">Confirm</button>
               <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">Edit</button>
           </div>
@@ -102,7 +102,7 @@
                 <h3 class="modal-title" id="myModalLabel6">{{'reservation.BOTTLE_DIALOG' | translate}}</h3>
             </div>
             <div class="modal-body">
-                <p>{{'reservation.BOTTLE_DIALOG_DESC' | translate}}</p>
+                <p>{{'reservation.BOOKING_REQUEST' | translate}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>
