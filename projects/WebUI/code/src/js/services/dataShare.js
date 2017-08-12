@@ -23,6 +23,7 @@ app.service('DataShare', function() {
   this.focused = '';
   this.privateEventFocused = '';
   this.guestFocus = '';
+  this.partyFocus = '';
   this.userselectedTables = '';
   this.selectedBlog = {};
   this.enablePayment = '';

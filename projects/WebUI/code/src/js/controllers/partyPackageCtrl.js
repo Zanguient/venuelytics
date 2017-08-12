@@ -37,6 +37,10 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
+            if(DataShare.partyFocus !== '') {
+              self.partyFocus = DataShare.partyFocus;
+            }
+
             self.partyEventDescription = function(value) {
                 // $log.info("Value:", value);
                 $rootScope.partyDescription = value;
@@ -81,7 +85,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
 
             self.confirmPartyPackage = function(selectedParty) {
                 DataShare.selectedVenuePrice = selectedParty.price;
-
+                DataShare.partyFocus = 'is-focused';
                 $log.info("Party price:", DataShare.selectedVenuePrice);
                 var fullName = self.party.userFirstName + " " + self.party.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
