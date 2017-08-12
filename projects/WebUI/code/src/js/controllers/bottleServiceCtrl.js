@@ -17,7 +17,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.init = function() {
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#requestDate" ).datepicker({format: "mm/dd/yyyy", autoclose:true, todayHighlight: true, startDate: today});
+                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueid = $routeParams.venueid;
                 if((DataShare.amount) || ($rootScope.serviceName === 'BottleService')) {
                     DataShare.bottleServiceData = '';
@@ -97,8 +97,17 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
-                    if((self.bottle.bottleOccasion !== undefined) && (self.bottle.bottleOccasion !== '')) {
-                      self.eventTypes.push(self.bottle.bottleOccasion);
+                    if(DataShare.bottleServiceData !== '') {
+                      $log.info("Inside datashare");
+                      var selectedType;
+                      angular.forEach(self.eventTypes, function(tmpType) {
+                        if(tmpType.id === DataShare.bottleServiceData.bottleOccasion.id) {
+                          selectedType = tmpType;
+                        }
+                      });
+                      if(selectedType) {
+                        self.bottle.bottleOccasion = selectedType;
+                      }
                     }
                 });
             };
@@ -224,7 +233,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.fillColor = function(id) {
 
               var obj = $scope.reservationData[id];
-              // $log.info("fillColor obj:", obj);
+              // $log.info("Reservation Data:", angular.toJson(obj));
               // $log.info("tableSelection data:", angular.toJson(self.tableSelection));
               if (self.tableSelection.length !== 0) {
                   for (var i = 0; i < self.tableSelection.length; i++) {

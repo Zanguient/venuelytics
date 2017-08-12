@@ -14,6 +14,10 @@
   font-stretch: normal;
 }
 
+.floatingLabel {
+  padding-left: 0px;
+}
+
 .fontBold {
   font-family: 'Source Sans Pro', 'sans-serif';
   font-weight: 700;

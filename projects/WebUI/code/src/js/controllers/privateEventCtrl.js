@@ -107,8 +107,17 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
-                    if((Object.keys(self.private).length) !== 0) {
-                      self.eventTypes.push(self.private.privateEvent);
+                    if(DataShare.privateEventData !== '') {
+                        $log.info("Inside datashare");
+                        var selectedType;
+                        angular.forEach(self.eventTypes, function(tmpType) {
+                            if(tmpType.id === DataShare.privateEventData.privateEvent.id) {
+                            selectedType = tmpType;
+                            }
+                        });
+                        if(selectedType) {
+                            self.private.privateEvent = selectedType;
+                        }
                     }
                 });
             };

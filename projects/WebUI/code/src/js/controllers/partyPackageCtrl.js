@@ -46,8 +46,16 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
-                    if((Object.keys(self.party).length) !== 0) {
-                      self.eventTypes.push(self.party.partyEventType);
+                    if(DataShare.partyServiceData !== '') {
+                      var selectedType;
+                      angular.forEach(self.eventTypes, function(tmpType) {
+                        if(tmpType.id === DataShare.partyServiceData.partyEventType.id) {
+                          selectedType = tmpType;
+                        }
+                      });
+                      if(selectedType) {
+                        self.party.partyEventType = selectedType;
+                      }
                     }
                 });
             };
