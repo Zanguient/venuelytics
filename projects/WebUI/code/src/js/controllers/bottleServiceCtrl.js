@@ -67,12 +67,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             });
             self.startDate = moment().format('YYYY-MM-DD');
             self.$watch('bottle.requestedDate', function() {
-                if((self.bottle.requestedDate != "") || (self.bottle.requestedDate != undefined)) {
-                    self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
+                if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
+                    if(self.bottle.requestedDate) {
+                        self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
+                    }
                     self.showFloorMapByDate();
-                } 
-                if((self.bottle.requestedDate === undefined) || (self.bottle.requestedDate === "")) {
-                  self.bottle.requestedDate = moment().format('DD/MM/YYYY');
                 }
             });
 
