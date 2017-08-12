@@ -37,7 +37,7 @@
 	"icon": "icon-users",
 	"translate": "sidebar.nav.pages.USERS",
 	"submenu": [],
-	"roleId": 1000
+	"roleId": 100
  }, 
   {
 	"text": "Agency Management",
