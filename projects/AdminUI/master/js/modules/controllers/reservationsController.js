@@ -19,6 +19,7 @@
   $scope.selectedTable = {};
   $scope.order = {};
   $scope.isCurrSelReserved = false;
+  $scope.isBanquetHallReserved = false;
   $scope.loading = false;
  /**
  * Invoke full calendar plugin and attach behavior
@@ -34,11 +35,12 @@
     $scope.events = [];
     var tableCount = $scope.reservedBookings['VenueMap.count'];
     var banquetCount = $scope.reservedBookings['BanquetHall.count'];
-
     for( var dateKey in $scope.reservedBookings.calendar){
       if ($scope.reservedBookings.calendar.hasOwnProperty(dateKey)) {
         if (typeof tableCount !== 'undefined' && tableCount > 0) {
           var reservedTables = $scope.reservedBookings.calendar[dateKey].VenueMap;
+          var reservedBanquetHall = $scope.reservedBookings.calendar[dateKey].BanquetHall;
+          //Reserved Tables In calender
           if (typeof reservedTables === 'undefined') {
             reservedTables = 0;
           }
@@ -64,9 +66,36 @@
             obj.borderColor = '#00a65a'; //yellow
           }
           obj.allDay = true;  
-          $scope.events.push(obj);		
-        }
+          $scope.events.push(obj);
 
+          //BanquetHall Events In calender
+          if (typeof reservedBanquetHall === 'undefined') {
+            reservedBanquetHall = 0;
+          }
+          var from = dateKey.split("-");
+          var f = new Date(from[0], from[1] - 1, from[2]);
+          var remaining = (banquetCount - reservedBanquetHall);
+          if (remaining < 0) {
+            remaining = 0;
+          }
+          var banquetObj = {};
+          banquetObj.title = 'B: ' + remaining;  
+          banquetObj.serviceType = 'BanquetHall';
+          banquetObj.start = f;
+          if (remaining === 0)  {
+            banquetObj.title = 'Fully Booked'; 
+            banquetObj.backgroundColor = '#f56954'; //red 
+            banquetObj.borderColor = '#f56954'; //red
+          } else if (remaining < banquetCount ) {
+            banquetObj.backgroundColor = '#f39c12'; //green 
+            banquetObj.borderColor = '#f39c12'; //green
+          } else {
+            banquetObj.backgroundColor = '#00a65a'; //yellow 
+            banquetObj.borderColor = '#00a65a'; //yellow
+          }
+          banquetObj.allDay = true;  
+          $scope.events.push(banquetObj);
+        }
       }
     }
     $scope.initCalendar();
@@ -129,9 +158,18 @@ $scope.initCalendar = function () {
           $scope.setVenueMapImage();
         },
         eventClick: function( event, jsEvent, view ) {
-          $scope.selectedDate = event.start;
-          calElement.fullCalendar('select',$scope.selectedDate);
-          $scope.setVenueMapImage();
+          if(event.serviceType === 'BottleService') {
+              $scope.selectedDate = event.start;
+              calElement.fullCalendar('select',$scope.selectedDate);
+              $scope.serviceType = 'BottleService';
+              $scope.setVenueMapImage();
+          } else if(event.serviceType === 'BanquetHall') {
+              $scope.selectedDate = event.start;
+              calElement.fullCalendar('select',$scope.selectedDate);
+              $scope.serviceType = 'BanquetHall';
+              $scope.getBanquetHall();
+          }
+          
         },
         eventDragStart: function (event, js, ui) {
 	        //draggingEvent = event;
@@ -139,6 +177,8 @@ $scope.initCalendar = function () {
 	      eventRender: function(event, eventElement) {
           if (event.serviceType === 'BottleService') {
             eventElement.find("span.fc-event-title").prepend('<em class="fa fa-glass">');
+          } else if (event.serviceType === 'BanquetHall') {
+            eventElement.find("span.fc-event-title").prepend('<em class="fa fa-diamond">');
           }
         },
 	      // This array is the events sourc === 'BottleService'es
@@ -150,7 +190,7 @@ $scope.initCalendar = function () {
 
       promise.$promise.then(function(data) {
         $scope.venueMapData = data;
-        $scope.setVenueMapImage();     
+        $scope.setVenueMapImage();    
       });
     };
     $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
@@ -158,22 +198,55 @@ $scope.initCalendar = function () {
        $scope.init();
     });
 
-    $scope.selectTable = function(tableId, name) {
-      
-      $scope.selectedTable =  $scope.selectedVenueMap.productsByName[name];
+    $scope.selectTable = function(tableId, name, table) {
+      if($scope.selectedVenueMap.imageUrls.length === 0) {
+          $scope.selectedTable =  table;
+      } else {
+          $scope.selectedTable =  $scope.selectedVenueMap.productsByName[name];
+      }
       $scope.isCurrSelReserved = typeof $scope.reservationData[$scope.selectedTable.id] !== 'undefined';
       $scope.order = {};
       if (typeof $scope.reservationData[$scope.selectedTable.id] === 'undefined') {
-        $scope.order.type = 'OPEN';
+          $scope.order.type = 'OPEN';
       } else {
-        $scope.order = $scope.reservationData[$scope.selectedTable.id].serviceInfo;
-        $scope.order.type = $scope.reservationData[$scope.selectedTable.id].type;
+          $scope.order = $scope.reservationData[$scope.selectedTable.id].serviceInfo;
+          $scope.order.type = $scope.reservationData[$scope.selectedTable.id].type;
       }
-
     };
 
+    $scope.selectBanquetHall = function(banquet) {
+      $scope.selectBanquet =  banquet;
+      $scope.isBanquetHallReserved = typeof $scope.reservationData[$scope.selectBanquet.id] !== 'undefined';
+      $scope.banquetOrder = {};
+      if (typeof $scope.reservationData[$scope.selectBanquet.id] === 'undefined') {
+        $scope.banquetOrder.type = 'OPEN';
+      } else {
+        $scope.banquetOrder = $scope.reservationData[$scope.selectBanquet.id].serviceInfo;
+        $scope.banquetOrder.type = $scope.reservationData[$scope.selectBanquet.id].type;
+      }
+    };
+
+    $scope.getBanquetHall = function() {
+
+      var promise = RestServiceFactory.ProductService().getPrivateEvents({id:$scope.venueNumber});
+      promise.$promise.then(function(data) {
+      $scope.BanquetHallDetails = data;
+      });
+        $scope.reservationData = [];
+        RestServiceFactory.ReservationService().getForDate({id: $scope.venueNumber, date: $scope.selectedDate.format("YYYYMMDD")}, function(data){
+          angular.forEach(data, function(obj, key) {
+            $scope.reservationData[obj.productId] = obj;
+            if (typeof obj.product !== 'undefined') {
+              $scope.reservationData[obj.product.sku] = obj;
+            }
+          });
+          $scope.loading = false;  
+        }, function(error){
+          $scope.loading = false;
+        });
+    }
+
     $scope.setVenueMapImage = function() {
-     
       if ($scope.selectedDate != null) {
          $scope.loading  = true;
         var day = $scope.selectedDate.format('ddd').toUpperCase();
