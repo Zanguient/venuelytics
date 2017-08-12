@@ -13,7 +13,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 self.venueID = $routeParams.venueid;
                 self.getPartyHall(self.venueID);
                 if($rootScope.serviceName === 'PartyPackages') {
-                  DataShare.partyServiceData = '';
+                  DataShare.partyServiceData = {};
                 }
                 self.party = DataShare.partyServiceData;
                 self.party.authorize = false;
@@ -33,8 +33,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                     self.partyInfoSheet = response.data["BanquetHall.Details"];
                     self.partyVideo = response.data["BanqueHall.Video"];
                     self.partyFloorPlan = response.data["BanquetHall.FloorMap"];
-                    //self.enabledPayment = response.data["Advance.enabledPayment"];
-                    self.enabledPayment = 'Y';
+                    self.enabledPayment = response.data["Advance.enabledPayment"];
                 });
             };
 
