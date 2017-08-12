@@ -26,6 +26,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 self.getEventType();
             };
 
+            self.party.orderDate = moment().format('DD/MM/YYYY');
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
                     self.partyCateringMenu = response.data["BanquetHall.cateringMenuUrl"];

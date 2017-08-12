@@ -19,6 +19,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 self.private = DataShare.privateEventData;
                 self.private.authorize = false;
                 self.private.agree = false;
+                self.private.orderDate = moment().format('DD/MM/YYYY');
             };
 
             self.createPrivateEvent = function(value) {

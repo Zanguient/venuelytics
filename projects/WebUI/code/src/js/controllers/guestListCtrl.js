@@ -18,7 +18,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
               $log.info("insdie focused");
               self.guestFocus = DataShare.guestFocus;
             }
-
+            self.guest.requestedDate = moment().format('DD/MM/YYYY');
             self.glistSave = function(guest) {
                 DataShare.tab = 'G';
                 DataShare.guestFocus = 'is-focused';
