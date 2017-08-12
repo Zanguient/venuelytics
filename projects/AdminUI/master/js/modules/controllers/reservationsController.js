@@ -21,6 +21,7 @@
   $scope.isCurrSelReserved = false;
   $scope.isBanquetHallReserved = false;
   $scope.loading = false;
+  $scope.selectCalender = false;
  /**
  * Invoke full calendar plugin and attach behavior
  * @param  jQuery [calElement] The calendar dom element wrapped into jQuery
@@ -156,6 +157,8 @@ $scope.initCalendar = function () {
          dayClick: function (date, jsEvent, view) {
           $scope.selectedDate = date;
           $scope.setVenueMapImage();
+          $scope.selectCalender = true;
+
         },
         eventClick: function( event, jsEvent, view ) {
           if(event.serviceType === 'BottleService') {
@@ -195,10 +198,25 @@ $scope.initCalendar = function () {
     };
     $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
         // register on venue change;
-       $scope.init();
+       //$scope.init();
     });
 
+    $scope.clickServiceType =  function( event ) {
+          if(event === 'BottleService') {
+              $scope.serviceType = 'BottleService';
+              $scope.selectCalender = false;
+              $scope.setVenueMapImage();
+              $scope.order.type = $scope.reservationData[$scope.selectedTable.id].type;
+          } else if(event === 'BanquetHall') {
+              $scope.serviceType = 'BanquetHall';
+              $scope.selectCalender = false;
+              $scope.getBanquetHall();
+              $scope.banquetOrder.type = $scope.reservationData[$scope.selectBanquet.id].type;
+          }
+          
+        }
     $scope.selectTable = function(tableId, name, table) {
+      $scope.idSelectedVote = tableId.id;
       if($scope.selectedVenueMap.imageUrls.length === 0) {
           $scope.selectedTable =  table;
       } else {
@@ -215,6 +233,7 @@ $scope.initCalendar = function () {
     };
 
     $scope.selectBanquetHall = function(banquet) {
+      $scope.idSelectedVote = banquet.id;
       $scope.selectBanquet =  banquet;
       $scope.isBanquetHallReserved = typeof $scope.reservationData[$scope.selectBanquet.id] !== 'undefined';
       $scope.banquetOrder = {};
@@ -238,6 +257,7 @@ $scope.initCalendar = function () {
             $scope.reservationData[obj.productId] = obj;
             if (typeof obj.product !== 'undefined') {
               $scope.reservationData[obj.product.sku] = obj;
+
             }
           });
           $scope.loading = false;  
@@ -302,8 +322,17 @@ $scope.initCalendar = function () {
      }
 
     };
+    /*$scope.getSelectedTableColor = function(type){
+      var obj = $scope.reservationData[type];
+      if(typeof obj === 'undefined') {
+        return 'success';
+      } else {
+        return 'danger';
+      }
+    }*/
 
     $scope.getStatusColor = function(type) {
+      
       if (typeof type === 'undefined') {
         return 'gray';
       } else if ( type === 'OPEN') {

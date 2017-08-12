@@ -1,3 +1,15 @@
+<style type="text/css">
+   .selectedTableColor {
+  background-color: red;
+}
+.table-image-selected {
+      cursor: pointer; 
+      width: 100px;
+      height: 100px;
+      margin-left: 15px;
+      padding-bottom: 9px;
+   }
+</style>
 <h3>
    <div class="row">
       <div class="col-lg-11">
@@ -19,8 +31,8 @@
          </div>
          <!-- END panel-->
       </div>
-      <div class="col-lg-4 col-md-4" ng-if="serviceType === 'BottleService'">
-         <label style="padding-left: 10px;">Selected Date: {{selectedDate.format('DD-MMM YYYY')}}</label>
+      <div class="col-lg-4 col-md-4" ng-show="selectCalender === false" ng-if="serviceType === 'BottleService'">
+         <label style="padding-left: 10px;">Selected Date: {{selectedDate.format('DD-MMM-YYYY')}}</label>
          <div ng-if="selectedVenueMap.imageUrls && selectedVenueMap.imageUrls[0].originalUrl != ''" ng-class="loading ? 'csspinner ringed' : ''">
             <center>
                <img id="imageMap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#imageMapCoordinates" class="map img-responsive"/>
@@ -34,49 +46,47 @@
             </center>
          </div>
          <div ng-if="selectedVenueMap.imageUrls.length === 0">
-               <div class="tableItem">
-                     <table style="margin-left: 15px;">
-                        <tr ng-repeat="table in selectedVenueMap.elements">
-                           <td>
-                              <input type="checkbox" id="checkData" name="{{table.name}}" ng-click="selectTable(table.id, table.name, table)" /> 
-                           </td>
-                           <td>
+               <div class="tableItem" ng-repeat="table in selectedVenueMap.elements">
+                     <table style="margin-left: 15px; width: 133px;">
+                        <tr>
+                           <td ng-click="selectTable(table.id, table.name, table)" ng-class="{selectedTableColor : table.id === idSelectedVote}">
                               <label>&nbsp;&nbsp;{{table.name}}
-                              <span ng-hide="table.servingSize <= 0">({{table.servingSize}}<i class="fa fa-user" aria-hidden="true" />)
-                              </span>
+                                 <span ng-hide="table.servingSize <= 0">({{table.servingSize}}<i class="fa fa-user" aria-hidden="true" />)
+                                 </span>
                               </label>
-                           </td>
-                           <td>
-                              <img style="width: 100px;height: 100px;margin-left: 15px;padding-bottom: 9px;" class="img-responsive" ng-src="{{table.imageUrls[0].smallUrl}}"/>
+                              <img class="table-image-selected" ng-src="{{table.imageUrls[0].smallUrl}}"/>
                            </td>
                         </tr>
-                     </table>
+                     </table><br>
                </div>
                  <!--  <div class="col-md-6 col-sm-12">
                      <label>{{table.description}}</label>
                   </div>  -->
          </div>
       </div>
-      <div class="col-lg-4 col-md-4" ng-if="serviceType === 'BanquetHall'">
-         <div class="tableItem">
-            <table style="margin-left: 15px;">
-               <tr ng-repeat="banquet in BanquetHallDetails">
+      <div class="col-lg-4 col-md-4" ng-show="selectCalender === false" ng-if="serviceType === 'BanquetHall'">
+         <label style="padding-left: 10px;">Selected Date: {{selectedDate.format('DD-MMM-YYYY')}}</label>
+         <div class="tableItem" ng-repeat="banquet in BanquetHallDetails">
+            <table style="margin-left: 15px; width: 133px;">
+               <tr ng-click="selectBanquetHall(banquet)" ng-class="{selectedTableColor : banquet.id === idSelectedVote}">
+                  <!-- <td ng-click="selectBanquetHall(banquet)" ng-class="'bg-' + getSelectedTableColor(banquet.id)" class="bg bg-xl "> -->
                   <td>
-                     <input type="checkbox" id="checkData" name="{{banquet.name}}" ng-click="selectBanquetHall(banquet)"/> 
-                  </td>
-                  <td>
-                     <label>&nbsp;&nbsp;{{banquet.name}}
+                      <label>&nbsp;&nbsp;{{banquet.name}}
                         <span ng-hide="banquet.servingSize <= 0">({{banquet.servingSize}}<i class="fa fa-user" aria-hidden="true" />)
                         </span>
                      </label>
-                  </td>
-                  <td>
-                     <img style="width: 100px;height: 100px;margin-left: 15px;padding-bottom: 9px;" class="img-responsive" ng-src="{{banquet.imageUrls[0].smallUrl}}"/>
+                     <img class="table-image-selected" ng-src="{{banquet.imageUrls[0].smallUrl}}" />
                   </td>
                </tr>
-            </table>
+            </table><br>
          </div>
       </div>
+
+      <div class="col-lg-4 col-md-4" ng-show="selectCalender === true">
+         <input id="calendar" type = "button" value="Show the Flow Map" ng-click="clickServiceType('BottleService')" class="btn btn-default pull-center"><br/><br/><br/>
+         <input type = "button" ng-click="clickServiceType('BanquetHall')" value="Show the banquet Hall" class="btn btn-default pull-center">
+      </div>
+
       <div class="col-lg-3 col-md-3" ng-if="serviceType === 'BanquetHall'">
          <form  name="userInfo" validate-form="" novalidate role="form">
             <!-- START panel-->
