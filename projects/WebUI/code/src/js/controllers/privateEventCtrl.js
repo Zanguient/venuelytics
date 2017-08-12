@@ -23,6 +23,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
 
             self.createPrivateEvent = function(value) {
                 DataShare.tab = 'P';
+                DataShare.privateEventFocused = 'is-focused';
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
                 DataShare.privateEventData = self.private;
@@ -104,19 +105,25 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
+            if(DataShare.privateEventFocused !== '') {
+              $log.info("insdie focused");
+              self.privateEventFocused = DataShare.privateEventFocused;
+            }
+
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
-                    if(DataShare.privateEventData !== '') {
-                        $log.info("Inside datashare");
+                    if(DataShare.privateEventFocused !== '') {
+                        
                         var selectedType;
                         angular.forEach(self.eventTypes, function(tmpType) {
                             if(tmpType.id === DataShare.privateEventData.privateEvent.id) {
-                            selectedType = tmpType;
+                                selectedType = tmpType;
                             }
                         });
                         if(selectedType) {
                             self.private.privateEvent = selectedType;
+                            $log.info("Inside datashare", angular.toJson(self.private.privateEvent));
                         }
                     }
                 });

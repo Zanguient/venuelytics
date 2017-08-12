@@ -14,8 +14,14 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 $("#requestedDate").datepicker({autoclose:true, todayHighlight: true});
             };
 
+            if(DataShare.guestFocus !== '') {
+              $log.info("insdie focused");
+              self.guestFocus = DataShare.guestFocus;
+            }
+
             self.glistSave = function(guest) {
                 DataShare.tab = 'G';
+                DataShare.guestFocus = 'is-focused';
                 var name = guest.guestFirstName + " " + guest.guestLastName;
                 var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
                 guest.guestStartDate = moment(guest.guestStartDate).format('YYYY-MM-DD');

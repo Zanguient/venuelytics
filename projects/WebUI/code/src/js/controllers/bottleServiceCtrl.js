@@ -23,6 +23,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     DataShare.bottleServiceData = '';
                     DataShare.tableSelection = '';
                     DataShare.selectBottle = '';
+                    self.isFocused = '';
                     self.startDate = moment().format('YYYY-MM-DD');
                     self.showFloorMapByDate();
                 } else {
@@ -94,11 +95,15 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 arrayObj.splice(index, 1);
             };
 
+            if(DataShare.focused !== '') {
+              $log.info("insdie focused");
+              self.isFocused = DataShare.focused;
+            }
+                        
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
-                    if(DataShare.bottleServiceData !== '') {
-                      $log.info("Inside datashare");
+                    if(DataShare.focused !== '') {
                       var selectedType;
                       angular.forEach(self.eventTypes, function(tmpType) {
                         if(tmpType.id === DataShare.bottleServiceData.bottleOccasion.id) {
@@ -389,6 +394,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
         };
 
             self.confirmBottleService = function() {
+                DataShare.focused = 'is-focused';
+                $log.info("inside is focused");
                 DataShare.selectedDateForBottle = self.bottleServiceDate;
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);

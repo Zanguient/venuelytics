@@ -20,6 +20,9 @@ app.service('DataShare', function() {
   this.selectedDateForBottle = '';
   this.tableSelection = '';
   this.tab = '';
+  this.focused = '';
+  this.privateEventFocused = '';
+  this.guestFocus = '';
   this.userselectedTables = '';
   this.selectedBlog = {};
   this.enablePayment = '';
