@@ -3,18 +3,26 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('GuestListController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS) {
+app.controller('GuestListController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
 
     		$log.log('Inside GuestList Controller.');
 
             var self = $scope;
-
+            self.guestDateIsFocused = 'is-focused';
             self.init = function() {
                 $("#requestedDate").datepicker({autoclose:true, todayHighlight: true});
+                if($rootScope.serviceName == 'GuestList') {
+                    self.guestDateIsFocused = '';
+                    DataShare.guestFocus = '';
+                    self.guestFocus = '';
+                    DataShare.guestListData = {};
+                    self.guest = {};
+                } else {
+                    self.guest.requestedDate = moment().format('YYYYMMDD');
+                }
             };
-
-            if(DataShare.guestFocus !== '') {
+            if(DataShare.guestFocus != '') {
               $log.info("insdie focused");
               self.guestFocus = DataShare.guestFocus;
             }

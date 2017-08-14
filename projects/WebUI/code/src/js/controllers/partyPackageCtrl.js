@@ -8,14 +8,25 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
 
 
             var self = $scope;
+            self.partyDateIsFocused = 'is-focused';
             self.init = function() {
                 $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueID = $routeParams.venueid;
                 self.getPartyHall(self.venueID);
+                if((Object.keys(DataShare.partyServiceData).length) !== 0) {
+                    self.party = DataShare.partyServiceData;
+                } else {
+                    self.party = {};
+                }
                 if($rootScope.serviceName === 'PartyPackages') {
                   DataShare.partyServiceData = {};
+                  self.partyDateIsFocused = '';
+                  DataShare.partyFocus = '';
+                  self.party = {};
+                  self.partyFocus = '';
+                } else {
+                  self.party.orderDate = moment().format('YYYYMMDD');
                 }
-                self.party = DataShare.partyServiceData;
                 self.party.authorize = false;
                 self.party.agree = false;
                 self.totalGuest = DataShare.totalNoOfGuest;
@@ -25,7 +36,6 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 self.getMenus();
                 self.getEventType();
             };
-
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
                     self.partyCateringMenu = response.data["BanquetHall.cateringMenuUrl"];
@@ -37,7 +47,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
-            if(DataShare.partyFocus !== '') {
+            if(DataShare.partyFocus != '') {
               self.partyFocus = DataShare.partyFocus;
             }
 
@@ -49,7 +59,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
-                    if(DataShare.partyServiceData !== '') {
+                    if(DataShare.partyFocus != '') {
                       var selectedType;
                       angular.forEach(self.eventTypes, function(tmpType) {
                         if(tmpType.id === DataShare.partyServiceData.partyEventType.id) {

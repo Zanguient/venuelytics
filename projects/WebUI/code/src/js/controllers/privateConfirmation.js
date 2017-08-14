@@ -26,7 +26,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
             self.privateEventSave = function() {
                   AjaxService.createBottleService(self.editVenueID, self.object, self.authBase64Str).then(function(response) {
                     $log.info("response: "+angular.toJson(response));
-                    $('#privateEventModal').modal('show');
+                    $location.url(self.editCity + '/private-success/' + self.editVenueID);
                 });
             };
 
@@ -41,11 +41,6 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
                 var ampm = H < 12 ? " AM" : " PM";
                 timeString = h + timeString.substr(2, 3) + ampm;
                 return timeString;
-            };
-
-            self.closePrivateEventModal = function() {
-              $('.modal-backdrop').remove();
-              $location.url(self.editCity + '/private-success/' + self.editVenueID);
             };
 
             self.init();

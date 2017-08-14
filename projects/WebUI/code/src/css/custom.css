@@ -176,7 +176,7 @@ select {
 
 .table-carousel {
   width: 320px;
-  height: 213px;
+  height: auto;
 }
 
 .table-color {
@@ -210,6 +210,18 @@ select {
   border: 1px solid #4CAF50;
   margin-bottom: 0px;
   margin-top: 0px;
+}
+
+.bottleConfirmation {
+  width: 486px;
+}
+
+.bottleHeadername {
+  margin-right: 100px;
+}
+
+.bottleConfirmationTable {
+  width: 452px;
 }
 
 .search {
@@ -279,7 +291,6 @@ select {
 
 .city {
   background-color: #fff;
-  color: #000;
 }
 
 .loadingCities {
@@ -304,6 +315,10 @@ select {
   .downloadIcon{
     padding-top: 250px;
     margin-left: 137px;
+  }
+
+  #removeBtn {
+      margin-left: 200px;
   }
 
   .img-singleline {
@@ -347,6 +362,10 @@ select {
       height: 40px !important;
     }
 
+    #removeBtn {
+      margin-left: 200px;
+    }
+
     .img-container {
       width: 500px;
       height: 55px;
@@ -386,6 +405,10 @@ select {
 
   .carouselImage {
     width: 100%;
+  }
+
+  #removeBtn {
+      margin-left: 200px;
   }
 
   .wrapingSpace {

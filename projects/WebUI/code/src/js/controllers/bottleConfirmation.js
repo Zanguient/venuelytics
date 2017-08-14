@@ -86,6 +86,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             };
 
             self.backToReservation = function() {
+                DataShare.focused = '';
                 $location.url('/newCities/' + self.editCity + '/' + self.venueID + '/bottle-service');
             };
 
@@ -105,7 +106,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                     if (self.cardPayment === true) {
                         self.creditCardPayment();
                     } else {
-                        $('#bottleServiceModal').modal('show');
+                        $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
                     }
                 });
             };
@@ -165,10 +166,5 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 handler.close();
             });
         };
-
-        self.closeBottleModal = function() {
-          $('.modal-backdrop').remove();
-          $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
-        };
-            self.init();
+        self.init();
     }]);
