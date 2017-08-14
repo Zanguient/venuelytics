@@ -138,8 +138,8 @@ gulp.task('revolution', function() {
 });
 
 gulp.task('html', function() {
-    return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*', 'src/html/bottle/**/*.html',
-        'src/html/private/**/*.html', 'src/html/guest/**/*.html', 'src/html/party/**/*.html'])
+    return gulp.src(['src/html/*.html', '!src/html/layout/**/*',
+        , 'src/html/blogs/**/*.html', 'src/html/venue/**/*.html'])
         .pipe(changed(path.join(paths.html)))
         .pipe(processhtml({
             recursive: true,
@@ -171,7 +171,7 @@ gulp.task('html', function() {
 });
 
 gulp.task('html:dist', function() {
-    const f = filter([ 'src/html/*.html', '!src/html/index.html'], {restore: true});
+    const f = filter([ 'src/html/*.html', 'src/html/blogs/*.html', '!src/html/index.html'], {restore: true});
     const indexFilter =  filter([ 'src/html/index.html'], {restore: true});
     return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
          .pipe(changed(path.join(paths.html)))
@@ -387,7 +387,7 @@ gulp.task('dev', function(cb) {
     config.environment = 'dev';
     config.compress = false;
     return runSequence(
-        'clean', ['plugins', 'html',  'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js', 'dist', cb
+        'clean', ['plugins', 'html', 'html:dist', 'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js', 'dist', cb
     );
 });
 
