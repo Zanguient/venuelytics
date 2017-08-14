@@ -216,7 +216,7 @@ $scope.initCalendar = function () {
           
         }
     $scope.selectTable = function(tableId, name, table) {
-      $scope.idSelectedVote = tableId.id;
+      $scope.idSelectedTable = tableId.id;
       if($scope.selectedVenueMap.imageUrls.length === 0) {
           $scope.selectedTable =  table;
       } else {
@@ -233,7 +233,7 @@ $scope.initCalendar = function () {
     };
 
     $scope.selectBanquetHall = function(banquet) {
-      $scope.idSelectedVote = banquet.id;
+      $scope.idSelectedTable = banquet.id;
       $scope.selectBanquet =  banquet;
       $scope.isBanquetHallReserved = typeof $scope.reservationData[$scope.selectBanquet.id] !== 'undefined';
       $scope.banquetOrder = {};
@@ -322,14 +322,14 @@ $scope.initCalendar = function () {
      }
 
     };
-    /*$scope.getSelectedTableColor = function(type){
+    $scope.bookedTableColor = function(type){
       var obj = $scope.reservationData[type];
       if(typeof obj === 'undefined') {
         return 'success';
       } else {
         return 'danger';
       }
-    }*/
+    };
 
     $scope.getStatusColor = function(type) {
       
