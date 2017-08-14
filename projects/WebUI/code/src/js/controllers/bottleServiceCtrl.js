@@ -26,7 +26,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     DataShare.tableSelection = '';
                     DataShare.selectBottle = '';
                     self.isFocused = '';
-                    self.startDate = moment().format('YYYY-MM-DD');
+                    self.startDate = moment();
                     self.showFloorMapByDate();
                 } else {
                     self.bottle = DataShare.bottleServiceData;
@@ -67,7 +67,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     $('#imagemap').maphilight();
                 }, 200);
             });
-            self.startDate = moment().format('YYYY-MM-DD');
+            self.startDate = moment();
             self.$watch('bottle.requestedDate', function() {
                 if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
                     if(self.bottle.requestedDate) {
