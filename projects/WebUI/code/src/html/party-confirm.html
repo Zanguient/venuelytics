@@ -2,9 +2,8 @@
 
 	<center>
 		<h1 class="color-success fontRegular">{{'reservation.CONFIRM_DETAILS' | translate}}</h1>
-	</center>
 
-	<div class="form-group">
+	<div class="form-group bottleConfirmation">
 		<table class="table table-responsive table-no-border">
 
         <tbody>
@@ -42,9 +41,6 @@
             </tr>
         </tbody>
     </table>
-  </div>
-
-	    <center>
 			<div ng-if="enabledPayment != 'Y'">
 				<button type="submit" class="btn btn-raised btn-primary" ng-click="savePartyPackage()">Confirm</button>
 				<button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
@@ -55,20 +51,5 @@
           </div>
 	    </center>
 	</div>
-
-<div class="modal modal-success" id="partyEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-    <div class="modal-dialog animated zoomIn animated-3x" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-                <h3 class="modal-title" id="myModalLabel6">{{'reservation.PARTY' | translate}}</h3>
-            </div>
-            <div class="modal-body">
-                <p>{{'reservation.BOOKING_REQUEST' | translate}}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>
-            </div>
-        </div>
     </div>
-</div>
+

@@ -2,9 +2,8 @@
 
 	<center>
 		<h1 class="color-success fontRegular">{{'reservation.CONFIRM_DETAILS' | translate}}</h1>
-	</center>
 
-	<div class="form-group">
+	<div class="form-group bottleConfirmation">
 		<table class="table table-responsive table-no-border">
 
         <tbody>
@@ -44,8 +43,8 @@
     </table>
   </div>
   <div class="form-group">
-      <h4 class="color-success">{{"reservation.SELECT_TABLE"  | translate}}</h4>
-          <table class="table table-responsive table-no-border">
+      <h4 class="color-success bottleHeadername">{{"reservation.SELECT_TABLE"  | translate}}</h4>
+          <table class="table table-responsive table-no-border bottleConfirmationTable">
               <thead>
                 <tr>
                   <th>{{"reservation.TABLE_NAME"  | translate}}</th>
@@ -60,7 +59,8 @@
               </tbody>
           </table>
   </div>
-  <div class="form-group">
+  </center>
+  <div class="form-group" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
       <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
           <table class="table table-responsive table-no-border">
               <thead>

@@ -14,7 +14,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.bottleCount = 1;
             $scope.selectedVenueMap = {};
             self.bottleMinimum = [];
-
+            self.noTableSelected = false;
+            self.bottleDateIsFocused = 'is-focused';
             self.init = function() {
                 //$("div.form-group").add("style", "margin-left: auto");
                 var date = new Date();
@@ -22,10 +23,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueid = $routeParams.venueid;
                 if((DataShare.amount) || ($rootScope.serviceName === 'BottleService')) {
-                    DataShare.bottleServiceData = '';
+                    DataShare.bottleServiceData = {};
                     DataShare.tableSelection = '';
                     DataShare.selectBottle = '';
                     self.isFocused = '';
+                    self.bottleDateIsFocused = '';
                     self.startDate = moment();
                     self.showFloorMapByDate();
                 } else {
@@ -406,6 +408,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 DataShare.authBase64Str = authBase64Str;
                 DataShare.selectBottle = self.bottleMinimum;
                 DataShare.tableSelection = self.tableSelection;
+                var date = new Date(self.bottle.requestedDate);
+                var newDate = date.toISOString();
+                if ($scope.tableSelection.length == 0) {
+                    self.noTableSelected = true;
+                    return;
+                }
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,
@@ -423,7 +431,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     "serviceInstructions": self.bottle.instructions,
                     "status": "REQUEST",
                     "serviceDetail": null,
-                    "fulfillmentDate": self.bottle.date,
+                    "fulfillmentDate": newDate,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
                     "deliveryAddress": null,
@@ -433,7 +441,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     "ratingDateTime": null,
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": self.bottle.date,
+                        "orderDate": newDate,
                         "orderItems": []
                     },
                     "prebooking": false,

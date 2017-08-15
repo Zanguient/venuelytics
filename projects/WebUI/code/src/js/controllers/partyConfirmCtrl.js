@@ -66,7 +66,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
                     if (self.cardPayment === true) {
                         self.creditCardPayment();
                     } else {
-                        $('#partyEventModal').modal('show');
+                        $location.url(self.city +'/party-success/'+ self.selectedVenueID);
                     }
                 });
 
@@ -141,11 +141,6 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
             window.addEventListener('popstate', function() {
                 handler.close();
             });
-        };
-
-        self.closeBottleModal = function() {
-          $('.modal-backdrop').remove();
-          $location.url(self.city +'/party-success/'+ self.selectedVenueID);
         };
 
         self.init();

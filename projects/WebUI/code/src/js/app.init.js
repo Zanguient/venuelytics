@@ -139,7 +139,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
 
         })
         .when('/emailVerification/:venueid', {
-            templateUrl: 'emailVerification.html',
+            templateUrl: 'email-verification.html',
             controller: 'businessController',
             title: 'Venuelytics-EmailVerification',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
