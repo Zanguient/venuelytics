@@ -267,13 +267,13 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $translateProvider.preferredLanguage('en');
     $translateProvider.useLocalStorage();
 
-}]).run(['$location', '$rootScope',function($location, $rootScope) {
+}]).run(['$location', '$rootScope','$window',function($location, $rootScope, $window) {
 
     var hostName = $location.host();
     if (typeof hostName === 'undefined') {
         hostName = '';
     }
-    hostName = hostName.toLowerCase();
+    hostName = $window.location.href.toLowerCase();
     $rootScope.showBusinessLink = true;
     var defaultPage = '/home';
     if (hostName.indexOf("itzfun.com") >= 0){
