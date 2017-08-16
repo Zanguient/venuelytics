@@ -232,17 +232,19 @@
                 </tr>
             </table>
         </div>
-        <div class="col-md-11">
-            <div class="checkbox">
-                <label class="check-box fontRegular table-font">
-                    <input type="checkbox" ng-model="bottle.authorize" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AUTHORIZE" | translate}} {{venueName}}.</input>
+        <div class="col-md-12">
+            <div>
+                <label class="fontRegular table-font fontColorForText">
+                    <input type="checkbox" ng-model="bottle.authorize" required/>
+                     {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
                 </label>
             </div>
         </div>
-        <div class="col-md-11">
-            <div class="checkbox">
-                <label class="check-box fontRegular table-font fontColorForText">
-                    <input type="checkbox" ng-model="bottle.agree" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}</input>
+        <div class="col-md-12">
+            <div>
+                <label class="fontRegular table-font fontColorForText">
+                    <input type="checkbox" ng-model="bottle.agree" required/>
+                     {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
                 </label>
             </div>
         </div>

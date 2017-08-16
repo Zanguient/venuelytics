@@ -18,7 +18,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     self.private = {};
                 }
                 if($rootScope.serviceName === 'PrivateEvent') {
-                    $log.log('Inside clear data.');
+                 $log.log('Inside clear data.');
                   DataShare.privateEventData = {};
                   self.private.orderDate = moment().format('MM/DD/YYYY');
                   self.private = {};
@@ -63,28 +63,19 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
                     "budget": 0,
-                    "hostEmployeeId": -1,
-                    "hasBid": "N",
-                    "bidStatus": null,
+                    
                     "serviceInstructions": self.private.privateComment,
                     "status": "REQUEST",
                     "serviceDetail": null,
                     "fulfillmentDate": dateValue,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
-                    "deliveryAddress": null,
-                    "deliveryInstructions": null,
-                    "rating": -1,
-                    "ratingComment": null,
-                    "ratingDateTime": null,
+                   
                     "order": {
                         "venueNumber": self.venueid,
                         "orderDate": dateValue,
                         "orderItems": []
-                    },
-                    "prebooking": false,
-                    "employeeName": "",
-                    "visitorName": fullName
+                    }
                 };
 
                 var items = {

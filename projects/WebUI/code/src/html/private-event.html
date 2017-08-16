@@ -109,7 +109,7 @@
 
         <div class="showInWeb">
         
-            <div class="col-md-12form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
                 <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
             </div>
@@ -140,16 +140,18 @@
             <input type="text" class="form-control fontBold" id="instructions" ng-model="private.privateComment"  data-parsley-trigger="change">
         </div>
         <div class="col-md-12">
-            <div class="checkbox">
-                <label class="check-box fontRegular fontColorForText">
-                    <input type="checkbox" ng-model="private.authorize" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}</input>
+            <div>
+                <label class="fontRegular fontColorForText">
+                    <input type="checkbox" ng-model="private.authorize" required/>
+                    {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
                 </label>
             </div>
         </div>
         <div class="col-md-12">
-            <div class="checkbox">
-                <label class="check-box fontRegular fontColorForText">
-                    <input type="checkbox" ng-model="private.agree" required><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}</input>
+            <div>
+                <label class="fontRegular fontColorForText">
+                    <input type="checkbox" ng-model="private.agree" required/>
+                     {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
                 </label>
             </div>
         </div>
