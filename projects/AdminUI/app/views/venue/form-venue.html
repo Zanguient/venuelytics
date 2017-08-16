@@ -53,69 +53,12 @@
             <textarea placeholder="Enter venue description" rows="5" ng-model="data.description" class="form-control ng-pristine ng-valid"></textarea>
      		</div>
         <div class="row">
-	        <div class="form-group col-sm-3">
+	             <div class="form-group col-sm-3" ng-repeat="vType in venueTypes">
                    <div class="checkbox c-checkbox">
                      <label>
-                        <input type="checkbox" name="barType"  value="Y" ng-model="barType" ng-true-value="Y"  ng-false-value="N"  ng-checked="barType == 'Y'"/>
-                        <span class="fa fa-check"></span>Bar
+                        <input type="checkbox" ng-model="vType.value"  ng-checked="vType.value > 0"/>
+                        <span class="fa fa-check"></span>{{vType.displayName}}
                       </label>
-                  </div>
-               </div>
-                <div class="form-group col-sm-3">
-                   <div class="checkbox c-checkbox">
-                     <label>
-                        <input type="checkbox" name="clubType"  ng-model="clubType" ng-true-value="Y"  ng-false-value="N" ng-checked="clubType == 'Y'"/>
-                        <span class="fa fa-check"></span>Club
-                     </label>
-                  </div>
-               </div>
-                <div class="form-group col-sm-3">
-                   <div class="checkbox c-checkbox">
-                     <label>
-                        <input type="checkbox" name="loungeType"  ng-model="loungeType" ng-true-value="Y"  ng-false-value="N"  ng-checked="loungeType == 'Y'"/>
-                        <span class="fa fa-check"></span>Lounge
-                        </label>
-                  </div>
-               </div>
-               <div class="form-group col-sm-3">
-                   <div class="checkbox c-checkbox">
-                     <label>
-                        <input type="checkbox" name="casinoType"  ng-model="casinoType" ng-true-value="Y"  ng-false-value="N" ng-checked="casinoType == 'Y'"/>
-                        <span class="fa fa-check"></span>Casino
-                        </label>
-                  </div>
-               </div>
-               <div class="form-group col-sm-3">
-                   <div class="checkbox c-checkbox">
-                     <label>
-                        <input type="checkbox" name="nightClubType" ng-model="nightClubType" ng-true-value="Y"  ng-false-value="N"  ng-checked="nightClubType == 'Y'"/>
-                        <span class="fa fa-check"></span>Night Club
-                        </label>
-                  </div>
-               </div>
-               <br/>
-               <div class="form-group col-sm-3">
-                   <div class="checkbox c-checkbox">
-                     <label>
-                        <input type="checkbox" name="bowlingType" ng-model="bowlingType" ng-true-value="Y"  ng-false-value="N" ng-checked="bowlingType == 'Y'"/>
-                        <span class="fa fa-check"></span>Bowling
-                        </label>
-                  </div>
-               </div>
-               <div class="form-group col-sm-3">
-                   <div class="checkbox c-checkbox">
-                     <label>
-                        <input type="checkbox" name="karaokeType" ng-model="karaokeType" ng-true-value="Y"  ng-false-value="N" ng-checked="karaokeType == 'Y'"/>
-                        <span class="fa fa-check"></span>Karaoke
-                        </label>
-                  </div>
-               </div>
-               <div class="form-group col-sm-3">
-                   <div class="checkbox c-checkbox">
-                     <label>
-                        <input type="checkbox" name="restaurantType"  ng-model="restaurantType" ng-true-value="Y" ng-false-value="N"  ng-checked="restaurantType == 'Y'"/>
-                        <span class="fa fa-check"></span>Restaurant
-                        </label>
                   </div>
                </div>
 	        </div>
@@ -124,7 +67,7 @@
                <div class="form-group col-sm-6">
                    <div class="checkbox c-checkbox">
                      <label>
-                        <input type="checkbox" name="enable_venue" value="Y" ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N" ng-checked="venueEnabled=='Y'"/>
+                        <input type="checkbox" name="enable_venue" value="Y" ng-model="data.enabled" ng-true-value="'Y'"  ng-false-value="'N'" ng-checked="venueEnabled=='Y'"/>
                         <span class="fa fa-check"></span>Enable Venue
                         </label>
                   </div>
@@ -142,18 +85,18 @@
         	  <button type="submit" class="btn btn-primary" ng-click="update(storeInfo.$valid,data)">Save</button>
     </form>
 </div>
-<div class="col-lg-6" animate-enabled="false">
-	<carousel interval="5000" >
+<div class="col-sm-6" animate-enabled="true">
+	<div class="form-group col-sm-12" >
+        <input type="file" id="control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+  </div>
+  <carousel interval="5000" class="col-sm-12">
     <slide ng-repeat="slide in imageUrl" active="slide.active">
-      <img ng-src="{{slide.originalUrl}}" style="margin: auto;" alt="" />
-        <div class="carousel-caption">
-          <h4>Image {{$index + 1}}</h4>
+      <img ng-src="{{slide.originalUrl}}" alt="" />
+        <div class="row row-table bg-gray-darker" style="padding: 15px;">
+          <span> Image {{$index + 1}}</span> <a href="javascript:void(0)"> <em class="fa fa-trash fa-2x pull-right" ng-click="deleteImage(slide.id)" /></a>
         </div>
     </slide>
   </carousel>
-   <br />
-   <br />
-      <div class="form-group">
-        <input type="file" id="control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
-    </div>
+  
+    
 </div>

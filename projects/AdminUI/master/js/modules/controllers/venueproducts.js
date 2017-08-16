@@ -50,7 +50,7 @@ App.controller('VenueProductsController', ['$scope', '$state','$compile','$timeo
           table.column(1).search( val ? '^'+val+'$' : '', true, false ).draw();
       });
 
-	    var promise = RestServiceFactory.ProductService().get({id: $stateParams.id});
+	    var promise = RestServiceFactory.ProductService().get({id: $stateParams.id, role: 'admin'});
 	    promise.$promise.then(function(data) {
     	 
     	$scope.productMap = [];

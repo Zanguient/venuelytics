@@ -75,17 +75,39 @@
     });
     table.draw();
   };
+  function addType(typeName, typeValue, displayName, venueTypeCode) {
+
+    var obj = {
+      typeName : typeName,
+      typeValue: typeValue,
+      value: (venueTypeCode & typeValue)  > 0,
+      displayName: displayName,
+    };
+
+    $scope.venueTypes.push(obj);
+
+  }
   $scope.venueTypeCodes = function(data){
-    $scope.barType = (data.venueTypeCode & 1)  > 0 ? 'Y' : 'N';
-    $scope.clubType = (data.venueTypeCode & 2) > 0 ? 'Y' : 'N';
-    $scope.loungeType = (data.venueTypeCode & 4) > 0 ? 'Y' : 'N';
-    $scope.casinoType = (data.venueTypeCode & 8) >0 ? 'Y' : 'N';
-    $scope.nightClubType = (data.venueTypeCode & 32) > 0? 'Y' : 'N';
-    $scope.restaurantType = (data.venueTypeCode & 64) > 0 ? 'Y' : 'N';
-    $scope.bowlingType = (data.venueTypeCode & 128) > 0 ? 'Y' : 'N';
-    $scope.karaokeType = (data.venueTypeCode & 256) > 0 ? 'Y' : 'N';
+    $scope.venueTypes = [];
+    addType("barType", 1, "Bar", data.venueTypeCode);
+    addType("clubType", 2, "Club", data.venueTypeCode);
+    addType("loungeType", 4, "Lounge", data.venueTypeCode);
+    addType("casinoType", 8, "Casino", data.venueTypeCode);
+    addType("nightClubType", 32, "Night Club", data.venueTypeCode);
+    addType("restaurantType", 64, "Restaurant", data.venueTypeCode);
+    addType("bowlingType", 128, "Bowling", data.venueTypeCode);
+    addType("karaokeType", 256, "Karaoke", data.venueTypeCode);
   };
   
+  $scope.deleteImage = function(imageId) {
+    var promise = RestServiceFactory.VenueImage().deleteVenueImage({id: imageId}, function(data){
+      toaster.pop('data', "Deleted the selected Image successfull");
+    },function(error){
+      if (typeof error.data !== 'undefined') {
+        toaster.pop('error', "Server Error", error.data.developerMessage);
+      }
+    });
+  };
   $scope.isVenueType = function(code) {
   	if (typeof $scope.venueType === 'undefined'){
   		return true;
@@ -124,7 +146,7 @@
       }
       table.clear();
       $.each($scope.data.info, function (k,v) {
-        table.row.add([k, v, k]);
+        table.row.add([$translate.instant(k), v, k]);
       });
       table.draw();    
     }, function (reason) {
@@ -145,14 +167,12 @@
       return;
     }
     var venueTypeCode  = 0; 
-    venueTypeCode += $scope.barType === 'Y' ? 0 : 1;
-    venueTypeCode += $scope.clubType === 'Y' ? 0 : 2;
-    venueTypeCode += $scope.loungeType === 'Y' ? 0 : 4;
-    venueTypeCode += $scope.casinoType === 'Y' ? 0 : 8;
-    venueTypeCode += $scope.nightClubType === 'Y' ? 0 : 32;
-    venueTypeCode += $scope.restaurantType === 'Y' ? 0 : 64;
-    venueTypeCode += $scope.bowlingType === 'Y' ? 0 : 128;
-    venueTypeCode += $scope.karaokeType === 'Y' ? 0 : 256;
+    for (var tIndex = 0; tIndex < $scope.venueTypes.length; tIndex++) {
+      if ($scope.venueTypes[tIndex].value) {
+        venueTypeCode += $scope.venueTypes[tIndex].typeValue;
+      }
+    }
+    
     data.venueTypeCode = venueTypeCode;
     $scope.imageId = [];
     angular.forEach($scope.imageUrl, function(value, key){ 

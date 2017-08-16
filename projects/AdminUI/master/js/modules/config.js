@@ -147,8 +147,16 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins','ngDialog')
     })
     .state('app.editBanquetHall', {
-        url: '/edit/:venueNumber/:id',
+        url: '/editBanquetHall/:venueNumber/:id',
         title: 'Edit BanquetHall',
+        templateUrl: basepath('venue/banquet-hall-edit.html'),
+        controller: 'NullController',
+        data: { authorizedRoles: [USER_ROLES.admin]},
+        resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins')
+    })
+    .state('app.editPartyHall', {
+        url: '/editPartyHall/:venueNumber/:id',
+        title: 'Edit Party Hall',
         templateUrl: basepath('venue/banquet-hall-edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},

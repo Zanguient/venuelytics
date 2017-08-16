@@ -55,8 +55,12 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
 
             	  if (typeof(toState) !== 'undefined' && toState.name !== 'page.login'){
                   $rootScope.hideNavVenueDropdown = false;
-                  if (toState.name === 'app.storeedit' || toState.name === 'app.stores') {
-                    $rootScope.hideNavVenueDropdown = true;
+                  if (toState.name === 'app.storeedit' || 
+                      toState.name === 'app.stores' ||
+                      toState.name === 'app.editBanquetHall' ||
+                      toState.name === 'app.editVenueMap'
+                     ) {
+                      $rootScope.hideNavVenueDropdown = true;
                   }       
 	            	  var authorizedRoles = toState.data.authorizedRoles;
 	            	  if (AuthService.needAuthorization(authorizedRoles) && !AuthService.isAuthenticated()) {

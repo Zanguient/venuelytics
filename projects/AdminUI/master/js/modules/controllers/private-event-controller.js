@@ -7,7 +7,7 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
             function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
 								RestServiceFactory, toaster, FORMATS, $rootScope) {
     'use strict';
-    var promise = RestServiceFactory.ProductService().getPrivateEvent({id:0, productId: $stateParams.id});
+    var promise = RestServiceFactory.ProductService().getPrivateEvent({id:0, productId: $stateParams.id, role: 'admin'});
     $scope.venueNumber = $stateParams.venueNumber;
     promise.$promise.then(function(data) {
  	    $scope.data = data;

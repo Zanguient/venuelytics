@@ -45,14 +45,14 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
     
 	    DataTableService.initDataTable('events_table', columnDefinitions, false);
    
-	    var promise = RestServiceFactory.ProductService().getPrivateEvents({id:$stateParams.id});
+	    var promise = RestServiceFactory.ProductService().getPrivateEvents({id:$stateParams.id, role: 'admin'});
 	    promise.$promise.then(function(data) {
 	    $scope.data = data;
     	var table = $('#events_table').DataTable();
 
     	data.map(function(room) {
     		var d = room.description;
-    		if (d.length > 150) {
+    		if (d != null && d.length > 150) {
     			d = d.substring(0, 147) + " ...";
     		}
     		table.row.add([room.name,  room.price, room.size, room.servingSize, d, room.enabled, room.id]);

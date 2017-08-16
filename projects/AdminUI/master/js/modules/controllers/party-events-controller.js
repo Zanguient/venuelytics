@@ -45,7 +45,7 @@ App.controller('partyEventsController', ['$scope', '$state', '$stateParams', '$c
     
 	    DataTableService.initDataTable('party_events_table', columnDefinitions, false);
    
-	    var promise = RestServiceFactory.ProductService().getPartyEvents({id:$stateParams.id});
+	    var promise = RestServiceFactory.ProductService().getPartyEvents({id:$stateParams.id, role: 'admin'});
 	    promise.$promise.then(function(data) {
 	    $scope.data = data;
     	var table = $('#party_events_table').DataTable();
@@ -68,11 +68,11 @@ App.controller('partyEventsController', ['$scope', '$state', '$stateParams', '$c
 		
   	$scope.editPartyEvent = function(rowId, productId) {
   		$rootScope.createPartySplit = "party";
-	  	$state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:productId});
+	  	$state.go('app.editPartyHall', {venueNumber: $stateParams.id, id:productId});
 	};
 	$scope.createPartyEvent = function(rowId, productId){
 		$rootScope.createPartySplit = "party";
-		$state.go('app.editBanquetHall', {venueNumber: $stateParams.id, id:'new'});
+		$state.go('app.editPartyHall', {venueNumber: $stateParams.id, id:'new'});
 	};
   	$scope.deletePartyEvent = function (rowId, productId) {
     ngDialog.openConfirm({
