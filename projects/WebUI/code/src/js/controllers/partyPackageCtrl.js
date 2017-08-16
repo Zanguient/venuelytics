@@ -25,7 +25,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                   self.party = {};
                   self.partyFocus = '';
                 } else {
-                  self.party.orderDate = moment().format('YYYYMMDD');
+                  self.party.orderDate = moment().format('MM/DD/YYYY');
                 }
                 self.party.authorize = false;
                 self.party.agree = false;
@@ -96,9 +96,14 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.confirmPartyPackage = function(selectedParty) {
                 DataShare.selectedVenuePrice = selectedParty.price;
                 DataShare.partyFocus = 'is-focused';
+                var date = new Date(self.party.orderDate);
+                var newDate = date.toISOString();
+                var parsedend = moment(newDate).format("MM-DD-YYYY");
+                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
                 $log.info("Party price:", DataShare.selectedVenuePrice);
                 var fullName = self.party.userFirstName + " " + self.party.userLastName;
-                var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
+                var authBase64Str = window.btoa(fullName + ':' + self.party.email + ':' + self.party.mobile);
                 DataShare.partyServiceData = self.party;
                 DataShare.authBase64Str = authBase64Str;
                 self.serviceJSON = {
@@ -118,7 +123,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                   "serviceInstructions": self.party.instructions,
                   "status": "REQUEST",
                   "serviceDetail": null,
-                  "fulfillmentDate": self.party.orderDate,
+                  "fulfillmentDate": dateValue,
                   "durationInMinutes": 0,
                   "deliveryType": "Pickup",
                   "deliveryAddress": null,
@@ -128,13 +133,23 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                   "ratingDateTime": null,
                   "order": {
                       "venueNumber": self.venueid,
-                      "orderDate": self.party.orderDate,
+                      "orderDate": dateValue,
                       "orderItems": []
                   },
                   "prebooking": false,
                   "employeeName": "",
                   "visitorName": fullName
                 };
+
+                var items = {
+                            "venueNumber": self.venueid,
+                            "productId": selectedParty.id,
+                            "productType": selectedParty.productType,
+                            "quantity": selectedParty.size,
+                            "comments": selectedParty.comments,
+                            "name": selectedParty.name
+                        };
+                self.serviceJSON.order.orderItems.push(items);
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;

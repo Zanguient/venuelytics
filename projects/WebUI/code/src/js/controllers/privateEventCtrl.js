@@ -9,9 +9,23 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
     		$log.log('Inside PrivateEvent Controller.');
 
             var self = $scope;
-
+            self.privateDateIsFocused = 'is-focused';
             self.init = function() {
                 self.venueID = self.venueid = $routeParams.venueid;
+                if((Object.keys(DataShare.privateEventData).length) !== 0) {
+                    self.private = DataShare.privateEventData;
+                } else {
+                    self.private = {};
+                }
+                if($rootScope.serviceName === 'PrivateEvent') {
+                  DataShare.privateEventData = {};
+                  self.privateEventFocused = '';
+                  DataShare.privateEventFocused = '';
+                  self.privateDateIsFocused = '';
+                  self.private = {};
+                } else {
+                  self.private.orderDate = moment().format('MM/DD/YYYY');
+                }
                 self.getBanquetHall(self.venueID);
                 self.getMenus();
                 self.getEventType();
@@ -24,6 +38,11 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             self.createPrivateEvent = function(value) {
                 DataShare.tab = 'P';
                 DataShare.privateEventFocused = 'is-focused';
+                var date = new Date(self.private.orderDate);
+                var newDate = date.toISOString();
+                var parsedend = moment(newDate).format("MM-DD-YYYY");
+                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
                 DataShare.privateEventData = self.private;

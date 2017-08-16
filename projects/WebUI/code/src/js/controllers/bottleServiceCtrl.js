@@ -400,16 +400,19 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.confirmBottleService = function() {
                 DataShare.focused = 'is-focused';
                 $log.info("inside is focused");
+                var date = new Date(self.bottle.requestedDate);
+                var newDate = date.toISOString();
+                var parsedend = moment(newDate).format("MM-DD-YYYY");
+                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
                 DataShare.selectedDateForBottle = self.bottleServiceDate;
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
-                var authBase64Str = window.btoa(fullName + ':' + self.email + ':' + self.mobile);
+                var authBase64Str = window.btoa(fullName + ':' + self.bottle.email + ':' + self.bottle.mobile);
                 DataShare.bottleServiceData = self.bottle;
                 DataShare.bottleZip = self.bottle.bottleZipcode;
                 DataShare.authBase64Str = authBase64Str;
                 DataShare.selectBottle = self.bottleMinimum;
                 DataShare.tableSelection = self.tableSelection;
-                var date = new Date(self.bottle.requestedDate);
-                var newDate = date.toISOString();
                 if ($scope.tableSelection.length == 0) {
                     self.noTableSelected = true;
                     return;
@@ -421,7 +424,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     "contactNumber": self.bottle.mobile,
                     "contactEmail": self.bottle.email,
                     "contactZipcode": self.bottle.bottleZipcode,
-                    "noOfGuests": self.bottle.totalGuest,
+                    "noOfGuests": parseInt(self.bottle.totalGuest),
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
                     "budget": 0,
@@ -431,7 +434,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     "serviceInstructions": self.bottle.instructions,
                     "status": "REQUEST",
                     "serviceDetail": null,
-                    "fulfillmentDate": newDate,
+                    "fulfillmentDate": dateValue,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
                     "deliveryAddress": null,
@@ -441,7 +444,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     "ratingDateTime": null,
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": newDate,
+                        "orderDate": dateValue,
                         "orderItems": []
                     },
                     "prebooking": false,
