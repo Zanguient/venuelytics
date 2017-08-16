@@ -65,7 +65,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     "serviceInstructions": self.private.privateComment,
                     "status": "REQUEST",
                     "serviceDetail": null,
-                    "fulfillmentDate": self.private.orderDate,
+                    "fulfillmentDate": self.private.date,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
                     "deliveryAddress": null,
@@ -75,7 +75,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     "ratingDateTime": null,
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": self.private.orderDate,
+                        "orderDate": self.private.date,
                         "orderItems": []
                     },
                     "prebooking": false,
