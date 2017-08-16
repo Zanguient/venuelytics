@@ -20,8 +20,8 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
             };
 
             self.guestListSave = function() {
-                    AjaxService.createGuestList(DataShare.venueNumber, self.object, self.authBase64Str).then(function(response) {
-                    $('#guestListModal').modal('show');
+                    AjaxService.createGuestList(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
+                    $location.url(self.city + '/guest-success/' + self.selectedVenueID);
                 });
             };
 
@@ -30,9 +30,5 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
                 $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
             };
 
-            self.closeGuestListModal = function() {
-              $('.modal-backdrop').remove();
-              $location.url(self.city + '/guest-success/' + self.selectedVenueID);
-            };
             self.init();
     }]);
