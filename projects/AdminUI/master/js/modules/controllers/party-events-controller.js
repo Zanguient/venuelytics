@@ -67,11 +67,9 @@ App.controller('partyEventsController', ['$scope', '$state', '$stateParams', '$c
   	};
 		
   	$scope.editPartyEvent = function(rowId, productId) {
-  		$rootScope.createPartySplit = "party";
 	  	$state.go('app.editPartyHall', {venueNumber: $stateParams.id, id:productId});
 	};
 	$scope.createPartyEvent = function(rowId, productId){
-		$rootScope.createPartySplit = "party";
 		$state.go('app.editPartyHall', {venueNumber: $stateParams.id, id:'new'});
 	};
   	$scope.deletePartyEvent = function (rowId, productId) {

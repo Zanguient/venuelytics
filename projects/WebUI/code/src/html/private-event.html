@@ -39,7 +39,7 @@
 </div>
 <form class="form-horizontal privateFormHeight" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
     <fieldset>
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateDateIsFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateDateIsFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="privateDate" ng-model="private.orderDate" >
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
@@ -53,21 +53,21 @@
             </center>
         </div>
         <div class="col-md-12">
-        <div class="col-md-5 form-group is-empty">
-        <table>
-        <tr><td>
-            <select class="form-control fontBold" required=""
-                ng-model="private.privateStartTime" ng-options="x.key as x.value for x in reservationTime">
-                <option value="">{{"reservation.START_TIME"  | translate}}</option>
-            </select></td><td>
+            <div class="col-md-5 form-group is-empty">
+                <table>
+                <tr><td>
+                    <select class="form-control fontBold" required=""
+                        ng-model="private.privateStartTime" ng-options="x.key as x.value for x in reservationTime">
+                        <option value="">{{"reservation.START_TIME"  | translate}}</option>
+                    </select></td><td>
 
-            <select id="alignmentTime" class="form-control fontBold" required=""
-                ng-model="private.privateEndTime" ng-options="x.key as x.value for x in reservationTime">
-                <option value="">{{"reservation.END_TIME"  | translate}}</option>
-            </select></td>
-        </tr>
-        </table>
-        </div>
+                    <select id="alignmentTime" class="form-control fontBold" required=""
+                        ng-model="private.privateEndTime" ng-options="x.key as x.value for x in reservationTime">
+                        <option value="">{{"reservation.END_TIME"  | translate}}</option>
+                    </select></td>
+                </tr>
+                </table>
+            </div>
         </div>
         <div class="col-lg-12 form-group is-empty">
             <table>
@@ -89,45 +89,45 @@
         </div>
 
         <div class="showInMobile">
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
-        </div>
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold" ng-model="private.privateLastName" id="lastName" >
-        </div>
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
-            <input type="email" class="form-control fontBold" id="email" ng-model="private.privateEmail"  data-parsley-trigger="change" required>
-        </div>
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
-            <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" required data-parsley-trigger="change">
-        </div>
+            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+            <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
+                <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
+            </div>
+            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+            <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
+                <input type="text" class="form-control fontBold" ng-model="private.privateLastName" id="lastName" >
+            </div>
+            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+            <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
+                <input type="email" class="form-control fontBold" id="email" ng-model="private.privateEmail"  data-parsley-trigger="change" required>
+            </div>
+            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+            <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
+                <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" required data-parsley-trigger="change">
+            </div>
         </div>
 
         <div class="showInWeb">
-        <div>
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
+        
+            <div class="col-md-12form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+            <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
+                <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
+            </div>
+            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+            <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
+                <input type="text" class="form-control fontBold fontChange" ng-model="private.privateLastName" id="lastName" required>
+            </div>
         </div>
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold fontChange" ng-model="private.privateLastName" id="lastName" required>
-        </div>
-        </div>
-        <div>
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+        
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
             <input type="email" class="form-control fontBold" id="email" ng-model="private.privateEmail"  data-parsley-trigger="change" required>
         </div>
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
             <input type="text" id="ms-form-pass" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber"  required data-parsley-trigger="change">
         </div>
-        </div>
+        
         </div>
         <div class="col-md-12 form-group is-empty">
             <select class="form-control fontBold" required=""
@@ -135,7 +135,7 @@
                 <option value="">{{"reservation.EVENT_TYPE"  | translate}}</option>
             </select>
         </div>
-        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.COMMENT' | translate}}</label>
             <input type="text" class="form-control fontBold" id="instructions" ng-model="private.privateComment"  data-parsley-trigger="change">
         </div>
