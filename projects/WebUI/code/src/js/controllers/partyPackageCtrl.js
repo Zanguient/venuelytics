@@ -20,10 +20,10 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 }
                 if($rootScope.serviceName === 'PartyPackages') {
                   DataShare.partyServiceData = {};
-                  self.partyDateIsFocused = '';
                   DataShare.partyFocus = '';
                   self.party = {};
                   self.partyFocus = '';
+                  self.party.orderDate = moment().format('MM/DD/YYYY');
                 } else {
                   self.party.orderDate = moment().format('MM/DD/YYYY');
                 }

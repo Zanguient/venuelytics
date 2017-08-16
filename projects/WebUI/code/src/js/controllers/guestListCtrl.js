@@ -13,13 +13,13 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             self.init = function() {
                 $("#requestedDate").datepicker({autoclose:true, todayHighlight: true});
                 if($rootScope.serviceName == 'GuestList') {
-                    self.guestDateIsFocused = '';
                     DataShare.guestFocus = '';
                     self.guestFocus = '';
                     DataShare.guestListData = {};
                     self.guest = {};
+                    self.guest.requestedDate = moment().format('MM/DD/YYYY');
                 } else {
-                    self.guest.requestedDate = moment().format('YYYYMMDD');
+                    self.guest.requestedDate = moment().format('MM/DD/YYYY');
                 }
             };
             if(DataShare.guestFocus != '') {
@@ -32,13 +32,17 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 DataShare.guestFocus = 'is-focused';
                 var name = guest.guestFirstName + " " + guest.guestLastName;
                 var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
-                guest.guestStartDate = moment(guest.guestStartDate).format('YYYY-MM-DD');
+                var date = new Date(self.guest.requestedDate);
+                var newDate = date.toISOString();
+                var parsedend = moment(newDate).format("MM-DD-YYYY");
+                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
                 var object = {
                      "venueNumber" : self.venueid,
                      "email" : guest.guestEmailId,
                      "phone" : guest.guestMobileNumber,
                      "zip" : guest.guestZip,
-                     "eventDay" : guest.guestStartDate,
+                     "eventDay" : dateValue,
                      "totalCount" : guest.totalGuest,
                      "maleCount" : guest.guestMen,
                      "femaleCount" : guest.guestWomen,
