@@ -57,7 +57,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             }
 
             self.partyEventDescription = function(value) {
-                $rootScope.partyDescription = value;
+                self.partyDescription = value;
             };
 
             self.getEventType = function() {
@@ -137,27 +137,18 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                   "noOfFemaleGuests": 0,
                   "budget": 0,
                   "hostEmployeeId": -1,
-                  "hasBid": "N",
-                  "bidStatus": null,
+                  
                   "serviceInstructions": self.party.instructions,
                   "status": "REQUEST",
                   "serviceDetail": null,
                   "fulfillmentDate": dateValue,
                   "durationInMinutes": 0,
                   "deliveryType": "Pickup",
-                  "deliveryAddress": null,
-                  "deliveryInstructions": null,
-                  "rating": -1,
-                  "ratingComment": null,
-                  "ratingDateTime": null,
                   "order": {
                       "venueNumber": self.venueid,
                       "orderDate": dateValue,
                       "orderItems": []
-                  },
-                  "prebooking": false,
-                  "employeeName": "",
-                  "visitorName": fullName
+                  }
                 };
 
                 var items = {

@@ -426,7 +426,6 @@
 		"VIEW_BOTTLE":"View Bottle Menu",
 		"VIP_SERVICE_POLICY":"VIP SERVICE POLICY",
 		"DRESS_CODE":"DRESS CODE STRICTLY ENFORCED",
-		"DESCRIPTION":"Located in the heart of Silicon Valley, Pure Lounge offers a luxurious, modern, upscale setting for various occasions.  Featuring dramatic, classical architecture, and complemented with modern decor, our lounge transcends “pure” sophisticated style. We welcome small groups in our Red Room on the 2nd floor (accommodates groups of up to Our venue measures 8,000 Sq ft. Spacious and comfortable, we have built-in LED cocktail tables which set the mood for every occasion. Large scale parties on our glittering first floor are perfect where we offer maximum flexibility to create your perfect event. Step away from the dull, gray drawing board, and into the brilliance of Pure Lounge! Pure Lounge offers Multiple bars serving liquor, crafted cocktails, wine &amp; beer State of Art sound &amp; lighting, dj booth, LED panel for visuals demo Delicious catering options, Live DJs, Creative elements &amp; party themes, Photo booth, dancers, entertainers options Full in-house staff Nearby parking &amp; Walking distance from cal-train",
 		"BOTTLE_DIALOG":"Bottle Service",
 		"FOOD_SERVICE":"Food Service",
 		"DRINK_SERVICE":"Drink Service",
@@ -477,8 +476,7 @@
 		"FOOD_APPETIZSER":"FoodAppetizsers",
 		"FOOD_GLUTEN":"FoodGlutenfree",
 		"TOTAL_GUEST_SELECTED":"Please choose a different table(s). The selected table(s) cannot accommodate the requested number of guests.",
-		"FOOD_CONFIRM":"Confirm your Food Service Details",
-		"DESCRIPTION_MOBILE":"Located in the heart of Silicon Valley, Pure Lounge offers a luxurious, modern, upscale setting for various occasions. Featuring dramatic, classical architecture, ..."
+		"FOOD_CONFIRM":"Confirm your Food Service Details"
 	},
 	"bottleServiceTab": {
 		"DATE":"Requested Date",

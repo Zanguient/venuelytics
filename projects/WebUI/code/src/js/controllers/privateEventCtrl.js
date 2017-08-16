@@ -92,12 +92,9 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
              };
 
-             self.privateDescription = function() {
-                self.desc = "Description";
-             };
-
+            
              self.privateEventDesc = function(value) {
-                $rootScope.privateEventDescription = value;
+                self.privateEventDescription = value;
              };
 
             self.getBanquetHall = function(venueId) {
