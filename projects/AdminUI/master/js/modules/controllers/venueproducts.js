@@ -22,11 +22,11 @@ App.controller('VenueProductsController', ['$scope', '$state','$compile','$timeo
 		    	"targets": [8],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit Product" class="btn btn-default btn-oval fa fa-edit"'+
+		    	/*	var actionHtml = '<button title="Edit Product" class="btn btn-default btn-oval fa fa-edit"'+
             ' ng-click="editProduct('+row +"," +cellData+')"></button>&nbsp;&nbsp;';
 		    		
 		    		$(td).html(actionHtml);
-		    		$compile(td)($scope);
+		    		$compile(td)($scope);*/
 		    	  }
 	        }];
     

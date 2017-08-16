@@ -92,7 +92,7 @@
   <carousel interval="5000" class="col-sm-12">
     <slide ng-repeat="slide in imageUrl" active="slide.active">
       <img ng-src="{{slide.originalUrl}}" alt="" />
-        <div class="row row-table bg-gray-darker" style="padding: 15px;">
+        <div class="row row-table bg-gray-darker" style="padding: 15px;" ng-show="imageUrl.length > 0">
           <span> Image {{$index + 1}}</span> <a href="javascript:void(0)"> <em class="fa fa-trash fa-2x pull-right" ng-click="deleteImage(slide.id)" /></a>
         </div>
     </slide>

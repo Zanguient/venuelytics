@@ -9,12 +9,19 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
     'use strict';
     var promise = RestServiceFactory.ProductService().getPrivateEvent({id:0, productId: $stateParams.id, role: 'admin'});
     $scope.venueNumber = $stateParams.venueNumber;
+    $scope.data = {enabled: 'N'};
     promise.$promise.then(function(data) {
  	    $scope.data = data;
         $scope.imageUrl = data.imageUrls;
     });
+    $scope.displayTypeName = "Party Hall";
+    $scope.displayName = "Party Package  Name *";
+    if($state.current.name === 'app.editBanquetHall'){
+        $scope.displayTypeName = "Banquet Hall";
+        $scope.displayName = "Banquet Hall Name *"
+    }
 	$scope.update = function(isValid, data, num) {
-        if($rootScope.createPartySplit === 'private'){
+        if($state.current.name === 'app.editBanquetHall'){
             data.brand = "BanquetHall";
             data.productType = "BanquetHall";
             data.category = "BanquetHall";

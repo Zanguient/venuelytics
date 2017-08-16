@@ -150,7 +150,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/editBanquetHall/:venueNumber/:id',
         title: 'Edit BanquetHall',
         templateUrl: basepath('venue/banquet-hall-edit.html'),
-        controller: 'NullController',
+        controller: 'PrivateEventController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins')
     })
@@ -158,7 +158,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/editPartyHall/:venueNumber/:id',
         title: 'Edit Party Hall',
         templateUrl: basepath('venue/banquet-hall-edit.html'),
-        controller: 'NullController',
+        controller: 'PrivateEventController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins')
     })

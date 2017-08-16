@@ -1,13 +1,10 @@
-<h3 ng-show="createPartySplit == 'private'">
-	Add / Edit Banquet Hall <small>Add a new Banquet Hall or Edit
-		an existing Banquet Hall.</small>
+<h3>
+	Add / Edit {{displayTypeName}} <small>Add a new {{displayTypeName}} or Edit
+		an existing {{displayTypeName}}.</small>
 </h3>
-<h3 ng-show="createPartySplit == 'party'">
-	Add / Edit Party Packages <small>Add a new Party Packages or Edit
-		an existing Party Packages.</small>
-</h3>
+
 <!-- START row-->
-<div class="row" ng-controller="PrivateEventController">
+<div class="row">
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<toaster-container
@@ -18,8 +15,7 @@
 
 					<div class="row">
 						<div class="form-group col-sm-8">
-							<label ng-show="createPartySplit == 'private'" class="control-label">Banquet Hall Name *</label>
-							<label ng-show="createPartySplit == 'party'" class="control-label">Party Packages  Name *</label> <input
+							<label ng-bind="displayName" class="control-label"></label> <input
 								type="text" name="name" required="required" class="form-control"
 								ng-model="data.name" />
 						</div>
@@ -68,9 +64,8 @@
 					<div class="row" >
 						<div class="form-group col-sm-6">
 							<div class="checkbox c-checkbox">
-								<label> <input type="checkbox" name="enable_hall"
-									value="Y" ng-model="data.enabled" ng-true-value="Y"
-									ng-false-value="N" ng-checked="data.enabled=='Y'" /> <span
+								<label> <input type="checkbox" name="enable_hall" ng-model="data.enabled" ng-true-value="'Y'"
+									ng-false-value="'N'" ng-checked="data.enabled=='Y'" /> <span
 									class="fa fa-check" style="top: 29px;"></span>
 									<h5 ng-show="createPartySplit == 'private'">Enable Private Event </h5>
 									<h5 ng-show="createPartySplit == 'party'">Enable Party Packages </h5>
