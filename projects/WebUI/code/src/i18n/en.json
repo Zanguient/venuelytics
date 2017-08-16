@@ -476,6 +476,7 @@
 		"FOOD_DESSERTS":"FoodDesserts",
 		"FOOD_APPETIZSER":"FoodAppetizsers",
 		"FOOD_GLUTEN":"FoodGlutenfree",
+		"TOTAL_GUEST_SELECTED":"Please choose a different table(s). The selected table(s) cannot accommodate the requested number of guests.",
 		"FOOD_CONFIRM":"Confirm your Food Service Details",
 		"DESCRIPTION_MOBILE":"Located in the heart of Silicon Valley, Pure Lounge offers a luxurious, modern, upscale setting for various occasions. Featuring dramatic, classical architecture, ..."
 	},

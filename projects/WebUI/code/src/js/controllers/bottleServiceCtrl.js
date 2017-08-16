@@ -15,6 +15,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             $scope.selectedVenueMap = {};
             self.bottleMinimum = [];
             self.noTableSelected = false;
+            self.moreCapacity = false;
             self.bottleDateIsFocused = 'is-focused';
             self.init = function() {
                 //$("div.form-group").add("style", "margin-left: auto");
@@ -409,14 +410,24 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 DataShare.selectedDateForBottle = self.bottleServiceDate;
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.bottle.email + ':' + self.bottle.mobile);
+                var sum = 0;
+                for (var i = 0; i < $scope.tableSelection.length; i++) {
+                  sum += $scope.tableSelection[i].size;
+                }
                 DataShare.bottleServiceData = self.bottle;
                 DataShare.bottleZip = self.bottle.bottleZipcode;
                 DataShare.authBase64Str = authBase64Str;
                 DataShare.selectBottle = self.bottleMinimum;
                 DataShare.tableSelection = self.tableSelection;
-                if ($scope.tableSelection.length == 0) {
+                if($scope.tableSelection.length == 0) {
                     self.noTableSelected = true;
                     return;
+                }
+                if (sum != 0) {
+                  if(self.bottle.totalGuest > sum) {
+                      $('#moreTableModal').modal('show');
+                      return;
+                  }
                 }
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
