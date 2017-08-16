@@ -22,16 +22,20 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueid = $routeParams.venueid;
-                if((DataShare.amount) || ($rootScope.serviceName === 'BottleService')) {
+                if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
+                    self.bottle = DataShare.bottleServiceData;
+                } else {
+                    self.bottle = {};
+                    self.bottle.requestedDate = moment().format('MM/DD/YYYY');
+                }
+                if(($rootScope.serviceName === 'BottleService') || (DataShare.amount != '')) {
                     DataShare.bottleServiceData = {};
                     DataShare.tableSelection = '';
                     DataShare.selectBottle = '';
                     self.isFocused = '';
-                    self.bottleDateIsFocused = '';
-                    self.startDate = moment();
-                    self.showFloorMapByDate();
+                    self.bottle = {};
+                    self.bottle.requestedDate = moment().format('MM/DD/YYYY');
                 } else {
-                    self.bottle = DataShare.bottleServiceData;
                     self.bottle.authorize = false;
                     self.bottle.agree = false;
                 }
@@ -69,12 +73,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     $('#imagemap').maphilight();
                 }, 200);
             });
-            self.startDate = moment();
             self.$watch('bottle.requestedDate', function() {
                 if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
-                    if(self.bottle.requestedDate) {
-                        self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
-                    }
+                    self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
                     self.showFloorMapByDate();
                 }
             });
@@ -107,7 +108,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
                     self.eventTypes = response.data;
-                    if(DataShare.focused !== '') {
+                    if($rootScope.serviceName != 'BottleService') {
                       var selectedType;
                       angular.forEach(self.eventTypes, function(tmpType) {
                         if(tmpType.id === DataShare.bottleServiceData.bottleOccasion.id) {

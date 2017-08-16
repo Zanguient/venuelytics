@@ -86,7 +86,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             };
 
             self.backToReservation = function() {
-                DataShare.focused = '';
+                $rootScope.serviceName = 'BottleService';
                 $location.url('/newCities/' + self.editCity + '/' + self.venueID + '/bottle-service');
             };
 
