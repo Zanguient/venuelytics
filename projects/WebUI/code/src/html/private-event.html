@@ -193,7 +193,8 @@
                                                     <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDesc(privateEvent.description)">Read More</a>
                                                     </p><br>
                                                     <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right"
-                                                    novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY"></button>
+                                                    novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY" ng-if="privateEvent.reserve == false"></button>
+                                                    <label class="pull-right" ng-if="privateEvent.reserve == true">Reserved</label>
                                             </article>
                                         </div>
                                     </div>

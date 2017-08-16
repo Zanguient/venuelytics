@@ -12,7 +12,6 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.init = function() {
                 $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueID = $routeParams.venueid;
-                self.getPartyHall(self.venueID);
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.party = DataShare.partyServiceData;
                 } else {
@@ -36,6 +35,12 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 self.getMenus();
                 self.getEventType();
             };
+
+            self.$watch('party.orderDate', function() {
+                if (self.party.orderDate != "") {
+                    self.getPartyHall(self.venueID);
+                }
+            });
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
                     self.partyCateringMenu = response.data["BanquetHall.cateringMenuUrl"];
@@ -52,7 +57,6 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             }
 
             self.partyEventDescription = function(value) {
-                // $log.info("Value:", value);
                 $rootScope.partyDescription = value;
             };
 
@@ -89,7 +93,22 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
 
             self.getPartyHall = function(venueId) {
                 AjaxService.getPrivateEvent(venueId).then(function(response) {
-                    $scope.partyHall = response.data;
+                    self.partyHall = response.data;
+                    self.reservationData = [];
+                    var partyDate = moment(self.party.orderDate).format('YYYYMMDD');
+                    AjaxService.getVenueMapForADate(self.venueid,partyDate).then(function(response) {
+                        self.reservations = response.data;
+                        angular.forEach(self.partyHall, function(value, key) {
+                            value.reserve = false;
+                        });
+                        angular.forEach(self.partyHall, function(value1, key1) {
+                            angular.forEach(self.reservations, function(value2, key2) {
+                                if(value1.id == value2.productId) {
+                                    value1.reserve = true;
+                                } 
+                            });
+                        });
+                    });
                 });
             };
 

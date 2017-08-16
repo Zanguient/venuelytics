@@ -141,7 +141,8 @@
                                                         }}{{partyObj.description.length > 120 ? '...' :''}}
                                                     <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyEventDescription(partyObj.description)">Read More</a>
                                                     </p><br>
-                                                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="confirmPartyPackage(partyObj)" translate="ENQUIRY"></button>
+                                                    <button type="submit" id="partyEnquire" class="btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="confirmPartyPackage(partyObj)" translate="ENQUIRY" ng-if="partyObj.reserve == false"></button>
+                                                    <label class="pull-right" ng-if="partyObj.reserve == true">Reserved</label>
                                             </article>
                                         </div>
                                     </div>

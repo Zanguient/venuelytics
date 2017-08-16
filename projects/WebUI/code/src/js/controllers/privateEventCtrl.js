@@ -21,15 +21,11 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     $log.log('Inside clear data.');
                   DataShare.privateEventData = {};
                   self.private.orderDate = moment().format('MM/DD/YYYY');
-                  // self.privateEventFocused = '';
-                  // DataShare.privateEventFocused = '';
-                  // self.privateDateIsFocused = '';
                   self.private = {};
                 } else {
                     $log.log('Inside else data.');
                     self.private.orderDate = moment().format('MM/DD/YYYY');
                 }
-                self.getBanquetHall(self.venueID);
                 self.getMenus();
                 self.getEventType();
                 $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true});
@@ -38,6 +34,11 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 self.private.agree = false;
             };
 
+            self.$watch('private.orderDate', function() {
+                if (self.private.orderDate != "") {
+                    self.getBanquetHall(self.venueid);
+                }
+            });
             self.createPrivateEvent = function(value) {
                 DataShare.tab = 'P';
                 DataShare.privateEventFocused = 'is-focused';
@@ -110,7 +111,22 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
 
             self.getBanquetHall = function(venueId) {
                 AjaxService.getPrivateEvent(venueId).then(function(response) {
-                    $scope.privateEventValueArray = response.data;
+                    self.privateEventValueArray = response.data;
+                    self.reservationData = [];
+                    var privateDate = moment(self.private.orderDate).format('YYYYMMDD');
+                    AjaxService.getVenueMapForADate(self.venueid,privateDate).then(function(response) {
+                        self.reservations = response.data;
+                        angular.forEach(self.privateEventValueArray, function(value, key) {
+                            value.reserve = false;
+                        });
+                        angular.forEach(self.privateEventValueArray, function(value1, key1) {
+                            angular.forEach(self.reservations, function(value2, key2) {
+                                if(value1.id == value2.productId) {
+                                    value1.reserve = true;
+                                }
+                            });
+                        });
+                    });
                 });
             };
 
