@@ -19,9 +19,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 if($rootScope.serviceName === 'GuestList') {
                     DataShare.guestListData = '';
                 }
-                if($rootScope.serviceName === 'PrivateEvent') {
-                    DataShare.privateEventData = '';
-                }
                 if ((self.venueid == 70008) || (self.venueid == 170637)) {
                     if(self.tabParams === 'guest-list') {
                       self.partyFlag = false;

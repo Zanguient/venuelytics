@@ -18,13 +18,16 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     self.private = {};
                 }
                 if($rootScope.serviceName === 'PrivateEvent') {
+                    $log.log('Inside clear data.');
                   DataShare.privateEventData = {};
-                  self.privateEventFocused = '';
-                  DataShare.privateEventFocused = '';
-                  self.privateDateIsFocused = '';
+                  self.private.orderDate = moment().format('MM/DD/YYYY');
+                  // self.privateEventFocused = '';
+                  // DataShare.privateEventFocused = '';
+                  // self.privateDateIsFocused = '';
                   self.private = {};
                 } else {
-                  self.private.orderDate = moment().format('MM/DD/YYYY');
+                    $log.log('Inside else data.');
+                    self.private.orderDate = moment().format('MM/DD/YYYY');
                 }
                 self.getBanquetHall(self.venueID);
                 self.getMenus();
@@ -65,7 +68,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     "serviceInstructions": self.private.privateComment,
                     "status": "REQUEST",
                     "serviceDetail": null,
-                    "fulfillmentDate": self.private.date,
+                    "fulfillmentDate": dateValue,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
                     "deliveryAddress": null,
@@ -75,7 +78,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     "ratingDateTime": null,
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": self.private.date,
+                        "orderDate": dateValue,
                         "orderItems": []
                     },
                     "prebooking": false,
