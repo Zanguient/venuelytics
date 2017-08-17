@@ -9,7 +9,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   'use strict';
   
   $scope.img = {};
-  $scope.img.picUrl = "";
+  $scope.img.pic_url = "";
   $scope.createElements = [];
   $scope.addMapsforSave = [];
   $scope.imageUrls = [];
@@ -21,7 +21,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
   image.onload = function(){
     $scope.originalWidth = this.width;
     $scope.originalHeight = this.height;
-    $scope.img.picUrl = this.src;
+    $scope.img.pic_url = this.src;
             
   }; 
   $('#venueMapImg').bind('resize', function(){
@@ -29,10 +29,10 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     if ($scope.displayWidth !== $('#venueMapImg').width() || $scope.displayHeight !== $('#venueMapImg').height()) {
       $scope.displayWidth = $('#venueMapImg').width();
       $scope.displayHeight = $('#venueMapImg').height();
-      var a = $scope.img.picUrl;
-      $scope.img.picUrl = "";
+      var a = $scope.img.pic_url;
+      $scope.img.pic_url = "";
       $timeout(function(){
-        $scope.img.picUrl =a;
+        $scope.img.pic_url =a;
       }, 200);
     }
     });
@@ -215,7 +215,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       $scope.img.maps.map(function(area){
       area.editMode = true;
       });
-    };    
+    };
     $scope.deleteTable = function(rowId) {
       var table = $('#tables_table').dataTable();
       table.fnDeleteRow(rowId);
@@ -225,8 +225,6 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       $state.go('app.venueMapedit', {id: 'new'});
     };
     
-     
-
   
   $scope.$watch('img', function(nVal, oVal){
       $scope.imgJson = angular.toJson(nVal, true);
@@ -236,7 +234,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
               return [$scope.displayWidth, $scope.displayHeight];
           },
           getImgSize: function(img) {
-                return _getImgSize(img.picUrl) || [10, 10];
+                return _getImgSize(img.pic_url) || [10, 10];
             },
             removeArea : function(area, index) {
               var table = $('#tables_table').dataTable();
@@ -269,7 +267,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     }
     data.imageMap = JSON.stringify($scope.addMapsforSave);
     data.elements = $scope.createElements;
-    if($scope.imageUrls !==""){
+    if($scope.imageUrls != ''){
       data.imageUrls = $scope.imageUrls;
       $scope.imageUrls = [];
     }
@@ -300,6 +298,19 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         target = {};
       }*/
       RestServiceFactory.VenueMapService().updateVenueMap(target,payload, function(success){
+        if(payload.id == success.id){
+          ngDialog.openConfirm({
+              template: '<p>Your information update successfull</p>',
+              plain: true,
+              className: 'ngdialog-theme-default'
+          });
+        } else {
+          ngDialog.openConfirm({
+              template: '<p>Your information saved successfull</p>',
+              plain: true,
+              className: 'ngdialog-theme-default'
+          });
+        }
         $state.go('app.storeedit', {id : venueNumber});
       },function(error){
         if (typeof error.data !== 'undefined') {
@@ -319,7 +330,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
             t.imageUrls.push(success);
             document.getElementById("clear").value = "";
           } else {
-            $scope.img.picUrl = success.originalUrl;
+            $scope.img.pic_url = success.originalUrl;
             $scope.originalWidth = success.largeWidth;
             $scope.originalHeight = success.largeHeight;
             $scope.imageUrls.push(success);

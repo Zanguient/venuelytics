@@ -67,7 +67,7 @@
                <div class="form-group col-sm-6">
                    <div class="checkbox c-checkbox">
                      <label>
-                        <input type="checkbox" name="enable_venue" value="Y" ng-model="data.enabled" ng-true-value="'Y'"  ng-false-value="'N'" ng-checked="venueEnabled=='Y'"/>
+                        <input type="checkbox" name="enable_venue" value="Y" ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N" ng-checked="venueEnabled=='Y'"/>
                         <span class="fa fa-check"></span>Enable Venue
                         </label>
                   </div>
@@ -82,18 +82,19 @@
                </div>
            </div>
              <div class="required">* Required fields</div>
-        	  <button type="submit" class="btn btn-primary" ng-click="update(storeInfo.$valid,data)">Save</button>
+        	  <button  ng-disabled="data.enabled == 'N'" type="submit" class="btn btn-primary" ng-click="update(storeInfo.$valid,data)">Save</button>
     </form>
 </div>
 <div class="col-sm-6" animate-enabled="true">
 	<div class="form-group col-sm-12" >
         <input type="file" id="control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
-  </div>
+  </div><br />
   <carousel interval="5000" class="col-sm-12">
     <slide ng-repeat="slide in imageUrl" active="slide.active">
       <img ng-src="{{slide.originalUrl}}" alt="" />
         <div class="row row-table bg-gray-darker" style="padding: 15px;" ng-show="imageUrl.length > 0">
-          <span> Image {{$index + 1}}</span> <a href="javascript:void(0)"> <em class="fa fa-trash fa-2x pull-right" ng-click="deleteImage(slide.id)" /></a>
+          <span> Image {{$index + 1}}</span> <a href="javascript:void(0)"> <em class="fa fa-trash fa-2x" style="padding-left: 155px;" ng-click="deleteImage(slide.id, imageUrl, slide)" />
+          </a>
         </div>
     </slide>
   </carousel>

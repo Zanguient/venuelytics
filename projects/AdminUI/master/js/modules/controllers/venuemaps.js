@@ -64,7 +64,8 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
     }).then(function (value) {
       var target = {id: $stateParams.id ,tableId:cellData};
       RestServiceFactory.VenueMapService().delete(target,  function(success){
-        $state.go('app.stores');
+        var table = $('#venue_map_table').dataTable();
+        table.fnDeleteRow(rowId);
       },function(error){
         if (typeof error.data !== 'undefined') { 
           toaster.pop('error', "Server Error", error.data.developerMessage);

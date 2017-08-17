@@ -79,7 +79,8 @@ App.controller('partyEventsController', ['$scope', '$state', '$stateParams', '$c
     }).then(function (value) {
       var target = {id: $stateParams.id ,productId:productId};
   		RestServiceFactory.ProductService().delete(target,  function(success){
-  			$state.go('app.stores');
+  			var table = $('#party_events_table').dataTable();
+        	table.fnDeleteRow(rowId);
     	},function(error){
     		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);

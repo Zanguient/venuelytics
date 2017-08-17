@@ -8,7 +8,7 @@
       function($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
         $timeout,DataTableService, $compile, ngDialog) {
   'use strict';
-  
+  $scope.deletedVenueImage = [];
   $scope.advanceSwitches = {
     "Advance.BottleService.enable" : false,
     "Advance.BookBanqetHall.enable": false,
@@ -98,8 +98,12 @@
     addType("bowlingType", 128, "Bowling", data.venueTypeCode);
     addType("karaokeType", 256, "Karaoke", data.venueTypeCode);
   };
-  
-  $scope.deleteImage = function(imageId) {
+  $scope.deleteImage = function(imageId, imageArray, deletedImage) {
+    imageArray.splice(imageId, 1);
+        var id= {
+            "id" : deletedImage.id
+        }
+        $scope.deletedVenueImage.push(id);
     var promise = RestServiceFactory.VenueImage().deleteVenueImage({id: imageId}, function(data){
       toaster.pop('data', "Deleted the selected Image successfull");
     },function(error){
@@ -171,14 +175,18 @@
       if ($scope.venueTypes[tIndex].value) {
         venueTypeCode += $scope.venueTypes[tIndex].typeValue;
       }
-    }
-    
+    }    
     data.venueTypeCode = venueTypeCode;
     $scope.imageId = [];
-    angular.forEach($scope.imageUrl, function(value, key){ 
+    angular.forEach($scope.imageUrl, function(value, key){
       var venueImageId = {
         "id" : value.id
       };
+      angular.forEach($scope.deletedVenueImage, function(value1, key1) {
+        if(venueImageId.id == value1.id) {
+            delete venueImageId.id;
+            }
+        });
       $scope.imageId.push(venueImageId);
     });
     data.imageUrls = $scope.imageId;
@@ -188,11 +196,19 @@
       target = {};
     }
     RestServiceFactory.VenueService().save(target,payload, function(success){
-      ngDialog.openConfirm({
-        template: '<p>venue information update successfull</p>',
-        plain: true,
-        className: 'ngdialog-theme-default'
-      });
+      if(target.id == success.id){
+        ngDialog.openConfirm({
+          template: '<p>venue information update successfull</p>',
+          plain: true,
+          className: 'ngdialog-theme-default'
+        });
+      } else {
+        ngDialog.openConfirm({
+          template: '<p>venue information saved successfull</p>',
+          plain: true,
+          className: 'ngdialog-theme-default'
+        });
+      }
       $state.go('app.stores');
     },function(error){
       if (typeof error.data !== 'undefined') {
