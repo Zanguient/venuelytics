@@ -84,9 +84,25 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
         }
       });
   	};
+    /*$scope.deleteStore = function(rowId, storeId) {
+      ngDialog.openConfirm({
+      template: 'deleteVenueId',
+      className: 'ngdialog-theme-default'
+    }).then(function (value) {
+      var target = {id: storeId};
+      RestServiceFactory.VenueService().delete(target,  function(success){
+        var table = $('#stores_table').dataTable();
+        table.fnDeleteRow(rowId);
+      },function(error){
+        if (typeof error.data !== 'undefined') { 
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+      }, function (reason) {
+    });
+    };*/
   	$scope.createNewStore = function() {
   		$state.go('app.storeedit', {id: 'new'});
   	};
   });
-}]);
-      
+}]);      

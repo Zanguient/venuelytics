@@ -64,33 +64,31 @@
 					<div class="row" >
 						<div class="form-group col-sm-6">
 							<div class="checkbox c-checkbox">
-								<label> <input type="checkbox" name="enable_hall" ng-model="data.enabled" ng-true-value="'Y'"
-									ng-false-value="'N'" ng-checked="data.enabled=='Y'" /> <span
+								<label> <input type="checkbox" name="enable_hall" ng-model="data.enabled" ng-true-value="Y"
+									ng-false-value="N" ng-checked="data.enabled=='Y'" /> <span
 									class="fa fa-check" style="top: 29px;"></span>
-									<h5 ng-show="createPartySplit == 'private'">Enable Private Event </h5>
-									<h5 ng-show="createPartySplit == 'party'">Enable Party Packages </h5>
+									<h5 style="margin-left: 10px;"> Enable *</h5>
 								</label>
 							</div>
 						</div>
 					</div>
 					<div class="required">* Required fields</div>
-					<button type="submit" class="btn btn-primary"
+					<button ng-disabled="data.enabled == 'N'" type="submit" class="btn btn-primary"
 						ng-click="update(storeInfo.$valid,data,venueNumber)">Save</button>
 				</form>
 			</div>
 			<div class="col-lg-6" animate-enabled="false">
+				<div class="form-group">
+    				<input type="file" id="clear" name="file" onchange="angular.element(this).	scope().uploadFile(this.files)"/>
+				</div><br />	
 				<carousel interval="5000">
 				    <slide ng-repeat="slide in imageUrl" active="slide.active">
-				      <img ng-src="{{slide.originalUrl}}" style="margin: auto;" alt="" />
-				        <div class="carousel-caption">
-				          <h4>Image {{$index + 1}}</h4>
+				      <img ng-src="{{slide.originalUrl}}" alt="" />
+				        <div class="row row-table bg-gray-darker" style="padding: 15px;" ng-show="imageUrl.length > 0">
+				          <span> Image {{$index + 1}}</span> <a href="javascript:void(0)"> <em class="fa fa-trash fa-2x" style="padding-left: 155px;" ng-click="deleteImage(slide.id, imageUrl, slide)" /></a>
 				        </div>
 				    </slide>
 				 </carousel>
-			</div>
-			<br /><br />
-			<div class="form-group">
-    			<input type="file" id="clear" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
 			</div>
 		</div>
 	</div>

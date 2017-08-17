@@ -3,11 +3,13 @@
  *smangipudi
  =========================================================*/
 App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$compile',
- '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','$rootScope',  
+ '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','$rootScope','ngDialog',  
             function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
-								RestServiceFactory, toaster, FORMATS, $rootScope) {
+								RestServiceFactory, toaster, FORMATS, $rootScope, ngDialog) {
     'use strict';
-    var promise = RestServiceFactory.ProductService().getPrivateEvent({id:0, productId: $stateParams.id, role: 'admin'});
+
+    $scope.deletedPrivateImage = [];
+    var promise = RestServiceFactory.ProductService().getPrivateEvent({id:$stateParams.venueNumber, productId: $stateParams.id, role: 'admin'});
     $scope.venueNumber = $stateParams.venueNumber;
     $scope.data = {enabled: 'N'};
     promise.$promise.then(function(data) {
@@ -20,6 +22,16 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
         $scope.displayTypeName = "Banquet Hall";
         $scope.displayName = "Banquet Hall Name *"
     }
+
+    $scope.deleteImage = function(imageId, imageArray, deletedImage) {
+        imageArray.splice(imageId, 1);
+            var id= {
+                "id" : deletedImage.id
+            }
+        $scope.deletedPrivateImage.push(id);
+        toaster.pop('id', "Deleted the selected Image successfull");
+    };
+
 	$scope.update = function(isValid, data, num) {
         if($state.current.name === 'app.editBanquetHall'){
             data.brand = "BanquetHall";
@@ -39,6 +51,11 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
             var venueImageId = {
                 "id" : value.id
             };
+            angular.forEach($scope.deletedPrivateImage, function(value1, key1) {
+                if(venueImageId.id == value1.id) {
+                    delete venueImageId.id;
+                }
+            });
             $scope.imageUrl.push(venueImageId);
         });
         data.imageUrls = $scope.imageUrl;
@@ -49,6 +66,19 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
     		target = {id: num};
     	}
     	RestServiceFactory.ProductService().updatePrivateEvent(target,payload, function(success){
+            if(target.productId == success.id){
+                ngDialog.openConfirm({
+                    template: '<p>Your information update successfull</p>',
+                    plain: true,
+                    className: 'ngdialog-theme-default'
+                });
+            } else {
+                ngDialog.openConfirm({
+                    template: '<p>Your information saved successfull</p>',
+                    plain: true,
+                    className: 'ngdialog-theme-default'
+                });
+            }
             $state.go('app.storeedit', {id : $scope.venueNumber});
     	},function(error){
     		if (typeof error.data !== 'undefined') { 

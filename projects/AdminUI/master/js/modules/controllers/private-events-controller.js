@@ -44,12 +44,10 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
 		 } ];
     
 	    DataTableService.initDataTable('events_table', columnDefinitions, false);
-   
 	    var promise = RestServiceFactory.ProductService().getPrivateEvents({id:$stateParams.id, role: 'admin'});
 	    promise.$promise.then(function(data) {
 	    $scope.data = data;
     	var table = $('#events_table').DataTable();
-
     	data.map(function(room) {
     		var d = room.description;
     		if (d != null && d.length > 150) {
@@ -79,7 +77,8 @@ App.controller('PrivateEventsController', ['$scope', '$state', '$stateParams', '
     }).then(function (value) {
       var target = {id: $stateParams.id ,productId:productId};
   		RestServiceFactory.ProductService().delete(target,  function(success){
-  			$state.go('app.stores');
+  		var table = $('#events_table').dataTable();
+        table.fnDeleteRow(rowId);
     	},function(error){
     		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
