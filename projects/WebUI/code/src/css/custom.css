@@ -321,6 +321,10 @@ select {
       margin-left: 200px;
   }
 
+  .partyAlignment {
+    width:1000px;
+  }
+
   .img-singleline {
     display: inline-block;
     float: left;
@@ -355,6 +359,10 @@ select {
 
     .downloadIcon{
       padding-top: 20px;
+    }
+
+    .partyAlignment {
+      width:1000px;
     }
 
     .img-singleline-image {
@@ -405,6 +413,10 @@ select {
 
   .carouselImage {
     width: 100%;
+  }
+
+  .partyAlignment {
+    width:1000px;
   }
 
   #removeBtn {
