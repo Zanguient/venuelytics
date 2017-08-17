@@ -74,13 +74,15 @@
         </div>
         </div>
         </div>
-
-        <div class="col-md-12 form-group is-empty">
+        
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
+            <label class="control-label" for="focusedInput1">{{"reservation.EVENT_TYPE"  | translate}}</label>
             <select class="form-control fontBold" required=""
                 ng-model="party.partyEventType" ng-options="t.name for t in eventTypes">
-                <option value="">{{"reservation.EVENT_TYPE"  | translate}}</option>
+                <option value=""></option>
             </select>
         </div>
+
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.COMMENT' | translate}}</label>
             <input type="text" class="form-control fontBold" id="instructions" ng-model="party.instructions" data-parsley-trigger="change">

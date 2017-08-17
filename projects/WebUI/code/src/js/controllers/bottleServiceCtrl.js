@@ -16,6 +16,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.bottleMinimum = [];
             self.noTableSelected = false;
             self.moreCapacity = false;
+            self.sum = 0;
             self.bottleDateIsFocused = 'is-focused';
             self.init = function() {
                 //$("div.form-group").add("style", "margin-left: auto");
@@ -350,6 +351,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     data.fillColor = APP_COLORS.darkYellow;
                     data.strokeColor = APP_COLORS.turbo;
                     self.selectionTableItems.push(dataValueObj);
+                    self.sum = dataValueObj.size + self.sum;
                     DataShare.userselectedTables = self.selectionTableItems;
 
 
@@ -366,8 +368,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         };
                         self.tableSelection.push(table);
                     }
-
+                    $('#tableSelectionModal').modal('show');
                 } else if (data.fillColor === APP_COLORS.darkYellow) {
+                    self.sum = self.sum - dataValueObj.size;
                     data.fillColor = APP_COLORS.lightGreen;
                     data.strokeColor = APP_COLORS.darkGreen;
                     angular.forEach(self.tableSelection, function(key, value) {
@@ -395,6 +398,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
                 }
             });
+            self.sum = self.sum - arrayObj.size;
             table.splice(index, 1);
             self.selectionTableItems.splice(index, 1);
         };

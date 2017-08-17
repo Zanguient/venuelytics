@@ -296,9 +296,6 @@
     </center>
 </div>
 
-</div>
-</div>
-
 
 <div class="modal modal-success" id="reservedTable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
     <div class="modal-dialog animated zoomIn animated-3x" role="document">
@@ -329,6 +326,40 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeGuestListModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-success" id="tableSelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="myModalLabel6">{{'reservation.SELECT_TABLE' | translate}}</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-no-border">
+                    <tr>
+                        <td>
+                            <label>{{'reservation.TABLE_NAME' | translate}}</label>
+                        </td>
+                        <td>
+                            <label ng-repeat="tableInfo in tableSelection">{{tableInfo.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
+                        </td>
+                    </tr>
+                    <tr ng-hide="sum <=0">
+                        <td>
+                            <label>{{'reservation.CAPACITY' | translate}}</label>
+                        </td>
+                        <td>
+                            <label>{{sum}}</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>
             </div>
         </div>
     </div>
