@@ -21,6 +21,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.init = function() {
                 //$("div.form-group").add("style", "margin-left: auto");
                 var date = new Date();
+                $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueid = $routeParams.venueid;
@@ -36,6 +37,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     DataShare.selectBottle = '';
                     self.isFocused = '';
                     self.bottle = {};
+                    $rootScope.serviceName = '';
                     self.bottle.requestedDate = moment().format('MM/DD/YYYY');
                 } else {
                     self.bottle.authorize = false;
@@ -406,6 +408,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.confirmBottleService = function() {
                 DataShare.focused = 'is-focused';
                 $log.info("inside is focused");
+                $rootScope.serviceTabClear = true;
                 var date = new Date(self.bottle.requestedDate);
                 var newDate = date.toISOString();
                 var parsedend = moment(newDate).format("MM-DD-YYYY");

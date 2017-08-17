@@ -10,22 +10,23 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             var self = $scope;
             self.partyDateIsFocused = 'is-focused';
             self.init = function() {
+                $rootScope.serviceTabClear = false;
                 $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true});
                 self.venueID = $routeParams.venueid;
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.party = DataShare.partyServiceData;
                 } else {
                     self.party = {};
+                    self.party.orderDate = moment().format('MM/DD/YYYY');
                 }
                 if($rootScope.serviceName === 'PartyPackages') {
                   DataShare.partyServiceData = {};
                   DataShare.partyFocus = '';
                   self.party = {};
                   self.partyFocus = '';
+                  $rootScope.serviceName = '';
                   self.party.orderDate = moment().format('MM/DD/YYYY');
-                } else {
-                  self.party.orderDate = moment().format('MM/DD/YYYY');
-                }
+                } 
                 self.party.authorize = false;
                 self.party.agree = false;
                 self.totalGuest = DataShare.totalNoOfGuest;
@@ -114,6 +115,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             };
 
             self.confirmPartyPackage = function(selectedParty) {
+                $rootScope.serviceTabClear = true;
                 DataShare.selectedVenuePrice = selectedParty.price;
                 DataShare.partyFocus = 'is-focused';
                 var date = new Date(self.party.orderDate);

@@ -10,7 +10,6 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.guestListData = DataShare.guestListData;
-                self.guestSelectedDate = moment(self.guestListData.guestStartDate).format('MM-DD-YYYY');
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
             };

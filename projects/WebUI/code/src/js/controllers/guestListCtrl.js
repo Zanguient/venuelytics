@@ -11,16 +11,22 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             var self = $scope;
             self.guestDateIsFocused = 'is-focused';
             self.init = function() {
+                $rootScope.serviceTabClear = false;
                 $("#requestedDate").datepicker({autoclose:true, todayHighlight: true});
+                if((Object.keys(DataShare.guestListData).length) !== 0) {
+                    self.guest = DataShare.guestListData;
+                } else {
+                    self.guest = {};
+                    self.guest.requestedDate = moment().format('MM/DD/YYYY');
+                }
                 if($rootScope.serviceName == 'GuestList') {
                     DataShare.guestFocus = '';
                     self.guestFocus = '';
                     DataShare.guestListData = {};
+                    $rootScope.serviceName = '';
                     self.guest = {};
                     self.guest.requestedDate = moment().format('MM/DD/YYYY');
-                } else {
-                    self.guest.requestedDate = moment().format('MM/DD/YYYY');
-                }
+                } 
             };
             if(DataShare.guestFocus != '') {
               $log.info("insdie focused");
@@ -30,6 +36,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             self.glistSave = function(guest) {
                 DataShare.tab = 'G';
                 DataShare.guestFocus = 'is-focused';
+                $rootScope.serviceTabClear = true;
                 var name = guest.guestFirstName + " " + guest.guestLastName;
                 var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
                 var date = new Date(self.guest.requestedDate);

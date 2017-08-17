@@ -14,7 +14,6 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
                 self.privateEventData = DataShare.privateEventData;
-                self.privateSelectedDate = moment(self.privateEventData.orderDate).format('MM-DD-YYYY');
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
             };

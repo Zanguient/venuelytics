@@ -225,10 +225,38 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
              };
 
              self.tabClear = function() {
-                DataShare.bottleServiceData = {};
-                DataShare.privateEventData = {};
-                DataShare.guestListData = {};
-                DataShare.partyServiceData = {};
+                if(((Object.keys(DataShare.bottleServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
+                    DataShare.privateEventData = {};
+                    DataShare.guestListData = {};
+                    DataShare.partyServiceData = {};
+                    DataShare.guestFocus = '';
+                    DataShare.partyFocus = '';
+                    DataShare.privateEventFocused = '';
+                } else if(((Object.keys(DataShare.privateEventData).length) != 0) || ($rootScope.serviceTabClear === false)) {
+                    DataShare.bottleServiceData = {};
+                    DataShare.guestListData = {};
+                    DataShare.partyServiceData = {};
+                    DataShare.guestFocus = '';
+                    DataShare.partyFocus = '';
+                    DataShare.focused = '';
+                } else if(((Object.keys(DataShare.guestListData).length) != 0) || ($rootScope.serviceTabClear === false)) {
+                    DataShare.bottleServiceData = {};
+                    DataShare.privateEventData = {};
+                    DataShare.partyServiceData = {};
+                    DataShare.partyFocus = '';
+                    DataShare.privateEventFocused = '';
+                    DataShare.focused = '';
+                } else if(((Object.keys(DataShare.partyServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
+                    DataShare.bottleServiceData = {};
+                    DataShare.guestListData = {};
+                    DataShare.privateEventData = {};
+                    DataShare.guestFocus = '';
+                    DataShare.privateEventFocused = '';
+                    DataShare.focused = '';
+                } else {
+                    $log.info('Inside else');
+                }
+                
              }
 
             self.init();
