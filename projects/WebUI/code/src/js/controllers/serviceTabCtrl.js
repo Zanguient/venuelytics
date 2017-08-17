@@ -70,9 +70,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
             /*For bottle service tab highlight*/
             self.bottleService = function() {
-                DataShare.privateEventData = {};
-                DataShare.guestListData = {};
-                DataShare.partyServiceData = {};
+                self.tabClear();
                 self.myClass = 'partBackgroundNotSelected';
                 self.tabButtonColor = 'partyBackgroundButtonNotSelected';
                 $log.info("Inside bottle function:");
@@ -96,9 +94,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
             /*For private event service tab highlight*/
              self.event = function() {
-                DataShare.bottleServiceData = {};
-                DataShare.guestListData = {};
-                DataShare.partyServiceData = {};
+                self.tabClear();
                 self.myClass = 'partBackgroundNotSelected';
                 self.tabButtonColor = 'partyBackgroundButtonNotSelected';
                 $log.info("Inside event function:");
@@ -125,9 +121,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             /*For guest list service tab highlight*/
              self.glist = function() {
                $log.info("Inside glist function:");
-                DataShare.bottleServiceData = {};
-                DataShare.privateEventData = {};
-                DataShare.partyServiceData = {};
+                self.tabClear();
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color',APP_COLORS.fruitSalad);
@@ -151,10 +145,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
              /*For bachelor party service tab highlight*/
              self.bachelorFunction = function() {
                $log.info("Inside bachelor function:");
-                DataShare.bottleServiceData = {};
-                DataShare.privateEventData = {};
-                DataShare.guestListData = {};
-                DataShare.partyServiceData = {};
+                self.tabClear();
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#bachelorEventTab").css('background-color',APP_COLORS.fruitSalad);
@@ -178,9 +169,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
              /*For party packages service tab highlight*/
              self.partyFunction = function() {
                 $log.info("Inside party function:");
-                DataShare.bottleServiceData = {};
-                DataShare.privateEventData = {};
-                DataShare.guestListData = {};
+                self.tabClear();
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#bottleTab").css('background-color',APP_COLORS.silver);
@@ -199,10 +188,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
              /*For food service tab highlight*/
              self.foodFunction = function() {
-                DataShare.bottleServiceData = {};
-                DataShare.privateEventData = {};
-                DataShare.guestListData = {};
-                DataShare.partyServiceData = {};
+                self.tabClear();
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#bottleTab").css('background-color',APP_COLORS.silver);
@@ -221,10 +207,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
              /*For drink service tab highlight*/
              self.drinkFunction = function() {
-                DataShare.bottleServiceData = {};
-                DataShare.privateEventData = {};
-                DataShare.guestListData = {};
-                DataShare.partyServiceData = {};
+                self.tabClear();
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#bottleTab").css('background-color',APP_COLORS.silver);
@@ -240,6 +223,13 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.drinkServiceTab = true;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/drink-services");
              };
+
+             self.tabClear = function() {
+                DataShare.bottleServiceData = {};
+                DataShare.privateEventData = {};
+                DataShare.guestListData = {};
+                DataShare.partyServiceData = {};
+             }
 
             self.init();
 
