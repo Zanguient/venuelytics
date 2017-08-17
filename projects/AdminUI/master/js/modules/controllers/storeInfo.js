@@ -238,7 +238,12 @@
       var promise = RestServiceFactory.VenueService().get({id:$stateParams.id});
       promise.$promise.then(function(data) {
         data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
-        $scope.imageUrl = data.imageUrls;
+        $scope.imageUrl = [];
+        for (var imgIndex = 0; imgIndex < data.imageUrls.length; imgIndex++) {
+          if ( data.imageUrls[imgIndex].id !== null) {
+            $scope.imageUrl.push(data.imageUrls[imgIndex]);
+          }
+        }
         $scope.venueTypeCodes(data);
         $scope.data = data; 
         $scope.initInfoTable();

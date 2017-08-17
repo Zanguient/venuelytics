@@ -91,7 +91,7 @@
   </div><br />
   <carousel interval="5000" class="col-sm-12">
     <slide ng-repeat="slide in imageUrl" active="slide.active">
-      <img ng-src="{{slide.originalUrl}}" alt="" />
+      <img ng-src="{{slide.originalUrl}}" alt="" class="img-responsive" style="width: 100% !important"/>
         <div class="row row-table bg-gray-darker" style="padding: 15px;" ng-show="imageUrl.length > 0">
           <span> Image {{$index + 1}}</span> <a href="javascript:void(0)"> <em class="fa fa-trash fa-2x" style="padding-left: 155px;" ng-click="deleteImage(slide.id, imageUrl, slide)" />
           </a>
