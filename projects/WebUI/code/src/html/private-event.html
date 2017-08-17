@@ -1,21 +1,21 @@
 <div ng-controller="PrivateEventController">
 <!-- <div class="col-lg-6"> -->
-<div class="showInWeb">
- <legend class="fontRegular">Description</legend>
-    <div class="form-group ">
-        <p id="banquetHallData" class="fontRegular">show venue description</p>
+    <div class="showInWeb">
+     <legend class="fontRegular">Description</legend>
+        <div class="form-group ">
+            <p id="banquetHallData" class="fontRegular">show venue description</p>
+        </div>
     </div>
-</div>
-<div class="showInMobile">
- <legend class="fontRegular">Description</legend>
-    <div class="form-group ">
-        <p id="banquetHallData" class="fontRegular">show venue description</p>
-        <a class="btn btn-default btn-raised btn-xs pull-right" ng-click="privateDescription()">Read More</a>
+    <div class="showInMobile">
+     <legend class="fontRegular">Description</legend>
+        <div class="form-group ">
+            <p id="banquetHallData" class="fontRegular">show venue description</p>
+            <a class="btn btn-default btn-raised btn-xs pull-right" ng-click="privateDescription()">Read More</a>
+        </div>
     </div>
-</div>
-<div class="col-md-12 showInMobile alignUrl">
-    <center>
-    <table>
+    <div class="col-md-12 showInMobile alignUrl">
+        <center>
+            <table>
                 <tr>
                     <td ng-if="privateInfoSheet">
                         <a  href="" class="btn btn-success fontRegular btn-raised btn-xs" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE" | translate}}</a>
@@ -32,9 +32,10 @@
                         <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FLOOR" | translate}}</a>
                     </td>
                 </tr>
-            </table> </center>
-</div>
-<form class="form-horizontal col-md-12 privateFormHeight" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
+            </table> 
+        </center>
+    </div>
+    <form class="form-horizontal col-md-12 privateFormHeight" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
     <fieldset>
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateDateIsFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
@@ -125,7 +126,6 @@
             <input type="text" id="ms-form-pass" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber"  required data-parsley-trigger="change">
         </div>
         
-        </div>
         <div class="col-md-12 form-group is-empty">
             <select class="form-control fontBold" required=""
                 ng-model="private.privateEvent" ng-options="t.name for t in eventTypes">
