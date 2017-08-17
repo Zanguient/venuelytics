@@ -2,18 +2,18 @@
 <!-- <div class="col-lg-6"> -->
     <div class="showInWeb">
      <legend class="fontRegular">Description</legend>
-        <div class="form-group ">
+        <div class="form-group col-md-12">
             <p id="banquetHallData" class="fontRegular">{{banquetHallDescription}}</p>
         </div>
     </div>
     <div class="showInMobile">
      <legend class="fontRegular">Description</legend>
-        <div class="form-group ">
+        <div class="form-group col-md-12">
             <p id="banquetHallData" class="fontRegular">{{banquetHallDescription | limitTo: 160}}{{banquetHallDescription.length > 160 ? '...' :''}}</p>
             <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(banquetHallDescription)" ng-if="banquetHallDescription.length > 160">Read More</a>
         </div>
     </div>
-    <div class="col-md-12 showInMobile alignUrl">
+    <div class="col-md-12 showInMobile alignUrl" ng-if="((privateInfoSheet) || (privateMenu) || (privateVideo) || (privateFloorPlan))">
         <center>
             <table>
                 <tr>
@@ -35,7 +35,7 @@
             </table> 
         </center>
     </div>
-    <form class="form-horizontal col-md-12 privateFormHeight" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
+    <form class="form-horizontal col-md-12" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
     <fieldset>
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateDateIsFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
