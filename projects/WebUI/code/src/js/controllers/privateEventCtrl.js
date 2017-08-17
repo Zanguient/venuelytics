@@ -93,8 +93,8 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
              };
 
             
-             self.privateEventDesc = function(value) {
-                self.privateEventDescription = value;
+             self.privateEventDescription = function(value) {
+                $rootScope.privateDescription = value;
              };
 
             self.getBanquetHall = function(venueId) {

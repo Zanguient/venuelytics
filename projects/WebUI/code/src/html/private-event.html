@@ -191,7 +191,7 @@
                                                     <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
                                                     <p class="privateEventBox">{{privateEvent.description | limitTo: 120
                                                         }}{{privateEvent.description.length > 120 ? '...' :''}}
-                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDesc(privateEvent.description)">Read More</a>
+                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(privateEvent.description)" ng-if="privateEvent.description.length > 120">Read More</a>
                                                     </p><br>
                                                     <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right"
                                                     novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" translate="ENQUIRY" ng-if="privateEvent.reserve == false"></button>
@@ -220,7 +220,7 @@
                 <h3 class="modal-title" id="myModalLabel6">{{'bottleServiceTab.DESC' | translate}}</h3>
             </div>
             <div class="modal-body">
-                <p>{{privateEventDescription}}</p>
+                <p>{{privateDescription}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>

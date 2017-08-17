@@ -74,7 +74,7 @@
         </div>
         </div>
         </div>
-        
+
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{"reservation.EVENT_TYPE"  | translate}}</label>
             <select class="form-control fontBold" required=""
@@ -139,7 +139,7 @@
                                                     <p ng-if="partyObj.size != 0">{{partyObj.size}} sq.ft</p>
                                                     <p class="privateEventBox">{{partyObj.description | limitTo: 120
                                                         }}{{partyObj.description.length > 120 ? '...' :''}}
-                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyEventDescription(partyObj.description)">Read More</a>
+                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyEventDescription(partyObj.description)" ng-if="partyObj.description.length > 120">Read More</a>
                                                     </p><br>
                                                     <button type="submit" id="partyEnquire" class="btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="confirmPartyPackage(partyObj)" translate="reservation.ENQUIRY" ng-if="partyObj.reserve == false"></button>
                                                     <label class="pull-right" ng-if="partyObj.reserve == true">Reserved</label>

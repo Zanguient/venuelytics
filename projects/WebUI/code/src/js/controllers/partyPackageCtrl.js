@@ -57,7 +57,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             }
 
             self.partyEventDescription = function(value) {
-                self.partyDescription = value;
+                $rootScope.partyDescription = value;
             };
 
             self.getEventType = function() {
