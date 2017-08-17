@@ -56,7 +56,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
               self.partyFocus = DataShare.partyFocus;
             }
 
-            self.partyEventDescription = function(value) {
+            self.partyHallDescription = function(value) {
                 $rootScope.partyDescription = value;
             };
 
@@ -94,6 +94,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.getPartyHall = function(venueId) {
                 AjaxService.getPrivateHalls(venueId, 'PartyHall').then(function(response) {
                     self.partyHall = response.data;
+                    self.partyDescription = response.data[0].description;
                     self.reservationData = [];
                     var partyDate = moment(self.party.orderDate).format('YYYYMMDD');
                     AjaxService.getVenueMapForADate(self.venueid,partyDate).then(function(response) {

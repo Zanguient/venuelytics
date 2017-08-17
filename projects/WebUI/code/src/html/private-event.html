@@ -3,14 +3,14 @@
     <div class="showInWeb">
      <legend class="fontRegular">Description</legend>
         <div class="form-group ">
-            <p id="banquetHallData" class="fontRegular">show venue description</p>
+            <p id="banquetHallData" class="fontRegular">{{banquetHallDescription}}</p>
         </div>
     </div>
     <div class="showInMobile">
      <legend class="fontRegular">Description</legend>
         <div class="form-group ">
-            <p id="banquetHallData" class="fontRegular">show venue description</p>
-            <a class="btn btn-default btn-raised btn-xs pull-right" ng-click="privateDescription()">Read More</a>
+            <p id="banquetHallData" class="fontRegular">{{banquetHallDescription | limitTo: 160}}{{banquetHallDescription.length > 160 ? '...' :''}}</p>
+            <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(banquetHallDescription)" ng-if="banquetHallDescription.length > 160">Read More</a>
         </div>
     </div>
     <div class="col-md-12 showInMobile alignUrl">

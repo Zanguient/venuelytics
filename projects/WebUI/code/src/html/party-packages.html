@@ -3,14 +3,14 @@
 <div class="showInWeb">
  <legend class="fontRegular">Description</legend>
     <div class="form-group ">
-        <p id="banquetHallData" class="fontRegular">show venue description</p>
+        <p id="banquetHallData" class="fontRegular">{{partyDescription}}</p>
     </div>
 </div>
 <div class="showInMobile">
  <legend class="fontRegular">Description</legend>
     <div class="form-group " ng-if="!desc">
-        <p id="banquetHallData" class="fontRegular">show venue description</p>
-        <a class="btn btn-default btn-raised btn-xs pull-right" ng-click="privateDescription()">Read More</a>
+        <p id="banquetHallData" class="fontRegular">{{partyDescription | limitTo: 160}}{{partyDescription.length > 160 ? '...' :''}}</p>
+        <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyHallDescription(partyDescription)" ng-if="partyDescription.length > 160">Read More</a>
     </div>
 </div>
 <form class="form-horizontal privateFormHeight" name="privateForm" parsley-validate validate-form="" ng-cloak>
@@ -139,7 +139,7 @@
                                                     <p ng-if="partyObj.size != 0">{{partyObj.size}} sq.ft</p>
                                                     <p class="privateEventBox">{{partyObj.description | limitTo: 120
                                                         }}{{partyObj.description.length > 120 ? '...' :''}}
-                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyEventDescription(partyObj.description)" ng-if="partyObj.description.length > 120">Read More</a>
+                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyHallDescription(partyObj.description)" ng-if="partyObj.description.length > 120">Read More</a>
                                                     </p><br>
                                                     <button type="submit" id="partyEnquire" class="btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="confirmPartyPackage(partyObj)" translate="reservation.ENQUIRY" ng-if="partyObj.reserve == false"></button>
                                                     <label class="pull-right" ng-if="partyObj.reserve == true">Reserved</label>
