@@ -107,7 +107,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             }
                         
             self.getEventType = function() {
-                AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
+                AjaxService.getTypeOfEvents(self.venueid, 'Bottle').then(function(response) {
                     self.eventTypes = response.data;
                     if($rootScope.serviceName != 'BottleService') {
                       var selectedType;

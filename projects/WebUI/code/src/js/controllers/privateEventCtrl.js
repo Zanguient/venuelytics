@@ -98,7 +98,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
              };
 
             self.getBanquetHall = function(venueId) {
-                AjaxService.getPrivateEvent(venueId).then(function(response) {
+                AjaxService.getPrivateHalls(venueId, 'BanquetHall').then(function(response) {
                     self.privateEventValueArray = response.data;
                     self.reservationData = [];
                     var privateDate = moment(self.private.orderDate).format('YYYYMMDD');
@@ -137,7 +137,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             }
 
             self.getEventType = function() {
-                AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
+                AjaxService.getTypeOfEvents(self.venueid, 'BanquetHall').then(function(response) {
                     self.eventTypes = response.data;
                     if(DataShare.privateEventFocused !== '') {
                         

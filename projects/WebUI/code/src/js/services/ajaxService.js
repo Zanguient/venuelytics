@@ -160,10 +160,10 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
-    this.getPrivateEvent = function(venueId) {
+    this.getPrivateHalls = function(venueId, hallType) {
         return $http({
             method: 'GET',
-            url: RestURL.baseURL + 'products/' + venueId + '/type/BanquetHall'
+            url: RestURL.baseURL + 'products/' + venueId + '/type/' + hallType
         }).then(function(success) {
             return success;
         }, function(error) {
@@ -284,10 +284,10 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
-    this.getTypeOfEvents = function(venueId) {
+    this.getTypeOfEvents = function(venueId, serviceType) {
         return $http({
             method: 'GET',
-            url: RestURL.baseURL + 'vas/' + venueId + '/categories?st=Bottle&type=EVENT'
+            url: RestURL.baseURL + 'vas/' + venueId + '/categories?type=EVENT&st='+serviceType
         }).then(function(success) {
             return success;
         }, function(error) {

@@ -61,7 +61,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             };
 
             self.getEventType = function() {
-                AjaxService.getTypeOfEvents(self.venueid).then(function(response) {
+                AjaxService.getTypeOfEvents(self.venueid, 'PartyHall').then(function(response) {
                     self.eventTypes = response.data;
                     if(DataShare.partyFocus != '') {
                       var selectedType;
@@ -92,7 +92,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             };
 
             self.getPartyHall = function(venueId) {
-                AjaxService.getPrivateEvent(venueId).then(function(response) {
+                AjaxService.getPrivateHalls(venueId, 'PartyHall').then(function(response) {
                     self.partyHall = response.data;
                     self.reservationData = [];
                     var partyDate = moment(self.party.orderDate).format('YYYYMMDD');
