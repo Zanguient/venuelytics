@@ -5,7 +5,9 @@
   		<h1 class="display-3">{{"reservation.THANK_YOU"  | translate}}!</h1>
   		<p>{{"reservation.TOTAL_TO_PAY"  | translate}} : &dollar;{{availableAmount | number: 2}}</p>
   		<p class="lead">
-  			<a href="javascript:void(0)" ng-click="backToReservation()">{{"reservation.BACK_RESERVE"  | translate}}</a>
-  		</p>
-  </center>
+     		<a class="btn btn-primary btn-sm" href="javascript:void(0)" ng-click="backToReservation()">{{"reservation.BACK_RESERVE"  | translate}}</a>
+    	</p>
+    	<br>
+    	<p>{{"reservation.POWERED_BY"  | translate}}</p>
+  	</center>
 </div>

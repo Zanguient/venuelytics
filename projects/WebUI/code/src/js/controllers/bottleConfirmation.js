@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService) {
+app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
 
     		$log.log('Inside Confirm Reservation Controller.');
 
