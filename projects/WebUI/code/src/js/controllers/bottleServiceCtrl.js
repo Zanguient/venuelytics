@@ -12,7 +12,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
             self.selectionTableItems = [];
             self.bottleCount = 1;
-            $scope.selectedVenueMap = {};
+            self.selectedVenueMap = {};
             self.bottleMinimum = [];
             self.noTableSelected = false;
             self.moreCapacity = false;
@@ -317,26 +317,29 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
         }
 
         self.isReserved = function (table) {
-        if (self.reservations && typeof self.reservations != 'undefined') {
-            for (var resIndex = 0; resIndex < self.reservations.length; resIndex++) {
-                if (table.id == self.reservations[resIndex].productId) {
-                    return true;
+            table.reserved = false;
+            if (self.reservations && typeof self.reservations != 'undefined') {
+                for (var resIndex = 0; resIndex < self.reservations.length; resIndex++) {
+                    if (table.id == self.reservations[resIndex].productId) {
+                        table.reserved = true;
+                        return true;
+                    }
                 }
             }
-        }
-          return false;
-        }
+            return false;
+        }  
 
         $scope.isSelected = function (table) {
-        if (self.tableSelection && typeof self.tableSelection != 'undefined') {
-            for (var resIndex = 0; resIndex < self.tableSelection.length; resIndex++) {
-                if (table.id == self.tableSelection[resIndex].id) {
-                    return true;
+            if (self.tableSelection && typeof self.tableSelection != 'undefined') {
+                for (var resIndex = 0; resIndex < self.tableSelection.length; resIndex++) {
+                    if (table.id == self.tableSelection[resIndex].id) {
+                        return true;
+                    }
                 }
             }
+            return false;
         }
-          return false;
-        }
+
         self.selectTable = function(id, name) {
           
             var data = $('#' + id).mouseout().data('maphilight') || {};

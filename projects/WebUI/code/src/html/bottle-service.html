@@ -66,6 +66,7 @@
                     <label>{{table.description}}</label>
                 </div>
                 <div class="col-md-4" />
+                <label ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
             </div>
         </div>
 

@@ -478,7 +478,11 @@
 		"CONTACT_SHORTLY":"Your service request has been sent. You will be contacted shortly.",
 		"POWERED_BY":"Powered by © VenueLytics, Inc",
 		"TOTAL_GUEST_SELECTED":"Please choose a different table(s). The selected table(s) cannot accommodate the requested number of guests.",
-		"FOOD_CONFIRM":"Confirm your Food Service Details"
+		"FOOD_CONFIRM":"Confirm your Food Service Details",
+		"ENQUIRE":"Enquire",
+		"RESERVED":"Already Reserved",
+		"READ_MORE":"Read More"
+
 	},
 	"bottleServiceTab": {
 		"DATE":"Requested Date",

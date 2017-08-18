@@ -54,7 +54,7 @@
               <tbody>
                 <tr ng-repeat="table in selectTables">
                   <td>{{table.name}}</td>
-                  <td>{{table.quantity}}</td>
+                  <td>{{(table == null || table.quantity == 0 || table.quantity == undefined) ? "-" : table.quantity}}</td>
                 </tr>
               </tbody>
           </table>
@@ -76,7 +76,7 @@
                   <td><label>{{bottle.bottle}}</label></td>
                   <td><label>{{bottle.brand}}</label></td>
                   <td><label>{{bottle.quantity}}</label></td>
-                  <td>$<label>{{bottle.price}}</label></td>
+                  <td>$<label>{{(bottle == null || bottle.price == 0 || bottle.price == undefined) ? "-" : bottle.price}}</label></td>
                 </tr>
               </tbody>
           </table>
