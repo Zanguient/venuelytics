@@ -55,6 +55,14 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 });
             };
 
+            self.delivery = function(value) {
+                self.food = {};
+            };
+
+            self.pickUp = function(value) {
+                self.food = {};
+            };
+
             self.getVenueType = function() {
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.venueType = response.venueType;
@@ -86,6 +94,14 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 var authBase64Str = window.btoa(fullName + ':' + self.food.emailId + ':' + self.food.mobileNumber);
                 DataShare.authBase64Str = authBase64Str;
                 DataShare.foodServiceData = self.food;
+                var tableNumber;
+                if((self.food.tableNumber) && (self.food.seatNumber)) {
+                    tableNumber = self.food.tableNumber+ "-" + self.food.seatNumber;
+                } else if(self.food.tableNumber) {
+                    tableNumber = self.food.tableNumber;
+                } else {
+                    tableNumber = self.food.laneNumber;
+                }
                 self.serviceJSON = {
                   "serviceType": 'Food',
                   "venueNumber": self.venueid,
@@ -106,7 +122,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                   "fulfillmentDate": dateValue,
                   "durationInMinutes": 0,
                   "deliveryType": self.foodType,
-                  "deliveryAddress": null,
+                  "deliveryAddress": tableNumber,
                   "deliveryInstructions": null,
                   "rating": -1,
                   "ratingComment": null,

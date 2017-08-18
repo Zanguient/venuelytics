@@ -2,11 +2,11 @@
 <form class="search-form" name="foodForm" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset>
             <div class="form-group">
-                <input type="radio" name="deliveryFood" ng-model="foodType" value="Delivery"/>&nbsp;&nbsp;
+                <input type="radio" ng-change="delivery(foodType)" name="deliveryFood" ng-model="foodType" value="Delivery"/>&nbsp;&nbsp;
                 <label>
                     <font size="3">{{"reservation.DELIVERY" | translate}}</font>
                 </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="pickFood" ng-model="foodType" value="Pickup" name="tests"/>&nbsp;&nbsp;
+                <input type="radio" ng-change="pickUp(foodType)" name="pickFood" ng-model="foodType" value="Pickup" name="tests"/>&nbsp;&nbsp;
                 <label>
                     <font size="3">{{"reservation.PICKUP" | translate}}</font>
                 </label>
@@ -23,7 +23,7 @@
             <div class="col-lg-12 form-group is-empty">
                 <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="foodMobile" placeholder="{{'reservation.MOBILE' | translate}}" ng-model="food.mobileNumber" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-lg-12 form-group is-empty" ng-hide="foodType == 'Pickup'">
+            <div class="col-lg-12 form-group is-empty" ng-hide="((foodType == 'Pickup') || (venueTypeBowling == 'BOWLING'))">
                 <select class="btn btn-default dropdown-toggle form-control" ng-model="food.tableNumber">
                     <option value="">{{"reservation.TABLE_NUMBER" | translate}}</option>
                     <option value="1">1</option>
@@ -60,7 +60,7 @@
                     <option value="32">32</option>
                 </select>
             </div>
-            <div class="col-lg-12 form-group is-empty" ng-hide="foodType == 'Pickup'">
+            <div class="col-lg-12 form-group is-empty" ng-hide="foodType == 'Pickup'" ng-if="venueTypeCasino == 'CASINO'">
                 <select id="foodSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.seatNumber">
                     <option value="">{{"reservation.SEAT_NUMBER" | translate}}</option>
                     <option value="1">1</option>
@@ -75,7 +75,7 @@
                     <option value="10">10</option>
                 </select>
             </div>
-            <div class="col-lg-12 form-group is-empty" ng-hide="foodType == 'Pickup'">
+            <div class="col-lg-12 form-group is-empty" ng-hide="foodType == 'Pickup'" ng-if="venueTypeBowling == 'BOWLING'">
                 <select id="foodLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.laneNumber">
                     <option value="">{{"reservation.LANE_NUMBER" | translate}}</option>
                     <option value="1">1</option>
@@ -110,9 +110,9 @@
                     <option value="30">30</option>
                 </select>
             </div>
-            <div class="col-lg-12 form-group is-empty" ng-hide="foodType == 'Pickup'">
+            <!-- <div class="col-lg-12 form-group is-empty" ng-hide="foodType == 'Pickup'">
                 <input type="text" ng-model="food.location" id="foodLocation" placeholder="Location" name="foodLocation" class="form-control">
-            </div>
+            </div> -->
 
         <div class="col-md-12">
     		<center>
