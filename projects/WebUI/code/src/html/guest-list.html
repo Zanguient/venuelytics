@@ -35,7 +35,7 @@
             <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
                 <input type="email" id="guestEmailId" name="guestEmailId" data-parsley-type="email" class="form-control fontBold" ng-model="guest.guestEmailId" required="" data-parsley-trigger="change">
             </div>
-            <div class="showInMobile">
+            
             <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestFocus}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
                 <input type="text" id="guestFirstName" name="guestFirstName" class="form-control fontBold" ng-model="guest.guestFirstName" required="" data-parsley-trigger="change">
@@ -44,18 +44,8 @@
             <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
                 <input type="text" id="guestLastName" name="guestLastName" placeholder="" class="form-control fontBold" ng-model="guest.guestLastName" required="" data-parsley-trigger="change">
             </div>
-            </div>
-
-            <div class="showInWeb">
-            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestFocus}}" style="margin-left: auto;">
-            <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
-                <input type="text" id="guestFirstName" name="guestFirstName" class="form-control fontBold" ng-model="guest.guestFirstName" required="" data-parsley-trigger="change">
-            </div>
-            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestFocus}}" style="margin-left: auto;">
-            <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
-                <input type="text" id="guestLastName" name="guestLastName" class="form-control fontBold" ng-model="guest.guestLastName" required="" data-parsley-trigger="change">
-            </div>
-            </div>
+            
+            
             <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestFocus}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.ZIPCODE' | translate}}</label>
                 <input type="text" id="guestZip" name="guestZip" class="form-control fontBold" ng-model="guest.guestZip" data-parsley-trigger="change" required>

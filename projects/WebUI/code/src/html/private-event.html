@@ -86,35 +86,14 @@
             </table>
         </div>
 
-        <div class="showInMobile">
-            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-            <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
-                <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
-            </div>
-            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-            <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
-                <input type="text" class="form-control fontBold" ng-model="private.privateLastName" id="lastName" >
-            </div>
-            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-            <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
-                <input type="email" class="form-control fontBold" id="email" ng-model="private.privateEmail"  data-parsley-trigger="change" required>
-            </div>
-            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-            <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
-                <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" required data-parsley-trigger="change">
-            </div>
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+        <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
+            <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
         </div>
-
-        <div class="showInWeb">
-        
-            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-            <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
-                <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
-            </div>
-            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
-            <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
-                <input type="text" class="form-control fontBold fontChange" ng-model="private.privateLastName" id="lastName" required>
-            </div>
+    
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
+        <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
+            <input type="text" class="form-control fontBold" ng-model="private.privateLastName" id="lastName" >
         </div>
         
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
@@ -123,8 +102,9 @@
         </div>
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
-            <input type="text" id="ms-form-pass" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber"  required data-parsley-trigger="change">
+            <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" required data-parsley-trigger="change">
         </div>
+    
         
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{"reservation.EVENT_TYPE"  | translate}}</label>

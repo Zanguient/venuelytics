@@ -3,82 +3,82 @@
   <center>
     <h1 class="color-success fontRegular">{{'reservation.PRIVATE_EVENT_CONFIRM' | translate}}</h1>
 
-  <div class="form-group bottleConfirmation">
-    <table class="table table-responsive table-no-border">
+    <div class="form-group bottleConfirmation">
+      <table class="table table-responsive table-no-border">
 
-                      <tbody>
-                        <tr>
-                          <td> <label><b>{{'bottleServiceTab.DATE' | translate}} </b></label></td>
-                          <td>{{privateEventData.orderDate}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{"reservation.START_TIME"  | translate}} </b></label></td>
-                          <td>{{time24to12(privateEventData.privateStartTime)}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{"reservation.END_TIME"  | translate}}</b></label> </td>
-                          <td>{{time24to12(privateEventData.privateEndTime)}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{'reservation.FIRST_NAME' | translate}}</b></label> </td>
-                          <td>{{privateEventData.privateFirstName}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{'reservation.LAST_NAME' | translate}}</b></label> </td>
-                          <td>{{privateEventData.privateLastName}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'reservation.EMAIL' | translate}}</b></label> </td>
-                          <td>{{privateEventData.privateEmail}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
-                          <td>{{privateEventData.privateMobileNumber}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{'reservation.BUDGET' | translate}}</b></label> </td>
-                          <td>{{privateEventData.budget}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
-                          <td>{{privateEventData.totalGuest}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{'reservation.COMMENT' | translate}}</b></label> </td>
-                          <td>{{privateEventData.privateComment}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{"reservation.EVENT_TYPE"  | translate}} </b></label></td>
-                          <td>{{privateEventData.privateEvent.name}}</td>
-                        </tr>
-                  </tbody>
-              </table>
-          </div>
-          <div class="col-md-11 form-group">
-                  <h4 class="color-success bottleHeadername">{{"reservation.SELECT_HALL"  | translate}}</h4>
-                      <table class="table table-responsive table-no-border bottleConfirmationTable">
-                          <thead>
-                            <tr>
-                              <th>{{"reservation.HALL_NAME"  | translate}}</th>
-                              <th>{{"reservation.HALL_SIZE"  | translate}}</th>
-                              <th>{{"reservation.CAPACITY"  | translate}}</th>
-                              <th>{{"reservation.PRICE"  | translate}}</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>{{privateOrderItem.name}}</td>
-                              <td>{{privateOrderItem.size == 0 ? "-" : privateOrderItem.size}}</td>
-                              <td>{{privateOrderItem.servingSize == 0 ? "-" : privateOrderItem.servingSize}}</td>
-                              <td>{{privateOrderItem.price == 0 ? "-" : privateOrderItem.price}}</td>
-                            </tr>
-                          </tbody>
-                      </table>
-                </div>
-          <div>
-              <button type="submit" class="btn btn-raised btn-primary" ng-click="privateEventSave()">Confirm</button>
-              <button type="button" class="btn btn-raised btn-danger" ng-click="editPrivatePage()">Edit</button>
-          </div>
-      </center>
-  </div>
+        <tbody>
+          <tr>
+            <td> <label><b>{{'bottleServiceTab.DATE' | translate}} </b></label></td>
+            <td>{{privateEventData.orderDate}}</td>
+          </tr>
+          <tr>
+            <td><label><b> {{"reservation.START_TIME"  | translate}} </b></label></td>
+            <td>{{time24to12(privateEventData.privateStartTime)}}</td>
+          </tr>
+          <tr>
+            <td> <label><b>{{"reservation.END_TIME"  | translate}}</b></label> </td>
+            <td>{{time24to12(privateEventData.privateEndTime)}}</td>
+          </tr>
+          <tr>
+            <td><label><b> {{'reservation.FIRST_NAME' | translate}}</b></label> </td>
+            <td>{{privateEventData.privateFirstName}}</td>
+          </tr>
+          <tr>
+            <td><label><b> {{'reservation.LAST_NAME' | translate}}</b></label> </td>
+            <td>{{privateEventData.privateLastName}}</td>
+          </tr>
+          <tr>
+            <td> <label><b>{{'reservation.EMAIL' | translate}}</b></label> </td>
+            <td>{{privateEventData.privateEmail}}</td>
+          </tr>
+          <tr>
+            <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
+            <td>{{privateEventData.privateMobileNumber}}</td>
+          </tr>
+          <tr>
+            <td><label><b> {{'reservation.BUDGET' | translate}}</b></label> </td>
+            <td>{{privateEventData.budget}}</td>
+          </tr>
+          <tr>
+            <td><label><b> {{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
+            <td>{{privateEventData.totalGuest}}</td>
+          </tr>
+          <tr>
+            <td><label><b> {{'reservation.COMMENT' | translate}}</b></label> </td>
+            <td>{{privateEventData.privateComment}}</td>
+          </tr>
+          <tr>
+            <td><label><b> {{"reservation.EVENT_TYPE"  | translate}} </b></label></td>
+            <td>{{privateEventData.privateEvent.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12 form-group">
+      <h4 class="color-success bottleHeadername">{{"reservation.SELECT_HALL"  | translate}}</h4>
+      <table class="table table-responsive table-no-border bottleConfirmationTable">
+        <thead>
+          <tr>
+            <th>{{"reservation.HALL_NAME"  | translate}}</th>
+            <th>{{"reservation.HALL_SIZE"  | translate}}</th>
+            <th>{{"reservation.CAPACITY"  | translate}}</th>
+            <th>{{"reservation.PRICE"  | translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{privateOrderItem.name}}</td>
+            <td>{{privateOrderItem.size == 0 ? "-" : privateOrderItem.size}}</td>
+            <td>{{privateOrderItem.servingSize == 0 ? "-" : privateOrderItem.servingSize}}</td>
+            <td>{{privateOrderItem.price == 0 ? "-" : privateOrderItem.price}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-raised btn-primary" ng-click="privateEventSave()">Confirm</button>
+      <button type="button" class="btn btn-raised btn-danger" ng-click="editPrivatePage()">Edit</button>
+    </div>
+  </center>
+</div>
 
