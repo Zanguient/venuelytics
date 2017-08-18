@@ -90,6 +90,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
 
                 self.serviceJSON.order.orderItems.push(items);
                 DataShare.payloadObject = self.serviceJSON;
+                DataShare.privateOrderItem = value;
                 $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
              };
 
@@ -126,11 +127,22 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     self.privateInfoSheet = response.data["BanquetHall.Details"];
                     self.privateVideo = response.data["BanqueHall.Video"];
                     self.privateFloorPlan = response.data["BanquetHall.FloorMap"];
-                    self.bottleMenuUrl = response.data["Bottle.menuUrl"];
-                    self.bottleVIPPolicy = response.data["Bottle.BottleVIPPolicy"];
-                    self.dressCode =  response.data["Advance.dressCode"];
                     self.enabledPayment =  response.data["Advance.enabledPayment"];
                 });
+            };
+
+            self.menuUrlSelection = function(privateMenu) {
+                var data = privateMenu.split(".");
+                var splitLength = data.length;
+                if(data[0] === "www") {
+                    privateMenu = 'http://' + privateMenu;
+                    $window.open(privateMenu, '_blank');
+                } else if(data[splitLength-1] === "jpg" || data[splitLength-1] === "png") {
+                    self.menuImageUrl = privateMenu;
+                    $('#menuModal').modal('show');
+                } else {
+                    $window.open(privateMenu, '_blank');
+                }
             };
 
             if(DataShare.privateEventFocused !== '') {

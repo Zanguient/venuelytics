@@ -51,13 +51,34 @@
                           <td><label><b> {{"reservation.EVENT_TYPE"  | translate}} </b></label></td>
                           <td>{{privateEventData.privateEvent.name}}</td>
                         </tr>
-                      </tbody>
-                    </table>
-          <div >
+                  </tbody>
+              </table>
+          </div>
+          <div class="col-md-11 form-group">
+                  <h4 class="color-success bottleHeadername">{{"reservation.SELECT_HALL"  | translate}}</h4>
+                      <table class="table table-responsive table-no-border bottleConfirmationTable">
+                          <thead>
+                            <tr>
+                              <th>{{"reservation.HALL_NAME"  | translate}}</th>
+                              <th>{{"reservation.HALL_SIZE"  | translate}}</th>
+                              <th>{{"reservation.CAPACITY"  | translate}}</th>
+                              <th>{{"reservation.PRICE"  | translate}}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>{{privateOrderItem.name}}</td>
+                              <td>{{privateOrderItem.size == 0 ? "-" : privateOrderItem.size}}</td>
+                              <td>{{privateOrderItem.servingSize == 0 ? "-" : privateOrderItem.servingSize}}</td>
+                              <td>{{privateOrderItem.price == 0 ? "-" : privateOrderItem.price}}</td>
+                            </tr>
+                          </tbody>
+                      </table>
+                </div>
+          <div>
               <button type="submit" class="btn btn-raised btn-primary" ng-click="privateEventSave()">Confirm</button>
               <button type="button" class="btn btn-raised btn-danger" ng-click="editPrivatePage()">Edit</button>
           </div>
       </center>
   </div>
-</div>
 

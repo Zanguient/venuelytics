@@ -33,7 +33,9 @@ app.service('DataShare', function() {
           "maps": []
   };
   this.elements=[];
+  this.selectedFoods = '';
   this.amount = '';
+  this.privateOrderItem = '';
 
   /*this.getCurrentLocation = function() {
 

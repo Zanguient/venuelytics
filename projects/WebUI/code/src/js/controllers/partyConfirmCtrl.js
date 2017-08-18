@@ -15,6 +15,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
                 self.venueName = DataShare.venueName;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.availableAmount = DataShare.selectedVenuePrice;
+                self.privateOrderItem = DataShare.privateOrderItem;
                 self.taxDate = moment(self.partyPackageData.orderDate).format('YYYYMMDD');
                 self.object = DataShare.payloadObject;
                 self.enabledPayment = DataShare.enablePayment;

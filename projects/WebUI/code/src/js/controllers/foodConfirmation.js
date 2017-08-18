@@ -11,6 +11,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
                 self.foodServiceDetails = DataShare.foodServiceData;
+                self.selectedFoodItems = DataShare.selectedFoods;
             };
 
             self.editFoodPage = function() {

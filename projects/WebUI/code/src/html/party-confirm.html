@@ -1,55 +1,76 @@
 <div class="container">
 
-	<center>
-		<h1 class="color-success fontRegular">{{'reservation.CONFIRM_DETAILS' | translate}}</h1>
+    <center>
+        <h1 class="color-success fontRegular">{{'reservation.PARTY_EVENT_CONFIRM' | translate}}</h1>
 
-	<div class="form-group bottleConfirmation">
-		<table class="table table-responsive table-no-border">
+    <div class="form-group bottleConfirmation">
+        <table class="table table-responsive table-no-border">
 
-        <tbody>
-            <tr>
-                <td><label><b> {{'bottleServiceTab.DATE' | translate}}</b></label> </td>
-                <td>{{partyPackageData.orderDate}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.FIRST_NAME' | translate}}</b></label> </td>
-                <td>{{partyPackageData.userFirstName}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.LAST_NAME' | translate}}</b></label> </td>
-                <td>{{partyPackageData.userLastName}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.EMAIL' | translate}} </b></label></td>
-                <td>{{partyPackageData.email}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.MOBILE' | translate}} </b></label></td>
-                <td>{{partyPackageData.mobile}}</td>
-            </tr>
-            <tr>
-                <td> <label><b>{{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
-                <td>{{partyPackageData.totalGuest}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.INSTRUCTIONS' | translate}}</b></label> </td>
-                <td>{{partyPackageData.instructions}}</td>
-            </tr>
-            <tr>
-                <td> <label><b>{{"reservation.OCCASION"  | translate}}</b></label> </td>
-                <td>{{partyPackageData.partyEventType.name}}</td>
-            </tr>
-        </tbody>
-    </table>
-			<div ng-if="enabledPayment != 'Y'">
-				<button type="submit" class="btn btn-raised btn-primary" ng-click="savePartyPackage()">Confirm</button>
-				<button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
-			</div>
-	        <div ng-if="enabledPayment == 'Y'">
+            <tbody>
+                <tr>
+                    <td><label><b> {{'bottleServiceTab.DATE' | translate}}</b></label> </td>
+                    <td>{{partyPackageData.orderDate}}</td>
+                </tr>
+                <tr>
+                    <td><label><b> {{'reservation.FIRST_NAME' | translate}}</b></label> </td>
+                    <td>{{partyPackageData.userFirstName}}</td>
+                </tr>
+                <tr>
+                    <td><label><b> {{'reservation.LAST_NAME' | translate}}</b></label> </td>
+                    <td>{{partyPackageData.userLastName}}</td>
+                </tr>
+                <tr>
+                    <td><label><b> {{'reservation.EMAIL' | translate}} </b></label></td>
+                    <td>{{partyPackageData.email}}</td>
+                </tr>
+                <tr>
+                    <td><label><b> {{'reservation.MOBILE' | translate}} </b></label></td>
+                    <td>{{partyPackageData.mobile}}</td>
+                </tr>
+                <tr>
+                    <td> <label><b>{{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
+                    <td>{{partyPackageData.totalGuest}}</td>
+                </tr>
+                <tr>
+                    <td><label><b> {{'reservation.INSTRUCTIONS' | translate}}</b></label> </td>
+                    <td>{{partyPackageData.instructions}}</td>
+                </tr>
+                <tr>
+                    <td> <label><b>{{"reservation.OCCASION"  | translate}}</b></label> </td>
+                    <td>{{partyPackageData.partyEventType.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-11 form-group">
+      <h4 class="color-success bottleHeadername">{{"reservation.SELECT_HALL"  | translate}}</h4>
+          <table class="table table-responsive table-no-border bottleConfirmationTable">
+              <thead>
+                <tr>
+                  <th>{{"reservation.HALL_NAME"  | translate}}</th>
+                  <th>{{"reservation.HALL_SIZE"  | translate}}</th>
+                  <th>{{"reservation.CAPACITY"  | translate}}</th>
+                  <th>{{"reservation.PRICE"  | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{privateOrderItem.name}}</td>
+                  <td>{{privateOrderItem.size == 0 ? "-" : privateOrderItem.size}}</td>
+                  <td>{{privateOrderItem.servingSize == 0 ? "-" : privateOrderItem.servingSize}}</td>
+                  <td>{{privateOrderItem.price == 0 ? "-" : privateOrderItem.price}}</td>
+                </tr>
+              </tbody>
+          </table>
+    </div>
+
+            <div ng-if="enabledPayment != 'Y'">
+                <button type="submit" class="btn btn-raised btn-primary" ng-click="savePartyPackage()">Confirm</button>
+                <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
+            </div>
+            <div ng-if="enabledPayment == 'Y'">
               <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">Confirm</button>
               <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
           </div>
-	    </center>
-	</div>
+        </center>
     </div>
-

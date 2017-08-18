@@ -5,23 +5,17 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             $log.log('Inside Food Service Controller.');
 
             var self = $scope;
-            self.foodCount = 1;
+            self.selectedFoodItems = [];
+            self.foodType = 'Delivery';
             self.init = function() {
-                self.venueID = $routeParams.venueid;
-                
-                self.restoreTab = DataShare.tab;
-                self.tabParam = $routeParams.tabParam;
-                self.getMenus();
-
-                AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
-                    self.detailsOfVenue = response;
-                    self.selectedCity = $routeParams.cityName;
-                    self.venueName =    self.detailsOfVenue.venueName;
-                });
-                self.imageParam = $location.search().i;
-                if(self.imageParam === 'Y') {
-                    self.venueImage = self.detailsOfVenue.imageUrls[0].largeUrl;
+                self.venueid = $routeParams.venueid;
+                if((Object.keys(DataShare.foodServiceData).length) !== 0) {
+                    self.food = DataShare.foodServiceData;
+                    self.foodType = $rootScope.serviceName;
                 }
+                self.getMenus();
+                self.getFood();
+                self.getVenueType();
             };
 
             self.getMenus = function() {
@@ -36,6 +30,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                     self.foodDessertsUrl = response.data["Food.dessertsUrl"];
                     self.foodAppetizsersUrl = response.data["Food.appetizsersUrl"];
                     self.foodGlutenfree = response.data["Food.glutenfree"];
+                    self.enabledPayment =  response.data["Advance.enabledPayment"];
                 });
             };
 
@@ -54,8 +49,39 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 }
             };
 
+            self.getFood = function() {
+                AjaxService.getPrivateHalls(self.venueid, 'Food').then(function(response) {
+                    self.foodDetails = response.data;
+                });
+            };
+
+            self.getVenueType = function() {
+                AjaxService.getVenues(self.venueid,null,null).then(function(response) {
+                    self.venueType = response.venueType;
+                    var venueTypeSplit = self.venueType.split(',');
+                    angular.forEach(venueTypeSplit, function(value1) {
+                          var value = value1.trim();
+                          if (value == 'CLUB') {
+                              self.venueTypesClub = value;
+                          } else if (value == 'BAR') {
+                              self.venueTypesBar = value;
+                          } else if (value == 'LOUNGE') {
+                              self.venueTypesLounge = value;
+                          } else if (value == 'BOWLING') {
+                              self.venueTypeBowling = value;
+                          } else if (value == 'CASINO') {
+                              self.venueTypeCasino = value;
+                          } else if (value == 'RESTAURANT') {
+                              self.venueTypeRestaurant = value;
+                          } else {}
+                    });
+                });
+            };
+
             self.foodSave = function() {
-                self.date = moment().format('YYYY-MM-DD');
+                var parsedend = moment().format("MM-DD-YYYY");
+                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
                 var fullName = self.food.firstName + " " + self.food.lastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.food.emailId + ':' + self.food.mobileNumber);
                 DataShare.authBase64Str = authBase64Str;
@@ -77,9 +103,9 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                   "serviceInstructions": self.food.instructions,
                   "status": "REQUEST",
                   "serviceDetail": null,
-                  "fulfillmentDate": self.date,
+                  "fulfillmentDate": dateValue,
                   "durationInMinutes": 0,
-                  "deliveryType": "Pickup",
+                  "deliveryType": self.foodType,
                   "deliveryAddress": null,
                   "deliveryInstructions": null,
                   "rating": -1,
@@ -87,16 +113,31 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                   "ratingDateTime": null,
                   "order": {
                       "venueNumber": self.venueid,
-                      "orderDate": self.date,
+                      "orderDate": dateValue,
                       "orderItems": []
                   },
                   "prebooking": false,
                   "employeeName": "",
                   "visitorName": fullName
                 };
+                angular.forEach(self.foodDetails, function(value, key) {
+                    if(value.count) {
+                        var items = {
+                        "venueNumber": self.venueid,
+                        "productId": value.id,
+                        "productType": value.productType,
+                        "quantity": value.count,
+                        "name": value.name
+                    };
+                    self.selectedFoodItems.push(value);
+                    self.serviceJSON.order.orderItems.push(items);
+                  } 
+                });
+                $rootScope.serviceName = self.foodType;
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;
+                DataShare.selectedFoods = self.selectedFoodItems;
                 $location.url("/confirmFoodService/" + self.selectedCity + "/" + self.venueid);
              };
             self.init();

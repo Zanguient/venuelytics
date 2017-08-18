@@ -450,6 +450,9 @@
 		"GUEST_SUCCESS":"Guest List details have been sent successfully.",
 		"ADD":"Add",
 		"TABLE_NAME":"Table Name(s)",
+		"HALL_NAME": "Hall Name",
+  		"SELECT_HALL":"Selected Hall",
+  		"HALL_SIZE":"Size",
 		"CAPACITY":"Capacity",
 		"VENUE_NAME":"Venue Name",
 		"AMOUNT":"Amount",
@@ -481,8 +484,16 @@
 		"FOOD_CONFIRM":"Confirm your Food Service Details",
 		"ENQUIRE":"Enquire",
 		"RESERVED":"Already Reserved",
-		"READ_MORE":"Read More"
-
+		"READ_MORE":"Read More",
+		"DELIVERY":"Delivery",
+		"PICKUP":"Pickup",
+		"TABLE_NUMBER":"Select Table Number",
+		"SEAT_NUMBER":"Select Seat Number",
+		"LANE_NUMBER":"Select Lane Number",
+		"FOOD_ITEMS":"Food Items",
+		"SELECTED_FOOD_ITEMS":"Selected Food(s)",
+		"FOOD_TYPE":"Food Type",
+		"NAME":"Name"
 	},
 	"bottleServiceTab": {
 		"DATE":"Requested Date",

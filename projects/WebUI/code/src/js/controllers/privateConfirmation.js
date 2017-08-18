@@ -16,6 +16,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
                 self.privateEventData = DataShare.privateEventData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
+                self.privateOrderItem = DataShare.privateOrderItem;
             };
 
             self.editPrivatePage = function() {

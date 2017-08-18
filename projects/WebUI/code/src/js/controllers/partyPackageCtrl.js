@@ -44,11 +44,11 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             });
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
-                    self.partyCateringMenu = response.data["BanquetHall.cateringMenuUrl"];
-                    self.partyMenu = response.data["BanquetHall.Menu"];
-                    self.partyInfoSheet = response.data["BanquetHall.Details"];
-                    self.partyVideo = response.data["BanqueHall.Video"];
-                    self.partyFloorPlan = response.data["BanquetHall.FloorMap"];
+                    self.partyCateringMenu = response.data["PartyHall.cateringMenuUrl"];
+                    self.partyMenu = response.data["PartyHall.Menu"];
+                    self.partyInfoSheet = response.data["PartyHall.Details"];
+                    self.partyVideo = response.data["PartyHall.Video"];
+                    self.partyFloorPlan = response.data["PartyHall.FloorMap"];
                     self.enabledPayment = response.data["Advance.enabledPayment"];
                 });
             };
@@ -166,6 +166,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;
+                DataShare.privateOrderItem = selectedParty;
                 $location.url("/confirmPartyPackage/" + self.selectedCity + "/" + self.venueid);
              };
             self.init();

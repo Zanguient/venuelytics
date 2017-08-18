@@ -5,33 +5,53 @@
 	</center>
 
 	<div class="form-group">
-		<table class="table table-responsive table-no-border">
-
-                      <tbody>
-                        <tr>
-                          <td> <label><b>{{'reservation.FIRST_NAME' | translate}}</b></label> </td>
-                          <td>{{foodServiceDetails.firstName}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'reservation.LAST_NAME' | translate}}</b></label> </td>
-                          <td>{{foodServiceDetails.lastName}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
-                          <td>{{foodServiceDetails.mobileNumber}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
-                          <td>{{foodServiceDetails.emailId}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{'reservation.SPECIAL_INSTRUCTION' | translate}}</b></label> </td>
-                          <td>{{foodServiceDetails.instructions}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+		  <table class="table table-responsive table-no-border">
+          <tbody>
+              <tr>
+                  <td> <label><b>{{'reservation.FIRST_NAME' | translate}}</b></label> </td>
+                  <td>{{foodServiceDetails.firstName}}</td>
+              </tr>
+              <tr>
+                  <td> <label><b>{{'reservation.LAST_NAME' | translate}}</b></label> </td>
+                  <td>{{foodServiceDetails.lastName}}</td>
+              </tr>
+              <tr>
+                  <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
+                  <td>{{foodServiceDetails.mobileNumber}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
+                  <td>{{foodServiceDetails.emailId}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.SPECIAL_INSTRUCTION' | translate}}</b></label> </td>
+                  <td>{{foodServiceDetails.instructions}}</td>
+              </tr>
+          </tbody>
+      </table>
+      <div class="form-group">
+      <h4 class="color-success">{{"reservation.SELECTED_FOOD_ITEMS"  | translate}}</h4>
+          <table class="table table-responsive table-no-border">
+              <thead>
+                <tr>
+                  <th>{{"reservation.FOOD_TYPE"  | translate}}</th>
+                  <th>{{"reservation.NAME"  | translate}}</th>
+                  <th>{{"reservation.QUANTITY"  | translate}}</th>
+                  <th>{{"reservation.PRICE"  | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="foodItem in selectedFoodItems">
+                  <td>{{foodItem.brand}}</td>
+                  <td>{{foodItem.name}}</td>
+                  <td>{{foodItem.count}}</td>
+                  <td>&dollar;{{(foodItem == null || foodItem.price == 0 || foodItem.price == undefined) ? "-" : foodItem.price}}</td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
 	    <center>
-	        <div >
+	        <div>
 	            <button type="submit" class="btn btn-raised btn-primary" ng-click="foodServiceSave()">Confirm</button>
 	            <button type="button" class="btn btn-raised btn-danger" ng-click="editFoodPage()">Edit</button>
 	        </div>
