@@ -91,13 +91,13 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             };
 
             self.cardPaymentData = function(value) {
-                $scope.cardPayment = true;
-                $scope.paypal = false;
+                self.cardPayment = true;
+                self.paypal = false;
             };
 
             self.paypalData = function(value) {
-                $scope.paypal = true;
-                $scope.cardPayment = false;
+                self.paypal = true;
+                self.cardPayment = false;
             };
 
             self.createBottleSave = function() {

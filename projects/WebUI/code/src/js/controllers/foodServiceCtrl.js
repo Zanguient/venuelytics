@@ -12,6 +12,13 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 if((Object.keys(DataShare.foodServiceData).length) !== 0) {
                     self.food = DataShare.foodServiceData;
                     self.foodType = $rootScope.serviceName;
+                } 
+                if(($rootScope.serviceName === 'FoodService') || (DataShare.amount != '')) {
+                    DataShare.foodServiceData = {};
+                    self.isFoodFocused = '';
+                    self.food = {};
+                    $rootScope.serviceName = '';
+                    self.foodType = 'Delivery';
                 }
                 self.getMenus();
                 self.getFood();
@@ -30,9 +37,14 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                     self.foodDessertsUrl = response.data["Food.dessertsUrl"];
                     self.foodAppetizsersUrl = response.data["Food.appetizsersUrl"];
                     self.foodGlutenfree = response.data["Food.glutenfree"];
-                    self.enabledPayment =  response.data["Advance.enabledPayment"];
+                    self.enabledPayment = response.data["Advance.enabledPayment"];
                 });
             };
+
+            if(DataShare.foodFocused !== '') {
+              $log.info("insdie focused");
+              self.isFoodFocused = DataShare.foodFocused;
+            }
 
             self.menuUrlSelection = function(menu) {
                 var data = menu.split(".");
@@ -87,6 +99,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             };
 
             self.foodSave = function() {
+                DataShare.foodFocused = 'is-focused';
                 var parsedend = moment().format("MM-DD-YYYY");
                 var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
                 var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
@@ -145,6 +158,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                         "quantity": value.count,
                         "name": value.name
                     };
+                    value.price = value.price * value.count;
                     self.selectedFoodItems.push(value);
                     self.serviceJSON.order.orderItems.push(items);
                   } 

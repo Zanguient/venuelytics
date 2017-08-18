@@ -216,6 +216,18 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller:'PartyConfirmController',
             description: 'Venuelytics - a real time venue experience platform for party payment success'
         })
+        .when('/:cityName/foodPayment/:venueid', {
+            templateUrl: 'food-payment.html',
+            title: 'Venuelytics-Food-Payment',
+            controller:'FoodConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for food success'
+        })
+        .when('/:cityName/foodSuccess/:venueid', {
+            templateUrl: 'food-payment-success.html',
+            title: 'Venuelytics-Food-Payment-Success',
+            controller:'FoodConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for food payment success'
+        })
         .when('/:cityName/private-success/:venueid', {
             templateUrl: 'private-success.html',
             title: 'Venuelytics-Private-Success',
@@ -227,6 +239,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics-Private-Success',
             controller:'PartyConfirmController',
             description: 'Venuelytics - a real time venue experience platform for private success'
+        })
+        .when('/:cityName/food-success/:venueid', {
+            templateUrl: 'food-success.html',
+            title: 'Venuelytics-Food-Success',
+            controller:'FoodConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for Food success'
         })
         .when('/:cityName/guest-success/:venueid', {
             templateUrl: 'guest-success.html',

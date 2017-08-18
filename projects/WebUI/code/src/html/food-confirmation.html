@@ -51,10 +51,14 @@
           </table>
       </div>
 	    <center>
-	        <div>
+	        <div ng-if="enabledPayment != 'Y'">
 	            <button type="submit" class="btn btn-raised btn-primary" ng-click="foodServiceSave()">Confirm</button>
 	            <button type="button" class="btn btn-raised btn-danger" ng-click="editFoodPage()">Edit</button>
 	        </div>
+          <div ng-if="enabledPayment == 'Y'">
+              <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnabled()">Payment</button>
+              <button type="button" class="btn btn-raised btn-danger" ng-click="editFoodPage()">Edit</button>
+          </div>
 	    </center>
 	</div>
 
