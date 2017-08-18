@@ -73,6 +73,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.tabClear();
                 self.myClass = 'partBackgroundNotSelected';
                 self.tabButtonColor = 'partyBackgroundButtonNotSelected';
+                self.drinkClass = 'drinkBackgroundNotSelected';
+                self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
+                self.foodClass = 'foodBackgroundNotSelected';
+                self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
                 $log.info("Inside bottle function:");
                 $("#privateEventTab").css('background-color', APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
@@ -97,6 +101,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.tabClear();
                 self.myClass = 'partBackgroundNotSelected';
                 self.tabButtonColor = 'partyBackgroundButtonNotSelected';
+                self.drinkClass = 'drinkBackgroundNotSelected';
+                self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
+                self.foodClass = 'foodBackgroundNotSelected';
+                self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
                 $log.info("Inside event function:");
                 $("#privateEventTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#private').css('color', 'white');
@@ -122,6 +130,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
              self.glist = function() {
                $log.info("Inside glist function:");
                 self.tabClear();
+                self.drinkClass = 'drinkBackgroundNotSelected';
+                self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
+                self.foodClass = 'foodBackgroundNotSelected';
+                self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color',APP_COLORS.fruitSalad);
@@ -169,6 +181,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
              /*For party packages service tab highlight*/
              self.partyFunction = function() {
                 $log.info("Inside party function:");
+                self.drinkClass = 'drinkBackgroundNotSelected';
+                self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
+                self.foodClass = 'foodBackgroundNotSelected';
+                self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
                 self.tabClear();
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
@@ -193,8 +209,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#bottleTab").css('background-color',APP_COLORS.silver);
                 $('#bottle').css('color', APP_COLORS.fruitSalad);
-                self.myClass = 'partyBackgroundSelected';
-                self.tabButtonColor = 'partyBackgroundButtonSelected';
+                self.foodClass = 'foodBackgroundSelected';
+                self.foodTabButtonColor = 'foodBackgroundButtonSelected';
+                self.drinkClass = 'drinkBackgroundNotSelected';
+                self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
+                self.myClass = 'partBackgroundNotSelected';
+                self.tabButtonColor = 'partyBackgroundButtonNotSelected';
+                self.guestClass = 'guestBackgroundNotSelected';
+                self.guestTabButtonColor = 'guestBackgroundButtonNotSelected';
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
                 self.guestServiceTab = false;
@@ -212,8 +234,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#bottleTab").css('background-color',APP_COLORS.silver);
                 $('#bottle').css('color', APP_COLORS.fruitSalad);
-                self.myClass = 'partyBackgroundSelected';
-                self.tabButtonColor = 'partyBackgroundButtonSelected';
+                self.drinkClass = 'drinkBackgroundSelected';
+                self.drinkTabButtonColor = 'drinkBackgroundButtonSelected';
+                self.myClass = 'partBackgroundNotSelected';
+                self.tabButtonColor = 'partyBackgroundButtonNotSelected';
+                self.foodClass = 'foodBackgroundNotSelected';
+                self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
+                self.guestClass = 'guestBackgroundNotSelected';
+                self.guestTabButtonColor = 'guestBackgroundButtonNotSelected';
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
                 self.guestServiceTab = false;

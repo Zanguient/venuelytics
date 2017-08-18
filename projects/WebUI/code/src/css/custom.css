@@ -77,6 +77,46 @@ select {
   background-color: #CCCBCC;
 }
 
+.foodBackgroundSelected {
+  background-color: #4CAF50;
+}
+
+.foodBackgroundButtonSelected {
+  color: white;
+}
+
+.foodBackgroundButtonNotSelected {
+  color: #4CAF50;
+}
+
+.foodBackgroundNotSelected {
+  background-color: #CCCBCC;
+}
+
+.drinkBackgroundSelected {
+  background-color: #4CAF50;
+}
+
+.drinkBackgroundButtonSelected {
+  color: white;
+}
+
+.drinkBackgroundButtonNotSelected {
+  color: #4CAF50;
+}
+
+.drinkBackgroundNotSelected {
+  background-color: #CCCBCC;
+}
+
+.guestBackgroundButtonNotSelected {
+  color: #4CAF50;
+}
+
+.guestBackgroundNotSelected {
+  background-color: #CCCBCC;
+}
+
 .cardHeight {
   height:550px;
 }
