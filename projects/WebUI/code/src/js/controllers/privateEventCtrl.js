@@ -11,25 +11,25 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             var self = $scope;
             self.privateDateIsFocused = 'is-focused';
             self.init = function() {
+                $rootScope.serviceTabClear = false;
                 self.venueID = self.venueid = $routeParams.venueid;
                 if((Object.keys(DataShare.privateEventData).length) !== 0) {
                     self.private = DataShare.privateEventData;
                 } else {
                     self.private = {};
-                }
-                if($rootScope.serviceName === 'PrivateEvent') {
-                 $log.log('Inside clear data.');
-                  DataShare.privateEventData = {};
-                  self.private.orderDate = moment().format('MM/DD/YYYY');
-                  self.private = {};
-                } else {
-                    $log.log('Inside else data.');
                     self.private.orderDate = moment().format('MM/DD/YYYY');
                 }
+                if($rootScope.serviceName === 'PrivateEvent') {
+                  $log.log('Inside clear data.');
+                  DataShare.privateEventData = {};
+                  DataShare.privateEventFocused = '';
+                  $rootScope.serviceName = '';
+                  self.private = {};
+                  self.private.orderDate = moment().format('MM/DD/YYYY');
+                } 
                 self.getMenus();
                 self.getEventType();
                 $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true});
-                self.private = DataShare.privateEventData;
                 self.private.authorize = false;
                 self.private.agree = false;
             };
@@ -40,6 +40,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 }
             });
             self.createPrivateEvent = function(value) {
+                $rootScope.serviceTabClear = true;
                 DataShare.tab = 'P';
                 DataShare.privateEventFocused = 'is-focused';
                 var date = new Date(self.private.orderDate);
