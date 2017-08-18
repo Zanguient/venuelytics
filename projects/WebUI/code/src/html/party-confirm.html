@@ -42,7 +42,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-md-11 form-group">
+    <div class="col-md-12 form-group">
       <h4 class="color-success bottleHeadername">{{"reservation.SELECT_HALL"  | translate}}</h4>
           <table class="table table-responsive table-no-border bottleConfirmationTable">
               <thead>
@@ -64,13 +64,13 @@
           </table>
     </div>
 
-            <div ng-if="enabledPayment != 'Y'">
-                <button type="submit" class="btn btn-raised btn-primary" ng-click="savePartyPackage()">Confirm</button>
-                <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
-            </div>
-            <div ng-if="enabledPayment == 'Y'">
-              <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">Confirm</button>
-              <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
-          </div>
-        </center>
+    <div ng-if="enabledPayment != 'Y'">
+        <button type="submit" class="btn btn-raised btn-primary" ng-click="savePartyPackage()">Confirm</button>
+        <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
     </div>
+    <div ng-if="enabledPayment == 'Y'">
+        <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">Confirm</button>
+        <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
+    </div>
+  </center>
+</div>

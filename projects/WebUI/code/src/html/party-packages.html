@@ -67,7 +67,7 @@
             </table>
         </div>
         
-        <div class="showInMobile">
+        
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
             <input type="text" class="form-control fontBold" ng-model="party.userFirstName" id="firstName"  required>
@@ -84,31 +84,8 @@
         <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
             <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="party.mobile" required data-parsley-trigger="change">
         </div>
-        </div>
-
-        <div class="showInWeb">
-        <div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold" ng-model="party.userFirstName" id="firstName"  required>
-        </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold fontChange" ng-model="party.userLastName" id="lastName" required>
-        </div>
-        </div>
-        <div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
-            <input type="email" class="form-control fontBold" id="email" ng-model="party.email" data-parsley-trigger="change" required>
-        </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
-        <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
-            <input type="text" id="ms-form-pass" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="party.mobile" required data-parsley-trigger="change">
-        </div>
-        </div>
-        </div>
-
+        
+        
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{"reservation.EVENT_TYPE"  | translate}}</label>
             <select class="form-control fontBold" required=""
