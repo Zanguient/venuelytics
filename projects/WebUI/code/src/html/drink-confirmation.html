@@ -1,0 +1,66 @@
+<div class="container">
+
+	<center>
+		<h1 class="color-success fontRegular">{{'reservation.DRINK_CONFIRM' | translate}}</h1>
+	</center>
+
+	<div class="form-group">
+		  <table class="table table-responsive table-no-border">
+          <tbody>
+              <tr>
+                  <td> <label><b>{{'reservation.FIRST_NAME' | translate}}</b></label> </td>
+                  <td>{{drinkServiceDetails.firstName}}</td>
+              </tr>
+              <tr>
+                  <td> <label><b>{{'reservation.LAST_NAME' | translate}}</b></label> </td>
+                  <td>{{drinkServiceDetails.lastName}}</td>
+              </tr>
+              <tr>
+                  <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
+                  <td>{{drinkServiceDetails.mobileNumber}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
+                  <td>{{drinkServiceDetails.emailId}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.SPECIAL_INSTRUCTION' | translate}}</b></label> </td>
+                  <td>{{drinkServiceDetails.instructions}}</td>
+              </tr>
+          </tbody>
+      </table>
+      <div class="form-group">
+      <h4 class="color-success">{{"reservation.SELECTED_DRINK_ITEMS"  | translate}}</h4>
+          <table class="table table-responsive table-no-border">
+              <thead>
+                <tr>
+                  <th>{{"reservation.DRINK_TYPE"  | translate}}</th>
+                  <th>{{"reservation.BRAND"  | translate}}</th>
+                  <th>{{"reservation.QUANTITY"  | translate}}</th>
+                  <th>{{"reservation.PRICE"  | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="drinkItem in selectedDrinkItems">
+                  <td>{{drinkItem.brand}}</td>
+                  <td>{{drinkItem.name}}</td>
+                  <td>{{drinkItem.count}}</td>
+                  <td>&dollar;{{(drinkItem == null || drinkItem.price == 0 || drinkItem.price == undefined) ? "-" : drinkItem.price}}</td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+	    <center>
+	        <div ng-if="enabledPayment != 'Y'">
+	            <button type="submit" class="btn btn-raised btn-primary" ng-click="drinkServiceSave()">Confirm</button>
+	            <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">Edit</button>
+	        </div>
+          <div ng-if="enabledPayment == 'Y'">
+              <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnabled()">Payment</button>
+              <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">Edit</button>
+          </div>
+	    </center>
+	</div>
+
+</div>
+

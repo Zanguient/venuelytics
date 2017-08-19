@@ -13,6 +13,7 @@ app.service('DataShare', function() {
   this.partyServiceData = { };
   this.guestListData = { };
   this.foodServiceData = { };
+  this.drinkServiceData = { };
   this.authBase64Str = { };
   this.bottleZip = '';
   this.payloadObject = '';
@@ -24,6 +25,7 @@ app.service('DataShare', function() {
   this.privateEventFocused = '';
   this.guestFocus = '';
   this.partyFocus = '';
+  this.drinkFocused = '';
   this.userselectedTables = '';
   this.selectedBlog = {};
   this.enablePayment = '';
@@ -34,6 +36,7 @@ app.service('DataShare', function() {
   };
   this.elements=[];
   this.selectedFoods = '';
+  this.selectedDrinks = '';
   this.amount = '';
   this.privateOrderItem = '';
 

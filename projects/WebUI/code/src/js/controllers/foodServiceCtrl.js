@@ -52,10 +52,10 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 if(data[0] === "www") {
                     menu = 'http://' + menu;
                     $window.open(menu, '_blank');
+                     console.log("menu"+menu);
                 } else if(data[splitLength-1] === "jpg" || data[splitLength-1] === "png") {
-                    self.menuImageUrl = menu;
-                    //$('#foodMenuModal').modal('show');
-                    $window.open(menu, '_blank');
+                    $rootScope.menuImageUrl = menu;
+                    $('#foodMenuModal').modal('show');
                 } else {
                     $window.open(menu, '_blank');
                 }
@@ -64,6 +64,20 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             self.getFood = function() {
                 AjaxService.getPrivateHalls(self.venueid, 'Food').then(function(response) {
                     self.foodDetails = response.data;
+                    if((Object.keys(DataShare.selectedFoods).length) !== 0) {
+                        self.editFoodItems = DataShare.selectedFoods;
+                        angular.forEach(self.editFoodItems, function(value,key) {
+                          angular.forEach(self.foodDetails, function(value1,key1) {
+                              if(value.id == value1.id) {
+                                self.foodDetails.splice(key1, 1);
+                              }
+                          });
+                        });
+                        angular.forEach(self.foodDetails, function(value2) {
+                              self.editFoodItems.push(value2);
+                        });
+                        self.foodDetails = self.editFoodItems;
+                    }
                 });
             };
 
