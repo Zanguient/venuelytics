@@ -28,6 +28,9 @@ var gulp        = require('gulp'),
     connect = require('gulp-connect'),
     jshint = require('gulp-jshint'),
     jeditor = require('gulp-json-editor');
+
+    var webserver = require('gulp-webserver');
+
     PluginError = gutil.PluginError;
 
 
@@ -421,10 +424,15 @@ gulp.task('dev',gulpSequence([
 
 gulp.task('start_server', function (){
 
-         return connect.server({
-            root: '../',
-            port:9000
-         });
+  return gulp.src('../')
+    .pipe(webserver({
+      livereload: true,
+      path: '/mgmtconsole',
+      directoryListing: false,
+      open: 'http://localhost:8000/mgmtconsole',
+      fallback: 'index.html'
+    }));
+
  });
 
 gulp.task('remove-template-cache', function() {
