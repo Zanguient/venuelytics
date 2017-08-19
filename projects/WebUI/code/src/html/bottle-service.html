@@ -53,20 +53,19 @@
                 <div class="col-md-3 col-sm-4">
                     <input type="checkbox" id="checkData" name="{{table.name}}"
                         ng-checked="isSelected(table)" ng-disabled="isReserved(table)"
-                        ng-click="selectTableForWithOutFloorMap(table)" /> <label>&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
+                        ng-click="selectTableForWithOutFloorMap(table)" /><label>&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
                         ng-hide="table.size <= 0">({{table.size}}&nbsp;<i
                             class="fa fa-user" aria-hidden="true" />)
                     </span></label>
+                    <label class="tableReserved" ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
                 </div>
                 <div class="col-md-4 col-sm-4">
                     <img class="table-carousel" class="img-responsive"
                         data-ng-src="{{table.imageUrls[0].smallUrl}}">
                 </div>
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-4 col-sm-12 descriptionAlign">
                     <label>{{table.description}}</label>
                 </div>
-                <div class="col-md-4" />
-                <label ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
             </div>
         </div>
 

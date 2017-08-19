@@ -408,6 +408,22 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.selectionTableItems.splice(index, 1);
         };
 
+        $(window).resize(function() {
+            var divHeight = $('#imagemap').height();
+            var divWidth = $('#imagemap').width();
+            setTimeout(function() {
+              $('#imagemap').maphilight();
+              if (divHeight > 0) {
+                $('div.map.img-responsive').css('width', divWidth + 'px');
+                $('div.map.img-responsive').css('height', divHeight + 'px');
+                $('canvas').css('height', divHeight + 'px');
+                $('canvas').css('width', divWidth + 'px');
+                $('#imagemap').css('height', divHeight + 'px');
+                $('#imagemap').css('width', divWidth + 'px');
+              }
+            }, 200);
+        });
+
             self.confirmBottleService = function() {
                 DataShare.focused = 'is-focused';
                 DataShare.editBottle = 'true';
