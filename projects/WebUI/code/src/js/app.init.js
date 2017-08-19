@@ -204,6 +204,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller:'FoodConfirmController',
             description: 'Venuelytics - a real time venue experience platform for food confirmation'
         })
+        .when('/confirmDrinkService/:cityName/:venueid', {
+            templateUrl: 'drink-confirmation.html',
+            title: 'Venuelytics-Drink-Confirmation',
+            controller:'DrinkConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for drink confirmation'
+        })
         .when('/:cityName/paymentSuccess/:venueid', {
             templateUrl: 'payment-success.html',
             title: 'Venuelytics-Payment-Success',
@@ -222,11 +228,23 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller:'FoodConfirmController',
             description: 'Venuelytics - a real time venue experience platform for food success'
         })
+        .when('/:cityName/drinkPayment/:venueid', {
+            templateUrl: 'drink-payment.html',
+            title: 'Venuelytics-Drink-Payment',
+            controller:'DrinkConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for drink success'
+        })
         .when('/:cityName/foodSuccess/:venueid', {
             templateUrl: 'food-payment-success.html',
             title: 'Venuelytics-Food-Payment-Success',
             controller:'FoodConfirmController',
             description: 'Venuelytics - a real time venue experience platform for food payment success'
+        })
+        .when('/:cityName/drinkSuccess/:venueid', {
+            templateUrl: 'drink-payment-success.html',
+            title: 'Venuelytics-Drink-Payment-Success',
+            controller:'DrinkConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for drink payment success'
         })
         .when('/:cityName/private-success/:venueid', {
             templateUrl: 'private-success.html',
@@ -245,6 +263,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics-Food-Success',
             controller:'FoodConfirmController',
             description: 'Venuelytics - a real time venue experience platform for Food success'
+        })
+        .when('/:cityName/drink-success/:venueid', {
+            templateUrl: 'drink-success.html',
+            title: 'Venuelytics-Drink-Success',
+            controller:'DrinkConfirmController',
+            description: 'Venuelytics - a real time venue experience platform for Drink success'
         })
         .when('/:cityName/guest-success/:venueid', {
             templateUrl: 'guest-success.html',
