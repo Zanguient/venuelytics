@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestFocus}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.TOTAL_GUEST' | translate}}</label>
-            <input type="text" class="form-control fontBold" id="privateTotalGuest" ng-model="guest.totalGuest" >
+            <input type="text" class="form-control fontBold" id="totalGuest" ng-model="guest.totalGuest">
             </div>
             <div class="col-lg-12 form-group is-empty">
             <table>
@@ -63,6 +63,22 @@
                     <input type="checkbox" ng-model="guest.agree" required/> {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
                 </label>
             </div>
+            </div>
+            <div class="modal modal-success" id="guestError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+                <div class="modal-dialog animated zoomIn animated-3x" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                            <h3 class="modal-title" id="myModalLabel6">{{'reservation.TOTAL_GUEST_ERROR' | translate}}</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{'reservation.GUEST_ERROR' | translate}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <br><br>
             <div class="col-lg-12">

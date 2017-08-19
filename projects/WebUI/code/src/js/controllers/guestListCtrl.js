@@ -34,6 +34,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             }
 
             self.glistSave = function(guest) {
+                var guestTotal = parseInt(guest.guestMen) + parseInt(guest.guestWomen);
                 DataShare.tab = 'G';
                 DataShare.guestFocus = 'is-focused';
                 $rootScope.serviceTabClear = true;
@@ -60,7 +61,12 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 DataShare.payloadObject = object;
                 self.guest.authorize = false;
                 self.guest.agree = false;
-                $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
+                if(guestTotal === parseInt(guest.totalGuest)){
+                    $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
+                } else {
+                    $('#guestError').modal('show');
+                }
+                
             };
 
             self.init();

@@ -453,6 +453,8 @@
 		"HALL_NAME": "Hall Name",
   		"SELECT_HALL":"Selected Hall",
   		"HALL_SIZE":"Size",
+  		"GUEST_ERROR":"The Sum of total guest is not equal to Men and Women",
+  		"TOTAL_GUEST_ERROR":"Total Guest",
 		"CAPACITY":"Capacity",
 		"VENUE_NAME":"Venue Name",
 		"AMOUNT":"Amount",
