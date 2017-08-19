@@ -91,10 +91,11 @@
                     index="$index"> <img
                     class="img-responsive center-block table-carousel" data-ng-src="{{slide.originalUrl}}"
                     ng-click="imageView(slide.originalUrl)"> 
+                </uib-slide> </uib-carousel>
                     <center>
                         <button id="removeBtn" type="button" class="btn btn-danger btn-raised" ng-click="removeSelectedTables($index,table,tableSelection) ">{{'bottleServiceTab.REMOVE' | translate}}</button>
                     </center>
-                    </uib-slide> </uib-carousel>
+                    
                 <br> <label class="table-capacity" ng-hide="table.description == null"><b>{{'bottleServiceTab.DESC' | translate}}</b></label> <br> <label
                     class="table-capacity"
                     ng-hide="table.description == null">{{table.description}}</label>
