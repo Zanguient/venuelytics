@@ -12,7 +12,8 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location'
     		self.selectedCityName = $routeParams.cityName;
             self.venueID = $routeParams.venueid;
         	self.backToReservation = function() {
-        		$rootScope.serviceName = 'BottleService';
+				$rootScope.serviceName = 'BottleService';
+				DataShare.editBottle = 'false';
             	$location.url('/newCities/' + self.selectedCityName + '/' + self.venueID + '/bottle-service');
         	};
     }]);

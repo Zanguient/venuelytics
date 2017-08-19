@@ -26,6 +26,7 @@ app.service('DataShare', function() {
   this.partyFocus = '';
   this.userselectedTables = '';
   this.selectedBlog = {};
+  this.editBottle = '';
   this.enablePayment = '';
   this.imageMapping={
       "pictureURL": "",

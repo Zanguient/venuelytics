@@ -112,7 +112,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid, 'Bottle').then(function(response) {
                     self.eventTypes = response.data;
-                    if($rootScope.serviceName != 'BottleService') {
+                    if(DataShare.editBottle === 'true') {
                       var selectedType;
                       angular.forEach(self.eventTypes, function(tmpType) {
                         if(tmpType.id === DataShare.bottleServiceData.bottleOccasion.id) {
@@ -314,7 +314,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                   };
                   self.tableSelection.push(table);
               }
-        }
+        };
 
         self.isReserved = function (table) {
             table.reserved = false;
@@ -327,7 +327,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
             }
             return false;
-        }  
+        };  
 
         $scope.isSelected = function (table) {
             if (self.tableSelection && typeof self.tableSelection != 'undefined') {
@@ -338,7 +338,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
             }
             return false;
-        }
+        };
 
         self.selectTable = function(id, name) {
           
@@ -410,13 +410,13 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
             self.confirmBottleService = function() {
                 DataShare.focused = 'is-focused';
-                $log.info("inside is focused");
+                DataShare.editBottle = 'true';
                 $rootScope.serviceTabClear = true;
                 var date = new Date(self.bottle.requestedDate);
                 var newDate = date.toISOString();
                 var parsedend = moment(newDate).format("MM-DD-YYYY");
-                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
-                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
+                var dateFormat = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                var dateValue = moment(dateFormat).format("YYYY-MM-DDTHH:mm:ss");
                 DataShare.selectedDateForBottle = self.bottleServiceDate;
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.bottle.email + ':' + self.bottle.mobile);
@@ -429,7 +429,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 DataShare.authBase64Str = authBase64Str;
                 DataShare.selectBottle = self.bottleMinimum;
                 DataShare.tableSelection = self.tableSelection;
-                if($scope.tableSelection.length == 0) {
+                if($scope.tableSelection.length === 0) {
                     self.noTableSelected = true;
                     return;
                 }
