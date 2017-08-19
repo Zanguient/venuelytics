@@ -11,7 +11,9 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.partyDateIsFocused = 'is-focused';
             self.init = function() {
                 $rootScope.serviceTabClear = false;
-                $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true});
+                var date = new Date();
+                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today});
                 self.venueID = $routeParams.venueid;
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.party = DataShare.partyServiceData;

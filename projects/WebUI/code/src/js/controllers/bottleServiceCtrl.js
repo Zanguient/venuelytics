@@ -23,7 +23,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
+                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today});
                 self.venueid = $routeParams.venueid;
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
@@ -245,7 +245,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             };
 
             self.fillColor = function(id) {
-
               var obj = $scope.reservationData[id];
               // $log.info("Reservation Data:", angular.toJson(obj));
               // $log.info("tableSelection data:", angular.toJson(self.tableSelection));
