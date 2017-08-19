@@ -33,7 +33,7 @@
   RestServiceFactory.AnalyticsService().get({id: contextService.userVenues.selectedVenueNumber, 
    anaType: 'ReservedBookings', aggPeriodType: 'Yearly', filter: 'scodes=BPK&aggTypeFilter=2017'}, function(data){
     $scope.reservedBookings = data;
-    $scope.events = [];
+    $scope.events.splice(0);
     var tableCount = $scope.reservedBookings['VenueMap.count'];
     var banquetCount = $scope.reservedBookings['BanquetHall.count'];
     for( var dateKey in $scope.reservedBookings.calendar){
@@ -99,7 +99,9 @@
         }
       }
     }
-    $scope.initCalendar();
+     $('#calendar').fullCalendar( 'removeEvents');
+     $('#calendar').fullCalendar( 'addEventSource', $scope.events );
+     $('#calendar').fullCalendar('rerenderEvents' );
     },function(error){
       /*if (typeof error.data !== 'undefined') { 
           //toaster.pop('error', "Server Error", error.data.developerMessage);
@@ -198,7 +200,17 @@ $scope.initCalendar = function () {
     };
     $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
         // register on venue change;
-       //$scope.init();
+      $scope.venueMapData = [];
+      $scope.selectedDate = null;
+      $scope.selectedVenueMap = {};
+      $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
+      $scope.selectedTable = {};
+      $scope.order = {};
+      $scope.isCurrSelReserved = false;
+      $scope.isBanquetHallReserved = false;
+      $scope.loading = false;
+      $scope.selectCalender = false;
+       $scope.getReservationSummary();
     });
 
     $scope.clickServiceType =  function( event ) {
@@ -365,7 +377,7 @@ $scope.initCalendar = function () {
       }, 200);
 
     };
-
+    $scope.initCalendar();
     $scope.getReservationSummary();
     $("img[usemap]").jMap();
     $('#imageMap').maphilight();

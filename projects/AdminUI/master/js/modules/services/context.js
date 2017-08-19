@@ -19,12 +19,17 @@ App.service('ContextService',['$location','RestServiceFactory', '$rootScope', 'A
         listIsOpen : false,
         available: {}
 	};
+	
 
 	this.openVenueDropdown = function (selector) {
         $(selector).animate({ scrollTop: 0 }, 'slow', function () {});
     };
     var self = this;
 	$rootScope.$on(AUTH_EVENTS.loginSuccess, function() {
+		if(typeof $rootScope.$storage.selectedVenueNumber !== 'undefined'){
+			self.userVenues.selectedVenueNumber = $rootScope.$storage.selectedVenueNumber;
+			self.userVenues.selectedVenueName = $rootScope.$storage.selectedVenueName;
+		}
 		self.loadVenues();
 	});
 

@@ -17,9 +17,9 @@ if (typeof $ === 'undefined') { throw new Error('This application\'s JavaScript 
 var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','ngAnimate', 'ngStorage', 'ngCookies', 
           'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'angular-loading-bar','ngDialog','ngImgMap', 'templates'])
           .run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache','AUTH_EVENTS', 'AuthService', 'FORMATS',
-           'Session','$timeout','$log','$cookies', '$http',
+           'Session','$timeout','$log','$cookies', '$http','ContextService',
                function ($rootScope, $state, $stateParams, $window, $templateCache, AUTH_EVENTS, AuthService, FORMATS,
-                 Session, $timeout, $log,$cookies, $http) {
+                 Session, $timeout, $log,$cookies, $http, contextService) {
         	   'use strict';
               // Set reference to access them from any scope
               $rootScope.$state = $state;
@@ -58,6 +58,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                   if (toState.name === 'app.storeedit' || 
                       toState.name === 'app.stores' ||
                       toState.name === 'app.editBanquetHall' ||
+                      toState.name === 'app.editPartyHall' ||
                       toState.name === 'app.editVenueMap'
                      ) {
                       $rootScope.hideNavVenueDropdown = true;
@@ -173,7 +174,11 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
               /// initialize session
               if (session !== null && typeof session !== 'undefined' && session.hasOwnProperty("sessionId")) {
          		     Session.init(session);
-         		     $state.go('app.dashboard');
+                 $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                 $timeout(function(){
+                    $state.go('app.dashboard'); 
+                 }, 200);
+         		     
          	    }
        
             }

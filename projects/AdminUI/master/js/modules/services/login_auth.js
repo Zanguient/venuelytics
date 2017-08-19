@@ -5,13 +5,13 @@
  =========================================================*/
  
 App.factory(
-		'AuthService',['$http','Session','USER_ROLES','$rootScope', 'ContextService', 
-		function($http, Session, USER_ROLES, $rootScope, ContextService) {
+		'AuthService',['$http','Session','USER_ROLES','$rootScope', 'RestServiceFactory', 
+		function($http, Session, USER_ROLES, $rootScope, RestServiceFactory) {
 		"use strict";
 		var authService = {};
 		
 		authService.login = function(credentials) {
-			var baseUrl = ContextService.contextName + "/v1/auth/";
+			var baseUrl = RestServiceFactory.contextName + "/v1/auth/";
 			return $http.post(baseUrl + 'login', credentials).then(
 					function(result) {
 						Session.create(result.data.sessionId, result.data.userId, result.data.userName,result.data.roleId);
@@ -20,7 +20,7 @@ App.factory(
 					});
 		};
 		authService.logout = function() {
-			var baseUrl = ContextService.contextName + "/v1/auth/";
+			var baseUrl = RestServiceFactory.contextName + "/v1/auth/";
 			return $http.post(baseUrl + 'logout', '{"sessionId":"'+Session.id +'"}').then(function(result) {
 				Session.destroy();
 				$rootScope.$storage.sessionData = null;
