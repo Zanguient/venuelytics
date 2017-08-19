@@ -139,7 +139,7 @@ gulp.task('revolution', function() {
 
 gulp.task('html', function() {
     return gulp.src(['src/html/*.html', '!src/html/layout/**/*',
-        , 'src/html/blogs/**/*.html', 'src/html/venue/**/*.html'])
+        , 'src/html/blogs/**/*.html', 'src/html/venue/**/*.html'], {base: 'src/html'})
         .pipe(changed(path.join(paths.html)))
         .pipe(processhtml({
             recursive: true,
