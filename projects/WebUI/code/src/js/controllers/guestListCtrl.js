@@ -11,8 +11,10 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             var self = $scope;
             self.guestDateIsFocused = 'is-focused';
             self.init = function() {
+                var date = new Date();
+                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $rootScope.serviceTabClear = false;
-                $("#requestedDate").datepicker({autoclose:true, todayHighlight: true});
+                $("#requestedDate").datepicker({autoclose:true, todayHighlight: true, startDate: today});
                 if((Object.keys(DataShare.guestListData).length) !== 0) {
                     self.guest = DataShare.guestListData;
                 } else {
@@ -34,6 +36,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             }
 
             self.glistSave = function(guest) {
+                var guestTotal = parseInt(guest.guestMen) + parseInt(guest.guestWomen);
                 DataShare.tab = 'G';
                 DataShare.guestFocus = 'is-focused';
                 $rootScope.serviceTabClear = true;
@@ -60,7 +63,12 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 DataShare.payloadObject = object;
                 self.guest.authorize = false;
                 self.guest.agree = false;
-                $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
+                if(guestTotal === parseInt(guest.totalGuest)){
+                    $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
+                } else {
+                    $('#guestError').modal('show');
+                }
+                
             };
 
             self.init();

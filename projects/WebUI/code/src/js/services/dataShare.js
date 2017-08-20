@@ -30,6 +30,7 @@ app.service('DataShare', function() {
   this.foodService = [];
   this.drinks = [];
   this.selectedBlog = {};
+  this.editBottle = '';
   this.enablePayment = '';
   this.imageMapping={
       "pictureURL": "",

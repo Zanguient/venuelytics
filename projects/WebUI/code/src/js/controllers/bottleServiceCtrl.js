@@ -23,7 +23,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true});
+                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today});
                 self.venueid = $routeParams.venueid;
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
@@ -112,7 +112,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid, 'Bottle').then(function(response) {
                     self.eventTypes = response.data;
-                    if($rootScope.serviceName != 'BottleService') {
+                    if(DataShare.editBottle === 'true') {
                       var selectedType;
                       angular.forEach(self.eventTypes, function(tmpType) {
                         if(tmpType.id === DataShare.bottleServiceData.bottleOccasion.id) {
@@ -245,7 +245,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             };
 
             self.fillColor = function(id) {
-
               var obj = $scope.reservationData[id];
               // $log.info("Reservation Data:", angular.toJson(obj));
               // $log.info("tableSelection data:", angular.toJson(self.tableSelection));
@@ -300,8 +299,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             };
 
         self.selectTableForWithOutFloorMap = function(data) {
-            self.selectionTableItems.push(data);
+            if (self.selectionTableItems.indexOf(data) === -1) {
+                self.selectionTableItems.push(data);
+            }
             self.tableSelection = [];
+
             for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
                 var table = {
                     "id": self.selectionTableItems[itemIndex].id,
@@ -314,7 +316,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                   };
                   self.tableSelection.push(table);
               }
-        }
+        };
 
         self.isReserved = function (table) {
             table.reserved = false;
@@ -327,7 +329,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
             }
             return false;
-        }  
+        };  
 
         $scope.isSelected = function (table) {
             if (self.tableSelection && typeof self.tableSelection != 'undefined') {
@@ -338,7 +340,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
             }
             return false;
-        }
+        };
 
         self.selectTable = function(id, name) {
           
@@ -408,15 +410,31 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.selectionTableItems.splice(index, 1);
         };
 
+        $(window).resize(function() {
+            var divHeight = $('#imagemap').height();
+            var divWidth = $('#imagemap').width();
+            setTimeout(function() {
+              $('#imagemap').maphilight();
+              if (divHeight > 0) {
+                $('div.map.img-responsive').css('width', divWidth + 'px');
+                $('div.map.img-responsive').css('height', divHeight + 'px');
+                $('canvas').css('height', divHeight + 'px');
+                $('canvas').css('width', divWidth + 'px');
+                $('#imagemap').css('height', divHeight + 'px');
+                $('#imagemap').css('width', divWidth + 'px');
+              }
+            }, 200);
+        });
+
             self.confirmBottleService = function() {
                 DataShare.focused = 'is-focused';
-                $log.info("inside is focused");
+                DataShare.editBottle = 'true';
                 $rootScope.serviceTabClear = true;
                 var date = new Date(self.bottle.requestedDate);
                 var newDate = date.toISOString();
                 var parsedend = moment(newDate).format("MM-DD-YYYY");
-                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
-                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
+                var dateFormat = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                var dateValue = moment(dateFormat).format("YYYY-MM-DDTHH:mm:ss");
                 DataShare.selectedDateForBottle = self.bottleServiceDate;
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.bottle.email + ':' + self.bottle.mobile);
@@ -429,7 +447,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 DataShare.authBase64Str = authBase64Str;
                 DataShare.selectBottle = self.bottleMinimum;
                 DataShare.tableSelection = self.tableSelection;
-                if($scope.tableSelection.length == 0) {
+                if($scope.tableSelection.length === 0) {
                     self.noTableSelected = true;
                     return;
                 }

@@ -29,7 +29,9 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 } 
                 self.getMenus();
                 self.getEventType();
-                $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true});
+                    var date = new Date();
+                    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today});
                 self.private.authorize = false;
                 self.private.agree = false;
             };
