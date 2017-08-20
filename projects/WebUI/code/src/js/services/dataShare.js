@@ -28,6 +28,7 @@ app.service('DataShare', function() {
   this.drinkFocused = '';
   this.userselectedTables = '';
   this.foodService = [];
+  this.drinks = [];
   this.selectedBlog = {};
   this.enablePayment = '';
   this.imageMapping={

@@ -71,8 +71,13 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                     if (self.selectedFoodList.indexOf(item) === -1) {
                         self.selectedFoodList.push(item);
                     }
-                    
                 }
+
+                if (item.count === 0) {
+                    var index = self.selectedFoodList.indexOf(item);
+                    self.selectedFoodList.splice(index, 1);
+                }
+
                 DataShare.foodService = self.selectedFoodList;
             };
 

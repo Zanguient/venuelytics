@@ -11,12 +11,15 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 if((Object.keys(DataShare.drinkServiceData).length) !== 0) {
                     self.drink = DataShare.drinkServiceData;
                     self.drinkType = $rootScope.serviceName;
+                    self.userSelectedDrinks = DataShare.drinks;
                 } 
                 if(($rootScope.serviceName === 'DrinkService') || (DataShare.amount != '')) {
                     DataShare.drinkServiceData = {};
                     self.isDrinkFocused = '';
                     self.drink = {};
                     $rootScope.serviceName = '';
+                    DataShare.foodService = [];
+                    DataShare.drinks = '';
                     self.drinkType = 'Delivery';
                 }
                 self.getMenus();
@@ -52,6 +55,23 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 } else {
                     $window.open(menu, '_blank');
                 }
+            };
+
+            self.userSelectedDrinks = [];
+
+
+            self.drinkService = function(item) {
+                if(item.count !== undefined) {
+                    if (self.userSelectedDrinks.indexOf(item) === -1) {
+                        self.userSelectedDrinks.push(item);
+                    }
+                } 
+                
+                if (item.count === 0) {
+                    var index = self.userSelectedDrinks.indexOf(item);
+                    self.userSelectedDrinks.splice(index, 1);
+                }
+                DataShare.drinks = self.userSelectedDrinks;
             };
 
             self.getDrink = function() {

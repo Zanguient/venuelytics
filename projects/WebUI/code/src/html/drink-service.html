@@ -131,7 +131,33 @@
                 <a href="" class="btn btn-success btn-raised fontRegular" ng-if="drinksMenuUrl" ng-click="menuUrlSelection(drinksMenuUrl)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.DRINK_MENU_URL" | translate}}</a>
                 <a href="" class="btn btn-success fontRegular btn-raised" ng-if="drinksCocktailsUrl" ng-click="menuUrlSelection(drinksCocktailsUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_COCKTAILS" | translate}}</a>&nbsp;&nbsp;
     		</center>
-		</div> <br/>
+        </div> <br/>
+        
+        <div ng-if="userSelectedDrinks.length != 0">
+        <h1>Selected Foods:</h1>
+        <div>
+                <table class="table table-no-border table-striped table-responsive">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Brand</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="drink in userSelectedDrinks">
+                      <td>{{drink.name}}</td>
+                      <td>{{drink.brand}}</td>
+                      <td>{{drink.count}}</td>
+                      <td>{{drink.price * drink.count }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+
+
         <div class="col-md-8 form-group is-empty">
             <div class="row">
             <div class="col-md-8 ms-paper-content-container">
@@ -142,12 +168,12 @@
                             <div class="panel panel-primary" ng-repeat="items in drinkDetails">
                                 <div class="panel-heading" role="tab" id="{{items.id}}">
                                     <h4 class="panel-title">
-                                        <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse{{items.id}}" aria-expanded="false" aria-controls="collapse{{items.id}}">
+                                        <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}" aria-controls="collapse{{items.id}}">
                                             <i class="zmdi zmdi-star"></i>{{items.brand}} (Category)
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapse{{items.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{items.id}}">
+                                <div id="collapse{{items.id}}" class="panel-collapse collapse {{$index == 0 ? 'collapse in' : ''}}"" role="tabpanel" aria-labelledby="{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}">
                                     <div class="panel-body">
                                         <table class="table table-responsive table-no-border">
                                         <tr>
@@ -156,10 +182,10 @@
                                             </td>
                                             <td class="col-md-3"><font size="4"><strong>{{items.name}}</strong></font></td>
                                         </tr>
-                                        <tr>
+                                        <tr ng-mouseleave="drinkService(items)">
                                             <td class="col-md-3"><font size="2">Price: &dollar;{{items.price}}</font><br>
                                             <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#drinkItemDetails">Details</a></font></td>
-                                            <td class="col-md-1"><input type="number" class="form-control" min="0" max="25" ng-model="items.count"/></td>
+                                            <td class="col-md-1"><input type="number" class="form-control" min="0" max="25" ng-model="items.count" value="{{items.count || 0}}"/></td>
                                         </tr>
                                     </table>
                                     </div>
