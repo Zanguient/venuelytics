@@ -66,7 +66,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
 
             self.selectedFoods = [];
 
-            self.test = function(item) {
+            self.userSelectedFood = function(item) {
                 if(item.count !== undefined) {
                     if (self.selectedFoods.indexOf(item) === -1) {
                         self.selectedFoods.push(item);
