@@ -146,7 +146,31 @@
                 <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodAppetizsersUrl" ng-click="menuUrlSelection(foodAppetizsersUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_APPETIZSER" | translate}}</a>&nbsp;&nbsp;
                 <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodGlutenfree" ng-click="menuUrlSelection(foodGlutenfree)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FOOD_GLUTEN" | translate}}</a>
     		</center>
-		</div> <br/>
+        </div> <br/>
+        
+        <h1>Selected Foods:</h1>
+        <div>
+                <table class="table table-no-border table-striped table-responsive">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Brand</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="foods in selectedFoods">
+                      <td>{{foods.name}}</td>
+                      <td>{{foods.brand}}</td>
+                      <td>{{foods.count}}</td>
+                      <td>{{10}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
         <div class="col-md-8 form-group is-empty">
             <div class="row">
             <div class="col-md-8 ms-paper-content-container">
@@ -171,7 +195,7 @@
                                             </td>
                                             <td class="col-md-3"><font size="4"><strong>{{items.name}}</strong></font></td>
                                         </tr>
-                                        <tr>
+                                        <tr ng-mouseleave="test(items)">
                                             <td class="col-md-3"><font size="2">Price: &dollar;{{items.price}}</font><br>
                                             <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#foodItemDetails">Details</a></font></td>
                                             <td class="col-md-1"><input type="number" class="form-control" min="0" max="25" ng-model="items.count" value="{{items.count || 0}}"/></td>

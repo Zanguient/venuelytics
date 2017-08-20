@@ -13,12 +13,14 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 if((Object.keys(DataShare.foodServiceData).length) !== 0) {
                     self.food = DataShare.foodServiceData;
                     self.foodType = $rootScope.serviceName;
+                    self.selectedFoods = DataShare.foodService;
                 } 
                 if(($rootScope.serviceName === 'FoodService') || (DataShare.amount != '')) {
                     DataShare.foodServiceData = {};
                     self.isFoodFocused = '';
                     self.food = {};
                     $rootScope.serviceName = '';
+                    DataShare.foodService = [];
                     self.foodType = 'Delivery';
                 }
                 self.getMenus();
@@ -60,6 +62,18 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 } else {
                     $window.open(menu, '_blank');
                 }
+            };
+
+            self.selectedFoods = [];
+
+            self.test = function(item) {
+                if(item.count !== undefined) {
+                    if (self.selectedFoods.indexOf(item) === -1) {
+                        self.selectedFoods.push(item);
+                    }
+                    
+                }
+                DataShare.foodService = self.selectedFoods;
             };
 
             self.getFood = function() {
