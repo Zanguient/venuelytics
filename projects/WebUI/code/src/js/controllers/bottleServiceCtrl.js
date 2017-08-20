@@ -299,8 +299,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             };
 
         self.selectTableForWithOutFloorMap = function(data) {
-            self.selectionTableItems.push(data);
+            if (self.selectionTableItems.indexOf(data) === -1) {
+                self.selectionTableItems.push(data);
+            }
             self.tableSelection = [];
+
             for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
                 var table = {
                     "id": self.selectionTableItems[itemIndex].id,
