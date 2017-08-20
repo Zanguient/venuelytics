@@ -6,20 +6,26 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
 
             var self = $scope;
             self.selectedFoodItems = [];
+            self.selectedFoodList = [];
             self.foodType = 'Delivery';
             self.init = function() {
                 self.venueid = $routeParams.venueid;
-                if((Object.keys(DataShare.foodServiceData).length) !== 0) {
-                    self.food = DataShare.foodServiceData;
-                    self.foodType = $rootScope.serviceName;
-                } 
+                self.selectedCity = $routeParams.cityName;
+                $rootScope.serviceTabClear = false;
                 if(($rootScope.serviceName === 'FoodService') || (DataShare.amount != '')) {
                     DataShare.foodServiceData = {};
                     self.isFoodFocused = '';
                     self.food = {};
                     $rootScope.serviceName = '';
+                    DataShare.foodService = '';
                     self.foodType = 'Delivery';
+                    DataShare.selectedFoods = '';
                 }
+                if((Object.keys(DataShare.foodServiceData).length) !== 0) {
+                    self.food = DataShare.foodServiceData;
+                    self.foodType = $rootScope.serviceName;
+                    self.selectedFoodList = DataShare.foodService;
+                } 
                 self.getMenus();
                 self.getFood();
                 self.getVenueType();
@@ -59,6 +65,21 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 } else {
                     $window.open(menu, '_blank');
                 }
+            };
+
+            self.userSelectedFood = function(item) {
+                if(item.count !== undefined) {
+                    if (self.selectedFoodList.indexOf(item) === -1) {
+                        self.selectedFoodList.push(item);
+                    }
+                }
+
+                if (item.count === 0) {
+                    var index = self.selectedFoodList.indexOf(item);
+                    self.selectedFoodList.splice(index, 1);
+                }
+
+                DataShare.foodService = self.selectedFoodList;
             };
 
             self.getFood = function() {
@@ -114,6 +135,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
 
             self.foodSave = function() {
                 DataShare.foodFocused = 'is-focused';
+                $rootScope.serviceTabClear = true;
                 var parsedend = moment().format("MM-DD-YYYY");
                 var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
                 var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");

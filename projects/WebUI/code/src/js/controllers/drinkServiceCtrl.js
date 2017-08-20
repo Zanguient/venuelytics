@@ -7,15 +7,20 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
             self.drinkType = 'Delivery';
             self.init = function() {
                 self.venueid = $routeParams.venueid;
+                self.selectedCity = $routeParams.cityName;
+                $rootScope.serviceTabClear = false;
                 if((Object.keys(DataShare.drinkServiceData).length) !== 0) {
                     self.drink = DataShare.drinkServiceData;
                     self.drinkType = $rootScope.serviceName;
+                    self.userSelectedDrinks = DataShare.drinks;
                 } 
                 if(($rootScope.serviceName === 'DrinkService') || (DataShare.amount != '')) {
                     DataShare.drinkServiceData = {};
                     self.isDrinkFocused = '';
                     self.drink = {};
                     $rootScope.serviceName = '';
+                    DataShare.foodService = [];
+                    DataShare.drinks = '';
                     self.drinkType = 'Delivery';
                 }
                 self.getMenus();
@@ -51,6 +56,23 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 } else {
                     $window.open(menu, '_blank');
                 }
+            };
+
+            self.userSelectedDrinks = [];
+
+
+            self.drinkService = function(item) {
+                if(item.count !== undefined) {
+                    if (self.userSelectedDrinks.indexOf(item) === -1) {
+                        self.userSelectedDrinks.push(item);
+                    }
+                } 
+                
+                if (item.count === 0) {
+                    var index = self.userSelectedDrinks.indexOf(item);
+                    self.userSelectedDrinks.splice(index, 1);
+                }
+                DataShare.drinks = self.userSelectedDrinks;
             };
 
             self.getDrink = function() {
@@ -106,6 +128,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
 
             self.drinkSave = function() {
                 DataShare.drinkFocused = 'is-focused';
+                $rootScope.serviceTabClear = true;
                 var parsedend = moment().format("MM-DD-YYYY");
                 var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
                 var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");

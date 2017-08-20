@@ -44,7 +44,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
         
         self.dispatchToService(self.tabParams);
-      
+                
+
         self.reservationTime = APP_ARRAYS.time;
         AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
             self.detailsOfVenue = response;
@@ -57,40 +58,74 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         });
     };
 
-   
+           
      self.tabClear = function() {
         if(((Object.keys(DataShare.bottleServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
             DataShare.privateEventData = {};
             DataShare.guestListData = {};
             DataShare.partyServiceData = {};
+            DataShare.foodServiceData = {};
+            DataShare.drinkServiceData = {};
             DataShare.guestFocus = '';
             DataShare.partyFocus = '';
             DataShare.privateEventFocused = '';
+            DataShare.foodFocused = '';
+            DataShare.drinkFocused = '';
         } else if(((Object.keys(DataShare.privateEventData).length) != 0) || ($rootScope.serviceTabClear === false)) {
             DataShare.bottleServiceData = {};
             DataShare.guestListData = {};
             DataShare.partyServiceData = {};
+            DataShare.foodServiceData = {};
+            DataShare.drinkServiceData = {};
             DataShare.guestFocus = '';
             DataShare.partyFocus = '';
             DataShare.focused = '';
+            DataShare.foodFocused = '';
+            DataShare.drinkFocused = '';
         } else if(((Object.keys(DataShare.guestListData).length) != 0) || ($rootScope.serviceTabClear === false)) {
             DataShare.bottleServiceData = {};
             DataShare.privateEventData = {};
             DataShare.partyServiceData = {};
+            DataShare.foodServiceData = {};
+            DataShare.drinkServiceData = {};
             DataShare.partyFocus = '';
             DataShare.privateEventFocused = '';
             DataShare.focused = '';
+            DataShare.foodFocused = '';
+            DataShare.drinkFocused = '';
         } else if(((Object.keys(DataShare.partyServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
             DataShare.bottleServiceData = {};
             DataShare.guestListData = {};
             DataShare.privateEventData = {};
+            DataShare.foodServiceData = {};
+            DataShare.drinkServiceData = {};
             DataShare.guestFocus = '';
             DataShare.privateEventFocused = '';
             DataShare.focused = '';
+            DataShare.drinkFocused = '';
+            DataShare.bottleServiceData = {};
+            DataShare.guestListData = {};
+            DataShare.privateEventData = {};
+            DataShare.drinkServiceData = {};
+            DataShare.partyServiceData = {};
+            DataShare.guestFocus = '';
+            DataShare.privateEventFocused = '';
+            DataShare.focused = '';
+            DataShare.partyFocus = '';
+            DataShare.drinkFocused = '';
+        } else if(((Object.keys(DataShare.drinkServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
+            DataShare.bottleServiceData = {};
+            DataShare.guestListData = {};
+            DataShare.privateEventData = {};
+            DataShare.partyServiceData = {};
+            DataShare.foodServiceData = {};
+            DataShare.guestFocus = '';
+            DataShare.privateEventFocused = '';
+            DataShare.focused = '';
+            DataShare.foodFocused = '';
+            DataShare.partyFocus = '';
         }
-        
     };
-
 
     self.bgTabColor = function(tabId) {
         var calHandler = self.dispatchHandler[self.tabParams];
@@ -121,7 +156,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         self.tabClear();
         $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
 
-    }
+    };
+
     function addTab(id, bId, img, name, tabParam, htmlContentPage) {
         self.displayTabs.push({
            id: id,
@@ -144,7 +180,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     addTab('guestlistTab','glist', 'assets/img/guest.png','reservation.GUEST', 'guest-list', 'guest-list.html');
     addTab('foodServiceTab','foodTab', 'assets/img/ic_bottle.png','reservation.FOOD_SERVICE', 'food-services', 'food-service.html');
     addTab('drinkServiceTab','drink', 'assets/img/ic_bottle.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service.html');
-        
+    addTab('tableServiceTab','tableService', 'assets/img/ic_bottle.png','reservation.TABLE_SERVICE', 'table-services', 'table-service.html');
+    
+
     self.init();
 
 }]);

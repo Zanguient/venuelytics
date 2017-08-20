@@ -99,20 +99,20 @@ gulp.task('plugins', ['plugins:js', 'plugins:css', 'plugins:fonts', 'plugins:img
     return gulp.src(config.plugins.jsConcat)
         .pipe(gulpif(config.concat, concat('plugins.min.js')))
         .pipe(gulpif(config.compress, uglify()))
-        .pipe(cachebust.resources())
+        .pipe(gulpif(config.compress, cachebust.resources()))
         .pipe(gulp.dest(paths.jsConcat));
 });
 
 gulp.task('plugins:js', function() {
     return gulp.src(config.plugins.js)
-        .pipe(cachebust.resources())
+        .pipe(gulpif(config.compress, cachebust.resources()))
         .pipe(gulp.dest(paths.js));
 });
 
 gulp.task('plugins:css', function() {
     return gulp.src(config.plugins.css)
         .pipe(gulpif(config.concat, concat('plugins.min.css')))
-        .pipe(cachebust.resources())
+        .pipe(gulpif(config.compress, cachebust.resources()))
         .pipe(gulp.dest(paths.css));
 });
 
@@ -201,7 +201,7 @@ gulp.task('js', ['js:base', 'js:configurator'], function() {
 
     return gulp.src('src/js/pages/**/*')
         .pipe(gulpif(config.compress, uglify()))
-        .pipe(cachebust.resources())
+        .pipe(gulpif(config.compress, cachebust.resources()))
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
 });
@@ -226,7 +226,7 @@ gulp.task('js:base', function() {
         .pipe(gulpif('*.js',replace('dev.api.venuelytics.com',baseUrl())))
         .pipe(gulpif(config.compress, concat('app.min.js')))
         .pipe(gulpif(config.compress, uglify()))
-        .pipe(cachebust.resources())
+        .pipe(gulpif(config.compress,cachebust.resources()))
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
 });
@@ -235,7 +235,7 @@ gulp.task('js:configurator', function() {
     return gulp.src('src/js/configurator.js')
         .pipe(gulpif(config.compress, concat('configurator.min.js')))
         .pipe(gulpif(config.compress, uglify()))
-        .pipe(cachebust.resources())
+         .pipe(gulpif(config.compress,cachebust.resources()))
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
 });
@@ -307,7 +307,7 @@ gulp.task('scss', function() {
             extname: '.css'
         })))
         //.pipe(gulpif(!config.compress, rename('style.' + config.defaultTheme + '.min.css')))
-        .pipe(cachebust.resources())
+        .pipe(gulpif(config.compress, cachebust.resources()))
         .pipe(gulp.dest(paths.css))
         .pipe(connect.reload());
 });
@@ -346,7 +346,7 @@ gulp.task('clean', function() {
 
 gulp.task('watch', function() {
     gulp.watch(['src/html/**/*'], ['html']);
-    gulp.watch(['src/html/layout/**/*'], ['html:dist']);
+    gulp.watch(['src/html/layout/**/*'], ['html']);
     gulp.watch(['src/js/**/*'], ['js']);
     gulp.watch(['src/scss/**/*'], ['scss']);
     gulp.watch(['src/img/**/*'], ['img']);
@@ -355,6 +355,9 @@ gulp.task('watch', function() {
     gulp.watch(['src/seo/**/*']);
 });
 
+gulp.task('remove-template-cache', function() {
+  return del.sync(['dist/assets/js/templates*.js'], {force: true});
+});
 
 gulp.task('connect', function() {
   gulp.src(config.folders.dist)
@@ -378,6 +381,8 @@ gulp.task('dist:pre', function(cb) {
 });
 
 gulp.task('dist',['dist:pre'], function(cb) {
+    config.environment = 'dist';
+    config.compress = true;
     return gulp.src('dist/index.html')
      .pipe(cachebust.references())
      .pipe(gulp.dest(config.folders.dist));
@@ -387,7 +392,7 @@ gulp.task('dev', function(cb) {
     config.environment = 'dev';
     config.compress = false;
     return runSequence(
-        'clean', ['plugins', 'html', 'html:dist', 'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js', 'dist', cb
+        'clean', ['plugins', 'html', 'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js',  cb
     );
 });
 
@@ -395,7 +400,7 @@ gulp.task('work', function(cb) {
     config.environment = 'dev';
     config.compress = false;
     return runSequence(
-        'dev', ['connect', 'watch'], cb
+        'dev', 'remove-template-cache',['connect', 'watch'], cb
     );
 });
 

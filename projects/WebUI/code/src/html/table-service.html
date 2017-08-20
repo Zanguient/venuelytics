@@ -1,0 +1,65 @@
+<div ng-controller="TableServiceController">
+<form class="search-form" name="tableServiceForm" validate-form="" parsley-validate novalidate ng-cloak>
+        <fieldset>
+        <h1>Make a reservation</h1>
+            <div class="col-md-12 form-group is-empty">
+                <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
+                    <input type="text" class="form-control fontBold" id="tableServiceDate" ng-model="tableDate" required>
+                </div>
+                <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
+                    <select class="form-control fontBold" ng-model="table.reserveTime" ng-options="x.key as x.value for x in reservationTime" required>
+                        <option value="">SELECT A TIME</option>
+                    </select>
+                </div>
+                <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
+                    <select class="form-control fontBold" ng-model="table.guest" required>
+                        <option value="">No of Guest</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
+                <div class="col-md-3 form-group is-empty" >
+                    <button type="button" class="btn btn-success btn-raised" ng-click="findTable()">Find a Table</button>
+                </div>
+            </div>
+            <div class="col-md-8 form-group is-empty" ng-if="timeSelection == true" style="border:1px solid #000;">
+                <h3>Select Time:</h3>
+                <div class="col-md-2 form-group is-empty" >
+                    <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve()">6.15 PM</button>
+                </div>
+                <div class="col-md-2 form-group is-empty" >
+                    <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve()">6.30 PM</button>
+                </div>
+                <div class="col-md-2 form-group is-empty" >
+                    <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve()">7.00 PM</button>
+                </div>
+                <div class="col-md-2 form-group is-empty" >
+                    <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve()">7.30 PM</button>
+                </div>
+            </div>
+        </fieldset>
+</form>
+</div>
