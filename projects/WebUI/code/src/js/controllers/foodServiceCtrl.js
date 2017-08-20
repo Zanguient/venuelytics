@@ -9,6 +9,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             self.foodType = 'Delivery';
             self.init = function() {
                 self.venueid = $routeParams.venueid;
+                self.selectedCity = $routeParams.cityName;
                 if((Object.keys(DataShare.foodServiceData).length) !== 0) {
                     self.food = DataShare.foodServiceData;
                     self.foodType = $rootScope.serviceName;

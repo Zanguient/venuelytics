@@ -53,6 +53,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                     self.foodFunction();
                 } else if(self.tabParams === 'drink-services') {
                     self.drinkFunction();
+                } else if(self.tabParams === 'table-services') {
+                    self.tableServiceFunction();
                 } else {
                     self.bottleService();
                 }
@@ -77,6 +79,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
                 self.foodClass = 'foodBackgroundNotSelected';
                 self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
+                self.tableServiceClass = 'tableServiceBackgroundNotSelected';
+                self.tableServiceTabButtonColor = 'tableServiceBackgroundButtonNotSelected';
                 $log.info("Inside bottle function:");
                 $("#privateEventTab").css('background-color', APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
@@ -93,6 +97,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.guestServiceTab = false;
                 self.partyPackageTab = false;
                 self.bachelorPartyTab = false;
+                self.foodServiceTab = false;
+                self.drinkServiceTab = false;
+                self.tableServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bottle-service");
              };
 
@@ -105,6 +112,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
                 self.foodClass = 'foodBackgroundNotSelected';
                 self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
+                self.tableServiceClass = 'tableServiceBackgroundNotSelected';
+                self.tableServiceTabButtonColor = 'tableServiceBackgroundButtonNotSelected';
                 $log.info("Inside event function:");
                 $("#privateEventTab").css('background-color',APP_COLORS.fruitSalad);
                 $('#private').css('color', 'white');
@@ -123,6 +132,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bachelorPartyTab = false;
                 self.foodServiceTab = false;
                 self.drinkServiceTab = false;
+                self.tableServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/private-events");
              };
 
@@ -134,6 +144,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
                 self.foodClass = 'foodBackgroundNotSelected';
                 self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
+                self.tableServiceClass = 'tableServiceBackgroundNotSelected';
+                self.tableServiceTabButtonColor = 'tableServiceBackgroundButtonNotSelected';
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
                 $("#guestlistTab").css('background-color',APP_COLORS.fruitSalad);
@@ -151,6 +163,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bachelorPartyTab = false;
                 self.foodServiceTab = false;
                 self.drinkServiceTab = false;
+                self.tableServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/guest-list");
              };
 
@@ -175,6 +188,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bachelorPartyTab = true;
                 self.foodServiceTab = false;
                 self.drinkServiceTab = false;
+                self.tableServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bachelor-party");
              };
 
@@ -185,6 +199,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
                 self.foodClass = 'foodBackgroundNotSelected';
                 self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
+                self.tableServiceClass = 'tableServiceBackgroundNotSelected';
+                self.tableServiceTabButtonColor = 'tableServiceBackgroundButtonNotSelected';
                 self.tabClear();
                 $("#privateEventTab").css('background-color',APP_COLORS.silver);
                 $('#private').css('color', APP_COLORS.fruitSalad);
@@ -199,6 +215,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bachelorPartyTab = false;
                 self.foodServiceTab = false;
                 self.drinkServiceTab = false;
+                self.tableServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/party-packages");
              };
 
@@ -217,6 +234,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.tabButtonColor = 'partyBackgroundButtonNotSelected';
                 self.guestClass = 'guestBackgroundNotSelected';
                 self.guestTabButtonColor = 'guestBackgroundButtonNotSelected';
+                self.tableServiceClass = 'tableServiceBackgroundNotSelected';
+                self.tableServiceTabButtonColor = 'tableServiceBackgroundButtonNotSelected';
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
                 self.guestServiceTab = false;
@@ -224,6 +243,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bachelorPartyTab = false;
                 self.foodServiceTab = true;
                 self.drinkServiceTab = false;
+                self.tableServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/food-services");
              };
 
@@ -242,6 +262,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
                 self.guestClass = 'guestBackgroundNotSelected';
                 self.guestTabButtonColor = 'guestBackgroundButtonNotSelected';
+                self.tableServiceClass = 'tableServiceBackgroundNotSelected';
+                self.tableServiceTabButtonColor = 'tableServiceBackgroundButtonNotSelected';
                 self.bottleServiceTab = false;
                 self.eventServiceTab = false;
                 self.guestServiceTab = false;
@@ -249,7 +271,36 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bachelorPartyTab = false;
                 self.foodServiceTab = false;
                 self.drinkServiceTab = true;
+                self.tableServiceTab = false;
                 $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/drink-services");
+             };
+
+             /*For table service tab highlight*/
+             self.tableServiceFunction = function() {
+                self.tabClear();
+                $("#privateEventTab").css('background-color',APP_COLORS.silver);
+                $('#private').css('color', APP_COLORS.fruitSalad);
+                $("#bottleTab").css('background-color',APP_COLORS.silver);
+                $('#bottle').css('color', APP_COLORS.fruitSalad);
+                self.tableServiceClass = 'tableServiceBackgroundSelected';
+                self.tableServiceTabButtonColor = 'tableServiceBackgroundButtonSelected';
+                self.myClass = 'partBackgroundNotSelected';
+                self.tabButtonColor = 'partyBackgroundButtonNotSelected';
+                self.foodClass = 'foodBackgroundNotSelected';
+                self.foodTabButtonColor = 'foodBackgroundButtonNotSelected';
+                self.guestClass = 'guestBackgroundNotSelected';
+                self.guestTabButtonColor = 'guestBackgroundButtonNotSelected';
+                self.drinkClass = 'drinkBackgroundNotSelected';
+                self.drinkTabButtonColor = 'drinkBackgroundButtonNotSelected';
+                self.bottleServiceTab = false;
+                self.eventServiceTab = false;
+                self.guestServiceTab = false;
+                self.partyPackageTab = false;
+                self.bachelorPartyTab = false;
+                self.foodServiceTab = false;
+                self.drinkServiceTab = false;
+                self.tableServiceTab = true;
+                //$location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/table-services");
              };
 
              self.tabClear = function() {

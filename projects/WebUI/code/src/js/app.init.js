@@ -156,6 +156,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics-ConfirmPartyPackage',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
+        .when('/confirmTableService/:cityName/:venueid', {
+            templateUrl: 'tableService-form.html',
+            controller: 'TableServiceController',
+            title: 'Venuelytics-ConfirmTableService',
+            description: 'Venuelytics - a real time venue experience platform enabling Table Service'
+        })
         .when('/confirmEvent/:cityName/:venueid', {
             templateUrl: 'private-confirm.html',
             controller: 'PrivateConfirmController',

@@ -117,6 +117,22 @@ select {
   background-color: #CCCBCC;
 }
 
+.tableServiceBackgroundSelected {
+  background-color: #4CAF50;
+}
+
+.tableServiceBackgroundButtonSelected {
+  color: white;
+}
+
+.tableServiceBackgroundButtonNotSelected {
+  color: #4CAF50;
+}
+
+.tableServiceBackgroundNotSelected {
+  background-color: #CCCBCC;
+}
+
 .cardHeight {
   height:550px;
 }
@@ -184,6 +200,11 @@ select {
 }
 
 #foodTab {
+  white-space: normal;
+  border-right:2px solid #ffffff;
+}
+
+#drink {
   white-space: normal;
   border-right:2px solid #ffffff;
 }

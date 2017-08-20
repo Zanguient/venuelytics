@@ -86,6 +86,12 @@
                                                 <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong ng-class="[drinkTabButtonColor]">{{"reservation.DRINK_SERVICE" | translate}}</strong></span>
                                             </button>
                                         </div>
+                                        <div id="tableServiceTab" class="btn-group" ng-class="[tableServiceClass]">
+                                            <button id="tableService" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="tableServiceFunction()">
+                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
+                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong ng-class="[tableServiceTabButtonColor]">{{"reservation.TABLE_SERVICE" | translate}}</strong></span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </center>
                             </div>
@@ -116,6 +122,9 @@
                             </div>
                             <div ng-show="drinkServiceTab">
                                 <div ng-include="'drink-service.html'"></div>
+                            </div>
+                            <div ng-show="tableServiceTab">
+                                <div ng-include="'table-service.html'"></div>
                             </div>
                         </div>
 

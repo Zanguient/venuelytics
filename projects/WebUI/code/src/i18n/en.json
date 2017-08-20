@@ -504,7 +504,8 @@
 		"NAME":"Name",
 		"DRINK_ITEMS":"Drink Items",
 		"SELECTED_DRINK_ITEMS":"Selected Drink(s)",
-		"DRINK_TYPE":"Drink Type"
+		"DRINK_TYPE":"Drink Type",
+		"TABLE_SERVICE":"Table Service"
 	},
 	"bottleServiceTab": {
 		"DATE":"Requested Date",
