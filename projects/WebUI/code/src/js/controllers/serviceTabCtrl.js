@@ -300,7 +300,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.foodServiceTab = false;
                 self.drinkServiceTab = false;
                 self.tableServiceTab = true;
-                //$location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/table-services");
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/table-services");
              };
 
              self.tabClear = function() {

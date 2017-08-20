@@ -6,23 +6,25 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
 
             var self = $scope;
             self.selectedFoodItems = [];
+            self.selectedFoodList = [];
             self.foodType = 'Delivery';
             self.init = function() {
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
-                if((Object.keys(DataShare.foodServiceData).length) !== 0) {
-                    self.food = DataShare.foodServiceData;
-                    self.foodType = $rootScope.serviceName;
-                    self.selectedFoods = DataShare.foodService;
-                } 
                 if(($rootScope.serviceName === 'FoodService') || (DataShare.amount != '')) {
                     DataShare.foodServiceData = {};
                     self.isFoodFocused = '';
                     self.food = {};
                     $rootScope.serviceName = '';
-                    DataShare.foodService = [];
+                    DataShare.foodService = '';
                     self.foodType = 'Delivery';
+                    DataShare.selectedFoods = '';
                 }
+                if((Object.keys(DataShare.foodServiceData).length) !== 0) {
+                    self.food = DataShare.foodServiceData;
+                    self.foodType = $rootScope.serviceName;
+                    self.selectedFoodList = DataShare.foodService;
+                } 
                 self.getMenus();
                 self.getFood();
                 self.getVenueType();
@@ -64,16 +66,14 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 }
             };
 
-            self.selectedFoods = [];
-
             self.userSelectedFood = function(item) {
                 if(item.count !== undefined) {
-                    if (self.selectedFoods.indexOf(item) === -1) {
-                        self.selectedFoods.push(item);
+                    if (self.selectedFoodList.indexOf(item) === -1) {
+                        self.selectedFoodList.push(item);
                     }
                     
                 }
-                DataShare.foodService = self.selectedFoods;
+                DataShare.foodService = self.selectedFoodList;
             };
 
             self.getFood = function() {

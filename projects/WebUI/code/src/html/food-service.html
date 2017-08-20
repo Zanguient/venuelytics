@@ -148,28 +148,29 @@
     		</center>
         </div> <br/>
         
+        <div ng-if="selectedFoodList.length != 0">
         <h1>Selected Foods:</h1>
         <div>
-                <table class="table table-no-border table-striped table-responsive">
-                  <thead>
+            <table class="table table-no-border table-striped table-responsive">
+                <thead>
                     <tr>
                       <th>Name</th>
                       <th>Brand</th>
                       <th>Quantity</th>
                       <th>Price</th>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="foods in selectedFoods">
+                </thead>
+                <tbody>
+                    <tr ng-repeat="foods in selectedFoodList">
                       <td>{{foods.name}}</td>
                       <td>{{foods.brand}}</td>
                       <td>{{foods.count}}</td>
                       <td>{{10}}</td>
                     </tr>
-                  </tbody>
-                </table>
-              </div>
-
+                </tbody>
+            </table>
+        </div>
+        </div>
 
         <div class="col-md-8 form-group is-empty">
             <div class="row">
