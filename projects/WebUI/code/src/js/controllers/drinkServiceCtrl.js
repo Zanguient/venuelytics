@@ -128,6 +128,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
 
             self.drinkSave = function() {
                 DataShare.drinkFocused = 'is-focused';
+                $rootScope.serviceTabClear = true;
                 var parsedend = moment().format("MM-DD-YYYY");
                 var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
                 var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
