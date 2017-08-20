@@ -1,3 +1,12 @@
+<style>
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button {  
+    
+       opacity: 1;
+    
+    }
+</style>
+
 <div ng-controller="foodServiceController">
 <form class="search-form" name="foodForm" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset>
@@ -148,12 +157,12 @@
                             <div class="panel panel-primary" ng-repeat="items in foodDetails">
                                 <div class="panel-heading" role="tab" id="{{items.id}}">
                                     <h4 class="panel-title">
-                                        <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse{{items.id}}" aria-expanded="false" aria-controls="collapse{{items.id}}">
+                                        <a class="{{$index == 0 ? '' : 'collapsed'}} withripple" role="button" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}" aria-controls="collapse{{items.id}}">
                                             <i class="zmdi zmdi-star"></i>{{items.brand}} (Category)
                                         </a>
                                     </h4>
                                 </div>
-                                <div id="collapse{{items.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{items.id}}">
+                                <div id="collapse{{items.id}}" class="panel-collapse collapse {{$index == 0 ? 'collapse in' : ''}}" role="tabpanel" aria-labelledby="{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}">
                                     <div class="panel-body">
                                         <table class="table table-responsive table-no-border">
                                         <tr>
@@ -165,7 +174,7 @@
                                         <tr>
                                             <td class="col-md-3"><font size="2">Price: &dollar;{{items.price}}</font><br>
                                             <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#foodItemDetails">Details</a></font></td>
-                                            <td class="col-md-1"><input type="number" class="form-control" min="0" max="25" ng-model="items.count"/></td>
+                                            <td class="col-md-1"><input type="number" class="form-control" min="0" max="25" ng-model="items.count" value="{{items.count || 0}}"/></td>
                                         </tr>
                                     </table>
                                     </div>
