@@ -149,7 +149,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         if (typeof calHandler !== 'undefined') {
            return calHandler.htmlPage;
         }
-        return 'bottle-service.html';
+        return 'bottle-service/bottle-service.html';
     };
 
     self.dispatchToService = function(serviceName) {
@@ -169,17 +169,17 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         self.dispatchHandler[tabParam] = {dispatchId: tabParam, tabId: id, htmlPage: htmlContentPage};
     }
 
-    addTab('bottleTab','bottle', 'assets/img/ic_bottle.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service.html');
+    addTab('bottleTab','bottle', 'assets/img/ic_bottle.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html');
     if (self.bachelorFlag) {
         addTab('bottleTab','bottle', 'assets/img/ic_bottle.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party.html');
     }
     if (self.partyFlag) {
-        addTab('partyEventTab','party', 'assets/img/ic_party(2).png','reservation.PARTY', 'party-packages','party-packages.html');
+        addTab('partyEventTab','party', 'assets/img/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html');
     }
-    addTab('privateEventTab','private', 'assets/img/private.png','reservation.EVENTS', 'private-events', 'private-event.html');
-    addTab('guestlistTab','glist', 'assets/img/guest.png','reservation.GUEST', 'guest-list', 'guest-list.html');
-    addTab('foodServiceTab','foodTab', 'assets/img/ic_bottle.png','reservation.FOOD_SERVICE', 'food-services', 'food-service.html');
-    addTab('drinkServiceTab','drink', 'assets/img/ic_bottle.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service.html');
+    addTab('privateEventTab','private', 'assets/img/private.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html');
+    addTab('guestlistTab','glist', 'assets/img/guest.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html');
+    addTab('foodServiceTab','foodTab', 'assets/img/ic_bottle.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html');
+    addTab('drinkServiceTab','drink', 'assets/img/ic_bottle.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html');
     addTab('tableServiceTab','tableService', 'assets/img/ic_bottle.png','reservation.TABLE_SERVICE', 'table-services', 'table-service.html');
     
 

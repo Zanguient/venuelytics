@@ -35,7 +35,7 @@
                             </div>
                             <div id="serviceTabs" class="btn-group btn-group-justified">
                                 <center>
-                                    <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" style="background-color:{{bgTabColor(tab.id)}}; padding: 0px !important; margin-top:20px;" font-color= "{{textColor(tab.id)}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" class="col-sm-4"></div>
+                                    <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" style="background-color:{{bgTabColor(tab.id)}};" font-color= "{{textColor(tab.id)}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" class="reservation-tab col-sm-4"></div>
                                 </center>
                             </div>
                            <div ng-include="selectedPage()"></div>

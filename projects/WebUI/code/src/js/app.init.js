@@ -57,23 +57,23 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
 
         })
         .when('/cities/:cityName', {
-            templateUrl: 'venues.html',
+            templateUrl: 'venue/venues.html',
             controller: 'VenueController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/cities/:cityName/:venueid/:serviceType', {
-            templateUrl: 'venue-details.html',
+            templateUrl: 'venue/venue-details.html',
             controller: 'VenueDetailsController',
             title: 'Venuelytics-Service',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/cities/:cityName/:venueid', {
-            templateUrl: 'venue-details.html',
+            templateUrl: 'venue/venue-details.html',
             controller: 'VenueDetailsController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/cities/:cityName/:venueid?i&orgId', {
-            templateUrl: 'venue-details.html',
+            templateUrl: 'venue/venue-details.html',
             controller: 'VenueDetailsController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
@@ -85,17 +85,17 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
 
         })
         .when('/newCities/:cityName', {
-            templateUrl: 'new-venues.html',
+            templateUrl: 'venue/new-venues.html',
             controller: 'NewVenueController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/newCities/:cityName/:venueid', {
-            templateUrl: 'service-tabs.html',
+            templateUrl: 'venue/service-tabs.html',
             controller: 'ServiceTabController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/newCities/:cityName/:venueid/:tabParam', {
-            templateUrl: 'service-tabs.html',
+            templateUrl: 'venue/service-tabs.html',
             controller: 'ServiceTabController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
@@ -145,13 +145,13 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .when('/confirm/:cityName/:venueid', {
-            templateUrl: 'bottle-reservation.html',
+            templateUrl: 'bottle-service/bottle-reservation.html',
             controller: 'ConfirmReservationController',
             title: 'Venuelytics-ConfirmReservation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .when('/confirmPartyPackage/:cityName/:venueid', {
-            templateUrl: 'party-confirm.html',
+            templateUrl: 'party-service/party-confirm.html',
             controller: 'PartyConfirmController',
             title: 'Venuelytics-ConfirmPartyPackage',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
@@ -163,13 +163,13 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform enabling Table Service'
         })
         .when('/confirmEvent/:cityName/:venueid', {
-            templateUrl: 'private-confirm.html',
+            templateUrl: 'private-event/private-confirm.html',
             controller: 'PrivateConfirmController',
             title: 'Venuelytics-ConfirmReservation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .when('/confirmGuestList/:cityName/:venueid', {
-            templateUrl: 'guest-confirmation.html',
+            templateUrl: 'guest-list/guest-confirmation.html',
             controller: 'GuestConfirmController',
             title: 'Venuelytics-GuestListConfirmation',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
@@ -193,25 +193,25 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform enabling Order'
         })
         .when('/:cityName/bottlePayment/:venueid', {
-            templateUrl: 'bottle-payment.html',
+            templateUrl: 'bottle-service/bottle-payment.html',
             title: 'Venuelytics-Bottle-Payment',
             controller:'ConfirmReservationController',
             description: 'Venuelytics - a real time venue experience platform for bottle payment'
         })
         .when('/:cityName/partyPackagePayment/:venueid', {
-            templateUrl: 'party-payment.html',
+            templateUrl: 'party-service/party-payment.html',
             title: 'Venuelytics-Bottle-Payment',
             controller:'PartyConfirmController',
             description: 'Venuelytics - a real time venue experience platform for bottle payment'
         })
         .when('/confirmFoodService/:cityName/:venueid', {
-            templateUrl: 'food-confirmation.html',
+            templateUrl: 'food-service/food-confirmation.html',
             title: 'Venuelytics-Food-Confirmation',
             controller:'FoodConfirmController',
             description: 'Venuelytics - a real time venue experience platform for food confirmation'
         })
         .when('/confirmDrinkService/:cityName/:venueid', {
-            templateUrl: 'drink-confirmation.html',
+            templateUrl: 'drink-service/drink-confirmation.html',
             title: 'Venuelytics-Drink-Confirmation',
             controller:'DrinkConfirmController',
             description: 'Venuelytics - a real time venue experience platform for drink confirmation'
@@ -223,61 +223,61 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform for payment success'
         })
         .when('/:cityName/partySuccess/:venueid', {
-            templateUrl: 'party-payment-success.html',
+            templateUrl: 'party-service/party-payment-success.html',
             title: 'Venuelytics-Party-Payment-Success',
             controller:'PartyConfirmController',
             description: 'Venuelytics - a real time venue experience platform for party payment success'
         })
         .when('/:cityName/foodPayment/:venueid', {
-            templateUrl: 'food-payment.html',
+            templateUrl: 'food-service/food-payment.html',
             title: 'Venuelytics-Food-Payment',
             controller:'FoodConfirmController',
             description: 'Venuelytics - a real time venue experience platform for food success'
         })
         .when('/:cityName/drinkPayment/:venueid', {
-            templateUrl: 'drink-payment.html',
+            templateUrl: 'drink-service/drink-payment.html',
             title: 'Venuelytics-Drink-Payment',
             controller:'DrinkConfirmController',
             description: 'Venuelytics - a real time venue experience platform for drink success'
         })
         .when('/:cityName/foodSuccess/:venueid', {
-            templateUrl: 'food-payment-success.html',
+            templateUrl: 'food-service/food-payment-success.html',
             title: 'Venuelytics-Food-Payment-Success',
             controller:'FoodConfirmController',
             description: 'Venuelytics - a real time venue experience platform for food payment success'
         })
         .when('/:cityName/drinkSuccess/:venueid', {
-            templateUrl: 'drink-payment-success.html',
+            templateUrl: 'drink-service/drink-payment-success.html',
             title: 'Venuelytics-Drink-Payment-Success',
             controller:'DrinkConfirmController',
             description: 'Venuelytics - a real time venue experience platform for drink payment success'
         })
         .when('/:cityName/private-success/:venueid', {
-            templateUrl: 'private-success.html',
+            templateUrl: 'private-event/private-success.html',
             title: 'Venuelytics-Private-Success',
             controller:'PrivateConfirmController',
             description: 'Venuelytics - a real time venue experience platform for private success'
         })
         .when('/:cityName/party-success/:venueid', {
-            templateUrl: 'party-success.html',
+            templateUrl: 'party-service/party-success.html',
             title: 'Venuelytics-Private-Success',
             controller:'PartyConfirmController',
             description: 'Venuelytics - a real time venue experience platform for private success'
         })
         .when('/:cityName/food-success/:venueid', {
-            templateUrl: 'food-success.html',
+            templateUrl: 'food-service/food-success.html',
             title: 'Venuelytics-Food-Success',
             controller:'FoodConfirmController',
             description: 'Venuelytics - a real time venue experience platform for Food success'
         })
         .when('/:cityName/drink-success/:venueid', {
-            templateUrl: 'drink-success.html',
+            templateUrl: 'drink-service/drink-success.html',
             title: 'Venuelytics-Drink-Success',
             controller:'DrinkConfirmController',
             description: 'Venuelytics - a real time venue experience platform for Drink success'
         })
         .when('/:cityName/guest-success/:venueid', {
-            templateUrl: 'guest-success.html',
+            templateUrl: 'guest-list/guest-success.html',
             title: 'Venuelytics-Guest-Success',
             controller:'GuestConfirmController',
             description: 'Venuelytics - a real time venue experience platform for guest success'

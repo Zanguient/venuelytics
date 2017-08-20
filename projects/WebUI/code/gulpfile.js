@@ -138,8 +138,7 @@ gulp.task('revolution', function() {
 });
 
 gulp.task('html', function() {
-    return gulp.src(['src/html/*.html', '!src/html/layout/**/*',
-        , 'src/html/blogs/**/*.html', 'src/html/venue/**/*.html'], {base: 'src/html'})
+    return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'], {base: 'src/html'})
         .pipe(changed(path.join(paths.html)))
         .pipe(processhtml({
             recursive: true,
@@ -171,7 +170,7 @@ gulp.task('html', function() {
 });
 
 gulp.task('html:dist', function() {
-    const f = filter([ 'src/html/*.html', 'src/html/blogs/*.html', '!src/html/index.html'], {restore: true});
+    const f = filter([ 'src/html/**/*.html', '!src/html/index.html'], {restore: true});
     const indexFilter =  filter([ 'src/html/index.html'], {restore: true});
     return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
          .pipe(changed(path.join(paths.html)))
@@ -232,6 +231,7 @@ gulp.task('js:base', function() {
 });
 
 gulp.task('js:configurator', function() {
+    gutil.log('config.compress=' + config.compress);
     return gulp.src('src/js/configurator.js')
         .pipe(gulpif(config.compress, concat('configurator.min.js')))
         .pipe(gulpif(config.compress, uglify()))
@@ -377,12 +377,13 @@ gulp.task('default', function() {
 });
 
 gulp.task('dist:pre', function(cb) {
+    config.environment = 'dist';
+    config.compress = true;
    return runSequence('themes', ['plugins', 'html:dist', 'i18n','scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js',cb);
 });
 
 gulp.task('dist',['dist:pre'], function(cb) {
-    config.environment = 'dist';
-    config.compress = true;
+   
     return gulp.src('dist/index.html')
      .pipe(cachebust.references())
      .pipe(gulp.dest(config.folders.dist));

@@ -11,3 +11,8 @@
 /app/css/**
 /cache/**
 /dist/**
+/app/views/documentation.html
+/master/.sublime-gulp.cache
+/master/bnd.sh
+/master/jshint-output.html
+/master/run.sh

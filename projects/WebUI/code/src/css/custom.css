@@ -70,77 +70,6 @@ select {
   background-color: #FAFAFA
 }
 
-.partyBackgroundSelected {
-  background-color: #4CAF50;
-}
-
-.partyBackgroundButtonSelected {
-  color: white;
-}
-
-.partyBackgroundButtonNotSelected {
-  color: #4CAF50;
-}
-
-.partBackgroundNotSelected {
-  background-color: #CCCBCC;
-}
-
-.foodBackgroundSelected {
-  background-color: #4CAF50;
-}
-
-.foodBackgroundButtonSelected {
-  color: white;
-}
-
-.foodBackgroundButtonNotSelected {
-  color: #4CAF50;
-}
-
-.foodBackgroundNotSelected {
-  background-color: #CCCBCC;
-}
-
-.drinkBackgroundSelected {
-  background-color: #4CAF50;
-}
-
-.drinkBackgroundButtonSelected {
-  color: white;
-}
-
-.drinkBackgroundButtonNotSelected {
-  color: #4CAF50;
-}
-
-.drinkBackgroundNotSelected {
-  background-color: #CCCBCC;
-}
-
-.guestBackgroundButtonNotSelected {
-  color: #4CAF50;
-}
-
-.guestBackgroundNotSelected {
-  background-color: #CCCBCC;
-}
-
-.tableServiceBackgroundSelected {
-  background-color: #4CAF50;
-}
-
-.tableServiceBackgroundButtonSelected {
-  color: white;
-}
-
-.tableServiceBackgroundButtonNotSelected {
-  color: #4CAF50;
-}
-
-.tableServiceBackgroundNotSelected {
-  background-color: #CCCBCC;
-}
 
 .cardHeight {
   height:550px;
@@ -176,7 +105,7 @@ select {
 }
 
 .reservation-tab {
-  border: 1px solid #fff;
+  padding: 0px !important; margin-top:20px;
 }
 
 .req-border {
@@ -186,40 +115,7 @@ select {
 .reservation-button {
   white-space: normal;
   height: 80px;
-}
-
-#bottle {
-  white-space: normal;
-  border-right:2px solid #ffffff;
-}
-
-#private {
-  white-space: normal;
-  border-right:2px solid #ffffff;
-}
-
-#bachelor {
-  white-space: normal;
-  border-right:2px solid #ffffff;
-}
-
-#party {
-  white-space: normal;
-  border-right:2px solid #ffffff;
-}
-
-#foodTab {
-  white-space: normal;
-  border-right:2px solid #ffffff;
-}
-
-#drink {
-  white-space: normal;
-  border-right:2px solid #ffffff;
-}
-
-#glist {
-  white-space: normal;
+  border-left:2px solid #ffffff !important;
 }
 
 .table-map-info {
