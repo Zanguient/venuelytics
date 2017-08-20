@@ -5,9 +5,6 @@
                 <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
                 <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate" required>
             </div>
-            <div class="col-md-10 form-group is-empty selected-table" ng-if="tableSelection" style="margin-top: 0px;">
-                Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
-            </div>
             <div class="col-md-10 form-group is-empty selected-table" ng-if="selectedVenueMap.imageUrls[0].originalUrl" style="margin-top: 0px;">
                 <div class="table-map-info">
                     <div id="mapSection">
@@ -33,15 +30,14 @@
                                     </tr>
                                 </table>
                             </div>
-                            <img id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#ImgExam" class="map img-responsive">
+                            <img id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#ImgExam" class="map img-responsive"/>
                             <map name="ImgExam">
                                 <area id="{{area.id}}"
                                     style="outline: red solid 2px;" shape="rect"
                                     coords="{{area.coords.join()}}" ng-repeat="area in selectedVenueMap.coordinates"
                                     ng-href="{{area.link_url || 'javascript:void(0)'}}"
                                     ng-click="selectTable(area.id, area.name)"
-                                    data-maphilight='{"fillColor":"{{fillColor(area.id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{strokeColor(area.id)}}","strokeWidth":2}'>
-                                </area>
+                                    data-maphilight='{"fillColor":"{{fillColor(area.id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{strokeColor(area.id)}}","strokeWidth":2}'/>
                             </map>
                         </center>
                     </div>
@@ -60,14 +56,16 @@
                         <label class="tableReserved" ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
                     </div>
                     <div class="col-md-4 col-sm-4">
-                        <img class="table-carousel" class="img-responsive" data-ng-src="{{table.imageUrls[0].smallUrl}}">
+                        <img class="table-carousel" class="img-responsive" data-ng-src="{{table.imageUrls[0].smallUrl}}"/>
                     </div>
                     <div class="col-md-4 col-sm-12 descriptionAlign">
                         <label>{{table.description}}</label>
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-8 form-group is-empty selected-table" ng-if="tableSelection.length > 0" style="margin-left: 48px;margin-top: 0px;">
+                Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
+            </div>
             <div class="col-md-11 form-group is-empty" ng-if="tableSelection">
                 <div class="form-group" ng-repeat="table in tableSelection">
                     <center>
@@ -84,7 +82,7 @@
                         </table>
                     </center>
                     <uib-carousel interval="-1" active="active" no-wrap="false">
-                        <uib-slide data-ng-repeat="slide in table.imageUrls track by slide.id" index="$index"> <img class="img-responsive center-block table-carousel" data-ng-src="{{slide.originalUrl}}" ng-click="imageView(slide.originalUrl)">
+                        <uib-slide data-ng-repeat="slide in table.imageUrls track by slide.id" index="$index"> <img class="img-responsive center-block table-carousel" data-ng-src="{{slide.originalUrl}}" ng-click="imageView(slide.originalUrl)"/>
                         </uib-slide>
                     </uib-carousel>
                     <center>
