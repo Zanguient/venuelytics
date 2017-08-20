@@ -15,6 +15,8 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 self.reservationTime = APP_ARRAYS.time;
+                self.tableDate = moment().format('MM/DD/YYYY');
+                console.log("self.tableDate>>>>>>>>>>>>>"+self.tableDate);
             };
 
             self.findTable = function() {

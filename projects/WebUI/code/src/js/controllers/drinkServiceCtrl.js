@@ -8,6 +8,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
             self.init = function() {
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
+                $rootScope.serviceTabClear = false;
                 if((Object.keys(DataShare.drinkServiceData).length) !== 0) {
                     self.drink = DataShare.drinkServiceData;
                     self.drinkType = $rootScope.serviceName;

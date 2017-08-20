@@ -11,6 +11,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             self.init = function() {
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
+                $rootScope.serviceTabClear = false;
                 if(($rootScope.serviceName === 'FoodService') || (DataShare.amount != '')) {
                     DataShare.foodServiceData = {};
                     self.isFoodFocused = '';

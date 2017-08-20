@@ -308,30 +308,68 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                     DataShare.privateEventData = {};
                     DataShare.guestListData = {};
                     DataShare.partyServiceData = {};
+                    DataShare.foodServiceData = {};
+                    DataShare.drinkServiceData = {};
                     DataShare.guestFocus = '';
                     DataShare.partyFocus = '';
                     DataShare.privateEventFocused = '';
+                    DataShare.foodFocused = '';
+                    DataShare.drinkFocused = '';
                 } else if(((Object.keys(DataShare.privateEventData).length) != 0) || ($rootScope.serviceTabClear === false)) {
                     DataShare.bottleServiceData = {};
                     DataShare.guestListData = {};
                     DataShare.partyServiceData = {};
+                    DataShare.foodServiceData = {};
+                    DataShare.drinkServiceData = {};
                     DataShare.guestFocus = '';
                     DataShare.partyFocus = '';
                     DataShare.focused = '';
+                    DataShare.foodFocused = '';
+                    DataShare.drinkFocused = '';
                 } else if(((Object.keys(DataShare.guestListData).length) != 0) || ($rootScope.serviceTabClear === false)) {
                     DataShare.bottleServiceData = {};
                     DataShare.privateEventData = {};
                     DataShare.partyServiceData = {};
+                    DataShare.foodServiceData = {};
+                    DataShare.drinkServiceData = {};
                     DataShare.partyFocus = '';
                     DataShare.privateEventFocused = '';
                     DataShare.focused = '';
+                    DataShare.foodFocused = '';
+                    DataShare.drinkFocused = '';
                 } else if(((Object.keys(DataShare.partyServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
                     DataShare.bottleServiceData = {};
                     DataShare.guestListData = {};
                     DataShare.privateEventData = {};
+                    DataShare.foodServiceData = {};
+                    DataShare.drinkServiceData = {};
                     DataShare.guestFocus = '';
                     DataShare.privateEventFocused = '';
                     DataShare.focused = '';
+                    DataShare.foodFocused = '';
+                    DataShare.drinkFocused = '';
+                } else if(((Object.keys(DataShare.foodServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
+                    DataShare.bottleServiceData = {};
+                    DataShare.guestListData = {};
+                    DataShare.privateEventData = {};
+                    DataShare.drinkServiceData = {};
+                    DataShare.partyServiceData = {};
+                    DataShare.guestFocus = '';
+                    DataShare.privateEventFocused = '';
+                    DataShare.focused = '';
+                    DataShare.partyFocus = '';
+                    DataShare.drinkFocused = '';
+                } else if(((Object.keys(DataShare.drinkServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
+                    DataShare.bottleServiceData = {};
+                    DataShare.guestListData = {};
+                    DataShare.privateEventData = {};
+                    DataShare.partyServiceData = {};
+                    DataShare.foodServiceData = {};
+                    DataShare.guestFocus = '';
+                    DataShare.privateEventFocused = '';
+                    DataShare.focused = '';
+                    DataShare.foodFocused = '';
+                    DataShare.partyFocus = '';
                 } else {
                     $log.info('Inside else');
                 }
