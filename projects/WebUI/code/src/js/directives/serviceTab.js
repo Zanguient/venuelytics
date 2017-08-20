@@ -9,12 +9,17 @@ app.directive('serviceTab', function() {
     restrict: 'A',
     scope:{
       buttonId: '@',
-      onClick: '&',
       buttonImg: '@',
-      name: '@'
+      name: '@',
+      fontColor: '@',
+      serviceName: '@',
+      clickCb:'&'
   	},
   	controller: [ '$scope', function ($scope) {
-  		
+  		$scope.onClick = function () {
+        $scope.clickCb({serviceName: $scope.serviceName});
+      };
+
   	}],
   	templateUrl: 'venue/service-tab.html'
   };

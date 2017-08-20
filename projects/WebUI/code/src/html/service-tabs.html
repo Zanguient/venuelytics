@@ -10,7 +10,7 @@
         <a href="newCities" class="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} </a>
         <a href="newCities/{{selectedCity}}"> > {{selectedCity}}</a>
     </h3>
-    <div class="row venueTabs">
+    <div class="venueTabs">
         <div class="col-md-12">
             <article class="card card-primary wow zoomInRight animation-delay-5 mb-4">
                 <div class="card-block card-block-big">
@@ -33,94 +33,15 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div id="rowOne">
-                                <center>
-                                    <div id="serviceTabs" class="btn-group btn-group-justified">
-                                        <div service-tab="" buttonId="bottle" on-click="bottleService()" 
-                                        button-img="assets/img/ic_bottle.png" name="reservation.BOTTLE_SERVICE" id="bottleTab" class="btn-group">
-
-
-                                            <!-- <button id="bottle" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="bottleService()">
-                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
-                                                <br class="showInMobile"<span class="fontRegular"><strong>{{"reservation.BOTTLE_SERVICE" | translate}}</strong></span>
-                                            </button> -->
-                                        </div>
-
-                                        <div id="bachelorEventTab" class="btn-group" ng-if="bachelorFlag == true">
-                                            <button id="bachelor" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="bachelorFunction()">
-                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
-                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.BACHELOR" | translate}}</strong></span>
-                                            </button>
-                                        </div>
-                                        <div id="partyEventTab" class="btn-group" ng-if="partyFlag == true" ng-class="[myClass]">
-                                            <button id="party" type="button" class="btn btn-succes btn-responsive reservation-button" ng-click="partyFunction()">
-                                                <img ng-src="assets/img/ic_party(2).png" class="reservation-icon"></img>
-                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong ng-class="[tabButtonColor]">{{"reservation.PARTY" | translate}}</strong></span>
-                                            </button>
-                                        </div>
-                                        <div id="privateEventTab" class="btn-group" service-tab="" buttonId="private" on-click="event()" button-img="assets/img/private.png" name="reservation.EVENTS" >
-                                            <!-- <button id="private" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="event()">
-                                                <img ng-src="assets/img/private.png" class="reservation-icon"></img>
-                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong>{{"reservation.EVENTS" | translate}}</strong></span>
-                                            </button> -->
-                                        </div>
-                                        <div id="guestlistTab" class="btn-group" ng-hide="((partyFlag == true)||(bachelorFlag == true))" ng-class="[guestClass]">
-                                            <button id="glist" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="glist()">
-                                                <img ng-src="assets/img/guest.png" class="reservation-icon"></img>
-                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong ng-class="[guestTabButtonColor]">{{"reservation.GUEST" | translate}}</strong></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </center>
+                            
+                            <div id="serviceTabs" class="btn-group btn-group-justified">
+                            <center>
+                                <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" style="background-color:{{bgTabColor(tab.id)}}; padding: 0px !important; margin-top:20px;" font-color= "{{textColor(tab.id)}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" class="col-sm-4"></div>
+                            </center>
                             </div>
-
-                             <div id="rowTwo">
-                                <center>
-                                    <div id="serviceTabTwo" class="btn-group btn-group-justified" class="reservation-tab">
-                                        <div id="foodServiceTab" class="btn-group" ng-class="[foodClass]">
-                                            <button id="foodTab" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="foodFunction()">
-                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
-                                                <br class="showInMobile"><span class="fontRegular"><strong ng-class="[foodTabButtonColor]">{{"reservation.FOOD_SERVICE" | translate}}</strong></span>
-                                            </button>
-                                        </div>
-                                        <div id="drinkServiceTab" class="btn-group" ng-class="[drinkClass]">
-                                            <button id="drink" type="button" class="btn btn-success btn-responsive reservation-button" ng-click="drinkFunction()">
-                                                <img ng-src="assets/img/ic_bottle.png" class="reservation-icon"></img>
-                                                <br class="showInMobile"><span class="fontRegular wrapingSpace"><strong ng-class="[drinkTabButtonColor]">{{"reservation.DRINK_SERVICE" | translate}}</strong></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </center>
-                            </div>
-
-
-                            <!-- Bottle Service START row-->
-                            <div ng-show="bottleServiceTab">
-                                <div ng-include="'bottle-service.html'"></div>
-                            </div>
-
-                            <div ng-show="guestServiceTab">
-                                <div ng-include="'guest-list.html'"></div>
-                            </div>
-
-                            <div ng-show="eventServiceTab">
-                                <div ng-include="'private-event.html'"></div>
-                            </div>
-
-                            <div ng-show="partyPackageTab">
-                                <div ng-include="'party-packages.html'"></div>
-                            </div>
-
-                            <div ng-show="bachelorPartyTab">
-                                <div ng-include="'bachelor-party.html'"></div>
-                            </div>
-                            <div ng-show="foodServiceTab">
-                                <div ng-include="'food-service.html'"></div>
-                            </div>
-                            <div ng-show="drinkServiceTab">
-                                <div ng-include="'drink-service.html'"></div>
-                            </div>
+                           
+                           <div ng-include="selectedPage()"></div>
+                           
                         </div>
 
                         <!-- <embed ng-src="{{resevationURL}}" id='venueReservationFrame' width="100%"></embed> -->
