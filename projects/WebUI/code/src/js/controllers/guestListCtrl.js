@@ -18,21 +18,24 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 if((Object.keys(DataShare.guestListData).length) !== 0) {
                     self.guest = DataShare.guestListData;
                 } else {
-                    self.guest = {};
-                    self.guest.requestedDate = moment().format('MM/DD/YYYY');
+                    self.tabClear();
                 }
                 if($rootScope.serviceName == 'GuestList') {
-                    DataShare.guestFocus = '';
-                    self.guestFocus = '';
-                    DataShare.guestListData = {};
-                    $rootScope.serviceName = '';
-                    self.guest = {};
-                    self.guest.requestedDate = moment().format('MM/DD/YYYY');
+                    self.tabClear();
                 } 
             };
             if(DataShare.guestFocus != '') {
               $log.info("insdie focused");
               self.guestFocus = DataShare.guestFocus;
+            }
+
+            self.tabClear = function() {
+                DataShare.guestFocus = '';
+                self.guestFocus = '';
+                DataShare.guestListData = {};
+                $rootScope.serviceName = '';
+                self.guest = {};
+                self.guest.requestedDate = moment().format('MM/DD/YYYY');
             }
 
             self.glistSave = function(guest) {

@@ -13,23 +13,29 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;
                 if(($rootScope.serviceName === 'FoodService') || (DataShare.amount != '')) {
-                    DataShare.foodServiceData = {};
-                    self.isFoodFocused = '';
-                    self.food = {};
-                    $rootScope.serviceName = '';
-                    DataShare.foodService = '';
-                    self.foodType = 'Delivery';
-                    DataShare.selectedFoods = '';
+                    self.tabClear();
                 }
                 if((Object.keys(DataShare.foodServiceData).length) !== 0) {
                     self.food = DataShare.foodServiceData;
                     self.foodType = $rootScope.serviceName;
                     self.selectedFoodList = DataShare.foodService;
-                } 
+                } else {
+                    self.tabClear();
+                }
                 self.getMenus();
                 self.getFood();
                 self.getVenueType();
             };
+
+            self.tabClear = function() {
+                DataShare.foodServiceData = {};
+                self.isFoodFocused = '';
+                self.food = {};
+                $rootScope.serviceName = '';
+                DataShare.foodService = '';
+                self.foodType = 'Delivery';
+                DataShare.selectedFoods = '';
+            }
 
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {

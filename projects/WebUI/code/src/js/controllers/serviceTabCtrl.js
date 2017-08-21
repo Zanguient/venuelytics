@@ -58,75 +58,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         });
     };
 
-           
-     self.tabClear = function() {
-        if(((Object.keys(DataShare.bottleServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
-            DataShare.privateEventData = {};
-            DataShare.guestListData = {};
-            DataShare.partyServiceData = {};
-            DataShare.foodServiceData = {};
-            DataShare.drinkServiceData = {};
-            DataShare.guestFocus = '';
-            DataShare.partyFocus = '';
-            DataShare.privateEventFocused = '';
-            DataShare.foodFocused = '';
-            DataShare.drinkFocused = '';
-        } else if(((Object.keys(DataShare.privateEventData).length) != 0) || ($rootScope.serviceTabClear === false)) {
-            DataShare.bottleServiceData = {};
-            DataShare.guestListData = {};
-            DataShare.partyServiceData = {};
-            DataShare.foodServiceData = {};
-            DataShare.drinkServiceData = {};
-            DataShare.guestFocus = '';
-            DataShare.partyFocus = '';
-            DataShare.focused = '';
-            DataShare.foodFocused = '';
-            DataShare.drinkFocused = '';
-        } else if(((Object.keys(DataShare.guestListData).length) != 0) || ($rootScope.serviceTabClear === false)) {
-            DataShare.bottleServiceData = {};
-            DataShare.privateEventData = {};
-            DataShare.partyServiceData = {};
-            DataShare.foodServiceData = {};
-            DataShare.drinkServiceData = {};
-            DataShare.partyFocus = '';
-            DataShare.privateEventFocused = '';
-            DataShare.focused = '';
-            DataShare.foodFocused = '';
-            DataShare.drinkFocused = '';
-        } else if(((Object.keys(DataShare.partyServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
-            DataShare.bottleServiceData = {};
-            DataShare.guestListData = {};
-            DataShare.privateEventData = {};
-            DataShare.foodServiceData = {};
-            DataShare.drinkServiceData = {};
-            DataShare.guestFocus = '';
-            DataShare.privateEventFocused = '';
-            DataShare.focused = '';
-            DataShare.drinkFocused = '';
-            DataShare.bottleServiceData = {};
-            DataShare.guestListData = {};
-            DataShare.privateEventData = {};
-            DataShare.drinkServiceData = {};
-            DataShare.partyServiceData = {};
-            DataShare.guestFocus = '';
-            DataShare.privateEventFocused = '';
-            DataShare.focused = '';
-            DataShare.partyFocus = '';
-            DataShare.drinkFocused = '';
-        } else if(((Object.keys(DataShare.drinkServiceData).length) != 0) || ($rootScope.serviceTabClear === false)) {
-            DataShare.bottleServiceData = {};
-            DataShare.guestListData = {};
-            DataShare.privateEventData = {};
-            DataShare.partyServiceData = {};
-            DataShare.foodServiceData = {};
-            DataShare.guestFocus = '';
-            DataShare.privateEventFocused = '';
-            DataShare.focused = '';
-            DataShare.foodFocused = '';
-            DataShare.partyFocus = '';
-        }
-    };
-
     self.bgTabColor = function(tabId) {
         var calHandler = self.dispatchHandler[self.tabParams];
         if (typeof calHandler !== 'undefined') {
@@ -153,7 +84,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     };
 
     self.dispatchToService = function(serviceName) {
-        self.tabClear();
         $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
 
     };
@@ -178,7 +108,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     }
     addTab('privateEventTab','private', 'assets/img/private.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html');
     addTab('guestlistTab','glist', 'assets/img/guest.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html');
-    addTab('foodServiceTab','foodTab', 'assets/img/ic_bottle.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html');
+    addTab('foodServiceTab','foodTab', 'assets/img/food.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html');
     addTab('drinkServiceTab','drink', 'assets/img/ic_bottle.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html');
     addTab('tableServiceTab','tableService', 'assets/img/ic_bottle.png','reservation.TABLE_SERVICE', 'table-services', 'table-service.html');
     

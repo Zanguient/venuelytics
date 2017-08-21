@@ -16,16 +16,10 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 if((Object.keys(DataShare.privateEventData).length) !== 0) {
                     self.private = DataShare.privateEventData;
                 } else {
-                    self.private = {};
-                    self.private.orderDate = moment().format('MM/DD/YYYY');
+                    self.tabClear();
                 }
                 if($rootScope.serviceName === 'PrivateEvent') {
-                  $log.log('Inside clear data.');
-                  DataShare.privateEventData = {};
-                  DataShare.privateEventFocused = '';
-                  $rootScope.serviceName = '';
-                  self.private = {};
-                  self.private.orderDate = moment().format('MM/DD/YYYY');
+                    self.tabClear();
                 } 
                 self.getMenus();
                 self.getEventType();
@@ -41,6 +35,14 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     self.getBanquetHall(self.venueid);
                 }
             });
+
+            self.tabClear = function() {
+                DataShare.privateEventData = {};
+                DataShare.privateEventFocused = '';
+                $rootScope.serviceName = '';
+                self.private = {};
+                self.private.orderDate = moment().format('MM/DD/YYYY');
+            }
             self.createPrivateEvent = function(value) {
                 $rootScope.serviceTabClear = true;
                 DataShare.tab = 'P';

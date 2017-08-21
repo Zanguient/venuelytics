@@ -11,21 +11,16 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 $rootScope.serviceTabClear = false;
                 
                 if(($rootScope.serviceName === 'DrinkService') || (DataShare.amount != '')) {
-                    DataShare.drinkServiceData = {};
-                    self.isDrinkFocused = '';
-                    self.drink = {};
-                    $rootScope.serviceName = '';
-                    DataShare.foodService = [];
-                    DataShare.drinks = '';
-                    self.drinkType = 'Delivery';
-                    DataShare.selectedDrinks = '';
+                    self.tabClear();
                 }
 
                 if((Object.keys(DataShare.drinkServiceData).length) !== 0) {
                     self.drink = DataShare.drinkServiceData;
                     self.drinkType = $rootScope.serviceName;
                     self.userSelectedDrinks = DataShare.drinks;
-                } 
+                } else {
+                    self.tabClear();
+                }
                 self.getMenus();
                 self.getDrink();
                 self.getVenueType();
@@ -41,6 +36,17 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                     self.enabledPayment = response.data["Advance.enabledPayment"];
                 });
             };
+
+            self.tabClear = function() {
+                DataShare.drinkServiceData = {};
+                self.isDrinkFocused = '';
+                self.drink = {};
+                $rootScope.serviceName = '';
+                DataShare.foodService = [];
+                DataShare.drinks = '';
+                self.drinkType = 'Delivery';
+                DataShare.selectedDrinks = '';
+            }
 
             if(DataShare.drinkFocused !== '') {
               $log.info("insdie focused");
