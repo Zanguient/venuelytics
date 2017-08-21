@@ -28,17 +28,10 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
                 } else {
-                    self.bottle = {};
-                    self.bottle.requestedDate = moment().format('MM/DD/YYYY');
+                    self.tabClear();
                 }
                 if(($rootScope.serviceName === 'BottleService') || (DataShare.amount != '')) {
-                    DataShare.bottleServiceData = {};
-                    DataShare.tableSelection = '';
-                    DataShare.selectBottle = '';
-                    self.isFocused = '';
-                    self.bottle = {};
-                    $rootScope.serviceName = '';
-                    self.bottle.requestedDate = moment().format('MM/DD/YYYY');
+                    self.tabClear();
                 } else {
                     self.bottle.authorize = false;
                     self.bottle.agree = false;
@@ -89,6 +82,16 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.allBottle = response.data;
                 });
             };
+
+            self.tabClear = function() {
+                DataShare.bottleServiceData = {};
+                DataShare.tableSelection = '';
+                DataShare.selectBottle = '';
+                self.isFocused = '';
+                self.bottle = {};
+                $rootScope.serviceName = '';
+                self.bottle.requestedDate = moment().format('MM/DD/YYYY');
+            }
 
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {

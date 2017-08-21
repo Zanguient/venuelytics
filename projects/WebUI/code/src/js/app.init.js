@@ -270,6 +270,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller:'FoodConfirmController',
             description: 'Venuelytics - a real time venue experience platform for Food success'
         })
+        .when('/:cityName/table-success/:venueid', {
+            templateUrl: 'table-success.html',
+            title: 'Venuelytics-Table-Success',
+            controller:'TableServiceController',
+            description: 'Venuelytics - a real time venue experience platform for Table success'
+        })
         .when('/:cityName/drink-success/:venueid', {
             templateUrl: 'drink-service/drink-success.html',
             title: 'Venuelytics-Drink-Success',

@@ -2,9 +2,8 @@
 
 	<center>
 		<h1 class="color-success fontRegular">{{'reservation.DRINK_CONFIRM' | translate}}</h1>
-	</center>
 
-	<div class="form-group">
+	<div class="form-group confirmationCenter">
 		  <table class="table table-responsive table-no-border">
           <tbody>
               <tr>
@@ -34,10 +33,10 @@
           <table class="table table-responsive table-no-border">
               <thead>
                 <tr>
-                  <th>{{"reservation.DRINK_TYPE"  | translate}}</th>
-                  <th>{{"reservation.BRAND"  | translate}}</th>
-                  <th>{{"reservation.QUANTITY"  | translate}}</th>
-                  <th>{{"reservation.PRICE"  | translate}}</th>
+                  <th><label><b>{{"reservation.DRINK_TYPE"  | translate}}</b></label></th>
+                  <th><label><b>{{"reservation.BRAND"  | translate}}</b></label></th>
+                  <th><label><b>{{"reservation.QUANTITY"  | translate}}</b></label></th>
+                  <th><label><b>{{"reservation.PRICE"  | translate}}</b></label></th>
                 </tr>
               </thead>
               <tbody>
@@ -45,12 +44,11 @@
                   <td>{{drinkItem.brand}}</td>
                   <td>{{drinkItem.name}}</td>
                   <td>{{drinkItem.count}}</td>
-                  <td>&dollar;{{(drinkItem == null || drinkItem.price == 0 || drinkItem.price == undefined) ? "-" : drinkItem.price}}</td>
+                  <td><span ng-hide="((drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined))">&dollar;</span>{{(drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined) ? "-" : drinkItem.total}}</td>
                 </tr>
               </tbody>
           </table>
       </div>
-	    <center>
 	        <div ng-if="enabledPayment != 'Y'">
 	            <button type="submit" class="btn btn-raised btn-primary" ng-click="drinkServiceSave()">Confirm</button>
 	            <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">Edit</button>
@@ -59,8 +57,8 @@
               <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnabled()">Payment</button>
               <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">Edit</button>
           </div>
-	    </center>
+	    
 	</div>
-
+    </center>
 </div>
 

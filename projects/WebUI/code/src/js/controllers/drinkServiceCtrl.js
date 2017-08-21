@@ -9,19 +9,17 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;
+                
+                if(($rootScope.serviceName === 'DrinkService') || (DataShare.amount != '')) {
+                    self.tabClear();
+                }
+
                 if((Object.keys(DataShare.drinkServiceData).length) !== 0) {
                     self.drink = DataShare.drinkServiceData;
                     self.drinkType = $rootScope.serviceName;
                     self.userSelectedDrinks = DataShare.drinks;
-                } 
-                if(($rootScope.serviceName === 'DrinkService') || (DataShare.amount != '')) {
-                    DataShare.drinkServiceData = {};
-                    self.isDrinkFocused = '';
-                    self.drink = {};
-                    $rootScope.serviceName = '';
-                    DataShare.foodService = [];
-                    DataShare.drinks = '';
-                    self.drinkType = 'Delivery';
+                } else {
+                    self.tabClear();
                 }
                 self.getMenus();
                 self.getDrink();
@@ -38,6 +36,17 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                     self.enabledPayment = response.data["Advance.enabledPayment"];
                 });
             };
+
+            self.tabClear = function() {
+                DataShare.drinkServiceData = {};
+                self.isDrinkFocused = '';
+                self.drink = {};
+                $rootScope.serviceName = '';
+                DataShare.foodService = [];
+                DataShare.drinks = '';
+                self.drinkType = 'Delivery';
+                DataShare.selectedDrinks = '';
+            }
 
             if(DataShare.drinkFocused !== '') {
               $log.info("insdie focused");
@@ -64,6 +73,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
             self.drinkService = function(item) {
                 if(item.count !== undefined) {
                     if (self.userSelectedDrinks.indexOf(item) === -1) {
+                        item.total = item.price * item.count;
                         self.userSelectedDrinks.push(item);
                     }
                 } 
@@ -187,7 +197,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                         "quantity": value.count,
                         "name": value.name
                     };
-                    value.price = value.price * value.count;
                     self.selectedDrinkItems.push(value);
                     self.serviceJSON.order.orderItems.push(items);
                   } 

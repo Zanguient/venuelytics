@@ -13,23 +13,29 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;
                 if(($rootScope.serviceName === 'FoodService') || (DataShare.amount != '')) {
-                    DataShare.foodServiceData = {};
-                    self.isFoodFocused = '';
-                    self.food = {};
-                    $rootScope.serviceName = '';
-                    DataShare.foodService = '';
-                    self.foodType = 'Delivery';
-                    DataShare.selectedFoods = '';
+                    self.tabClear();
                 }
                 if((Object.keys(DataShare.foodServiceData).length) !== 0) {
                     self.food = DataShare.foodServiceData;
                     self.foodType = $rootScope.serviceName;
                     self.selectedFoodList = DataShare.foodService;
-                } 
+                } else {
+                    self.tabClear();
+                }
                 self.getMenus();
                 self.getFood();
                 self.getVenueType();
             };
+
+            self.tabClear = function() {
+                DataShare.foodServiceData = {};
+                self.isFoodFocused = '';
+                self.food = {};
+                $rootScope.serviceName = '';
+                DataShare.foodService = '';
+                self.foodType = 'Delivery';
+                DataShare.selectedFoods = '';
+            }
 
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
@@ -70,6 +76,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             self.userSelectedFood = function(item) {
                 if(item.count !== undefined) {
                     if (self.selectedFoodList.indexOf(item) === -1) {
+                        item.total = item.price * item.count;
                         self.selectedFoodList.push(item);
                     }
                 }
@@ -194,7 +201,6 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                         "quantity": value.count,
                         "name": value.name
                     };
-                    value.price = value.price * value.count;
                     self.selectedFoodItems.push(value);
                     self.serviceJSON.order.orderItems.push(items);
                   } 

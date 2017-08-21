@@ -18,16 +18,10 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.party = DataShare.partyServiceData;
                 } else {
-                    self.party = {};
-                    self.party.orderDate = moment().format('MM/DD/YYYY');
+                    self.tabClear();
                 }
                 if($rootScope.serviceName === 'PartyPackages') {
-                  DataShare.partyServiceData = {};
-                  DataShare.partyFocus = '';
-                  self.party = {};
-                  self.partyFocus = '';
-                  $rootScope.serviceName = '';
-                  self.party.orderDate = moment().format('MM/DD/YYYY');
+                    self.tabClear();
                 } 
                 self.party.authorize = false;
                 self.party.agree = false;
@@ -62,6 +56,15 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.partyHallDescription = function(value) {
                 $rootScope.partyDescription = value;
             };
+
+            self.tabClear = function() {
+                DataShare.partyServiceData = {};
+                DataShare.partyFocus = '';
+                self.party = {};
+                self.partyFocus = '';
+                $rootScope.serviceName = '';
+                self.party.orderDate = moment().format('MM/DD/YYYY');
+            }
 
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid, 'PartyHall').then(function(response) {
