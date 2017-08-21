@@ -2,9 +2,8 @@
 
 	<center>
 		<h1 class="color-success fontRegular">{{'reservation.DRINK_CONFIRM' | translate}}</h1>
-	</center>
 
-	<div class="form-group">
+	<div class="form-group confirmationCenter">
 		  <table class="table table-responsive table-no-border">
           <tbody>
               <tr>
@@ -50,7 +49,6 @@
               </tbody>
           </table>
       </div>
-	    <center>
 	        <div ng-if="enabledPayment != 'Y'">
 	            <button type="submit" class="btn btn-raised btn-primary" ng-click="drinkServiceSave()">Confirm</button>
 	            <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">Edit</button>
@@ -59,8 +57,8 @@
               <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnabled()">Payment</button>
               <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">Edit</button>
           </div>
-	    </center>
+	    
 	</div>
-
+    </center>
 </div>
 

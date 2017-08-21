@@ -178,7 +178,7 @@ select {
   margin-top: 0px;
 }
 
-.bottleConfirmation {
+.confirmationCenter {
   width: 486px;
 }
 
@@ -226,6 +226,10 @@ select {
 .image-block:hover > p {
   background-color: rgba(3,3,3,0.5);
   color: white;
+}
+
+.headerColor {
+  color: green;
 }
 
 .cityImage {
