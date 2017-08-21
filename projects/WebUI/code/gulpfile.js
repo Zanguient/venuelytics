@@ -171,7 +171,7 @@ gulp.task('html', function() {
 });
 
 gulp.task('html:dist', function() {
-    const f = filter([ 'src/html/*.html', 'src/html/blogs/*.html', '!src/html/index.html'], {restore: true});
+    const f = filter([ 'src/html/**/*.html', '!src/html/index.html'], {restore: true});
     const indexFilter =  filter([ 'src/html/index.html'], {restore: true});
     return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
          .pipe(changed(path.join(paths.html)))
@@ -195,7 +195,6 @@ gulp.task('html:dist', function() {
         .pipe(indexFilter.restore)
         .pipe(connect.reload());
 });
-
 
 gulp.task('js', ['js:base', 'js:configurator'], function() {
 
