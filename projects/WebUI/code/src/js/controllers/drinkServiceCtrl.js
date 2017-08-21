@@ -9,11 +9,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;
-                if((Object.keys(DataShare.drinkServiceData).length) !== 0) {
-                    self.drink = DataShare.drinkServiceData;
-                    self.drinkType = $rootScope.serviceName;
-                    self.userSelectedDrinks = DataShare.drinks;
-                } 
+                
                 if(($rootScope.serviceName === 'DrinkService') || (DataShare.amount != '')) {
                     DataShare.drinkServiceData = {};
                     self.isDrinkFocused = '';
@@ -22,7 +18,14 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                     DataShare.foodService = [];
                     DataShare.drinks = '';
                     self.drinkType = 'Delivery';
+                    DataShare.selectedDrinks = '';
                 }
+
+                if((Object.keys(DataShare.drinkServiceData).length) !== 0) {
+                    self.drink = DataShare.drinkServiceData;
+                    self.drinkType = $rootScope.serviceName;
+                    self.userSelectedDrinks = DataShare.drinks;
+                } 
                 self.getMenus();
                 self.getDrink();
                 self.getVenueType();
