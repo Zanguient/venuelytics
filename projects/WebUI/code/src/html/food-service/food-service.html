@@ -165,7 +165,7 @@
                       <td>{{foods.name}}</td>
                       <td>{{foods.brand}}</td>
                       <td>{{foods.count}}</td>
-                      <td>{{foods.price * foods.count}}</td>
+                      <td><span ng-hide="((foods == null || foods.total == 0 || foods.total == undefined))">&dollar;</span>{{(foods == null || foods.total == 0 || foods.total == undefined) ? "-" : foods.total}}</td>
                     </tr>
                 </tbody>
             </table>

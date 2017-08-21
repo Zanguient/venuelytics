@@ -67,6 +67,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
             self.drinkService = function(item) {
                 if(item.count !== undefined) {
                     if (self.userSelectedDrinks.indexOf(item) === -1) {
+                        item.total = item.price * item.count;
                         self.userSelectedDrinks.push(item);
                     }
                 } 
@@ -190,7 +191,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                         "quantity": value.count,
                         "name": value.name
                     };
-                    value.price = value.price * value.count;
                     self.selectedDrinkItems.push(value);
                     self.serviceJSON.order.orderItems.push(items);
                   } 
