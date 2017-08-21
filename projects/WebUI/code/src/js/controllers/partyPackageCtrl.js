@@ -34,7 +34,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             };
 
             self.$watch('party.orderDate', function() {
-                if (self.party.orderDate != "") {
+                if (self.party.orderDate !== "") {
                     self.getPartyHall(self.venueID);
                 }
             });
@@ -49,7 +49,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
-            if(DataShare.partyFocus != '') {
+            if(DataShare.partyFocus !== '') {
               self.partyFocus = DataShare.partyFocus;
             }
 
@@ -64,12 +64,12 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 self.partyFocus = '';
                 $rootScope.serviceName = '';
                 self.party.orderDate = moment().format('MM/DD/YYYY');
-            }
+            };
 
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueid, 'PartyHall').then(function(response) {
                     self.eventTypes = response.data;
-                    if(DataShare.partyFocus != '') {
+                    if(DataShare.partyFocus !== '') {
                       var selectedType;
                       angular.forEach(self.eventTypes, function(tmpType) {
                         if(tmpType.id === DataShare.partyServiceData.partyEventType.id) {
@@ -110,7 +110,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                         });
                         angular.forEach(self.partyHall, function(value1, key1) {
                             angular.forEach(self.reservations, function(value2, key2) {
-                                if(value1.id == value2.productId) {
+                                if(value1.id === value2.productId) {
                                     value1.reserve = true;
                                 } 
                             });
@@ -126,7 +126,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 var date = new Date(self.party.orderDate);
                 var newDate = date.toISOString();
                 var parsedend = moment(newDate).format("MM-DD-YYYY");
-                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                date = new Date(moment(parsedend,'MM-DD-YYYY').format());
                 var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
                 $log.info("Party price:", DataShare.selectedVenuePrice);
                 var fullName = self.party.userFirstName + " " + self.party.userLastName;

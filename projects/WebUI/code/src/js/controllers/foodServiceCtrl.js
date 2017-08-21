@@ -12,7 +12,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;
-                if(($rootScope.serviceName === 'FoodService') || (DataShare.amount != '')) {
+                if(($rootScope.serviceName === 'FoodService') || (DataShare.amount !== '')) {
                     self.tabClear();
                 }
                 if((Object.keys(DataShare.foodServiceData).length) !== 0) {
@@ -35,7 +35,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 DataShare.foodService = '';
                 self.foodType = 'Delivery';
                 DataShare.selectedFoods = '';
-            }
+            };
 
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
@@ -123,19 +123,19 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                     var venueTypeSplit = self.venueType.split(',');
                     angular.forEach(venueTypeSplit, function(value1) {
                           var value = value1.trim();
-                          if (value == 'CLUB') {
+                          if (value === 'CLUB') {
                               self.venueTypesClub = value;
-                          } else if (value == 'BAR') {
+                          } else if (value === 'BAR') {
                               self.venueTypesBar = value;
-                          } else if (value == 'LOUNGE') {
+                          } else if (value === 'LOUNGE') {
                               self.venueTypesLounge = value;
-                          } else if (value == 'BOWLING') {
+                          } else if (value === 'BOWLING') {
                               self.venueTypeBowling = value;
-                          } else if (value == 'CASINO') {
+                          } else if (value === 'CASINO') {
                               self.venueTypeCasino = value;
-                          } else if (value == 'RESTAURANT') {
+                          } else if (value === 'RESTAURANT') {
                               self.venueTypeRestaurant = value;
-                          } else {}
+                          }
                     });
                 });
             };

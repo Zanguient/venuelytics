@@ -20,11 +20,11 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 } else {
                     self.tabClear();
                 }
-                if($rootScope.serviceName == 'GuestList') {
+                if($rootScope.serviceName === 'GuestList') {
                     self.tabClear();
                 } 
             };
-            if(DataShare.guestFocus != '') {
+            if(DataShare.guestFocus !== '') {
               $log.info("insdie focused");
               self.guestFocus = DataShare.guestFocus;
             }
@@ -36,7 +36,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 $rootScope.serviceName = '';
                 self.guest = {};
                 self.guest.requestedDate = moment().format('MM/DD/YYYY');
-            }
+            };
 
             self.glistSave = function(guest) {
                 var guestTotal = parseInt(guest.guestMen) + parseInt(guest.guestWomen);
@@ -48,7 +48,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 var date = new Date(self.guest.requestedDate);
                 var newDate = date.toISOString();
                 var parsedend = moment(newDate).format("MM-DD-YYYY");
-                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                date = new Date(moment(parsedend,'MM-DD-YYYY').format());
                 var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
                 var object = {
                      "venueNumber" : self.venueid,

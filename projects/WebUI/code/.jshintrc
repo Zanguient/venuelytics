@@ -63,6 +63,7 @@
 		"WOW": false,
 		"app": false,
 		"iFrameResize": false,
-		"moment": false
+		"moment": false,
+		"StripeCheckout": false
     }
 }

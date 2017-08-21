@@ -30,7 +30,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 } else {
                     self.tabClear();
                 }
-                if(($rootScope.serviceName === 'BottleService') || (DataShare.amount != '')) {
+                if(($rootScope.serviceName === 'BottleService') || (DataShare.amount !== '')) {
                     self.tabClear();
                 } else {
                     self.bottle.authorize = false;
@@ -91,7 +91,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 self.bottle = {};
                 $rootScope.serviceName = '';
                 self.bottle.requestedDate = moment().format('MM/DD/YYYY');
-            }
+            };
 
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
@@ -323,7 +323,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
         self.isReserved = function (table) {
             table.reserved = false;
-            if (self.reservations && typeof self.reservations != 'undefined') {
+            if (self.reservations && typeof self.reservations !== 'undefined') {
                 for (var resIndex = 0; resIndex < self.reservations.length; resIndex++) {
                     if (table.id == self.reservations[resIndex].productId) {
                         table.reserved = true;
@@ -335,9 +335,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
         };  
 
         $scope.isSelected = function (table) {
-            if (self.tableSelection && typeof self.tableSelection != 'undefined') {
+            if (self.tableSelection && typeof self.tableSelection !== 'undefined') {
                 for (var resIndex = 0; resIndex < self.tableSelection.length; resIndex++) {
-                    if (table.id == self.tableSelection[resIndex].id) {
+                    if (table.id === self.tableSelection[resIndex].id) {
                         return true;
                     }
                 }
@@ -454,7 +454,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.noTableSelected = true;
                     return;
                 }
-                if (sum != 0) {
+                if (sum !== 0) {
                   if(self.bottle.totalGuest > sum) {
                       $('#moreTableModal').modal('show');
                       return;
@@ -471,9 +471,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
                     "budget": 0,
-                    "hostEmployeeId": -1,
-                    "hasBid": "N",
-                    "bidStatus": null,
                     "serviceInstructions": self.bottle.instructions,
                     "status": "REQUEST",
                     "serviceDetail": null,
@@ -482,9 +479,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     "deliveryType": "Pickup",
                     "deliveryAddress": null,
                     "deliveryInstructions": null,
-                    "rating": -1,
-                    "ratingComment": null,
-                    "ratingDateTime": null,
                     "order": {
                         "venueNumber": self.venueid,
                         "orderDate": dateValue,

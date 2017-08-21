@@ -10,7 +10,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;
                 
-                if(($rootScope.serviceName === 'DrinkService') || (DataShare.amount != '')) {
+                if(($rootScope.serviceName === 'DrinkService') || (DataShare.amount !== '')) {
                     self.tabClear();
                 }
 
@@ -46,7 +46,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 DataShare.drinks = '';
                 self.drinkType = 'Delivery';
                 DataShare.selectedDrinks = '';
-            }
+            };
 
             if(DataShare.drinkFocused !== '') {
               $log.info("insdie focused");
@@ -119,19 +119,19 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                     var venueTypeSplit = self.venueType.split(',');
                     angular.forEach(venueTypeSplit, function(value1) {
                           var value = value1.trim();
-                          if (value == 'CLUB') {
+                          if (value === 'CLUB') {
                               self.venueTypesClub = value;
-                          } else if (value == 'BAR') {
+                          } else if (value === 'BAR') {
                               self.venueTypesBar = value;
-                          } else if (value == 'LOUNGE') {
+                          } else if (value === 'LOUNGE') {
                               self.venueTypesLounge = value;
-                          } else if (value == 'BOWLING') {
+                          } else if (value === 'BOWLING') {
                               self.venueTypeBowling = value;
-                          } else if (value == 'CASINO') {
+                          } else if (value === 'CASINO') {
                               self.venueTypeCasino = value;
-                          } else if (value == 'RESTAURANT') {
+                          } else if (value === 'RESTAURANT') {
                               self.venueTypeRestaurant = value;
-                          } else {}
+                          } 
                     });
                 });
             };
@@ -165,9 +165,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                   "noOfMaleGuests": 0,
                   "noOfFemaleGuests": 0,
                   "budget": 0,
-                  "hostEmployeeId": -1,
-                  "hasBid": "N",
-                  "bidStatus": null,
                   "serviceInstructions": self.drink.instructions,
                   "status": "REQUEST",
                   "serviceDetail": null,
@@ -176,9 +173,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                   "deliveryType": self.drinkType,
                   "deliveryAddress": tableNumber,
                   "deliveryInstructions": null,
-                  "rating": -1,
-                  "ratingComment": null,
-                  "ratingDateTime": null,
                   "order": {
                       "venueNumber": self.venueid,
                       "orderDate": dateValue,

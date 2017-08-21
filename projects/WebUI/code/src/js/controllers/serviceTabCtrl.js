@@ -22,7 +22,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         if($rootScope.serviceName === 'GuestList') {
             DataShare.guestListData = '';
         }
-        if ((self.venueid == 70008) || (self.venueid == 170637)) {
+        if ((self.venueid === 70008) || (self.venueid === 170637)) {
             if(self.tabParams === 'guest-list') {
               self.partyFlag = false;
             } else {
@@ -61,7 +61,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.bgTabColor = function(tabId) {
         var calHandler = self.dispatchHandler[self.tabParams];
         if (typeof calHandler !== 'undefined') {
-            return calHandler.tabId == tabId ? APP_COLORS.fruitSalad : APP_COLORS.silver;
+            return calHandler.tabId === tabId ? APP_COLORS.fruitSalad : APP_COLORS.silver;
         }
         return APP_COLORS.silver;
 
@@ -70,7 +70,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.textColor = function(tabId) {
           var calHandler = self.dispatchHandler[self.tabParams];
         if (typeof calHandler !== 'undefined') {
-            return calHandler.tabId == tabId ? "white" : APP_COLORS.fruitSalad;
+            return calHandler.tabId === tabId ? "white" : APP_COLORS.fruitSalad;
         }
         return APP_COLORS.fruitSalad;
     };

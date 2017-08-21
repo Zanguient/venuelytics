@@ -20,15 +20,15 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
 
             self.findTable = function() {
                 self.timeSelection = true;
-            }
+            };
 
             self.confirmTableReserve = function() {
                 $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);
-            }
+            };
 
             self.backToTable = function() {
               $location.url('/newCities/' + self.selectedCity + '/' + self.venueid + '/table-services');
-            }
+            };
 
             self.confirmReservation = function() {
                 var fullName = self.tableService.firstName + " " + self.tableService.lastName;
@@ -48,9 +48,6 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                   "noOfMaleGuests": 0,
                   "noOfFemaleGuests": 0,
                   "budget": 0,
-                  "hostEmployeeId": -1,
-                  "hasBid": "N",
-                  "bidStatus": null,
                   "serviceInstructions": "",
                   "status": "REQUEST",
                   "serviceDetail": null,
@@ -58,9 +55,6 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                   "durationInMinutes": 0,
                   "deliveryType": "Pickup",
                   "deliveryInstructions": null,
-                  "rating": -1,
-                  "ratingComment": null,
-                  "ratingDateTime": null,
                   "order": {
                       "venueNumber": self.venueid,
                       "orderDate": dateValue,
@@ -74,6 +68,6 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
                     $location.url(self.selectedCity +'/table-success/'+ self.venueid);
                 });
-            }
+            };
             self.init();
     }]);

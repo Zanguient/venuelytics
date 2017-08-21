@@ -31,7 +31,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             };
 
             self.$watch('private.orderDate', function() {
-                if (self.private.orderDate != "") {
+                if (self.private.orderDate !== "") {
                     self.getBanquetHall(self.venueid);
                 }
             });
@@ -42,7 +42,8 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 $rootScope.serviceName = '';
                 self.private = {};
                 self.private.orderDate = moment().format('MM/DD/YYYY');
-            }
+            };
+
             self.createPrivateEvent = function(value) {
                 $rootScope.serviceTabClear = true;
                 DataShare.tab = 'P';
@@ -50,7 +51,8 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 var date = new Date(self.private.orderDate);
                 var newDate = date.toISOString();
                 var parsedend = moment(newDate).format("MM-DD-YYYY");
-                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                
+                date = new Date(moment(parsedend,'MM-DD-YYYY').format());
                 var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
@@ -116,7 +118,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                         });
                         angular.forEach(self.privateEventValueArray, function(value1, key1) {
                             angular.forEach(self.reservations, function(value2, key2) {
-                                if(value1.id == value2.productId) {
+                                if(value1.id === value2.productId) {
                                     value1.reserve = true;
                                 }
                             });
