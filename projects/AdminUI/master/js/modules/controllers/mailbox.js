@@ -8,6 +8,7 @@
   $scope.folders = [
     {name: 'Inbox', folder: 'all', alert:$rootScope.unreadMessages, icon: "fa-inbox",color: 'success',},
     {name: 'New Requests', folder: 'REQUEST', alert: $rootScope.comfirmedCount, icon: "fa-star",color: 'info' },
+    {name: 'Completed', folder: 'COMPLETED', alert: $rootScope.comfirmedCount, icon: "fa-star",color: 'info' },
     {name: 'OnHold', folder: 'ONHOLD', alert: $rootScope.requestCount, icon: "fa-paper-plane-o", color: 'warning'},
     {name: 'Bottle', folder: 'Bottle', alert: $rootScope.bottleCount, icon: "fa-edit", color: 'success'},
     {name: 'Private Events',   folder: 'BanquetHall', alert: $rootScope.banquetHallCount, icon: "fa-diamond",color: 'success'},
@@ -45,7 +46,7 @@
 
       var target = {id:contextService.userVenues.selectedVenueNumber};
       $cookieStore.put("venueNumber", contextService.userVenues.selectedVenueNumber);
-      if ($scope.folder === 'REQUEST' || $scope.folder === 'ONHOLD') {
+      if ($scope.folder === 'REQUEST' || $scope.folder === 'ONHOLD' || $scope.folder === 'COMPLETED') {
         target.type = $scope.folder;
       } else if ($scope.folder !== 'all'){
         target.serviceType = $scope.folder;

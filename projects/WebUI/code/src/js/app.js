@@ -29,6 +29,7 @@ $(document).ready(function(){
     $('.hero-img-col').matchHeight();
     //$('.collapse').collapse();
 
+    $.material.init();
 
     new SmoothScroll('a[href*="#"]', {
         // Selectors
