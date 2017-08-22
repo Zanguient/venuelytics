@@ -108,13 +108,21 @@ select {
   padding: 0px !important; margin-top:20px;
   border-right:2px solid #ffffff !important;
 }
-
+.reservationTabLabel {
+    font-weight: 400;
+    letter-spacing: 0.14px;
+    line-height: 1.5em;
+    display: block;
+    white-space: pre-line;
+    align-self: center;
+    outline: rgba(0, 0, 0, 0.870588) none 0px;
+     text-transform: uppercase;
+  }
 .req-border {
   border: 1px solid;
 }
 
 .reservation-button {
-  white-space: normal;
   height: 80px;
 }
 
@@ -435,7 +443,7 @@ select {
   .showInMobile {
     display:none;
   }
-
+  
 
   .citySearchLabel {
     margin-top: 15px;
