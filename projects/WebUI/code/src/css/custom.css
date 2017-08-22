@@ -126,6 +126,15 @@ select {
   height: 80px;
 }
 
+.tableReserved {
+   margin-left: 26px;
+   margin-top: 16px;
+ }
+
+ descriptionAlign {
+   text-align: justify;
+ }
+
 .table-map-info {
   text-align: center;
   margin-top: 0px;
