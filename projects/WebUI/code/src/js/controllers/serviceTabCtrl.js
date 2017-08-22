@@ -92,9 +92,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
     };
 
-    AjaxService.getInfo(self.venueid).then(function(response) {
+    /*AjaxService.getInfo(self.venueid).then(function(response) {
     self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
-    self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
+    self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];*/
     function addTab(id, bId, img, name, tabParam, htmlContentPage) {
         self.displayTabs.push({
            id: id,
@@ -115,14 +115,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     }
     addTab('privateEventTab','private', 'assets/img/private.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html');
     addTab('guestlistTab','glist', 'assets/img/guest.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html');
-    if (self.foodSeriveButton === 'y' || self.foodSeriveButton === 'Y'){
+    /*if (self.foodSeriveButton === 'y' || self.foodSeriveButton === 'Y'){
         addTab('foodServiceTab','foodTab', 'assets/img/food.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html');
     }
     if (self.drinkSeriveButton === 'y' || self.drinkSeriveButton === 'Y'){
         addTab('drinkServiceTab','drink', 'assets/img/drinks.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html');
-    }
+    }*/
     addTab('tableServiceTab','tableService', 'assets/img/ic_bottle.png','reservation.TABLE_SERVICE', 'table-services', 'table-service.html');
-    });
+   /* });*/
 
     self.init();
 

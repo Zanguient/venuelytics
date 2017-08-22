@@ -37,8 +37,15 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);
             };
 
-            self.timeSlot = function(value) {
-                self.reservedTimeSlot = value;
+            self.timeSlot = function(data) {
+                self.reservedTimeSlot = data;
+                angular.forEach(self.reservedTimeSlot, function(value,key) {
+                    if(value.am === true) {
+                        value.time = value.hours +':'+ value.minutes + ' AM'
+                    } else {
+                        value.time = value.hours +':'+ value.minutes + ' PM'
+                    }
+                });
             }
 
             self.backToTable = function() {

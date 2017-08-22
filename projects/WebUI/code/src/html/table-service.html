@@ -62,7 +62,7 @@
             <div class="col-md-8 form-group is-empty" ng-if="timeSelection == true" style="border:1px solid #000;">
                 <h3>Select Time:</h3>
                 <div class="col-md-2 form-group is-empty" >
-                    <button type="button" class="btn btn-success btn-raised" ng-repeat = "time in reservedTimeSlot" ng-click="confirmTableReserve()">{{time.hours}}</button>
+                    <button type="button" class="btn btn-success btn-raised" ng-repeat = "times in reservedTimeSlot" ng-click="confirmTableReserve()">{{times.time}}</button>
                 </div>
             </div>
         </fieldset>
