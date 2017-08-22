@@ -45,7 +45,7 @@
                     <button type="button" class="btn btn-success btn-raised" ng-click="findTable()">Find a Table</button>
                 </div>
             </div>
-            <div>
+            <div ng-show = "productItem.length >0 ">
             <table class="table table-no-border table-striped table-responsive">
                 <th>
                     <td><label><b>Name</b></label></td>
@@ -59,7 +59,8 @@
                     <td><button type="button" class="btn btn-success btn-raised" ng-click="timeSlot(item.availableTimes)">Select Time Slot</button></td>
                 </tr>
             </table>
-            <div class="col-md-8 form-group is-empty" ng-if="timeSelection == true" style="border:1px solid #000;">
+            </div>
+            <div class="col-md-8 form-group is-empty" ng-show="showTime ==true" ng-if="timeSelection == true" style="border:1px solid #000;">
                 <h3>Select Time:</h3>
                 <div class="col-md-2 form-group is-empty" >
                     <button type="button" class="btn btn-success btn-raised" ng-repeat = "times in reservedTimeSlot" ng-click="confirmTableReserve()">{{times.time}}</button>

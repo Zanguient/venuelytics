@@ -6,7 +6,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             $log.debug('Inside Table Service Controller.');
 
             var self = $scope;
-
+            self.showTime = false;
             self.init = function() {
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
@@ -38,6 +38,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             };
 
             self.timeSlot = function(data) {
+                self.showTime = true;
                 self.reservedTimeSlot = data;
                 angular.forEach(self.reservedTimeSlot, function(value,key) {
                     if(value.am === true) {
