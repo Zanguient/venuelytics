@@ -84,8 +84,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     };
 
     self.dispatchToService = function(serviceName) {
-        $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
-
+        var calHandler = self.dispatchHandler[self.tabParams];
+        if (typeof calHandler !== 'undefined') {
+           $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
+        } else {
+            $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bottle-service");
+        }
     };
 
     function addTab(id, bId, img, name, tabParam, htmlContentPage) {
