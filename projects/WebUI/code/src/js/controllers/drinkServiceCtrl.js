@@ -34,8 +34,18 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
             		    self.drinksMenuUrl = response.data["Drinks.menuUrl"];
             		    self.drinksCocktailsUrl = response.data["Drinks.cocktailsUrl"];
                     self.enabledPayment = response.data["Advance.enabledPayment"];
+                    self.drinkPickup = response.data["Drinks.DrinksPickup.enable"];
                 });
             };
+
+            self.removeDrinkItems = function(index,obj) {
+                self.userSelectedDrinks.splice(index,1);
+                angular.forEach(self.drinkDetails, function(value,key) {
+                  if(obj.id === value.id) {
+                      value.count = '';
+                  }
+                });
+            }
 
             self.tabClear = function() {
                 DataShare.drinkServiceData = {};
@@ -74,6 +84,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 if(item.count !== undefined) {
                     if (self.userSelectedDrinks.indexOf(item) === -1) {
                         item.total = item.price * item.count;
+                        item.total = item.total.toFixed(2);
                         self.userSelectedDrinks.push(item);
                     }
                 } 
@@ -103,6 +114,10 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                         self.drinkDetails = self.editDrinkItems;
                     }
                 });
+            };
+
+            self.itemDescription = function(value) {
+                $rootScope.description = value;
             };
 
             self.delivery = function(value) {

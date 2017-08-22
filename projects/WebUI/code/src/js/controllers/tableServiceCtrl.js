@@ -11,7 +11,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true});
+                $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today});
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 self.reservationTime = APP_ARRAYS.time;
@@ -19,12 +19,27 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             };
 
             self.findTable = function() {
-                self.timeSelection = true;
+                self.productItem = [];
+                var date= moment(self.tableDate).format('YYYYMMDD');
+                var authBase64Str = "YXJ1biByYXVuOmFydW5AZ21haWwuY29tOig4ODgpIDg4OC04ODg4";
+                AjaxService.getTime(self.venueid, date, self.table.reserveTime,authBase64Str).then(function(response) {
+                    var obj = response.data;
+                    Object.keys(obj).forEach(function(key){
+                      var value = obj[key];
+                      self.productItem.push(value);
+                      });
+                    self.timeSelection = true;
+
+                });
             };
 
             self.confirmTableReserve = function() {
                 $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);
             };
+
+            self.timeSlot = function(value) {
+                self.reservedTimeSlot = value;
+            }
 
             self.backToTable = function() {
               $location.url('/newCities/' + self.selectedCity + '/' + self.venueid + '/table-services');

@@ -45,19 +45,24 @@
                     <button type="button" class="btn btn-success btn-raised" ng-click="findTable()">Find a Table</button>
                 </div>
             </div>
+            <div>
+            <table class="table table-no-border table-striped table-responsive">
+                <th>
+                    <td><label><b>Name</b></label></td>
+                    <td><label><b>Brand</b></label></td>
+                    <td><label><b>Description</b></label></td>
+                </th>
+                <tr ng-repeat="item in productItem">
+                    <td>{{item.product.name}}</td>
+                    <td>{{item.product.brand}}</td>
+                    <td>{{item.product.description}}</td>
+                    <td><button type="button" class="btn btn-success btn-raised" ng-click="timeSlot(item.availableTimes)">Select Time Slot</button></td>
+                </tr>
+            </table>
             <div class="col-md-8 form-group is-empty" ng-if="timeSelection == true" style="border:1px solid #000;">
                 <h3>Select Time:</h3>
                 <div class="col-md-2 form-group is-empty" >
-                    <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve()">6.15 PM</button>
-                </div>
-                <div class="col-md-2 form-group is-empty" >
-                    <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve()">6.30 PM</button>
-                </div>
-                <div class="col-md-2 form-group is-empty" >
-                    <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve()">7.00 PM</button>
-                </div>
-                <div class="col-md-2 form-group is-empty" >
-                    <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve()">7.30 PM</button>
+                    <button type="button" class="btn btn-success btn-raised" ng-repeat = "time in reservedTimeSlot" ng-click="confirmTableReserve()">{{time.hours}}</button>
                 </div>
             </div>
         </fieldset>

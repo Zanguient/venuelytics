@@ -67,7 +67,7 @@
                 </div>
                 <label class="tableReserved" ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
             </div>
-
+        </div>
         <div class="col-md-12 form-group is-empty selected-table" ng-if="tableSelection.length > 0" style="margin-top: 0px; margin-left: 46px">
             Selected Table(s): <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
         </div>

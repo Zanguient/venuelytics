@@ -37,6 +37,15 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 DataShare.selectedFoods = '';
             };
 
+            self.removeFoodItems = function(index,obj) {
+                self.selectedFoodList.splice(index,1);
+                angular.forEach(self.foodDetails, function(value,key) {
+                  if(obj.id === value.id) {
+                      value.count = '';
+                  }
+                });
+            }
+
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
                     self.foodBreakFastUrl = response.data["Food.breakFastUrl"];
@@ -50,6 +59,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                     self.foodAppetizsersUrl = response.data["Food.appetizsersUrl"];
                     self.foodGlutenfree = response.data["Food.glutenfree"];
                     self.enabledPayment = response.data["Advance.enabledPayment"];
+                    self.foodPickup = response.data["Food.FoodPickup.enable"];
                 });
             };
 
@@ -77,6 +87,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 if(item.count !== undefined) {
                     if (self.selectedFoodList.indexOf(item) === -1) {
                         item.total = item.price * item.count;
+                        item.total = item.total.toFixed(2);
                         self.selectedFoodList.push(item);
                     }
                 }
@@ -87,6 +98,10 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 }
 
                 DataShare.foodService = self.selectedFoodList;
+            };
+
+            self.itemDescription = function(value) {
+                $rootScope.description = value;
             };
 
             self.getFood = function() {

@@ -216,6 +216,21 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
+    this.getTime = function(venueId,date,time,authBase64Str) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'reservations/' + venueId + '/availableSlots/' + date + '?time=' + time + '&type=Restaurant',
+            headers: {
+                    "Authorization": "Anonymous " + authBase64Str
+                }
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
     this.getVenueMapForADate = function(venueId,date) {
         return $http({
             method: 'GET',

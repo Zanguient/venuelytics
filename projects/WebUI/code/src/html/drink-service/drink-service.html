@@ -2,12 +2,12 @@
 <form class="search-form" name="drinkForm" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset>
             <div class="form-group">
-                <input type="radio" ng-change="delivery(drinkType)" name="deliveryDrink" ng-model="drinkType" value="Delivery"/>&nbsp;&nbsp;
                 <label>
+                <input type="radio" ng-change="delivery(drinkType)" name="deliveryDrink" ng-model="drinkType" value="Delivery"/>&nbsp;&nbsp;
                     <font size="3">{{"reservation.DELIVERY" | translate}}</font>
                 </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" ng-change="pickUp(drinkType)" name="pickDrink" ng-model="drinkType" value="Pickup" name="tests"/>&nbsp;&nbsp;
-                <label>
+                <label ng-show="drinkPickup === 'Y' || drinkPickup === 'y">
+                    <input type="radio" ng-change="pickUp(drinkType)" name="pickDrink" ng-model="drinkType" value="Pickup" name="tests"/>&nbsp;&nbsp;
                     <font size="3">{{"reservation.PICKUP" | translate}}</font>
                 </label>
             </div>
@@ -151,6 +151,7 @@
                       <td>{{drink.brand}}</td>
                       <td>{{drink.count}}</td>
                       <td><span ng-hide="((drink == null || drink.total == 0 || drink.total == undefined))">&dollar;</span>{{(drink == null || drink.total == 0 || drink.total == undefined) ? "-" : drink.total}}</td>
+                       <td><button type="submit" class="btn btn-raised btn-sm btn-danger" ng-click="removeDrinkItems($index,drink)">X</td>
                     </tr>
                   </tbody>
                 </table>
@@ -178,13 +179,13 @@
                                         <table class="table table-responsive table-no-border">
                                         <tr>
                                             <td rowspan="3" class="col-md-3" style="padding-right: 0px;padding-left: 0px;">
-                                                <img class="img-responsive" data-ng-src="https://www.petzl.com/fondation/foundation-makay-nature-expedition-thumbnail.jpg?v=1" > 
+                                                <img class="img-responsive" data-ng-src="https://www.petzl.com/fondation/foundation-makay-nature-expedition-thumbnail.jpg?v=1" style="height:100px;width:100px;"> 
                                             </td>
                                             <td class="col-md-3"><font size="4"><strong>{{items.name}}</strong></font></td>
                                         </tr>
                                         <tr ng-mouseleave="drinkService(items)">
                                             <td class="col-md-3"><font size="2">Price: &dollar;{{items.price}}</font><br>
-                                            <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#drinkItemDetails">Details</a></font></td>
+                                            <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#drinkItemDetails" ng-if="((items.description != null)(items.description != '')(items.description != undefined))" ng-click="itemDescription(items.description)">Details</a></font></td>
                                             <td class="col-md-2">
                                             <select class="form-control fontBold" ng-model="items.count" value="{{items.count || 0}}">
                                                     <option value=""></option>
@@ -267,7 +268,7 @@
                 <h3 class="modal-title" id="myModalLabel6">Drink Details</h3>
             </div>
             <div class="modal-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam sed labore autem nesciunt ea veniam recusandae necessitatibus reprehenderit. Praesentium non velit at natus ut dolores iusto totam doloremque perspiciatis. Quidem.</p>
+                <p>{{description}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
