@@ -1,6 +1,6 @@
 <div  ng-controller="BottleServiceController">
 <form class="form-horizontal" parsley-validate validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>
-    <fieldset>
+    <fieldset class="col-md-10 col-md-offset-right-2">
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{bottleDateIsFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate"  required>
