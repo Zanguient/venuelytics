@@ -6,7 +6,7 @@
                 <input type="radio" ng-change="delivery(drinkType)" name="deliveryDrink" ng-model="drinkType" value="Delivery"/>&nbsp;&nbsp;
                     <font size="3">{{"reservation.DELIVERY" | translate}}</font>
                 </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                <label ng-show="drinkPickup === 'Y' || drinkPickup === 'y">
+                <label ng-show="drinkPickup === 'Y' || drinkPickup === 'y'">
                     <input type="radio" ng-change="pickUp(drinkType)" name="pickDrink" ng-model="drinkType" value="Pickup" name="tests"/>&nbsp;&nbsp;
                     <font size="3">{{"reservation.PICKUP" | translate}}</font>
                 </label>
@@ -183,13 +183,13 @@
                                             </td>
                                             <td class="col-md-3"><font size="4"><strong>{{items.name}}</strong></font></td>
                                         </tr>
-                                        <tr ng-mouseleave="drinkService(items)">
+                                        <tr>
                                             <td class="col-md-3"><font size="2">{{'reservation.PRICE' | translate}}: &dollar;{{items.price}}</font><br>
-                                            <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#drinkItemDetails" ng-if="((items.description != null)(items.description != '')(items.description != undefined))" ng-click="itemDescription(items.description)">{{'reservation.FOOD_DRINK_DETAILS' | translate}}</a></font></td>
+                                            <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#drinkPopUp" ng-if="items.description != null" ng-click="drinkPopUp(items.description)">{{'reservation.FOOD_DRINK_DETAILS' | translate}}</a></font></td>
                                         </tr>
                                         <tr>
                                             <td class="col-md-2">
-                                            <select class="form-control" ng-model="items.count" value="{{items.count || 0}}">
+                                            <select class="form-control" ng-mouseleave="drinkService(items)" ng-model="items.count" value="{{items.count || 0}}">
                                                     <option value="">{{"reservation.QUANTITY" | translate}}</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -262,7 +262,7 @@
     </div>
 </div>
 
-<div class="modal modal-success" id="drinkItemDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+<div class="modal modal-success" id="drinkPopUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
     <div class="modal-dialog animated zoomIn animated-3x" role="document">
         <div class="modal-content">
             <div class="modal-header">

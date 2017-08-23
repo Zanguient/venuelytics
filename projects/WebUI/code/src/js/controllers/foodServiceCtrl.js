@@ -64,7 +64,6 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             };
 
             if(DataShare.foodFocused !== '') {
-              $log.info("insdie focused");
               self.isFoodFocused = DataShare.foodFocused;
             }
 
@@ -87,11 +86,9 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 if(item.count !== undefined) {
                     if (self.selectedFoodList.indexOf(item) === -1) {
                         item.total = item.price * item.count;
-                        item.total = item.total.toFixed(2);
                         self.selectedFoodList.push(item);
                     }
                 }
-
                 if (item.count === 0) {
                     var index = self.selectedFoodList.indexOf(item);
                     self.selectedFoodList.splice(index, 1);
@@ -100,7 +97,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 DataShare.foodService = self.selectedFoodList;
             };
 
-            self.itemDescription = function(value) {
+            self.showPopUp = function(value) {
                 $rootScope.description = value;
             };
 

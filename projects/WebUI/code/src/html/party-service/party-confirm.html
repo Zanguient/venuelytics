@@ -65,12 +65,12 @@
     </div>
 
     <div ng-if="enabledPayment != 'Y'">
-        <button type="submit" class="btn btn-raised btn-primary" ng-click="savePartyPackage()">Confirm</button>
-        <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
+        <button type="submit" class="btn btn-raised btn-primary" ng-click="savePartyPackage()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+        <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
     </div>
     <div ng-if="enabledPayment == 'Y'">
-        <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">Confirm</button>
-        <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">Edit</button>
+        <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+        <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
     </div>
   </center>
 </div>

@@ -1,13 +1,13 @@
 <div ng-controller="PartyPackageController">
 <!-- <div class="col-lg-6"> -->
 <div class="showInWeb">
- <legend class="fontRegular">Description</legend>
+ <legend class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</legend>
     <div class="form-group ">
         <p id="banquetHallData" class="fontRegular">{{partyDescription}}</p>
     </div>
 </div>
 <div class="showInMobile">
- <legend class="fontRegular">Description</legend>
+ <legend class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</legend>
     <div class="form-group " ng-if="!desc">
         <p id="banquetHallData" class="fontRegular">{{partyDescription | limitTo: 160}}{{partyDescription.length > 160 ? '...' :''}}</p>
         <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyHallDescription(partyDescription)" ng-if="partyDescription.length > 160">Read More</a>
@@ -180,7 +180,7 @@
                 <p>{{partyDescription}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
             </div>
         </div>
     </div>

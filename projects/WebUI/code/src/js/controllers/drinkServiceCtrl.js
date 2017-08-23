@@ -59,7 +59,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
             };
 
             if(DataShare.drinkFocused !== '') {
-              $log.info("insdie focused");
               self.isDrinkFocused = DataShare.drinkFocused;
             }
 
@@ -116,7 +115,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
-            self.itemDescription = function(value) {
+            self.showPopUp = function(value) {
                 $rootScope.description = value;
             };
 

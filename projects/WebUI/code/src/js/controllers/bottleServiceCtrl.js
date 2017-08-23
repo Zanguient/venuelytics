@@ -108,7 +108,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             };
 
             if(DataShare.focused !== '') {
-              $log.info("insdie focused");
               self.isFocused = DataShare.focused;
             }
                         

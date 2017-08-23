@@ -1,16 +1,16 @@
 <div>
 <!-- <div class="col-lg-6"> -->
 <div class="showInWeb">
- <legend class="fontRegular">Description</legend>
+ <legend class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</legend>
     <div class="form-group ">
         <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
     </div>
 </div>
 <div class="showInMobile">
- <legend class="fontRegular">Description</legend>
+ <legend class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</legend>
     <div class="form-group " ng-if="!desc">
         <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION_MOBILE" | translate}}</p>
-        <a class="btn btn-default btn-raised btn-xs pull-right" ng-click="privateDescription()">Read More</a>
+        <a class="btn btn-default btn-raised btn-xs pull-right" ng-click="privateDescription()">{{'reservation.READ_MORE' | translate}}</a>
     </div>
     <div class="form-group " ng-if="desc">
         <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>

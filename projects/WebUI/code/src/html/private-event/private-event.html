@@ -1,13 +1,13 @@
 <div ng-controller="PrivateEventController">
 <!-- <div class="col-lg-6"> -->
     <div class="showInWeb">
-     <legend class="fontRegular">Description</legend>
+     <legend class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</legend>
         <div class="form-group col-md-12">
             <p id="banquetHallData" class="fontRegular">{{banquetHallDescription}}</p>
         </div>
     </div>
     <div class="showInMobile">
-     <legend class="fontRegular">Description</legend>
+     <legend class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</legend>
         <div class="form-group col-md-12">
             <p id="banquetHallData" class="fontRegular">{{banquetHallDescription | limitTo: 160}}{{banquetHallDescription.length > 160 ? '...' :''}}</p>
             <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(banquetHallDescription)" ng-if="banquetHallDescription.length > 160">Read More</a>
@@ -203,7 +203,7 @@
                 <p>{{privateDescription}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
             </div>
         </div>
     </div>

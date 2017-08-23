@@ -46,8 +46,8 @@
                       </tbody>
                     </table>
 	        <div >
-	            <button type="submit" class="btn btn-raised btn-primary" ng-click="guestListSave()">Confirm</button>
-	            <button type="button" class="btn btn-raised btn-danger" ng-click="editGuestPage()">Edit</button>
+	            <button type="submit" class="btn btn-raised btn-primary" ng-click="guestListSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+	            <button type="button" class="btn btn-raised btn-danger" ng-click="editGuestPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
 	        </div>
 	    </center>
 	</div>
@@ -66,7 +66,7 @@
                 <p>{{'reservation.GUEST_SUCCESS' | translate}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeGuestListModal()">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeGuestListModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
             </div>
         </div>
     </div>

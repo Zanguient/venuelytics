@@ -83,12 +83,12 @@
   </div>
 	    <center>
 	        <div ng-if="enablePayment != 'Y'">
-	            <button type="submit" class="btn btn-raised btn-primary" ng-click="createBottleSave()">Confirm</button>
-	            <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">Edit</button>
+	            <button type="submit" class="btn btn-raised btn-primary" ng-click="createBottleSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+	            <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
 	        </div>
           <div ng-if="enablePayment == 'Y'">
-              <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">Confirm</button>
-              <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">Edit</button>
+              <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+              <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
           </div>
 	    </center>
 	</div>
@@ -105,7 +105,7 @@
                 <p>{{'reservation.BOOKING_REQUEST' | translate}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
             </div>
         </div>
     </div>

@@ -25,7 +25,6 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 } 
             };
             if(DataShare.guestFocus !== '') {
-              $log.info("insdie focused");
               self.guestFocus = DataShare.guestFocus;
             }
 

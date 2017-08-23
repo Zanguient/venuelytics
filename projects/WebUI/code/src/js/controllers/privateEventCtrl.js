@@ -6,7 +6,6 @@
 app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
 
-    		$log.log('Inside PrivateEvent Controller.');
 
             var self = $scope;
             self.privateDateIsFocused = 'is-focused';
