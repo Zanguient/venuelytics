@@ -14,7 +14,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $rootScope.serviceTabClear = false;
-                $("#requestedDate").datepicker({autoclose:true, todayHighlight: true, startDate: today});
+                $("#requestedDate").datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
                 if((Object.keys(DataShare.guestListData).length) !== 0) {
                     self.guest = DataShare.guestListData;
                 } else {

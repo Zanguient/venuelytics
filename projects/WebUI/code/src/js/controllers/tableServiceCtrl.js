@@ -11,7 +11,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today});
+                $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 self.reservationTime = APP_ARRAYS.time;
@@ -41,6 +41,9 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 self.showTime = true;
                 self.reservedTimeSlot = data;
                 angular.forEach(self.reservedTimeSlot, function(value,key) {
+                    if(value.minutes === 0) {
+                        value.minutes = '00';
+                    }
                     if(value.am === true) {
                         value.time = value.hours +':'+ value.minutes + ' AM'
                     } else {

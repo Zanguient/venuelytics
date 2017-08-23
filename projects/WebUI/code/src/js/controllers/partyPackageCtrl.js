@@ -13,7 +13,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today});
+                $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
                 self.venueID = $routeParams.venueid;
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.party = DataShare.partyServiceData;

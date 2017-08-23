@@ -135,15 +135,15 @@
 
         <div class="col-md-12">
     		<center>
-        		<a href="" class="btn btn-success fontRegular btn-raised" ng-if="foodBreakFastUrl" ng-click="menuUrlSelection(foodBreakFastUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.BREAK_FAST" | translate}}</a>&nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodBranchUrl" ng-click="menuUrlSelection(foodBranchUrl)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.FOOD_BRANCH" | translate}}</a> &nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodStartersUrl" ng-click="menuUrlSelection(foodStartersUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_STARTERS" | translate}}</a>&nbsp;&nbsp;
+        		<a href="" class="btn btn-success fontRegular btn-raised" ng-if="foodBreakFastUrl" ng-click="menuUrlSelection(foodBreakFastUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.BREAK_FAST" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodBranchUrl" ng-click="menuUrlSelection(foodBranchUrl)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.FOOD_BRANCH" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodStartersUrl" ng-click="menuUrlSelection(foodStartersUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_STARTERS" | translate}}</a>
                 <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodMenuUrl" ng-click="menuUrlSelection(foodMenuUrl)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FOOD_MENU" | translate}}</a>
-                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="foodHappyHourUrl" ng-click="menuUrlSelection(foodHappyHourUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.FOOD_HAPPY_HOUR" | translate}}</a>&nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodDinnerUrl" ng-click="menuUrlSelection(foodDinnerUrl)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.FOOD_DINNER" | translate}}</a> &nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodLunchUrl" ng-click="menuUrlSelection(foodLunchUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_LUNCH" | translate}}</a>&nbsp;&nbsp;
+                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="foodHappyHourUrl" ng-click="menuUrlSelection(foodHappyHourUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.FOOD_HAPPY_HOUR" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodDinnerUrl" ng-click="menuUrlSelection(foodDinnerUrl)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.FOOD_DINNER" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodLunchUrl" ng-click="menuUrlSelection(foodLunchUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_LUNCH" | translate}}</a>
                 <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodDessertsUrl" ng-click="menuUrlSelection(foodDessertsUrl)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FOOD_DESSERTS" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodAppetizsersUrl" ng-click="menuUrlSelection(foodAppetizsersUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_APPETIZSER" | translate}}</a>&nbsp;&nbsp;
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodAppetizsersUrl" ng-click="menuUrlSelection(foodAppetizsersUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.FOOD_APPETIZSER" | translate}}</a>
                 <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodGlutenfree" ng-click="menuUrlSelection(foodGlutenfree)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FOOD_GLUTEN" | translate}}</a>
     		</center>
         </div> <br/>
@@ -154,10 +154,10 @@
             <table class="table table-no-border table-striped table-responsive">
                 <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Brand</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
+                      <th>{{'reservation.NAME' | translate}}</th>
+                      <th>{{'reservation.BRAND' | translate}}</th>
+                      <th>{{'reservation.QUANTITY' | translate}}</th>
+                      <th>{{'reservation.PRICE' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -184,7 +184,7 @@
                                 <div class="panel-heading" role="tab" id="{{items.id}}">
                                     <h4 class="panel-title">
                                         <a class="{{$index == 0 ? '' : 'collapsed'}} withripple" role="button" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}" aria-controls="collapse{{items.id}}">
-                                            <i class="zmdi zmdi-star"></i>{{items.brand}} (Category)
+                                            {{items.brand}} (Category)
                                         </a>
                                     </h4>
                                 </div>
@@ -192,37 +192,39 @@
                                     <div class="panel-body">
                                         <table class="table table-responsive table-no-border">
                                         <tr>
-                                            <td rowspan="3" class="col-md-3" style="padding-right: 0px;padding-left: 0px;">
+                                            <td rowspan="4" class="col-md-3" style="padding-right: 0px;padding-left: 0px;">
                                                 <img class="img-responsive" data-ng-src="https://www.petzl.com/fondation/foundation-makay-nature-expedition-thumbnail.jpg?v=1" style="height:100px;width:100px;"> 
                                             </td>
                                             <td class="col-md-3"><font size="4"><strong>{{items.name}}</strong></font></td>
                                         </tr>
                                         <tr ng-mouseleave="userSelectedFood(items)">
-                                            <td class="col-md-3"><font size="2">Price: &dollar;{{items.price}}</font><br>
-                                            <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#foodItemDetails" ng-if="((items.description != null)(items.description != '')(items.description != undefined))" ng-click="itemDescription(items.description)">Details</a></font></td>
+                                            <td class="col-md-3"><font size="2">{{'reservation.PRICE' | translate}}: &dollar;{{items.price}}</font><br>
+                                            <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#foodItemDetails" ng-if="((items.description != null)(items.description != '')(items.description != undefined))" ng-click="itemDescription(items.description)">{{'reservation.FOOD_DRINK_DETAILS' | translate}}</a></font></td>
+                                        </tr>
+                                        <tr>
                                             <td class="col-md-2">
-                                            <select class="form-control fontBold" ng-model="items.count" value="{{items.count || 0}}">
-                                                <option value=""></option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
+                                            <select class="form-control" ng-model="items.count" value="{{items.count || 0}}">
+                                                    <option value="">{{"reservation.QUANTITY" | translate}}</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
                                             </select>
                                             </td>
                                         </tr>

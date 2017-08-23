@@ -125,11 +125,11 @@
 
         <div class="col-md-12">
     		<center>
-        		<a href="" class="btn btn-success fontRegular btn-raised" ng-if="drinksWineListuUrl" ng-click="menuUrlSelection(drinksWineListuUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_WINE" | translate}}</a>&nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="drinksHappyHourDrinkUrl" ng-click="menuUrlSelection(drinksHappyHourDrinkUrl)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.DRINK_HAPPY_HOUR" | translate}}</a> &nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="drinksBeerMenuUrl" ng-click="menuUrlSelection(drinksBeerMenuUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.DRINK_BEER_MENU" | translate}}</a>&nbsp;&nbsp;
+        		<a href="" class="btn btn-success fontRegular btn-raised" ng-if="drinksWineListuUrl" ng-click="menuUrlSelection(drinksWineListuUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_WINE" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="drinksHappyHourDrinkUrl" ng-click="menuUrlSelection(drinksHappyHourDrinkUrl)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.DRINK_HAPPY_HOUR" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="drinksBeerMenuUrl" ng-click="menuUrlSelection(drinksBeerMenuUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.DRINK_BEER_MENU" | translate}}</a>
                 <a href="" class="btn btn-success btn-raised fontRegular" ng-if="drinksMenuUrl" ng-click="menuUrlSelection(drinksMenuUrl)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.DRINK_MENU_URL" | translate}}</a>
-                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="drinksCocktailsUrl" ng-click="menuUrlSelection(drinksCocktailsUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_COCKTAILS" | translate}}</a>&nbsp;&nbsp;
+                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="drinksCocktailsUrl" ng-click="menuUrlSelection(drinksCocktailsUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_COCKTAILS" | translate}}</a>
     		</center>
         </div> <br/>
         
@@ -139,10 +139,10 @@
                 <table class="table table-no-border table-striped table-responsive">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Brand</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
+                      <th>{{'reservation.NAME' | translate}}</th>
+                      <th>{{'reservation.BRAND' | translate}}</th>
+                      <th>{{'reservation.QUANTITY' | translate}}</th>
+                      <th>{{'reservation.PRICE' | translate}}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -170,7 +170,7 @@
                                 <div class="panel-heading" role="tab" id="{{items.id}}">
                                     <h4 class="panel-title">
                                         <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}" aria-controls="collapse{{items.id}}">
-                                            <i class="zmdi zmdi-star"></i>{{items.brand}} (Category)
+                                            {{items.brand}} (Category)
                                         </a>
                                     </h4>
                                 </div>
@@ -178,17 +178,19 @@
                                     <div class="panel-body">
                                         <table class="table table-responsive table-no-border">
                                         <tr>
-                                            <td rowspan="3" class="col-md-3" style="padding-right: 0px;padding-left: 0px;">
+                                            <td rowspan="4" class="col-md-3" style="padding-right: 0px;padding-left: 0px;">
                                                 <img class="img-responsive" data-ng-src="https://www.petzl.com/fondation/foundation-makay-nature-expedition-thumbnail.jpg?v=1" style="height:100px;width:100px;"> 
                                             </td>
                                             <td class="col-md-3"><font size="4"><strong>{{items.name}}</strong></font></td>
                                         </tr>
                                         <tr ng-mouseleave="drinkService(items)">
-                                            <td class="col-md-3"><font size="2">Price: &dollar;{{items.price}}</font><br>
-                                            <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#drinkItemDetails" ng-if="((items.description != null)(items.description != '')(items.description != undefined))" ng-click="itemDescription(items.description)">Details</a></font></td>
+                                            <td class="col-md-3"><font size="2">{{'reservation.PRICE' | translate}}: &dollar;{{items.price}}</font><br>
+                                            <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#drinkItemDetails" ng-if="((items.description != null)(items.description != '')(items.description != undefined))" ng-click="itemDescription(items.description)">{{'reservation.FOOD_DRINK_DETAILS' | translate}}</a></font></td>
+                                        </tr>
+                                        <tr>
                                             <td class="col-md-2">
-                                            <select class="form-control fontBold" ng-model="items.count" value="{{items.count || 0}}">
-                                                    <option value=""></option>
+                                            <select class="form-control" ng-model="items.count" value="{{items.count || 0}}">
+                                                    <option value="">{{"reservation.QUANTITY" | translate}}</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>

@@ -23,7 +23,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today});
+                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
                 self.venueid = $routeParams.venueid;
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
