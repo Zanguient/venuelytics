@@ -80,7 +80,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
 
 
             self.drinkService = function(item) {
-                if(item.count !== undefined) {
+                if(item.count !== undefined && item.count !== '') {
                     if (self.userSelectedDrinks.indexOf(item) === -1) {
                         item.total = item.price * item.count;
                         item.total = item.total.toFixed(2);

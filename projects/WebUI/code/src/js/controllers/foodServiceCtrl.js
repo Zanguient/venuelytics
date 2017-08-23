@@ -83,7 +83,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             };
 
             self.userSelectedFood = function(item) {
-                if(item.count !== undefined) {
+                if(item.count !== undefined && item.count !== '') {
                     if (self.selectedFoodList.indexOf(item) === -1) {
                         item.total = item.price * item.count;
                         self.selectedFoodList.push(item);
