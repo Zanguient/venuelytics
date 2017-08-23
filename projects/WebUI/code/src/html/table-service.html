@@ -1,19 +1,19 @@
 <div ng-controller="TableServiceController">
 <form class="search-form" name="tableServiceForm" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset>
-        <h1>Make a reservation</h1>
+        <h1>{{'reservation.TABLE_RESERVATION' | translate}}</h1>
             <div class="col-md-12 form-group is-empty">
                 <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
                     <input type="text" class="form-control fontBold" id="tableServiceDate" ng-model="tableDate" required>
                 </div>
                 <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
                     <select class="form-control fontBold" ng-model="table.reserveTime" ng-options="x.key as x.value for x in reservationTime" required>
-                        <option value="">Select your preferred time</option>
+                        <option value="">{{'reservation.TABLE_PREFEREED_TIME' | translate}}</option>
                     </select>
                 </div>
                 <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
                     <select class="form-control fontBold" ng-model="table.guest" required>
-                        <option value="">Number of Guests</option>
+                        <option value="">{{'reservation.TOTAL_GUEST' | translate}}</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -42,15 +42,15 @@
                     </select>
                 </div>
                 <div class="col-md-3 form-group is-empty" >
-                    <button type="button" class="btn btn-success btn-raised" ng-click="findTable()">Find a Table</button>
+                    <button type="button" class="btn btn-success btn-raised" ng-click="findTable()">{{'reservation.FIND_A_TABLE' | translate}}</button>
                 </div>
             </div>
             <div ng-show = "productItem.length >0 ">
             <table class="table table-no-border table-striped table-responsive">
                 <th>
-                    <td><label><b>Name</b></label></td>
-                    <td><label><b>Brand</b></label></td>
-                    <td><label><b>Description</b></label></td>
+                    <td><label><b>{{'reservation.NAME' | translate}}</b></label></td>
+                    <td><label><b>{{'reservation.BRAND' | translate}}</b></label></td>
+                    <td><label><b>{{'bottleServiceTab.DESC' | translate}}</b></label></td>
                 </th>
                 <tr ng-repeat="item in productItem">
                     <td>{{item.product.name}}</td>

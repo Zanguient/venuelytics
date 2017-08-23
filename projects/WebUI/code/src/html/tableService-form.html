@@ -1,7 +1,7 @@
 <div class="container">
 <form class="search-form" name="tableConfirmForm" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset>
-            <h2>Hurry! we can only hold this table for the next 15 mins</h2>
+            <h2>{{'reservation.TABLE_SERVICE_TIMEOUT' | translate}}</h2>
             <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
                 <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
                 <input type="text" id="tableServiceFirstName" name="tableServiceFirstName" class="form-control fontBold" ng-model="tableService.firstName" required="" data-parsley-trigger="change">
@@ -19,11 +19,11 @@
                 <input type="email" id="tableServiceEmailId" name="tableServiceEmailId" data-parsley-type="email" class="form-control fontBold" ng-model="tableService.emailId" required="" data-parsley-trigger="change">
             </div>
             <div class="col-md-12 form-group is-empty">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam sed labore autem nesciunt ea veniam recusandae necessitatibus reprehenderit. Praesentium non velit at natus ut dolores iusto totam doloremque perspiciatis. Quidem.</p>
+                <p>{{'reservation.TABLE_CONFIRM_DESC' | translate}}</p>
             </div>
             <hr>
             <center>
-                <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-click="confirmReservation()">CONFIRM RESERVATION</button>
+                <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-click="confirmReservation()">{{'reservation.TABLE_CONFIRM_RESERVATION' | translate}}</button>
             </center>
         </fieldset>
 </form>

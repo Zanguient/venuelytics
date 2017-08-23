@@ -50,12 +50,12 @@
           </table>
       </div>
 	        <div ng-if="enabledPayment != 'Y'">
-	            <button type="submit" class="btn btn-raised btn-primary" ng-click="drinkServiceSave()">Confirm</button>
-	            <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">Edit</button>
+	            <button type="submit" class="btn btn-raised btn-primary" ng-click="drinkServiceSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+	            <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
 	        </div>
           <div ng-if="enabledPayment == 'Y'">
-              <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnabled()">Payment</button>
-              <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">Edit</button>
+              <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnabled()">{{"reservation.PAYMENT"  | translate}}</button>
+              <button type="button" class="btn btn-raised btn-danger" ng-click="editDrinkPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
           </div>
 	    
 	</div>
