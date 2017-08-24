@@ -65,7 +65,21 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
                               "servingSize": d[2],
                               "imageUrls": d[6]
                             };
-                            $scope.createElements.push(splitElement);
+                            angular.forEach($scope.createElements, function(value, key){
+                              if(splitElement.id == value.id){
+                                $scope.createElements[key] = splitElement;
+                               } else {
+                                 $scope.createElements.push(splitElement);                                  
+                               }
+                            });
+                            if($scope.createElements.length <= 0){
+                              $scope.createElements.push(splitElement);
+                            }
+                            angular.forEach($scope.createElements, function(value, key){
+                                if(value.id === -1){
+                                  delete value.id;
+                                }
+                            });
                             var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit"'+
                               ' ng-click="editTable('+row+','+cellData+')"></button>&nbsp;&nbsp;';
                             actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash"'+
@@ -216,9 +230,16 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       area.editMode = true;
       });
     };
+
     $scope.deleteTable = function(rowId) {
-      var table = $('#tables_table').dataTable();
-      table.fnDeleteRow(rowId);
+      ngDialog.openConfirm({
+      template: 'deletebottletableId',
+      className: 'ngdialog-theme-default'
+      }).then(function (value) {
+        var table = $('#tables_table').dataTable();
+        table.fnDeleteRow(rowId);
+      }, function (reason) {
+      });
     };
 
     $scope.createNewVenueMap = function() {
