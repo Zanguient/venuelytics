@@ -56,7 +56,7 @@ App.service('ContextService',['$location','RestServiceFactory', '$rootScope', 'A
 			for (var index in data.venues) {
 				venue = data.venues[index];
 				self.userVenues.available.push({name: venue.venueName, id: venue.id});
-				if ($rootScope.$storage.selectedVenueNumber === venue.id){
+				if ($rootScope.$storage.selectedVenueNumber == venue.id){
 					$rootScope.$storage.selectedVenueName = venue.venueName;
 					selectedVenueFound = true;
 				}

@@ -125,6 +125,7 @@ var dynamicScriptFiles = [
     '../vendor/flot/jquery.flot.time.min.js',
     '../vendor/flot/jquery.flot.categories.min.js',
     '../vendor/flot/jquery.flot.spline.min.js',
+    '../vendor/flot/jquery.flot.stack.js',
     '../vendor/jqueryui/jquery-ui.min.js',
     '../vendor/touch-punch/jquery.ui.touch-punch.min.js',
     '../vendor/chosen/chosen.jquery.min.js',

@@ -216,10 +216,17 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
         });
     };
 
-    this.getTime = function(venueId,date,time,authBase64Str) {
+    this.getTime = function(venueId,date,time, guestCount, authBase64Str) {
+
+        if (guestCount == parseInt(guestCount, 10)) {
+            guestCount = parseInt(guestCount, 10);
+        } else {
+            guestCount = 0;
+        }
         return $http({
             method: 'GET',
-            url: RestURL.baseURL + 'reservations/' + venueId + '/availableSlots/' + date + '?time=' + time + '&type=Restaurant',
+            params: {time: time, type: 'Restaurant', capacity: guestCount},
+            url: RestURL.baseURL + 'reservations/' + venueId + '/availableSlots/' + date,
             headers: {
                     "Authorization": "Anonymous " + authBase64Str
                 }

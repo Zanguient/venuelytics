@@ -59,6 +59,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[2].value = addForType($scope.venueBookings, $scope.selectedPeriod);
         $scope.top3Stats[3].value = addForType($scope.venueCheckin, $scope.selectedPeriod);
         $scope.top3Stats[3].value += addForType($scope.visitorCheckin, $scope.selectedPeriod);
+        $scope.top3Stats[3].value += addForType($scope.venueCheckinBooking, $scope.selectedPeriod);
+        
         var stackedBarDataStage =  $scope.requestByStatusZip[$scope.selectedPeriod];
         $scope.bookingRequestByZipcodeData=  [];
         for (var key in stackedBarDataStage) {
@@ -106,6 +108,12 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             $scope.venueCheckin = data.VENUE_CHECKIN;
         } else {
             $scope.venueCheckin = null;
+        }
+
+        if (typeof data.VENUE_VISITOR_CHECKIN_BOOKING !== 'undefined' && data.VENUE_VISITOR_CHECKIN_BOOKING.length > 0) {
+            $scope.venueCheckinBooking = data.VENUE_VISITOR_CHECKIN_BOOKING;
+        } else {
+            $scope.venueCheckinBooking = null;
         }
 
         if (typeof data.VENUE_VISITOR_CHECKIN !== 'undefined' && data.VENUE_VISITOR_CHECKIN.length > 0) {
