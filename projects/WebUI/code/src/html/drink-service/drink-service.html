@@ -3,11 +3,11 @@
         <fieldset class="col-md-10 col-md-offset-right-2">
             <div class="form-group">
                 <label>
-                <input type="radio" ng-change="delivery(drinkType)" name="deliveryDrink" ng-model="drinkType" value="Delivery"/>&nbsp;&nbsp;
+                <input type="radio" name="deliveryDrink" ng-model="drinkType" value="Delivery"/>&nbsp;&nbsp;
                     <font size="3">{{"reservation.DELIVERY" | translate}}</font>
                 </label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <label ng-show="drinkPickup === 'Y' || drinkPickup === 'y'">
-                    <input type="radio" ng-change="pickUp(drinkType)" name="pickDrink" ng-model="drinkType" value="Pickup" name="tests"/>&nbsp;&nbsp;
+                    <input type="radio" name="pickDrink" ng-model="drinkType" value="Pickup" name="tests"/>&nbsp;&nbsp;
                     <font size="3">{{"reservation.PICKUP" | translate}}</font>
                 </label>
             </div>

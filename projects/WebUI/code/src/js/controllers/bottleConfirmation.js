@@ -14,12 +14,16 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.availableAmount = 0;
             self.paypal = false;
             self.cardPayment = false;
+            self.orderPlaced = false;
             self.init = function() {
                 self.editCity = $routeParams.cityName;
                 self.venueID = $routeParams.venueid;
                 self.userData = DataShare.bottleServiceData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
+                /*if(($window.localStorage.getItem("bottleAmount") != '') || ($window.localStorage.getItem("bottleAmount") != undefined) || ($window.localStorage.getItem("bottleAmount") != null)) {
+                    self.availableAmount = $window.localStorage.getItem("bottleAmount");
+                }*/
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');
                 self.selectBottleOrders = DataShare.selectBottle;
                 self.enablePayment = DataShare.enablePayment;
@@ -94,22 +98,43 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.cardPaymentData = function(value) {
                 self.cardPayment = true;
                 self.paypal = false;
+                self.phoneVenues = false;
             };
 
             self.paypalData = function(value) {
                 self.paypal = true;
                 self.cardPayment = false;
+                self.phoneVenues = false;
+            };
+
+            self.paypalPayment = function() { 
+                DataShare.amount = self.chargedAmount;
+                var popup = window.open("","directories=no,height=100,width=100,menubar=no,resizable=no,scrollbars=no,status=no,titlebar=no,top=0,location=no");
+                if (!popup || popup.closed || typeof popup.closed=='undefined'){
+                    alert("Popup Blocker is enabled!");
+                    popup.close();
+                } else {
+                    //Popup Allowed
+                    popup.close();
+                    var paypalElement = document.getElementById('paypal-button');
+                    jQuery(paypalElement).trigger('click');
+                } 
             };
 
             self.createBottleSave = function() {
-                AjaxService.createBottleService(self.venueID, self.object, self.authBase64Str).then(function(response) {
-                    self.orderId = response.data.id;
-                    if (self.cardPayment === true) {
-                        self.creditCardPayment();
-                    } else {
-                        $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
-                    }
-                });
+                if(self.orderPlaced === false) {
+                    AjaxService.createBottleService(self.venueID, self.object, self.authBase64Str).then(function(response) {
+                        self.orderId = response.data.id;
+                        self.orderPlaced = true;
+                        if (self.cardPayment === true) {
+                            self.creditCardPayment();
+                        } else if (self.paypal === true) {
+                            self.paypalPayment();
+                        } else {
+                            $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
+                        }
+                    });
+                }
             };
 
             self.creditCardPayment = function() {
@@ -128,12 +153,8 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                     if(token.card.country === 'INR') {
                         currencyType = 'INR';
                     }
-                    
-                    
                     taxValue = self.taxAmount.toFixed(2);
-                    
                     orderAmount = amount.toFixed(2);
-                    
                     var payment = {
                                     "gatewayId":1,
                                     "token":token.id,

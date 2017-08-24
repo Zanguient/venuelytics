@@ -4,13 +4,16 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
 
 
     		var self = $scope;
-            self.availableAmount = 0;
             self.paypal = false;
             self.cardPayment = false;
+            self.orderPlaced = false;
             self.init = function() {
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;
+                if(($window.localStorage.getItem("amount") != '') || ($window.localStorage.getItem("amount") != undefined) || ($window.localStorage.getItem("amount") != null)) {
+                    self.availableAmount = $window.localStorage.getItem("amount");
+                }
                 self.object = DataShare.payloadObject;
                 self.foodServiceDetails = DataShare.foodServiceData;
                 self.selectedFoodItems = DataShare.selectedFoods;
@@ -18,9 +21,12 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 self.venueName = DataShare.venueName;
                 self.taxDate = moment().format('YYYYMMDD');
                 self.getTax();
+                var amountValue = 0;
                 angular.forEach(self.selectedFoodItems, function(value1, key1) {
-                    self.availableAmount = self.availableAmount + value1.price;
+                    var total = parseFloat(value1.total)
+                    amountValue = amountValue + total;
                 });
+                self.availableAmount = amountValue;
                 if(DataShare.amount) {
                     self.availableAmount = DataShare.amount;
                 }
@@ -63,24 +69,44 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             };
 
             self.foodServiceSave = function() {
-                AjaxService.createBottleService(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
-                    self.orderId = response.data.id;
-                    if (self.cardPayment === true) {
-                        self.creditCardPayment();
-                    } else {
-                        $location.url(self.city +'/food-success/'+ self.selectedVenueID);
-                    }
-                });
+                if(self.orderPlaced === false) {
+                    AjaxService.createBottleService(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
+                        self.orderId = response.data.id;
+                        if (self.cardPayment === true) {
+                            self.creditCardPayment();
+                        } else if (self.paypal === true) {
+                            self.paypalPayment();
+                        } else {
+                            $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
+                        }
+                    });
+                }
             };
 
             self.cardPaymentData = function(value) {
                 self.cardPayment = true;
                 self.paypal = false;
+                self.phoneVenues = false;
             };
 
             self.paypalData = function(value) {
                 self.paypal = true;
                 self.cardPayment = false;
+                self.phoneVenues = false;
+            };
+
+            self.paypalPayment = function() { 
+                DataShare.amount = self.chargedAmount;
+                var popup = window.open("","directories=no,height=100,width=100,menubar=no,resizable=no,scrollbars=no,status=no,titlebar=no,top=0,location=no");
+                if (!popup || popup.closed || typeof popup.closed=='undefined'){
+                    alert("Popup Blocker is enabled!");
+                    popup.close();
+                } else {
+                    //Popup Allowed
+                    popup.close();
+                    var paypalElement = document.getElementById('paypal-button');
+                    jQuery(paypalElement).trigger('click');
+                } 
             };
 
             self.paymentEnabled = function() {

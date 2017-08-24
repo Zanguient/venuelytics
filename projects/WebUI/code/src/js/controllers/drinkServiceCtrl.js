@@ -119,14 +119,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 $rootScope.description = value;
             };
 
-            self.delivery = function(value) {
-                self.drink = {};
-            };
-
-            self.pickUp = function(value) {
-                self.drink = {};
-            };
-
             self.getVenueType = function() {
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                     self.venueType = response.venueType;
