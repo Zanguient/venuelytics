@@ -144,9 +144,9 @@
         $scope.data.info[attributeKey] = attributeValue;
       } else {
         value = value.value;
-        payload[rowData[0]] = value;
+        payload[rowData[2]] = value;
         $scope.updateServices(payload);
-        $scope.data.info[rowData[0]] = value;
+        $scope.data.info[rowData[2]] = value;
       }
       table.clear();
       $.each($scope.data.info, function (k,v) {

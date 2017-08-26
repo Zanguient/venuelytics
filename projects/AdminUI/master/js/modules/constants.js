@@ -96,7 +96,7 @@ App
       'spectrum':            ['vendor/spectrumcolor/js/spectrum.js','vendor/spectrumcolor/css/spectrum.css'],
       'ngDialog':			['vendor/ngDialog/js/ngDialog.min.js', 'vendor/ngDialog/css/ngDialog.min.css', 
                       'vendor/ngDialog/css/ngDialog-theme-default.min.css'],
-      'ngImgMap': ['vendor/ngImgMap/compile/ng-img-map.css']
+      'ngImgMap': ['vendor/ngImgMap/compile/ng-img-map.css', 'vendor/ngImgMap/source/ng-img-map.js']
      
   	// Also add in gulpfile.js 
     },

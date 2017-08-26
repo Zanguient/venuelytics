@@ -93,7 +93,7 @@ var vendorBaseScripts = [
   // color spectrum
   '../vendor/spectrumcolor/angular-spectrum-color-min.js',
   '../vendor/ngDialog/js/ngDialog.min.js',
-  '../vendor/ngImgMap/compile/ng-img-map.min.js',
+  '../vendor/ngImgMap/source/ng-img-map.js',
   '../vendor/maphilight/jquery.maphilight.js',
   '../vendor/jMap/jquery.jmap.min.js'
 ];
@@ -160,7 +160,6 @@ var dynamicScriptFiles = [
     '../vendor/ngDialog/css/ngDialog.min.css', 
     '../vendor/ngDialog/css/ngDialog-theme-default.min.css',
     '../vendor/ngImgMap/compile/ng-img-map.css',
-    '../vendor/ngImgMap/compile/ng-img-map.js',
     '../vendor/toaster/toaster.css',
     '../vendor/toaster/toaster.js',
     '../vendor/spectrumcolor/js/angular-spectrum-color-min.js',

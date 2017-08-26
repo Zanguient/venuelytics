@@ -9,7 +9,9 @@
         var curArea = {
             area: undefined,
             mouse: [0, 0],
-            action: undefined
+            action: undefined,
+            fn: undefined
+
         };
 
         // 翻折判断，更新坐标点
@@ -34,6 +36,9 @@
                 _updateCoords(curArea.area.coords);
                 delete curArea.area.isDraging;
                 curArea.area = undefined;
+                if (curArea.fn && angular.isFunction(curArea.fn.dragInit)) {
+                   curArea.fn.dragInit(null, -1);
+                }
             }
         });
 
@@ -278,7 +283,7 @@
         });
 
         // 捕获操作节点
-        $scope.catchArea = function(e, area){
+        $scope.catchArea = function(e, area, index){
             // fix拖拽时选中现象
             e.preventDefault();
             e.stopPropagation();
@@ -286,11 +291,15 @@
                 localArea = area;
                 curArea.area = area;
                 curArea.mouse = [e.pageX, e.pageY];
+                curArea.fn = fn;
                 curArea.action = calculation.getDragAction(e.target['className']);
                 if (['move', 'resize'].indexOf(curArea.action[0]) > -1) {
                     curArea.area.isDraging = true;
-                };
-            };
+                    if (fn && angular.isFunction(fn.dragInit)) {
+                        fn.dragInit(area, index);
+                    }
+                }
+            }
         };
 
         // 追踪鼠标位置
@@ -349,7 +358,7 @@
 
     .run(['$templateCache',function($templateCache){
         var template =   '<div class="img-map-wrapper" ng-mousemove="trackMouse($event)" ng-style="wrapperStyle">'
-                        +'    <div ng-show="area.editMode" ng-repeat="area in m.maps" class="map-area" ng-mousedown="catchArea($event, area)" ng-class="{draging: area.isDraging}" ng-style="getAreaStyle(area)">'
+                        +'    <div ng-show="area.editMode" ng-repeat="area in m.maps" class="map-area" ng-mousedown="catchArea($event, area, $index)" ng-class="{draging: area.isDraging}" ng-style="getAreaStyle(area)">'
                         +'        <div class="dragbar">'
                         +'            <div class="bar-title">{{$index+1}}</div>'
                         +'            <div class="bar-remove" ng-click="removeArea(m.maps, $index)">&times;</div>'
