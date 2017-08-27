@@ -189,7 +189,7 @@
                                         </tr>
                                         <tr>
                                             <td class="col-md-2">
-                                            <select class="form-control" ng-mouseleave="drinkService(items)" ng-model="items.count" value="{{items.count || 0}}">
+                                            <select class="form-control" ng-change="drinkService(items)" ng-model="items.count" value="{{items.count || 0}}">
                                                     <option value="">{{"reservation.QUANTITY" | translate}}</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -214,6 +214,7 @@
                                             </select>
                                             </td>
                                         </tr>
+                                        
                                     </table>
                                     </div>
                                 </div>

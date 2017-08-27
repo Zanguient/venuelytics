@@ -121,7 +121,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
    // if (self.drinkSeriveButton === 'y' || self.drinkSeriveButton === 'Y'){
         addTab('drinkServiceTab','drink', 'assets/img/drinks.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html');
     //}
-    addTab('tableServiceTab','tableService', 'assets/img/ic_bottle.png','reservation.TABLE_SERVICE', 'table-services', 'table-service.html');
+    addTab('tableServiceTab','tableService', 'assets/img/ic_bottle.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html');
    /* });*/
 
     self.init();

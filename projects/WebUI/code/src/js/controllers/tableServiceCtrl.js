@@ -44,11 +44,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                     if(value.minutes === 0) {
                         value.minutes = '00';
                     }
-                    if(value.am === true) {
-                        value.time = value.hours +':'+ value.minutes + ' AM'
-                    } else {
-                        value.time = value.hours +':'+ value.minutes + ' PM'
-                    }
+                    value.time = (value.hours % 12) +':'+ value.minutes + (value.am === true ? ' AM' : ' PM');  
                 });
             }
 

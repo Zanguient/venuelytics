@@ -157,7 +157,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'
         })
         .when('/confirmTableService/:cityName/:venueid', {
-            templateUrl: 'tableService-form.html',
+            templateUrl: 'table-service/tableService-form.html',
             controller: 'TableServiceController',
             title: 'Venuelytics-ConfirmTableService',
             description: 'Venuelytics - a real time venue experience platform enabling Table Service'
@@ -271,7 +271,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform for Food success'
         })
         .when('/:cityName/table-success/:venueid', {
-            templateUrl: 'table-success.html',
+            templateUrl: 'table-service/table-success.html',
             title: 'Venuelytics-Table-Success',
             controller:'TableServiceController',
             description: 'Venuelytics - a real time venue experience platform for Table success'

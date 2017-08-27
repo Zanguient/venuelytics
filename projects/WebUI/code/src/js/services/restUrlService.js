@@ -1,7 +1,7 @@
 "use strict";
 app.factory('RestURL', function () {
   return {
-    baseURL: 'https://dev.api.venuelytics.com/WebServices/rsapi/v1/',
-    adminURL: 'https://dev.api.venuelytics.com/WebServices/'
+    baseURL: 'http://dev.api.venuelytics.com/WebServices/rsapi/v1/',
+    adminURL: 'http://dev.api.venuelytics.com/WebServices/'
   };
 });
