@@ -13,6 +13,8 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     $scope.mapElements = [];
     $scope.imageUrls = [];
     $scope.img.maps = [];
+    $scope.collapse = false;
+
     $timeout(function(){
 
       if ( ! $.fn.dataTable ) return;
@@ -23,7 +25,8 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         $scope.originalHeight = this.height;
         $scope.img.pic_url = this.src;
 
-      }; 
+      };
+
       $('#venueMapImg').bind('resize', function(){
 
         if ($scope.displayWidth !== $('#venueMapImg').width() || $scope.displayHeight !== $('#venueMapImg').height()) {
@@ -122,6 +125,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     $scope.addTable = function () {
       $scope.newTable = {};
       $scope.newTable.enabled = 'Y';
+      $scope.newTable.price = 0;
       $scope.newTable.description = '';
       $scope.newTable.id = -1;
       $scope.newTable.imageUrls =[];
@@ -132,7 +136,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         scope : $scope 
       }).then(function (value) {
         var table = $('#tables_table').DataTable();
-        table.row.add([$scope.newTable.name, $scope.newTable.price, $scope.newTable.servingSize,
+        table.row.add([$scope.newTable.name, $scope.newTable.price || 0, $scope.newTable.servingSize,
         $scope.newTable.description,  $scope.newTable.enabled,   $scope.newTable.id, $scope.newTable.imageUrls]);
         table.page( 'last' ).draw( false );
         _addArea($scope.img, $scope.newTable.name);
@@ -184,7 +188,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
           $('#tables_table').dataTable().fnDeleteRow(rowId);
           var t = $scope.newTable;
           $scope.renameTableNameInImgMap(oldName, t.name);
-          table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id, t.imageUrls]);
+          table.row.add([t.name, t.price || 0, t.servingSize, t.description, t.enabled,  t.id, t.imageUrls]);
           table.draw();
         },function(error){
 
@@ -327,6 +331,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     }
 
     $scope.update = function(isValid, data, venueNumber) {
+      
       $scope.syncTablesAndMapElements()
       for (var i = 0; i < $scope.img.maps.length; i++) {
         var coordinates = [];

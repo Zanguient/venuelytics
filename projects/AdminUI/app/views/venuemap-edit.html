@@ -1,6 +1,7 @@
 <h3>
 	Add / Edit Venue Map <small>Add a new Venue Map Hall or Edit
 		an existing Venue Map.</small>
+		<button class="btn btn-default pull-right" ng-click="isCollapsed = !isCollapsed">Collapse</button>
 </h3>
 <!-- START row-->
 <div class="row" ng-controller="VenueMapController">
@@ -75,7 +76,7 @@
 						ng-click="update(storeInfo.$valid,data,venueNumber)">Save</button>
 				</form>
 			</div>
-			<div  class="col-lg-7" >
+			<div class="col-lg-7" >
 				<div class="row">
 					<button type="button" class="btn btn-primary pull-left  btn-lg" ng-click="addTable()">Add Table</button>
 					<button type="button" class="btn btn-primary  btn-lg pull-right" ng-click="doneEditing()">Done Editing</button>
