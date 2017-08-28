@@ -45,27 +45,17 @@
                     <button type="button" class="btn btn-success btn-raised" ng-click="findTable()">{{'reservation.FIND_A_TABLE' | translate}}</button>
                 </div>
             </div>
-            <div ng-show = "productItem.length >0 ">
-            <table class="table table-no-border table-striped table-responsive">
-                <tr>
-                    <td><label><b>{{'reservation.NAME' | translate}}</b></label></td>
-                    <td><label><b>{{'reservation.HALL_SIZE' | translate}}</b></label></td>
-                    <td><label><b>{{'bottleServiceTab.DESC' | translate}}</b></label></td>
-                     <td></td>
-                </tr>
-                <tr ng-repeat="item in productItem">
-                    <td>{{item.product.name}}</td>
-                    <td>{{item.product.servingSize}}</td>
-                    <td>{{item.product.description}}</td>
-                    <td><button type="button" class="btn btn-success btn-raised" ng-click="timeSlot(item.availableTimes)">Select Time Slot</button></td>
-                </tr>
-            </table>
-            </div>
-            <div class="col-md-12 form-group is-empty" ng-show="showTime ==true" ng-if="timeSelection == true" style="border:1px solid #000;">
+
+            <div class="col-md-12 form-group is-empty" style="border:1px solid #000;" ng-show="((reservedTimeSlot.length != 0) && (timeSlot == true))">
                 <h3>{{'reservation.SELECT_TIME' | translate}}</h3>
                 <div class="col-md-2" ng-repeat="times in reservedTimeSlot">
                     <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve()">{{times.time}}</button>
                 </div>
+            </div>
+            <div class="col-md-12 form-group is-empty" style="border:1px solid #000;" ng-show="((reservedTimeSlot.length == 0) && (timeSlot == true))">
+                <center>
+                    <h3>{{'reservation.NO_TIME_SLOT' | translate}}</h3>
+                </center>
             </div>
         </fieldset>
     </form>

@@ -6,7 +6,8 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             $log.debug('Inside Table Service Controller.');
 
             var self = $scope;
-            self.showTime = false;
+            self.reservedTimeSlot = '';
+            self.timeSlot = false;
             self.init = function() {
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
@@ -24,29 +25,35 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 var authBase64Str = "YXJ1biByYXVuOmFydW5AZ21haWwuY29tOig4ODgpIDg4OC04ODg4";
                 AjaxService.getTime(self.venueid, date, self.table.reserveTime, self.table.guest, authBase64Str).then(function(response) {
                     var obj = response.data;
+                    self.reservedTimeSlot = '';
+                    self.timeSlot = true;
                     Object.keys(obj).forEach(function(key){
                       var value = obj[key];
                       self.productItem.push(value);
-                      });
-                    self.timeSelection = true;
+                    });
 
+                    angular.forEach(self.productItem, function(value1,key1) {
+                          var size = value1.product.servingSize;
+                          if(parseInt(self.table.guest) === size) {
+                              self.reservedTimeSlot = value1.availableTimes
+                          }
+                    });
+
+                    angular.forEach(self.reservedTimeSlot, function(value,key) {
+                        if(value.minutes === 0) {
+                          value.minutes = '00';
+                        }
+                        if(value.hours !== 12) {
+                          value.hours = value.hours % 12;
+                        }
+                        value.time = value.hours +':'+ value.minutes + (value.am === true ? ' AM' : ' PM');  
+                    });
                 });
             };
 
             self.confirmTableReserve = function() {
                 $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);
             };
-
-            self.timeSlot = function(data) {
-                self.showTime = true;
-                self.reservedTimeSlot = data;
-                angular.forEach(self.reservedTimeSlot, function(value,key) {
-                    if(value.minutes === 0) {
-                        value.minutes = '00';
-                    }
-                    value.time = (value.hours % 12) +':'+ value.minutes + (value.am === true ? ' AM' : ' PM');  
-                });
-            }
 
             self.backToTable = function() {
               $location.url('/newCities/' + self.selectedCity + '/' + self.venueid + '/table-services');

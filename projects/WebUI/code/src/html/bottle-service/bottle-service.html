@@ -3,7 +3,7 @@
     <fieldset class="col-md-10 col-md-offset-right-2">
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{bottleDateIsFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
-            <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate"  required>
+            <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate"  required/>
         </div>
         <div class="col-md-12 form-group is-empty selected-table" ng-if="selectedVenueMap.imageUrls[0].originalUrl" style="margin-top: 0px;">
             <div class="table-map-info">
@@ -37,7 +37,8 @@
                                 coords="{{area.coords.join()}}" ng-repeat="area in selectedVenueMap.coordinates"
                                 ng-href="{{area.link_url || 'javascript:void(0)'}}"
                                 ng-click="selectTable(area.id, area.name)"
-                                data-maphilight='{"fillColor":"{{fillColor(area.id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{strokeColor(area.id)}}","strokeWidth":2}'/>
+                                data-maphilight='{"fillColor":"{{fillColor(area.id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{strokeColor(area.id)}}","strokeWidth":2}'>
+                            </area>
                     </map>
                 </center>
                 </div>
@@ -49,7 +50,7 @@
             <div class="col-md-12 col-sm-12 tableItem">
                 <div class="col-md-3 col-sm-4">
                     <input type="checkbox" id="checkData" name="{{table.name}}" ng-checked="isSelected(table)" ng-disabled="isReserved(table)"
-                        ng-click="selectTableForWithOutFloorMap(table)" /><label>&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
+                        ng-click="selectTableForWithOutFloorMap(table,$index)" /><label>&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
                     ng-hide="table.size <= 0">({{table.size}}&nbsp;<i
                         class="fa fa-user" aria-hidden="true" />)
                 </span></label>
@@ -159,9 +160,6 @@
             <label class="control-label" for="focusedInput1">{{'reservation.INSTRUCTIONS' | translate}}</label>
             <input type="text" class="form-control fontBold" id="instructions" ng-model="bottle.instructions" placeholder="">
         </div>
-        <!-- <div class="col-md-10 form-group is-empty">
-            <input type="text" class="form-control" id="zipcode" placeholder="{{'reservation.HOST' | translate}}">
-        </div> -->
         <div class="col-md-12 form-group is-empty" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>
@@ -182,7 +180,7 @@
                         <td><label>{{bottle.brand}}</label></td>
                         <td><label>{{bottle.quantity}}</label></td>
                         <td>$<label>{{bottle.price}}</label></td>
-                        <td><a class="btn btn-danger btn-sm btn-raised btn-responsive" ng-click="removeBottleMinimum($index,bottle,bottleMinimum)" >X</td>
+                        <td><a class="btn btn-danger btn-sm btn-raised btn-responsive" ng-click="removeBottleMinimum($index,bottle,bottleMinimum)" >X</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -257,39 +255,47 @@
           <div class="ripple-container"></div>
         </button>
     </fieldset>
-</form> <br/>
+</form> 
+<br/>
 
-<div class="col-md-12 req-border">
+<!-- <div class="col-md-12 req-border">
     <p class="fontRegular table-font"><font color="#4caf50">{{"reservation.MIN_REQ" | translate}}</font></p>
     <p class="fontRegular table-font">{{"reservation.MIN_REQ_DESC" | translate}}</p>
     <p class="fontRegular table-font"><font color="#4caf50">{{"reservation.DRESS_CODE" | translate}}</font></p>
     <p class="fontRegular table-font">{{"reservation.DRESS_CODE_DESC" | translate}}</p>
-</div> <br/>
+</div> <br/>  -->
 
-<div class="col-md-12">
+<div class="col-md-12" ng-if="bottleMenuUrl">
 
     <center>
-        <h1 class="fontLight color-success">{{'reservation.POLICIES' | translate}}</h1>
+        <h1 class="fontRegular color-success">{{'reservation.POLICIES' | translate}}</h1>
     </center>
     <hr/>
 
-    <center ng-if="bottleMenuUrl">
-        <h1 class="color-success fontRegular">{{'reservation.BOTTLE_MENU' | translate}}</h1>
+    <center>
+        <h3 class="color-success fontLight">{{'reservation.BOTTLE_MENU' | translate}}</h3>
         <a href="" class="btn btn-raised btn-success" ng-click="menuUrlSelection(bottleMenuUrl)">
                          {{'reservation.VIEW_BOTTLE' | translate}}<div class="ripple-container"></div></a>
     </center>
-</div> <br/>
+</div>
 
 <div class="col-md-12" ng-if="bottleVIPPolicy">
     <center>
-        <h1 class="color-success fontRegular">{{'reservation.VIP_SERVICE_POLICY' | translate}}</h1>
+        <h3 class="color-success fontLight">{{'reservation.VIP_SERVICE_POLICY' | translate}}</h3>
         <p class="fontRegular">{{bottleVIPPolicy}}</p>
+    </center>
+</div>
+
+<div class="col-md-12" ng-if="bottleMinimumRequirement">
+    <center>
+        <h3 class="color-success fontLight">{{"reservation.MIN_REQ" | translate}}</h3>
+        <p class="fontRegular">{{bottleMinimumRequirement}}</p>
     </center>
 </div>
 
 <div class="col-md-12" ng-if="dressCode">
     <center>
-        <h1 class="color-success fontRegular">{{'reservation.DRESS_CODE' | translate}}</h1>
+        <h3 class="color-success fontLight">{{'reservation.DRESS_CODE' | translate}}</h3>
         <p class="fontRegular">{{dressCode}}</p>
     </center>
 </div>
@@ -306,7 +312,7 @@
                 <p>{{'bottleServiceTab.ALREADY_SELECTED' | translate}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
+                <button type="button" class="btn btn-default" ng-click="closeReservedModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
             </div>
         </div>
     </div>
@@ -323,7 +329,7 @@
                 <p>{{'reservation.TOTAL_GUEST_SELECTED' | translate}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeGuestListModal()">Close</button>
+                <button type="button" class="btn btn-default" ng-click="closeMoreTableModal()">Close</button>
             </div>
         </div>
     </div>
@@ -357,9 +363,10 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</a>
+                <button type="button" class="btn btn-default" ng-click="closeModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button> 
             </div>
         </div>
     </div>
+</div>
 </div>
 

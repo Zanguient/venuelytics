@@ -21,9 +21,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 self.userData = DataShare.bottleServiceData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
-                /*if(($window.localStorage.getItem("bottleAmount") != '') || ($window.localStorage.getItem("bottleAmount") != undefined) || ($window.localStorage.getItem("bottleAmount") != null)) {
-                    self.availableAmount = $window.localStorage.getItem("bottleAmount");
-                }*/
+                self.availableAmount = $window.localStorage.getItem("bottleAmount");
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');
                 self.selectBottleOrders = DataShare.selectBottle;
                 self.enablePayment = DataShare.enablePayment;
@@ -34,7 +32,8 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 if(DataShare.amount) {
                     self.availableAmount = DataShare.amount;
                 }
-                angular.forEach(self.object.order.orderItems, function(value, key) {
+                if(self.object !== '') {
+                    angular.forEach(self.object.order.orderItems, function(value, key) {
                     if(value.productType === 'VenueMap') {
                         var items = {
                             "venueNumber": value.venueNumber,
@@ -43,9 +42,10 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                             "quantity": value.quantity,
                             "name": value.name
                         };
-                        self.selectTables.push(items);
-                    }
-                });
+                            self.selectTables.push(items);
+                        }
+                    });
+                }
                 self.getTax();
             };
 
@@ -54,7 +54,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.getTax = function() {
                 AjaxService.getTaxType(self.venueID,self.taxDate).then(function(response) {
                     self.tax = response.data;
-                    var amount = self.availableAmount;
+                    var amount = parseInt(self.availableAmount);
                     if(self.tax.length !== 0) {
                         angular.forEach(self.tax, function(value, key) {
                             if(value.type === 'tax') {
@@ -72,7 +72,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                             }
                         });
                     } else {
-                        self.chargedAmount = self.availableAmount;
+                        self.chargedAmount = parseInt(self.availableAmount);
                         self.taxAmount = 0;
                         self.gratuity = 0;
                         self.discount = 0;
@@ -134,6 +134,14 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                             $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
                         }
                     });
+                } else {
+                    if (self.cardPayment === true) {
+                        self.creditCardPayment();
+                    } else if (self.paypal === true) {
+                        self.paypalPayment();
+                    } else {
+                        $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
+                    }
                 }
             };
 
