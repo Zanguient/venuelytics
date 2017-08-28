@@ -26,16 +26,16 @@ App.directive('collapseWidth', ['$transition', function ($transition, $timeout) 
       function expand() {
         
         element.removeClass('collapse').addClass('collapse in');
-        element.removeClass('col-lg-1').addClass('col-lg-6');
-       $('#expandDiv').removeClass('col-lg-11').addClass('col-lg-6');
+        element.removeClass('col-md-0').addClass('col-md-6');
+       $('#expandDiv').removeClass('col-md-12').addClass('col-md-6');
         
       }
 
      
       function collapse() {
           element.removeClass('collapse in').addClass('collapse');
-          element.removeClass('col-lg-6').addClass('col-lg-1');
-         $('#expandDiv').removeClass('col-lg-6').addClass('col-lg-11');
+          element.removeClass('col-md-6').addClass('col-md-0');
+         $('#expandDiv').removeClass('col-md-6').addClass('col-md-12');
           
       }
 

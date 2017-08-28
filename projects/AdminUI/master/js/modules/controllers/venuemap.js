@@ -14,7 +14,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     $scope.imageUrls = [];
     $scope.img.maps = [];
     $scope.collapse = false;
-
+    $scope.img.containerSelector='#venueMapImg';
     $timeout(function(){
 
       if ( ! $.fn.dataTable ) return;
@@ -27,16 +27,11 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 
       };
 
-      $('#venueMapImg').bind('resize', function(){
+      $($scope.img.containerSelector).bind('resize', function(){
 
         if ($scope.displayWidth !== $('#venueMapImg').width() || $scope.displayHeight !== $('#venueMapImg').height()) {
           $scope.displayWidth = $('#venueMapImg').width();
           $scope.displayHeight = $('#venueMapImg').height();
-          var a = $scope.img.pic_url;
-          $scope.img.pic_url = "";
-          $timeout(function(){
-            $scope.img.pic_url =a;
-          }, 200);
         }
       });
 
@@ -331,7 +326,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     }
 
     $scope.update = function(isValid, data, venueNumber) {
-      
+
       $scope.syncTablesAndMapElements()
       for (var i = 0; i < $scope.img.maps.length; i++) {
         var coordinates = [];

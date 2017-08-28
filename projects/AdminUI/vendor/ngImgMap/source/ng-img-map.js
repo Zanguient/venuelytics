@@ -217,8 +217,8 @@
 
     }])
 
-    .controller('ngImgMapCtrl', ['$scope', 'ngImgMapCalculation', 'ngImgMapCurArea', 
-        function($scope, ngImgMapCalculation, ngImgMapCurArea){
+    .controller('ngImgMapCtrl', ['$scope', 'ngImgMapCalculation', 'ngImgMapCurArea', '$timeout',
+        function($scope, ngImgMapCalculation, ngImgMapCurArea, $timeout){
 
         var curArea = ngImgMapCurArea,
             localArea = null, 
@@ -278,8 +278,14 @@
         init();
 
         // 若图片改版，重新初始化
-        $scope.$watch('m.pic_url', function(){
+        $scope.$watch('m.pic_url', function(oldVaue, newValue, scope){
             if (calculation) {init();};
+        }, true);
+        
+        $(m.containerSelector).bind('resize', function(){
+            $timeout(function(){
+                if (calculation) {init();};
+            }, 300);
         });
 
         // 捕获操作节点

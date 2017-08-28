@@ -1,7 +1,6 @@
 <h3>
 	Add / Edit Venue Map <small>Add a new Venue Map Hall or Edit
 		an existing Venue Map.</small>
-		<button class="btn btn-default pull-right" ng-click="isCollapsed = !isCollapsed">Collapse</button>
 </h3>
 <!-- START row-->
 <div class="row" ng-controller="VenueMapController">
@@ -9,7 +8,7 @@
 		<div class="panel-body">
 			<toaster-container
 				toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
-			<div class="col-lg-5">
+			<div class="col-md-6" collapse-width="isCollapsed">
 				<form name="venueMapInfo" validate-form="" novalidate role="form">
 					<!-- START panel-->
 
@@ -76,13 +75,17 @@
 						ng-click="update(storeInfo.$valid,data,venueNumber)">Save</button>
 				</form>
 			</div>
-			<div class="col-lg-7" >
+			<div id="expandDiv" class="col-md-6" >
 				<div class="row">
-					<button type="button" class="btn btn-primary pull-left  btn-lg" ng-click="addTable()">Add Table</button>
-					<button type="button" class="btn btn-primary  btn-lg pull-right" ng-click="doneEditing()">Done Editing</button>
+					<center>
+						<button type="button" class="btn btn-primary pull-left  btn-lg" ng-click="addTable()">Add Table</button>
+						
+						<button class="btn btn-default btn-oval fa fa-2x pull-right" ng-click="isCollapsed = !isCollapsed" ng-class="isCollapsed ?  'fa-compress':'fa-expand'"></button>
+						<button type="button" class="btn btn-primary  btn-lg pull-right" ng-click="doneEditing()">Done Editing</button>
+					</center>
 				</div>
 				<div class="row">
-					<div id="venueMapImg" class="col-lg-12" img-responsive img-rounded ng-img-map ng-img-map-fns="mapFns" ng-model="img" ng-show="img.pic_url != ''" ></div>
+					<div id="venueMapImg" class="col-sm-12" img-responsive img-rounded ng-img-map ng-img-map-fns="mapFns" ng-model="img" ng-show="img.pic_url != ''" ></div>
 				</div>
 				<br />
 				<div class="form-group" ng-show="img.pic_url == ''">
