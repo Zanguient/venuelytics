@@ -258,6 +258,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
                 return _getImgSize(img.pic_url) || [10, 10];
             },
             removeArea : function(area, index) {
+              $scope.deleteTable(index);
               var table = $('#tables_table').dataTable();
               table.fnDeleteRow(index);
             }
