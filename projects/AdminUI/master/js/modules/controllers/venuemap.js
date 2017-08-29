@@ -236,8 +236,8 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 
     $scope.$watch('img', function(nVal, oVal){
       $scope.imgJson = angular.toJson(nVal, true);
-<<<<<<< HEAD
     }, true);
+
     $scope.mapFns = {
       getCanSize: function() {
         return [$scope.displayWidth, $scope.displayHeight];
@@ -260,20 +260,6 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
             if (rowsData[i][0] === area.elementName) {
               table.row( i ).nodes().to$().addClass( 'highlight' ); 
               return;   
-=======
-  }, true);
-  $scope.mapFns = {
-          getCanSize: function() {
-              return [$scope.displayWidth, $scope.displayHeight];
-          },
-          getImgSize: function(img) {
-                return _getImgSize(img.pic_url) || [10, 10];
-            },
-            removeArea : function(area, index) {
-              $scope.deleteTable(index);
-              var table = $('#tables_table').dataTable();
-              table.fnDeleteRow(index);
->>>>>>> master
             }
           }
         }
