@@ -176,9 +176,9 @@
                                             "Authorization": "Anonymous " + authBase64Str
                                         },
                                         success: function(data){
-                                        /*if (typeof(Storage) !== "undefined") {
+                                        if (typeof(Storage) !== "undefined") {
                                             localStorage.setItem("bottleAmount",chargeAmountValue);  
-                                        }*/
+                                        }
                                         window.location.replace(cityName+"/paymentSuccess/"+venueNumber);
                                         },
                                         failure: function(errMsg) {

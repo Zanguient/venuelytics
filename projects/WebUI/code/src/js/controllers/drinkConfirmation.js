@@ -12,9 +12,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
-                if(($window.localStorage.getItem("drinkAmount") != '') || ($window.localStorage.getItem("drinkAmount") != undefined) || ($window.localStorage.getItem("drinkAmount") != null)) {
-                    self.availableAmount = $window.localStorage.getItem("drinkAmount");
-                }
+                self.payAmounts = $window.localStorage.getItem("drinkAmount");
                 self.drinkServiceDetails = DataShare.drinkServiceData;
                 self.selectedDrinkItems = DataShare.selectedDrinks;
                 self.enabledPayment = DataShare.enablePayment;
@@ -29,6 +27,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                 self.availableAmount = amountValue;
                 if(DataShare.amount) {
                     self.availableAmount = DataShare.amount;
+                    self.payAmounts = DataShare.amount;
                 }
             };
 
@@ -37,7 +36,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
             self.getTax = function() {
                 AjaxService.getTaxType(self.selectedVenueID,self.taxDate).then(function(response) {
                     self.tax = response.data;
-                    var amount = self.availableAmount;
+                    var amount = parseInt(self.availableAmount);
                     if(self.tax.length !== 0) {
                         angular.forEach(self.tax, function(value, key) {
                             if(value.type === 'tax') {
@@ -55,7 +54,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                             }
                         });
                     } else {
-                        self.chargedAmount = self.availableAmount;
+                        self.chargedAmount = parseInt(self.availableAmount);
                         self.taxAmount = 0;
                         self.gratuity = 0;
                         self.discount = 0;
@@ -72,6 +71,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                 if(self.orderPlaced === false) {
                     AjaxService.createBottleService(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
                         self.orderId = response.data.id;
+                        self.orderPlaced = true;
                         if (self.cardPayment === true) {
                             self.creditCardPayment();
                         } else if (self.paypal === true) {
@@ -80,6 +80,14 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                             $location.url(self.city +'/drink-success/'+ self.selectedVenueID);
                         }
                     });
+                } else {
+                    if (self.cardPayment === true) {
+                        self.creditCardPayment();
+                    } else if (self.paypal === true) {
+                        self.paypalPayment();
+                    } else {
+                        $location.url(self.city +'/drink-success/'+ self.selectedVenueID);
+                    }
                 }
             };
 

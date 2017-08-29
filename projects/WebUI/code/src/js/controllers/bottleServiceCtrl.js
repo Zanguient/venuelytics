@@ -97,6 +97,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 AjaxService.getInfo(self.venueid).then(function(response) {
                     self.bottleMenuUrl = response.data["Bottle.menuUrl"];
                     self.bottleVIPPolicy = response.data["Bottle.BottleVIPPolicy"];
+                    self.bottleMinimumRequirement = response.data["Bottle.BottleMinimumrequirements"];
                     self.dressCode =  response.data["Advance.dressCode"];
                     self.enabledPayment =  response.data["Advance.enabledPayment"];
                     self.reservationFee =  response.data["Bottle.BottleReservationFee"];
@@ -300,9 +301,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
               }
             };
 
-        self.selectTableForWithOutFloorMap = function(data) {
+        self.selectTableForWithOutFloorMap = function(data,index) {
             if (self.selectionTableItems.indexOf(data) === -1) {
                 self.selectionTableItems.push(data);
+            } else {
+                self.selectionTableItems.splice(index,1);
             }
             self.tableSelection = [];
 
@@ -319,6 +322,18 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                   self.tableSelection.push(table);
               }
         };
+
+        self.closeModal = function() {
+          $('#tableSelectionModal').modal('hide');
+        }
+
+        self.closeMoreTableModal = function() {
+          $('#moreTableModal').modal('hide');
+        }
+
+        self.closeReservedModal = function() {
+          $('#reservedTable').modal('hide');
+        }
 
         self.isReserved = function (table) {
             table.reserved = false;

@@ -176,9 +176,9 @@
                                             "Authorization": "Anonymous " + authBase64Str
                                         },
                                         success: function(data){
-                                       /* if (typeof(Storage) !== "undefined") {
+                                        if (typeof(Storage) !== "undefined") {
                                             localStorage.setItem("amount",chargeAmountValue);  
-                                        }*/
+                                        }
                                         window.location.replace(cityName+"/foodSuccess/"+venueNumber);
                                         },
                                         failure: function(errMsg) {
