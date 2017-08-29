@@ -1,6 +1,8 @@
 /**
- * ========================================================= Module: venuemap.js
- * smangipudi =========================================================
+ * ========================================================= 
+ * Module: venuemap.js
+ * smangipudi 
+ * =========================================================
  */
 
 App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 
@@ -245,6 +247,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
       removeArea : function(area, index) {
         var table = $('#tables_table').dataTable();
         table.fnDeleteRow(index);
+        $scope.syncTablesAndMapElements();
       },
 
       dragInit : function(area, index) {

@@ -22,14 +22,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         if($rootScope.serviceName === 'GuestList') {
             DataShare.guestListData = '';
         }
-        if ((self.venueid === 70008) || (self.venueid === 170637)) {
+        if ((self.venueid == 70008) || (self.venueid == 170637)) {
             if(self.tabParams === 'guest-list') {
               self.partyFlag = false;
             } else {
               self.partyFlag = true;
             }
         }
-        if (self.venueid === 170639) {
+        if (self.venueid == 170639) {
             self.bachelorFlag = true;
         }
         self.guest = DataShare.guestListData;
@@ -105,6 +105,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         });
         self.dispatchHandler[tabParam] = {dispatchId: tabParam, tabId: id, htmlPage: htmlContentPage};
     }
+    
+    self.init();
 
     addTab('bottleTab','bottle', 'assets/img/ic_bottle.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html');
     if (self.bachelorFlag) {
@@ -124,6 +126,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     addTab('tableServiceTab','tableService', 'assets/img/ic_bottle.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html');
    /* });*/
 
-    self.init();
+   
 
 }]);
