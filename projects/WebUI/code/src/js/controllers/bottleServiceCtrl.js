@@ -175,6 +175,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 } else if(data[splitLength-1] === "jpg" || data[splitLength-1] === "png") {
                     self.menuImageUrl = bottleMenu;
                     $('#menuModal').modal('show');
+                    $('.modal-backdrop').remove();
                 } else {
                     $window.open(bottleMenu, '_blank');
                 }
@@ -369,6 +370,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             if(data.fillColor === APP_COLORS.red) {
               // $log.info("Reserved table clicked");
               $('#reservedTable').modal('show');
+              $('.modal-backdrop').remove();
             }
 
                 if(data.fillColor === APP_COLORS.lightGreen) {
@@ -393,6 +395,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         self.tableSelection.push(table);
                     }
                     $('#tableSelectionModal').modal('show');
+                    $('.modal-backdrop').remove();
                 } else if (data.fillColor === APP_COLORS.darkYellow) {
                     self.sum = self.sum - dataValueObj.size;
                     data.fillColor = APP_COLORS.lightGreen;
@@ -471,6 +474,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 if (sum !== 0) {
                   if(self.bottle.totalGuest > sum) {
                       $('#moreTableModal').modal('show');
+                      $('.modal-backdrop').remove();
                       return;
                   }
                 }
