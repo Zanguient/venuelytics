@@ -84,13 +84,23 @@
                     </tr>
                 </table>
                 </center>
-                <uib-carousel interval="-1" active="active" no-wrap="false">
-                <uib-slide
-                    data-ng-repeat="slide in table.imageUrls track by slide.id"
-                    index="$index"> <img
-                    class="img-responsive center-block table-carousel" data-ng-src="{{slide.originalUrl}}"
-                    ng-click="imageView(slide.originalUrl)"/>
-                </uib-slide> </uib-carousel>
+                <center>
+                    <div id="carousel-{{$index}}" class="ms-carousel carousel slide table-carousel" data-ride="carousel">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner carousel-inner-class table-carousel" role="listbox">
+                            <div class="item {{slide.active}} table-carousel" ng-repeat="slide in table.imageUrls">
+                                <img ng-src="{{slide.originalUrl}}" class="img-responsive" style="height:250px"/>
+                            </div>
+                        </div>
+                        <!-- Controls -->
+                        <span data-target="#carousel-{{$index}}" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control" role="button" data-slide="prev" ng-show="table.imageUrls.length > 1">
+                            <i class="zmdi zmdi-chevron-left"></i>
+                        </span> 
+                        <span data-target="#carousel-{{$index}}" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary right carousel-control" role="button" data-slide="next" ng-show="table.imageUrls.length > 1">
+                            <i class="zmdi zmdi-chevron-right"></i>
+                        </span>
+                    </div>
+                </center>
                     <center>
                         <button id="removeBtn" type="button" class="btn btn-danger btn-raised" ng-click="removeSelectedTables($index,table,tableSelection) ">{{'bottleServiceTab.REMOVE' | translate}}</button>
                     </center>
