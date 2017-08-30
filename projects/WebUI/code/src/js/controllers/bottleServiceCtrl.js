@@ -45,7 +45,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
                 if(DataShare.tableSelection) {
                     self.tableSelection = DataShare.tableSelection;
-                    self.showSelectedVenueMap();
+                    //self.showSelectedVenueMap();
                 }
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
@@ -271,7 +271,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                       }
                   }
                   // $log.info("Inside green");
-                  return APP_COLORS.lightGreen;
+                  if (typeof obj === 'undefined') {
+                      return APP_COLORS.lightGreen;
+                  } else {
+                      // $log.info("Inside red color");
+                      return APP_COLORS.red;
+                  }
               } else {
                   if (typeof obj === 'undefined') {
                       return APP_COLORS.lightGreen;
@@ -314,8 +319,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         // $log.info("Inside yellow");
                         return APP_COLORS.turbo;
                       }
-                    }
-                    return APP_COLORS.darkGreen;
+                  }
+                  if (typeof obj === 'undefined') {
+                      return APP_COLORS.darkGreen;
+                  } else {
+                      return APP_COLORS.guardsmanRed;
+                  }
              } else {
                if (typeof obj === 'undefined') {
                   return APP_COLORS.darkGreen;
