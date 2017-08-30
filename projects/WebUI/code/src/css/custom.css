@@ -131,7 +131,11 @@ select {
    margin-top: 16px;
  }
 
- descriptionAlign {
+ .modalMarginTop {
+  margin-top:200px;
+ }
+
+ .descriptionAlign {
    text-align: justify;
  }
 
