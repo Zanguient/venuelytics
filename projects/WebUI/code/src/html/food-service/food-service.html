@@ -11,7 +11,7 @@
 <form class="search-form" name="foodForm" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset class="col-md-10 col-md-offset-right-2">
             <div class="form-group">
-                <label ng-show="foodPickup != 'Y' || foodPickup != 'y'">
+                <label ng-show="foodPickup === 'N' || foodPickup === 'n'">
                     <input type="radio" name="deliveryFood" ng-model="foodType" value="Delivery"/>&nbsp;&nbsp;
                     <font size="3">{{"reservation.DELIVERY" | translate}}</font>
                 </label>&nbsp;&nbsp;&nbsp;&nbsp;
