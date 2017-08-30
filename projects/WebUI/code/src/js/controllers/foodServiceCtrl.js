@@ -60,6 +60,10 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                     self.foodGlutenfree = response.data["Food.glutenfree"];
                     self.enabledPayment = response.data["Advance.enabledPayment"];
                     self.foodPickup = response.data["Food.FoodPickup.enable"];
+                    if(self.foodPickup === 'Y' || self.foodPickup === 'y'){
+                        self.foodType = 'Pickup';
+                    }
+
                 });
             };
 

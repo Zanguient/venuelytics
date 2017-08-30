@@ -79,6 +79,10 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
 
             self.init();
 
+            self.venueInNewCityDescriptionModal = function(value) {
+                $rootScope.privateDescription = value;
+                $('.modal-backdrop').remove();
+            };
     		self.selectCity = function(city) {
                 $rootScope.title = 'Venuelytics-City-'+city.name;
                 $location.url('/newCities/'+city.name);

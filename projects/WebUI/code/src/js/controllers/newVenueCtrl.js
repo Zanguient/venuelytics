@@ -3,8 +3,8 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('NewVenueController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $translate) {
+app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate',
+    function ($rootScope, $log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $translate) {
 
     		$log.log('Inside New Venue Controller.');
 
@@ -51,6 +51,10 @@ app.controller('NewVenueController', ['$log', '$scope', '$http', '$location', 'R
                         });
                     }
                 }
+            };
+            self.newVenueDescription = function(value) {
+                $rootScope.privateDescription = value;
+                $('.modal-backdrop').remove();
             };
 
             self.setTab = function(type){

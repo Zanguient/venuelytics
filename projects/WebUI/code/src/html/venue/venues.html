@@ -70,9 +70,11 @@
                                                     <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address | limitTo: 38
                                                     }}{{venue.address.length > 38 ? '...' :''}}</p>
                                                     <a href="{{venue.website}}" target="_blank" class="venueTitle"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
-                                                    <p class="venueDescription">{{venue.description | limitTo: 75
-                                                        }}{{venue.description.length > 75 ? '...' :''}}</p>
-                                                    <div class="row col-lg-8 serviceIcon">
+                                                    <p class="venueDescription">{{venue.description | limitTo: 60
+                                                        }}{{venue.description.length > 60 ? '...' :''}}
+                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#venuesDescriptionModal" ng-click="venueDescription(venue.description)" ng-if="venue.description.length > 60">{{"reservation.READ_MORE" | translate}}</a></p>
+                                                    <p ng-if = "venue.description === ''">No description</p>
+                                                    <div class="row col-lg-12 serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
                                                             ng-src="{{service.image}}" class="serviceSmallIcon" title="{{service.title}}"
                                                             ng-show="venue.info['{{service.fieldName}}'] == 'Y'"></img>
@@ -107,3 +109,20 @@
     <!-- ms-paper -->
 </div>
 <!-- container -->
+
+<div class="modal modal-success" id="venuesDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="myModalLabel6">{{'bottleServiceTab.DESC' | translate}}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{{privateDescription}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
