@@ -16,8 +16,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.dispatchHandler = [];
     self.venueid = $routeParams.venueid;
     self.tabParams = $routeParams.tabParam;
+    
+
 
     self.init = function() {
+        
+
         /*jshint maxcomplexity:14 */
         if($rootScope.serviceName === 'GuestList') {
             DataShare.guestListData = '';
@@ -36,6 +40,18 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         self.private = DataShare.privateEventData;
         self.totalGuest = DataShare.totalNoOfGuest;
         self.restoreTab = DataShare.tab;
+        var utmSource = $location.search().utm_source;
+        var utmMedium = $location.search().utm_medium;
+        var campaignName = $location.search().utm_campaign;
+        var rawreq = $location.absUrl();
+        var rawreq = $location.absUrl();
+        var userAgent = '';
+        if (typeof $window.navigator !== 'undefined') {
+            userAgent = $window.navigator.userAgent;
+        }        
+
+        AjaxService.utmRequest(self.venueid, self.tabParams, utmSource, utmMedium, campaignName, rawreq, userAgent );
+
         if(DataShare.selectBottle) {
             self.bottleMinimum = DataShare.selectBottle;
         }
@@ -86,7 +102,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
         self.guestServiceButton = response.data["Advance.GuestList.enable"];
         self.tableServiceButton = response.data["Advance.tableService.enable"];
-        self.dispatchToService(self.tabParams);
+        
+        //self.dispatchToService(self.tabParams);
         addTabs();
     });
 
@@ -100,7 +117,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         });
         self.dispatchHandler[tabParam] = {dispatchId: tabParam, tabId: id, htmlPage: htmlContentPage};
     }
-    
+
     function addTabs() {
         if (self.tabParams ) {
             if(self.bottleServiceButton === 'Y' || self.bottleServiceButton === 'y') {

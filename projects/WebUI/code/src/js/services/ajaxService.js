@@ -3,7 +3,7 @@
  * @date MAR'24 2017
  */
 "use strict";
-app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL, $log) {
+app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($http, RestURL, $log, $window) {
 
     this.getVenues = function(id, city, venueType, lat, long) {
 
@@ -329,5 +329,44 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', function($http, RestURL,
             return error;
         });
     };
+    function randomString() {
+        var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+        var stringLength = 16;
+        var randomString = '';
+        for (var i = 0; i < stringLength; i++) {
+            var rnum = Math.floor(Math.random() * chars.length);
+            randomString += chars.substring(rnum,rnum+1);
+        }
 
+        return randomString;
+    
+    }
+    this.utmRequest = function(venueNumber, serviceType, utmSource, utmMedium, campaignName, rawreq, agent ) {
+        if (typeof utmSource === 'undefined' || utmSource === '') {
+            return;
+        }
+        var referenceId = null;
+        if (typeof $window.localStorage !== 'undefined') {
+            referenceId = $window.localStorage.getItem("utm:referenceId");
+            if (referenceId == null || typeof referenceId == 'undefined') {
+                referenceId = randomString();
+                $window.localStorage.setItem("utm:referenceId", referenceId);
+            }
+        }
+        var data = {type : serviceType , utmSource : utmSource , utmMedium : utmMedium || '',
+        venueNumber : venueNumber, utmCampaign : campaignName || '', referenceId: referenceId,
+        request: rawreq, agentInfo: agent};
+
+        return $http({
+                method: 'POST',
+                url: RestURL.baseURL + 'utmrequest' ,
+                data: data
+               
+            }).then(function(response) {
+                return response;
+            }, function(error) {
+                $log.error('Error: ' + error);
+                return error;
+        });
+    };
 }]);
