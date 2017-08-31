@@ -6,42 +6,13 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
-			<tabset type="pills"> 
-				<tab> 
-					<tab-heading> <em class="fa fa-home fa-fw"></em>Venue Information</tab-heading> 
+			<tabset type="pills" > 
+				<tab ng-repeat="tabId in tabs"> 
+					<tab-heading class="bold"><em class="fa fa-xlg" ng-class="tabId.icon"></em>{{tabId.name}}</tab-heading> 
 					<hr>
-					<div ng-include="'app/views/venue/form-venue.html'"></div>
+					<div ng-include="tabId.content"></div>
 				</tab> 
-				<tab> 
-					<tab-heading> <em class="fa fa-list-ul fa-fw"></em>Attributes</tab-heading> 
-					<hr>
-					<div ng-include="'app/views/venue/venue-attributes.html'"></div>
-				</tab> 
-				<tab> 
-					<tab-heading> <em class="fa fa-birthday-cake fa-fw"></em>Private Events</tab-heading> 
-					<hr>
-					<div ng-include="'app/views/venue/private-events.html'"></div>
-				</tab> 
-				<tab> 
-					<tab-heading> <em class="fa fa-beer fa-fw"></em>Bottle</tab-heading> 
-					<hr>
-					<div ng-include="'app/views/venue/venue-bottle.html'"></div>
-				</tab>
-				<tab> 
-					<tab-heading> <em class="fa fa-trophy fa-fw"></em>Party Packages</tab-heading> 
-					<hr>
-					<div ng-include="'app/views/venue/party-events.html'"></div>
-				</tab>
-				<tab> 
-					<tab-heading> <em class="fa fa-shopping-basket fa-fw"></em>Products</tab-heading> 
-					<hr>
-					<div ng-include="'app/views/venue/venue-products.html'"></div>
-				</tab> 
-				<tab> 
-					<tab-heading> <em class="fa fa-money fa-fw"></em>Deals</tab-heading> 
-					<hr>
-					<div ng-include="'app/views/venue/venue-deals.html'"></div>
-				</tab>
+				
 			</tabset>
 		</div>
 	</div>

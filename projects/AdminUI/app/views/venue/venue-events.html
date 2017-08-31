@@ -1,0 +1,29 @@
+
+<div ng-controller="VenueEventsController" class="container-fluid">
+   <span> <a class="btn btn-default pull-right" style="margin-top: -175px;" ng-click="createNewEvent()"><em class="fa fa-plus"></em>Add Event</a></span>
+   <div class="row-masonry row-masonry-lg-5 row-masonry-md-3 row-masonry-sm-1">
+      <div class="col-masonry panel panel-default" ng-repeat="event in events" >
+         <div class="row" ng-mouseenter="visibility=true" ng-mouseleave="visibility=false">
+            <img ng-src="{{event.imageURL}}" alt="" class="img-responsive col-xs-12" />
+         </div>
+         <div class="overlay-bottom" ng-show="visibility" ng-mouseenter="visibility=true" ng-mouseleave="visibility=false">
+            <div class="btn-group pull-right">
+               <button type="button" class="btn btn-default btn-sm" ng-click="editEvent(event.id)">
+                  <em class="fa fa-pencil fa-2x text-gray-dark"></em>
+               </button>
+              
+               <button type="button" class="btn btn-default btn-sm">
+                  <em class="fa fa-trash fa-2x text-gray-dark"></em>
+               </button>
+            </div>
+         </div>
+         <div class="panel-body">
+            <h3>{{event.eventName}}</h3>
+            <h5>{{event.description}}</h5>
+         </div>
+         
+      </div>
+      
+   </div>
+
+</div>

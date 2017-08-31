@@ -77,7 +77,11 @@
  					delete : {method: 'DELETE',  params: { id: '@id'},
  						url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"},
  					getGuests : {method: 'GET',  params: { id: '@id' }, isArray:true,
- 						url: urlTemplate.replace("@context", "venues") +"/guests/20170708"}
+ 						url: urlTemplate.replace("@context", "venues") +"/guests/20170708"},
+ 					getEvents : {method: 'GET',  params: { id: '@id' }, isArray:false,
+ 						url: urlTemplate.replace("@context", "venues") +"/venueevents"},
+ 					getEvent : {method: 'GET',  params: { id: '@id' }, isArray:false,
+ 						url: urlTemplate.replace("@context", "venueevents")}
  				});
  			},
  			NotificationService: function () {

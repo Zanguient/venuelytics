@@ -29,6 +29,16 @@
     "Advance.KarokeRequest.enable": false 
   };
   
+  $scope.tabs = [
+    {name: 'Venue Information', content: 'app/views/venue/form-venue.html', icon: 'fa-home'},
+    {name: 'Attributes', content: 'app/views/venue/venue-attributes.html', icon: 'fa-list-ul'},
+    {name: 'Private Events', content: 'app/views/venue/private-events.html', icon: 'fa-birthday-cake'},
+    {name: 'Bottle', content: 'app/views/venue/venue-bottle.html', icon: 'fa-beer'},
+    {name: 'Party Packages', content: 'app/views/venue/party-events.html', icon: 'fa-trophy'},
+    {name: 'Products', content: 'app/views/venue/venue-products.html', icon: 'fa-shopping-basket'},
+    {name: 'Offers/Deals', content: 'app/views/venue/venue-deals.html', icon: 'fa-money'},
+    {name: 'Events', content: 'app/views/venue/venue-events.html', icon: 'fa-money'},
+  ];
   $scope.onUpdate = function() {
     var payload = {};
     angular.forEach($scope.advanceSwitches, function(v, k, o) {

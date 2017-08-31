@@ -87,6 +87,7 @@ var vendorBaseScripts = [
   // oclazyload
   '../vendor/oclazyload/ocLazyLoad.min.js',
   // UI Bootstrap
+  '../vendor/bootstrap/js/bootstrap.min.js',
   '../vendor/bootstrap/js/ui-bootstrap-tpls-0.11.0.min.js',
   // Loading Bar
   '../vendor/loadingbar/loading-bar.js',

@@ -163,12 +163,20 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins')
     })
      .state('app.editVenueMap', {
-        url: '/editVenueMap/:venueNumber/:id',
+        url: '/venues/:venueNumber/editVenueMap/:id',
         title: 'Edit VenueMap',
         templateUrl: basepath('venuemap-edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins','ngImgMap','ngDialog')
+    })
+     .state('app.editVenueEvent', {
+        url: '/venues/:venueNumber/events/:id',
+        title: 'Edit Venue Event',
+        templateUrl: basepath('venue/venue-event-edit.html'),
+        controller: 'VenueEventController',
+        data: { authorizedRoles: [USER_ROLES.admin]},
+        resolve: resolveFor('parsley','inputmask', 'datatables-pugins','ngDialog')
     })
     .state('app.content-performance', {
         url: '/content-performance/:id',

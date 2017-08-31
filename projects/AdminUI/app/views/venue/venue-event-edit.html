@@ -1,0 +1,133 @@
+<h3>Add / Edit Event
+   <small>Add a new Event or Edit an existing Event.</small>
+</h3>
+<!-- START row-->
+<div class="row">
+  <form  name="eventInfo"  novalidate role="form">
+    <div class="col-md-6">
+       <!-- START panel-->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+           <div class="panel-title">Event Information</div>
+        </div>
+        <div class="panel-body">
+        	<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+        	
+      	<div class="form-group col-md-6 col-sm-12">
+          <label class="control-label">Event Name *</label>
+          <input type="text" name="eventName" required="required" class="form-control" ng-model="data.eventName"/>
+        </div>
+        <div class="form-group col-md-6 col-sm-12">
+          <label class="control-label">Venue Number</label>
+          <input type="text" name="venueNumber" required="required" class="form-control" ng-model="data.venueNumber" ng-disabled="true"/>
+        </div>
+          
+        <div class="form-group col-md-6 col-sm-12">
+          <label class="control-label nowrap">Start Date* </label> 
+          <p class="input-group">
+            <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="data.startDate" is-open="config.startOpened"  ng-readonly="'true'" date-disabled="disabled(date, mode)"  max-date="maxDate"  datepicker-options="dateOptions" ng-required="true" close-text="Close" class="form-control"/>
+            <span class="input-group-btn">
+               <button id="startDtCalendarId"  type="button" class="btn btn-default">
+                  <em class="fa fa-calendar"></em>
+               </button>
+            </span>
+          </p>
+        </div>
+        <div class="form-group col-md-6 col-sm-12">
+          <label class="control-label nowrap">End Date* </label> 
+          <p class="input-group">
+            <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="data.endDate" is-open="config.endOpened"  ng-readonly="'true'" max-date="maxDate"  datepicker-options="dateOptions" ng-required="true" close-text="Close" class="form-control"/>
+            <span class="input-group-btn">
+               <button id="endDtCalendarId"  type="button" class="btn btn-default">
+                  <em class="fa fa-calendar"></em>
+               </button>
+            </span>
+          </p>
+        </div>
+        
+        <div class="form-group col-md-6 col-sm-12">
+          <label class="control-label nowrap">Start Time* </label>
+          <!-- <input type="text" name="eventTime" class="form-control" required="required" ng-model="data.eventTime"/> -->
+          <timepicker ng-model="eventDisplayTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"></timepicker>
+        </div>
+        <div class="form-group col-md-6  col-sm-12">
+          <label class="control-label nowrap">Duration* </label>
+          <input type="text" name="durationInMinutes" required="required" class="form-control" ng-model="data.durationInMinutes"/>
+        </div>
+        
+        <div class="row col-sm-12"/>  
+         <div class="form-group col-md-6  col-sm-12">
+          <label class="control-label nowrap">
+            <input type="radio" name="scheduleRadio" ng-model="config.scheduleRadio" ng-value="'M'" />Selected Days of Month
+            </label>
+            <input type="text" name="scheduleDayOfMonth" class="form-control" ng-model="data.scheduleDayOfMonth" placeholder="1,2,3, ... 30" 
+            ng-disabled="config.scheduleRadio == 'W' "/>
+        </div>
+
+        <div class="form-group col-md-6  col-sm-12">
+
+          <label class="control-label nowrap">
+            <input type="radio" name="scheduleRadio" ng-model="config.scheduleRadio" ng-value="'W'" />Selected Week Days
+          </label>
+          <input type="text" name="scheduleDayOfWeek" class="form-control" ng-model="data.scheduleDayOfWeek" placeholder="SUN,MON,TUE,WED,THU,FRI,SAT" 
+          ng-disabled="config.scheduleRadio == 'M' "/>
+        </div>
+
+       
+
+      
+        <div class="form-group col-md-6  col-sm-12">
+          <label class="control-label">Performer Name</label>
+          <input type="text" name="performerName" class="form-control" ng-model="data.performerName"/>
+        </div>
+         
+        <div class="form-group col-md-6 col-sm-12">
+          <label class="control-label">Performance URL</label>
+          <input type="text" name="description" class="form-control" ng-model="data.performanceURL"/>
+        </div>
+          
+        <div class="form-group col-md-6  col-sm-12">
+          <label class="control-label">Price</label>
+          <input type="text" name="bookingUrl" class="form-control" ng-model="data.price"/>
+        </div>
+
+        <div class="form-group col-md-6  col-sm-12">
+          <label class="control-label">Booking URL</label>
+          <input type="text" name="bookingUrl" class="form-control" ng-model="data.bookingUrl"/>
+        </div>
+
+        <div class="form-group col-sm-12">
+          <label>Description</label>
+          <textarea placeholder="Enter venue description" rows="4" ng-model="data.description" class="form-control ng-pristine ng-valid"></textarea>
+        </div>
+          
+
+          <div class="form-group  col-sm-12">
+            <div class="checkbox c-checkbox">
+              <label>
+                <input type="checkbox" name="enabled"  ng-model="data.enabled" ng-true-value="true"  ng-false-value="false"/>
+                <span class="fa fa-check"></span>Enable
+              </label>
+            </div>
+          </div>
+          <div class="required col-sm-12">* Required fields</div>
+        </div>
+        <div class="panel-footer col-sm-12">
+       	  <button type="submit" class="btn btn-primary" ng-disabled="eventInfo.$invalid" ng-click="update(eventInfo,data)" >Save</button>
+        </div>
+      </div>
+       <!-- END panel-->
+    </div>
+    <div class="col-md-6">
+      <div class="form-group col-sm-12" >
+        <input type="file" id="control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+      </div><br />
+      <center>
+      <div col-sm-6>
+         <img ng-src="{{data.imageURL}}" alt="" class="img-responsive"/>
+      </div>
+      </center>
+    </div>
+  </form>
+</div>
+<!-- END row-->
