@@ -51,12 +51,31 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 var newDate = date.toISOString();
                 var parsedend = moment(newDate).format("MM-DD-YYYY");
                 
-                date = new Date(moment(parsedend,'MM-DD-YYYY').format());
-                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
+                date = moment(parsedend).format("MM-DD-YYYY");
+                self.selectDete = new Date(moment(date + ' ' +self.private.privateStartTime,'MM-DD-YYYY h:mm').format());
+                self.selectDete = moment(self.selectDete).format("YYYY-MM-DDTHH:mm:ss");
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
                 DataShare.privateEventData = self.private;
                 DataShare.authBase64Str = authBase64Str;
+
+                //calculate duration
+                var start = self.private.privateStartTime;
+                var end = self.private.privateEndTime;
+                start = start.split(":");
+                end = end.split(":");
+                var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+                var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+                var diff = endDate.getTime() - startDate.getTime();
+                var hours = Math.floor(diff / 1000 / 60 / 60);
+                diff -= hours * 1000 * 60 * 60;
+                var minutes = Math.floor(diff / 1000 / 60);
+                var finalValue =  (hours < 9 ? "0" : "") + hours + ":" + (minutes < 9 ? "0" : "") + minutes;
+                finalValue = finalValue.split(":");
+                self.duration = finalValue[0] * 60; 
+                if(finalValue[1] == "30") {
+                self.duration = self.duration + 30;
+                }
 
                 self.serviceJSON = {
                     "serviceType": 'BanquetHall',
@@ -73,13 +92,13 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     "serviceInstructions": self.private.privateComment,
                     "status": "REQUEST",
                     "serviceDetail": null,
-                    "fulfillmentDate": dateValue,
-                    "durationInMinutes": 0,
+                    "fulfillmentDate": self.selectDete,
+                    "durationInMinutes": self.duration,
                     "deliveryType": "Pickup",
                    
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": dateValue,
+                        "orderDate": self.selectDete,
                         "orderItems": []
                     }
                 };

@@ -29,12 +29,15 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
                     self.drinksWineListuUrl = response.data["Drinks.wineListuUrl"];
-            		    self.drinksHappyHourDrinkUrl = response.data["Drinks.happyHourDrinkUrl"];
-            		    self.drinksBeerMenuUrl = response.data["Drinks.beerMenuUrl"];
-            		    self.drinksMenuUrl = response.data["Drinks.menuUrl"];
-            		    self.drinksCocktailsUrl = response.data["Drinks.cocktailsUrl"];
+                    self.drinksHappyHourDrinkUrl = response.data["Drinks.happyHourDrinkUrl"];
+                    self.drinksBeerMenuUrl = response.data["Drinks.beerMenuUrl"];
+                    self.drinksMenuUrl = response.data["Drinks.menuUrl"];
+                    self.drinksCocktailsUrl = response.data["Drinks.cocktailsUrl"];
                     self.enabledPayment = response.data["Advance.enabledPayment"];
                     self.drinkPickup = response.data["Drinks.DrinksPickup.enable"];
+                    if(self.drinkPickup === 'Y' || self.drinkPickup === 'y'){
+                        self.drinkType = 'Pickup';
+                    }
                 });
             };
 

@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="col-md-12 form-group is-empty selected-table" ng-if="tableSelection.length > 0" style="margin-top: 0px; margin-left: 46px">
-            {{'reservation.SELECT_TABLE' | translate}}: <label ng-repeat="table in tableSelection">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
+            <font size="4"><b>{{'reservation.SELECT_TABLE' | translate}}</b>: </font><label ng-repeat="table in tableSelection"><font size="4">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</font></label>
         </div>
 
         <div class="col-md-12 form-group is-empty" ng-if="tableSelection">
@@ -84,19 +84,29 @@
                     </tr>
                 </table>
                 </center>
-                <uib-carousel interval="-1" active="active" no-wrap="false">
-                <uib-slide
-                    data-ng-repeat="slide in table.imageUrls track by slide.id"
-                    index="$index"> <img
-                    class="img-responsive center-block table-carousel" data-ng-src="{{slide.originalUrl}}"
-                    ng-click="imageView(slide.originalUrl)"/>
-                </uib-slide> </uib-carousel>
+                <center>
+                    <div id="carousel-{{$index}}" class="ms-carousel carousel slide table-carousel" data-ride="carousel">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner carousel-inner-class table-carousel" role="listbox">
+                            <div class="item {{slide.active}} table-carousel" ng-repeat="slide in table.imageUrls">
+                                <img ng-src="{{slide.originalUrl}}" class="img-responsive" style="height:250px"/>
+                            </div>
+                        </div>
+                        <!-- Controls -->
+                        <span data-target="#carousel-{{$index}}" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control" role="button" data-slide="prev" ng-show="table.imageUrls.length > 1" style="margin-left: 25px;">
+                            <i class="zmdi zmdi-chevron-left"></i>
+                        </span> 
+                        <span data-target="#carousel-{{$index}}" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary right carousel-control" role="button" data-slide="next" ng-show="table.imageUrls.length > 1" style="margin-right: 25px;">
+                            <i class="zmdi zmdi-chevron-right"></i>
+                        </span>
+                    </div>
+                </center>
                     <center>
                         <button id="removeBtn" type="button" class="btn btn-danger btn-raised" ng-click="removeSelectedTables($index,table,tableSelection) ">{{'bottleServiceTab.REMOVE' | translate}}</button>
                     </center>
-                <br> <label class="table-capacity" ng-hide="table.description == null"><b>{{'bottleServiceTab.DESC' | translate}}</b></label> <br> <label
+                <br> <label class="table-capacity" ng-hide="((table.description == null) || (table.description == ''))"><b>{{'bottleServiceTab.DESC' | translate}}</b></label> <br> <label
                     class="table-capacity"
-                    ng-hide="table.description == null">{{table.description}}</label>
+                    ng-hide="((table.description == null) || (table.description == ''))">{{table.description}}</label>
                 
             </div>
         </div>
@@ -289,7 +299,7 @@
                 <p>{{'bottleServiceTab.ALREADY_SELECTED' | translate}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="closeReservedModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
+                <button type="button" class="btn btn-default" ng-click="closeReservedModal()" data-backdrop="false">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
             </div>
         </div>
     </div>
@@ -306,14 +316,14 @@
                 <p>{{'reservation.TOTAL_GUEST_SELECTED' | translate}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="closeMoreTableModal()">Close</button>
+                <button type="button" class="btn btn-default" ng-click="closeMoreTableModal()" data-backdrop="false">Close</button>
             </div>
         </div>
     </div>
 </div>
 
 <div class="modal modal-success" id="tableSelectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+    <div class="modal-dialog animated zoomIn animated-3x modalMarginTop" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
@@ -340,7 +350,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="closeModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button> 
+                <button type="button" class="btn btn-default" ng-click="closeModal()" data-backdrop="false">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button> 
             </div>
         </div>
     </div>

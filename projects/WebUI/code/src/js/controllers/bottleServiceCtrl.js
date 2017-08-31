@@ -45,7 +45,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
                 if(DataShare.tableSelection) {
                     self.tableSelection = DataShare.tableSelection;
-                    self.showSelectedVenueMap();
+                    //self.showSelectedVenueMap();
                 }
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
@@ -64,12 +64,22 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.venueImage = self.detailsOfVenue.imageUrls[0].largeUrl;
                 }
             };
-
             $(window).resize(function() {
+                var divHeight = $('#imagemap').height();
+                var divWidth = $('#imagemap').width();
                 setTimeout(function() {
                     $('#imagemap').maphilight();
+                    if (divHeight > 0) {
+                        $('div.map.img-responsive').css('width', divWidth + 'px');
+                        $('div.map.img-responsive').css('height', divHeight + 'px');
+                        $('canvas').css('height', divHeight + 'px');
+                        $('canvas').css('width', divWidth + 'px');
+                        $('#imagemap').css('height', divHeight + 'px');
+                        $('#imagemap').css('width', divWidth + 'px');
+                    }
                 }, 200);
             });
+
             self.$watch('bottle.requestedDate', function() {
                 if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
                     self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
@@ -175,6 +185,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 } else if(data[splitLength-1] === "jpg" || data[splitLength-1] === "png") {
                     self.menuImageUrl = bottleMenu;
                     $('#menuModal').modal('show');
+                    $('.modal-backdrop').remove();
                 } else {
                     $window.open(bottleMenu, '_blank');
                 }
@@ -260,7 +271,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                       }
                   }
                   // $log.info("Inside green");
-                  return APP_COLORS.lightGreen;
+                  if (typeof obj === 'undefined') {
+                      return APP_COLORS.lightGreen;
+                  } else {
+                      // $log.info("Inside red color");
+                      return APP_COLORS.red;
+                  }
               } else {
                   if (typeof obj === 'undefined') {
                       return APP_COLORS.lightGreen;
@@ -274,9 +290,22 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
           self.showSelectedVenueMap = function() {
             setTimeout(function() {
               $("img[usemap]").rwdImageMaps();
-              setTimeout(function(){
+              /* setTimeout(function(){
                 $('#imagemap').maphilight();
-              }, 200);
+              }, 200); */
+                var divHeight = $('#imagemap').height();
+                var divWidth = $('#imagemap').width();
+                setTimeout(function() {
+                    $('#imagemap').maphilight();
+                    if (divHeight > 0) {
+                        $('div.map.img-responsive').css('width', divWidth + 'px');
+                        $('div.map.img-responsive').css('height', divHeight + 'px');
+                        $('canvas').css('height', divHeight + 'px');
+                        $('canvas').css('width', divWidth + 'px');
+                        $('#imagemap').css('height', divHeight + 'px');
+                        $('#imagemap').css('width', divWidth + 'px');
+                    }
+                }, 200);
             }, 200);
           };
 
@@ -290,8 +319,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         // $log.info("Inside yellow");
                         return APP_COLORS.turbo;
                       }
-                    }
-                    return APP_COLORS.darkGreen;
+                  }
+                  if (typeof obj === 'undefined') {
+                      return APP_COLORS.darkGreen;
+                  } else {
+                      return APP_COLORS.guardsmanRed;
+                  }
              } else {
                if (typeof obj === 'undefined') {
                   return APP_COLORS.darkGreen;
@@ -369,11 +402,13 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             if(data.fillColor === APP_COLORS.red) {
               // $log.info("Reserved table clicked");
               $('#reservedTable').modal('show');
+              $('.modal-backdrop').remove();
             }
 
                 if(data.fillColor === APP_COLORS.lightGreen) {
                     data.fillColor = APP_COLORS.darkYellow;
                     data.strokeColor = APP_COLORS.turbo;
+                    dataValueObj.imageUrls[0].active = 'active';
                     self.selectionTableItems.push(dataValueObj);
                     self.sum = dataValueObj.size + self.sum;
                     DataShare.userselectedTables = self.selectionTableItems;
@@ -393,6 +428,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         self.tableSelection.push(table);
                     }
                     $('#tableSelectionModal').modal('show');
+                    $('.modal-backdrop').remove();
                 } else if (data.fillColor === APP_COLORS.darkYellow) {
                     self.sum = self.sum - dataValueObj.size;
                     data.fillColor = APP_COLORS.lightGreen;
@@ -427,22 +463,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.selectionTableItems.splice(index, 1);
         };
 
-        $(window).resize(function() {
-            var divHeight = $('#imagemap').height();
-            var divWidth = $('#imagemap').width();
-            setTimeout(function() {
-              $('#imagemap').maphilight();
-              if (divHeight > 0) {
-                $('div.map.img-responsive').css('width', divWidth + 'px');
-                $('div.map.img-responsive').css('height', divHeight + 'px');
-                $('canvas').css('height', divHeight + 'px');
-                $('canvas').css('width', divWidth + 'px');
-                $('#imagemap').css('height', divHeight + 'px');
-                $('#imagemap').css('width', divWidth + 'px');
-              }
-            }, 200);
-        });
-
             self.confirmBottleService = function() {
                 DataShare.focused = 'is-focused';
                 DataShare.editBottle = 'true';
@@ -471,6 +491,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 if (sum !== 0) {
                   if(self.bottle.totalGuest > sum) {
                       $('#moreTableModal').modal('show');
+                      $('.modal-backdrop').remove();
                       return;
                   }
                 }
