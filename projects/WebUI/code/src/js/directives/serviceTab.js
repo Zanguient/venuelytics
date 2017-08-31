@@ -14,7 +14,9 @@ app.directive('serviceTab', function() {
       fontColor: '@',
       serviceName: '@',
       clickCb:'&',
-      bgColor: '@'
+      bgColor: '@',
+      tabFlag: '@',
+      tabParam: '@'
   	},
   	controller: [ '$scope', function ($scope) {
   		$scope.onClick = function () {

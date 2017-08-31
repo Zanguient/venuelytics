@@ -398,6 +398,10 @@ select {
     height: 730px;
   }
 
+  .btnIcon {
+    margin-top: 4px;
+  }
+
   .cardAlignment{
     margin-right: 20px;
   }
@@ -649,6 +653,10 @@ select {
   .chk-button {
     border-radius: 10px;
     width: 100%;
+  }
+
+  .buttonHeight {
+    height: 100px
   }
 
   .alignUrl {
