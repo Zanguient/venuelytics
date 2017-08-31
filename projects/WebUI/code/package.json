@@ -58,5 +58,8 @@
     "path": "^0.12.7",
     "run-sequence": "^1.2.2",
     "yargs": "^7.1.0"
+  },
+  "dependencies": {
+    "connect-s4a": "0.0.8"
   }
 }
