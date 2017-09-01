@@ -1,6 +1,6 @@
 "use strict";
-app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope) {
+app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams) {
 
     		$log.log('Inside Business Controller');
     		
@@ -35,9 +35,27 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.bottleUrl = response.data["business.bottleUrl"];
             }
             self.init = function() {
+                self.venueid = $routeParams.venueid;
                 self.cityNames = APP_ARRAYS.cityName;
                 self.listOfCategory = APP_ARRAYS.categories;
                 self.listOfRoles = APP_ARRAYS.roles;
+                if(self.venueid) {
+                    AjaxService.getClaimBusiness(self.venueid).then(function(response) {
+                        self.businessUrl = response ? true : false;
+                        self.privateUrl = response.data["business.privateUrl"];
+                        self.foodUrl = response.data["business.foodUrl"];
+                        self.premiumUrl = response.data["business.premiumUrl"];
+                        self.drinksUrl = response.data["business.drinksUrl"];
+                        self.guestList = response.data["business.guestList"];
+                        self.bottleUrl = response.data["business.bottleUrl"];
+                    });
+                }
+                AjaxService.getVenues(self.venueid,null,null).then(function(response) {
+                    self.selectedVenueName = response.venueName;
+                    self.selectedVenueAddress = response.address;
+                    self.selectedVenueWebsite = response.website;
+                    self.businessImage = response.imageUrls[0].largeUrl;
+                });
             };
 
             self.init();
@@ -114,7 +132,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
 
             self.getClaimBusiness = function(selectedVenue) {
-                $location.url('/emailVerification/' + selectedVenue.id);
+                $location.url('/businessAlreadyClaimed/' + selectedVenue.id);
                 DataShare.businessImage = selectedVenue.imageUrls[0].originalUrl;
                 DataShare.venueName = selectedVenue.venueName;
                 DataShare.venueAddress = selectedVenue.address;
@@ -122,7 +140,15 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                     DataShare.businessUrl = response;
                     // $location.path("/deployment/"+selectedVenue.id);
                 });
-              };
+            };
+
+            self.noFunction = function() {
+                $location.path("/home");
+            };
+
+            self.yesFunction = function() {
+                $location.path("/home");
+            };
 
             self.save = function(newUser) {
                $('#successView').modal('show');

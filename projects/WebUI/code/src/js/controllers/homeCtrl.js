@@ -120,17 +120,26 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 	self.changeLanguage = function(lang){
 			$translate.use(lang);
 	};
-
     self.sendEmail = function(email) {
+        if((email !== undefined) && (email !== '')){
+            $('#subscribeModal').modal('show');
+            $('.modal-backdrop').remove();
+            $rootScope.successEmail = email;
+        }
+    }
+    self.saveBusiness = function() {
         var subscribeEmail = {
-            "email": email,
+            "email": $rootScope.successEmail,
              "utmSource" : "dev.webui.venuelytics.com",
              "utmCampaign" :"homepage",
              "utmMedium": "subscribe"
         };
-
         AjaxService.sendSubscriptionMail(subscribeEmail).then(function(response) {
-            $('#subscribeModal').modal('show');
+            $rootScope.successEmail = subscribeEmail.email;
+            $('#subscribeSuccessModal').modal('show');
+            $('.modal-backdrop').remove();
+            self.subscribeEmails = '';
+            self.emailToSend = '';
         });
     };
     self.init();

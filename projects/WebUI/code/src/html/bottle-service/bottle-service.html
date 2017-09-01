@@ -74,12 +74,12 @@
                 <table>
                     <tr>
                         <td><label class="table-map-color" style="color: black;"><b>#{{$index+1}}</b></label></td>
-                        <td><label>:&nbsp;&nbsp;{{table.name}}</label>
+                        <td><label style="color: black;">:&nbsp;&nbsp;{{table.name}}</label>
                         </td>
                         <td><label ng-hide="table.size <= 0"
                             class="table-capacity" style="color: black;"><b>{{'bottleServiceTab.CAPACITY' | translate}}</b></label>
                         </td>
-                        <td><label ng-hide="table.size <= 0">:&nbsp;&nbsp;{{table.size}}</label>
+                        <td><label ng-hide="table.size <= 0" style="color: black;">:&nbsp;&nbsp;{{table.size}}</label>
                         </td>
                     </tr>
                 </table>
@@ -333,18 +333,18 @@
                 <table class="table table-no-border">
                     <tr>
                         <td>
-                            <label>{{'reservation.TABLE_NAME' | translate}}</label>
+                            <span style="font-weight:bold">{{'reservation.TABLE_NAME' | translate}}</span>
                         </td>
                         <td>
-                            <label ng-repeat="tableInfo in tableSelection">{{tableInfo.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
+                            <span style="font-weight:bold" ng-repeat="tableInfo in tableSelection">{{tableInfo.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</span>
                         </td>
                     </tr>
                     <tr ng-hide="sum <=0">
                         <td>
-                            <label>{{'reservation.CAPACITY' | translate}}</label>
+                            <span style="font-weight:bold">{{'reservation.CAPACITY' | translate}}</span>
                         </td>
                         <td>
-                            <label>{{sum}}</label>
+                            <span style="font-weight:bold">{{sum}}</span>
                         </td>
                     </tr>
                 </table>
