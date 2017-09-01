@@ -99,7 +99,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
 
             self.businessSubmit = function(businessClaim) {
                 var businessObject = {
-                    "business.contactName": DataShare.venueName,
+                    "business.contactName": businessClaim.name,
                     "business.contactEmail": businessClaim.emailId,
                     "business.contactPhone": businessClaim.phone,
                     "business.contactRole": businessClaim.role.role
