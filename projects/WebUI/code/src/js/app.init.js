@@ -105,6 +105,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics-BusinessSearch',
             description: 'Venuelytics - a real time venue experience platform enabling Business Search'
         })
+        .when('/completeBusinessClaim/:venueId', {
+            templateUrl: 'deployment-steps.html',
+            controller: 'BusinessClaimController',
+            title: 'Venuelytics-BusinessSearch',
+            description: 'Venuelytics - a real time venue experience platform enabling Business Search'
+        })
         .when('/about', {
             templateUrl: 'about.html',
             title: 'Venuelytics-About',
