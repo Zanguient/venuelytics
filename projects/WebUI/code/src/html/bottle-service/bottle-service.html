@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="col-md-12 form-group is-empty selected-table" ng-if="tableSelection.length > 0" style="margin-top: 0px; margin-left: 46px">
-            <font size="4"><b>{{'reservation.SELECT_TABLE' | translate}}</b>: </font><label ng-repeat="table in tableSelection"><font size="4">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</font></label>
+            <font size="4"><b>{{'reservation.SELECT_TABLE' | translate}}</b>: </font><label ng-repeat="table in tableSelection"><font size="4" style="font-weight:bold;">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</font></label>
         </div>
 
         <div class="col-md-12 form-group is-empty" ng-if="tableSelection">
@@ -74,12 +74,12 @@
                 <table>
                     <tr>
                         <td><label class="table-map-color" style="color: black;"><b>#{{$index+1}}</b></label></td>
-                        <td><label style="color: black;">:&nbsp;&nbsp;{{table.name}}</label>
+                        <td><label style="font-weight:bold; color: black;">:&nbsp;&nbsp;{{table.name}}</label>
                         </td>
                         <td><label ng-hide="table.size <= 0"
                             class="table-capacity" style="color: black;"><b>{{'bottleServiceTab.CAPACITY' | translate}}</b></label>
                         </td>
-                        <td><label ng-hide="table.size <= 0" style="color: black;">:&nbsp;&nbsp;{{table.size}}</label>
+                        <td><label ng-hide="table.size <= 0" style=" font-weight:bold; color: black;">:&nbsp;&nbsp;{{table.size}}</label>
                         </td>
                     </tr>
                 </table>
