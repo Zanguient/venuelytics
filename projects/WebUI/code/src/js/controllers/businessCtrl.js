@@ -84,6 +84,8 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.businessData = true;
                 self.hideForm = true;
                 self.claimForm = false;
+                self.claimBusiness = false;
+                self.searchBusiness = '';
             };
             
             self.cancel = function() {
@@ -97,7 +99,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
 
             self.businessSubmit = function(businessClaim) {
                 var businessObject = {
-                    "business.contactName": DataShare.venueName,
+                    "business.contactName": businessClaim.name,
                     "business.contactEmail": businessClaim.emailId,
                     "business.contactPhone": businessClaim.phone,
                     "business.contactRole": businessClaim.role.role
@@ -116,10 +118,10 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 DataShare.businessImage = selectedVenue.imageUrls[0].originalUrl;
                 DataShare.venueName = selectedVenue.venueName;
                 DataShare.venueAddress = selectedVenue.address;
-                /*AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
+                AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
                     DataShare.businessUrl = response;
                     // $location.path("/deployment/"+selectedVenue.id);
-                });*/
+                });
               };
 
             self.save = function(newUser) {

@@ -3663,7 +3663,7 @@ var SEMICOLON = SEMICOLON || {};
 		$cookieNotification = $('#cookie-notification');
 
 	$(document).ready( SEMICOLON.documentOnReady.init );
-	$window.load( SEMICOLON.documentOnLoad.init );
+	$window.on('load', SEMICOLON.documentOnLoad.init );
 	$window.on( 'resize', SEMICOLON.documentOnResize.init );
 
 })(jQuery);

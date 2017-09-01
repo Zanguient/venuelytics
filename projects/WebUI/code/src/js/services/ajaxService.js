@@ -329,6 +329,22 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
             return error;
         });
     };
+
+    this.completeBusinessClaim = function(venueId, verificationCode, emailHash) {
+        var data = {vc: verificationCode, ce: emailHash};
+        return $http({
+            method: 'POST',
+            url: RestURL.baseURL + 'venues/' + venueId + '/completeBusinessClaim',
+            params: data,
+            data: data
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
     function randomString() {
         var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
         var stringLength = 16;
