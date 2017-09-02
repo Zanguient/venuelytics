@@ -38,9 +38,19 @@ App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout
           
       });
   };
-    
-	$scope.deleteProduct = function(rowId, productId) {
-			
+  $scope.TIME = function(d) {
+    var t = d.split(":");
+    var h = parseInt(t[0]);
+    var m = parseInt(t[1]);
+    var pm = false;
+    if (h > 11) {
+      pm = true;
+    }
+
+    return ((h % 12) + ':' + h) + (pm ? ' PM' : ' AM');
+  }
+	$scope.deleteEvent = function(index, eventId) {
+			$scope.events.splice(index,1);
 	};
 	$scope.createNewEvent = function() {
 		$state.go('app.editVenueEvent', {venueNumber: $stateParams.id, id: 'new'});
@@ -50,4 +60,7 @@ App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout
     $state.go('app.editVenueEvent', {venueNumber: $stateParams.id, id: eventId});
   };
 
+  $scope.enableDisableColor = function(enabled) {
+    return enabled === 'Y' ? 'circle-green' : 'circle-gray';
+  };
 }]);

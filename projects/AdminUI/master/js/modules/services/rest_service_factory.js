@@ -28,6 +28,11 @@
  		var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls', 'servingSize',
  			'productType', 'BanquetHall','category','brand','enabled','price'];
  		var venueMapProperties = ['id','type','section','imageMap','days','updatedAt','elements','imageUrls'];
+ 		
+ 		var venueEventProperties =['id', 'venueNumber', 'eventName', 'description', 
+ 		'eventType', 'eventTime','durationInMinutes','startDate', 'endDate', 'scheduleDayOfMonth',
+ 		'scheduleDayOfWeek','imageURL','bookingUrl', 'price', 'enabled', 'performerId'];
+ 		
  		var REQ_PROP= {};
  		
  		REQ_PROP['VenueService'] = storeProperties;
@@ -38,6 +43,8 @@
  		REQ_PROP['AgencyService'] = agencyProperties;
  		REQ_PROP['ProductService'] = productProperties;
  		REQ_PROP['VenueMapService'] = venueMapProperties;
+ 		REQ_PROP['VenueEventService'] = venueEventProperties;
+
  		var urlTemplate =  BASE_URL + "/v1/@context/:id";
  		var contentActivateUrl = BASE_URL + "/v1/content/:id/@activate";
  		var self = this;
@@ -81,6 +88,8 @@
  					getEvents : {method: 'GET',  params: { id: '@id' }, isArray:false,
  						url: urlTemplate.replace("@context", "venues") +"/venueevents"},
  					getEvent : {method: 'GET',  params: { id: '@id' }, isArray:false,
+ 						url: urlTemplate.replace("@context", "venueevents")},
+ 					saveEvent : {method: 'POST',  params: { id: '@id' },
  						url: urlTemplate.replace("@context", "venueevents")}
  				});
  			},
@@ -130,6 +139,9 @@
  					url: urlTemplate.replace("@context", "upload")+"/venueImgElements"},
  					uploadPrivateImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
  					url: urlTemplate.replace("@context", "upload")+"/banquetVenueImg"},
+ 					uploadImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
+ 					url: urlTemplate.replace("@context", "upload")+"/:objectType"},
+
  				});
  			},
  			LoyaltyService: function () {
@@ -180,6 +192,9 @@
  					getForDate : { method: 'GET',  params: { id: '@id', date: '@date' }, isArray: true,
  						url: urlTemplate.replace("@context", "reservations") + "/date/:date"}
  					});
+ 			},
+ 			PerformerService : function() {
+ 				return $resource(urlTemplate.replace("@context", "performers"));
  			},
  			cleansePayload : function(serviceName, payload) {
  				var rProps = REQ_PROP[serviceName];

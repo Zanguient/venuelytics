@@ -206,20 +206,14 @@
       target = {};
     }
     RestServiceFactory.VenueService().save(target,payload, function(success){
-      if(target.id == success.id){
+     
         ngDialog.openConfirm({
-          template: '<p>venue information update successfull</p>',
+          template: '<p>venue information saved successfully</p>',
           plain: true,
           className: 'ngdialog-theme-default'
         });
-      } else {
-        ngDialog.openConfirm({
-          template: '<p>venue information saved successfull</p>',
-          plain: true,
-          className: 'ngdialog-theme-default'
-        });
-      }
-      $state.go('app.stores');
+      
+      $state.go('app.venues');
     },function(error){
       if (typeof error.data !== 'undefined') {
        toaster.pop('error', "Server Error", error.data.developerMessage);

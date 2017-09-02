@@ -67,3 +67,86 @@ tab-heading.bold {
   font-size: 16px; 
   text-transform: uppercase; 
 }
+
+.date {
+  display: block;
+  width: 80px;
+  height: 110px;
+  margin: 30px auto;
+  background: #fff;
+  text-align: center;
+  font-family: 'Helvetica', sans-serif;
+  position: relative;
+}
+
+.date .binds {
+  position: absolute;
+  height: 15px;
+  width: 50px;
+  background: transparent;
+  border: 2px solid #999;
+  border-width: 0 5px;
+  top: -6px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.date .month {
+  background: orange;
+  display: block;
+  padding: 8px 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  border-bottom: 1px solid #333;
+  box-shadow: inset 0 -1px 0 0 #666;
+}
+
+.date .day {
+  display: block;
+  margin: 0;
+  padding: 0px 0px 15px 0px;
+  box-shadow: 0 0 3px #ccc;
+  position: relative;
+}
+.date .weekday {
+  display: block;
+  margin: 0;
+  position: relative;
+  color: orange;
+  top: -20px;
+  font-weight: bold;
+}
+
+.date .time {
+  display: block;
+  margin: 0;
+  position: relative;
+  color: black;
+  top: -10px;
+}
+
+.date .day::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 96%;
+  position: absolute;
+  top: 3px;
+  left: 2%;
+  z-index: -1;
+  box-shadow: 0 0 3px #ccc;
+}
+
+.date .day::before {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 90%;
+  position: absolute;
+  top: 6px;
+  left: 5%;
+  z-index: -1;
+  box-shadow: 0 0 3px #ccc;
+}

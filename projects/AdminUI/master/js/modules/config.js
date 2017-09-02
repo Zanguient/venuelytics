@@ -93,7 +93,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
         resolve: resolveFor('flot-chart','flot-chart-plugins')
-    }).state('app.stores', {
+    }).state('app.venues', {
         url: '/venues',
         title: 'Venues',
         templateUrl: basepath('venue/stores.html'),
@@ -138,8 +138,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley')
     })
-    .state('app.storeedit', {
-        url: '/storeedit/:id',
+    .state('app.venueedit', {
+        url: '/venues/:id',
         title: 'Edit Store',
         templateUrl: basepath('venue/store_edit.html'),
         controller: 'NullController',

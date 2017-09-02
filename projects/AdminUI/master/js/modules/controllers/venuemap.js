@@ -388,7 +388,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
             className: 'ngdialog-theme-default'
           });
         }
-        $state.go('app.storeedit', {id : venueNumber});
+        $state.go('app.venueedit', {id : venueNumber});
       },function(error){
         if (typeof error.data !== 'undefined') {
           toaster.pop('error', "Server Error", error.data.developerMessage);
