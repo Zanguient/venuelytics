@@ -10,9 +10,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 	$log.log('Inside Home Controller.');
 
 	var self = $scope;
-	$rootScope.homeTab = 'active';
-
+    $rootScope.homeTab = 'active';
     self.clientImages = APP_CLIENTS.clientImages;
+    $rootScope.businessRoles = APP_ARRAYS.roles;
     /*var data = $location.search().sb;
     self.showBusinessTab = parseInt(data);
     var newConsumer = $location.search().nc;
@@ -120,17 +120,29 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 	self.changeLanguage = function(lang){
 			$translate.use(lang);
 	};
-
     self.sendEmail = function(email) {
+        $rootScope.businessIsFocused = 'is-focused';
+        if((email !== undefined) && (email !== '')){
+            $('#subscribeModal').modal('show');
+            $('.modal-backdrop').remove();
+            $rootScope.successEmail = email;
+        }
+    }
+    self.saveBusiness = function() {
         var subscribeEmail = {
-            "email": email,
+            "email": $rootScope.successEmail,
              "utmSource" : "dev.webui.venuelytics.com",
              "utmCampaign" :"homepage",
              "utmMedium": "subscribe"
         };
-
         AjaxService.sendSubscriptionMail(subscribeEmail).then(function(response) {
-            $('#subscribeModal').modal('show');
+            $rootScope.successEmail = subscribeEmail.email;
+            $('#subscribeSuccessModal').modal('show');
+            $('.modal-backdrop').remove();
+            self.subscribeEmails = '';
+            self.business = {};
+            $rootScope.businessIsFocused = '';
+            $rootScope.emailToSend = '';
         });
     };
     self.init();

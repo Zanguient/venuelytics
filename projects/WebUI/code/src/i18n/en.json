@@ -71,7 +71,7 @@
 		"VIP_PERSONALLY":"Go Well-Beyond Loyalty…Know Your VIP’s Personally",
 		"CONSISTENTLY_REWARD":"Interact with Them Consistently and Reward Them Often",
 		"SUBSCRIPBE_MAIL":"Subscribe Mail",
-		"SUBSCRIPBE_TO_VENUELYTICS":"Thank you for subscribing to VenueLytics. Please check your email for more details."
+		"SUBSCRIPBE_TO_VENUELYTICS":"Thank you for subscribing to VenueLytics!"
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
@@ -104,6 +104,10 @@
 		"STATE":"State",
 		"CATEGORY":"Category",
 		"ROLE":"Role",
+		"YES":"Yes",
+		"NO":"No",
+		"CONTACT_US_CLAIM":"You can contact us at bizdev@venuelytics.com for any further questions.",
+		"BUSINESS_ALREADY":"Your business page has already been claimed. Do you want us to resend the link to your business page?",
 		"CREATE_ACCOUNT":"CREATE ACCOUNT",
 		"REGISTERED":"Registered Successfully",
 		"SUCCESS":"Your info are Registered Successfully. You will receive mail for verification",
@@ -142,7 +146,11 @@
  		"FOOD_URL":"Link to Food Service",
  		"DRINKS_URL":"Link to Drink Service",
  		"GUEST_URL":"Link to Guest List",
- 		"EMAIL_VERIFICATION":"Email Verification",
+		"EMAIL_VERIFICATION":"Email Verification",
+		"NAME_OF_PERSION":"Name of the Person",
+		"BUINESS_NAME":"Business Name",
+		"ROLE_OPTIONAL":"Role (Optional)",
+		"PHONE_OPTIONAL":"Phone number (Optional)",
  		"PLEASE_CHECK_EMAIL":"Please check your email and click on the activate link to complete the claiming process"
 	},
 	"venue":{

@@ -77,6 +77,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller: 'VenueDetailsController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
+        .when('/businessAlreadyClaimed/:venueid', {
+            templateUrl: 'business-already-claim.html',
+            controller: 'businessController',
+            title: 'Venuelytics-BusinessAlreadyClaim',
+            description: 'Venuelytics - a real time venue experience platform enabling Business Already Claimed'
+        })
         .when('/newCities', {
             templateUrl: 'new-city.html',
             controller: 'NewCityController',

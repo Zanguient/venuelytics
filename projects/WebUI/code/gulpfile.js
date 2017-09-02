@@ -31,12 +31,12 @@ var jscpd = require('gulp-jscpd');
 var sitemap = require('gulp-sitemap');
 var save = require('gulp-save');
 var gutil = require('gulp-util');
-var connect_s4a = require('connect-s4a');
-var token = "de8a66f13d57c8dce17ec0d6487ab351";
-var seo4ajax = require('connect');
+// var connect_s4a = require('connect-s4a');
+// var token = "de8a66f13d57c8dce17ec0d6487ab351";
+// var seo4ajax = require('connect');
 
 var webserver = require('gulp-webserver');
-var app = seo4ajax();
+// var app = seo4ajax();
 
 var paths = {
     src : {
@@ -403,11 +403,11 @@ gulp.task('dev', function(cb) {
 
 gulp.task('work', function(cb) {
 
-    app.use(connect_s4a(token));
-    app.use(function(req, res){
-        res.end('hello world\n');
-    });
-    app.listen(3000);
+    // app.use(connect_s4a(token));
+    // app.use(function(req, res){
+    //     res.end('hello world\n');
+    // });
+    // app.listen(3000);
 
     config.environment = 'dev';
     config.compress = false;

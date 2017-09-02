@@ -1,6 +1,6 @@
 <center ng-cloak>
 	<h1 class="color-success">{{"business.DEPLOY_STEPS" | translate}}</h1>
-	<h4 class="color-success"> {{"business.FINAL_STEPS" | translate}} </h4>
+	<h4 style="font-weight:bold"> {{"business.FINAL_STEPS" | translate}} </h4>
 </center>
 <div class="container">
 <form class="search-form" ng-cloak>
@@ -40,7 +40,7 @@
 			</div>
 
 		</div>
-		<div class="form-group">
+		<div class="form-group" ng-show = "businessUrl === true">
 			<div class="col-md-10">
 				<b class="control-label"><font size="4">{{"business.FOR_SHARING" | translate}}</font></b>
 				<br>
@@ -50,9 +50,9 @@
 				<p class="control-label" ng-if="premiumUrl"><font size="2">{{"business.PREMIUM_URL" | translate}}</font></p>
  				<label ng-if="premiumUrl"><font color="black">{{premiumUrl}}</font></label>
  				<hr class="underLine" ng-if="premiumUrl">
-				<p class="control-label"><font size="2">{{"business.URL" | translate}}</font></p>
+				<!-- <p class="control-label"><font size="2">{{"business.URL" | translate}}</font></p>
 				<label><font color="black">https://bit.ly/MonteCarloVIPPremiumServices</font></label>
-				<hr class="underLine">
+				<hr class="underLine"> -->
 				<p class="control-label" ng-if="bottleUrl"><font size="2">{{"business.BOTTLE_URL" | translate}}</font></p>
  				<label ng-if="bottleUrl"><font color="black">{{bottleUrl}}</font></label>
  				<hr class="underLine" ng-if="bottleUrl">
@@ -71,7 +71,7 @@
 			</div>
 
 		</div>
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<div class="col-md-10">
 					<b class="control-label"><font size="4">{{"business.CONFIG_SCRIPT" | translate}}</font></b>
 					<div class="form-group is-empty" id="formMargin">
@@ -95,10 +95,10 @@
 					</div>
 
 				</div>
-			</div>
-			<div>
+			</div> -->
+			<!-- <div>
 				<button class="btn btn-raised btn-success sendEmailButton">{{"business.DEPLOY_EMAIL" | translate}}</button>
-			</div>
+			</div> -->
 			
 </form>
 </div>
