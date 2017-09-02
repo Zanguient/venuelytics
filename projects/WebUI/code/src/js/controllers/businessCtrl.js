@@ -41,7 +41,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.listOfRoles = APP_ARRAYS.roles;
                 if(self.venueid) {
                     AjaxService.getClaimBusiness(self.venueid).then(function(response) {
-                        self.businessUrl = response ? true : false;
+                        self.businessUrl = response.data.status === undefined ? true : false;
                         self.privateUrl = response.data["business.privateUrl"];
                         self.foodUrl = response.data["business.foodUrl"];
                         self.premiumUrl = response.data["business.premiumUrl"];

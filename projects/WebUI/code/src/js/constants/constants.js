@@ -167,12 +167,12 @@ app
     'lightGreen':             '08FF00',
     'turbo':                  'E3E300',
     'btnColor':               '#fffff',
-    'bottleBtn':              '#7a11d9',
-    'privateBtn':             '#0e68a7',
-    'guestBtn':               '#dc992a',
-    'foodBtn':                '#1e8644',
-    'drinksBtn':              '#da0615',
-    'tableBtn':               '#dc992a',
-    'partyBtn':               '#DA0615',
-    'bachelorBtn':            '#DC992A'
+    'bottleBtn':              '#8320d9',
+    'privateBtn':             '#1c70b0',
+    'guestBtn':               '#d2902d',
+    'foodBtn':                '#23703f',
+    'drinksBtn':              '#b2111f',
+    'tableBtn':               '#d2902d',
+    'partyBtn':               '#DA0615',  
+    'bachelorBtn':            '#d2902d'
   });
