@@ -78,7 +78,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/businessAlreadyClaimed/:venueid', {
-            templateUrl: 'business-already-claim.html',
+            templateUrl: 'business/business-already-claim.html',
             controller: 'businessController',
             title: 'Venuelytics-BusinessAlreadyClaim',
             description: 'Venuelytics - a real time venue experience platform enabling Business Already Claimed'
@@ -106,13 +106,13 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
         .when('/searchBusiness', {
-            templateUrl: 'business-search.html',
+            templateUrl: 'business/business-search.html',
             controller: 'businessController',
             title: 'Venuelytics-BusinessSearch',
             description: 'Venuelytics - a real time venue experience platform enabling Business Search'
         })
         .when('/completeBusinessClaim/:venueId', {
-            templateUrl: 'deployment-steps.html',
+            templateUrl: 'business/business-verification.html',
             controller: 'BusinessClaimController',
             title: 'Venuelytics-BusinessSearch',
             description: 'Venuelytics - a real time venue experience platform enabling Business Search'
@@ -138,20 +138,20 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             description: 'Venuelytics - a real time venue experience platform enabling Terms Information'
         })
         .when('/claimBusiness/:venueid', {
-            templateUrl: 'claim-business.html',
+            templateUrl: 'business/claim-business.html',
             controller: 'businessController',
             title: 'Venuelytics-ClaimBusiness',
             description: 'Venuelytics - a real time venue experience platform enabling Claim Business Information'
         })
         .when('/deployment/:venueid', {
-            templateUrl: 'deployment-steps.html',
+            templateUrl: 'business/deployment-steps.html',
             controller: 'businessController',
             title: 'Venuelytics-Deployment',
             description: 'Venuelytics - a real time venue experience platform enabling Deployment Information'
 
         })
         .when('/emailVerification/:venueid', {
-            templateUrl: 'email-verification.html',
+            templateUrl: 'business/email-verification.html',
             controller: 'businessController',
             title: 'Venuelytics-EmailVerification',
             description: 'Venuelytics - a real time venue experience platform enabling Email Verfication'

@@ -151,7 +151,9 @@
 		"BUINESS_NAME":"Business Name",
 		"ROLE_OPTIONAL":"Role (Optional)",
 		"PHONE_OPTIONAL":"Phone number (Optional)",
- 		"PLEASE_CHECK_EMAIL":"Please check your email and click on the activate link to complete the claiming process"
+ 		"PLEASE_CHECK_EMAIL":"Please check your email and click on the activate link to complete the claiming process",
+ 		"WAIT_ACTIVATING_BUSINESS_ACCOUNT":"Please wait activating your business account ...",
+ 		"VALIDATING_BUSINESS_ACCOUN_FAILED": "Unable to activate / validate your business account. Please try again or contact Venulytics, Inc."
 	},
 	"venue":{
 		"HOME":"Home",
