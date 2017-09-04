@@ -17,6 +17,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.venueid = $routeParams.venueid;
     self.tabParams = $routeParams.tabParam;
 
+
     self.init = function() {
         
 
@@ -58,15 +59,32 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
         
         self.reservationTime = APP_ARRAYS.time;
-        AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
-            self.detailsOfVenue = response;
-            self.selectedCity = $routeParams.cityName;
-            self.venueName =    self.detailsOfVenue.venueName;
-            self.imageParam = $location.search().i;
-            if(self.imageParam === 'Y') {
-                self.venueImage = response.imageUrls[0].largeUrl;
-            }
-        });
+            AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
+                self.detailsOfVenue = response;
+                self.selectedCity = $routeParams.cityName;
+                self.venueName =    self.detailsOfVenue.venueName;
+                self.imageParam = $location.search().i;
+                if(self.imageParam === 'Y') {
+                    self.detailsOfVenue.imageUrls[0].active = 'active';
+                    self.venueImage = self.detailsOfVenue;
+                }
+                AjaxService.getInfo(self.venueid).then(function(response) {
+                    self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
+                    self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
+                    self.bottleServiceButton = response.data["Advance.BottleService.enable"];
+                    self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
+                    self.guestServiceButton = response.data["Advance.GuestList.enable"];
+                    self.tableServiceButton = response.data["Advance.tableService.enable"];
+                    self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
+                    self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
+                    self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
+                    self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
+                    self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
+                    self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
+                    self.dispatchToService(self.tabParams);
+                    addTabs();
+                }); 
+            });
     };
 
     self.selectedPage = function() {
@@ -78,29 +96,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     };
 
     self.dispatchToService = function(serviceName) {
-        if(serviceName === undefined) {
+        if(self.imageParam === 'Y' || self.imageParam === 'y') {
+            $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + "?i=Y");
+        } else if(serviceName === undefined) {
             $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bottle-service");
         } else {
             $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
         }
     };
-
-    AjaxService.getInfo(self.venueid).then(function(response) {
-        self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
-        self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
-        self.bottleServiceButton = response.data["Advance.BottleService.enable"];
-        self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
-        self.guestServiceButton = response.data["Advance.GuestList.enable"];
-        self.tableServiceButton = response.data["Advance.tableService.enable"];
-        self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
-        self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
-        self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
-        self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
-        self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
-        self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
-        self.dispatchToService(self.tabParams);
-        addTabs();
-    });
 
     function addTab(id, bId, img, name, tabParam, htmlContentPage, tabEnable, bgColor, fontColor, tabSelected, tabOpacity) {
         self.displayTabs.push({
@@ -122,8 +125,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     function addTabs() {
         if (self.tabParams ) {
             self.tabBottle = self.tabParams === 'bottle-service' ? 'bottle-service' : '';
-            var bottleOpacity = self.bottleServiceButton === false ? 4 : 0.4 ;
-            addTab('bottleTab','bottle', 'assets/img/ic_bottle.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, APP_COLORS.bottleBtn, APP_COLORS.btnColor, self.tabBottle, bottleOpacity);
+            var bgBottle = self.bottleServiceButton === false ? APP_COLORS.bottleBtn : APP_COLORS.bottleShadow;
+            addTab('bottleTab','bottle', 'assets/img/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, bgBottle, APP_COLORS.btnColor, self.tabBottle);
 
             self.tabBachelor = self.tabParams === 'bachelor-party' ? 'bachelor-party' : '';
             if (self.bachelorFlag) {
@@ -136,24 +139,24 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             }
 
             self.tabPrivate = self.tabParams === 'private-events' ? 'private-events' : '';
-            var privateOpacity = self.privateServiceButton === false ? 4 : 0.4 ;
-            addTab('privateEventTab','private', 'assets/img/private.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, APP_COLORS.privateBtn, APP_COLORS.btnColor, self.tabPrivate, privateOpacity);
+            var bgPrivate = self.privateServiceButton === false ? APP_COLORS.privateBtn : APP_COLORS.privateShadow;
+            addTab('privateEventTab','private', 'assets/img/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, bgPrivate, APP_COLORS.btnColor, self.tabPrivate);
 
             self.tabGuest = self.tabParams === 'guest-list' ? 'guest-list' : '';
-            var guestOpacity = self.guestServiceButton === false ? 4 : 0.4 ;
-            addTab('guestlistTab','glist', 'assets/img/guest.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, APP_COLORS.guestBtn, APP_COLORS.btnColor, self.tabGuest, guestOpacity);
+            var bgGuest = self.guestServiceButton === false ? APP_COLORS.guestBtn : APP_COLORS.guestShadow;
+            addTab('guestlistTab','glist', 'assets/img/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, bgGuest, APP_COLORS.btnColor, self.tabGuest);
 
             self.tabFood = self.tabParams === 'food-services' ? 'food-services' : '';
-            var foodOpacity = self.foodSeriveButton === false ? 4 : 0.4 ;
-            addTab('foodServiceTab','foodTab', 'assets/img/food.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, APP_COLORS.foodBtn, APP_COLORS.btnColor, self.tabFood, foodOpacity);
+            var bgFood = self.foodSeriveButton === false ? APP_COLORS.foodBtn : APP_COLORS.foodShadow;
+            addTab('foodServiceTab','foodTab', 'assets/img/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, bgFood, APP_COLORS.btnColor, self.tabFood);
 
             self.tabDrink = self.tabParams === 'drink-services' ? 'drink-services' : '';
-            var drinkOpacity = self.drinkSeriveButton === false ? 4 : 0.4 ;
-            addTab('drinkServiceTab','drink', 'assets/img/drinks.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, APP_COLORS.drinksBtn, APP_COLORS.btnColor, self.tabDrink, drinkOpacity);
+            var bgDrink = self.drinkSeriveButton === false ? APP_COLORS.drinksBtn : APP_COLORS.drinksShadow;
+            addTab('drinkServiceTab','drink', 'assets/img/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, bgDrink, APP_COLORS.btnColor, self.tabDrink);
             
             self.tabTable = self.tabParams === 'table-services' ? 'table-services' : '';
-            var tableOpacity = self.tableServiceButton === false ? 4 : 0.4 ;
-            addTab('tableServiceTab','tableService', 'assets/img/table-img.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, APP_COLORS.tableBtn, APP_COLORS.btnColor, self.tabTable, tableOpacity);
+            var bgTable = self.tableServiceButton === false ? APP_COLORS.tableBtn : APP_COLORS.tableShadow;
+            addTab('tableServiceTab','tableService', 'assets/img/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, bgTable, APP_COLORS.btnColor, self.tabTable);
         }
 
     }

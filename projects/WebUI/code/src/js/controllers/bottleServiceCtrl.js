@@ -59,10 +59,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.selectedCity = $routeParams.cityName;
                     self.venueName =    self.detailsOfVenue.venueName;
                 });
-                self.imageParam = $location.search().i;
-                if(self.imageParam === 'Y') {
-                    self.venueImage = self.detailsOfVenue.imageUrls[0].largeUrl;
-                }
             };
             $(window).resize(function() {
                 var divHeight = $('#imagemap').height();

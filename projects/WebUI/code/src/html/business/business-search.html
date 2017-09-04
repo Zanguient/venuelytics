@@ -38,12 +38,12 @@
                                 <div class="slider">
                                     <img ng-repeat="slide in business.imageUrls" class="slide businessImage col-sm-12" ng-swipe-right="showPrev(slide)"
                                         ng-swipe-left="showNext(slide)" ng-show="isActive($index)"
-                                        ng-src="{{slide.originalUrl}}" />
+                                        ng-src="{{slide.originalUrl}}" alt="businessImg" />
                                     <ul class="buttonNav">
                                         <li ng-repeat="slide in business.imageUrls"
                                             ng-class="{'active':isActive($index)}"><img
                                             ng-src="{{slide.originalUrl}}"
-                                            class="img-responsive sliderThumb" ng-click="showPhoto(slide,$index);" />
+                                            class="img-responsive sliderThumb" alt="busCurImg" ng-click="showPhoto(slide,$index);" />
                                         </li>
                                     </ul>
                                 </div>

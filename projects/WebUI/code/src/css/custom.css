@@ -7,6 +7,12 @@
   font-weight: bold;
 }
 
+.galleryLrg {
+	display: inline-block;
+	height: 50%;
+	width: 100%;
+}
+
 .tableReserved {
   margin-left: 26px;
   margin-top: 16px;
@@ -303,10 +309,19 @@ select {
 /*Desktop*/
 @media screen and (min-width: 1600px) and (max-width:
  1990px) {
+
+  #venueImage {
+    height: 600px;
+  }
+
   .downloadIcon{
     padding-top: 250px;
     margin-left: 137px;
   }
+
+  .textOnImg {
+    position: absolute;left: 400px;top: 50px; color: white;
+   }
 
   #removeBtn {
       margin-left: 200px;
@@ -348,6 +363,9 @@ select {
 @media screen and (min-width: 730px) and (max-width:
   1200px) {
 
+    #venueImage {
+      height: 600px;
+    }
     .downloadIcon{
       padding-top: 20px;
     }
@@ -355,6 +373,10 @@ select {
     .partyAlignment {
       width:1000px;
     }
+
+    .textOnImg {
+      position: absolute;left: 480px;top: 50px; color: white;
+     }
 
     .img-singleline-image {
       /*width: 90px !important;*/
@@ -394,9 +416,17 @@ select {
 @media screen and (min-width: 1200px) and (max-width:
  1600px) {
 
+  #venueImage {
+    height: 600px;
+  }
+
   .imageHeight {
     height: 730px;
   }
+
+  .textOnImg {
+    position: absolute;left: 480px;top: 50px; color: white;
+   }
 
   .btnIcon {
     margin-top: 4px;
@@ -650,6 +680,14 @@ select {
 @media only screen and (min-width: 320px) and (max-width:
  480px) {
 
+  #venueImage {
+    height: 200px;
+  }
+
+  .textOnImg {
+    position: absolute;left: 50px;color: white;
+   }
+
   .chk-button {
     border-radius: 10px;
     width: 100%;
@@ -893,6 +931,10 @@ select {
     width: 100%;
   }
 
+  .textOnImg {
+    position: absolute;left: 80px;color: white;
+   }
+
   .privateFormHeight {
     margin-top: 38px;
   }
@@ -1010,6 +1052,10 @@ select {
     border-radius: 10px;
     width: 100%;
   }
+
+  .textOnImg {
+    position: absolute;left: 100px;color: white;
+   }
 
   .privateFormHeight {
     margin-top: 38px;

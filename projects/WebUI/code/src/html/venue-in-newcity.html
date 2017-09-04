@@ -19,7 +19,7 @@
                                                 class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left"
                                                     ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt=""
+                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venueNewImg"
                                                         class="img-responsive" id="venueImages">
                                                 </figure>
                                                 <div class="card-block">
@@ -37,7 +37,7 @@
                                                     <p ng-if = "venue.description === ''">No description</p>
                                                     <div class="row col-lg-12 serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
-                                                            ng-src="{{service.image}}" class="serviceSmallIcon" title="{{service.title}}"
+                                                            ng-src="{{service.image}}" alt="serviceNewImg" class="serviceSmallIcon" title="{{service.title}}"
                                                             ng-show="venue.info['{{service.fieldName}}'] == 'Y'"></img>
                                                             </a>
                                                     </div>

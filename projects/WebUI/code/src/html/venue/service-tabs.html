@@ -16,26 +16,27 @@
                 <div class="card-block card-block-big">
                     <div class="row">
                         <div>
-                            <div id="carousel-example-generic" class="ms-carousel carousel slide" data-ride="carousel" ng-if="imageParam == 'Y'">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="carousel-example-generic" data-slide-to="0" class="active"></li>
-                                </ol>
-
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner carousel-inner-class" role="listbox">
-                                    <div>
-                                        <img ng-src={{venueImage}} alt="..." class="imageHeight carouselImageWidth">
-                                        <div class="reservationCarousel">
-                                            <p id="venueImageName" class="fontBold reservation-carousel">Reservations / <b><font size="4">{{venueName}}</font></b></p>
-                                            <p id="venueImageHours" class="fontBold reservation-carousel"><b><font size="4">Hours: 11:30 AM - 11:00 AM</font></b></p>
+                            <center ng-show = "imageParam === 'Y' || imageParam === 'y'">
+                                <div id="carousel-{{$index}}1" class="ms-carousel carousel slide" data-ride="carousel">
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner carousel-inner-class" role="listbox">
+                                        <div class="item {{venus.active}}" ng-repeat="venus in venueImage.imageUrls">
+                                            <h1 class="textOnImg fontBold">Featured</h1>
+                                            <img id="venueImage" ng-src="{{venus.originalUrl}}" alt="venusImg" class="galleryLrg"/>
                                         </div>
                                     </div>
+                                    <!-- Controls -->
+                                    <span data-target="#carousel-{{$index}}1" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control" role="button" data-slide="prev" ng-show="venueImage.imageUrls.length > 1" style="margin-left: 25px;">
+                                        <i class="zmdi zmdi-chevron-left"></i>
+                                    </span> 
+                                    <span data-target="#carousel-{{$index}}1" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary right carousel-control" role="button" data-slide="next" ng-show="venueImage.imageUrls.length > 1" style="margin-right: 25px;">
+                                        <i class="zmdi zmdi-chevron-right"></i>
+                                    </span>
                                 </div>
-                            </div>
+                            </center>
                             <div id="serviceTabs" class="btn-group btn-group-justified">
                                 <center>
-                                    <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" font-color="{{tab.fontColor}}" bg-color="{{tab.bgColor}}" tab-param="{{tab.tabParam}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" tab-flag="{{tab.tabFlag}}" tab-opacity="{{tab.tabOpacity}}" class="reservation-tab col-xs-4"></div>
+                                    <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" font-color="{{tab.fontColor}}" bg-color="{{tab.bgColor}}" tab-param="{{tab.tabParam}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" tab-flag="{{tab.tabFlag}}" tab-opacity="{{tab.tabOpacity}}" class="btn-group reservation-tab col-xs-4"></div>
                                 </center>
                             </div>
                            <div ng-include="selectedPage()"></div>
@@ -51,7 +52,7 @@
 <div class="modal" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13">
     <div class="modal-dialog animated zoomIn animated-3x" role="document">
         <div class="modal-content">
-            <img src="{{menuImageUrl}}" alt="" class="img-responsive">
+            <img src="{{menuImageUrl}}" alt="documentImg" class="img-responsive">
         </div>
     </div>
 </div>

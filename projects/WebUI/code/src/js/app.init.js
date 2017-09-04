@@ -105,6 +105,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller: 'ServiceTabController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
+        .when('/newCities/:cityName/:venueid/:tabParam?i&orgId', {
+            templateUrl: 'venue/service-tabs.html',
+            controller: 'ServiceTabController',
+            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
+        })
         .when('/searchBusiness', {
             templateUrl: 'business/business-search.html',
             controller: 'businessController',

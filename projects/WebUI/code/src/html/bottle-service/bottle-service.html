@@ -1,5 +1,5 @@
 <div  ng-controller="BottleServiceController">
-<form class="form-horizontal" parsley-validate validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>
+<form class="form-horizontal" parsley-validate validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
     <fieldset class="col-md-10 col-md-offset-right-2">
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{bottleDateIsFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
@@ -30,7 +30,7 @@
                                 </tr>
                             </table>
                         </div>
-                    <img id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#ImgExam" class="map img-responsive"/>
+                    <img alt="imgmap" id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#ImgExam" class="map img-responsive"/>
                     <map name="ImgExam">
                             <area id="{{area.id}}"
                                 style="outline: red solid 2px;" shape="rect"
@@ -57,7 +57,7 @@
                     <label class="tableReserved" ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
                 </div>
                 <div class="col-md-5 col-sm-5">
-                    <img class="table-carousel" class="img-responsive" data-ng-src="{{table.imageUrls[0].smallUrl}}"/>
+                    <img alt="tableImg" class="table-carousel" class="img-responsive" data-ng-src="{{table.imageUrls[0].smallUrl}}"/>
                 </div>
                 <div class="col-md-4 col-sm-12 descriptionAlign">
                     <label>{{table.description}}</label>
@@ -89,7 +89,7 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner carousel-inner-class table-carousel" role="listbox">
                             <div class="item {{slide.active}} table-carousel" ng-repeat="slide in table.imageUrls">
-                                <img ng-src="{{slide.originalUrl}}" class="img-responsive" style="height:250px"/>
+                                <img alt="curouselImg" ng-src="{{slide.originalUrl}}" class="img-responsive" style="height:250px"/>
                             </div>
                         </div>
                         <!-- Controls -->
