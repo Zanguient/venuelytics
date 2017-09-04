@@ -1,27 +1,44 @@
 
 <div ng-controller="VenueEventsController" class="container-fluid">
    <span> <a class="btn btn-default pull-right" style="margin-top: -175px;" ng-click="createNewEvent()"><em class="fa fa-plus"></em>Add Event</a></span>
-   <div class="row-masonry row-masonry-lg-5 row-masonry-md-3 row-masonry-sm-1">
-      <div class="col-masonry panel panel-default" ng-repeat="event in events" >
-         <div class="row" ng-mouseenter="visibility=true" ng-mouseleave="visibility=false">
-            <img ng-src="{{event.imageURL}}" alt="" class="img-responsive col-xs-12" />
+   <div class="row-masonry row-masonry-lg-4 row-masonry-md-3 row-masonry-sm-1">
+      <div class="col-masonry panel panel-default" ng-repeat="event in events track by $index" >
+         <div class="row">
+            <img ng-src="{{event.imageURL || 'app/img/event_2.jpg'}}" alt="{{event.description}}" class="img-responsive col-xs-12" />
          </div>
-         <div class="overlay-bottom" ng-show="visibility" ng-mouseenter="visibility=true" ng-mouseleave="visibility=false">
+         <div class="overlay-bottom" ng-show="true">
             <div class="btn-group pull-right">
                <button type="button" class="btn btn-default btn-sm" ng-click="editEvent(event.id)">
                   <em class="fa fa-pencil fa-2x text-gray-dark"></em>
                </button>
-              
-               <button type="button" class="btn btn-default btn-sm">
+               <button type="button" class="btn btn-default btn-sm" ng-click="deleteEvent($index, event.id)">
                   <em class="fa fa-trash fa-2x text-gray-dark"></em>
                </button>
             </div>
          </div>
          <div class="panel-body">
-            <h3>{{event.eventName}}</h3>
-            <h5>{{event.description}}</h5>
+            <div class="row">
+               <div class="date pull-left" style="margin: 10px;">
+                  <span class="binds"></span>
+                  <span class="month" ng-bind="event.startDate | date: 'MMMM'"></span>
+                  <h1 class="day" ng-bind="event.startDate | date: 'dd'"></h1>
+                  <h5 class="weekday" ng-bind="event.startDate | date: 'EEE' | uppercase"> </h5>
+                  <h4 class="time" ng-bind="TIME(event.eventTime)"> </h4>
+               </div>  
+               <div>
+                  <div class="pull-right" style="position: relative; top: -20px; right: -80px">
+                     <h3 ng-show="event.price > 0"><em class="fa fa-dollar"/>{{event.price}}</h3>
+                  </div>
+                  <h3 ng-bind="event.eventName"></h3>
+                  <h4> {{event.eventType}} - {{event.performer.performerName}}</h4>
+                  <h5 ng-bind="event.description"></h5>
+               </div>
+
+            </div>                
          </div>
-         
+         <div class="panel-footer">
+            <em class="fa fa-refresh"></em>&nbsp;{{event.scheduleDayOfWeek}}<span class="pull-right circle circle-xl" ng-class="enableDisableColor(event.enabled)" ></span>
+         </div>
       </div>
       
    </div>

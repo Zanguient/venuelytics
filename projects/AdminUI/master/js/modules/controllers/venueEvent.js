@@ -3,24 +3,35 @@
  * smangipudi
  =========================================================*/
 
-App.controller('VenueEventController', ['$scope', '$timeout', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS',
-    function($scope, $timeout, $stateParams, RestServiceFactory, toaster, FORMATS) {
+App.controller('VenueEventController', ['$scope', '$timeout', '$state','$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS','ngDialog',
+    function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, FORMATS, ngDialog) {
   'use strict';
-    var n;
-    n = $scope.minDate = new Date(2017,1,1);
+    
+    var n = $scope.minDate = new Date(2017,1,1);
     
     $scope.maxDate = new Date(n.getFullYear()+1, n.getMonth(), n.getDate());
-    console.log($scope.maxDate);
+    
     $scope.dateOptions = {
         formatYear: 'yy',
         startingDay: 1
     };
     $scope.config = {};
-     $scope.config.scheduleRadio = "M";
+    $scope.config.scheduleRadio = "M";
 
-   $scope.radioChecked = function() {
-    console.log(JSON.stringify($scope.config));
-   };
+    $scope.eventTypes = {};
+    $scope.eventTypes['DJ'] = 'DJ';
+    $scope.eventTypes['VJ'] = 'VJ';
+    $scope.eventTypes['COUNTRY WESTERN'] = 'Country Western';
+    $scope.eventTypes['LATIN NIGHT'] = 'Latin Nights';
+    $scope.eventTypes['ROCK BAND'] = 'Rock Band';
+    $scope.eventTypes['COMEDY'] = 'Comedy';
+    $scope.eventTypes['KARAOKE'] = 'Karaoke';
+    $scope.eventTypes['DANCE'] = 'Dance Night';
+    $scope.eventTypes['MUSICAL'] = 'Musical Night';
+
+    $scope.radioChecked = function() {
+    };
+   
   // Disable weekend selection
     $scope.disabled = function(date, mode) {
         return false;
@@ -48,12 +59,18 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$stateParams', 'R
 	    });
     } else {
     	var data = {};
+        data.venueNumber = $stateParams.venueNumber;
     	data.enabled = false;
     	$scope.data = data;
     }
 	$scope.changed = function() {
 
     };
+    $scope.performers = [];
+    RestServiceFactory.PerformerService().get(function(data) {
+        $scope.performers = data.performers;
+    });
+
     // $scope.startOpened = true;
     $('#startDtCalendarId').on('click', function ($event) {
         $event.preventDefault();
@@ -69,8 +86,47 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$stateParams', 'R
             $scope.config.endOpened = !$scope.config.endOpened;
         }, 200);
     });
-    
+   
     $scope.update = function(form, data) {
-    	console.log(JSON.stringify(form.$error));
+        data.venueNumber = $stateParams.venueNumber;
+        var t = $scope.eventDisplayTime;
+        data.eventTime = t.getHours() +":" + t.getMinutes();
+    	var payload = RestServiceFactory.cleansePayload('VenueEventService', data);
+        var target = {id: data.id};
+        if ($stateParams.id === 'new'){
+          target = {};
+        }
+        console.log(JSON.stringify(payload))
+        RestServiceFactory.VenueService().saveEvent(target, payload, function(success){
+         
+            ngDialog.openConfirm({
+              template: '<p>venue Event information  successfully saved</p>',
+              plain: true,
+              className: 'ngdialog-theme-default'
+            });
+          
+          $state.go('app.venueedit', {id: $stateParams.venueNumber});
+        },function(error){
+          if (typeof error.data !== 'undefined') {
+           toaster.pop('error', "Server Error", error.data.developerMessage);
+          }
+        });
+        
+    };
+    $scope.uploadFile = function(images) {
+        var payload = new FormData();
+        payload.append("file", images[0]);
+        var target ={objectType: 'venueEvent'};
+        RestServiceFactory.VenueImage().uploadImage(target,payload, function(success){
+          if(success !== {}){
+            $scope.data.imageURL = success.originalUrl;
+            toaster.pop('success', "Image upload successfull");
+            document.getElementById("control").value = "";
+          }
+        },function(error){
+          if (typeof error.data !== 'undefined') {
+           toaster.pop('error', "Server Error", error.data.developerMessage);
+            }
+        });
     };
 }]);

@@ -10,9 +10,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 	$log.log('Inside Home Controller.');
 
 	var self = $scope;
-	$rootScope.homeTab = 'active';
-
+    $rootScope.homeTab = 'active';
     self.clientImages = APP_CLIENTS.clientImages;
+    $rootScope.businessRoles = APP_ARRAYS.roles;
     /*var data = $location.search().sb;
     self.showBusinessTab = parseInt(data);
     var newConsumer = $location.search().nc;
@@ -121,6 +121,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 			$translate.use(lang);
 	};
     self.sendEmail = function(email) {
+        $rootScope.businessIsFocused = 'is-focused';
         if((email !== undefined) && (email !== '')){
             $('#subscribeModal').modal('show');
             $('.modal-backdrop').remove();
@@ -139,7 +140,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $('#subscribeSuccessModal').modal('show');
             $('.modal-backdrop').remove();
             self.subscribeEmails = '';
-            self.emailToSend = '';
+            self.business = {};
+            $rootScope.businessIsFocused = '';
+            $rootScope.emailToSend = '';
         });
     };
     self.init();

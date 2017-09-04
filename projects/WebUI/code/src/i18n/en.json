@@ -71,7 +71,7 @@
 		"VIP_PERSONALLY":"Go Well-Beyond Loyalty…Know Your VIP’s Personally",
 		"CONSISTENTLY_REWARD":"Interact with Them Consistently and Reward Them Often",
 		"SUBSCRIPBE_MAIL":"Subscribe Mail",
-		"SUBSCRIPBE_TO_VENUELYTICS":"Thank you for subscribing to VenueLytics. Please check your email for more details."
+		"SUBSCRIPBE_TO_VENUELYTICS":"Thank you for subscribing to VenueLytics!"
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
@@ -126,7 +126,7 @@
 		"FORM_ADDRESS_REQUIRED":"Address is required",
 		"FORM_ADDRESS2_REQUIRED":"Address2 is required",
 		"FORM_CITY_REQUIRED":"City is required",
-		"DEPLOY_STEPS":"Activate Your Venue",
+		"DEPLOY_STEPS":"Activate Your Business Page",
 		"FINAL_STEPS":"Here are the final steps to deploying VenueLytics",
 		"SEARCH_BUSINESS_MESSAGE":"Sorry, the matching business profile is not available currently. Please click on Create Business button below to update your business details.",
 		"DEPLOY_MENU":"MENU",
@@ -151,7 +151,9 @@
 		"BUINESS_NAME":"Business Name",
 		"ROLE_OPTIONAL":"Role (Optional)",
 		"PHONE_OPTIONAL":"Phone number (Optional)",
- 		"PLEASE_CHECK_EMAIL":"Please check your email and click on the activate link to complete the claiming process"
+ 		"PLEASE_CHECK_EMAIL":"Please check your email and click on the activate link to complete the claiming process",
+ 		"WAIT_ACTIVATING_BUSINESS_ACCOUNT":"Please wait activating your business account ...",
+ 		"VALIDATING_BUSINESS_ACCOUN_FAILED": "Unable to activate / validate your business account. Please try again or contact Venulytics, Inc."
 	},
 	"venue":{
 		"HOME":"Home",

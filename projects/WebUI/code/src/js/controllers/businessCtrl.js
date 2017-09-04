@@ -26,28 +26,30 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.selectedVenueAddress = DataShare.venueAddress;
             self.businessImage = DataShare.businessImage;
             var response = DataShare.businessUrl;
-            if(DataShare.businessUrl) {
-                self.privateUrl = response.data["business.privateUrl"];
-                self.foodUrl = response.data["business.foodUrl"];
-                self.premiumUrl = response.data["business.premiumUrl"];
-                self.drinksUrl = response.data["business.drinksUrl"];
-                self.guestList = response.data["business.guestList"];
-                self.bottleUrl = response.data["business.bottleUrl"];
-            }
+            self.successMessage = !!$location.search().successful ;
+            
             self.init = function() {
                 self.venueid = $routeParams.venueid;
                 self.cityNames = APP_ARRAYS.cityName;
                 self.listOfCategory = APP_ARRAYS.categories;
                 self.listOfRoles = APP_ARRAYS.roles;
+                self.deploymentServices = [];
                 if(self.venueid) {
                     AjaxService.getClaimBusiness(self.venueid).then(function(response) {
-                        self.businessUrl = response ? true : false;
+                        self.businessUrl = response.data.status === undefined ? true : false;   
                         self.privateUrl = response.data["business.privateUrl"];
                         self.foodUrl = response.data["business.foodUrl"];
                         self.premiumUrl = response.data["business.premiumUrl"];
                         self.drinksUrl = response.data["business.drinksUrl"];
                         self.guestList = response.data["business.guestList"];
                         self.bottleUrl = response.data["business.bottleUrl"];
+
+                        addDeployment("business.PREMIUM_URL", self.premiumUrl);
+                        addDeployment("business.BOTTLE_URL", self.bottleUrl);
+                        addDeployment("business.PRIVATE_URL", self.privateUrl);
+                        addDeployment("business.FOOD_URL", self.foodUrl);
+                        addDeployment("business.DRINKS_URL", self.drinksUrl);
+                        addDeployment("business.GUEST_URL", self.guestList);
                     });
                 }
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
@@ -58,7 +60,12 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 });
             };
 
-            self.init();
+            
+            function addDeployment(displayName, url) {
+                if (typeof url != 'undefined' && url != null && url.length > 0){
+                    self.deploymentServices.push({displayName: displayName, url: url});
+                }
+            }
 
             self.search = function(){
 
@@ -82,20 +89,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 });
             };
             
-            self.claim = function(selectedVenue) {
-                $window.scrollTo(0, 0);
-                DataShare.businessImage = selectedVenue.imageUrls[0].originalUrl;
-                self.selectedVenueName = selectedVenue.venueName;
-                DataShare.venueName = selectedVenue.venueName;
-                self.selectedVenueId = selectedVenue.id;
-                DataShare.venueNumber = selectedVenue.id;
-                self.selectedVenueWebsite = selectedVenue.website;
-                self.selectedVenueAddress = selectedVenue.address;
-                DataShare.venueAddress = self.selectedVenueAddress;
-                self.claimBusiness = true;
-                $rootScope.title = 'Venuelytics-ClaimBusiness-'+selectedVenue.venueName;
-                $location.path("/claimBusiness/"+self.selectedVenueId);
-            };
+            
 
             self.createBusinessAccount = function(){
                 $window.scrollTo(0, 0);
@@ -123,12 +117,38 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                     "business.contactRole": businessClaim.role.role
                 };
 
-                AjaxService.claimBusiness(DataShare.venueNumber, businessObject).then(function(response) {
+                AjaxService.claimBusiness(self.venueid , businessObject).then(function(response) {
                     $log.info("Claim business response: "+angular.toJson(response));
+                }, function(error) {
+                     $log.info("Claim business response: "+angular.toJson(error.data));
                 });
                 self.businessData = true;
                 self.hideForm = true;
-                $location.path("/emailVerification/"+DataShare.venueNumber);
+                $location.path("/emailVerification/"+self.venueid);
+            };
+
+            self.clickClaimBusiness = function(selectedVenue) {
+                if (selectedVenue.flag == false) {
+                    self.claim(selectedVenue);
+                } else {
+                    self.getClaimBusiness(selectedVenue);
+                }
+
+            };
+
+            self.claim = function(selectedVenue) {
+                $window.scrollTo(0, 0);
+                DataShare.businessImage = selectedVenue.imageUrls[0].originalUrl;
+                self.selectedVenueName = selectedVenue.venueName;
+                DataShare.venueName = selectedVenue.venueName;
+                self.selectedVenueId = selectedVenue.id;
+                DataShare.venueNumber = selectedVenue.id;
+                self.selectedVenueWebsite = selectedVenue.website;
+                self.selectedVenueAddress = selectedVenue.address;
+                DataShare.venueAddress = self.selectedVenueAddress;
+                self.claimBusiness = true;
+                $rootScope.title = 'Venuelytics-ClaimBusiness-'+selectedVenue.venueName;
+                $location.path("/claimBusiness/"+self.selectedVenueId);
             };
 
             self.getClaimBusiness = function(selectedVenue) {
@@ -139,6 +159,8 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
                     DataShare.businessUrl = response;
                     // $location.path("/deployment/"+selectedVenue.id);
+                }, function(error) {
+
                 });
             };
 
@@ -147,6 +169,9 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
 
             self.yesFunction = function() {
+                AjaxService.sendBusinessPage(self.venueid).then(function(response) {
+                    // may show success message
+                });
                 $location.path("/home");
             };
 
@@ -186,5 +211,6 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
 			// show a certain image
 			self.showPhoto = function (slide,index) {
 			self._Index = index;
-			}; 		
+			};
+        self.init(); 		
     }]);

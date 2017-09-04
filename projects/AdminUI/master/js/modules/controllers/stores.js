@@ -71,7 +71,7 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     });
 
     $scope.editStore = function(storeId) {
-  		$state.go('app.storeedit', {id: storeId});
+  		$state.go('app.venueedit', {id: storeId});
   	};
   	$scope.deleteStore = function(rowId, storeId) {
       var target = {id: storeId};
@@ -102,7 +102,7 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     });
     };*/
   	$scope.createNewStore = function() {
-  		$state.go('app.storeedit', {id: 'new'});
+  		$state.go('app.venueedit', {id: 'new'});
   	};
   });
 }]);      

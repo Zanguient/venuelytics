@@ -337,14 +337,14 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
             url: RestURL.baseURL + 'venues/' + venueId + '/completeBusinessClaim',
             params: data,
             data: data
-        }).then(function(success) {
-            return success;
-        }, function(error) {
-            $log.error('Error: ' + error);
-            return error;
         });
     };
-
+    this.sendBusinessPage = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'venues/' + venueId + '/sendBusinessPage'
+        });
+    };
     function randomString() {
         var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
         var stringLength = 16;

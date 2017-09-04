@@ -79,7 +79,7 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
                     className: 'ngdialog-theme-default'
                 });
             }
-            $state.go('app.storeedit', {id : $scope.venueNumber});
+            $state.go('app.venueedit', {id : $scope.venueNumber});
     	},function(error){
     		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
