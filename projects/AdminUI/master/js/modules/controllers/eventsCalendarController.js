@@ -27,6 +27,7 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
     promise.$promise.then(function(data) {
       $scope.events = data['venue-events'];
       var today = new Date();
+      $scope.calEvents = [];
       for(var i = 0; i < $scope.events.length; i++) {
         var event = $scope.events[i];
         if (event.enabled !== 'Y') {
@@ -159,7 +160,7 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
     });
   };
   $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
-        // register on venue change;
+      $scope.getEvents();  
   
   });
 
