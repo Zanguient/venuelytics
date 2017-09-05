@@ -332,6 +332,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
         self.selectTableForWithOutFloorMap = function(data,index) {
             if (self.selectionTableItems.indexOf(data) === -1) {
+                data.imageUrls[0].active = 'active';
                 self.selectionTableItems.push(data);
             } else {
                 self.selectionTableItems.splice(index,1);

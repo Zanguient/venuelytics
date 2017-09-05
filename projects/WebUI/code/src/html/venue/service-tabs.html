@@ -21,7 +21,7 @@
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner carousel-inner-class" role="listbox">
                                         <div class="item {{venus.active}}" ng-repeat="venus in venueImage.imageUrls">
-                                            <h1 class="textOnImg fontBold">Featured</h1>
+                                            <h1 ng-show ="featuredEnable === 'Y' || featuredEnable === 'y'" class="textOnImg fontBold">Featured</h1>
                                             <img id="venueImage" ng-src="{{venus.originalUrl}}" alt="venusImg" class="galleryLrg"/>
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                             </center>
                             <div id="serviceTabs" class="btn-group btn-group-justified">
                                 <center>
-                                    <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" font-color="{{tab.fontColor}}" bg-color="{{tab.bgColor}}" tab-param="{{tab.tabParam}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" tab-flag="{{tab.tabFlag}}" tab-opacity="{{tab.tabOpacity}}" class="btn-group reservation-tab col-xs-4"></div>
+                                    <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" font-color="{{tab.fontColor}}" bg-color="{{tab.bgColor}}" tab-param="{{tab.tabParam}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" tab-flag="{{tab.tabFlag}}" tab-opacity="{{tab.tabOpacity}}" tab-cursor="{{tab.tabCursor}}" class="reservation-tab col-xs-4"></div>
                                 </center>
                             </div>
                            <div ng-include="selectedPage()"></div>

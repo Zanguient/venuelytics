@@ -75,12 +75,15 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                     self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
                     self.guestServiceButton = response.data["Advance.GuestList.enable"];
                     self.tableServiceButton = response.data["Advance.tableService.enable"];
+                    self.featuredEnable = response.data["Advance.featured"];
+                    self.eventsEnable = response.data["venueEvents"]
                     self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
                     self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
                     self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
                     self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
                     self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
                     self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
+                    self.eventsEnable = self.eventsEnable === 'Y' ? false : true;
                     self.dispatchToService(self.tabParams);
                     addTabs();
                 }); 
@@ -105,7 +108,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
     };
 
-    function addTab(id, bId, img, name, tabParam, htmlContentPage, tabEnable, bgColor, fontColor, tabSelected, tabOpacity) {
+    function addTab(id, bId, img, name, tabParam, htmlContentPage, tabEnable, bgColor, fontColor, tabSelected, tabOpacity, tabCursor) {
         self.displayTabs.push({
            id: id,
            buttonId: bId,
@@ -116,7 +119,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
            bgColor: bgColor,
            fontColor: fontColor,
            tabParam: tabSelected,
-           tabOpacity: tabOpacity
+           tabOpacity: tabOpacity,
+           tabCursor: tabCursor
 
         });
         self.dispatchHandler[tabParam] = {dispatchId: tabParam, tabId: id, htmlPage: htmlContentPage};
@@ -125,8 +129,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     function addTabs() {
         if (self.tabParams ) {
             self.tabBottle = self.tabParams === 'bottle-service' ? 'bottle-service' : '';
-            var bgBottle = self.bottleServiceButton === false ? APP_COLORS.bottleBtn : APP_COLORS.bottleShadow;
-            addTab('bottleTab','bottle', 'assets/img/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, bgBottle, APP_COLORS.btnColor, self.tabBottle);
+            var bottleOpacity = self.bottleServiceButton === false ? 4 : 0.6 ;
+            var bottleCursor = self.bottleServiceButton === false ? '' : 'not-allowed';
+            addTab('bottleTab','bottle', 'assets/img/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, APP_COLORS.bottleBtn, APP_COLORS.btnColor, self.tabBottle, bottleOpacity, bottleCursor);
 
             self.tabBachelor = self.tabParams === 'bachelor-party' ? 'bachelor-party' : '';
             if (self.bachelorFlag) {
@@ -139,24 +144,34 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             }
 
             self.tabPrivate = self.tabParams === 'private-events' ? 'private-events' : '';
-            var bgPrivate = self.privateServiceButton === false ? APP_COLORS.privateBtn : APP_COLORS.privateShadow;
-            addTab('privateEventTab','private', 'assets/img/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, bgPrivate, APP_COLORS.btnColor, self.tabPrivate);
+            var privateOpacity = self.privateServiceButton === false ? 4 : 0.6 ;
+            var privateCursor = self.privateServiceButton === false ? '' : 'not-allowed';
+            addTab('privateEventTab','private', 'assets/img/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, APP_COLORS.privateBtn, APP_COLORS.btnColor, self.tabPrivate, privateOpacity, privateCursor);
 
             self.tabGuest = self.tabParams === 'guest-list' ? 'guest-list' : '';
-            var bgGuest = self.guestServiceButton === false ? APP_COLORS.guestBtn : APP_COLORS.guestShadow;
-            addTab('guestlistTab','glist', 'assets/img/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, bgGuest, APP_COLORS.btnColor, self.tabGuest);
+            var guestOpacity = self.guestServiceButton === false ? 4 : 0.6 ;
+            var guestCursor = self.guestServiceButton === false ? '' : 'not-allowed';
+            addTab('guestlistTab','glist', 'assets/img/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, APP_COLORS.guestBtn, APP_COLORS.btnColor, self.tabGuest, guestOpacity, guestCursor);
 
             self.tabFood = self.tabParams === 'food-services' ? 'food-services' : '';
-            var bgFood = self.foodSeriveButton === false ? APP_COLORS.foodBtn : APP_COLORS.foodShadow;
-            addTab('foodServiceTab','foodTab', 'assets/img/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, bgFood, APP_COLORS.btnColor, self.tabFood);
+            var foodOpacity = self.foodSeriveButton === false ? 4 : 0.6 ;
+            var foodCursor = self.foodSeriveButton === false ? '' : 'not-allowed';
+            addTab('foodServiceTab','foodTab', 'assets/img/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, APP_COLORS.foodBtn, APP_COLORS.btnColor, self.tabFood, foodOpacity, foodCursor);
 
             self.tabDrink = self.tabParams === 'drink-services' ? 'drink-services' : '';
-            var bgDrink = self.drinkSeriveButton === false ? APP_COLORS.drinksBtn : APP_COLORS.drinksShadow;
-            addTab('drinkServiceTab','drink', 'assets/img/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, bgDrink, APP_COLORS.btnColor, self.tabDrink);
+            var drinkOpacity = self.drinkSeriveButton === false ? 4 : 0.6 ;
+            var drinkCursor = self.drinkSeriveButton === false ? '' : 'not-allowed';
+            addTab('drinkServiceTab','drink', 'assets/img/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, APP_COLORS.drinksBtn, APP_COLORS.btnColor, self.tabDrink, drinkOpacity, drinkCursor);
             
             self.tabTable = self.tabParams === 'table-services' ? 'table-services' : '';
-            var bgTable = self.tableServiceButton === false ? APP_COLORS.tableBtn : APP_COLORS.tableShadow;
-            addTab('tableServiceTab','tableService', 'assets/img/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, bgTable, APP_COLORS.btnColor, self.tabTable);
+            var tableOpacity = self.tableServiceButton === false ? 4 : 0.6 ;
+            var tableCursor = self.tableServiceButton === false ? '' : 'not-allowed';
+            addTab('tableServiceTab','tableService', 'assets/img/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, APP_COLORS.tableBtn, APP_COLORS.btnColor, self.tabTable, tableOpacity, tableCursor);
+
+            self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
+            var eventOpacity = self.eventsEnable === false ? 4 : 0.6 ;
+            var eventCursor = self.eventsEnable === false ? '' : 'not-allowed';
+            //addTab('eventListTab','eventlist', 'assets/img/table.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, APP_COLORS.tableBtn, APP_COLORS.btnColor, self.tabEvents, eventOpacity, eventCursor);
         }
 
     }

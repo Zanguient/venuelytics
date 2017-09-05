@@ -44,8 +44,12 @@
             <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
                 <input type="text" id="guestLastName" name="guestLastName" placeholder="" class="form-control fontBold" ng-model="guest.guestLastName" required="" data-parsley-trigger="change">
             </div>
-            
-            
+            <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestFocus}}" style="margin-left: auto;">
+                <label class="control-label" for="focusedInput1">{{"reservation.EVENT_TYPE"  | translate}}</label>
+                <select class="form-control fontBold" required="" ng-model="guest.guestEvent" ng-options="t.name for t in eventTypes">
+                    <option value=""></option>
+                </select>
+            </div>            
             <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestFocus}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.ZIPCODE' | translate}}</label>
                 <input type="text" id="guestZip" name="guestZip" class="form-control fontBold" ng-model="guest.guestZip" data-parsley-trigger="change" required>

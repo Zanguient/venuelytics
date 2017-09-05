@@ -1,0 +1,38 @@
+<div ng-controller="eventListCtrl">
+    <button type="button" class="btn btn-primary pull-right" ng-model="calenderData" ng-click="calenderEventView()">
+        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Calender
+    </button>
+    <button type="button" class="btn btn-primary pull-right"ng-model="eventListData" ng-click="listEventView()" style="margin-right: 13px;">
+        <i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;List
+    </button><br/><br/>
+    <div class="form-group col-md-10"  ng-if="eventListData == true">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
+            <label class="control-label" for="focusedInput1">Search</label>
+            <input type="text" class="form-control fontBold" ng-model="Search" id="Search">
+        </div>
+    </div><br/><br/>
+    <div class="form-group col-md-10"  ng-if="eventListData == true">
+        <div ng-repeat="venue in venueEvents" style="border:1px solid black;margin-top:15px;">
+            <table class="table">
+                <tr>
+                    <td class="col-md-2">{{venue.startDate | date}}</td>
+                    <td class="col-md-2">
+                        <img src="{{venue.imageURL}}" alt="" style="width: 100px; height: 100px;" ng-show="((venue.imageURL != '') || (venue.imageURL != null))">
+                        <img src="assets/img/placeholder.jpg" alt="" style="width: 100px; height: 100px;" ng-show="((venue.imageURL === '') || (venue.imageURL === null))">
+                    </td>
+                    <td class="col-md-6">
+                        <font size="4">
+                            <span>{{venue.eventName}}</span>
+                        </font><br/>
+                        <font size="2">Doors:{{venue.eventTime | date:'h:mm a'}} / Show: {{venue.eventTime | date:'h:mm a'}} (event ends at {{venue.endTime}})
+                        </font>
+                    </td>
+                    <td class="col-md-1">
+                        <button type="button" class="btn btn-success btn-raised btn-sm">BUY TICKETS</button><br/>
+                        <span class="pull-right">$ {{venue.price}}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
