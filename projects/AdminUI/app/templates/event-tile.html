@@ -28,9 +28,6 @@
             <h4 class="time" ng-bind="TIME(event.eventTime)"> </h4>
          </div>  
          <div>
-            <div class="pull-right" style="position: relative; top: -20px; right: -80px">
-               <h3 ng-show="event.price > 0"><em class="fa fa-dollar"/>{{event.price}}</h3>
-            </div>
             <h3 ng-bind="event.eventName"></h3>
             <h4> {{event.eventType}} - {{event.performer.performerName}}</h4>
             <h5 ng-bind="event.description"></h5>
@@ -39,7 +36,11 @@
       </div>                
    </div>
    <div class="panel-footer">
-      <em class="fa fa-refresh"></em>&nbsp;{{event.scheduleDayOfWeek}}<span class="pull-right circle circle-xl" ng-class="enableDisableColor(event.enabled)" ></span>
+      <em class="fa fa-refresh"></em>&nbsp;{{event.scheduleDayOfWeek}}
+   
+      <span class="pull-right circle circle-xl" ng-class="enableDisableColor(event.enabled)" >      
+      </span>
+      <span ng-show="event.price > 0" class="pull-right" style="font-size: 150%; position: relative; top: -10px; left: -20px;"><em class="fa fa-dollar"/>{{event.price}}</span>
    </div>
 </div>
 

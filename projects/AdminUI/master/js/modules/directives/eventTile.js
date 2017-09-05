@@ -13,6 +13,10 @@ App.directive('eventTile', function() {
   	},
   	controller : [ '$scope', 'RestServiceFactory', '$state', 'ngDialog', 
   			function($scope, RestServiceFactory, $state, ngDialog) {
+		
+		$scope.$watch('event', function() {
+        	
+    	});
 		$scope.editEvent = function(eventId) {
     		$state.go('app.editVenueEvent', {venueNumber: $scope.event.venueNumber, id: eventId});
   		};

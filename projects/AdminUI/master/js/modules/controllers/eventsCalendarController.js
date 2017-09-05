@@ -50,6 +50,7 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
         obj.allDay = false;
         obj.backgroundColor = $scope.colorPalattes[i % $scope.colorPalattes.length];
         obj.borderColor = $scope.colorPalattes[i % $scope.colorPalattes.length];
+        obj.className = '__event_id_class';
         var tempDays = event.scheduleDayOfMonth.split(",");
         var mDays = [];
         for (var md = 0; md < tempDays.length; md++) {
@@ -142,6 +143,8 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
       eventClick: function( event, jsEvent, view ) {
         $scope.selectCalender = false;
         $scope.event = event.venueEvent;
+        $('.__event_id_class').css('border-color', '');
+        $(this).css('border-color', 'red');
       },
       eventDragStart: function (event, js, ui) {
         //draggingEvent = event;
