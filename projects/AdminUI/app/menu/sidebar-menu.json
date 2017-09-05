@@ -17,7 +17,7 @@
   },
   {
   	"text": "Venue Management",
-	"sref": "app.stores",
+	"sref": "app.venues",
 	 "icon": "icon-home",
 	 "translate": "sidebar.nav.pages.STORES",
 	 "submenu": [],
@@ -28,6 +28,14 @@
 	"sref": "app.reservations",
 	 "icon": "icon-calendar",
 	 "translate": "sidebar.nav.pages.RESERVATIONS",
+	 "submenu": [],
+	 "roleId": 100
+  },
+  {
+  	"text": "Events Calendar",
+	"sref": "app.eventsCalendar",
+	 "icon": "icon-calendar",
+	 "translate": "sidebar.nav.pages.EVENTS_CALENDAR",
 	 "submenu": [],
 	 "roleId": 100
   },

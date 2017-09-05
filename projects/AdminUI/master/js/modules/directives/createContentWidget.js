@@ -12,7 +12,8 @@ App.directive('contentWidget', [ '$log','ContextService','Session','$state', '$s
 		link : function($scope, element, attrs) {
 			
 		},
-		controller : [ '$scope', '$log', '$location','$http','$stateParams', 'RestServiceFactory','$timeout', '$rootScope',function($scope, $log, $location, $http, $stateParams, RestServiceFactory, $timeout, $rootScope) {
+		controller : [ '$scope', '$log', '$location','$http','$stateParams', 'RestServiceFactory','$timeout', '$rootScope',
+		function($scope, $log, $location, $http, $stateParams, RestServiceFactory, $timeout, $rootScope) {
 			$log.log("contentWidget controller has been initialized!");
 			
 			/**

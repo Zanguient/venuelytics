@@ -1,0 +1,81 @@
+/**
+ * ===========================
+ * 		Smangipudi
+ * ===========================
+ */
+
+App.directive('eventTile', function() {
+  "use strict";
+  return {
+    restrict: 'A',
+    scope:{
+	  event: '='
+  	},
+  	controller : [ '$scope', 'RestServiceFactory', '$state', 'ngDialog', 
+  			function($scope, RestServiceFactory, $state, ngDialog) {
+		$scope.editEvent = function(eventId) {
+    		$state.go('app.editVenueEvent', {venueNumber: $scope.event.venueNumber, id: eventId});
+  		};
+
+  		$scope.enableDisableColor = function(enabled) {
+    		return enabled === 'Y' ? 'circle-green' : 'circle-gray';
+  		};	
+
+  		$scope.TIME = function(d) {
+  			if (typeof d !== 'undefined') {
+			    var t = d.split(":");
+			    var h = parseInt(t[0]);
+			    var m = parseInt(t[1]);
+			    var pm = false;
+			    if (h > 11) {
+			      pm = true;
+			    }
+	    		return ((h % 12) + ':' + h) + (pm ? ' PM' : ' AM');
+    		}
+  		};
+
+		$scope.deleteEvent = function(index, eventId) {
+
+	      ngDialog.openConfirm({
+	        template: 'deleteVenueEventId',
+	        className: 'ngdialog-theme-default'
+	      }).then(function (value) {
+	        var target = {id: eventId};
+	        RestServiceFactory.VenueService().deleteEvent(target,  function(success){
+	          $scope.events.splice(index,1);
+	        },function(error){
+	          if (typeof error.data !== 'undefined') { 
+	            toaster.pop('error', "Server Error", error.data.developerMessage);
+	          } 
+	        });
+	      });
+			
+		};
+
+		$scope.printEvent = function(event) {
+			var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+		    mywindow.document.write('<html><head><title> VenueLytics - ' + event.eventName  + '</title>');
+		    mywindow.document.write('<link rel="stylesheet" href="app/css/app.css">');
+		    mywindow.document.write('<link rel="stylesheet" href="app/css/theme-e.css">');
+		    mywindow.document.write('</head><body >');
+
+		    mywindow.document.write('<h1>' + event.eventName  + '</h1>');
+
+		    var elementId = 'event-id-'+event.id +'-'+event.startDate;
+		    var html = document.getElementById(elementId).outerHTML;
+		    mywindow.document.write('<div style="position: relative; left: 50px; width: 320px !important; height:auto">' + html + '</div>');
+		    mywindow.document.write('</body></html>');
+
+		    mywindow.document.close(); // necessary for IE >= 10
+		    mywindow.focus(); // necessary for IE >= 10*/
+
+		    mywindow.print();
+		   // mywindow.close();
+
+		    return true;
+		}
+  	}],
+    templateUrl: 'app/templates/event-tile.html'
+  };
+});

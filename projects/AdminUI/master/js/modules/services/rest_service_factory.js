@@ -90,6 +90,8 @@
  					getEvent : {method: 'GET',  params: { id: '@id' }, isArray:false,
  						url: urlTemplate.replace("@context", "venueevents")},
  					saveEvent : {method: 'POST',  params: { id: '@id' },
+ 						url: urlTemplate.replace("@context", "venueevents")},
+ 					deleteEvent : {method: 'DELETE',  params: { id: '@id' },
  						url: urlTemplate.replace("@context", "venueevents")}
  				});
  			},

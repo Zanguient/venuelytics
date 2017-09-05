@@ -30,6 +30,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     $scope.eventTypes['MUSICAL'] = 'Musical Night';
 
     $scope.radioChecked = function() {
+
     };
    
   // Disable weekend selection
@@ -56,6 +57,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
             d.setMinutes(m);
             d.setSeconds(0);
             $scope.eventDisplayTime = d;
+            $scope.config.scheduleRadio = data.scheduleDayOfWeek.length >0 ? 'W' : 'M';
 	    });
     } else {
     	var data = {};
@@ -87,7 +89,12 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         }, 200);
     });
    
-    $scope.update = function(form, data) {
+    $scope.update = function(isValid, form, data) {
+
+        if (!isValid) {
+            return;
+        }
+        
         data.venueNumber = $stateParams.venueNumber;
         var t = $scope.eventDisplayTime;
         data.eventTime = t.getHours() +":" + t.getMinutes();
@@ -95,6 +102,11 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         var target = {id: data.id};
         if ($stateParams.id === 'new'){
           target = {};
+        }
+         if($scope.config.scheduleRadio === 'M') {
+            payload.scheduleDayOfWeek = '';
+        } else {
+            payload.scheduleDayOfMonth = '';
         }
         console.log(JSON.stringify(payload))
         RestServiceFactory.VenueService().saveEvent(target, payload, function(success){

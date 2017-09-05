@@ -3,7 +3,7 @@
 </h3>
 <!-- START row-->
 <div class="row">
-  <form  name="eventInfo"  novalidate role="form">
+  <form  name="eventInfo" validate-form="" novalidate role="form">
     <div class="col-md-6">
        <!-- START panel-->
       <div class="panel panel-default">
@@ -58,21 +58,22 @@
         </div>
         
         <div class="row col-sm-12"/>  
-          <div class="form-group col-md-6  col-sm-12">
-            <label class="control-label nowrap">
-              <input type="radio" name="scheduleRadio" ng-model="config.scheduleRadio" ng-value="'M'" />Selected Days of Month
-            </label>
-            <input type="text" name="scheduleDayOfMonth" class="form-control" ng-model="data.scheduleDayOfMonth" placeholder="1,2,3, ... 30" 
-            ng-disabled="config.scheduleRadio == 'W' "/>
-          </div>
+          
 
           <div class="form-group col-md-6  col-sm-12">
 
             <label class="control-label nowrap">
-              <input type="radio" name="scheduleRadio" ng-model="config.scheduleRadio" ng-value="'W'" />Selected Week Days
+              <input type="radio" name="scheduleRadio" ng-model="config.scheduleRadio" ng-value="'W'" />Selected Week Days *
             </label>
             <input type="text" name="scheduleDayOfWeek" class="form-control" ng-model="data.scheduleDayOfWeek" placeholder="SUN,MON,TUE,WED,THU,FRI,SAT" 
           ng-disabled="config.scheduleRadio == 'M' "/>
+          </div>
+          <div class="form-group col-md-6  col-sm-12">
+            <label class="control-label nowrap">
+              <input type="radio" name="scheduleRadio" ng-model="config.scheduleRadio" ng-value="'M'" />Selected Days of Month *
+            </label>
+            <input type="text" name="scheduleDayOfMonth" class="form-control" ng-model="data.scheduleDayOfMonth" placeholder="1,2,3, ... 30" 
+            ng-disabled="config.scheduleRadio == 'W' "/>
           </div>
         </div>
         <div class="form-group col-md-6  col-sm-12">
@@ -99,22 +100,21 @@
 
         <div class="form-group col-sm-12">
           <label>Description</label>
-          <textarea placeholder="Enter venue description" rows="4" ng-model="data.description" class="form-control ng-pristine ng-valid"></textarea>
+          <textarea placeholder="Enter venue description" rows="4" ng-model="data.description" class="form-control"></textarea>
         </div>
           
 
-          <div class="form-group  col-sm-12">
-            <div class="checkbox c-checkbox">
-              <label>
-                <input type="checkbox" name="enabled"  ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N"/>
-                <span class="fa fa-check"></span>Enable
-              </label>
-            </div>
+        <div class="form-group  col-sm-12">
+          <div class="checkbox c-checkbox">
+            <label>
+              <input type="checkbox" name="enabled"  ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N"/>
+              <span class="fa fa-check"></span>Enable
+            </label>
           </div>
-          <div class="required col-sm-12">* Required fields</div>
         </div>
+        <div class="required col-sm-12">* Required fields</div>
         <div class="panel-footer col-sm-12">
-       	  <button type="submit" class="btn btn-primary" ng-disabled="eventInfo.$invalid" ng-click="update(eventInfo,data)" >Save</button>
+       	  <button type="submit" class="btn btn-primary" ng-click="update(eventInfo.$valid, eventInfo,data)" >Save</button>
         </div>
       </div>
        <!-- END panel-->
@@ -122,11 +122,12 @@
     <div class="col-md-6">
       <div class="form-group col-sm-12" >
         <input type="file" id="control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
-      </div><br />
-      <center>
-      <div col-sm-6>
-         <img ng-src="{{data.imageURL}}" alt="" class="img-responsive"/>
       </div>
+      <br />
+      <center>
+        <div col-sm-6>
+           <img ng-src="{{data.imageURL}}" alt="" class="img-responsive"/>
+        </div>
       </center>
     </div>
   </form>

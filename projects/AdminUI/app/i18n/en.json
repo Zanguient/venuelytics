@@ -282,8 +282,9 @@
         "BEACONS": "Beacon Management",
         "LOYALTY": "Loyalty Management",
         "SETTINGS": "Application Settings",
-         "RESERVATIONS": "Reservations",
-         "INBOX": "Inbox"
+        "RESERVATIONS": "Reservations",
+        "INBOX": "Inbox",
+        "EVENTS_CALENDAR": "Events Calendar"
       }
     }
   }

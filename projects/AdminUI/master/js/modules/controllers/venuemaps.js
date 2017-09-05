@@ -59,20 +59,19 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
     
     $scope.deleteBottle = function(rowId, cellData){
       ngDialog.openConfirm({
-      template: 'deleteBottleId',
-      className: 'ngdialog-theme-default'
-    }).then(function (value) {
-      var target = {id: $stateParams.id ,tableId:cellData};
-      RestServiceFactory.VenueMapService().delete(target,  function(success){
-        var table = $('#venue_map_table').dataTable();
-        table.fnDeleteRow(rowId);
-      },function(error){
-        if (typeof error.data !== 'undefined') { 
-          toaster.pop('error', "Server Error", error.data.developerMessage);
-        }
+        template: 'deleteBottleId',
+        className: 'ngdialog-theme-default'
+      }).then(function (value) {
+        var target = {id: $stateParams.id ,tableId:cellData};
+        RestServiceFactory.VenueMapService().delete(target,  function(success){
+          var table = $('#venue_map_table').dataTable();
+          table.fnDeleteRow(rowId);
+        },function(error){
+          if (typeof error.data !== 'undefined') { 
+            toaster.pop('error', "Server Error", error.data.developerMessage);
+          } 
+        });
       });
-    }, function (reason) {
-    });
     };
   });  
 }]);

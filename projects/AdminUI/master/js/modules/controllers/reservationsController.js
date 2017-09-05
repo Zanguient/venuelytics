@@ -46,7 +46,7 @@
             reservedTables = 0;
           }
           var from = dateKey.split("-");
-          var f = new Date(from[0], from[1] - 1, from[2]);
+          var fromDate = new Date(from[0], from[1] - 1, from[2]);
           var remaining = (tableCount - reservedTables);
           if (remaining < 0) {
             remaining = 0;
@@ -54,7 +54,7 @@
           var obj = {};
           obj.title = 'A: ' + remaining;	
           obj.serviceType = 'BottleService';
-          obj.start = f;
+          obj.start = fromDate;
           if (remaining === 0) 	{
             obj.title = 'Fully Booked';	
             obj.backgroundColor = '#f56954'; //red 
@@ -73,16 +73,15 @@
           if (typeof reservedBanquetHall === 'undefined') {
             reservedBanquetHall = 0;
           }
-          var from = dateKey.split("-");
-          var f = new Date(from[0], from[1] - 1, from[2]);
+          
           var remaining = (banquetCount - reservedBanquetHall);
           if (remaining < 0) {
             remaining = 0;
           }
           var banquetObj = {};
-          banquetObj.title = 'B: ' + remaining;  
+          banquetObj.title = 'A: ' + remaining;  
           banquetObj.serviceType = 'BanquetHall';
-          banquetObj.start = f;
+          banquetObj.start = fromDate;
           if (remaining === 0)  {
             banquetObj.title = 'Fully Booked'; 
             banquetObj.backgroundColor = '#f56954'; //red 
