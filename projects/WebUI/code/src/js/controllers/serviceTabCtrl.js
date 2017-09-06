@@ -108,14 +108,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
     };
 
-    function addTab(id, bId, img, name, tabParam, htmlContentPage, tabEnable, bgColor, fontColor, tabSelected) {
+    function addTab(id, bId, img, name, tabParam, htmlContentPage, disableTab, bgColor, fontColor, tabSelected) {
         self.displayTabs.push({
            id: id,
            buttonId: bId,
            buttonImg: img,
            serviceName: tabParam,
            name: name,
-           disabled: tabEnable,
+           disabled: disableTab,
            bgColor: bgColor,
            fontColor: fontColor,
            selected: tabSelected
@@ -153,12 +153,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
             self.tabBachelor = self.tabParams === 'bachelor-party' ? 'bachelor-party' : '';
             if (self.bachelorFlag) {
-                addTab('bottleTab','bottle', 'assets/img/ic_bottle.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party.html');
+                addTab('bottleTab','bottle', 'assets/img/ic_bottle.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party.html',!self.bachelorFlag, APP_COLORS.bottleBtn, APP_COLORS.btnColor, self.tabBachelor);
             }
 
             self.tabParty = self.tabParams === 'party-packages' ? 'party-packages' : '';
             if (self.partyFlag) {
-                addTab('partyEventTab','party', 'assets/img/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html');
+                addTab('partyEventTab','party', 'assets/img/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html',!self.partyFlag, APP_COLORS.privateBtn, APP_COLORS.btnColor, self.tabParty);
             }
 
             self.tabPrivate = self.tabParams === 'private-events' ? 'private-events' : '';
