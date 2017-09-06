@@ -1,6 +1,6 @@
-<button id="{{buttonId}}" type="button" class="btn-success btn-responsive reservation-button buttonHeight col-xs-12" style="background-color:{{bgColor}}; color: {{fontColor}}; border-color: white; opacity: {{tabOpacity}}; cursor: {{tabCursor}};" ng-click="onClick()" ng-disabled="{{tabFlag}}">
+<button id="{{buttonId}}" type="button" class="btn btn-responsive reservation-button buttonHeight col-xs-12" style="background-color:{{bgColor}}; color: {{fontColor}}; border-color: white;" ng-click="onClick()" ng-disabled="{{disabled}}">
     <img ng-src="{{buttonImg}}" alt="buttonImg" class="reservation-icon" ></img>
     <br class="showInMobile">
-    <span class="reservationTabLabel" style="color: {{fontColor}};"><strong>{{name | translate}}</strong></span>
-    <span ng-show="{{tabParam != ''}}" class="fa fa-caret-down fa-2x btnIcon"></span>
+    <span class="tabLabel"><strong>{{name | translate}}</strong></span>
+    <em ng-show="{{selected != ''}}" class="fa fa-caret-down fa-2x tabSelected"></em>
 </button>

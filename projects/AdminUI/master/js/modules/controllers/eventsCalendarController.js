@@ -45,6 +45,10 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
         sDate.setMinutes(m);
         sDate.setSeconds(0);
 
+        endDate.setHours(23);
+        endDate.setMinutes(59);
+        endDate.setSeconds(59);
+
         obj.start = sDate;
         obj.end = moment(sDate).add(event.durationInMinutes, 'm');
         obj.allDay = false;

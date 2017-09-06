@@ -267,7 +267,7 @@ select {
   padding: 0px !important; margin-top:20px;
   border-right:2px solid #ffffff !important;
 }
-.reservationTabLabel {
+.tabLabel {
     font-weight: 400;
     letter-spacing: 0.14px;
     line-height: 1.5em;
@@ -275,8 +275,15 @@ select {
     white-space: pre-line;
     align-self: center;
     outline: rgba(0, 0, 0, 0.870588) none 0px;
-     text-transform: uppercase;
-  }
+    text-transform: uppercase;
+    color: white;
+}
+
+.tabSelected {
+  color: #fff;
+  text-shadow: 1px 1px 1px #ccc;
+}
+
 .req-border {
   border: 1px solid;
 }
@@ -459,55 +466,17 @@ select {
  margin-bottom:2rem !important;
 }
 
-/*Desktop*/
-/*@media screen and (min-width: 771px) and (max-width:
-1050px) {
 
- .downloadIcon{
-   padding-top: 180px;
- }
-
- .img-singleline {
-   display: inline-block;
-   float: left;
-   padding: 0 10px;
-   margin-bottom: 10px;
- }
-
- .img-singleline img {
-   height: 40px !important;
- }
-
- .img-container {
-   width: 500px;
-   height: 55px;
- }
-
+.btn.disabled,.btn[disabled],fieldset[disabled] .btn {
+   cursor:not-allowed;
+   filter:alpha(opacity=65);
+   -webkit-box-shadow:none;
+   box-shadow:none;
+   opacity:.65
 }
-@media screen and (min-width: 1050px) and (max-width:
-1350px) {
-
- .downloadIcon{
-   padding-top: 300px;
- }
-
- .img-singleline {
-   display: inline-block;
-   float: left;
-   padding: 0 10px;
-   margin-bottom: 10px;
- }
-
- .img-singleline img {
-   height: 40px !important;
- }
-
- .img-container {
-   width: 500px;
-   height: 55px;
- }
-
-}*/
+a.btn.disabled,fieldset[disabled] a.btn {
+  pointer-events:none
+}
 
 @media screen and (min-width: 1990px) and (max-width:
 5500px) {

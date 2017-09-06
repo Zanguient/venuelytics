@@ -13,106 +13,115 @@
         <div class="panel-body">
         	<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
         	
-      	<div class="form-group col-md-6 col-sm-12">
-          <label class="control-label">Event Name *</label>
-          <input type="text" name="eventName" required="required" class="form-control" ng-model="data.eventName"/>
-        </div>
-        <div class="form-group col-md-6 col-sm-12">
-          <label class="control-label">Event Type *</label>
-            <select name="eventType" required="required" ngRequired class="form-control col-sm-12" ng-model="data.eventType" >  
-              <option ng-repeat="(key, value) in eventTypes" value="{{key}}">{{value}}</option>  
-            </select>
-        </div>
+        	<div class="form-group col-md-6 col-sm-12">
+            <label class="control-label">Event Name *</label>
+            <input type="text" name="eventName" required="required" class="form-control" ng-model="data.eventName"/>
+          </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="control-label">Event Type *</label>
+              <select name="eventType" required="required" ngRequired class="form-control col-sm-12" ng-model="data.eventType" >  
+                <option ng-repeat="(key, value) in eventTypes" value="{{key}}">{{value}}</option>  
+              </select>
+          </div>
+            
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="control-label nowrap">Start Date* </label> 
+            <p class="input-group">
+              <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="data.startDate" is-open="config.startOpened"  ng-readonly="'true'" date-disabled="disabled(date, mode)"  max-date="maxDate"  datepicker-options="dateOptions" ng-required="true" close-text="Close" class="form-control"/>
+              <span class="input-group-btn">
+                 <button id="startDtCalendarId"  type="button" class="btn btn-default">
+                    <em class="fa fa-calendar"></em>
+                 </button>
+              </span>
+            </p>
+          </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="control-label nowrap">End Date* </label> 
+            <p class="input-group">
+              <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="data.endDate" is-open="config.endOpened"  ng-readonly="'true'" max-date="maxDate"  datepicker-options="dateOptions" ng-required="true" close-text="Close" class="form-control"/>
+              <span class="input-group-btn">
+                 <button id="endDtCalendarId"  type="button" class="btn btn-default">
+                    <em class="fa fa-calendar"></em>
+                 </button>
+              </span>
+            </p>
+          </div>
           
-        <div class="form-group col-md-6 col-sm-12">
-          <label class="control-label nowrap">Start Date* </label> 
-          <p class="input-group">
-            <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="data.startDate" is-open="config.startOpened"  ng-readonly="'true'" date-disabled="disabled(date, mode)"  max-date="maxDate"  datepicker-options="dateOptions" ng-required="true" close-text="Close" class="form-control"/>
-            <span class="input-group-btn">
-               <button id="startDtCalendarId"  type="button" class="btn btn-default">
-                  <em class="fa fa-calendar"></em>
-               </button>
-            </span>
-          </p>
-        </div>
-        <div class="form-group col-md-6 col-sm-12">
-          <label class="control-label nowrap">End Date* </label> 
-          <p class="input-group">
-            <input type="text" datepicker-popup="dd-MMMM-yyyy" ng-model="data.endDate" is-open="config.endOpened"  ng-readonly="'true'" max-date="maxDate"  datepicker-options="dateOptions" ng-required="true" close-text="Close" class="form-control"/>
-            <span class="input-group-btn">
-               <button id="endDtCalendarId"  type="button" class="btn btn-default">
-                  <em class="fa fa-calendar"></em>
-               </button>
-            </span>
-          </p>
-        </div>
-        
-        <div class="form-group col-md-6 col-sm-12">
-          <label class="control-label nowrap">Start Time* </label>
-          <!-- <input type="text" name="eventTime" class="form-control" required="required" ng-model="data.eventTime"/> -->
-          <timepicker ng-model="eventDisplayTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"></timepicker>
-        </div>
-        <div class="form-group col-md-6  col-sm-12">
-          <label class="control-label nowrap">Duration* </label>
-          <input type="text" name="durationInMinutes" required="required" class="form-control" ng-model="data.durationInMinutes"/>
-        </div>
-        
-        <div class="row col-sm-12"/>  
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="control-label nowrap">Start Time* </label>
+            <!-- <input type="text" name="eventTime" class="form-control" required="required" ng-model="data.eventTime"/> -->
+            <timepicker ng-model="eventDisplayTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"></timepicker>
+          </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="control-label nowrap">Duration* </label>
+            <input type="text" name="durationInMinutes" required="required" class="form-control" ng-model="data.durationInMinutes"/>
+          </div>
           
-
-          <div class="form-group col-md-6  col-sm-12">
-
-            <label class="control-label nowrap">
-              <input type="radio" name="scheduleRadio" ng-model="config.scheduleRadio" ng-value="'W'" />Selected Week Days *
+          <div class="row col-sm-12"></div>  
+          <div class="form-group col-sm-12">
+            <label class="radio-inline c-radio nowrap">
+              <input type="radio" name="scheduleRadio"  ng-model="config.scheduleRadio" 
+              value="N"/><span class="fa fa-check"></span><strong>This is a one time only event.</strong>
             </label>
-            <input type="text" name="scheduleDayOfWeek" class="form-control" ng-model="data.scheduleDayOfWeek" placeholder="SUN,MON,TUE,WED,THU,FRI,SAT" 
-          ng-disabled="config.scheduleRadio == 'M' "/>
           </div>
           <div class="form-group col-md-6  col-sm-12">
-            <label class="control-label nowrap">
-              <input type="radio" name="scheduleRadio" ng-model="config.scheduleRadio" ng-value="'M'" />Selected Days of Month *
-            </label>
-            <input type="text" name="scheduleDayOfMonth" class="form-control" ng-model="data.scheduleDayOfMonth" placeholder="1,2,3, ... 30" 
-            ng-disabled="config.scheduleRadio == 'W' "/>
+            <div class="col-md-8">
+              <label class="radio-inline c-radio">
+                <input type="radio" name="scheduleRadio"  ng-model="config.scheduleRadio" 
+                value="W" /><span class="fa fa-check"></span>Selected Days of Week *
+              </label>
+            </div>
+            <input type="text" name="scheduleDayOfWeek" class="form-control" 
+              ng-model="data.scheduleDayOfWeek" placeholder="MON,TUE,WED,THU,FRI,SAT,SUN" ng-readonly="config.scheduleRadio != 'W'"/>
           </div>
-        </div>
-        <div class="form-group col-md-6  col-sm-12">
-          <label class="control-label">Performer Name</label>
-          <select name="performer" ngRequired class="form-control col-sm-12" ng-model="data.performerId" >  
-              <option ng-repeat="performer in performers" value="{{performer.id}}">{{performer.performerName}}</option>  
-            </select>
-        </div>
-         
-          
-        <div class="form-group col-md-6  col-sm-12">
-          <label class="control-label">Price</label>
-          <div class="input-group m-b">
-             <span class="input-group-addon">$</span>
-             <input type="text" class="form-control" ng-model="data.price" />
-             <span class="input-group-addon">.00</span>
+          <div class="form-group col-md-6  col-sm-12">
+            <div class="col-md-8">
+              <label class="radio-inline c-radio">
+                <input type="radio" name="scheduleRadio"  ng-model="config.scheduleRadio" 
+                value="M" /><span class="fa fa-check"></span>Selected  Days of Month*
+              </label>
+            </div>
+            <input type="text" name="scheduleDayOfMonth" class="form-control" 
+            ng-model="data.scheduleDayOfMonth" placeholder="1,2,3, ... 30" ng-readonly="config.scheduleRadio != 'M'"/>
           </div>
-        </div>
-      
-        <div class="form-group col-md-6  col-sm-12">
-          <label class="control-label">Booking URL</label>
-          <input type="text" name="bookingUrl" class="form-control" ng-model="data.bookingUrl"/>
-        </div>
+          <div class="form-group col-md-6  col-sm-12">
+            <label class="control-label">Performer Name</label>
+            <select name="performer" ngRequired class="form-control col-sm-12" ng-model="data.performerId" >  
+                <option ng-repeat="performer in performers" value="{{performer.id}}">{{performer.performerName}}</option>  
+              </select>
+          </div>
+           
+            
+          <div class="form-group col-md-6  col-sm-12">
+            <label class="control-label">Price</label>
+            <div class="input-group m-b">
+               <span class="input-group-addon">$</span>
+               <input type="text" class="form-control" ng-model="data.price" />
+               <span class="input-group-addon">.00</span>
+            </div>
+          </div>
+        
+          <div class="form-group col-md-6  col-sm-12">
+            <label class="control-label">Booking URL</label>
+            <input type="text" name="bookingUrl" class="form-control" ng-model="data.bookingUrl"/>
+          </div>
 
-        <div class="form-group col-sm-12">
-          <label>Description</label>
-          <textarea placeholder="Enter venue description" rows="4" ng-model="data.description" class="form-control"></textarea>
-        </div>
-          
-
-        <div class="form-group  col-sm-12">
-          <div class="checkbox c-checkbox">
-            <label>
-              <input type="checkbox" name="enabled"  ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N"/>
-              <span class="fa fa-check"></span>Enable
-            </label>
+          <div class="form-group col-sm-12">
+            <label>Description</label>
+            <textarea placeholder="Enter venue description" rows="4" ng-model="data.description" class="form-control"></textarea>
           </div>
+            
+
+          <div class="form-group  col-sm-12">
+            <div class="checkbox c-checkbox">
+              <label>
+                <input type="checkbox" name="enabled"  ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N"/>
+                <span class="fa fa-check"></span>Enable
+              </label>
+            </div>
+          </div>
+          <div class="required col-sm-12">* Required fields</div>
         </div>
-        <div class="required col-sm-12">* Required fields</div>
         <div class="panel-footer col-sm-12">
        	  <button type="submit" class="btn btn-primary" ng-click="update(eventInfo.$valid, eventInfo,data)" >Save</button>
         </div>
