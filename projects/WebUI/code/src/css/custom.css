@@ -460,7 +460,7 @@ select {
 }
 
 /*Desktop*/
-@media screen and (min-width: 771px) and (max-width:
+/*@media screen and (min-width: 771px) and (max-width:
 1050px) {
 
  .downloadIcon{
@@ -475,7 +475,6 @@ select {
  }
 
  .img-singleline img {
-   /*width: 90px !important;*/
    height: 40px !important;
  }
 
@@ -500,7 +499,6 @@ select {
  }
 
  .img-singleline img {
-   /*width: 90px !important;*/
    height: 40px !important;
  }
 
@@ -509,7 +507,7 @@ select {
    height: 55px;
  }
 
-}
+}*/
 
 @media screen and (min-width: 1990px) and (max-width:
 5500px) {
