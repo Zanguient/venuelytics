@@ -171,7 +171,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
             var eventOpacity = self.eventsEnable === false ? 4 : 0.6 ;
             var eventCursor = self.eventsEnable === false ? '' : 'not-allowed';
-            //addTab('eventListTab','eventlist', 'assets/img/table.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, APP_COLORS.tableBtn, APP_COLORS.btnColor, self.tabEvents, eventOpacity, eventCursor);
+            addTab('eventListTab','eventlist', 'assets/img/table.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, APP_COLORS.tableBtn, APP_COLORS.btnColor, self.tabEvents, eventOpacity, eventCursor);
         }
 
     }

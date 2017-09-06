@@ -1,3 +1,30 @@
+<div class="smartbanner" id="smartabanner" ng-show="venuelyticsApp === true">
+    <div class="smartbanner-container">
+        <a href="javascript:void(0)" class="smartbanner-close" ng-click="closeStore()">&times;</a>
+        <span class="smartbanner-icon"></span>
+        <div class="smartbanner-info">
+            <div class="smartbanner-title">{{"navbar.APPLE_STORE" | translate}}</div>
+            <span>{{"navbar.FREE_APPLE" | translate}}</span>
+        </div>
+        <a href="https://itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8" target="_new" class="smartbanner-button">
+            <span class="smartbanner-button-text">{{"navbar.GET_IT" | translate}}</span>
+        </a>
+    </div>
+</div>
+<div class="smartbanner" id="smartGoogle" ng-show="itzfunApp === true">
+    <div class="smartbanner-container">
+        <a href="javascript:void(0)" class="smartbanner-close" ng-click="closeStore()">&times;</a>
+        <span class="smartbanner-icon"></span>
+        <div class="smartbanner-info">
+            <div class="smartbanner-title">{{"navbar.GOOGLE_PLAY" | translate}}</div>
+            <span>{{"navbar.FREE_GOOGLE" | translate}}</span>
+        </div>
+        <a href="https://play.google.com/store/apps/details?id=com.itzfun.biz&hl=en"  target="_new" class="smartbanner-button">
+            <span class="smartbanner-button-text">{{"navbar.GET_IT" | translate}}</span>
+        </a>
+    </div>
+</div>
+
 <!-- Modal -->
 <header class="ms-header <%= headerClass %>">
     <div class="container container-full">

@@ -27,6 +27,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = '';
             $rootScope.blogTab = '';
+            $rootScope.venuelyticsApp = true;
+            $rootScope.itzfunApp = false;
+            $rootScope.panelShow = true;
         } else if(tab === 'searchBusiness') {
             $rootScope.homeTab = '';
             $rootScope.businessTab = 'active';
@@ -35,6 +38,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = '';
             $rootScope.blogTab = '';
+            $rootScope.venuelyticsApp = false;
+            $rootScope.itzfunApp = false;
+            $rootScope.panelShow = false;
         } else if(tab === 'cities') {
             $rootScope.homeTab = '';
             $rootScope.businessTab = '';
@@ -43,6 +49,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = '';
             $rootScope.blogTab = '';
+            $rootScope.itzfunApp = true;
+            $rootScope.venuelyticsApp = false;
+            $rootScope.panelShow = true;
         } else if(tab === 'newCities') {
             $rootScope.homeTab = '';
             $rootScope.businessTab = '';
@@ -51,6 +60,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = '';
             $rootScope.blogTab = '';
+            $rootScope.itzfunApp = true;
+            $rootScope.venuelyticsApp = false;
+            $rootScope.panelShow = true;
         } else if(tab === 'about') {
             $rootScope.homeTab = '';
             $rootScope.businessTab = '';
@@ -59,6 +71,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = 'active';
             $rootScope.contactTab = '';
             $rootScope.blogTab = '';
+            $rootScope.venuelyticsApp = false;
+            $rootScope.itzfunApp = false;
+            $rootScope.panelShow = false;
         } else if(tab === 'contact') {
             $rootScope.homeTab = '';
             $rootScope.businessTab = '';
@@ -67,6 +82,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = 'active';
             $rootScope.blogTab = '';
+            $rootScope.venuelyticsApp = false;
+            $rootScope.itzfunApp = false;
+            $rootScope.panelShow = false;
         } else if(tab === 'blog') {
             $rootScope.homeTab = '';
             $rootScope.businessTab = '';
@@ -75,6 +93,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = '';
             $rootScope.blogTab = 'active';
+            $rootScope.venuelyticsApp = false;
+            $rootScope.itzfunApp = false;
+            $rootScope.panelShow = false;
         } else {
             $log.info("Else block");
         }
@@ -85,7 +106,6 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
         $rootScope.canonicalURL = $location.absUrl();
         self.navBar(userSelectedTab[0]);
     });
-
     self.init = function() {
         self.venueLyticsFeatures = APP_ARRAYS.features;
 
@@ -119,7 +139,12 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     
 	self.changeLanguage = function(lang){
 			$translate.use(lang);
-	};
+    };
+    $rootScope.closeStore = function() {
+        $rootScope.venuelyticsApp = false;
+        $rootScope.itzfunApp = false;
+        $rootScope.panelShow = false;
+    };
     self.sendEmail = function(email) {
         $rootScope.businessIsFocused = 'is-focused';
         if((email !== undefined) && (email !== '')){
