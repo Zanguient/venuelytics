@@ -16,7 +16,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         startingDay: 1
     };
     $scope.config = {};
-    $scope.config.scheduleRadio = "M";
+    $scope.config.scheduleRadio = "N";
 
     $scope.eventTypes = {};
     $scope.eventTypes['DJ'] = 'DJ';
@@ -54,7 +54,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
             d.setMinutes(m);
             d.setSeconds(0);
             $scope.eventDisplayTime = d;
-           // $scope.config.scheduleRadio = data.scheduleDayOfWeek.length >0 ? 'W' : 'M';
+            $scope.config.scheduleRadio = data.scheduleDayOfWeek.length >0 ? 'W' : data.scheduleDayOfMonth.length >0 ? 'M' : 'N';
             //$scope.changed();
 	    });
     } else {
