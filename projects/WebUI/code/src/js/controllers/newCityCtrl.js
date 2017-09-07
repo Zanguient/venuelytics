@@ -8,7 +8,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
 
     		$log.log('Inside New City Controller.');
     		
-    		var self = $scope;
+            var self = $scope;
             var nextPageSize = 0;
             var previousPageSize = 0;
             self.next = false;
@@ -103,6 +103,9 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 self.listOfCities = [];
                 AjaxService.getVenueBySearch(DataShare.latitude, DataShare.longitude, venueSearch).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
+                    angular.forEach(self.listOfVenuesByCity, function(value, key) {
+                        value.feature = value.info["Advance.featured"];
+                    });
                 });
             };
 

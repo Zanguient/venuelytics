@@ -1,9 +1,9 @@
 <div ng-controller="eventListCtrl">
-    <button type="button" class="btn btn-primary pull-right" ng-model="calenderData" ng-click="calenderEventView()">
-        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Calender
-    </button>
     <button type="button" class="btn btn-primary pull-right"ng-model="eventListData" ng-click="listEventView()" style="margin-right: 13px;">
         <i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;List
+    </button>
+    <button type="button" class="btn btn-primary pull-right" ng-model="calenderData" ng-click="calenderEventView()">
+        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Calender
     </button><br/><br/>
     <div class="form-group col-md-10 col-md-offset-right-10"  ng-if="eventListData == true">
         <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
@@ -12,7 +12,7 @@
         </div>
     </div><br/><br/>
     <div class="form-group col-md-10 col-md-offset-right-10"  ng-if="eventListData == true">
-        <div event-tile="" ng-class="'col-masonry'" event="event" ng-repeat="event in events track by $index" style="border:1px solid black;margin-top:15px;">
+        <div event-tile="" ng-class="'col-masonry eventListcal'" event="event" ng-repeat="event in events track by $index">
             <table class="table">
                 <tr>
                     <!-- <td class="col-md-2">{{event.startDate | date}}</td> -->
@@ -21,29 +21,28 @@
                             <div class="row">
                                 <div class="date pull-left">
                                     <span class="binds"></span>
-                                    <span class="month" ng-bind="event.startDate | date: 'MMMM'"></span>
+                                    <span class="month" ng-bind="event.startDate | date: 'MMMM' | uppercase"></span>
                                     <h1 class="day" ng-bind="event.startDate | date: 'dd'"></h1>
-                                    <h5 class="weekday" ng-bind="event.startDate | date: 'EEE' | uppercase"> </h5>
-                                    <h4 class="time" ng-bind="TIME(event.eventTime)"> </h4>
+                                    <h5 class="weekday" ng-bind="event.startDate | date: 'EEE'"> </h5>
                                 </div>                   
                             </div>                
                         </div>
-                    </td>
+                    </td>   
                     <td class="col-md-2">
-                        <img src="{{event.imageURL}}" alt="eventImg" style="width: 100px; height: 100px;" ng-show="((event.imageURL != '') || (event.imageURL != null))">
-                        <img src="assets/img/placeholder.jpg" alt="noEventImg" style="width: 100px; height: 100px;" ng-show="((event.imageURL === '') || (event.imageURL === null))">
+                        <img class="eventlistImage" ng-show="((event.imageURL != '') || (event.imageURL != null))" src="{{event.imageURL}}" alt="">
+                        <img class="eventlistImage" ng-show="((event.imageURL === '') || (event.imageURL === null))" src="assets/img/placeholder.jpg" alt="noEventImg">
                     </td>
                     <td class="col-md-7">
-                        <h2 style="margin-top: -5px; color:black">
+                        <h2 class="eventListName">
                             <span>{{event.eventName}}</span>
                         </h2><br/>
-                        <h5 style="margin-top: 0px; margin-bottom: 0px;">
-                            Doors:{{event.eventTime | date:'h:mm a'}} / Show: {{event.eventTime | date:'h:mm a'}} (event ends at {{event.endtimes | date:'h:mm a'}})
+                        <h5 class="eventListTime">
+                            Doors:{{event.eventTimes | date:'h:mm a'}} / Show: {{event.eventTimes | date:'h:mm a'}} (event ends at {{event.endtimes | date:'h:mm a'}})
                         </h5>
                     </td>
                     <td>
                         <button type="button" class="btn btn-success btn-raised btn-sm">BUY TICKETS</button><br/>
-                        <span class="pull-right">
+                        <span class="pull-right eventListPrice">
                         <span ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">&dollar;</span><span>{{(event.price == null || event.price == 0 || event.price == undefined) ? "-" : event.price}}</span></span>
                     </td>
                 </tr>
@@ -51,21 +50,12 @@
         </div>
     </div>
 
-    <div class="form-group col-md-10 col-md-offset-right-10"  ng-if="calenderData === true">
-        <div class="calendar-app">
-            <div class="row gutter-2">
-                <div class="col-md-8 col-sm-6">
-                    <!-- START panel-->
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                        <!-- START calendar-->
-                        <div id="calendar"></div>
-                        <!-- END calendar-->
-                        </div>
-                    </div>
-                    <!-- END panel-->
-                </div>
-                <div event-tile="" event="event" ng-class="'col-md-4 col-sm-6'" ng-show="!!event"/>
+    <div ng-hide="eventListData == true">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <!-- START calendar-->
+                <div id="calendar"></div>
+                <!-- END calendar-->
             </div>
         </div>
     </div>
