@@ -81,14 +81,13 @@
                       <td>{{drink.name}}</td>
                       <td>{{drink.brand}}</td>
                       <td>{{drink.count}}</td>
-                      <td><span ng-hide="((drink == null || drink.total == 0 || drink.total == undefined))">&dollar;</span>{{(drink == null || drink.total == 0 || drink.total == undefined) ? "-" : drink.total}}</td>
+                      <td><span ng-hide="((drink == null || drink.total == 0 || drink.total == undefined))">&dollar;</span>{{(drink == null || drink.total == 0 || drink.total == undefined) ? "-" : drink.total | number:2}}</td>
                        <td><button type="submit" class="btn btn-raised btn-sm btn-danger" ng-click="removeDrinkItems($index,drink)">X</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
         </div>
-
 
         <div class="col-md-8 form-group is-empty">
             <div class="row">

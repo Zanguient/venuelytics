@@ -59,7 +59,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.selectedCity = $routeParams.cityName;
                     self.venueName =    self.detailsOfVenue.venueName;
                 });
-            };
+
+                AjaxService.getHosts(self.venueid).then(function(response) {
+                    self.hostDate = response.data;
+                });
+            };            
             $(window).resize(function() {
                 var divHeight = $('#imagemap').height();
                 var divWidth = $('#imagemap').width();
@@ -388,7 +392,13 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             }
             return false;
         };
-
+        self.selectHostImg = function(img){
+            if(img != undefined){
+                $('#hostImages').modal('show');
+                $('.modal-backdrop').remove();
+                self.hostImg = img;
+            }
+        }
         self.selectTable = function(id, name) {
           
             var data = $('#' + id).mouseout().data('maphilight') || {};

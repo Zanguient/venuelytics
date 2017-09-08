@@ -1,6 +1,6 @@
 "use strict";
-app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams) {
+app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams', 'APP_LINK',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams, APP_LINK) {
 
     		$log.log('Inside Business Controller');
     		
@@ -31,6 +31,13 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.init = function() {
                 self.venueid = $routeParams.venueid;
                 self.cityNames = APP_ARRAYS.cityName;
+                var urlPattern = $location.absUrl();
+                var data = urlPattern.split(".");
+                if(data[1] === "itzfun") {
+                    $rootScope.facebook = APP_LINK.FACEBOOK_VENUELYTICS;
+                    $rootScope.twitter = APP_LINK.TWITTER_VENUELYTICS;
+                    $rootScope.instagram = APP_LINK.INSTAGRAM_VENUELYTICS;
+                }
                 self.listOfCategory = APP_ARRAYS.categories;
                 self.listOfRoles = APP_ARRAYS.roles;
                 self.deploymentServices = [];

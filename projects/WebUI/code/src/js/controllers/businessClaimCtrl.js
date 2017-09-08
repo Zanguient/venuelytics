@@ -1,11 +1,18 @@
 "use strict";
-app.controller('BusinessClaimController', ['$log', '$scope', '$http', '$location', 'AjaxService','$routeParams',
- function ($log, $scope, $http, $location, AjaxService, $routeParams) {
+app.controller('BusinessClaimController', ['$log', '$scope', '$http', '$location', 'AjaxService','$routeParams', 'APP_LINK',
+ function ($log, $scope, $http, $location, AjaxService, $routeParams, APP_LINK) {
 
     var self = $scope;
 
     self.init = function() {
         self.venueNumber = $routeParams.venueId;
+        var urlPattern = $location.absUrl();
+        var data = urlPattern.split(".");
+        if(data[1] === "itzfun") {
+            $rootScope.facebook = APP_LINK.FACEBOOK_VENUELYTICS;
+            $rootScope.twitter = APP_LINK.TWITTER_VENUELYTICS;
+            $rootScope.instagram = APP_LINK.INSTAGRAM_VENUELYTICS;
+        }
         var vc = $location.search().vc;
         var ce = $location.search().ce;
         self.successMessage = !!$location.search().successful ;

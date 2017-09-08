@@ -147,6 +147,12 @@
             <label class="control-label" for="focusedInput1">{{'reservation.INSTRUCTIONS' | translate}}</label>
             <input type="text" class="form-control fontBold" id="instructions" ng-model="bottle.instructions" placeholder="">
         </div>
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;">
+            <label class="control-label" for="focusedInput1">{{'reservation.HOST' | translate}}</label>
+            <select ng-change="selectHostImg(bottle.host.profileImage)" class="form-control fontBold" ng-model="bottle.host" ng-options="x as x.name for x in hostDate  track by x.id">
+                <option value=""></option>
+            </select>
+        </div>
         <div class="col-md-12 form-group is-empty" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>
@@ -351,6 +357,23 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" ng-click="closeModal()" data-backdrop="false">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-success" id="hostImages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                <h3 class="modal-title" id="myModalLabel6">{{'reservation.HOST' | translate}}</h3>
+            </div>
+            <div class="modal-body">
+                <img ng-src="{{hostImg}}" class="img-responsive"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeHostModal()" data-backdrop="false">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
             </div>
         </div>
     </div>

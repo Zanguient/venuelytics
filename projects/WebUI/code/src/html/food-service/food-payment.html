@@ -31,6 +31,62 @@
                     &nbsp;&nbsp;$<label>{{taxAmount | number:2}}</label>
                 </td>
             </tr>
+            <tr ng-show = "processingFee > 0">
+                <td>
+                    <label>{{"reservation.PROCESS_FEE"  | translate}} :</label>
+                </td>
+                <td>
+                    &nbsp;&nbsp;$<label>{{processingFee | number:2}}</label>
+                </td>
+            </tr>
+            <tr ng-show = "discount > 0">
+                <td>
+                    <label>{{"reservation.DISCOUNT"  | translate}} :</label>
+                </td>
+                <td>
+                    &nbsp;&nbsp;$<label>{{discount | number:2}}</label>
+                </td>
+            </tr>
+            <tr ng-show = "gratuity > 0">
+                <td>
+                    <label>{{"reservation.SERVICE_FEE"  | translate}} :</label>
+                </td>
+                <td>
+                    &nbsp;&nbsp;$<label>{{gratuity | number:2}}</label>
+                </td>
+            </tr>
+            <tr ng-show = "tipsFee > 0">
+                <td>
+                    <label>{{"reservation.TIPS"  | translate}} :</label>
+                </td>
+                <td>
+                    &nbsp;&nbsp;$<label>{{tipsFee | number:2}}</label>
+                </td>
+            </tr>
+            <tr ng-show = "foodFee > 0"> 
+                <td>
+                    <label>{{"reservation.DELIVERY_FEE"  | translate}} :</label>
+                </td>
+                <td>
+                    &nbsp;&nbsp;$<label>{{foodFee | number:2}}</label>
+                </td>
+            </tr>
+            <tr ng-if = "paypal === true && payPalFee > 0">
+                <td>
+                    <label>{{"reservation.PAY_PAL_FEE"  | translate}} :</label>
+                </td>
+                <td>
+                    &nbsp;&nbsp;$<label>{{payPalFee | number:2}}</label>
+                </td>
+            </tr>
+            <tr ng-if = "cardPayment === true && creditCardFee > 0">
+                <td>
+                    <label>{{"reservation.CREDIT_CARD_FEE"  | translate}} :</label>
+                </td>
+                <td>
+                    &nbsp;&nbsp;$<label>{{creditCardFee | number:2}}</label>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <label>{{"reservation.TOTAL"  | translate}} :</label>
@@ -44,16 +100,16 @@
                     <label>{{"reservation.PAYMENT"  | translate}}</label>
                 </td>
                 <td style="white-space: nowrap">&nbsp;&nbsp;
-                    <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>&nbsp;&nbsp;
                     <label>
+                    <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>&nbsp;&nbsp;
                         <font size="3">{{"reservation.PAYPAL"  | translate}}</font>
                     </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>&nbsp;&nbsp;
                     <label>
+                    <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>&nbsp;&nbsp;
                         <font size="3">{{"reservation.CREDIT_CARD"  | translate}}</font>
                     </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="type" ng-model="phoneInVenue" value="Phone/In Venue"/>&nbsp;&nbsp;
                     <label>
+                    <input type="radio" name="type" ng-change="payAtVenue(test)" ng-model="test" value="Phone/In Venue"/>&nbsp;&nbsp;
                         <font size="3">{{"reservation.PAY_AT_VENUE"  | translate}}</font>
                     </label>
                 </td>
@@ -69,6 +125,7 @@
 </div>
 <div class="form-group" ng-hide="true">
         <input type="text" id="stripeAmount" placeholder="payAmount" ng-model="availableAmount">
+        <input type="text" id="payPalchargedAmount" placeholder="payChargedAmount" ng-model="chargedAmount">
         <input type="text" id="taxDate" placeholder="taxDate" ng-model="taxDate">
         <input type="text" id="venueNumber" placeholder="venueNumber" ng-model="selectedVenueID">
         <input type="text" id="orderIdValue" placeholder="orderIdValue" ng-model="orderId">
@@ -90,6 +147,7 @@
                         braintree.paypal.create({
                             client: clientInstance
                         }, function(err, paypalInstance) {
+                            var payPalchargedAmount = $("#payPalchargedAmount").val();
                                 console.log('paypalButton:' + paypalButton);
                                 var chargeAmountValue;
                                 var amount = $("#stripeAmount").val();
@@ -133,7 +191,7 @@
                                 // Tokenize here!
                                 paypalInstance.tokenize({
                                     flow: 'checkout', // Required
-                                    amount: chargeAmountValue, // Required
+                                    amount: payPalchargedAmount, // Required
                                     currency: 'USD', // Required
                                     locale: 'en_US'
                                 }, function(err, tokenizationPayload) {
@@ -160,7 +218,7 @@
                                                     "processingFee":processingFee,
                                                     "discountAmount":discount,
                                                     "paymentType":"PAYPAL",
-                                                    "chargedAmount":chargeAmountValue
+                                                    "chargedAmount":payPalchargedAmount
                                                 }                            
                                 var name = paypalDetails.details.firstName + " " + paypalDetails.details.lastName;
                                 var authBase64Str = window.btoa(name + ':' + paypalDetails.details.email + ':' + paypalDetails.details.phone);
@@ -177,7 +235,7 @@
                                         },
                                         success: function(data){
                                         if (typeof(Storage) !== "undefined") {
-                                            localStorage.setItem("amount",chargeAmountValue);  
+                                            localStorage.setItem("amount",payPalchargedAmount);  
                                         }
                                         window.location.replace(cityName+"/foodSuccess/"+venueNumber);
                                         },

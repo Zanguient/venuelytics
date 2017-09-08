@@ -178,6 +178,8 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
     });
     self.selectedDate = calElement.fullCalendar('getDate');
   };
-  self.initCalendar();
+  setTimeout(function() { 
+    self.initCalendar();
+  }, 2500);
   self.init();
 }]);

@@ -18,9 +18,9 @@
                 <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
                 <input type="email" id="tableServiceEmailId" name="tableServiceEmailId" data-parsley-type="email" class="form-control fontBold" ng-model="tableService.emailId" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-12 form-group is-empty">
+            <!-- <div class="col-md-12 form-group is-empty">
                 <p>{{'reservation.TABLE_CONFIRM_DESC' | translate}}</p>
-            </div>
+            </div> -->
             <hr>
             <center>
                 <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-click="confirmReservation()">{{'reservation.TABLE_CONFIRM_RESERVATION' | translate}}</button>

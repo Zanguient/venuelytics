@@ -3,8 +3,8 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, AjaxService, APP_ARRAYS, $rootScope) {
+app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope', 'APP_LINK',
+    function ($log, $scope, $http, $location, RestURL, DataShare, AjaxService, APP_ARRAYS, $rootScope, APP_LINK) {
 
     		$log.log('Inside City Controller.');
     		
@@ -44,6 +44,14 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             };
 
             self.init = function() {
+
+                var urlPattern = $location.absUrl();
+                var data = urlPattern.split(".");
+                if(data[1] === "venuelytics") {
+                    $rootScope.facebook = APP_LINK.FACEBOOK_ITZFUN;
+                    $rootScope.twitter = APP_LINK.TWITTER_ITZFUN;
+                    $rootScope.instagram = APP_LINK.INSTAGRAM_ITZFUN;
+                }
 
                 $('.selectpicker').selectpicker({
                     style: 'btn-info',
