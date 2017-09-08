@@ -20,7 +20,7 @@
  		var userProperties = ['badgeNumber', 'businessName','email', 'loginId', 'roleId', 'userName', 'phone',
  		'storeNumber', 'enabled', 'password'];
 
- 		var loyalityProperties = ['name', 'rewardText', 'condition','displayAttributes', 'conditionType'];
+ 		var loyalityProperties = ['name', 'venueNumber','rewardText', 'condition','displayAttributes', 'conditionType'];
 
  		var profileProperties = ['badgeNumber', 'email', 'loginId', 'userName', 'phone', 'password','newpassword',
  		'confirmnewpassword'];
@@ -147,7 +147,10 @@
  				});
  			},
  			LoyaltyService: function () {
- 				return $resource(urlTemplate.replace("@context", "loyalty"));
+ 				return $resource(urlTemplate.replace("@context", "loyalty"),{},{
+ 					getLevel : {method: 'GET',params: { id: '@venueNumber', levelId: '@id' }, 
+ 					url: urlTemplate.replace("@context", "loyalty") +'/level/:levelId'},
+ 				});
  			},
 
  			AppSettingsService: function () {
