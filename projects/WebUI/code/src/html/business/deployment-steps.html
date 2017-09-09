@@ -6,14 +6,14 @@
 <form class="search-form" ng-cloak>
 	<div class="form-group">
 	
-		<div class="col-md-10 col-md-offset-right-2">	
+		<div class="col-md-10 col-md-offset-2">	
 			<h2 ng-show="successMessage">Your Business Account is successfully activated. </h2>
 		</div>
 
 	</div>
 	<div class="form-group">
 
-		<div class="col-md-10 col-md-offset-right-2">	
+		<div class="col-md-10 col-md-offset-2">	
 			<div class="post-container">                
 			    <div class="post-thumb"><img class="deployPost" ng-src="{{businessImage}}" alt="deployImg"/></div>
 			    <div class="post-content">
@@ -29,7 +29,7 @@
 	</div>
 	<br>
 	<div class="form-group">
-		<div class="col-md-10 col-md-offset-right-2">
+		<div class="col-md-10 col-md-offset-2">
 			<h3><strong>{{"business.DOWNLOAD_VENUELYTICS" | translate}}</strong></h3>
 			<label><h4>{{"business.LINK_DOWNLOAD" | translate}}:</h4></label>
 			<a href="http://onelink.to/xw558c" target="_blank">{{"business.DOWNLOAD_VENUELYTICS_URL" | translate}}</a>
@@ -38,7 +38,7 @@
 
 	</div>
 	<div class="form-group">
-		<div class="col-md-10 col-md-offset-right-2">
+		<div class="col-md-10 col-md-offset-2">
 			<h3><strong>{{"business.DOWNLOAD_VENUELYTICS_WHITE" | translate}}</strong></h3>
 			<label><h4>{{"business.LINK_DOWNLOAD" | translate}}:</h4></label>
 			<a href="http://onelink.to/98dmnv" target="_blank">{{"business.DOWNLOAD_VENUELYTICS_WHITE_URL" | translate}}</a>
@@ -47,8 +47,9 @@
 
 	</div>
 	<div class="form-group" ng-show = "businessUrl === true">
-		<div class="col-md-10 col-md-offset-right-2">
-			<h2>{{"business.FOR_SHARING" | translate}}</h2>
+		<div class="col-md-10 col-md-offset-2">
+			<h2><strong>{{"business.FOR_SHARING" | translate}}</strong></h2>
+
 			<div class="control-label" ng-repeat="depItem in deploymentServices">
 				<h4 ng-bind="depItem.displayName | translate"></h4>
 				<label><a ng-href="{{depItem.url}}" target="_blank">{{depItem.url}}</a></label>
@@ -58,6 +59,20 @@
 				
 		</div>
 
-	</div>		
+	</div>	
+	<div class="form-group">
+		<div class="col-md-10 col-md-offset-2">
+			<h2><strong>{{"business.CONFIG_SCRIPT" | translate}}</strong></h2>
+			<div class="control-label col-md-10 col-md-offset-right-2">
+			   <h4> 
+			   		<pre>
+			   			<code> <p ng-bind="embedServicesHTML"></p></code>
+			   		</pre> 
+			   </h4>
+			   <hr class="underLine">
+			</div>
+		</div>
+	</div>
+</div>	
 </form>
 </div>

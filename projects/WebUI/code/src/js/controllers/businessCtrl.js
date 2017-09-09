@@ -1,6 +1,6 @@
 "use strict";
-app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams', 'APP_LINK',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams, APP_LINK) {
+app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams', 'APP_LINK', '$templateCache',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams, APP_LINK, $templateCache) {
 
     		$log.log('Inside Business Controller');
     		
@@ -57,6 +57,8 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                         addDeployment("business.FOOD_URL", self.foodUrl);
                         addDeployment("business.DRINKS_URL", self.drinksUrl);
                         addDeployment("business.GUEST_URL", self.guestList);
+
+                        setupEmbedScript();
                     });
                 }
                 AjaxService.getVenues(self.venueid,null,null).then(function(response) {
@@ -67,7 +69,11 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 });
             };
 
-            
+            function setupEmbedScript() {
+                var premiumUrl = RestURL.adminURL + '/reservation/'+self.venueid +'?i=Y';
+                self.embedServicesHTML = $templateCache.get('business/iframe-integration.html');
+                self.embedServicesHTML = self.embedServicesHTML.replace('premiumUrl', premiumUrl);
+            }
             function addDeployment(displayName, url) {
                 if (typeof url != 'undefined' && url != null && url.length > 0){
                     self.deploymentServices.push({displayName: displayName, url: url});
