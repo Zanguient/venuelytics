@@ -73,6 +73,16 @@
 		"SUBSCRIPBE_MAIL":"Subscribe Mail",
 		"SUBSCRIPBE_TO_VENUELYTICS":"Thank you for subscribing to VenueLytics!"
 	},
+	"navbar":{
+		"HOME":"Home",
+		"BUSINESS":"Business",
+		"CONSUMERS":"Consumers",
+		"APPLE_STORE":"Download link for Venuelytics App",
+		"GOOGLE_PLAY":"Download link for Itzfun App",
+		"FREE_VENUELYTICS":"Free - Venuelytics App",
+		"FREE_ITZFUN":"Free - Itzfun App",
+		"GET_IT":"Get it"
+	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
 		"LOYALITY":"Loyality Management",
@@ -167,16 +177,6 @@
 		"MILES":"miles",
 		"SEARCH_VENUE":"Search Venue",
 		"NO_MATCHING_RESULTS":"Sorry there are no matching results. Please try clicking on other type of venues in the tab above"
-	},
-	"navbar":{
-		"HOME":"Home",
-		"BUSINESS":"Business",
-		"CONSUMERS":"Consumers",
-		"APPLE_STORE":"Download link for Venulytics App",
-		"GOOGLE_PLAY":"Download link for Itzfun App",
-		"FREE_VENUELYTICS":"Free - Venulytics App",
-		"FREE_ITZFUN":"Free - Itzfun App",
-		"GET_IT":"Get it"
 	},
 	"title":{
 		"TITLE_VENUE":"Venue",
