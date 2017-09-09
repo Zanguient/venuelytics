@@ -165,6 +165,8 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
       eventClick: function( event, jsEvent, view ) {
         self.selectCalender = false;
         self.event = event.venueEvent;
+        $('#eventView').modal('show');
+        $('.modal-backdrop').remove();
         $('.__event_id_class').css('border-color', '');
         $(this).css('border-color', 'red');
       },
