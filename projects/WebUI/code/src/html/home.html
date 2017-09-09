@@ -350,39 +350,41 @@
 
 
 <div class="modal modal-success" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-        <div class="modal-dialog animated zoomIn animated-3x" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-                    <h3 class="modal-title" id="myModalLabel6">{{'home.SUBSCRIPBE_MAIL' | translate}}</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-12 form-group label-floating is-empty floatingLabel {{businessIsFocused}}" style="margin-left: auto;">
-                        <label class="control-label" for="emailId">{{'business.EMAIL' | translate}}</label>
-                        <input id="emailId" name="emailId" type="email" value="Email" class="form-control fontBold" ng-model="successEmail" required>
+        <form name="subscribe" novalidate="">
+            <div class="modal-dialog animated zoomIn animated-3x" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                        <h3 class="modal-title" id="myModalLabel6">{{'home.SUBSCRIPBE_MAIL' | translate}}</h3>
                     </div>
-                    <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
-                        <label class="control-label" for="nameOfPerson">{{'business.NAME_OF_PERSION' | translate}}</label>
-                        <input id="nameOfPerson" name="nameOfPerson" type="text" value="NameOfPerson" class="form-control fontBold" ng-model="business.NameOfPerson" required>
+                    <div class="modal-body">
+                        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{businessIsFocused}}" style="margin-left: auto;">
+                            <label class="control-label" for="emailId">{{'business.EMAIL' | translate}}</label>
+                            <input id="emailId" name="emailId" type="email" value="Email" class="form-control fontBold" ng-model="successEmail" required>
+                        </div>
+                        <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
+                            <label class="control-label" for="nameOfPerson">{{'business.NAME_OF_PERSION' | translate}}</label>
+                            <input id="nameOfPerson" name="nameOfPerson" type="text" value="NameOfPerson" class="form-control fontBold" ng-model="business.NameOfPerson" required>
+                        </div>
+                        <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
+                            <label class="control-label" for="businessName">{{'business.BUINESS_NAME' | translate}}</label>
+                            <input id="businessName" name="businessName" type="text" value="BusinessName" class="form-control fontBold" ng-model="business.businessName" required>
+                        </div>
+                        <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
+                            <label class="control-label" for="roldId">{{'business.ROLE_OPTIONAL' | translate}}</label>
+                            <select id="roldId" name="roldId" class="btn dropdown-toggle form-control"  ng-model="business.businessRole" ng-options="r.role for r in businessRoles">
+                            </select>
+                        </div>
+                        <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
+                            <label class="control-label" for="phoneNo">{{'business.PHONE_OPTIONAL' | translate}}</label>
+                            <input id="phoneNo" name="phoneNo" type="text" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" ng-model="business.phoneNumber" data-parsley-trigger="change">
+                        </div>
                     </div>
-                    <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
-                        <label class="control-label" for="businessName">{{'business.BUINESS_NAME' | translate}}</label>
-                        <input id="businessName" name="businessName" type="text" value="BusinessName" class="form-control fontBold" ng-model="business.businessName" required>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveBusiness()" ng-disabled="subscribe.$invalid">{{'business.SUBMIT' | translate}}</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" >{{'business.CANCEL' | translate}}</button>
                     </div>
-                    <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
-                        <label class="control-label" for="roldId">{{'business.ROLE_OPTIONAL' | translate}}</label>
-                        <select id="roldId" name="roldId" class="btn dropdown-toggle form-control" required="" ng-model="business.businessRole" ng-options="r.role for r in businessRoles">
-                        </select>
-                    </div>
-                    <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
-                        <label class="control-label" for="phoneNo">{{'business.PHONE_OPTIONAL' | translate}}</label>
-                        <input id="phoneNo" name="phoneNo" type="text" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" ng-model="business.phoneNumber" required data-parsley-trigger="change">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveBusiness()">{{'business.SUBMIT' | translate}}</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'business.CANCEL' | translate}}</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
