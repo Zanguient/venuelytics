@@ -179,9 +179,15 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
         }
     }
     self.saveBusiness = function() {
+        var business = $scope.business;
+        var role = (typeof business.businessRole  === 'undefined') ? '' :  business.businessRole.role;
         var subscribeEmail = {
             "email": $rootScope.successEmail,
-             "utmSource" : "dev.webui.venuelytics.com",
+            "mobile": business.phoneNumber,
+            "name": business.NameOfPerson,
+            "businessName": business.businessName,
+            "role": role ,
+             "utmSource" : "venuelytics.com",
              "utmCampaign" :"homepage",
              "utmMedium": "subscribe"
         };
@@ -190,7 +196,6 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $('#subscribeSuccessModal').modal('show');
             $('.modal-backdrop').remove();
             self.subscribeEmails = '';
-            self.business = {};
             $rootScope.businessIsFocused = '';
             $rootScope.emailToSend = '';
         });
