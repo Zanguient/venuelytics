@@ -1,32 +1,32 @@
-<div class="smartbanner" id="smartabanner" ng-show="venuelyticsApp === true">
+<div class="smartbanner" id="smartabanner" ng-show="venuelyticsApp === true" ng-cloak>
     <div class="smartbanner-container">
         <a href="javascript:void(0)" class="smartbanner-close" ng-click="closeStore()">&times;</a>
         <span class="smartbanner-icon"></span>
         <div class="smartbanner-info">
-            <div class="smartbanner-title">{{"navbar.APPLE_STORE" | translate}}</div>
-            <span>{{"navbar.FREE_VENUELYTICS" | translate}}</span>
+            <div class="smartbanner-title" ng-bind="'navbar.APPLE_STORE' | translate"></div>
+            <span ng-bind="'navbar.FREE_VENUELYTICS' | translate"></span>
         </div>
         <a href="{{venuelyticsAppUrl}}" target="_new" class="smartbanner-button">
-            <span class="smartbanner-button-text">{{"navbar.GET_IT" | translate}}</span>
+            <span class="smartbanner-button-text" ng-bind="'navbar.GET_IT' | translate"></span>
         </a>
     </div>
 </div>
-<div class="smartbanner" id="smartGoogle" ng-show="itzfunApp === true">
+<div class="smartbanner" id="smartGoogle" ng-show="itzfunApp === true" ng-cloak>
     <div class="smartbanner-container">
         <a href="javascript:void(0)" class="smartbanner-close" ng-click="closeStore()">&times;</a>
         <span class="smartbanner-icon"></span>
         <div class="smartbanner-info">
-            <div class="smartbanner-title">{{"navbar.GOOGLE_PLAY" | translate}}</div>
-            <span>{{"navbar.FREE_ITZFUN" | translate}}</span>
+            <div class="smartbanner-title" ng-bind="'navbar.GOOGLE_PLAY' | translate"></div>
+            <span ng-bind="'navbar.FREE_ITZFUN' | translate"></span>
         </div>
         <a href="{{itzfunAppUrl}}"  target="_new" class="smartbanner-button">
-            <span class="smartbanner-button-text">{{"navbar.GET_IT" | translate}}</span>
+            <span class="smartbanner-button-text" ng-bind="'navbar.GET_IT' | translate"></span>
         </a>
     </div>
 </div>
 
 <!-- Modal -->
-<header class="ms-header <%= headerClass %>">
+<header class="ms-header <%= headerClass %>" ng-cloak>
     <div class="container container-full">
         <div class="ms-title">
             <a href="index.html">
