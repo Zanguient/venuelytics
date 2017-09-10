@@ -3,8 +3,8 @@
  * @date 05-sep-2017
  */
 "use strict";
-app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
+app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','$timeout',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, $timeout) {
         
     var self = $scope;
 
@@ -165,10 +165,12 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
       eventClick: function( event, jsEvent, view ) {
         self.selectCalender = false;
         self.event = event.venueEvent;
-        $('#eventView').modal('show');
-        $('.modal-backdrop').remove();
-        $('.__event_id_class').css('border-color', '');
-        $(this).css('border-color', 'red');
+        $timeout(function() {
+          $('#eventView').modal('show');
+          $('.modal-backdrop').remove();
+          $('.__event_id_class').css('border-color', '');
+          $(this).css('border-color', 'red');
+        }, 300);
       },
       eventDragStart: function (event, js, ui) {
         //draggingEvent = event;
