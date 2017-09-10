@@ -344,9 +344,6 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
     this.getHosts = function(venueNumber) {
         return $http({
             method: 'GET',
-            headers: {
-                "X-XSRF-TOKEN": "XX-YY-XX-V"
-            },
             url: RestURL.baseURL + '/venues/' + venueNumber + '/hosts'
         }).then(function(success) {
             return success;

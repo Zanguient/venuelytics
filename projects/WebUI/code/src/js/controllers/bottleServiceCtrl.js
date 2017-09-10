@@ -400,7 +400,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             if (self.bottle.host && self.bottle.host.profileImage){
                 return self.bottle.host.profileImage;
             }
-            return "https://d1hx7mabke4m1h.cloudfront.net/3dxp56ct9/image/default_host.png";
+            return "";
         }
         self.selectTable = function(id, name) {
           
