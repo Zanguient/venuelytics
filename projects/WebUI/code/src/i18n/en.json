@@ -83,6 +83,17 @@
 		"FREE_ITZFUN":"Free - Itzfun App",
 		"GET_IT":"Get it"
 	},
+	"event":{
+		"EVENT_LIST":"List",
+		"EVENT_CALENDAR":"Calender",
+		"EVENT_DOORS":"Doors",
+		"EVENT_SHOW":"Show",
+		"EVENT_END":"Event ends at",
+		"EVENT_TICKET":"BUY TICKETS",
+		"EVENT_WEEK":"Date Of The Week",
+		"EVENT_TYPES":"Event Type",
+		"EVENT_COVER":"Cover"
+	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
 		"LOYALITY":"Loyality Management",
