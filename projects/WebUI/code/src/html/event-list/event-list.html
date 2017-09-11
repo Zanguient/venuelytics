@@ -1,10 +1,10 @@
 <div ng-controller="eventListCtrl">
     <div event-tile="" ng-class="'col-masonry'" event="event" ng-repeat="event in events track by $index"/>
     <button type="button" class="btn btn-primary pull-right"ng-model="eventListData" ng-click="listEventView()" style="margin-right: 13px;">
-        <i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;List
+        <i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;{{'event.EVENT_LIST' | translate}}
     </button>
     <button type="button" class="btn btn-primary pull-right" ng-model="calenderData" ng-click="calenderEventView()">
-        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;Calender
+        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;{{'event.EVENT_CALENDAR' | translate}}
     </button><br/><br/>
     <div class="form-group col-md-10 col-md-offset-right-10"  ng-if="eventListData == true">
         <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
@@ -13,10 +13,11 @@
         </div>
     </div><br/><br/>
     <div class="form-group col-md-10 col-md-offset-right-10"  ng-if="eventListData == true">
-        <div event-tile="" ng-class="'col-masonry eventListcal'" ng-repeat="event in events track by $index">
+        <div event-tile="" class="col-md-12" ng-class="'col-masonry eventListcal'" ng-repeat="event in events track by $index">
             <table class="table">
                 <tr>
-                    <td class="col-md-2">
+                    <td>
+                    <div class="col-md-2 col-sm-6 col-xs-6">
                         <div class="dateMargin">
                             <div class="row">
                                 <div class="date pull-left">
@@ -27,21 +28,21 @@
                                 </div>                   
                             </div>                
                         </div>
-                    </td> 
-                    <td class="col-md-2">
+                    </div> 
+                    <div class="col-md-2 col-sm-6 col-xs-6">
                         <img class="eventlistImage" ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" alt="eventListImg">
-                    </td>
-                    <td class="col-md-7">
-                        <h2 class="eventListName">
-                            <span>{{event.eventName}}</span>
-                        </h2><br/>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 eventDescription">
+                        <div class="eventListName">{{event.eventName}}</div><br/>
                         <h5 class="eventListTime">
-                            Doors:{{event.eventTimes | date:'h:mm a'}} / Show: {{event.eventTimes | date:'h:mm a'}} (event ends at {{event.endtimes | date:'h:mm a'}})
+                            {{'event.EVENT_DOORS' | translate}}:{{event.eventTimes | date:'h:mm a'}} / {{'event.EVENT_SHOW' | translate}}: {{event.eventTimes | date:'h:mm a'}} ({{'event.EVENT_END' | translate}} :{{event.endtimes | date:'h:mm a'}})
                         </h5>
-                    </td>
-                    <td><a href="{{event.bookingUrl}}" target="_new" class="btn btn-success btn-raised btn-sm">BUY TICKETS</a><br/>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-6">
+                        <a href="{{event.bookingUrl}}" target="_new" class="btn btn-success btn-raised btn-sm">{{'event.EVENT_TICKET' | translate}}</a><br/>
                         <span class="pull-right eventListPrice">
                         <span ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">&dollar;</span><span>{{(event.price == null || event.price == 0 || event.price == undefined) ? "-" : event.price}}</span></span>
+                    </div>
                     </td>
                 </tr>
             </table>
@@ -58,22 +59,28 @@
         </div>
     </div>
     <div class="modal modal-success col-md-12" id="eventView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-        <div class="modal-dialog animated zoomIn animated-3x modalMarginTop" event="event" role="document">
+        <div class="modal-dialog animated zoomIn animated-3x eventModalTop" event="event" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-no-border">
-                        <tr class="col-md-12">
-                            <td class="col-md-4">
-                                <img ng-src="{{event.imageURL}}" style="margin-left: -20px"/>
-                            </td>
-                            <td class="col-md-8">
-                                <label>Event Name </label><h1>{{event.eventName}}</h1>
-                                <label>Event Type </label><h1>{{event.eventType}}</h1>
-                                <label>Date of the Week</label><h4>{{event.scheduleDayOfWeek}}</h4>
-                                <label>Description</label><h4>{{event.description}}</h4>
+                    <table class="table table-no-border col-md-12">
+                        <tr>
+                            <td>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <img ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" class="img-responsive" style="margin-left: -20px"/>
+                            </div>
+                            <div class="col-md-8 col-sm-12 col-xs-12" style="color:black;">
+                                <h2 class="calEventName fontBold">{{event.eventName}}</h2>
+                                <div class="eventListName">{{'event.EVENT_WEEK' | translate}}:</div><h4> {{event.scheduleDayOfWeek}} ({{event.eventTimes | date:'h:mm a'}} - {{event.endtimes | date:'h:mm a'}})</h4><hr>
+                                <div class="eventListName">{{'event.EVENT_TYPES' | translate}}:</div><h4>{{event.eventType}}</h4>
+                                <div class="eventListName">{{'bottleServiceTab.DESC' | translate}}:</div><h4> {{event.description}}</h4>
+                                <span class="eventListName" ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">
+                                    <label class="eventListName">{{'event.EVENT_COVER' | translate}}:</label><span>&dollar;</span><span>{{(event.price == null || event.price == 0 || event.price == undefined) ? "-" : event.price}}</span>
+                                </span><br>
+                                <a href="{{event.bookingUrl}}" target="_new" class="btn btn-success btn-raised btn-sm">{{'event.EVENT_TICKET' | translate}}</a><br/>
+                            <div>
                             </td>
                         </tr>
                     </table>
