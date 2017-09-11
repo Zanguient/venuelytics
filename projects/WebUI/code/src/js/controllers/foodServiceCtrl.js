@@ -17,7 +17,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 }
                 if((Object.keys(DataShare.foodServiceData).length) !== 0) {
                     self.food = DataShare.foodServiceData;
-                    self.foodType = $rootScope.serviceName;
+                    self.foodType = DataShare.serviceTypes;
                     self.selectedFoodList = DataShare.foodService;
                 } else {
                     self.tabClear();
@@ -31,7 +31,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 DataShare.foodServiceData = {};
                 self.isFoodFocused = '';
                 self.food = {};
-                $rootScope.serviceName = '';
+                DataShare.serviceTypes = '';
                 DataShare.foodService = '';
                 self.foodType = 'Delivery';
                 DataShare.selectedFoods = '';
@@ -60,10 +60,8 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                     self.foodGlutenfree = response.data["Food.glutenfree"];
                     self.enabledPayment = response.data["Advance.enabledPayment"];
                     self.foodPickup = response.data["Food.FoodPickup.enable"];
-                    if(self.foodPickup === 'Y' || self.foodPickup === 'y'){
-                        self.foodType = 'Pickup';
-                    }
-
+                    self.specificFood = response.data["Food.SpecificServiceFood.enable"];
+                    self.preOrder = response.data["Food.PreOrdering.enable"];
                 });
             };
 
@@ -213,7 +211,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                     self.serviceJSON.order.orderItems.push(items);
                   } 
                 });
-                $rootScope.serviceName = self.foodType;
+                DataShare.serviceTypes = self.foodType;
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;

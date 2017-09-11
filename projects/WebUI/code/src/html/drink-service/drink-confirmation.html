@@ -44,7 +44,7 @@
                   <td>{{drinkItem.brand}}</td>
                   <td>{{drinkItem.name}}</td>
                   <td>{{drinkItem.count}}</td>
-                  <td><span ng-hide="((drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined))">&dollar;</span>{{(drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined) ? "-" : drinkItem.total}}</td>
+                  <td><span ng-hide="((drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined))">&dollar;</span>{{(drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined) ? "-" : drinkItem.total | number:2}}</td>
                 </tr>
               </tbody>
           </table>
