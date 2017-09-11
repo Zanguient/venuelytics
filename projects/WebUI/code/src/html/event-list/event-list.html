@@ -1,6 +1,6 @@
 <div ng-controller="eventListCtrl">
     <div event-tile="" ng-class="'col-masonry'" event="event" ng-repeat="event in events track by $index"/>
-    <button type="button" class="btn btn-primary pull-right"ng-model="eventListData" ng-click="listEventView()" style="margin-right: 13px;">
+    <button type="button" class="btn btn-primary pull-right" ng-model="eventListData" ng-click="listEventView()" style="margin-right: 13px;">
         <i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;{{'event.EVENT_LIST' | translate}}
     </button>
     <button type="button" class="btn btn-primary pull-right" ng-model="calenderData" ng-click="calenderEventView()">
