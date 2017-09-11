@@ -38,7 +38,7 @@
                             {{'event.EVENT_DOORS' | translate}}:{{event.eventTimes | date:'h:mm a'}} / {{'event.EVENT_SHOW' | translate}}: {{event.eventTimes | date:'h:mm a'}} ({{'event.EVENT_END' | translate}} :{{event.endtimes | date:'h:mm a'}})
                         </h5>
                     </div>
-                    <div class="col-md-2 col-sm-6 col-xs-6">
+                    <div class="col-md-2 col-sm-6 col-xs-6 eventButtonAling">
                         <a href="{{event.bookingUrl}}" target="_new" class="btn btn-success btn-raised btn-sm">{{'event.EVENT_TICKET' | translate}}</a><br/>
                         <span class="pull-right eventListPrice">
                         <span ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">&dollar;</span><span>{{(event.price == null || event.price == 0 || event.price == undefined) ? "-" : event.price}}</span></span>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-md-8 col-sm-12 col-xs-12" style="color:black;">
                                 <h2 class="calEventName fontBold">{{event.eventName}}</h2>
-                                <div class="eventListName">{{'event.EVENT_WEEK' | translate}}:</div><h4> {{event.scheduleDayOfWeek}} ({{event.eventTimes | date:'h:mm a'}} - {{event.endtimes | date:'h:mm a'}})</h4><hr>
+                                <h4> {{event.scheduleDayOfWeek}} ({{event.eventTimes | date:'h:mm a'}} - {{event.endtimes | date:'h:mm a'}})</h4><hr>
                                 <div class="eventListName">{{'event.EVENT_TYPES' | translate}}:</div><h4>{{event.eventType}}</h4>
                                 <div class="eventListName">{{'bottleServiceTab.DESC' | translate}}:</div><h4> {{event.description}}</h4>
                                 <span class="eventListName" ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">

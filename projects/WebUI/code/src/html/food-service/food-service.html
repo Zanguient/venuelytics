@@ -15,46 +15,46 @@
                     <input ng-disabled="preOrder === 'n' || preOrder === 'N'" type="radio" name="deliveryFood" ng-model="foodType" value="Delivery"/>&nbsp;&nbsp;
                     <font size="3">{{"reservation.DELIVERY" | translate}}</font>
                 </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                <label ng-show="foodPickup === 'Y' || foodPickup === 'y'">
-                    <input ng-disabled="preOrder === 'n' || preOrder === 'N'" type="radio" name="pickFood" ng-model="foodType" value="Pickup" name="tests"/>&nbsp;&nbsp;
+                <label>
+                    <input ng-disabled="preOrder === 'n' || preOrder === 'N' || foodPickup === 'N' || foodPickup === 'n'" type="radio" name="pickFood" ng-model="foodType" value="Pickup" name="tests"/>&nbsp;&nbsp;
                     <font size="3">{{"reservation.PICKUP" | translate}}</font>
                 </label> 
             </div>
-            <div ng-show="preOrder === 'y' || preOrder === 'Y'" class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
+            <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
                 <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
-                <input type="text" id="foodFirstName" name="foodFirstName" class="form-control fontBold" ng-model="food.firstName" required="" data-parsley-trigger="change">
+                <input type="text" ng-disabled="orderDisable === true" id="foodFirstName" name="foodFirstName" class="form-control fontBold" ng-model="food.firstName" required="" data-parsley-trigger="change">
             </div>
-            <div ng-show="preOrder === 'y' || preOrder === 'Y'" class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
+            <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
                 <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
-                <input type="text" id="foodLastName" name="foodLastName" class="form-control fontBold" ng-model="food.lastName" required="" data-parsley-trigger="change">
+                <input type="text" ng-disabled="orderDisable === true" id="foodLastName" name="foodLastName" class="form-control fontBold" ng-model="food.lastName" required="" data-parsley-trigger="change">
             </div>
-            <div ng-show="preOrder === 'y' || preOrder === 'Y'" class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
+            <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
                 <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
-                <input type="email" id="foodEmailId" name="foodEmailId" data-parsley-type="email" class="form-control fontBold" ng-model="food.emailId" required="" data-parsley-trigger="change">
+                <input type="email" ng-disabled="orderDisable === true" id="foodEmailId" name="foodEmailId" data-parsley-type="email" class="form-control fontBold" ng-model="food.emailId" required="" data-parsley-trigger="change">
             </div>
-            <div ng-show="preOrder === 'y' || preOrder === 'Y'" class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
+            <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
                 <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
-                <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="foodMobile" ng-model="food.mobileNumber" required="" data-parsley-trigger="change">
+                <input type="text" ng-disabled="orderDisable === true" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="foodMobile" ng-model="food.mobileNumber" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;" ng-hide="((foodType === 'Pickup') && (preOrder === 'n' || preOrder === 'N'))" ng-if="venueTypeBowling === 'BOWLING'">
+            <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;" ng-hide="(foodType === 'Pickup')" ng-if="venueTypeBowling === 'BOWLING'">
                 <label class="control-label" for="focusedInput1">{{"reservation.TABLE_NUMBER" | translate}}</label>
-                <select class="form-control fontBold" ng-model="drink.tableNumber">
+                <select class="form-control fontBold" ng-disabled="orderDisable === true" ng-model="drink.tableNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(32) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
             </div>
 
-            <div ng-show="preOrder === 'y' || preOrder === 'Y'" class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;" ng-hide="foodType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
+            <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;" ng-hide="foodType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" for="focusedInput1">{{"reservation.SEAT_NUMBER" | translate}}</label>
-                <select class="form-control fontBold" id="foodSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.seatNumber">
+                <select class="form-control fontBold" ng-disabled="orderDisable === true" id="foodSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.seatNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(10) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
             </div>
 
-             <div ng-show="preOrder === 'y' || preOrder === 'Y'" class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;" ng-hide="foodType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
+             <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;" ng-hide="foodType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
                 <label class="control-label" for="focusedInput1">{{"reservation.LANE_NUMBER" | translate}}</label>
-                <select class="form-control fontBold" id="foodLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.laneNumber">
+                <select class="form-control fontBold" ng-disabled="orderDisable === true" id="foodLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.laneNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(30) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -150,12 +150,12 @@
             </div>
             </div>
         </div>
-        <div ng-show="preOrder === 'y' || preOrder === 'Y'" class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
+        <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.SPECIAL_INSTRUCTION' | translate}}</label>
-            <input type="text" class="form-control fontBold" id="foodInstructions" ng-model="food.instructions">
+            <input type="text" class="form-control fontBold" ng-disabled="orderDisable === true" id="foodInstructions" ng-model="food.instructions">
         </div>
        	<br><br>
-            <div ng-show="preOrder === 'y' || preOrder === 'Y'" class="col-lg-12">
+            <div class="col-lg-12">
                 <center>
                     <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-disabled="foodForm.$invalid" ng-click="foodSave()">
                         <span class="fontRegular">{{'business.DEPLOY_APPLY' | translate}}</span>

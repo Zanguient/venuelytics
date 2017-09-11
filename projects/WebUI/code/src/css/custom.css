@@ -1082,6 +1082,14 @@ a.btn.disabled,fieldset[disabled] a.btn {
 @media only screen and (min-width: 320px) and (max-width:
  480px) {
 
+  .eventListPrice {
+    margin-right: 20px;
+    color: black;
+  }
+  .eventButtonAling {
+    margin-left: -22px;
+  }
+
   .fc-header-title {
     display: inline-block;
     vertical-align: top;
@@ -1373,6 +1381,14 @@ a.btn.disabled,fieldset[disabled] a.btn {
     and (min-width : 375px)
     and (max-width : 667px) {
 
+      .eventListPrice {
+        margin-right: 48px;
+        color: black;
+      }
+      .eventButtonAling {
+        margin-left: -22px;
+      }
+
       .fc-header-title {
         display: inline-block;
         vertical-align: top;
@@ -1533,6 +1549,14 @@ a.btn.disabled,fieldset[disabled] a.btn {
 @media only screen
     and (min-width : 414px)
     and (max-width : 736px) {
+
+      .eventListPrice {
+        margin-right: 64px;
+        color: black;
+      }
+      .eventButtonAling {
+        margin-left: -22px;
+      }
 
       .fc-header-title {
         display: inline-block;

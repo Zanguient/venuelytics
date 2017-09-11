@@ -78,7 +78,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         $('#imagemap').css('height', divHeight + 'px');
                         $('#imagemap').css('width', divWidth + 'px');
                     }
-                }, 5000);
+                }, 7000);
             });
 
             self.$watch('bottle.requestedDate', function() {

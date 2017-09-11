@@ -62,6 +62,9 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                     self.foodPickup = response.data["Food.FoodPickup.enable"];
                     self.specificFood = response.data["Food.SpecificServiceFood.enable"];
                     self.preOrder = response.data["Food.PreOrdering.enable"];
+                    if((self.preOrder === 'N') || (self.preOrder === 'n' )){
+                        self.orderDisable = true;
+                    }
                 });
             };
 
