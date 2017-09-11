@@ -32,6 +32,7 @@ app.service('DataShare', function() {
   this.selectedBlog = {};
   this.editBottle = '';
   this.enablePayment = '';
+  this.serviceTypes = '';
   this.imageMapping={
       "pictureURL": "",
       "pictureURLThumbnail":"",
