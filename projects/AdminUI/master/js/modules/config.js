@@ -136,7 +136,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('loyalty/loyalty_edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('parsley')
+        resolve: resolveFor('parsley', 'angularSpectrumColorpicker')
     })
     .state('app.venueedit', {
         url: '/venues/:id',
