@@ -44,7 +44,7 @@
                   <td>{{foodItem.brand}}</td>
                   <td>{{foodItem.name}}</td>
                   <td>{{foodItem.count}}</td>
-                  <td><span ng-hide="((foodItem == null || foodItem.total == 0 || foodItem.total == undefined))">&dollar;</span>{{(foodItem == null || foodItem.total == 0 || foodItem.total == undefined) ? "-" : foodItem.total}}</td>
+                  <td><span ng-hide="((foodItem == null || foodItem.total == 0 || foodItem.total == undefined))">&dollar;</span>{{(foodItem == null || foodItem.total == 0 || foodItem.total == undefined) ? "-" : foodItem.total | number:2}}</td>
                 </tr>
               </tbody>
           </table>

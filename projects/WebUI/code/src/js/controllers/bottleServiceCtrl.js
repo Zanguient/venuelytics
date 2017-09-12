@@ -78,7 +78,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         $('#imagemap').css('height', divHeight + 'px');
                         $('#imagemap').css('width', divWidth + 'px');
                     }
-                }, 200);
+                }, 7000);
             });
 
             self.$watch('bottle.requestedDate', function() {
@@ -309,8 +309,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         $('#imagemap').css('height', divHeight + 'px');
                         $('#imagemap').css('width', divWidth + 'px');
                     }
-                }, 200);
-            }, 200);
+                }, 1000);
+            }, 1000);
           };
 
             self.strokeColor = function(id) {

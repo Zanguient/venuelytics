@@ -16,7 +16,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
 
                 if((Object.keys(DataShare.drinkServiceData).length) !== 0) {
                     self.drink = DataShare.drinkServiceData;
-                    self.drinkType = $rootScope.serviceName;
+                    self.drinkType = DataShare.serviceTypes;
                     self.userSelectedDrinks = DataShare.drinks;
                 } else {
                     self.tabClear();
@@ -35,8 +35,10 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                     self.drinksCocktailsUrl = response.data["Drinks.cocktailsUrl"];
                     self.enabledPayment = response.data["Advance.enabledPayment"];
                     self.drinkPickup = response.data["Drinks.DrinksPickup.enable"];
-                    if(self.drinkPickup === 'Y' || self.drinkPickup === 'y'){
-                        self.drinkType = 'Pickup';
+                    self.specificDrink = response.data["Drinks.SpecificServiceDrink.enable"];
+                    self.preOrder = response.data["Drinks.PreOrdering.enable"];
+                    if((self.preOrder === 'N') || (self.preOrder === 'n' )){
+                        self.orderDisable = true;
                     }
                 });
             };
@@ -54,7 +56,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 DataShare.drinkServiceData = {};
                 self.isDrinkFocused = '';
                 self.drink = {};
-                $rootScope.serviceName = '';
+                DataShare.serviceTypes = '';
                 DataShare.foodService = [];
                 DataShare.drinks = '';
                 self.drinkType = 'Delivery';
@@ -204,7 +206,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                     self.serviceJSON.order.orderItems.push(items);
                   } 
                 });
-                $rootScope.serviceName = self.drinkType;
+                DataShare.serviceTypes = self.drinkType;
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;

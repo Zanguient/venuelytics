@@ -9,6 +9,7 @@
   display: block;
   width: 80px;
   height: 100px;
+  margin-left: -25px;
   background: #fff;
   text-align: center;
   font-family: 'Helvetica', sans-serif;
@@ -96,15 +97,24 @@
 .featureMargin{
   margin-top: 100px;
 }
-
+.calEventName {
+  margin-top: 0px;
+  color: black;
+}
+.eventDescription {
+  margin-left: -20px;
+}
+.eventModalTop {
+  margin-top: 50px;
+}
 /* Date End */
 .eventListcal {
   border:1px solid black;
   margin-top:15px;
 }
 .eventListName {
-  margin-top: -5px;
   color:black;
+  font-size: 24px;
 }
 .eventListTime {
   margin-top: 0px; 
@@ -116,6 +126,7 @@
 .eventlistImage {
   width: 100px; 
   height: 100px;
+  margin-left: -20px;
 }
 /*This is for imgae tiles row*/
 
@@ -1071,6 +1082,27 @@ a.btn.disabled,fieldset[disabled] a.btn {
 @media only screen and (min-width: 320px) and (max-width:
  480px) {
 
+  .eventListPrice {
+    margin-right: 20px;
+    color: black;
+  }
+  .eventButtonAling {
+    margin-left: -22px;
+  }
+
+  .fc-header-title {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: -60px;
+    margin-right: -224px;
+  }
+
+  .fc-header-title h2 {
+    margin-top: 0;
+    white-space: nowrap;
+    margin-left: -200px;
+}
+
   .citiesImgContainer {
     width: 460px;
     height: 35px;
@@ -1349,6 +1381,27 @@ a.btn.disabled,fieldset[disabled] a.btn {
     and (min-width : 375px)
     and (max-width : 667px) {
 
+      .eventListPrice {
+        margin-right: 48px;
+        color: black;
+      }
+      .eventButtonAling {
+        margin-left: -22px;
+      }
+
+      .fc-header-title {
+        display: inline-block;
+        vertical-align: top;
+        margin-top: -60px;
+        margin-right: -224px;
+      }
+
+      .fc-header-title h2 {
+        margin-top: 0;
+        white-space: nowrap;
+        margin-left: -195px;
+    }
+
       .citiesImgContainer {
         width: 460px;
         height: 35px;
@@ -1496,6 +1549,27 @@ a.btn.disabled,fieldset[disabled] a.btn {
 @media only screen
     and (min-width : 414px)
     and (max-width : 736px) {
+
+      .eventListPrice {
+        margin-right: 64px;
+        color: black;
+      }
+      .eventButtonAling {
+        margin-left: -22px;
+      }
+
+      .fc-header-title {
+        display: inline-block;
+        vertical-align: top;
+        margin-top: -60px;
+        margin-right: -224px;
+      }
+
+      .fc-header-title h2 {
+        margin-top: 0;
+        white-space: nowrap;
+        margin-left: -200px;
+    }
 
       .citiesImgContainer {
         width: 460px;
