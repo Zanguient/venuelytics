@@ -24,6 +24,14 @@
 	 "roleId": 100
   },
   {
+  	"text": "Loyalty Management",
+	"sref": "app.loyalty",
+	 "icon": "fa fa-id-card-o",
+	 "translate": "sidebar.nav.pages.LOYALTY",
+	 "submenu": [],
+	 "roleId": 100
+  },
+  {
   	"text": "Reservations",
 	"sref": "app.reservations",
 	 "icon": "icon-calendar",

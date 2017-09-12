@@ -34,12 +34,13 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     $scope.userRoles[7] = 'Artist';
     $scope.userRoles[8] = 'Host';
     $scope.userRoles[50] = 'Promotor';
-    $scope.userRoles[50] = 'Service Manager';
-    $scope.userRoles[100] = 'Manager';
+    $scope.userRoles[51] = 'Service Manager';
+    $scope.userRoles[100] = 'Venue Manager';
     $scope.userRoles[500] = 'Owner';
     $scope.userRoles[1000] = 'Administrator';
     $scope.userRoles[10] = 'Agent';
     $scope.userRoles[11] = 'Agent Manager';
+    $scope.userRoles[12] = 'Store Manager';
     
     $scope.stores = [];
    // var storePromise = RestServiceFactory.VenueService().get();

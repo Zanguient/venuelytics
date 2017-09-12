@@ -3,8 +3,8 @@
  * smangipudi
  =========================================================*/
 
-App.controller('LoyaltyController', ['$scope', '$state','$compile', '$timeout', 'RestServiceFactory','DataTableService', 'toaster',
-                                      function($scope, $state,$compile, $timeout, RestServiceFactory, DataTableService, toaster) {
+App.controller('LoyaltyController', ['$scope', '$state','$compile', '$timeout', 'RestServiceFactory','DataTableService', 'toaster','ContextService',
+                                      function($scope, $state,$compile, $timeout, RestServiceFactory, DataTableService, toaster, contextService) {
   'use strict';
 
   $timeout(function(){
@@ -17,13 +17,13 @@ App.controller('LoyaltyController', ['$scope', '$state','$compile', '$timeout', 
     		 $(td).html('<button class="btn btn-default btn-oval fa fa-edit" ng-click="editLevel('+cellData+')"></button>&nbsp;&nbsp;<button class="btn btn-default btn-oval fa fa-trash" ng-click="deleteLevel(' +row +','+cellData+')"></button>');
     		 $compile(td)($scope);
     		}
-	 	}, {
-		 	"targets": [0],
-	    	"orderable": false,
-	    	"createdCell": function (td, cellData, rowData, row, col) {
-	    		$(td).html('<div style="width:30px;height:30px;background-color:'+cellData+'"></div>');
-	    		}
-		 	}
+    	 	}, {
+    		 	  "targets": [0],
+    	    	"orderable": false,
+    	    	"createdCell": function (td, cellData, rowData, row, col) {
+    	    	  $(td).html('<div class="circle circle-xxl" style="background-color:'+cellData+'"></div>');
+    	    	}
+    		 	}
     	];
 	    
 	    var conditionFormat = function(condition, conditionType) {
@@ -33,10 +33,11 @@ App.controller('LoyaltyController', ['$scope', '$state','$compile', '$timeout', 
 	    		return "$" + condition + " spend";
 	    	}
 	    }
-	    
+	    $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
+
 	    DataTableService.initDataTable('loyalty_table', columnDefinitions, false);
    
-	    var promise = RestServiceFactory.LoyaltyService().get();
+	    var promise = RestServiceFactory.LoyaltyService().get({id: $scope.venueNumber});
 	    
 	    promise.$promise.then(function(data) {
     	 

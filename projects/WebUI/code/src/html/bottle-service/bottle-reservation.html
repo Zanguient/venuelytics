@@ -39,6 +39,10 @@
                 <td><label><b> {{"reservation.OCCASION"  | translate}}</b></label> </td>
                 <td>{{userData.bottleOccasion.name}}</td>
             </tr>
+            <tr ng-hide="userData.host.name === '' || userData.host.name === undefined">
+                <td><label><b> {{"reservation.HOST"  | translate}}</b></label> </td>
+                <td>{{userData.host.name}}</td>
+            </tr>
         </tbody>
     </table>
   </div>

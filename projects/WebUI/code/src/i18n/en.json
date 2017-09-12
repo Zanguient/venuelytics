@@ -73,6 +73,27 @@
 		"SUBSCRIPBE_MAIL":"Subscribe Mail",
 		"SUBSCRIPBE_TO_VENUELYTICS":"Thank you for subscribing to VenueLytics!"
 	},
+	"navbar":{
+		"HOME":"Home",
+		"BUSINESS":"Business",
+		"CONSUMERS":"Consumers",
+		"APPLE_STORE":"Download link for Venuelytics App",
+		"GOOGLE_PLAY":"Download link for Itzfun App",
+		"FREE_VENUELYTICS":"Free - Venuelytics App",
+		"FREE_ITZFUN":"Free - Itzfun App",
+		"GET_IT":"Get it"
+	},
+	"event":{
+		"EVENT_LIST":"List",
+		"EVENT_CALENDAR":"Calender",
+		"EVENT_DOORS":"Doors",
+		"EVENT_SHOW":"Show",
+		"EVENT_END":"Event ends at",
+		"EVENT_TICKET":"BUY TICKETS",
+		"EVENT_WEEK":"Date Of The Week",
+		"EVENT_TYPES":"Event Type",
+		"EVENT_COVER":"Cover"
+	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
 		"LOYALITY":"Loyality Management",
@@ -111,9 +132,9 @@
 		"CREATE_ACCOUNT":"CREATE ACCOUNT",
 		"REGISTERED":"Registered Successfully",
 		"SUCCESS":"Your info are Registered Successfully. You will receive mail for verification",
-		"FOR_SHARING":"Links for sharing",
+		"FOR_SHARING":"Links for sharing on social media (Facebook, Instagram, Twitter ...)",
 		"LINK":"Link to your premium services",
-		"CONFIG_SCRIPT":"Configuration scripts for your website",
+		"CONFIG_SCRIPT":"Configuration scripts for your Website",
 		"MENU_OPTIONS":"Menu Options",
 		"DASHBOARD_BUTTONS":"Dashboard Buttons",
 		"SCRIPT":"Script to include on your website",
@@ -167,16 +188,6 @@
 		"MILES":"miles",
 		"SEARCH_VENUE":"Search Venue",
 		"NO_MATCHING_RESULTS":"Sorry there are no matching results. Please try clicking on other type of venues in the tab above"
-	},
-	"navbar":{
-		"HOME":"Home",
-		"BUSINESS":"Business",
-		"CONSUMERS":"Consumers",
-		"APPLE_STORE":"Download link from Apple Store",
-		"GOOGLE_PLAY":"Download link from Google Play",
-		"FREE_APPLE":"Free - Apple Store",
-		"FREE_GOOGLE":"Free - Google Play",
-		"GET_IT":"Get it"
 	},
 	"title":{
 		"TITLE_VENUE":"Venue",
@@ -479,9 +490,15 @@
 		"AMOUNT":"Amount",
 		"PAYMENT":"Payment",
 		"SALES_TAX":"Sales Tax",
+		"DISCOUNT":"Discount Fee",
+		"SERVICE_FEE":"Gratuity",
+		"TIPS":"Tips",
+		"DELIVERY_FEE":"Delivery Fee",
+		"PAY_PAL_FEE":"Paypal Processing Fee",
 		"TOTAL":"Total",
 		"ERROR_MESSAGE":"Error",
 		"PAYPAL":"Paypal",
+		"CREDIT_CARD_FEE":"CreditCard Processing Fee",
 		"CREDIT_CARD":"Credit/Debit Card",
 		"PAY_AT_VENUE":"Pay at Venue",
 		"TOTAL_TO_PAY":"Your total amount paid",

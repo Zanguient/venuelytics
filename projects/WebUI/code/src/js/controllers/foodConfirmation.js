@@ -7,6 +7,8 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             self.paypal = false;
             self.cardPayment = false;
             self.orderPlaced = false;
+            self.sumAmount = 0;
+            self.chargedAmount = 0;
             self.init = function() {
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
@@ -36,25 +38,51 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             self.getTax = function() {
                 AjaxService.getTaxType(self.selectedVenueID,self.taxDate).then(function(response) {
                     self.tax = response.data;
-                    var amount = parseInt(self.availableAmount);
+                    self.amount = parseFloat(self.availableAmount);
+                    self.chargedAmount = self.amount;
                     if(self.tax.length !== 0) {
                         angular.forEach(self.tax, function(value, key) {
                             if(value.type === 'tax') {
                                 var taxData = value.value;
-                                self.taxAmount = (amount * taxData)/100;
-                                self.chargedAmount = amount + self.taxAmount;
-                            } else if(value.type === 'convenience-fee'){
-                                    self.processingFee = value.value;
-                            } else if(value.type === 'discount'){
-                                    self.discount = value.value;
-                            } else if(value.type === 'service-fee'){
-                                    self.gratuity = value.value;
-                            } else{
-                                $log.info("Else block:");
+                                self.taxAmount = (self.amount * taxData)/100;
+                                self.chargedAmount += self.taxAmount;
+                            } 
+                            if(value.type === 'convenience-fee'){
+                                var conFee = value.value;
+                                self.chargedAmount += conFee;
+                                self.processingFee = value.value;
+                            } 
+                            if(value.type === 'discount'){
+                                var discountFee = value.value;
+                                self.chargedAmount += discountFee;
+                                self.discount = value.value;
+                            } 
+                            if(value.type === 'service-fee'){
+                                var serviceFee = value.value;
+                                self.gratuity = (self.amount * serviceFee)/100;
+                                self.chargedAmount += self.gratuity;
+                            }
+                            if(value.type === 'tips') {
+                                var tipsFee = value.value;
+                                self.chargedAmount += tipsFee;
+                                self.tipsFee = value.value;
+                            }
+                            if(value.serviceType === 'FOOD') {
+                                var foodFee = value.value;
+                                self.foodFee = (self.amount * foodFee)/100;
+                                self.chargedAmount += self.foodFee;
+                            }
+                            if(value.type === 'paypal-convenience-fee') {
+                                var payPalConFee = value.value;
+                                self.payPalFee = (self.amount * payPalConFee)/100;
+                            }
+                            if(value.type === 'credit-convenience-fee') {
+                                var cardFee = value.value;
+                                self.creditCardFee = (self.amount * cardFee)/100;
                             }
                         });
                     } else {
-                        self.chargedAmount = parseInt(self.availableAmount);
+                        self.chargedAmount = self.availableAmount;
                         self.taxAmount = 0;
                         self.gratuity = 0;
                         self.discount = 0;
@@ -95,12 +123,37 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 self.cardPayment = true;
                 self.paypal = false;
                 self.phoneVenues = false;
+                if(self.sumAmount === 0){
+                    self.chargedAmount += self.creditCardFee;
+                    self.sumAmount = self.creditCardFee;
+                } else {
+                    self.chargedAmount = ((self.chargedAmount - self.sumAmount) + self.creditCardFee);
+                    self.sumAmount = self.creditCardFee;
+                }
             };
 
             self.paypalData = function(value) {
                 self.paypal = true;
                 self.cardPayment = false;
                 self.phoneVenues = false;
+                if(self.sumAmount === 0){
+                    self.chargedAmount += self.payPalFee;
+                    self.sumAmount = self.payPalFee;
+                } else {
+                    self.chargedAmount = ((self.chargedAmount - self.sumAmount) + self.payPalFee);
+                    self.sumAmount = self.payPalFee;
+                }
+            };
+            self.payAtVenue = function(value){
+                self.paypal = false;
+                self.cardPayment = false;
+                self.phoneVenues = true;
+                if(self.sumAmount === 0){
+                    self.chargedAmount = self.chargedAmount;
+                } else {
+                    self.chargedAmount -= self.sumAmount;
+                    self.sumAmount = 0;
+                }
             };
 
             self.paypalPayment = function() { 

@@ -63,15 +63,19 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                 //DataShare.selectedCity = self.selectedCityName;
                 AjaxService.getVenues(null,self.selectedCityName, type, DataShare.latitude, DataShare.longitude).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
+                    angular.forEach(self.listOfVenuesByCity, function(value, key) {
+                            value.feature = value.info["Advance.featured"];
+                    });                
                 });
             };
-
             self.getVenueBySearch = function(venueSearch){
                 AjaxService.getVenueBySearch(DataShare.latitude, DataShare.longitude, venueSearch).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
+                    angular.forEach(self.listOfVenuesByCity, function(value, key) {
+                        value.feature = value.info["Advance.featured"];
+                    });
                 });
             };
-
             self.getVenuesKeyEnter = function(keyEvent,venueSearch) {
                 if (keyEvent.which === 13){
                     self.getVenueBySearch(venueSearch);

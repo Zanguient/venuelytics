@@ -147,6 +147,11 @@
             <label class="control-label" for="focusedInput1">{{'reservation.INSTRUCTIONS' | translate}}</label>
             <input type="text" class="form-control fontBold" id="instructions" ng-model="bottle.instructions" placeholder="">
         </div>
+        <div class="col-md-4 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;" ng-hide ="!hostDate || hostDate.length == 0">
+            <label class="control-label">{{'reservation.HOST' | translate}}</label>
+            
+            <select class="form-control fontBold" ng-model="bottle.host" ng-options="x as x.name for x in hostDate  track by x.id">
+            </select></label></div><img class="hostImgs" ng-src="{{getHostImage()}}"/>
         <div class="col-md-12 form-group is-empty" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>

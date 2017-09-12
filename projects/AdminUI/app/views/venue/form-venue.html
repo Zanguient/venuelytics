@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-sm-6">
      <form  name="storeInfo" validate-form="" novalidate role="form">
         <!-- START panel-->
         
@@ -88,14 +88,19 @@
 <div class="col-sm-6" animate-enabled="true">
 	<div class="form-group col-sm-12" >
         <input type="file" id="control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
-  </div><br />
-  <carousel interval="5000" class="col-sm-12">
-    <slide ng-repeat="slide in imageUrl" active="slide.active">
-      <img ng-src="{{slide.originalUrl}}" alt="" class="img-responsive" style="width: 100% !important"/>
-        <div class="row row-table bg-gray-darker" style="padding: 15px;" ng-show="imageUrl.length > 0">
-          <span> Image {{$index + 1}}</span> <a href="javascript:void(0)"> <em class="fa fa-trash fa-2x" style="padding-left: 155px;" ng-click="deleteImage(slide.id, imageUrl, slide)" />
-          </a>
+  </div>
+  <br />
+  <carousel id="venueImageCarousel" interval="5000" class="col-sm-12">
+    <slide ng-repeat="slide in imageUrl track by slide.id" active="slide.active">
+      <div style="display: inline-block;">
+        <img ng-src="{{slide.mediumUrl}}" class="img-responsive" style="max-width: 640px; height: 300px; max-height: 300px; margin: auto;"/>
+        <div class="carousel-caption"><h2  ng-bind="slide.status"></h2></div>
+        <div class="bg-gray-darker col-sm-12" ng-show="imageUrl.length > 0"> 
+          <a href="javascript:void(0)"> 
+              <em class="fa fa-trash fa-2x pull-right" ng-click="deleteImage($index,slide)" />
+            </a>
         </div>
+      </div>
     </slide>
   </carousel>
   

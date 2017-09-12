@@ -27,6 +27,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 self.venueid = $routeParams.venueid;
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
+                    self.sum = DataShare.count;
                 } else {
                     self.tabClear();
                 }
@@ -59,7 +60,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.selectedCity = $routeParams.cityName;
                     self.venueName =    self.detailsOfVenue.venueName;
                 });
-            };
+
+                AjaxService.getHosts(self.venueid).then(function(response) {
+                    self.hostDate = response.data;
+                });
+            };            
             $(window).resize(function() {
                 var divHeight = $('#imagemap').height();
                 var divWidth = $('#imagemap').width();
@@ -73,7 +78,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         $('#imagemap').css('height', divHeight + 'px');
                         $('#imagemap').css('width', divWidth + 'px');
                     }
-                }, 200);
+                }, 7000);
             });
 
             self.$watch('bottle.requestedDate', function() {
@@ -192,6 +197,10 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.tableSelection = [];
                     self.selectionTableItems = [];
                 }
+                if(!DataShare.count){
+                    self.sum = 0;
+                    self.clearSum = true;
+                  }
                 // Date in YYYYMMDD format
                 self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
                 var day = moment(self.startDate).format('ddd').toUpperCase();
@@ -251,7 +260,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     });
                     self.showSelectedVenueMap();
                 });
-                
             };
 
             self.fillColor = function(id) {
@@ -301,8 +309,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                         $('#imagemap').css('height', divHeight + 'px');
                         $('#imagemap').css('width', divWidth + 'px');
                     }
-                }, 200);
-            }, 200);
+                }, 1000);
+            }, 1000);
           };
 
             self.strokeColor = function(id) {
@@ -378,7 +386,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             return false;
         };  
 
-        $scope.isSelected = function (table) {
+        self.isSelected = function (table) {
             if (self.tableSelection && typeof self.tableSelection !== 'undefined') {
                 for (var resIndex = 0; resIndex < self.tableSelection.length; resIndex++) {
                     if (table.id === self.tableSelection[resIndex].id) {
@@ -388,13 +396,23 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             }
             return false;
         };
-
+        self.getHostImage = function () {
+            if (self.bottle.host && self.bottle.host.profileImage){
+                return self.bottle.host.profileImage;
+            }
+            return "";
+        }
         self.selectTable = function(id, name) {
           
             var data = $('#' + id).mouseout().data('maphilight') || {};
             var dataValueObj = self.selectedVenueMap.productsByName[name];
 
             // $log.info("Data :", data);
+
+            if(self.clearSum === true) {
+                self.clearSum = false;
+                self.sum = 0;
+            }
 
             if(data.fillColor === APP_COLORS.red) {
               // $log.info("Reserved table clicked");
@@ -492,6 +510,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                       return;
                   }
                 }
+                DataShare.count = self.sum;
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,

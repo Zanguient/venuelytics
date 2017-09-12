@@ -4,8 +4,8 @@
  */
 "use strict";
 app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'APP_CLIENTS', 
-    'APP_ARRAYS', '$rootScope', 'AjaxService',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope, AjaxService) {
+    'APP_ARRAYS', '$rootScope', 'AjaxService', 'APP_LINK',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope, AjaxService, APP_LINK) {
 
 	$log.log('Inside Home Controller.');
 
@@ -17,7 +17,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     self.showBusinessTab = parseInt(data);
     var newConsumer = $location.search().nc;
     self.showNewConsumer = parseInt(newConsumer);*/
-    $rootScope.videoUrl = "https://www.youtube.com/watch?v=ruy7kCuPpV4";
+    $rootScope.videoUrl = APP_LINK.VIDEO_PLAY;
     self.navBar = function(tab) {
         if(tab === 'home') {
             $rootScope.homeTab = 'active';
@@ -109,6 +109,31 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     self.init = function() {
         self.venueLyticsFeatures = APP_ARRAYS.features;
 
+        var urlPattern = $location.absUrl();
+        var data = urlPattern.split(".");
+        if(data[1] === "itzfun") {
+            $rootScope.facebook = APP_LINK.FACEBOOK_ITZFUN;
+            $rootScope.twitter = APP_LINK.TWITTER_ITZFUN;
+            $rootScope.instagram = APP_LINK.INSTAGRAM_ITZFUN;
+        } else {
+            $rootScope.facebook = APP_LINK.FACEBOOK_VENUELYTICS;
+            $rootScope.twitter = APP_LINK.TWITTER_VENUELYTICS;
+            $rootScope.instagram = APP_LINK.INSTAGRAM_VENUELYTICS;
+        }
+        $rootScope.venuelyticsAppUrl = APP_LINK.APPLE_STORE_VENUELYTICS;
+        $rootScope.itzfunAppUrl = APP_LINK.APPLE_STORE_ITZFUN;
+        
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        if (/android/i.test(userAgent)) {
+            $rootScope.venuelyticsAppUrl = APP_LINK.GOOGLE_PLAY_VENUELYTICS;
+            $rootScope.itzfunAppUrl = APP_LINK.GOOGLE_PLAY_ITZFUN;
+        }
+
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            $rootScope.venuelyticsAppUrl = APP_LINK.APPLE_STORE_VENUELYTICS;
+            $rootScope.itzfunAppUrl = APP_LINK.APPLE_STORE_ITZFUN;
+        }
         $(document).ready(function () {
             
             $('#carousel-example-generic').carousel({
@@ -154,9 +179,15 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
         }
     }
     self.saveBusiness = function() {
+        var business = $scope.business;
+        var role = (typeof business.businessRole  === 'undefined') ? '' :  business.businessRole.role;
         var subscribeEmail = {
             "email": $rootScope.successEmail,
-             "utmSource" : "dev.webui.venuelytics.com",
+            "mobile": business.phoneNumber,
+            "name": business.NameOfPerson,
+            "businessName": business.businessName,
+            "role": role ,
+             "utmSource" : "venuelytics.com",
              "utmCampaign" :"homepage",
              "utmMedium": "subscribe"
         };
@@ -165,7 +196,6 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $('#subscribeSuccessModal').modal('show');
             $('.modal-backdrop').remove();
             self.subscribeEmails = '';
-            self.business = {};
             $rootScope.businessIsFocused = '';
             $rootScope.emailToSend = '';
         });

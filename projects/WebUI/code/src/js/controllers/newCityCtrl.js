@@ -3,12 +3,12 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, AjaxService, APP_ARRAYS, $rootScope) {
+app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope', 'APP_LINK',
+    function ($log, $scope, $http, $location, RestURL, DataShare, AjaxService, APP_ARRAYS, $rootScope, APP_LINK) {
 
     		$log.log('Inside New City Controller.');
     		
-    		var self = $scope;
+            var self = $scope;
             var nextPageSize = 0;
             var previousPageSize = 0;
             self.next = false;
@@ -43,6 +43,14 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             };
 
             self.init = function() {
+
+                var urlPattern = $location.absUrl();
+                var data = urlPattern.split(".");
+                if(data[1] === "venuelytics") {
+                    $rootScope.facebook = APP_LINK.FACEBOOK_ITZFUN;
+                    $rootScope.twitter = APP_LINK.TWITTER_ITZFUN;
+                    $rootScope.instagram = APP_LINK.INSTAGRAM_ITZFUN;
+                }
 
                 $('.selectpicker').selectpicker({
                     style: 'btn-info',
@@ -103,6 +111,9 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 self.listOfCities = [];
                 AjaxService.getVenueBySearch(DataShare.latitude, DataShare.longitude, venueSearch).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
+                    angular.forEach(self.listOfVenuesByCity, function(value, key) {
+                        value.feature = value.info["Advance.featured"];
+                    });
                 });
             };
 

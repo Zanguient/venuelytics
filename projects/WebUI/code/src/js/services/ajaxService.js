@@ -341,6 +341,17 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
             return error;
         });
     };
+    this.getHosts = function(venueNumber) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + '/venues/' + venueNumber + '/hosts'
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
 
     this.completeBusinessClaim = function(venueId, verificationCode, emailHash) {
         var data = {vc: verificationCode, ce: emailHash};

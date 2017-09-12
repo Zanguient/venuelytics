@@ -48,21 +48,20 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         "orderable": false,
         "createdCell": function (td, cellData, rowData, row, col) {
 
-          var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit" ng-click="editTable('+row+','+cellData+')"></button>&nbsp;&nbsp;';
+          var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit"></button>&nbsp;&nbsp;';
           actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash"></button>';
 
           $(td).html(actionHtml);
           $compile(td)($scope);
+        },
+        "render": function (data, type, row, meta ) {
+          var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit"></button>&nbsp;&nbsp;';
+          actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash"></button>';
+
+          return actionHtml;
         }
       },
-      /*"render": function (data, type, row, meta ) {
-        var actionHtml = '<button title="Edit Table" class="btn btn-default btn-oval fa fa-edit" '+
-          ' ng-click="editTable('+meta.row+','+meta.col+')"></button>&nbsp;&nbsp;';
-        actionHtml += '<button title="Delete Table" class="btn btn-default btn-oval fa fa-trash"'+
-          ' ng-click="deleteTable('+meta.row+')"></button>';
-        
-        return actionHtml;
-      }*/                      
+                         
       {
         "targets": [4],
         "orderable": false,
@@ -74,7 +73,15 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
           }
           $(td).html(actionHtml);
           $compile(td)($scope);
-      }
+        },
+        "render": function (data, type, row, meta ) {
+          var actionHtml = '<em class="fa fa-check-square-o"></em>';
+          if (row[4] === false){
+            actionHtml = '<em class="fa fa-square-o"></em>';
+          }
+          return actionHtml;
+        }
+        
 
     } ];
 
@@ -113,6 +120,10 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
             table.draw();
             $('#tables_table').on('click', '.fa-trash',function() {
               $scope.deleteTable(this, table);
+            });
+
+             $('#tables_table').on('click', '.fa-edit',function() {
+              $scope.editTable(this, table);
             });
           }        
         });      
@@ -164,9 +175,10 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
         }
     }
     //name, price, capacity, description, enabled, action
-    $scope.editTable = function(rowId, colId) {
-      var table = $('#tables_table').DataTable();
-      var d = table.row(rowId).data();
+    $scope.editTable = function(button, table) {
+      var targetRow = $(button).closest("tr");
+      var d = table.row( targetRow).data();
+      
       $scope.newTable = {};
       $scope.newTable.name = d[0];
       $scope.newTable.price = d[1];
@@ -182,11 +194,17 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
           className: 'ngdialog-theme-default',
           scope : $scope 
         }).then(function (value) {
-          $('#tables_table').dataTable().fnDeleteRow(rowId);
+          d[0] = $scope.newTable.name ;
+          d[1] = $scope.newTable.price ;
+          d[2] = $scope.newTable.servingSize;
+          d[3] = $scope.newTable.description;
+          d[4] = $scope.newTable.enabled;f
+          d[5] = $scope.newTable.id;
+          d[6] = $scope.newTable.imageUrls;
+
+          table.row(targetRow).data(d).draw();
           var t = $scope.newTable;
           $scope.renameTableNameInImgMap(oldName, t.name);
-          table.row.add([t.name, t.price || 0, t.servingSize, t.description, t.enabled,  t.id, t.imageUrls]);
-          table.draw();
         },function(error){
 
       });
@@ -315,6 +333,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
               "description": data[3],
               "price": data[1],
               "enabled": "Y",
+              "size": data[2],
               "servingSize": data[2],
               "imageUrls": []
             };

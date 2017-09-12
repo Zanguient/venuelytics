@@ -122,13 +122,18 @@ app
       "guest-list":"blogs/blog-guest-list.html",
       "nightlife":"blogs/blog-post-list.html",
       "nightlife-trends":"blogs/blog-nightlife-trends.html",
-      "7-ways-nightlife":"blogs/7-ways-nightlife-online.html"
+      "7-ways-nightlife":"blogs/7-ways-nightlife-online.html",
+      "10-tips-nightclub":"blogs/10-Tips-to-Setup-Nightclub.html",
+      "how_to_promote":"blogs/how_to_promote.html"
     },
     'blogs': [{"title":"7 Mind Blowing Nightlife Cities in the United States", "image":"assets/img/blog/blog-1.jpg", "description":"Who doesn't like to Party? And who doesn't like Casinos, Clubs, and Live Music Bars? We all wait till Friday just to get our own time from the hectic busy schedules so that we go out and have some fun with our friends and family. When it comes to the United States, you will have many choices to have a good time, and it's hard to select one city over other since every city here has its own charisma. Well, let us all say TGIF and check out some mind blowing nightlife cities in the USA that will make you say 'WOW'.", "link":"nightlife"},
               {"title":"What Is Bottle Service and Facts You Should Know", "image":"assets/img/blog/blog-2.jpg", "description":"Bottle service is also called table service, and it is the ONLY way to secure a table at your favorite party place (Bar, Pub, Nightclub, etc.). Almost all clubs these days have VIP tables arranged throughout the club. The only way to get on the guest list and bypass the line for any bar/pub/nightclub is to reserve a table. Wikipedia defines bottle service as the sale of liquor by the bottle in most American lounges and nightclubs. The purchase of bottle service typically includes a reserved table for the patron's party and mixers of the patron's choice.", "link":"bottle-service"},
               {"title":"What Is the Guest List and How to Get On It", "image":"assets/img/blog/blog-3.jpg", "description":"Guest list might be a bit confusing term to some people who are new to nightclubs, bars, and pubs. Today, we are going to explain this term and some more things attached to it. All these nightlife venues maintain their own dignity and culture, and you cannot just enter any nightclub and have your drinks. Well, you can go and have drinks, but at the famous places and the partying places with high demand, it is not easy.", "link":"guest-list"},
               {"title":"7 Nightlife Trends", "image":"assets/img/blog/blog-4.jpg", "description":"Businesses in the hospitality industry, must constantly change and adapt in a dynamic environment driven by technology and demand for better and faster services.  Equally, service differentiation is key to attracting new customers and retaining the exiting once.  These requirements are even more important when it comes to the new generation and the nightlife.", "link":"nightlife-trends"},
-              {"title":"7 Ways to Imporve Nightlife Online", "image":"assets/img/blog/blog-7ways.gif", "description":"Promoting an existing nightclub or a bar and growing the business can be a more challenging these days. As a new business, It is even more difficult to pass the six months mark.  Statistics show that 75% of new businesses fail in the first six months.", "link":"7-ways-nightlife"}],
+              {"title":"7 Ways to Imporve Nightlife Online", "image":"assets/img/blog/blog-7ways.gif", "description":"Promoting an existing nightclub or a bar and growing the business can be a more challenging these days. As a new business, It is even more difficult to pass the six months mark.  Statistics show that 75% of new businesses fail in the first six months.", "link":"7-ways-nightlife"},
+              {"title":"10 Tips to Setup a Nightclub", "image":"assets/img/blog/10-tips.jpg", "description":"We are back with yet another article and tips to share with you on creating the nightclub of tomorrow.", "link":"10-tips-nightclub"},
+              {"title":"How to Promote Nightlife", "image":"assets/img/blog/mil_1.png", "description":"Unlike Gen X, Millennials are between the ages of 18-35 of age and majority are about interaction social media and connecting over the smart phones.", "link":"how_to_promote"}
+              ],
     
     'nightlife': [{"title":"7 Mind Blowing Nightlife Cities in the United States", "image":"assets/img/blog/blog-1.jpg", "description":"Who doesn't like to Party? And who doesn't like Casinos, Clubs, and Live Music? We count down to Fridays just cut lose and have a great time with friends. Regardless of the city you live in, when it comes to the night life, we may have many choices and sometimes it is hard to choose. Well, let us all say TGIF and check out some cities with awesome nightlife in the USA that will make you say 'WOW.'", "link":"nightlife"},
                   {"title":"Las Vegas", "image":"assets/img/blog/city-1.jpg", "description":"Las Vegas has gained its status as America's playground for a valid reason. Some of the world's most riotous nightclubs stay in the city's glitzy hotels and casinos. Travel to Fremont Street for a break from the Strip. And apparently, every hotel on the Las Vegas Strip has at least one nightclub to keep you dancing and enjoying with your newest friends."},
@@ -181,4 +186,18 @@ app
     'tableShadow':            '#af7009',
     'bottleShadow':           '#56099c',
     'privateShadow':          '#08548a'
+  })
+
+  .constant('APP_LINK', {
+    "FACEBOOK_VENUELYTICS"   :  "http://www.facebook.com/venuelytics",
+    "TWITTER_VENUELYTICS"    :  "http://www.twitter.com/venuelytics",
+    "INSTAGRAM_VENUELYTICS"  :  "http://www.instagram.com/venuelytics",
+    "FACEBOOK_ITZFUN"        :  "http://www.facebook.com/itzfunapp",
+    "TWITTER_ITZFUN"         :  "http://www.twitter.com/itzfuninc",
+    "INSTAGRAM_ITZFUN"       :  "http://www.instagram.com/itzfunapp",
+    "APPLE_STORE_VENUELYTICS":  "https://itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8",
+    "APPLE_STORE_ITZFUN"     :  "https://itunes.apple.com/us/app/itzfun/id1035171101?mt=8",
+    "GOOGLE_PLAY_VENUELYTICS":  "https://play.google.com/store/apps/details?id=com.itzfun.biz&hl=en",
+    "GOOGLE_PLAY_ITZFUN"     :  "https://play.google.com/store/apps/details?id=com.itzfun&hl=en",
+    "VIDEO_PLAY"             :  "https://www.youtube.com/watch?v=ruy7kCuPpV4"
   });

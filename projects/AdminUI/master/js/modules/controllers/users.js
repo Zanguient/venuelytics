@@ -17,12 +17,13 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
 	userRoles[7] = 'Artist';
 	userRoles[8] = 'Host';
 	userRoles[50] = 'Promotor';
-	userRoles[50] = 'Service Manager';
+	userRoles[51] = 'Service Manager';
 	userRoles[100] = 'Manager';
 	userRoles[500] = 'Owner';
 	userRoles[1000] = 'Administrator';
 	userRoles[10] = 'Agent';
 	userRoles[11] = 'Agent Manager';
+	userRoles[12] = 'Store Manager';
   	$timeout(function(){
 
     if ( ! $.fn.dataTable ) return;

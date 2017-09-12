@@ -3,11 +3,12 @@
  * smangipudi
  =========================================================*/
 
-App.controller('LoyaltyLevelController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS) {
+App.controller('LoyaltyLevelController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'ContextService', 
+        function($scope, $state, $stateParams, RestServiceFactory, toaster, contextService) {
   'use strict';
-    
+    $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
     if($stateParams.id != 'new') {
-	    var promise = RestServiceFactory.LoyaltyService().get({id:$stateParams.id});
+	    var promise = RestServiceFactory.LoyaltyService().getLevel({id: $scope.venueNumber, levelId:$stateParams.id});
 	    promise.$promise.then(function(data) {
 	    	$scope.data = data;
 	    },function(error){
@@ -15,17 +16,21 @@ App.controller('LoyaltyLevelController', ['$scope', '$state', '$stateParams', 'R
     			toaster.pop('error', "Server Error", error.data.developerMessage);
     		}
     	} );
+    } else {
+        $scope.data ={};
+        $scope.data.venueNumber = $scope.venueNumber;
     }
-    $scope.data ={};
     $scope.update = function(isValid, data) {
     	console.log(data);
     	if (!isValid) {
     		return;
     	}
+
     	var displayAttributes = data.displayAttributes;
     	data.displayAttributes = JSON.stringify(displayAttributes);
     	data.conditionType = "V";
-    	var payload = RestServiceFactory.cleansePayload('LoyaltyService', data);
+    	data.venueNumber = $scope.venueNumber;
+        var payload = RestServiceFactory.cleansePayload('LoyaltyService', data);
     	var target = {id: data.id};
     	if ($stateParams.id == 'new'){
     		target = {};

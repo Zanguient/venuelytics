@@ -41,14 +41,17 @@
                             </div>
                            <div ng-include="selectedPage()"></div>
                                         
-                        <!-- <embed ng-src="{{resevationURL}}" id='venueReservationFrame' width="100%"></embed> -->
                     </div>
                 </div>
             </article>
         </div>
     </div>
 </div>
-
+<script>
+    window.iFrameResizer = {
+        targetOrigin : '*'
+    }
+</script>
 <div class="modal" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13">
     <div class="modal-dialog animated zoomIn animated-3x" role="document">
         <div class="modal-content">

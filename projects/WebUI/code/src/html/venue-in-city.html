@@ -19,8 +19,10 @@
                                                 class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left"
                                                     ng-click="selectVenue(venue)" id="cityImage">
-                                                    <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venueCityImg"
-                                                        class="img-responsive" id="venueImages">
+                                                    <div class="imgHolder">
+                                                            <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venueImgs" class="img-responsive" id="venueImages">
+                                                            <h5 class="fontBold pull-right featureMargin" ng-show ="venue.feature === 'Y' || venue.feature === 'y'">FEATURED</h5>
+                                                        </div>
                                                 </figure>
                                                 <div class="card-block">
                                                     <h3 class="venueTitle">
