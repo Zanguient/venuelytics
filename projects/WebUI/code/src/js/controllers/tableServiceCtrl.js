@@ -6,6 +6,9 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             $log.debug('Inside Table Service Controller.');
 
             var self = $scope;
+            if($routeParams.new === 'new'){
+                $rootScope.hideNavBar = true;
+            }
             self.reservedTimeSlot = '';
             self.timeSlot = false;
             self.init = function() {
@@ -52,11 +55,19 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             };
 
             self.confirmTableReserve = function() {
-                $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);
+                if($routeParams.new === 'new'){
+                    $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid + "/" + $routeParams.new);
+                } else {
+                    $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);
+                }
             };
 
             self.backToTable = function() {
-              $location.url('/newCities/' + self.selectedCity + '/' + self.venueid + '/table-services');
+                if($routeParams.new === 'new'){
+                    $location.url('/newCities/' + self.selectedCity + '/' + self.venueid + '/table-services' + "/" +$routeParams.new);
+                } else {
+                    $location.url('/newCities/' + self.selectedCity + '/' + self.venueid + '/table-services');
+                }
             };
 
             self.confirmReservation = function() {
@@ -95,7 +106,11 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 };
 
                 AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
-                    $location.url(self.selectedCity +'/table-success/'+ self.venueid);
+                    if($routeParams.new === 'new'){
+                        $location.url(self.selectedCity +'/table-success/'+ self.venueid + "/" + $routeParams.new);
+                    } else {
+                        $location.url(self.selectedCity +'/table-success/'+ self.venueid);
+                    }
                 });
             };
             self.init();

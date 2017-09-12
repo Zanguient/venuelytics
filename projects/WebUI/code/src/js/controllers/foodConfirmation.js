@@ -3,13 +3,17 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
 
 
-    		var self = $scope;
+            var self = $scope;
+            if($routeParams.new === 'new'){
+                $rootScope.hideNavBar = true;
+            }
             self.paypal = false;
             self.cardPayment = false;
             self.orderPlaced = false;
             self.sumAmount = 0;
             self.chargedAmount = 0;
             self.init = function() {
+                self.newWithoutHead = $routeParams.new;
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;
@@ -92,7 +96,11 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             };
 
             self.editFoodPage = function() {
-                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
+                if($routeParams.new === 'new'){
+                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services' + "/" + $routeParams.new);
+                } else {
+                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
+                }
             };
 
             self.foodServiceSave = function() {
@@ -105,7 +113,11 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.city +'/food-success/'+ self.selectedVenueID);
+                            if($routeParams.new === 'new'){
+                                $location.url(self.city +'/food-success/'+ self.selectedVenueID + "/" + $routeParams.new);
+                            } else {
+                                $location.url(self.city +'/food-success/'+ self.selectedVenueID);
+                            } 
                         }
                     });
                 } else {
@@ -114,7 +126,11 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.city +'/food-success/'+ self.selectedVenueID);
+                        if($routeParams.new === 'new'){
+                            $location.url(self.city +'/food-success/'+ self.selectedVenueID + "/" + $routeParams.new);
+                        } else {
+                            $location.url(self.city +'/food-success/'+ self.selectedVenueID);
+                        } 
                     }
                 }
             };
@@ -124,11 +140,15 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 self.paypal = false;
                 self.phoneVenues = false;
                 if(self.sumAmount === 0){
-                    self.chargedAmount += self.creditCardFee;
-                    self.sumAmount = self.creditCardFee;
+                    if(self.creditCardFee != undefined){
+                        self.chargedAmount += self.creditCardFee;
+                        self.sumAmount = self.creditCardFee;
+                    }
                 } else {
-                    self.chargedAmount = ((self.chargedAmount - self.sumAmount) + self.creditCardFee);
-                    self.sumAmount = self.creditCardFee;
+                    if(self.sumAmount != undefined){
+                        self.chargedAmount = ((self.chargedAmount - self.sumAmount) + self.creditCardFee);
+                        self.sumAmount = self.creditCardFee;
+                    }
                 }
             };
 
@@ -137,11 +157,15 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 self.cardPayment = false;
                 self.phoneVenues = false;
                 if(self.sumAmount === 0){
-                    self.chargedAmount += self.payPalFee;
-                    self.sumAmount = self.payPalFee;
+                    if(self.payPalFee != undefined){
+                        self.chargedAmount += self.payPalFee;
+                        self.sumAmount = self.payPalFee;
+                    }
                 } else {
-                    self.chargedAmount = ((self.chargedAmount - self.sumAmount) + self.payPalFee);
-                    self.sumAmount = self.payPalFee;
+                    if(self.sumAmount != undefined){
+                        self.chargedAmount = ((self.chargedAmount - self.sumAmount) + self.payPalFee);
+                        self.sumAmount = self.payPalFee;
+                    }
                 }
             };
             self.payAtVenue = function(value){
@@ -151,8 +175,10 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 if(self.sumAmount === 0){
                     self.chargedAmount = self.chargedAmount;
                 } else {
-                    self.chargedAmount -= self.sumAmount;
-                    self.sumAmount = 0;
+                    if(self.sumAmount != undefined){
+                        self.chargedAmount -= self.sumAmount;
+                        self.sumAmount = 0;
+                    }                    
                 }
             };
 
@@ -171,12 +197,20 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             };
 
             self.paymentEnabled = function() {
-                $location.url(self.city +"/foodPayment/" + self.selectedVenueID);
+                if($routeParams.new === 'new'){
+                    $location.url(self.city +"/foodPayment/" + self.selectedVenueID + "/" + $routeParams.new);
+                } else {
+                    $location.url(self.city +"/foodPayment/" + self.selectedVenueID);
+                }
             };
 
             self.backToFood = function() {
                 $rootScope.serviceName = 'FoodService';
-                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
+                if($routeParams.new === 'new'){
+                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services' + "/" + $routeParams.new);
+                } else {
+                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
+                }
             };
 
             self.creditCardPayment = function() {
@@ -218,7 +252,11 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                     var fullName = self.foodServiceDetails.firstName + " " + self.foodServiceDetails.lastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.foodServiceDetails.emailId + ':' + self.foodServiceDetails.mobileNumber);
                     AjaxService.createTransaction(self.selectedVenueID, self.orderId, payment, authBase64Str).then(function(response) {
-                        $location.url(self.city +"/foodSuccess/" + self.selectedVenueID);
+                        if($routeParams.new === 'new'){
+                            $location.url(self.city +"/foodSuccess/" + self.selectedVenueID + "/" + $routeParams.new);
+                        } else {
+                            $location.url(self.city +"/foodSuccess/" + self.selectedVenueID);
+                        }
                     });
                 }
             });

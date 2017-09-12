@@ -1,4 +1,4 @@
-<div class="ms-hero-page ms-hero-img-keyboard" ng-cloak>
+<div class="ms-hero-page ms-hero-img-keyboard" ng-cloak ng-hide="hideNavBar === true">
     <div class="container">
         <div class="text-center">
             <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{detailsOfVenue.venueName}} - {{selectedCity}}</h1>
@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="container" ng-cloak>
-    <h3>
+    <h3 ng-hide="hideNavBar === true">
         <a href="newCities" class="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} </a>
         <a href="newCities/{{selectedCity}}"> > {{selectedCity}}</a>
     </h3>

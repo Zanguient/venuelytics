@@ -8,6 +8,9 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
 
     		$log.log('Inside Confirm Reservation Controller.');
 
+            if($routeParams.new === 'new'){
+                $rootScope.hideNavBar = true;
+            }
     		var self = $scope;
             self.selectTables = [];
             self.selectBottleOrders = [];
@@ -16,6 +19,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
+                self.newWithoutHead = $routeParams.new;
                 self.editCity = $routeParams.cityName;
                 self.venueID = $routeParams.venueid;
                 self.userData = DataShare.bottleServiceData;
@@ -82,17 +86,29 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             };
 
             self.editConfirmPage = function() {
-                $location.url("/newCities/" + self.editCity + "/" + self.venueID);
+                if($routeParams.new ==='new'){ 
+                    $location.url("/newCities/" + self.editCity + "/" + self.venueID + '/bottle-service' + "/" + $routeParams.new);
+                } else {
+                    $location.url("/newCities/" + self.editCity + "/" + self.venueID + '/bottle-service');
+                }s
             };
 
             self.paymentEnable = function() {
-                $location.url(self.editCity +"/bottlePayment/" + self.venueID);
+                if($routeParams.new ==='new'){
+                    $location.url(self.editCity +"/bottlePayment/" + self.venueID + "/" + $routeParams.new);
+                } else {
+                    $location.url(self.editCity +"/bottlePayment/" + self.venueID);
+                }
             };
 
             self.backToReservation = function() {
                 $rootScope.serviceName = 'BottleService';
                 DataShare.editBottle = 'false';
-                $location.url('/newCities/' + self.editCity + '/' + self.venueID + '/bottle-service');
+                if($routeParams.new ==='new'){
+                    $location.url('/newCities/' + self.editCity + '/' + self.venueID + '/bottle-service' + "/" + $routeParams.new);
+                } else {
+                    $location.url('/newCities/' + self.editCity + '/' + self.venueID + '/bottle-service');
+                }
             };
 
             self.cardPaymentData = function(value) {
@@ -131,7 +147,11 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
+                            if($routeParams.new ==='new'){
+                                $location.url(self.editCity +'/orderConfirm/'+ self.venueID + "/" + $routeParams.new);
+                            } else {
+                                $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
+                            }
                         }
                     });
                 } else {
@@ -140,7 +160,11 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
+                        if($routeParams.new ==='new'){
+                            $location.url(self.editCity +'/orderConfirm/'+ self.venueID + "/" + $routeParams.new);
+                        } else {
+                            $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
+                        }
                     }
                 }
             };
@@ -180,7 +204,11 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                     var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
                     AjaxService.createTransaction(self.venueID, self.orderId, payment, authBase64Str).then(function(response) {
-                        $location.url(self.editCity +"/paymentSuccess/" + self.venueID);
+                        if($routeParams.new ==='new'){
+                            $location.url(self.editCity +'/paymentSuccess/'+ self.venueID + "/" + $routeParams.new);
+                        } else {
+                            $location.url(self.editCity +"/paymentSuccess/" + self.venueID);
+                        }
                     });
                 }
             });

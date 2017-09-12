@@ -409,6 +409,7 @@
 	},
 	"reservation": {
 		"PROCESS_FEE": "Process Fee",
+		"FEATURED":"FEATURED",
 		"PARTY":"Party Packages",
 		"DATE":"Date",
 		"TABLE":"Table",
