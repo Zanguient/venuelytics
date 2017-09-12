@@ -3,6 +3,9 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
 
            var self = $scope;
+            if($routeParams.new === 'new'){
+                $rootScope.hideNavBar = true;
+            }
             self.selectedDrinkItems = [];
             self.drinkType = 'Delivery';
             self.init = function() {
@@ -211,7 +214,11 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;
                 DataShare.selectedDrinks = self.selectedDrinkItems;
-                $location.url("/confirmDrinkService/" + self.selectedCity + "/" + self.venueid);
+                if($routeParams.new === 'new'){
+                    $location.url("/confirmDrinkService/" + self.selectedCity + "/" + self.venueid + "/" + $routeParams.new);
+                } else{
+                    $location.url("/confirmDrinkService/" + self.selectedCity + "/" + self.venueid);
+                }
              };
             self.init();
     }]);

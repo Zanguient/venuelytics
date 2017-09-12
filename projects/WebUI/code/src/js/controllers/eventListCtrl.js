@@ -7,7 +7,9 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, $timeout) {
         
     var self = $scope;
-
+    if($routeParams.new === 'new'){
+      $rootScope.hideNavBar = true;
+    }
     var DAYS = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
     /**
     * Invoke full calendar plugin and attach behavior

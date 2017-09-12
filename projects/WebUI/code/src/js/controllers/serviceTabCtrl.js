@@ -10,7 +10,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
     var self = $scope;
     self.displayTabs = [];
-
+    if($routeParams.new === 'new'){
+        $rootScope.hideNavBar = true;
+    }
     self.selectionTableItems = [];
     self.bottleMinimum = [];
     self.dispatchHandler = [];

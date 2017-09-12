@@ -9,6 +9,9 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
     		$log.log('Inside GuestList Controller.');
 
             var self = $scope;
+            if($routeParams.new === 'new'){
+                $rootScope.hideNavBar = true;
+            }
             self.guestDateIsFocused = 'is-focused';
             self.init = function() {
                 self.venueid = $routeParams.venueid;
@@ -88,13 +91,14 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 self.guest.authorize = false;
                 self.guest.agree = false;
                 if(guestTotal === parseInt(guest.totalGuest)){
-                    $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
+                    if($routeParams.new === 'new'){
+                        $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid + "/" + $routeParams.new);
+                    } else {
+                        $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
+                    }
                 } else {
                     $('#guestError').modal('show');
                 }
-                
             };
-
             self.init();
-
     }]);

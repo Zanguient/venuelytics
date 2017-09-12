@@ -8,6 +8,9 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location'
 
     		$log.log('Inside Order confirm Controller.');
 
+			if($routeParams.new === 'new'){
+                $rootScope.hideNavBar = true;
+            }
     		var self = $scope;
     		self.selectedCityName = $routeParams.cityName;
             self.venueID = $routeParams.venueid;
