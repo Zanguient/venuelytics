@@ -108,19 +108,18 @@
     addType("bowlingType", 128, "Bowling", data.venueTypeCode);
     addType("karaokeType", 256, "Karaoke", data.venueTypeCode);
   };
-  $scope.deleteImage = function(imageId, imageArray, deletedImage) {
-    imageArray.splice(imageId, 1);
-        var id= {
-            "id" : deletedImage.id
-        }
-        $scope.deletedVenueImage.push(id);
-    var promise = RestServiceFactory.VenueImage().deleteVenueImage({id: imageId}, function(data){
-      toaster.pop('data', "Deleted the selected Image successfull");
-    },function(error){
-      if (typeof error.data !== 'undefined') {
-        toaster.pop('error', "Server Error", error.data.developerMessage);
+  $scope.deleteImage = function(index, deletedImage) {
+      var id= {
+          "id" : deletedImage.id
       }
-    });
+      var promise = RestServiceFactory.VenueImage().deleteVenueImage(id, function(data){
+        deletedImage.status = "DELETED";
+        toaster.pop('data', "Deleted the selected Image successfull");
+      },function(error){
+        if (typeof error.data !== 'undefined') {
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
   };
   $scope.isVenueType = function(code) {
   	if (typeof $scope.venueType === 'undefined'){
