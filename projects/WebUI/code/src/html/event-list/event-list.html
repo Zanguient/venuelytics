@@ -1,11 +1,11 @@
 <div ng-controller="eventListCtrl">
     <div event-tile="" ng-class="'col-masonry'" event="event" ng-repeat="event in events track by $index"/>
-    <button type="button" class="btn btn-primary pull-right eventListClass" ng-model="eventListData" ng-click="listEventView()">
+    <div style="margin-left: -36px;"><button type="button" class="btn btn-primary pull-right eventListClass" ng-model="eventListData" ng-click="listEventView()">
         <i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;{{'event.EVENT_LIST' | translate}}
     </button>
-    <button type="button" class="btn btn-primary pull-right eventCalendarClass" ng-model="calenderData" ng-click="calenderEventView()">
+    <button type="button" class="btn btn-primary pull-right eventCalendarClass" ng-model="calenderData" ng-click="calenderEventView()" style="margin-right: -15px;">
         <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;{{'event.EVENT_CALENDAR' | translate}}
-    </button><br/><br/>
+    </button></div><br/><br/>
     <div class="form-group col-md-10 col-md-offset-right-10"  ng-if="eventListData == true">
         <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">Search</label>

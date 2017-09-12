@@ -3,7 +3,7 @@
   height: 100px;
   margin-left: 30px;
 }
-eventListClass {
+.eventListClass {
   margin-right: 13px;
 }
 
@@ -1098,7 +1098,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-left: 13px;
   }
   .fc-button-prev {
-    margin-left: -20px;
+    margin-left: -15px;
     width: 10px;
   }
   .fc-button-next {
@@ -1106,7 +1106,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
   .fc-button-today {
     margin-left: -9px;
-    width: 48px;
+    width: 50px;
   }
 
   .eventListPrice {
@@ -1132,8 +1132,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
   .panel-default {
     margin-top: 35px;
-    margin-left: 5px;
-    width: 97%;
+    width: 100%;
   }
   .fc .fc-header-space {
     padding-left: 0px;
