@@ -14,8 +14,9 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
                 self.venueid = $routeParams.venueid;
+                self.getServiceTime();
                 self.selectedCity = $routeParams.cityName;
-                self.reservationTime = APP_ARRAYS.time;
+                //self.reservationTime = APP_ARRAYS.time;
                 self.tableDate = moment().format('MM/DD/YYYY');
             };
 
@@ -51,6 +52,18 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                     });
                 });
             };
+
+            self.getServiceTime = function() {
+                AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
+                    self.reservationTime = response.data;
+                    angular.forEach(self.reservationTime, function(value, key) {
+                        var H = + value.startTime.substr(0, 2);
+                        var h = (H % 12) || 12;
+                        var ampm = H < 12 ? " AM" : " PM";
+                        value.time = h + value.startTime.substr(2, 3) + ampm;
+                    });
+                });
+            }
 
             self.confirmTableReserve = function() {
                 $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);

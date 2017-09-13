@@ -92,7 +92,8 @@
 		"EVENT_TICKET":"BUY TICKETS",
 		"EVENT_WEEK":"Date Of The Week",
 		"EVENT_TYPES":"Event Type",
-		"EVENT_COVER":"Cover"
+		"EVENT_COVER":"Cover",
+		"EVENT_VIEW":"Event View"
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
