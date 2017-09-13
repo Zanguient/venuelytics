@@ -9,9 +9,6 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
 
             var self = $scope;
             self.privateDateIsFocused = 'is-focused';
-            if($routeParams.tabParam === 'new'){
-                $rootScope.hideNavBar = true;
-            }
             self.init = function() {
                 $rootScope.serviceTabClear = false;
                 self.venueID = self.venueid = $routeParams.venueid;
@@ -118,13 +115,8 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 self.serviceJSON.order.orderItems.push(items);
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.privateOrderItem = value;
-                if($routeParams.new === 'new'){
-                    $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid + "/" + $routeParams.new);
-                } else {
-                    $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
-                }
+                $location.url("/confirmEvent/" + self.selectedCity + "/" + self.venueid);
              };
-
             
              self.privateEventDescription = function(value) {
                 $rootScope.privateDescription = value;

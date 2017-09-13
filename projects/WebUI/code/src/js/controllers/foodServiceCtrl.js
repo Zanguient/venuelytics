@@ -5,9 +5,6 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             $log.log('Inside Food Service Controller.');
 
             var self = $scope;
-            if($routeParams.new === 'new'){
-                $rootScope.hideNavBar = true;
-            }
             self.selectedFoodItems = [];
             self.selectedFoodList = [];
             self.foodType = 'Delivery';
@@ -222,11 +219,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;
                 DataShare.selectedFoods = self.selectedFoodItems;
-                if($routeParams.new === 'new'){
-                    $location.url("/confirmFoodService/" + self.selectedCity + "/" + self.venueid + "/" + $routeParams.new);
-                } else {
-                    $location.url("/confirmFoodService/" + self.selectedCity + "/" + self.venueid);
-                }
+                $location.url("/confirmFoodService/" + self.selectedCity + "/" + self.venueid);
              };
             self.init();
     }]);

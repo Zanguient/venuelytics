@@ -9,9 +9,6 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
             $log.log('Inside Private Confirm Controller.');
 
             var self = $scope;
-            if($routeParams.new === 'new'){
-                $rootScope.hideNavBar = true;
-            }
             self.init = function() {
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
@@ -22,32 +19,20 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
             };
 
             self.editPrivatePage = function() {
-                if($routeParams.new === 'new'){
-                    $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events' + "/" + $routeParams.new);
-                } else {
-                    $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events');
-                }
+                $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events');
             };
 
             self.privateEventSave = function() {
                   AjaxService.createBottleService(self.editVenueID, self.object, self.authBase64Str).then(function(response) {
                     $log.info("response: "+angular.toJson(response));
-                    if($routeParams.new === 'new'){
-                        $location.url(self.editCity + '/private-success/' + self.editVenueID + "/" + $routeParams.new);
-                    } else {
-                        $location.url(self.editCity + '/private-success/' + self.editVenueID);
-                    }
+                    $location.url(self.editCity + '/private-success/' + self.editVenueID);
                 });
             };
 
             self.backToPrivate = function() {
                 $rootScope.serviceName = 'PrivateEvent';
                 DataShare.privateEventFocused = '';
-                if($routeParams.new === 'new'){
-                    $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events' + "/" + $routeParams.new);
-                } else {
-                    $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events');
-                }
+                $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events');
             };
 
              self.time24to12 = function(timeString) {

@@ -8,9 +8,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
             $log.debug('Inside Bottle Service Controller.');
 
-            if($routeParams.new === 'new'){
-                $rootScope.hideNavBar = true;
-            }
 
             var self = $scope;
 
@@ -573,11 +570,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.enablePayment = self.enabledPayment;
                 DataShare.venueName = self.venueName;
-                if($routeParams.new === 'new'){
-                    $location.url("/confirm/" + self.selectedCity + "/" + self.venueid + "/" + $routeParams.new);
-                } else {
-                    $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
-                }
+                $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
              };
             self.init();
     }]);

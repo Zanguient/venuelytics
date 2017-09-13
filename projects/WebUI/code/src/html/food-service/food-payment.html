@@ -237,11 +237,7 @@
                                         if (typeof(Storage) !== "undefined") {
                                             localStorage.setItem("amount",payPalchargedAmount);  
                                         }
-                                        if(newWithoutHead === 'new'){
-                                            window.location.replace(cityName+"/foodSuccess/"+venueNumber+"/"+newWithoutHead);
-                                        } else{
-                                            window.location.replace(cityName+"/foodSuccess/"+venueNumber);
-                                        }
+                                        window.location.replace(cityName+"/foodSuccess/"+venueNumber);
                                         },
                                         failure: function(errMsg) {
                                         alert(errMsg);

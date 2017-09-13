@@ -4,16 +4,12 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
 
 
             var self = $scope;
-            if($routeParams.new === 'new'){
-                $rootScope.hideNavBar = true;
-            }
             self.paypal = false;
             self.cardPayment = false;
             self.orderPlaced = false;
             self.sumAmount = 0;
             self.chargedAmount = 0;
             self.init = function() {
-                self.newWithoutHead = $routeParams.new;
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;
@@ -96,11 +92,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             };
 
             self.editFoodPage = function() {
-                if($routeParams.new === 'new'){
-                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services' + "/" + $routeParams.new);
-                } else {
-                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
-                }
+                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
             };
 
             self.foodServiceSave = function() {
@@ -113,11 +105,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            if($routeParams.new === 'new'){
-                                $location.url(self.city +'/food-success/'+ self.selectedVenueID + "/" + $routeParams.new);
-                            } else {
-                                $location.url(self.city +'/food-success/'+ self.selectedVenueID);
-                            } 
+                            $location.url(self.city +'/food-success/'+ self.selectedVenueID); 
                         }
                     });
                 } else {
@@ -126,11 +114,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        if($routeParams.new === 'new'){
-                            $location.url(self.city +'/food-success/'+ self.selectedVenueID + "/" + $routeParams.new);
-                        } else {
-                            $location.url(self.city +'/food-success/'+ self.selectedVenueID);
-                        } 
+                        $location.url(self.city +'/food-success/'+ self.selectedVenueID); 
                     }
                 }
             };
@@ -197,20 +181,12 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             };
 
             self.paymentEnabled = function() {
-                if($routeParams.new === 'new'){
-                    $location.url(self.city +"/foodPayment/" + self.selectedVenueID + "/" + $routeParams.new);
-                } else {
-                    $location.url(self.city +"/foodPayment/" + self.selectedVenueID);
-                }
+                $location.url(self.city +"/foodPayment/" + self.selectedVenueID);
             };
 
             self.backToFood = function() {
                 $rootScope.serviceName = 'FoodService';
-                if($routeParams.new === 'new'){
-                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services' + "/" + $routeParams.new);
-                } else {
-                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
-                }
+                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
             };
 
             self.creditCardPayment = function() {
@@ -252,11 +228,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                     var fullName = self.foodServiceDetails.firstName + " " + self.foodServiceDetails.lastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.foodServiceDetails.emailId + ':' + self.foodServiceDetails.mobileNumber);
                     AjaxService.createTransaction(self.selectedVenueID, self.orderId, payment, authBase64Str).then(function(response) {
-                        if($routeParams.new === 'new'){
-                            $location.url(self.city +"/foodSuccess/" + self.selectedVenueID + "/" + $routeParams.new);
-                        } else {
-                            $location.url(self.city +"/foodSuccess/" + self.selectedVenueID);
-                        }
+                        $location.url(self.city +"/foodSuccess/" + self.selectedVenueID);
                     });
                 }
             });

@@ -179,11 +179,7 @@
                                         if (typeof(Storage) !== "undefined") {
                                             localStorage.setItem("bottleAmount",chargeAmountValue);  
                                         }
-                                        if(newWithoutHead === 'new'){
-                                            window.location.replace(cityName+"/paymentSuccess/"+venueNumber+"/"+newWithoutHead);
-                                        } else {
-                                            window.location.replace(cityName+"/paymentSuccess/"+venueNumber);
-                                        }
+                                        window.location.replace(cityName+"/paymentSuccess/"+venueNumber);
                                         },
                                         failure: function(errMsg) {
                                         alert(errMsg);

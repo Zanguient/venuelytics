@@ -4,16 +4,12 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
 
 
             var self = $scope;
-            if($routeParams.new === 'new'){
-                $rootScope.hideNavBar = true;
-            }
             self.paypal = false;
             self.cardPayment = false;
             self.orderPlaced = false;
             self.sumAmount = 0;
             self.chargedAmount = 0;
             self.init = function() {
-                self.newWithoutHead = $routeParams.new;
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;
@@ -96,11 +92,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
             };
 
             self.editDrinkPage = function() {
-                if($routeParams.new === 'new'){
-                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/drink-services' + "/" +$routeParams.new);
-                } else {
-                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
-                }
+                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
             };
 
             self.drinkServiceSave = function() {
@@ -113,11 +105,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            if($routeParams.new === 'new'){
-                                $location.url(self.city +'/drink-success/'+ self.selectedVenueID + "/" +$routeParams.new );
-                            } else {
-                                $location.url(self.city +'/drink-success/'+ self.selectedVenueID);
-                            }
+                            $location.url(self.city +'/drink-success/'+ self.selectedVenueID);
                         }
                     });
                 } else {
@@ -126,11 +114,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        if($routeParams.new === 'new'){
-                            $location.url(self.city +'/drink-success/'+ self.selectedVenueID + "/" +$routeParams.new );
-                        } else {
-                            $location.url(self.city +'/drink-success/'+ self.selectedVenueID);
-                        }
+                        $location.url(self.city +'/drink-success/'+ self.selectedVenueID);
                     }
                 }
             };
@@ -197,20 +181,12 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
             };
 
             self.paymentEnabled = function() {
-                if($routeParams.new === 'new'){
-                    $location.url(self.city +"/drinkPayment/" + self.selectedVenueID + "/" + $routeParams.new);
-                } else {
-                    $location.url(self.city +"/drinkPayment/" + self.selectedVenueID);
-                }
+                $location.url(self.city +"/drinkPayment/" + self.selectedVenueID);
             };
 
             self.backToDrink = function() {
                 $rootScope.serviceName = 'DrinkService';
-                if($routeParams.new === 'new'){
-                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/drink-services' + "/" +$routeParams.new);
-                } else {
-                    $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
-                }
+                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
             };
 
             self.creditCardPayment = function() {
@@ -252,11 +228,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                     var fullName = self.drinkServiceDetails.firstName + " " + self.drinkServiceDetails.lastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.drinkServiceDetails.emailId + ':' + self.drinkServiceDetails.mobileNumber);
                     AjaxService.createTransaction(self.selectedVenueID, self.orderId, payment, authBase64Str).then(function(response) {
-                        if($routeParams.new === 'new'){
-                            $location.url(self.city +"/drinkSuccess/" + self.selectedVenueID + "/" + $routeParams.new);
-                        } else {
-                            $location.url(self.city +"/drinkSuccess/" + self.selectedVenueID);
-                        }
+                        $location.url(self.city +"/drinkSuccess/" + self.selectedVenueID);
                     });
                 }
             });
