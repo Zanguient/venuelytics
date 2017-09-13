@@ -1,6 +1,6 @@
 "use strict";
-app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
+app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore) {
 
     		$log.log('Inside Guest Confirm Controller.');
 
@@ -11,6 +11,10 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
                 self.guestListData = DataShare.guestListData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
+                var target = $cookieStore.get('embedded');
+                if(target === "embed"){
+                    $rootScope.embeddedFlag = true;
+                }
             };
 
             self.editGuestPage = function() {

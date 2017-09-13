@@ -1,6 +1,6 @@
 "use strict";
-app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
+app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore) {
 
     		$log.log('Inside Party Confirm Controller.');
 
@@ -19,6 +19,10 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
                 self.taxDate = moment(self.partyPackageData.orderDate).format('YYYYMMDD');
                 self.object = DataShare.payloadObject;
                 self.enabledPayment = DataShare.enablePayment;
+                var target = $cookieStore.get('embedded');
+                if(target === "embed"){
+                    $rootScope.embeddedFlag = true;
+                }
                 self.getTax();
             };
 

@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
+app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore) {
 
             $log.log('Inside Private Confirm Controller.');
 
@@ -16,6 +16,10 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
                 self.privateOrderItem = DataShare.privateOrderItem;
+                var target = $cookieStore.get('embedded');
+                if(target === "embed"){
+                    $rootScope.embeddedFlag = true;
+                }
             };
 
             self.editPrivatePage = function() {

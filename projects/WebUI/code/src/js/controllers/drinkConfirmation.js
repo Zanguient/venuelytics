@@ -1,6 +1,6 @@
 "use strict";
-app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
+app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore) {
 
 
             var self = $scope;
@@ -20,6 +20,10 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                 self.enabledPayment = DataShare.enablePayment;
                 self.venueName = DataShare.venueName;
                 self.taxDate = moment().format('YYYYMMDD');
+                var target = $cookieStore.get('embedded');
+                if(target === "embed"){
+                    $rootScope.embeddedFlag = true;
+                }
                 self.getTax();
                 var amountValue = 0;
                 angular.forEach(self.selectedDrinkItems, function(value1, key1) {

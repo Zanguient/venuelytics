@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope) {
+app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore) {
 
     		$log.log('Inside Confirm Reservation Controller.');
 
@@ -26,6 +26,10 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 self.selectBottleOrders = DataShare.selectBottle;
                 self.enablePayment = DataShare.enablePayment;
                 self.venueName = DataShare.venueName;
+                var target = $cookieStore.get('embedded');
+                if(target === "embed"){
+                    $rootScope.embeddedFlag = true;
+                }
                 angular.forEach(self.selectBottleOrders, function(value1, key1) {
                     self.availableAmount = self.availableAmount + value1.price;
                 });

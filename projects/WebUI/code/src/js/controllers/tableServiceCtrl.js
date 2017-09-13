@@ -23,6 +23,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 self.productItem = [];
                 var date= moment(self.tableDate).format('YYYYMMDD');
                 var authBase64Str = "YXJ1biByYXVuOmFydW5AZ21haWwuY29tOig4ODgpIDg4OC04ODg4";
+                console.log("date>>>>>>>>>>>"+self.table.reserveTime);
                 AjaxService.getTime(self.venueid, date, self.table.reserveTime, self.table.guest, authBase64Str).then(function(response) {
                     var obj = response.data;
                     self.reservedTimeSlot = '';

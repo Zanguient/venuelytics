@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope) {
+app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope', '$cookieStore',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, $cookieStore) {
 
 	$log.log('Inside ServiceTab Controller.');
 
@@ -15,6 +15,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.dispatchHandler = [];
     self.venueid = $routeParams.venueid;
     self.tabParams = $routeParams.tabParam;
+    self.embeddedService = $routeParams.new;
 
 
     self.init = function() {
@@ -23,6 +24,13 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         /*jshint maxcomplexity:14 */
         if($rootScope.serviceName === 'GuestList') {
             DataShare.guestListData = '';
+        }
+        var target = $cookieStore.get('embedded');
+        if((self.embeddedService === 'new') || (target === "embed")){
+            $rootScope.embeddedFlag = true;
+            if((target === '') || (target === undefined)) {
+                $cookieStore.put("embedded", "embed");
+            }
         }
         if ((self.venueid == 70008) || (self.venueid == 170637)) {
             if(self.tabParams === 'guest-list') {
@@ -103,7 +111,11 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         } else if(serviceName === undefined) {
             $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bottle-service");
         } else {
-            $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
+            if(self.embeddedService === 'new'){
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + '/new');
+            } else {
+                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
+            }        
         }
     };
 
