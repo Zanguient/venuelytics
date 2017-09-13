@@ -93,7 +93,7 @@
 		"EVENT_WEEK":"Date Of The Week",
 		"EVENT_TYPES":"Event Type",
 		"EVENT_COVER":"Cover",
-		"EVENT_VIEW":"Event View"
+		"EVENT_VIEW":"Event Details"
 	},
 	"feature":{
 		"REAL_TIME":"Real-Time",
