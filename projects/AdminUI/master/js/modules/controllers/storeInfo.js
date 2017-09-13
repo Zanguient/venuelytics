@@ -37,7 +37,7 @@
     {name: 'Party Packages', content: 'app/views/venue/party-events.html', icon: 'fa-trophy'},
     {name: 'Products', content: 'app/views/venue/venue-products.html', icon: 'fa-shopping-basket'},
     {name: 'Offers/Deals', content: 'app/views/venue/venue-deals.html', icon: 'fa-money'},
-    {name: 'Events', content: 'app/views/venue/venue-events.html', icon: 'fa-money'},
+    {name: 'Events', content: 'app/views/venue-events/venue-events.html', icon: 'fa-money'},
   ];
   $scope.onUpdate = function() {
     var payload = {};

@@ -173,7 +173,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
      .state('app.editVenueEvent', {
         url: '/venues/:venueNumber/events/:id',
         title: 'Edit Venue Event',
-        templateUrl: basepath('venue/venue-event-edit.html'),
+        templateUrl: basepath('venue-events/venue-event-edit.html'),
         controller: 'VenueEventController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask', 'datatables-pugins','ngDialog')
