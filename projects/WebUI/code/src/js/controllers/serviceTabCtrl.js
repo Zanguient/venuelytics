@@ -57,7 +57,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.tableSelection = DataShare.tableSelection;
         }
         
-        self.reservationTime = APP_ARRAYS.time;
+        //self.reservationTime = APP_ARRAYS.time;
             AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                 self.detailsOfVenue = response;
                 self.selectedCity = $routeParams.cityName;

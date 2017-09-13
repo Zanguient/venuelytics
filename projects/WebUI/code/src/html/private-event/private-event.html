@@ -55,12 +55,12 @@
                 <table>
                 <tr><td>
                     <select class="form-control fontBold" required=""
-                        ng-model="private.privateStartTime" ng-options="x.key as x.value for x in reservationTime">
+                        ng-model="private.privateStartTime" ng-options="x.startTime as x.sTime for x in reservationTime">
                         <option value="">{{"reservation.START_TIME"  | translate}}</option>
                     </select></td><td>
 
                     <select id="alignmentTime" class="form-control fontBold" required=""
-                        ng-model="private.privateEndTime" ng-options="x.key as x.value for x in reservationTime">
+                        ng-model="private.privateEndTime" ng-options="x.endTime as x.eTime for x in reservationTime">
                         <option value="">{{"reservation.END_TIME"  | translate}}</option>
                     </select></td>
                 </tr>
