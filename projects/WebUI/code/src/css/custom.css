@@ -6,7 +6,10 @@
 .eventListClass {
   margin-right: 13px;
 }
-
+.withOutTabDec {
+  font-size: 15px;
+  text-align:justify;
+}
 /* Date calendar start */
 .date {
   display: block;
@@ -530,6 +533,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
 @media screen and (min-width: 1990px) and (max-width:
 5500px) {
 
+  .withoutTabs {
+    color:black;
+    font-size: 24px;
+  }
+
   .footerApple {
     width: 115px;
     height: 40px;
@@ -571,6 +579,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 @media screen and (min-width: 1600px) and (max-width:
  1990px) {
+
+  .withoutTabs {
+    color:black;
+    font-size: 24px;
+  }
 
   .footerApple {
     width: 115px;
@@ -656,6 +669,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 @media screen and (min-width: 730px) and (max-width:
   1200px) {
+
+    .withoutTabs {
+      color:black;
+      font-size: 24px;
+    }
 
     .citiesImgContainer {
       margin-left: 150px;
@@ -764,6 +782,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
 /*Desktop*/
 @media screen and (min-width: 1200px) and (max-width:
  1600px) {
+
+  .withoutTabs {
+    color:black;
+    font-size: 24px;
+  }
 
   .citiesImgContainer {
     margin-left: 150px;
@@ -1083,6 +1106,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
 /*iPhone 5*/
 @media only screen and (min-width: 310px) and (max-width:
  374px) {
+
+   .withoutTabs {
+      color:black;
+      font-size: 15px;
+    }
 
   .fc-button-today {
     width: 40px;
@@ -1416,6 +1444,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
     and (min-width : 375px)
     and (max-width : 413px) {
 
+      .withoutTabs {
+        color:black;
+        font-size: 17px;
+      }
+
       .eventListPrice {
         margin-right: 48px;
         color: black;
@@ -1584,6 +1617,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
 @media only screen
     and (min-width : 414px)
     and (max-width : 736px) {
+
+      .withoutTabs {
+        color:black;
+        font-size: 20px;
+      }
 
       .eventListPrice {
         margin-right: 64px;

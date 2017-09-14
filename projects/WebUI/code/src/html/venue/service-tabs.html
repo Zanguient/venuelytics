@@ -16,7 +16,7 @@
                 <div class="card-block card-block-big">
                     <div class="row">
                         <div>
-                            <center ng-show = "imageParam === 'Y' || imageParam === 'y'">
+                            <center ng-show = "imageParam === 'Y' || imageParam === 'y' || removeAllTabs == true">
                                 <div id="carousel-{{$index}}1" class="ms-carousel carousel slide" data-ride="carousel">
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner carousel-inner-class" role="listbox">
@@ -34,13 +34,27 @@
                                     </span>
                                 </div>
                             </center>
-                            <div id="serviceTabs" class="btn-group btn-group-justified">
+                            <div id="serviceTabs" class="btn-group btn-group-justified" ng-hide="removeAllTabs === true">
                                 <center>
                                     <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" font-color="{{tab.fontColor}}" bg-color="{{tab.bgColor}}" selected="{{tab.selected}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" disabled="{{tab.disabled}}" class="reservation-tab col-xs-4"></div>
                                 </center>
                             </div>
-                           <div ng-include="selectedPage()"></div>
-                                        
+                            <div ng-include="selectedPage()" ng-hide="removeAllTabs === true"></div><br>
+                            <div class="eventListcal" ng-if="removeAllTabs == true">
+                                <table class="table">
+                                    <tr><td>
+                                        <center><div class="withoutTabs">{{detailsOfVenue.venueName}}</div></center>
+                                        <div class="withOutTabDec"><span class="fontBold">{{"venue.WORKING_HOUR" | translate}} :</span> {{openHour}}-{{closeHour}}</div>
+                                        <div class="withOutTabDec"><span class="fontBold">{{"business.ADDRESS" | translate}}:</span><br>&emsp;{{detailsOfVenue.address}}</div>
+                                        <div class="withOutTabDec">&emsp;{{detailsOfVenue.state}}</div>
+                                        <div class="withOutTabDec">&emsp;{{detailsOfVenue.country}}</div>
+                                        <div class="withOutTabDec">&emsp;{{detailsOfVenue.phone}}</div>
+                                        <a href="{{detailsOfVenue.website}}" target="_new" class="withOutTabDec">&emsp;{{detailsOfVenue.website}}</a>
+                                        <div class="withOutTabDec"><span class="fontBold">{{"bottleServiceTab.DESC" | translate}}:</span><br>&emsp;{{detailsOfVenue.description}}</div>
+                                    </td></tr>
+                                </table>
+                            </div>           
+                        </div>
                     </div>
                 </div>
             </article>
