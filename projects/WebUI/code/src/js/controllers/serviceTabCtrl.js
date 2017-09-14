@@ -27,7 +27,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
         if(self.embeddedService === 'new'){
             $rootScope.embeddedFlag = true;
-            self.getServiceTime();
         }
         if ((self.venueid == 70008) || (self.venueid == 170637)) {
             if(self.tabParams === 'guest-list') {
@@ -43,6 +42,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         self.private = DataShare.privateEventData;
         self.totalGuest = DataShare.totalNoOfGuest;
         self.restoreTab = DataShare.tab;
+        self.getServiceTime();
         var utmSource = $location.search().utm_source;
         var utmMedium = $location.search().utm_medium;
         var campaignName = $location.search().utm_campaign;
@@ -68,6 +68,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.selectedCity = $routeParams.cityName;
                 self.venueName =  $rootScope.headerVenueName = self.detailsOfVenue.venueName;
                 $rootScope.headerAddress = self.detailsOfVenue.address;
+                $rootScope.headerWebsite = self.detailsOfVenue.website;
                 self.imageParam = $location.search().i;
                 self.detailsOfVenue.imageUrls[0].active = 'active';
                 self.venueImage = self.detailsOfVenue;
