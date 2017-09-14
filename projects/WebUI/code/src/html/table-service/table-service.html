@@ -7,38 +7,14 @@
                     <input type="text" class="form-control fontBold" id="tableServiceDate" ng-model="tableDate" required>
                 </div>
                 <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
-                    <select class="form-control fontBold" ng-model="table.reserveTime" ng-options="x.key as x.value for x in reservationTime" required>
+                    <select class="form-control fontBold" ng-model="table.reserveTime" ng-options="x.startTime as x.time for x in reservationTime" required>
                         <option value="">{{'reservation.TABLE_PREFEREED_TIME' | translate}}</option>
                     </select>
                 </div>
                 <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
                     <select class="form-control fontBold" ng-model="table.guest" required>
                         <option value="">{{'reservation.TOTAL_GUEST' | translate}}</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
+                        <option ng-repeat="n in [].constructor(25) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                     </select>
                 </div>
                 <div class="col-md-3 form-group is-empty" >

@@ -12,6 +12,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             self.init = function() {
                 $rootScope.serviceTabClear = false;
                 self.venueID = self.venueid = $routeParams.venueid;
+                self.getServiceTime();
                 if((Object.keys(DataShare.privateEventData).length) !== 0) {
                     self.private = DataShare.privateEventData;
                 } else {
@@ -34,6 +35,21 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     self.getBanquetHall(self.venueid);
                 }
             });
+            self.getServiceTime = function() {
+                AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
+                    self.reservationTime = response.data;
+                    angular.forEach(self.reservationTime, function(value, key) {
+                        var H = + value.startTime.substr(0, 2);
+                        var h = (H % 12) || 12;
+                        var ampm = H < 12 ? " AM" : " PM";
+                        value.sTime = h + value.startTime.substr(2, 3) + ampm;
+                        H = + value.endTime.substr(0, 2);
+                        h = (H % 12) || 12;
+                        ampm = H < 12 ? " AM" : " PM";
+                        value.eTime = h + value.startTime.substr(2, 3) + ampm;
+                    });
+                });
+            }
 
             self.tabClear = function() {
                 DataShare.privateEventData = {};

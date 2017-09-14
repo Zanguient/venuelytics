@@ -4,11 +4,11 @@
         <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="blog in blogs">
             <article class="card card-info mb-4 wow materialUp animation-delay-5">
                 <figure class="ms-thumbnail ms-thumbnail-left">
-                    <img src="{{blog.image}}" alt="blogImg" class="img-responsive">
+                    <img src="{{blog.image}}" alt="blogImg" class="img-responsive" style="height:235px">
                 </figure>
                 <div class="card-block">
                     <h3><a href="blogPost/{{blog.link}}">{{blog.title}}</a></h3>
-                    <p>{{blog.description | limitTo: 150 }}{{blog.description.length > 150 ? '...' :''}}</p>
+                    <p>{{blog.description | limitTo: 120 }}{{blog.description.length > 120 ? '...' :''}}</p>
 
                     <div class="row">
                         <div class="col-lg-6 col-md-8">

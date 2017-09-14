@@ -341,6 +341,18 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
             return error;
         });
     };
+    this.getServiceTime = function(venueId, serviceType) {
+        var url = RestURL.baseURL + 'venues/' + venueId + '/servicehours?type=' + serviceType;
+        return $http({
+            method: 'GET',
+            url: url
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
     this.getHosts = function(venueNumber) {
         return $http({
             method: 'GET',
