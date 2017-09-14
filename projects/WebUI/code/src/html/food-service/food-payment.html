@@ -125,7 +125,7 @@
 </div>
 <div class="form-group" ng-hide="true">
         <input type="text" id="stripeAmount" placeholder="payAmount" ng-model="availableAmount">
-        <input type="text" id="payPalchargedAmount" placeholder="payChargedAmount" ng-model="chargedAmount">
+        <input type="text" id="payPalchargedAmount" placeholder="payChargedAmount" ng-model="totalChargedAmount">
         <input type="text" id="taxDate" placeholder="taxDate" ng-model="taxDate">
         <input type="text" id="venueNumber" placeholder="venueNumber" ng-model="selectedVenueID">
         <input type="text" id="orderIdValue" placeholder="orderIdValue" ng-model="orderId">
@@ -148,6 +148,7 @@
                             client: clientInstance
                         }, function(err, paypalInstance) {
                             var payPalchargedAmount = $("#payPalchargedAmount").val();
+                            payPalchargedAmount = parseFloat(payPalchargedAmount).toFixed(2);
                                 console.log('paypalButton:' + paypalButton);
                                 var chargeAmountValue;
                                 var amount = $("#stripeAmount").val();

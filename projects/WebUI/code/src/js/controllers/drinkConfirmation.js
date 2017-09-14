@@ -9,6 +9,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
             self.orderPlaced = false;
             self.sumAmount = 0;
             self.chargedAmount = 0;
+            self.totalChargedAmount = 0;
             self.init = function() {
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
@@ -142,6 +143,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                 self.phoneVenues = false;
                 if(self.sumAmount === 0){
                     if(self.payPalFee != undefined){
+                        self.totalChargedAmount = self.chargedAmount + self.payPalFee;
                         self.chargedAmount += self.payPalFee;
                         self.sumAmount = self.payPalFee;
                     }
@@ -166,8 +168,8 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                 }
             };
 
-            self.paypalPayment = function() { 
-                DataShare.amount = self.chargedAmount;
+            self.paypalPayment = function() {
+                setTimeout(function(){
                 var popup = window.open("","directories=no,height=100,width=100,menubar=no,resizable=no,scrollbars=no,status=no,titlebar=no,top=0,location=no");
                 if (!popup || popup.closed || typeof popup.closed=='undefined'){
                     alert("Popup Blocker is enabled!");
@@ -177,7 +179,8 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                     popup.close();
                     var paypalElement = document.getElementById('paypal-button');
                     jQuery(paypalElement).trigger('click');
-                } 
+                }
+                },2500);
             };
 
             self.paymentEnabled = function() {
