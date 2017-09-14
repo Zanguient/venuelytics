@@ -58,3 +58,15 @@
         </div>
     </div>
 </header>
+<header class="ms-header <%= headerClass %>" ng-cloak ng-show="embeddedFlag === true">
+    <div class="container container-full">
+        <div class="ms-title">
+            <img src="<%= assets %>/img/Logo_VenueLytics_3x.png" alt="headerImg">
+        </div>
+        <div class="text-center">
+            <font size="6"><span ng-bind="headerVenueName"></span></font><br>
+            <span ng-bind="headerAddress"></span><br>
+            <span>{{"venue.WORKING_HOUR" | translate}} : {{openHour}}-{{closeHour}}</span>
+        </div>
+    </div>
+</header>

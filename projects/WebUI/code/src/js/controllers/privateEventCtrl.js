@@ -46,7 +46,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                         H = + value.endTime.substr(0, 2);
                         h = (H % 12) || 12;
                         ampm = H < 12 ? " AM" : " PM";
-                        value.eTime = h + value.startTime.substr(2, 3) + ampm;
+                        value.eTime = h + value.endTime.substr(2, 3) + ampm;
                     });
                 });
             }

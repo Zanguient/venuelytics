@@ -53,12 +53,23 @@
                         <a href="{{twitter | translate}}" class="btn-circle btn-twitter" target="_new"><i class="zmdi zmdi-twitter"></i></a>
                         <a href="{{instagram | translate}}" class="btn-circle btn-instagram" target="_new"><i class="zmdi zmdi-instagram"></i></a><br/>
                     </div>
-                    <a href="https://itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8" target="_new"> <img class="img-singleline-image footerApple" ng-src="assets/img/apple-store.png" />
+                    <a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8" target="_new"> <img class="img-singleline-image footerApple" ng-src="assets/img/apple-store.png" />
                     </a>
-                    <a href="https://play.google.com/store/apps/details?id=com.itzfun.biz&hl=en" target="_new"> <img class="img-singleline-image footerAndroid" ng-src="assets/img/android.png" />
+                    <a href="//play.google.com/store/apps/details?id=com.itzfun.biz&hl=en" target="_new"> <img class="img-singleline-image footerAndroid" ng-src="assets/img/android.png" />
                     </a>
                 </div>
             </div>
         </div>
     </div>
 </aside>
+<div ng-show="embeddedFlag === true">
+    <center>
+    <p>
+        <span class="fontBold fontColorForText">{{"venue.POWERED_BY" | translate}} &copy; <a href="//www.venuelytics.com" target="_blank">{{"venue.VENUELYTICS_INC" | translate}}</a></span>
+        <br>
+        <span class="fontBold fontColorForText">
+        <font size="2">{{"venue.MOBILE_APP" | translate}}, <a href="//onelink.to/98dmnv" target="_blank">{{"venue.CLICK_HERE" | translate}}</a></font>
+        </span>
+    </p>
+    </center>
+</div>

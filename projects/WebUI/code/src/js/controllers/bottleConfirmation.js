@@ -26,10 +26,6 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 self.selectBottleOrders = DataShare.selectBottle;
                 self.enablePayment = DataShare.enablePayment;
                 self.venueName = DataShare.venueName;
-                var target = $cookieStore.get('embedded');
-                if(target === "embed"){
-                    $rootScope.embeddedFlag = true;
-                }
                 angular.forEach(self.selectBottleOrders, function(value1, key1) {
                     self.availableAmount = self.availableAmount + value1.price;
                 });

@@ -11,10 +11,6 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location'
     		var self = $scope;
     		self.selectedCityName = $routeParams.cityName;
             self.venueID = $routeParams.venueid;
-            var target = $cookieStore.get('embedded');
-            if(target === "embed"){
-                $rootScope.embeddedFlag = true;
-            }
         	self.backToReservation = function() {
 				$rootScope.serviceName = 'BottleService';
 				DataShare.editBottle = 'false';

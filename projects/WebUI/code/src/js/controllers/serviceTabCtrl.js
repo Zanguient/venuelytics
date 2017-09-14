@@ -25,12 +25,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         if($rootScope.serviceName === 'GuestList') {
             DataShare.guestListData = '';
         }
-        var target = $cookieStore.get('embedded');
-        if((self.embeddedService === 'new') || (target === "embed")){
+        if(self.embeddedService === 'new'){
             $rootScope.embeddedFlag = true;
-            if((target === '') || (target === undefined)) {
-                $cookieStore.put("embedded", "embed");
-            }
+            self.getServiceTime();
         }
         if ((self.venueid == 70008) || (self.venueid == 170637)) {
             if(self.tabParams === 'guest-list') {
@@ -69,7 +66,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                 self.detailsOfVenue = response;
                 self.selectedCity = $routeParams.cityName;
-                self.venueName =    self.detailsOfVenue.venueName;
+                self.venueName =  $rootScope.headerVenueName = self.detailsOfVenue.venueName;
+                $rootScope.headerAddress = self.detailsOfVenue.address;
                 self.imageParam = $location.search().i;
                 if(self.imageParam === 'Y') {
                     self.detailsOfVenue.imageUrls[0].active = 'active';
@@ -83,7 +81,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                     self.guestServiceButton = response.data["Advance.GuestList.enable"];
                     self.tableServiceButton = response.data["Advance.tableService.enable"];
                     self.featuredEnable = response.data["Advance.featured"];
-                    self.eventsEnable = response.data["venueEvents"]
+                    self.eventsEnable = response.data["venueEvents"];
+                    if(self.embeddedService === 'new') {
+                        $rootScope.embedColor = response.data["ui.service.bgcolor"];
+                    }
                     self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
                     self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
                     self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
@@ -96,6 +97,25 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 }); 
             });
     };
+
+    self.getServiceTime = function() {
+        var reservationTime;
+        AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
+            reservationTime = response.data;
+            angular.forEach(reservationTime, function(value, key) {
+                var H = + value.startTime.substr(0, 2);
+                var h = (H % 12) || 12;
+                var ampm = H < 12 ? " AM" : " PM";
+                value.sTime = h + value.startTime.substr(2, 3) + ampm;
+                H = + value.endTime.substr(0, 2);
+                h = (H % 12) || 12;
+                ampm = H < 12 ? " AM" : " PM";
+                value.eTime = h + value.endTime.substr(2, 3) + ampm;
+            });  
+            $rootScope.openHour = reservationTime[0].sTime;
+            $rootScope.closeHour = reservationTime[0].eTime;
+        });
+    }
 
     self.selectedPage = function() {
         var calHandler = self.dispatchHandler[self.tabParams];

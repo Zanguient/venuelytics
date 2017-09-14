@@ -16,10 +16,6 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
                 self.privateOrderItem = DataShare.privateOrderItem;
-                var target = $cookieStore.get('embedded');
-                if(target === "embed"){
-                    $rootScope.embeddedFlag = true;
-                }
             };
 
             self.editPrivatePage = function() {

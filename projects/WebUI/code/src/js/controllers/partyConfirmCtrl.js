@@ -19,10 +19,6 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
                 self.taxDate = moment(self.partyPackageData.orderDate).format('YYYYMMDD');
                 self.object = DataShare.payloadObject;
                 self.enabledPayment = DataShare.enablePayment;
-                var target = $cookieStore.get('embedded');
-                if(target === "embed"){
-                    $rootScope.embeddedFlag = true;
-                }
                 self.getTax();
             };
 

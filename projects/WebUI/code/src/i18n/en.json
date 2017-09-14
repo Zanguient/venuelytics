@@ -187,6 +187,11 @@
 		"BOWLING":"BOWLING",
 		"RESTAURANT":"RESTAURANT",
 		"MILES":"miles",
+		"POWERED_BY":"Powered by",
+		"VENUELYTICS_INC":"VenueLytics Inc",
+		"MOBILE_APP":"To request via Mobile App",
+		"CLICK_HERE":"Click Here",
+		"WORKING_HOUR":"Working Hours",
 		"SEARCH_VENUE":"Search Venue",
 		"NO_MATCHING_RESULTS":"Sorry there are no matching results. Please try clicking on other type of venues in the tab above"
 	},
