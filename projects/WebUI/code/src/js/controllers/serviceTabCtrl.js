@@ -69,10 +69,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.venueName =  $rootScope.headerVenueName = self.detailsOfVenue.venueName;
                 $rootScope.headerAddress = self.detailsOfVenue.address;
                 self.imageParam = $location.search().i;
-                if(self.imageParam === 'Y') {
-                    self.detailsOfVenue.imageUrls[0].active = 'active';
-                    self.venueImage = self.detailsOfVenue;
-                }
+                self.detailsOfVenue.imageUrls[0].active = 'active';
+                self.venueImage = self.detailsOfVenue;
                 AjaxService.getInfo(self.venueid).then(function(response) {
                     self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
                     self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
@@ -91,7 +89,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                     self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
                     self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
                     self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
-                    self.eventsEnable = self.eventsEnable === 'Y' ? false : true;
+                    self.eventsEnable = self.eventsEnable === 'Y' ? false : true; 
                     self.dispatchToService(self.tabParams);
                     addTabs();
                 }); 
@@ -174,6 +172,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
         for (var j = removeRows.length-1; j >=0; j--) {
             tabArray.splice(removeRows[j],3);
+            if(tabArray.length === 0){
+                self.removeAllTabs = true;
+            }
         }
     }
 
@@ -209,7 +210,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             addTab('tableServiceTab','tableService', 'assets/img/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, APP_COLORS.tableBtn, APP_COLORS.btnColor, self.tabTable);
 
             self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
-            addTab('eventListTab','eventlist', 'assets/img/table.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, APP_COLORS.tableBtn, APP_COLORS.btnColor, self.tabEvents);
+            addTab('eventListTab','eventlist', 'assets/img/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, APP_COLORS.tableBtn, APP_COLORS.btnColor, self.tabEvents);
 
             optimizeTabDisplay( self.displayTabs);            
         }
