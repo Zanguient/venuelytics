@@ -91,7 +91,12 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 if(item.count !== undefined && item.count !== '') {
                     if (self.selectedFoodList.indexOf(item) === -1) {
                         item.total = item.price * item.count;
+                        item.total = item.total.toFixed(2);
                         self.selectedFoodList.push(item);
+                    } else {
+                        item.total = item.price * item.count;
+                        item.total = item.total.toFixed(2);
+                        self.selectedFoodList.total = item.total;
                     }
                 }
                 if (item.count === 0) {
