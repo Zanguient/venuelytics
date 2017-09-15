@@ -139,7 +139,7 @@
 <hr>
 <div class="col-md-12">
 <h4>{{"reservation.PRIVATE_DETAILS" | translate}}</h4>
-<div class="container container-full" ng-cloak>
+<div class="container container-full private-details" ng-cloak>
     <div class="ms-paper">
         <div>
             <!-- For Horizontal tabs -->
@@ -155,11 +155,11 @@
                                             class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
                                             ng-repeat="privateEvent in privateEventValueArray"
                                             ng-if="privateEvent.imageUrls[0].smallUrl">
-                                            <article id="articleCart"
+                                            <article
                                                 class="card card-info mb-4 wow materialUp animation-delay-5 cardHeight">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
                                                     <img ng-src="{{privateEvent.imageUrls[0].smallUrl}}" alt="privateImg"
-                                                        class="img-responsive" id="venueImages">
+                                                        class="img-responsive privateImages">
                                                 </figure>
                                                 <div class="card-block">
                                                     <h2 class="venueTitle">
@@ -171,7 +171,7 @@
                                                     <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
                                                     <p class="privateEventBox">{{privateEvent.description | limitTo: 120
                                                         }}{{privateEvent.description.length > 120 ? '...' :''}}
-                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(privateEvent.description)" ng-if="privateEvent.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
+                                                    <a id="private-card-margin" class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(privateEvent.description)" ng-if="privateEvent.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
                                                     </p><br>
                                                     <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right"
                                                     novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" ng-if="privateEvent.reserve == false">{{"reservation.ENQUIRE" | translate}}</button>
