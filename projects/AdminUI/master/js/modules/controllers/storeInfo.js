@@ -113,7 +113,7 @@
       var id= {
           "id" : deletedImage.id
       }
-      var promise = RestServiceFactory.VenueImage().deleteVenueImage(id, function(data){
+      RestServiceFactory.VenueImage().deleteVenueImage(id, function(data){
         deletedImage.status = "DELETED";
         toaster.pop('data', "Deleted the selected Image successfull");
       },function(error){

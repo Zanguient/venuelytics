@@ -7,6 +7,13 @@ App.controller('AgencyController', ['$scope', '$state', '$stateParams', 'RestSer
     function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS) {
   'use strict';
     
+    $scope.budgetTypes = [];
+    $scope.budgetTypes['M'] = "Max";
+    $scope.budgetTypes['NM'] = "No Max";
+    $scope.budgetTypes['DM'] = "Daily Max";
+    $scope.budgetTypes['WM'] = "Weekly Max";
+    $scope.budgetTypes['MM'] = "Monthly Max";
+    
     if($stateParams.id !== 'new') {
 	    var promise = RestServiceFactory.AgencyService().get({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
@@ -17,16 +24,19 @@ App.controller('AgencyController', ['$scope', '$state', '$stateParams', 'RestSer
 	    		data.mobile = $.inputmask.format(data.mobile,{ mask: FORMATS.phoneUS} );
 	    	}
 	    	$scope.data = data;
+
 	    });
     } else {
     	var data = {};
     	data.enabled = "false";
     	$scope.data = data;
+        $scope.data.budgetType = "NM";
     }
 	 
     
     $scope.update = function(isValid, data) {
-    	if (!isValid) {
+
+    	if (!$("#agencyForm").parsley().isValid() || !isValid ) {
     		return;
     	}
     	var payload = RestServiceFactory.cleansePayload('AgencyService', data);

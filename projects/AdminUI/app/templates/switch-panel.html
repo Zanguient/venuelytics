@@ -1,5 +1,5 @@
 <div>
-	<div class="row col-sm-2" ng-repeat="(key, value) in switches">
+	<div class="col-sm-6" ng-repeat="(key, value) in switches">
 		<div class="col-xs-8"><strong>{{key | translate}}</strong></div>
 		<div class="col-xs-4">
         	<label class="switch switch-md">
@@ -8,7 +8,7 @@
           	</label>
       	</div>
    </div>
-   <div class="row col-sm-10">
+   <div class="col-sm-12">
    		<button type="button" ng-click="onSave()" class="btn btn-primary btn-lg">Update Options</button>
    </div>
 </div>

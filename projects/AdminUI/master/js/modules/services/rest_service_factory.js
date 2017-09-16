@@ -24,7 +24,7 @@
 
  		var profileProperties = ['badgeNumber', 'email', 'loginId', 'userName', 'phone', 'password','newpassword',
  		'confirmnewpassword'];
- 		var agencyProperties = ['name', 'managerName','phone', 'mobile', 'address', 'city','country','zip',"enabled"];
+ 		var agencyProperties = ['name', 'budget', 'budgetType', 'phone', 'mobile', 'address', 'city','country','zip',"enabled"];
  		var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls', 'servingSize',
  			'productType', 'BanquetHall','category','brand','enabled','price'];
  		var venueMapProperties = ['id','type','section','imageMap','days','updatedAt','elements','imageUrls'];
@@ -102,7 +102,9 @@
  					saveEvent : {method: 'POST',  params: { id: '@id' },
  						url: urlTemplate.replace("@context", "venueevents")},
  					deleteEvent : {method: 'DELETE',  params: { id: '@id' },
- 						url: urlTemplate.replace("@context", "venueevents")}
+ 						url: urlTemplate.replace("@context", "venueevents")},
+ 					getServiceTimings: {method: 'GET',  params: { id: '@id' }, isArray:true,
+ 						url: urlTemplate.replace("@context", "venues") +"/servicehours"},
  				});
  			},
  			VenueEventService: function () {
