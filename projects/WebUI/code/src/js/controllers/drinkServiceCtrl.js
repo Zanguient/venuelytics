@@ -90,6 +90,10 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                         item.total = item.price * item.count;
                         item.total = item.total.toFixed(2);
                         self.userSelectedDrinks.push(item);
+                    } else {
+                        item.total = item.price * item.count;
+                        item.total = item.total.toFixed(2);
+                        self.userSelectedDrinks.total = item.total;
                     }
                 } 
                 

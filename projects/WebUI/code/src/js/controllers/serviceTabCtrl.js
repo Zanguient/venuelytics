@@ -47,7 +47,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         var utmMedium = $location.search().utm_medium;
         var campaignName = $location.search().utm_campaign;
         var rawreq = $location.absUrl();
-        var rawreq = $location.absUrl();
         var userAgent = '';
         if (typeof $window.navigator !== 'undefined') {
             userAgent = $window.navigator.userAgent;
@@ -83,6 +82,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                     self.eventsEnable = response.data["venueEvents"];
                     if(self.embeddedService === 'new') {
                         $rootScope.embedColor = response.data["ui.service.bgcolor"];
+                        $rootScope.venueHeader = response.data["ui.custom.header"];
+                        $rootScope.venueFooter = response.data["ui.custom.footer"]; 
                     }
                     self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
                     self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
@@ -96,7 +97,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 }); 
             });
     };
-
     self.getServiceTime = function() {
         var reservationTime;
         AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
@@ -218,4 +218,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
     }
     self.init();
+}])
+
+.filter('to_trusted', ['$sce', function($sce){
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        };
 }]);

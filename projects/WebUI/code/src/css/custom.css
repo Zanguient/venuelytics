@@ -283,7 +283,7 @@ select {
 
 
 .cardHeight {
-  height:550px;
+  height:650px;
 }
 
 .thankYouHeight {
@@ -675,13 +675,25 @@ a.btn.disabled,fieldset[disabled] a.btn {
       font-size: 24px;
     }
 
+    .privateImages {
+      height: 243px;
+    }
+
     .citiesImgContainer {
       margin-left: 150px;
+    }
+
+    #private-card-margin {
+      margin-bottom: 0px;
     }
 
     .cities-img-container {
       width: 500px;
       height: 55px;
+    }
+
+    .private-details {
+      width: 1030px;
     }
 
     .smartbanner-icon{
@@ -787,6 +799,18 @@ a.btn.disabled,fieldset[disabled] a.btn {
     color:black;
     font-size: 24px;
   }
+
+  .privateImages {
+      height: 243px;
+  }
+
+  .private-details {
+    width: 1030px;
+  }
+
+  #private-card-margin {
+      margin-bottom: 0px;
+    }
 
   .citiesImgContainer {
     margin-left: 150px;
@@ -1145,6 +1169,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-left: -22px;
   }
 
+  .cardHeight {
+    height:580px;
+    margin-top: 56px;
+  }
+
   .fc-header-title {
     display: inline-block;
     vertical-align: top;
@@ -1449,6 +1478,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
         font-size: 17px;
       }
 
+      .cardHeight {
+        height:620px;
+        margin-top: 56px;
+      }
+
       .eventListPrice {
         margin-right: 48px;
         color: black;
@@ -1621,6 +1655,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
       .withoutTabs {
         color:black;
         font-size: 20px;
+      }
+
+      .cardHeight {
+        height:600px;
+        margin-top: 56px;
       }
 
       .eventListPrice {
