@@ -34,11 +34,9 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
 		    	"targets": [4],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Unlink User " class="btn btn-default btn-oval fa fa-unlink" '+
-            'ng-click="removeUser(' +row +','+cellData+')"></button>';
+		    		var actionHtml = '<button title="Unlink User " class="btn btn-default btn-oval fa fa-unlink"></button>';
 		    		if (rowData[3] === 'AGENT_MANAGER') {
-		    			actionHtml += '<button title="Set As Manager " class="btn btn-default btn-oval fa fa-black-tie" '+
-              'ng-click="setAsManager(' +row +','+cellData+')"></button>';
+		    			actionHtml += '<button title="Set As Manager " class="btn btn-default btn-oval fa fa-black-tie"></button>';
 		    		}
 		    		
 		    		$(td).html(actionHtml);
@@ -47,7 +45,15 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
 	    	} ];
     
 	    DataTableService.initDataTable('agency_user_table', columnDefinitions);
-   
+      var table = $('#agency_user_table').DataTable();
+      $('#agency_user_table').on('click', '.fa-unlink', function() {
+          $scope.removeUser(this, table);
+      });
+
+      $('#agency_user_table').on('click', '.fa-black-tie', function() {
+        $scope.setAsManager(this, table);
+      });
+
 	    var promise = RestServiceFactory.AgencyService().getUsers({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
 	    	$scope.data = data;
@@ -61,17 +67,16 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
 	    
     promise = RestServiceFactory.AgencyService().get({id:$stateParams.id});
     promise.$promise.then(function(data) {
-    	$scope.data.name = data.name;
+    	$scope.agencyName = data.name;
     });
  
-  	$scope.removeUser = function(rowId, agentId) {
-  		
-  	
-  		var target = {id:$stateParams.id, userId: agentId};
+  	$scope.removeUser = function(button, table) {
+  		var targetRow = $(button).closest("tr");
+      var rowData = table.row(targetRow).data();
+  		var target = {id:$stateParams.id, userId: rowData[4]};
 	
   		RestServiceFactory.AgencyService().deleteAgents(target, function(success){
-    		var table = $('#agency_user_table').dataTable();
-    		table.fnDeleteRow(rowId);
+    		table.row(targetRow).remove().draw();
     	},function(error){
     		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);
@@ -79,14 +84,14 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
     	});
   	};
   	
-  	$scope.setAsManager = function(rowId, agentId) {
+  	$scope.setAsManager = function(button, table) {
   		
-  	  	
-  		var target = {id:$stateParams.id, userId: agentId};
-	
+  	  var targetRow = $(button).closest("tr");
+      var rowData = table.row(targetRow).data();
+      var target = {id:$stateParams.id, userId: rowData[4]};
+  		
   		RestServiceFactory.AgencyService().setAsManager(target, function(success){
-    		//var table = $('#agency_user_table').dataTable();
-    		//table.fnDeleteRow(rowId);
+    	 rowData[3] = 'AGENT_MANAGER';
     	},function(error){
     		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);

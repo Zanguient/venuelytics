@@ -32,6 +32,9 @@
  		var venueEventProperties =['id', 'venueNumber', 'eventName', 'description', 
  		'eventType', 'eventTime','durationInMinutes','startDate', 'endDate', 'scheduleDayOfMonth',
  		'scheduleDayOfWeek','imageURL','bookingUrl', 'price', 'enabled', 'performerId'];
+
+ 		var eventTicketProperties =['id', 'storeNumber', 'name', 'description', 
+ 		'price', 'discountedPrice','sectionName','seatStartNumber', 'count', 'row', 'eventDate', 'uiAttribute'];
  		
  		var REQ_PROP= {};
  		
@@ -44,6 +47,7 @@
  		REQ_PROP['ProductService'] = productProperties;
  		REQ_PROP['VenueMapService'] = venueMapProperties;
  		REQ_PROP['VenueEventService'] = venueEventProperties;
+ 		REQ_PROP['EventTicket'] = eventTicketProperties;
 
  		var urlTemplate =  BASE_URL + "/v1/@context/:id";
  		var contentActivateUrl = BASE_URL + "/v1/content/:id/@activate";
@@ -81,6 +85,12 @@
  						url: urlTemplate.replace("@context", "venues")+"/info"},
  					getAnalytics : {method: 'GET',  params: { id: '@id' }, 
  						url: urlTemplate.replace("@context", "venues") +"/analytics"},
+ 					getAgencies : {method: 'GET',  params: { id: '@id' }, 
+ 						url: urlTemplate.replace("@context", "venues") +"/agency"},
+					removeAgency : {method: 'DELETE',  params: { id: '@id', agencyId: '@agencyId' },
+						url: urlTemplate.replace("@context", "venues")+'/agency/:agencyId'},
+					addAgency : {method: 'POST',  params: { id: '@id', agencyId: '@agencyId' },
+						url: urlTemplate.replace("@context", "venues")+'/agency/:agencyId'},
  					delete : {method: 'DELETE',  params: { id: '@id'},
  						url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"},
  					getGuests : {method: 'GET',  params: { id: '@id' }, isArray:true,
@@ -93,6 +103,16 @@
  						url: urlTemplate.replace("@context", "venueevents")},
  					deleteEvent : {method: 'DELETE',  params: { id: '@id' },
  						url: urlTemplate.replace("@context", "venueevents")}
+ 				});
+ 			},
+ 			VenueEventService: function () {
+ 				return $resource(urlTemplate.replace("@context", "venueevents"), {}, {
+ 					getEventTickets : {method: 'GET',  params: { id: '@id' }, isArray:true,
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/ticket'},
+ 					saveEventTicket : {method: 'POST',  params: { id: '@id', ticketId :'@ticketId' },
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/ticket/:ticketId'},
+ 					deleteEventTicket : {method: 'DELETE',  params: { id: '@id', ticketId :'@ticketId' },
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/ticket/:ticketId'}
  				});
  			},
  			NotificationService: function () {

@@ -8,7 +8,7 @@
 			<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
 			<tabset type="pills" > 
 				<tab ng-repeat="tabId in tabs"> 
-					<tab-heading class="bold"><em class="fa fa-xlg" ng-class="tabId.icon"></em>{{tabId.name}}</tab-heading> 
+					<tab-heading class="bold"><em class="fa fa-lg" style="padding-right: 5px;" ng-class="tabId.icon"></em>{{tabId.name}}</tab-heading> 
 					<hr>
 					<div ng-include="tabId.content"></div>
 				</tab> 

@@ -69,24 +69,25 @@ App.controller('partyEventsController', ['$scope', '$state', '$stateParams', '$c
   	$scope.editPartyEvent = function(rowId, productId) {
 	  	$state.go('app.editPartyHall', {venueNumber: $stateParams.id, id:productId});
 	};
+	
 	$scope.createPartyEvent = function(rowId, productId){
 		$state.go('app.editPartyHall', {venueNumber: $stateParams.id, id:'new'});
 	};
+  	
   	$scope.deletePartyEvent = function (rowId, productId) {
-    ngDialog.openConfirm({
-      template: 'deletePartyId',
-      className: 'ngdialog-theme-default'
-    }).then(function (value) {
-      var target = {id: $stateParams.id ,productId:productId};
-  		RestServiceFactory.ProductService().delete(target,  function(success){
-  			var table = $('#party_events_table').dataTable();
-        	table.fnDeleteRow(rowId);
-    	},function(error){
-    		if (typeof error.data !== 'undefined') { 
-    			toaster.pop('error', "Server Error", error.data.developerMessage);
-    		}
-    	});
-    }, function (reason) {
-    });
-  };
+	    ngDialog.openConfirm({
+	      template: 'deletePartyId',
+	      className: 'ngdialog-theme-default'
+	    }).then(function (value) {
+	      	var target = {id: $stateParams.id ,productId:productId};
+	  		RestServiceFactory.ProductService().delete(target,  function(success){
+	  			var table = $('#party_events_table').dataTable();
+	        	table.fnDeleteRow(rowId);
+	    	},function(error){
+	    		if (typeof error.data !== 'undefined') { 
+	    			toaster.pop('error', "Server Error", error.data.developerMessage);
+	    		}
+	    	});
+	    });
+  	};
 }]);

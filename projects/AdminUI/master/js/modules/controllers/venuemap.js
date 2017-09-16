@@ -87,6 +87,14 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 
 
     DataTableService.initDataTable('tables_table', columnDefinitions, false);
+    var table = $('#tables_table').DataTable();
+    $('#tables_table').on('click', '.fa-trash',function() {
+        $scope.deleteTable(this, table);
+    });
+
+    $('#tables_table').on('click', '.fa-edit',function() {
+      $scope.editTable(this, table);
+    });
     var promise = RestServiceFactory.VenueMapService().getAll({id: $stateParams.venueNumber});
     $scope.venueNumber = $stateParams.venueNumber;
     if($stateParams.id !== ""){
@@ -113,18 +121,11 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
                 "link_url": "javascript:void(0)"
               });
             });
-            var table = $('#tables_table').DataTable();
+            table = $('#tables_table').DataTable();
             venueMap.elements.map(function(t) {
               table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id, t.imageUrls]);
             });
             table.draw();
-            $('#tables_table').on('click', '.fa-trash',function() {
-              $scope.deleteTable(this, table);
-            });
-
-             $('#tables_table').on('click', '.fa-edit',function() {
-              $scope.editTable(this, table);
-            });
           }        
         });      
       });

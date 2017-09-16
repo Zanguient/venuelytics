@@ -20,7 +20,6 @@
 	"sref": "app.venues",
 	 "icon": "icon-home",
 	 "translate": "sidebar.nav.pages.STORES",
-	 "submenu": [],
 	 "roleId": 100
   },
   {

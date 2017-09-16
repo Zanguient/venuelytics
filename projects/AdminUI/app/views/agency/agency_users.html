@@ -1,7 +1,7 @@
 <h3 ng-controller="IdController">Manage Agency Users
    <small>Add or remove the association of Agency - Users</small>
    <span> <a
-		class="btn btn-default pull-right" style="margin-top: -25px;"
+		class="btn btn-primary pull-right" style="margin-top: -25px;"
 		href="#/app/newagencyuser/{{data.id}}"><em class="fa fa-plus"></em>Add New Agent</a></span>
 </h3>
 <!-- START row-->
@@ -12,7 +12,7 @@
          <!-- START panel-->
          <div class="panel panel-default">
             <div class="panel-heading">
-               <div class="panel-title">Users for Agency: {{data.name}}</div>
+               <div class="panel-title">Users for Agency: {{agencyName}}</div>
             </div>
             <div class="panel-body">
             	<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>

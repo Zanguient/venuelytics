@@ -4,7 +4,7 @@
  =========================================================*/
 
 App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory', 'DataTableService', 'toaster','ngDialog', 
-                                    function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, ngDialog) {
+    function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, ngDialog) {
   'use strict'; 
   
   $timeout(function(){
@@ -20,8 +20,8 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
 	    	"targets": [6],
 	    	"orderable": false,
 	    	"createdCell": function (td, cellData, rowData, row, col) {
-	    		 $(td).html('<button class="btn btn-default btn-oval fa fa-edit" ng-click="editStore('+cellData+')"></button>&nbsp;&nbsp;'+
-            '<button class="btn btn-default btn-oval fa fa-trash" ng-click="deleteStore(' +row +','+cellData+')"></button>');
+	    		 $(td).html('<button class="btn btn-default btn-oval fa fa-edit" ></button>&nbsp;&nbsp;'+
+            '<button class="btn btn-default btn-oval fa fa-trash" ></button>');
 	    		 $compile(td)($scope);
 	    		}
         },
@@ -40,7 +40,15 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     	} ];
    
     DataTableService.initDataTable('stores_table', columnDefinitions, false);
-    
+    var table = $('#stores_table').DataTable();
+    $('#stores_table').on('click', '.fa-edit', function() {
+        $scope.editStore(this);
+    });
+
+    $('#stores_table').on('click', '.fa-trash', function() {
+      $scope.deleteStore(this, table);
+    });
+
     $('#stores_table_filter input').unbind();
     
     $('#stores_table_filter input').bind('keyup', function(e) {
@@ -70,37 +78,29 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
     	 table.draw();
     });
 
-    $scope.editStore = function(storeId) {
-  		$state.go('app.venueedit', {id: storeId});
+    $scope.editStore = function(button) {
+      var targetRow = $(button).closest("tr");
+      var rowData = table.row(targetRow).data();
+  		$state.go('app.venueedit', {id: rowData[6]});
   	};
-  	$scope.deleteStore = function(rowId, storeId) {
-      var target = {id: storeId};
-      RestServiceFactory.VenueService().delete(target,  function(success){
-        var table = $('#stores_table').dataTable();
-        table.fnDeleteRow(rowId);
-      },function(error){
-        if (typeof error.data !== 'undefined') { 
-          toaster.pop('error', "Server Error", error.data.developerMessage);
-        }
-      });
-  	};
-    /*$scope.deleteStore = function(rowId, storeId) {
+
+    $scope.deleteStore = function(button, table) {
+      var targetRow = $(button).closest("tr");
+      var rowData = table.row(targetRow).data();
       ngDialog.openConfirm({
-      template: 'deleteVenueId',
-      className: 'ngdialog-theme-default'
-    }).then(function (value) {
-      var target = {id: storeId};
-      RestServiceFactory.VenueService().delete(target,  function(success){
-        var table = $('#stores_table').dataTable();
-        table.fnDeleteRow(rowId);
-      },function(error){
-        if (typeof error.data !== 'undefined') { 
-          toaster.pop('error', "Server Error", error.data.developerMessage);
-        }
+          template: 'deleteVenueId',
+          className: 'ngdialog-theme-default'
+      }).then(function (value) {
+         var target = {id: rowData[6]};
+          RestServiceFactory.VenueService().delete(target,  function(success){
+            table.row(targetRow).remove().draw();
+          }, function(error){
+            if (typeof error.data !== 'undefined') { 
+              toaster.pop('error', "Server Error", error.data.developerMessage);
+            }
+          });
       });
-      }, function (reason) {
-    });
-    };*/
+    };
   	$scope.createNewStore = function() {
   		$state.go('app.venueedit', {id: 'new'});
   	};

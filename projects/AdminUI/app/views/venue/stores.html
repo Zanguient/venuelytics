@@ -2,11 +2,11 @@
 <h3>Venues  
    <small>Manage your Venue Information</small>
    <span> <a
-		class="btn btn-default pull-right" style="margin-top: -25px;"
-		href="#/app/storeedit/new"><em class="fa fa-plus"></em> Add Venue</a></span>
+		class="btn btn-primary pull-right" style="margin-top: -25px;" ng-click="createNewStore()">
+    <em class="fa fa-plus"></em> Add Venue</a></span>
 </h3>
 
-<div ng-controller="StoresController" class="container-fluid">
+<div class="container-fluid">
   
    <!-- START DATATABLE 2 -->
    <div class="row">
@@ -40,9 +40,13 @@
    </div>
   <!-- END DATATABLE 2 --> 
 </div>
-
-<!-- <script type="text/ng-template" id="deleteVenueId">
-  <div class="ngdialog-message"><h3>Are Your Want to Delete </h3>
-    <button type="button" ng-click="confirm(confirmValue)" class="btn btn-primary mr">Confirm</button><button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancel</button>
+<script type="text/ng-template" id="deleteVenueId">
+  <div class="modal-header">
+    <h3>Delete Venue?</h3>
   </div>
-</script> -->
+  <div class="modal-body">
+    <h5>Are you sure want to delete this Venue? </h5>
+    <button type="button" ng-click="closeThisDialog(0)" class="btn btn-default pull-right">Cancel</button> &nbsp;
+    <button type="button" style=" margin-left: 6px; " ng-click="confirm(0)" class="btn btn-danger mr pull-right">Confirm</button>
+  </div>
+</script>

@@ -1,0 +1,68 @@
+<div>
+	<legend>Event Tickets</legend>
+	<!-- START row -->
+	<form  id="eventTicketId" name="eventTicketInfo" validate-form="">
+		<div class="form-group col-md-12">
+			<label class="control-label">Name *:</label> 
+			<input type="text" name="name" required="required" placeholder="Name" class="form-control" ng-model="ticket.name"/>
+		</div>
+		<div class="form-group col-md-12">
+			<label class="control-label">Store *:</label> 
+			<select name="storeId"  placeholder="Allocate to Store" ngRequired class="form-control" ng-model="store" ng-options="item.name for item in contextService.userVenues.available">  
+	        </select>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-6">
+				<label class="control-label">Section *:</label> 
+				<input type="text" name="section" ngRequired placeholder="Name of the Section" class="form-control" ng-model="ticket.sectionName"/>
+			</div>
+			<div class="form-group col-md-6">
+				<label class="control-label">Row:</label> 
+				<input type="text" name="row" class="form-control" ng-model="ticket.row"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-6">
+				<label class="control-label" >Seat Start Number *:</label> 
+				<input type="text" name="seatStartNumber" required="required" data-parsley-type="integer" placeholder="Seating Starting Number" class="form-control" ng-model="ticket.seatStartNumber"/>
+			</div>
+			<div class="form-group  col-md-6">
+				<label class="control-label">Count *:</label> 
+				<input type="text" required="true" name="count" data-parsley-type="integer" class="form-control" ng-model="ticket.count"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-6">
+				<label class="control-label">Price ($):</label> 
+				<input type="text" name="price" required="true" data-parsley-type="integer" class="form-control" ng-model="ticket.price"/>
+			</div>
+			<div class="form-group col-md-6">
+				<label class="control-label">Discounted Price ($):</label> 
+				<input type="text" required="true" name="discountPrice" data-parsley-type="integer" class="form-control" ng-model="ticket.discountedPrice"/>
+			</div>
+		</div>
+		<!-- <div class="form-group col-md-12">
+			<label class="control-label">Comments:</label> 
+			<textarea placeholder="Enter description" rows="2" class="form-control ng-pristine ng-valid" ng-model="ticket.comment"></textarea>
+		</div> -->
+		
+		<div class="row">
+			<div class="col-sm-12 btn-block">
+				<button  class="btn btn-primary pull-right" type="submit" ng-click="saveEventTicket(eventTicketInfo)">Save</button>
+				<button type="button" class="btn btn-default pull-right" ng-click="closeThisDialog(0)">Cancel</button>
+	    		
+	    	</div>
+		</div>
+	</form>
+	<!-- END row -->
+</div>
+
+<script type="text/ng-template" id="deleteEventTicketId">
+  <div class="modal-header">
+    <h3>Delete Ticket?</h3>
+  </div>
+  <div class="modal-body"><h5>Are you sure want to delete selected Ticket? </h5>
+    <button type="button" ng-click="closeThisDialog('button')" class="btn btn-default pull-right">Cancel</button>&nbsp;
+    <button type="button" style=" margin-left: 6px; " ng-click="confirm('confirmValue')" class="btn btn-danger mr pull-right">Confirm</button>
+  </div>
+</script>

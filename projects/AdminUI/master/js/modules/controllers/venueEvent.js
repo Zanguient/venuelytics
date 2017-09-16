@@ -3,14 +3,14 @@
  * smangipudi
  =========================================================*/
 
-App.controller('VenueEventController', ['$scope', '$timeout', '$state','$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS','ngDialog',
-    function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, FORMATS, ngDialog) {
+App.controller('VenueEventController', ['$scope', '$timeout', '$state','$stateParams', 'RestServiceFactory', 
+    'toaster','ngDialog','DataTableService','$compile','ContextService',function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, ngDialog, DataTableService, $compile, contextService) {
   'use strict';
     
     var n = $scope.minDate = new Date(2017,1,1);
     
     $scope.maxDate = new Date(n.getFullYear()+1, n.getMonth(), n.getDate());
-    
+    $scope.contextService = contextService;
     $scope.dateOptions = {
         formatYear: 'yy',
         startingDay: 1
@@ -141,5 +141,132 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
            toaster.pop('error', "Server Error", error.data.developerMessage);
             }
         });
+    };
+
+    $scope.initEventTickets = function() {
+        if ( ! $.fn.dataTable ) return;
+        var columnDefinitions = [
+            { sWidth: "15%", aTargets: [0,1,2,3,4] },
+            { sWidth: "25%", aTargets: [5] },
+            {
+                "targets": [5],
+                "createdCell": function (td, cellData, rowData, row, col) {
+                   var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit"></button>'+
+                    '&nbsp;&nbsp;<button title="Delete" class="btn btn-default btn-oval fa fa-trash"></button>';
+                    
+                    $(td).html(actionHtml);
+                    $compile(td)($scope);
+                },
+                "render": function (data, type, row, meta ) {
+                  var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit"></button>&nbsp;&nbsp;';
+                  actionHtml += '<button title="Delete" class="btn btn-default btn-oval fa fa-trash"></button>';
+
+                  return actionHtml;
+                }
+            }
+        ];
+    
+        DataTableService.initDataTable('event_ticket_table', columnDefinitions, false);
+        var table = $('#event_ticket_table').DataTable();
+        $('#event_ticket_table').on('click', '.fa-trash', function() {
+            $scope.deleteTicket(this, table);
+        });
+
+        $('#event_ticket_table').on('click', '.fa-edit', function() {
+          $scope.editTicket(this, table);
+        });
+        var promise = RestServiceFactory.VenueEventService().getEventTickets({id: $stateParams.id});
+        promise.$promise.then(function(data) {
+     
+            var table = $('#event_ticket_table').DataTable();
+            
+            data.map(function(t) {
+                table.row.add([t.name, $scope.storeNumber, _SEC(t), t.price, t.discountedPrice, t]);
+            });
+            table.draw();
+        });
+    
+    };
+    
+    $scope.editTicket = function(button, table) {
+        var targetRow = $(button).closest("tr");
+        var d = table.row( targetRow).data();
+      
+        $scope.ticket = d[5];
+        $scope.store = $scope.ticket.store;
+        _updateTicket(targetRow);
+    };
+    $scope.addTicket = function() {
+        $scope.ticket = {};
+        $scope.ticket.section = "GA";
+        $scope.ticket.row = "GA";
+        $scope.ticket.seatStartNumber = 0;
+        
+        _updateTicket(null);
+    };
+    function _SEC(t) {
+        var section = t.sectionName;
+        if (typeof t.row !='undefined' && typeof t.seatStartNumber != 'undefined') {
+            section +=  " - " +  t.row + " [" + t.seatStartNumber + "-" + t.seatStartNumber+t.count +']';
+        } else if (typeof t.row !='undefined' ) {
+            section += " - " +  t.row ;
+        } else if (typeof t.seatStartNumber != 'undefined') {
+             section +=  " - " + " [" + t.seatStartNumber + "-" + t.seatStartNumber+t.count +']';
+        } 
+        return section;
+    }
+    function _updateTicket(targetRow) {
+        var dialog = ngDialog.open({
+            template: 'app/views/venue-events/event-ticket-edit.html',
+            scope : $scope,
+            className: 'ngdialog-theme-default',
+            controller: ['$scope', function($scope) {
+            //$("#eventTicketId").parsley();
+            $scope.saveEventTicket = function(eventTicketInfo) {
+                
+                if (eventTicketInfo.$valid && $("#eventTicketId").parsley().isValid()) {
+                    var t = $scope.ticket;
+                    var table = $('#event_ticket_table').DataTable();
+                    var section = _SEC(t);
+                    t.store = $scope.store;
+                    t.storeNumber = t.store.id;
+                    var target = {id: $stateParams.id};
+                    if (targetRow != null) {// update actipn
+                     target.ticketId = t.id;
+                    }
+                    var ticket = RestServiceFactory.cleansePayload('EventTicket', t);
+                    var promise = RestServiceFactory.VenueEventService().saveEventTicket(target, ticket);
+                    promise.$promise.then(function(data) {
+
+                        if (targetRow == null) {
+                            table.row.add([t.name, $scope.store.name, section, t.price, t.discountedPrice, data]);
+                            table.draw();
+                        } else {
+                            var d = [t.name, $scope.store.name, section, t.price, t.discountedPrice, data];
+                            table.row(targetRow).data(d).draw();
+                        }
+                        dialog.close();
+                    });
+                }
+            };
+          }]
+        });
+    }
+
+    $scope.deleteTicket = function(button, table) {
+
+      ngDialog.openConfirm({
+        template: 'deleteEventTicketId',
+        className: 'ngdialog-theme-default'
+      }).then(function (value) {
+
+        var targetRow = $(button).closest("tr");
+        var rowData = table.row( targetRow).data();
+        table.row(targetRow).remove().draw();
+        
+      }, function (reason) {
+
+      });
+
     };
 }]);

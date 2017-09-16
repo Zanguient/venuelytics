@@ -97,9 +97,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/venues',
         title: 'Venues',
         templateUrl: basepath('venue/stores.html'),
-        controller: 'NullController',
+        controller: 'StoresController',
         data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('datatables', 'datatables-pugins')
+        resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
     }).state('app.contentList', {
         url: '/content-list',
         title: 'Content List View',
@@ -176,8 +176,17 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('venue-events/venue-event-edit.html'),
         controller: 'VenueEventController',
         data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('parsley','inputmask', 'datatables-pugins','ngDialog')
+        resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins','ngDialog')
     })
+     .state('app.addVenueStore', {
+        url: '/venues/:id/stores',
+        title: 'Add Venue Store',
+        templateUrl: basepath('venue/new-venue-store.html'),
+        controller: 'NewVenueStoreController',
+        data: { authorizedRoles: [USER_ROLES.admin]},
+        resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
+    })
+     
     .state('app.content-performance', {
         url: '/content-performance/:id',
         title: 'Content Performance',

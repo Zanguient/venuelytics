@@ -3,15 +3,11 @@
  *smangipudi
  =========================================================*/
 App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService',
-	'RestServiceFactory', 'toaster', 'FORMATS', function($scope, $state, $stateParams, $compile, $timeout, DataTableService,
-	 RestServiceFactory, toaster, FORMATS) {
+	'RestServiceFactory', 'toaster', 'UserRoleService', function($scope, $state, $stateParams, $compile, $timeout, DataTableService,
+	 RestServiceFactory, toaster, userRoleService) {
   'use strict';
   
-  var userRoles = [];
-  userRoles['admin'] = 'Administrator';
-  userRoles['director'] = 'Store Director';
-  userRoles['manager'] = 'Manager';
-  userRoles['marketing'] = 'Marketing';
+  var userRoles = userRoleService.getRoles();
   $timeout(function(){
 
     if ( ! $.fn.dataTable ) return;
@@ -22,8 +18,7 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
 		    	"targets": [4],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-link" '+
-		    		'ng-click="addAgencyUser(' +row +','+cellData+')"></button>&nbsp;&nbsp;';
+		    		var actionHtml = '<button title="Add User" class="btn btn-default btn-oval fa fa-link"></button>&nbsp;&nbsp;';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
@@ -44,8 +39,11 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
 		 	} ];
     
 	    DataTableService.initDataTable('users_table', columnDefinitions);
-   
-	    var promise = RestServiceFactory.UserService().get();
+   		var table = $('#users_table').DataTable();
+      	$('#users_table').on('click', '.fa-link', function() {
+        	$scope.addAgencyUser(this, table);
+      	});
+	    var promise = RestServiceFactory.UserService().get({roleId: "10,11,12"});
 	    promise.$promise.then(function(data) {
 		    $scope.data = data;
 	    	var table = $('#users_table').DataTable();
@@ -73,13 +71,15 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
   };
 	
 	
-  $scope.addAgencyUser = function(rowId, userId) {
-		var userIds = [];
-		userIds[0] = userId;
+  $scope.addAgencyUser = function(button, table) {
+
+  		var targetRow = $(button).closest("tr");
+      	var rowData = table.row(targetRow).data();
+ 		var userIds = [rowData[4]];
+
 		var target = {id: $stateParams.id};
 		RestServiceFactory.AgencyService().addAgent(target, userIds,  function(success){
-			var table = $('#users_table').dataTable();
-			table.fnDeleteRow(rowId);
+			table.row(targetRow).remove().draw();
 		},function(error){
 			if (typeof error.data !== 'undefined') { 
   				toaster.pop('error', "Server Error", error.data.developerMessage);
