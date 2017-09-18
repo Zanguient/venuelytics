@@ -61,13 +61,15 @@
  			AgencyService: function () {
  				return $resource(urlTemplate.replace("@context", "agencies"), {}, {
  					getUsers : {method: 'GET',  params: { id: '@id' }, 
- 					url: urlTemplate.replace("@context", "agencies") +"/users"},
+ 						url: urlTemplate.replace("@context", "agencies") +"/users"},
  					addAgent : {method: 'POST',  params: { id: '@id' }, 
- 					url: urlTemplate.replace("@context", "agencies") +"/user"},
+ 						url: urlTemplate.replace("@context", "agencies") +"/user"},
  					deleteAgents: {method: 'DELETE',  params: { id: '@id', userId: '@userId' }, 
- 					url: urlTemplate.replace("@context", "agencies") +"/user/:userId"},
+ 						url: urlTemplate.replace("@context", "agencies") +"/user/:userId"},
  					setAsManager: {method: 'POST',  params: { id: '@id', userId: '@userId' }, 
- 					url: urlTemplate.replace("@context", "agencies") +"/manager/:userId"}
+ 						url: urlTemplate.replace("@context", "agencies") +"/manager/:userId"},
+ 					getAuthorizedMachines: {method: 'GET',  params: { id: '@id' }, isArray: true,
+ 						url: urlTemplate.replace("@context", "agencies") +"/authorizedSystems"}
  				});
  			},
  			UserVenueService: function () {

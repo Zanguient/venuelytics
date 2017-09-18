@@ -3,16 +3,16 @@
  * smangipudi
  =========================================================*/
 
-App.controller('AgencyController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS',
-    function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS) {
+App.controller('AgencyController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS','DataTableService','$compile',
+    function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, DataTableService, $compile) {
   'use strict';
     
-    $scope.budgetTypes = [];
-    $scope.budgetTypes['M'] = "Max";
-    $scope.budgetTypes['NM'] = "No Max";
-    $scope.budgetTypes['DM'] = "Daily Max";
-    $scope.budgetTypes['WM'] = "Weekly Max";
-    $scope.budgetTypes['MM'] = "Monthly Max";
+    $scope.budgetTypes = [{name: 'M', label: "Max", disabled: false}, 
+                          {name: 'NM', label: "No Max", disabled: false}, 
+                          {name: 'DM', label: "Daily Max", disabled: true},
+                          {name: 'WM', label: "Weekly Max", disabled: true},
+                          {name: 'MM', label: "Monthly Max", disabled: true},
+                          ];
     
     if($stateParams.id !== 'new') {
 	    var promise = RestServiceFactory.AgencyService().get({id:$stateParams.id});
@@ -28,12 +28,17 @@ App.controller('AgencyController', ['$scope', '$state', '$stateParams', 'RestSer
 	    });
     } else {
     	var data = {};
-    	data.enabled = "false";
+    	data.enabled = "N";
     	$scope.data = data;
         $scope.data.budgetType = "NM";
     }
 	 
-    
+    $scope.onSectionChange = function(budgetType) {
+        if (budgetType === 'NM') {
+            $scope.data.budget = "";
+        }
+    };
+
     $scope.update = function(isValid, data) {
 
     	if (!$("#agencyForm").parsley().isValid() || !isValid ) {
@@ -52,4 +57,38 @@ App.controller('AgencyController', ['$scope', '$state', '$stateParams', 'RestSer
     		}
     	});
     };
+
+    $scope.initMacInfoTable = function() {
+        if ( ! $.fn.dataTable || $stateParams.id === 'new') {
+          return;
+        }
+        var columnDefinitions = [
+        {
+         "sWidth" : "30%", aTargets:[0],
+         "sWidth" : "20%", aTargets:[2],
+         "sWidth" : "50%", aTargets:[1]
+        },
+        {
+          "targets": [2],
+          "createdCell": function (td, cellData, rowData, row, col) {
+            var actionHtml = '<button title="Delete" ng-disabled="true" class="btn btn-default btn-oval fa fa-trash" ></button>';
+
+            $(td).html(actionHtml);
+            $compile(td)($scope);
+          }
+        }];
+        DataTableService.initDataTable('mac_id_table', columnDefinitions);
+        var table = $('#mac_id_table').DataTable();
+        RestServiceFactory.AgencyService().getAuthorizedMachines({id:$stateParams.id}, function(data) {
+            $scope.macData = data
+            $.each($scope.macData, function (k,v) {
+                table.row.add([v.name, v.machineInfo, v]);
+            });
+            table.draw();
+        });
+        
+    };
+
+    $scope.initMacInfoTable();
+
 }]);
