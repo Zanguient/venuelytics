@@ -31,7 +31,7 @@
         </div>
     </div>
 </header>
-<header class="ms-header <%= headerClass %>" ng-cloak ng-show="embeddedFlag === true">
+<header class="ms-header <%= headerClass %>" ng-cloak ng-show="embeddedFlag === true && venueHeader != '' && venueHeader != undefined">
     <div class="container container-full">
         <div class="text-center">
             <div ng-bind-html="venueHeader | to_trusted"></div>

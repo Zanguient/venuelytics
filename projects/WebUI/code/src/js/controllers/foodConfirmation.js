@@ -93,7 +93,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             };
 
             self.editFoodPage = function() {
-                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
+                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/food-services');
             };
 
             self.foodServiceSave = function() {
@@ -189,7 +189,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
 
             self.backToFood = function() {
                 $rootScope.serviceName = 'FoodService';
-                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/food-services');
+                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/food-services');
             };
 
             self.creditCardPayment = function() {

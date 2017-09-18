@@ -9,6 +9,10 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             self.reservedTimeSlot = '';
             self.timeSlot = false;
             self.init = function() {
+                var embed = $routeParams.embed;
+                if(embed === "embed") {
+                    $rootScope.embeddedFlag = true;
+                }
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -16,8 +20,12 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 self.venueid = $routeParams.venueid;
                 self.getServiceTime();
                 self.selectedCity = $routeParams.cityName;
-                //self.reservationTime = APP_ARRAYS.time;
+                self.reservationTime = APP_ARRAYS.time;
                 self.tableDate = moment().format('MM/DD/YYYY');
+                setTimeout(function() {
+                var divWidth = $(window).width();
+                $("#divObj").width(divWidth)
+                }, 1000);
             };
 
             self.findTable = function() {
@@ -52,14 +60,32 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
+            $(window).resize(function() {
+                setTimeout(function() {
+                var divWidth = $(window).width();
+                $("#divObj").width(divWidth);
+                }, 1000);
+            });
+
             self.getServiceTime = function() {
+                self.reserveTimes = [];
+                var date = new Date();
+                $scope.startDate = moment(date).format("MM-DD-YYYY");
                 AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
-                    self.reservationTime = response.data;
-                    angular.forEach(self.reservationTime, function(value, key) {
-                        var H = + value.startTime.substr(0, 2);
-                        var h = (H % 12) || 12;
-                        var ampm = H < 12 ? " AM" : " PM";
-                        value.time = h + value.startTime.substr(2, 3) + ampm;
+                    self.reservationData = response.data;
+                    angular.forEach(self.reservationData, function(value1, key1) {
+                        $scope.venueOpenTime = new Date(moment($scope.startDate + ' ' + value1.startTime,'MM-DD-YYYY h:mm').format());
+                        value1.startTime = moment($scope.venueOpenTime).format("HH:mm");
+                        angular.forEach(self.reservationTime, function(value, key) {
+                            if(value.key >= value1.startTime && value.key <= value1.lastCallTime){
+                                self.reserveTimes.push(value);
+                            }
+                            if(value1.lastCallTime === '' || value1.lastCallTime === null) {
+                                if(value.key >= value1.startTime && value.key < value1.endTime){
+                                    self.reserveTimes.push(value);
+                                }
+                            }
+                        });
                     });
                 });
             }
@@ -69,7 +95,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             };
 
             self.backToTable = function() {
-                $location.url('/newCities/' + self.selectedCity + '/' + self.venueid + '/table-services');
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueid + '/table-services');
             };
 
             self.confirmReservation = function() {

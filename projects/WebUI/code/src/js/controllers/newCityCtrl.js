@@ -93,7 +93,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             };
     		self.selectCity = function(city) {
                 $rootScope.title = 'Venuelytics-City-'+city.name;
-                $location.url('/newCities/'+city.name);
+                $location.url('/cities/'+city.name);
     		};
 
             self.previousPage = function() {
@@ -128,7 +128,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 self.selectedCityName = venue.city;
                 DataShare.selectedVenue = venue;
                 DataShare.venueNumber = venue.id;
-                $location.url('/newCities/' + self.selectedCityName + '/' + venue.id + '/bottle-service');
+                $location.url('/cities/' + self.selectedCityName + '/' + venue.id + '/bottle-service');
             };
 
             self.getCityKeyEnter = function(keyEvent,citySearch) {

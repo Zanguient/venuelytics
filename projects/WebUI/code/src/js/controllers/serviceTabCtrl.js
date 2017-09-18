@@ -83,7 +83,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                     if(self.embeddedService === 'new') {
                         $rootScope.embedColor = response.data["ui.service.bgcolor"];
                         $rootScope.venueHeader = response.data["ui.custom.header"];
-                        $rootScope.venueFooter = response.data["ui.custom.footer"]; 
+                        $rootScope.venueFooter = response.data["ui.custom.footer"];
+                        $rootScope.embeddedFlag = true;
                     }
                     self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
                     self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
@@ -99,17 +100,23 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     };
     self.getServiceTime = function() {
         var reservationTime;
+        var date = new Date();
+        $scope.startDate = moment(date).format("MM-DD-YYYY");
         AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
             reservationTime = response.data;
             angular.forEach(reservationTime, function(value, key) {
-                var H = + value.startTime.substr(0, 2);
+                $scope.venueOpenTime = new Date(moment($scope.startDate + ' ' + value.startTime,'MM-DD-YYYY h:mm').format());
+                var startDateValue = moment($scope.venueOpenTime).format("HH:mm a");
+                var H = + startDateValue.substr(0, 2);
                 var h = (H % 12) || 12;
                 var ampm = H < 12 ? " AM" : " PM";
-                value.sTime = h + value.startTime.substr(2, 3) + ampm;
-                H = + value.endTime.substr(0, 2);
+                value.sTime = h + startDateValue.substr(2, 3) + ampm;
+                $scope.venueCloseTime = new Date(moment($scope.startDate + ' ' + value.endTime,'MM-DD-YYYY h:mm').format());
+                var endDateValue = moment($scope.venueCloseTime).format("HH:mm a");
+                H = + endDateValue.substr(0, 2);
                 h = (H % 12) || 12;
                 ampm = H < 12 ? " AM" : " PM";
-                value.eTime = h + value.endTime.substr(2, 3) + ampm;
+                value.eTime = h + endDateValue.substr(2, 3) + ampm;
             });  
             $rootScope.openHour = reservationTime[0].sTime;
             $rootScope.closeHour = reservationTime[0].eTime;
@@ -126,14 +133,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
     self.dispatchToService = function(serviceName) {
         if(self.imageParam === 'Y' || self.imageParam === 'y') {
-            $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + "?i=Y");
+            $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + "?i=Y");
         } else if(serviceName === undefined) {
-            $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bottle-service");
+            $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/bottle-service");
         } else {
             if(self.embeddedService === 'new'){
-                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + '/new');
+                $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + '/new');
             } else {
-                $location.url("/newCities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
+                $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
             }        
         }
     };

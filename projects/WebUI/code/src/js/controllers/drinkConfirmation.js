@@ -93,7 +93,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
             };
 
             self.editDrinkPage = function() {
-                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
+                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
             };
 
             self.drinkServiceSave = function() {
@@ -189,7 +189,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
 
             self.backToDrink = function() {
                 $rootScope.serviceName = 'DrinkService';
-                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
+                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
             };
 
             self.creditCardPayment = function() {

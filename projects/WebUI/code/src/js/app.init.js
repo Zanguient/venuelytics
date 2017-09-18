@@ -49,13 +49,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             title: 'Venuelytics',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
-        .when('/cities', {
+        /* .when('/cities', {
             templateUrl: 'city.html',
             controller: 'CityController',
             title: 'Venuelytics-City',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
-
-        })
+        }) 
         .when('/cities/:cityName', {
             templateUrl: 'venue/venues.html',
             controller: 'VenueController',
@@ -76,41 +75,41 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'venue/venue-details.html',
             controller: 'VenueDetailsController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
-        })
+        })*/
         .when('/businessAlreadyClaimed/:venueid', {
             templateUrl: 'business/business-already-claim.html',
             controller: 'businessController',
             title: 'Venuelytics-BusinessAlreadyClaim',
             description: 'Venuelytics - a real time venue experience platform enabling Business Already Claimed'
         })
-        .when('/newCities', {
+        .when('/cities', {
             templateUrl: 'new-city.html',
             controller: 'NewCityController',
             title: 'Venuelytics-City',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
 
         })
-        .when('/newCities/:cityName', {
+        .when('/cities/:cityName', {
             templateUrl: 'venue/new-venues.html',
             controller: 'NewVenueController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
-        .when('/newCities/:cityName/:venueid', {
+        .when('/cities/:cityName/:venueid', {
             templateUrl: 'venue/service-tabs.html',
             controller: 'ServiceTabController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
-        .when('/newCities/:cityName/:venueid/:tabParam', {
+        .when('/cities/:cityName/:venueid/:tabParam', {
             templateUrl: 'venue/service-tabs.html',
             controller: 'ServiceTabController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
-        .when('/newCities/:cityName/:venueid/:tabParam/:new', {
+        .when('/cities/:cityName/:venueid/:tabParam/:new', {
             templateUrl: 'venue/service-tabs.html',
             controller: 'ServiceTabController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
         })
-        .when('/newCities/:cityName/:venueid/:tabParam?i&orgId', {
+        .when('/cities/:cityName/:venueid/:tabParam?i&orgId', {
             templateUrl: 'venue/service-tabs.html',
             controller: 'ServiceTabController',
             description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
@@ -310,6 +309,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller:'GuestConfirmController',
             description: 'Venuelytics - a real time venue experience platform for guest success'
         })
+        .when('/cities/:cityName/:venueid/new/new/:embed', {
+            templateUrl: 'business/iframe.html',
+            controller:'TableServiceController',
+            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
+        })
         .otherwise('/home');
 
     $locationProvider.html5Mode({
@@ -338,10 +342,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $rootScope.showBusinessLink = true;
     $rootScope.embeddedFlag = false;
     var defaultPage = '/home';
-    if (hostName.indexOf("itzfun.com") >= 0){
+    /* if (hostName.indexOf("itzfun.com") >= 0){
         defaultPage = '/cities';
         $rootScope.showBusinessLink = false;
-    }
+    } */
 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 

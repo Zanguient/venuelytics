@@ -82,7 +82,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             };
 
             self.editConfirmPage = function() {
-                $location.url("/newCities/" + self.editCity + "/" + self.venueID + '/bottle-service');
+                $location.url("/cities/" + self.editCity + "/" + self.venueID + '/bottle-service');
             };
 
             self.paymentEnable = function() {
@@ -92,7 +92,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.backToReservation = function() {
                 $rootScope.serviceName = 'BottleService';
                 DataShare.editBottle = 'false';
-                $location.url('/newCities/' + self.editCity + '/' + self.venueID + '/bottle-service');
+                $location.url('/cities/' + self.editCity + '/' + self.venueID + '/bottle-service');
             };
 
             self.cardPaymentData = function(value) {

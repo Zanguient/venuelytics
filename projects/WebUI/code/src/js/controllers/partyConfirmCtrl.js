@@ -54,7 +54,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
             };
 
             self.editPartyPackage = function() {
-                $location.url("/newCities/" + self.city + "/" + self.selectedVenueID + '/party-packages');
+                $location.url("/cities/" + self.city + "/" + self.selectedVenueID + '/party-packages');
             };
 
             self.paymentEnable = function() {
@@ -85,7 +85,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
 
             self.backToParty = function() {
               $rootScope.serviceName = 'PartyPackages';
-              $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/party-packages');
+              $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/party-packages');
             };
 
             self.creditCardPayment = function() {

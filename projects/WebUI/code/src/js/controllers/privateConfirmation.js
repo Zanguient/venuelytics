@@ -19,7 +19,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
             };
 
             self.editPrivatePage = function() {
-                $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events');
+                $location.url('/cities/' + self.editCity + '/' + self.editVenueID + '/private-events');
             };
 
             self.privateEventSave = function() {
@@ -32,7 +32,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
             self.backToPrivate = function() {
                 $rootScope.serviceName = 'PrivateEvent';
                 DataShare.privateEventFocused = '';
-                $location.url('/newCities/' + self.editCity + '/' + self.editVenueID + '/private-events');
+                $location.url('/cities/' + self.editCity + '/' + self.editVenueID + '/private-events');
             };
 
              self.time24to12 = function(timeString) {

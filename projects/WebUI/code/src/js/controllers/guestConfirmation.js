@@ -14,7 +14,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
             };
 
             self.editGuestPage = function() {
-                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
+                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
             };
 
             self.guestListSave = function() {
@@ -25,7 +25,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
 
             self.backToGuest = function() {
                 $rootScope.serviceName = 'GuestList';
-                $location.url('/newCities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
+                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
             };
 
             self.init();

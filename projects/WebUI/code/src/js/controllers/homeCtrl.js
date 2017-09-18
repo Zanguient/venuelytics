@@ -41,7 +41,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.venuelyticsApp = false;
             $rootScope.itzfunApp = false;
             $rootScope.panelShow = false;
-        } else if(tab === 'cities') {
+        /* } else if(tab === 'cities') {
             $rootScope.homeTab = '';
             $rootScope.businessTab = '';
             $rootScope.consumerTab = 'active';
@@ -51,8 +51,8 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.blogTab = '';
             $rootScope.itzfunApp = true;
             $rootScope.venuelyticsApp = false;
-            $rootScope.panelShow = true;
-        } else if(tab === 'newCities') {
+            $rootScope.panelShow = true; */
+        } else if(tab === 'cities') {
             $rootScope.homeTab = '';
             $rootScope.businessTab = '';
             $rootScope.consumerTab = '';
