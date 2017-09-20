@@ -12,6 +12,8 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             var nextPageSize = 0;
             var previousPageSize = 0;
             self.next = false;
+            self.searchVenue = false;
+            $rootScope.showSearchBox = true;
             self.gettingLocation = function(lat, long, country) {
                 self.loadingBar = true;
                 AjaxService.gettingLocation(lat, long, country).then(function(response) {
@@ -39,6 +41,8 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 AjaxService.getVenuesByCity(DataShare.latitude, DataShare.longitude, citySearch).then(function(response) {
                     self.listOfCities = response;
                     self.loadingBar = false;
+                    if((self.listOfCities.length < 1) && (self.searchVenue === true))
+                    self.getVenueBySearch(citySearch);
                 });
             };
 
@@ -121,6 +125,15 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 self.listOfCities = [];
                 if (keyEvent.which === 13){
                     self.getVenueBySearch(venueSearch);
+                }
+            };
+            $rootScope.getSearchBySearch = function(venueSearch){
+                self.getCity(venueSearch);
+                self.searchVenue = true;
+            };
+            $rootScope.getserchKeyEnter = function(keyEvent,venueSearch) {
+                if (keyEvent.which === 13){
+                    $rootScope.getSearchBySearch(venueSearch);
                 }
             };
 

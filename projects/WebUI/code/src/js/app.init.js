@@ -22,31 +22,31 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'Venuelytics',
+            title: 'VenueLytics Title - Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         .when('/home', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'Venuelytics',
+            title: 'VenueLytics Title - Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         .when('/home*', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'Venuelytics',
+            title: 'VenueLytics Title - Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         .when('/home?sb&orgId', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'Venuelytics',
+            title: 'VenueLytics Title - Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         .when('/home?nc&orgId', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'Venuelytics',
+            title: 'VenueLytics Title - Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         /* .when('/cities', {
@@ -129,11 +129,13 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/about', {
             templateUrl: 'about.html',
             title: 'Venuelytics-About',
+            controller: 'BlogController',
             description: 'Venuelytics - a real time venue experience platform enabling About Information'
         })
         .when('/contact', {
             templateUrl: 'contact.html',
             title: 'Venuelytics-Contact',
+            controller: 'BlogController',
             description: 'Venuelytics - a real time venue experience platform enabling Contact Information'
         })
         .when('/privacy', {
@@ -205,6 +207,12 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'blogs/blog-post.html',
             controller: 'BlogPostController',
             title: 'Venuelytics-Blog-Post',
+            description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
+        })
+        .when('/breakthrough/:throughId', {
+            templateUrl: 'break-through/through-post.html',
+            controller: 'Breakthrough',
+            title: 'Venuelytics-Break-Through',
             description: 'Venuelytics - a real time venue experience platform enabling Blog Information'
         })
         .when('/:cityName/orderConfirm/:venueid', {
