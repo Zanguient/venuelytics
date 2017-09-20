@@ -22,6 +22,7 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
         AjaxService.getEvents($routeParams.venueid).then(function(response) {
           self.events = response.data['venue-events'];
           self.eventCalender();
+          self.getSelectedTab();
         });
     };
 
@@ -32,6 +33,10 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
     self.listEventView = function() {
         self.eventListData = true;
         self.calenderData = false;
+    };
+    self.getSelectedTab = function() {
+        $("em").hide();
+        $("#eventList").show();
     };
     self.eventCalender = function() {
       var today = new Date();

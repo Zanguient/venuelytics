@@ -25,6 +25,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                     self.tabClear();
                 }
                 self.getEventType();
+                self.getSelectedTab();
             };
             if(DataShare.guestFocus !== '') {
               self.guestFocus = DataShare.guestFocus;
@@ -56,6 +57,11 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                         }
                     }
                 });
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#guestList").show();
             };
 
             self.glistSave = function(guest) {

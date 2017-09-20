@@ -55,6 +55,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 self.getBottleProducts();
                 self.getMenus();
                 self.getEventType();
+                self.getSelectedTab();
 
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
@@ -93,6 +94,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 AjaxService.getProductOfBottle(self.venueid).then(function(response) {
                     self.allBottle = response.data;
                 });
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#bottleService").show();
             };
 
             self.tabClear = function() {

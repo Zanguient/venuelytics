@@ -25,6 +25,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 self.getMenus();
                 self.getFood();
                 self.getVenueType();
+                self.getSelectedTab();
             };
 
             self.tabClear = function() {
@@ -35,6 +36,11 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 DataShare.foodService = '';
                 self.foodType = 'Delivery';
                 DataShare.selectedFoods = '';
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#foodServices").show();
             };
 
             self.removeFoodItems = function(index,obj) {

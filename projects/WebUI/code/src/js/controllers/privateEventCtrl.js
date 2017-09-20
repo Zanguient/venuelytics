@@ -23,6 +23,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 } 
                 self.getMenus();
                 self.getEventType();
+                self.getSelectedTab();
                     var date = new Date();
                     var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
@@ -57,6 +58,11 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 $rootScope.serviceName = '';
                 self.private = {};
                 self.private.orderDate = moment().format('MM/DD/YYYY');
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#privateEvents").show();
             };
 
             self.createPrivateEvent = function(value) {

@@ -24,6 +24,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 self.getMenus();
                 self.getDrink();
                 self.getVenueType();
+                self.getSelectedTab();
             };
 
             self.getMenus = function() {
@@ -41,6 +42,11 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                         self.orderDisable = true;
                     }
                 });
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#drinkServices").show();
             };
 
             self.removeDrinkItems = function(index,obj) {
