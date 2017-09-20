@@ -9,6 +9,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.businessData = false;
             self.hideForm = false;
             self.claimForm = false;
+            $rootScope.showSearchBox = false;
             self.newUser = {
                 businessName: '',
                 address: '',
