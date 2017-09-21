@@ -24,7 +24,9 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 self.getMenus();
                 self.getDrink();
                 self.getVenueType();
-                self.getSelectedTab();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
             };
 
             self.getMenus = function() {

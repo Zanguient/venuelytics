@@ -23,7 +23,9 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 } 
                 self.getMenus();
                 self.getEventType();
-                self.getSelectedTab();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
                     var date = new Date();
                     var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});

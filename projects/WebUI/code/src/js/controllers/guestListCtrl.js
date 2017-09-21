@@ -25,7 +25,9 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                     self.tabClear();
                 }
                 self.getEventType();
-                self.getSelectedTab();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
             };
             if(DataShare.guestFocus !== '') {
               self.guestFocus = DataShare.guestFocus;

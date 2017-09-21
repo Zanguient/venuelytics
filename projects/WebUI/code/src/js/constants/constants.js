@@ -53,7 +53,8 @@ app
       "Guest-List-Lost":"break-through/break-guest-list.html",
       "Business-Analytics-Dashboard":"break-through/business-analytics-dashboard.html",
       "WIFI-White-Label-Solution":"break-through/wifi-white-label.html",
-      "Campaign-Loyalty-Management":"break-through/break-loyalty-management.html"
+      "Campaign-Loyalty-Management":"break-through/break-loyalty-management.html",
+      "Break-Private-Events":"break-through/break-private-events.html"
     },
     'features': [{'title': 'FEATURE_REAL_TIME_RES', 'description':'FEATURE_REAL_TIME_DESC', 'image': 'assets/img/ic_reservations.png', 'color': 'color-info','link':'Real-Time-Reservations'},
                  {'title': 'FEATURE_FOOD_DRINK', 'description':'FEATURE_FOOD_DRINK_DESC', 'image': 'assets/img/ic_fooddrink.png', 'color': 'color-warning','link':'Food-Drink-Services'},
@@ -62,7 +63,7 @@ app
                  {'title': 'FEATURE_BUSINESS', 'description':'FEATURE_BUSINESS_DESC', 'image': 'assets/img/ic_analytics.png', 'color': 'color-info','link':'Business-Analytics-Dashboard'},
                  {'title': 'FEATURE_WIFI', 'description':'FEATURE_WIFI_DESC', 'image': 'assets/img/ic_wifi.png', 'color': 'color-warning','link':'WIFI-White-Label-Solution'},
                  {'title': 'FEATURE_PRIVATE_EVENT',
-                            'description':'FEATURE_PRIVATE_EVENT_DESC', 'image': 'assets/img/ic_privatevent.png', 'color': 'color-success','link':'Private-Events'},
+                            'description':'FEATURE_PRIVATE_EVENT_DESC', 'image': 'assets/img/ic_privatevent.png', 'color': 'color-success','link':'Break-Private-Events'},
                  {'title': 'FEATURE_LOYALTY', 'description':'FEATURE_LOYALTY_DESC', 'image': 'assets/img/ic_campaign.png', 'color': 'color-danger','link':'Campaign-Loyalty-Management'}],
     'serviceSmallIcons': [{"title":"Karaoke", "tab":"k", "image":"assets/img/ic_karaoke.png", "fieldName":"Advance.KarokeRequest.enable"},
                          {"title":"BottleService", "tab":"b", "image":"assets/img/ic_bottle.png", "fieldName":"Advance.BottleService.enable"},

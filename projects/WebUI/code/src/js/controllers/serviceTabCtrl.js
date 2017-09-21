@@ -13,6 +13,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.selectionTableItems = [];
     self.bottleMinimum = [];
     self.dispatchHandler = [];
+    $rootScope.showSearchBox = false;
     self.venueid = $routeParams.venueid;
     self.tabParams = $routeParams.tabParam;
     self.embeddedService = $routeParams.new;
@@ -135,7 +136,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         if(self.imageParam === 'Y' || self.imageParam === 'y') {
             $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + "?i=Y");
         } else if(serviceName === undefined) {
-            $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/reservation");
+            $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP");
         } else {
             if(self.embeddedService === 'new'){
                 $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + '/new');
@@ -222,10 +223,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             addTab('eventListTab','eventlist', 'assets/img/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, APP_COLORS.tableBtn, APP_COLORS.btnColor, 'eventList');
 
             optimizeTabDisplay( self.displayTabs);  
-            setTimeout(function() { 
+            setTimeout(function() {
                 $("em").hide();
                 $("#bottleService").show(); 
-            }, 1000);         
+            }, 500);
         }
 
     }

@@ -31,6 +31,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
 
             self.backToPrivate = function() {
                 $rootScope.serviceName = 'PrivateEvent';
+                DataShare.privateEventData = '';
                 DataShare.privateEventFocused = '';
                 $location.url('/cities/' + self.editCity + '/' + self.editVenueID + '/private-events');
             };
