@@ -25,7 +25,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 });
             };
 
-            $scope.getCountry = function (countryObject) {
+            self.getCountry = function (countryObject) {
                 self.loadingBar = true;
                 self.listOfCities = '';
                 self.selectedCountry = countryObject;
@@ -35,16 +35,23 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 });
             };
 
-            $scope.getCity = function (citySearch) {
+            self.getCity = function (citySearch) {
                 self.listOfVenuesByCity = [];
                 self.loadingBar = true;
                 AjaxService.getVenuesByCity(DataShare.latitude, DataShare.longitude, citySearch).then(function(response) {
                     self.listOfCities = response;
                     self.loadingBar = false;
-                    if((self.listOfCities.length < 1) && (self.searchVenue === true))
-                    self.getVenueBySearch(citySearch);
+                    if((self.listOfCities.length > 0) && (self.searchVenue === true)){
+                        scrollWin();
+                    }
+                    if((self.listOfCities.length < 1) && (self.searchVenue === true)) {
+                        self.getVenueBySearch(citySearch);
+                    }
                 });
             };
+            function scrollWin() {
+                window.scrollBy(0, 800);
+            }
 
             self.init = function() {
 
@@ -118,6 +125,9 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                     angular.forEach(self.listOfVenuesByCity, function(value, key) {
                         value.feature = value.info["Advance.featured"];
                     });
+                    if(self.searchVenue === true){
+                        scrollWin();
+                    }
                 });
             };
 

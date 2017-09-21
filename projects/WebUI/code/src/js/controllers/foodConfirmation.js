@@ -189,6 +189,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
 
             self.backToFood = function() {
                 $rootScope.serviceName = 'FoodService';
+                DataShare.foodServiceData = '';
                 $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/food-services');
             };
 

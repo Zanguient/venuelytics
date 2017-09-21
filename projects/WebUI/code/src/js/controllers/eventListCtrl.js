@@ -22,7 +22,9 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
         AjaxService.getEvents($routeParams.venueid).then(function(response) {
           self.events = response.data['venue-events'];
           self.eventCalender();
-          self.getSelectedTab();
+          setTimeout(function() {
+              self.getSelectedTab();
+          }, 600);
         });
     };
 

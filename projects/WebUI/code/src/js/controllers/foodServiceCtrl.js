@@ -25,7 +25,9 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 self.getMenus();
                 self.getFood();
                 self.getVenueType();
-                self.getSelectedTab();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
             };
 
             self.tabClear = function() {

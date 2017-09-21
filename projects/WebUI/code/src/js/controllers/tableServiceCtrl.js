@@ -19,7 +19,9 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
                 self.venueid = $routeParams.venueid;
                 self.getServiceTime();
-                self.getSelectedTab();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
                 self.selectedCity = $routeParams.cityName;
                 self.reservationTime = APP_ARRAYS.time;
                 self.tableDate = moment().format('MM/DD/YYYY');

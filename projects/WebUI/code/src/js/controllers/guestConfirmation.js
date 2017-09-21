@@ -25,6 +25,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
 
             self.backToGuest = function() {
                 $rootScope.serviceName = 'GuestList';
+                DataShare.guestListData = '';
                 $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
             };
 

@@ -189,6 +189,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
 
             self.backToDrink = function() {
                 $rootScope.serviceName = 'DrinkService';
+                DataShare.drinkServiceData = '';
                 $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
             };
 
