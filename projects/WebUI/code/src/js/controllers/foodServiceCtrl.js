@@ -9,6 +9,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             self.selectedFoodList = [];
             self.foodType = 'Delivery';
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Food-Services';
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;
@@ -25,6 +26,9 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 self.getMenus();
                 self.getFood();
                 self.getVenueType();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
             };
 
             self.tabClear = function() {
@@ -35,6 +39,11 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                 DataShare.foodService = '';
                 self.foodType = 'Delivery';
                 DataShare.selectedFoods = '';
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#foodServices").show();
             };
 
             self.removeFoodItems = function(index,obj) {

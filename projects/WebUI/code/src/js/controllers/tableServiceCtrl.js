@@ -9,6 +9,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             self.reservedTimeSlot = '';
             self.timeSlot = false;
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Table-Services';
                 var embed = $routeParams.embed;
                 if(embed === "embed") {
                     $rootScope.embeddedFlag = true;
@@ -19,6 +20,9 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
                 self.venueid = $routeParams.venueid;
                 self.getServiceTime();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
                 self.selectedCity = $routeParams.cityName;
                 self.reservationTime = APP_ARRAYS.time;
                 self.tableDate = moment().format('MM/DD/YYYY');
@@ -66,6 +70,11 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 $("#divObj").width(divWidth);
                 }, 1000);
             });
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#tableServices").show();
+            };
 
             self.getServiceTime = function() {
                 self.reserveTimes = [];

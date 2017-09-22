@@ -16,6 +16,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Bottle-Confirmation';
                 self.editCity = $routeParams.cityName;
                 self.venueID = $routeParams.venueid;
                 self.userData = DataShare.bottleServiceData;
@@ -92,6 +93,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.backToReservation = function() {
                 $rootScope.serviceName = 'BottleService';
                 DataShare.editBottle = 'false';
+                DataShare.bottleServiceData = '';
                 $location.url('/cities/' + self.editCity + '/' + self.venueID + '/bottle-service');
             };
 

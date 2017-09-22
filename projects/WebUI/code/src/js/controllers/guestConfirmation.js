@@ -6,6 +6,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
 
     		var self = $scope;
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Guest-List-Confirmation';
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.guestListData = DataShare.guestListData;
@@ -25,6 +26,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
 
             self.backToGuest = function() {
                 $rootScope.serviceName = 'GuestList';
+                DataShare.guestListData = '';
                 $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
             };
 

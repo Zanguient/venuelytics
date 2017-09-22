@@ -12,6 +12,8 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             var nextPageSize = 0;
             var previousPageSize = 0;
             self.next = false;
+            self.searchVenue = false;
+            $rootScope.showSearchBox = true;
             self.gettingLocation = function(lat, long, country) {
                 self.loadingBar = true;
                 AjaxService.gettingLocation(lat, long, country).then(function(response) {
@@ -23,7 +25,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 });
             };
 
-            $scope.getCountry = function (countryObject) {
+            self.getCountry = function (countryObject) {
                 self.loadingBar = true;
                 self.listOfCities = '';
                 self.selectedCountry = countryObject;
@@ -33,14 +35,27 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 });
             };
 
-            $scope.getCity = function (citySearch) {
+            self.getCity = function (citySearch) {
                 self.listOfVenuesByCity = [];
                 self.loadingBar = true;
                 AjaxService.getVenuesByCity(DataShare.latitude, DataShare.longitude, citySearch).then(function(response) {
                     self.listOfCities = response;
                     self.loadingBar = false;
+                    if((self.listOfCities.length > 0) && (self.searchVenue === true)){
+                        scrollWin();
+                        self.citySearch = citySearch;
+                        self.venueSearch = '';
+                    }
+                    if((self.listOfCities.length < 1) && (self.searchVenue === true)) {
+                        self.getVenueBySearch(citySearch);
+                        self.venueSearch = citySearch;
+                        self.citySearch = '';
+                    }
                 });
             };
+            function scrollWin() {
+                window.scrollBy(0, 800);
+            }
 
             self.init = function() {
 
@@ -92,7 +107,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 $('.modal-backdrop').remove();
             };
     		self.selectCity = function(city) {
-                $rootScope.title = 'Venuelytics-City-'+city.name;
+                $rootScope.title = 'Venuelytics-City-'+ city.name;
                 $location.url('/cities/'+city.name);
     		};
 
@@ -114,6 +129,9 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                     angular.forEach(self.listOfVenuesByCity, function(value, key) {
                         value.feature = value.info["Advance.featured"];
                     });
+                    if(self.searchVenue === true){
+                        scrollWin();
+                    }
                 });
             };
 
@@ -121,6 +139,15 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 self.listOfCities = [];
                 if (keyEvent.which === 13){
                     self.getVenueBySearch(venueSearch);
+                }
+            };
+            $rootScope.getSearchBySearch = function(venueSearch){
+                self.getCity(venueSearch);
+                self.searchVenue = true;
+            };
+            $rootScope.getserchKeyEnter = function(keyEvent,venueSearch) {
+                if (keyEvent.which === 13){
+                    $rootScope.getSearchBySearch(venueSearch);
                 }
             };
 

@@ -10,6 +10,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
 
             var self = $scope;
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Private-Confirmation';
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
                 self.privateEventData = DataShare.privateEventData;
@@ -31,6 +32,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
 
             self.backToPrivate = function() {
                 $rootScope.serviceName = 'PrivateEvent';
+                DataShare.privateEventData = '';
                 DataShare.privateEventFocused = '';
                 $location.url('/cities/' + self.editCity + '/' + self.editVenueID + '/private-events');
             };

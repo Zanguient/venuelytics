@@ -20,6 +20,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.sum = 0;
             self.bottleDateIsFocused = 'is-focused';
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Bottle-services';
                 //$("div.form-group").add("style", "margin-left: auto");
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
@@ -55,6 +56,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 self.getBottleProducts();
                 self.getMenus();
                 self.getEventType();
+                self.getSelectedTab();
 
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
@@ -93,6 +95,11 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 AjaxService.getProductOfBottle(self.venueid).then(function(response) {
                     self.allBottle = response.data;
                 });
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#bottleService").show();
             };
 
             self.tabClear = function() {

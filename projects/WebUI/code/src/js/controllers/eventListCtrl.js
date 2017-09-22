@@ -18,10 +18,14 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
      self.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
 
     self.init = function() {
+      $rootScope.title = 'Venuelytics-Event-List';
         self.tabParam = $routeParams.tabParam;
         AjaxService.getEvents($routeParams.venueid).then(function(response) {
           self.events = response.data['venue-events'];
           self.eventCalender();
+          setTimeout(function() {
+              self.getSelectedTab();
+          }, 600);
         });
     };
 
@@ -32,6 +36,10 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
     self.listEventView = function() {
         self.eventListData = true;
         self.calenderData = false;
+    };
+    self.getSelectedTab = function() {
+        $("em").hide();
+        $("#eventList").show();
     };
     self.eventCalender = function() {
       var today = new Date();

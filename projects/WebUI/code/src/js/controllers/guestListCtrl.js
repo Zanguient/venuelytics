@@ -11,6 +11,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             var self = $scope;
             self.guestDateIsFocused = 'is-focused';
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Guest-List';
                 self.venueid = $routeParams.venueid;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -25,6 +26,9 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                     self.tabClear();
                 }
                 self.getEventType();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
             };
             if(DataShare.guestFocus !== '') {
               self.guestFocus = DataShare.guestFocus;
@@ -56,6 +60,11 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                         }
                     }
                 });
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#guestList").show();
             };
 
             self.glistSave = function(guest) {

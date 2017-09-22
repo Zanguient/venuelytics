@@ -9,6 +9,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
             self.paypal = false;
             self.cardPayment = false;
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Party-Confirmation';
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.partyPackageData = DataShare.partyServiceData;

@@ -6,6 +6,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
             self.selectedDrinkItems = [];
             self.drinkType = 'Delivery';
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Drink-Services';
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;
@@ -24,6 +25,9 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                 self.getMenus();
                 self.getDrink();
                 self.getVenueType();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
             };
 
             self.getMenus = function() {
@@ -41,6 +45,11 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                         self.orderDisable = true;
                     }
                 });
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#drinkServices").show();
             };
 
             self.removeDrinkItems = function(index,obj) {

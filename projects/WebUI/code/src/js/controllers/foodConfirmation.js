@@ -11,6 +11,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             self.chargedAmount = 0;
             self.totalChargedAmount = 0;
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Food-Confirmation';
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;
@@ -189,6 +190,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
 
             self.backToFood = function() {
                 $rootScope.serviceName = 'FoodService';
+                DataShare.foodServiceData = '';
                 $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/food-services');
             };
 
