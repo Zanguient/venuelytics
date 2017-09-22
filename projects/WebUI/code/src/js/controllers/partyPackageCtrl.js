@@ -10,6 +10,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             var self = $scope;
             self.partyDateIsFocused = 'is-focused';
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Party-Packages';
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());

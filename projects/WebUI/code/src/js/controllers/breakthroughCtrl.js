@@ -10,8 +10,9 @@ app.controller('Breakthrough', ['$log', '$scope', 'DataShare','$translate', '$ro
 
     	var self = $scope;
         self.init = function() {
-          self.throughId = $routeParams.throughId;	
-          self.breakThroughUrl = APP_ARRAYS.breakThrough[self.throughId];
+            $rootScope.title = 'Venuelytics-Breakthrough-Solutions';
+            self.throughId = $routeParams.throughId;	
+            self.breakThroughUrl = APP_ARRAYS.breakThrough[self.throughId];
         };
 
         self.init();

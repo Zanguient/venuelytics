@@ -20,6 +20,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.sum = 0;
             self.bottleDateIsFocused = 'is-focused';
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Bottle-services';
                 //$("div.form-group").add("style", "margin-left: auto");
                 var date = new Date();
                 $rootScope.serviceTabClear = false;

@@ -1491,6 +1491,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
         font-size: 17px;
       }
 
+      .buttonHeight {
+        height: 100px
+      }
+
       .cardHeight {
         height:620px;
         margin-top: 56px;
@@ -1668,6 +1672,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
       .withoutTabs {
         color:black;
         font-size: 20px;
+      }
+      
+      .buttonHeight {
+        height: 100px
       }
 
       .cardHeight {

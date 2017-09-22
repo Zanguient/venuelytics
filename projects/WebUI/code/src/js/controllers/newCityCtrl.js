@@ -43,9 +43,13 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                     self.loadingBar = false;
                     if((self.listOfCities.length > 0) && (self.searchVenue === true)){
                         scrollWin();
+                        self.citySearch = citySearch;
+                        self.venueSearch = '';
                     }
                     if((self.listOfCities.length < 1) && (self.searchVenue === true)) {
                         self.getVenueBySearch(citySearch);
+                        self.venueSearch = citySearch;
+                        self.citySearch = '';
                     }
                 });
             };
@@ -103,7 +107,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 $('.modal-backdrop').remove();
             };
     		self.selectCity = function(city) {
-                $rootScope.title = 'Venuelytics-City-'+city.name;
+                $rootScope.title = 'Venuelytics-City-'+ city.name;
                 $location.url('/cities/'+city.name);
     		};
 

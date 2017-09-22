@@ -138,12 +138,16 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         } else if(serviceName === undefined) {
             $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP");
         } else {
-            if(self.embeddedService === 'new'){
-                $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + '/new');
+            if(self.embeddedService === 'new') {
+                $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP" + '/new');
+                self.tabParams = serviceName;
+            } else if(self.embeddedService != undefined )  {
+                $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP"+ "/" + self.embeddedService);
+                self.tabParams = serviceName === 'VIP' ? self.embeddedService : serviceName;                
             } else {
                 //$location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
                 self.tabParams = serviceName;
-            }        
+            }
         }
     };
 

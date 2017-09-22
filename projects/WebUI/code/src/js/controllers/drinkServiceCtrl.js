@@ -6,6 +6,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
             self.selectedDrinkItems = [];
             self.drinkType = 'Delivery';
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Drink-Services';
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;
