@@ -45,7 +45,14 @@
 	 "translate": "sidebar.nav.pages.EVENTS_CALENDAR",
 	 "submenu": [],
 	 "roleId": 100
-  },
+  },{
+  	"text": "Ticket Counter",
+	"sref": "app.ticketsCalendar",
+	 "icon": "fa fa-ticket",
+	 "translate": "sidebar.nav.pages.TICKET_COUNTER",
+	 "submenu": [],
+	 "roleId": [10,11,12]
+  }, 
   {
 	"text": "Users Management",
 	"sref": "app.users",

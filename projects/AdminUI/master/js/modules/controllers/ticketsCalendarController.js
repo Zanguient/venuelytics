@@ -6,8 +6,8 @@
  * =========================================================
  */
 
-App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', '$rootScope',  'ContextService', 'RestServiceFactory', 'APP_EVENTS',
-  function ($state, $stateParams, $scope, $rootScope, contextService, RestServiceFactory, APP_EVENTS) {
+App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope', '$rootScope', 'Session','ContextService', 'RestServiceFactory', 'APP_EVENTS','ngDialog',
+  function ($state, $stateParams, $scope, $rootScope, session, contextService, RestServiceFactory, APP_EVENTS, ngDialog) {
   "use strict";
 
   var DAYS = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
@@ -138,17 +138,21 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
         
       },
       dayClick: function (date, jsEvent, view) {
-          $scope.selectedDate = date;
+          $scope.selectedDate = new Date(date);
           $scope.selectCalender = true;
           $scope.event = null;
           $scope.$digest();
+          $scope.getTaxNFees();
       },
       eventClick: function( event, jsEvent, view ) {
         $scope.selectCalender = false;
         $scope.event = event.venueEvent;
+        $scope.selectedDate = new Date(event.start);
+        $scope.getTaxNFees();
         $('.__event_id_class').css('border-color', '');
         $(this).css('border-color', 'red');
         $scope.$digest();
+        $scope.getEventTickets(event.venueEvent, $scope.selectedDate);
       },
       eventDragStart: function (event, js, ui) {
         //draggingEvent = event;
@@ -158,19 +162,152 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
 	      // This array is the events sourc === 'BottleService'es
 	    events: $scope.calEvents
     });
-    $scope.selectedDate = calElement.fullCalendar('getDate');
+    $scope.selectedDate = new Date(calElement.fullCalendar('getDate'));
      
-    var promise = RestServiceFactory.VenueMapService().getAll({id: $scope.venueNumber});
-
-    promise.$promise.then(function(data) {
-          
-    });
   };
   $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
       $scope.getEvents();  
   
   });
+  $scope.mkDate = function(d, durationInMinutes) {
+    if (typeof durationInMinutes === 'undefined') {
+      durationInMinutes = 0;
+    }    
+
+    if (typeof d !== 'undefined') {
+      var t = d.split(":");
+      var h = parseInt(t[0]);
+      var m = parseInt(t[1]);
+      
+      var d = new Date();
+      
+      d.setHours(h);
+      d.setMinutes(m+durationInMinutes);
+      return d;
+    }
+    return new Date();
+  };
+
+  $scope.getAgencyInfo = function() {
+    RestServiceFactory.UserService().getAgencyInfo({id: session.userId}, function(data) {
+      $scope.agency = data;
+      if (data.budgetType === 'NM') {
+        if (data.budget <= data.budgetUsed){
+          data.budget = 2*data.budgetUsed;
+        }
+      }
+      if (data.budget === 0){
+        data.budget = 1;
+      }
+      $scope.budgetPercent = (data.budgetUsed*100)/data.budget;
+      $scope.availableBudget = data.budget - data.budgetUsed;
+
+    });
+  };
+
+  $scope.getEventTickets = function(event, date) {
+    RestServiceFactory.VenueEventService().getEventTickets({id: event.id, date: moment(date).format("YYYYMMDD")}, function(data) {
+        $scope.tickets = data;
+    });
+  };
+
+  $scope.getTaxNFees = function() {
+    RestServiceFactory.VenueService().getTaxNFees({id: contextService.userVenues.selectedVenueNumber, 
+        YYMMDD: moment($scope.selectedDate).format("YYYYMMDD")}, function(data) {
+        $scope.taxNFees = data;
+    });
+  };
+
+  $scope.buyTicket = function(ticket) {
+    $scope.ticket = ticket;
+    var t = $scope.event.eventTime.split(":");
+    var h = parseInt(t[0]);
+    var m = parseInt(t[1]);
+    $scope.selectedDate.setMinutes(m);
+    $scope.selectedDate.setHours(h);
+
+    $scope.ticketSale = {};
+    $scope.ticketSale.ticketId = ticket.id;
+    $scope.ticketSale.eventDate = $scope.selectedDate;
+    $scope.ticketSale.soldMacId = "$WEWE78GHJ3$3$";
+    $scope.ticketSale.soldCount = 1;
+
+    var dialog = ngDialog.open({
+            template: 'app/views/venue-events/buy-ticket.html',
+            scope : $scope,
+            className: 'ngdialog-theme-default custom-width',
+            controller: ['$scope', function($scope) {
+            //$("#eventTicketId").parsley();
+            $scope.calculateTaxNFees = function(ticket) {
+              var quantity = $scope.ticketSale.soldCount;
+              if (typeof $scope.taxNFees !== 'undefined') {
+                var tnfArray = $scope.taxNFees;
+                var result = [];
+                var totalTaxNFees = 0;
+                for (var i = 0; i < tnfArray.length; i++) {
+                  var tnfItem = tnfArray[i];
+                  if (tnfItem.serviceType === 'TICKET-AGENCY') {
+                    if (tnfItem.valueType === '%'){
+                      var cost = Number($scope.ticket.discountedPrice*quantity*tnfItem.value*0.01).toFixed(2);
+                      totalTaxNFees += Number(cost);
+                      var s = tnfItem.name +' (' +tnfItem.value+ '%) = <span class="pull-right">$' + cost +'</span>';
+                      result.push(s);
+
+                    } else {
+                      var cost = Number(tnfItem.value).toFixed(2);
+                      var s = tnfItem.name +' = <span class="pull-right">$' + cost +'</span>';
+                      totalTaxNFees += Number(cost);
+                      result.push(s);
+                    }
+                  }
+                }
+                if (result.length > 0) {
+                  result.push("<hr class=\"mb0\"/>");
+                }
+                result.push('Total Taxes and Fees ($) = <span class="pull-right">$' + Number(totalTaxNFees).toFixed(2) +'</span>');
+                var retResult = {};
+                retResult.textHtml = result.join("<br>");
+                retResult.value = totalTaxNFees;
+                return retResult;
+              }
+              var retResult = {text: "Total Taxes and Fees ($) = 0", value: 0};
+              return retResult;
+              
+            };
+            $scope.totalPriceWithTaxNFees = function(ticket) {
+              var cal = $scope.calculateTaxNFees(ticket);
+              return Number(ticket.discountedPrice*$scope.ticketSale.soldCount + cal.value).toFixed(2) ;
+            };
+
+            $scope.sellTicket = function(ticketInfo) {
+
+               if (ticketInfo.$valid && $("#sellTicketId").parsley().isValid()) {
+                  if (typeof ticket.contactName !== 'undefined' 
+                        || typeof ticket.contactEmail !== 'undefined' 
+                        || typeof ticket.contactPhone !== 'undefined') {
+
+                    if (!( typeof ticket.contactName !== 'undefined' && 
+                        (typeof ticket.contactEmail !== 'undefined' || typeof ticket.contactPhone !== 'undefined'))){
+                      return;
+                    }
+                  }
+                  var target = {id: $scope.event.id, ticketId: ticket.id};
+                  
+                  RestServiceFactory.VenueEventService().buyTicket(target, $scope.ticketSale, function(data){
+                    
+                    $scope.$digest();
+                    dialog.close();
+                  });
+                }
+            };
+          }]
+        });
+  };
+
 
   $scope.initCalendar();
   $scope.getEvents();
+  $scope.getAgencyInfo();
+  
+
 }]);

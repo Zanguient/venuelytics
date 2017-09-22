@@ -276,6 +276,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('jquery-ui', 'moment','fullcalendar')
     })
+    .state('app.ticketsCalendar', {
+        url: '/ticketsCalendar',
+        title: 'Tickets Calendar',
+        templateUrl: basepath('agency/ticketCalendar.html'),
+        controller: 'TicketsCalendarController',
+        data: { authorizedRoles: [10,11,12]},
+        resolve: resolveFor('jquery-ui', 'moment','fullcalendar','ngDialog', 'parsley','inputmask')
+    })
     // Mailbox
     // ----------------------------------- 
      // Mailbox

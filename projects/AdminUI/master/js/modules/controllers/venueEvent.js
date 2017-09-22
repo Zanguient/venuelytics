@@ -175,25 +175,37 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         $('#event_ticket_table').on('click', '.fa-edit', function() {
           $scope.editTicket(this, table);
         });
-        var promise = RestServiceFactory.VenueEventService().getEventTickets({id: $stateParams.id});
-        promise.$promise.then(function(data) {
-     
-            var table = $('#event_ticket_table').DataTable();
-            
-            data.map(function(t) {
-                table.row.add([t.name, $scope.storeNumber, _SEC(t), t.price, t.discountedPrice, t]);
+        var table = $('#event_ticket_table').DataTable();
+       
+        $scope.storeNames = [];
+        RestServiceFactory.VenueService().getAgencies({id: $stateParams.venueNumber}, function(data) {
+            $scope.agencies = data.agencies;
+            for (var i = 0; i < $scope.agencies.length; i++) {
+                $scope.storeNames[$scope.agencies[i].id] = $scope.agencies[i];
+            }
+
+            RestServiceFactory.VenueEventService().getEventTickets({id: $stateParams.id}, function(data) {
+                data.map(function(t) {
+                    table.row.add([t.name, _STORE_NAME(t.storeNumber), _SEC(t), t.price, t.discountedPrice, t]);
+                });
+                table.draw();
             });
-            table.draw();
         });
-    
+
     };
-    
+    function _STORE_NAME(id) {
+        var store = $scope.storeNames[id]
+        return typeof name ==='undefined' ? id : store.name;
+    }
     $scope.editTicket = function(button, table) {
         var targetRow = $(button).closest("tr");
         var d = table.row( targetRow).data();
       
         $scope.ticket = d[5];
-        $scope.store = $scope.ticket.store;
+        
+        
+        var store = $scope.storeNames[$scope.ticket.storeNumber];
+        $scope.store = store;
         _updateTicket(targetRow);
     };
     $scope.addTicket = function() {

@@ -56,8 +56,11 @@ App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$locatio
     	if (typeof item.roleId === 'undefined') {
     		return 0;
     	}
-
-      return item.roleId <= Session.roleId;
+      if (item.roleId.constructor === Array) {
+        return item.roleId.indexOf(Session.roleId) >=0;
+      } else {
+        return item.roleId <= Session.roleId;
+      }
 
     };
     $scope.loadSidebarMenu = function() {

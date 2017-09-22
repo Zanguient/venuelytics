@@ -284,7 +284,8 @@
         "SETTINGS": "Application Settings",
         "RESERVATIONS": "Reservations",
         "INBOX": "Inbox",
-        "EVENTS_CALENDAR": "Events Calendar"
+        "EVENTS_CALENDAR": "Events Calendar",
+        "TICKET_COUNTER":"Ticket Counter"
       }
     }
   }

@@ -176,7 +176,11 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
          		     Session.init(session);
                  $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                  $timeout(function(){
-                    $state.go('app.dashboard'); 
+                    if (Session.roleId >= 10 && Session.roleId <= 12) {
+                       $state.go('app.ticketsCalendar'); 
+                    }  else {
+                      $state.go('app.dashboard'); 
+                    }
                  }, 200);
          		     
          	    }

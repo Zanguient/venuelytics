@@ -1,9 +1,13 @@
 
 App.controller('DashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService',
-    'RestServiceFactory','$translate','colors', 'APP_EVENTS',
+    'RestServiceFactory','$translate','colors', 'APP_EVENTS','Session','$state',
                                       function($log, $scope, $window, $http, $timeout, contextService,
-                                       RestServiceFactory, $translate, colors, APP_EVENTS) {
+                                       RestServiceFactory, $translate, colors, APP_EVENTS, session, $state) {
 	'use strict';
+    if (session.roleId >= 10 && session.roleId <= 12) {
+        $state.go('app.ticketsCalendar'); 
+        return;
+    }
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.selectedPeriod = 'WEEKLY';
     $scope.notificationCount = 0;

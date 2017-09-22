@@ -56,7 +56,11 @@
  			contextName : self.contextName,
  			serverName : self.serverName,
  			UserService: function () {
- 				return $resource(urlTemplate.replace("@context", "users"));
+ 				return $resource(urlTemplate.replace("@context", "users"), {}, {
+ 					getAgencyInfo : {method: 'GET',  params: { id: '@id' }, 
+ 						url: urlTemplate.replace("@context", "users") +"/agency"}
+ 				});
+
  			},
  			AgencyService: function () {
  				return $resource(urlTemplate.replace("@context", "agencies"), {}, {
@@ -75,7 +79,7 @@
  			UserVenueService: function () {
  				return $resource(urlTemplate.replace("@context", "users")+"/venues",{},{
  					deleteVenues : {method: 'DELETE',  params: { id: '@id', venueNumber: '@venueNumber'}, 
- 					url:  urlTemplate.replace("@context", "users")+"/venues/:venueNumber"},					
+ 						url:  urlTemplate.replace("@context", "users")+"/venues/:venueNumber"},					
  				});
  			},
  			BeaconService:  function () {	
@@ -107,6 +111,8 @@
  						url: urlTemplate.replace("@context", "venueevents")},
  					getServiceTimings: {method: 'GET',  params: { id: '@id' }, isArray:true,
  						url: urlTemplate.replace("@context", "venues") +"/servicehours"},
+ 					getTaxNFees: {method: 'GET',  params: { id: '@id', YYMMDD: '@YYMMDD' }, isArray:true,
+ 						url: urlTemplate.replace("@context", "vas") +"/taxNfees/:YYMMDD"},
  				});
  			},
  			VenueEventService: function () {
@@ -116,34 +122,36 @@
  					saveEventTicket : {method: 'POST',  params: { id: '@id', ticketId :'@ticketId' },
  						url: urlTemplate.replace("@context", "venueevents")+ '/ticket/:ticketId'},
  					deleteEventTicket : {method: 'DELETE',  params: { id: '@id', ticketId :'@ticketId' },
- 						url: urlTemplate.replace("@context", "venueevents")+ '/ticket/:ticketId'}
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/ticket/:ticketId'},
+ 					buyTicket : {method: 'POST',  params: { id: '@id', ticketId :'@ticketId' },
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/ticket/:ticketId/sell'}
  				});
  			},
  			NotificationService: function () {
  				return $resource(urlTemplate.replace("@context", "notifications"), {}, {
  					getActiveNotifications : {method: 'GET',  params: { id: '@id' }, 
- 					url: urlTemplate.replace("@context", "notifications")+"/active"},
+ 						url: urlTemplate.replace("@context", "notifications")+"/active"},
  					getCurrentNotifications : {method: 'GET',  params: { id: '@id' }, 
- 					url: urlTemplate.replace("@context", "notifications")+"/:productId"},
+ 						url: urlTemplate.replace("@context", "notifications")+"/:productId"},
  					getUnreadNotificationCount : {method: 'GET',  params: { id: '@id' }, 
- 					url: urlTemplate.replace("@context", "notifications")+"/count"},
+ 						url: urlTemplate.replace("@context", "notifications")+"/count"},
  					getNotificationSummary : {method: 'GET', params: { id: '@id' }, 
- 					url: urlTemplate.replace("@context", "notifications")+"/summary"}
+ 						url: urlTemplate.replace("@context", "notifications")+"/summary"}
  				});
  			},
  			ProductService : function () {
  				return $resource(urlTemplate.replace("@context", "products"), {}, {
  					get : {method: 'GET',  params: { id: '@id' }, isArray:true},
  					getPrivateEvents : {method: 'GET',  params: { id: '@id' }, isArray:true, 
- 					url: urlTemplate.replace("@context", "products")+"/type/BanquetHall"},
+ 						url: urlTemplate.replace("@context", "products")+"/type/BanquetHall"},
  					getPartyEvents : {method: 'GET',  params: { id: '@id' }, isArray:true, 
- 					url: urlTemplate.replace("@context", "products")+"/type/partyHall"},
+ 						url: urlTemplate.replace("@context", "products")+"/type/partyHall"},
  					getPrivateEvent : {method: 'GET',  params: { id: '@id', productId : '@productId'}, 
- 					url: urlTemplate.replace("@context", "products")+"/:productId"},
+ 						url: urlTemplate.replace("@context", "products")+"/:productId"},
  					updatePrivateEvent : {method: 'POST',  params: { id: '@id', productId : '@productId'}, 
- 					url: urlTemplate.replace("@context", "products")+"/:productId"},
+ 						url: urlTemplate.replace("@context", "products")+"/:productId"},
  					delete : {method: 'DELETE',  params: { id: '@id', productId : '@productId'}, 
- 					url:  urlTemplate.replace("@context", "products")+"/:productId"}
+ 						url:  urlTemplate.replace("@context", "products")+"/:productId"}
 
  				});
  			},				
@@ -159,21 +167,21 @@
  			VenueImage : function () {
  				return $resource(urlTemplate.replace("@context", "upload"),{}, {
  					uploadVenueImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
- 					url: urlTemplate.replace("@context", "upload")+"/VenueImg"},
+ 						url: urlTemplate.replace("@context", "upload")+"/VenueImg"},
  					deleteVenueImage : {method: 'DELETE',  url: urlTemplate.replace("@context", "upload")},
  					uploadTableImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
- 					url: urlTemplate.replace("@context", "upload")+"/venueImgElements"},
+ 						url: urlTemplate.replace("@context", "upload")+"/venueImgElements"},
  					uploadPrivateImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
- 					url: urlTemplate.replace("@context", "upload")+"/banquetVenueImg"},
+ 						url: urlTemplate.replace("@context", "upload")+"/banquetVenueImg"},
  					uploadImage : {method: 'POST', withCredentials: true, transformRequest: angular.identity, headers: { 'Content-Type': undefined }, 
- 					url: urlTemplate.replace("@context", "upload")+"/:objectType"},
+ 						url: urlTemplate.replace("@context", "upload")+"/:objectType"},
 
  				});
  			},
  			LoyaltyService: function () {
  				return $resource(urlTemplate.replace("@context", "loyalty"),{},{
  					getLevel : {method: 'GET',params: { id: '@venueNumber', levelId: '@id' }, 
- 					url: urlTemplate.replace("@context", "loyalty") +'/level/:levelId'},
+ 						url: urlTemplate.replace("@context", "loyalty") +'/level/:levelId'},
  				});
  			},
 
@@ -186,9 +194,9 @@
  			ContentService: function () {
  				return $resource(urlTemplate.replace("@context", "content"),{},{
  					activate : {method: 'POST',  params: { id: '@id' }, 
- 					url: contentActivateUrl.replace("@activate", "activate")},
+ 						url: contentActivateUrl.replace("@activate", "activate")},
  					deactivate : {method: 'POST',  params: { id: '@id' }, 
- 					url: contentActivateUrl.replace("@activate", "deactivate")},
+ 						url: contentActivateUrl.replace("@activate", "deactivate")},
 
  					}
  				);
@@ -197,9 +205,9 @@
  				return $resource(urlTemplate.replace("@context", "coupons"),{},{
  					get : {method: 'GET',  params: { id: '@id' }, isArray:true},
  					activate : {method: 'POST',  params: { id: '@id' }, 
- 					url: contentActivateUrl.replace("@activate", "activate")},
+ 						url: contentActivateUrl.replace("@activate", "activate")},
  					deactivate : {method: 'POST',  params: { id: '@id' }, 
- 					url: contentActivateUrl.replace("@activate", "deactivate")},
+ 						url: contentActivateUrl.replace("@activate", "deactivate")},
 
  					});
  			},
