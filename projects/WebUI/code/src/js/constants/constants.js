@@ -59,7 +59,7 @@ app
     'features': [{'title': 'FEATURE_REAL_TIME_RES', 'description':'FEATURE_REAL_TIME_DESC', 'image': 'assets/img/ic_reservations.png', 'color': 'color-info','link':'Real-Time-Reservations'},
                  {'title': 'FEATURE_FOOD_DRINK', 'description':'FEATURE_FOOD_DRINK_DESC', 'image': 'assets/img/ic_fooddrink.png', 'color': 'color-warning','link':'Food-Drink-Services'},
                  {'title': 'FEATURE_GUEST_LIST', 'description':'FEATURE_GUEST_LIST_DESC', 'image': 'assets/img/ic_guestlist.png', 'color': 'color-success','link':'Guest-List-Lost'},
-                 {'title': 'FEATURE_ORDER_PAY', 'description':'FEATURE_ORDER_PAY_DESC', 'image': 'assets/img/ic_payments.png', 'color': 'color-danger','link':'Order-Pay'},
+                 {'title': 'FEATURE_ORDER_PAY', 'description':'FEATURE_ORDER_PAY_DESC', 'image': 'assets/img/ic_payments.png', 'color': 'color-danger'},
                  {'title': 'FEATURE_BUSINESS', 'description':'FEATURE_BUSINESS_DESC', 'image': 'assets/img/ic_analytics.png', 'color': 'color-info','link':'Business-Analytics-Dashboard'},
                  {'title': 'FEATURE_WIFI', 'description':'FEATURE_WIFI_DESC', 'image': 'assets/img/ic_wifi.png', 'color': 'color-warning','link':'WIFI-White-Label-Solution'},
                  {'title': 'FEATURE_PRIVATE_EVENT',

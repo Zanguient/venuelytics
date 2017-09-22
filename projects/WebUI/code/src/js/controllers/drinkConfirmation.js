@@ -11,6 +11,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
             self.chargedAmount = 0;
             self.totalChargedAmount = 0;
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Drink-Confiramtion';
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;

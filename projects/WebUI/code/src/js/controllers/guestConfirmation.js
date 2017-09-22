@@ -6,6 +6,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location'
 
     		var self = $scope;
             self.init = function() {
+                $rootScope.title = 'Venuelytics-Guest-List-Confirmation';
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.guestListData = DataShare.guestListData;
