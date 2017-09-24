@@ -3,8 +3,8 @@
  *smangipudi
  =========================================================*/
 App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$compile', '$timeout', 'DataTableService',
-  'RestServiceFactory', 'toaster', 'FORMATS', function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
-    RestServiceFactory, toaster, FORMATS) {
+  'RestServiceFactory', 'toaster', 'FORMATS', 'UserRoleService',function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
+    RestServiceFactory, toaster, FORMATS, userRoleService) {
   'use strict';
   
   $timeout(function(){
@@ -35,7 +35,7 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		var actionHtml = '<button title="Unlink User " class="btn btn-default btn-oval fa fa-unlink"></button>';
-		    		if (rowData[3] === 'AGENT_MANAGER') {
+		    		if (rowData[4].roleId === 11 || rowData[4].roleId === 12) {
 		    			actionHtml += '<button title="Set As Manager " class="btn btn-default btn-oval fa fa-black-tie"></button>';
 		    		}
 		    		
@@ -60,7 +60,7 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
 	    	var table = $('#agency_user_table').DataTable();
 	    	data.users.map(function(user) {
 	    		
-	    		table.row.add([user.userName, user.loginId, user.enabled, user.role, user.id]);
+	    		table.row.add([user.userName, user.loginId, user.enabled, userRoleService.getRoles()[user.roleId], user]);
 	    	});
 	    	table.draw();
 	    });
@@ -73,7 +73,7 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
   	$scope.removeUser = function(button, table) {
   		var targetRow = $(button).closest("tr");
       var rowData = table.row(targetRow).data();
-  		var target = {id:$stateParams.id, userId: rowData[4]};
+  		var target = {id:$stateParams.id, userId: rowData[4].id};
 	
   		RestServiceFactory.AgencyService().deleteAgents(target, function(success){
     		table.row(targetRow).remove().draw();
@@ -88,10 +88,10 @@ App.controller('AgencyUserController', ['$scope', '$state', '$stateParams', '$co
   		
   	  var targetRow = $(button).closest("tr");
       var rowData = table.row(targetRow).data();
-      var target = {id:$stateParams.id, userId: rowData[4]};
+      var target = {id:$stateParams.id, userId: rowData[4].id};
   		
   		RestServiceFactory.AgencyService().setAsManager(target, function(success){
-    	 rowData[3] = 'AGENT_MANAGER';
+
     	},function(error){
     		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);

@@ -6,8 +6,9 @@
  * =========================================================
  */
 
-App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope', '$rootScope', 'Session','ContextService', 'RestServiceFactory', 'APP_EVENTS','ngDialog',
-  function ($state, $stateParams, $scope, $rootScope, session, contextService, RestServiceFactory, APP_EVENTS, ngDialog) {
+App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope', '$rootScope', 'Session','ContextService', 
+  'RestServiceFactory', 'APP_EVENTS','ngDialog', function ($state, $stateParams, $scope, $rootScope, session, 
+    contextService, RestServiceFactory, APP_EVENTS, ngDialog) {
   "use strict";
 
   var DAYS = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
@@ -19,6 +20,9 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
   $scope.events = [];
   $scope.calEvents = [];
   $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
+  var self = $scope;
+  self.enableReset = false;
+
   $scope.getEvents = function() {
 
     var promise = RestServiceFactory.VenueService().getEvents({id: contextService.userVenues.selectedVenueNumber});
@@ -32,7 +36,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
           continue;
         }
         var obj = {};
-        obj.title = event.eventType  + ':' +  event.eventName;  
+        obj.title = event.eventName;  
         var sDate = new Date(event.startDate);
         var endDate = new Date(event.endDate);
         var t = event.eventTime.split(":");
@@ -191,6 +195,9 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
   $scope.getAgencyInfo = function() {
     RestServiceFactory.UserService().getAgencyInfo({id: session.userId}, function(data) {
       $scope.agency = data;
+      if (session.roleId === 12 && $scope.agency.managerId === session.userId) {
+        self.enableReset = true;
+      }
       if (data.budgetType === 'NM') {
         if (data.budget <= data.budgetUsed){
           data.budget = 2*data.budgetUsed;
@@ -232,79 +239,85 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
     $scope.ticketSale.soldMacId = "$WEWE78GHJ3$3$";
     $scope.ticketSale.soldCount = 1;
 
-    var dialog = ngDialog.open({
-            template: 'app/views/venue-events/buy-ticket.html',
-            scope : $scope,
-            className: 'ngdialog-theme-default custom-width',
-            controller: ['$scope', function($scope) {
-            //$("#eventTicketId").parsley();
-            $scope.calculateTaxNFees = function(ticket) {
-              var quantity = $scope.ticketSale.soldCount;
-              if (typeof $scope.taxNFees !== 'undefined') {
-                var tnfArray = $scope.taxNFees;
-                var result = [];
-                var totalTaxNFees = 0;
-                for (var i = 0; i < tnfArray.length; i++) {
-                  var tnfItem = tnfArray[i];
-                  if (tnfItem.serviceType === 'TICKET-AGENCY') {
-                    if (tnfItem.valueType === '%'){
-                      var cost = Number($scope.ticket.discountedPrice*quantity*tnfItem.value*0.01).toFixed(2);
-                      totalTaxNFees += Number(cost);
-                      var s = tnfItem.name +' (' +tnfItem.value+ '%) = <span class="pull-right">$' + cost +'</span>';
-                      result.push(s);
+    $scope.dialog = ngDialog.open({
+        template: 'app/views/venue-events/buy-ticket.html',
+        scope : $scope,
+        className: 'ngdialog-theme-default custom-width',
+        controller: ['$scope','$timeout', function($scope, $timeout) {
+        //$("#eventTicketId").parsley();
+        $scope.calculateTaxNFees = function(ticket) {
+          var quantity = $scope.ticketSale.soldCount;
+          if (typeof $scope.taxNFees !== 'undefined') {
+            var tnfArray = $scope.taxNFees;
+            var result = [];
+            var totalTaxNFees = 0;
+            for (var i = 0; i < tnfArray.length; i++) {
+              var tnfItem = tnfArray[i];
+              if (tnfItem.serviceType === 'TICKET-AGENCY') {
+                if (tnfItem.valueType === '%'){
+                  var cost = Number($scope.ticket.discountedPrice*quantity*tnfItem.value*0.01).toFixed(2);
+                  totalTaxNFees += Number(cost);
+                  var s = tnfItem.name +' (' +tnfItem.value+ '%) = <span class="pull-right">$' + cost +'</span>';
+                  result.push(s);
 
-                    } else {
-                      var cost = Number(tnfItem.value).toFixed(2);
-                      var s = tnfItem.name +' = <span class="pull-right">$' + cost +'</span>';
-                      totalTaxNFees += Number(cost);
-                      result.push(s);
-                    }
-                  }
+                } else {
+                  var cost = Number(tnfItem.value).toFixed(2);
+                  var s = tnfItem.name +' = <span class="pull-right">$' + cost +'</span>';
+                  totalTaxNFees += Number(cost);
+                  result.push(s);
                 }
-                if (result.length > 0) {
-                  result.push("<hr class=\"mb0\"/>");
-                }
-                result.push('Total Taxes and Fees ($) = <span class="pull-right">$' + Number(totalTaxNFees).toFixed(2) +'</span>');
-                var retResult = {};
-                retResult.textHtml = result.join("<br>");
-                retResult.value = totalTaxNFees;
-                return retResult;
               }
-              var retResult = {text: "Total Taxes and Fees ($) = 0", value: 0};
-              return retResult;
-              
-            };
-            $scope.totalPriceWithTaxNFees = function(ticket) {
-              var cal = $scope.calculateTaxNFees(ticket);
-              return Number(ticket.discountedPrice*$scope.ticketSale.soldCount + cal.value).toFixed(2) ;
-            };
+            }
+            if (result.length > 0) {
+              result.push("<hr class=\"mb0\"/>");
+            }
+            result.push('Total Taxes and Fees ($) = <span class="pull-right">$' + Number(totalTaxNFees).toFixed(2) +'</span>');
+            var retResult = {};
+            retResult.textHtml = result.join("<br>");
+            retResult.value = totalTaxNFees;
+            return retResult;
+          }
+          var retResult = {text: "Total Taxes and Fees ($) = 0", value: 0};
+          return retResult;
+          
+        };
+        $scope.totalPriceWithTaxNFees = function(ticket) {
+          var cal = $scope.calculateTaxNFees(ticket);
+          return Number(ticket.discountedPrice*$scope.ticketSale.soldCount + cal.value).toFixed(2) ;
+        };
 
-            $scope.sellTicket = function(ticketInfo) {
+        $scope.sellTicket = function(ticketInfo) {
 
-               if (ticketInfo.$valid && $("#sellTicketId").parsley().isValid()) {
-                  if (typeof ticket.contactName !== 'undefined' 
-                        || typeof ticket.contactEmail !== 'undefined' 
-                        || typeof ticket.contactPhone !== 'undefined') {
+          if (ticketInfo.$valid && $("#sellTicketId").parsley().isValid()) {
+            if (typeof ticket.contactName !== 'undefined' 
+                  || typeof ticket.contactEmail !== 'undefined' 
+                  || typeof ticket.contactPhone !== 'undefined') {
 
-                    if (!( typeof ticket.contactName !== 'undefined' && 
-                        (typeof ticket.contactEmail !== 'undefined' || typeof ticket.contactPhone !== 'undefined'))){
-                      return;
-                    }
-                  }
-                  var target = {id: $scope.event.id, ticketId: ticket.id};
-                  
-                  RestServiceFactory.VenueEventService().buyTicket(target, $scope.ticketSale, function(data){
-                    
-                    $scope.$digest();
-                    dialog.close();
-                  });
-                }
-            };
-          }]
-        });
+              if (!( typeof ticket.contactName !== 'undefined' && 
+                  (typeof ticket.contactEmail !== 'undefined' || typeof ticket.contactPhone !== 'undefined'))){
+                return;
+              }
+            }
+            var target = {id: $scope.event.id, ticketId: ticket.id};
+            
+            RestServiceFactory.VenueEventService().buyTicket(target, $scope.ticketSale, function(data){
+              $scope.dialog.close();
+              self.getEventTickets(self.event, self.selectedDate);
+              self.getAgencyInfo();
+            });
+          }
+        };
+      }]
+    });
   };
 
-
+  $scope.resetBudget = function() {
+    var target = {id: $scope.agency.id};
+            
+    RestServiceFactory.AgencyService().resetBudget(target, function(data) {
+      self.getAgencyInfo();
+    });
+  }
   $scope.initCalendar();
   $scope.getEvents();
   $scope.getAgencyInfo();

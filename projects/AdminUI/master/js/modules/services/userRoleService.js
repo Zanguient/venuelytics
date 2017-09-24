@@ -26,6 +26,9 @@
  	return {
  		getRoles : function() {
 			return userRoles;
+ 		},
+ 		getRoleText : function (roleId) {
+ 			return userRoles[roleId];
  		}
  	};
  });

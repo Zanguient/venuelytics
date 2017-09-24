@@ -4,11 +4,16 @@
          <div class="col-sm-4">
             <div class="clearfix">
                <small class="text-muted mr">
-               <div class="media-heading col-sm-12">
-                  <span class="pull-left text-info"><strong>Total Budget: ${{agency.budget}}</strong></span>
-                  <span class="pull-right">Available Budget: ${{availableBudget}}</span>
-               </div>
-               <progressbar style="border-radius: 10px; border-color: green" value="budgetPercent" type="success" class="progress m0">${{agency.budgetUsed}}</progressbar></small>
+                  <div class="media-heading col-sm-12">
+                     <span class="pull-left text-info"><strong>Total Budget: ${{agency.budget}}</strong></span>
+                     <span class="pull-right">Available Budget: ${{availableBudget}}</span>
+                  </div>
+                  <progressbar style="border-radius: 10px; border-color: green" value="budgetPercent" type="success" class="progress m0">${{agency.budgetUsed}}</progressbar>
+                  <div class="col-sm-offset-4 col-sm-4 mt" ng-show="enableReset">
+                     <button class="btn btn-oval btn-primary col-sm-12" ng-click="resetBudget()">Reset Budget</button>
+                  </div>
+               </small>
+
             </div>
          </div>
       </div>
@@ -17,7 +22,7 @@
 <!-- START row-->
 <div class="calendar-app">
    <div class="row">
-      <div class=" col-sm-6">
+      <div class="col-sm-6">
          <!-- START panel-->
          <div class="panel panel-default">
             <div class="panel-body">
@@ -28,9 +33,9 @@
          </div>
          <!-- END panel-->
       </div>
-      <div class="row">
-      <div  class="col-sm-6" ng-repeat="ticket in tickets">
-         <div class="col-sm-12 col-masonary eventListCard " ng-show="!!event">
+      
+      <div  class="col-sm-6 pull-right" ng-repeat="ticket in tickets">
+         <div class="col-sm-12 eventListCard" ng-show="!!event">
             
             <div class="col-sm-12 cardheader text-center">
                <div class="col-sm-4">
@@ -81,7 +86,6 @@
                </div>  
             </div>
          </div>
-      </div>
       </div>
    </div>
 </div>
