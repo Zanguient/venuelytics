@@ -3,8 +3,8 @@
  * @date 09-SEP-2017
  */
 "use strict";
-app.controller('Breakthrough', ['$log', '$scope', 'DataShare','$translate', '$routeParams','APP_ARRAYS', 
-    function ($log, $scope, DataShare, $translate, $routeParams, APP_ARRAYS) {
+app.controller('Breakthrough', ['$log', '$scope', 'DataShare','$translate', '$routeParams','APP_ARRAYS','$rootScope', 
+    function ($log, $scope, DataShare, $translate, $routeParams, APP_ARRAYS, $rootScope) {
 
     	$log.log('Inside BreakThrough Controller.');
 

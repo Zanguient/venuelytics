@@ -13,6 +13,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.selectionTableItems = [];
     self.bottleMinimum = [];
     self.dispatchHandler = [];
+    $rootScope.venueTotalHours = [];
     $rootScope.showSearchBox = false;
     self.venueid = $routeParams.venueid;
     self.tabParams = $routeParams.tabParam;
@@ -118,9 +119,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 h = (H % 12) || 12;
                 ampm = H < 12 ? " AM" : " PM";
                 value.eTime = h + endDateValue.substr(2, 3) + ampm;
-            });  
-            $rootScope.openHour = reservationTime[0].sTime;
-            $rootScope.closeHour = reservationTime[0].eTime;
+                $rootScope.venueTotalHours.push(value);
+            });
         });
     }
 
