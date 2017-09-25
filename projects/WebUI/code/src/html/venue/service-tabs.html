@@ -44,7 +44,7 @@
                                 <table class="table">
                                     <tr><td>
                                         <center><div class="withoutTabs">{{detailsOfVenue.venueName}}</div></center>
-                                        <div class="withOutTabDec"><span class="fontBold">{{"venue.WORKING_HOUR" | translate}} :</span> {{openHour}}-{{closeHour}}</div>
+                                        <div class="withOutTabDec"><span class="fontBold">{{"venue.WORKING_HOUR" | translate}} :</span><span ng-repeat="venueHours in venueTotalHours">{{venueHours.sTime}} - {{venueHours.eTime}}{{$last ? '' : ' and '}}</span></div>
                                         <div class="withOutTabDec"><span class="fontBold">{{"business.ADDRESS" | translate}}:</span><br>&emsp;{{detailsOfVenue.address}}</div>
                                         <div class="withOutTabDec">&emsp;{{detailsOfVenue.state}}</div>
                                         <div class="withOutTabDec">&emsp;{{detailsOfVenue.country}}</div>

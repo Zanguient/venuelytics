@@ -48,7 +48,7 @@ app
                     {'title': 'BOWLING', 'icon': 'assets/img/ic_bowling.png'},
                     {'title': 'RESTAURANT', 'icon': 'assets/img/ic_restaurant.png'}],
     'breakThrough':{
-      "Real-Time-Reservations":"break-through/real-rime-reservations.html",
+      "Real-Time-Reservations":"break-through/real-time-reservations.html",
       "Food-Drink-Services":"break-through/food-drink-services.html",
       "Guest-List-Lost":"break-through/break-guest-list.html",
       "Business-Analytics-Dashboard":"break-through/business-analytics-dashboard.html",
