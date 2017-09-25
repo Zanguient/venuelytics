@@ -30,6 +30,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.successMessage = !!$location.search().successful ;
             
             self.init = function() {
+                self.venueLyticsFeatures = APP_ARRAYS.features;
                 self.venueid = $routeParams.venueid;
                 self.cityNames = APP_ARRAYS.cityName;
                 var urlPattern = $location.absUrl();
@@ -82,7 +83,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             }
 
             self.search = function(){
-
+                $window.scrollTo(0, 0);
                 AjaxService.searchBusiness(self.searchBusiness).then(function(response) {
                     self.businessDetails = response.data.venues;
                     self.businessDetailLength = self.businessDetails.length;
