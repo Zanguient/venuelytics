@@ -92,7 +92,7 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
 
             self.selectedServices = function(venue, serviceType) {
                 self.selectedCityName = venue.city;
-                $location.url('/cities/' + self.selectedCityName +'/'+ venue.id + '/' + serviceType);
+                $location.url('/cities/' + self.selectedCityName +'/'+ venue.id +"/VIP"+ '/' + serviceType);
             };
     		self.init();
     }])

@@ -1490,6 +1490,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
         color:black;
         font-size: 17px;
       }
+      
+      .carousel-inner .item img {
+        height: 600px;
+      }
 
       .buttonHeight {
         height: 100px

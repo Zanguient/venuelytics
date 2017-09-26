@@ -44,16 +44,16 @@
                     <label>{{"reservation.PAYMENT"  | translate}}</label>
                 </td>
                 <td style="white-space: nowrap">&nbsp;&nbsp;
-                    <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>&nbsp;&nbsp;
                     <label>
+                        <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>&nbsp;&nbsp;
                         <font size="3">{{"reservation.PAYPAL"  | translate}}</font>
                     </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>&nbsp;&nbsp;
                     <label>
+                        <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>&nbsp;&nbsp;
                         <font size="3">{{"reservation.CREDIT_CARD"  | translate}}</font>
                     </label>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="type" ng-model="phoneInVenue" value="Phone/In Venue"/>&nbsp;&nbsp;
                     <label>
+                        <input type="radio" name="type" ng-model="phoneInVenue" value="Phone/In Venue"/>&nbsp;&nbsp;
                         <font size="3">{{"reservation.PAY_AT_VENUE"  | translate}}</font>
                     </label>
                 </td>
