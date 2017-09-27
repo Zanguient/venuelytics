@@ -3,7 +3,7 @@
     <div class="container container-full">
         <div class="ms-title">
             <a href="index.html">
-                <img src="<%= assets %>/img/Logo_VenueLytics_3x.png" alt="headerImg">
+                <img src="<%= assets %>/img/Logo_VenueLytics_3x.png" alt="header-image">
                 <!-- span class="ms-logo animated zoomInDown animation-delay-5">V</span>
                 <h1 class="animated fadeInRight animation-delay-6">Venue <span>Lytics</span></h1-->
             </a>
@@ -33,6 +33,22 @@
             <input class="form-control" type="text" ng-model="naveSearch" ng-keypress="getserchKeyEnter($event,naveSearch)" placeholder="Search...">
             <span class="input-group-btn">
             <button type="button" class="btn btn-fab btn-fab-mini" ng-click="getSearchBySearch(naveSearch)">
+                <i class="zmdi zmdi-search"></i>
+            </button>
+            </span>
+        </div>
+        <div class="header-right input-group col-md-3 headerSearch" style="margin-top:0px" ng-show="businessSearch === true">
+            <input class="form-control" type="text" ng-model="businessSearchs" ng-keypress="searchHeader($event,businessSearchs)" placeholder="Business Search...">
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-fab btn-fab-mini" ng-click="search(businessSearchs)">
+                <i class="zmdi zmdi-search"></i>
+            </button>
+            </span>
+        </div>
+        <div class="header-right input-group col-md-3 headerSearch" style="margin-top:0px" ng-show="searchVenue === true">
+            <input class="form-control" type="text" ng-model="searchVenues" ng-keypress="getVenuesKeyEnter($event,searchVenues)" placeholder="Venue Search...">
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-fab btn-fab-mini" ng-click="getVenueBySearch(searchVenues)">
                 <i class="zmdi zmdi-search"></i>
             </button>
             </span>

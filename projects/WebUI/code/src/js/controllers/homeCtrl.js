@@ -11,6 +11,8 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 
     var self = $scope;
     $rootScope.showSearchBox = false;
+    $rootScope.businessSearch = false;
+    $rootScope.searchVenue = false;
     $rootScope.homeTab = 'active';
     self.clientImages = APP_CLIENTS.clientImages;
     $rootScope.businessRoles = APP_ARRAYS.roles;
@@ -116,7 +118,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.facebook = APP_LINK.FACEBOOK_ITZFUN;
             $rootScope.twitter = APP_LINK.TWITTER_ITZFUN;
             $rootScope.instagram = APP_LINK.INSTAGRAM_ITZFUN;
-            $location.url('/cities');
+            //$location.url('/cities');
         } else {
             $rootScope.facebook = APP_LINK.FACEBOOK_VENUELYTICS;
             $rootScope.twitter = APP_LINK.TWITTER_VENUELYTICS;

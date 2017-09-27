@@ -22,15 +22,15 @@
                         <!-- ng-if="clubTab != 0" --> <a href ng-click="setTab(type.title)"
                         class="withoutripple" aria-controls="clubs" role="tab"
                         data-toggle="tab"> <!-- ng-init="$index == 0 ? setTab('CLUB') : ''" -->
-                            <img ng-src="{{type.icon}}" class="serviceTabIcons" alt="serviceTabImg"></img> <span class="hidden-xs">{{type.title | translate}}</span>
+                            <img ng-src="{{type.icon}}" class="serviceTabIcons" alt="serviceTab-image"></img> <span class="hidden-xs">{{type.title | translate}}</span>
                     </a>
                     </li>
                 </ul>
                 <div class="form-group label-floating is-empty col-md-12">
                     <div class="input-group col-md-3 pull-right">
                       <span></span>
-                      <label class="control-label" for="addon3a">{{"venue.SEARCH_VENUE" | translate}}... </label>
-                      <input class="form-control" type="text" ng-model="venueSearch" ng-keypress="getVenuesKeyEnter($event,venueSearch)">
+                      <!-- <label class="control-label" for="addon3a">{{"venue.SEARCH_VENUE" | translate}}... </label> -->
+                      <input class="form-control" type="text" placeholder="VenueSearch..." ng-model="venueSearch" ng-keypress="getVenuesKeyEnter($event,venueSearch)">
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-fab btn-fab-mini" ng-click="getVenueBySearch(venueSearch)">
                           <i class="zmdi zmdi-search"></i>
@@ -59,7 +59,7 @@
                                                 <figure class="ms-thumbnail ms-thumbnail-left"
                                                     ng-click="selectVenue(venue)" id="cityImage">
                                                     <div class="imgHolder">
-                                                        <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venueImgs" class="img-responsive" id="venueImages">
+                                                        <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venues-image" class="img-responsive" id="venueImages">
                                                         <h5 class="fontBold pull-right featureMargin" ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
                                                     </div>
                                                 </figure>
@@ -78,7 +78,7 @@
                                                     <p ng-if = "venue.description === ''">No description</p>
                                                     <div class="row col-lg-12 serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
-                                                            ng-src="{{service.image}}" alt="serviceVenueImg" class="serviceSmallIcon" title="{{service.title}}"
+                                                            ng-src="{{service.image}}" alt="serviceVenue-image" class="serviceSmallIcon" title="{{service.title}}"
                                                             ng-show="venue.info['{{service.fieldName}}'] == 'Y'"></img>
                                                             </a>
                                                     </div>

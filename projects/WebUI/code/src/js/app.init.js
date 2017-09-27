@@ -22,31 +22,31 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'VenueLytics Title - Book VIP Reservations & Events',
+            title: 'Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         .when('/home', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'VenueLytics Title - Book VIP Reservations & Events',
+            title: 'Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         .when('/home*', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'VenueLytics Title - Book VIP Reservations & Events',
+            title: 'Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         .when('/home?sb&orgId', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'VenueLytics Title - Book VIP Reservations & Events',
+            title: 'Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         .when('/home?nc&orgId', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'VenueLytics Title - Book VIP Reservations & Events',
+            title: 'Book VIP Reservations & Events',
             description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...'
         })
         /* .when('/cities', {

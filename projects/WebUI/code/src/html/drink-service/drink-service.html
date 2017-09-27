@@ -27,7 +27,7 @@
                 <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="drinkMobile" ng-model="drink.mobileNumber" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
+            <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" for="focusedInput1">{{"reservation.TABLE_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control fontBold" ng-model="drink.tableNumber">
                     <option value=""></option>
@@ -109,7 +109,7 @@
                                         <table class="table table-responsive table-no-border">
                                         <tr>
                                             <td rowspan="4" class="col-md-3" style="padding-right: 0px;padding-left: 0px;">
-                                                <img class="img-responsive" alt="Image" data-ng-src="" style="height:100px;width:100px;"> 
+                                                <img class="img-responsive" alt="drinkTable-image" data-ng-src="" style="height:100px;width:100px;"> 
                                             </td>
                                             <td class="col-md-3"><font size="4"><strong>{{items.name}}</strong></font></td>
                                         </tr>
@@ -164,7 +164,7 @@
             </div>
             <div class="modal-body">
                 <center>
-                    <img class="img-responsive" alt="drinkImg" src="{{menuImageUrl}}"/>
+                    <img class="img-responsive" alt="drinkMenu-image" src="{{menuImageUrl}}"/>
                 </center>
             </div>
             <div class="modal-footer">
