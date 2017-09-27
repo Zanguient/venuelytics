@@ -15,6 +15,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.dispatchHandler = [];
     $rootScope.venueTotalHours = [];
     $rootScope.showSearchBox = false;
+    $rootScope.businessSearch = false;
+    $rootScope.searchVenue = false;
     self.venueid = $routeParams.venueid;
     self.tabParams = $routeParams.tabParam;
     self.embeddedService = $routeParams.new;

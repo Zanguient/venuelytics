@@ -22,7 +22,7 @@
                         <!-- ng-if="clubTab != 0" --> <a href ng-click="setTab(type.title)"
                         class="withoutripple" aria-controls="clubs" role="tab"
                         data-toggle="tab"> <!-- ng-init="$index == 0 ? setTab('CLUB') : ''" -->
-                            <img ng-src="{{type.icon}}" class="serviceTabIcons" alt="serviceIconImg" ></img> <span class="hidden-xs">{{type.title | translate}}</span>
+                            <img ng-src="{{type.icon}}" class="serviceTabIcons" alt="serviceIcon-image" ></img> <span class="hidden-xs">{{type.title | translate}}</span>
                     </a>
                     </li>
                 </ul>
@@ -59,7 +59,7 @@
                                                 <figure class="ms-thumbnail ms-thumbnail-left"
                                                     ng-click="selectVenue(venue)" id="cityImage">
                                                     <div class="imgHolder">
-                                                            <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venueImgs" class="img-responsive" id="venueImages">
+                                                            <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venue-image" class="img-responsive" id="venueImages">
                                                             <h5 class="fontBold pull-right featureMargin" ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
                                                         </div>
                                                 </figure>
@@ -78,7 +78,7 @@
                                                     <p ng-if = "venue.description === ''">No description</p>
                                                     <div class="row col-lg-12 serviceIcon">
                                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)"><img
-                                                            ng-src="{{service.image}}" alt="serviceSelectImg" class="serviceSmallIcon" title="{{service.title}}"
+                                                            ng-src="{{service.image}}" alt="serviceSelect-image" class="serviceSmallIcon" title="{{service.title}}"
                                                             ng-show="venue.info['{{service.fieldName}}'] == 'Y'"></img>
                                                             </a>
                                                     </div>

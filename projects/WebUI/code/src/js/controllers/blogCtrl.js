@@ -10,6 +10,8 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
 
         var self = $scope;
         $rootScope.showSearchBox = false;
+        $rootScope.businessSearch = false;
+        $rootScope.searchVenue = false;
 
         self.blogs = APP_ARRAYS.blogs;
 

@@ -14,6 +14,8 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             self.next = false;
             self.searchVenue = false;
             $rootScope.showSearchBox = true;
+            $rootScope.businessSearch = false;
+            $rootScope.searchVenue = false;
             self.gettingLocation = function(lat, long, country) {
                 self.loadingBar = true;
                 AjaxService.gettingLocation(lat, long, country).then(function(response) {

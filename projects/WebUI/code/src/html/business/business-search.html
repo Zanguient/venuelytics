@@ -20,7 +20,7 @@
                     </fieldset>
                     <center>
                         <button type="submit" class="btn btn-raised btn-primary"
-                        ng-click="search()">{{"business.SEARCH" | translate}}</button>
+                        ng-click="search(searchBusiness)">{{"business.SEARCH" | translate}}</button>
                     </center>
                 </form>
             </div>
@@ -39,12 +39,12 @@
                                     <div class="slider">
                                         <img ng-repeat="slide in business.imageUrls" class="slide businessImage col-sm-12" ng-swipe-right="showPrev(slide)"
                                         ng-swipe-left="showNext(slide)" ng-show="isActive($index)"
-                                        ng-src="{{slide.originalUrl}}" alt="businessImg" />
+                                        ng-src="{{slide.originalUrl}}" alt="business-image" />
                                         <ul class="buttonNav">
                                             <li ng-repeat="slide in business.imageUrls"
                                             ng-class="{'active':isActive($index)}"><img
                                             ng-src="{{slide.originalUrl}}"
-                                            class="img-responsive sliderThumb" alt="busCurImg" ng-click="showPhoto(slide,$index);" />
+                                            class="img-responsive sliderThumb" alt="busSearch-image" ng-click="showPhoto(slide,$index);" />
                                         </li>
                                     </ul>
                                 </div>
@@ -102,7 +102,7 @@
 
                 <div class="row">
                     <div class="col-md-6 col-md-push-3 mb-4  center-block">
-                        <img src="<%= assets %>/img/demo/devices.png" alt="deviceImg"
+                        <img src="<%= assets %>/img/demo/devices.png" alt="device-image"
                         class="img-responsive center-block wow zoomIn animation-delay-8 ">
                     </div>
 
@@ -126,7 +126,7 @@
         class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
         <div class="text-center card-block">
             <a href="breakthrough/{{feature.link}}">
-            <img ng-src="{{feature.image}}" alt="featureImg" class="ms-icon ms-icon-xxlg ms-icon-circle imgpointer"></img></a>
+            <img ng-src="{{feature.image}}" alt="feature-image" class="ms-icon ms-icon-xxlg ms-icon-circle imgpointer"></img></a>
             <a href="breakthrough/{{feature.link}}" class="{{feature.color}} imgpointer"><h4>{{feature.title | translate}}</h4></a>
             <p class="">{{feature.description | translate}}</p>
         </div>

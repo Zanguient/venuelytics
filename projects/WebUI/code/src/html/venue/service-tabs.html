@@ -22,7 +22,7 @@
                                     <div class="carousel-inner carousel-inner-class" role="listbox">
                                         <div class="item {{venus.active}}" ng-repeat="venus in venueImage.imageUrls">
                                             <h1 ng-show ="featuredEnable === 'Y' || featuredEnable === 'y'" class="textOnImg fontBold">Featured</h1>
-                                            <img id="venueImage" ng-src="{{venus.originalUrl}}" alt="venusImg" class="galleryLrg"/>
+                                            <img id="venueImage" ng-src="{{venus.originalUrl}}" alt="venus-image" class="galleryLrg"/>
                                         </div>
                                     </div>
                                     <!-- Controls -->
@@ -69,7 +69,7 @@
 <div class="modal" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13">
     <div class="modal-dialog animated zoomIn animated-3x" role="document">
         <div class="modal-content">
-            <img src="{{menuImageUrl}}" alt="documentImg" class="img-responsive">
+            <img src="{{menuImageUrl}}" alt="document-image" class="img-responsive">
         </div>
     </div>
 </div>
