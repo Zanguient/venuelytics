@@ -20,7 +20,7 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
 	    	"targets": [6],
 	    	"orderable": false,
 	    	"createdCell": function (td, cellData, rowData, row, col) {
-	    		 $(td).html('<button class="btn btn-default btn-oval fa fa-edit" ></button>&nbsp;&nbsp;'+
+	    		 $(td).html('<button class="btn btn-primary btn-oval fa fa-edit" ></button>&nbsp;&nbsp;'+
             '<button class="btn btn-default btn-oval fa fa-trash" ></button>');
 	    		 $compile(td)($scope);
 	    		}

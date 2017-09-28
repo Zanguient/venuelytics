@@ -20,14 +20,19 @@ App.directive('formWizard', function(){
           validating: function(e, ui) {
 
             var $this = $(this),
-                form = $this.parent(),
-                group = form.find('.bwizard-activated');
+            form = $this.parent(),
+            group = form.find('.bwizard-activated');
 
-            if (false === form.parsley().validate( group[0].id )) {
-              e.preventDefault();
-              return;
-            }
-          }
+            console.log(JSON.stringify(ui));
+            e.preventDefault();
+            return false;
+              
+          },
+          activeIndexChanged: function (e, ui) { 
+            console.log(JSON.stringify(ui));
+            e.preventDefault();
+            return false;
+          } 
         });
       }
       else {

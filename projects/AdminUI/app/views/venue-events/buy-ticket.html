@@ -41,7 +41,7 @@
 			</div>
 			<div class="col-md-4 form-group">
 				<label>Quantity:</label> 
-				<select name="quantity" ng-model="ticketSale.soldCount" class="form-control" data-parsley-type="integer">
+				<select name="quantity" ng-model="ticketSale.quantity" class="form-control" data-parsley-type="integer">
 				<option ng-repeat="n in [].constructor((ticket.count-ticket.soldTickets)) track by $index" value="{{$index+1}}">{{$index+1}}</option>
 				</select> 
 			</div>
@@ -49,7 +49,7 @@
 				<label>Total Price:</label> 
 				<div class="input-group m-b">
 					<span class="input-group-addon">$</span> 
-					<input type="text" name="price" disabled="true"  class="form-control" ng-value="ticket.discountedPrice*ticketSale.soldCount"/>
+					<input type="text" name="price" disabled="true"  class="form-control" ng-value="ticket.discountedPrice*ticketSale.quantity"/>
 				</div>
 			</div>
 		</div>

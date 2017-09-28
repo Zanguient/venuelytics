@@ -279,11 +279,30 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('app.ticketsCalendar', {
         url: '/ticketsCalendar',
         title: 'Tickets Calendar',
-        templateUrl: basepath('agency/ticketCalendar.html'),
+        templateUrl: basepath('venue-events/ticketCalendar.html'),
         controller: 'TicketsCalendarController',
         data: { authorizedRoles: [10,11,12]},
         resolve: resolveFor('jquery-ui', 'moment','fullcalendar','ngDialog', 'parsley','inputmask')
     })
+    .state('app.ticketsSold', {
+        url: '/ticketsSold',
+        title: 'Sold Tickets',
+        templateUrl: basepath('venue-events/ticketsSold.html'),
+        controller: 'TicketsSoldController',
+        data: { authorizedRoles: [10,11,12]},
+        resolve: resolveFor('datatables', 'datatables-pugins')
+    })
+    .state('app.registerComputer', {
+        url: '/registerComputer',
+        title: 'Register Computer',
+        templateUrl: basepath('venue-events/register-computer.html'),
+        controller: 'RegisterComputerController',
+        data: { authorizedRoles: [11,12]},
+        resolve: resolveFor('bwizard', 'parsley')
+    })
+
+
+    
     // Mailbox
     // ----------------------------------- 
      // Mailbox

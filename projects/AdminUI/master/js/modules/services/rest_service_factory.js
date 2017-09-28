@@ -126,7 +126,11 @@
  					deleteEventTicket : {method: 'DELETE',  params: { id: '@id', ticketId :'@ticketId' },
  						url: urlTemplate.replace("@context", "venueevents")+ '/ticket/:ticketId'},
  					buyTicket : {method: 'POST',  params: { id: '@id', ticketId :'@ticketId' },
- 						url: urlTemplate.replace("@context", "venueevents")+ '/ticket/:ticketId/sell'}
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/ticket/:ticketId/sell'},
+ 					getSoldTickets : {method: 'GET',  params: { id: '@id'}, isArray: true,
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/soldTickets'},
+ 					cancelTicket :  {method: 'DELETE',  params: { id: '@eventId', ticketId: '@ticketId'}, 
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/soldTicket/' +':ticketId'}
  				});
  			},
  			NotificationService: function () {

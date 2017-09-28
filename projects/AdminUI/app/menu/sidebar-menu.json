@@ -50,7 +50,16 @@
 	"sref": "app.ticketsCalendar",
 	 "icon": "fa fa-ticket",
 	 "translate": "sidebar.nav.pages.TICKET_COUNTER",
-	 "submenu": [],
+	 "submenu": [
+	 ],
+	 "roleId": [10,11,12]
+  },{
+  	"text": "Tickets Sold",
+	"sref": "app.ticketsSold",
+	 "icon": "fa fa-history",
+	 "translate": "sidebar.nav.pages.SOLD_TICKETS",
+	 "submenu": [
+	 ],
 	 "roleId": [10,11,12]
   }, 
   {

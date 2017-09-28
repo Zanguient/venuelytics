@@ -237,7 +237,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
     $scope.ticketSale.ticketId = ticket.id;
     $scope.ticketSale.eventDate = $scope.selectedDate;
     $scope.ticketSale.soldMacId = "$WEWE78GHJ3$3$";
-    $scope.ticketSale.soldCount = 1;
+    $scope.ticketSale.quantity = 1;
 
     $scope.dialog = ngDialog.open({
         template: 'app/views/venue-events/buy-ticket.html',
@@ -246,7 +246,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
         controller: ['$scope','$timeout', function($scope, $timeout) {
         //$("#eventTicketId").parsley();
         $scope.calculateTaxNFees = function(ticket) {
-          var quantity = $scope.ticketSale.soldCount;
+          var quantity = $scope.ticketSale.quantity;
           if (typeof $scope.taxNFees !== 'undefined') {
             var tnfArray = $scope.taxNFees;
             var result = [];
@@ -283,7 +283,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
         };
         $scope.totalPriceWithTaxNFees = function(ticket) {
           var cal = $scope.calculateTaxNFees(ticket);
-          return Number(ticket.discountedPrice*$scope.ticketSale.soldCount + cal.value).toFixed(2) ;
+          return Number(ticket.discountedPrice*$scope.ticketSale.quantity + cal.value).toFixed(2) ;
         };
 
         $scope.sellTicket = function(ticketInfo) {
@@ -317,6 +317,9 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
     RestServiceFactory.AgencyService().resetBudget(target, function(data) {
       self.getAgencyInfo();
     });
+  };
+  $scope.register = function() {
+    $state.go('app.registerComputer');
   }
   $scope.initCalendar();
   $scope.getEvents();
