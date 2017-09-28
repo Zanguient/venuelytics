@@ -65,12 +65,14 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                         setupEmbedScript();
                     });
                 }
-                AjaxService.getVenues(self.venueid,null,null).then(function(response) {
-                    self.selectedVenueName = response.venueName;
-                    self.selectedVenueAddress = response.address;
-                    self.selectedVenueWebsite = response.website;
-                    self.businessImage = response.imageUrls[0].largeUrl;
-                });
+                if(self.venueid != undefined){
+                    AjaxService.getVenues(self.venueid,null,null).then(function(response) {
+                        self.selectedVenueName = response.venueName;
+                        self.selectedVenueAddress = response.address;
+                        self.selectedVenueWebsite = response.website;
+                        self.businessImage = response.imageUrls[0].largeUrl;
+                    });
+                }
             };
 
             function setupEmbedScript() {

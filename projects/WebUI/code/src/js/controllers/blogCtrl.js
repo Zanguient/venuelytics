@@ -9,7 +9,7 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
     		$log.log('Inside Blog Controller.');
 
         var self = $scope;
-        $rootScope.showSearchBox = false;
+        $rootScope.showSearchBox = true;
         $rootScope.businessSearch = false;
         $rootScope.searchVenue = false;
 

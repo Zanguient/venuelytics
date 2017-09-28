@@ -143,6 +143,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 self.cardPayment = false;
                 self.phoneVenues = false;
                 if(self.sumAmount === 0){
+                    self.totalChargedAmount = self.chargedAmount;
                     if(self.payPalFee != undefined){
                         self.totalChargedAmount = self.chargedAmount + self.payPalFee;
                         self.chargedAmount += self.payPalFee;
@@ -181,7 +182,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                     var paypalElement = document.getElementById('paypal-button');
                     jQuery(paypalElement).trigger('click');
                 }
-                },2500);
+                },3000);
             };
 
             self.paymentEnabled = function() {

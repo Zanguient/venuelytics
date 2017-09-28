@@ -2424,6 +2424,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   background-size: cover;
   background-position: center;
   height: 128px;
+  width: 98%;
   
 }
 
@@ -2434,6 +2435,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 .text-description {
   margin-top: 20px;
+  width: 98%;
 }
 
 .fontSize4 {
