@@ -1211,7 +1211,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
   .citiesImgContainer {
     width: 460px;
     height: 35px;
-    margin-left: 50px;
+    margin-top: -60px;
+    margin-left: -323px;
   }
 
   .cities-img-container {
@@ -1491,6 +1492,15 @@ a.btn.disabled,fieldset[disabled] a.btn {
         font-size: 17px;
       }
 
+      #forMobile {
+        width: 100%;
+        height: 100%;
+      }
+      
+      .carousel-inner .item img {
+        height: 600px;
+      }
+
       .buttonHeight {
         height: 100px
       }
@@ -1522,6 +1532,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     }
 
       .citiesImgContainer {
+        margin-left: -255px;
         width: 460px;
         height: 35px;
       }
@@ -1673,6 +1684,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
         color:black;
         font-size: 20px;
       }
+      #forMobile {
+        width: 100%;
+        height: 100%;
+      }
       
       .buttonHeight {
         height: 100px
@@ -1710,6 +1725,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
       }
     
       .cities-img-container {
+        margin-left: -220px;
         width: 460px;
         height: 55px;
       }
@@ -2408,6 +2424,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   background-size: cover;
   background-position: center;
   height: 128px;
+  width: 98%;
   
 }
 
@@ -2418,6 +2435,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 .text-description {
   margin-top: 20px;
+  width: 98%;
 }
 
 .fontSize4 {

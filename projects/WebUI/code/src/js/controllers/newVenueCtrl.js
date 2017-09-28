@@ -8,7 +8,10 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
 
     		$log.log('Inside New Venue Controller.');
 
-    		var self = $scope;
+            var self = $scope;
+            $rootScope.showSearchBox = false;
+            $rootScope.businessSearch = false;
+            $rootScope.searchVenue = true;
 
             self.init = function() {
                 DataShare.bottleServiceData = {};
@@ -68,7 +71,8 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                     });                
                 });
             };
-            self.getVenueBySearch = function(venueSearch){
+            $rootScope.getVenueBySearch = function(venueSearch){
+                self.venueSearch = venueSearch;
                 AjaxService.getVenueBySearch(DataShare.latitude, DataShare.longitude, venueSearch).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
                     angular.forEach(self.listOfVenuesByCity, function(value, key) {
@@ -76,7 +80,7 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                     });
                 });
             };
-            self.getVenuesKeyEnter = function(keyEvent,venueSearch) {
+            $rootScope.getVenuesKeyEnter = function(keyEvent,venueSearch) {
                 if (keyEvent.which === 13){
                     self.getVenueBySearch(venueSearch);
                 }
@@ -92,7 +96,7 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
 
             self.selectedServices = function(venue, serviceType) {
                 self.selectedCityName = venue.city;
-                $location.url('/cities/' + self.selectedCityName +'/'+ venue.id + '/' + serviceType);
+                $location.url('/cities/' + self.selectedCityName +'/'+ venue.id +"/VIP"+ '/' + serviceType);
             };
     		self.init();
     }])

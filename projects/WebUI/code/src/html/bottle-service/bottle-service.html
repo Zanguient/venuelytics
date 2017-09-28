@@ -30,7 +30,7 @@
                                 </tr>
                             </table>
                         </div>
-                    <img alt="imgmap" id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#ImgExam" class="map img-responsive"/>
+                    <img alt="bottleService-image" id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#ImgExam" class="map img-responsive"/>
                     <map name="ImgExam">
                             <area id="{{area.id}}"
                                 style="outline: red solid 2px;" shape="rect"
@@ -57,7 +57,7 @@
                     <label class="tableReserved" ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
                 </div>
                 <div class="col-md-5 col-sm-5">
-                    <img alt="tableImg" class="table-carousel" class="img-responsive" data-ng-src="{{table.imageUrls[0].smallUrl}}"/>
+                    <img alt="table-images" class="table-carousel" class="img-responsive" data-ng-src="{{table.imageUrls[0].smallUrl}}"/>
                 </div>
                 <div class="col-md-4 col-sm-12 descriptionAlign">
                     <label>{{table.description}}</label>
@@ -89,7 +89,7 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner carousel-inner-class table-carousel" role="listbox">
                             <div class="item {{slide.active}} table-carousel" ng-repeat="slide in table.imageUrls">
-                                <img alt="curouselImg" ng-src="{{slide.originalUrl}}" class="img-responsive" style="height:250px"/>
+                                <img alt="curousel-images" ng-src="{{slide.originalUrl}}" class="img-responsive" style="height:250px"/>
                             </div>
                         </div>
                         <!-- Controls -->
@@ -151,7 +151,7 @@
             <label class="control-label">{{'reservation.HOST' | translate}}</label>
             
             <select class="form-control fontBold" ng-model="bottle.host" ng-options="x as x.name for x in hostDate  track by x.id">
-            </select></label></div><img class="hostImgs" ng-src="{{getHostImage()}}"/>
+            </select></label></div><img class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
         <div class="col-md-12 form-group is-empty" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>

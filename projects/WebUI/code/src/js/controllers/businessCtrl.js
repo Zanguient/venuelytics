@@ -10,6 +10,8 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.hideForm = false;
             self.claimForm = false;
             $rootScope.showSearchBox = false;
+            $rootScope.businessSearch = true;
+            $rootScope.searchVenue = false;
             self.newUser = {
                 businessName: '',
                 address: '',
@@ -63,12 +65,14 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                         setupEmbedScript();
                     });
                 }
-                AjaxService.getVenues(self.venueid,null,null).then(function(response) {
-                    self.selectedVenueName = response.venueName;
-                    self.selectedVenueAddress = response.address;
-                    self.selectedVenueWebsite = response.website;
-                    self.businessImage = response.imageUrls[0].largeUrl;
-                });
+                if(self.venueid != undefined){
+                    AjaxService.getVenues(self.venueid,null,null).then(function(response) {
+                        self.selectedVenueName = response.venueName;
+                        self.selectedVenueAddress = response.address;
+                        self.selectedVenueWebsite = response.website;
+                        self.businessImage = response.imageUrls[0].largeUrl;
+                    });
+                }
             };
 
             function setupEmbedScript() {
@@ -82,9 +86,16 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 }
             }
 
-            self.search = function(){
+            $rootScope.searchHeader = function(keyEvent, search){
+               if (keyEvent.which === 13){
+                $rootScope.search(search);
+               }
+            }
+
+            $rootScope.search = function(business){
+                self.searchBusiness = business;
                 $window.scrollTo(0, 0);
-                AjaxService.searchBusiness(self.searchBusiness).then(function(response) {
+                AjaxService.searchBusiness(business).then(function(response) {
                     self.businessDetails = response.data.venues;
                     self.businessDetailLength = self.businessDetails.length;
                     angular.forEach(self.businessDetails, function(value, key) {

@@ -30,10 +30,10 @@
                         </div>
                     </div> 
                     <div class="col-md-2 col-sm-6 col-xs-6">
-                        <img class="eventlistImage" ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" alt="eventListImg">
+                        <img class="eventlistImage" ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" alt="eventList-image">
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12 eventDescription">
-                        <div class="eventListName">{{event.eventName}}</div><br/>
+                        <h2 class="calEventName mb0">{{event.eventName}}</h2><br/>
                         <h5 class="eventListTime">
                             {{'event.EVENT_DOORS' | translate}}:{{event.eventTimes | date:'h:mm a'}} / {{'event.EVENT_SHOW' | translate}}: {{event.eventTimes | date:'h:mm a'}} ({{'event.EVENT_END' | translate}} :{{event.endtimes | date:'h:mm a'}})
                         </h5>
@@ -70,13 +70,13 @@
                         <tr>
                             <td>
                             <div class="col-md-4 col-sm-12 col-xs-12">
-                                <img ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" class="img-responsive" style="margin-left: -20px"/>
+                                <img ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" alt="eventList-image" class="img-responsive" style="margin-left: -20px"/>
                             </div>
                             <div class="col-md-8 col-sm-12 col-xs-12" style="color:black;">
                                 <h2 class="calEventName fontBold">{{event.eventName}}</h2>
                                 <h4> {{event.scheduleDayOfWeek}} ({{event.eventTimes | date:'h:mm a'}} - {{event.endtimes | date:'h:mm a'}})</h4><hr>
-                                <div class="eventListName">{{'event.EVENT_TYPES' | translate}}:</div><h4>{{event.eventType}}</h4>
-                                <div class="eventListName">{{'bottleServiceTab.DESC' | translate}}:</div><h4> {{event.description}}</h4>
+                                <h3 class="eventListName mt0 fontBold">{{'event.EVENT_TYPES' | translate}}:</h3><h4>{{event.eventType}}</h4>
+                                <h3 class="eventListName mt0 fontBold">{{'bottleServiceTab.DESC' | translate}}:</h3><h4> {{event.description}}</h4>
                                 <span class="eventListName" ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">
                                     <label class="eventListName">{{'event.EVENT_COVER' | translate}}:</label><span>&dollar;</span><span>{{(event.price == null || event.price == 0 || event.price == undefined) ? "-" : event.price}}</span>
                                 </span><br>

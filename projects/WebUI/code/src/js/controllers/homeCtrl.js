@@ -10,7 +10,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 	$log.log('Inside Home Controller.');
 
     var self = $scope;
-    $rootScope.showSearchBox = false;
+    $rootScope.showSearchBox = true;
+    $rootScope.businessSearch = false;
+    $rootScope.searchVenue = false;
     $rootScope.homeTab = 'active';
     self.clientImages = APP_CLIENTS.clientImages;
     $rootScope.businessRoles = APP_ARRAYS.roles;
