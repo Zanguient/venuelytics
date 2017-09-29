@@ -1,30 +1,8 @@
 <div class="container" ng-cloak>
 
     <div class="row">
-        <div ng-hide="claimBusiness == true">
-            <center>
-                <h1 class="color-success">{{"business.BUSINESS_SEARCH" |
-                    translate}}</h1>
-                </center>
-                <form class="form-horizontal businessSearchForm">
-                    <fieldset>
-                        <div class="form-group is-empty">
-                            <label for="searchBusiness" class="col-md-2 control-label">
-                                <font size="3">{{"business.BUSINESS_NAME" | translate}}:</font>
-                            </label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="search"
-                                ng-model="searchBusiness" name="searchBox">
-                            </div>
-                        </div>
-                    </fieldset>
-                    <center>
-                        <button type="submit" class="btn btn-raised btn-primary"
-                        ng-click="search(searchBusiness)">{{"business.SEARCH" | translate}}</button>
-                    </center>
-                </form>
-            </div>
-            <div class="claimCard">
+        
+        <div class="claimCard">
                 <center>
                     <h5 ng-show="businessDetailLength == 0">{{"business.SEARCH_BUSINESS_MESSAGE"
                         | translate}}</h5>
@@ -89,26 +67,27 @@
     </div>
     <div class="turnkey" ng-cloak ng-show="!(claimBusiness == true)">
         <div class="container">
-            <div class="ms-hero-turnkey">
-                <h2
-                class="text-center text-light mb-6 wow fadeInDown animation-delay-3 ms-hero-text">
-                <p>{{"home.POWER_OF" | translate}} <strong>{{"home.TURNKEY" |
-                    translate}} </strong> {{"home.CUSTOM" | translate}}</p>
-                </h2>
+           <div class="container mt-0">
+                <h1
+                    class="text-center color-primary mb-2 wow fadeInDown animation-delay-3">{{"home.WELCOME_HEADING_1"
+                    | translate}}</h1>
+                <h3
+                    class="text-center mb-6 wow fadeInDown animation-delay-4"><b>{{"home.WELCOME_HEADING_2"
+                    | translate}}</b></h3>
+                <p
+                    class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4">{{"home.WELCOME_DESCRIPTION"
+                    | translate}}</p>
             </div>
 
-            <p class="text-center mb-6 wow fadeInDown animation-delay-3 text-description" >{{"home.VENUE_DESCRIPTION"
-                | translate}}</p>
-
-                <div class="row">
-                    <div class="col-md-6 col-md-push-3 mb-4  center-block">
-                        <img src="<%= assets %>/img/demo/devices.png" alt="device-image"
-                        class="img-responsive center-block wow zoomIn animation-delay-8 ">
-                    </div>
-
+            <div class="row">
+                <div class="col-md-6 col-md-push-3 mb-4  center-block">
+                    <img src="<%= assets %>/img/demo/devices.png" alt="device-image"
+                    class="img-responsive center-block wow zoomIn animation-delay-8 ">
                 </div>
+
             </div>
         </div>
+    </div>
 
     </div>
 <div class="container mt-4" ng-cloak>
@@ -132,28 +111,27 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div ng-hide="claimBusiness == true">
-        <center>
-            <h1 class="color-success">{{"business.BUSINESS_SEARCH" |
-            translate}}</h1>
-        </center>
-        <form class="form-horizontal businessSearchForm">
-            <fieldset>
-                <div class="form-group is-empty">
-                    <label for="searchBusiness" class="col-md-2 control-label">
-                        <font size="3">{{"business.BUSINESS_NAME" | translate}}:</font>
-                    </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="search"
-                        ng-model="searchBusiness" name="searchBox">
-                    </div>
+
+<div ng-hide="claimBusiness == true">
+    <center>
+        <h1 class="color-success">{{"business.BUSINESS_SEARCH" |
+        translate}}</h1>
+    </center>
+    <form class="form-horizontal businessSearchForm">
+        <fieldset>
+            <div class="form-group is-empty">
+                <label for="searchBusiness" class="col-md-offset-left-2 col-md-4 control-label">
+                    <font size="3">{{"business.BUSINESS_NAME" | translate}}:</font>
+                </label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" id="search"
+                    ng-model="searchBusiness" name="searchBox">
                 </div>
-            </fieldset>
-            <center>
-                <button type="submit" class="btn btn-raised btn-primary"
-                ng-click="search()">{{"business.SEARCH" | translate}}</button>
-            </center>
-        </form>
-    </div>
+            </div>
+        </fieldset>
+        <center>
+            <button type="submit" class="btn btn-raised btn-primary"
+            ng-click="search()">{{"business.SEARCH" | translate}}</button>
+        </center>
+    </form>
 </div>
