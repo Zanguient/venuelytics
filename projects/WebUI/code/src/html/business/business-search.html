@@ -104,14 +104,14 @@
     <div
         class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
         <div class="text-center card-block">
-            <a href="breakthrough/{{feature.link}}">
+            <a href="#{{feature.link}}">
             <img ng-src="{{feature.image}}" alt="feature-image" class="ms-icon ms-icon-xxlg ms-icon-circle imgpointer"></img></a>
-            <a href="breakthrough/{{feature.link}}" class="{{feature.color}} imgpointer"><h4>{{feature.title | translate}}</h4></a>
+            <a href="#{{feature.link}}" class="{{feature.color}} imgpointer"><h4>{{feature.title | translate}}</h4></a>
             <p class="">{{feature.description | translate}}</p>
         </div>
     </div>
 </div>
-
+<div id="{{feature.link}}" ng-include="linkToPath[feature.link]" ng-repeat="feature in venueLyticsFeatures"></div>
 <div ng-hide="claimBusiness == true">
     <center>
         <h1 class="color-success">{{"business.BUSINESS_SEARCH" |

@@ -33,6 +33,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             
             self.init = function() {
                 self.venueLyticsFeatures = APP_ARRAYS.features;
+                self.linkToPath = APP_ARRAYS.breakThrough;
                 self.venueid = $routeParams.venueid;
                 self.cityNames = APP_ARRAYS.cityName;
                 var urlPattern = $location.absUrl();

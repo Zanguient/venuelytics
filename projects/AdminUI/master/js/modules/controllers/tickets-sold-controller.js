@@ -32,6 +32,7 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
     
 	    DataTableService.initDataTable('tickets_table', columnDefinitions, false,"<'row'<'col-xs-6'l<'product_type_selector'>><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>");
    
+     ]
 	    $('#tickets_table').on('click', '.fa-times', function() {
         	$scope.cancelTicket(this);
    		});
