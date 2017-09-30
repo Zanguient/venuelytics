@@ -75,7 +75,13 @@
  					getAuthorizedMachines: {method: 'GET',  params: { id: '@id' }, isArray: true,
  						url: urlTemplate.replace("@context", "agencies") +"/authorizedSystems"},
  					resetBudget : {method: 'POST',  params: { id: '@id' },
- 						url: urlTemplate.replace("@context", "agencies")+ '/resetBudget'}
+ 						url: urlTemplate.replace("@context", "agencies")+ '/resetBudget'},
+ 					checkRegistration : {method: 'POST', 
+ 						url: urlTemplate.replace("@context", "agencies")+ '/validateComputer'},
+ 					sendRegistrationCode: {method: 'POST', params: { medium: '@medium' },
+ 						url: urlTemplate.replace("@context", "agencies")+ '/sendRegistrationCode/:medium'},
+ 					completeRegistration: {method: 'POST', params: { medium: '@medium' },
+ 						url: urlTemplate.replace("@context", "agencies")+ '/validateRegistration'}
  				});
  			},
  			UserVenueService: function () {

@@ -17,9 +17,9 @@ if (typeof $ === 'undefined') { throw new Error('This application\'s JavaScript 
 var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','ngAnimate', 'ngStorage', 'ngCookies', 
           'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'angular-loading-bar','ngDialog','ngImgMap', 'templates'])
           .run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache','AUTH_EVENTS', 'AuthService', 'FORMATS',
-           'Session','$timeout','$log','$cookies', '$http','ContextService',
+           'Session','$timeout','$log','$cookies', '$http','ContextService','ngDialog',
                function ($rootScope, $state, $stateParams, $window, $templateCache, AUTH_EVENTS, AuthService, FORMATS,
-                 Session, $timeout, $log,$cookies, $http, contextService) {
+                 Session, $timeout, $log,$cookies, $http, contextService,ngDialog) {
         	   'use strict';
               // Set reference to access them from any scope
               $rootScope.$state = $state;
@@ -36,14 +36,17 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
               $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(event, data){
             	 var msg = {};
             	 msg.message = data;
+               ngDialog.closeAll();
             	 $state.go('page.login', msg);
               });
               $rootScope.$on(AUTH_EVENTS.sessionTimeout, $rootScope.sessionTimeoutFx);
               
               $rootScope.loginFailedFx = function(event) {
+                ngDialog.closeAll();
             	  $state.go('page.login');
               };
               $rootScope.sessionTimeoutFx = function(event) {
+                ngDialog.closeAll();
             	  $state.go('page.login');
               };
               

@@ -17,28 +17,31 @@ App.directive('formWizard', function(){
       if(validate) {
         wizard.bwizard({
           clickableSteps: false,
+          delay: 500,
           validating: function(e, ui) {
 
             var $this = $(this),
             form = $this.parent(),
             group = form.find('.bwizard-activated');
 
-            console.log(JSON.stringify(ui));
-            e.preventDefault();
-            return false;
+            if (!scope.validate(e, ui)) {
+              e.preventDefault();
+              return;
+            }
+           /* if (false === form.parsley().validate( group[0].id )) {
               
+            }*/
           },
           activeIndexChanged: function (e, ui) { 
-            console.log(JSON.stringify(ui));
+           /* console.log(JSON.stringify(ui));
             e.preventDefault();
-            return false;
+            return false;*/
           } 
         });
       }
       else {
         wizard.bwizard();
       }
-      
     }
   };
 

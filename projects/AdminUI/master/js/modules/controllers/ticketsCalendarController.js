@@ -6,8 +6,8 @@
  * =========================================================
  */
 
-App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope', '$rootScope', 'Session','ContextService', 
-  'RestServiceFactory', 'APP_EVENTS','ngDialog', function ($state, $stateParams, $scope, $rootScope, session, 
+App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope', 'toaster', 'Session','ContextService', 
+  'RestServiceFactory', 'APP_EVENTS','ngDialog', function ($state, $stateParams, $scope, toaster, session, 
     contextService, RestServiceFactory, APP_EVENTS, ngDialog) {
   "use strict";
 
@@ -19,6 +19,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
  */
   $scope.events = [];
   $scope.calEvents = [];
+  $scope.registration = angular.fromJson($scope.$storage['computerRegistration']);
   $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
   var self = $scope;
   self.enableReset = false;
@@ -236,7 +237,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
     $scope.ticketSale = {};
     $scope.ticketSale.ticketId = ticket.id;
     $scope.ticketSale.eventDate = $scope.selectedDate;
-    $scope.ticketSale.soldMacId = "$WEWE78GHJ3$3$";
+    $scope.ticketSale.soldMacId = $scope.registration.registrationCode;
     $scope.ticketSale.quantity = 1;
 
     $scope.dialog = ngDialog.open({
@@ -304,6 +305,10 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
               $scope.dialog.close();
               self.getEventTickets(self.event, self.selectedDate);
               self.getAgencyInfo();
+            }, function(error, s) {
+               if (typeof error.data !== 'undefined') { 
+                  toaster.pop('error', "Buy Ticket Failed", error.data.message);
+               }
             });
           }
         };
@@ -321,9 +326,25 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
   $scope.register = function() {
     $state.go('app.registerComputer');
   }
+  $scope.unregister = function() {
+    //$state.go('app.registerComputer');
+  }
+  $scope.checkRegistration = function() {
+    var target = {};
+    RestServiceFactory.AgencyService().checkRegistration(target, $scope.registration, function(data) {
+      if (data.status == 1) { // computer is registered, go to done screen.
+        $scope.authorizationCode = 1;
+        $scope.getEvents();
+        $scope.getAgencyInfo();
+      } else {
+        $scope.authorizationCode = -1;
+      }
+      
+    });
+  };
+  $scope.authorizationCode = 0;
   $scope.initCalendar();
-  $scope.getEvents();
-  $scope.getAgencyInfo();
+  $scope.checkRegistration();
   
 
 }]);

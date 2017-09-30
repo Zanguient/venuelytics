@@ -296,7 +296,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/registerComputer',
         title: 'Register Computer',
         templateUrl: basepath('venue-events/register-computer.html'),
-        controller: 'RegisterComputerController',
+        controller: 'NullController',
         data: { authorizedRoles: [11,12]},
         resolve: resolveFor('bwizard', 'parsley')
     })
@@ -463,8 +463,9 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 			responseError: function(rejection) {
 				if (rejection.status === 0){
 					$injector.get('$state').go('page.login');
-					 return $q.reject(rejection);
+					return $q.reject(rejection);
 				}
+                return $q.reject(rejection);
 			}
 		};
 	}]);
