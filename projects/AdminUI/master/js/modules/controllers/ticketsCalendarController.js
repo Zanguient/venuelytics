@@ -20,6 +20,12 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
   $scope.events = [];
   $scope.calEvents = [];
   $scope.registration = angular.fromJson($scope.$storage['computerRegistration']);
+ 
+  if (typeof $scope.registration === 'undefined' ) {
+    $scope.registration = {};
+  }
+  $scope.registered = false;
+
   $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
   var self = $scope;
   self.enableReset = false;

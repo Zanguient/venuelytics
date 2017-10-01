@@ -11,9 +11,7 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     if($stateParams.id !== 'new') {
 	    var promise = RestServiceFactory.UserService().get({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
-	    	if (data.phone !== null) {
-	    		data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
-	    	}
+	    	
 	    	data.enabled = data.enabled ? "true" : "false";
 	    	$scope.data = data;
 	    });
@@ -60,6 +58,7 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     	if ($stateParams.id === 'new'){
     		target = {};
     	}
+        payload.phone = $('#phoneNumberId').val();
     	RestServiceFactory.UserService().save(target,payload, function(success){
     		$state.go('app.users');
     	},function(error){

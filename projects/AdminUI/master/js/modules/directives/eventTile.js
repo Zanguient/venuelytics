@@ -22,20 +22,22 @@ App.directive('eventTile', function() {
   		};
 
   		$scope.enableDisableColor = function(enabled) {
-    		return enabled === 'Y' ? 'circle-green' : 'circle-gray';
+    		return enabled === 'Y' ? 'fa fa-check' : '';
   		};	
 
   		$scope.TIME = function(d) {
   			if (typeof d !== 'undefined') {
-			    var t = d.split(":");
-			    var h = parseInt(t[0]);
-			    var m = parseInt(t[1]);
-			    var pm = false;
-			    if (h > 11) {
-			      pm = true;
-			    }
-	    		return ((h % 12) + ':' + h) + (pm ? ' PM' : ' AM');
-    		}
+		      var t = d.split(":");
+		      var h = parseInt(t[0]);
+		      var m = parseInt(t[1]);
+		      
+		      var d = new Date();
+		      
+		      d.setHours(h);
+		      d.setMinutes(m);
+		      return d;
+		    }
+		    return new Date();
   		};
 
 		$scope.deleteEvent = function(index, eventId) {

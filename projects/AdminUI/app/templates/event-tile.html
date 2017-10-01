@@ -4,12 +4,12 @@
    </div>
    <div class="overlay-bottom" ng-show="true">
       <div class="btn-group pull-right">
-         <button type="button" class="btn btn-default btn-sm" ng-click="buyEvent(event)">
+         <!-- <button type="button" class="btn btn-default btn-sm" ng-click="buyEvent(event)">
             <em class="fa fa-shopping-cart fa-2x text-gray-dark"></em>
          </button>
          <button type="button" class="btn btn-default btn-sm" ng-click="printEvent(event)">
             <em class="fa fa-print fa-2x text-gray-dark"></em>
-         </button>
+         </button> -->
          <button type="button" class="btn btn-default btn-sm" ng-click="editEvent(event.id)">
             <em class="fa fa-pencil fa-2x text-gray-dark"></em>
          </button>
@@ -23,9 +23,9 @@
          <div class="date pull-left" style="margin: 10px;">
             <span class="binds"></span>
             <span class="month" ng-bind="event.startDate | date: 'MMMM'"></span>
-            <h1 class="day" ng-bind="event.startDate | date: 'dd'"></h1>
+            <h2 class="day" ng-bind="event.startDate | date: 'dd'"></h1>
             <h5 class="weekday" ng-bind="event.startDate | date: 'EEE' | uppercase"> </h5>
-            <h4 class="time" ng-bind="TIME(event.eventTime)"> </h4>
+            <h4 class="time" ng-bind="TIME(event.eventTime) | date:'h:mm a' "> </h4>
          </div>  
          <div>
             <h3 ng-bind="event.eventName"></h3>
@@ -38,7 +38,7 @@
    <div class="panel-footer">
       <em class="fa fa-refresh"></em>&nbsp;{{event.scheduleDayOfWeek}}
    
-      <span class="pull-right circle circle-xl" ng-class="enableDisableColor(event.enabled)" >      
+      <span class="pull-right circle circle-xl text-green" ng-class="enableDisableColor(event.enabled)" >      
       </span>
       <span ng-show="event.price > 0" class="pull-right" style="font-size: 150%; position: relative; top: -10px; left: -20px;"><em class="fa fa-dollar"/>{{event.price}}</span>
    </div>

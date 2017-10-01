@@ -56,7 +56,7 @@
                </div>
                <div class="form-group">
                   <label class="control-label nowrap">Phone *</label>
-                  <input type="text" masked="" data-inputmask="'mask': '(999) 999-9999'" name="phone" required="required" class="form-control" ng-model="data.phone"/>
+                  <input id="phoneNumberId" type="text" masked="" data-inputmask="'mask': '(999) 999-9999', 'autoUnmask': true"  name="phone" required="required" class="form-control" ng-model="data.phone"/>
                </div>
               <div class="form-group">
                    <div class="checkbox c-checkbox">

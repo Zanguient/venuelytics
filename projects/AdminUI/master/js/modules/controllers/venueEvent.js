@@ -211,7 +211,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     };
     $scope.addTicket = function() {
         $scope.ticket = {};
-        $scope.ticket.section = "GA";
+        $scope.ticket.sectionName = "GA";
         $scope.ticket.row = "GA";
         $scope.ticket.seatStartNumber = 0;
         
@@ -220,11 +220,11 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     function _SEC(t) {
         var section = t.sectionName;
         if (typeof t.row !='undefined' && typeof t.seatStartNumber != 'undefined') {
-            section +=  " - " +  t.row + " [" + t.seatStartNumber + "-" + t.seatStartNumber+t.count +']';
+            section +=  " - " +  t.row + " [" + t.seatStartNumber + "-" + (Number(t.seatStartNumber)+Number(t.count) -1) +']';
         } else if (typeof t.row !='undefined' ) {
             section += " - " +  t.row ;
         } else if (typeof t.seatStartNumber != 'undefined') {
-             section +=  " - " + " [" + t.seatStartNumber + "-" + t.seatStartNumber+t.count +']';
+             section +=  " - " + " [" + t.seatStartNumber + "-" + (Number(t.seatStartNumber)+Number(t.count) -1) +']';
         } 
         return section;
     }
