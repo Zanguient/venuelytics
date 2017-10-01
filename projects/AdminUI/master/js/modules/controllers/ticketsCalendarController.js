@@ -317,7 +317,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
               self.getAgencyInfo();
             }, function(error, s) {
                if (typeof error.data !== 'undefined') { 
-                  toaster.pop('error', "Buy Ticket Failed", error.data.message);
+                  toaster.pop('error', "Sell Ticket Failed", error.data.message);
                }
             });
           }

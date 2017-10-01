@@ -1,20 +1,22 @@
 <h3 class="page-heading" ng-cloak>
    <div class="row">
-      <div class="col-sm-12"> <div class="col-sm-8">Ticket Calendar - <small>Manage and Sell Event Tickets</small></div>
-         <div class="col-sm-4" ng-show="authorizationCode > 0">
+      <div class="col-sm-12"> 
+         <div class="col-sm-7">Ticket Calendar - <small>Manage and Sell Event Tickets</small></div>
+         <div class="col-sm-5" ng-show="authorizationCode > 0">
             <div class="clearfix">
                <small class="text-muted mr">
                   <div class="media-heading col-sm-12">
                      <span class="pull-left text-info"><strong>Total Budget: ${{agency.budget}}</strong></span>
                      <span class="pull-right">Available Budget: ${{availableBudget}}</span>
                   </div>
-                  <progressbar style="border-radius: 10px; border-color: green" value="budgetPercent" type="success" class="progress m0">${{agency.budgetUsed}}</progressbar>
-                  <div class="col-sm-12 mt" ng-show="true">
-                     <button class="btn btn-oval btn-default col-sm-4 pull-left" ng-disabled="true" ng-click="unregister()">Cancel Registration</button>
-                     <button class="btn btn-oval btn-primary col-sm-4 pull-right" ng-click="resetBudget()">Reset Budget</button>
-                  </div>
                </small>
-
+               <progressbar style="border-radius: 10px; border-color: green" value="budgetPercent" type="success" class="progress m0">${{agency.budgetUsed}}</progressbar>
+               
+               <div class="btn-block mt" ng-show="true">
+                  <button class="btn btn-oval btn-default mt pull-right" ng-disabled="true" ng-click="unregister()">Cancel Registration</button>
+                  <button class="btn btn-oval btn-primary mt mr-sm pull-right" ng-click="resetBudget()">Reset Budget</button>
+               </div>
+               
             </div>
          </div>
       </div>
@@ -29,7 +31,7 @@
 </div>
 <div class="col-sm-8" ng-show="authorizationCode == -1" ng-cloak> 
    <div class="jumbotron" >
-      <p>For Online security, you need to register all your computers which you want to access "Buy and Print Tickets" services. <br><br><strong>This computer is either not registered or the registration is expired. </strong>
+      <p>For Online security, you need to register all your computers which you want to access "Sell and Print Tickets" services. <br><br><strong>This computer is either not registered or the registration is expired. </strong>
       </p>
       <p>Please click 'Register' to Register / Re-register this computer. </p>
       <p ng-show="!isManager">Log-in as Store Manager to register this computer.</p>
@@ -97,7 +99,7 @@
                <p class="col-sm-2 h4">{{event.eventType}}</p>
                <p class="col-sm-10 h4 text-muted">DOORS: {{mkDate(event.eventTime, -30) | date:'h:mm a'}} | SHOW TIME: {{mkDate(event.eventTime) | date:'h:mm a'}} - {{mkDate(event.eventTime, event.durationInMinutes) | date:'h:mm a'}}</p>
                <div class="clearfix media-heading pull-right rb0" >
-                  <button class="btn btn-oval btn-sm btn-success btn-raised pull-right" ng-click="buyTicket(ticket)">Buy Ticket</a>
+                  <button class="btn btn-oval btn-sm btn-success btn-raised pull-right" ng-click="buyTicket(ticket)">Sell Ticket</a>
                </div>  
             </div>
          </div>

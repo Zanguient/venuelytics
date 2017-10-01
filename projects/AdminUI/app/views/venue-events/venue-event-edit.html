@@ -53,8 +53,8 @@
             <timepicker ng-model="eventDisplayTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"></timepicker>
           </div>
           <div class="form-group col-md-6 col-sm-12">
-            <label class="control-label nowrap">Duration* </label>
-            <input type="text" name="durationInMinutes" required="required" class="form-control" ng-model="data.durationInMinutes"/>
+            <label class="control-label nowrap">Duration (in minutes) * </label>
+            <input type="text" name="durationInMinutes" required="required" data-parsley-type="integer" class="form-control" ng-model="data.durationInMinutes"/>
           </div>
           
           <div class="row col-sm-12"></div>  
@@ -130,6 +130,7 @@
     </div>
     <div class="col-md-6">
       <div class="form-group col-sm-12" >
+        <label>Upload Event Flyer</label>
         <input type="file" id="control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
       </div>
       <br />
