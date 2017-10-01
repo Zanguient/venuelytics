@@ -4,7 +4,8 @@
  =========================================================*/
 
 App.controller('VenueEventController', ['$scope', '$timeout', '$state','$stateParams', 'RestServiceFactory', 
-    'toaster','ngDialog','DataTableService','$compile','ContextService',function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, ngDialog, DataTableService, $compile, contextService) {
+    'toaster','DialogService','ngDialog','DataTableService','$compile','ContextService',
+    function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, DialogService, ngDialog, DataTableService, $compile, contextService) {
   'use strict';
     
     var n = $scope.minDate = new Date(2017,1,1);
@@ -266,19 +267,12 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     }
 
     $scope.deleteTicket = function(button, table) {
-
-      ngDialog.openConfirm({
-        template: 'deleteEventTicketId',
-        className: 'ngdialog-theme-default'
-      }).then(function (value) {
-
-        var targetRow = $(button).closest("tr");
-        var rowData = table.row( targetRow).data();
-        table.row(targetRow).remove().draw();
-        
-      }, function (reason) {
-
-      });
-
+ 
+        DialogService.confirmYesNo('Delete Ticket?', 'Are you sure want to delete selected Ticket?', function() {
+            var targetRow = $(button).closest("tr");
+            var rowData = table.row( targetRow).data();
+            table.row(targetRow).remove().draw();
+        });
+      
     };
 }]);
