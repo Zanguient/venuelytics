@@ -19,11 +19,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
  */
   $scope.events = [];
   $scope.calEvents = [];
-  $scope.registration = angular.fromJson($scope.$storage['computerRegistration']);
- 
-  if (typeof $scope.registration === 'undefined' ) {
-    $scope.registration = {};
-  }
+  $scope.isManager = session.roleId == 11 || session.roleId == 12;
   $scope.registered = false;
 
   $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
@@ -205,6 +201,14 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
       if (session.roleId === 12 && $scope.agency.managerId === session.userId) {
         self.enableReset = true;
       }
+      $scope.registration = angular.fromJson($scope.$storage['computerRegistration@AID:'+$scope.agency.id]);
+      $scope.isManager = session.roleId == 11 || session.roleId == 12;
+      if (typeof $scope.registration === 'undefined' ) {
+        $scope.registration = {};
+      }
+      
+      $scope.checkRegistration();
+
       if (data.budgetType === 'NM') {
         if (data.budget <= data.budgetUsed){
           data.budget = 2*data.budgetUsed;
@@ -341,7 +345,6 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
       if (data.status == 1) { // computer is registered, go to done screen.
         $scope.authorizationCode = 1;
         $scope.getEvents();
-        $scope.getAgencyInfo();
       } else {
         $scope.authorizationCode = -1;
       }
@@ -350,7 +353,6 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
   };
   $scope.authorizationCode = 0;
   $scope.initCalendar();
-  $scope.checkRegistration();
+  $scope.getAgencyInfo();
   
-
 }]);

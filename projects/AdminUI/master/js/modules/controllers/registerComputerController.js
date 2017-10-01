@@ -2,23 +2,37 @@
  * Module: registerComputerController.js
  =========================================================*/
 
-App.controller('RegisterComputerController', ['$scope', '$state', 'RestServiceFactory', 'toaster',
-	function($scope, $state, RestServiceFactory, toaster) {
+App.controller('RegisterComputerController', ['$scope', '$state', 'RestServiceFactory', 'toaster','Session',
+	function($scope, $state, RestServiceFactory, toaster, session) {
 	$scope.option = {};
 	$scope.option.selectedOption = 1;
 	$scope.submitTitle = "Register";
-	$scope.waitCursor ="";
-	$scope.registration = angular.fromJson($scope.$storage['computerRegistration']);
-	if (typeof $scope.registration === 'undefined' ) {
-		$scope.registration = {};
-	}
+	$scope.waitCursor = 'csspinner double-up';
+	$scope.isManager = session.roleId == 11 || session.roleId == 12;
+	
 	$scope.registered = false;
 	$scope.tabIndex = 0;
 	$scope.init = function() {
-		$scope.checkRegistration($scope.registration);
-
+		$scope.getAgencyInfo();
 	};
+	$scope.getAgencyInfo = function() {
+
+	    RestServiceFactory.UserService().getAgencyInfo({id: session.userId}, function(data) {
+		$scope.agency = data;
+		$scope.registration = angular.fromJson($scope.$storage['computerRegistration@AID:'+$scope.agency.id]);
+
+		if (typeof $scope.registration === 'undefined' ) {
+			$scope.registration = {};
+		}
+
+		$scope.checkRegistration($scope.registration);
+	  });
+	};
+
 	$scope.validate = function(event, ui) {
+		if (!$scope.isManager) {
+			return false;
+		}
 		var retValue = $scope.registered;
 		if($scope.registered) {
 			$scope.tabDone = ui.nextIndex;	
@@ -29,9 +43,11 @@ App.controller('RegisterComputerController', ['$scope', '$state', 'RestServiceFa
 			if ($scope.option.selectedOption == '2' || $scope.option.selectedOption == '3' ) {
 				var target = {medium : $scope.option.selectedOption == '2' ? 'EMAIL' : 'SMS'};
 				RestServiceFactory.AgencyService().sendRegistrationCode(target,{}, function(data){
-					$scope.registration.registrationCode = data.registrationCode
-					$scope.$storage['computerRegistration'] = angular.toJson($scope.registration);
+					$scope.registration.registrationCode = data.registrationCode;
+					$scope.$storage['computerRegistration@AID:'+$scope.agency.id] = angular.toJson($scope.registration);
+					$scope.waitCursor = '';
 				}, function(error) {
+					$scope.waitCursor = '';
 					toaster.pop('error', "Registration Error", "Unexpected error occurred. Please click Previous and re-register.");
 				});
 			}
@@ -48,13 +64,12 @@ App.controller('RegisterComputerController', ['$scope', '$state', 'RestServiceFa
 
 		if (ui.index === 1 && $scope.registrationInfo.$valid) {
 			$scope.waitCursor = 'csspinner double-up';
-			$scope.$digest();
-			
+	
 			var payload = {machineName: $scope.registration.machineName,securityCode: $scope.securityCode, registrationCode: $scope.registration.registrationCode};
 
 			RestServiceFactory.AgencyService().completeRegistration({},payload, function(data){
 				$scope.waitCursor = '';
-				$scope.$storage['computerRegistration'] = angular.toJson($scope.registration);
+				$scope.$storage['computerRegistration@AID:'+$scope.agency.id] = angular.toJson($scope.registration);
 				if (data.status <= 0) {
 					toaster.pop('error', "Registration Error", "Unexpected error occurred. Please click Previous and re-register.");
 				} else {
@@ -81,11 +96,13 @@ App.controller('RegisterComputerController', ['$scope', '$state', 'RestServiceFa
 		RestServiceFactory.AgencyService().checkRegistration(target, registration, function(data) {
 			if (data.status == 1) { // computer is registered, go to done screen.
 				$scope.registered = true;
+				$scope.waitCursor = '';
 				$('#wizardId').bwizard("play");
 			} else {
 				$scope.registered = false;
 				$scope.maskedEmail = data.email;
 				$scope.maskedPhone = data.phone;
+				$scope.waitCursor = '';
 			}
 		});
 	};
@@ -104,4 +121,4 @@ App.controller('RegisterComputerController', ['$scope', '$state', 'RestServiceFa
 	};
 	
 	$scope.init();
-}]);$
+}]);

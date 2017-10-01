@@ -22,17 +22,18 @@
 </h3>
 <!-- START row-->
 <div class="col-sm-8" ng-show="authorizationCode == 0" ng-cloak> 
-   <div class="jumbotron m0" >
+   <div class="jumbotron" >
        <p><strong>Please Wait ...! Checking authorization permissions!! </strong>
       </p>
    </div>
 </div>
 <div class="col-sm-8" ng-show="authorizationCode == -1" ng-cloak> 
-   <div class="jumbotron m0" >
+   <div class="jumbotron" >
       <p>For Online security, you need to register all your computers which you want to access "Buy and Print Tickets" services. <br><br><strong>This computer is either not registered or the registration is expired. </strong>
       </p>
       <p>Please click 'Register' to Register / Re-register this computer. </p>
-      <button class="btn btn-oval btn-primary col-sm-4" ng-click="register()">Register</button>
+      <p ng-show="!isManager">Log-in as Store Manager to register this computer.</p>
+      <button class="btn btn-oval btn-primary col-sm-4" ng-click="register()" ng-disabled="!isManager">Register</button>
    </div>
 </div>
 <div class="calendar-app" ng-show="authorizationCode > 0" ng-cloak>
