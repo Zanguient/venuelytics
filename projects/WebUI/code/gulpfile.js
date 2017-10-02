@@ -31,8 +31,7 @@ var jscpd = require('gulp-jscpd');
 var sitemap = require('gulp-sitemap');
 var save = require('gulp-save');
 var gutil = require('gulp-util');
-// var connect_s4a = require('connect-s4a');
-// var token = "de8a66f13d57c8dce17ec0d6487ab351";
+
 // var seo4ajax = require('connect');
 
 var webserver = require('gulp-webserver');
@@ -141,40 +140,8 @@ gulp.task('revolution', function() {
         .pipe(gulp.dest(paths.revolution));
 });
 
-gulp.task('html', function() {
-    return gulp.src(['src/html/*.html', '!src/html/layout/**/*',
-        , 'src/html/blogs/**/*.html', 'src/html/venue/**/*.html'])
-        .pipe(changed(path.join(paths.html)))
-        .pipe(processhtml({
-            recursive: true,
-            process: true,
-            strip: true,
-            environment: targets[config.environment].environment,
-            data: targets[config.environment].data,
-            customBlockTypes: ['gulp/components-menu.js']
-        }))
-        .pipe(gulpif(config.compress, prettify({
-            indent_size: 2
-        })))
-        .pipe(gulp.dest(path.join(paths.html)))
-        .pipe(connect.reload())
-        /*.pipe(save('before-sitemap'))
-        .pipe(sitemap({
-            siteUrl: 'http://dev.webui.s3-website-us-west-1.amazonaws.com',
-            lastmod: Date.now(),
-            changefreq: ['hourly'],
-            mappings: [{
-                pages: ['about.html', 'city.html', 'contact.html', 'home.html', 'privacy.html', 'terms-of-use.html',
-                'business-search.html', 'new-city.html', 'new-venues.html'],
-                changefreq: ['daily'],
-                lastmod: Date.now()
-            }]
-        }))
-        .pipe(gulp.dest('./dist'))
-        .pipe(save.restore('before-sitemap'))*/;
-});
 
-gulp.task('html:dist', function() {
+gulp.task('html', function() {
     const f = filter([ 'src/html/**/*.html', '!src/html/index.html'], {restore: true});
     const indexFilter =  filter([ 'src/html/index.html'], {restore: true});
     return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
@@ -349,13 +316,11 @@ gulp.task('clean', function() {
 
 gulp.task('watch', function() {
     gulp.watch(['src/html/**/*'], ['html']);
-    gulp.watch(['src/html/layout/**/*'], ['html:dist']);
     gulp.watch(['src/js/**/*'], ['js']);
     gulp.watch(['src/scss/**/*'], ['scss']);
     gulp.watch(['src/img/**/*'], ['img']);
     gulp.watch(['src/fonts/**/*'], ['fonts']);
     gulp.watch(['src/media/**/*'], ['media']);
-    gulp.watch(['src/seo/**/*']);
 });
 
 
@@ -384,10 +349,11 @@ gulp.task('default', function() {
 });
 
 gulp.task('dist:pre', function(cb) {
-   return runSequence('themes', ['plugins', 'html:dist', 'i18n','scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js',cb);
+   return runSequence('themes', ['plugins', 'html', 'i18n','scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js',cb);
 });
 
 gulp.task('dist',['dist:pre'], function(cb) {
+    config.compress = true;
     return gulp.src('dist/index.html')
      .pipe(cachebust.references())
      .pipe(gulp.dest(config.folders.dist));
@@ -397,17 +363,11 @@ gulp.task('dev', function(cb) {
     config.environment = 'dev';
     config.compress = false;
     return runSequence(
-        'clean', ['plugins', 'html', 'html:dist', 'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js', 'dist', cb
+        'clean', ['plugins', 'html', 'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js', 'dist', cb
     );
 });
 
 gulp.task('work', function(cb) {
-
-    // app.use(connect_s4a(token));
-    // app.use(function(req, res){
-    //     res.end('hello world\n');
-    // });
-    // app.listen(3000);
 
     config.environment = 'dev';
     config.compress = false;
@@ -418,73 +378,6 @@ gulp.task('work', function(cb) {
 
 gulp.task('dist:clean', function(cb) {
     return runSequence('clean', 'dist', cb);
-});
-gulp.task('aws:deploy',['dist:clean'],function() {
-    config.compress = true;
-    config.environment = 'dist';
-    config.allColors = true;
-
-    config.themes = [themeOptions.primaryColor];
-    config.shines = [themeOptions.shineColor];
-
-
-    if (themeOptions.navbarMode) {
-        config.environment = 'navbar';
-    }
-
-    var publisherItzFun = awspublish.create({
-        region: 'us-west-1',
-        params: {
-            Bucket: 'www.itzfun.com'
-        }
-    }, {
-        cacheFileName: 'cache/release.itzfun.com.cache'
-    });
-
-
-    var publisher = awspublish.create({
-        region: 'us-west-1',
-        params: {
-            Bucket: 'dev.webui'
-        }
-    }, {
-        cacheFileName: 'cache/release.webui.cache'
-    });
-
-    // define custom headers 
-    var headers = {
-       // 'Cache-Control': 'max-age=315360000, no-transform, public'
-            // ... 
-    };
-
-   /* gulp.src(['dist/**'])
-        // gzip, Set Content-Encoding headers and add .gz extension 
-    .pipe(awspublish.gzip())
-
-    // publisher will add Content-Length, Content-Type and headers specified above 
-    // If not specified it will set x-amz-acl to public-read by default 
-    .pipe(publisher.publish(headers))
-
-    // create a cache file to speed up consecutive uploads 
-    .pipe(publisher.cache())
-
-    // print upload updates to console 
-    .pipe(awspublish.reporter());*/
-
-    return gulp.src(['dist/**'])
-        // gzip, Set Content-Encoding headers and add .gz extension 
-    .pipe(awspublish.gzip())
-
-    // publisher will add Content-Length, Content-Type and headers specified above 
-    // If not specified it will set x-amz-acl to public-read by default 
-    .pipe(publisherItzFun.publish(headers))
-
-    // create a cache file to speed up consecutive uploads 
-    .pipe(publisherItzFun.cache())
-
-    // print upload updates to console 
-    .pipe(awspublish.reporter());
-
 });
 
 function baseUrl() {
