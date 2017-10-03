@@ -12,6 +12,8 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
             $rootScope.showSearchBox = false;
             $rootScope.businessSearch = false;
             $rootScope.searchVenue = true;
+            $rootScope.newConsumerTab = 'active';
+            $rootScope.homeTab = '';
 
             self.init = function() {
                 DataShare.bottleServiceData = {};
