@@ -16,7 +16,7 @@ app
     				  {'image': 'assets/img/clients/12.png', 'link': '//www.aurasj.com'},
     				  {'image': 'assets/img/clients/15.png', 'link': '//www.facebook.com/thevenuelivermore/'},
     				  {'image': 'assets/img/clients/17.png', 'link': '//charleyslg.com/'},
-    				  {'image': 'assets/img/clients/18.png', 'link': '//blowfishsushi.com/'},
+    				  /* {'image': 'assets/img/clients/18.png', 'link': '//blowfishsushi.com/'}, */
     				  {'image': 'assets/img/clients/19.png', 'link': '//loftbarandbistro.com'},
     				  {'image': 'assets/img/clients/20.png', 'link': '//www.lvl44.com'},
     				  {'image': 'assets/img/clients/21.png', 'link': '//alibiloungelv.com/'},
@@ -26,15 +26,20 @@ app
     				  {'image': 'assets/img/clients/26.png', 'link': '//wetrepublic.com/'},
     				  {'image': 'assets/img/clients/27.png', 'link': '//1oaklasvegas.com/home/'},
     				  {'image': 'assets/img/clients/28.png', 'link': '//barepoollv.com'},
-    				  {'image': 'assets/img/clients/29.png', 'link': '//www.aria.com/en/nightlife.html'},
+    				  /* {'image': 'assets/img/clients/29.png', 'link': '//www.aria.com/en/nightlife.html'}, */
     				  {'image': 'assets/img/clients/31.png', 'link': '//www.crawllv.com'},
     				  {'image': 'assets/img/clients/32.png', 'link': '//www.nightlifeunlocked.com'},
     				  {'image': 'assets/img/clients/noir-lounge.png', 'link': '//www.noir-sf.com/'},
     				  {'image': 'assets/img/clients/wine-jar.png', 'link': '//winejar-sf.com/'},
-                      {'image': 'assets/img/clients/mayes.png', 'link': '//www.mayessf.com/'},
-                      {'image': 'assets/img/clients/fan.png', 'link': '//www.spriza.com/'},
-                      {'image': 'assets/img/clients/shboom.jpg', 'link': '//www.shboomnightclub.com/'}
-                      ]
+              {'image': 'assets/img/clients/mayes.png', 'link': '//www.mayessf.com/'},
+              {'image': 'assets/img/clients/fan.png', 'link': '//www.spriza.com/'},
+              {'image': 'assets/img/clients/lure.jpg', 'link': '//www.lurehollywood.com/'},
+              {'image': 'assets/img/clients/lejardin.jpg', 'link': '//www.lejardin.la/'},
+              {'image': 'assets/img/clients/fuz.jpg', 'link': '//www.fuzlounge.com/'},
+              {'image': 'assets/img/clients/sjlive.png', 'link': '//www.sjlivesj.com/'},
+              {'image': 'assets/img/clients/eighty1.png', 'link': '//eightyonesj.com/'},
+              {'image': 'assets/img/clients/shboom.jpg', 'link': '//www.shboomnightclub.com/'}
+            ]
   })
   .constant('APP_ARRAYS', {
     'country': [{"countryName": "North America", "shortName": "USA"},

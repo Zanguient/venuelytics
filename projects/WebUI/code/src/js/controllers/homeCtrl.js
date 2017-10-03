@@ -165,6 +165,18 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             });
         });
     };
+
+    $rootScope.getSearchBySearch = function(searchVenue){
+        $location.url('/cities');
+        setTimeout(function(){
+            $rootScope.getSearchBySearch(searchVenue);
+        },3000);        
+    }
+    $rootScope.getserchKeyEnter = function(keyEvent,searchVenue) {
+        if (keyEvent.which === 13){
+            $rootScope.getSearchBySearch(searchVenue);
+        }
+    };
     
 	self.changeLanguage = function(lang){
 			$translate.use(lang);
