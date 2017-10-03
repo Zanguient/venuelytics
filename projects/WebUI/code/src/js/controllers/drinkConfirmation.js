@@ -182,7 +182,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                     var paypalElement = document.getElementById('paypal-button');
                     jQuery(paypalElement).trigger('click');
                 }
-                },3000);
+                },2500);
             };
 
             self.paymentEnabled = function() {
