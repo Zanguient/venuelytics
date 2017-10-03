@@ -31,7 +31,9 @@ var jscpd = require('gulp-jscpd');
 var sitemap = require('gulp-sitemap');
 var save = require('gulp-save');
 var gutil = require('gulp-util');
-
+var cleanCSS = require('gulp-clean-css');
+// var connect_s4a = require('connect-s4a');
+// var token = "de8a66f13d57c8dce17ec0d6487ab351";
 // var seo4ajax = require('connect');
 
 var webserver = require('gulp-webserver');
@@ -101,7 +103,7 @@ var targets = {
 gulp.task('plugins', ['plugins:js', 'plugins:css', 'plugins:fonts', 'plugins:img'],function() {   
     return gulp.src(config.plugins.jsConcat)
         .pipe(gulpif(config.concat, concat('plugins.min.js')))
-        .pipe(gulpif(true, uglify())) /// config.compress
+        .pipe(gulpif(config.compress, uglify())) 
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.jsConcat));
 });
@@ -114,6 +116,7 @@ gulp.task('plugins:js', function() {
 
 gulp.task('plugins:css', function() {
     return gulp.src(config.plugins.css)
+        .pipe(gulpif('!*.min.css', cleanCSS({compatibility: 'ie8', keepBreaks:true})))
         .pipe(gulpif(config.concat, concat('plugins.min.css')))
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.css));
@@ -154,7 +157,7 @@ gulp.task('html', function() {
             data: targets[config.environment].data,
             customBlockTypes: ['gulp/components-menu.js']
         }))
-        .pipe(gulpif(true, prettify({ /// config.compress
+        .pipe(gulpif(config.compress, prettify({
             indent_size: 2
         })))
         .pipe(f)
@@ -162,6 +165,9 @@ gulp.task('html', function() {
         .pipe(gulp.dest('src/js/'))
         .pipe(f.restore)
         .pipe(indexFilter)
+        .pipe(gulpif(config.compress, prettify({
+            indent_size: 2
+         })))
         .pipe(gulp.dest(path.join(paths.html)))
         .pipe(indexFilter.restore)
         .pipe(connect.reload());
@@ -170,7 +176,7 @@ gulp.task('html', function() {
 gulp.task('js', ['js:base', 'js:configurator'], function() {
 
     return gulp.src('src/js/pages/**/*')
-        .pipe(gulpif(true, uglify())) /// config.compress
+        .pipe(gulpif(config.compress, uglify())) 
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
@@ -194,8 +200,8 @@ gulp.task('js:base', function() {
         }))
         .pipe(f.restore)
         .pipe(gulpif('*.js',replace('dev.api.venuelytics.com',baseUrl())))
-        .pipe(gulpif(false, concat('app.min.js')))
-        .pipe(gulpif(true, uglify())) /// config.compress
+      //  .pipe(gulpif(false, concat('app.min.js'))) 
+        .pipe(gulpif(config.compress, uglify())) 
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
@@ -203,8 +209,8 @@ gulp.task('js:base', function() {
 
 gulp.task('js:configurator', function() {
     return gulp.src('src/js/configurator.js')
-        .pipe(gulpif(true, concat('configurator.min.js')))
-        .pipe(gulpif(true, uglify()))
+       // .pipe(gulpif(false, concat('configurator.min.js'))) //config.compress
+        .pipe(gulpif(config.compress, uglify()))   
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
@@ -266,16 +272,16 @@ gulp.task('scss', function() {
     return gulp.src('src/scss/**/*.scss')
         .pipe(gulpif(config.allColors, sassThemes('src/scss/themes/_*.scss', generateNames())))
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulpif(false, please({ /// config.compress
+        .pipe(gulpif(config.compress, please({ 
             "autoprefixer": true,
             "filters": true,
             "rem": true,
             "opacity": true
         })))
-        .pipe(gulpif(false, rename({ /// config.compress
+      /*  .pipe(gulpif(config.compress, rename({ 
             suffix: '.min',
             extname: '.css'
-        })))
+        })))*/
         //.pipe(gulpif(!config.compress, rename('style.' + config.defaultTheme + '.min.css')))
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.css))
@@ -284,7 +290,7 @@ gulp.task('scss', function() {
 
 gulp.task('img', function() {
     return gulp.src('src/img/**/*')
-        .pipe(gulpif(config.compress, imagemin()))
+      //  .pipe(gulpif(config.compress, imagemin()))
         .pipe(gulp.dest(paths.img))
         .pipe(connect.reload());
 });
@@ -316,21 +322,17 @@ gulp.task('clean', function() {
 
 gulp.task('watch', function() {
     gulp.watch(['src/html/**/*'], ['html']);
+    gulp.watch(['src/html/layout/**/*'], ['html']);
     gulp.watch(['src/js/**/*'], ['js']);
     gulp.watch(['src/scss/**/*'], ['scss']);
     gulp.watch(['src/img/**/*'], ['img']);
     gulp.watch(['src/fonts/**/*'], ['fonts']);
     gulp.watch(['src/media/**/*'], ['media']);
+    gulp.watch(['src/seo/**/*']);
 });
 
 
 gulp.task('connect', function() {
-
-    // app.use(connect_s4a(token));
-    // app.use(function(req, res){
-    //     res.end('hello world\n');
-    // });
-    // app.listen(3000);
 
   gulp.src(config.folders.dist)
     .pipe(webserver({
@@ -353,6 +355,7 @@ gulp.task('dist:pre', function(cb) {
 });
 
 gulp.task('dist',['dist:pre'], function(cb) {
+    config.environment = 'dev';
     config.compress = true;
     return gulp.src('dist/index.html')
      .pipe(cachebust.references())
@@ -361,7 +364,7 @@ gulp.task('dist',['dist:pre'], function(cb) {
 
 gulp.task('dev', function(cb) {
     config.environment = 'dev';
-    config.compress = true;
+    config.compress = false;
     return runSequence(
         'clean', ['plugins', 'html', 'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js', 'dist', cb
     );
@@ -386,3 +389,4 @@ function baseUrl() {
     } 
     return "localhost:8080";
 }
+

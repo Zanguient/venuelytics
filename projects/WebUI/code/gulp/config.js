@@ -83,7 +83,7 @@ module.exports = {
             'bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css',
             'bower_components/Slidebars/dist/slidebars.min.css',
             'bower_components/prism-theme-one-dark/prism-onedark.css',
-            'bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css',
+            'bower_components/bootstrap-daterangepicker/daterangepicker.css',
             'bower_components/Yamm3/yamm/yamm.css',
             'bower_components/plyr/dist/plyr.css',
             'bower_components/owl.carousel/dist/assets/owl.carousel.min.css',

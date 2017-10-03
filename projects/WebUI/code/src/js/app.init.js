@@ -339,6 +339,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     });
     $translateProvider.preferredLanguage('en');
     $translateProvider.useLocalStorage();
+    $translateProvider.useSanitizeValueStrategy(null);
 
 }]).run(['$location', '$rootScope','$window',function($location, $rootScope, $window) {
 
