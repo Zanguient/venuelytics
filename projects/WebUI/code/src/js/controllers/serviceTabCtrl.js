@@ -251,10 +251,4 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
     }
     self.init();
-}])
-
-.filter('to_trusted', ['$sce', function($sce){
-        return function(text) {
-            return $sce.trustAsHtml(text);
-        };
 }]);

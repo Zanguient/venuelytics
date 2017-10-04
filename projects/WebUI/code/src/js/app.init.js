@@ -341,6 +341,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $translateProvider.useLocalStorage();
     $translateProvider.useSanitizeValueStrategy(null);
 
+}]).filter('to_trusted', ['$sce', function($sce){
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        };
 }]).run(['$location', '$rootScope','$window',function($location, $rootScope, $window) {
 
     var hostName = $location.host();
