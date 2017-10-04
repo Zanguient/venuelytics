@@ -163,7 +163,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                 if(self.sumAmount === 0){
                     self.chargedAmount = self.chargedAmount;
                 } else {
-                    if(type self.sumAmount !== 'undefined'){
+                    if(typeof self.sumAmount !== 'undefined'){
                         self.chargedAmount -= self.sumAmount;
                         self.sumAmount = 0;
                     }
