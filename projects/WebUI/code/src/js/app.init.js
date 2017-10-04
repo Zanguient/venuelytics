@@ -355,7 +355,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         defaultPage = '/cities';
         $rootScope.showBusinessLink = false;
     } */
+    setTimeout(function(){
+        $('.wait_loading_above_fold').remove();
+    },300); 
 
+    
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 
         if (current.hasOwnProperty('$$route')) {
