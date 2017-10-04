@@ -199,7 +199,7 @@ gulp.task('js:cpd', function() {
 gulp.task('js:base', function() {
     const f = filter([ 'src/js/**/*.js','!src/js/libs/*.js' ,'!src/js/configurator.js', '!src/js/pages/**/*', 
         '!src/js/templates.js', '!src/js/dropdownhover.js', '!src/js/app.js', '!src/js/material.js' ,'!src/js/functions.js'], {restore: true});
-    return gulp.src(['src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*'])
+    return gulp.src(['src/js/**/*.js', '!src/js/*.js','!src/js/configurator.js', '!src/js/pages/**/*'])
         .pipe(f)
         .pipe(jshint())
         .pipe(jshint.reporter('gulp-jshint-html-reporter', {
@@ -213,14 +213,13 @@ gulp.task('js:base', function() {
         .pipe(gulpif('**/pages/**', uglify()))
         .pipe(gulpif('**/services/**', uglify()))
         .pipe(gulpif('**/constants/**', uglify()))
-        .pipe(gulpif('**/src/js/**.js', uglify()))
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
 });
 
 gulp.task('js:configurator', function() {
-    return gulp.src('src/js/configurator.js')
+    return gulp.src('src/js/*.js')
        // .pipe(gulpi//false, concat('configurator.min.js'))) //config.compress
         .pipe(gulpif(config.compress, uglify()))   
         .pipe(cachebust.resources())
