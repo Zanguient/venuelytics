@@ -55,6 +55,7 @@ var paths = {
     assets: path.join(config.folders.dist, config.folders.assets),
     html: path.join(config.folders.dist),
     js: path.join(config.folders.dist, config.folders.assets, 'js'),
+    libs: path.join(config.folders.dist, config.folders.assets, 'js', 'libs'),
     jsConcat: path.join(config.folders.dist, config.folders.assets, 'js'),
     fonts: path.join(config.folders.dist, config.folders.assets, 'fonts'),
     media: path.join(config.folders.dist, config.folders.assets, 'media'),
@@ -181,14 +182,14 @@ gulp.task('html', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('js', ['js:base', 'js:configurator'], function() {
-
-    return gulp.src('src/js/pages/**/*')
-        .pipe(gulpif(config.compress, uglify())) 
+gulp.task('js', ['js:base', 'js:main'], function() {
+    return gulp.src(['src/js/libs/*.js'])
+       // .pipe(gulpi//false, concat('configurator.min.js'))) //config.compress
+        .pipe(concat('libs.js'))
         .pipe(cachebust.resources())
-        .pipe(gulp.dest(paths.js))
-        .pipe(connect.reload());
+        .pipe(gulp.dest(paths.js));
 });
+
 gulp.task('js:cpd', function() {
        return gulp.src([ 'src/js/controllers/*.js',  'src/js/services/*.js','src/js/directives/*.js'])
         .pipe(jscpd({
@@ -199,7 +200,7 @@ gulp.task('js:cpd', function() {
 gulp.task('js:base', function() {
     const f = filter([ 'src/js/**/*.js','!src/js/libs/*.js' ,'!src/js/configurator.js', '!src/js/pages/**/*', 
         '!src/js/templates.js', '!src/js/dropdownhover.js', '!src/js/app.js', '!src/js/material.js' ,'!src/js/functions.js'], {restore: true});
-    return gulp.src(['src/js/**/*.js', '!src/js/*.js','!src/js/configurator.js', '!src/js/pages/**/*'])
+    return gulp.src(['src/js/**/*.js', '!src/js/*.js','!src/js/configurator.js', '!src/js/pages/**/*', '!src/js/libs/**/*'])
         .pipe(f)
         .pipe(jshint())
         .pipe(jshint.reporter('gulp-jshint-html-reporter', {
@@ -208,20 +209,18 @@ gulp.task('js:base', function() {
         .pipe(f.restore)
         .pipe(gulpif('*.js',replace('dev.api.venuelytics.com',baseUrl())))
       //  .pipe(gulpif(false, concat('app.min.js'))) 
-        .pipe(gulpif('**/controllers/**', uglify()))
-        //.pipe(gulpif('**/directives/**', uglify()))
-        .pipe(gulpif('**/pages/**', uglify()))
-        .pipe(gulpif('**/services/**', uglify()))
-        .pipe(gulpif('**/constants/**', uglify()))
+        .pipe(concat('app_logic.js'))
+        .pipe(gulpif(config.compress, uglify()))
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
 });
 
-gulp.task('js:configurator', function() {
-    return gulp.src('src/js/*.js')
+gulp.task('js:main', function() {
+    return gulp.src(['src/js/*.js', '!src/js/configurator.js'])
        // .pipe(gulpi//false, concat('configurator.min.js'))) //config.compress
-        .pipe(gulpif(config.compress, uglify()))   
+        .pipe(concat('app_main.js'))  
+       // .pipe(gulpif(config.compress, uglify()))   
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
@@ -367,7 +366,7 @@ gulp.task('dist:pre', function(cb) {
 
 gulp.task('dist',['dist:pre'], function(cb) {
     config.environment = 'dev';
-    config.compress = true;
+    config.compress = false;
     return gulp.src('dist/index.html')
      .pipe(cachebust.references())
      .pipe(gulpif(config.compress, htmlmin({collapseWhitespace: true})))
@@ -376,7 +375,7 @@ gulp.task('dist',['dist:pre'], function(cb) {
 
 gulp.task('dev', function(cb) {
     config.environment = 'dev';
-    config.compress = true;
+    config.compress = false;
     return runSequence(
         'clean', ['plugins', 'html', 'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js', 'dist', cb
     );

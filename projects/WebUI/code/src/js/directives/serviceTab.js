@@ -4,7 +4,7 @@
 *
  =========================================================*/
 app.directive('serviceTab', function() {
-  "use strict";
+  'use strict';
   return {
     restrict: 'A',
     scope:{
@@ -27,3 +27,4 @@ app.directive('serviceTab', function() {
   	templateUrl: 'venue/service-tab.html'
   };
 });
+
