@@ -112,7 +112,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.paypalPayment = function() { 
                 DataShare.amount = self.chargedAmount;
                 var popup = window.open("","directories=no,height=100,width=100,menubar=no,resizable=no,scrollbars=no,status=no,titlebar=no,top=0,location=no");
-                if (!popup || popup.closed || typeof popup.closed=='undefined'){
+                if (!popup || popup.closed || typeof popup.closed==='undefined'){
                     alert("Popup Blocker is enabled!");
                     popup.close();
                 } else {

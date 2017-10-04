@@ -1,6 +1,6 @@
 "use strict";
-app.controller('BusinessClaimController', ['$log', '$scope', '$http', '$location', 'AjaxService','$routeParams', 'APP_LINK',
- function ($log, $scope, $http, $location, AjaxService, $routeParams, APP_LINK) {
+app.controller('BusinessClaimController', ['$log', '$scope', '$rootScope','$http', '$location', 'AjaxService','$routeParams', 'APP_LINK',
+ function ($log, $scope, $rootScope, $http, $location, AjaxService, $routeParams, APP_LINK) {
 
     var self = $scope;
 
@@ -18,9 +18,9 @@ app.controller('BusinessClaimController', ['$log', '$scope', '$http', '$location
         self.successMessage = !!$location.search().successful ;
         AjaxService.completeBusinessClaim(self.venueNumber, vc, ce).then(function(response) {
            $log.info(response);
-           if (response.status == 200 || response.status == 201) {
+           if (response.status === 200 || response.status === 201) {
             $location.url("/deployment/" + self.venueNumber +'?successful'); 
-           } else if (response.status == 202){
+           } else if (response.status === 202){
                 $location.url("/businessAlreadyClaimed/" + self.venueNumber);
            } else {
              self.error = true;

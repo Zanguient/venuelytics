@@ -28,7 +28,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 self.tableDate = moment().format('MM/DD/YYYY');
                 setTimeout(function() {
                 var divWidth = $(window).width();
-                $("#divObj").width(divWidth)
+                $("#divObj").width(divWidth);
                 }, 1000);
             };
 
@@ -48,7 +48,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                     angular.forEach(self.productItem, function(value1,key1) {
                           var size = value1.product.servingSize;
                           if(parseInt(self.table.guest) === size) {
-                              self.reservedTimeSlot = value1.availableTimes
+                              self.reservedTimeSlot = value1.availableTimes;
                           }
                     });
 
@@ -97,7 +97,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                         });
                     });
                 });
-            }
+            };
 
             self.confirmTableReserve = function() {
                 $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);

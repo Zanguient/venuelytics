@@ -71,10 +71,10 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
       event.eventTimes = obj.start;
       var dateValue = moment(obj.end).format("HH:mm a");
       var H = + dateValue.substr(0, 2);
-      var h = (H % 12) || 12;
+      h = (H % 12) || 12;
       var ampm = H < 12 ? " AM" : " PM";
       dateValue = h + dateValue.substr(2, 3) + ampm;
-      if(dateValue.indexOf(":")) {
+      if(dateValue.indexOf(":") ) {
       } else {
         dateValue = h + ':'+ dateValue.substr(2, 3) + ampm;
       }

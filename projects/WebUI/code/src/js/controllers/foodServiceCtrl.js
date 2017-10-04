@@ -53,7 +53,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                       value.count = '';
                   }
                 });
-            }
+            };
 
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
@@ -127,7 +127,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                         self.editFoodItems = DataShare.selectedFoods;
                         angular.forEach(self.editFoodItems, function(value,key) {
                           angular.forEach(self.foodDetails, function(value1,key1) {
-                              if(value.id == value1.id) {
+                              if(value.id === value1.id) {
                                 self.foodDetails.splice(key1, 1);
                               }
                           });

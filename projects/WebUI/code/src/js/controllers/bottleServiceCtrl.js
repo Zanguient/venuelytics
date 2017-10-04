@@ -371,21 +371,21 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
         self.closeModal = function() {
           $('#tableSelectionModal').modal('hide');
-        }
+        };
 
         self.closeMoreTableModal = function() {
           $('#moreTableModal').modal('hide');
-        }
+        };
 
         self.closeReservedModal = function() {
           $('#reservedTable').modal('hide');
-        }
+        };
 
         self.isReserved = function (table) {
             table.reserved = false;
             if (self.reservations && typeof self.reservations !== 'undefined') {
                 for (var resIndex = 0; resIndex < self.reservations.length; resIndex++) {
-                    if (table.id == self.reservations[resIndex].productId) {
+                    if (table.id === self.reservations[resIndex].productId) {
                         table.reserved = true;
                         return true;
                     }
@@ -409,7 +409,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 return self.bottle.host.profileImage;
             }
             return "";
-        }
+        };
         self.selectTable = function(id, name) {
           
             var data = $('#' + id).mouseout().data('maphilight') || {};

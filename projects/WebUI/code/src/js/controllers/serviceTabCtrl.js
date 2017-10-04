@@ -34,14 +34,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         if(self.embeddedService === 'new'){
             $rootScope.embeddedFlag = true;
         }
-        if ((self.venueid == 70008) || (self.venueid == 170637)) {
+        if ((self.venueid === 70008) || (self.venueid === 170637)) {
             if(self.tabParams === 'guest-list') {
               self.partyFlag = false;
             } else {
               self.partyFlag = true;
             }
         }
-        if (self.venueid == 170639) {
+        if (self.venueid === 170639) {
             self.bachelorFlag = true;
         }
         self.guest = DataShare.guestListData;
@@ -126,14 +126,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 $rootScope.venueTotalHours.push(value);
             });
         });
-    }
+    };
 
     $rootScope.getSearchBySearch = function(searchVenue){
         $location.url('/cities');
         setTimeout(function(){
             $rootScope.getSearchBySearch(searchVenue);
         },3000);        
-    }
+    };
     $rootScope.getserchKeyEnter = function(keyEvent,searchVenue) {
         if (keyEvent.which === 13){
             $rootScope.getSearchBySearch(searchVenue);
@@ -157,7 +157,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             if(self.embeddedService === 'new') {
                 $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP" + '/new');
                 self.tabParams = serviceName;
-            } else if(self.embeddedService != undefined )  {
+            } else if(self.embeddedService !== undefined )  {
                 $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP"+ "/" + self.embeddedService);
                 self.tabParams = serviceName === 'VIP' ? self.embeddedService : serviceName;                
             } else {

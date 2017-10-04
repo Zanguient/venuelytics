@@ -32,9 +32,17 @@ var sitemap = require('gulp-sitemap');
 var save = require('gulp-save');
 var gutil = require('gulp-util');
 var cleanCSS = require('gulp-clean-css');
+var htmlmin = require('gulp-htmlmin');
+var gulpmatch = require('gulp-match');
+
 // var connect_s4a = require('connect-s4a');
 // var token = "de8a66f13d57c8dce17ec0d6487ab351";
 // var seo4ajax = require('connect');
+var includeCondition = function (file) {
+  return !gulpmatch(file, ['**/libs/**','**/directives/**']);
+}
+
+ 
 
 var webserver = require('gulp-webserver');
 // var app = seo4ajax();
@@ -189,9 +197,8 @@ gulp.task('js:cpd', function() {
         }));       
 });
 gulp.task('js:base', function() {
-    const f = filter([ 'src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*', 
-        '!src/js/templates.js', '!src/js/dropdownhover.js', '!src/js/app.js',  '!src/js/material.js'
-        ,'!src/js/functions.js'], {restore: true});
+    const f = filter([ 'src/js/**/*.js','!src/js/libs/*.js' ,'!src/js/configurator.js', '!src/js/pages/**/*', 
+        '!src/js/templates.js', '!src/js/dropdownhover.js', '!src/js/app.js', '!src/js/material.js' ,'!src/js/functions.js'], {restore: true});
     return gulp.src(['src/js/**/*.js', '!src/js/configurator.js', '!src/js/pages/**/*'])
         .pipe(f)
         .pipe(jshint())
@@ -201,7 +208,12 @@ gulp.task('js:base', function() {
         .pipe(f.restore)
         .pipe(gulpif('*.js',replace('dev.api.venuelytics.com',baseUrl())))
       //  .pipe(gulpif(false, concat('app.min.js'))) 
-        .pipe(gulpif(config.compress, uglify())) 
+        .pipe(gulpif('**/controllers/**', uglify()))
+        //.pipe(gulpif('**/directives/**', uglify()))
+        .pipe(gulpif('**/pages/**', uglify()))
+        .pipe(gulpif('**/services/**', uglify()))
+        .pipe(gulpif('**/constants/**', uglify()))
+        .pipe(gulpif('**/src/js/**.js', uglify()))
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
         .pipe(connect.reload());
@@ -209,7 +221,7 @@ gulp.task('js:base', function() {
 
 gulp.task('js:configurator', function() {
     return gulp.src('src/js/configurator.js')
-       // .pipe(gulpif(false, concat('configurator.min.js'))) //config.compress
+       // .pipe(gulpi//false, concat('configurator.min.js'))) //config.compress
         .pipe(gulpif(config.compress, uglify()))   
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
@@ -359,12 +371,13 @@ gulp.task('dist',['dist:pre'], function(cb) {
     config.compress = true;
     return gulp.src('dist/index.html')
      .pipe(cachebust.references())
+     .pipe(gulpif(config.compress, htmlmin({collapseWhitespace: true})))
      .pipe(gulp.dest(config.folders.dist));
 });
 
 gulp.task('dev', function(cb) {
     config.environment = 'dev';
-    config.compress = false;
+    config.compress = true;
     return runSequence(
         'clean', ['plugins', 'html', 'i18n', 'scss', 'img', 'fonts', 'media', 'revolution', 'seo'], 'js', 'dist', cb
     );

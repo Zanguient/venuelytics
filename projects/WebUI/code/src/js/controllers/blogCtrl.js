@@ -25,7 +25,7 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
           setTimeout(function(){
               $rootScope.getSearchBySearch(searchVenue);
           },3000);        
-        }
+        };
         $rootScope.getserchKeyEnter = function(keyEvent,searchVenue) {
             if (keyEvent.which === 13){
                 $rootScope.getSearchBySearch(searchVenue);

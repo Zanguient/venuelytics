@@ -59,7 +59,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                       value.count = '';
                   }
                 });
-            }
+            };
 
             self.tabClear = function() {
                 DataShare.drinkServiceData = {};
@@ -120,7 +120,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                         self.editDrinkItems = DataShare.selectedDrinks;
                         angular.forEach(self.editDrinkItems, function(value,key) {
                           angular.forEach(self.drinkDetails, function(value1,key1) {
-                              if(value.id == value1.id) {
+                              if(value.id === value1.id) {
                                 self.drinkDetails.splice(key1, 1);
                               }
                           });

@@ -66,12 +66,14 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                         setupEmbedScript();
                     });
                 }
-                if(self.venueid != undefined){
+                if(typeof self.venueid !== 'undefined'){
                     AjaxService.getVenues(self.venueid,null,null).then(function(response) {
                         self.selectedVenueName = response.venueName;
                         self.selectedVenueAddress = response.address;
                         self.selectedVenueWebsite = response.website;
-                        self.businessImage = response.imageUrls[0].largeUrl;
+                        if (typeof response.imageUrls !== 'undefined') {
+                            self.businessImage = response.imageUrls[0].largeUrl;
+                        }
                     });
                 }
             };
@@ -82,7 +84,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.embedServicesHTML = self.embedServicesHTML.replace('premiumUrl', premiumUrl);
             }
             function addDeployment(displayName, url) {
-                if (typeof url != 'undefined' && url != null && url.length > 0){
+                if (typeof url !== 'undefined' && url != null && url.length > 0){
                     self.deploymentServices.push({displayName: displayName, url: url});
                 }
             }
@@ -91,7 +93,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                if (keyEvent.which === 13){
                 $rootScope.search(search);
                }
-            }
+            };
 
             $rootScope.search = function(business){
                 self.searchBusiness = business;
@@ -155,7 +157,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             };
 
             self.clickClaimBusiness = function(selectedVenue) {
-                if (selectedVenue.flag == false) {
+                if (selectedVenue.flag === false) {
                     self.claim(selectedVenue);
                 } else {
                     self.getClaimBusiness(selectedVenue);

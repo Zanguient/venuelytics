@@ -53,7 +53,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                         value.eTime = h + value.endTime.substr(2, 3) + ampm;
                     });
                 });
-            }
+            };
 
             self.tabClear = function() {
                 DataShare.privateEventData = {};
@@ -98,7 +98,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 var finalValue =  (hours < 9 ? "0" : "") + hours + ":" + (minutes < 9 ? "0" : "") + minutes;
                 finalValue = finalValue.split(":");
                 self.duration = finalValue[0] * 60; 
-                if(finalValue[1] == "30") {
+                if(finalValue[1] === "30") {
                 self.duration = self.duration + 30;
                 }
 

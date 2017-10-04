@@ -25,7 +25,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 self.getTax();
                 var amountValue = 0;
                 angular.forEach(self.selectedFoodItems, function(value1, key1) {
-                    var total = parseFloat(value1.total)
+                    var total = parseFloat(value1.total);
                     amountValue = amountValue + total;
                 });
                 self.availableAmount = amountValue;
@@ -126,12 +126,12 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 self.paypal = false;
                 self.phoneVenues = false;
                 if(self.sumAmount === 0){
-                    if(self.creditCardFee != undefined){
+                    if(typeof self.creditCardFee !== 'undefined'){
                         self.chargedAmount += self.creditCardFee;
                         self.sumAmount = self.creditCardFee;
                     }
                 } else {
-                    if(self.sumAmount != undefined){
+                    if(typeof self.sumAmount !== 'undefined'){
                         self.chargedAmount = ((self.chargedAmount - self.sumAmount) + self.creditCardFee);
                         self.sumAmount = self.creditCardFee;
                     }
@@ -144,13 +144,13 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 self.phoneVenues = false;
                 if(self.sumAmount === 0){
                     self.totalChargedAmount = self.chargedAmount;
-                    if(self.payPalFee != undefined){
+                    if(typeof self.payPalFee !== 'undefined'){
                         self.totalChargedAmount = self.chargedAmount + self.payPalFee;
                         self.chargedAmount += self.payPalFee;
                         self.sumAmount = self.payPalFee;
                     }
                 } else {
-                    if(self.sumAmount != undefined){
+                    if(typeof self.sumAmount !== 'undefined'){
                         self.chargedAmount = ((self.chargedAmount - self.sumAmount) + self.payPalFee);
                         self.sumAmount = self.payPalFee;
                     }
@@ -163,7 +163,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
                 if(self.sumAmount === 0){
                     self.chargedAmount = self.chargedAmount;
                 } else {
-                    if(self.sumAmount != undefined){
+                    if(typeof self.sumAmount !== 'undefined'){
                         self.chargedAmount -= self.sumAmount;
                         self.sumAmount = 0;
                     }                    
@@ -173,7 +173,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             self.paypalPayment = function() { 
                 setTimeout(function(){
                 var popup = window.open("","directories=no,height=100,width=100,menubar=no,resizable=no,scrollbars=no,status=no,titlebar=no,top=0,location=no");
-                if (!popup || popup.closed || typeof popup.closed=='undefined'){
+                if (!popup || popup.closed || typeof popup.closed==='undefined'){
                     alert("Popup Blocker is enabled!");
                     popup.close();
                 } else {

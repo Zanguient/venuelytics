@@ -218,7 +218,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
 
     this.getTime = function(venueId,date,time, guestCount, authBase64Str) {
 
-        if (guestCount == parseInt(guestCount, 10)) {
+        if (guestCount === parseInt(guestCount, 10)) {
             guestCount = parseInt(guestCount, 10);
         } else {
             guestCount = 0;
@@ -399,7 +399,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         var referenceId = null;
         if (typeof $window.localStorage !== 'undefined') {
             referenceId = $window.localStorage.getItem("utm:referenceId");
-            if (referenceId == null || typeof referenceId == 'undefined') {
+            if (referenceId === null || typeof referenceId === 'undefined') {
                 referenceId = randomString();
                 $window.localStorage.setItem("utm:referenceId", referenceId);
             }

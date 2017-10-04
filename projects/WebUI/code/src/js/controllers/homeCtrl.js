@@ -171,7 +171,8 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
         setTimeout(function(){
             $rootScope.getSearchBySearch(searchVenue);
         },3000);        
-    }
+    };
+
     $rootScope.getserchKeyEnter = function(keyEvent,searchVenue) {
         if (keyEvent.which === 13){
             $rootScope.getSearchBySearch(searchVenue);
@@ -193,7 +194,8 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $('.modal-backdrop').remove();
             $rootScope.successEmail = email;
         }
-    }
+    };
+    
     self.saveBusiness = function() {
         var business = $scope.business;
         var role = (typeof business.businessRole  === 'undefined') ? '' :  business.businessRole.role;
