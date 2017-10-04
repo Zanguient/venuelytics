@@ -185,6 +185,7 @@ gulp.task('html', function() {
 gulp.task('js', ['js:base', 'js:main'], function() {
     return gulp.src(['src/js/libs/*.js'])
        // .pipe(gulpi//false, concat('configurator.min.js'))) //config.compress
+        .pipe(gulpif(config.compress, gulpif("!**/*min.js",uglify())))
         .pipe(concat('libs.js'))
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js));
