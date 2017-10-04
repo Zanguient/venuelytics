@@ -112,7 +112,7 @@ var targets = {
 gulp.task('plugins', ['plugins:js', 'plugins:css', 'plugins:fonts', 'plugins:img'],function() {   
     return gulp.src(config.plugins.jsConcat)
         .pipe(gulpif(config.concat, concat('plugins.min.js')))
-        .pipe(gulpif(config.compress, uglify())) 
+        //.pipe(gulpif(config.compress, uglify())) 
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.jsConcat));
 });
