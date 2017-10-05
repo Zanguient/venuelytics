@@ -34,7 +34,8 @@ var gutil = require('gulp-util');
 var cleanCSS = require('gulp-clean-css');
 var htmlmin = require('gulp-htmlmin');
 var gulpmatch = require('gulp-match');
-
+var minifyInline = require('gulp-minify-inline-scripts');
+ 
 // var connect_s4a = require('connect-s4a');
 // var token = "de8a66f13d57c8dce17ec0d6487ab351";
 // var seo4ajax = require('connect');
@@ -371,6 +372,7 @@ gulp.task('dist',['dist:pre'], function(cb) {
     return gulp.src('dist/index.html')
      .pipe(cachebust.references())
      .pipe(gulpif(config.compress, htmlmin({collapseWhitespace: true})))
+     .pipe(gulpif(config.compress, minifyInline()))
      .pipe(gulp.dest(config.folders.dist));
 });
 
