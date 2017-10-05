@@ -3,7 +3,7 @@
  * smangipudi
  =========================================================*/
 
-App.controller('LoyaltyController', ['$scope', '$state','$compile', '$timeout', 'RestServiceFactory','DataTableService', 'toaster','ContextService',
+App.controller('LoyaltyMembershipController', ['$scope', '$state','$compile', '$timeout', 'RestServiceFactory','DataTableService', 'toaster','ContextService',
                                       function($scope, $state,$compile, $timeout, RestServiceFactory, DataTableService, toaster, contextService) {
   'use strict';
 

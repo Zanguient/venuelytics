@@ -126,7 +126,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/loyalty',
         title: 'Loyalty',
         templateUrl: basepath('loyalty/loyalty.html'),
-        controller: 'NullController',
+        controller: 'LoyaltyController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
     })
