@@ -335,7 +335,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     var version = new Date().getTime();
     $translateProvider.useStaticFilesLoader({
         prefix : 'assets/i18n/',
-        suffix : '.json?v=' + version
+        suffix : '.json'
     });
     $translateProvider.preferredLanguage('en');
     $translateProvider.useLocalStorage();
