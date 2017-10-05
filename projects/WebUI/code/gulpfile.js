@@ -183,11 +183,17 @@ gulp.task('html', function() {
         .pipe(connect.reload());
 });
 
-gulp.task('js', ['js:base', 'js:main'], function() {
-    return gulp.src(['src/js/libs/*.js'])
+gulp.task('js', ['js:base', 'js:main', 'js:moment'], function() {
+    return gulp.src(['src/js/libs/*.js', '!src/js/libs/moment.min.js'])
        // .pipe(gulpi//false, concat('configurator.min.js'))) //config.compress
         .pipe(gulpif(config.compress, gulpif("!**/*min.js",uglify())))
-        .pipe(concat('libs.js'))
+        .pipe(concat('libs.min.js'))
+        .pipe(cachebust.resources())
+        .pipe(gulp.dest(paths.js));
+});
+
+gulp.task('js:moment', function() {
+    return gulp.src(['src/js/libs/moment.min.js']) 
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js));
 });
@@ -219,7 +225,7 @@ gulp.task('js:base', function() {
 });
 
 gulp.task('js:main', function() {
-    return gulp.src(['src/js/*.js', '!src/js/configurator.js'])
+    return gulp.src(['src/js/*.js','!src/js/configurator.js'])
        // .pipe(gulpi//false, concat('configurator.min.js'))) //config.compress
         .pipe(concat('app_main.js'))  
        // .pipe(gulpif(config.compress, uglify()))   
