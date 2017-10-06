@@ -29,7 +29,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 }, 600);
                     var date = new Date();
                     var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
+                $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
                 self.private.authorize = false;
                 self.private.agree = false;
             };
@@ -60,7 +60,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 DataShare.privateEventFocused = '';
                 $rootScope.serviceName = '';
                 self.private = {};
-                self.private.orderDate = moment().format('MM/DD/YYYY');
+                self.private.orderDate = moment().format('YYYY-MM-DD');
             };
 
             self.getSelectedTab = function() {
