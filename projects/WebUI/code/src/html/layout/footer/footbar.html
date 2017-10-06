@@ -1,31 +1,31 @@
-<aside id="footerMargin" class="ms-footbar" ng-cloak ng-hide="embeddedFlag === true">
-    <div class="container" ng-controller="HomeController" ng-cloak>
+<aside id="footerMargin" class="ms-footbar" ng-hide="embeddedFlag === true">
+    <div class="container" ng-controller="HomeController">
         <div class="row">
             <div class="col-md-4 ms-footer-col">
                 <div class="ms-footbar-block" id="footbarWidth">
-                    <h3 class="ms-footbar-title">{{'footBar.SITE_MAP' | translate}}</h3>
+                    <h3 class="ms-footbar-title" ng-bind="footBar.SITE_MAP | translate">Sitemap</h3>
                     <ul class="list-unstyled ms-icon-list three_cols">
-                        <li ng-click="navBar(1)"><a href="home"><i class="zmdi zmdi-home"></i> {{"navbar.HOME" | translate}}</a></li>
-                        <li ng-click="navBar(2)" ng-show="((showBusinessLink) && ($root.showBusinessTab == 1))"><a href="searchBusiness"><i class="zmdi zmdi-edit"></i> {{"navbar.BUSINESS" | translate}}</a></li>
-                        <li ng-click="navBar(3)"><a href="cities"><i class="zmdi zmdi-image-o"></i> {{"navbar.CONSUMERS" | translate}}</a></li>
-                        <li><a href="about"><i class="zmdi zmdi-favorite-outline"></i> {{"footBar.ABOUT" | translate}}</a></li>
-                        <li><a href="terms"><i class="zmdi zmdi-case"></i> {{"footBar.TERMS" | translate}}</a></li>
-                        <li><a href="privacy"><i class="zmdi zmdi-time"></i> {{"footBar.PRIVACY" | translate}}</a></li>
+                        <li ng-click="navBar(1)"><a href="home"><i class="zmdi zmdi-home"></i><span ng-bind="(navbar.HOME | translate)">Home</span></a></li>
+                        <li ng-click="navBar(2)" ng-show="((showBusinessLink) && ($root.showBusinessTab == 1))"><a href="searchBusiness"><i class="zmdi zmdi-edit"></i><span ng-bind="(navbar.BUSINESS | translate)">Business</span></a></li>
+                        <li ng-click="navBar(3)"><a href="cities"><i class="zmdi zmdi-image-o"></i><span ng-bind="navbar.CONSUMERS | translate">Consumers</span></a></li>
+                        <li><a href="about"><i class="zmdi zmdi-favorite-outline"></i><span ng-bind="footBar.ABOUT | translate">About Us</span></a></li>
+                        <li><a href="terms"><i class="zmdi zmdi-case"></i><span ng-bind="footBar.TERMS | translate">Terms of Use</span></a></li>
+                        <li><a href="privacy"><i class="zmdi zmdi-time"></i><span ng-bind="footBar.PRIVACY | translate">Privacy Policy</span></a></li>
                         <!-- <li><a ng-click="changeLanguage('en')"><i class=""></i> English</a></li>
                         <li><a ng-click="changeLanguage('pseudo')"><i class=""></i>Pseudo</a></li> -->
                     </ul>
                 </div>
                 <div class="ms-footbar-block">
-                    <h3 class="ms-footbar-title">{{"footBar.SUBSCRIPBE" | translate}}</h3>
-                    <p class="">{{"footBar.DESCRIPTION" | translate}}</p>
+                    <h3 class="ms-footbar-title" ng-bind="footBar.SUBSCRIPBE | translate">Subscribe</h3>
+                    <p class="" ng-bind="footBar.DESCRIPTION | translate">We believe in Personalized, Real-Time Venue Experiences.</p>
                     <form>
                         <div class="form-group label-floating mt-2 mb-1">
                             <div class="input-group ms-input-subscribe">
-                                <label class="control-label" for="ms-subscribe"><i class="zmdi zmdi-email"></i> {{"footBar.EMAIL_ADDRESS" | translate}}</label>
+                                <label class="control-label" for="ms-subscribe"><i class="zmdi zmdi-email"></i><span ng-bind="footBar.EMAIL_ADDRESS | translate">Email Adress</span></label>
                                 <input type="email" id="ms-subscribe" class="form-control" ng-model="emailToSend">
                             </div>
                         </div>
-                        <button class="ms-subscribre-btn" type="button" ng-click="sendEmail(emailToSend)">{{"footBar.SUBSCRIPBE" | translate}}</button>
+                        <button class="ms-subscribre-btn" type="button" ng-click="sendEmail(emailToSend)"><span ng-bind="footBar.SUBSCRIPBE | translate">Subscribe</span></button>
                     </form>
                 </div>
             </div>
@@ -36,18 +36,18 @@
                 <div class="ms-footbar-block">
                     <div class="ms-footbar-title">
                         <img class="ms-logo" src="assets/img/logo-collapsed.png" alt="footer-image">
-                        <h3 class="no-m ms-site-title">{{"title.TITLE_VENUE" | translate}}<span>{{"title.TITLE_LYTICS"  | translate}}</span></h3>
+                        <h3 class="no-m ms-site-title" ng-bind="title.TITLE_VENUE | translate">Venue<span ng-bind="title.TITLE_LYTICS | translate">Lytics</span></h3>
                     </div>
                     <address class="no-mb">
-                        <p><i class="color-danger-light zmdi zmdi-pin mr-1"></i> {{"footBar.ADDRESS1"  | translate}}</p>
-                        <p><i class="color-warning-light zmdi zmdi-map mr-1"></i>{{"footBar.ADDRESS2"  | translate}}</p>
-                        <p><i class="color-info-light zmdi zmdi-email mr-1"></i> <a href="mailto:info@venuelytics.com">{{"footBar.EMAIL"  | translate}}</a></p>
+                        <p><i class="color-danger-light zmdi zmdi-pin mr-1"></i> <span ng-bind="footBar.ADDRESS1  | translate">530 Lytton Avenue</span></p>
+                        <p><i class="color-warning-light zmdi zmdi-map mr-1"></i><span ng-bind="footBar.ADDRESS2  | translate">Palo Alto, CA 94304</span></p>
+                        <p><i class="color-info-light zmdi zmdi-email mr-1"></i> <a href="mailto:info@venuelytics.com"><span ng-bind="footBar.EMAIL | translate">info@venuelytics.com</span></a></p>
                         <p><i class="color-royal-light zmdi zmdi-phone mr-1"></i>(408) 372-6453 </p>
                     </address>
                 </div>
 
                 <div class="ms-footbar-block">
-                    <h3 class="ms-footbar-title">{{"footBar.SOCIAL" | translate}}</h3>
+                    <h3 class="ms-footbar-title" ng-bind="footBar.SOCIAL| translate">Social Media</h3>
                     <div class="ms-footbar-social">
                         <a href="{{facebook | translate}}" class="btn-circle btn-facebook" target="_new"><i class="zmdi zmdi-facebook"></i></a>
                         <a href="{{twitter | translate}}" class="btn-circle btn-twitter" target="_new"><i class="zmdi zmdi-twitter"></i></a>

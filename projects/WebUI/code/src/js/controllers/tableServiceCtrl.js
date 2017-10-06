@@ -17,7 +17,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
+                $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
                 self.venueid = $routeParams.venueid;
                 self.getServiceTime();
                 setTimeout(function() {
@@ -25,7 +25,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 }, 600);
                 self.selectedCity = $routeParams.cityName;
                 self.reservationTime = APP_ARRAYS.time;
-                self.tableDate = moment().format('MM/DD/YYYY');
+                self.tableDate = moment().format('YYYY-MM-DD');
                 setTimeout(function() {
                 var divWidth = $(window).width();
                 $("#divObj").width(divWidth);

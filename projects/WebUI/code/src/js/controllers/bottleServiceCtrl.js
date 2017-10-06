@@ -25,7 +25,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
+                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
                 self.venueid = $routeParams.venueid;
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
@@ -89,7 +89,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
                     self.showFloorMapByDate();
                 }
-            });
+            }); 
 
             self.getBottleProducts = function() {
                 AjaxService.getProductOfBottle(self.venueid).then(function(response) {
@@ -109,7 +109,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 self.isFocused = '';
                 self.bottle = {};
                 $rootScope.serviceName = '';
-                self.bottle.requestedDate = moment().format('MM/DD/YYYY');
+                self.bottle.requestedDate = moment().format('YYYY-MM-DD');
             };
 
             self.getMenus = function() {

@@ -16,7 +16,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $rootScope.serviceTabClear = false;
-                $("#requestedDate").datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
+                $("#requestedDate").datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
                 if((Object.keys(DataShare.guestListData).length) !== 0) {
                     self.guest = DataShare.guestListData;
                 } else {
@@ -40,7 +40,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 DataShare.guestListData = {};
                 $rootScope.serviceName = '';
                 self.guest = {};
-                self.guest.requestedDate = moment().format('MM/DD/YYYY');
+                self.guest.requestedDate = moment().format('YYYY-MM-DD');
             };
 
             self.getEventType = function() {

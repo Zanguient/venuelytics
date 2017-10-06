@@ -14,7 +14,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0});
+                $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
                 self.venueID = $routeParams.venueid;
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.party = DataShare.partyServiceData;
@@ -64,7 +64,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 self.party = {};
                 self.partyFocus = '';
                 $rootScope.serviceName = '';
-                self.party.orderDate = moment().format('MM/DD/YYYY');
+                self.party.orderDate = moment().format('YYYY-MM-DD');
             };
 
             self.getEventType = function() {
