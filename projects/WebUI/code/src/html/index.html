@@ -1,12 +1,37 @@
 <!-- build:include layout/header.html --><!-- /build -->
 <div ng-view autoscroll="true">
-        
-    </div>
-
-
-
-
-
+	<div class="container venueBanner">
+		<div class="card venueCard">
+			<div class="item">
+			    <img ng-src="assets/img/screen2.jpg" alt="realTimeHome-image" class="carouselImage" src="assets/img/screen2.jpg">
+			    <div class="custom-carousel backColor">
+					<p class="paragraph-bottom"></p><h1 class="mt0 mb0 fontBold ng-binding" ng-bind="'home.REAL_TIME_HOME' |
+						translate">REAL-TIME VENUE EXPERIENCE PLATFORM</h1><p></p>
+					<p class="paragraph-bottom"></p><h4 class="mt0 mb0 fontBold ng-binding" ng-bind="'home.PERSONALIZED_SERVICES' |
+						translate">Personalized Services to Consumers...</h4><p></p>
+					<p class="paragraph-bottom"></p><h4 class="mt0 mb0 fontBold ng-binding" ng-bind="'home.REALTIME_INSIGHTS' |
+						translate">Real-Time Insights &amp; Loyalty To Venues!</h4><p></p>
+			        <center class="downloadIcon ng-scope">
+						<div class="img-container imgContainer">
+							<div class="img-singleline">
+								<a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&amp;mt=8" target="_new"> <img class="img-singleline-image" alt="apple-image" ng-src="assets/img/apple-store.png" src="assets/img/apple-store.png">
+								</a>
+							</div>
+							<div class="img-singleline">
+								<a href="//play.google.com/store/apps/details?id=com.itzfun.biz&amp;hl=en" target="_new"> <img class="img-singleline-image" alt="android-image" ng-src="assets/img/android.png" src="assets/img/android.png">
+								</a>
+							</div>
+							<div class="img-singleline">
+								<a href="//www.youtube.com/watch?v=ruy7kCuPpV4" target="_new"> <img class="img-singleline-image" alt="video-image" ng-src="assets/img/play_full_color.png" src="assets/img/play_full_color.png">
+								</a>
+							</div>
+						</div>
+					</center>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- build:include layout/footer/footbar.html --><!-- /build -->
 <!-- build:include layout/footer/foot.html --><!-- /build -->
