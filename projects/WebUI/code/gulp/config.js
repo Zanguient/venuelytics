@@ -57,7 +57,7 @@ module.exports = {
             "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
 			'bower_components/angular/angular.min.js',
 			'bower_components/angular-route/angular-route.min.js',
-            'bower_components/momentjs/moment.js',
+           /* 'bower_components/momentjs/min/moment.min.js',*/
             'bower_components/bootstrap-daterangepicker/daterangepicker.js',
             'bower_components/angular-daterangepicker/js/angular-daterangepicker.js',
 			'bower_components/clipboard/dist/clipboard.min.js',
@@ -70,7 +70,6 @@ module.exports = {
             'bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js',
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
-            'bower_components/parsleyjs/dist/parsley.min.js',
             'bower_components/parsleyjs/dist/parsley.min.js',
             'bower_components/inputmask/dist/min/jquery.inputmask.bundle.min.js'               
 
