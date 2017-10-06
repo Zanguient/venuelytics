@@ -1,4 +1,4 @@
-<div class="container venueBanner" ng-cloak>
+<div class="container venueBanner" >
     <div class="banner-fill-img">
         <div class="card venueCard">
             <div id="carousel-example-generic" class="ms-carousel carousel slide"
@@ -20,8 +20,8 @@
                     <div class="item active">
                         <img ng-src="<%= assets %>/img/screen2.jpg" alt="realTimeHome-image" class="carouselImage">
                         <div class="custom-carousel backColor">
-                            <p class="paragraph-bottom"><h1 class="mt0 mb0 fontBold">{{"home.REAL_TIME_HOME" |
-                                translate}}</h1></p>
+                            <p class="paragraph-bottom"><h1 class="mt0 mb0 fontBold" ng-bind="home.REAL_TIME_HOME |
+                                translate">Real Time Home</h1></p>
                             <p class="paragraph-bottom"><h4 class="mt0 mb0 fontBold">{{"home.PERSONALIZED_SERVICES" |
                                 translate}}</h4></p>
                             <p class="paragraph-bottom"><h4 class="mt0 mb0 fontBold">{{"home.REALTIME_INSIGHTS" |

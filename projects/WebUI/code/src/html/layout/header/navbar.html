@@ -1,5 +1,5 @@
 <nav class="navbar navbar-static-top yamm ms-navbar <%= navbarClass %>" id="navBar" ng-hide="embeddedFlag === true">
-    <div class="container container-full" ng-cloak>
+    <div class="container container-full" >
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">
                 <img class = "ms-logo" src="<%= assets %>/img/logo-collapsed.png" alt="navbar-image">
@@ -10,7 +10,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown {{$root.homeTab}}">
-                    <a ng-href="home" class="dropdown-toggle animated fadeIn animation-delay-4" data-toggle="dropdown" data-hover="dropdown" role="button" data-name="home">{{"navbar.HOME" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
+                    <a ng-href="home" class="dropdown-toggle animated fadeIn animation-delay-4" data-toggle="dropdown" data-hover="dropdown" role="button" data-name="home" ng-bind="navbar.HOME | translate">Home<i class="zmdi zmdi-chevron-down"></i></a>
                     
 
                 </li>
