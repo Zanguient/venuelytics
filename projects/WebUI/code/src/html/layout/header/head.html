@@ -17,9 +17,9 @@
     <base href="<%= context %>">
     <title ng-bind="title"></title>
     <link rel="shortcut icon" href="<%= assets %>/img/logo-collapsed.png">
-
-    <style>
-    /* fallback */
+    <style >
+    
+        /* fallback */
         @font-face {
           font-family: 'Material Icons';
           font-style: normal;
@@ -42,7 +42,9 @@
           -moz-font-feature-settings: 'liga';
           -moz-osx-font-smoothing: grayscale;
         }
+
     </style>
+  
     <!-- build:css:dist,navbar,demo <%=assets%>/css/preload.min.css -->
         <link rel="stylesheet" href="<%= assets %>/css/preload.css">
     <!-- /build -->
@@ -63,10 +65,6 @@
         <link rel="stylesheet" href="<%= assets %>/css/style.themed.css">
     <!-- /build -->
 
-
-    <!-- build:remove:dist,navbar,dev -->
-        <link rel="stylesheet" href="<%= assets %>/css/width-boxed.min.css" id="ms-boxed" disabled="">
-    <!-- /build -->
 
     <!--[if lt IE 9]>
         <script src="<%= assets %>/js/html5shiv.min.js"></script>
