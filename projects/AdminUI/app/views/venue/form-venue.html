@@ -92,16 +92,18 @@
   <br />
   <carousel id="venueImageCarousel" interval="5000" class="col-sm-12">
     <slide ng-repeat="slide in imageUrl track by slide.id" active="slide.active">
-      <div style="display: inline-block;">
-        <img ng-src="{{slide.mediumUrl}}" class="img-responsive" style="max-width: 640px; height: 300px; max-height: 300px; margin: auto;"/>
+     
+      <div style="display: inline-block; width: 100%;">
+        <img ng-src="{{slide.mediumUrl}}" class="img-responsive" style="width: 100%;max-width: 640px; height: 300px; max-height: 300px; margin: auto;"/>
         <div class="carousel-caption"><h2  ng-bind="slide.status"></h2></div>
-        <div class="bg-gray-darker col-sm-12" ng-show="imageUrl.length > 0"> 
-          <a href="javascript:void(0)"> 
-              <em class="fa fa-trash fa-2x pull-right" ng-click="deleteImage($index,slide)" />
-            </a>
-        </div>
       </div>
+    
+     <div style="position: absolute; top:5px; right:5px; z-index: 999" > 
+          <button class="btn btn-sm btn-danger fa fa-trash fa-2x" ng-click="deleteImage($index,slide)"> 
+            </button>
+      </div>  
     </slide>
+
   </carousel>
   
     

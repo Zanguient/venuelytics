@@ -387,8 +387,7 @@ gulp.task('templates:views', function() {
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
-  livereload.listen();
-
+  
   gulp.watch(source.scripts.watch,           ['scripts:app']);
   gulp.watch(source.styles.app.watch,        ['styles:app', 'styles:app:rtl']);
   gulp.watch(source.styles.themes.watch,     ['styles:themes']);
@@ -397,13 +396,7 @@ gulp.task('watch', function() {
   gulp.watch(source.templates.views.watch,   ['templates:views', 'bust-template']);
   gulp.watch(source.templates.app.watch,     ['templates:app', 'bust-template']);
 
-  gulp.watch(
-      '../app/**', livereload.changed).on('change', function(event) {
-      livereload.changed();
-      console.log('Triggering LiveReload..');
-      // console.log('File', event.path, 'was', event.type);
-      console.log('Triggered LiveReload..');
-  });
+  
 
 });
 
@@ -483,38 +476,6 @@ gulp.task('package:build', ['package:src', 'package:vendor'], function () {
 });
 
 gulp.task('dist', gulpSequence('clean','package:build'));
-
-gulp.task('aws:deploy', ['dist'], function () {
-      
-    var publisher = awspublish.create({
-        region: 'us-west-1',
-        params: {
-          Bucket: 'dev.admin.itzfun.com'
-        }
-      }, {
-        cacheFileName: '../cache/dev.admin.itzfun.com.cache'
-      });
-     
-      // define custom headers 
-      var headers = {
-        'Cache-Control': 'max-age=315360000, no-transform, public'
-        // ... 
-      };
-     
-      return gulp.src(['../dist/**'])
-         // gzip, Set Content-Encoding headers and add .gz extension 
-        .pipe(awspublish.gzip())
-     
-        // publisher will add Content-Length, Content-Type and headers specified above 
-        // If not specified it will set x-amz-acl to public-read by default 
-        .pipe(publisher.publish(headers))
-     
-        // create a cache file to speed up consecutive uploads 
-        .pipe(publisher.cache())
-     
-         // print upload updates to console 
-        .pipe(awspublish.reporter());
-});
 
 
 // Error handler
