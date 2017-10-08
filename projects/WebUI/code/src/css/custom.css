@@ -3215,3 +3215,7 @@ table.fc-border-separate {
   _overflow: hidden;
   }
   
+  p.lato {
+    font-family: 'Lato', sans sarif;
+    font-size: 1.4em;
+  }
