@@ -773,6 +773,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     .img-singleline-image {
       /*width: 90px !important;*/
       height: 40px !important;
+      width: auto !important;
     }
 
     #removeBtn {
@@ -1117,7 +1118,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
   .img-singleline-image {
     /*width: 90px !important;*/
-    height: 40px !important;;
+    height: 40px !important;
+    width: auto !important;
   }
 
 
@@ -1454,7 +1456,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
   .img-singleline-image {
     width: 90px !important;
-    height: 28px !important;;
+    height: auto !important;
   }
 
   .img-container {
@@ -1646,7 +1648,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
   .img-singleline-image {
     width: 90px !important;
-    height: 28px !important;;
+    height: auto !important;
   }
 
   .sendEmailButton {
@@ -1938,7 +1940,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
   .img-singleline-image {
     width: 90px !important;
-    height: 28px !important;
+    height: auto !important;
   }
 
   .img-container {
