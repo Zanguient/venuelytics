@@ -13,6 +13,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             var previousPageSize = 0;
             self.next = false;
             self.searchVenue = false;
+            $rootScope.showItzfun = true;
             $rootScope.showSearchBox = true;
             $rootScope.businessSearch = false;
             $rootScope.searchVenue = false;

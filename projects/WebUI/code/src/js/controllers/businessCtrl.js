@@ -12,6 +12,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             $rootScope.showSearchBox = false;
             $rootScope.businessSearch = true;
             $rootScope.searchVenue = false;
+            $rootScope.showItzfun = false;
             self.newUser = {
                 businessName: '',
                 address: '',
@@ -32,6 +33,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.successMessage = !!$location.search().successful ;
             
             self.init = function() {
+                self.embeddedVideo = APP_LINK.VIDEO_PLAY;
                 self.venueLyticsFeatures = APP_ARRAYS.features;
                 self.linkToPath = APP_ARRAYS.breakThrough;
                 self.venueid = $routeParams.venueid;
@@ -242,4 +244,9 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
 			self._Index = index;
 			};
         self.init(); 		
+    }]).filter('trusted', ['$sce', function ($sce) {
+        return function(url) {
+                var video_id = url.split('v=')[1].split('&')[0];
+            return $sce.trustAsResourceUrl("//www.youtube.com/embed/" + video_id);
+        };
     }]);

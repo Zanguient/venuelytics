@@ -59,10 +59,18 @@
                         <a href="{{twitter | translate}}" class="btn-circle btn-twitter" target="_new"><i class="zmdi zmdi-twitter"></i></a>
                         <a href="{{instagram | translate}}" class="btn-circle btn-instagram" target="_new"><i class="zmdi zmdi-instagram"></i></a><br/>
                     </div>
-                    <a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8" target="_new"> <img class="img-singleline-image footerApple" alt="footerApple-image" ng-src="assets/img/apple-store.png" />
-                    </a>
-                    <a href="//play.google.com/store/apps/details?id=com.itzfun.biz&hl=en" target="_new"> <img class="img-singleline-image footerAndroid" alt="foterAndroid-image" ng-src="assets/img/android.png" />
-                    </a>
+                    <div ng-if="showItzfun != true">
+                        <a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8" target="_new"> <img class="img-singleline-image footerApple" alt="footerApple-image" ng-src="assets/img/apple-store.png" />
+                        </a>
+                        <a href="//play.google.com/store/apps/details?id=com.itzfun.biz&hl=en" target="_new"> <img class="img-singleline-image footerAndroid" alt="foterAndroid-image" ng-src="assets/img/android.png" />
+                        </a>
+                    </div>
+                    <div ng-if="showItzfun === true">
+                        <a href="//itunes.apple.com/us/app/itzfun/id1035171101?mt=8" target="_new"> <img class="img-singleline-image footerApple" alt="footerApple-image" ng-src="assets/img/apple-store.png" />
+                        </a>
+                        <a href="//play.google.com/store/apps/details?id=com.itzfun&hl=en" target="_new"> <img class="img-singleline-image footerAndroid" alt="foterAndroid-image" ng-src="assets/img/android.png" />
+                        </a>
+                    </div>                    
                 </div>
             </div>
         </div>

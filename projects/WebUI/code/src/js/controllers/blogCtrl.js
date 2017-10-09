@@ -12,6 +12,7 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
         $rootScope.showSearchBox = true;
         $rootScope.businessSearch = false;
         $rootScope.searchVenue = false;
+        $rootScope.showItzfun = false;
 
         self.blogs = APP_ARRAYS.blogs;
 

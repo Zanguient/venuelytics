@@ -13,6 +13,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
     $rootScope.showSearchBox = true;
     $rootScope.businessSearch = false;
     $rootScope.searchVenue = false;
+    $rootScope.showItzfun = false;
     $rootScope.homeTab = 'active';
     self.clientImages = APP_CLIENTS.clientImages;
     $rootScope.businessRoles = APP_ARRAYS.roles;

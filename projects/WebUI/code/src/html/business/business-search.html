@@ -93,8 +93,12 @@
 <div class="img-singleline col-sm-12">
     <br>
     <center>
-    <a href="//www.youtube.com/watch?v=ruy7kCuPpV4" target="_new" class="btn btn-raised btn-round-lg"> <img class="img-singleline-image " alt="video-image" ng-src="assets/img/play_full_color.png" src="assets/img/play_full_color.png">
-    </a>
+    <!-- <a href="//www.youtube.com/watch?v=ruy7kCuPpV4" target="_new" class="btn btn-raised btn-round-lg"> <img class="img-singleline-image " alt="video-image" ng-src="assets/img/playicon.png" src="assets/img/playicon.png">
+    </a> -->
+    <div>
+        <iframe width="560" height="315" ng-src="{{embeddedVideo | trusted}}" 
+          frameborder="0" allowfullscreen></iframe>
+     </div>
     </center>
 </div>
 
@@ -135,7 +139,7 @@
                     ng-model="searchBusiness" name="searchBox">
                 </div>
                 <div class="col-md-3">
-                    <button type="submit" class="btn btn-raised btn-primary" ng-click="search()">{{"business.SEARCH" | translate}}</button>
+                    <button type="submit" class="btn btn-raised btn-primary" ng-click="search(searchBusiness)">{{"business.SEARCH" | translate}}</button>
                 </div>
             </div>
         </fieldset>
