@@ -2419,7 +2419,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 .ms-hero-turnkey {
-  background-image: url("../img/turn_key.PNG");
+  background-image: url("/assets/img/turn_key.PNG");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

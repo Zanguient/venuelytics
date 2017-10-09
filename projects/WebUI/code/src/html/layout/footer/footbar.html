@@ -42,7 +42,11 @@
                 <div class="ms-footbar-block">
                     <div class="ms-footbar-title">
                         <img class="ms-logo" src="assets/img/logo-collapsed.png" alt="footer-image">
-                        <h3 class="no-m ms-site-title" ng-bind="'title.TITLE_VENUE' | translate">Venue<span ng-bind="'title.TITLE_LYTICS' | translate">Lytics</span></h3>
+                        <h3 class="no-m ms-site-title">
+                            <font color="black" ng-bind="'title.TITLE_VENUE' | translate">Venue</font>
+                             <font color="green" ng-bind="'title.TITLE_LYTICS' | translate">Lytics</font>
+                        </h3>
+
                     </div>
                     <address class="no-mb">
                         <p><i class="color-danger-light zmdi zmdi-pin mr-1"></i> <span ng-bind="'footBar.ADDRESS1'  | translate">530 Lytton Avenue</span></p>
