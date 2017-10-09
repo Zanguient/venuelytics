@@ -18,13 +18,13 @@
                                         <img ng-repeat="slide in business.imageUrls" class="slide businessImage col-sm-12" ng-swipe-right="showPrev(slide)"
                                         ng-swipe-left="showNext(slide)" ng-show="isActive($index)"
                                         ng-src="{{slide.originalUrl}}" alt="business-image" />
-                                        <ul class="buttonNav">
-                                            <li ng-repeat="slide in business.imageUrls"
-                                            ng-class="{'active':isActive($index)}"><img
-                                            ng-src="{{slide.originalUrl}}"
-                                            class="img-responsive sliderThumb" alt="busSearch-image" ng-click="showPhoto(slide,$index);" />
-                                        </li>
-                                    </ul>
+                                       <!--  <ul class="buttonNav">
+                                           <li ng-repeat="slide in business.imageUrls"
+                                           ng-class="{'active':isActive($index)}"><img
+                                           ng-src="{{slide.originalUrl}}"
+                                           class="img-responsive sliderThumb" alt="busSearch-image" ng-click="showPhoto(slide,$index);" />
+                                       </li>
+                                                                           </ul> -->
                                 </div>
                             </div>
                             <div class="col-md-5 col-sm-6">
