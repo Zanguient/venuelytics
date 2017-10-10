@@ -7,7 +7,7 @@
                     <ul class="list-unstyled ms-icon-list three_cols">
                         <li ng-click="navBar(1)"><a href="home"><i class="zmdi zmdi-home"></i>
                             <span ng-bind="('navbar.HOME' | translate)">Home</span></a></li>
-                        <li ng-click="navBar(2)" ng-show="((showBusinessLink) && ($root.showBusinessTab == 1))"><a href="searchBusiness"><i class="zmdi zmdi-edit"></i>
+                        <li ng-click="navBar(2)" ng-show="showBusinessLink"><a href="searchBusiness"><i class="zmdi zmdi-edit"></i>
                             <span ng-bind="('navbar.BUSINESS' | translate)">Business</span></a></li>
                         <li ng-click="navBar(3)"><a href="cities"><i class="zmdi zmdi-image-o"></i>
                             <span ng-bind="'navbar.CONSUMERS' | translate">Consumers</span></a></li>

@@ -115,15 +115,17 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 
         var urlPattern = $location.absUrl();
         var data = urlPattern.split(".");
-        if(data[1] === "itzfun") {
+        if(urlPattern.toLowerCase().indexOf("itzfun.com")>= 0) {
             $rootScope.facebook = APP_LINK.FACEBOOK_ITZFUN;
             $rootScope.twitter = APP_LINK.TWITTER_ITZFUN;
             $rootScope.instagram = APP_LINK.INSTAGRAM_ITZFUN;
             $location.url('/cities');
+            $scope.showBusinessLink = false;
         } else {
             $rootScope.facebook = APP_LINK.FACEBOOK_VENUELYTICS;
             $rootScope.twitter = APP_LINK.TWITTER_VENUELYTICS;
             $rootScope.instagram = APP_LINK.INSTAGRAM_VENUELYTICS;
+            $scope.showBusinessLink = true;
         }
         $rootScope.venuelyticsAppUrl = APP_LINK.APPLE_STORE_VENUELYTICS;
         $rootScope.itzfunAppUrl = APP_LINK.APPLE_STORE_ITZFUN;
