@@ -1406,7 +1406,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   .imgContainer {
     width: 460px;
     height: 35px;
-    margin-left: 50px;
   }
 
   #deployStepsInput {
@@ -1455,8 +1454,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 
   .img-singleline-image {
-    width: 90px !important;
-    height: auto !important;
+    height: 40px !important;
+    width: auto !important;
   }
 
   .img-container {
@@ -1647,8 +1646,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 
   .img-singleline-image {
-    width: 90px !important;
-    height: auto !important;
+    height: 40px !important;
+    width: auto !important;
   }
 
   .sendEmailButton {
@@ -1657,7 +1656,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 
   .imgContainer {
-    margin-left: 95px;
     width: 460px;
     height: 35px;
   }
@@ -1887,7 +1885,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 
   .imgContainer {
-    margin-left: 115px;
     width: 460px;
     height: 35px;
   }
@@ -1939,8 +1936,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-right: 5px;
   }
   .img-singleline-image {
-    width: 90px !important;
-    height: auto !important;
+    height: 40px !important;
+    width: auto !important;
   }
 
   .img-container {
