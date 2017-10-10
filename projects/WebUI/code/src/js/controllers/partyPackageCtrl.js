@@ -10,7 +10,8 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             var self = $scope;
             self.partyDateIsFocused = 'is-focused';
             self.init = function() {
-                $rootScope.title = 'Venuelytics-Party-Packages';
+                self.venudetails = DataShare.venueFullDetails;
+                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Party Package Services";
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());

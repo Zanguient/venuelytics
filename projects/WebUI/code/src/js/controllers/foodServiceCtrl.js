@@ -9,7 +9,8 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             self.selectedFoodList = [];
             self.foodType = 'Delivery';
             self.init = function() {
-                $rootScope.title = 'Venuelytics-Food-Services';
+                self.venudetails = DataShare.venueFullDetails;
+                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Food Services";
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;

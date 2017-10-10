@@ -16,7 +16,9 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
-                $rootScope.title = 'Venuelytics-Bottle-Confirmation';
+                $rootScope.description = DataShare.eachVenueDescription;
+                self.venudetails = DataShare.venueFullDetails;
+                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services Confirmation & Payment";
                 self.editCity = $routeParams.cityName;
                 self.venueID = $routeParams.venueid;
                 self.userData = DataShare.bottleServiceData;

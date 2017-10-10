@@ -10,7 +10,9 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$http', '$locatio
 
             var self = $scope;
             self.init = function() {
-                $rootScope.title = 'Venuelytics-Private-Confirmation';
+                $rootScope.description = DataShare.eachVenueDescription;
+                self.venudetails = DataShare.venueFullDetails;
+                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Private Event Confirmation";
                 self.editCity = $routeParams.cityName;
                 self.editVenueID = $routeParams.venueid;
                 self.privateEventData = DataShare.privateEventData;

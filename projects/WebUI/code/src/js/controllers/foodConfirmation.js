@@ -11,7 +11,9 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             self.chargedAmount = 0;
             self.totalChargedAmount = 0;
             self.init = function() {
-                $rootScope.title = 'Venuelytics-Food-Confirmation';
+                $rootScope.description = DataShare.eachVenueDescription;
+                self.venudetails = DataShare.venueFullDetails;
+                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+"Food Services Confirmation & Payment";
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;

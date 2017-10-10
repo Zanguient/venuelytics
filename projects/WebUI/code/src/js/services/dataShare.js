@@ -43,6 +43,8 @@ app.service('DataShare', function() {
   this.selectedDrinks = '';
   this.amount = '';
   this.privateOrderItem = '';
+  this.eachVenueDescription = '';
+  this.venueFullDetails = '';
 
   /*this.getCurrentLocation = function() {
 
