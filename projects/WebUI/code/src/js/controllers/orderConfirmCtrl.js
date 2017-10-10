@@ -10,7 +10,10 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location'
 
     		var self = $scope;
     		self.selectedCityName = $routeParams.cityName;
-            self.venueID = $routeParams.venueid;
+			self.venueID = $routeParams.venueid;
+			$rootScope.description = DataShare.eachVenueDescription;
+			self.venudetails = DataShare.venueFullDetails;
+			$rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services Confirmation";
         	self.backToReservation = function() {
 				$rootScope.serviceName = 'BottleService';
 				DataShare.editBottle = 'false';

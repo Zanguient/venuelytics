@@ -10,7 +10,8 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             var self = $scope;
             self.privateDateIsFocused = 'is-focused';
             self.init = function() {
-                $rootScope.title = 'Venuelytics-Private-Events';
+                self.venudetails = DataShare.venueFullDetails;
+                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Private Event";
                 $rootScope.serviceTabClear = false;
                 self.venueID = self.venueid = $routeParams.venueid;
                 self.getServiceTime();

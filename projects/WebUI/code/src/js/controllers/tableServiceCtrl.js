@@ -9,7 +9,9 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             self.reservedTimeSlot = '';
             self.timeSlot = false;
             self.init = function() {
-                $rootScope.title = 'Venuelytics-Table-Services';
+                $rootScope.description = DataShare.eachVenueDescription;
+                self.venudetails = DataShare.venueFullDetails;
+                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Table Services";
                 var embed = $routeParams.embed;
                 if(embed === "embed") {
                     $rootScope.embeddedFlag = true;

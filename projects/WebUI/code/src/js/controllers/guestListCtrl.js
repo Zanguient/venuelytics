@@ -11,7 +11,8 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             var self = $scope;
             self.guestDateIsFocused = 'is-focused';
             self.init = function() {
-                $rootScope.title = 'Venuelytics-Guest-List';
+                self.venudetails = DataShare.venueFullDetails;
+                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Guest List";
                 self.venueid = $routeParams.venueid;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());

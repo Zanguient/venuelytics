@@ -25,7 +25,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
 
     self.init = function() {
-        
+        localStorage.clear();
 
         /*jshint maxcomplexity:14 */
         if($rootScope.serviceName === 'GuestList') {
@@ -66,11 +66,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         if(DataShare.tableSelection) {
             self.tableSelection = DataShare.tableSelection;
         }
-        
+
         //self.reservationTime = APP_ARRAYS.time;
         AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
             self.detailsOfVenue = response;
+            $rootScope.description = self.detailsOfVenue.description;
+            DataShare.eachVenueDescription = self.detailsOfVenue.description;
             self.selectedCity = $routeParams.cityName;
+            DataShare.venueFullDetails = self.detailsOfVenue;
             self.venueName =  $rootScope.headerVenueName = self.detailsOfVenue.venueName;
             $rootScope.headerAddress = self.detailsOfVenue.address;
             $rootScope.headerWebsite = self.detailsOfVenue.website;
