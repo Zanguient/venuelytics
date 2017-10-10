@@ -68,41 +68,41 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
         
         //self.reservationTime = APP_ARRAYS.time;
-            AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
-                self.detailsOfVenue = response;
-                self.selectedCity = $routeParams.cityName;
-                self.venueName =  $rootScope.headerVenueName = self.detailsOfVenue.venueName;
-                $rootScope.headerAddress = self.detailsOfVenue.address;
-                $rootScope.headerWebsite = self.detailsOfVenue.website;
-                self.imageParam = $location.search().i;
-                self.detailsOfVenue.imageUrls[0].active = 'active';
-                self.venueImage = self.detailsOfVenue;
-                AjaxService.getInfo(self.venueid).then(function(response) {
-                    self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
-                    self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
-                    self.bottleServiceButton = response.data["Advance.BottleService.enable"];
-                    self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
-                    self.guestServiceButton = response.data["Advance.GuestList.enable"];
-                    self.tableServiceButton = response.data["Advance.tableService.enable"];
-                    self.featuredEnable = response.data["Advance.featured"];
-                    self.eventsEnable = response.data["venueEvents"];
-                    if(self.embeddedService === 'new') {
-                        $rootScope.embedColor = response.data["ui.service.bgcolor"];
-                        $rootScope.venueHeader = response.data["ui.custom.header"];
-                        $rootScope.venueFooter = response.data["ui.custom.footer"];
-                        $rootScope.embeddedFlag = true;
-                    }
-                    self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
-                    self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
-                    self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
-                    self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
-                    self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
-                    self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
-                    self.eventsEnable = self.eventsEnable === 'Y' ? false : true; 
-                    self.dispatchToService(self.tabParams);
-                    addTabs();
-                }); 
-            });
+        AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
+            self.detailsOfVenue = response;
+            self.selectedCity = $routeParams.cityName;
+            self.venueName =  $rootScope.headerVenueName = self.detailsOfVenue.venueName;
+            $rootScope.headerAddress = self.detailsOfVenue.address;
+            $rootScope.headerWebsite = self.detailsOfVenue.website;
+            self.imageParam = $location.search().i;
+            self.detailsOfVenue.imageUrls[0].active = 'active';
+            self.venueImage = self.detailsOfVenue;
+            AjaxService.getInfo(self.venueid).then(function(response) {
+                self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
+                self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
+                self.bottleServiceButton = response.data["Advance.BottleService.enable"];
+                self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
+                self.guestServiceButton = response.data["Advance.GuestList.enable"];
+                self.tableServiceButton = response.data["Advance.tableService.enable"];
+                self.featuredEnable = response.data["Advance.featured"];
+                self.eventsEnable = response.data["venueEvents"];
+                if(self.embeddedService === 'new') {
+                    $rootScope.embedColor = response.data["ui.service.bgcolor"];
+                    $rootScope.venueHeader = response.data["ui.custom.header"];
+                    $rootScope.venueFooter = response.data["ui.custom.footer"];
+                    $rootScope.embeddedFlag = true;
+                }
+                self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
+                self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
+                self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
+                self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
+                self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
+                self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
+                self.eventsEnable = self.eventsEnable === 'Y' ? false : true; 
+                self.dispatchToService(self.tabParams);
+                addTabs();
+            }); 
+        });
     };
     self.getServiceTime = function() {
         var reservationTime;

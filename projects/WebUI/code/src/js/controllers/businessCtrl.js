@@ -31,7 +31,13 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.businessImage = DataShare.businessImage;
             var response = DataShare.businessUrl;
             self.successMessage = !!$location.search().successful ;
-            
+            var utmPayload = {};
+            utmPayload.utmSource = $location.search().utm_source;
+            utmPayload.utmMedium = $location.search().utm_media;
+            utmPayload.utmCampaign = $location.search().utm_campaign;
+            utmPayload.utmContent = $location.search().utm_content;
+            utmPayload.referenceId = $location.search().reference_id;
+            utmPayload.utmTerm = "VenueLytics";
             self.init = function() {
                 self.embeddedVideo = APP_LINK.VIDEO_PLAY;
                 self.venueLyticsFeatures = APP_ARRAYS.features;
@@ -44,6 +50,18 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                     $rootScope.facebook = APP_LINK.FACEBOOK_VENUELYTICS;
                     $rootScope.twitter = APP_LINK.TWITTER_VENUELYTICS;
                     $rootScope.instagram = APP_LINK.INSTAGRAM_VENUELYTICS;
+                    utmPayload.utmTerm = "ItzFun";
+                }
+                if (typeof utmPayload.utmSource  !== 'undefined' && typeof utmPayload.utmSource  !== 'undefined' ) {
+                    var userAgent = '';
+                    if (typeof $window.navigator !== 'undefined') {
+                        userAgent = $window.navigator.userAgent;
+                    } 
+                    var rawreq = $location.absUrl();
+                    utmPayload.agentInfo = userAgent;
+                    utmPayload.type = 'BusinessSearch';
+                    utmPayload.request = rawreq; 
+                    AjaxService.recordUTM(utmPayload);
                 }
                 self.listOfCategory = APP_ARRAYS.categories;
                 self.listOfRoles = APP_ARRAYS.roles;

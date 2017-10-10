@@ -392,7 +392,25 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         return randomString;
     
     }
+
+    this.recordUTM = function(payload) {
+
+        return $http({
+                method: 'POST',
+                url: RestURL.baseURL + 'utmrequest' ,
+                data: payload
+               
+            }).then(function(response) {
+                return response;
+            }, function(error) {
+                $log.error('Error: ' + error);
+                return error;
+        });
+
+    };
+
     this.utmRequest = function(venueNumber, serviceType, utmSource, utmMedium, campaignName, rawreq, agent ) {
+        
         if (typeof utmSource === 'undefined' || utmSource === '') {
             return;
         }
@@ -408,16 +426,6 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         venueNumber : venueNumber, utmCampaign : campaignName || '', referenceId: referenceId,
         request: rawreq, agentInfo: agent};
 
-        return $http({
-                method: 'POST',
-                url: RestURL.baseURL + 'utmrequest' ,
-                data: data
-               
-            }).then(function(response) {
-                return response;
-            }, function(error) {
-                $log.error('Error: ' + error);
-                return error;
-        });
+        recordUTM(data);
     };
 }]);
