@@ -543,8 +543,24 @@ a.btn.disabled,fieldset[disabled] a.btn {
   pointer-events:none
 }
 
-@media screen and (min-width: 1990px) and (max-width:
-5500px) {
+ .img-container {
+   width: 460px;
+   height: 55px;
+ }
+
+ .img-singleline {
+   display: inline-block;
+   float: left;
+   padding: 0 5px;
+   margin-bottom: 10px;
+ }
+
+.img-singleline img {
+    height: 40px !important;
+    width: auto !important;
+}
+
+@media screen and (min-width: 1990px) and (max-width: 5500px) {
 
   .withoutTabs {
     color:black;
@@ -571,22 +587,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
    margin-left: 137px;
  }
 
- .img-singleline {
-   display: inline-block;
-   float: left;
-   padding: 0 10px;
-   margin-bottom: 10px;
- }
-
- .img-singleline img {
-   /*width: 90px !important;*/
-   height: 40px !important;
- }
-
- .img-container {
-   width: 500px;
-   height: 55px;
- }
 
 }
 
@@ -655,22 +655,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     width:1000px;
   }
 
-  .img-singleline {
-    display: inline-block;
-    float: left;
-    padding: 0 10px;
-    margin-bottom: 10px;
-  }
-
-  .img-singleline img {
-    /*width: 90px !important;*/
-    height: 40px !important;
-  }
-
-  .img-container {
-    width: 500px;
-    height: 55px;
-  }
 
   #forMobile {
     height: 690px;
@@ -692,18 +676,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
       height: 243px;
     }
 
-    .citiesImgContainer {
-      margin-left: 150px;
-    }
 
     #private-card-margin {
       margin-bottom: 0px;
     }
 
-    .cities-img-container {
-      width: 500px;
-      height: 55px;
-    }
 
     .private-details {
       width: 1030px;
@@ -770,31 +747,12 @@ a.btn.disabled,fieldset[disabled] a.btn {
       color: white;
      }
 
-    .img-singleline-image {
-      /*width: 90px !important;*/
-      height: 40px !important;
-      width: auto !important;
-    }
 
     #removeBtn {
       margin-left: 200px;
     }
 
-    .img-container {
-      width: 500px;
-      height: 55px;
-    }
-
-    .img-singleline {
-      display: inline-block;
-      float: left;
-      padding: 0 10px;
-      margin-bottom: 10px;
-    }
-
-    .imgContainer {
-      margin-left: 150px;
-    }
+  
 
     #forMobile {
      height: 690px;
@@ -826,15 +784,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
       margin-bottom: 0px;
     }
 
-  .citiesImgContainer {
-    margin-left: 150px;
-    margin-top: 250px;
-  }
-
-  .cities-img-container {
-    width: 500px;
-    height: 55px;
-  }
   .smartbanner-icon{
     position:absolute;
     left:50px;
@@ -1105,32 +1054,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
     min-width: 200px;
   }
 
-  .img-container {
-    width: 500px;
-    height: 55px;
-  }
-
-  .img-singleline {
-    display: inline-block;
-    float: left;
-    padding: 0 10px;
-    margin-bottom: 10px;
-  }
-  .img-singleline-image {
-    /*width: 90px !important;*/
-    height: 40px !important;
-    width: auto !important;
-  }
-
 
   .sendEmailButton {
     width: 200px !important;
     margin-left: 10px !important;
-  }
-
-  .imgContainer {
-    margin-left: 100px;
-    margin-top: 160px;
   }
 
   .paragraph-bottom {
@@ -1210,17 +1137,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     padding-left: 0px;
   }
 
-  .citiesImgContainer {
-    width: 460px;
-    height: 35px;
-    margin-top: -60px;
-    margin-left: -323px;
-  }
 
-  .cities-img-container {
-    width: 460px;
-    height: 55px;
-  }
   .smartbanner-icon{
     position:absolute;
     left:30px;
@@ -1403,10 +1320,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     padding-right: 15px;
   }
 
-  .imgContainer {
-    width: 460px;
-    height: 35px;
-  }
 
   #deployStepsInput {
     margin-top: 5px;
@@ -1447,21 +1360,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     width: 74px;
   }
 
-  .img-singleline {
-    float: left;
-    margin-bottom: 10px;
-    margin-right: 5px;
-  }
 
-  .img-singleline-image {
-    height: 40px !important;
-    width: auto !important;
-  }
-
-  .img-container {
-    width: 460px;
-    height: 55px;
-  }
 
   .sendEmailButton {
     width: 200px !important;
@@ -1532,12 +1431,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
         margin-left: -195px;
     }
 
-      .citiesImgContainer {
-        margin-left: -255px;
-        width: 460px;
-        height: 35px;
-      }
-      .smartbanner-icon{
+
+    .smartbanner-icon{
         position:absolute;
         left:30px;
         top:10px;
@@ -1640,24 +1535,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-left: 85px;
   }
 
-  .img-singleline {
-    float: left;
-    margin-right: 5px;
-  }
-
-  .img-singleline-image {
-    height: 40px !important;
-    width: auto !important;
-  }
 
   .sendEmailButton {
     width: 200px !important;
     margin-left: 10px !important;
-  }
-
-  .imgContainer {
-    width: 460px;
-    height: 35px;
   }
 
   .paragraph-bottom {
@@ -1719,16 +1600,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
         margin-left: -200px;
     }
 
-      .citiesImgContainer {
-        width: 460px;
-        height: 35px;
-      }
-    
-      .cities-img-container {
-        margin-left: -220px;
-        width: 460px;
-        height: 55px;
-      }
     .smartbanner-icon{
         position:absolute;
         left:30px;
@@ -1884,10 +1755,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     padding-right: 15px;
   }
 
-  .imgContainer {
-    width: 460px;
-    height: 35px;
-  }
 
   #deployStepsInput {
     margin-top: 5px;
@@ -1928,23 +1795,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     width: 74px;
   }
 
-  .img-singleline {
-    float: left;
-    width: 90px;
-    height: 28px;
-    margin-bottom: 10px;
-    margin-right: 5px;
-  }
-  .img-singleline-image {
-    height: 40px !important;
-    width: auto !important;
-  }
-
-  .img-container {
-    width: 460px;
-    height: 55px;
-  }
-
+  
   .sendEmailButton {
     width: 200px !important;
     margin-left: 10px !important;
