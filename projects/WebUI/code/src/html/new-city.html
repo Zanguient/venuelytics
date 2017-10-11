@@ -1,13 +1,8 @@
-<style>
- .playVideo {
-    z-index: 100;position: absolute;left: 350px;top: 200px;
-  }
-</style>
 <div id="container" class="container venueBanner venueContainer">
-        <ng-include class="playVideo" src="'cities-apps-image.html'" scope="" onload=""></ng-include>
     <div class="banner-fill-img">
         <img ng-src="assets/img/demo/banner.jpg" alt="banner-image" id="forMobile">
     </div>
+    <ng-include class="row col-sm-12" style="bottom: 75px;" src="'cities-apps-image.html'"></ng-include>
 </div>
 <!-- container -->
 <div class="city" ng-cloak>

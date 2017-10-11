@@ -316,10 +316,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $rootScope.showBusinessLink = true;
     $rootScope.embeddedFlag = false;
     var defaultPage = '/home';
-    /* if (hostName.indexOf("itzfun.com") >= 0){
-        defaultPage = '/cities';
-        $rootScope.showBusinessLink = false;
-    } */
+    
     setTimeout(function(){
         $('.wait_loading_above_fold').remove();
     },300); 
