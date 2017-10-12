@@ -20,8 +20,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.sum = 0;
             self.bottleDateIsFocused = 'is-focused';
             self.init = function() {
-                self.venudetails = DataShare.venueFullDetails;
-                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services";
                 //$("div.form-group").add("style", "margin-left: auto");
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
@@ -61,6 +59,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
 
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
+                    DataShare.venueFullDetails = self.detailsOfVenue;
+                    self.venudetails = DataShare.venueFullDetails;
+                    $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services";
                     self.selectedCity = $routeParams.cityName;
                     self.venueName =    self.detailsOfVenue.venueName;
                 });
