@@ -124,19 +124,21 @@
         <script src="<%= assets %>/js/html5shiv.min.js"></script>
         <script src="<%= assets %>/js/respond.min.js"></script>
     <![endif]-->
-    <script>
-        if(navigator.userAgent.indexOf("Speed Insights") == -1) {
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-101906980-1', 'auto');
-            ga('send', 'pageview');
+  <script type="text/javascript">
+    if(navigator.userAgent.indexOf("Speed Insights") == -1) {
+        var domainUrl = document.domain;
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        if (domainUrl.toLowerCase().indexOf("venuelytics.com") === -1) {
+          ga('create', 'UA-81847754-1', 'auto');
+        } else {
+          ga('create', 'UA-89045420-1', 'auto');
         }
-    </script>
-	<script type="text/javascript">
-    var domainUrl = document.domain;
+        ga('send', 'pageview');
+    }
+    
     if (domainUrl.toLowerCase().indexOf("venuelytics.com") === -1) {
         (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="//cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
             branch.init('key_live_dcxOdVSv6iZx1tySZJOr3jogzwegtOML');//itzFun
