@@ -119,8 +119,10 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.facebook = APP_LINK.FACEBOOK_ITZFUN;
             $rootScope.twitter = APP_LINK.TWITTER_ITZFUN;
             $rootScope.instagram = APP_LINK.INSTAGRAM_ITZFUN;
-            $location.url('/cities');
             $scope.showBusinessLink = false;
+            if((urlPattern === "http://www.itzfun.com/") || (urlPattern === "https://www.itzfun.com/")){
+                $location.url('/cities');
+            }
         } else {
             $rootScope.facebook = APP_LINK.FACEBOOK_VENUELYTICS;
             $rootScope.twitter = APP_LINK.TWITTER_VENUELYTICS;
