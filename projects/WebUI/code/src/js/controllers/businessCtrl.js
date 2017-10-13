@@ -1,6 +1,6 @@
 "use strict";
-app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams', 'APP_LINK', '$templateCache',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams, APP_LINK, $templateCache) {
+app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams', 'APP_LINK', '$templateCache','ngMeta',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams, APP_LINK, $templateCache, ngMeta) {
 
     		$log.log('Inside Business Controller');
     		
@@ -197,6 +197,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 DataShare.venueAddress = self.selectedVenueAddress;
                 self.claimBusiness = true;
                 $rootScope.title = 'Venuelytics-ClaimBusiness-'+selectedVenue.venueName;
+                ngMeta.setTitle('Venuelytics-ClaimBusiness-'+selectedVenue.venueName);
                 $location.path("/claimBusiness/"+self.selectedVenueId);
             };
 

@@ -1,6 +1,6 @@
 "use strict";
-app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore) {
+app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore','ngMeta',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore, ngMeta) {
 
 
             var self = $scope;
@@ -14,6 +14,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                 $rootScope.description = DataShare.eachVenueDescription;
                 self.venudetails = DataShare.venueFullDetails;
                 $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Drink Services Confirmation & Payment";
+                ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Drink Services Confirmation & Payment");
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;

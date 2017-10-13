@@ -3,8 +3,8 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope', 'APP_LINK',
-    function ($log, $scope, $http, $location, RestURL, DataShare, AjaxService, APP_ARRAYS, $rootScope, APP_LINK) {
+app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope', 'APP_LINK','ngMeta',
+    function ($log, $scope, $http, $location, RestURL, DataShare, AjaxService, APP_ARRAYS, $rootScope, APP_LINK, ngMeta) {
 
     		$log.log('Inside City Controller.');
     		
@@ -95,6 +95,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
 
     		self.selectCity = function(city) {
                 $rootScope.title = 'Venuelytics-City-'+city.name;
+                ngMeta.setTitle('Venuelytics-City-'+city.name);
                 $location.url('/cities/'+city.name);
     		};
 

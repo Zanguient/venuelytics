@@ -3,8 +3,8 @@
  * @date 28-JULY-2017
  */
 "use strict";
-app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'APP_ARRAYS', '$rootScope', 'AjaxService', '$routeParams', '$cookieStore',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_ARRAYS, $rootScope, AjaxService, $routeParams, $cookieStore) {
+app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'APP_ARRAYS', '$rootScope', 'AjaxService', '$routeParams', '$cookieStore','ngMeta',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_ARRAYS, $rootScope, AjaxService, $routeParams, $cookieStore, ngMeta) {
 
     		$log.log('Inside Order confirm Controller.');
 
@@ -14,6 +14,7 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location'
 			$rootScope.description = DataShare.eachVenueDescription;
 			self.venudetails = DataShare.venueFullDetails;
 			$rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services Confirmation";
+			ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services Confirmation");
         	self.backToReservation = function() {
 				$rootScope.serviceName = 'BottleService';
 				DataShare.editBottle = 'false';

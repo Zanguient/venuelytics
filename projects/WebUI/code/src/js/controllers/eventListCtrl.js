@@ -3,8 +3,8 @@
  * @date 05-sep-2017
  */
 "use strict";
-app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','$timeout',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, $timeout) {
+app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','$timeout','ngMeta',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, $timeout, ngMeta) {
         
     var self = $scope;
     var DAYS = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
@@ -20,6 +20,7 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
     self.init = function() {
       self.venudetails = DataShare.venueFullDetails;
       $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Event List";
+      ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Event List");
         self.tabParam = $routeParams.tabParam;
         AjaxService.getEvents($routeParams.venueid).then(function(response) {
           self.events = response.data['venue-events'];

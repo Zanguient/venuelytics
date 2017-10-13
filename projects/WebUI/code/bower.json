@@ -68,6 +68,7 @@
     "inputmask": "^3.3.7",
     "source-sans-pro-fontface": "^1.1.0",
     "angular-daterangepicker": "^0.2.2",
-    "eonasdan-bootstrap-datetimepicker": "^4.17.47"
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "ngMeta": "^1.0.2"
   }
 }
