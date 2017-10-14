@@ -4,11 +4,12 @@
  */
 "use strict";
 app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'APP_CLIENTS', 
-    'APP_ARRAYS', '$rootScope', 'AjaxService', 'APP_LINK',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope, AjaxService, APP_LINK) {
+    'APP_ARRAYS', '$rootScope', 'AjaxService', 'APP_LINK','ngMeta',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope, AjaxService,
+     APP_LINK, ngMeta) {
 
 	$log.log('Inside Home Controller.');
-
+    ngMeta.setTitle("Home Controller");
     var self = $scope;
     $rootScope.showSearchBox = true;
     $rootScope.businessSearch = false;

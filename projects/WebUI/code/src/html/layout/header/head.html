@@ -11,11 +11,11 @@
     <meta name="theme-color" content="#333">
     <meta name="google-site-verification" content="SKw3L8Qjuwx-wApZnWkzt_LwE7pIGY7lZpUduwLx8eY" />
     <meta content="VenueLytics,Venue Analytics,ItzFun,Milennial,itsfun,Venuenow,Bars,Club,Lounge,Resorts,Stadium,Casino,Hospitality,Karaoke,Entertainment,Venue Management,Experience,Table Service,Fast Pass,Drink,Food,Bottle Service,Private Events,Night Life" name="keywords">
-    <meta name="description" content="{{description}}">
+    <meta name="description" content="{{ngMeta.description}}">
 
     <!-- Facebook Meta -->
     <meta property="og:title" content="{{ngMeta.title}}"/>
-    <meta property="og:description" content="{{description}}"/>
+    <meta property="og:description" content="{{ngMeta.description}}"/>
     <meta property="og:url" content="{{canonicalURL}}"/>
     <meta property="og:site_name" content="venuelytics"/>
     <meta property="og:type" content="website"/>
@@ -24,13 +24,12 @@
     <link meta meta-key="canonicalUrl" rel="{{canonicalURL}}">
     <meta meta meta-key="statusCode" name="prerender-status-code"/>
     <!-- APP DEEPLINKS -->
-    <link rel="alternate" href="android-app://com.tablelistapp.android.prod/tablelist">
-
+    
     <!-- twiter meta -->
     <meta name="twitter:card" content="app">
     <meta name="twitter:site" content="@venuelytics">
     <meta name="twitter:app:country" content="US">
-    <meta property="twitter:title"content="{{ngMeta.title}}">
+    <meta property="twitter:title" content="{{ngMeta.title}}">
     <meta name="twitter:description" content="{{description}}">
     <meta property="twitter:image" content="assets/img/logo_venuelytics_skype.png" meta-key="twitterImage">
 
@@ -53,7 +52,7 @@
     <link rel="canonical" ng-href="{{canonicalURL}}" />
 
     <base href="<%= context %>">
-    <title ng-bind="title"></title>
+    <title ng-bind="ngMeta.title"></title>
     <link rel="shortcut icon" href="<%= assets %>/img/logo-collapsed.png">
 
     <style >

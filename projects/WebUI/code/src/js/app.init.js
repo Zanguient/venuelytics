@@ -21,117 +21,41 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $routeProvider
         .when('/', {
             templateUrl: 'home.html',
-            controller: 'HomeController',
-            title: 'Book VIP Reservations & Events',
-            description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...',
-            data: {
-                meta: {
-                    'title': 'Book VIP Reservations & Events'
-                }
-            }           
+            controller: 'HomeController'
+                       
         })
         .when('/home', {
             templateUrl: 'home.html',
             controller: 'HomeController',
-            title: 'Book VIP Reservations & Events',
-            description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...',
-            data: {
-                meta: {
-                    'title': 'Book VIP Reservations & Events'
-                }
-            }
+            title: 'Book VIP Reservations & Events'
         })
         .when('/home*', {
             templateUrl: 'home.html',
-            controller: 'HomeController',
-            title: 'Book VIP Reservations & Events',
-            description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...',
-            data: {
-                meta: {
-                    'title': 'Book VIP Reservations & Events'
-                }
-            }
+            controller: 'HomeController'
         })
         .when('/home?sb&orgId', {
             templateUrl: 'home.html',
-            controller: 'HomeController',
-            title: 'Book VIP Reservations & Events',
-            description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...',
-            data: {
-                meta: {
-                    'title': 'Book VIP Reservations & Events'
-                }
-            }
+            controller: 'HomeController'
         })
         .when('/home?nc&orgId', {
             templateUrl: 'home.html',
-            controller: 'HomeController',
-            title: 'Book VIP Reservations & Events',
-            description: 'Venuelytics - a real time venue experience platform enabling businesses to provide table &amp; bottle reservations, private event, rewards, food &amp; drink ordering...',
-            data: {
-                meta: {
-                    'title': 'Book VIP Reservations & Events'
-                }
-            }
+            controller: 'HomeController'
         })
-        /* .when('/cities', {
-            templateUrl: 'city.html',
-            controller: 'CityController',
-            title: 'Venuelytics-City',
-            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
-        }) 
-        .when('/cities/:cityName', {
-            templateUrl: 'venue/venues.html',
-            controller: 'VenueController',
-            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
-        })
-        .when('/cities/:cityName/:venueid/:serviceType', {
-            templateUrl: 'venue/venue-details.html',
-            controller: 'VenueDetailsController',
-            title: 'Venuelytics-Service',
-            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
-        })
-        .when('/cities/:cityName/:venueid', {
-            templateUrl: 'venue/venue-details.html',
-            controller: 'VenueDetailsController',
-            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
-        })
-        .when('/cities/:cityName/:venueid?i&orgId', {
-            templateUrl: 'venue/venue-details.html',
-            controller: 'VenueDetailsController',
-            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
-        })*/
         .when('/businessAlreadyClaimed/:venueid', {
             templateUrl: 'business/business-already-claim.html',
-            controller: 'businessController',
-            title: 'Venuelytics-BusinessAlreadyClaim',
-            description: 'Venuelytics - a real time venue experience platform enabling Business Already Claimed',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-BusinessAlreadyClaim'
-                }
-            }
+            controller: 'businessController'
         })
         .when('/cities', {
             templateUrl: 'new-city.html',
-            controller: 'NewCityController',
-            title: 'Venuelytics-City',
-            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-City'
-                }
-            }
+            controller: 'NewCityController'
         })
         .when('/cities/:cityName', {
             templateUrl: 'venue/new-venues.html',
-            controller: 'NewVenueController',
-            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
+            controller: 'NewVenueController'
         })
         .when('/cities/:cityName/:venueid', {
             templateUrl: 'venue/service-tabs.html',
-            controller: 'ServiceTabController',
-            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
+            controller: 'ServiceTabController'
         })
         .when('/cities/:cityName/:venueid/:tabParam', {
             templateUrl: 'venue/service-tabs.html',
@@ -147,100 +71,38 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/searchBusiness', {
             templateUrl: 'business/business-search.html',
-            controller: 'businessController',
-            title: 'Venuelytics-BusinessSearch',
-            description: 'Venuelytics - a real time venue experience platform enabling Business Search',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-BusinessSearch'
-                }
-            }
+            controller: 'businessController'
         })
         .when('/completeBusinessClaim/:venueId', {
             templateUrl: 'business/business-verification.html',
-            controller: 'BusinessClaimController',
-            title: 'Venuelytics-BusinessSearch',
-            description: 'Venuelytics - a real time venue experience platform enabling Business Search',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-BusinessSearch'
-                }
-            }
+            controller: 'BusinessClaimController'
         })
         .when('/about', {
             templateUrl: 'about.html',
-            controller: 'BlogController',
-            title: 'Venuelytics-About',
-            description: 'Venuelytics - a real time venue experience platform enabling About Information',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-About'
-                }
-            }
+            controller: 'BlogController'
         })
         .when('/contact', {
             templateUrl: 'contact.html',
-            controller: 'BlogController',
-            title: 'Venuelytics-Contact',
-            description: 'Venuelytics - a real time venue experience platform enabling Contact Information',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Contact'
-                }
-            }
+            controller: 'BlogController'
         })
         .when('/privacy', {
             templateUrl: 'privacy.html',
-            title: 'Venuelytics-Privacy',
-            description: 'Venuelytics - a real time venue experience platform enabling Privacy Information',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Privacy'
-                }
-            }
+            title: 'Venuelytics-Privacy'
         })
         .when('/terms', {
-            templateUrl: 'terms-of-use.html',
-            title: 'Venuelytics-Terms',
-            description: 'Venuelytics - a real time venue experience platform enabling Terms Information',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Terms'
-                }
-            }
+            templateUrl: 'terms-of-use.html'
         })
         .when('/claimBusiness/:venueid', {
             templateUrl: 'business/claim-business.html',
-            controller: 'businessController',
-            title: 'Venuelytics-ClaimBusiness',
-            description: 'Venuelytics - a real time venue experience platform enabling Claim Business Information',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-ClaimBusiness'
-                }
-            }
+            controller: 'businessController'
         })
         .when('/deployment/:venueid', {
             templateUrl: 'business/deployment-steps.html',
-            controller: 'businessController',
-            title: 'Venuelytics-Deployment',
-            description: 'Venuelytics - a real time venue experience platform enabling Deployment Information',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Deployment'
-                }
-            }
+            controller: 'businessController'
         })
         .when('/emailVerification/:venueid', {
             templateUrl: 'business/email-verification.html',
-            controller: 'businessController',
-            title: 'Venuelytics-EmailVerification',
-            description: 'Venuelytics - a real time venue experience platform enabling Email Verfication',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-EmailVerification'
-                }
-            }
+            controller: 'businessController'
         })
         .when('/confirm/:cityName/:venueid', {
             templateUrl: 'bottle-service/bottle-reservation.html',
@@ -264,36 +126,15 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/blog', {
             templateUrl: 'blogs/blogs.html',
-            controller:'BlogController',
-            title: 'Venuelytics-Blog',
-            description: 'Venuelytics - a real time venue experience platform enabling Blog Information',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Blog'
-                }
-            }
+            controller:'BlogController'
         })
         .when('/blogPost/:postId', {
             templateUrl: 'blogs/blog-post.html',
-            controller: 'BlogPostController',
-            title: 'Venuelytics-Blog-Post',
-            description: 'Venuelytics - a real time venue experience platform enabling Blog Information',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Blog-Post'
-                }
-            }
+            controller: 'BlogPostController'
         })
         .when('/breakthrough/:throughId', {
             templateUrl: 'break-through/through-post.html',
-            controller: 'Breakthrough',
-            title: 'Venuelytics-Break-Through',
-            description: 'Venuelytics - a real time venue experience platform enabling Blog Information',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Break-Through'
-                }
-            }
+            controller: 'Breakthrough'
         })
         .when('/:cityName/orderConfirm/:venueid', {
             templateUrl: 'order-confirm.html',
@@ -317,14 +158,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/:cityName/paymentSuccess/:venueid', {
             templateUrl: 'payment-success.html',
-            controller:'ConfirmReservationController',
-            title: 'Venuelytics-Payment-Success',
-            description: 'Venuelytics - a real time venue experience platform for payment success' ,
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Payment-Success'
-                }
-            }            
+            controller:'ConfirmReservationController'          
         })
         .when('/:cityName/partySuccess/:venueid', {
             templateUrl: 'party-service/party-payment-success.html',
@@ -340,25 +174,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/:cityName/foodSuccess/:venueid', {
             templateUrl: 'food-service/food-payment-success.html',
-            controller:'FoodConfirmController',
-            title: 'Venuelytics-Food-Payment-Success',
-            description: 'Venuelytics - a real time venue experience platform for food payment success',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Food-Payment-Success'
-                }
-            }           
+            controller:'FoodConfirmController'          
         })
         .when('/:cityName/drinkSuccess/:venueid', {
             templateUrl: 'drink-service/drink-payment-success.html',
-            controller:'DrinkConfirmController',
-            title: 'Venuelytics-Drink-Payment-Success',
-            description: 'Venuelytics - a real time venue experience platform for drink payment success',
-            data: {
-                meta: {
-                    'title': 'Venuelytics-Drink-Payment-Success'  
-                }
-            } 
+            controller:'DrinkConfirmController'
             
         })
         .when('/:cityName/private-success/:venueid', {
@@ -387,8 +207,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/cities/:cityName/:venueid/new/new/:embed', {
             templateUrl: 'business/iframe.html',
-            controller:'TableServiceController',
-            description: 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...'
+            controller:'TableServiceController'
         })
         .otherwise('/home');
 
@@ -398,6 +217,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         rewriteLinks: true
     });
    // $locationProvider.hashPrefix('!');
+    ngMetaProvider.useTitleSuffix(true);
+    ngMetaProvider.setDefaultTag('description', 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...');
+    ngMetaProvider.setDefaultTitle('Venuelytics');
+    ngMetaProvider.setDefaultTitleSuffix(' | Book VIP Reservations & Events');
 
 }]).config(['$translateProvider', function ($translateProvider) {
     var version = new Date().getTime();
