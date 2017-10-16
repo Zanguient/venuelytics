@@ -39,6 +39,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             utmPayload.referenceId = $location.search().reference_id;
             utmPayload.utmTerm = "VenueLytics";
             self.init = function() {
+                ngMeta.setTitle("Real Time Venue Management Platform");
                 self.embeddedVideo = APP_LINK.VIDEO_PLAY;
                 self.venueLyticsFeatures = APP_ARRAYS.features;
                 self.linkToPath = APP_ARRAYS.breakThrough;
