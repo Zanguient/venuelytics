@@ -1,0 +1,79 @@
+<style>
+.mousestyle {
+    background-color:#fff;
+    color: yellow;
+}
+.title_name:hover {
+    color: yellow;
+}
+.cursorPointer {
+    cursor: pointer;
+}
+.circle_image {
+    position: absolute;
+    left: 570px;
+    top: 5px;
+    width: 160px;
+}
+.title_name {
+    position: absolute;
+    left: 577px;
+    top: 190px;
+    color: #fff;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.btn_color {
+    color:rgb(38, 4, 161);
+    width: 500px;
+    font-weight: 900;
+    font-size: 20px;
+}
+.btn_color:hover {
+    width: 500px;
+    font-weight: 900;
+    font-size: 20px;
+    color: rebeccapurple;
+}
+.marginSize {
+    margin-top: 10px;
+    width: 28%;
+}
+.marginsize {
+    margin-top: 256px;
+    margin-left: 385px;
+}
+.buttonclass {
+    border:1.5px solid rgb(255, 255, 255);
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 500px;
+    height: 50px;
+}
+.buttonclass:hover {
+    background-color:#fff;
+}
+footer {
+    position: absolute;
+    color:rgb(38, 4, 161);
+}
+</style>
+
+<form class="col-md-12" layout="column" layout-fill>
+    <div class="col-md-12" ng-repeat="image in images">
+        <img class="circle_image img-responsive" src="{{image.logo}}" ng-style="avatar_style" alt="app_image">
+        <h2 class="title_name cursorPointer">@{{image.title}}</h2>
+        <div class="marginsize">
+            <div class="marginSize" ng-repeat="repeats in repeatName">
+                <div class="buttonclass"><a class="btn btn-raised btn_color" href="{{repeats.Urls}}" target="_new" ng-bind="repeats.name"></a></div>
+              </div>
+        </div>
+        <footer>
+            <div layout="row" layout-align="center center">
+                <h2>Venuelytics</h2>
+            </div>
+        </footer>   
+    </div>    
+</form>
