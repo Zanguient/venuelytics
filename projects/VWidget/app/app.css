@@ -1,3 +1,12 @@
+
+.gradient {
+  background-image:
+    linear-gradient(
+      to top right, 
+      lightblue, #1874CD
+    );
+}
+
 .service-container {
   max-width: 700px;
 	flex: 1;
@@ -5,6 +14,7 @@
   margin-left: auto;
   margin-right: auto;
 }
+
 .container {
     margin-left: auto;
     margin-right: auto;
@@ -13,7 +23,6 @@
     min-height: 100%;
     position: relative;
     width: 95%;
-
 
 }
 .header {
@@ -29,13 +38,6 @@
    height:50px; 
 }
 
-.gradient {
-  background-image:
-    linear-gradient(
-      to top right, 
-      lightblue, #1874CD
-    );
-}
 
 .mousestyle {
     background-color:#fff;
@@ -81,10 +83,6 @@
 .btn_color {
     color: #fff
 }
-.btn_color:hover {
-    
-    color: #0275dd;
-}
 
 
 .button {
@@ -104,5 +102,26 @@
   padding-bottom: 20px;
 }
 
+.glass{
+  /* background styles */
+  position: relative;
+  background-color: green; /*for compatibility with older browsers*/
+  background-image: linear-gradient(green,lightgreen);
+  border-radius: 3px;
+  box-shadow: 0px 1px 4px -2px #333;
+  text-shadow: 0px -1px #333;
+}
 
+.glass:after{
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(100% - 4px);
+  height: 50%;
+  background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+}
 
+.glass:hover{
+  background: linear-gradient(#073,#0fa);
+}
