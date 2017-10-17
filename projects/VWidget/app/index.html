@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> 
-<html lang="en" ng-app="venuelytics"> <!--<![endif]-->
+<html lang="en" class="" ng-app="venuelytics"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,21 +15,18 @@
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" > 
-  <style>
-    body  {
-        background-image: url('images/landingpaage.jpg');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-    }
-  </style>
+  
 </head>
-<body>
+<body class="gradient">
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ng-view></div>
+  <div class="container" ng-view></div>
+  <div class="footer">
+        <h4>Venuelytics</h4>
+  </div>
+
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->

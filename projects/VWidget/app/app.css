@@ -1,4 +1,27 @@
 /* app css stylesheet */
+body {
+    font-family: Helvetica,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+  	flex-direction: column;
+  	min-height: 100%;
+
+}
+body, html {
+  height: 100%;
+}
+.service-container {
+    max-width: 700px;
+    width: auto;
+	flex: 1;
+}
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    padding: 10px;
+    text-align: center;
+}
 
 .menu {
   list-style: none;
@@ -23,3 +46,86 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+.gradient {
+  background-image:
+    linear-gradient(
+      to top right, 
+      lightblue, #1874CD
+    );
+}
+
+.mousestyle {
+    background-color:#fff;
+    color: yellow;
+}
+.title_name:hover {
+    color: yellow;
+}
+.cursorPointer {
+    cursor: pointer;
+}
+.circle_image {
+    margin-left: auto;
+    margin-right: auto;
+    top: 5px;
+    width: 120px;
+	border-radius: 50%;
+}
+
+.title_name {
+  	text-align: center;
+    color: #fff;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.btn {
+	text-decoration: none;
+	padding: 15px 20px;
+	display: block;
+
+	color: #fff;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+	-webkit-transition: all .25s cubic-bezier(.08,.59,.29,.99);
+	transition: all .25s cubic-bezier(.08,.59,.29,.99);
+	z-index: 2;
+	background: 0 0;
+	font-weight: 600;
+	font-size: 16px;
+}
+
+.btn_color {
+    color: #fff
+}
+.btn_color:hover {
+    
+    color: #0275dd;
+}
+
+
+.buttonclass {
+    border:1.5px solid rgb(255, 255, 255);
+    width: 500px;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 15px;
+}
+.buttonclass:hover {
+    background-color:#fff;
+}
+
+.actions {
+	padding: 20px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 100%
+}
+
