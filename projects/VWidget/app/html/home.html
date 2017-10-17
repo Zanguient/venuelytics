@@ -1,10 +1,18 @@
-<div class="container service-container">
-     <img class="circle_image img-responsive" src="{{logo}}" class="avatar" alt="app_image">
+<div class="header"> 
+	<img class="circle_image img-responsive" src="{{logo}}" class="avatar" alt="app_image">
      <h2 class="title_name cursorPointer">{{title}}</h2>
-        <div class="container actions">
-            <div ng-repeat="repeats in repeatName">
-                <div class="buttonclass"><a class="btn btn-raised btn_color" href="{{repeats.Urls}}" target="_new" ng-bind="repeats.name"></a></div>
-              </div>
-        </div>
-    </div>    
 </div>
+<div class="service-container">
+     
+	<div class="actions">
+	    <div ng-repeat="repeats in repeatName">
+	        <div class="button">
+	        	<a class="btn btn-raised btn_color" href="{{repeats.Urls}}" target="_new" ng-bind="repeats.name"></a>
+	        </div>
+	    </div>
+	</div>
+</div>    
+
+<div class="footer">
+        <h4>Venuelytics</h4>
+ </div>
