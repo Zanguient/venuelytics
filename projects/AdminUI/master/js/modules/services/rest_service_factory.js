@@ -6,10 +6,10 @@
  App.factory('RestServiceFactory',['$resource','Session','USER_ROLES',  function($resource, Session, USER_ROLES) {
  		'use strict';
  		var BASE_URL = "//dev.api.venuelytics.com/WebServices/rsapi";
-
+ 		var BASE_SITE_URL = "http://52.9.4.76";
  		this.serverName = "dev.api.venuelytics.com";
  		this.contextName = BASE_URL;
- 		
+ 		this.baseSiteUrl = BASE_SITE_URL;
 
  		var storeProperties = ['id','venueName','managerName','address','city','state','country','zip','phone',
  			'mobile','email','website','enabled','venueNumber','venueTypeCode','venueType','description','cleansed','imageUrls','info','options'];
@@ -55,6 +55,7 @@
  		return {
  			contextName : self.contextName,
  			serverName : self.serverName,
+ 			baseSiteUrl: self.baseSiteUrl,
  			UserService: function () {
  				return $resource(urlTemplate.replace("@context", "users"), {}, {
  					getAgencyInfo : {method: 'GET',  params: { id: '@id' }, 
@@ -121,6 +122,8 @@
  						url: urlTemplate.replace("@context", "venues") +"/servicehours"},
  					getTaxNFees: {method: 'GET',  params: { id: '@id', YYMMDD: '@YYMMDD' }, isArray:true,
  						url: urlTemplate.replace("@context", "vas") +"/taxNfees/:YYMMDD"},
+ 					getInfo: {method: 'GET',  params: { id: '@id' }, isArray:false,
+ 						url: urlTemplate.replace("@context", "venues")+"/info"}
  				});
  			},
  			VenueEventService: function () {
@@ -253,4 +256,4 @@
  				return payload;
  			}
  		};
- 	}]);
+ }]);

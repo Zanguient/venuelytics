@@ -7,10 +7,13 @@ var app = angular.module('venuelytics', [
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
-  $routeProvider.when('/home', {
+  $routeProvider.when('/:portalName', {
     templateUrl: 'html/home.html',
     controller: 'homeController'
+  })
+  .when('/welcome', {
+    templateUrl: 'html/welcome.html'
   });
 
-  $routeProvider.otherwise({redirectTo: '/home'});
+  $routeProvider.otherwise({redirectTo: '/welcome'});
 }]);

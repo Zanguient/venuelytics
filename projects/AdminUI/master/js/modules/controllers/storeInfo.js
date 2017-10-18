@@ -39,7 +39,9 @@
     {name: 'Offers/Deals', content: 'app/views/venue/venue-deals.html', icon: 'fa-money'},
     {name: 'Events', content: 'app/views/venue-events/venue-events.html', icon: 'fa-calendar-o'},
     {name: 'Outlets', content: 'app/views/venue/venue-stores.html', icon: 'fa-building-o'},
+    {name: 'Portal', content: 'app/views/venue/venue-portal.html', icon: 'fa-home'},
   ];
+  
   $scope.onUpdate = function() {
     var payload = {};
     angular.forEach($scope.advanceSwitches, function(v, k, o) {
@@ -236,6 +238,7 @@
       }
     });
   };
+
 
   $timeout(function () {
     if($stateParams.id !== 'new') {

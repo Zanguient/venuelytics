@@ -243,3 +243,93 @@ h3 .page-heading {
    display: inline-block;
   }
 }
+
+.portal_preview  {
+  height: 500px;
+  padding: 20px;
+}
+
+.gradient_blue {
+  background-image:
+    linear-gradient(
+      to top right, 
+      lightblue, #1874CD
+    );
+}
+
+.footer {
+  position: absolute;
+  bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  height:20px; 
+  font-size: 12px;
+  color: black;
+}
+
+.portal_title_name {
+    text-align: center;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.portal_button {
+    border:1.5px solid rgb(255, 255, 255);
+    height: 50px;
+    margin: auto;
+    margin-bottom: 15px;
+    max-width: 500px;
+    color: #fff;
+    padding: 0px !important;
+}
+
+.portal_button:hover {
+    background-color:#fff;
+}
+
+.glass{
+  /* background styles */
+  position: relative;
+  background-color: green !important; /*for compatibility with older browsers*/
+  background-image: linear-gradient(green,lightgreen) !important;
+  border-radius: 3px;
+  box-shadow: 0px 1px 4px -2px #333;
+  text-shadow: 0px -1px #333;
+}
+
+.portal_button.glass {
+  border: 0px;
+}
+
+.glass:after{
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(100%);
+  height: 50%;
+  background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+}
+
+.glass:hover{
+  background: linear-gradient(#073,#0fa);
+  color; #fff;
+}
+
+.portal_btn {
+  text-decoration: none !important;
+  
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: all .25s cubic-bezier(.08,.59,.29,.99);
+  transition: all .25s cubic-bezier(.08,.59,.29,.99);
+  z-index: 2;
+  background: 0 0;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 15px 20px;
+  display: block;
+  color: #fff;
+  text-align: center;
+}

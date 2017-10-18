@@ -1,18 +1,18 @@
 <div class="header"> 
-	<img class="circle_image img-responsive" src="{{logo}}" class="avatar" alt="app_image">
-     <h2 class="title_name cursorPointer">{{title}}</h2>
+	<img class="circle_image img-responsive avatar" src="{{portal.logo.smallUrl}}"  alt="{{portal.portalTitle}}">
+     <h2 class="title_name cursorPointer">{{portal.portalTitle}}</h2>
 </div>
 <div class="service-container">
      
 	<div class="actions">
-	    <div ng-repeat="repeats in repeatName">
-	        <div class="button">
-	        	<a class="btn btn-raised btn_color glass" href="{{repeats.Urls}}" target="_new" ng-bind="repeats.name"></a>
+	    <div ng-repeat="action in portal.actionButtons">
+	        <div class="button" ng-class="portal.glassyButtons=='Y' ? 'glass' : ''">
+	        	<a class="btn btn-raised btn_color"  href="{{action.url}}" target="_new" ng-bind="action.name"></a>
 	        </div>
 	    </div>
 	</div>
 </div>    
 
 <div class="footer">
-    <h4>Venuelytics</h4>
+    <h4 ng-bind="portal.footer"></h4>
  </div>

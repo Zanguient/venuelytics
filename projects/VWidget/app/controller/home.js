@@ -1,30 +1,14 @@
 'use strict';
-app.controller('homeController', ['$scope', function($scope) {
+app.controller('homeController', ['$scope','$routeParams', '$rootScope','RestAPI',function($scope, $routeParams, $rootScope, RestAPI) {
 
-  $scope.logo = "images/logo.png";
-  $scope.title ="@venuelytics";
-    
-  $scope.repeatName = [
-    {
-      "name":"Venuelytics Home",
-      "Urls":"http://www.venuelytics.com/home"
-    },
-    {
-      "name":"Venuelytics Business",
-      "Urls":"http://www.venuelytics.com/searchBusiness"
-    },
-    {
-      "name":"Venuelytics Customer",
-      "Urls":"http://www.venuelytics.com/cities"
-    },
-    {
-      "name":"Venuelytics About",
-      "Urls":"http://www.venuelytics.com/about"
-    },
-    {
-      "name":"Venuelytics Contact",
-      "Urls":"http://www.venuelytics.com/contact"
-    }
-  ];
+  $scope.portal = {};
+  $scope.init = function() {
+    RestAPI.getPortalInfo($routeParams.portalName).then(function ok(response) {
+      $scope.portal = angular.fromJson(response.data);
+      $rootScope.siteBgColor = $scope.portal.theme.bgColorCode;
+    }, function err(response) {
 
+    });
+  };
+  $scope.init();
 }]);
