@@ -110,7 +110,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
     this.searchBusiness = function(businessName) {
         return $http({
             method: 'GET',
-            url: RestURL.baseURL + '/venues?&search=' + businessName + '&from=0'
+            url: RestURL.baseURL + '/venues?search=' + businessName + '&from=0'
         }).then(function(success) {
             return success;
         }, function(error) {

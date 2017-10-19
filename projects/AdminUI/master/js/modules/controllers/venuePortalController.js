@@ -62,6 +62,7 @@
   	}
   	var payload = {};
   	payload['portal.conf'] = angular.toJson(data);
+  	payload['portal.portalName'] = data.portalName;
   	RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
       toaster.pop('data', "Attribute updated successfull");
     },function(error){
@@ -84,4 +85,5 @@
   };
 
   $scope.init();
+  
 }]);

@@ -30,27 +30,17 @@
     $script([
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
-      'app.js',
-      'controller/home.js',
-      'components/version/version.js',
-      'components/version/version-directive.js',
-      'components/version/interpolate-filter.js'
+      'js/app.js',
+      'js/controller/home.js'
     ], function() {
       // when all is done, execute bootstrap angular application
       angular.bootstrap(document, ['venuelytics']);
     });
   </script>
   <title>Venuelytics</title>
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="css/app.css">
 </head>
-<body ng-cloak>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-  </ul>
-
-  <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
-
+<body ng-class="siteBgColor" ng-cloak>
+<div class="container" ng-view></div>
 </body>
 </html>
