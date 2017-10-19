@@ -41,7 +41,7 @@ var minifyInline = require('gulp-minify-inline-scripts');
 // var seo4ajax = require('connect');
 var includeCondition = function (file) {
   return !gulpmatch(file, ['**/libs/**','**/directives/**']);
-}
+};
 
  
 
