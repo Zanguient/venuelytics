@@ -5,7 +5,7 @@ var app = angular.module('venuelytics', ['ngRoute', 'templates', 'ngIframeResize
 .config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   
   $routeProvider
-  .when('/:portalName', {
+  .when('/portal/:portalName', {
     templateUrl: 'html/home.html',
     controller: 'homeController'
   })
@@ -17,7 +17,7 @@ var app = angular.module('venuelytics', ['ngRoute', 'templates', 'ngIframeResize
   $locationProvider.html5Mode({
         enabled: true,
         requireBase: true,
-        rewriteLinks: true
+        rewriteLinks: false
     });
 }]);
 
