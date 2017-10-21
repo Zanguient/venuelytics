@@ -247,6 +247,7 @@ h3 .page-heading {
 .portal_preview  {
   height: 500px;
   padding: 20px;
+   background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAABkCAYAAAC/zKGXAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADhJREFUeNrs1rERACAMA7GE/dh/HMMIKblDX6ty5U6ya9CqYSAIgiAIvg/7PgDzgCAIguBv8AgwANxaBw4K0o5OAAAAAElFTkSuQmCC') repeat-x center;
 }
 
 .gradient_blue {
@@ -254,6 +255,35 @@ h3 .page-heading {
     linear-gradient(
       to top right, 
       lightblue, #1874CD
+    );
+}
+
+.gradient_black {
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 1) 5%, lightblue 120%
+    );
+}
+
+.gradient_white {
+  background-image:
+    linear-gradient(
+        #FFFFF0 2%, lightgray 95%
+    );
+}
+
+.gradient_green {
+  background-image:
+    linear-gradient(
+      green 20%,  lightgreen 95%
+    );
+}
+
+.gradient_blue_pink {
+  background-image:
+    linear-gradient(
+      to top right, 
+      lightblue, #C361C3
     );
 }
 
@@ -314,7 +344,7 @@ h3 .page-heading {
 
 .glass:hover{
   background: linear-gradient(#073,#0fa);
-  color; #fff;
+  color: #fff;
 }
 
 .portal_btn {

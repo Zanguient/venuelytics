@@ -22,7 +22,9 @@ var config = {
 var plugins = {
     js : [
         'app/bower_components/angular/angular.js',
-        'app/bower_components/angular-route/angular-route.js'
+        'app/bower_components/angular-route/angular-route.js',
+        'app/lib/iframeResizer.min.js',
+        'app/lib/ng-iframe-resizer.js'
     ],
     modernizr : [
         'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js'
@@ -51,6 +53,7 @@ gulp.task('html', function() {
         .pipe(gulpif(config.compress, prettify({
             indent_size: 2
         })))
+        .pipe(replace('__website__',baseWebsite()))
         .pipe(templateHtmlCache('templates.js', {root: 'html'}))
         .pipe(gulp.dest(build.js));
        // .pipe(connect.reload());
@@ -59,7 +62,7 @@ gulp.task('html', function() {
 gulp.task('js', ['js:modernizr', 'js:dependencies'], function() {
     return gulp.src(src.js)
        // .pipe(gulpi//false, concat('configurator.min.js'))) //config.compress
-        .pipe(replace('dev.api.venuelytics.com',baseUrl()))
+        .pipe(replace('dev.api.venuelytics.com',baseAPIUrl()))
         .pipe(gulpif(config.compress, uglify()))
 
         .pipe(concat('app.min.js'))
@@ -129,8 +132,9 @@ gulp.task('connect', function() {
     .pipe(webserver({
       livereload: true,
       path: '/',
+      port: 8100,
       directoryListing: false,
-      open: 'http://localhost:8000/',
+      open: 'http://localhost:8100/',
       fallback: 'index.html'
     }));
 });
@@ -152,12 +156,21 @@ gulp.task('work', function(cb) {
     );
 });
 
-function baseUrl() {
+function baseAPIUrl() {
     if (gutil.env.build === 'prod') {
         return "prod.api.venuelytics.com";
     } else if (gutil.env.build === 'dev') {
         return "dev.api.venuelytics.com";
     } 
     return "localhost:8080";
+}
+
+function baseWebsite() {
+    if (gutil.env.build === 'prod') {
+        return "www.venuelytics.com";
+    } else if (gutil.env.build === 'dev') {
+        return "52.9.4.76";
+    } 
+    return "localhost:8000";
 }
 

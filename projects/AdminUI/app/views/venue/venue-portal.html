@@ -27,14 +27,14 @@
       <div class="row">
         <div class="form-group col-sm-12">
                <label class="control-label nowrap">Select a Theme</label>
-               <select name="theme" required="required"  class="form-control"  ng-model="portal.theme" ng-options="type.name as type.label for type in themes track by type.name" ng-selected="onSectionChange(portal.theme)"> </select>
+               <select name="theme" required="required"  class="form-control" ng-model="portal.theme" ng-options="type.label for type in themes" ng-selected="onSectionChange()"> </select>
         </div>
             
-        <div class="form-group col-sm-4">
+        <!-- <div class="form-group col-sm-4">
            <label class="control-label nowrap">Background Color *</label>
            <input type="text" name="bgColor" placeholder="Bacground Color" ng-disabled = "true" required="required" class="form-control" ng-model="portal.theme.bgColor"/>
         </div>
-      
+              
         <div class="form-group col-sm-4">
           <label class="control-label nowrap">Font Color *</label>
            <input type="text" name="fontColor" placeholder="Font Color" ng-disabled = "true" required="required"  class="form-control" ng-model="portal.theme.fontColor"/>
@@ -42,7 +42,7 @@
         <div class="form-group col-sm-4">
           <label class="control-label nowrap">Button Color *</label>
            <input type="text" name="btnColor" placeholder="Button Color" ng-disabled = "true" required="required"  class="form-control" ng-model="portal.theme.btnColor"/>
-        </div>
+        </div> -->
         <div class="form-group col-sm-4 checkbox c-checkbox">
           <label>
             <input type="checkbox" name="glassy" value="Y" ng-model="portal.glassyButtons" ng-true-value="Y"  ng-false-value="N" ng-checked="portal.glassyButtons=='Y'"/>
