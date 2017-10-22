@@ -29,7 +29,7 @@
     { url: 'www.venuelytics/about', name :'VenueLytics About'}*/
 
   ];
-  $scope.baseLink = RestServiceFactory.baseSiteUrl + '/portal/';
+  $scope.baseLink = RestServiceFactory.baseSiteUrl + '/portal';
   $scope.newPortalAction = function() {
   	ngDialog.openConfirm({
       template: 'actionDialogId',
