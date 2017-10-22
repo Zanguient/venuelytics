@@ -46,12 +46,15 @@
     background-color:#fff;
     color: yellow;
 }
+
 .title_name:hover {
     color: yellow;
 }
+
 .cursorPointer {
     cursor: pointer;
 }
+
 .circle_image {
   margin-left: auto;
   margin-right: auto;
@@ -80,11 +83,17 @@
 	font-size: 16px;
   padding: 15px 20px;
   display: block;
-  color: #fff !important;
+  color: #fff ;
   text-align: center;
 }
 
+.btn:hover {
+  color: rgb(66, 139, 202) !important;
+}
 
+.glass .btn:hover {
+  color: #fff !important;
+}
 
 .button {
     border:1.5px solid rgb(255, 255, 255);
@@ -96,7 +105,6 @@
 
 .button:hover {
     background-color:#fff;
-    color: black;
 }
 
 .actions {
@@ -128,6 +136,7 @@
 
 .glass:hover{
   background: linear-gradient(#073,#0fa);
+  color: #fff !important!;
 }
 
 .gradient_black {
