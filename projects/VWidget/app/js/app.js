@@ -14,11 +14,11 @@ var app = angular.module('venuelytics', ['ngRoute', 'templates', 'ngIframeResize
   })
   .otherwise('/');
 
-  $locationProvider.html5Mode({
+  /*$locationProvider.html5Mode({
         enabled: true,
         requireBase: true,
         rewriteLinks: true
-    });
+    });*/
 }]);
 
 angular.module('templates', []);
