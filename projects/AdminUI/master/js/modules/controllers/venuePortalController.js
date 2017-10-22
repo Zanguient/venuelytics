@@ -69,6 +69,12 @@
     });
   };
 
+  $scope.deletePortalAction = function(index) {
+    if ($scope.portal.actionButtons.length > index) {
+      $scope.portal.actionButtons.splice(index, 1);
+    }
+  };
+
   $scope.updatePortalData = function(valid, data) {
   	if (!valid) {
   		return;
