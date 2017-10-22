@@ -308,32 +308,38 @@ h3 .page-heading {
     padding: 0px !important;
 }
 
+.portal_circle {
+   border-radius: 25px;
+}
 .portal_button:hover {
     background-color:#fff;
 }
 
-
-.gradient_blue .glass {
+.glass {
   /* background styles */
   position: relative;
-  background-color: blue; /*for compatibility with older browsers*/
-  background-image: linear-gradient(blue,lightblue);
-  border-radius: 3px;
   box-shadow: 0px 1px 4px -2px #333;
   text-shadow: 0px -1px #333;
   color: #fff !important;
+  overflow: hidden;
+}
+
+.gradient_blue .glass {
+  background-color: blue; /*for compatibility with older browsers*/
+  background-image: linear-gradient(blue,lightblue);
 }
 
 
-.glass:after{
+.glass:before{
   content: '';
   position: absolute;
   top: 2px;
-  left: 2px;
+  left: 0px;
   width: calc(100%);
-  height: 50%;
+  height: 50% ;
   background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
 }
+
 
 .gradient_blue .glass:hover{
   background: linear-gradient(lightblue,blue);
@@ -356,17 +362,12 @@ h3 .page-heading {
   display: block;
   color: #fff;
   text-align: center;
+  border-radius: 25px;
 }
 
-.gradient_black .glass {
-  /* background styles */
-  position: relative;
+.gradient_black .glass {  
   background-color: blue; /*for compatibility with older browsers*/
   background-image: linear-gradient(black,gray);
-  border-radius: 3px;
-  box-shadow: 0px 1px 4px -2px #333;
-  text-shadow: 0px -1px #333;
-  color: #fff !important;
 }
 
 .gradient_black .glass:hover{
@@ -375,14 +376,8 @@ h3 .page-heading {
 }
 
 .gradient_green .glass{
-  /* background styles */
-  position: relative;
   background-color: blue; /*for compatibility with older browsers*/
   background-image: linear-gradient(green,lightgreen);
-  border-radius: 3px;
-  box-shadow: 0px 1px 4px -2px #333;
-  text-shadow: 0px -1px #333;
-  color: #fff !important;
 }
 
 .gradient_green .glass:hover{
@@ -391,14 +386,8 @@ h3 .page-heading {
 }
 
 .gradient_blue_pink .glass{
-  /* background styles */
-  position: relative;
   background-color: blue; /*for compatibility with older browsers*/
   background-image: linear-gradient(#C361C3,lightblue);
-  border-radius: 3px;
-  box-shadow: 0px 1px 4px -2px #333;
-  text-shadow: 0px -1px #333;
-  color: #fff !important;
 }
 
 .gradient_blue_pink .glass:hover{
@@ -407,11 +396,15 @@ h3 .page-heading {
 }
 
 
-.circle_portal_logo {
+.portal_logo {
   margin-left: auto;
   margin-right: auto;
   top: 5px;
-  width: 120px;
+  width: auto;
   height: 120px;
+}
+
+.portal_logo_circle {
   border-radius: 50%;
+  width: 120 px !important;
 }

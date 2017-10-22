@@ -6,14 +6,10 @@
  App.controller('VenuePortalController', ['$scope', '$state', '$stateParams','RestServiceFactory', 'toaster','ngDialog',
       function($scope, $state, $stateParams, RestServiceFactory, toaster, ngDialog) {
   'use strict';
-  $scope.themes = [{label : "Blue Ocean", name :"default_blue", bgColor: 'blue', fontColor: 'white', btnColor: 'white', 
-  	bgColorCode : 'gradient_blue', fontColorCode: 'white', btnColorCode: 'white'},
-	{label : "Evening Red", name :"gradient_blue_pink", bgColor: 'pink', fontColor: 'white', btnColor: 'white', bgColorCode :
-	'gradient_blue_pink', fontColorCode: 'white', btnColorCode: 'white'},
-	{label : "Black", name :"gradient_black", bgColor: 'white', fontColor: 'black', btnColor: 'white', bgColorCode :
-	'gradient_black', fontColorCode: 'black', btnColorCode: 'black'},
-	{label : "Green", name :"gradient_green", bgColor: 'white', fontColor: 'black', btnColor: 'white', bgColorCode :
-	'gradient_green', fontColorCode: 'black', btnColorCode: 'black'}
+  $scope.themes = [{label : "Blue Ocean", name :"gradient_blue",  bgColorCode : 'gradient_blue'},
+	{label : "Evening Red", name :"gradient_blue_pink", bgColorCode : 'gradient_blue_pink'},
+	{label : "Black", name :"gradient_black", bgColorCode : 'gradient_black'},
+	{label : "Green", name :"gradient_green", bgColorCode : 'gradient_green'}
 	];
 
 

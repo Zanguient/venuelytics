@@ -18,9 +18,15 @@
         </div>
       </div> 
       <div class="row">
-        <div class="form-group col-sm-12">
-           <label class="control-label">Portal Logo Image*
+        <div class="form-group col-sm-6">
+           <label class="control-label">Portal Logo Image* (W X W)
             <input type="file" id="portalLogoId" name="file" onchange="angular.element(this).scope().uploadPortalLogo(this.files)"/>
+            </label>
+        </div>
+        <div class="form-group col-sm-6 checkbox c-checkbox">
+          <label>
+              <input type="checkbox" name="circle" value="Y" ng-model="portal.roundLogo" ng-true-value="Y"  ng-false-value="N" ng-checked="portal.roundLogo=='Y'"/>
+                <span class="fa fa-check"></span>Round Logo 
             </label>
         </div>
       </div> 
@@ -43,11 +49,19 @@
           <label class="control-label nowrap">Button Color *</label>
            <input type="text" name="btnColor" placeholder="Button Color" ng-disabled = "true" required="required"  class="form-control" ng-model="portal.theme.btnColor"/>
         </div> -->
-        <div class="form-group col-sm-4 checkbox c-checkbox">
-          <label>
-            <input type="checkbox" name="glassy" value="Y" ng-model="portal.glassyButtons" ng-true-value="Y"  ng-false-value="N" ng-checked="portal.glassyButtons=='Y'"/>
-              <span class="fa fa-check"></span>Enable Glassy Buttons
-          </label>
+        <div class="form-group col-sm-12 checkbox c-checkbox">
+          <div class="col-sm-4">
+            <label class="mr">
+              <input type="checkbox" name="glassy" value="Y" ng-model="portal.glassyButtons" ng-true-value="Y"  ng-false-value="N" ng-checked="portal.glassyButtons=='Y'"/>
+                <span class="fa fa-check"></span>Enable Glassy Buttons
+            </label>
+          </div>
+          <div class="col-sm-4">
+            <label>
+              <input type="checkbox" name="circle" value="Y" ng-model="portal.roundButtons" ng-true-value="Y"  ng-false-value="N" ng-checked="portal.roundButtons=='Y'"/>
+                <span class="fa fa-check"></span>Enable Round Buttons
+            </label>
+          </div>
         </div>
       </div> 
       <div class="row">    
@@ -100,12 +114,12 @@
     <label class="control-label nowrap">Portal Link: {{baseLink}}/#/{{portal.portalName}}</label>
   	<div class="col-sm-12 text-center portal_preview" ng-class="portal.theme.bgColorCode">
       
-        <img src="{{portal.logo.smallUrl}}" class="circle_portal_logo img-responsive" width="100px" height="100px"/>
+        <img src="{{portal.logo.smallUrl}}" class="portal_logo img-responsive" ng-class="{ 'portal_logo_circle' :portal.roundLogo =='Y'}"/>
         <div class="portal_title_name" ng-bind="portal.portalTitle"></div>
         <br>
         
         <div ng-repeat="action in portal.actionButtons">
-            <div class="portal_button" ng-class="portal.glassyButtons == 'Y' ? 'glass' : '' ">
+            <div class="portal_button" ng-class=" {'glass' : portal.glassyButtons == 'Y', 'portal_circle' : portal.roundButtons == 'Y' }">
               <a class="portal_btn btn-raised" href="{{action.url}}" target="_new" ng-bind="action.name"></a>
             </div>
         </div>
