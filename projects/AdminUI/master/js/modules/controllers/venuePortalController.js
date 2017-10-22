@@ -12,8 +12,6 @@
 	'gradient_blue_pink', fontColorCode: 'white', btnColorCode: 'white'},
 	{label : "Black", name :"gradient_black", bgColor: 'white', fontColor: 'black', btnColor: 'white', bgColorCode :
 	'gradient_black', fontColorCode: 'black', btnColorCode: 'black'},
-	{label : "white", name :"gradient_white", bgColor: 'white', fontColor: 'black', btnColor: 'white', bgColorCode :
-	'gradient_white', fontColorCode: 'black', btnColorCode: 'black'},
 	{label : "Green", name :"gradient_green", bgColor: 'white', fontColor: 'black', btnColor: 'white', bgColorCode :
 	'gradient_green', fontColorCode: 'black', btnColorCode: 'black'}
 	];

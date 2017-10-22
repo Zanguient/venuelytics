@@ -265,12 +265,6 @@ h3 .page-heading {
     );
 }
 
-.gradient_white {
-  background-image:
-    linear-gradient(
-        #FFFFF0 2%, lightgray 95%
-    );
-}
 
 .gradient_green {
   background-image:
@@ -318,19 +312,18 @@ h3 .page-heading {
     background-color:#fff;
 }
 
-.glass{
+
+.gradient_blue .glass{
   /* background styles */
   position: relative;
-  background-color: green !important; /*for compatibility with older browsers*/
-  background-image: linear-gradient(green,lightgreen) !important;
+  background-color: blue; /*for compatibility with older browsers*/
+  background-image: linear-gradient(blue,lightblue);
   border-radius: 3px;
   box-shadow: 0px 1px 4px -2px #333;
   text-shadow: 0px -1px #333;
+  color: #fff !important;
 }
 
-.portal_button.glass {
-  border: 0px;
-}
 
 .glass:after{
   content: '';
@@ -342,10 +335,11 @@ h3 .page-heading {
   background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
 }
 
-.glass:hover{
-  background: linear-gradient(#073,#0fa);
-  color: #fff;
+.gradient_blue .glass:hover{
+  background: linear-gradient(lightblue,blue);
+  color: #fff !important!;
 }
+
 
 .portal_btn {
   text-decoration: none !important;
@@ -363,3 +357,52 @@ h3 .page-heading {
   color: #fff;
   text-align: center;
 }
+
+.gradient_black .glass{
+  /* background styles */
+  position: relative;
+  background-color: blue; /*for compatibility with older browsers*/
+  background-image: linear-gradient(black,gray);
+  border-radius: 3px;
+  box-shadow: 0px 1px 4px -2px #333;
+  text-shadow: 0px -1px #333;
+  color: #fff !important;
+}
+
+.gradient_black .glass:hover{
+  background: linear-gradient(gray,black);
+  color: #fff !important!;
+}
+
+.gradient_green .glass{
+  /* background styles */
+  position: relative;
+  background-color: blue; /*for compatibility with older browsers*/
+  background-image: linear-gradient(green,lightgreen);
+  border-radius: 3px;
+  box-shadow: 0px 1px 4px -2px #333;
+  text-shadow: 0px -1px #333;
+  color: #fff !important;
+}
+
+.gradient_green .glass:hover{
+  background: linear-gradient(lightgreen,green);
+  color: #fff !important!;
+}
+
+.gradient_blue_pink .glass{
+  /* background styles */
+  position: relative;
+  background-color: blue; /*for compatibility with older browsers*/
+  background-image: linear-gradient(#C361C3,lightblue);
+  border-radius: 3px;
+  box-shadow: 0px 1px 4px -2px #333;
+  text-shadow: 0px -1px #333;
+  color: #fff !important;
+}
+
+.gradient_blue_pink .glass:hover{
+  background: linear-gradient(lightblue, #C361C3);
+  color: #fff !important!;
+}
+
