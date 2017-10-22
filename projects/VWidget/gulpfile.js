@@ -131,10 +131,10 @@ gulp.task('connect', function() {
   return gulp.src(build.dist)
     .pipe(webserver({
       livereload: true,
-      path: '/',
+      path: '/portal',
       port: 8100,
       directoryListing: false,
-      open: 'http://localhost:8100/',
+      open: 'http://localhost:8100/portal',
       fallback: 'index.html'
     }));
 });

@@ -13,7 +13,7 @@
   padding: 2px;
   margin-left: auto;
   margin-right: auto;
-  height: calc(100vh - 135px);
+  height: calc(100vh - 175px);
 }
 
 .container {
@@ -29,7 +29,6 @@
 }
 .header {
   padding: 10px;
-  height: 130px;
 }
 
 .footer {
@@ -57,7 +56,8 @@
   margin-left: auto;
   margin-right: auto;
   top: 5px;
-  width: 120px;
+  width: auto;
+  height: 120px;
 	border-radius: 50%;
 }
 
@@ -93,8 +93,10 @@
     margin-bottom: 15px;
     max-width: 500px;
 }
+
 .button:hover {
     background-color:#fff;
+    color: black;
 }
 
 .actions {
@@ -126,4 +128,33 @@
 
 .glass:hover{
   background: linear-gradient(#073,#0fa);
+}
+
+.gradient_black {
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 1) 5%, lightblue 120%
+    );
+}
+
+.gradient_white {
+  background-image:
+    linear-gradient(
+        #FFFFF0 2%, lightgray 95%
+    );
+}
+
+.gradient_green {
+  background-image:
+    linear-gradient(
+      green 20%,  lightgreen 95%
+    );
+}
+
+.gradient_blue_pink {
+  background-image:
+    linear-gradient(
+      to top right, 
+      lightblue, #C361C3
+    );
 }
