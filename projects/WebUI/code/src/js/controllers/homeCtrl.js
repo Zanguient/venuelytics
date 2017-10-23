@@ -112,8 +112,9 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
         self.navBar(userSelectedTab[0]);
     });
     self.init = function() {
-        self.venueLyticsFeatures = APP_ARRAYS.features;
 
+        self.venueLyticsFeatures = APP_ARRAYS.features;
+        ngMeta.setTag('image', 'assets/img/screen2.jpg');
         var urlPattern = $location.absUrl();
         var data = urlPattern.split(".");
         if(urlPattern.toLowerCase().indexOf("itzfun.com")>= 0) {

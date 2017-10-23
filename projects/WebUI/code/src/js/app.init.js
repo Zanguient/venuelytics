@@ -221,6 +221,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     ngMetaProvider.setDefaultTag('description', 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...');
     ngMetaProvider.setDefaultTitle('Venuelytics');
     ngMetaProvider.setDefaultTitleSuffix(' | Book VIP Reservations & Events');
+    ngMetaProvider.setDefaultTag('image', 'assets/img/screen2.jpg');
 
 }]).config(['$translateProvider', function ($translateProvider) {
     var version = new Date().getTime();
@@ -252,7 +253,6 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         $('.wait_loading_above_fold').remove();
     },300);
 
-    
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 
         if (current.hasOwnProperty('$$route')) {

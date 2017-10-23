@@ -61,7 +61,8 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             }
 
             self.init = function() {
-
+                ngMeta.setTitle("Consumer Controller");
+                ngMeta.setTag('image', 'assets/img/screen2.jpg');
                 var urlPattern = $location.absUrl();
                 var data = urlPattern.split(".");
                 if(data[1] === "venuelytics") {
@@ -110,8 +111,6 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
                 $('.modal-backdrop').remove();
             };
     		self.selectCity = function(city) {
-                $rootScope.title = 'Venuelytics-City-'+ city.name;
-                ngMeta.setTitle('Venuelytics-City-'+ city.name);
                 $location.url('/cities/'+city.name);
     		};
 

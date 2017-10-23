@@ -145,6 +145,17 @@ app
       "7-Popular-Cocktails-Every-Bartender-and-Cocktail-Enthusiast-Must-Know":"blogs/7-popular-cocktails.html",
       "Nyeelah-the-face-of-New-York-Nightlife":"blogs/nyeelah-blog.html"
     },
+    'blogPostsImages':{
+      "What-Is-Bottle-Service-and-Facts-You-Should-Know":"assets/img/blog/blog-2.jpg",
+      "What-Is-the-Guest-List-and-How-to-Get-On-It":"assets/img/blog/blog-3.jpg",
+      "7-Mind-Blowing-Nightlife-Cities-in-the-United-States":"assets/img/blog/blog-1.jpg",
+      "7-Nightlife-Trends-to-Follow":"assets/img/blog/blog-4.jpg",
+      "7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online":"assets/img/blog/blog-7ways.gif",
+      "10-Tips-to-Setup-a-Nightclub-of-Tomorrow-Today":"assets/img/blog/10-tips.jpg",
+      "How-to-Promote-Your-Nightlife-Venue-to-The-Millennials":"assets/img/blog/mil_1.png",
+      "7-Popular-Cocktails-Every-Bartender-and-Cocktail-Enthusiast-Must-Know":"assets/img/blog/margarita_blog.jpg",
+      "Nyeelah-the-face-of-New-York-Nightlife":"assets/img/blog/nyeelah_blogs.jpg"
+    },
     'blogs': [{"title":"7 Mind Blowing Nightlife Cities in the United States", "image":"assets/img/blog/blog-1.jpg", "description":"Who doesn't like to Party? And who doesn't like Casinos, Clubs, and Live Music Bars? We all wait till Friday just to get our own time from the hectic busy schedules so that we go out and have some fun with our friends and family. When it comes to the United States, you will have many choices to have a good time, and it's hard to select one city over other since every city here has its own charisma. Well, let us all say TGIF and check out some mind blowing nightlife cities in the USA that will make you say 'WOW'.", "link":"7-Mind-Blowing-Nightlife-Cities-in-the-United-States"},
               {"title":"What Is   Bottle Service and Facts You Should Know", "image":"assets/img/blog/blog-2.jpg", "description":"Bottle service is also called table service, and it is the ONLY way to secure a table at your favorite party place (Bar, Pub, Nightclub, etc.). Almost all clubs these days have VIP tables arranged throughout the club. The only way to get on the guest list and bypass the line for any bar/pub/nightclub is to reserve a table. Wikipedia defines bottle service as the sale of liquor by the bottle in most American lounges and nightclubs. The purchase of bottle service typically includes a reserved table for the patron's party and mixers of the patron's choice.", "link":"What-Is-Bottle-Service-and-Facts-You-Should-Know"},
               {"title":"What Is the Guest List and How to Get On It", "image":"assets/img/blog/blog-3.jpg", "description":"Guest list might be a bit confusing term to some people who are new to nightclubs, bars, and pubs. Today, we are going to explain this term and some more things attached to it. All these nightlife venues maintain their own dignity and culture, and you cannot just enter any nightclub and have your drinks. Well, you can go and have drinks, but at the famous places and the partying places with high demand, it is not easy.", "link":"What-Is-the-Guest-List-and-How-to-Get-On-It"},

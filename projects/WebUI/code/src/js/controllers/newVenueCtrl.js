@@ -3,8 +3,8 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate',
-    function ($rootScope, $log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $translate) {
+app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','$routeParams', 'AjaxService', 'APP_ARRAYS', '$translate','ngMeta',
+    function ($rootScope, $log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $translate, ngMeta) {
 
     		$log.log('Inside New Venue Controller.');
 
@@ -28,6 +28,9 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                 self.selectedCityName = $routeParams.cityName;
                 AjaxService.getCity(self.selectedCityName).then(function(response) {
                     self.cityInfo = response[0];
+                    ngMeta.setTag('image', self.cityInfo.imageUrl);
+                    $rootScope.title = 'Venuelytics-City-'+ self.cityInfo.name;
+                    ngMeta.setTitle('Venuelytics-City-'+ self.cityInfo.name);
                     self.selectedCityDistance = self.cityInfo.distanceInMiles;
                     self.barTab = self.cityInfo.counts.BAR;
                     self.karaokeTab = self.cityInfo.counts.KARAOKE;
