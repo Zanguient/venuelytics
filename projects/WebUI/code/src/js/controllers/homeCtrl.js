@@ -9,7 +9,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
      APP_LINK, ngMeta) {
 
 	$log.log('Inside Home Controller.');
-    ngMeta.setTitle("Home Controller");
+    ngMeta.setTitle("Venuelytics - Home");
     var self = $scope;
     $rootScope.showSearchBox = true;
     $rootScope.businessSearch = false;
@@ -115,6 +115,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
 
         self.venueLyticsFeatures = APP_ARRAYS.features;
         ngMeta.setTag('image', 'assets/img/screen2.jpg');
+        ngMeta.setTag('description', 'VenueLytics real-time platform integrates with Venue Website, Social Media Sites, Mobile Apps, ItzFun Consumer App and 3rd party Apps. Our white-label consumer App ItzFun!, provides access to an extensive level of information about the most important entertainment');
         var urlPattern = $location.absUrl();
         var data = urlPattern.split(".");
         if(urlPattern.toLowerCase().indexOf("itzfun.com")>= 0) {

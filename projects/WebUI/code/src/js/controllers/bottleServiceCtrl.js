@@ -61,9 +61,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.detailsOfVenue = response;
                     DataShare.venueFullDetails = self.detailsOfVenue;
                     self.venudetails = DataShare.venueFullDetails;
-                    ngMeta.setTag('description', response.description);
-                    $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services";
-                    ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services");
+                    ngMeta.setTag('description', response.description + " Bottle Services");
+                    $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services";
+                    ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services");
                     angular.forEach(response.imageUrls, function(value,key){
                         ngMeta.setTag('image', value.originalUrl);
                     });

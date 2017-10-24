@@ -29,8 +29,8 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                 AjaxService.getCity(self.selectedCityName).then(function(response) {
                     self.cityInfo = response[0];
                     ngMeta.setTag('image', self.cityInfo.imageUrl);
-                    $rootScope.title = 'Venuelytics-City-'+ self.cityInfo.name;
-                    ngMeta.setTitle('Venuelytics-City-'+ self.cityInfo.name);
+                    $rootScope.title =self.cityInfo.name + ' - Venuelytics';
+                    ngMeta.setTitle(self.cityInfo.name + ' - Venuelytics');
                     self.selectedCityDistance = self.cityInfo.distanceInMiles;
                     self.barTab = self.cityInfo.counts.BAR;
                     self.karaokeTab = self.cityInfo.counts.KARAOKE;

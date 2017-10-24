@@ -13,8 +13,9 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$http', '$location'
 			self.venueID = $routeParams.venueid;
 			$rootScope.description = DataShare.eachVenueDescription;
 			self.venudetails = DataShare.venueFullDetails;
-			$rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services Confirmation";
-			ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services Confirmation");
+			ngMeta.setTag('description', self.venudetails.description + " Bottle Order Confirmation");
+			$rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services Confirmation";
+			ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services Confirmation");
         	self.backToReservation = function() {
 				$rootScope.serviceName = 'BottleService';
 				DataShare.editBottle = 'false';

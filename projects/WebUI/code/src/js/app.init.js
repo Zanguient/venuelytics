@@ -257,7 +257,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
 
         if (current.hasOwnProperty('$$route')) {
             if(current.$$route.title) {
-                $rootScope.title = current.$$route.data.meta.title;
+                $rootScope.title = current.$$route.title;
                 $rootScope.description = current.$$route.description;
             }
         }

@@ -11,8 +11,9 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             self.privateDateIsFocused = 'is-focused';
             self.init = function() {
                 self.venudetails = DataShare.venueFullDetails;
-                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Private Event";
-                ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Private Event");
+                ngMeta.setTag('description', self.venudetails.description + " Private Event");
+                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Private Event";
+                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Private Event");
                 $rootScope.serviceTabClear = false;
                 self.venueID = self.venueid = $routeParams.venueid;
                 self.getServiceTime();

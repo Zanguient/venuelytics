@@ -11,8 +11,9 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
             self.init = function() {
                 $rootScope.description = DataShare.eachVenueDescription;
                 self.venudetails = DataShare.venueFullDetails;
-                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Party Services Confirmation & Payment";
-                ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Party Services Confirmation & Payment");
+                ngMeta.setTag('description', self.venudetails.description + " Party Confirmation");
+                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Services Confirmation & Payment";
+                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Services Confirmation & Payment");
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.partyPackageData = DataShare.partyServiceData;

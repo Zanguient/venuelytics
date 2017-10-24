@@ -101,7 +101,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
                 self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
                 self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
-                self.eventsEnable = self.eventsEnable === 'Y' ? false : true; 
+                self.eventsEnable = self.eventsEnable === 'Y' ? false : true;
+                /* self.tabParams = self.bottleServiceButton === false ? 'VIP' : 'private-events'; */
                 self.dispatchToService(self.tabParams);
                 addTabs();
             }); 
@@ -164,7 +165,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP"+ "/" + self.embeddedService);
                 self.tabParams = serviceName === 'VIP' ? self.embeddedService : serviceName;                
             } else {
-                //$location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName);
+                /* $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP"); */
                 self.tabParams = serviceName;
             }
         }

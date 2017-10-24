@@ -17,9 +17,12 @@ app.controller('BlogPostController', ['$log', '$scope', 'DataShare','$translate'
             self.blogPost = APP_ARRAYS.nightlife;
             self.blogPostUrl = APP_ARRAYS.blogPosts[self.postId];
             self.blogPostImage = APP_ARRAYS.blogPostsImages[self.postId];
+            self.blogPostTitle = APP_ARRAYS.blogPostsTitle[self.postId];
+            self.blogPostDescription = APP_ARRAYS.blogPostDescription[self.postId];
             $log.info("Readmore blog post:", self.blogPostUrl);
+            ngMeta.setTitle(self.blogPostTitle + " - Venuelytics");
             ngMeta.setTag('image', self.blogPostImage);
-            ngMeta.setTag('description', 'Venuelytics block post');
+            ngMeta.setTag('description', self.blogPostDescription);
         };
 
         self.init();

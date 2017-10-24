@@ -11,8 +11,9 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             self.init = function() {
                 $rootScope.description = DataShare.eachVenueDescription;
                 self.venudetails = DataShare.venueFullDetails;
-                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Table Services";
-                ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Table Services");
+                ngMeta.setTag('description', self.venudetails.description + " Table Services");
+                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Table Services";
+                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Table Services");
                 var embed = $routeParams.embed;
                 if(embed === "embed") {
                     $rootScope.embeddedFlag = true;

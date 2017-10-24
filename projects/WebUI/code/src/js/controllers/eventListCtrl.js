@@ -19,8 +19,9 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
 
     self.init = function() {
       self.venudetails = DataShare.venueFullDetails;
-      $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Event List";
-      ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Event List");
+      ngMeta.setTag('description', self.venudetails.description + " Event Services");
+      $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Event List";
+      ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Event List");
         self.tabParam = $routeParams.tabParam;
         AjaxService.getEvents($routeParams.venueid).then(function(response) {
           self.events = response.data['venue-events'];
