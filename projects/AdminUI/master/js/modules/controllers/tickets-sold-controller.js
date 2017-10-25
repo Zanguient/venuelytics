@@ -7,27 +7,29 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
   function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster,
     FORMATS, DialogService, $rootScope, contextService) {
     'use strict';
+    $scope.config = {};
+    $scope.config.opened = false;
+    $scope.calendarDate = '';
+    var n = $scope.minDate = new Date(2017,1,1);
+    $scope.maxDate = new Date(n.getFullYear()+1, n.getMonth(), n.getDate());
+      
+    $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
+     
     $timeout(function() {
 
       if (!$.fn.dataTable) return;
-      var columnDefinitions = [{
-          "sWidth": "15%",
-          aTargets: [0, 1, 6, 7]
-        }, {
-          "sWidth": "10%",
-          aTargets: [2, 4]
-        }, {
-          "sWidth": "10%",
-          aTargets: [3, 5]
-        },
-
+      var columnDefinitions = [
+        { "sWidth": "15%", aTargets: [0,1,7]},
+        { "sWidth": "10%", aTargets: [4,5,6,8]},
+        { "sWidth": "7%",  aTargets: [2,3]},
         {
-          "bAutoWidth": false
-        }, {
-          "targets": [7],
+          "targets": [8],
           "orderable": false,
           "createdCell": function(td, cellData, rowData, row, col) {
-            var o = rowData[7];
+            var o = rowData[8];
             var actionHtml = '<pdf-download c="\'btn-oval fa fa-download\'"  title="Download Ticket" url="v1/download/' + contextService.userVenues.selectedVenueNumber + '/pdf/ticket/' + o.id +
               '" filename="ticket-' + o.id + '.pdf"></pdf-download>&nbsp;&nbsp;<button class="btn btn-default btn-oval fa fa-times" title="Cancel"></button>';
             $(td).html(actionHtml);
@@ -37,29 +39,57 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
       ];
 
       DataTableService.initDataTable('tickets_table', columnDefinitions, false);
+       
+     
       $('#tickets_table').on('click', '.fa-times', function() {
         $scope.cancelTicket(this);
       });
+
+      $('#eventDateCalendarId').on('click', function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $timeout(function() {
+            $scope.config.opened = !$scope.config.opened;
+        }, 200);
+      });
+      
+      $scope.readData();
+    });
+
+    $scope.readData = function () {
+      
+      var date = '';
+      if ($scope.calendarDate != '') {
+        date = moment($scope.calendarDate).format('YYYYMMDD');
+      }
       var target = {
-        id: contextService.userVenues.selectedVenueNumber
+        id: contextService.userVenues.selectedVenueNumber,
+        date: date
       };
-      var table = $('#tickets_table').DataTable();
+
       RestServiceFactory.VenueEventService().getSoldTickets(target, function(data) {
+        var table = $('#tickets_table').DataTable();
+        table.clear();
         data.map(function(ticketSold) {
-          table.row.add([ticketSold.eventName, ticketSold.ticketType, ticketSold.quantity, ticketSold.cost, moment(ticketSold.soldDate).format('MMM DD, YYYY'), ticketSold.orderNumber, ticketSold.contactName, ticketSold]);
+          table.row.add([ticketSold.eventName, ticketSold.ticketType, ticketSold.quantity, ticketSold.cost,
+           moment(ticketSold.soldDate).format('MMM DD, YYYY'), moment(ticketSold.eventDate).format('MMM DD, YYYY'), 
+           ticketSold.orderNumber, ticketSold.contactName, ticketSold]);
         });
         table.draw();
       });
+    };
+    $scope.$watch('calendarDate',  function() {
+        $scope.readData();
     });
-
     $scope.cancelTicket = function(button) {
       var table = $('#tickets_table').DataTable();
       var targetRow = $(button).closest("tr");
       var rowData = table.row(targetRow).data();
 
-      DialogService.confirmYesNo('Cancel Ticket?', 'Do you really want to cancel this Ticket?', function() {
-        var target = {id: contextService.userVenues.selectedVenueNumber, ticketId: rowData[7].id};
-        RestServiceFactory.VenueEventService().cancelTicket(target, function(success) {
+      DialogService.confirmYesNoReason('Cancel Ticket?', 'Do you really want to cancel this Ticket?', function(data) {
+      var target = {id: contextService.userVenues.selectedVenueNumber, ticketId: rowData[8].id, reason: data};
+      
+      RestServiceFactory.VenueEventService().cancelTicket(target, function(success) {
           table.row(targetRow).remove().draw();
         }, function(error) {
           if (typeof error.data !== 'undefined') {

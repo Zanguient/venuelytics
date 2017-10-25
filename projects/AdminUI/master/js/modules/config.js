@@ -290,7 +290,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('venue-events/ticketsSold.html'),
         controller: 'TicketsSoldController',
         data: { authorizedRoles: [10,11,12]},
-        resolve: resolveFor('datatables', 'datatables-pugins')
+        resolve: resolveFor('datatables', 'datatables-pugins','moment','fullcalendar')
     })
     .state('app.registerComputer', {
         url: '/registerComputer',
@@ -347,7 +347,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/page',
         templateUrl: 'app/pages/page.html',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.owner, USER_ROLES.manager]},
-        resolve: angular.extend(resolveFor('modernizr', 'icons', 'parsley'))
+        resolve: angular.extend(resolveFor('modernizr', 'icons', 'parsley','toaster'))
     })
     .state('page.login', {
         url: '/login',
@@ -365,6 +365,12 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/recover',
         title: "Recover",
         templateUrl: 'app/pages/recover.html'
+    })
+    .state('page.reset', {
+        url: '/reset',
+        title: "Reset Password",
+        controller: 'PasswordResetController',
+        templateUrl: 'app/pages/reset-password.html'
     })
     .state('page.lock', {
         url: '/lock',

@@ -61,7 +61,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     } else {
     	var data = {};
         data.venueNumber = $stateParams.venueNumber;
-    	data.enabled = false;
+    	data.enabled = 'N';
     	$scope.data = data;
     }
 	$scope.changed = function() {

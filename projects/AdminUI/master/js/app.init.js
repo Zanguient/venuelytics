@@ -34,10 +34,10 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
              
               $rootScope.$on(AUTH_EVENTS.loginFailed, $rootScope.loginFailedFx);
               $rootScope.$on(AUTH_EVENTS.notAuthenticated, function(event, data){
-            	 var msg = {};
-            	 msg.message = data;
-               ngDialog.closeAll();
-            	 $state.go('page.login', msg);
+            	   var msg = {};
+            	   msg.message = data;
+                 ngDialog.closeAll();
+            	   $state.go('page.login', msg);
               });
               $rootScope.$on(AUTH_EVENTS.sessionTimeout, $rootScope.sessionTimeoutFx);
               
@@ -56,7 +56,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                       $templateCache.remove(toState.templateUrl);
                 }*/
 
-            	  if (typeof(toState) !== 'undefined' && toState.name !== 'page.login'){
+            	  if (typeof(toState) !== 'undefined' && toState.name !== 'page.login' && toState.name !== 'page.recover' && toState.name !== 'page.register' && toState.name !== 'page.reset'){
                   $rootScope.hideNavVenueDropdown = false;
                   if (toState.name === 'app.venueedit' || 
                       toState.name === 'app.venues' ||

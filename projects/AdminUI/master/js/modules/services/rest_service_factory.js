@@ -59,9 +59,10 @@
  			UserService: function () {
  				return $resource(urlTemplate.replace("@context", "users"), {}, {
  					getAgencyInfo : {method: 'GET',  params: { id: '@id' }, 
- 						url: urlTemplate.replace("@context", "users") +"/agency"}
+ 						url: urlTemplate.replace("@context", "users") +"/agency"},
+ 					resetPassword : {method: 'POST',  params: { id: '@id' }, 
+ 						url: urlTemplate.replace("@context", "users") +"/resetpassword"}
  				});
-
  			},
  			AgencyService: function () {
  				return $resource(urlTemplate.replace("@context", "agencies"), {}, {
