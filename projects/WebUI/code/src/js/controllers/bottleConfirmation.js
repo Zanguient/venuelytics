@@ -17,9 +17,10 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.orderPlaced = false;
             self.init = function() {
                 $rootScope.description = DataShare.eachVenueDescription;
-                self.venudetails = DataShare.venueFullDetails;
-                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services Confirmation & Payment";
-                ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Bottle Services Confirmation & Payment");
+                self.venudetails = DataShare.venueFullDetails;                
+                ngMeta.setTag('description', self.venudetails.description + " Bottle Confirmation");
+                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services Confirmation & Payment";
+                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services Confirmation & Payment");
                 self.editCity = $routeParams.cityName;
                 self.venueID = $routeParams.venueid;
                 self.userData = DataShare.bottleServiceData;

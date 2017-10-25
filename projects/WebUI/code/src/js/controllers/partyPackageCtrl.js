@@ -11,8 +11,9 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.partyDateIsFocused = 'is-focused';
             self.init = function() {
                 self.venudetails = DataShare.venueFullDetails;
-                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Party Package Services";
-                ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Party Package Services");
+                ngMeta.setTag('description', self.venudetails.description + " Party Package");
+                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Package Services";
+                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Package Services");
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());

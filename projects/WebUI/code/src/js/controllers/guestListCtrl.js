@@ -12,8 +12,9 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             self.guestDateIsFocused = 'is-focused';
             self.init = function() {
                 self.venudetails = DataShare.venueFullDetails;
-                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Guest List";
-                ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Guest List");
+                ngMeta.setTag('description', self.venudetails.description + " Guest List");
+                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Guest List";
+                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Guest List");
                 self.venueid = $routeParams.venueid;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());

@@ -10,8 +10,9 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             self.foodType = 'Delivery';
             self.init = function() {
                 self.venudetails = DataShare.venueFullDetails;
-                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Food Services";
-                ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+ "Food Services");
+                ngMeta.setTag('description', self.venudetails.description + " Food Services");
+                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Food Services";
+                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Food Services");
                 self.venueid = $routeParams.venueid;
                 self.selectedCity = $routeParams.cityName;
                 $rootScope.serviceTabClear = false;

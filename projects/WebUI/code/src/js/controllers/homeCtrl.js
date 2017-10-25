@@ -9,7 +9,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
      APP_LINK, ngMeta) {
 
 	$log.log('Inside Home Controller.');
-    ngMeta.setTitle("Home Controller");
+    ngMeta.setTitle("Home - Venuelytics");
     var self = $scope;
     $rootScope.showSearchBox = true;
     $rootScope.businessSearch = false;
@@ -112,8 +112,10 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
         self.navBar(userSelectedTab[0]);
     });
     self.init = function() {
-        self.venueLyticsFeatures = APP_ARRAYS.features;
 
+        self.venueLyticsFeatures = APP_ARRAYS.features;
+        ngMeta.setTag('image', 'assets/img/screen2.jpg');
+        ngMeta.setTag('description', 'The VenueLytics Business App is a Venue Management & Entertainment Platform which provides venues like Casinos, Resorts, Stadiums, Top Golf, Clubs, Bars, Lounges, Karaoke & Bowling Alleys with features that generate incremental revenue through service requests, mobile pay, analytics, rewards and more. Venues can also reach and enhance customer’s experience real-time via the “ItzFun!” consumer app.');
         var urlPattern = $location.absUrl();
         var data = urlPattern.split(".");
         if(urlPattern.toLowerCase().indexOf("itzfun.com")>= 0) {

@@ -13,8 +13,9 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$http', '$location',
             self.init = function() {
                 $rootScope.description = DataShare.eachVenueDescription;
                 self.venudetails = DataShare.venueFullDetails;
-                $rootScope.title = self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+"Food Services Confirmation & Payment";
-                ngMeta.setTitle(self.venudetails.venueName+','+$routeParams.cityName+','+self.venudetails.state+','+"Food Services Confirmation & Payment");
+                ngMeta.setTag('description', self.venudetails.description + " Food Confirmation");
+                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Food Services Confirmation & Payment";
+                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Food Services Confirmation & Payment");
                 self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;
