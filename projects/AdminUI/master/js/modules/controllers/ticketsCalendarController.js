@@ -245,8 +245,8 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
     $scope.selectedDate.setHours(h);
 
     $scope.ticketSale = {};
-    $scope.ticketSale.ticketId = ticket.id;
-    $scope.ticketSale.eventDate = $scope.selectedDate;
+    $scope.ticketSale.ticketId = ticket.id;//2017-10-29T02:00:00.000Z
+    $scope.ticketSale.eventDate =  moment($scope.selectedDate).format("YYYY-MM-DDTHH:mm:00");
     $scope.ticketSale.soldMacId = $scope.registration.registrationCode;
     $scope.ticketSale.quantity = 1;
 
