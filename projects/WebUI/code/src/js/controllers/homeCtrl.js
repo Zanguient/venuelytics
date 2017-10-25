@@ -9,7 +9,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
      APP_LINK, ngMeta) {
 
 	$log.log('Inside Home Controller.');
-    ngMeta.setTitle("Venuelytics - Home");
+    ngMeta.setTitle("Home - Venuelytics");
     var self = $scope;
     $rootScope.showSearchBox = true;
     $rootScope.businessSearch = false;

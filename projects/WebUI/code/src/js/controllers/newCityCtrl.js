@@ -61,7 +61,7 @@ app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'Re
             }
 
             self.init = function() {
-                ngMeta.setTitle("Venuelytics - Consumers");
+                ngMeta.setTitle("Consumers - Venuelytics");
                 ngMeta.setTag('image', 'assets/img/screen2.jpg');
                 ngMeta.setTag('description', 'Personalized Real-Time Premium Services to Consumers!');
                 var urlPattern = $location.absUrl();
