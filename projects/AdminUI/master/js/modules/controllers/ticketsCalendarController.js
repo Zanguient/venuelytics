@@ -7,8 +7,8 @@
  */
 
 App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope', 'toaster', 'Session','ContextService', 
-  'RestServiceFactory', 'APP_EVENTS','ngDialog', function ($state, $stateParams, $scope, toaster, session, 
-    contextService, RestServiceFactory, APP_EVENTS, ngDialog) {
+  'RestServiceFactory', 'APP_EVENTS','ngDialog', '$window', function ($state, $stateParams, $scope, toaster, session, 
+    contextService, RestServiceFactory, APP_EVENTS, ngDialog, $window) {
   "use strict";
 
   var DAYS = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
@@ -21,7 +21,8 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
   $scope.calEvents = [];
   $scope.isManager = session.roleId == 11 || session.roleId == 12;
   $scope.registered = false;
-
+  $scope.pdfShow = false;
+  $scope.pdfDoc = '';
   $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
   var self = $scope;
   self.enableReset = false;
@@ -315,12 +316,20 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
               $scope.dialog.close();
               self.getEventTickets(self.event, self.selectedDate);
               self.getAgencyInfo();
+
+              $timeout(function(){
+                $window.open("data:application/pdf;base64, " + data.pdfDoc);
+              }, 300);
             }, function(error, s) {
                if (typeof error.data !== 'undefined') { 
                   toaster.pop('error', "Sell Ticket Failed", error.data.message);
                }
             });
           }
+        };
+
+        $scope.showPrintTicket= function(data) {
+
         };
       }]
     });
