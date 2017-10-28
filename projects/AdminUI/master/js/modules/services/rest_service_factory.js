@@ -30,7 +30,7 @@
  		
  		var venueEventProperties =['id', 'venueNumber', 'eventName', 'description', 
  		'eventType', 'eventTime','durationInMinutes','startDate', 'endDate', 'scheduleDayOfMonth',
- 		'scheduleDayOfWeek','imageURL','bookingUrl', 'price', 'enabled', 'performerId'];
+ 		'scheduleDayOfWeek','imageURL','bookingUrl', 'price', 'enabled', 'performerId', 'processingFeeMode'];
 
  		var eventTicketProperties =['id', 'storeNumber', 'name', 'description', 
  		'price', 'discountedPrice','sectionName','seatStartNumber', 'count', 'row', 'eventDate', 'uiAttribute'];
@@ -70,7 +70,9 @@
  					saveMyProfile : {method: 'POST',  params: { id: '@id'}, 
  						url: urlTemplate.replace("@context", "users") +"/myProfile"},
  					getManagers : {method: 'GET',  params: { id: '@id'}, isArray: true,
- 						url: urlTemplate.replace("@context", "users") +"/managers"}
+ 						url: urlTemplate.replace("@context", "users") +"/managers"},
+ 					getPartners : {method: 'GET',  params: { id: '@id'}, isArray: true,
+ 						url: urlTemplate.replace("@context", "users") +"/partners"}
  						
 
  				});

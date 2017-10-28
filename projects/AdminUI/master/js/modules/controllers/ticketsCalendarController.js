@@ -266,17 +266,19 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
             for (var i = 0; i < tnfArray.length; i++) {
               var tnfItem = tnfArray[i];
               if (tnfItem.serviceType === 'TICKET-AGENCY') {
-                if (tnfItem.valueType === '%'){
-                  var cost = Number($scope.ticket.discountedPrice*quantity*tnfItem.value*0.01).toFixed(2);
-                  totalTaxNFees += Number(cost);
-                  var s = tnfItem.name +' (' +tnfItem.value+ '%) = <span class="pull-right">$' + cost +'</span>';
-                  result.push(s);
+                if (ticket.processingFeeMode === 0 || tnfItem.type !== 'convenience-fee') {
+                  if (tnfItem.valueType === '%' ){
+                    var cost = Number($scope.ticket.discountedPrice*quantity*tnfItem.value*0.01).toFixed(2);
+                    totalTaxNFees += Number(cost);
+                    var s = tnfItem.name +' (' +tnfItem.value+ '%) = <span class="pull-right">$' + cost +'</span>';
+                    result.push(s);
 
-                } else {
-                  var cost = Number(tnfItem.value).toFixed(2);
-                  var s = tnfItem.name +' = <span class="pull-right">$' + cost +'</span>';
-                  totalTaxNFees += Number(cost);
-                  result.push(s);
+                  } else {
+                    var cost = Number(tnfItem.value).toFixed(2);
+                    var s = tnfItem.name +' = <span class="pull-right">$' + cost +'</span>';
+                    totalTaxNFees += Number(cost);
+                    result.push(s);
+                  }
                 }
               }
             }

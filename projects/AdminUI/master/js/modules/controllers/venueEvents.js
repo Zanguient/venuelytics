@@ -5,8 +5,8 @@
  * =========================================================
  */
 
-App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams','ngDialog',
-                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams, ngDialog) {
+App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory', '$stateParams','Session',
+                                   function($scope, $state, $compile, $timeout, RestServiceFactory, $stateParams, Session) {
   'use strict';
   
   $scope.events = [];
@@ -20,7 +20,10 @@ App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout
     return value.getMonth()+1 + "/" + value.getDate() + "/" + value.getYear();
   }
   
-  
+  $scope.enableCreateEvent = function() {
+    return Session.roleId >= 50;
+  };
+
 	$scope.createNewEvent = function() {
 		$state.go('app.editVenueEvent', {venueNumber: $stateParams.id, id: 'new'});
 	};

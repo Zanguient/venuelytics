@@ -251,6 +251,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask')
     })
+    .state('app.partners', {
+        url: '/partners',
+        title: 'Partners',
+        templateUrl: basepath('user/partners.html'),
+        controller: 'PartnerController',
+        data: { authorizedRoles: [USER_ROLES.admin]},
+        resolve: resolveFor('parsley')
+    })
     .state('app.settings', {
         url: '/appsettings',
         title: 'Application Settings',

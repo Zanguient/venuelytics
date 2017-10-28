@@ -110,7 +110,21 @@
             <label>Description</label>
             <textarea placeholder="Enter venue description" rows="4" ng-model="data.description" class="form-control"></textarea>
           </div>
-            
+          <div class="form-group  col-sm-12">
+             <label>Processing Fee</label>
+            <div class="radio c-radio ml-lg mt0">
+              <label>
+                <input name="FeeMode" value="0" type="radio" ng-model="data.processingFeeMode">
+                  <span class="fa fa-circle"></span>Apply Traditional Fee
+                </label>
+            </div>
+            <div class="radio c-radio ml-lg">
+              <label>
+                <input name="FeeMode" value="1" type="radio" ng-model="data.processingFeeMode">
+                  <span class="fa fa-circle"></span>Sell at Face Value (No processing Fee) - Promoters will pay the commission
+                </label>
+            </div>
+          </div>
 
           <div class="form-group  col-sm-12">
             <div class="checkbox c-checkbox">

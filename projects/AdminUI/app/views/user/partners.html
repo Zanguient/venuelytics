@@ -1,0 +1,42 @@
+<div ng-controller="PartnerController" class="container-fluid">
+   
+   <div class="row-masonry row-masonry-lg-4 row-masonry-md-3 row-masonry-sm-1">
+    	
+  		<div class="col-masonry" ng-repeat="partner in partners" ng-init="partner.locked = true">
+			<div class="panel panel-default" >
+				<div class="row">
+			      <img ng-src="{{partner.profileImageThumbnail}}" alt="" class="img-responsive col-xs-12" />
+
+			   	</div> 
+			   	<div class="text-center">
+			   	  
+			    	<h3 class="mt0 mb0 bg-gray-dark" ng-bind="partner.userName"></h3>
+			      
+			   	</div> 
+			   	<div class="panel-body">
+			   		<ul class="list-unstyled">
+                     <li class="mb-sm">
+                        <em class="fa fa-phone fa-fw"></em>{{partner.phone}}</li>
+                     <li class="mb-sm">
+                        <em class="fa fa-envelope fa-fw"></em>{{partner.email}}</li>
+                     <li class="mb-sm">
+                        <em class="fa fa-home fa-fw"></em>{{partner.businessName}}</li>
+                  	</ul>
+			      	<div class="col-sm-12" ng-show="!partner.locked">
+				    	<img ng-src="{{partner.securityBarCode}}" alt="" class="img-responsive well"  style="max-height: 200px; width: auto; margin:auto;"/><br/>
+				   	  	<div ng-bind="partner.securityCode" class="col-sm-12 text-center well well-sm"></div> 
+					</div>
+			   </div>
+			   <div class="panel-footer">
+					<em class="fa fa-lock secure" ng-class="partner.locked ? 'fa-lock' : 'fa-unlock'" ng-click="lockUnlock(partner)"></em> 
+					<span class="pull-right circle circle-xl text-green" ng-class="enableDisableColor(partner.enabled)" >      
+      				</span>
+			   </div>
+			</div>
+
+  		</div>
+         
+   		
+	</div>
+   
+</div>
