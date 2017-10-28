@@ -106,3 +106,11 @@
       </div>
    </div>
 </div>
+
+<script type="text/ng-template" id="ticketPopUP">
+	<div class="ngdialog-message">
+        <!-- <iframe style="width: 412px; height: 202px;" src="{{ngDialogData.base64data}}"/> -->
+        <!-- <embed src="{{ngDialogData.base64data}}" width="500" height="375" type='application/pdf'> -->
+        <object width="100%" height="100%" type='application/pdf' data="{{ngDialogData.base64data}}"/>
+	</div>
+</script>

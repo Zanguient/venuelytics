@@ -3,6 +3,18 @@
   height: 100px;
   margin-left: 30px;
 }
+.price_headter {
+  font-size: 18px;
+  font-weight: 700;
+}
+.price_enterprice {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 400;
+  height: 52px;
+  line-height: 52px;
+  text-align: center;
+}
 .eventListClass {
   margin-right: 13px;
 }
