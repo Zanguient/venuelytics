@@ -318,9 +318,18 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
               $scope.dialog.close();
               self.getEventTickets(self.event, self.selectedDate);
               self.getAgencyInfo();
-
+              var base64data = "data:application/pdf;base64," + data.pdfDoc;
               $timeout(function(){
-                $window.open("data:application/pdf;base64, " + data.pdfDoc);
+                ngDialog.openConfirm({
+                  template: 'ticketPopUP',
+                  className: 'ngdialog-theme-default',
+                  data: {base64data: base64data},
+                }).then(function (value) {
+                }, function (reason) {
+                });
+
+                /* $window.open("data:application/pdf;base64," + data.pdfDoc); */
+                /* $window.open("data:application/octet-stream;base64," + data.pdfDoc); */ /*download Pdf*/
               }, 300);
             }, function(error, s) {
                if (typeof error.data !== 'undefined') { 

@@ -1,0 +1,135 @@
+<div class="container">
+    <br><br>
+    <div class="row pricing-table-container">
+        <div class="col-md-3 hidden-sm hidden-xs pricing-col">
+            <div class="pricing-table pricing-table-description">
+               <div class="pricing-table-head">
+                   <h2>
+                    {{planFeature}}
+                   </h2>
+                   <h3 class="price">
+                    {{monthlyPrice}}
+                   </h3>
+               </div>
+               <ul  class="pricing-table-content">
+                    <li>
+                        <i></i><span class="price_headter">{{reservationPromotation}}</span>
+                    </li>
+                    <li ng-repeat="reservation in reservationPromotationArray">
+                            <i></i>{{reservation.title}}
+                    </li>
+                    <li>
+                        <i></i><span class="price_headter">{{premiumServices}}</span>
+                    </li>
+                    <li ng-repeat="premium in premiumServicesArray">
+                        <i></i>{{premium.title}}
+                    </li>
+                    <li>
+                        <i></i><span class="price_headter">{{wifiMonetization}}</span>
+                    </li>
+                    <li ng-repeat="wifi in wifiMonetizationArray">
+                        <i></i>{{wifi.title}}
+                    </li>
+               </ul>
+           </div>
+        </div>
+        <div class="col-md-3 pricing-col">
+            <div class="pricing-table">
+                <div class="pricing-table-head">
+                    <h2>
+                        {{basicFee}}<span>{{basicFeeIdeal}}</span>
+                    </h2>
+                    <h3 class="price">
+                        $ <i>{{basicPrice}}</i>
+                        <span class="hidden-md hidden-lg">{{perMonth}}</span>
+                    </h3>
+                </div>
+                <ul class="pricing-table-content">
+                    <li style="height: 47px;"></li>
+                    <li ng-repeat="reservation in reservationPromotationArray">
+                        {{reservation.basicDetails}}
+                        <span class="hidden-md hidden-lg">{{reservation.title}}</span>
+                    </li>
+                    <li style="height: 47px;"></li>
+                    <li ng-repeat="primium in premiumServicesArray">
+                        {{primium.basicDetails}}
+                        <span class="hidden-md hidden-lg">{{primium.title}}</span>
+                    </li>
+                    <li style="height: 47px;"></li>
+                    <li ng-repeat="wifi in wifiMonetizationArray">
+                        {{wifi.basicDetails}}
+                        <span class="hidden-md hidden-lg">{{wifi.title}}</span>
+                    </li>
+                </ul>
+                <div class="pricing-table-footer text-center">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-raised"><i class="zmdi zmdi-cloud-download"></i> Get Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 pricing-col">
+            <div class="pricing-table">
+                <div class="pricing-table-head">
+                    <h2>
+                        {{professionalFee}}<span>{{professionalFeeEverything}}</span>
+                    </h2>
+                    <h3 class="price">
+                        $ <i>{{professionalPrice}}</i>
+                        <span class="hidden-md hidden-lg">{{perMonth}}</span>
+                    </h3>
+                </div>
+                <ul class="pricing-table-content">
+                    <li style="height: 47px;"></li>
+                    <li ng-repeat="reservation in reservationPromotationArray">
+                        {{reservation.professionalDetails}}
+                        <span class="hidden-md hidden-lg">{{reservation.title}}</span>
+                    </li>
+                    <li style="height: 47px;"></li>
+                    <li ng-repeat="primium in premiumServicesArray">
+                        {{primium.professionalDetails}}
+                        <span class="hidden-md hidden-lg">{{primium.title}}</span>
+                    </li>
+                    <li style="height: 47px;"></li>
+                    <li ng-repeat="wifi in wifiMonetizationArray">
+                        {{wifi.professionalDetails}}
+                        <span class="hidden-md hidden-lg">{{wifi.title}}</span>
+                    </li>
+                </ul>
+                <div class="pricing-table-footer text-center">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-raised"><i class="zmdi zmdi-cloud-download"></i> Get Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 pricing-col">
+            <div class="pricing-table">
+                <div class="pricing-table-head">
+                    <h2>
+                        {{enterpriseFee}}<span>{{enterpriseFeeAdvanced}}</span>
+                    </h2>
+                    <h3 class="price_enterprice">
+                        {{enterPrise}}
+                    </h3>
+                </div>
+                <ul class="pricing-table-content">
+                    <li style="height: 47px;"></li>
+                    <li ng-repeat="reservation in reservationPromotationArray">
+                        {{reservation.enterPriseDetails}}
+                        <span class="hidden-md hidden-lg">{{reservation.title}}</span>
+                    </li>
+                    <li style="height: 47px;"></li>
+                    <li ng-repeat="primium in premiumServicesArray">
+                        {{primium.enterPriseDetails}}
+                        <span class="hidden-md hidden-lg">{{primium.title}}</span>
+                    </li>
+                    <li style="height: 47px;"></li>
+                    <li ng-repeat="wifi in wifiMonetizationArray">
+                        {{wifi.enterPriseDetails}}
+                        <span class="hidden-md hidden-lg">{{wifi.title}}</span>
+                    </li>
+                </ul>
+                <div class="pricing-table-footer text-center">
+                    <a href="javascript:void(0)" class="btn btn-primary btn-raised"><i class="zmdi zmdi-cloud-download"></i> Get Now</a>
+                </div>
+            </div>
+        </div>
+    </div> <!-- row -->
+</div> <!-- container -->

@@ -254,4 +254,57 @@ app
     "GOOGLE_PLAY_VENUELYTICS":  "//play.google.com/store/apps/details?id=com.itzfun.biz&hl=en",
     "GOOGLE_PLAY_ITZFUN"     :  "//play.google.com/store/apps/details?id=com.itzfun&hl=en",
     "VIDEO_PLAY"             :  "//www.youtube.com/watch?v=ruy7kCuPpV4"
+  })
+
+  .constant('PRICING_APP', {
+    "MONTHLY_PRICE":"Monthly price",
+    "PER_MONTH":"Per Month",
+    "BASIC_PRICE":"89",
+    "PROFESSIONAL_PRICE":"249",
+    "ENTER_PRICE":"Contact For Pricing",
+    "PLAN_FEATURE":"Plan Feature",
+    "MONTHLY_PRICE":"Monthly price",
+    "BASIC_FEE":"Basic",
+    "BASIC_FEE_IDEAL":"Ideal for Small Venues",
+    "PROFESSIONAL_FEE":"Professional",
+    "PROFESSSIONAL_FEE_EVERYTHING":"Everything you need for a growing business",
+    "ENTERPRISE_FEE":"Enterprise",
+    "ENTERPRISE_FEE_ADVANCED":"Advanced features for Enterpise Level Services",
+    "RESERVATION_PROMOTATION":"Reservation & Promotion",
+    "RESERVATION_PROMOTATION_ARRAY":[
+      {'title':'Table Reservation', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Private Event Booking', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Bottle Service', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Deals & Coupons', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Party Packages', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'}
+    ],
+    "PREMIUM_SERVICES":"Premium Services",
+    "PREMIUM_SERVICES_ARRAY":[
+      {'title':'Event & Ticketing', 'basicDetails': 'NO', 'professionalDetails': 'Yes', 'enterPriseDetails': 'YES'},
+      {'title':'Mobile Payment', 'basicDetails': 'NO', 'professionalDetails': 'Yes (2.9% + $0.25)', 'enterPriseDetails': 'Yes (2.9% + $0.25)'},
+      {'title':'Artist/DJ Promotion', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Integration', 'basicDetails': '-', 'professionalDetails': '-', 'enterPriseDetails': '-'},
+      {'title':'Social Media', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Web', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Mobile App/ItzFun', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'ChatBot', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'NO'},
+      {'title':'Landing Page', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'NO'},
+      {'title':'Contest & Tournaments', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Business Analytics', 'basicDetails': 'Basic', 'professionalDetails': 'FULL', 'enterPriseDetails': 'Advanced'},
+      {'title':'Internal Messaging', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Guest List', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'NO'},
+      {'title':'Fast Pass', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Lost & Found', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Valet Services', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Guest Registration', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'}
+    ],
+    "WIFI_MONETIZATION":"WiFi Monetization",
+    "WIFI_MONETIZATION_ARRAY":[
+      {'title':'On-site Food/Drinks Ordering', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
+      {'title':'VIP Services / Concierge', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
+      {'title':'Digital Loyaty Management', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
+      {'title':'Beacon Integration', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
+      {'title':'White Label - Private App', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
+      {'title':'Way Finder', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'}
+    ]
   });
