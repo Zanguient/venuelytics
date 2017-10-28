@@ -5,7 +5,7 @@
  
  App.factory('UserRoleService',  function() {
  	'use strict';
- 	var userRoles = [];
+ 	var userRoles = {};
 	userRoles[1] = 'Basic User';
 	userRoles[2] = 'Bouncer';
 	userRoles[3] = 'Bartender';
@@ -14,6 +14,7 @@
 	userRoles[6] = 'Karaoke Manager';
 	userRoles[7] = 'Artist';
 	userRoles[8] = 'Host';
+	userRoles[9] = 'Partner';
 	userRoles[50] = 'Promotor';
 	userRoles[51] = 'Service Manager';
 	userRoles[100] = 'Manager';
@@ -23,6 +24,7 @@
 	userRoles[11] = 'Agent Manager';
 	userRoles[12] = 'Store Manager';
  	
+
  	return {
  		getRoles : function() {
 			return userRoles;

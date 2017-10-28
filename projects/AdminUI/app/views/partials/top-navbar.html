@@ -35,8 +35,14 @@
          </li-->
          <li class="visible-lg">
             <a href="#">
-               <em class="fa fa-server"></em> {{serverName}} | <em class="fa fa-user"></em> {{session.userName}}
+               <em class="fa fa-server"></em> {{serverName}} |  {{session.userName}}
             </a>
+         </li>
+         <li class="visible-lg">
+            <div class="media text-center" ng-click="showUserProfile()">
+               <img src="{{userInfo.profileImageThumbnail}}" width="50px" heigh="auto" alt="" ng-show="userInfo.profileImageThumbnail.length > 0" class="img-responsive img-circle">
+               <em class="fa fa-3x fa-user-o pt-sm" ng-show="userInfo.profileImageThumbnail.length == 0"></em>
+            </div>
          </li>
          <!-- END lock screen-->
       </ul>

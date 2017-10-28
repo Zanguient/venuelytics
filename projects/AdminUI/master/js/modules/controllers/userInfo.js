@@ -3,52 +3,134 @@
  * smangipudi
  =========================================================*/
 
-App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', 
-    function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS) {
+App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', 'Session','UserRoleService',
+    function($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, Session, UserRoleService) {
    
    'use strict';
-    
+    $scope.data = {};
+    $scope.showSecurityCode = false;
+    $scope.showHideText = "Show Security Code";
     if($stateParams.id !== 'new') {
 	    var promise = RestServiceFactory.UserService().get({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
 	    	
 	    	data.enabled = data.enabled ? "true" : "false";
 	    	$scope.data = data;
+            if (data.roleId === 9) {
+                $scope.getSecurityToken();
+            }
 	    });
     } else {
     	var data = {};
     	data.enabled = "false";
-    	data.role = 'marketing';
     	$scope.data = data;
     }
-	 
-    $scope.userRoles = {};
-    $scope.userRoles[1] = 'Basic User';
-    $scope.userRoles[2] = 'Bouncer';
-    $scope.userRoles[3] = 'Bartender';
-    $scope.userRoles[4] = 'Waitress';
-    $scope.userRoles[5] = 'DJ';
-    $scope.userRoles[6] = 'Karaoke Manager';
-    $scope.userRoles[7] = 'Artist';
-    $scope.userRoles[8] = 'Host';
-    $scope.userRoles[50] = 'Promotor';
-    $scope.userRoles[51] = 'Service Manager';
-    $scope.userRoles[100] = 'Venue Manager';
-    $scope.userRoles[500] = 'Owner';
-    $scope.userRoles[1000] = 'Administrator';
-    $scope.userRoles[10] = 'Agent';
-    $scope.userRoles[11] = 'Agent Manager';
-    $scope.userRoles[12] = 'Store Manager';
-    
-    $scope.stores = [];
-   // var storePromise = RestServiceFactory.VenueService().get();
-    //storePromise.$promise.then(function(data) {
-    //	$scope.stores = data.stores;
-  //  });
-    
+	
+    $scope.userRoles = UserRoleService.getRoles();
+    $scope.managerUsers = [];
+    $scope.getManagers = function() {
+        RestServiceFactory.UserService().getManagers({}, function(managerUsers) {
+            $scope.managerUsers = managerUsers;
+        });
+    };
+
     $scope.storeAddress = function(store) {
     	return store.address.concat(", ", store.city, ", " , store.state);
     };
+
+    $scope.getSecurityToken = function() {
+        RestServiceFactory.UserService().getSecurityToken({id:$stateParams.id},function(data){
+            $scope.securityCodeSecure = data.securityCode;
+            $scope.securityBarCode = 'data:image/png;base64,' +data.securityBarCode;
+             
+        });
+    };
+    
+    $scope.newSecurityToken = function() {
+        $scope.showSecurityCode = true;
+        $scope.showHideSecurityCode();
+        RestServiceFactory.UserService().generateSecurityToken({id:$stateParams.id},function(data){
+            $scope.securityCodeSecure = data.securityCode;
+            $scope.securityBarCode = 'data:image/png;base64,' +data.securityBarCode;
+            toaster.pop("success", "New Security Code", "New Security Code is generated and saved in the user profile.")
+             
+        });
+    };
+    
+    $scope.showHideSecurityCode = function() {
+        $scope.showSecurityCode = ! $scope.showSecurityCode;
+        if ( $scope.showSecurityCode) {
+            $scope.securityCode = $scope.securityCodeSecure ;
+            $scope.showHideText = "Hide Security Code";
+        } else {
+            $scope.securityCode = "XXXX-XXXX-XXXX" ;
+            $scope.showHideText = "Show Security Code";
+        }
+
+    };
+    
+    $scope.showGenerateSecurityToken = function() {
+        return $scope.data.roleId === 9 && Session.roleId >= 10;
+    };
+    
+    $scope.init =function() {
+        $scope.securityCode = "XXXX-XXXX-XXXX";
+        $scope.securityCodeSecure = '';
+        $scope.securityBarCode  = '';
+        
+        $scope.getManagers();
+
+        angular.element(document).ready(function() {
+
+        var progressbar = $('#progressbar'),
+            bar         = progressbar.find('.progress-bar'),
+            settings    = {
+
+                action: RestServiceFactory.getImageUploadUrl("user-profile"), // upload url
+
+                allow : '*.(jpg|jpeg|gif|png)', // allow only images
+
+                param: 'file',
+
+                loadstart: function() {
+                    bar.css('width', '0%').text('0%');
+                    progressbar.removeClass('hidden');
+                },
+
+                progress: function(percent) {
+                    percent = Math.ceil(percent);
+                    bar.css('width', percent+'%').text(percent+'%');
+                },
+
+                beforeSend : function (xhr) {
+                    xhr.setRequestHeader('X-XSRF-TOKEN', Session.id);
+                },
+
+                allcomplete: function(response) {
+
+                    var data = response && angular.fromJson(response);
+                    bar.css('width', '100%').text('100%');
+
+                    setTimeout(function(){
+                        progressbar.addClass('hidden');
+                    }, 250);
+
+                    // Upload Completed
+                    if(data) {
+                        $scope.$apply(function() {
+                           $scope.data.profileImage = data.originalUrl;
+                           $scope.data.profileImageThumbnail = data.smallUrl;
+                        });
+                    }
+                }
+            };
+
+        var select = new $.upload.select($('#upload-select'), settings),
+            drop   = new $.upload.drop($('#upload-drop'), settings);
+      });
+
+    } ;
+    
     $scope.update = function(isValid, data) {
     	if (!isValid) {
     		return;
@@ -67,4 +149,6 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     		}
     	});
     };
+
+    $scope.init();
 }]);

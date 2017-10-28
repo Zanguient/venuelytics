@@ -4,26 +4,44 @@
  =========================================================*/
 
 App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster','UserRoleService',
-                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, userRoleService) {
+                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, UserRoleService) {
   'use strict';
 
-   	var userRoles = userRoleService.getRoles();
+   	var userRoles = UserRoleService.getRoles();
   	$timeout(function(){
 
     if ( ! $.fn.dataTable ) return;
 	    var columnDefinitions = [
-	        { sWidth: "18%", aTargets: [0,1,2] },
-	        { sWidth: "10%", aTargets: [3,4] },
-	        { sWidth: "20%", aTargets: [5] },
+	        { sWidth: "5%", aTargets: [0] },
+	        { sWidth: "15%", aTargets: [1,2,3] },
+	        { sWidth: "10%", aTargets: [4,5] },
+	        { sWidth: "30%", aTargets: [6] },
 	        {
-		    	"targets": [5],
+	        	"targets": [0],
+	        	"orderable": false,
+		    	"createdCell": function (td, cellData, rowData, row, col) {
+		    		var imgHtml =	'<div class="media text-center">';
+
+		    		if (cellData !== null && cellData !== '') {
+		    			imgHtml	+= '<img src="'+cellData+'" alt="Image" class="img-responsive img-circle">';
+		    		} else {
+		    			imgHtml	+= '<em class="fa fa-2x fa-user-o"></em>';
+		    		}
+
+		    		imgHtml	+= '</div>';
+		    		$(td).html(imgHtml);
+		    		$compile(td)($scope);
+		    	  }
+	        },
+	        {
+		    	"targets": [6],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" '+
 		    			'ng-click="editUser('+cellData+')"></button>&nbsp;&nbsp;';
 		    		actionHtml += '<button title="Associate Venue" class="btn btn-default btn-oval fa fa-home"'+
 		    			' ng-click="associateVenue(' +row +','+cellData+')"></button>';
-		    		if (rowData[5] !== 1) {
+		    		if (rowData[6] !== 1) {
 		    			actionHtml += '<button title="Delete User" class="btn btn-default btn-oval fa fa-trash"'+
 		    			' ng-click="deleteUser(' +row +','+cellData+')"></button>';
 		    		}
@@ -33,7 +51,7 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
 		    	  }
 	    	},
 	    	{
-		    	"targets": [3],
+		    	"targets": [4],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		
@@ -62,7 +80,11 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
     		if (user.businessName == null) {
     			user.businessName = "";
     		}
-    		table.row.add([user.userName, user.loginId, user.businessName, user.enabled, role, user.id]);
+    		var img = user.profileImageThumbnail;
+    		if (typeof img === 'undefined') {
+    			img = '';
+    		}
+    		table.row.add([img, user.userName, user.loginId, user.businessName, user.enabled, role, user.id]);
     	});
     	table.draw();
     });

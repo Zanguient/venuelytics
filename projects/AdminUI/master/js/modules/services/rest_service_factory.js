@@ -18,12 +18,11 @@
  		'udid','enabled', 'departmentName', 'aisleName'];
 
  		var userProperties = ['badgeNumber', 'businessName','email', 'loginId', 'roleId', 'userName', 'phone',
- 		'storeNumber', 'enabled', 'password'];
+ 		'storeNumber', 'enabled', 'password', 'profileImage', 'profileImageThumbnail', 'supervisorId'];
 
  		var loyalityProperties = ['name', 'venueNumber','rewardText', 'condition','displayAttributes', 'conditionType'];
 
- 		var profileProperties = ['badgeNumber', 'email', 'loginId', 'userName', 'phone', 'password','newpassword',
- 		'confirmnewpassword'];
+ 		var profileProperties = ['email', 'userName', 'phone', 'password','newpassword','profileImage', 'profileImageThumbnail'];
  		var agencyProperties = ['name', 'budget', 'budgetType', 'phone', 'mobile', 'address', 'city','country','zip',"enabled"];
  		var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls', 'servingSize',
  			'productType', 'BanquetHall','category','brand','enabled','price'];
@@ -61,7 +60,19 @@
  					getAgencyInfo : {method: 'GET',  params: { id: '@id' }, 
  						url: urlTemplate.replace("@context", "users") +"/agency"},
  					resetPassword : {method: 'POST',  params: { id: '@id' }, 
- 						url: urlTemplate.replace("@context", "users") +"/resetpassword"}
+ 						url: urlTemplate.replace("@context", "users") +"/resetpassword"},
+ 					getSecurityToken : {method: 'GET',  params: { id: '@id'}, 
+ 						url: urlTemplate.replace("@context", "users") +"/securityToken"},
+ 					generateSecurityToken : {method: 'POST',  params: { id: '@id'}, 
+ 						url: urlTemplate.replace("@context", "users") +"/securityToken"},
+ 					getMyProfile : {method: 'GET',  params: { id: '@id'}, 
+ 						url: urlTemplate.replace("@context", "users") +"/myProfile"},
+ 					saveMyProfile : {method: 'POST',  params: { id: '@id'}, 
+ 						url: urlTemplate.replace("@context", "users") +"/myProfile"},
+ 					getManagers : {method: 'GET',  params: { id: '@id'}, isArray: true,
+ 						url: urlTemplate.replace("@context", "users") +"/managers"}
+ 						
+
  				});
  			},
  			AgencyService: function () {
@@ -204,9 +215,6 @@
  			AppSettingsService: function () {
  				return $resource(urlTemplate.replace("@context", "settings"));
  			},
- 			ProfileService: function () {
- 				return $resource(urlTemplate.replace("@context", "myprofile"));
- 			},
  			ContentService: function () {
  				return $resource(urlTemplate.replace("@context", "content"),{},{
  					activate : {method: 'POST',  params: { id: '@id' }, 
@@ -229,6 +237,9 @@
  			},
  			getAnalyticsUrl : function (venueNumber, anaType, aggPreriodType, filter) {
  				return BASE_URL + "/v1/analytics/" + venueNumber + "/"+anaType +"/"+aggPreriodType+"?"+ filter;
+ 			},
+ 			getImageUploadUrl : function(uploadContext) {
+ 				return BASE_URL + "/v1/upload/" + uploadContext;
  			},
  			AnalyticsService : function () {
  			

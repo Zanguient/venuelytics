@@ -4,9 +4,9 @@
  =========================================================*/
 
 App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthService','Session',
-	'$http', '$state','$log','$rootScope', 'ContextService', 'AUTH_EVENTS',
+	'$http', '$state','$log','$rootScope', 'ContextService', 'AUTH_EVENTS', '$timeout',
      	function($scope, RestServiceFactory, AuthService, Session,$http, $state, $log, $rootScope,
-      	contextService, AUTH_EVENTS) {
+      	contextService, AUTH_EVENTS, $timeout) {
     'use strict';
 	$scope.appLogo = "app/img/itzfun_logo.png";
 	$scope.appLogoSingle = "app/img/itzfun_logo.png";
@@ -18,6 +18,7 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthServ
     $rootScope.comfirmedCount = 0;
     $scope.session = Session;
 	$scope.getNotificationIconClass = $rootScope.getNotificationIconClass;
+	$scope.userInfo = {};
     var statusArray = ['REQUEST', 'COMPLETED', 'ASSIGNED', 'CANCELED', 'REJECTED'];
 	$scope.notificationSummary = function() {
 		var target = {id:contextService.userVenues.selectedVenueNumber};
@@ -42,9 +43,18 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthServ
 			
 		});
 	};
-	
-	$scope.notificationSummary();
+	$scope.userData = function() {
+		var promise = RestServiceFactory.UserService().get({id: Session.userId});
 
+		promise.$promise.then(function(data) {
+			$scope.userInfo = data;
+		});
+	};
+	$scope.notificationSummary();
+	$timeout(function() {
+		$scope.userData();
+	}, 1000);
+	
 	setInterval(function(){
   		$scope.notificationSummary();
 	}, 300000);
@@ -64,5 +74,8 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthServ
 	  }, function () {
 		    $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
 	  });
-  };
+  	};
+  	$scope.showUserProfile = function() {
+		$state.go("app.myprofile");
+	};
 }]);

@@ -77,6 +77,13 @@
 	"translate": "sidebar.nav.pages.AGENCIES",
 	"submenu": [],
 	"roleId": 1000
+ },{
+	"text": "My Profile",
+	"sref": "app.myprofile",
+	"icon": "fa fa-user-o",
+	"translate": "sidebar.nav.pages.MYPROFILE",
+	"submenu": [],
+	"roleId": 0
  }, 
  {
 	"text": "Application Settings",
