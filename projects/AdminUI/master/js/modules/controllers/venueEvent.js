@@ -4,8 +4,8 @@
  =========================================================*/
 
 App.controller('VenueEventController', ['$scope', '$timeout', '$state','$stateParams', 'RestServiceFactory', 
-    'toaster','DialogService','ngDialog','DataTableService','$compile','ContextService',
-    function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, DialogService, ngDialog, DataTableService, $compile, contextService) {
+    'toaster','DialogService','ngDialog','DataTableService','$compile','ContextService', 'Session',
+    function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, DialogService, ngDialog, DataTableService, $compile, contextService, Session) {
   'use strict';
     
     var n = $scope.minDate = new Date(2017,1,1);
