@@ -4,8 +4,7 @@
         
         <div class="claimCard">
                 <center>
-                    <h5 ng-show="businessDetailLength == 0">{{"business.SEARCH_BUSINESS_MESSAGE"
-                        | translate}}</h5>
+                    <h5 ng-show="businessDetailLength == 0">{{"business.SEARCH_BUSINESS_MESSAGE" | translate}}</h5>
                     </center>
 
                     <div ng-repeat="business in businessDetails"
@@ -113,6 +112,7 @@
             adipisicing</span> elit. Dolor alias provident excepturi eligendi, nam
         numquam iusto eum illum, ea quisquam.
     </p> -->
+
     <div
         class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
         <div class="text-center card-block">
@@ -123,10 +123,11 @@
         </div>
     </div>
 </div>
+<a name="FreeTrail"></a>
+<br/><br/>
 <div ng-hide="claimBusiness == true">
     <center>
-        <h1 class="color-success">{{"business.BUSINESS_SEARCH" |
-        translate}}</h1>
+        <h1 class="color-success">{{"business.BUSINESS_SEARCH" |  translate}}</h1>
     </center>
     <form class="form-horizontal businessSearchForm">
         <fieldset>

@@ -77,7 +77,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'business/business-verification.html',
             controller: 'BusinessClaimController'
         })
-        .when('/pricing', {
+        .when('/price', {
             templateUrl: 'pricing.html',
             controller: 'PricingController'
         })

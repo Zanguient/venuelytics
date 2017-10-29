@@ -252,6 +252,15 @@
 		"SUBMIT":"Submit",
 		"ADDRESS":"530 Lytton Avenue, 2nd Floor"
 	},
+	"price": {
+		"PRICE":"Price",
+		"NAME":"Name",
+		"EMAIL":"Email",
+		"SUBJECT":"Subject",
+		"MESSAGE":"Message",
+		"SUBMIT":"Submit",
+		"ADDRESS":"530 Lytton Avenue, 2nd Floor"
+	},
 	"blog": {
 		"BLOG":"Blog"
 	},
