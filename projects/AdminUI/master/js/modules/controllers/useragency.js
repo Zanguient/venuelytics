@@ -43,7 +43,7 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
       	$('#users_table').on('click', '.fa-link', function() {
         	$scope.addAgencyUser(this, table);
       	});
-	    var promise = RestServiceFactory.UserService().get({roleId: "10,11,12"});
+	    var promise = RestServiceFactory.UserService().get({roleId: "10,11,12,50,51"});
 	    promise.$promise.then(function(data) {
 		    $scope.data = data;
 	    	var table = $('#users_table').DataTable();

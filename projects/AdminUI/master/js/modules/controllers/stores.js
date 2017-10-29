@@ -96,7 +96,7 @@ App.controller('StoresController', ['$scope', '$state','$compile','$timeout', 'R
             table.row(targetRow).remove().draw();
           }, function(error){
             if (typeof error.data !== 'undefined') { 
-              toaster.pop('error', "Server Error", error.data.developerMessage);
+              toaster.pop('error', "Server Error", error.data.message);
             }
           });
       });

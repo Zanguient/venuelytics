@@ -15,15 +15,15 @@
 	userRoles[7] = 'Artist';
 	userRoles[8] = 'Host';
 	userRoles[9] = 'Partner';
-	userRoles[50] = 'Promotor';
-	userRoles[51] = 'Service Manager';
-	userRoles[100] = 'Manager';
-	userRoles[500] = 'Owner';
-	userRoles[1000] = 'Administrator';
 	userRoles[10] = 'Agent';
 	userRoles[11] = 'Agent Manager';
 	userRoles[12] = 'Store Manager';
- 	
+	userRoles[75] = 'Service Manager';
+	userRoles[50] = 'Promotor';
+	userRoles[51] = 'Event Manager';
+	userRoles[100] = 'Manager';
+	userRoles[500] = 'Owner';
+	userRoles[1000] = 'Administrator';
 
  	return {
  		getRoles : function() {

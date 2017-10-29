@@ -19,7 +19,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
  */
   $scope.events = [];
   $scope.calEvents = [];
-  $scope.isManager = session.roleId == 11 || session.roleId == 12;
+  $scope.isManager = session.roleId === 11 || session.roleId === 12;
   $scope.registered = false;
   $scope.pdfShow = false;
   $scope.pdfDoc = '';
@@ -187,7 +187,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
       var h = parseInt(t[0]);
       var m = parseInt(t[1]);
       
-      var d = new Date();
+      d = new Date();
       
       d.setHours(h);
       d.setMinutes(m+durationInMinutes);
@@ -203,7 +203,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
         self.enableReset = true;
       }
       $scope.registration = angular.fromJson($scope.$storage['computerRegistration@AID:'+$scope.agency.id]);
-      $scope.isManager = session.roleId == 11 || session.roleId == 12;
+      $scope.isManager = session.roleId === 11 || session.roleId === 12;
       if (typeof $scope.registration === 'undefined' ) {
         $scope.registration = {};
       }
@@ -291,8 +291,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
             retResult.value = totalTaxNFees;
             return retResult;
           }
-          var retResult = {text: "Total Taxes and Fees ($) = 0", value: 0};
-          return retResult;
+          return {text: "Total Taxes and Fees ($) = 0", value: 0};
           
         };
         $scope.totalPriceWithTaxNFees = function(ticket) {
@@ -318,18 +317,18 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
               $scope.dialog.close();
               self.getEventTickets(self.event, self.selectedDate);
               self.getAgencyInfo();
-              var base64data = "data:application/pdf;base64," + data.pdfDoc;
+              //var base64data = "data:application/pdf;base64," + data.pdfDoc;
               $timeout(function(){
-                ngDialog.openConfirm({
+                /*ngDialog.openConfirm({
                   template: 'ticketPopUP',
                   className: 'ngdialog-theme-default',
                   data: {base64data: base64data},
                 }).then(function (value) {
                 }, function (reason) {
-                });
+                });*/
 
-                /* $window.open("data:application/pdf;base64," + data.pdfDoc); */
-                /* $window.open("data:application/octet-stream;base64," + data.pdfDoc); */ /*download Pdf*/
+                $window.open("data:application/pdf;base64," + data.pdfDoc); 
+                //$window.open("data:application/octet-stream;base64," + data.pdfDoc);  /*download Pdf*/
               }, 300);
             }, function(error, s) {
                if (typeof error.data !== 'undefined') { 
@@ -355,14 +354,16 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
   };
   $scope.register = function() {
     $state.go('app.registerComputer');
-  }
+  };
+
   $scope.unregister = function() {
     //$state.go('app.registerComputer');
-  }
+  };
+
   $scope.checkRegistration = function() {
     var target = {};
     RestServiceFactory.AgencyService().checkRegistration(target, $scope.registration, function(data) {
-      if (data.status == 1) { // computer is registered, go to done screen.
+      if (data.status === 1) { // computer is registered, go to done screen.
         $scope.authorizationCode = 1;
         $scope.getEvents();
       } else {

@@ -113,14 +113,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         templateUrl: basepath('user/users.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('datatables', 'datatables-pugins')
+        resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
     }).state('app.agencies', {
         url: '/agencies',
         title: 'Agencies',
         templateUrl: basepath('agency/agencies.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('datatables', 'datatables-pugins')
+        resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
     })
      .state('app.loyalty', {
         url: '/loyalty',

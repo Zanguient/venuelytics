@@ -22,16 +22,19 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
 
       if (!$.fn.dataTable) return;
       var columnDefinitions = [
-        { "sWidth": "15%", aTargets: [0,1,7]},
-        { "sWidth": "10%", aTargets: [4,5,6,8]},
-        { "sWidth": "7%",  aTargets: [2,3]},
+        { "sWidth": "20%", aTargets: [0,8]},
+        { "sWidth": "10%", aTargets: [1,4,5,6,7]},
+        { "sWidth": "5%",  aTargets: [2,3]},
         {
           "targets": [8],
           "orderable": false,
           "createdCell": function(td, cellData, rowData, row, col) {
             var o = rowData[8];
-            var actionHtml = '<pdf-download c="\'btn-oval fa fa-download\'"  title="Download Ticket" url="v1/download/' + contextService.userVenues.selectedVenueNumber + '/pdf/ticket/' + o.id +
-              '" filename="ticket-' + o.id + '.pdf"></pdf-download>&nbsp;&nbsp;<button class="btn btn-default btn-oval fa fa-times" title="Cancel"></button>';
+            var actionHtml = '<pdf-download c="\'btn-oval fa fa-ticket mr\'"  title="Download Ticket" url="v1/download/' + contextService.userVenues.selectedVenueNumber + '/pdf/ticket/' + o.id +
+              '" filename="ticket-' + o.id + '.pdf"></pdf-download>'+
+              '<pdf-download c="\'btn-oval fa fa-file-pdf-o mr\'"  title="Download Receipt" url="v1/download/' + contextService.userVenues.selectedVenueNumber + '/pdf/ticketreceipt/' + o.id +
+              '" filename="ticket-receipt' + o.id + '.pdf"></pdf-download>'+
+              '<button class="btn btn-default btn-oval fa fa-times" title="Cancel"></button>';
             $(td).html(actionHtml);
             $compile(td)($scope);
           }

@@ -68,6 +68,10 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
 	$scope.changed = function() {
         
     };
+    $scope.showEnableDisable = function() {
+        return Session.roleId >= 500? true : false;
+    };
+
     $scope.performers = [];
     RestServiceFactory.PerformerService().get(function(data) {
         $scope.performers = data.performers;
