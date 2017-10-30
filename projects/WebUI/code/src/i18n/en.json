@@ -22,6 +22,11 @@
 	"FEATURE_PRIVATE_EVENT":"Private Events",
 	"FEATURE_PRIVATE_EVENT_DESC":"Book Banquet Halls, Karaoke Rooms & Event Tickets",
 	"home":{
+		"PRICING":"Pricing",
+		"START_YOUR_FREE_TRAIL":"Start your free Trial",
+		"CLIM_CREATE_BUSINESS":"Claim or Create your Business Services Page!",
+		"TRY_VENUELYTICS_FREE":"Try VenueLytics free for 30 days, no credit card required",
+		"COLLECTS_SALES_TAXES":"VenueLytics collects sales taxes in states where it is required by law. Above mentioned prices do not include these taxes.",
 		"CLIENT_CAROUSEL_TITLE":"OUR CUSTOMERS, PARTNERS & FEATURED VENUES",
 		"WELCOME_HEADING_1":"Welcome to VenueLytics!",
 		"WELCOME_HEADING_2":"Real-Time Venue Experience Platform",

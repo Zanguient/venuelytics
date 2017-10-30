@@ -7,7 +7,8 @@ app.controller('PricingController', ['$log', '$scope', '$http', '$location', 'Re
 
         var self = $scope;
         self.init = function() {
-
+            $rootScope.priceTab = 'active';
+            $rootScope.homeTab = '';
             self.basicPrice = PRICING_APP.BASIC_PRICE;
             self.professionalPrice = PRICING_APP.PROFESSIONAL_PRICE;
             self.enterPrise = PRICING_APP.ENTER_PRICE;

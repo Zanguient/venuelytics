@@ -32,6 +32,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = '';
             $rootScope.blogTab = '';
+            $rootScope.priceTab = '';
             $rootScope.venuelyticsApp = true;
             $rootScope.itzfunApp = false;
             $rootScope.panelShow = true;
@@ -43,6 +44,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = '';
             $rootScope.blogTab = '';
+            $rootScope.priceTab = '';
             $rootScope.venuelyticsApp = false;
             $rootScope.itzfunApp = false;
             $rootScope.panelShow = false;
@@ -65,6 +67,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = '';
             $rootScope.blogTab = '';
+            $rootScope.priceTab = '';
             $rootScope.itzfunApp = true;
             $rootScope.venuelyticsApp = false;
             $rootScope.panelShow = true;
@@ -76,6 +79,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = 'active';
             $rootScope.contactTab = '';
             $rootScope.blogTab = '';
+            $rootScope.priceTab = '';
             $rootScope.venuelyticsApp = false;
             $rootScope.itzfunApp = false;
             $rootScope.panelShow = false;
@@ -87,6 +91,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = 'active';
             $rootScope.blogTab = '';
+            $rootScope.priceTab = '';
             $rootScope.venuelyticsApp = false;
             $rootScope.itzfunApp = false;
             $rootScope.panelShow = false;
@@ -98,6 +103,19 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.aboutTab = '';
             $rootScope.contactTab = '';
             $rootScope.blogTab = 'active';
+            $rootScope.priceTab = '';
+            $rootScope.venuelyticsApp = false;
+            $rootScope.itzfunApp = false;
+            $rootScope.panelShow = false;
+        } else if(tab === 'price') {
+            $rootScope.homeTab = '';
+            $rootScope.businessTab = '';
+            $rootScope.consumerTab = '';
+            $rootScope.newConsumerTab = '';
+            $rootScope.aboutTab = '';
+            $rootScope.contactTab = '';
+            $rootScope.blogTab = '';
+            $rootScope.priceTab = 'active';
             $rootScope.venuelyticsApp = false;
             $rootScope.itzfunApp = false;
             $rootScope.panelShow = false;

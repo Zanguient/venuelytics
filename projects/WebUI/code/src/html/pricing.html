@@ -1,5 +1,10 @@
 <div class="container">
-    <br><br>
+    <h1 class="color-primary text-center">{{"home.PRICING" | translate}}</h1>
+    <p class="price_header_bold text-center center-block mw-800">{{"home.CLIM_CREATE_BUSINESS" | translate}}</p>
+    <p class="price_header_bold text-center center-block mw-800">{{"home.TRY_VENUELYTICS_FREE" | translate}}</p>
+    <div class="pricing-table-footer text-center price_trail_button">
+        <a ng-href="searchBusiness#FreeTrail" class="btn btn-primary btn-raised">{{"home.START_YOUR_FREE_TRAIL" | translate}}</a>
+    </div>
     <div class="row pricing-table-container">
         <div class="col-md-3 hidden-sm hidden-xs pricing-col">
             <div class="pricing-table pricing-table-description">
@@ -11,7 +16,7 @@
                     {{monthlyPrice}}
                    </h3>
                </div>
-               <ul  class="pricing-table-content">
+               <ul class="pricing-table-content">
                     <li class="price_header">
                         <span >{{reservationPromotation}}</span>
                     </li>
@@ -141,4 +146,10 @@
             </div>
         </div>
     </div> <!-- row -->
+    <div class="price_trail_button">
+        <p class="lead text-center center-block mw-800">{{"home.COLLECTS_SALES_TAXES" | translate}}</p>
+    </div>
+    <div class="pricing-table-footer text-center price_trail_last">
+        <a ng-href="searchBusiness#FreeTrail" class="btn btn-primary btn-raised">{{"home.START_YOUR_FREE_TRAIL" | translate}}</a>
+    </div>
 </div> <!-- container -->
