@@ -300,6 +300,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: { authorizedRoles: [10,11,12]},
         resolve: resolveFor('datatables', 'datatables-pugins','moment','fullcalendar')
     })
+    .state('app.reports', {
+        url: '/ve-reports',
+        title: 'Reports',
+        templateUrl: basepath('venue-events/venue-event-report.html'),
+        controller: 'VenueEventReportController',
+        data: { authorizedRoles: [10,11,12]},
+        resolve: resolveFor('datatables', 'datatables-pugins','moment','fullcalendar', 'parsley','inputmask')
+    })
     .state('app.registerComputer', {
         url: '/registerComputer',
         title: 'Register Computer',
