@@ -153,7 +153,9 @@
  					getSoldTickets : {method: 'GET',  params: { id: '@id'}, isArray: true,
  						url: urlTemplate.replace("@context", "venueevents")+ '/soldTickets'},
  					cancelTicket :  {method: 'DELETE',  params: { id: '@eventId', ticketId: '@ticketId'}, 
- 						url: urlTemplate.replace("@context", "venueevents")+ '/soldTicket/' +':ticketId'}
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/soldTicket/' +':ticketId'},
+ 					getReport :  {method: 'GET',  params: { id: '@id'}, isArray: true,
+ 						url: urlTemplate.replace("@context", "venueevents")+ '/report/' }
  				});
  			},
  			NotificationService: function () {

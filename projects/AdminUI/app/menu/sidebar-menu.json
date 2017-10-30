@@ -69,6 +69,15 @@
 	 "submenu": [
 	 ],
 	 "roleId": [10,11,12]
+  },
+  {
+  	"text": "Reports",
+	"sref": "app.reports",
+	 "icon": "fa fa-file-pdf-o",
+	 "translate": "sidebar.nav.pages.REPORTS",
+	 "submenu": [
+	 ],
+	 "roleId": [10,11,12]
   }, 
   {
 	"text": "Users Management",

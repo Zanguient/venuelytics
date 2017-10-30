@@ -287,7 +287,8 @@
         "EVENTS_CALENDAR": "Events Calendar",
         "TICKET_COUNTER":"Ticket Counter",
         "SOLD_TICKETS":"Sold Tickets",
-        "PARTNERS": "Partners"
+        "PARTNERS": "Partners",
+        "REPORTS": "Reports"
       }
     }
   }
