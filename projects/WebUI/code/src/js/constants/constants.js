@@ -80,8 +80,8 @@ app
                          {"title":"Drink Services", "tab":"drink-services", "image":"assets/img/drinks.png", "fieldName":"Advance.DrinksService.enable"},
                          {"title":"Private Event", "tab":"private-events", "image":"assets/img/private.png", "fieldName":"Advance.BookBanqetHall.enable"}],
     'cityName': [{"city":"LOS ANGELES"}, {"city":"NEW JERSEY"}, {"city":"FLORIDA"}, {"city":"CALIFORNIA"}],
-    'categories': [{"category":"WEDDING"}, {"category":"BIRTHDAY PARTY"}, {"category":"EVENT"}, {"category":"BARS"},
-                   {"category":"CLUBS"}, {"category":"LOUNGE"}, {"category":"CASINO"}, {"category":"RESTAURANT"},
+    'categories': [{"category":"BAR"},
+                   {"category":"CLUB"}, {"category":"LOUNGE"}, {"category":"CASINO"}, {"category":"RESTAURANT"},
                    {"category":"HOTEL"}, {"category":"KARAOKE"}, {"category":"BOWLING"}],
     'roles': [{"role":"General Manager"}, {"role":"Owner"}],
     'time': [
@@ -281,7 +281,7 @@ app
     "PREMIUM_SERVICES":"Premium Services",
     "PREMIUM_SERVICES_ARRAY":[
       {'title':'Event & Ticketing', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
-      {'title':'Mobile Payment', 'basicDetails': 'NO', 'professionalDetails': 'YES (2.9% + $0.25)', 'enterPriseDetails': 'YES (2.9% + $0.25)'},
+      {'title':'Mobile Payment', 'basicDetails': 'NO', 'professionalDetails': 'YES (2.45% + $0.25)', 'enterPriseDetails': 'YES (2.45% + $0.25)'},
       {'title':'Artist/DJ Promotion', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
       {'title':'Integration', 'basicDetails': '-', 'professionalDetails': '-', 'enterPriseDetails': '-'},
       {'title':'Social Media', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
