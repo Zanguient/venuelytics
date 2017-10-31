@@ -1,5 +1,5 @@
 "use strict";
-app.controller('businessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams', 'APP_LINK', '$templateCache','ngMeta',
+app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams', 'APP_LINK', '$templateCache','ngMeta',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams, APP_LINK, $templateCache, ngMeta) {
 
     		$log.log('Inside Business Controller');
@@ -16,9 +16,8 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
             self.newUser = {
                 businessName: '',
                 address: '',
-                address2: '',
                 city: '',
-                emailId: '',
+                email: '',
                 phone:''
             };
             self.claimNewBusiness = {
@@ -46,7 +45,7 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 self.venueLyticsFeatures = APP_ARRAYS.features;
                 self.linkToPath = APP_ARRAYS.breakThrough;
                 self.venueid = $routeParams.venueid;
-                self.cityNames = APP_ARRAYS.cityName;
+                self.states = APP_ARRAYS.cityName;
                 var urlPattern = $location.absUrl();
                 var data = urlPattern.split(".");
                 if(data[1] === "itzfun") {
@@ -228,8 +227,11 @@ app.controller('businessController', ['$log', '$scope', '$http', '$location', 'R
                 $location.path("/home");
             };
 
-            self.save = function(newUser) {
-               $('#successView').modal('show');
+            self.createBusinessUser = function(newAccount) {
+                AjaxService.createBusinessUser(newAccount).then(function(response) {
+                    $('#successView').modal('show');
+                });
+              
             };
 
             self.createBusinessMethod = function() {

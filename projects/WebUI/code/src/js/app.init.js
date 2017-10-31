@@ -43,7 +43,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/businessAlreadyClaimed/:venueid', {
             templateUrl: 'business/business-already-claim.html',
-            controller: 'businessController'
+            controller: 'BusinessController'
         })
         .when('/cities', {
             templateUrl: 'new-city.html',
@@ -71,7 +71,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/searchBusiness', {
             templateUrl: 'business/business-search.html',
-            controller: 'businessController'
+            controller: 'BusinessController'
         })
         .when('/completeBusinessClaim/:venueId', {
             templateUrl: 'business/business-verification.html',
@@ -98,15 +98,15 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/claimBusiness/:venueid', {
             templateUrl: 'business/claim-business.html',
-            controller: 'businessController'
+            controller: 'BusinessController'
         })
         .when('/deployment/:venueid', {
             templateUrl: 'business/deployment-steps.html',
-            controller: 'businessController'
+            controller: 'BusinessController'
         })
         .when('/emailVerification/:venueid', {
             templateUrl: 'business/email-verification.html',
-            controller: 'businessController'
+            controller: 'BusinessController'
         })
         .when('/confirm/:cityName/:venueid', {
             templateUrl: 'bottle-service/bottle-reservation.html',

@@ -365,6 +365,15 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         });
     };
 
+    this.createBusinessUser = function(businessUser) {
+
+        return $http({
+            method: 'POST',
+            url: RestURL.baseURL + 'users/business',
+            data: businessUser
+        });
+    };
+
     this.completeBusinessClaim = function(venueId, verificationCode, emailHash) {
         var data = {vc: verificationCode, ce: emailHash};
         return $http({
