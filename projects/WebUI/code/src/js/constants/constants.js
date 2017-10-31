@@ -281,7 +281,7 @@ app
     "PREMIUM_SERVICES":"Premium Services",
     "PREMIUM_SERVICES_ARRAY":[
       {'title':'Event & Ticketing', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
-      {'title':'Mobile Payment', 'basicDetails': 'NO', 'professionalDetails': 'YES (2.45% + $0.25)', 'enterPriseDetails': 'YES (2.45% + $0.25)'},
+      {'title':'Mobile Payment', 'basicDetails': 'NO', 'professionalDetails': 'YES (2.90% + $0.25)', 'enterPriseDetails': 'YES (2.45% + $0.25)'},
       {'title':'Artist/DJ Promotion', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
       {'title':'Integration', 'basicDetails': '-', 'professionalDetails': '-', 'enterPriseDetails': '-'},
       {'title':'Social Media', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
