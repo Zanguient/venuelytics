@@ -109,7 +109,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location'
                     }
                 } 
                 
-                if (item.count === 0) {
+                if ((item.count === 0) || (item.count=== '')) {
                     var index = self.userSelectedDrinks.indexOf(item);
                     self.userSelectedDrinks.splice(index, 1);
                 }

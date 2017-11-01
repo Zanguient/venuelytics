@@ -201,8 +201,8 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
 
             self.creditCardPayment = function() {
             var pay,chargeAmountValue;
-            pay = self.chargedAmount * 100;
             chargeAmountValue = parseFloat(self.chargedAmount).toFixed(2);
+            pay = chargeAmountValue * 100;
             var amount = self.availableAmount;
             var currencyType = 'USD';
             var taxValue = 0;

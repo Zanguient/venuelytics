@@ -111,7 +111,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
                         self.selectedFoodList.total = item.total;
                     }
                 }
-                if (item.count === 0) {
+                if ((item.count === 0) || (item.count=== '')) {
                     var index = self.selectedFoodList.indexOf(item);
                     self.selectedFoodList.splice(index, 1);
                 }
