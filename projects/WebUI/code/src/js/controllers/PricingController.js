@@ -30,7 +30,7 @@ app.controller('PricingController', ['$log', '$scope', '$http', '$location', 'Re
 
             ngMeta.setTitle("Pricing - Venuelytics");
             ngMeta.setTag('image', 'assets/img/screen2.jpg');
-            ngMeta.setTag('description',"venuelytics Pricing");
+            ngMeta.setTag('description',"Claim or Create your Business Services Page! Try VenueLytics free for 30 days, no credit card required");
         };
 
         self.init();
