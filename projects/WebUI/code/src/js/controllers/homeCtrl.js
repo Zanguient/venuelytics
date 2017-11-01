@@ -107,7 +107,7 @@ app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestU
             $rootScope.venuelyticsApp = false;
             $rootScope.itzfunApp = false;
             $rootScope.panelShow = false;
-        } else if(tab === 'price') {
+        } else if(tab === 'pricing') {
             $rootScope.homeTab = '';
             $rootScope.businessTab = '';
             $rootScope.consumerTab = '';

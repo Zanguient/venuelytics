@@ -31,6 +31,7 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                     ngMeta.setTag('image', self.cityInfo.imageUrl);
                     $rootScope.title =self.cityInfo.name + ' - Venuelytics';
                     ngMeta.setTitle(self.cityInfo.name + ' - Venuelytics');
+                    ngMeta.setTag('description',self.cityInfo.name + ' | The VenueLytics Business App is a Venue Management & Entertainment Platform which provides venues like Casinos, Resorts, Stadiums, Top Golf, Clubs, Bars, Lounges, Karaoke & Bowling Alleys with features that generate incremental revenue through service requests, mobile pay, analytics, rewards and more. Venues can also reach and enhance customer’s experience real-time via the “ItzFun!” consumer app.');
                     self.selectedCityDistance = self.cityInfo.distanceInMiles;
                     self.barTab = self.cityInfo.counts.BAR;
                     self.karaokeTab = self.cityInfo.counts.KARAOKE;
