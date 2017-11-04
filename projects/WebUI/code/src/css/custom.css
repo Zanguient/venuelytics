@@ -3,6 +3,66 @@
   height: 100px;
   margin-left: 30px;
 }
+/* Break through css start */
+.reservationSideImage {
+  margin-left: 320px;
+  width: 90px;
+}
+.reservation1A{
+  margin-top: -111px;
+}
+.whiteList1A {
+  margin-top: -60px;
+}
+.whiteListHeader {
+  margin-top: 21px;
+}
+.mobileImage {
+  margin-left: -30px;
+}
+.reservationRightImage {
+  margin-left: -17px;
+  width: 90px;
+}
+.ominiImage {
+  margin-top: -90px;
+}
+.massagingImage {
+  margin-top: -111px;
+}
+.leftImageMargin {
+  margin-left: 90px;
+}
+.bottomImages {
+  margin-top: 20px;
+}
+.priveteAdverise {
+  margin-top: 100px;
+}
+.private360 {
+  margin-top: 60px;
+}
+.privateMessageImg {
+  margin-top: -224px;
+}
+.foodPickUP {
+  margin-top: -35px;
+}
+.reservationGuestImage {
+  margin-left: 270px;
+  width: 90px;
+}
+.reservationDealImage {
+  margin-left: 310px;
+  width: 90px;
+}
+.dealsTop {
+  margin-top: 30px;
+}
+.dealSetupImage {
+  margin-top: -120px;
+}
+/* Break through css end */
 .faIconWidth {
   width: 30px;
 }
