@@ -3,6 +3,15 @@
   height: 100px;
   margin-left: 30px;
 }
+.faIconWidth {
+  width: 30px;
+}
+.pricingText {
+  margin-left: 30px;
+}
+.faIconLeft {
+  margin-left: 70px;
+}
 .price_header_bold {
   font-weight: 600;
   font-size: 2rem;

@@ -51,21 +51,18 @@
                 <ul class="pricing-table-content">
                     <li class="price_header"> </li>
                     <li ng-repeat="reservation in reservationPromotationArray">
-                        <i class="fa" ng-class="reservation.basicDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
-                        <!--{{reservation.basicDetails}}-->
-                        <span class="hidden-md hidden-lg">{{reservation.title}}</span>
+                        <i class="hidden-sm hidden-xs fa" ng-class="reservation.basicDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
+                        <span class="text-justify faIconLeft hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="reservation.basicDetails === 'YES' ? 'fa-check': 'fa-times'"></i>{{reservation.title}}</span>
                     </li>
                     <li class="price_header"> </li>
                     <li ng-repeat="premium in premiumServicesArray">
-                        <i class="fa" ng-class="premium.basicDetails === 'BASIC' ? '': (premium.basicDetails === 'YES' ? 'fa-check':'fa-times')"></i> <span ng-bind="premium.basicDetails === 'BASIC' ? 'BASIC' :''"/>
-                        <!--{{premium.basicDetails}}-->
-                        <span class="hidden-md hidden-lg">{{premium.title}}</span>
+                        <i class="hidden-sm hidden-xs fa" ng-class="premium.basicDetails === 'BASIC' ? '': (premium.basicDetails === 'YES' ? 'fa-check':'fa-times')"></i> <span class="hidden-sm hidden-xs" ng-bind="premium.basicDetails === 'BASIC' ? 'BASIC' :''"></span>
+                        <span class="text-justify faIconLeft  hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="premium.basicDetails === 'BASIC' ? '': (premium.basicDetails === 'YES' ? 'fa-check':'fa-times')"></i>{{premium.title}}<span class="pricingText" ng-bind="premium.basicDetails === 'BASIC' ? 'BASIC' :''"></span></span>
                     </li>
                     <li class="price_header"> </li>
                     <li ng-repeat="wifi in wifiMonetizationArray">
-                        <i class="fa" ng-class="wifi.basicDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
-                        <!--{{wifi.basicDetails}}-->
-                        <span class="hidden-md hidden-lg">{{wifi.title}}</span>
+                        <i class="hidden-sm hidden-xs fa" ng-class="wifi.basicDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
+                        <span class="text-justify faIconLeft  hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="wifi.basicDetails === 'YES' ? 'fa-check': 'fa-times'"></i>{{wifi.title}}</span>
                     </li>
                 </ul>
                 <div class="pricing-table-footer text-center">
@@ -87,21 +84,20 @@
                 <ul class="pricing-table-content">
                     <li class="price_header"> </li>
                     <li ng-repeat="reservation in reservationPromotationArray">
-                        <i class="fa" ng-class="reservation.professionalDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
-                        <!--{{reservation.professionalDetails}}-->
-                        <span class="hidden-md hidden-lg">{{reservation.title}}</span>
+                        <i class="hidden-sm hidden-xs fa" ng-class="reservation.professionalDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
+                        <span class="text-justify faIconLeft hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="reservation.professionalDetails === 'YES' ? 'fa-check': 'fa-times'"></i>{{reservation.title}}</span>
                     </li>
                     <li class="price_header"> </li>
                     <li ng-repeat="premium in premiumServicesArray">
-                        <i class="fa" ng-class="premium.professionalDetails === 'YES' ? 'fa-check': (premium.professionalDetails === 'NO' ? 'fa-times' : '')"></i> <span ng-show="premium.professionalDetails === 'YES' || premium.professionalDetails === 'NO' ? false : true ">
+                        <i class="hidden-sm hidden-xs fa" ng-class="premium.professionalDetails === 'YES' ? 'fa-check': (premium.professionalDetails === 'NO' ? 'fa-times' : '')"></i> <span class="hidden-sm hidden-xs" ng-show="premium.professionalDetails === 'YES' || premium.professionalDetails === 'NO' ? false : true ">
                         {{premium.professionalDetails}}</span>
-                        <span class="hidden-md hidden-lg">{{premium.title}}</span>
+                        <span class="text-justify faIconLeft hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="premium.professionalDetails === 'YES' ? 'fa-check': (premium.professionalDetails === 'NO' ? 'fa-times' : '')"></i>{{premium.title}}<span class="pricingText" ng-show="premium.professionalDetails === 'YES' || premium.professionalDetails === 'NO' ? false : true ">
+                                {{premium.professionalDetails}}</span></span>
                     </li>
                     <li class="price_header"> </li>
                     <li ng-repeat="wifi in wifiMonetizationArray">
-                        <i class="fa" ng-class="wifi.professionalDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
-                        <!--{{wifi.professionalDetails}}-->
-                        <span class="hidden-md hidden-lg">{{wifi.title}}</span>
+                        <i class="hidden-sm hidden-xs fa" ng-class="wifi.professionalDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
+                        <span class="text-justify faIconLeft hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="wifi.professionalDetails === 'YES' ? 'fa-check': 'fa-times'"></i>{{wifi.title}}</span>
                     </li>
                 </ul>
                 <div class="pricing-table-footer text-center">
@@ -122,21 +118,19 @@
                 <ul class="pricing-table-content">
                     <li class="price_header"> </li>
                     <li ng-repeat="reservation in reservationPromotationArray">
-                        <i class="fa fa-check"></i>
-                        <!--{{reservation.enterPriseDetails}}-->
-                        <span class="hidden-md hidden-lg">{{reservation.title}}</span>
+                        <i class="hidden-sm hidden-xs fa fa-check"></i>
+                        <span class="text-justify faIconLeft hidden-md hidden-lg"><i class="faIconWidth fa fa-check"></i>{{reservation.title}}</span>
                     </li>
                     <li class="price_header"> </li>
                     <li ng-repeat="premium in premiumServicesArray">
-                        <i class="fa" ng-class="premium.enterPriseDetails === 'YES' ? 'fa-check': (premium.enterPriseDetails === 'NO' ? 'fa-times' : '')"></i> <span ng-show="premium.enterPriseDetails === 'YES' || premium.enterPriseDetails === 'NO' ? false : true ">
-                        {{premium.enterPriseDetails}}</span>
-                        <span class="hidden-md hidden-lg">{{premium.title}}</span>
+                        <i class="hidden-sm hidden-xs fa" ng-class="premium.enterPriseDetails === 'YES' ? 'fa-check': (premium.enterPriseDetails === 'NO' ? 'fa-times' : '')"></i> <span class="hidden-sm hidden-xs" ng-show="premium.enterPriseDetails === 'YES' || premium.enterPriseDetails === 'NO' ? false : true ">{{premium.enterPriseDetails}}</span>
+                        <span class="text-justify faIconLeft hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="premium.enterPriseDetails === 'YES' ? 'fa-check': (premium.enterPriseDetails === 'NO' ? 'fa-times' : '')"></i>{{premium.title}}<span class="pricingText" ng-show="premium.enterPriseDetails === 'YES' || premium.enterPriseDetails === 'NO' ? false : true ">
+                                {{premium.enterPriseDetails}}</span></span>
                     </li>
                     <li class="price_header"> </li>
                     <li ng-repeat="wifi in wifiMonetizationArray">
-                        <i class="fa fa-check"></i>
-                        <!--{{wifi.enterPriseDetails}}-->
-                        <span class="hidden-md hidden-lg">{{wifi.title}}</span>
+                        <i class="hidden-sm hidden-xs fa fa-check"></i>
+                        <span class="text-justify faIconLeft hidden-md hidden-lg"><i class="faIconWidth fa fa-check"></i>{{wifi.title}}</span>
                     </li>
                 </ul>
                 <div class="pricing-table-footer text-center">
