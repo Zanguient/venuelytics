@@ -3,6 +3,9 @@
   height: 100px;
   margin-left: 30px;
 }
+.contactTop {
+  margin-top: 19px;
+}
 /* Break through css start */
 .reservationSideImage {
   margin-left: 320px;
