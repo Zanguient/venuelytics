@@ -3,13 +3,16 @@
  *smangipudi
  =========================================================*/
 
-App.controller('AgenciesController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster',
-                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster) {
-  'use strict';
-  
-  $timeout(function(){
+App.controller('AgenciesController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', 'DialogService',
+                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, DialogService) {
+ 	'use strict';
+  	$scope.agencyType = $state.current.data.type;
 
-    if ( ! $.fn.dataTable ) return;
+	$scope.typeLabel = $scope.agencyType === 'AGENCY' ? 'Agencies' : 'Stores';
+
+ 	$timeout(function(){
+
+	    if ( ! $.fn.dataTable ) return;
 	    var columnDefinitions = [
 	        { sWidth: "15%", aTargets: [0,4] },
 	        { sWidth: "10%", aTargets: [1,5] },
@@ -18,14 +21,15 @@ App.controller('AgenciesController', ['$scope', '$state','$compile','$timeout', 
 		    	"targets": [6],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" ' +
-		    		'ng-click="editAgency('+cellData+')"></button>&nbsp;&nbsp;';
-		    		actionHtml += '<button title="Associate Venue" class="btn btn-default btn-oval fa fa-users" ' + 
+		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit mr" ' +
+		    		'ng-click="editAgency('+cellData+')"></button>';
+		    		actionHtml += '<button title="Associate Venue" class="btn btn-default btn-oval fa fa-users mr" ' + 
 		    		'ng-click="agencyUsers(' +row +','+cellData+')"></button>';
-		    		if (rowData[5] !== 1) {
-		    			actionHtml += '<button title="Delete User" class="btn btn-default btn-oval fa fa-trash" ' + 
-		    							'ng-click="deleteAgency(' +row +','+cellData+')"></button>';
+		    		if ($scope.agencyType === 'AGENCY') {
+		    			actionHtml += '<button title="Associate Stores" class="btn btn-default btn-oval mr fa fa-building"></button>';	
 		    		}
+		    		
+		    		actionHtml += '<button title="Delete Agency" class="btn btn-default btn-oval fa fa-trash"></button>';
 		    		
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
@@ -43,42 +47,58 @@ App.controller('AgenciesController', ['$scope', '$state','$compile','$timeout', 
 		    		$(td).html(actionHtml);
 		    		$compile(td)($scope);
 		    	}
-		 } ];
-    
+			} ];
+
 	    DataTableService.initDataTable('agencies_table', columnDefinitions);
-   
-	    var promise = RestServiceFactory.AgencyService().get();
+
+	    var table = $('#agencies_table').DataTable();
+	    $('#agencies_table').on('click', '.fa-trash',function() {
+	  		$scope.deleteAgency(this, table);
+	  	});
+	  	$('#agencies_table').on('click', '.fa-building',function() {
+	  		var targetRow = $(this).closest("tr");
+	        var rowData = table.row( targetRow).data();
+	 		var target = {id: rowData[6]};
+	  		$state.go("app.addAgencyStores",  target);
+	  	});
+
+	    var promise = RestServiceFactory.AgencyService().get({type: $scope.agencyType});
 	    promise.$promise.then(function(data) {
-    	 
-    	var table = $('#agencies_table').DataTable();
-    	
-    	data.agencies.map(function(agency) {
-    		table.row.add([agency.name, agency.managerName, agency.phone,  agency.mobile, agency.address, agency.enabled, agency.id]);
-    	});
-    	table.draw();
-    });
-    $scope.editAgency = function(userId) {
-  		$state.go('app.agencyedit', {id: userId});
-  	};
-    
-    $scope.agencyUsers = function(rowId, userId) {
-  		$state.go('app.agencyUsers', {id: userId});
-  	};
-    
-  	$scope.deleteAgency = function(rowId, agencyId) {
-  		
-  		var target = {id: agencyId};
-  		RestServiceFactory.AgencyService().delete(target,  function(success){
-    		var table = $('#agencies_table').dataTable();
-    		table.fnDeleteRow(rowId);
-    	},function(error){
-    		if (typeof error.data !== 'undefined') { 
-    			toaster.pop('error', "Server Error", error.data.developerMessage);
-    		}
-    	});
-  	};
-  	$scope.createNewUser = function() {
-  		$state.go('app.agencyedit', {id: 'new'});
-  	};
-  });
+		 
+			var table = $('#agencies_table').DataTable();
+	    	data.agencies.map(function(agency) {
+	    		table.row.add([agency.name, agency.managerName, agency.phone,  agency.mobile, agency.address, agency.enabled, agency.id]);
+	    	});
+			table.draw();
+		});
+		$scope.addNew  = function() {
+			$scope.editAgency('new');
+		};
+	    $scope.editAgency = function(agencyId) {
+	    	var route = $scope.agencyType === 'AGENCY' ? 'app.agencyedit' : 'app.storeedit';
+	  		$state.go(route , {id: agencyId});
+	  	};
+		    
+	    $scope.agencyUsers = function(rowId, agencyId) {
+	  		$state.go('app.agencyUsers', {id: agencyId});
+	  	};
+
+	  	$scope.deleteAgency = function(button, table) {
+	  		
+	  		DialogService.confirmYesNo('Delete Business Entity?', 'Are you sure want to delete selected Business Entity?', function() {
+		        var targetRow = $(button).closest("tr");
+		        var rowData = table.row( targetRow).data();
+		 		var target = {id: rowData[6]};
+				RestServiceFactory.AgencyService().delete(target,  function(success){
+			  		table.row(targetRow).remove().draw();
+			  	},function(error){
+			  		if (typeof error.data !== 'undefined') { 
+			  			toaster.pop('error', "Server Error", error.data.developerMessage);
+			  		}
+		  		});
+	        
+   			});
+
+	  	};
+  	});
 }]);

@@ -1,11 +1,9 @@
-
-<h3>Agencies
-   <small>Manage Agencies</small>
-   	<span> <a
-		class="btn btn-primary pull-right" style="margin-top: -25px;"
-		href="#/app/agencyedit/new"><em class="fa fa-plus"></em>Add Agency</a></span>
+<h3>{{typeLabel}}
+   <small>Manage {{typeLabel}}</small>
+   	<span> <button type="buttn"
+		class="btn btn-primary pull-right" ng-click="addNew()" style="margin-top: -25px;"><em class="fa fa-plus"></em>Add New</button></span>
 </h3>
-<div ng-controller="AgenciesController" class="container-fluid">
+<div class="container-fluid">
   
    <!-- START DATATABLE 2 -->
    <div class="row">

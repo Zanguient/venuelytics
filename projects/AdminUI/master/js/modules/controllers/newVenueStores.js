@@ -11,7 +11,7 @@ App.controller('NewVenueStoreController', ['$scope', '$state', '$stateParams','R
   };
   
 	$scope.search = function(storeName) {
-		var promise = RestServiceFactory.AgencyService().get({search: storeName});
+		var promise = RestServiceFactory.AgencyService().get({search: storeName, type: 'AGENCY'});
 		promise.$promise.then(function(data) {
 			$scope.stores = data.agencies;
 		});

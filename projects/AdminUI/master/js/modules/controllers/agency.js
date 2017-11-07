@@ -32,7 +32,8 @@ App.controller('AgencyController', ['$scope', '$state', '$stateParams', 'RestSer
     	$scope.data = data;
         $scope.data.budgetType = "NM";
     }
-	 
+	$scope.agencyType = $state.current.data.type;
+
     $scope.onSectionChange = function(budgetType) {
         if (budgetType === 'NM') {
             $scope.data.budget = "";
@@ -49,8 +50,11 @@ App.controller('AgencyController', ['$scope', '$state', '$stateParams', 'RestSer
     	if ($stateParams.id === 'new'){
     		target = {};
     	}
+        payload.type = $scope.agencyType;
     	RestServiceFactory.AgencyService().save(target,payload, function(success){
-    		$state.go('app.agencies');
+            var route = $scope.agencyType === 'AGENCY'? 'app.agencies': 'app.stores';
+    		  $state.go(route);
+            
     	},function(error){
     		if (typeof error.data !== 'undefined') { 
     			toaster.pop('error', "Server Error", error.data.developerMessage);

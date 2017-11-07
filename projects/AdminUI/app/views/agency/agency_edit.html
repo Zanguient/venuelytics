@@ -1,15 +1,15 @@
-<h3>Add / Edit User
-   <small>Add a new Agency or Edit an existing Agency.</small>
+<h3>Add or Edit {{ agencyType | translate}}
+   <small>Add a new {{ agencyType | translate}} or Edit an existing {{ agencyType | translate}}.</small>
 </h3>
 <!-- START row-->
-<div class="row" ng-controller="AgencyController">
+<div class="row">
    <div class="col-md-6 col-sm-12">
       
       <!-- START panel-->
       <div class="panel panel-default">
          <form id="agencyForm" name="userInfo" validate-form="" novalidate>
             <div class="panel-heading">
-               <div class="panel-title">Agency Information</div>
+               <div class="panel-title">{{ agencyType | translate}} Information</div>
             </div>
             <div class="panel-body">
             	<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>

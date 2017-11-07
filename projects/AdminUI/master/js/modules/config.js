@@ -57,39 +57,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         controller: 'CustomerInsightController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
         resolve: resolveFor('flot-chart','flot-chart-plugins')
-    }).state('app.instore', {
-        url: '/instore-insight',
-        title: 'Instore Insight',
-        templateUrl: basepath('analytics/instore-insights.html'),
-        controller: 'InstoreInsightController',
-        data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
-        resolve: resolveFor('flot-chart','flot-chart-plugins')
-    }).state('app.performance', {
-        url: '/performance-analytics',
-        title: 'Performance Analytics',
-        templateUrl: basepath('analytics/performance-analytics.html'),
-        controller: 'PerformanceAnalyticsController',
-        data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
-        resolve: resolveFor('flot-chart','flot-chart-plugins')
-    }).state('app.createcontent', {
-        url: '/create-content/:id',
-        title: 'Create Content',
-        templateUrl: basepath('create-content.html'),
-        controller: 'NullController',
-        data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
-        resolve: resolveFor('loadGoogleMapsJS', function() { return loadGoogleMaps(); }, 'google-map', 'parsley',
-            'inputmask', 'taginput','chosen', 'slider') 
     }).state('app.masonry', {
         url: '/content',
         title: 'Content Image View',
         templateUrl: basepath('content.html'),
-        controller: 'NullController',
-        data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
-        resolve: resolveFor('flot-chart','flot-chart-plugins')
-    }).state('app.trackcontent', {
-        url: '/trackcontent',
-        title: 'Track Contents',
-        templateUrl: basepath('analytics/trackcontent.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
         resolve: resolveFor('flot-chart','flot-chart-plugins')
@@ -100,13 +71,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         controller: 'StoresController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
-    }).state('app.contentList', {
-        url: '/content-list',
-        title: 'Content List View',
-        templateUrl: basepath('content-list.html'),
-        controller: 'NullController',
-        data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('datatables', 'datatables-pugins')
     }).state('app.users', {
         url: '/users',
         title: 'Users',
@@ -118,8 +82,48 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/agencies',
         title: 'Agencies',
         templateUrl: basepath('agency/agencies.html'),
-        controller: 'NullController',
-        data: { authorizedRoles: [USER_ROLES.admin]},
+        controller: 'AgenciesController',
+        data: { authorizedRoles: [USER_ROLES.admin], type: 'AGENCY'},
+        resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
+    })
+    .state('app.agencyedit', {
+        url: '/agencyedit/:id',
+        title: 'Edit Agency',
+        templateUrl: basepath('agency/agency_edit.html'),
+        controller: 'AgencyController',
+        data: { authorizedRoles: [USER_ROLES.admin], type: 'AGENCY'},
+        resolve: resolveFor('parsley','inputmask')
+    })
+    .state('app.stores', {
+        url: '/stores',
+        title: 'Stores',
+        templateUrl: basepath('agency/agencies.html'),
+        controller: 'AgenciesController',
+        data: { authorizedRoles: [USER_ROLES.admin], type: 'STORE'},
+        resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
+    })
+    .state('app.storeedit', {
+        url: '/storeedit/:id',
+        title: 'Edit Store',
+        templateUrl: basepath('agency/agency_edit.html'),
+        controller: 'AgencyController',
+        data: { authorizedRoles: [USER_ROLES.admin], type: 'STORE'},
+        resolve: resolveFor('parsley','inputmask')
+    })
+    .state('app.agencyStores', {
+        url: '/agency/:id/stores',
+        title: 'Agency Stores',
+        templateUrl: basepath('agency/agency-stores.html'),
+        controller: 'AgencyStoresController',
+        data: { authorizedRoles: [USER_ROLES.admin], mode: 'AS'},
+        resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
+    })
+    .state('app.addAgencyStores', {
+        url: '/agency/:id/stores',
+        title: 'Add Agency Store',
+        templateUrl: basepath('agency/new-agency-store.html'),
+        controller: 'AgencyStoresController',
+        data: { authorizedRoles: [USER_ROLES.admin], mode: 'AAS'},
         resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
     })
      .state('app.loyalty', {
@@ -186,27 +190,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
     })
-     
-    .state('app.content-performance', {
-        url: '/content-performance/:id',
-        title: 'Content Performance',
-        templateUrl: basepath('analytics/content-performance.html'),
-        controller: 'NullController',
-        data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager]},
-        resolve: resolveFor('flot-chart','flot-chart-plugins')
-    })
     .state('app.useredit', {
         url: '/useredit/:id',
         title: 'Edit User',
         templateUrl: basepath('user/user_edit.html'),
-        controller: 'NullController',
-        data: { authorizedRoles: [USER_ROLES.admin]},
-        resolve: resolveFor('parsley','inputmask')
-    })
-    .state('app.agencyedit', {
-        url: '/agencyedit/:id',
-        title: 'Edit Agency',
-        templateUrl: basepath('agency/agency_edit.html'),
         controller: 'NullController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask')
@@ -223,7 +210,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/agencyUsers/:id',
         title: 'Manage Agency Users',
         templateUrl: basepath('agency/agency_users.html'),
-        controller: 'NullController',
+        controller: 'AgencyUserController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
     })
@@ -239,7 +226,15 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/newagencyuser/:id',
         title: 'Add Agency User',
         templateUrl: basepath('agency/new_agency_user.html'),
-        controller: 'NullController',
+        controller: 'UserAgencyController',
+        data: { authorizedRoles: [USER_ROLES.admin]},
+        resolve: resolveFor('datatables', 'datatables-pugins')
+    })
+    .state('app.associateAgencyUser', {
+        url: '/associateAgencyUser/:id',
+        title: 'Associate Agency User',
+        templateUrl: basepath('agency/associate_agency_user.html'),
+        controller: 'AssociateAgencyUserController',
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
     })

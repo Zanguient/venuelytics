@@ -2,34 +2,34 @@ App.controller('PartnerController', ['$scope', 'RestServiceFactory', 'Session','
                        function($scope, RestServiceFactory, Session, toaster) {
   'use strict';
   $scope.partners = [];
-  $scope.locked = true;
+
   $scope.init = function(){
 
-  	RestServiceFactory.UserService().getPartners({}, function(data) {
-  		$scope.partners = data;
+  	RestServiceFactory.AgencyService().getPartners({id: 0}, function(data) {
+  		$scope.partners = data.users;
   	});
 
   };
 
-  $scope.lockUnlock = function(partner) {
-  	if(partner.locked) {
-  		RestServiceFactory.UserService().getSecurityToken({id:partner.id},function(data){
-            partner.securityCode = data.securityCode;
-            partner.securityBarCode = 'data:image/png;base64,' +data.securityBarCode;
-             
-        });
-  	} else {
-  		partner.securityCodeSecure = '';
-  		partner.securityBarCode = '';
-  	}
-  	partner.locked = !partner.locked;
+  $scope.validateToken = function(partner){
+    var payload = {};
+    payload.partnerId = partner.id;
+    payload.storeId = 0;
+
+    payload.securityCode = partner.token;
+    if (typeof partner.token === 'undefined' || partner.token === '') {
+     toaster.pop({ type: 'error', body: 'Enter Security Token', toasterId: 1000 });
+     partner.validatedClass = 'fa fa-times-circle text-danger';
+    } 
+    RestServiceFactory.AgencyService().validatePartner({}, payload, function(data) {
+      toaster.pop({ type: 'success', body: 'Successfully validated the Token', toasterId: 1000 });
+      partner.validatedClass = 'fa fa-check text-success';
+    }, function(e,d) {
+       toaster.pop({ type: 'error', body: 'Token validation Failed.', toasterId: 1000 });
+       partner.validatedClass = 'fa fa-times-circle text-danger';
+    });
+    
   };
-
-
-  $scope.enableDisableColor = function(enabled) {
-    return enabled ? 'fa fa-check' : '';
-  };	
-
 
   $scope.init();
 }]);

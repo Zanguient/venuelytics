@@ -70,10 +70,7 @@
  					saveMyProfile : {method: 'POST',  params: { id: '@id'}, 
  						url: urlTemplate.replace("@context", "users") +"/myProfile"},
  					getManagers : {method: 'GET',  params: { id: '@id'}, isArray: true,
- 						url: urlTemplate.replace("@context", "users") +"/managers"},
- 					getPartners : {method: 'GET',  params: { id: '@id'}, isArray: true,
- 						url: urlTemplate.replace("@context", "users") +"/partners"}
- 						
+ 						url: urlTemplate.replace("@context", "users") +"/managers"},	
 
  				});
  			},
@@ -96,7 +93,25 @@
  					sendRegistrationCode: {method: 'POST', params: { medium: '@medium' },
  						url: urlTemplate.replace("@context", "agencies")+ '/sendRegistrationCode/:medium'},
  					completeRegistration: {method: 'POST', params: { medium: '@medium' },
- 						url: urlTemplate.replace("@context", "agencies")+ '/validateRegistration'}
+ 						url: urlTemplate.replace("@context", "agencies")+ '/validateRegistration'},
+ 					getStores: {method: 'GET', params: { id: '@id'},
+ 						url: urlTemplate.replace("@context", "agencies")+ '/stores'},
+ 					addStore: {method: 'POST', params: { id: '@id',  storeId: '@storeId'},
+ 						url: urlTemplate.replace("@context", "agencies")+ '/store/:storeId'},
+ 					removeStore: {method: 'DELETE', params: { id: '@id',  storeId: '@storeId'},
+ 						url: urlTemplate.replace("@context", "agencies")+ '/store/:storeId'},
+ 					getPartners : {method: 'GET',  params: { id: '@id'}, 
+ 						url: urlTemplate.replace("@context", "agencies") +"/partners"},
+ 					getPossiblePartners : {method: 'GET',  params: { id: '@id'}, 
+ 						url: urlTemplate.replace("@context", "agencies") +"/store/users"},
+ 					addPartner : {method: 'POST',  params: { id: '@id', partnerId: '@partnerId'}, 
+ 						url: urlTemplate.replace("@context", "agencies") +"/partner/:partnerId"},
+ 					removePartner : {method: 'DELETE',  params: { id: '@id', partnerId: '@partnerId'}, 
+ 						url: urlTemplate.replace("@context", "agencies") +"/partner/:partnerId"},
+ 					validatePartner : {method: 'POST',  params: { }, 
+ 						url: urlTemplate.replace("@context", "agencies") +"/partners/validate"}
+
+ 						
  				});
  			},
  			UserVenueService: function () {

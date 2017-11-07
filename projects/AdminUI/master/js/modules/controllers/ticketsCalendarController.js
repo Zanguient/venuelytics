@@ -30,6 +30,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
   $scope.getEvents = function() {
 
     var promise = RestServiceFactory.VenueService().getEvents({id: contextService.userVenues.selectedVenueNumber});
+    
     promise.$promise.then(function(data) {
       $scope.events = data['venue-events'];
       var today = new Date();
@@ -255,7 +256,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
         template: 'app/views/venue-events/buy-ticket.html',
         scope : $scope,
         className: 'ngdialog-theme-default custom-width',
-        controller: ['$scope','$timeout', function($scope, $timeout) {
+        controller: ['$scope','$timeout', 'toaster',function($scope, $timeout, toaster) {
         //$("#eventTicketId").parsley();
         $scope.calculateTaxNFees = function(ticket) {
           var quantity = $scope.ticketSale.quantity;
@@ -300,14 +301,15 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
         };
 
         $scope.sellTicket = function(ticketInfo) {
-
+          
           if (ticketInfo.$valid && $("#sellTicketId").parsley().isValid()) {
-            if (typeof ticket.contactName !== 'undefined' 
-                  || typeof ticket.contactEmail !== 'undefined' 
-                  || typeof ticket.contactPhone !== 'undefined') {
+            if (typeof $scope.ticketSale.contactName !== 'undefined' 
+                  || typeof $scope.ticketSale.contactEmail !== 'undefined' 
+                  || typeof $scope.ticketSale.contactPhone !== 'undefined') {
 
-              if (!( typeof ticket.contactName !== 'undefined' && 
-                  (typeof ticket.contactEmail !== 'undefined' || typeof ticket.contactPhone !== 'undefined'))){
+              if (!( typeof $scope.ticketSale.contactName !== 'undefined' && 
+                  (typeof $scope.ticketSale.contactEmail !== 'undefined' || typeof $scope.ticketSale.contactPhone !== 'undefined'))){
+                  toaster.pop({ type: 'error', body: 'Atleast EMAIL or MOBILE number is required.', toasterId: 150 });
                 return;
               }
             }
@@ -332,7 +334,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
               }, 300);
             }, function(error, s) {
                if (typeof error.data !== 'undefined') { 
-                  toaster.pop('error', "Sell Ticket Failed", error.data.message);
+                  toaster.pop({ type: 'error', body: error.data.message, toasterId: 150 });
                }
             });
           }

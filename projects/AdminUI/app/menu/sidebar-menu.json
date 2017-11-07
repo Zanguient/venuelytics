@@ -19,7 +19,7 @@
   	"text": "Venue Management",
 	"sref": "app.venues",
 	 "icon": "icon-home",
-	 "translate": "sidebar.nav.pages.STORES",
+	 "translate": "sidebar.nav.pages.VENUES",
 	 "roleId": 100
   },
   {
@@ -92,6 +92,14 @@
 	"sref": "app.agencies",
 	"icon": "fa fa-building-o",
 	"translate": "sidebar.nav.pages.AGENCIES",
+	"submenu": [],
+	"roleId": 1000
+ },
+  {
+	"text": "Store Management",
+	"sref": "app.stores",
+	"icon": "fa fa-building",
+	"translate": "sidebar.nav.pages.STORES",
 	"submenu": [],
 	"roleId": 1000
  },{

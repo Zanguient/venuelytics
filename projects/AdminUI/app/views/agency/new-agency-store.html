@@ -1,5 +1,5 @@
-<h3>Add Venue Agency
-   <small>Associate a new Agency to an existing Venue</small>
+<h3>Associate Store to an Agency
+   <small>Associate a Store existing Agency</small>
 </h3>
 <!-- START row-->
 
@@ -8,20 +8,20 @@
          <!-- START panel-->
          <div class="panel panel-default">
             <div class="panel-heading">
-               <div class="panel-title">Add Agency to Venue: {{venueName}}</div>
+               <div class="panel-title">Add Store to Agency: {{agency.name}}</div>
             </div>
             <div class="panel-body">
             	<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
             	<div class="row">
 	            	<div class="form-group col-sm-6">
-	                  <input type="text" name="storeName" required="required" placeholder="Type Agency Name" class="form-control" ng-model="storeName"/>
+	                  <input type="text" name="storeName" required="required" placeholder="Type Store Name" class="form-control" ng-model="storeName"/>
 	               	</div>
 	                <button type="submit" name="Search" class="btn btn-primary" ng-click="search(storeName)">Search</button>
 	            </div>     
 	              <table id="search_venue_table"  class="table table-striped table-hover">
             	  <thead>
                      <tr>
-                        <th class="sort-alpha">Agency Name</th>
+                        <th class="sort-alpha">Store Name</th>
                         <th>Address</th>
                         <th class="text-nowrap">City</th>
                         <th class="text-nowrap">Country</th>
@@ -34,7 +34,7 @@
             		 <td>{{store.address}}</td>
             		 <td>{{store.city}}</td>
             		 <td>{{store.country}}</td>
-            	     <td><button title="Link Agency" class="btn btn-default btn-oval fa fa-link" ng-click="addVenueStore(store)"></button></td>
+            	     <td><button title="Link Store" class="btn btn-default btn-oval fa fa-link" ng-click="addAgencyStore(store)"></button></td>
             		</tr>
                   </tbody>
                </table>

@@ -1,11 +1,12 @@
 <div ng-controller="PartnerController" class="container-fluid">
    
    <div class="row-masonry row-masonry-lg-4 row-masonry-md-3 row-masonry-sm-1">
-    	
+    	<toaster-container toaster-options="{'toaster-id': 1000, 'position-class': 'toast-top-center', 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
   		<div class="col-masonry" ng-repeat="partner in partners" ng-init="partner.locked = true">
 			<div class="panel panel-default" >
 				<div class="row">
-			      <img ng-src="{{partner.profileImageThumbnail}}" alt="" class="img-responsive col-xs-12" />
+			      <img ng-src="{{partner.profileImageThumbnail}}" alt="" class="img-responsive col-xs-12" ng-show="!!partner.profileImageThumbnail"/>
+			       <em class="img-responsive col-xs-12 fa fa-user-o fa-15x text-center" ng-show="!partner.profileImageThumbnail"/>
 
 			   	</div> 
 			   	<div class="text-center">
@@ -22,15 +23,14 @@
                      <li class="mb-sm">
                         <em class="fa fa-home fa-fw"></em>{{partner.businessName}}</li>
                   	</ul>
-			      	<div class="col-sm-12" ng-show="!partner.locked">
-				    	<img ng-src="{{partner.securityBarCode}}" alt="" class="img-responsive well"  style="max-height: 200px; width: auto; margin:auto;"/><br/>
-				   	  	<div ng-bind="partner.securityCode" class="col-sm-12 text-center well well-sm"></div> 
+			      	<div class="col-sm-12" >
+			      		<div class="input-group mb-sm">
+			      		<span class="input-group-addon"><em class="fa" ng-class="partner.validatedClass"/></span>
+				   	  	<input name="securityKey" placeholder="Enter security Token" ng-model="partner.token" class="form-control col-xs-12" ng-keypress="partner.validatedClass = '' "/></div>
+				   	  	<button name="validate" class="form-control btn btn-primary btn-sm col-xs-12" ng-click="validateToken(partner)">Validate Token</button>
 					</div>
 			   </div>
-			   <div class="panel-footer">
-					<em class="fa fa-lock secure" ng-class="partner.locked ? 'fa-lock' : 'fa-unlock'" ng-click="lockUnlock(partner)"></em> 
-					<span class="pull-right circle circle-xl text-green" ng-class="enableDisableColor(partner.enabled)" >      
-      				</span>
+			   <div class="panel-footer"> 
 			   </div>
 			</div>
 

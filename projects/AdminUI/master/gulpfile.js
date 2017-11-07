@@ -188,7 +188,7 @@ var source = {
               ignored_files
             ],
     vendor: vendorBaseScripts,
-    watch: ['js/*.js','js/**/*.js']
+    watch: ['js/**/*.js']
   },
   templates: {
     app: {
@@ -208,7 +208,8 @@ var source = {
     app: {
       main: ['less/app.less', '!less/themes/*.less'],
       dir:  'less',
-      watch: ['less/*.less', 'less/**/*.less', '!less/themes/*.less']
+     // watch: ['less/*.less', 'less/**/*.less', '!less/themes/*.less']
+        watch: ['less/content.less']
     },
     themes: {
       main: ['less/themes/*.less', ignored_files],
@@ -390,11 +391,11 @@ gulp.task('watch', function() {
   
   gulp.watch(source.scripts.watch,           ['scripts:app']);
   gulp.watch(source.styles.app.watch,        ['styles:app', 'styles:app:rtl']);
-  gulp.watch(source.styles.themes.watch,     ['styles:themes']);
-  gulp.watch(source.bootstrap.watch,         ['styles:app']); //bootstrap
-  gulp.watch(source.templates.pages.watch,   ['templates:pages', 'bust-template']);
-  gulp.watch(source.templates.views.watch,   ['templates:views', 'bust-template']);
-  gulp.watch(source.templates.app.watch,     ['templates:app', 'bust-template']);
+ // gulp.watch(source.styles.themes.watch,     ['styles:themes']);
+//  gulp.watch(source.bootstrap.watch,         ['styles:app']); //bootstrap
+  //gulp.watch(source.templates.pages.watch,   ['templates:pages', 'bust-template']);
+  //gulp.watch(source.templates.views.watch,   ['templates:views', 'bust-template']);
+  //gulp.watch(source.templates.app.watch,     ['templates:app', 'bust-template']);
 
   
 

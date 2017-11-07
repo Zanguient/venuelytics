@@ -1,7 +1,7 @@
 <div>
 	<legend>Sell Ticket - {{event.eventName}}</legend>
 	<!-- START row -->
-	<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+	<toaster-container toaster-options="{'toaster-id': 150, 'position-class': 'toast-top-center', 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
 	<form  name="ticketInfo" id="sellTicketId" validate-form="" >
 		<div class="row">
 			<div class="col-md-6">
@@ -70,6 +70,10 @@
 					<input type="text" name="price" disabled="true"  class="form-control" ng-value="totalPriceWithTaxNFees(ticket)" />
 				</div>
 			</div>
+		</div>
+		<div class="well bg-info-light">
+			<span>*Contact Information is mandatory for Ticket cancellations and Event change Notifications. </span>
+			
 		</div>
 		<div class="row">
 			<div class="col-md-4">

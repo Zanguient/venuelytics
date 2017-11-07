@@ -115,7 +115,7 @@ App.controller('UsersController', ['$scope', '$state','$compile','$timeout', 'Re
 		  		}
 	  		});
 	        
-   		 });
+   		});
 
  	};
   
