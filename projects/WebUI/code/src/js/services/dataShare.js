@@ -1,6 +1,7 @@
 "use strict";
 app.service('DataShare', function() {
   this.latitude = '';
+  this.tableGuests = '';
   this.longitude = '';
   this.venueNumber = '';
   this.venueName = '';

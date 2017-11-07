@@ -38,6 +38,8 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
 
             self.findTable = function() {
                 self.productItem = [];
+                DataShare.tableGuests = self.table.guest;
+                DataShare.guestFocus = self.tableDate +"T"+ self.table.reserveTime;
                 var date= moment(self.tableDate).format('YYYYMMDD');
                 var authBase64Str = "YXJ1biByYXVuOmFydW5AZ21haWwuY29tOig4ODgpIDg4OC04ODg4";
                 AjaxService.getTime(self.venueid, date, self.table.reserveTime, self.table.guest, authBase64Str).then(function(response) {
@@ -112,28 +114,20 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             };
 
             self.confirmReservation = function() {
+                self.tableGuests =DataShare.tableGuests
                 var fullName = self.tableService.firstName + " " + self.tableService.lastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.tableService.emailId + ':' + self.tableService.mobileNumber);
                 DataShare.authBase64Str = authBase64Str;
-                var parsedend = moment().format("MM-DD-YYYY");
-                var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
-                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
+                var dateValue = moment(DataShare.guestFocus).format("YYYY-MM-DDTHH:mm:ss");
                 self.serviceJSON = {
                   "serviceType": 'Restaurant',
                   "venueNumber": self.venueid,
-                  "reason": "",
                   "contactNumber": self.tableService.mobileNumber,
                   "contactEmail": self.tableService.emailId,
-                  "contactZipcode": "",
-                  "noOfGuests": 0,
-                  "noOfMaleGuests": 0,
-                  "noOfFemaleGuests": 0,
-                  "budget": 0,
-                  "serviceInstructions": "",
+                  "noOfGuests": self.tableGuests,
                   "status": "REQUEST",
                   "serviceDetail": null,
                   "fulfillmentDate": dateValue,
-                  "durationInMinutes": 0,
                   "deliveryType": "Pickup",
                   "deliveryInstructions": null,
                   "order": {
@@ -142,7 +136,6 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                       "orderItems": []
                   },
                   "prebooking": false,
-                  "employeeName": "",
                   "visitorName": fullName
                 };
 
