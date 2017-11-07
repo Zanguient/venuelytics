@@ -11,17 +11,112 @@
 }
 /* Break through css start */
 .reservationSideImage {
-  margin-left: 320px;
+  margin-top: 30px;
+  margin-left: 0px;
   width: 90px;
 }
+.loyaltyImg1 {
+  margin-top: 25px;
+}
+.loyaltyMobile {
+  width: 90px;
+}
+.fastImg1 {
+  margin-top: 110px;
+}
+.busImg4 {
+  margin-top: 30px;
+  margin-left: 20px;
+}
+.busImg3 {
+  margin-left: 20px;
+}
+.marginData {
+  margin-top: -50px;
+}
+.leftBusinessMargin {
+  margin-left: 120px;
+}
+.businessRight {
+  margin-left: -130px;
+}
+.cenBusinessImg {
+  margin-left: -75px;
+  width: 60%;
+}
+.businessNum1 {
+  margin-top: -50px;
+}
+.businessImg2 {
+  margin-top: 40px;
+}
+.foodPickUp {
+  margin-top: 20px;
+}
+.guestInsights {
+  margin-top: 25px;
+}
+.foodNum3 {
+  margin-left: 25px;
+}
+.foodImg1 {
+  margin-left: 65px;
+  margin-top: 50px;
+}
+.breakImgwidth {
+  width: 90px;
+}
+.foodEasy {
+  margin-top: -50px;
+}
+.foodRightSide {
+  margin-left: 20px;
+}
+.guestFirst {
+  margin-left: -55px;
+}
+.foodNum1 {
+  margin-top: -50px;
+}
+.guestRightCol {
+  margin-left: -65px;
+}
+.cenGuestImg1 {
+  margin-left: -15px;
+  margin-top: 10px;
+}
+.foodImg2 {
+  margin-left: 65px;
+  margin-top: 30px;
+}
+.cenGuestImg {
+  margin-left: -85px;
+  width: 35%;
+}
+.secImageCol {
+  width: 120px;
+}
+.foodSecPar {
+  width: 300px;
+}
+.walkinsMar {
+  margin-top: 50px;
+}
+.cenMobileImg {
+  margin-left: -59px;
+}
+.cenMobileImg1 {
+  margin-left: -135px;
+  width: 48%;
+}
 .reservation1A{
-  margin-top: -111px;
+  margin-top: 35px;
 }
 .whiteList1A {
-  margin-top: -60px;
+  margin-top: 104px;
 }
 .whiteListHeader {
-  margin-top: 21px;
+  margin-top: 30px;  
 }
 .mobileImage {
   margin-left: -30px;
@@ -30,14 +125,20 @@
   margin-left: -17px;
   width: 90px;
 }
+.omniHeader {
+  margin-top: 55px;
+}
 .ominiImage {
-  margin-top: -90px;
+  margin-top: 20px;
 }
 .massagingImage {
-  margin-top: -111px;
+  margin-top: 30px;
+}
+.guestValet {
+  margin-top: 45px;
 }
 .leftImageMargin {
-  margin-left: 90px;
+  margin-left: -30px;
 }
 .bottomImages {
   margin-top: 20px;
@@ -45,17 +146,24 @@
 .priveteAdverise {
   margin-top: 100px;
 }
+.image360 {
+  margin-top: 106px;
+}
 .private360 {
-  margin-top: 60px;
+  margin-top: 88px;
 }
 .privateMessageImg {
-  margin-top: -136px;
+  margin-left: -36px;
+  width: 90px;
+}
+.privateMessageImgTop {
+  margin-top: 38px;
 }
 .foodPickUP {
-  margin-top: -35px;
+  margin-top: -50px;
 }
 .reservationGuestImage {
-  margin-left: 270px;
+  margin-left: 0px;
   width: 90px;
 }
 .reservationDealImage {
@@ -66,7 +174,7 @@
   margin-top: 30px;
 }
 .dealSetupImage {
-  margin-top: -83px;
+  margin-top: 60px;
 }
 /* Break through css end */
 .faIconWidth {
@@ -1172,56 +1280,115 @@ a.btn.disabled,fieldset[disabled] a.btn {
 @media only screen and (min-width: 310px) and (max-width:
  374px) {
 
-  .realTimeImage {
-    margin-top: -90px;
+  .dealSetupImage {
+    margin-top: 150px;
   }
-
-  .dealsTop {
+  .loyaltyPhone {
+    margin-left: -200px;
+  }
+  .guestImageTop1 {
+    margin-top: 160px;
+  }
+  .guestImageip6s {
+    margin-top: 150px;
+  }
+  .fastImg1 {
+    margin-top: 155px;
+  }
+  .guestFirst {
+    margin-left: -15px;
+  }
+  .guestRightCol {
+    margin-left: 0px;
+  }  
+  .cenGuestImg1 {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  .cenGuestImg {
+    margin-left: 0px;
+    width: 100%;
+  }
+  .businessRight {
+    margin-left: 0px;
+  }
+  .leftBusinessMargin {
+    margin-left: 0px;
+  }
+  .cenBusinessImg {
+    margin-left: 0px;
+    width: 100%;
+  }
+  .cenMobileImg1 {
+    margin-left: 0px;
+    width: 100%;
+  }
+  .ominiImage {
+    margin-top: 140px;
+  }
+  .omniHeader {
+    margin-top: 30px;
+  }
+  .secImageCol {
+    width: 85px;
+  }
+  .realTimeImage {
     margin-top: 60px;
   }
-
+  .image360 {
+    margin-top: 205px;
+  }
+  .private360 {
+    margin-top: -70px;
+  }
+  .dealsTop {
+    margin-top: 20px;
+  }
   .loyaltyMobile {
     margin-left: 190px;
     width: 60px;
   }
-
+  .cenMobileImg {
+    margin-left: 0px;
+  }
   .lostMargin {
     margin-top: 104px;
   }
-
-  .foodImageWidth {
-    width: 70px;
-  }
-
   .mobileImage {
     margin-left: 0px;
     margin-top: 10px;
   }
-
   .reservationRightImage {
     margin-left: -17px;
     width: 60px;
   }
-
   .reservationGuestImage {
-    margin-left: 190px;
+    margin-left: 0px;
     width: 60px;
   }
+  .priveteAdverise {
+    margin-top: 18px;
+  }
+  .privateMessageImg {
+    margin-left: -20px;
+    width: 55px;
+}
 
   .mobileImageWidht {
     width: 60px;
   }
   .reservationSideImage {
-    margin-left: 190px;
+    margin-left: 0px;
+    margin-top: 90px;
     width: 60px;
   }
 
   .mobMargin {
-    margin-left: -25px;
+    margin-left: -33px;
   }
 
   .whiteListHeader {
-    margin-top: 63px;
+    margin-top: 33px;
   }
 
    .withoutTabs {
@@ -1538,68 +1705,127 @@ a.btn.disabled,fieldset[disabled] a.btn {
     and (min-width : 375px)
     and (max-width : 413px) {
 
+      .dealSetuPhone {
+        margin-top: 135px;
+      }
+      .loyaltyPhone {
+        margin-left: -250px;
+      }
+      .guestValet {
+        margin-top: 26px;
+      }
+      .guestImageTop {
+        margin-top: 106px;
+      }
+      .guestRightCol {
+        margin-left: 0px;
+      } 
+      .cenGuestImg1 {
+        margin-left: 0px;
+        margin-top: 0px;
+      }
+      .cenGuestImg {
+        margin-left: 0px;
+        width: 100%;
+      }
+      .fastImg1 {
+        margin-top: 65px;
+      }
+      .guestFirst {
+        margin-left: -25px;
+      }
+      .businessRight {
+        margin-left: 0px;
+      }
+      .leftBusinessMargin {
+        margin-left: 0px;
+      }
+      .cenBusinessImg {
+        margin-left: 0px;
+        width: 100%;
+      }
+      .cenMobileImg1 {
+        margin-left: 0px;
+        width: 100%;
+      }
+      .ominiImage {
+        margin-top: 77px;
+      }
+      .omniHeader {
+        margin-top: 30px;
+      }
+      .walkinMob {
+        margin-top: 55px;
+      }
+      .waitListMob {
+        margin-top: 80px;
+      }
+      .cenMobileImg {
+        margin-left: 0px;
+        margin-top: 15px
+      }
+      .secImageCol {
+        width: 100px;
+      }
+      .privateMessageImg {
+        margin-left: -19px;
+        width: 75px;
+      }
+      .private360 {
+        margin-top: -50px;
+      }
+      .image360 {
+        margin-top: 180px;
+      }
+      .priveteAdverise {
+        margin-top: 20px;
+      }
       .realTimeImage {
-        margin-top: -90px;
+        margin-top: 40px;
       }
-
       .dealsTop {
-        margin-top: 60px;
+        margin-top: 25px;
       }
-
       .loyaltyMobile {
         margin-left: 250px;
-        width: 60px;
+        width: 75px;
       }
-
       .lostMargin {
         margin-top: 104px;
       }
-
-      .foodImageWidth {
-        width: 70px;
-      }
-
       .mobileImage {
         margin-left: 0px;
         margin-top: 10px;
       }
-
       .reservationRightImage {
         margin-left: -17px;
-        width: 60px;
+        width: 75px;
       }
-
       .reservationGuestImage {
+        margin-left: 0px;
+        width: 75px;
+      }
+      /* .reservationSideImage {
         margin-left: 250px;
         width: 60px;
-      }
-
-      .reservationSideImage {
-        margin-left: 250px;
-        width: 60px;
-      }
+      } */
       .whiteListHeader {
-        margin-top: 63px;
+        margin-top: 30px;
       }
-
       .mobMargin {
-        margin-left: -25px;
+        margin-left: -30px;
       }
-
       .withoutTabs {
         color:black;
         font-size: 17px;
       }
-
       #forMobile {
         width: 100%;
         height: 100%;
-      }
-      
+      }      
       .carousel-inner .item img {
         height: 600px;
       }
-
       .buttonHeight {
         height: 100px
       }
@@ -1752,7 +1978,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   .imageHeight {
     height: 300px;
   }
-
 }
 
 /*For iPhone 6 plus*/
@@ -1760,49 +1985,106 @@ a.btn.disabled,fieldset[disabled] a.btn {
     and (min-width : 414px)
     and (max-width : 736px) {
 
-      .realTimeImage {
-        margin-top: -90px;
+      .loyaltyPhone {
+        margin-left: -250px;
       }
-
-      .dealsTop {
+      .guestImageip6s {
         margin-top: 60px;
       }
-
-      .loyaltyMobile {
-        margin-left: 280px;
-        width: 60px;
+      .guestImageTop1 {
+        margin-top: 90px;
       }
-
+      .guestFirst {
+        margin-left: -40px;
+      }
+      .guestRightCol {
+        margin-left: 0px;
+      }
+      .cenGuestImg1 {
+        margin-left: 0px;
+        margin-top: 0px;
+      }
+      .cenGuestImg {
+        margin-left: 0px;
+        width: 100%;
+      }
+      .businessRight {
+        margin-left: 0px;
+      }
+      .leftBusinessMargin {
+        margin-left: 0px;
+      }
+      .cenBusinessImg {
+        margin-left: 0px;
+        width: 100%;
+      }
+      .cenMobileImg1 {
+        margin-left: 0px;
+        width: 100%;
+      }
+      .ominiImage {
+        margin-top: 54px;
+      }
+      .omniHeader {
+        margin-top: 30px;
+      }
+      .walkinMob {
+        margin-top: 55px;
+      }
+      .waitListMob {
+        margin-top: 80px;
+      }
+      .cenMobileImg {
+        margin-left: 0px;
+        margin-top: 15px
+      }
+      .secImageCol {
+        width: 100px;
+      }
+      .priveteAdverise {
+        margin-top: 50px;
+      }
+      .privateMessageImg {
+        margin-left: -15px;
+        width: 75px;
+      }
+      .private360 {
+        margin-top: -70px;
+      }
+      .realTimeImage {
+        margin-top: 30px;
+      }
+      .dealsTop {
+        margin-top: 20px;
+      }
+      .loyaltyMobile {
+        margin-left: 250px;
+        width: 80px;
+      }
       .lostMargin {
         margin-top: 104px;
       }
-      .foodImageWidth {
-        width: 70px;
-      }
-
       .mobileImage {
         margin-left: 0px;
         margin-top: 10px;
       }
-
       .reservationRightImage {
         margin-left: -17px;
-        width: 60px;
+        width: 75px;
       }
-
       .reservationGuestImage {
-        margin-left: 250px;
-        width: 60px;
+        margin-left: 0px;
+        width: 75px;
       }
-
       .reservationSideImage {
-        margin-left: 280px;
-        width: 60px;
+        width: 75px;
       }
       .whiteListHeader {
-        margin-top: 63px;
+        margin-top: 30px;
       }
-
+      .mobMargin {
+        margin-left: -30px;
+      }
       .withoutTabs {
         color:black;
         font-size: 20px;
