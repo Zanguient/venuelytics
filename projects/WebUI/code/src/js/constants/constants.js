@@ -57,7 +57,7 @@ app
       "Food-Drink-Services":"break-through/food-drink-services.html",
       "Guest-List-Lost":"break-through/break-guest-list.html",
       "Business-Analytics-Dashboard":"break-through/business-analytics-dashboard.html",
-      "WIFI-White-Label-Solution":"break-through/wifi-white-label.html",
+//      "WIFI-White-Label-Solution":"break-through/wifi-white-label.html",
       "Campaign-Loyalty-Management":"break-through/break-loyalty-management.html",
       "Break-Private-Events":"break-through/break-private-events.html"
     },
