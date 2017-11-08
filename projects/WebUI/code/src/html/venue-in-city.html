@@ -14,13 +14,13 @@
                                         <div
                                             class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
                                             ng-repeat="venue in listOfVenuesByCity"
-                                            ng-if="venue.imageUrls[0].smallUrl">
+                                            >
                                             <article id="articleCart"
                                                 class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left"
                                                     ng-click="selectVenue(venue)" id="cityImage">
                                                     <div class="imgHolder">
-                                                            <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venueInCity-image" class="img-responsive" id="venueImages">
+                                                            <img ng-src="{{venue.imageUrls[0].smallUrl || venue.imageUrls[0].originalUrl }}" alt="venueInCity-image" class="img-responsive" id="venueImages">
                                                             <h5 class="fontBold pull-right featureMargin" ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
                                                         </div>
                                                 </figure>
