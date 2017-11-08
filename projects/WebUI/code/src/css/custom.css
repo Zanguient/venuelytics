@@ -1135,9 +1135,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
  374px) {
 
   
-  .loyaltyPhone {
-    margin-left: -200px;
-  }
 
   .mobileImageWidht {
     width: 60px;
@@ -1457,10 +1454,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     and (min-width : 375px)
     and (max-width : 413px) {
 
-      .loyaltyPhone {
-        margin-left: -250px;
-      }
-
       .withoutTabs {
         color:black;
         font-size: 17px;
@@ -1631,9 +1624,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     and (min-width : 414px)
     and (max-width : 736px) {
 
-      .loyaltyPhone {
-        margin-left: -250px;
-      }
       
       .withoutTabs {
         color:black;
