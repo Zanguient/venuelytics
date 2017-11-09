@@ -428,6 +428,9 @@
 		"VENUELYTICS_INC":"VenueLytics Inc - ItzFun Consumer & VenueLytics Business App Version v1.8(Build 18027)"
 	},
 	"reservation": {
+		"TABLE_TIME":"Time",
+		"TABLE_GUEST":"Guests",
+		"TABLE_SERVICE_CONFIRMATION":"Yes, I want to receive email updates form this venue",
 		"PROCESS_FEE": "Process Fee",
 		"FEATURED":"FEATURED",
 		"PARTY":"Party Packages",
@@ -576,7 +579,7 @@
 		"DRINK_TYPE":"Drink Type",
 		"TABLE_SERVICE":"Table Service",
 		"EVENT_LIST": "Event List",
-		"TABLE_SERVICE_TIMEOUT":"Hurry! we can only hold this table for the next 15 mins",
+		"TABLE_SERVICE_TIMEOUT":"Hurry! We can hold your selected table only for the next 5 mins",
 		"TABLE_CONFIRM_DESC":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam sed labore autem nesciunt ea veniam recusandae necessitatibus reprehenderit. Praesentium non velit at natus ut dolores iusto totam doloremque perspiciatis. Quidem.",
 		"TABLE_CONFIRM_RESERVATION":"CONFIRM RESERVATION",
 		"SELECT_TIME":"Select Time:",

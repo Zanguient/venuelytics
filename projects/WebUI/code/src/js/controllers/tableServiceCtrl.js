@@ -9,6 +9,11 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             self.reservedTimeSlot = '';
             self.timeSlot = false;
             self.init = function() {
+                self.venueDetails = DataShare.venueFullDetails;
+                self.selectedVenue = self.venueDetails.venueName;
+                angular.forEach(self.venueDetails.imageUrls, function(value,key){
+                    self.venueImage = value.originalUrl;
+                });
                 $rootScope.description = DataShare.eachVenueDescription;
                 self.venudetails = DataShare.venueFullDetails;
                 ngMeta.setTag('description', self.venudetails.description + " Table Services");
@@ -105,16 +110,18 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
-            self.confirmTableReserve = function() {
+            self.confirmTableReserve = function(time) {
+                DataShare.editBottle = time;
                 $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);
             };
 
             self.backToTable = function() {
                 $location.url('/cities/' + self.selectedCity + '/' + self.venueid + '/table-services');
             };
-
-            self.confirmReservation = function() {
-                self.tableGuests =DataShare.tableGuests
+            self.tableGuests = DataShare.tableGuests
+            self.selelctedDate= moment(DataShare.guestFocus).format('YYYY-MM-DD');
+            self.selectedTime = DataShare.editBottle;
+            self.confirmReservation = function() {                
                 var fullName = self.tableService.firstName + " " + self.tableService.lastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.tableService.emailId + ':' + self.tableService.mobileNumber);
                 DataShare.authBase64Str = authBase64Str;

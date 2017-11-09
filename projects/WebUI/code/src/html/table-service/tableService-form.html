@@ -1,6 +1,29 @@
 <div class="container">
-<form class="search-form" name="tableConfirmForm" validate-form="" parsley-validate novalidate ng-cloak>
+<form class="col-md-12 search-form" name="tableConfirmForm" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset>
+            <br><br><br>
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <img src="{{venueImage}}" alt="venueImage" class="img-responsive mb-4">
+                </div>
+                <div class="col-md-4">
+                    <h3>{{"venue.RESTAURANT" | translate}}</h3>
+                    <div>{{selectedVenue}}</div>
+                </div>
+                <div class="col-md-2">
+                    <h3>{{"reservation.TABLE_GUEST" | translate}}</h3>
+                    <div>{{tableGuests}} People</div>
+                </div>
+                <div class="col-md-2">
+                    <h3>{{"reservation.DATE" | translate}}</h3>
+                    <div>{{selelctedDate}}</div>
+                </div>
+                <div class="col-md-2">
+                    <h3>{{"reservation.TABLE_TIME" | translate}}</h3>
+                    <div>{{selectedTime}}</div>
+                </div>
+            </div>
+            <br><br>
             <h2>{{'reservation.TABLE_SERVICE_TIMEOUT' | translate}}</h2>
             <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
                 <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
@@ -21,9 +44,17 @@
             <!-- <div class="col-md-12 form-group is-empty">
                 <p>{{'reservation.TABLE_CONFIRM_DESC' | translate}}</p>
             </div> -->
-            <hr>
+            <div class="col-md-12">
+                <div>
+                    <label class="fontRegular table-font fontColorForText">
+                        <input type="checkbox" ng-model="table.agree" required/>
+                        {{"reservation.TABLE_SERVICE_CONFIRMATION" | translate}} .<br>
+                    </label><br>
+                    {{"reservation.AGREE" | translate}} {{selectedVenue}} {{"reservation.AGREE_1" | translate}}
+                </div>
+            </div>
             <center>
-                <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-click="confirmReservation()">{{'reservation.TABLE_CONFIRM_RESERVATION' | translate}}</button>
+                <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-disabled="!table.agree" ng-click="confirmReservation()">{{'reservation.TABLE_CONFIRM_RESERVATION' | translate}}</button>
             </center>
         </fieldset>
 </form>
