@@ -6,21 +6,21 @@
                 <div class="col-md-2">
                     <img src="{{venueImage}}" alt="venueImage" class="img-responsive mb-4">
                 </div>
-                <div class="col-md-4">
-                    <h3>{{"venue.RESTAURANT" | translate}}</h3>
-                    <div>{{selectedVenue}}</div>
+                <div class="col-md-2 mt-2">
+                    <label>{{"venue.RESTAURANT" | translate}}</label>
+                    <h3 class="mt0">{{selectedVenue}}</h3>
                 </div>
-                <div class="col-md-2">
-                    <h3>{{"reservation.TABLE_GUEST" | translate}}</h3>
-                    <div>{{tableGuests}} People</div>
+                <div class="col-md-2  mt-2">
+                    <label>{{"reservation.TABLE_GUEST" | translate}}</label>
+                    <h3 class="mt0">{{tableGuests}} People</h3>
                 </div>
-                <div class="col-md-2">
-                    <h3>{{"reservation.DATE" | translate}}</h3>
-                    <div>{{selelctedDate}}</div>
+                <div class="col-md-2  mt-2">
+                    <label>{{"reservation.DATE" | translate}}</label>
+                    <h3 class="mt0">{{selelctedDate | date : 'EEE, MMM d, y'}}</h3>
                 </div>
-                <div class="col-md-2">
-                    <h3>{{"reservation.TABLE_TIME" | translate}}</h3>
-                    <div>{{selectedTime}}</div>
+                <div class="col-md-4  mt-2">
+                    <label>{{"reservation.TABLE_TIME" | translate}}</label>
+                    <h3 class="mt0">{{selectedTime}}</h3>
                 </div>
             </div>
             <br><br>
