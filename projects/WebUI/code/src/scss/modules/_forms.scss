@@ -73,8 +73,8 @@
     }
 
     label {
-        color: $color-medium-dark !important;
-
+        /* color: $color-medium-dark !important; */
+        color: $color-medium-dark;
     }
     &.is-focused {
         .radio {
@@ -85,7 +85,8 @@
 
                 &:hover,
                 &:focus {
-                    color: $color-dark-light !important;
+                    /* color: $color-dark-light !important; */
+                    color: $color-dark-light ;
                 }
             }
         }

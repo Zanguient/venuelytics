@@ -127,6 +127,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.dressCode =  response.data["Advance.dressCode"];
                     self.enabledPayment =  response.data["Advance.enabledPayment"];
                     self.reservationFee =  response.data["Bottle.BottleReservationFee"];
+                    $rootScope.embedColor = response.data["ui.servce.bgcolor"];
+                    $rootScope.holeTextColor = (($rootScope.embedColor === '#ffffff') || ($rootScope.embedColor === undefined)) ? '#000000':'#ffffff';
+                    $rootScope.blackTheme = $rootScope.holeTextColor === '#ffffff' ? 'blackTheme' : '';
                 });
             };
 

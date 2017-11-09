@@ -1,11 +1,11 @@
 <div  ng-controller="BottleServiceController">
 <form class="form-horizontal" parsley-validate validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
     <fieldset class="col-md-10 col-md-offset-right-2">
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{bottleDateIsFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{bottleDateIsFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
-            <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate"  required/>
+            <input type="text" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  id="requestDate" ng-model="bottle.requestedDate"  required/>
         </div>
-        <div class="col-md-12 form-group is-empty selected-table" ng-if="selectedVenueMap.imageUrls[0].originalUrl" style="margin-top: 0px;">
+        <div class="col-md-12 form-group is-empty selected-table" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  ng-if="selectedVenueMap.imageUrls[0].originalUrl" style="margin-top: 0px;">
             <div class="table-map-info">
                 <div id="mapSection">
                     <center>
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" class="form-group" ng-repeat="table in selectedVenueMap.elements"
+        <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" class="form-group" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  ng-repeat="table in selectedVenueMap.elements"
                 style="margin-top: 70px;">
             <div class="col-md-12 col-sm-12 tableItem">
                 <div class="col-md-3 col-sm-4"><label>
@@ -64,12 +64,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 form-group is-empty selected-table" ng-if="tableSelection.length > 0" style="margin-top: 0px; margin-left: 46px">
+        <div class="col-md-12 form-group is-empty selected-table" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  ng-if="tableSelection.length > 0" style="margin-top: 0px; margin-left: 46px">
             <font size="4"><b>{{'reservation.SELECT_TABLE' | translate}}</b>: </font><label ng-repeat="table in tableSelection"><font size="4" style="font-weight:bold;">{{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</font></label>
         </div>
 
-        <div class="col-md-12 form-group is-empty" ng-if="tableSelection">
-            <div class="form-group" ng-repeat="table in tableSelection">
+        <div class="col-md-12 form-group is-empty" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  ng-if="tableSelection">
+            <div class="form-group" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  ng-repeat="table in tableSelection">
                 <center>
                 <table>
                     <tr>
@@ -111,51 +111,51 @@
             </div>
         </div>
        
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold" ng-model="bottle.userFirstName" id="firstName" required>
+            <input type="text" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  ng-model="bottle.userFirstName" id="firstName" required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold fontChange" ng-model="bottle.userLastName" id="lastName" required>
+            <input type="text" class="form-control fontBold fontChange" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  ng-model="bottle.userLastName" id="lastName" required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
-            <input type="email" class="form-control fontBold" id="email" ng-model="bottle.email"data-parsley-trigger="change" required>
+            <input type="email" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  id="email" ng-model="bottle.email"data-parsley-trigger="change" required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
-            <input type="text" id="ms-form-pass" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="bottle.mobile" required data-parsley-trigger="change">
+            <input type="text" id="ms-form-pass" class="form-control fontBold fontChange" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="bottle.mobile" required data-parsley-trigger="change">
         </div>
        
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.ZIPCODE' | translate}}</label>
-            <input type="number" class="form-control fontBold" id="zipcode" ng-model="bottle.bottleZipcode"  required>
+            <input type="number" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" id="zipcode" ng-model="bottle.bottleZipcode"  required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}"ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.TOTAL_GUEST' | translate}}</label>
-            <input type="text" class="form-control fontBold" id="totalGuest" ng-model="bottle.totalGuest" >
+            <input type="text" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  id="totalGuest" ng-model="bottle.totalGuest" >
         </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" ng-c ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.OCCASION' | translate}}</label>
-            <select class="form-control fontBold" required
+            <select class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeBackground':holeTextColor ==='#ffffff' }" eqruired
                 ng-model="bottle.bottleOccasion" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.INSTRUCTIONS' | translate}}</label>
-            <input type="text" class="form-control fontBold" id="instructions" ng-model="bottle.instructions" placeholder="">
+            <input type="text" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  id="instructions" ng-model="bottle.instructions" placeholder="">
         </div>
-        <div class="col-md-4 form-group label-floating is-empty floatingLabel {{isFocused}}" style="margin-left: auto;" ng-hide ="!hostDate || hostDate.length == 0">
+        <div class="col-md-4 form-group label-floating is-empty floatingLabel {{isFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;" ng-hide ="!hostDate || hostDate.length == 0">
             <label class="control-label">{{'reservation.HOST' | translate}}</label>
             
-            <select class="form-control fontBold" ng-model="bottle.host" ng-options="x as x.name for x in hostDate  track by x.id">
+            <select class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeBackground':holeTextColor ==='#ffffff' }" ng-model="bottle.host" ng-options="x as x.name for x in hostDate  track by x.id">
             </select></div><img ng-hide ="!hostDate || hostDate.length == 0" class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
-        <div class="col-md-12 form-group is-empty" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-md-12 form-group is-empty" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>
-        <div class="col-md-12 form-group is-empty" ng-if="bottleMinimum != ''" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-md-12 form-group is-empty" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" ng-if="bottleMinimum != ''" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
             <table class="table table-responsive table-no-border">
                 <thead>
@@ -197,7 +197,7 @@
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <div>{{"reservation.PRICE" | translate}}</div>
                                     <div>
-                                        <input type="text" placeholder="Price" class="form-control" ng-model="chooseBottles.price">
+                                        <input type="text" placeholder="Price" class="form-control" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" ng-model="chooseBottles.price">
                                     </div>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -222,7 +222,7 @@
         </div>
         <div class="col-md-12">
             <div>
-                <label class="fontRegular table-font fontColorForText">
+                <label class="fontRegular table-font" ng-class="{'fontColorForText': holeTextColor ==='#ffffff', 'fontColorForTextBlack': holeTextColor !=='#ffffff'}">
                     <input type="checkbox" ng-model="bottle.authorize" required/>
                      {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
                 </label>
@@ -230,7 +230,7 @@
         </div>
         <div class="col-md-12">
             <div>
-                <label class="fontRegular table-font fontColorForText">
+                <label class="fontRegular table-font" ng-class="{'fontColorForText': holeTextColor ==='#ffffff' , 'fontColorForTextBlack': holeTextColor !=='#ffffff'}">
                     <input type="checkbox" ng-model="bottle.agree" required/>
                      {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
                 </label>
@@ -361,4 +361,3 @@
     </div>
 </div>
 </div>
-

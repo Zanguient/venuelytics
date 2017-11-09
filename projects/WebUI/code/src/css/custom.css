@@ -9,10 +9,27 @@
 .contactTop {
   margin-top: 19px;
 }
+/* BlackTheme start */
+
+.blackTheme label {
+  color: #fdfdfd !important;
+}
+.blackTheme {
+  color: #fdfdfd !important;
+}
+.fontColorForText {
+  color: #fdfdfd !important;
+}
+.fontColorForTextBlack {
+  color: #181818 !important;
+}
+.blackThemeBackground {
+  background-color: #000000 !important;
+}
+
+/* BalckTheme End */
+
 /* Break through css start */
-
-
-
 .center_content {
   display: block;
   margin: auto;
@@ -345,10 +362,6 @@ select {
 
 .ui-helper-center {
   text-align: center;
-}
-
-.fontColorForText {
-  color: #181818;
 }
 
 .bottleSelect {
