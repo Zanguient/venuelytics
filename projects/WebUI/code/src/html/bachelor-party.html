@@ -103,14 +103,14 @@
         </div>
         <div class="col-md-12">
             <div class="checkbox">
-                <label class="check-box fontRegular fontColorForText">
+                <label class="check-box fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
                 </label>
             </div>
         </div>
         <div class="col-md-12">
             <div class="checkbox">
-                <label class="check-box fontRegular fontColorForText">
+                <label class="check-box fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox"><span class="checkbox-material"><span class="check"></span></span> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
                 </label>
             </div>

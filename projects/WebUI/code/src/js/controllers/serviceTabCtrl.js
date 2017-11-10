@@ -89,8 +89,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.tableServiceButton = response.data["Advance.tableService.enable"];
                 self.featuredEnable = response.data["Advance.featured"];
                 self.eventsEnable = response.data["venueEvents"];
-                $rootScope.embedColor = response.data["ui.service.theme"];
-                $rootScope.blackTheme = $rootScope.embedColor === 'blackTheme' ? 'blackTheme' : '';
+                self.serviceTheme = response.data["ui.service.theme"];
+                $rootScope.blackTheme = self.serviceTheme === 'blackTheme' ? 'blackTheme' : '';
                 $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
                 if(self.embeddedService === 'new') {
                     $rootScope.venueHeader = response.data["ui.custom.header"];

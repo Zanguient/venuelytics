@@ -221,7 +221,7 @@
         </div>
         <div class="col-md-12">
             <div>
-                <label class="fontRegular table-font {{blackTheme}}">
+                <label class="fontRegular table-font" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="bottle.authorize" required/>
                         {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
                 </label>
@@ -229,7 +229,7 @@
         </div>
         <div class="col-md-12">
             <div>
-                <label class="fontRegular table-font {{blackTheme}}">
+                <label class="fontRegular table-font" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="bottle.agree" required/>
                         {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
                 </label>

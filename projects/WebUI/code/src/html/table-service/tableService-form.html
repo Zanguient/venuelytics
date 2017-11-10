@@ -1,5 +1,5 @@
-<div class="container">
-<form class="col-md-12 search-form" name="tableConfirmForm" validate-form="" parsley-validate novalidate ng-cloak>
+<div class="container card {{blackTheme}}">
+<form class="col-md-12 form-group search-form" name="tableConfirmForm" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset>
             <br><br><br>
             <div class="col-md-12">
@@ -45,10 +45,10 @@
                 <p>{{'reservation.TABLE_CONFIRM_DESC' | translate}}</p>
             </div> -->
             <div class="col-md-12">
-                <div>
-                    <label class="fontRegular table-font fontColorForText">
+                <div ng-class="{'Check_box_label': blackTheme === ''}">
+                    <label class="fontRegular table-font">
                         <input type="checkbox" ng-model="table.agree" required/>
-                        {{"reservation.TABLE_SERVICE_CONFIRMATION" | translate}} .<br>
+                        {{"reservation.TABLE_SERVICE_CONFIRMATION" | translate}}<br>
                     </label><br>
                     {{"reservation.AGREE" | translate}} {{selectedVenue}} {{"reservation.AGREE_1" | translate}}
                 </div>

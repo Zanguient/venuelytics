@@ -56,14 +56,14 @@
             </div>
             <div class="col-lg-12">
             <div>
-                <label class="fontRegular" >
+                <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-mode="guest.authorize" required/> {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
                 </label>
             </div>
             </div>
             <div class="col-lg-12">
             <div>
-                <label class="fontRegular">
+                <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="guest.agree" required/> {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
                 </label>
             </div>

@@ -28,6 +28,11 @@
 /* BalckTheme End */
 
 /* Break through css start */
+
+.Check_box_label {
+  color: #393939 !important;
+}
+
 .center_content {
   display: block;
   margin: auto;
