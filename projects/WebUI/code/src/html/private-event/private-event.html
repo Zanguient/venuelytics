@@ -32,14 +32,14 @@
                         <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FLOOR" | translate}}</a>
                     </td>
                 </tr>
-            </table> 
+            </table>
         </center>
     </div>
     <form class="form-horizontal col-md-12" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
     <fieldset class="col-md-10 col-md-offset-right-2">
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateDateIsFocused}}"  ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateDateIsFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
-            <input type="text" class="form-control fontBold"  ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" id="privateDate" ng-model="private.orderDate" >
+            <input type="text" class="form-control fontBold" id="privateDate" ng-model="private.orderDate" >
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
         <div class="col-md-12 showInWeb">
@@ -54,12 +54,12 @@
             <div class="col-md-5 form-group is-empty">
                 <table>
                 <tr><td>
-                    <select class="form-control fontBold"ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeBackground':holeTextColor ==='#ffffff' }" required=""
+                    <select class="form-control fontBold {{blackTheme}}" required=""
                         ng-model="private.privateStartTime" ng-options="x.startTime as x.sTime for x in reservationTime">
                         <option value="">{{"reservation.START_TIME"  | translate}}</option>
                     </select></td><td>
 
-                    <select id="alignmentTime" class="form-control fontBold"ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeBackground':holeTextColor ==='#ffffff' }" required=""
+                    <select id="alignmentTime" class="form-control fontBold {{blackTheme}}" required=""
                         ng-model="private.privateEndTime" ng-options="x.endTime as x.eTime for x in reservationTime">
                         <option value="">{{"reservation.END_TIME"  | translate}}</option>
                     </select></td>
@@ -71,56 +71,56 @@
             <table>
                 <tr>
                     <td>
-                        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}"  ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
+                        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
                         <label class="control-label" for="focusedInput1">{{'reservation.TOTAL_GUEST' | translate}}</label>
-                        <input type="text" class="form-control fontBold"  ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" id="privateTotalGuest" ng-model="private.totalGuest">
+                        <input type="text" class="form-control fontBold" id="privateTotalGuest" ng-model="private.totalGuest">
                         </div>
                     </td>
                     <td class="budgetPadding">
-                        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
+                        <div class="col-md-10 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
                         <label class="control-label" for="focusedInput1">{{'reservation.BUDGET' | translate}}</label>
-                        <input type="text" class="form-control fontBold"  ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" id="budget" ng-model="private.budget" data-parsley-trigger="change">
+                        <input type="text" class="form-control fontBold" id="budget" ng-model="private.budget" data-parsley-trigger="change">
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
 
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}"   style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" ng-model="private.privateFirstName" id="firstName"  required>
+            <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
         </div>
     
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
-            <input type="text" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" ng-model="private.privateLastName" id="lastName" >
+            <input type="text" class="form-control fontBold" ng-model="private.privateLastName" id="lastName" >
         </div>
         
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
-            <input type="email" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" id="email" ng-model="private.privateEmail"  data-parsley-trigger="change" required>
+            <input type="email" class="form-control fontBold" id="email" ng-model="private.privateEmail"  data-parsley-trigger="change" required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
-            <input type="text" id="ms-form-pass" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" required data-parsley-trigger="change">
+            <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" required data-parsley-trigger="change">
         </div>
     
         
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{"reservation.EVENT_TYPE"  | translate}}</label>
-            <select class="form-control fontBold"ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeBackground':holeTextColor ==='#ffffff' }" required=""
+            <select class="form-control fontBold {{blackTheme}}" required=""
                 ng-model="private.privateEvent" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>
         </div>
 
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{privateEventFocused}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.COMMENT' | translate}}</label>
-            <input type="text" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" id="instructions" ng-model="private.privateComment"  data-parsley-trigger="change">
+            <input type="text" class="form-control fontBold" id="instructions" ng-model="private.privateComment"  data-parsley-trigger="change">
         </div>
         <div class="col-md-12">
             <div>
-                <label class="fontRegular fontColorForText" ng-class="{'fontColorForText': holeTextColor ==='#ffffff', 'fontColorForTextBlack': holeTextColor !=='#ffffff'}">
+                <label class="fontRegular fontColorForText">
                     <input type="checkbox" ng-model="private.authorize" required/>
                     {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
                 </label>
@@ -128,7 +128,7 @@
         </div>
         <div class="col-md-12">
             <div>
-                <label class="fontRegular fontColorForText" ng-class="{'fontColorForText': holeTextColor ==='#ffffff', 'fontColorForTextBlack': holeTextColor !=='#ffffff'}">
+                <label class="fontRegular fontColorForText">
                     <input type="checkbox" ng-model="private.agree" required/>
                      {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
                 </label>

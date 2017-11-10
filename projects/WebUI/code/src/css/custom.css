@@ -11,23 +11,18 @@
 }
 /* BlackTheme start */
 
+.blackTheme {
+  color: #fdfdfd !important;
+  background-color: #000000 !important;
+}
 .blackTheme label {
   color: #fdfdfd !important;
 }
-.blackTheme {
+.blackTheme input {
   color: #fdfdfd !important;
 }
-.fontColorForText {
-  color: #fdfdfd !important;
-}
-.fontColorForTextBlack {
-  color: #181818 !important;
-}
-.blackThemeBackground {
+.blackTheme tr:hover {
   background-color: #000000 !important;
-}
-.blackThemeTable tr:hover {
-  background-color: #585757 !important;
 }
 
 /* BalckTheme End */

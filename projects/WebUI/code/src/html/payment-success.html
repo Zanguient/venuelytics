@@ -1,6 +1,6 @@
-<div class="container card" style="background-color: {{embedColor}}; color: {{holeTextColor}}">
+<div class="container card {{blackTheme}}">
 	<div class="text-xs-center">
-		<center ng-class="{'blackTheme': holeTextColor ==='#ffffff'}">
+		<center>
 			<font size="1000px;"><span class="fa fa-check-circle headerColor" aria-hidden="true"></span></font>
 			<h1 class="display-3">{{"reservation.THANK_YOU"  | translate}}!</h1>
 			<p>{{"reservation.TOTAL_TO_PAY"  | translate}} : &dollar;{{availableAmount | number: 2}}</p>

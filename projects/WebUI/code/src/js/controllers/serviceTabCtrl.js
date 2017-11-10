@@ -89,11 +89,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.tableServiceButton = response.data["Advance.tableService.enable"];
                 self.featuredEnable = response.data["Advance.featured"];
                 self.eventsEnable = response.data["venueEvents"];
-                $rootScope.embedColor = response.data["ui.servce.bgcolor"];
-                $rootScope.holeTextColor = (($rootScope.embedColor === '#ffffff') || ($rootScope.embedColor === undefined)) ? '#000000':'#ffffff';
-                $rootScope.blackTheme = $rootScope.holeTextColor != '#ffffff' ? 'blackTheme' : '';
+                $rootScope.embedColor = response.data["ui.service.theme"];
+                $rootScope.blackTheme = $rootScope.embedColor === 'blackTheme' ? 'blackTheme' : '';
+                $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
                 if(self.embeddedService === 'new') {
-                    /* $rootScope.embedColor = response.data["ui.service.bgcolor"]; */
                     $rootScope.venueHeader = response.data["ui.custom.header"];
                     $rootScope.venueFooter = response.data["ui.custom.footer"];
                     $rootScope.embeddedFlag = true;
