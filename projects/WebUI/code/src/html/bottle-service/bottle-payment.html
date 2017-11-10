@@ -1,10 +1,11 @@
+<div class="container card" style="background-color: {{embedColor}}; color: {{holeTextColor}}">
     <div>
-        <div>
-            <center>
-                <h1>{{"reservation.PAYMENT"  | translate}}</h1>
-            </center>
-        </div>
-        <div class="form-group">
+    <div>
+        <center>
+            <h1>{{"reservation.PAYMENT"  | translate}}</h1>
+        </center>
+    </div>
+    <div class="form-group" ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeTable':holeTextColor ==='#ffffff'}">
         <center>
             <table>
                 <tr>
@@ -59,14 +60,15 @@
                     </td>
                 </tr>
             </table>
-            </center>
-        </div>
+        </center>
     </div>
+</div>
     <div>
         <center>
             <input type="button" class="btn btn-success btn-raised" ng-click="createBottleSave()" value="Pay Now">
         </center>
     </div>
+</div>
     <div class="form-group" ng-hide="true">
         <input type="text" id="stripeAmount" placeholder="payAmount" ng-model="availableAmount">
         <input type="text" id="taxDate" placeholder="taxDate" ng-model="taxDate">

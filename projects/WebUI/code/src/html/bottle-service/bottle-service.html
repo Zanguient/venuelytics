@@ -132,7 +132,7 @@
             <label class="control-label" for="focusedInput1">{{'reservation.ZIPCODE' | translate}}</label>
             <input type="number" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" id="zipcode" ng-model="bottle.bottleZipcode"  required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}"ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty floatingLabel {{isFocused}}" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.TOTAL_GUEST' | translate}}</label>
             <input type="text" class="form-control fontBold" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  id="totalGuest" ng-model="bottle.totalGuest" >
         </div>
@@ -157,7 +157,7 @@
         </div>
         <div class="col-md-12 form-group is-empty" ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeTable':holeTextColor ==='#ffffff'}" ng-if="bottleMinimum != ''" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
-            <table class="table table-responsive table-no-border">
+            <table class="table table-responsive table-no-border" >
                 <thead>
                     <tr>
                         <th>{{"reservation.BOTTLE"  | translate}}</th>
@@ -178,20 +178,20 @@
             </table>
         </div>
         <div class="col-md-12" ng-class="{'blackThemeTable':holeTextColor ==='#ffffff'}" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
-            <table class="table table-no-border bottleSelect">
+            <table class="table table-no-border">
                 <tr>
                     <td>
                         <div class="row">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <div>{{"reservation.BOTTLE" | translate}}</div>
                                     <div>
-                                        <select ng-change="getBrandByBottleName(chooseBottles.bottleName)" class="form-control col-xs-3" ng-options="x.name as x.name for x in allBottle" ng-model="chooseBottles.bottleName"></select>
+                                        <select ng-change="getBrandByBottleName(chooseBottles.bottleName)" class="form-control col-xs-3" ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeBackground':holeTextColor ==='#ffffff' }" ng-options="x.name as x.name for x in allBottle" ng-model="chooseBottles.bottleName"></select>
                                     </div>
                              </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <div>{{"reservation.BRAND" | translate}}</div>
                                     <div>
-                                        <select class="form-control" ng-options="x.brand as x.brand for x in brandData" ng-model="chooseBottles.brandName"></select>
+                                        <select class="form-control" ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeBackground':holeTextColor ==='#ffffff' }" ng-options="x.brand as x.brand for x in brandData" ng-model="chooseBottles.brandName"></select>
                                     </div>
                             </div>
                             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -205,10 +205,10 @@
                                     <div>
                                         <table>
                                         <tr>
-                                            <td><a class="btn btn-default btn-sm btn-responsive" ng-click="minusValue()"> <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                            <td><a class="btn btn-default btn-sm btn-responsive" ng-click="minusValue()"> <span class="glyphicon glyphicon-minus" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" aria-hidden="true"></span>
                                             </a></td>
                                             <td>{{bottleCount}}</td>
-                                            <td><a class="btn btn-default btn-sm btn-responsive" ng-click="addValue()" > <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            <td><a class="btn btn-default btn-sm btn-responsive" ng-click="addValue()" > <span class="glyphicon glyphicon-plus" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" aria-hidden="true"></span>
                                             </a></td>
                                         </tr>
                                         </table>

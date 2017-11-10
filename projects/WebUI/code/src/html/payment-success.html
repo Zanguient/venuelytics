@@ -1,13 +1,14 @@
-
-<div class="jumbotron text-xs-center">
-	<center>
-  		<font size="1000px;"><span class="fa fa-check-circle headerColor" aria-hidden="true"></span></font>
-  		<h1 class="display-3">{{"reservation.THANK_YOU"  | translate}}!</h1>
-  		<p>{{"reservation.TOTAL_TO_PAY"  | translate}} : &dollar;{{availableAmount | number: 2}}</p>
-  		<p class="lead">
-     		<a class="btn btn-primary btn-sm" href="javascript:void(0)" ng-click="backToReservation()">{{"reservation.BACK_RESERVE"  | translate}}</a>
-    	</p>
-    	<br>
-    	<p>{{"reservation.POWERED_BY"  | translate}}</p>
-  	</center>
+<div class="container card" style="background-color: {{embedColor}}; color: {{holeTextColor}}">
+	<div class="text-xs-center">
+		<center ng-class="{'blackTheme': holeTextColor ==='#ffffff'}">
+			<font size="1000px;"><span class="fa fa-check-circle headerColor" aria-hidden="true"></span></font>
+			<h1 class="display-3">{{"reservation.THANK_YOU"  | translate}}!</h1>
+			<p>{{"reservation.TOTAL_TO_PAY"  | translate}} : &dollar;{{availableAmount | number: 2}}</p>
+			<p class="lead">
+				<a class="btn btn-primary btn-sm" href="javascript:void(0)" ng-click="backToReservation()">{{"reservation.BACK_RESERVE"  | translate}}</a>
+			</p>
+			<br>	
+			<p>{{"reservation.POWERED_BY"  | translate}}</p>
+		</center>
+	</div>
 </div>
