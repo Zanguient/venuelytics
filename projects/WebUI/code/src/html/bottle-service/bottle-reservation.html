@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container card" style="background-color: {{embedColor}}; color: {{holeTextColor}}">
 
 	<center>
 		<h1 class="color-success fontRegular">{{'reservation.CONFIRM_DETAILS' | translate}}</h1>
 
-	<div class="form-group confirmationCenter">
+	<div class="form-group confirmationCenter" ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeTable':holeTextColor ==='#ffffff'}">
 		<table class="table table-responsive table-no-border">
 
         <tbody>
@@ -46,7 +46,7 @@
         </tbody>
     </table>
   </div>
-  <div class="form-group">
+  <div class="form-group" ng-class="{'blackThemeTable':holeTextColor ==='#ffffff'}">
       <h4 class="color-success bottleHeadername">{{"reservation.SELECT_TABLE"  | translate}}</h4>
           <table class="table table-responsive table-no-border bottleConfirmationTable">
               <thead>
@@ -64,7 +64,7 @@
           </table>
   </div>
   </center>
-  <div class="form-group" ng-show = "enablePayment == 'Y' || enablePayment == 'y'">
+  <div class="form-group" ng-class="{'blackThemeTable':holeTextColor ==='#ffffff'}" ng-show = "enablePayment == 'Y' || enablePayment == 'y'">
       <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
           <table class="table table-responsive table-no-border">
               <thead>

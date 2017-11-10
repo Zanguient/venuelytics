@@ -26,6 +26,9 @@
 .blackThemeBackground {
   background-color: #000000 !important;
 }
+.blackThemeTable tr:hover {
+  background-color: #585757 !important;
+}
 
 /* BalckTheme End */
 

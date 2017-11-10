@@ -69,7 +69,7 @@
         </div>
 
         <div class="col-md-12 form-group is-empty" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  ng-if="tableSelection">
-            <div class="form-group" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}"  ng-repeat="table in tableSelection">
+            <div class="form-group" ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeTable':holeTextColor ==='#ffffff'}" ng-repeat="table in tableSelection">
                 <center>
                 <table>
                     <tr>
@@ -155,7 +155,7 @@
         <div class="col-md-12 form-group is-empty" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>
-        <div class="col-md-12 form-group is-empty" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" ng-if="bottleMinimum != ''" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-md-12 form-group is-empty" ng-class="{'blackTheme': holeTextColor ==='#ffffff', 'blackThemeTable':holeTextColor ==='#ffffff'}" ng-if="bottleMinimum != ''" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
             <table class="table table-responsive table-no-border">
                 <thead>
@@ -177,7 +177,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-md-12" ng-class="{'blackThemeTable':holeTextColor ==='#ffffff'}" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
             <table class="table table-no-border bottleSelect">
                 <tr>
                     <td>
@@ -200,7 +200,7 @@
                                         <input type="text" placeholder="Price" class="form-control" ng-class="{'blackTheme': holeTextColor ==='#ffffff'}" ng-model="chooseBottles.price">
                                     </div>
                             </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12" ng-class="{'blackThemeTable':holeTextColor ==='#ffffff'}">
                                 <div>{{"reservation.QUANTITY" | translate}}</div>
                                     <div>
                                         <table>
