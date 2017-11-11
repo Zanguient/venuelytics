@@ -8,7 +8,7 @@
 </style>
 
 <div ng-controller="foodServiceController">
-<form class="search-form" name="foodForm" validate-form="" parsley-validate novalidate ng-cloak>
+<form class="search-form" name="foodForm" autocomplete="off" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset class="col-md-10 col-md-offset-right-2">
             <div class="form-group">
                 <label>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;" ng-hide="(foodType === 'Pickup')" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" for="focusedInput1">{{"reservation.TABLE_NUMBER" | translate}}</label>
-                <select class="form-control fontBold" ng-disabled="orderDisable === true" ng-model="drink.tableNumber">
+                <select class="form-control fontBold {{blackTheme}}" ng-disabled="orderDisable === true" ng-model="drink.tableNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(32) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -46,7 +46,7 @@
 
             <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;" ng-hide="foodType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" for="focusedInput1">{{"reservation.SEAT_NUMBER" | translate}}</label>
-                <select class="form-control fontBold" ng-disabled="orderDisable === true" id="foodSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.seatNumber">
+                <select class="form-control fontBold {{blackTheme}}" ng-disabled="orderDisable === true" id="foodSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.seatNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(10) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -54,7 +54,7 @@
 
              <div class="col-md-11 form-group label-floating is-empty floatingLabel {{isFoodFocused}}" style="margin-left: auto;" ng-hide="foodType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
                 <label class="control-label" for="focusedInput1">{{"reservation.LANE_NUMBER" | translate}}</label>
-                <select class="form-control fontBold" ng-disabled="orderDisable === true" id="foodLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.laneNumber">
+                <select class="form-control fontBold {{blackTheme}}" ng-disabled="orderDisable === true" id="foodLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.laneNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(30) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -134,7 +134,7 @@
                                         </tr>
                                         <tr>
                                             <td class="col-md-2">
-                                            <select class="form-control" ng-change="userSelectedFood(items)" ng-model="items.count" value="{{items.count || 0}}">
+                                            <select class="form-control {{blackTheme}}" ng-change="userSelectedFood(items)" ng-model="items.count" value="{{items.count || 0}}">
                                                     <option value="">{{"reservation.QUANTITY" | translate}}</option>
                                                     <option ng-repeat="n in [].constructor(20) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                                             </select>

@@ -16,6 +16,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
+                $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
                 $rootScope.description = DataShare.eachVenueDescription;
                 self.venudetails = DataShare.venueFullDetails;                
                 ngMeta.setTag('description', self.venudetails.description + " Bottle Confirmation");
@@ -26,7 +27,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                 self.userData = DataShare.bottleServiceData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
-                self.blackTheme = $window.localStorage.getItem("blackTheme");
+                self.successPageTheme = $window.localStorage.getItem("blackTheme");
                 self.availableAmount = $window.localStorage.getItem("bottleAmount");
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');
                 self.selectBottleOrders = DataShare.selectBottle;

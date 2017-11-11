@@ -11,6 +11,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
             self.chargedAmount = 0;
             self.totalChargedAmount = 0;
             self.init = function() {
+                $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
                 $rootScope.description = DataShare.eachVenueDescription;
                 self.venudetails = DataShare.venueFullDetails;
                 ngMeta.setTag('description', self.venudetails.description + " Drink Confirmation");
@@ -20,6 +21,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
                 self.selectedVenueID = $routeParams.venueid;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
+                self.successPageTheme = $window.localStorage.getItem("blackTheme");
                 self.payAmounts = $window.localStorage.getItem("drinkAmount");
                 self.drinkServiceDetails = DataShare.drinkServiceData;
                 self.selectedDrinkItems = DataShare.selectedDrinks;

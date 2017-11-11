@@ -1,5 +1,5 @@
 <div  ng-controller="BottleServiceController">
-<form class="form-horizontal" parsley-validate  autocomplete="off"  validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
+<form class="form-horizontal" parsley-validate autocomplete="off"  validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
     <fieldset class="col-md-10 col-md-offset-right-2">
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{bottleDateIsFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
@@ -241,7 +241,7 @@
                 <strong><i class="zmdi zmdi-close-circle"></i> {{"reservation.ERROR_MESSAGE" | translate}}!</strong> {{"reservation.FLOOR_MAP_SELECTION" | translate}} 
             </div>
         </div>       
-        <button class="btn btn-raised btn-success chk-button fontXLarge" type="submit" novalidate="novalidate" ng-disabled="((!bottle.agree) || (!bottle.authorize))">
+        <button class="btn btn-raised btn-success chk-button fontXLarge" type="submit" novalidate="novalidate" ng-disabled="bottleForm.$invalid">
           <h2 class="mt0 mb0">{{"reservation.CHECKOUT" | translate}}</h2>
           <div class="ripple-container"></div>
         </button>
