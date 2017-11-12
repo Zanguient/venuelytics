@@ -439,7 +439,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 if(data.fillColor === APP_COLORS.lightGreen) {
                     data.fillColor = APP_COLORS.darkYellow;
                     data.strokeColor = APP_COLORS.turbo;
-                    dataValueObj.imageUrls[0].active = 'active';
+                    if (typeof dataValueObj.imageUrls !== 'undefined' && dataValueObj.imageUrls.length > 0) {
+                      dataValueObj.imageUrls[0].active = 'active';
+                    }
                     self.selectionTableItems.push(dataValueObj);
                     self.sum = dataValueObj.size + self.sum;
                     DataShare.userselectedTables = self.selectionTableItems;
