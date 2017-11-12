@@ -34,6 +34,7 @@ app.service('DataShare', function() {
   this.editBottle = '';
   this.enablePayment = '';
   this.serviceTypes = '';
+  this.tableService = {};
   this.imageMapping={
       "pictureURL": "",
       "pictureURLThumbnail":"",

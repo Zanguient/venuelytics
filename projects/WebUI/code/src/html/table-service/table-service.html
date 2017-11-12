@@ -4,7 +4,7 @@
         <h1>{{'reservation.TABLE_RESERVATION' | translate}}</h1>
             <div class="col-md-12 form-group is-empty">
                 <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
-                    <input type="text" class="form-control fontBold" id="tableServiceDate" ng-model="tableDate" required>
+                    <input type="text" class="form-control fontBold" id="tableServiceDate" ng-model="table.tableDate" required>
                 </div>
                 <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
                     <select class="form-control fontBold {{blackTheme}}" ng-model="table.reserveTime" ng-options="x.key as x.value for x in reserveTimes" required>

@@ -8,6 +8,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             var self = $scope;
             self.reservedTimeSlot = '';
             self.timeSlot = false;
+            self.table = {};
             self.init = function() {
                 self.venueDetails = DataShare.venueFullDetails;
                 self.selectedVenue = self.venueDetails.venueName;
@@ -34,18 +35,25 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 }, 600);
                 self.selectedCity = $routeParams.cityName;
                 self.reservationTime = APP_ARRAYS.time;
-                self.tableDate = moment().format('YYYY-MM-DD');
+                self.table.tableDate  = moment().format('YYYY-MM-DD');
                 setTimeout(function() {
                 var divWidth = $(window).width();
                 $("#divObj").width(divWidth);
                 }, 1000);
+                if((Object.keys(DataShare.tableService).length) !== 0) {
+                    self.table = DataShare.tableService;
+                    self.findTable();
+                }
             };
 
+            self.editTableService = function() {
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueid + '/table-services');
+            };
             self.findTable = function() {
                 self.productItem = [];
                 DataShare.tableGuests = self.table.guest;
-                DataShare.guestFocus = self.tableDate +"T"+ self.table.reserveTime;
-                var date= moment(self.tableDate).format('YYYYMMDD');
+                DataShare.guestFocus = self.table.tableDate +"T"+ self.table.reserveTime;
+                var date= moment(self.table.tableDate ).format('YYYYMMDD');
                 var authBase64Str = "YXJ1biByYXVuOmFydW5AZ21haWwuY29tOig4ODgpIDg4OC04ODg4";
                 AjaxService.getTime(self.venueid, date, self.table.reserveTime, self.table.guest, authBase64Str).then(function(response) {
                     var obj = response.data;
@@ -112,10 +120,12 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
 
             self.confirmTableReserve = function(time) {
                 DataShare.editBottle = time;
+                DataShare.tableService = self.table;
                 $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);
             };
 
             self.backToTable = function() {
+                DataShare.tableService = '';
                 $location.url('/cities/' + self.selectedCity + '/' + self.venueid + '/table-services');
             };
             self.tableGuests = DataShare.tableGuests
