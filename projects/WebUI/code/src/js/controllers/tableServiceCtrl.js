@@ -128,14 +128,16 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 DataShare.tableService = '';
                 $location.url('/cities/' + self.selectedCity + '/' + self.venueid + '/table-services');
             };
-            self.tableGuests = DataShare.tableGuests
-            self.selelctedDate= moment(DataShare.guestFocus).format('YYYY-MM-DD');
+            self.tableGuests = DataShare.tableGuests;
+            self.selectedDate= moment(DataShare.guestFocus).format('YYYY-MM-DD');
             self.selectedTime = DataShare.editBottle;
             self.confirmReservation = function() {                
                 var fullName = self.tableService.firstName + " " + self.tableService.lastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.tableService.emailId + ':' + self.tableService.mobileNumber);
                 DataShare.authBase64Str = authBase64Str;
-                var dateValue = moment(DataShare.guestFocus).format("YYYY-MM-DDTHH:mm:ss");
+                var selectedDate= moment(DataShare.guestFocus).format('YYYY-MM-DD');
+                DataShare.guestFocus = selectedDate +'T' + DataShare.editBottle;
+                var dateValue = moment(DataShare.guestFocus, 'YYYY-MM-DDThh:mm a').format("YYYY-MM-DDTHH:mm:ss");
                 self.serviceJSON = {
                   "serviceType": 'Restaurant',
                   "venueNumber": self.venueid,
