@@ -1,20 +1,16 @@
 <div class="container" ng-cloak>
-
     <div class="row">
-        
         <div class="claimCard">
-                <center>
-                    <h5 ng-show="businessDetailLength == 0">{{"business.SEARCH_BUSINESS_MESSAGE" | translate}}</h5>
-                    </center>
-
-                    <div ng-repeat="business in businessDetails"
-                    ng-hide="claimBusiness == true">
-                    <article class="card wow fadeInLeft animation-delay-5 mb-4">
-                        <div class="card-block">
-                            <div class="row">
-                                <div class="col-md-7 col-sm-6">
-                                    <div class="slider">
-                                        <img ng-repeat="slide in business.imageUrls" class="slide businessImage col-sm-12" ng-swipe-right="showPrev(slide)"
+            <center>
+                <h5 ng-show="businessDetailLength == 0">{{"business.SEARCH_BUSINESS_MESSAGE" | translate}}</h5>
+            </center>
+            <div ng-repeat="business in businessDetails" ng-hide="claimBusiness == true">
+                <article class="card wow fadeInLeft animation-delay-5 mb-4">
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-md-7 col-sm-6">
+                                <div class="slider">
+                                    <img ng-repeat="slide in business.imageUrls" class="slide businessImage col-sm-12" ng-swipe-right="showPrev(slide)"
                                         ng-swipe-left="showNext(slide)" ng-show="isActive($index)"
                                         ng-src="{{slide.originalUrl}}" alt="business-image" />
                                        <!--  <ul class="buttonNav">
@@ -67,27 +63,18 @@
     <div class="turnkey" ng-cloak ng-show="!(claimBusiness == true)">
         <div class="container">
            <div class="container mt-0">
-                <h1
-                    class="text-center color-primary mb-2 wow fadeInDown animation-delay-3">{{"home.WELCOME_HEADING_1"
-                    | translate}}</h1>
-                <h3
-                    class="text-center mb-6 wow fadeInDown animation-delay-4"><b>{{"home.WELCOME_HEADING_2"
-                    | translate}}</b></h3>
-                <p
-                    class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4">{{"home.WELCOME_DESCRIPTION"
-                    | translate}}</p>
+                <h1 class="text-center color-primary mb-2 wow fadeInDown animation-delay-3">{{"home.WELCOME_HEADING_1" | translate}}</h1>
+                <h3 class="text-center mb-6 wow fadeInDown animation-delay-4">{{"home.WELCOME_HEADING_2" | translate}}</h3>
+                <p class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4">{{"home.WELCOME_DESCRIPTION" | translate}}</p>
             </div>
-
             <div class="row">
                 <div class="col-md-6 col-md-push-3 mb-4  center-block">
                     <img src="<%= assets %>/img/demo/devices.png" alt="device-image"
                     class="img-responsive center-block wow zoomIn animation-delay-8 ">
                 </div>
-
             </div>
         </div>
     </div>
-
 </div>
 <br>
 <br>
@@ -100,26 +87,24 @@
         </div>
     </div>
 </div>
-
-<div class="container mt-4" ng-cloak>
-    <h2
-        class="text-center color-primary mb-2 wow fadeInDown animation-delay-3">{{"home.KNOW_OUR_FEATURES"
-        | translate}}</h2>
-    <!-- <p
-        class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4"
-        ng-show="false">
-        Lorem ipsum dolor sit amet, <span class="color-primary">consectetur
-            adipisicing</span> elit. Dolor alias provident excepturi eligendi, nam
-        numquam iusto eum illum, ea quisquam.
-    </p> -->
-
-    <div
-        class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
-        <div class="text-center card-block">
-            <a href="#{{feature.link}}">
-            <img ng-src="{{feature.image}}" alt="feature-image" class="ms-icon ms-icon-xxlg ms-icon-circle imgpointer"></img></a>
-            <a href="#{{feature.link}}" class="{{feature.color}} imgpointer"><h4>{{feature.title | translate}}</h4></a>
-            <p class="">{{feature.description | translate}}</p>
+<div class="wrap wrap-mountain">
+    <div class="container mt-4" ng-cloak>
+        <h2 class="text-center color-primary mb-2 wow fadeInDown animation-delay-3" ng-bind="'home.KNOW_OUR_FEATURES'
+            | translate">VenueLytics Breakthrough Solutions</h2>
+        <!-- <p
+            class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4"
+            ng-show="false">
+            Lorem ipsum dolor sit amet, <span class="color-primary">consectetur
+                adipisicing</span> elit. Dolor alias provident excepturi eligendi, nam
+            numquam iusto eum illum, ea quisquam.
+        </p> -->
+        <div class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
+            <div class="text-center form-group card-block">
+                <a href="#{{feature.link}}">
+                <img ng-src="{{feature.image}}" alt="feature-image" class="ms-icon ms-icon-xxlg ms-icon-circle imgpointer"/></a>
+                <a href="#{{feature.link}}" class="{{feature.color}} imgpointer"><h4>{{feature.title | translate}}</h4></a>
+                <label>{{feature.description | translate}}</label>
+            </div>
         </div>
     </div>
 </div>
@@ -127,45 +112,41 @@
 <br/><br/>
 <div ng-hide="claimBusiness == true">
     <center>
-        <h1 class="color-success">{{"business.BUSINESS_SEARCH" |  translate}}</h1>
+        <h1 class="color-success">{{"business.BUSINESS_SEARCH" | translate}}</h1>
     </center>
-    <form class="form-horizontal businessSearchForm">
-        <fieldset>
-            <div class="form-group is-empty">
-                <label for="searchBusiness" class="col-md-offset-left-2 col-md-4 control-label">
-                    <font size="3">{{"business.BUSINESS_NAME" | translate}}:</font>
-                </label>
-                <div class="col-md-4">
+    <div class="container">
+        <form class="form-horizontal businessSearchForm" autocomplete="off">
+            <fieldset>
+                <div class="col-md-2"></div>
+                <div class="form-group label-floating is-empty col-md-7">
+                    <label for="nameId" class="control-label">{{"business.BUSINESS_NAME" | translate}}</label>
                     <input type="text" class="form-control" ng-model="searchBusiness" name="searchBox">
                 </div>
                 <div class="col-md-3">
                     <button type="submit" class="btn btn-raised btn-primary" ng-click="search(searchBusiness)">{{"business.SEARCH" | translate}}</button>
                 </div>
-            </div>
-        </fieldset>
-    </form>
+            </fieldset>
+        </form>
+    </div>
 </div>
 <br/><br/>
 <div id="{{feature.link}}" ng-include="linkToPath[feature.link]" ng-repeat="feature in venueLyticsFeatures"></div>
 <div ng-hide="claimBusiness == true">
     <center>
-        <h1 class="color-success">{{"business.BUSINESS_SEARCH" |
-        translate}}</h1>
+        <h1 class="color-success">{{"business.BUSINESS_SEARCH" | translate}}</h1>
     </center>
-    <form class="form-horizontal businessSearchForm">
-        <fieldset>
-            <div class="form-group is-empty">
-                <label for="searchBusiness" class="col-md-offset-left-2 col-md-4 control-label">
-                    <font size="3">{{"business.BUSINESS_NAME" | translate}}:</font>
-                </label>
-                <div class="col-md-4">
+    <div class="container">
+        <form class="form-horizontal businessSearchForm" autocomplete="off">
+            <fieldset>
+                <div class="col-md-2"></div>
+                <div class="form-group label-floating is-empty col-md-7">
+                    <label for="nameId" class="control-label">{{"business.BUSINESS_NAME" | translate}}</label>
                     <input type="text" class="form-control" ng-model="searchBusiness" name="searchBox">
                 </div>
                 <div class="col-md-3">
                     <button type="submit" class="btn btn-raised btn-primary" ng-click="search(searchBusiness)">{{"business.SEARCH" | translate}}</button>
                 </div>
-            </div>
-            <br/><br/>
-        </fieldset>
-    </form>
+            </fieldset>
+        </form>
+    </div>
 </div>

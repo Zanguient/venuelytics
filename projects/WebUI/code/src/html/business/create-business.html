@@ -1,94 +1,46 @@
 <center>
     <h1>{{"business.CLAIM_BUSINESS" | translate}}</h1>
 </center>
-<div class="card-block" ng-cloak>
+<div class="card-block container" ng-cloak>
     <!-- <div class="tab-content"> -->
     <form id="myForm" name="myForm" novalidate parsley-validate validate-form="">
         <h4 id="businessMessage" ng-cloak>{{"business.FREE_TRIAL" | translate}}</h4>
         <fieldset>
-            <div class="form-group is-empty required">
-                <label for="businessName" class="col-md-2 control-label" ng-cloak><font
-                    size="3">{{"business.BUSINESS_NAME" | translate}}:</font></label>
-
-                <div class="col-md-10">
-                    <input type="text" id="ms-form-pass" class="form-control" name="businessName"
-                        ng-model="newUser.businessName" required="">
-                </div>
+            <div class="form-group label-floating is-empty">
+                <label for="businessName" class="control-label">{{"business.BUSINESS_NAME" | translate}}</label>
+                <input type="text" id="ms-form-pass" class="form-control" name="businessName" ng-model="newUser.businessName" required="">
             </div>
-
-            <div class="form-group is-empty required">
-                <label for="address" class="col-md-2 control-label" ng-cloak><font
-                    size="3">{{"business.ADDRESS" | translate}}:</font></label>
-
-                <div class="col-md-10">
-                    <input type="text" class="form-control"
-                        ng-model="newUser.address" required="" name="address"> 
-                </div>
+            <div class="form-group label-floating is-empty">
+                <label for="address" class="control-label">{{"business.ADDRESS" | translate}}</label>
+                <input type="text" class="form-control" ng-model="newUser.address" required="" name="address"> 
             </div>
-
-
-            <div class="form-group is-empty required">
-                <label for="city" class="col-md-2 control-label" ng-cloak><font
-                    size="3">{{"business.CITY" | translate}}:</font></label>
-
-                <div class="col-md-10">
-                    <input type="text" id="ms-form-pass" class="form-control"
-                        ng-model="newUser.city" required="" name="city">
-                </div>
+            <div class="form-group label-floating is-empty">
+                <label for="city" class="control-label">{{"business.CITY" | translate}}</label>
+                <input type="text" id="ms-form-pass" class="form-control" ng-model="newUser.city" required="" name="city">
             </div>
-
-            <div class="form-group is-empty required">
-                <label for="searchBusiness" class="col-md-2 control-label" ng-cloak><font
-                    size="3">{{"business.STATE" | translate}}:</font></label>
-
-                <div class="col-md-10">
-                    <select class="btn  dropdown-toggle form-control" required=""
-                        ng-model="newUser.state" ng-options="c.city as c.city for c in states">
-                    </select>
-                </div>
+            <div class="form-group label-floating is-empty">
+                <label for="searchBusiness" class="control-label">{{"business.STATE" | translate}}</label>
+                <select class="btn  dropdown-toggle form-control" required="" ng-model="newUser.state" ng-options="c.city as c.city for c in states">
+                </select>
             </div>
-
-            <div class="form-group is-empty required">
-                <label for="searchBusiness" class="col-md-2 control-label" ng-cloak><font
-                    size="3">{{"business.CATEGORY" | translate}}:</font></label>
-
-                <div class="col-md-10">
-                    <select class="btn  dropdown-toggle form-control" required=""
-                        ng-model="newUser.category" ng-options="c.category as c.category for c in listOfCategory">
-                    </select>
-                </div>
+            <div class="form-group label-floating is-empty">
+                <label for="category" class="control-label">{{"business.CATEGORY" | translate}}</label>
+                <select class="btn  dropdown-toggle form-control" required="" ng-model="newUser.category" ng-options="c.category as c.category for c in listOfCategory">
+                </select>
             </div>
-
-            <div class="form-group is-empty required">
-                <label for="searchBusiness" class="col-md-2 control-label" ng-cloak><font
-                    size="3">{{"business.ROLE" | translate}}:</font></label>
-
-                <div class="col-md-10">
-                    <select class="btn  dropdown-toggle form-control" required=""
-                        ng-model="newUser.role" ng-options="r.role as r.role for r in listOfRoles">
-                    </select>
-                </div>
+            <div class="form-group label-floating is-empty">
+                <label for="businessRole" class="control-label">{{"business.ROLE" | translate}}</label>
+                <select class="btn  dropdown-toggle form-control" required="" ng-model="newUser.role" ng-options="r.role as r.role for r in listOfRoles">
+                </select>
             </div>
-
-            <div class="form-group is-empty required">
-                <label for="email" class="col-md-2 control-label" ng-cloak><font
-                    size="3">{{"business.EMAIL" | translate}}:</font></label>
-
-                <div class="col-md-10">
-                    <input type="email"  ng-model="newUser.email" name="email" class="form-control" required="" data-parsley-trigger="change"> 
-                     
-                </div>
+            <div class="form-group label-floating is-empty">
+                <label for="email" class="control-label">{{"business.EMAIL" | translate}}</label>
+                <input type="email"  ng-model="newUser.email" name="email" class="form-control" required="" data-parsley-trigger="change"> 
             </div>
-            <div class="form-group is-empty">
-                <label for="phone" class="col-md-2 control-label"><font
-                    size="3">{{"business.PHONE" | translate}}:</font></label>
-
-                <div class="col-md-10">
-                    <input type="text"  ng-model="newUser.phone" name="phone" class="form-control"> 
-                     
-                </div>
+            <div class="form-group label-floating is-empty">
+                <label for="phoneId" class="control-label">{{"business.PHONE" | translate}}</label>
+                <input type="text" id="phoneId" class="form-control" masked="" data-inputmask="'mask': '(999) 999-9999'" name="phone" ng-model="newUser.phone" required="required" data-parsley-trigger="change">
             </div>
-
         </fieldset>
         <center>
             <div class="form-group">

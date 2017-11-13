@@ -30,7 +30,6 @@
 
                         </div>
                     </div>
-                    
                     <div class="item">
                         <img src="<%= assets %>/img/2.jpg" alt="realTime-image" class="carouselImage">
                         <div class="custom-carousel backColor">
@@ -50,9 +49,7 @@
                                 translate">Monetize WiFi, In-Venue Ordering, Skip the Line...</h4></p>
                               <ng-include src="'home-apps-image.html'" ></ng-include>
                         </div>
-
                     </div>
-
                     <div class="item">
                         <img ng-src="<%= assets %>/img/screen4.jpg" alt="vipPersonally-image" class="carouselImage">
                         <div class="custom-carousel backColor">
@@ -62,7 +59,6 @@
                                 translate">Interact with Them Consistently and Reward Them Often</h4></p>
                               <ng-include src="'home-apps-image.html'"></ng-include>
                         </div>
-
                     </div>
                     <div class="item">
                         <img ng-src="<%= assets %>/img/5-1.jpg" alt="improvePrductivity-image" class="carouselImage">
@@ -73,7 +69,6 @@
                                 translate">...for Casinos, Clubs, Bars, Restaurants, Golf Courses, Stadiums...</h4></p>
                               <ng-include src="'home-apps-image.html'" ></ng-include>
                         </div>
-
                     </div>
                     <div class="item">
                         <img ng-src="<%= assets %>/img/6(1).jpg" alt="realTimeMobile-image" class="carouselImage">
@@ -84,7 +79,6 @@
                                 translate">Instant WIFI Enabled Reward Delivery, Tracking and Visibility</h4></p>
                               <ng-include src="'home-apps-image.html'" ></ng-include>
                         </div>
-
                     </div>
                     <div class="item">
                         <img src="<%= assets %>/img/7.jpg" alt="customerService-images" class="carouselImage">
@@ -111,40 +105,35 @@
         </div>
     </div>
     <div class="container mt-0">
-        <h1
-            class="text-center color-primary mb-2 wow fadeInDown animation-delay-3" ng-bind="'home.WELCOME_HEADING_1'
+        <h1 class="text-center color-primary mb-2 wow fadeInDown animation-delay-3" ng-bind="'home.WELCOME_HEADING_1'
             | translate">Welcome to VenueLytics!</h1>
         <h3 class="text-center mb-6 wow fadeInDown animation-delay-4" ng-bind="'home.WELCOME_HEADING_2'| translate">Real-Time Venue Experience Platform</h3>
-        <p
-            class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4" ng-bind="'home.WELCOME_DESCRIPTION' | translate">VenueLytics empowers businesses, in the entertainment, hospitality and service industries, to engage their customers in real-time and deliver Table &amp; Bottle Service Reservations, Food &amp; Drink Ordering, Private Event Bookings, Events Booking, 360° degree view of the venue, Guest Lists, Campaigns, Loyalty Rewards &amp; other premium services across Omni-Channel &amp; WiFI. VenueLytics provides a patent-pending deep learning technology for venues to get real-time insights &amp; predictive recommendations.</p>
+        <p class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4" ng-bind="'home.WELCOME_DESCRIPTION' | translate">VenueLytics empowers businesses, in the entertainment, hospitality and service industries, to engage their customers in real-time and deliver Table &amp; Bottle Service Reservations, Food &amp; Drink Ordering, Private Event Bookings, Events Booking, 360° degree view of the venue, Guest Lists, Campaigns, Loyalty Rewards &amp; other premium services across Omni-Channel &amp; WiFI. VenueLytics provides a patent-pending deep learning technology for venues to get real-time insights &amp; predictive recommendations.</p>
     </div>
 </div>
 <div class="wrap wrap-mountain">
-<div class="container mt-4" ng-cloak>
-    <h2
-        class="text-center color-primary mb-2 wow fadeInDown animation-delay-3" ng-bind="'home.KNOW_OUR_FEATURES'
-        | translate">VenueLytics Breakthrough Solutions</h2>
-    <!-- <p
-        class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4"
-        ng-show="false">
-        Lorem ipsum dolor sit amet, <span class="color-primary">consectetur
-            adipisicing</span> elit. Dolor alias provident excepturi eligendi, nam
-        numquam iusto eum illum, ea quisquam.
-    </p> -->
-    <div
-        class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
-        <div class="text-center card-block">
-            <a href="breakthrough/{{feature.link}}">
-            <img ng-src="{{feature.image}}" alt="feature-image" class="ms-icon ms-icon-xxlg ms-icon-circle imgpointer"></img></a>
-            <a href="breakthrough/{{feature.link}}" class="{{feature.color}} imgpointer"><h4 ng-bind="feature.title | translate"></h4></a>
-            <p class="desColor" ng-bind="feature.description | translate"></p>
+    <div class="container mt-4" ng-cloak>
+        <h2 class="text-center color-primary mb-2 wow fadeInDown animation-delay-3" ng-bind="'home.KNOW_OUR_FEATURES'
+            | translate">VenueLytics Breakthrough Solutions</h2>
+        <!-- <p
+            class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4"
+            ng-show="false">
+            Lorem ipsum dolor sit amet, <span class="color-primary">consectetur
+                adipisicing</span> elit. Dolor alias provident excepturi eligendi, nam
+            numquam iusto eum illum, ea quisquam.
+        </p> -->
+        <div class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4 features" ng-repeat="feature in venueLyticsFeatures">
+            <div class="text-center form-group card-block">
+                <a href="breakthrough/{{feature.link}}">
+                <img ng-src="{{feature.image}}" alt="feature-image" class="ms-icon ms-icon-xxlg ms-icon-circle imgpointer"></a>
+                <a href="breakthrough/{{feature.link}}" class="{{feature.color}} imgpointer"><h4 ng-bind="feature.title | translate"></h4></a>
+                <label ng-bind="feature.description | translate"></label>
+            </div>
         </div>
     </div>
 </div>
-</div>
 <!-- container -->
 <div class="container mt-4 turnkey" ng-cloak>
-    
     <div class="ms-hero-turnkey">
         <h2
         class="text-center text-light mb-6 wow fadeInDown animation-delay-3 ms-hero-text">
@@ -153,16 +142,13 @@
             <span ng-bind="'home.CUSTOM' | translate">Custom Integration</span>
         </h2>
     </div>
-
     <p class="text-center mb-6 wow fadeInDown animation-delay-3 text-description" ng-bind="'home.VENUE_DESCRIPTION'
         | translate">VenueLytics real-time platform integrates with Venue's Website, Social Media Sites, Mobile Apps, ItzFun Consumer App and 3rd party Apps. Our white-label consumer App 'ItzFun!,' provides access to an extensive level of information about the most important entertainment &amp; hospitality venues around the world. With ItzFun!, consumers can know, and see, what’s fun &amp; happening, right now, at the very moment of decision.</p>
-
     <div class="row">
         <div class="col-md-6 col-md-push-3 mb-4  center-block">
             <img src="<%= assets %>/img/demo/devices.png" alt="device-image"
                 class="img-responsive center-block wow zoomIn animation-delay-8 ">
         </div>
-      
     </div>
 </div>
 
@@ -178,7 +164,6 @@
             </div>
         </div>
         <div class="text-center">
-
         </div>
     </div>
 </div>

@@ -66,7 +66,7 @@ app
                  {'title': 'FEATURE_GUEST_LIST', 'description':'FEATURE_GUEST_LIST_DESC', 'image': 'assets/img/ic_guestlist.png', 'color': 'color-success','link':'Guest-List-Lost'},
                  {'title': 'FEATURE_ORDER_PAY', 'description':'FEATURE_ORDER_PAY_DESC', 'image': 'assets/img/ic_payments.png', 'color': 'color-danger'},
                  {'title': 'FEATURE_BUSINESS', 'description':'FEATURE_BUSINESS_DESC', 'image': 'assets/img/ic_analytics.png', 'color': 'color-info','link':'Business-Analytics-Dashboard'},
-                 {'title': 'FEATURE_WIFI', 'description':'FEATURE_WIFI_DESC', 'image': 'assets/img/ic_wifi.png', 'color': 'color-warning','link':'WIFI-White-Label-Solution'},
+                 {'title': 'FEATURE_WIFI', 'description':'FEATURE_WIFI_DESC', 'image': 'assets/img/ic_wifi.png', 'color': 'color-warning'}, //'link':'WIFI-White-Label-Solution'
                  {'title': 'FEATURE_PRIVATE_EVENT',
                             'description':'FEATURE_PRIVATE_EVENT_DESC', 'image': 'assets/img/ic_privatevent.png', 'color': 'color-success','link':'Break-Private-Events'},
                  {'title': 'FEATURE_LOYALTY', 'description':'FEATURE_LOYALTY_DESC', 'image': 'assets/img/ic_campaign.png', 'color': 'color-danger','link':'Campaign-Loyalty-Management'}],
