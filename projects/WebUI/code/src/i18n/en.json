@@ -581,6 +581,7 @@
 		"TABLE_SERVICE":"Table Service",
 		"EVENT_LIST": "Event List",
 		"TABLE_SERVICE_TIMEOUT":"Hurry! We can hold your selected table only for the next 5 mins",
+		"TABLE_SERVICE-THANKS":"Reservation and Thanks giving dinner buffet - $15 Per Person.",
 		"TABLE_CONFIRM_DESC":"",
 		"TABLE_CONFIRM_RESERVATION":"CONFIRM RESERVATION",
 		"SELECT_TIME":"Select Time:",
