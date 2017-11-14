@@ -215,7 +215,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
            // self.tabBachelor = self.tabParams === 'bachelor-party' ? 'bachelor-party' : '';
             if (self.bachelorFlag) {
-                addTab('bottleTab','bottle', 'assets/img/ic_bottle.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party/bachelor-party.html',!self.bachelorFlag, APP_COLORS.bottleBtn, APP_COLORS.btnColor, 'bachelorParty');
+                addTab('bottleTab','bottle', 'assets/img/trophy.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party/bachelor-party.html',!self.bachelorFlag, APP_COLORS.bottleBtn, APP_COLORS.btnColor, 'bachelorParty');
             }
 
            // self.tabParty = self.tabParams === 'party-packages' ? 'party-packages' : '';

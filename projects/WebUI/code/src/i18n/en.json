@@ -429,6 +429,7 @@
 		"VENUELYTICS_INC":"VenueLytics Inc - ItzFun Consumer & VenueLytics Business App Version v1.8(Build 18027)"
 	},
 	"reservation": {
+		"BACHELOR":"Bachelor Party",
 		"TABLE_TIME":"Time",
 		"TABLE_GUEST":"Guests",
 		"TABLE_SERVICE_CONFIRMATION":"Yes, I want to receive email updates from this restaurant.",

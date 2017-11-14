@@ -116,6 +116,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'party-service/party-confirm.html',
             controller: 'PartyConfirmController'
         })
+        .when('/confirmBachelorParty/:cityName/:venueid', {
+            templateUrl: 'bachelor-party/bachelor-confirm.html',
+            controller: 'bachelorConfirmController'
+        })
         .when('/confirmTableService/:cityName/:venueid', {
             templateUrl: 'table-service/tableService-form.html',
             controller: 'TableServiceController'
@@ -152,6 +156,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'party-service/party-payment.html',
             controller:'PartyConfirmController'
         })
+        .when('/:cityName/bachelorPayment/:venueid', {
+            templateUrl: 'bachelor-party/bachelor-payment.html',
+            controller:'bachelorConfirmController'
+        })
         .when('/confirmFoodService/:cityName/:venueid', {
             templateUrl: 'food-service/food-confirmation.html',
             controller:'FoodConfirmController'
@@ -167,6 +175,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/:cityName/partySuccess/:venueid', {
             templateUrl: 'party-service/party-payment-success.html',
             controller:'PartyConfirmController'
+        })
+        .when('/:cityName/bachelorSuccess/:venueid', {
+            templateUrl: 'bachelor-party/bachelor-payment-success.html',
+            controller:'bachelorConfirmController'
         })
         .when('/:cityName/foodPayment/:venueid', {
             templateUrl: 'food-service/food-payment.html',
@@ -192,6 +204,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/:cityName/party-success/:venueid', {
             templateUrl: 'party-service/party-success.html',
             controller:'PartyConfirmController'
+        })
+        .when('/:cityName/bachelor-success/:venueid', {
+            templateUrl: 'bachelor-party/bachelor-success.html',
+            controller:'bachelorConfirmController'
         })
         .when('/:cityName/food-success/:venueid', {
             templateUrl: 'food-service/food-success.html',
