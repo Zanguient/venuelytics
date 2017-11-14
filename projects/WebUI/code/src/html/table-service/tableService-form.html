@@ -25,7 +25,7 @@
             </div>
             <br><br>
             <h2>{{'reservation.TABLE_SERVICE_TIMEOUT' | translate}}</h2>
-            <h4>{{'reservation.TABLE_SERVICE-THANKS' | translate}}</h4>
+            <h4 ng-show="venueid==70008">{{'reservation.TABLE_SERVICE-THANKS' | translate}}</h4>
             <div class="col-md-12 form-group label-floating is-empty floatingLabel" style="margin-left: auto;">
                 <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
                 <input type="text" id="tableServiceFirstName" name="tableServiceFirstName" class="form-control fontBold" ng-model="tableService.firstName" required="" data-parsley-trigger="change">
