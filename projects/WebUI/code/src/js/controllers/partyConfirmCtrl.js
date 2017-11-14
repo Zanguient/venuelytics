@@ -119,6 +119,10 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
                 $scope.paypal = true;
                 $scope.cardPayment = false;
             };
+            self.payAtVenue = function(value){
+                $scope.paypal = false;
+                $scope.cardPayment = false;
+            }
 
             self.backToParty = function() {
               $rootScope.serviceName = 'PartyPackages';

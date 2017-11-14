@@ -54,7 +54,7 @@
                             <font size="3">{{"reservation.CREDIT_CARD"  | translate}}</font>
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;
                         <label>
-                            <input type="radio" name="type" ng-model="phoneInVenue" value="Phone/In Venue"/>&nbsp;&nbsp;
+                            <input type="radio" ng-change="payAtVenue(test)" name="type" ng-model="test" value="Phone/In Venue"/>&nbsp;&nbsp;
                             <font size="3">{{"reservation.PAY_AT_VENUE"  | translate}}</font>
                         </label>
                     </td>
