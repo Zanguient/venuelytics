@@ -1,13 +1,13 @@
 <div ng-controller="PartyPackageController">
 <!-- <div class="col-lg-6"> -->
 <div class="showInWeb">
- <legend class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</legend>
+ <h4 class="fontRegular fontBold ">{{'bottleServiceTab.DESC' | translate}}</h4>
     <div class="form-group ">
         <p id="banquetHallData" class="fontRegular">{{partyDescription}}</p>
     </div>
 </div>
 <div class="showInMobile">
- <legend class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</legend>
+ <h4 class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</h4>
     <div class="form-group " ng-if="!desc">
         <p id="banquetHallData" class="fontRegular">{{partyDescription | limitTo: 160}}{{partyDescription.length > 160 ? '...' :''}}</p>
         <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyHallDescription(partyDescription)" ng-if="partyDescription.length > 160">Read More</a>
@@ -38,7 +38,7 @@
             </table> 
         </center>
     </div>
-<form class="form-horizontal" name="privateForm" parsley-validate validate-form="" ng-cloak>
+<form class="form-horizontal" name="privateForm" autocomplete="off" parsley-validate validate-form="" ng-cloak>
     <fieldset class="col-md-10 col-md-offset-right-2">
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyDateIsFocused}}" style="margin-left: auto;">
         <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
@@ -88,7 +88,7 @@
         
         <div class="col-md-12 form-group label-floating is-empty floatingLabel {{partyFocus}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{"reservation.EVENT_TYPE"  | translate}}</label>
-            <select class="form-control fontBold" required=""
+            <select class="form-control fontBold {{blackTheme}}" required=""
                 ng-model="party.partyEventType" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>
@@ -109,7 +109,7 @@
         <div class="col-md-12">
             <div>
                 <label class="check-box fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
-                    <input type="checkbox" ng-model="party.agree" required>{{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
+                    <input type="checkbox" ng-model="party.agree" required> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
                 </label>
             </div>
         </div>

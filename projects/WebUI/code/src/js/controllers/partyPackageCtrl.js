@@ -35,6 +35,9 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 self.tabParam = $routeParams.tabParam;
                 self.getMenus();
                 self.getEventType();
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
             };
 
             self.$watch('party.orderDate', function() {
@@ -68,6 +71,11 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 self.partyFocus = '';
                 $rootScope.serviceName = '';
                 self.party.orderDate = moment().format('YYYY-MM-DD');
+            };
+
+            self.getSelectedTab = function() {
+                $("em").hide();
+                $("#partyPackage").show();
             };
 
             self.getEventType = function() {
@@ -125,14 +133,12 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
 
             self.confirmPartyPackage = function(selectedParty) {
                 $rootScope.serviceTabClear = true;
-                DataShare.selectedVenuePrice = selectedParty.price;
                 DataShare.partyFocus = 'is-focused';
                 var date = new Date(self.party.orderDate);
                 var newDate = date.toISOString();
                 var parsedend = moment(newDate).format("MM-DD-YYYY");
                 date = new Date(moment(parsedend,'MM-DD-YYYY').format());
                 var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
-                $log.info("Party price:", DataShare.selectedVenuePrice);
                 var fullName = self.party.userFirstName + " " + self.party.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.party.email + ':' + self.party.mobile);
                 DataShare.partyServiceData = self.party;
