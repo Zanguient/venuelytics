@@ -258,7 +258,7 @@ app
     "APPLE_STORE_ITZFUN"     :  "//itunes.apple.com/us/app/itzfun/id1035171101?mt=8",
     "GOOGLE_PLAY_VENUELYTICS":  "//play.google.com/store/apps/details?id=com.itzfun.biz&hl=en",
     "GOOGLE_PLAY_ITZFUN"     :  "//play.google.com/store/apps/details?id=com.itzfun&hl=en",
-    "VIDEO_PLAY"             :  "//www.youtube.com/watch?v=ruy7kCuPpV4"
+    "VIDEO_PLAY"             :  "/www.youtube.com/watch?v=HZngJ7YtOuU"
   })
 
   .constant('PRICING_APP', {
