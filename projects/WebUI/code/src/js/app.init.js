@@ -225,10 +225,6 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'guest-list/guest-success.html',
             controller:'GuestConfirmController'
         })
-        .when('/cities/:cityName/:venueid/new/new/:embed', {
-            templateUrl: 'business/iframe.html',
-            controller:'TableServiceController'
-        })
         .otherwise('/home');
 
     $locationProvider.html5Mode({

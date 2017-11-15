@@ -31,7 +31,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         if($rootScope.serviceName === 'GuestList') {
             DataShare.guestListData = '';
         }
-        if(self.embeddedService === 'new'){
+        if(self.embeddedService === 'embed'){
             $rootScope.embeddedFlag = true;
         }
         if ((self.venueid === '70008') || (self.venueid === '170637')) {
@@ -86,7 +86,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.featuredEnable = response.data["Advance.featured"];
                 self.eventsEnable = response.data["venueEvents"];
                 $rootScope.blackTheme = ((response.data["ui.service.theme"] === '') || (response.data["ui.service.theme"] === undefined))  ? '' : response.data["ui.service.theme"];
-                if(self.embeddedService === 'new') {
+                if(self.embeddedService === 'embed') {
                     $rootScope.venueHeader = response.data["ui.custom.header"];
                     $rootScope.venueFooter = response.data["ui.custom.footer"];
                     $rootScope.embeddedFlag = true;

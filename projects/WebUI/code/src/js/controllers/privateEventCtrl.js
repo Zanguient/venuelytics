@@ -10,6 +10,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             var self = $scope;
             self.privateDateIsFocused = 'is-focused';
             self.init = function() {
+                self.getReservationTime = APP_ARRAYS.time;
                 self.venudetails = DataShare.venueFullDetails;
                 ngMeta.setTag('description', self.venudetails.description + " Private Event");
                 $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Private Event";
@@ -43,17 +44,29 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 }
             });
             self.getServiceTime = function() {
+                self.reserveStartTimes = [];
+                self.reserveEndTimes = [];
                 AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
                     self.reservationTime = response.data;
-                    angular.forEach(self.reservationTime, function(value, key) {
-                        var H = + value.startTime.substr(0, 2);
-                        var h = (H % 12) || 12;
-                        var ampm = H < 12 ? " AM" : " PM";
-                        value.sTime = h + value.startTime.substr(2, 3) + ampm;
-                        H = + value.endTime.substr(0, 2);
-                        h = (H % 12) || 12;
-                        ampm = H < 12 ? " AM" : " PM";
-                        value.eTime = h + value.endTime.substr(2, 3) + ampm;
+                    angular.forEach(self.reservationTime, function(value1, key1) {
+                        $scope.venueOpenTime = new Date(moment($scope.startDate + ' ' + value1.startTime,'MM-DD-YYYY h:mm').format());
+                        value1.startTime = moment($scope.venueOpenTime).format("HH:mm");
+                        angular.forEach(self.getReservationTime, function(value, key) {
+                            if(value.key >= value1.startTime && value.key < value1.lastCallTime){
+                                self.reserveStartTimes.push(value);
+                            }
+                            if(value.key > value1.startTime && value.key <= value1.lastCallTime){
+                                self.reserveEndTimes.push(value);
+                            }
+                            if(value1.lastCallTime === '' || value1.lastCallTime === null) {
+                                if(value.key >= value1.startTime && value.key < value1.endTime){
+                                    self.reserveStartTimes.push(value);
+                                }
+                                if(value.key > value1.startTime && value.key <= value1.endTime){
+                                    self.reserveEndTimes.push(value);
+                                }
+                            }                            
+                        });
                     });
                 });
             };
