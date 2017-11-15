@@ -186,7 +186,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     function optimizeTabDisplay(tabArray) {
         // get 3 tabs at at a time and check if they have ateast one service enabled.
         // If not remove that row
-        var removeRows = [];        
+        var removeRows = [];      
+        
         for(var i = 0 ; i < tabArray.length; i=i+3){
             var disabled = tabArray[i].disabled;
             if (tabArray.length > i+1) {
@@ -197,7 +198,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             }
             if (disabled) {
                 removeRows.push(i);
-            }
+            } 
         }
 
         for (var j = removeRows.length-1; j >=0; j--) {
@@ -206,6 +207,13 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.removeAllTabs = true;
             }
         }
+
+        for (var z = 0; z < tabArray.length; z++) {
+            if (!tabArray[z].disabled) {
+                return  tabArray[z].buttonId;
+            }
+        }
+        return null;
     }
 
     function addTabs() {
@@ -213,14 +221,14 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             //self.tabBottle = self.tabParams === 'bottle-service' ? 'bottle-service' : '';
             addTab('bottleTab','bottle', 'assets/img/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, APP_COLORS.bottleBtn, APP_COLORS.btnColor, 'bottleService');
 
-           // self.tabBachelor = self.tabParams === 'bachelor-party' ? 'bachelor-party' : '';
+          // self.tabBachelor = self.tabParams === 'bachelor-party' ? 'bachelor-party' : '';
             if (self.bachelorFlag) {
-                addTab('bottleTab','bottle', 'assets/img/trophy.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party/bachelor-party.html',!self.bachelorFlag, APP_COLORS.bottleBtn, APP_COLORS.btnColor, 'bachelorParty');
+                addTab('bachelorTab','bachelor', 'assets/img/trophy.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party/bachelor-party.html',!self.bachelorFlag, APP_COLORS.bachelorBtn, APP_COLORS.btnColor, 'bachelorParty');
             }
 
            // self.tabParty = self.tabParams === 'party-packages' ? 'party-packages' : '';
             if (self.partyFlag) {
-                addTab('partyEventTab','party', 'assets/img/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html',!self.partyFlag, APP_COLORS.privateBtn, APP_COLORS.btnColor,'partyPackage');
+                addTab('partyEventTab','party', 'assets/img/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html',!self.partyFlag, APP_COLORS.partyBtn, APP_COLORS.btnColor,'partyPackage');
             }
 
            // self.tabPrivate = self.tabParams === 'private-events' ? 'private-events' : '';
@@ -242,11 +250,13 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
            // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
             addTab('eventListTab','eventlist', 'assets/img/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, APP_COLORS.tableBtn, APP_COLORS.btnColor, 'eventList');
 
-            optimizeTabDisplay( self.displayTabs);  
-            setTimeout(function() {
-                $("em").hide();
-                $("#bottleService").show(); 
-            }, 500);
+            var firstEnabledTabBtnId = optimizeTabDisplay(self.displayTabs);
+            if (firstEnabledTabBtnId !== null) {  
+                setTimeout(function() {
+                    $("em").hide();
+                    $("#"+firstEnabledTabBtnId).click(); 
+                }, 500);
+            }
         }
 
     }

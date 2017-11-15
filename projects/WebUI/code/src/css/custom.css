@@ -25,11 +25,13 @@
   background-color: #000000 !important;
 }
 .blackTheme .btn:disabled {
-  background-color: #3a943a !important;
+  /* background-color: #3a943a !important; */
+  opacity: .35 !important;
   color: #fdfdfd !important;
 }
 .blackTheme .btn[disabled][disabled] {
-  background-color: #3a943a !important;
+ /*  background-color: #3a943a !important; */
+  opacity: .35 !important;
   color: #fdfdfd !important;
 }
 .blackTheme .panel {
