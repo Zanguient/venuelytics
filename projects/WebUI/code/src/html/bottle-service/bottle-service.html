@@ -231,7 +231,7 @@
             <div>
                 <label class="fontRegular table-font" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="bottle.agree" required/>
-                        {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
+                        {{"reservation.AGREE" | translate}} {{venueName}}'s {{"reservation.AGREE_1" | translate}}
                 </label>
             </div>
         </div>
@@ -273,22 +273,22 @@
 <div class="col-md-12" ng-if="bottleVIPPolicy">
     <center>
         <h3 class="color-success fontLight">{{'reservation.VIP_SERVICE_POLICY' | translate}}</h3>
-        <p class="fontRegular">{{bottleVIPPolicy}}</p>
     </center>
+    <p class="fontRegular">{{bottleVIPPolicy}}</p>
 </div>
 
 <div class="col-md-12" ng-if="bottleMinimumRequirement">
     <center>
         <h3 class="color-success fontLight">{{"reservation.MIN_REQ" | translate}}</h3>
-        <p class="fontRegular">{{bottleMinimumRequirement}}</p>
     </center>
+     <p class="fontRegular">{{bottleMinimumRequirement}}</p>
 </div>
 
 <div class="col-md-12" ng-if="dressCode">
     <center>
         <h3 class="color-success fontLight">{{'reservation.DRESS_CODE' | translate}}</h3>
-        <p class="fontRegular">{{dressCode}}</p>
     </center>
+    <p class="fontRegular">{{dressCode}}</p>
 </div>
 
 
