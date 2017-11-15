@@ -71,6 +71,7 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
             };
 
             self.glistSave = function(guest) {
+                guest.guestEvent = guest.guestEvent === null ? '' : guest.guestEvent === undefined ? '': guest.guestEvent;
                 var guestTotal = parseInt(guest.guestMen) + parseInt(guest.guestWomen);
                 DataShare.tab = 'G';
                 DataShare.guestFocus = 'is-focused';

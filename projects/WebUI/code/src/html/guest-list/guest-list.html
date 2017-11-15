@@ -3,7 +3,7 @@
         <fieldset class="col-md-10 col-md-offset-right-2">
             <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestDateIsFocused}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
-                <input type="text" class="form-control fontBold" id="requestedDate" ng-model="guest.requestedDate">
+                <input type="text" class="form-control fontBold" id="requestedDate" ng-model="guest.requestedDate" required>
             </div>
             <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestFocus}}" style="margin-left: auto;">
             <label class="control-label" for="focusedInput1">{{'reservation.TOTAL_GUEST' | translate}}</label>
@@ -46,7 +46,7 @@
             </div>
             <div class="col-md-12 form-group label-floating is-empty floatingLabel {{guestFocus}}" style="margin-left: auto;">
                 <label class="control-label" for="focusedInput1">{{"reservation.EVENT_TYPE"  | translate}}</label>
-                <select class="form-control fontBold {{blackTheme}}" required="" ng-model="guest.guestEvent" ng-options="t.name for t in eventTypes">
+                <select class="form-control fontBold {{blackTheme}}" ng-model="guest.guestEvent" ng-options="t.name for t in eventTypes">
                     <option value=""></option>
                 </select>
             </div>            
