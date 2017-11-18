@@ -78,22 +78,20 @@ app.controller('GuestListController', ['$log', '$scope', '$http', '$location', '
                 $rootScope.serviceTabClear = true;
                 var name = guest.guestFirstName + " " + guest.guestLastName;
                 var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
-                var date = new Date(self.guest.requestedDate);
-                var newDate = date.toISOString();
-                var parsedend = moment(newDate).format("MM-DD-YYYY");
-                date = new Date(moment(parsedend,'MM-DD-YYYY').format());
-                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
+               
+                var dateValue = moment(self.guest.requestedDate, 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss");
+                
                 var object = {
                      "venueNumber" : self.venueid,
-                     "email" : guest.guestEmailId,
-                     "phone" : guest.guestMobileNumber,
-                     "zip" : guest.guestZip,
-                     "eventDay" : dateValue,
+                     "email" :      guest.guestEmailId,
+                     "phone" :      guest.guestMobileNumber,
+                     "zip" :        guest.guestZip,
+                     "eventDay" :   dateValue,
                      "totalCount" : guest.totalGuest,
-                     "maleCount" : guest.guestMen,
+                     "maleCount" :  guest.guestMen,
                      "femaleCount" : guest.guestWomen,
                      "visitorName" : name,
-                     "eventName" : guest.guestEvent.name
+                     "eventName" :  guest.guestEvent.name
                 };
                 DataShare.guestListData = self.guest;
                 DataShare.authBase64Str = authBase64Str;
