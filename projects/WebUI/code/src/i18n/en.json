@@ -503,6 +503,7 @@
 		"BRAND":"Brand",
 		"QUANTITY":"Quantity",
 		"PRICE":"Price",
+		"TOTAL_PRICE": "Total Price",
 		"GUEST_SUCCESS":"Guest List details have been sent successfully.",
 		"ADD":"Add",
 		"TABLE_NAME":"Table Name(s)",

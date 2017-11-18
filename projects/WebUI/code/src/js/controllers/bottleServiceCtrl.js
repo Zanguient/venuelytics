@@ -18,6 +18,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             self.noTableSelected = false;
             self.moreCapacity = false;
             self.sum = 0;
+            self.price = 0;
             self.bottleDateIsFocused = 'is-focused';
             self.init = function() {
                 //$("div.form-group").add("style", "margin-left: auto");
@@ -29,6 +30,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
                     self.sum = DataShare.count;
+                    self.price = DataShare.price;
                 } else {
                     self.tabClear();
                 }
@@ -215,6 +217,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
                 if(!DataShare.count){
                     self.sum = 0;
+                    self.price = 0;
                     self.clearSum = true;
                   }
                 // Date in YYYYMMDD format
@@ -428,6 +431,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
             if(self.clearSum === true) {
                 self.clearSum = false;
                 self.sum = 0;
+                self.price = 0;
             }
 
             if(data.fillColor === APP_COLORS.red) {
@@ -444,6 +448,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     }
                     self.selectionTableItems.push(dataValueObj);
                     self.sum = dataValueObj.size + self.sum;
+                    self.price = dataValueObj.price + self.price;
                     DataShare.userselectedTables = self.selectionTableItems;
 
 
@@ -454,6 +459,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                             "productType": self.selectionTableItems[itemIndex].productType,
                             "name": self.selectionTableItems[itemIndex].name,
                             "size": self.selectionTableItems[itemIndex].size,
+                            "price" : self.selectionTableItems[itemIndex].price,
                             "imageUrls": self.selectionTableItems[itemIndex].imageUrls,
                             "description": self.selectionTableItems[itemIndex].description,
                             "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
@@ -464,6 +470,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     $('.modal-backdrop').remove();
                 } else if (data.fillColor === APP_COLORS.darkYellow) {
                     self.sum = self.sum - dataValueObj.size;
+                    self.price = self.price - dataValueObj.price;
                     data.fillColor = APP_COLORS.lightGreen;
                     data.strokeColor = APP_COLORS.darkGreen;
                     angular.forEach(self.tableSelection, function(key, value) {
@@ -492,6 +499,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 }
             });
             self.sum = self.sum - arrayObj.size;
+            self.price = self.price - arrayObj.price;
             table.splice(index, 1);
             self.selectionTableItems.splice(index, 1);
         };
@@ -500,18 +508,20 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 DataShare.focused = 'is-focused';
                 DataShare.editBottle = 'true';
                 $rootScope.serviceTabClear = true;
-                var date = new Date(self.bottle.requestedDate);
-                var newDate = date.toISOString();
-                var parsedend = moment(newDate).format("MM-DD-YYYY");
-                var dateFormat = new Date(moment(parsedend,'MM-DD-YYYY').format());
-                var dateValue = moment(dateFormat).format("YYYY-MM-DDTHH:mm:ss");
+                
+                var dateValue = self.bottle.requestedDate + 'T00:00:00';
+
                 DataShare.selectedDateForBottle = self.bottleServiceDate;
                 var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.bottle.email + ':' + self.bottle.mobile);
-                var sum = 0;
+                
+                self.sum = 0;
+                self.price = 0;
                 for (var i = 0; i < $scope.tableSelection.length; i++) {
-                  sum += $scope.tableSelection[i].size;
+                  self.sum += $scope.tableSelection[i].size;
+                  self.price += $scope.tableSelection[i].price;
                 }
+                
                 DataShare.bottleServiceData = self.bottle;
                 DataShare.bottleZip = self.bottle.bottleZipcode;
                 DataShare.authBase64Str = authBase64Str;
@@ -521,14 +531,15 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.noTableSelected = true;
                     return;
                 }
-                if (sum !== 0) {
-                  if(self.bottle.totalGuest > sum) {
+                if (self.sum !== 0) {
+                  if(self.bottle.totalGuest > self.sum) {
                       $('#moreTableModal').modal('show');
                       $('.modal-backdrop').remove();
                       return;
                   }
                 }
                 DataShare.count = self.sum;
+                DataShare.price = self.price;
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
                     "venueNumber": self.venueid,
@@ -542,12 +553,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     "budget": 0,
                     "serviceInstructions": self.bottle.instructions,
                     "status": "REQUEST",
-                    "serviceDetail": null,
                     "fulfillmentDate": dateValue,
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
-                    "deliveryAddress": null,
-                    "deliveryInstructions": null,
                     "order": {
                         "venueNumber": self.venueid,
                         "orderDate": dateValue,

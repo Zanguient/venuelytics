@@ -334,10 +334,6 @@
   font-stretch: normal;
 }
 
-.floatingLabel {
-  padding-left: 0px;
-}
-
 .fontBold {
   font-family: 'Source Sans Pro', 'sans-serif';
   font-weight: 700;
@@ -459,26 +455,8 @@ select {
    text-align: justify;
  }
 
-.table-map-info {
-  text-align: center;
-  margin-top: 0px;
-}
-
 .table-map-area {
   outline: red solid 2px;
-}
-
-.selected-table {
-  margin-top: 0px;
-}
-
-.table-map-color {
-  color: black;
-}
-
-.table-capacity {
-  margin-left: 15px;
-  color: black;
 }
 
 .table-carousel {
@@ -517,18 +495,6 @@ select {
   border: 1px solid #4CAF50;
   margin-bottom: 0px;
   margin-top: 0px;
-}
-
-.confirmationCenter {
-  width: 486px;
-}
-
-.bottleHeadername {
-  margin-right: 100px;
-}
-
-.bottleConfirmationTable {
-  width: 452px;
 }
 
 .search {

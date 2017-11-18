@@ -1,99 +1,104 @@
 <div class="container card {{blackTheme}}">
 	<center>
 		<h1 class="color-success fontRegular">{{'reservation.CONFIRM_DETAILS' | translate}}</h1>
-
-	<div class="form-group confirmationCenter">
-		<table class="table table-responsive table-no-border">
-        <tbody>
-            <tr>
-                <td><label><b> {{'bottleServiceTab.DATE' | translate}}</b></label> </td>
-                <td>{{userData.requestedDate}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.FIRST_NAME' | translate}} </b></label></td>
-                <td>{{userData.userFirstName}}</td>
-            </tr>
-            <tr>
-                <td> <label><b>{{'reservation.LAST_NAME' | translate}} </b></label></td>
-                <td>{{userData.userLastName}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
-                <td>{{userData.email}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.MOBILE' | translate}}</b></label> </td>
-                <td>{{userData.mobile}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
-                <td>{{userData.totalGuest}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.INSTRUCTIONS' | translate}}</b></label> </td>
-                <td>{{userData.instructions}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{"reservation.OCCASION"  | translate}}</b></label> </td>
-                <td>{{userData.bottleOccasion.name}}</td>
-            </tr>
-            <tr ng-hide="userData.host.name === '' || userData.host.name === undefined">
-                <td><label><b> {{"reservation.HOST"  | translate}}</b></label> </td>
-                <td>{{userData.host.name}}</td>
-            </tr>
-        </tbody>
-    </table>
-  </div>
-  <div class="form-group">
-      <h4 class="color-success bottleHeadername">{{"reservation.SELECT_TABLE"  | translate}}</h4>
-          <table class="table table-responsive table-no-border bottleConfirmationTable">
-              <thead>
-                <tr>
-                  <th>{{"reservation.TABLE_NAME"  | translate}}</th>
-                  <th>{{"reservation.CAPACITY"  | translate}}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="table in selectTables">
-                  <td>{{table.name}}</td>
-                  <td>{{(table == null || table.quantity == 0 || table.quantity == undefined) ? "-" : table.quantity}}</td>
-                </tr>
-              </tbody>
-          </table>
-  </div>
   </center>
-  <div class="form-group">
-      <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
-          <table class="table table-responsive table-no-border">
-              <thead>
-                <tr>
-                  <th>{{"reservation.BOTTLE"  | translate}}</th>
-                  <th>{{"reservation.BRAND"  | translate}}</th>
-                  <th>{{"reservation.QUANTITY"  | translate}}</th>
-                  <th>{{"reservation.PRICE"  | translate}}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="bottle in selectBottleOrders">
-                  <td><label>{{bottle.bottle}}</label></td>
-                  <td><label>{{bottle.brand}}</label></td>
-                  <td><label>{{bottle.quantity}}</label></td>
-                  <td>$<label>{{(bottle == null || bottle.price == 0 || bottle.price == undefined) ? "-" : bottle.price}}</label></td>
-                </tr>
-              </tbody>
-          </table>
+  <div class="col-sm-12 col-md-4 col-md-offset-4 col-md-offset-right-4">
+  	<div class="form-group">
+  		<table class="table table-responsive table-no-border">
+          <tbody>
+              <tr>
+                  <td><label><b> {{'bottleServiceTab.DATE' | translate}}</b></label> </td>
+                  <td>{{userData.requestedDate}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.FIRST_NAME' | translate}} </b></label></td>
+                  <td>{{userData.userFirstName}}</td>
+              </tr>
+              <tr>
+                  <td> <label><b>{{'reservation.LAST_NAME' | translate}} </b></label></td>
+                  <td>{{userData.userLastName}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
+                  <td>{{userData.email}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.MOBILE' | translate}}</b></label> </td>
+                  <td>{{userData.mobile}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
+                  <td>{{userData.totalGuest}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.INSTRUCTIONS' | translate}}</b></label> </td>
+                  <td>{{userData.instructions}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{"reservation.OCCASION"  | translate}}</b></label> </td>
+                  <td>{{userData.bottleOccasion.name}}</td>
+              </tr>
+              <tr ng-hide="userData.host.name === '' || userData.host.name === undefined">
+                  <td><label><b> {{"reservation.HOST"  | translate}}</b></label> </td>
+                  <td>{{userData.host.name}}</td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+ 
+    <div class="form-group">
+        <h4 class="color-success">{{"reservation.SELECT_TABLE"  | translate}}</h4>
+        <table class="table table-responsive table-no-border">
+            <thead>
+              <tr>
+                <th>{{"reservation.TABLE_NAME"  | translate}}</th>
+                <th>{{"reservation.CAPACITY"  | translate}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="table in selectTables">
+                <td>{{table.name}}</td>
+                <td>{{(table == null || table.quantity == 0 || table.quantity == undefined) ? "-" : table.quantity}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
   </div>
-	    <center>
-	        <div ng-if="enablePayment != 'Y'">
-	            <button type="submit" class="btn btn-raised btn-primary" ng-click="createBottleSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
-	            <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
-	        </div>
-          <div ng-if="enablePayment == 'Y'">
-              <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
-              <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
-          </div>
-	    </center>
-	</div>
+ 
+  <div class="col-sm-12 col-md-8 col-md-offset-2 col-md-offset-right-2">
+    <div class="form-group">
+      <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
+      <table class="table table-responsive table-no-border">
+          <thead>
+            <tr>
+              <th>{{"reservation.BOTTLE"  | translate}}</th>
+              <th>{{"reservation.BRAND"  | translate}}</th>
+              <th>{{"reservation.QUANTITY"  | translate}}</th>
+              <th>{{"reservation.PRICE"  | translate}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="bottle in selectBottleOrders">
+              <td><label>{{bottle.bottle}}</label></td>
+              <td><label>{{bottle.brand}}</label></td>
+              <td><label>{{bottle.quantity}}</label></td>
+              <td>$<label>{{(bottle == null || bottle.price == 0 || bottle.price == undefined) ? "-" : bottle.price}}</label></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <center>
+      <div ng-if="enablePayment != 'Y'">
+          <button type="submit" class="btn btn-raised btn-primary" ng-click="createBottleSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+          <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
+      </div>
+      <div ng-if="enablePayment == 'Y'">
+          <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+          <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
+      </div>
+  </center>
+</div>
 
 
 <div class="modal modal-success" id="bottleServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
@@ -103,7 +108,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
                 <h3 class="modal-title" id="myModalLabel6">{{'reservation.BOTTLE_DIALOG' | translate}}</h3>
             </div>
-            <div class="modal-body">
+            <div class="modal-body {{blackTheme}}">
                 <p>{{'reservation.BOOKING_REQUEST' | translate}}</p>
             </div>
             <div class="modal-footer">
