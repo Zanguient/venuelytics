@@ -16,7 +16,7 @@
         <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
     </div>
 </div>
-<!-- <div class="col-md-12 showInMobile alignUrl">
+<!-- <div class="col-md-12 showInMobile">
     <center>
         <table>
             <tr>
@@ -128,20 +128,20 @@
                                                 ng-repeat="bachelorObj in bachelorPartyHall"
                                                 ng-if="bachelorObj.imageUrls[0].smallUrl">
                                                 <article id="articleCart"
-                                                    class="card card-info mb-4 wow materialUp animation-delay-5 cardHeight">
+                                                    class="card card-info mb-4 wow materialUp animation-delay-5">
                                                     <figure class="ms-thumbnail ms-thumbnail-left">
                                                         <img ng-src="{{bachelorObj.imageUrls[0].smallUrl}}" alt="party-image"
                                                             class="img-responsive" id="venueImages">
                                                     </figure>
                                                     <div class="card-block">
-                                                        <h2 class="venueTitle">
+                                                        <h2>
                                                             <a href="#">{{bachelorObj.name
                                                                 | limitTo: 20 }}{{bachelorObj.name.length > 20 ? '...'
                                                                 :''}}</a>
                                                         </h2>
                                                         <p ng-if="bachelorObj.servingSize != 0">{{bachelorObj.servingSize}} people</p>
                                                         <p ng-if="bachelorObj.size != 0">{{bachelorObj.size}} sq.ft</p>
-                                                        <p class="privateEventBox">{{bachelorObj.description | limitTo: 120
+                                                        <p>{{bachelorObj.description | limitTo: 120
                                                             }}{{bachelorObj.description.length > 120 ? '...' :''}}
                                                         <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyHallDescription(bachelorObj.description)" ng-if="bachelorObj.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
                                                         </p><br>

@@ -24,19 +24,33 @@
 .blackTheme tr {
   background-color: #000000 !important;
 }
+
 .blackTheme .btn:disabled {
   /* background-color: #3a943a !important; */
   opacity: .35 !important;
-  color: #fdfdfd !important;
+ color: #fff;
 }
+
 .blackTheme .btn[disabled][disabled] {
  /*  background-color: #3a943a !important; */
-  opacity: .35 !important;
-  color: #fdfdfd !important;
+  opacity: .35 !important; 
+  color: #fff;
 }
+
+.inverse {
+ border: 1px solid #757575 !important;
+}
+
+.blackTheme .btn:disabled {
+  /* background-color: #3a943a !important; */
+  opacity: .35 !important;
+  color: #fff;
+}
+
 .blackTheme .panel {
   background-color: #000000 !important;
 }
+
 
 .blackTheme .borderLine{
   border-color: #fff !important;
@@ -352,14 +366,6 @@
   font-stretch: normal;
 }
 
-.privateEventBox {
-  color: #757575;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 2.6rem;
-  -webkit-font-smoothing: antialiased;
-}
 .mt0 {
   margin-top: 0px;
 }
@@ -384,9 +390,6 @@ select {
 } */
 
 
-.cardHeight {
-  height:650px;
-}
 
 .thankYouHeight {
   height: 750px;
@@ -558,10 +561,6 @@ select {
   color: red;
 }
 
-.venueTitle {
-  margin-bottom: 0px;
-}
-
 .venueDescription {
   margin-top: 10px;
 }
@@ -731,16 +730,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
       font-size: 24px;
     }
 
-    .privateImages {
-      height: 243px;
-    }
-
-
-    #private-card-margin {
-      margin-bottom: 0px;
-    }
-
-
     .private-details {
       width: 1030px;
     }
@@ -831,18 +820,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
     font-size: 24px;
   }
 
-  .privateImages {
-      height: 243px;
-  }
-
   .private-details {
     width: 1030px;
   }
 
-  #private-card-margin {
-      margin-bottom: 0px;
-    }
-
+  
   .smartbanner-icon{
     position:absolute;
     left:50px;
@@ -1176,10 +1158,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-left: -22px;
   }
 
-  .cardHeight {
-    height:580px;
-    margin-top: 56px;
-  }
+  
 
   .fc-header-title {
     display: inline-block;
@@ -1242,9 +1221,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     height: 100px
   }
 
-  .alignUrl {
-    margin-top: 40px;
-  }
 
   .privateFormHeight {
     margin-top: 38px;
@@ -1467,10 +1443,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
         height: 100px
       }
 
-      .cardHeight {
-        height:620px;
-        margin-top: 56px;
-      }
+      
 
       .eventListPrice {
         margin-right: 48px;
@@ -1534,10 +1507,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     width: 100px;
   }
 
-  .alignUrl {
-    margin-top: 40px;
-  }
-
+  
   #alignmentTime {
     margin-left: 13px;
   }
@@ -1636,11 +1606,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
         height: 100px
       }
 
-      .cardHeight {
-        height:600px;
-        margin-top: 56px;
-      }
-
+      
       .eventListPrice {
         margin-right: 64px;
         color: black;
@@ -1695,10 +1661,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
   .privateFormHeight {
     margin-top: 38px;
-  }
-
-  .alignUrl {
-    margin-top: 40px;
   }
 
   .eventImage{

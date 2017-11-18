@@ -13,7 +13,7 @@
         <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyHallDescription(partyDescription)" ng-if="partyDescription.length > 160">Read More</a>
     </div>
 </div>
-<div class="col-md-12 showInMobile alignUrl" ng-if="((partyCateringMenu) || (partyMenu) || (partyVideo) || (partyFloorPlan) || (partyInfoSheet))">
+<div class="col-md-12 showInMobile" ng-if="((partyCateringMenu) || (partyMenu) || (partyVideo) || (partyFloorPlan) || (partyInfoSheet))">
         <center>
             <table>
                 <tr>
@@ -135,20 +135,20 @@
                                             ng-repeat="partyObj in partyHall"
                                             ng-if="partyObj.imageUrls[0].smallUrl">
                                             <article id="articleCart"
-                                                class="card card-info mb-4 wow materialUp animation-delay-5 cardHeight">
+                                                class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
                                                     <img ng-src="{{partyObj.imageUrls[0].smallUrl}}" alt="party-image"
                                                         class="img-responsive" id="venueImages">
                                                 </figure>
                                                 <div class="card-block">
-                                                    <h2 class="venueTitle">
+                                                    <h2 >
                                                         <a href="#">{{partyObj.name
                                                             | limitTo: 20 }}{{partyObj.name.length > 20 ? '...'
                                                             :''}}</a>
                                                     </h2>
                                                     <p ng-if="partyObj.servingSize != 0">{{partyObj.servingSize}} people</p>
                                                     <p ng-if="partyObj.size != 0">{{partyObj.size}} sq.ft</p>
-                                                    <p class="privateEventBox">{{partyObj.description | limitTo: 120
+                                                    <p>{{partyObj.description | limitTo: 120
                                                         }}{{partyObj.description.length > 120 ? '...' :''}}
                                                     <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyHallDescription(partyObj.description)" ng-if="partyObj.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
                                                     </p><br>

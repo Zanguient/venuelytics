@@ -13,23 +13,23 @@
             <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(banquetHallDescription)" ng-if="banquetHallDescription.length > 160">Read More</a>
         </div>
     </div>
-    <div class="col-md-12 showInMobile alignUrl" ng-if="((privateInfoSheet) || (privateMenu) || (privateVideo) || (privateFloorPlan))">
+    <div class="col-md-12 showInMobile" ng-if="((privateInfoSheet) || (privateMenu) || (privateVideo) || (privateFloorPlan))">
         <center>
             <table>
                 <tr>
                     <td ng-if="privateInfoSheet">
-                        <a  href="" class="btn btn-success fontRegular btn-raised btn-xs" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE" | translate}}</a>
+                        <a  href="" class="btn btn-success fontRegular btn-raised btn-xs" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.VIEW_PRIVATE" | translate}}</a>
                     </td>
                     <td ng-if="privateMenu">
-                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a>
+                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span>{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a>
                     </td>
                 </tr>
                 <tr>
                     <td ng-if="privateVideo">
-                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.VIEW_VIDEO" | translate}}</a>
+                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>
                     </td>
                     <td ng-if="privateFloorPlan">
-                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FLOOR" | translate}}</a>
+                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
                     </td>
                 </tr>
             </table>
@@ -37,17 +37,18 @@
     </div>
     <form class="form-horizontal col-md-12" autocomplete="off" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
     <fieldset class="col-md-10 col-md-offset-right-2">
-        <div class="col-md-12 form-group label-floating is-empty no-p {{privateDateIsFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty no-p {{privateDateIsFocused}}">
             <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="privateDate" ng-model="private.orderDate" required>
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
         <div class="col-md-12 showInWeb">
             <center>
-                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="privateInfoSheet" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE" | translate}}</a>&nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="privateMenu" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a> &nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="privateVideo" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.VIEW_VIDEO" | translate}}</a>&nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="privateFloorPlan" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FLOOR" | translate}}</a>
+                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="privateInfoSheet" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.VIEW_PRIVATE" | translate}}</a>
+
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="privateMenu" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span> {{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="privateVideo" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>&
+                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="privateFloorPlan" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
             </center>
         </div>
         <div class="col-md-12">
@@ -71,13 +72,13 @@
             <table>
                 <tr>
                     <td>
-                        <div class="col-md-10 form-group label-floating is-empty no-p {{privateEventFocused}}" style="margin-left: auto;">
+                        <div class="col-md-10 form-group label-floating is-empty no-p {{privateEventFocused}}">
                         <label class="control-label" for="focusedInput1">{{'reservation.TOTAL_GUEST' | translate}}</label>
                         <input type="text" class="form-control fontBold" id="privateTotalGuest" ng-model="private.totalGuest">
                         </div>
                     </td>
                     <td class="budgetPadding">
-                        <div class="col-md-10 form-group label-floating is-empty no-p {{privateEventFocused}}" style="margin-left: auto;">
+                        <div class="col-md-10 form-group label-floating is-empty no-p {{privateEventFocused}}" >
                         <label class="control-label" for="focusedInput1">{{'reservation.BUDGET' | translate}}</label>
                         <input type="text" class="form-control fontBold" id="budget" ng-model="private.budget" data-parsley-trigger="change">
                         </div>
@@ -86,27 +87,27 @@
             </table>
         </div>
 
-        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}"   style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}" >
         <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
             <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
         </div>
     
-        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}">
         <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
             <input type="text" class="form-control fontBold" ng-model="private.privateLastName" id="lastName" >
         </div>
         
-        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}">
         <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
             <input type="email" class="form-control fontBold" id="email" ng-model="private.privateEmail"  data-parsley-trigger="change" required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}">
         <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
             <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" required data-parsley-trigger="change">
         </div>
     
         
-        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}">
             <label class="control-label" for="focusedInput1">{{"reservation.EVENT_TYPE"  | translate}}</label>
             <select class="form-control fontBold {{blackTheme}}" required=""
                 ng-model="private.privateEvent" ng-options="t.name for t in eventTypes">
@@ -114,7 +115,7 @@
             </select>
         </div>
 
-        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}" style="margin-left: auto;">
+        <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}">
         <label class="control-label" for="focusedInput1">{{'reservation.COMMENT' | translate}}</label>
             <input type="text" class="form-control fontBold" id="instructions" ng-model="private.privateComment"  data-parsley-trigger="change">
         </div>
@@ -155,27 +156,26 @@
                                             class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
                                             ng-repeat="privateEvent in privateEventValueArray"
                                             ng-if="privateEvent.imageUrls[0].smallUrl">
-                                            <article
-                                                class="card card-info mb-4 wow materialUp animation-delay-5 cardHeight">
+                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left">
                                                     <img ng-src="{{privateEvent.imageUrls[0].smallUrl}}" alt="private-image"
-                                                        class="img-responsive privateImages">
+                                                        class="img-responsive center-block">
                                                 </figure>
-                                                <div class="card-block">
-                                                    <h2 class="venueTitle">
-                                                        <a href="#">{{privateEvent.name
+                                                <div class="card-block color-dark">
+                                                    <h2 class="text-primary mt0 mb0">
+                                                        {{privateEvent.name
                                                             | limitTo: 20 }}{{privateEvent.name.length > 20 ? '...'
-                                                            :''}}</a>
+                                                            :''}}
                                                     </h2>
                                                     <p ng-if="privateEvent.servingSize != 0">{{privateEvent.servingSize}} people</p>
                                                     <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
-                                                    <p class="privateEventBox">{{privateEvent.description | limitTo: 120
+                                                    <p class="mb-1">{{privateEvent.description | limitTo: 120
                                                         }}{{privateEvent.description.length > 120 ? '...' :''}}
-                                                    <a id="private-card-margin" class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(privateEvent.description)" ng-if="privateEvent.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
-                                                    </p><br>
-                                                    <button type="submit" id="privateEnquire" class="btn btn-success btn-md btn-raised pull-right"
-                                                    novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" ng-if="privateEvent.reserve == false">{{"reservation.ENQUIRE" | translate}}</button>
+                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(privateEvent.description)" ng-if="privateEvent.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
+                                                    
+                                                    <button type="submit" id="privateEnquire" class="inverse btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" ng-if="privateEvent.reserve == false">{{"reservation.ENQUIRE" | translate}}</button>
                                                     <label class="pull-right" ng-if="privateEvent.reserve == true">{{"reservation.RESERVED" | translate}}</label>
+                                                    </p>
                                             </article>
                                         </div>
                                     </div>

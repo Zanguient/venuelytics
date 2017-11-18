@@ -31,8 +31,8 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 setTimeout(function() {
                     self.getSelectedTab();
                 }, 600);
-                    var date = new Date();
-                    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                var date = new Date();
+                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
                 self.private.authorize = false;
                 self.private.agree = false;
@@ -88,35 +88,20 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 $rootScope.serviceTabClear = true;
                 DataShare.tab = 'P';
                 DataShare.privateEventFocused = 'is-focused';
-                var date = new Date(self.private.orderDate);
-                var newDate = date.toISOString();
-                var parsedend = moment(newDate).format("MM-DD-YYYY");
+               
+                var selectedDateTime = moment(self.private.orderDate, 'YYYY-MM-DD').format("MM-DD-YYYY");
                 
-                date = moment(parsedend).format("MM-DD-YYYY");
-                self.selectDete = new Date(moment(date + ' ' +self.private.privateStartTime,'MM-DD-YYYY h:mm').format());
-                self.selectDete = moment(self.selectDete).format("YYYY-MM-DDTHH:mm:ss");
+                self.selectDate = moment(selectedDateTime + ' ' +self.private.privateStartTime,'MM-DD-YYYY h:mm a').format("YYYY-MM-DDTHH:mm:ss");
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
                 DataShare.privateEventData = self.private;
                 DataShare.authBase64Str = authBase64Str;
 
                 //calculate duration
-                var start = self.private.privateStartTime;
-                var end = self.private.privateEndTime;
-                start = start.split(":");
-                end = end.split(":");
-                var startDate = new Date(0, 0, 0, start[0], start[1], 0);
-                var endDate = new Date(0, 0, 0, end[0], end[1], 0);
-                var diff = endDate.getTime() - startDate.getTime();
-                var hours = Math.floor(diff / 1000 / 60 / 60);
-                diff -= hours * 1000 * 60 * 60;
-                var minutes = Math.floor(diff / 1000 / 60);
-                var finalValue =  (hours < 9 ? "0" : "") + hours + ":" + (minutes < 9 ? "0" : "") + minutes;
-                finalValue = finalValue.split(":");
-                self.duration = finalValue[0] * 60; 
-                if(finalValue[1] === "30") {
-                self.duration = self.duration + 30;
-                }
+                 
+                var startTime = moment(self.private.privateStartTime, "HH:mm");
+                var endTime = moment(self.private.privateEndTime, "HH:mm");
+                self.duration = moment.duration(endTime.diff(startTime));
 
                 self.serviceJSON = {
                     "serviceType": 'BanquetHall',
@@ -128,18 +113,16 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     "noOfGuests": self.private.totalGuest,
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
-                    "budget": 0,
-                    
+                    "budget": self.private.budget,
                     "serviceInstructions": self.private.privateComment,
                     "status": "REQUEST",
-                    "serviceDetail": null,
-                    "fulfillmentDate": self.selectDete,
-                    "durationInMinutes": self.duration,
+                    "fulfillmentDate": self.selectDate,
+                    "durationInMinutes": self.duration.asMinutes(),
                     "deliveryType": "Pickup",
                    
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": self.selectDete,
+                        "orderDate": self.selectDate,
                         "orderItems": []
                     }
                 };
