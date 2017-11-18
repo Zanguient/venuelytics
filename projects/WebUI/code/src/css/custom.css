@@ -37,6 +37,10 @@
 .blackTheme .panel {
   background-color: #000000 !important;
 }
+
+.blackTheme .borderLine{
+  border-color: #fff !important;
+}
 /* BalckTheme End */
 
 /* Break through css start */

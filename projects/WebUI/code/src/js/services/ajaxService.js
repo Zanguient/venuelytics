@@ -216,7 +216,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         });
     };
 
-    this.getTime = function(venueId,date,time, guestCount, authBase64Str) {
+    this.getTime = function(venueId,date,time, guestCount) {
 
         if (guestCount === parseInt(guestCount, 10)) {
             guestCount = parseInt(guestCount, 10);
@@ -226,10 +226,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         return $http({
             method: 'GET',
             params: {time: time, type: 'Restaurant', capacity: guestCount},
-            url: RestURL.baseURL + 'reservations/' + venueId + '/availableSlots/' + date,
-            headers: {
-                    "Authorization": "Anonymous " + authBase64Str
-                }
+            url: RestURL.baseURL + 'reservations/' + venueId + '/availableSlots/' + date
         }).then(function(success) {
             return success;
         }, function(error) {

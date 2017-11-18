@@ -1,7 +1,7 @@
 
 "use strict";
-app.controller('TableServiceController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta) {
+app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataShare', '$routeParams', 'AjaxService', 'APP_ARRAYS',  '$rootScope','ngMeta', '$translate',
+    function ($log, $scope,$location, DataShare, $routeParams, AjaxService, APP_ARRAYS,  $rootScope, ngMeta, $translate) {
 
             $log.debug('Inside Table Service Controller.');
 
@@ -10,6 +10,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             self.timeSlot = false;
             self.table = {};
             self.init = function() {
+                self.venueid = $routeParams.venueid;
                 self.venueDetails = DataShare.venueFullDetails;
                 self.selectedVenue = self.venueDetails.venueName;
                 angular.forEach(self.venueDetails.imageUrls, function(value,key){
@@ -28,18 +29,18 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
-                self.venueid = $routeParams.venueid;
+                
                 self.getServiceTime();
+                self.venueInfo();
                 setTimeout(function() {
                     self.getSelectedTab();
                 }, 600);
+                
                 self.selectedCity = $routeParams.cityName;
                 self.reservationTime = APP_ARRAYS.time;
                 self.table.tableDate  = moment().format('YYYY-MM-DD');
-                setTimeout(function() {
-                var divWidth = $(window).width();
-                $("#divObj").width(divWidth);
-                }, 1000);
+                
+                
                 if((Object.keys(DataShare.tableService).length) !== 0) {
                     self.table = DataShare.tableService;
                     self.findTable();
@@ -49,13 +50,19 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
             self.editTableService = function() {
                 $location.url('/cities/' + self.selectedCity + '/' + self.venueid + '/table-services');
             };
+            self.venueInfo = function() {
+                AjaxService.getInfo(self.venueid).then(function(response) {
+                    self.heading = response.data['table.ui.reservation.heading'] || $translate.instance('TABLE_SERVICE_TIMEOUT');
+                    self.description = response.data['table.ui.reservation.description'] || '';
+                });
+            };
             self.findTable = function() {
                 self.productItem = [];
                 DataShare.tableGuests = self.table.guest;
                 DataShare.guestFocus = self.table.tableDate +"T"+ self.table.reserveTime;
                 var date= moment(self.table.tableDate ).format('YYYYMMDD');
-                var authBase64Str = "YXJ1biByYXVuOmFydW5AZ21haWwuY29tOig4ODgpIDg4OC04ODg4";
-                AjaxService.getTime(self.venueid, date, self.table.reserveTime, self.table.guest, authBase64Str).then(function(response) {
+                
+                AjaxService.getTime(self.venueid, date, self.table.reserveTime, self.table.guest).then(function(response) {
                     var obj = response.data;
                     self.reservedTimeSlot = '';
                     self.timeSlot = true;
@@ -83,12 +90,6 @@ app.controller('TableServiceController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
-            $(window).resize(function() {
-                setTimeout(function() {
-                var divWidth = $(window).width();
-                $("#divObj").width(divWidth);
-                }, 1000);
-            });
 
             self.getSelectedTab = function() {
                 $("em").hide();
