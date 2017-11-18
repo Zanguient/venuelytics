@@ -134,11 +134,9 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.confirmPartyPackage = function(selectedParty) {
                 $rootScope.serviceTabClear = true;
                 DataShare.partyFocus = 'is-focused';
-                var date = new Date(self.party.orderDate);
-                var newDate = date.toISOString();
-                var parsedend = moment(newDate).format("MM-DD-YYYY");
-                date = new Date(moment(parsedend,'MM-DD-YYYY').format());
-                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
+               
+                
+                var dateValue = moment(self.party.orderDate, 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss");
                 var fullName = self.party.userFirstName + " " + self.party.userLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.party.email + ':' + self.party.mobile);
                 DataShare.partyServiceData = self.party;
@@ -154,11 +152,9 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                   "noOfMaleGuests": 0,
                   "noOfFemaleGuests": 0,
                   "budget": 0,
-                  "hostEmployeeId": -1,
                   
                   "serviceInstructions": self.party.instructions,
                   "status": "REQUEST",
-                  "serviceDetail": null,
                   "fulfillmentDate": dateValue,
                   "durationInMinutes": 0,
                   "deliveryType": "Pickup",

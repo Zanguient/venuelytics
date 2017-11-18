@@ -28,7 +28,7 @@
 .blackTheme .btn:disabled {
   /* background-color: #3a943a !important; */
   opacity: .35 !important;
- color: #fff;
+   color: #fff;
 }
 
 .blackTheme .btn[disabled][disabled] {
@@ -38,13 +38,8 @@
 }
 
 .inverse {
- border: 1px solid #757575 !important;
-}
-
-.blackTheme .btn:disabled {
-  /* background-color: #3a943a !important; */
-  opacity: .35 !important;
-  color: #fff;
+   border: 1px solid #757575 !important;
+   color: #757575 ;
 }
 
 .blackTheme .panel {
@@ -709,9 +704,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
       margin-left: 200px;
   }
 
-  .partyAlignment {
-    width:1000px;
-  }
 
 
   #forMobile {
@@ -782,10 +774,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     }
     .downloadIcon{
       padding-top: 20px;
-    }
-
-    .partyAlignment {
-      width:1000px;
     }
 
     .textOnImg {
@@ -893,10 +881,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
   .carouselImage {
     width: 100%;
-  }
-
-  .partyAlignment {
-    width:1000px;
   }
 
   #removeBtn {
