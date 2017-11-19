@@ -2,7 +2,7 @@
 <form class="form-horizontal" parsley-validate autocomplete="off"  validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
     <fieldset class="col-md-10 col-md-offset-1 col-md-offset-right-1">
         <div class="col-md-12 form-group label-floating is-empty no-p {{bottleDateIsFocused}}" >
-            <label class="control-label" for="focusedInput1">{{'reservation.DATE' | translate}}</label>
+            <label class="control-label" >{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate" required/>
         </div>
         <div class="col-md-12 form-group is-empty mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
@@ -99,39 +99,39 @@
             </div>
         </div>
         <div class="col-md-12 form-group label-floating no-p is-empty {{isFocused}}">
-            <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
+            <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
             <input type="text" class="form-control fontBold" ng-model="bottle.userFirstName" id="firstName" required>
         </div>
         <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}" >
-            <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
+            <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
             <input type="text" class="form-control fontBold fontChange"  ng-model="bottle.userLastName" id="lastName" required>
         </div>
         <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}" >
-            <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
+            <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
             <input type="email" class="form-control fontBold" id="email" ng-model="bottle.email"data-parsley-trigger="change" required>
         </div>
         <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}">
-            <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
+            <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
             <input type="text" id="ms-form-pass" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="bottle.mobile" required data-parsley-trigger="change">
         </div>
        
         <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}" >
-            <label class="control-label" for="focusedInput1">{{'reservation.ZIPCODE' | translate}}</label>
+            <label class="control-label" >{{'reservation.ZIPCODE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="zipcode" ng-model="bottle.bottleZipcode"  required>
         </div>
         <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}">
-            <label class="control-label" for="focusedInput1">{{'reservation.TOTAL_GUEST' | translate}}</label>
+            <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
             <input type="text" class="form-control fontBold" id="totalGuest" ng-model="bottle.totalGuest" >
         </div>
         <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}">
-            <label class="control-label" for="focusedInput1">{{'reservation.OCCASION' | translate}}</label>
+            <label class="control-label" >{{'reservation.OCCASION' | translate}}</label>
             <select class="form-control fontBold {{blackTheme}}" eqruired
                 ng-model="bottle.bottleOccasion" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>
         </div>
         <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}">
-            <label class="control-label" for="focusedInput1">{{'reservation.INSTRUCTIONS' | translate}}</label>
+            <label class="control-label" >{{'reservation.INSTRUCTIONS' | translate}}</label>
             <input type="text" class="form-control fontBold" id="instructions" ng-model="bottle.instructions" placeholder="">
         </div>
         <div class="col-md-4 form-group label-floating is-empty no-p {{isFocused}}" ng-hide ="!hostDate || hostDate.length == 0">

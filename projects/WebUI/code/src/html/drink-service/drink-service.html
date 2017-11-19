@@ -12,23 +12,23 @@
                 </label>
             </div>
             <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
-                <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
+                <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" id="drinkFirstName" name="drinkFirstName" class="form-control fontBold" ng-model="drink.firstName" required="" data-parsley-trigger="change">
             </div>
             <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
-                <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
+                <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" id="drinkLastName" name="drinkLastName" class="form-control fontBold" ng-model="drink.lastName" required="" data-parsley-trigger="change">
             </div>
             <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
-                <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
+                <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="email" id="drinkEmailId" name="drinkEmailId" data-parsley-type="email" class="form-control fontBold" ng-model="drink.emailId" required="" data-parsley-trigger="change">
             </div>
             <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
-                <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
+                <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="drinkMobile" ng-model="drink.mobileNumber" required="" data-parsley-trigger="change">
             </div>
             <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
-                <label class="control-label" for="focusedInput1">{{"reservation.TABLE_NUMBER" | translate}}</label>
+                <label class="control-label" >{{"reservation.TABLE_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control fontBold {{blackTheme}}" ng-model="drink.tableNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(32) track by $index" value="{{$index+1}}">{{$index+1}}</option>
@@ -36,7 +36,7 @@
             </div>
 
             <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
-                <label class="control-label" for="focusedInput1">{{"reservation.SEAT_NUMBER" | translate}}</label>
+                <label class="control-label" >{{"reservation.SEAT_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control fontBold {{blackTheme}}" id="drinkSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="drink.seatNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(10) track by $index" value="{{$index+1}}">{{$index+1}}</option>
@@ -44,7 +44,7 @@
             </div>
 
              <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
-                <label class="control-label" for="focusedInput1">{{"reservation.LANE_NUMBER" | translate}}</label>
+                <label class="control-label" >{{"reservation.LANE_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control fontBold {{blackTheme}}" id="drinkLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="drink.laneNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(30) track by $index" value="{{$index+1}}">{{$index+1}}</option>
@@ -137,7 +137,7 @@
             </div>
         </div>
         <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
-            <label class="control-label" for="focusedInput1">{{'reservation.SPECIAL_INSTRUCTION' | translate}}</label>
+            <label class="control-label" >{{'reservation.SPECIAL_INSTRUCTION' | translate}}</label>
             <input ng-disabled="orderDisable === true" type="text" class="form-control fontBold" id="drinkInstructions" ng-model="drink.instructions">
         </div>
        	<br><br>
