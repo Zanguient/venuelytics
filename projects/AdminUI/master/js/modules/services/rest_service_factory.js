@@ -109,7 +109,11 @@
  					removePartner : {method: 'DELETE',  params: { id: '@id', partnerId: '@partnerId'}, 
  						url: urlTemplate.replace("@context", "agencies") +"/partner/:partnerId"},
  					validatePartner : {method: 'POST',  params: { }, 
- 						url: urlTemplate.replace("@context", "agencies") +"/partners/validate"}
+ 						url: urlTemplate.replace("@context", "agencies") +"/partners/validate"},
+ 					getActivePaymentAuths : {method: 'GET',  params: {  id: '@id'},  isArray: true,
+ 						url: urlTemplate.replace("@context", "agencies") +"/payments"},
+ 					performPayment: {method: 'POST',  params: {  id: '@id'},
+ 						url: urlTemplate.replace("@context", "biz")},
 
  						
  				});
