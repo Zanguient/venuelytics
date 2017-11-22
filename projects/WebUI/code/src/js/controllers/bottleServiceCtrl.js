@@ -78,7 +78,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 AjaxService.getHosts(self.venueid).then(function(response) {
                     self.hostDate = response.data;
                 });
-            };            
+            }; 
+                       
             $(window).resize(function() {
                 var divHeight = $('#imagemap').height();
                 var divWidth = $('#imagemap').width();
