@@ -11,10 +11,9 @@ app.directive('serviceTab', function() {
       buttonId: '@',
       buttonImg: '@',
       name: '@',
-      fontColor: '@',
+      btnClass: '@',
       serviceName: '@',
       clickCb:'&',
-      bgColor: '@',
       disabled: '@',
       selected: '@'
   	},

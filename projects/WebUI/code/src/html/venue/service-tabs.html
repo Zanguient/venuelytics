@@ -36,7 +36,7 @@
                             </center>
                             <div id="serviceTabs" class="btn-group btn-group-justified" ng-hide="removeAllTabs === true">
                                 <center>
-                                    <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" font-color="{{tab.fontColor}}" bg-color="{{tab.bgColor}}" selected="{{tab.selected}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" disabled="{{tab.disabled}}" class="reservation-tab col-md-4 col-sm-6 col-xs-6"></div>
+                                    <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" btn-class="{{tab.btnClass}}" selected="{{tab.selected}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" disabled="{{tab.disabled}}" class="reservation-tab col-md-4 col-sm-6 col-xs-6"></div>
                                 </center>
                             </div>
                             <div ng-include="selectedPage()" ng-hide="removeAllTabs === true"></div><br>

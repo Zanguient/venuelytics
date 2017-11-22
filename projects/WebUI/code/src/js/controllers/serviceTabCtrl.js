@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope', '$cookieStore',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, $cookieStore) {
+app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore) {
 
 	$log.log('Inside ServiceTab Controller.');
 
@@ -63,7 +63,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.tableSelection = DataShare.tableSelection;
         }
 
-        //self.reservationTime = APP_ARRAYS.time;
         AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
             self.detailsOfVenue = response;
             $rootScope.description = self.detailsOfVenue.description;
@@ -170,7 +169,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
     };
 
-    function addTab(id, bId, img, name, tabParam, htmlContentPage, disableTab, bgColor, fontColor, tabSelected) {
+    function addTab(id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected) {
         self.displayTabs.push({
            id: id,
            buttonId: bId,
@@ -178,8 +177,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
            serviceName: tabParam,
            name: name,
            disabled: disableTab,
-           bgColor: bgColor,
-           fontColor: fontColor,
+           btnClass : btnClass,
            selected: tabSelected
            
         });
@@ -222,36 +220,37 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     function addTabs() {
         if (self.tabParams ) {
             //self.tabBottle = self.tabParams === 'bottle-service' ? 'bottle-service' : '';
-            addTab('bottleTab','bottle', 'assets/img/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, APP_COLORS.bottleBtn, APP_COLORS.btnColor, 'bottleService');
+            addTab('bottleTab','bottle', 'assets/img/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, 'bottleBtn', 'bottleService');
 
           // self.tabBachelor = self.tabParams === 'bachelor-party' ? 'bachelor-party' : '';
             if (self.bachelorFlag) {
-                addTab('bachelorTab','bachelor', 'assets/img/trophy.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party/bachelor-party.html',!self.bachelorFlag, APP_COLORS.bachelorBtn, APP_COLORS.btnColor, 'bachelorParty');
+                addTab('bachelorTab','bachelor', 'assets/img/trophy.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party/bachelor-party.html',!self.bachelorFlag, 'bachelorBtn', 'bachelorParty');
             }
 
            // self.tabParty = self.tabParams === 'party-packages' ? 'party-packages' : '';
             if (self.partyFlag) {
-                addTab('partyEventTab','party', 'assets/img/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html',!self.partyFlag, APP_COLORS.partyBtn, APP_COLORS.btnColor,'partyPackage');
+                addTab('partyEventTab','party', 'assets/img/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html',!self.partyFlag, 'partyBtn','partyPackage');
             }
 
            // self.tabPrivate = self.tabParams === 'private-events' ? 'private-events' : '';
             
-            addTab('privateEventTab','private', 'assets/img/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, APP_COLORS.privateBtn, APP_COLORS.btnColor, 'privateEvents');
+            addTab('privateEventTab','private', 'assets/img/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, 'privateBtn', 'privateEvents');
 
             //self.tabGuest = self.tabParams === 'guest-list' ? 'guest-list' : '';
-            addTab('guestlistTab','glist', 'assets/img/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, APP_COLORS.guestBtn, APP_COLORS.btnColor, 'guestList');
+            addTab('guestlistTab','glist', 'assets/img/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, 'guestBtn', 'guestList');
+
+            // self.tabTable = self.tabParams === 'table-services' ? 'table-services' : '';
+            addTab('tableServiceTab','tableService', 'assets/img/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, 'tableBtn', 'tableServices');
 
            // self.tabFood = self.tabParams === 'food-services' ? 'food-services' : '';
-            addTab('foodServiceTab','foodTab', 'assets/img/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, APP_COLORS.foodBtn, APP_COLORS.btnColor, 'foodServices');
+            addTab('foodServiceTab','foodTab', 'assets/img/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, 'foodBtn', 'foodServices');
 
            // self.tabDrink = self.tabParams === 'drink-services' ? 'drink-services' : '';
-            addTab('drinkServiceTab','drink', 'assets/img/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, APP_COLORS.drinksBtn, APP_COLORS.btnColor, 'drinkServices');
+            addTab('drinkServiceTab','drink', 'assets/img/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, 'drinksBtn', 'drinkServices');
             
-           // self.tabTable = self.tabParams === 'table-services' ? 'table-services' : '';
-            addTab('tableServiceTab','tableService', 'assets/img/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, APP_COLORS.tableBtn, APP_COLORS.btnColor, 'tableServices');
-
+          
            // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
-            addTab('eventListTab','eventlist', 'assets/img/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, APP_COLORS.tableBtn, APP_COLORS.btnColor, 'eventList');
+            addTab('eventListTab','eventlist', 'assets/img/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, 'eventListBtn', 'eventList');
             if(self.tabParams === "VIP"){
                 var firstEnabledTabBtnId = optimizeTabDisplay(self.displayTabs);
                 if (firstEnabledTabBtnId !== null) {  

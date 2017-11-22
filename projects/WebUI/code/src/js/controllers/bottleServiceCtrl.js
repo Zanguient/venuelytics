@@ -57,8 +57,10 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 self.getBottleProducts();
                 self.getMenus();
                 self.getEventType();
-                self.getSelectedTab();
-
+                setTimeout(function() {
+                    self.getSelectedTab();
+                }, 600);
+                
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     DataShare.venueFullDetails = self.detailsOfVenue;

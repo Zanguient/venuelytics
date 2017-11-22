@@ -3083,3 +3083,57 @@ table.fc-border-separate {
    font-size: 16px;
    height: 50px !important;
 }
+
+.bottleBtn {
+  background-color: rgba(122,17,217, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.tableBtn {
+  background-color: rgba(220,153,42, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.drinksBtn {
+  background-color: rgba(218,6,21, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.foodBtn {
+  background-color: rgba(30,134,68, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.privateBtn {
+  background-color: rgba(14,104,167, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.guestBtn {
+  background-color: rgba(220,153,42, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.partyBtn {
+  background-color: rgba(30,136,68, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.bachelorBtn {
+  background-color: rgba(103,111,121, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.eventListBtn {
+  background-color: rgba(218,6,21, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
