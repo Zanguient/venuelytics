@@ -1,13 +1,15 @@
 "use strict";
-var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies', 'ngclipboard', 'daterangepicker','ngMeta']);
+var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies', 'ngclipboard',
+ 'daterangepicker','ngMeta', 'satellizer']);
 
 
 // configure our routes
-app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegateProvider','ngMetaProvider',
-    function($routeProvider, $httpProvider, $locationProvider, $sceDelegateProvider, ngMetaProvider) {
+app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegateProvider','ngMetaProvider','$authProvider',
+    function($routeProvider, $httpProvider, $locationProvider, $sceDelegateProvider, ngMetaProvider, $authProvider) {
     $locationProvider.hashPrefix('');
     $httpProvider.defaults.withCredentials = true;
 
+    initAuthProvisers();
     $sceDelegateProvider.resourceUrlWhitelist([
         // Allow same origin resource loads.
         "self",
@@ -225,6 +227,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'guest-list/guest-success.html',
             controller:'GuestConfirmController'
         })
+        .when('/wifiLanding', {
+            templateUrl: 'landing/landing.html',
+            controller: 'WifiController'
+        })
+  
         .otherwise('/home');
 
     $locationProvider.html5Mode({
@@ -238,6 +245,38 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     ngMetaProvider.setDefaultTitle('Venuelytics');
     ngMetaProvider.setDefaultTitleSuffix(' | Book VIP Reservations & Events');
     ngMetaProvider.setDefaultTag('image', 'assets/img/screen2.jpg');
+
+    function initAuthProvisers() {
+        
+
+        $authProvider.facebook({
+          redirectUri: 'http://54abf2cb.ngrok.io/wifiLanding',
+          clientId: '1411355548976946'
+        });
+
+
+      
+//decb11290746edd944f7e550bbee1431
+        $authProvider.google({
+          clientId: '118965238180-nqjtuurcepb6s664nrmje9jcvbbn5j6b.apps.googleusercontent.com'
+        });
+
+        $authProvider.instagram({
+          clientId: 'Instagram Client ID'
+        });
+
+        $authProvider.twitter({
+          name: 'twitter',
+          url: '/auth/twitter',
+          authorizationEndpoint: 'https://api.twitter.com/oauth/authenticate',
+          redirectUri: window.location.origin,
+          oauthType: '10',
+          popupOptions: { width: 495, height: 645 }
+
+        });
+
+
+    }
 
 }]).config(['$translateProvider', function ($translateProvider) {
     var version = new Date().getTime();
