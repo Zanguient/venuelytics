@@ -139,7 +139,7 @@
                                                     <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(privateEvent.description)" ng-if="privateEvent.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
                                                     
                                                     <button type="submit" id="privateEnquire" class="inverse btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" ng-if="privateEvent.reserve == false">{{"reservation.ENQUIRE" | translate}}</button>
-                                                    <label class="pull-right" ng-if="privateEvent.reserve == true">{{"reservation.RESERVED" | translate}}</label>
+                                                    <span class="pull-right text-danger" ng-if="privateEvent.reserve == true">{{"reservation.RESERVED" | translate}}</span>
                                                     </p>
                                             </article>
                                         </div>
