@@ -3,15 +3,15 @@
  * @date 14/11/2017
  */
 "use strict";
-app.controller('bachelorPartyController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope,ngMeta) {
+app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope,ngMeta, venueService) {
             var self = $scope;
             self.bachelorDateIsFocused = 'is-focused';
             self.init = function() {
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + "Bachelor Party");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bachelor Party Services";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bachelor Party Services");
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                ngMeta.setTag('description', self.venueDetails.description + " Bachelor Party");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bachelor Party Services";
+                ngMeta.setTitle($rootScope.title);
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());

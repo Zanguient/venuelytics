@@ -1,7 +1,6 @@
 "use strict";
-app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore, ngMeta) {
-
+app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope, ngMeta, venueService) {
 
             var self = $scope;
             self.paypal = false;
@@ -12,16 +11,19 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$http', '$location'
             self.totalChargedAmount = 0;
             self.init = function() {
                 $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
-                $rootScope.description = DataShare.eachVenueDescription;
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Drink Confirmation");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Drink Services Confirmation & Payment";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Drink Services Confirmation & Payment");
-                self.city = $routeParams.cityName;
+                
                 self.selectedVenueID = $routeParams.venueid;
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                $rootScope.description = self.venueDetails.description;
+                ngMeta.setTag('description', self.venueDetails.description + " Drink Confirmation");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city + ' '+self.venueDetails.state+ " Venuelytics - Drink Services Confirmation & Payment";
+                ngMeta.setTitle($rootScope.title);
+                self.city = self.venueDetails.city;
+                
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
-                self.successPageTheme = $window.localStorage.getItem("blackTheme");
+               
                 self.payAmounts = $window.localStorage.getItem("drinkAmount");
                 self.drinkServiceDetails = DataShare.drinkServiceData;
                 self.selectedDrinkItems = DataShare.selectedDrinks;

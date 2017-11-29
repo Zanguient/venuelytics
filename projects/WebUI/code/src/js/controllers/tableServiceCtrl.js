@@ -1,7 +1,7 @@
 
 "use strict";
-app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataShare', '$routeParams', 'AjaxService', 'APP_ARRAYS',  '$rootScope','ngMeta', '$translate',
-    function ($log, $scope,$location, DataShare, $routeParams, AjaxService, APP_ARRAYS,  $rootScope, ngMeta, $translate) {
+app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataShare', '$routeParams', 'AjaxService', 'APP_ARRAYS',  '$rootScope','ngMeta', '$translate', 'VenueService',
+    function ($log, $scope,$location, DataShare, $routeParams, AjaxService, APP_ARRAYS,  $rootScope, ngMeta, $translate, venueService) {
 
             $log.debug('Inside Table Service Controller.');
 
@@ -11,16 +11,15 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
             self.table = {};
             self.init = function() {
                 self.venueid = $routeParams.venueid;
-                self.venueDetails = DataShare.venueFullDetails;
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
                 self.selectedVenue = self.venueDetails.venueName;
                 angular.forEach(self.venueDetails.imageUrls, function(value,key){
                     self.venueImage = value.originalUrl;
                 });
-                $rootScope.description = DataShare.eachVenueDescription;
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Table Services");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Table Services";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Table Services");
+                $rootScope.description = self.venueDetails.description;
+                ngMeta.setTag('description', self.venueDetails.description + " Table Services");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Table Services";
+                ngMeta.setTitle($rootScope.title);
                 var embed = $routeParams.embed;
                 if(embed === "embed") {
                     $rootScope.embeddedFlag = true;
@@ -135,7 +134,6 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
             self.confirmReservation = function() {                
                 var fullName = self.tableService.firstName + " " + self.tableService.lastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.tableService.emailId + ':' + self.tableService.mobileNumber);
-                DataShare.authBase64Str = authBase64Str;
                 var selectedDate= moment(DataShare.guestFocus).format('YYYY-MM-DD');
                 DataShare.guestFocus = selectedDate +'T' + DataShare.editBottle;
                 var dateValue = moment(DataShare.guestFocus, 'YYYY-MM-DDThh:mm a').format("YYYY-MM-DDTHH:mm:ss");

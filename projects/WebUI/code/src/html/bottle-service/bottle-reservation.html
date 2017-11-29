@@ -1,4 +1,8 @@
 <div class="container card {{blackTheme}}">
+  <div class="text-center"  ng-show="embeddedFlag === true">
+      <h1 class="no-m ms-site-title center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{venueDetails.venueName}} - {{selectedCity}}</h1>
+  </div>
+                
 	<center>
 		<h1 class="color-success fontRegular">{{'reservation.CONFIRM_DETAILS' | translate}}</h1>
   </center>

@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore, ngMeta) {
+app.controller('ConfirmReservationController', ['$log', '$scope', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService', 
+    function ($log, $scope, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope,  ngMeta, venueService) {
 
     		$log.log('Inside Confirm Reservation Controller.');
 
@@ -16,23 +16,26 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
-                $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
-                $rootScope.description = DataShare.eachVenueDescription;
-                self.venudetails = DataShare.venueFullDetails;                
-                ngMeta.setTag('description', self.venudetails.description + " Bottle Confirmation");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services Confirmation & Payment";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services Confirmation & Payment");
-                self.editCity = $routeParams.cityName;
+                $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueid, 'embed');
+                self.venueDetails =  venueService.getVenue($routeParams.venueid); 
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                $rootScope.description = self.venueDetails.description; 
+                DataShare.venueDetails = self.venueDetails;  
+                self.selectedCity = DataShare.venueDetails.city;
+                ngMeta.setTag('description', self.venueDetails.description + " Bottle Confirmation");
+                $rootScope.title = self.venueDetails.venueName+' '+self.selectedCity+' '+self.venueDetails.state + " Venuelytics - Bottle Services Confirmation & Payment";
+                ngMeta.setTitle($rootScope.title);
+               
                 self.venueID = $routeParams.venueid;
                 self.userData = DataShare.bottleServiceData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
-                self.successPageTheme = $window.localStorage.getItem("blackTheme");
+               
                 self.availableAmount = $window.localStorage.getItem("bottleAmount");
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');
                 self.selectBottleOrders = DataShare.selectBottle;
                 self.enablePayment = DataShare.enablePayment;
-                self.venueName = DataShare.venueName;
+                self.venueName =  DataShare.venueDetails.venueName;
                 angular.forEach(self.selectBottleOrders, function(value1, key1) {
                     self.availableAmount = self.availableAmount + value1.price;
                 });
@@ -89,18 +92,18 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             };
 
             self.editConfirmPage = function() {
-                $location.url("/cities/" + self.editCity + "/" + self.venueID + '/bottle-service');
+                $location.url("/cities/" + self.selectedCity + "/" + self.venueID + '/bottle-service');
             };
 
             self.paymentEnable = function() {
-                $location.url(self.editCity +"/bottlePayment/" + self.venueID);
+                $location.url(self.selectedCity +"/bottlePayment/" + self.venueID);
             };
 
             self.backToReservation = function() {
                 $rootScope.serviceName = 'BottleService';
                 DataShare.editBottle = 'false';
                 DataShare.bottleServiceData = '';
-                $location.url('/cities/' + self.editCity + '/' + self.venueID + '/bottle-service');
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueID + '/bottle-service');
             };
 
             self.cardPaymentData = function(value) {
@@ -141,7 +144,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
+                            $location.url(self.selectedCity +'/orderConfirm/'+ self.venueID);
                         }
                     });
                 } else {
@@ -150,7 +153,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.editCity +'/orderConfirm/'+ self.venueID);
+                        $location.url(self.selectedCity +'/orderConfirm/'+ self.venueID);
                     }
                 }
             };
@@ -190,7 +193,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
                     var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
                     AjaxService.createTransaction(self.venueID, self.orderId, payment, authBase64Str).then(function(response) {
-                        $location.url(self.editCity +"/paymentSuccess/" + self.venueID);
+                        $location.url(self.selectedCity +"/paymentSuccess/" + self.venueID);
                     });
                 }
             });

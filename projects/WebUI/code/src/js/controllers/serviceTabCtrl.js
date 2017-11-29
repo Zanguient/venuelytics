@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore) {
+app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore','VenueService',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore, venueService) {
 
 	$log.log('Inside ServiceTab Controller.');
 
@@ -25,15 +25,17 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
 
     self.init = function() {
-        localStorage.clear();
+        //localStorage.clear();
 
         /*jshint maxcomplexity:14 */
         if($rootScope.serviceName === 'GuestList') {
             DataShare.guestListData = '';
         }
-        if(self.embeddedService === 'embed'){
-            $rootScope.embeddedFlag = true;
-        }
+       
+        $rootScope.embeddedFlag = self.embeddedService === 'embed';
+
+        venueService.saveProperty(self.venueid, 'embed', $rootScope.embeddedFlag);
+
         if ((self.venueid === '70008') || (self.venueid === '170637')) {
             self.partyFlag = true;
         }
@@ -49,12 +51,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         var utmMedium = $location.search().utm_medium;
         var campaignName = $location.search().utm_campaign;
         var rawreq = $location.absUrl();
-        var userAgent = '';
-        if (typeof $window.navigator !== 'undefined') {
-            userAgent = $window.navigator.userAgent;
-        }        
-
-        AjaxService.utmRequest(self.venueid, self.tabParams, utmSource, utmMedium, campaignName, rawreq, userAgent );
+        
+        AjaxService.utmRequest(self.venueid, self.tabParams, utmSource, utmMedium, campaignName, rawreq );
 
         if(DataShare.selectBottle) {
             self.bottleMinimum = DataShare.selectBottle;
@@ -65,17 +63,17 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
         AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
             self.detailsOfVenue = response;
+            venueService.saveVenue($routeParams.venueid, response);
             $rootScope.description = self.detailsOfVenue.description;
-            DataShare.eachVenueDescription = self.detailsOfVenue.description;
-            self.selectedCity = $routeParams.cityName;
-            DataShare.venueFullDetails = self.detailsOfVenue;
+            self.selectedCity = self.detailsOfVenue.city;
             self.venueName =  $rootScope.headerVenueName = self.detailsOfVenue.venueName;
             $rootScope.headerAddress = self.detailsOfVenue.address;
             $rootScope.headerWebsite = self.detailsOfVenue.website;
             self.imageParam = $location.search().i;
             self.detailsOfVenue.imageUrls[0].active = 'active';
-            self.venueImage = self.detailsOfVenue;
+            self.venueImage = self.detailsOfVenue.imageUrls[0];
             AjaxService.getInfo(self.venueid).then(function(response) {
+                venueService.saveVenueInfo(self.venueid, response);
                 self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
                 self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
                 self.bottleServiceButton = response.data["Advance.BottleService.enable"];
@@ -84,7 +82,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.tableServiceButton = response.data["Advance.tableService.enable"];
                 self.featuredEnable = response.data["Advance.featured"];
                 self.eventsEnable = response.data["venueEvents"];
-                $rootScope.blackTheme = ((response.data["ui.service.theme"] === '') || (response.data["ui.service.theme"] === undefined))  ? '' : response.data["ui.service.theme"];
+                $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
                 if(self.embeddedService === 'embed') {
                     $rootScope.venueHeader = response.data["ui.custom.header"];
                     $rootScope.venueFooter = response.data["ui.custom.footer"];
@@ -251,7 +249,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
           
            // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
             addTab('eventListTab','eventlist', 'assets/img/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, 'eventListBtn', 'eventList');
-            if(self.tabParams === "VIP"){
+            //if(self.tabParams === "VIP"){
                 var firstEnabledTabBtnId = optimizeTabDisplay(self.displayTabs);
                 if (firstEnabledTabBtnId !== null) {  
                     setTimeout(function() {
@@ -259,7 +257,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                         $("#"+firstEnabledTabBtnId).click(); 
                     }, 500);
                 }
-            }
+            //}
         }
     }
     self.init();

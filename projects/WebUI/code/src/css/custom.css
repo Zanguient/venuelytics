@@ -6,12 +6,14 @@
 .contactTop {
   margin-top: 19px;
 }
-/* BlackTheme start */
 
+/* BlackTheme start */
 .blackTheme {
+  /*color: #fdfdfd !important;*/
   color: #fdfdfd !important;
   background-color: #000000 !important;
 }
+
 .blackTheme label {
   color: #fdfdfd !important;
 }
@@ -37,10 +39,6 @@
   color: #fff;
 }
 
-.inverse {
-   border: 1px solid #757575 !important;
-   color: #757575 ;
-}
 
 .blackTheme .panel {
   background-color: #000000 !important;
@@ -50,7 +48,68 @@
 .blackTheme .borderLine{
   border-color: #fff !important;
 }
-/* BalckTheme End */
+/* BlackTheme End */
+
+.whiteTheme {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+}
+
+.whiteTheme tr:hover {
+  background-color: #ffffff !important;
+}
+.whiteTheme tr {
+  background-color: #ffffff !important;
+}
+
+
+/* BlackGoldTheme start */
+.blackGoldTheme {
+  /*color: #fdfdfd !important;*/
+  color: #D4AF37 !important;
+  background-color: #000000 !important;
+}
+
+.blackGoldTheme label {
+  color: #D4AF37 !important;
+}
+.blackGoldTheme input {
+  color: #D4AF37 !important;
+}
+.blackGoldTheme tr:hover {
+  background-color: #000000 !important;
+}
+.blackGoldTheme tr {
+  background-color: #000000 !important;
+}
+
+.blackGoldTheme .btn:disabled {
+  /* background-color: #3a943a !important; */
+  opacity: .35 !important;
+   color: #fff;
+}
+
+.blackGoldTheme .btn[disabled][disabled] {
+ /*  background-color: #3a943a !important; */
+  opacity: .35 !important; 
+  color: #fff;
+}
+
+
+.blackGoldTheme .panel {
+  background-color: #000000 !important;
+}
+
+
+.blackGoldTheme .borderLine{
+  border-color: #fff !important;
+}
+/* BalckGoldTheme End */
+
+.inverse {
+   border: 1px solid #757575 !important;
+   color: #757575 ;
+}
 
 /* Break through css start */
 
@@ -402,9 +461,6 @@ select {
   margin-bottom: 15px;
 }
 
-.budgetPadding {
-   padding-left: 15px;
-}
 
 #venueImageHours {
   margin-bottom: 15px;
@@ -904,9 +960,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     height: 690px;
   }
 
-  #alignmentTime {
-    margin-left: 25px;
-  }
 
   #guestWomen {
     margin-left: 25px;
@@ -1219,9 +1272,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     z-index: 100;position: absolute;top: 150px;
   }
 
-  #alignmentTime {
-    margin-left: 13px;
-  }
 
   #guestWomen {
     margin-left: 13px;
@@ -1492,10 +1542,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 
   
-  #alignmentTime {
-    margin-left: 13px;
-  }
-
   #guestWomen {
     margin-left: 13px;
   }
@@ -1650,10 +1696,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   .eventImage{
     height: 100px;
     width: 100px;
-  }
-
-  #alignmentTime {
-    margin-left: 13px;
   }
 
   #guestWomen {

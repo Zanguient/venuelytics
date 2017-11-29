@@ -1,6 +1,6 @@
 "use strict";
-app.controller('bachelorConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore, ngMeta) {
+app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope, ngMeta, venueService) {
 
 
     		var self = $scope;
@@ -9,17 +9,16 @@ app.controller('bachelorConfirmController', ['$log', '$scope', '$http', '$locati
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
-                $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
-                $rootScope.description = DataShare.eachVenueDescription;
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Bachelor party Confirmation");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bachelor party Confirmation & Payment";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bachelor party Confirmation & Payment");
-                self.city = $routeParams.cityName;
+                
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                $rootScope.description = self.venueDetails.description;
+                ngMeta.setTag('description', self.venueDetails.description + " Bachelor party Confirmation");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bachelor party Confirmation & Payment";
+                ngMeta.setTitle($rootScope.title);
+                self.city = $self.venueDetails.city;
                 self.selectedVenueID = $routeParams.venueid;
                 self.bachelorData = DataShare.partyServiceData;
                 self.venueName = DataShare.venueName;
-                self.successPageTheme = $window.localStorage.getItem("blackTheme");
                 self.availableAmount = $window.localStorage.getItem("bachelorAmount");
                 self.authBase64Str = DataShare.authBase64Str;
                 if(DataShare.privateOrderItem !== ''){

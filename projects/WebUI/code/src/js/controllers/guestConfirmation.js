@@ -1,18 +1,20 @@
 "use strict";
-app.controller('GuestConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore, ngMeta) {
+app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope','ngMeta', 'VenueService',
+    function ($log, $scope, $location,  DataShare, $window, $routeParams, AjaxService, $rootScope, ngMeta, venueService) {
 
     		$log.log('Inside Guest Confirm Controller.');
 
     		var self = $scope;
             self.init = function() {
-                $rootScope.description = DataShare.eachVenueDescription;
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Guest Confirmation");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Guest List Confirmation";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Guest List Confirmation");
-                self.city = $routeParams.cityName;
+                
                 self.selectedVenueID = $routeParams.venueid;
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                $rootScope.description = self.venueDetails.description;
+                ngMeta.setTag('description', self.venueDetails.description + " Guest Confirmation");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Guest List Confirmation";
+                ngMeta.setTitle($rootScope.title);
+                self.city = self.venueDetails.city;
+                
                 self.guestListData = DataShare.guestListData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;

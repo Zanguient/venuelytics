@@ -415,8 +415,11 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
 
     };
 
-    this.utmRequest = function(venueNumber, serviceType, utmSource, utmMedium, campaignName, rawreq, agent ) {
-        
+    this.utmRequest = function(venueNumber, serviceType, utmSource, utmMedium, campaignName, rawreq ) {
+        var agent = '';
+        if (typeof $window.navigator !== 'undefined') {
+            agent = $window.navigator.userAgent;
+        } 
         if (typeof utmSource === 'undefined' || utmSource === '') {
             return;
         }

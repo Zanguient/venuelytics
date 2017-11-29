@@ -3,20 +3,21 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta) {
+app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, ngMeta, venueService) {
 
 
             var self = $scope;
             self.privateDateIsFocused = 'is-focused';
             self.init = function() {
                 self.getReservationTime = APP_ARRAYS.time;
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Private Event");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Private Event";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Private Event");
-                $rootScope.serviceTabClear = false;
                 self.venueID = self.venueid = $routeParams.venueid;
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                ngMeta.setTag('description', self.venueDetails.description + " Private Event");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Private Event";
+                ngMeta.setTitle($rootScope.title);
+                $rootScope.serviceTabClear = false;
+                
                 self.getServiceTime();
                 if((Object.keys(DataShare.privateEventData).length) !== 0) {
                     self.private = DataShare.privateEventData;
@@ -149,7 +150,6 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             self.getBanquetHall = function(venueId) {
                 AjaxService.getPrivateHalls(venueId, 'BanquetHall').then(function(response) {
                     self.privateEventValueArray = response.data;
-                    self.banquetHallDescription = response.data[0].description;
                     self.reservationData = [];
                     var privateDate = moment(self.private.orderDate).format('YYYYMMDD');
                     AjaxService.getVenueMapForADate(self.venueid,privateDate).then(function(response) {

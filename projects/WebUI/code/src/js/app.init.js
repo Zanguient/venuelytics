@@ -1,6 +1,6 @@
 "use strict";
 var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies', 'ngclipboard',
- 'daterangepicker','ngMeta', 'satellizer']);
+ 'daterangepicker','ngMeta', 'satellizer', 'ngStorage']);
 
 
 // configure our routes
@@ -301,7 +301,6 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     }
     hostName = $window.location.href.toLowerCase();
     $rootScope.showBusinessLink = true;
-    $rootScope.embeddedFlag = false;
     var defaultPage = '/home';
     
     setTimeout(function(){

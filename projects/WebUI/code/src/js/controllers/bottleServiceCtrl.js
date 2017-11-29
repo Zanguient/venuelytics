@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta) {
+app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta, venueService) {
 
             $log.debug('Inside Bottle Service Controller.');
 
@@ -63,15 +63,16 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                 
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
-                    DataShare.venueFullDetails = self.detailsOfVenue;
-                    self.venudetails = DataShare.venueFullDetails;
+                    self.venueDetails = response;
+                    venueService.saveVenue($routeParams.venueid, self.venueDetails);
+
                     ngMeta.setTag('description', response.description + " Bottle Services");
-                    $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services";
-                    ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bottle Services");
+                    $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bottle Services";
+                    ngMeta.setTitle($rootScope.title);
                     angular.forEach(response.imageUrls, function(value,key){
                         ngMeta.setTag('image', value.originalUrl);
                     });
-                    self.selectedCity = $routeParams.cityName;
+                    self.selectedCity = self.venueDetails.city;
                     self.venueName =    self.detailsOfVenue.venueName;
                 });
 
@@ -132,7 +133,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                     self.dressCode =  response.data["Advance.dressCode"];
                     self.enabledPayment =  response.data["Advance.enabledPayment"];
                     self.reservationFee =  response.data["Bottle.BottleReservationFee"];
-                    $rootScope.blackTheme = ((response.data["ui.service.theme"] === '') || (response.data["ui.service.theme"] === undefined))  ? '' : response.data["ui.service.theme"];
+                    $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
+                    venueService.saveVenueInfo(self.venueid, response);
                 });
             };
 
@@ -256,13 +258,15 @@ app.controller('BottleServiceController', ['$log', '$scope', '$http', '$location
                           var arc = JSON.parse("["+t.coordinates+"]");
                           var elem = {};
                           elem.name = t.TableName;
-                          elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
-                          elem.coords = [];
-                          elem.coords[0] = arc[0];
-                          elem.coords[1] = arc[1];
-                          elem.coords[2] = arc[4];
-                          elem.coords[3] = arc[5];
-                          maps.push(elem);
+                          if (typeof $scope.selectedVenueMap.productsByName[elem.name] !== 'undefined') {
+                            elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
+                            elem.coords = [];
+                            elem.coords[0] = arc[0];
+                            elem.coords[1] = arc[1];
+                            elem.coords[2] = arc[4];
+                            elem.coords[3] = arc[5];
+                            maps.push(elem);
+                          }
                         });
                         DataShare.imageMapping.maps = maps;
                         

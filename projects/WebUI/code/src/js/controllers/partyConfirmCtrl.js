@@ -1,6 +1,6 @@
 "use strict";
-app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore, ngMeta) {
+app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope','ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope, ngMeta, venueService) {
 
     		$log.log('Inside Party Confirm Controller.');
 
@@ -10,17 +10,18 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
-                $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
-                $rootScope.description = DataShare.eachVenueDescription;
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Party Confirmation");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Services Confirmation & Payment";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Services Confirmation & Payment");
-                self.city = $routeParams.cityName;
                 self.selectedVenueID = $routeParams.venueid;
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                $rootScope.description = self.venueDetails.description;
+                ngMeta.setTag('description', self.venueDetails.description + " Party Confirmation");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Party Services Confirmation & Payment";
+                ngMeta.setTitle($rootScope.title);
+                self.city = self.venueDetails.city;
+                
                 self.partyPackageData = DataShare.partyServiceData;
                 self.venueName = DataShare.venueName;
-                self.successPageTheme = $window.localStorage.getItem("blackTheme");
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
                 self.availableAmount = $window.localStorage.getItem("partyAmount");
                 self.authBase64Str = DataShare.authBase64Str;
                 if(DataShare.privateOrderItem !== ''){

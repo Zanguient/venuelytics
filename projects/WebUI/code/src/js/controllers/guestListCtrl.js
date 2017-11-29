@@ -3,19 +3,20 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('GuestListController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta) {
+app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, ngMeta, venueService) {
 
     		$log.log('Inside GuestList Controller.');
 
             var self = $scope;
             self.guestDateIsFocused = 'is-focused';
             self.init = function() {
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Guest List");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Guest List";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Guest List");
                 self.venueid = $routeParams.venueid;
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                ngMeta.setTag('description', self.venueDetails.description + " Guest List");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Guest List";
+                ngMeta.setTitle($rootScope.title);
+
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $rootScope.serviceTabClear = false;

@@ -1,6 +1,6 @@
 "use strict";
-app.controller('foodServiceController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta) {
+app.controller('foodServiceController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, ngMeta, venueService) {
 
             $log.log('Inside Food Service Controller.');
 
@@ -9,29 +9,30 @@ app.controller('foodServiceController', ['$log', '$scope', '$http', '$location',
             self.selectedFoodList = [];
             self.foodType = 'Delivery';
             self.init = function() {
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Food Services");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Food Services";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Food Services");
-                self.venueid = $routeParams.venueid;
-                self.selectedCity = $routeParams.cityName;
-                $rootScope.serviceTabClear = false;
-                if(($rootScope.serviceName === 'FoodService') || (DataShare.amount !== '')) {
-                    self.tabClear();
-                }
-                if((Object.keys(DataShare.foodServiceData).length) !== 0) {
-                    self.food = DataShare.foodServiceData;
-                    self.foodType = DataShare.serviceTypes;
-                    self.selectedFoodList = DataShare.foodService;
-                } else {
-                    self.tabClear();
-                }
-                self.getMenus();
-                self.getFood();
-                self.getVenueType();
-                setTimeout(function() {
-                    self.getSelectedTab();
-                }, 600);
+              self.venueid = $routeParams.venueid;
+              self.venueDetails = venueService.getVenue($routeParams.venueid);
+              ngMeta.setTag('description', self.venueDetails.description + " Food Services");
+              $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state +  " Venuelytics - Food Services";
+              ngMeta.setTitle($rootScope.title);
+              
+              self.selectedCity = self.venueDetails.city;
+              $rootScope.serviceTabClear = false;
+              if(($rootScope.serviceName === 'FoodService') || (DataShare.amount !== '')) {
+                  self.tabClear();
+              }
+              if((Object.keys(DataShare.foodServiceData).length) !== 0) {
+                  self.food = DataShare.foodServiceData;
+                  self.foodType = DataShare.serviceTypes;
+                  self.selectedFoodList = DataShare.foodService;
+              } else {
+                  self.tabClear();
+              }
+              self.getMenus();
+              self.getFood();
+              self.getVenueType();
+              setTimeout(function() {
+                  self.getSelectedTab();
+              }, 600);
             };
 
             self.tabClear = function() {

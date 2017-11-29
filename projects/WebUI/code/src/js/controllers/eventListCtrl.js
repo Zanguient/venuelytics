@@ -3,8 +3,8 @@
  * @date 05-sep-2017
  */
 "use strict";
-app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','$timeout','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, $timeout, ngMeta) {
+app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','$timeout','ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, $timeout, ngMeta, venueService) {
         
     var self = $scope;
     var DAYS = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
@@ -18,10 +18,10 @@ app.controller('eventListCtrl', ['$log', '$scope', '$http', '$location', 'RestUR
      self.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
 
     self.init = function() {
-      self.venudetails = DataShare.venueFullDetails;
-      ngMeta.setTag('description', self.venudetails.description + " Event Services");
-      $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Event List";
-      ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Event List");
+      self.venueDetails = venueService.getVenue($routeParams.venueid);
+      ngMeta.setTag('description', self.venueDetails.description + " Event Services");
+      $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Event List";
+      ngMeta.setTitle($rootScope.title);
         self.tabParam = $routeParams.tabParam;
         AjaxService.getEvents($routeParams.venueid).then(function(response) {
           self.events = response.data['venue-events'];

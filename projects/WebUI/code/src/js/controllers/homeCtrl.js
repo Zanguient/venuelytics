@@ -3,10 +3,8 @@
  * @date 25-MAY-2017
  */
 "use strict";
-app.controller('HomeController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'APP_CLIENTS', 
-    'APP_ARRAYS', '$rootScope', 'AjaxService', 'APP_LINK','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope, AjaxService,
-     APP_LINK, ngMeta) {
+app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$translate', 'APP_CLIENTS', 'APP_ARRAYS', '$rootScope', 'AjaxService', 'APP_LINK','ngMeta',
+    function ($log, $scope, $location, DataShare, $translate, APP_CLIENTS, APP_ARRAYS, $rootScope, AjaxService, APP_LINK, ngMeta) {
 
 	$log.log('Inside Home Controller.');
     ngMeta.setTitle("Home - Venuelytics");

@@ -198,8 +198,8 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
                 self.selectedVenueAddress = selectedVenue.address;
                 DataShare.venueAddress = self.selectedVenueAddress;
                 self.claimBusiness = true;
-                $rootScope.title = 'Venuelytics-ClaimBusiness-'+selectedVenue.venueName;
-                ngMeta.setTitle('Venuelytics-ClaimBusiness-'+selectedVenue.venueName);
+                $rootScope.title = 'Venuelytics Claim Your Business - '+selectedVenue.venueName;
+                ngMeta.setTitle($rootScope.title);
                 $location.path("/claimBusiness/"+self.selectedVenueId);
             };
 

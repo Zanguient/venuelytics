@@ -3,22 +3,24 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope,ngMeta) {
+app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','ngMeta', 'VenueService',
+    function ($log, $scope, $location,DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope,ngMeta, venueService) {
 
 
             var self = $scope;
             self.partyDateIsFocused = 'is-focused';
             self.init = function() {
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Party Package");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Package Services";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Package Services");
+                self.venueID = $routeParams.venueid;
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                ngMeta.setTag('description', self.venueDetails.description + " Party Package");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + "Venuelytics - Party Package Services";
+                ngMeta.setTitle($rootScope.title);
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
-                self.venueID = $routeParams.venueid;
+                
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.party = DataShare.partyServiceData;
                 } else {
@@ -112,7 +114,6 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
             self.getPartyHall = function(venueId) {
                 AjaxService.getPrivateHalls(venueId, 'PartyHall').then(function(response) {
                     self.partyHall = response.data;
-                    self.partyDescription = response.data[0].description;
                     self.reservationData = [];
                     var partyDate = moment(self.party.orderDate).format('YYYYMMDD');
                     AjaxService.getVenueMapForADate(self.venueid,partyDate).then(function(response) {

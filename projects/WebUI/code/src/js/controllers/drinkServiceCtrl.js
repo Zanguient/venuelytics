@@ -1,17 +1,18 @@
 "use strict";
-app.controller('drinkServiceController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta) {
+app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, ngMeta, venueService) {
 
            var self = $scope;
             self.selectedDrinkItems = [];
             self.drinkType = 'Delivery';
             self.init = function() {
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Drink Services");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Drink Services";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Drink Services");
                 self.venueid = $routeParams.venueid;
-                self.selectedCity = $routeParams.cityName;
+                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                ngMeta.setTag('description', self.venueDetails.description + " Drink Services");
+                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Drink Services";
+                ngMeta.setTitle($rootScope.title);
+                
+                self.selectedCity = self.venueDetails.city;
                 $rootScope.serviceTabClear = false;
                 
                 if(($rootScope.serviceName === 'DrinkService') || (DataShare.amount !== '')) {
