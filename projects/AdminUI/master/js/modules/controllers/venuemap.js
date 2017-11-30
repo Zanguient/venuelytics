@@ -351,7 +351,8 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
 
     $scope.update = function(isValid, data, venueNumber) {
 
-      $scope.syncTablesAndMapElements()
+      $scope.syncTablesAndMapElements();
+      $scope.mapElements = [];
       for (var i = 0; i < $scope.img.maps.length; i++) {
         var coordinates = [];
         var singlePoint = $scope.img.maps[i].coords;

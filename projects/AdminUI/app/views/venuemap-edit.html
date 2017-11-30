@@ -13,17 +13,26 @@
 					<!-- START panel-->
 
 					<div class="row">
-						<div class="form-group col-sm-8">
+						<div class="form-group col-sm-6 ">
 							<label class="control-label">Section Name *</label> 
 							<input type="text" name="name" required="required" class="form-control" ng-model="data.section" />
 						</div>
-						<div class="form-group col-sm-4">
+						<div class="form-group col-sm-6">
 							<label class="control-label">Venue Number</label> 
 							<input type="text" name="description" data-parsley-type="integer" readonly class="form-control" ng-model="venueNumber" />
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-sm-12">
+						<div class="form-group col-sm-6">
+							<label class="control-label">Type*</label> 
+							<select name="contentType" class="form-control m-b" ng-model="data.type">
+								<option value="VenueMap">Bottle Service</option>
+								<option value="Restaurant">Table Service</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-6">
 							<label class="control-label nowrap">Days*</label>
 							<input type="text" name="size" placeholder="Comma Separated 3 letter days Ex, SUN,MON,..." required="required" class="form-control" ng-model="data.days" />
 						</div>
