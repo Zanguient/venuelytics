@@ -256,7 +256,7 @@ app
     "MONTHLY_PRICE":"Monthly price",
     "BASIC_FEE":"Basic",
     "FREE_TIER":"FREE",
-    "FREE_PRICE":"FREE",
+    "FREE_PRICE":"0",
     "BASIC_FEE_IDEAL":"Ideal for Small Venues",
     "FREE_TIER_IDEAL":"Ideal for trying out",
     "PROFESSIONAL_FEE":"Professional",
