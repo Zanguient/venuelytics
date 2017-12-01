@@ -4,8 +4,19 @@
 <script defer src="<%= assets %>/js/app_main.js"></script>
 <script defer src="<%= assets %>/js/app_logic.js"></script>
 <script defer src="<%= assets %>/js/libs.min.js"></script>
+
 <script>
     window.iFrameResizer = {
         targetOrigin : '*'
     }
+
+	var capterra_vkey = '035233365b24da97f4e0de99ce221ea4',
+	capterra_vid = '2117189',
+	capterra_prefix = (('https:' == document.location.protocol) ? 'https://ct.capterra.com' : 'http://ct.capterra.com');
+
+      (function() {
+        var ct = document.createElement('script'); ct.type = 'text/javascript'; ct.async = true;
+        ct.src = capterra_prefix + '/capterra_tracker.js?vid=' + capterra_vid + '&vkey=' + capterra_vkey;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ct, s);
+      })();
 </script>

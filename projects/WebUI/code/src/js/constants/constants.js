@@ -230,21 +230,6 @@ app
     'guardsmanRed':           'C60000',
     'lightGreen':             '08FF00',
     'turbo':                  'E3E300',
-    'btnColor':               '#fffff',
-    'bottleBtn':              '#7a11d9',
-    'privateBtn':             '#0e68a7',
-    'guestBtn':               '#dc992a',
-    'foodBtn':                '#1e8644',
-    'drinksBtn':              '#da0615',
-    'tableBtn':               '#dc992a',
-    'partyBtn':               '#DA0615',  
-    'bachelorBtn':            '#d2902d',
-    'guestShadow':            '#af7009',
-    'drinksShadow':           '#bb0815',
-    'foodShadow':             '#0a6f2f',
-    'tableShadow':            '#af7009',
-    'bottleShadow':           '#56099c',
-    'privateShadow':          '#08548a'
   })
 
   .constant('APP_LINK', {
@@ -258,7 +243,7 @@ app
     "APPLE_STORE_ITZFUN"     :  "//itunes.apple.com/us/app/itzfun/id1035171101?mt=8",
     "GOOGLE_PLAY_VENUELYTICS":  "//play.google.com/store/apps/details?id=com.itzfun.biz&hl=en",
     "GOOGLE_PLAY_ITZFUN"     :  "//play.google.com/store/apps/details?id=com.itzfun&hl=en",
-    "VIDEO_PLAY"             :  "//www.youtube.com/watch?v=ruy7kCuPpV4"
+    "VIDEO_PLAY"             :  "//www.youtube.com/watch?v=HZngJ7YtOuU"
   })
 
   .constant('PRICING_APP', {

@@ -24,16 +24,31 @@
 .blackTheme tr {
   background-color: #000000 !important;
 }
+
 .blackTheme .btn:disabled {
-  background-color: #3a943a !important;
-  color: #fdfdfd !important;
+  /* background-color: #3a943a !important; */
+  opacity: .35 !important;
+   color: #fff;
 }
+
 .blackTheme .btn[disabled][disabled] {
-  background-color: #3a943a !important;
-  color: #fdfdfd !important;
+ /*  background-color: #3a943a !important; */
+  opacity: .35 !important; 
+  color: #fff;
 }
+
+.inverse {
+   border: 1px solid #757575 !important;
+   color: #757575 ;
+}
+
 .blackTheme .panel {
   background-color: #000000 !important;
+}
+
+
+.blackTheme .borderLine{
+  border-color: #fff !important;
 }
 /* BalckTheme End */
 
@@ -332,10 +347,6 @@
   font-stretch: normal;
 }
 
-.floatingLabel {
-  padding-left: 0px;
-}
-
 .fontBold {
   font-family: 'Source Sans Pro', 'sans-serif';
   font-weight: 700;
@@ -350,14 +361,6 @@
   font-stretch: normal;
 }
 
-.privateEventBox {
-  color: #757575;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 2.6rem;
-  -webkit-font-smoothing: antialiased;
-}
 .mt0 {
   margin-top: 0px;
 }
@@ -382,9 +385,6 @@ select {
 } */
 
 
-.cardHeight {
-  height:650px;
-}
 
 .thankYouHeight {
   height: 750px;
@@ -457,26 +457,8 @@ select {
    text-align: justify;
  }
 
-.table-map-info {
-  text-align: center;
-  margin-top: 0px;
-}
-
 .table-map-area {
   outline: red solid 2px;
-}
-
-.selected-table {
-  margin-top: 0px;
-}
-
-.table-map-color {
-  color: black;
-}
-
-.table-capacity {
-  margin-left: 15px;
-  color: black;
 }
 
 .table-carousel {
@@ -515,18 +497,6 @@ select {
   border: 1px solid #4CAF50;
   margin-bottom: 0px;
   margin-top: 0px;
-}
-
-.confirmationCenter {
-  width: 486px;
-}
-
-.bottleHeadername {
-  margin-right: 100px;
-}
-
-.bottleConfirmationTable {
-  width: 452px;
 }
 
 .search {
@@ -584,10 +554,6 @@ select {
 
 .error-message {
   color: red;
-}
-
-.venueTitle {
-  margin-bottom: 0px;
 }
 
 .venueDescription {
@@ -738,9 +704,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
       margin-left: 200px;
   }
 
-  .partyAlignment {
-    width:1000px;
-  }
 
 
   #forMobile {
@@ -758,16 +721,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
       color:black;
       font-size: 24px;
     }
-
-    .privateImages {
-      height: 243px;
-    }
-
-
-    #private-card-margin {
-      margin-bottom: 0px;
-    }
-
 
     .private-details {
       width: 1030px;
@@ -823,10 +776,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
       padding-top: 20px;
     }
 
-    .partyAlignment {
-      width:1000px;
-    }
-
     .textOnImg {
       position: absolute;
       right: 50px;
@@ -859,18 +808,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
     font-size: 24px;
   }
 
-  .privateImages {
-      height: 243px;
-  }
-
   .private-details {
     width: 1030px;
   }
 
-  #private-card-margin {
-      margin-bottom: 0px;
-    }
-
+  
   .smartbanner-icon{
     position:absolute;
     left:50px;
@@ -939,10 +881,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
   .carouselImage {
     width: 100%;
-  }
-
-  .partyAlignment {
-    width:1000px;
   }
 
   #removeBtn {
@@ -1204,10 +1142,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-left: -22px;
   }
 
-  .cardHeight {
-    height:580px;
-    margin-top: 56px;
-  }
+  
 
   .fc-header-title {
     display: inline-block;
@@ -1270,9 +1205,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     height: 100px
   }
 
-  .alignUrl {
-    margin-top: 40px;
-  }
 
   .privateFormHeight {
     margin-top: 38px;
@@ -1495,10 +1427,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
         height: 100px
       }
 
-      .cardHeight {
-        height:620px;
-        margin-top: 56px;
-      }
+      
 
       .eventListPrice {
         margin-right: 48px;
@@ -1562,10 +1491,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     width: 100px;
   }
 
-  .alignUrl {
-    margin-top: 40px;
-  }
-
+  
   #alignmentTime {
     margin-left: 13px;
   }
@@ -1664,11 +1590,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
         height: 100px
       }
 
-      .cardHeight {
-        height:600px;
-        margin-top: 56px;
-      }
-
+      
       .eventListPrice {
         margin-right: 64px;
         color: black;
@@ -1723,10 +1645,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
   .privateFormHeight {
     margin-top: 38px;
-  }
-
-  .alignUrl {
-    margin-top: 40px;
   }
 
   .eventImage{
@@ -3164,4 +3082,58 @@ table.fc-border-separate {
    font-weight: 600;
    font-size: 16px;
    height: 50px !important;
+}
+
+.bottleBtn {
+  background-color: rgba(122,17,217, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.tableBtn {
+  background-color: rgba(220,153,42, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.drinksBtn {
+  background-color: rgba(218,6,21, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.foodBtn {
+  background-color: rgba(30,134,68, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.privateBtn {
+  background-color: rgba(14,104,167, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.guestBtn {
+  background-color: rgba(220,153,42, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.partyBtn {
+  background-color: rgba(30,136,68, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.bachelorBtn {
+  background-color: rgba(103,111,121, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
+}
+
+.eventListBtn {
+  background-color: rgba(218,6,21, 0.80) !important;
+  color: #fff !important;
+  border-color: white !important;
 }

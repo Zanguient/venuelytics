@@ -106,14 +106,16 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$http', '$loc
             self.cardPaymentData = function(value) {
                 self.cardPayment = true;
                 self.paypal = false;
-                self.phoneVenues = false;
             };
 
             self.paypalData = function(value) {
                 self.paypal = true;
                 self.cardPayment = false;
-                self.phoneVenues = false;
             };
+            self.payAtVenue = function(value){
+                self.paypal = false;
+                self.cardPayment = false;
+            }
 
             self.paypalPayment = function() { 
                 DataShare.amount = self.chargedAmount;

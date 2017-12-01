@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var connect = require('gulp-connect');
+//var connect = require('gulp-connect');
 var argv = require('yargs').argv;
 var gulpif = require('gulp-if');
 var jshint = require('gulp-jshint');
@@ -157,8 +157,9 @@ gulp.task('revolution', function() {
 gulp.task('html', function() {
     const f = filter([ 'src/html/**/*.html', '!src/html/index.html'], {restore: true});
     const indexFilter =  filter([ 'src/html/index.html'], {restore: true});
+
     return gulp.src(['src/html/**/*.html', '!src/html/layout/**/*'])
-         .pipe(changed(path.join(paths.html)))
+         //.pipe(changed(path.join(paths.html)))
          .pipe(processhtml({
             recursive: true,
             process: true,
@@ -180,7 +181,7 @@ gulp.task('html', function() {
          })))
         .pipe(gulp.dest(path.join(paths.html)))
         .pipe(indexFilter.restore)
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('js', ['js:base', 'js:main', 'js:moment'], function() {
@@ -221,7 +222,7 @@ gulp.task('js:base', function() {
         .pipe(gulpif(config.compress, uglify()))
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('js:main', function() {
@@ -231,7 +232,7 @@ gulp.task('js:main', function() {
        // .pipe(gulpif(config.compress, uglify()))   
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('themes', function(cb) {
@@ -283,7 +284,7 @@ gulp.task('i18n', ['i18n:pseudo'], function() {
     return gulp.src(paths.src.i18n + '/*.json')
       //  .pipe(gulpif(config.compress, imagemin()))
         .pipe(gulp.dest(paths.i18n))
-        .pipe(connect.reload());
+       // .pipe(connect.reload());
 });
 
 gulp.task('scss', function() {
@@ -303,32 +304,32 @@ gulp.task('scss', function() {
         //.pipe(gulpif(!config.compress, rename('style.' + config.defaultTheme + '.min.css')))
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.css))
-        .pipe(connect.reload());
+       // .pipe(connect.reload());
 });
 
 gulp.task('img', function() {
     return gulp.src('src/img/**/*')
       //  .pipe(gulpif(config.compress, imagemin()))
         .pipe(gulp.dest(paths.img))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('fonts', function() {
     return gulp.src('src/fonts/**/*')
         .pipe(gulp.dest(paths.fonts))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('media', function() {
     return gulp.src('src/media/**/*')
         .pipe(gulp.dest(paths.media))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('seo', function() {
     return gulp.src('src/seo/**/*')
         .pipe(gulp.dest(paths.seo))
-        .pipe(connect.reload());
+        //.pipe(connect.reload());
 });
 
 gulp.task('clean', function() {
@@ -339,20 +340,22 @@ gulp.task('clean', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(['src/html/**/*'], ['html']);
-    gulp.watch(['src/html/layout/**/*'], ['html']);
-    gulp.watch(['src/js/**/*'], ['js']);
-    gulp.watch(['src/scss/**/*'], ['scss']);
+    config.environment = 'dev';
+    config.compress = false;
+    gulp.watch('src/html/**/*', ['incremental']);
+    gulp.watch(['src/html/layout/**/*'], ['incremental']);
+    gulp.watch(['src/js/**/*'], ['incremental']);
+   // gulp.watch(['src/scss/**/*'], ['scss']);
     gulp.watch(['src/img/**/*'], ['img']);
-    gulp.watch(['src/fonts/**/*'], ['fonts']);
-    gulp.watch(['src/media/**/*'], ['media']);
-    gulp.watch(['src/seo/**/*']);
+   // gulp.watch(['src/fonts/**/*'], ['fonts']);
+   // gulp.watch(['src/media/**/*'], ['media']);
+   // gulp.watch(['src/seo/**/*']);
 });
 
 
 gulp.task('connect', function() {
 
-  gulp.src(config.folders.dist)
+  return gulp.src(config.folders.dist)
     .pipe(webserver({
       livereload: true,
       path: '/',
@@ -381,6 +384,21 @@ gulp.task('dist',['dist:pre'], function(cb) {
    //  .pipe(gulpif(config.compress, minifyInline()))
      .pipe(gulp.dest(config.folders.dist));
 });
+
+gulp.task('incremental', ['incremental:pre'], function(cb) {
+    config.environment = 'dev';
+    config.compress = false;
+    return gulp.src('dist/index.html')
+     .pipe(cachebust.references())
+   //  .pipe(gulpif(config.compress, htmlmin({collapseWhitespace: true})))
+   //  .pipe(gulpif(config.compress, minifyInline()))
+     .pipe(gulp.dest(config.folders.dist));
+});
+
+gulp.task('incremental:pre', function(cb) {
+   return runSequence(['html', 'i18n'], 'js',cb);
+});
+
 
 gulp.task('dev', function(cb) {
     config.environment = 'dev';

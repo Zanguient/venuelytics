@@ -263,6 +263,7 @@ gulp.task('scripts:app', function() {
               'js/modules/filters/*.js', '!js/custom/**/*.js' ], {restore: true});
     return gulp.src(source.scripts.app)
      	  .pipe(gulpif('*.js',replace('dev.api.venuelytics.com',baseUrl())))
+        .pipe(gulpif('*.js',replace('http://52.9.4.76',baseSiteUrl())))
       	//.pipe(uglify()) 
         .pipe(f)
         .pipe(jshint())
@@ -513,5 +514,15 @@ function baseUrl() {
 	} else if (gutil.env.build === 'dev') {
 		return "dev.api.venuelytics.com";
 	} 
-	return "localhost:8080"
+	return "localhost:8080";
+}
+
+function baseSiteUrl () {
+  if (gutil.env.build === 'prod') {
+    return "http://www.venuelytics.com";
+  } else if (gutil.env.build === 'dev') {
+    return "http://52.9.4.76";
+  } 
+  return "http://localhost:8000";
+  
 }

@@ -64,14 +64,14 @@
                                                         </div>
                                                 </figure>
                                                 <div class="card-block">
-                                                    <h3 class="venueTitle">
+                                                    <h3 class="mb0">
                                                         <a ng-href="cities/{{selectedCityName}}/{{venue.id}}" ng-click="selectVenue(venue)">{{venue.venueName
                                                             | limitTo: 25 }}{{venue.venueName.length > 25 ? '...'
                                                             :''}}</a>
                                                     </h3>
                                                     <p><i class="fa fa-map-marker locationIcon"></i>{{venue.address | limitTo: 38
                                                     }}{{venue.address.length > 38 ? '...' :''}}</p>
-                                                    <a href="{{venue.website}}" target="_blank" class="venueTitle"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
+                                                    <a href="{{venue.website}}" target="_blank" class="mb0"><i class="fa fa-globe" aria-hidden="true"></i>     Website</a>
                                                     <p class="venueDescription">{{venue.description | limitTo: 60
                                                         }}{{venue.description.length > 60 ? '...' :''}}
                                                     <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#venuesDescriptionModal" ng-click="venueDescription(venue.description)" ng-if="venue.description.length > 60">{{"reservation.READ_MORE" | translate}}</a></p>

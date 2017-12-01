@@ -429,6 +429,7 @@
 		"VENUELYTICS_INC":"VenueLytics Inc - ItzFun Consumer & VenueLytics Business App Version v1.8(Build 18027)"
 	},
 	"reservation": {
+		"BACHELOR":"Bachelor Party",
 		"TABLE_TIME":"Time",
 		"TABLE_GUEST":"Guests",
 		"TABLE_SERVICE_CONFIRMATION":"Yes, I want to receive email updates from this restaurant.",
@@ -502,6 +503,7 @@
 		"BRAND":"Brand",
 		"QUANTITY":"Quantity",
 		"PRICE":"Price",
+		"TOTAL_PRICE": "Total Price",
 		"GUEST_SUCCESS":"Guest List details have been sent successfully.",
 		"ADD":"Add",
 		"TABLE_NAME":"Table Name(s)",
@@ -581,7 +583,6 @@
 		"TABLE_SERVICE":"Table Service",
 		"EVENT_LIST": "Event List",
 		"TABLE_SERVICE_TIMEOUT":"Hurry! We can hold your selected table only for the next 5 mins",
-		"TABLE_SERVICE-THANKS":"Table Reservation Price Details: $15 per person.",
 		"TABLE_CONFIRM_DESC":"",
 		"TABLE_CONFIRM_RESERVATION":"CONFIRM RESERVATION",
 		"SELECT_TIME":"Select Time:",

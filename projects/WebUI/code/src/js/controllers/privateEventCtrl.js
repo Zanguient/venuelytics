@@ -10,6 +10,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
             var self = $scope;
             self.privateDateIsFocused = 'is-focused';
             self.init = function() {
+                self.getReservationTime = APP_ARRAYS.time;
                 self.venudetails = DataShare.venueFullDetails;
                 ngMeta.setTag('description', self.venudetails.description + " Private Event");
                 $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Private Event";
@@ -30,8 +31,8 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 setTimeout(function() {
                     self.getSelectedTab();
                 }, 600);
-                    var date = new Date();
-                    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                var date = new Date();
+                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#privateDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
                 self.private.authorize = false;
                 self.private.agree = false;
@@ -43,17 +44,29 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 }
             });
             self.getServiceTime = function() {
+                self.reserveStartTimes = [];
+                self.reserveEndTimes = [];
                 AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
                     self.reservationTime = response.data;
-                    angular.forEach(self.reservationTime, function(value, key) {
-                        var H = + value.startTime.substr(0, 2);
-                        var h = (H % 12) || 12;
-                        var ampm = H < 12 ? " AM" : " PM";
-                        value.sTime = h + value.startTime.substr(2, 3) + ampm;
-                        H = + value.endTime.substr(0, 2);
-                        h = (H % 12) || 12;
-                        ampm = H < 12 ? " AM" : " PM";
-                        value.eTime = h + value.endTime.substr(2, 3) + ampm;
+                    angular.forEach(self.reservationTime, function(value1, key1) {
+                        $scope.venueOpenTime = new Date(moment($scope.startDate + ' ' + value1.startTime,'MM-DD-YYYY h:mm').format());
+                        value1.startTime = moment($scope.venueOpenTime).format("HH:mm");
+                        angular.forEach(self.getReservationTime, function(value, key) {
+                            if(value.key >= value1.startTime && value.key < value1.lastCallTime){
+                                self.reserveStartTimes.push(value);
+                            }
+                            if(value.key > value1.startTime && value.key <= value1.lastCallTime){
+                                self.reserveEndTimes.push(value);
+                            }
+                            if(value1.lastCallTime === '' || value1.lastCallTime === null) {
+                                if(value.key >= value1.startTime && value.key < value1.endTime){
+                                    self.reserveStartTimes.push(value);
+                                }
+                                if(value.key > value1.startTime && value.key <= value1.endTime){
+                                    self.reserveEndTimes.push(value);
+                                }
+                            }                            
+                        });
                     });
                 });
             };
@@ -75,35 +88,20 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                 $rootScope.serviceTabClear = true;
                 DataShare.tab = 'P';
                 DataShare.privateEventFocused = 'is-focused';
-                var date = new Date(self.private.orderDate);
-                var newDate = date.toISOString();
-                var parsedend = moment(newDate).format("MM-DD-YYYY");
+               
+                var selectedDateTime = moment(self.private.orderDate, 'YYYY-MM-DD').format("MM-DD-YYYY");
                 
-                date = moment(parsedend).format("MM-DD-YYYY");
-                self.selectDete = new Date(moment(date + ' ' +self.private.privateStartTime,'MM-DD-YYYY h:mm').format());
-                self.selectDete = moment(self.selectDete).format("YYYY-MM-DDTHH:mm:ss");
+                self.selectDate = moment(selectedDateTime + ' ' +self.private.privateStartTime,'MM-DD-YYYY h:mm a').format("YYYY-MM-DDTHH:mm:ss");
                 var fullName = self.private.privateFirstName + " " + self.private.privateLastName;
                 var authBase64Str = window.btoa(fullName + ':' + self.private.privateEmail + ':' + self.private.privateMobileNumber);
                 DataShare.privateEventData = self.private;
                 DataShare.authBase64Str = authBase64Str;
 
                 //calculate duration
-                var start = self.private.privateStartTime;
-                var end = self.private.privateEndTime;
-                start = start.split(":");
-                end = end.split(":");
-                var startDate = new Date(0, 0, 0, start[0], start[1], 0);
-                var endDate = new Date(0, 0, 0, end[0], end[1], 0);
-                var diff = endDate.getTime() - startDate.getTime();
-                var hours = Math.floor(diff / 1000 / 60 / 60);
-                diff -= hours * 1000 * 60 * 60;
-                var minutes = Math.floor(diff / 1000 / 60);
-                var finalValue =  (hours < 9 ? "0" : "") + hours + ":" + (minutes < 9 ? "0" : "") + minutes;
-                finalValue = finalValue.split(":");
-                self.duration = finalValue[0] * 60; 
-                if(finalValue[1] === "30") {
-                self.duration = self.duration + 30;
-                }
+                 
+                var startTime = moment(self.private.privateStartTime, "HH:mm");
+                var endTime = moment(self.private.privateEndTime, "HH:mm");
+                self.duration = moment.duration(endTime.diff(startTime));
 
                 self.serviceJSON = {
                     "serviceType": 'BanquetHall',
@@ -115,18 +113,16 @@ app.controller('PrivateEventController', ['$log', '$scope', '$http', '$location'
                     "noOfGuests": self.private.totalGuest,
                     "noOfMaleGuests": 0,
                     "noOfFemaleGuests": 0,
-                    "budget": 0,
-                    
+                    "budget": self.private.budget,
                     "serviceInstructions": self.private.privateComment,
                     "status": "REQUEST",
-                    "serviceDetail": null,
-                    "fulfillmentDate": self.selectDete,
-                    "durationInMinutes": self.duration,
+                    "fulfillmentDate": self.selectDate,
+                    "durationInMinutes": self.duration.asMinutes(),
                     "deliveryType": "Pickup",
                    
                     "order": {
                         "venueNumber": self.venueid,
-                        "orderDate": self.selectDete,
+                        "orderDate": self.selectDate,
                         "orderItems": []
                     }
                 };

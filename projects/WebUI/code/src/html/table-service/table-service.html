@@ -3,15 +3,15 @@
         <fieldset>
         <h1>{{'reservation.TABLE_RESERVATION' | translate}}</h1>
             <div class="col-md-12 form-group is-empty">
-                <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
+                <div class="col-md-3 form-group is-empty borderLine {{blackTheme}}" >
                     <input type="text" class="form-control fontBold" id="tableServiceDate" ng-model="table.tableDate" required>
                 </div>
-                <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
-                    <select class="form-control fontBold {{blackTheme}}" ng-model="table.reserveTime" ng-options="x.key as x.value for x in reserveTimes" required>
+                <div class="col-md-3 form-group is-empty borderLine {{blackTheme}}" >
+                    <select class="form-control fontBold  {{blackTheme}}" ng-model="table.reserveTime" ng-options="x.key as x.value for x in reserveTimes" required>
                         <option value="">{{'reservation.TABLE_PREFEREED_TIME' | translate}}</option>
                     </select>
                 </div>
-                <div class="col-md-3 form-group is-empty" style="border:1px solid #000;">
+                <div class="col-md-3 form-group is-empty borderLine {{blackTheme}}" >
                     <select class="form-control fontBold {{blackTheme}}" ng-model="table.guest" required>
                         <option value="">{{'reservation.TOTAL_GUEST' | translate}}</option>
                         <option ng-repeat="n in [].constructor(25) track by $index" value="{{$index+1}}">{{$index+1}}</option>
@@ -22,13 +22,13 @@
                 </div>
             </div>
 
-            <div class="col-md-12 form-group is-empty" style="border:1px solid #000;" ng-show="((reservedTimeSlot.length != 0) && (timeSlot == true))">
+            <div class="col-md-12 form-group is-empty borderLine {{blackTheme}}" ng-show="((reservedTimeSlot.length != 0) && (timeSlot == true))">
                 <h3>{{'reservation.SELECT_TIME' | translate}}</h3>
                 <div class="col-md-2" ng-repeat="times in reservedTimeSlot">
                     <button type="button" class="btn btn-success btn-raised" ng-click="confirmTableReserve(times.time)">{{times.time}}</button>
                 </div>
             </div>
-            <div class="col-md-12 form-group is-empty" style="border:1px solid #000;" ng-show="((reservedTimeSlot.length == 0) && (timeSlot == true))">
+            <div class="col-md-12 form-group is-empty borderLine {{blackTheme}}" ng-show="((reservedTimeSlot.length == 0) && (timeSlot == true))">
                 <center>
                     <h3>{{'reservation.NO_TIME_SLOT' | translate}}</h3>
                 </center>

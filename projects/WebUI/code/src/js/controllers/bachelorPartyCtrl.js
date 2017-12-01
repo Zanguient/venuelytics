@@ -1,34 +1,32 @@
 /**
- * @author Saravanakumar K
- * @date 19-MAY-2017
+ * @author Navaneethan C
+ * @date 14/11/2017
  */
 "use strict";
-app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
+app.controller('bachelorPartyController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope,ngMeta) {
-
-
             var self = $scope;
-            self.partyDateIsFocused = 'is-focused';
+            self.bachelorDateIsFocused = 'is-focused';
             self.init = function() {
                 self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Party Package");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Package Services";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Party Package Services");
+                ngMeta.setTag('description', self.venudetails.description + "Bachelor Party");
+                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bachelor Party Services";
+                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bachelor Party Services");
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
+                $( "#bachelorDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
                 self.venueID = $routeParams.venueid;
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
-                    self.party = DataShare.partyServiceData;
+                    self.bachelor = DataShare.partyServiceData;
                 } else {
                     self.tabClear();
                 }
-                if($rootScope.serviceName === 'PartyPackages') {
+                if($rootScope.serviceName === 'BachelorParty') {
                     self.tabClear();
-                } 
-                self.party.authorize = false;
-                self.party.agree = false;
+                }
+                self.bachelor.authorize = false;
+                self.bachelor.agree = false;
                 self.totalGuest = DataShare.totalNoOfGuest;
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
@@ -40,42 +38,42 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 }, 600);
             };
 
-            self.$watch('party.orderDate', function() {
-                if (self.party.orderDate !== "") {
-                    self.getPartyHall(self.venueID);
+            self.$watch('bachelor.orderDate', function() {
+                if (self.bachelor.orderDate !== "") {
+                    self.getBachelorPartyHall(self.venueID);
                 }
             });
             self.getMenus = function() {
                 AjaxService.getInfo(self.venueid).then(function(response) {
-                    self.partyCateringMenu = response.data["PartyHall.cateringMenuUrl"];
+                    /* self.partyCateringMenu = response.data["PartyHall.cateringMenuUrl"];
                     self.partyMenu = response.data["PartyHall.Menu"];
                     self.partyInfoSheet = response.data["PartyHall.Details"];
                     self.partyVideo = response.data["PartyHall.Video"];
-                    self.partyFloorPlan = response.data["PartyHall.FloorMap"];
+                    self.partyFloorPlan = response.data["PartyHall.FloorMap"]; */
                     self.enabledPayment = response.data["Advance.enabledPayment"];
                 });
             };
 
             if(DataShare.partyFocus !== '') {
-              self.partyFocus = DataShare.partyFocus;
+              self.bachelorPartyFocus = DataShare.partyFocus;
             }
 
             self.partyHallDescription = function(value) {
-                $rootScope.partyDescription = value;
+                $rootScope.BacheolorDescription = value;
             };
 
             self.tabClear = function() {
                 DataShare.partyServiceData = {};
                 DataShare.partyFocus = '';
-                self.party = {};
-                self.partyFocus = '';
+                self.bachelor = {};
+                self.bachelorPartyFocus = '';
                 $rootScope.serviceName = '';
-                self.party.orderDate = moment().format('YYYY-MM-DD');
+                self.bachelor.orderDate = moment().format('YYYY-MM-DD');
             };
 
             self.getSelectedTab = function() {
                 $("em").hide();
-                $("#partyPackage").show();
+                $("#bachelorParty").show();
             };
 
             self.getEventType = function() {
@@ -89,7 +87,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                         }
                       });
                       if(selectedType) {
-                        self.party.partyEventType = selectedType;
+                        self.bachelor.partyEventType = selectedType;
                       }
                     }
                 });
@@ -109,18 +107,18 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 }
             };
 
-            self.getPartyHall = function(venueId) {
+            self.getBachelorPartyHall = function(venueId) {
                 AjaxService.getPrivateHalls(venueId, 'PartyHall').then(function(response) {
-                    self.partyHall = response.data;
-                    self.partyDescription = response.data[0].description;
+                    self.bachelorPartyHall = response.data;
+                    self.BacheolorDescription = response.data[0].description;
                     self.reservationData = [];
-                    var partyDate = moment(self.party.orderDate).format('YYYYMMDD');
+                    var partyDate = moment(self.bachelor.orderDate).format('YYYYMMDD');
                     AjaxService.getVenueMapForADate(self.venueid,partyDate).then(function(response) {
                         self.reservations = response.data;
-                        angular.forEach(self.partyHall, function(value, key) {
+                        angular.forEach(self.bachelorPartyHall, function(value, key) {
                             value.reserve = false;
                         });
-                        angular.forEach(self.partyHall, function(value1, key1) {
+                        angular.forEach(self.bachelorPartyHall, function(value1, key1) {
                             angular.forEach(self.reservations, function(value2, key2) {
                                 if(value1.id === value2.productId) {
                                     value1.reserve = true;
@@ -131,30 +129,34 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
                 });
             };
 
-            self.confirmPartyPackage = function(selectedParty) {
+            self.confirmPartyPackage = function(selectedBachelorParty) {
                 $rootScope.serviceTabClear = true;
                 DataShare.partyFocus = 'is-focused';
-               
-                
-                var dateValue = moment(self.party.orderDate, 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss");
-                var fullName = self.party.userFirstName + " " + self.party.userLastName;
-                var authBase64Str = window.btoa(fullName + ':' + self.party.email + ':' + self.party.mobile);
-                DataShare.partyServiceData = self.party;
+                var date = new Date(self.bachelor.orderDate);
+                var newDate = date.toISOString();
+                var parsedend = moment(newDate).format("MM-DD-YYYY");
+                date = new Date(moment(parsedend,'MM-DD-YYYY').format());
+                var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
+                var fullName = self.bachelor.userFirstName + " " + self.bachelor.userLastName;
+                var authBase64Str = window.btoa(fullName + ':' + self.bachelor.email + ':' + self.bachelor.mobile);
+                DataShare.partyServiceData = self.bachelor;
                 DataShare.authBase64Str = authBase64Str;
                 self.serviceJSON = {
-                  "serviceType": 'PartyPackageService',
+                  "serviceType": 'BachelorPartyService',
                   "venueNumber": self.venueid,
-                  "reason": self.party.partyEventType.name,
-                  "contactNumber": self.party.mobile,
-                  "contactEmail": self.party.email,
+                  "reason": self.bachelor.partyEventType.name,
+                  "contactNumber": self.bachelor.mobile,
+                  "contactEmail": self.bachelor.email,
                   "contactZipcode": "",
-                  "noOfGuests": self.party.totalGuest,
+                  "noOfGuests": self.bachelor.totalGuest,
                   "noOfMaleGuests": 0,
                   "noOfFemaleGuests": 0,
                   "budget": 0,
+                  "hostEmployeeId": -1,
                   
-                  "serviceInstructions": self.party.instructions,
+                  "serviceInstructions": self.bachelor.instructions,
                   "status": "REQUEST",
+                  "serviceDetail": null,
                   "fulfillmentDate": dateValue,
                   "durationInMinutes": 0,
                   "deliveryType": "Pickup",
@@ -167,18 +169,18 @@ app.controller('PartyPackageController', ['$log', '$scope', '$http', '$location'
 
                 var items = {
                             "venueNumber": self.venueid,
-                            "productId": selectedParty.id,
-                            "productType": selectedParty.productType,
-                            "quantity": selectedParty.size,
-                            "comments": selectedParty.comments,
-                            "name": selectedParty.name
+                            "productId": selectedBachelorParty.id,
+                            "productType": selectedBachelorParty.productType,
+                            "quantity": selectedBachelorParty.size,
+                            "comments": selectedBachelorParty.comments,
+                            "name": selectedBachelorParty.name
                         };
                 self.serviceJSON.order.orderItems.push(items);
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;
-                DataShare.privateOrderItem = selectedParty;
-                $location.url("/confirmPartyPackage/" + self.selectedCity + "/" + self.venueid);
+                DataShare.privateOrderItem = selectedBachelorParty;
+                $location.url("/confirmBachelorParty/" + self.selectedCity + "/" + self.venueid);
              };
             self.init();
     }]);

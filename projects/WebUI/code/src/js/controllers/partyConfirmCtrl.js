@@ -8,7 +8,9 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
             self.availableAmount = 0;
             self.paypal = false;
             self.cardPayment = false;
+            self.orderPlaced = false;
             self.init = function() {
+                $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
                 $rootScope.description = DataShare.eachVenueDescription;
                 self.venudetails = DataShare.venueFullDetails;
                 ngMeta.setTag('description', self.venudetails.description + " Party Confirmation");
@@ -18,8 +20,12 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
                 self.selectedVenueID = $routeParams.venueid;
                 self.partyPackageData = DataShare.partyServiceData;
                 self.venueName = DataShare.venueName;
+                self.successPageTheme = $window.localStorage.getItem("blackTheme");
+                self.availableAmount = $window.localStorage.getItem("partyAmount");
                 self.authBase64Str = DataShare.authBase64Str;
-                self.availableAmount = DataShare.selectedVenuePrice;
+                if(DataShare.privateOrderItem !== ''){
+                    self.availableAmount = DataShare.privateOrderItem.price;
+                }                    
                 self.privateOrderItem = DataShare.privateOrderItem;
                 self.taxDate = moment(self.partyPackageData.orderDate).format('YYYYMMDD');
                 self.object = DataShare.payloadObject;
@@ -67,15 +73,41 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
             };
 
             self.savePartyPackage = function() {
-              AjaxService.createBottleService(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
-                    self.orderId = response.data.id;
+                if(self.orderPlaced === false) {
+                    AjaxService.createBottleService(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
+                        self.orderId = response.data.id;
+                        self.orderPlaced = true;
+                        if (self.cardPayment === true) {
+                            self.creditCardPayment();
+                        } else if (self.paypal === true) {
+                            self.paypalPayment();
+                        } else {
+                            $location.url(self.city +'/party-success/'+ self.selectedVenueID);
+                        }
+                    });
+                } else {
                     if (self.cardPayment === true) {
                         self.creditCardPayment();
+                    } else if (self.paypal === true) {
+                        self.paypalPayment();
                     } else {
                         $location.url(self.city +'/party-success/'+ self.selectedVenueID);
                     }
-                });
+                }
+            };
 
+            self.paypalPayment = function() {
+                DataShare.selectedVenuePrice = self.chargedAmount;
+                var popup = window.open("","directories=no,height=100,width=100,menubar=no,resizable=no,scrollbars=no,status=no,titlebar=no,top=0,location=no");
+                if (!popup || popup.closed || typeof popup.closed==='undefined'){
+                    alert("Popup Blocker is enabled!");
+                    popup.close();
+                } else {
+                    //Popup Allowed
+                    popup.close();
+                    var paypalElement = document.getElementById('paypal-button');
+                    jQuery(paypalElement).trigger('click');
+                } 
             };
 
             self.cardPaymentData = function(value) {
@@ -87,9 +119,14 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$http', '$location'
                 $scope.paypal = true;
                 $scope.cardPayment = false;
             };
+            self.payAtVenue = function(value){
+                $scope.paypal = false;
+                $scope.cardPayment = false;
+            }
 
             self.backToParty = function() {
               $rootScope.serviceName = 'PartyPackages';
+              DataShare.partyServiceData = '';
               $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/party-packages');
             };
 

@@ -2,58 +2,60 @@
 
 	<center>
 		<h1 class="color-success fontRegular">{{'reservation.GUEST_CONFIRM' | translate}}</h1>
-
-	<div class="form-group confirmationCenter">
-		<table class="table table-responsive table-no-border">
-
-                      <tbody>
-                        <tr>
-                          <td><label><b> {{'bottleServiceTab.DATE' | translate}} </b></label></td>
-                          <td>{{guestListData.requestedDate}}</td>
-                        </tr>
-                         <tr>
-                          <td> <label><b>{{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
-                          <td>{{guestListData.totalGuest}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'bottleServiceTab.MEN' | translate}}</b></label> </td>
-                          <td>{{guestListData.guestMen}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'bottleServiceTab.WOMEN' | translate}} </b></label></td>
-                          <td>{{guestListData.guestWomen}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
-                          <td>{{guestListData.guestMobileNumber}}</td>
-                        </tr>
-                        <tr>
-                          <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
-                          <td>{{guestListData.guestEmailId}}</td>
-                        </tr>
-                        <tr>
-                            <td><label><b> {{'reservation.EVENT_TYPE' | translate}}</b></label> </td>
-                            <td>{{guestListData.guestEvent.name}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'reservation.FIRST_NAME' | translate}}</b></label> </td>
-                          <td>{{guestListData.guestFirstName}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'reservation.LAST_NAME' | translate}}</b></label> </td>
-                          <td>{{guestListData.guestLastName}}</td>
-                        </tr>
-                        <tr>
-                          <td> <label><b>{{'reservation.ZIPCODE' | translate}} </b></label></td>
-                          <td>{{guestListData.guestZip}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-	        <div >
-	            <button type="submit" class="btn btn-raised btn-primary" ng-click="guestListSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
-	            <button type="button" class="btn btn-raised btn-danger" ng-click="editGuestPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
-	        </div>
-	    </center>
+  </center>
+  <div class="col-sm-12 col-md-4 col-md-offset-4 col-md-offset-right-4">
+  	<div class="form-group">
+  		<table class="table table-responsive table-no-border">
+          <tbody>
+            <tr>
+              <td><label><b> {{'bottleServiceTab.DATE' | translate}} </b></label></td>
+              <td>{{guestListData.requestedDate}}</td>
+            </tr>
+             <tr>
+              <td> <label><b>{{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
+              <td>{{guestListData.totalGuest}}</td>
+            </tr>
+            <tr>
+              <td> <label><b>{{'bottleServiceTab.MEN' | translate}}</b></label> </td>
+              <td>{{guestListData.guestMen}}</td>
+            </tr>
+            <tr>
+              <td> <label><b>{{'bottleServiceTab.WOMEN' | translate}} </b></label></td>
+              <td>{{guestListData.guestWomen}}</td>
+            </tr>
+            <tr>
+              <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
+              <td>{{guestListData.guestMobileNumber}}</td>
+            </tr>
+            <tr>
+              <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
+              <td>{{guestListData.guestEmailId}}</td>
+            </tr>
+            <tr>
+                <td><label><b> {{'reservation.EVENT_TYPE' | translate}}</b></label> </td>
+                <td>{{guestListData.guestEvent.name}}</td>
+            </tr>
+            <tr>
+              <td> <label><b>{{'reservation.FIRST_NAME' | translate}}</b></label> </td>
+              <td>{{guestListData.guestFirstName}}</td>
+            </tr>
+            <tr>
+              <td> <label><b>{{'reservation.LAST_NAME' | translate}}</b></label> </td>
+              <td>{{guestListData.guestLastName}}</td>
+            </tr>
+            <tr>
+              <td> <label><b>{{'reservation.ZIPCODE' | translate}} </b></label></td>
+              <td>{{guestListData.guestZip}}</td>
+            </tr>
+          </tbody>
+      </table>
+      <center>
+        <div >
+            <button type="submit" class="btn btn-raised btn-primary" ng-click="guestListSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+            <button type="button" class="btn btn-raised btn-danger" ng-click="editGuestPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
+        </div>
+      </center>
+    </div>
 	</div>
 
 </div>

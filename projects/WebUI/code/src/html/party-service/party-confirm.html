@@ -1,50 +1,50 @@
-<div class="container">
-
+<div class="container card {{blackTheme}}">
     <center>
-        <h1 class="color-success fontRegular">{{'reservation.PARTY_EVENT_CONFIRM' | translate}}</h1>
-
-    <div class="form-group confirmationCenter">
-        <table class="table table-responsive table-no-border">
-
-            <tbody>
-                <tr>
-                    <td><label><b> {{'bottleServiceTab.DATE' | translate}}</b></label> </td>
-                    <td>{{partyPackageData.orderDate}}</td>
-                </tr>
-                <tr>
-                    <td><label><b> {{'reservation.FIRST_NAME' | translate}}</b></label> </td>
-                    <td>{{partyPackageData.userFirstName}}</td>
-                </tr>
-                <tr>
-                    <td><label><b> {{'reservation.LAST_NAME' | translate}}</b></label> </td>
-                    <td>{{partyPackageData.userLastName}}</td>
-                </tr>
-                <tr>
-                    <td><label><b> {{'reservation.EMAIL' | translate}} </b></label></td>
-                    <td>{{partyPackageData.email}}</td>
-                </tr>
-                <tr>
-                    <td><label><b> {{'reservation.MOBILE' | translate}} </b></label></td>
-                    <td>{{partyPackageData.mobile}}</td>
-                </tr>
-                <tr>
-                    <td> <label><b>{{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
-                    <td>{{partyPackageData.totalGuest}}</td>
-                </tr>
-                <tr>
-                    <td><label><b> {{'reservation.INSTRUCTIONS' | translate}}</b></label> </td>
-                    <td>{{partyPackageData.instructions}}</td>
-                </tr>
-                <tr>
-                    <td> <label><b>{{"reservation.OCCASION"  | translate}}</b></label> </td>
-                    <td>{{partyPackageData.partyEventType.name}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <h1 class="text-primary fontRegular">{{'reservation.PARTY_EVENT_CONFIRM' | translate}}</h1>
+    </center>
+    <div class="col-sm-12 col-md-4 col-md-offset-4 col-md-offset-right-4">
+      <div class="form-group">
+          <table class="table table-responsive table-no-border">
+              <tbody>
+                  <tr>
+                      <td><label><b> {{'bottleServiceTab.DATE' | translate}}</b></label> </td>
+                      <td>{{partyPackageData.orderDate}}</td>
+                  </tr>
+                  <tr>
+                      <td><label><b> {{'reservation.FIRST_NAME' | translate}}</b></label> </td>
+                      <td>{{partyPackageData.userFirstName}}</td>
+                  </tr>
+                  <tr>
+                      <td><label><b> {{'reservation.LAST_NAME' | translate}}</b></label> </td>
+                      <td>{{partyPackageData.userLastName}}</td>
+                  </tr>
+                  <tr>
+                      <td><label><b> {{'reservation.EMAIL' | translate}} </b></label></td>
+                      <td>{{partyPackageData.email}}</td>
+                  </tr>
+                  <tr>
+                      <td><label><b> {{'reservation.MOBILE' | translate}} </b></label></td>
+                      <td>{{partyPackageData.mobile}}</td>
+                  </tr>
+                  <tr>
+                      <td> <label><b>{{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
+                      <td>{{partyPackageData.totalGuest}}</td>
+                  </tr>
+                  <tr>
+                      <td><label><b> {{'reservation.INSTRUCTIONS' | translate}}</b></label> </td>
+                      <td>{{partyPackageData.instructions}}</td>
+                  </tr>
+                  <tr>
+                      <td> <label><b>{{"reservation.OCCASION"  | translate}}</b></label> </td>
+                      <td>{{partyPackageData.partyEventType.name}}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
     </div>
-    <div class="col-md-12 form-group">
-      <h4 class="color-success bottleHeadername">{{"reservation.SELECT_HALL"  | translate}}</h4>
-          <table class="table table-responsive table-no-border bottleConfirmationTable">
+    <div class="col-sm-12 col-md-8 col-md-offset-2 col-md-offset-right-2">
+      <h2 class="text-primary center_content">{{"reservation.SELECT_HALL"  | translate}}</h2>
+          <table class="table table-responsive table-no-border">
               <thead>
                 <tr>
                   <th>{{"reservation.HALL_NAME"  | translate}}</th>
@@ -63,14 +63,14 @@
               </tbody>
           </table>
     </div>
-
-    <div ng-if="enabledPayment != 'Y'">
-        <button type="submit" class="btn btn-raised btn-primary" ng-click="savePartyPackage()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
-        <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
-    </div>
-    <div ng-if="enabledPayment == 'Y'">
-        <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
-        <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
-    </div>
-  </center>
+    <center>
+      <div ng-if="enabledPayment != 'Y'">
+          <button type="submit" class="btn btn-raised btn-primary" ng-click="savePartyPackage()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+          <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
+      </div>
+      <div ng-if="enabledPayment == 'Y'">
+          <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnable()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+          <button type="button" class="btn btn-raised btn-danger" ng-click="editPartyPackage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
+      </div>
+    </center>
 </div>
