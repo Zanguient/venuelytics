@@ -37,7 +37,40 @@
                </ul>
            </div>
         </div>
-        <div class="col-md-3 pricing-col">
+        <div class="col-md-2 col-sm-6 pricing-col">
+            <div class="pricing-table">
+                <div class="pricing-table-head">
+                    <h2>
+                        {{FreeTier}}<span>{{freeTierIdeal}}</span>
+                    </h2>
+                    <h3 class="price" >
+                        <span ng-hide = "FreePrice == 'FREE'">$ </span><i>{{FreePrice}}</i>
+                        <span class="hidden-md hidden-lg">{{perMonth}}</span>
+                    </h3>
+                </div>
+                <ul class="pricing-table-content">
+                    <li class="price_header"> </li>
+                    <li ng-repeat="reservation in reservationPromotationArray">
+                        <i class="hidden-sm hidden-xs fa" ng-class="reservation.FreeDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
+                        <span class="text-justify faIconLeft hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="reservation.FreeDetails === 'YES' ? 'fa-check': 'fa-times'"></i>{{reservation.title}}</span>
+                    </li>
+                    <li class="price_header"> </li>
+                    <li ng-repeat="premium in premiumServicesArray">
+                        <i class="hidden-sm hidden-xs fa" ng-class="premium.basicDetails === 'BASIC' ? '': (premium.basicDetails === 'YES' ? 'fa-check':'fa-times')"></i> <span class="hidden-sm hidden-xs" ng-bind="premium.basicDetails === 'BASIC' ? 'BASIC' :''"></span>
+                        <span class="text-justify faIconLeft  hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="premium.basicDetails === 'BASIC' ? '': (premium.basicDetails === 'YES' ? 'fa-check':'fa-times')"></i>{{premium.title}}<span class="pricingText" ng-bind="premium.basicDetails === 'BASIC' ? 'BASIC' :''"></span></span>
+                    </li>
+                    <li class="price_header"> </li>
+                    <li ng-repeat="wifi in wifiMonetizationArray">
+                        <i class="hidden-sm hidden-xs fa" ng-class="wifi.basicDetails === 'YES' ? 'fa-check': 'fa-times'"></i>
+                        <span class="text-justify faIconLeft  hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="wifi.basicDetails === 'YES' ? 'fa-check': 'fa-times'"></i>{{wifi.title}}</span>
+                    </li>
+                </ul>
+                <div class="pricing-table-footer text-center">
+                    <a ng-href="searchBusiness#FreeTrial" class="btn btn-primary btn-raised"><i class="zmdi zmdi-cloud-download"></i> Get Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-6 pricing-col">
             <div class="pricing-table">
                 <div class="pricing-table-head">
                     <h2>
@@ -70,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 pricing-col">
+        <div class="col-md-2 col-sm-6 pricing-col">
             <div class="pricing-table">
                 <div class="pricing-table-head">
                     <h2>
@@ -105,7 +138,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 pricing-col">
+        <div class="col-md-3 col-sm-6 pricing-col">
             <div class="pricing-table">
                 <div class="pricing-table-head">
                     <h2>

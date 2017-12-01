@@ -270,18 +270,21 @@ app
     "PLAN_FEATURE":"Plan Feature",
     "MONTHLY_PRICE":"Monthly price",
     "BASIC_FEE":"Basic",
+    "FREE_TIER":"FREE",
+    "FREE_PRICE":"FREE",
     "BASIC_FEE_IDEAL":"Ideal for Small Venues",
+    "FREE_TIER_IDEAL":"Ideal for trying out",
     "PROFESSIONAL_FEE":"Professional",
     "PROFESSSIONAL_FEE_EVERYTHING":"Everything you need for a growing business",
     "ENTERPRISE_FEE":"Enterprise",
     "ENTERPRISE_FEE_ADVANCED":"Advanced features for Enterpise Level Services",
     "RESERVATION_PROMOTATION":"Reservation & Promotion",
     "RESERVATION_PROMOTATION_ARRAY":[
-      {'title':'Table Reservation', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
-      {'title':'Private Event Booking', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
-      {'title':'Bottle Service', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
-      {'title':'Deals & Coupons', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
-      {'title':'Party Packages', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'}
+      {'title':'Table Reservation', 'FreeDetails': 'YES', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Private Event Booking', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Bottle Service', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Deals & Coupons', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'},
+      {'title':'Party Packages', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES'}
     ],
     "PREMIUM_SERVICES":"Premium Services",
     "PREMIUM_SERVICES_ARRAY":[
