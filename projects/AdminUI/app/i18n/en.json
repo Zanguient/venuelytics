@@ -284,6 +284,7 @@
         "STORES" : "Store Management",
         "BEACONS": "Beacon Management",
         "LOYALTY": "Loyalty Management",
+        "CONTEST":"Contest Management",
         "SETTINGS": "Application Settings",
         "RESERVATIONS": "Reservations",
         "INBOX": "Inbox",

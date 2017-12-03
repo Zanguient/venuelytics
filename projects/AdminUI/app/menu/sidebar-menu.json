@@ -23,6 +23,14 @@
 	 "roleId": 100
   },
   {
+  	"text": "Contest Management",
+	"sref": "app.contest",
+	 "icon": "fa fa-id-card-o",
+	 "translate": "sidebar.nav.pages.CONTEST",
+	 "submenu": [],
+	 "roleId": 100
+  },
+  {
   	"text": "Loyalty Management",
 	"sref": "app.loyalty",
 	 "icon": "fa fa-id-card-o",

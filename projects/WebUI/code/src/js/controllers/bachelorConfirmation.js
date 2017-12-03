@@ -1,28 +1,14 @@
 "use strict";
-<<<<<<< HEAD
 app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService',
     function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope, ngMeta, venueService) {
-=======
-<<<<<<< HEAD
-app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService',
-    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope, ngMeta, venueService) {
-=======
-app.controller('bachelorConfirmController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore, ngMeta) {
->>>>>>> 8ba4d936cbe80cb461c699ea0159df1611975119
->>>>>>> master
 
 
-    		var self = $scope;
+            var self = $scope;
             self.availableAmount = 0;
             self.paypal = false;
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> master
                 
                 self.venueDetails = venueService.getVenue($routeParams.venueid);
                 $rootScope.description = self.venueDetails.description;
@@ -30,28 +16,9 @@ app.controller('bachelorConfirmController', ['$log', '$scope', '$http', '$locati
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bachelor party Confirmation & Payment";
                 ngMeta.setTitle($rootScope.title);
                 self.city = $self.venueDetails.city;
-<<<<<<< HEAD
                 self.selectedVenueID = $routeParams.venueid;
                 self.bachelorData = DataShare.partyServiceData;
                 self.venueName = DataShare.venueName;
-=======
-                self.selectedVenueID = $routeParams.venueid;
-                self.bachelorData = DataShare.partyServiceData;
-                self.venueName = DataShare.venueName;
-=======
-                $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
-                $rootScope.description = DataShare.eachVenueDescription;
-                self.venudetails = DataShare.venueFullDetails;
-                ngMeta.setTag('description', self.venudetails.description + " Bachelor party Confirmation");
-                $rootScope.title = self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bachelor party Confirmation & Payment";
-                ngMeta.setTitle(self.venudetails.venueName+' '+$routeParams.cityName+' '+self.venudetails.state+' '+ "Venuelytics - Bachelor party Confirmation & Payment");
-                self.city = $routeParams.cityName;
-                self.selectedVenueID = $routeParams.venueid;
-                self.bachelorData = DataShare.partyServiceData;
-                self.venueName = DataShare.venueName;
-                self.successPageTheme = $window.localStorage.getItem("blackTheme");
->>>>>>> 8ba4d936cbe80cb461c699ea0159df1611975119
->>>>>>> master
                 self.availableAmount = $window.localStorage.getItem("bachelorAmount");
                 self.authBase64Str = DataShare.authBase64Str;
                 if(DataShare.privateOrderItem !== ''){
