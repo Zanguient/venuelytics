@@ -35,17 +35,20 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"Total Bookings", "value":0, "icon":"fa fa-shopping-cart"});
         $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"});
         
+        $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
 
-        var target = {id:contextService.userVenues.selectedVenueNumber};
-        
-        RestServiceFactory.VenueService().getAnalytics(target, function(data){
+        if (contextService.userVenues.selectedVenueNumber === 170706) {
+            $scope.effectiveVenueId = 521;
+        }
+
+        RestServiceFactory.VenueService().getAnalytics({id: $scope.effectiveVenueId}, function(data){
             $scope.processAnalytics(data);
         },function(error){
             /*if (typeof error.data !== 'undefined') { 
                 toaster.pop('error', "Server Error", error.data.developerMessage);
             }*/
         });
-        RestServiceFactory.VenueService().getGuests(target, function(data){
+        RestServiceFactory.VenueService().getGuests({id: $scope.effectiveVenueId}, function(data){
            $scope.guests = data;
         },function(error){
             /*if (typeof error.data !== 'undefined') { 
@@ -82,7 +85,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.top3FavItems = function () {
         var temp = $scope.selectedPeriod.toLowerCase();
         var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
-        var promise = RestServiceFactory.AnalyticsService().getTopNFavItems({id: contextService.userVenues.selectedVenueNumber, aggPeriodType: aggPeriodType, n: 3});   
+        var promise = RestServiceFactory.AnalyticsService().getTopNFavItems({id: $scope.effectiveVenueId, aggPeriodType: aggPeriodType, n: 3});   
         promise.$promise.then(function(data) {
             $scope.topItemsList = data;
         });
@@ -315,12 +318,13 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
      * loading visitor states
      */
     $scope.reload = function() {
-       var promise = RestServiceFactory.NotificationService().getActiveNotifications({id: contextService.userVenues.selectedVenueNumber});	
+
+        var promise = RestServiceFactory.NotificationService().getActiveNotifications({id: $scope.effectiveVenueId});	
         promise.$promise.then(function(data) {
             $scope.notifications = data.notifications;
         });
 
-        var promise2 = RestServiceFactory.NotificationService().getUnreadNotificationCount({id: contextService.userVenues.selectedVenueNumber});   
+        var promise2 = RestServiceFactory.NotificationService().getUnreadNotificationCount({id: $scope.effectiveVenueId});   
         promise2.$promise.then(function(data) {
             $scope.notificationCount = data.count;
         });
@@ -604,7 +608,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         var temp = $scope.selectedPeriod.toLowerCase();
         var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
         $scope.reservedBookings  = {};
-        RestServiceFactory.AnalyticsService().get({id: contextService.userVenues.selectedVenueNumber, 
+        RestServiceFactory.AnalyticsService().get({id: $scope.effectiveVenueId, 
                             anaType: 'ReservedBookings', aggPeriodType: aggPeriodType, filter: 'scodes=BPK'}, function(data){
             $scope.reservedBookings = data;
             $('#pie_rb').ClassyLoader({
@@ -633,7 +637,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
            
         var temp = $scope.selectedPeriod.toLowerCase();
         var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
-        $scope.bookingRequestUrl = RestServiceFactory.getAnalyticsUrl(contextService.userVenues.selectedVenueNumber, 
+        $scope.bookingRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 
                             'ServiceTypeByModeBy2', aggPeriodType, 'scodes=BPK');
         $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
          $scope.xAxisMode = 'categories'; 
