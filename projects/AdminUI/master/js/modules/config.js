@@ -134,6 +134,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('datatables', 'datatables-pugins')
     })
+     .state('app.contest', {
+        url: '/contest',
+        title: 'Contest Management',
+        templateUrl: basepath('contest/contest.html'),
+        controller: 'ContestController',
+        data: { authorizedRoles: [USER_ROLES.admin]},
+        resolve: resolveFor('datatables', 'datatables-pugins')
+    })
      .state('app.loyaltyedit', {
         url: '/loyaltyedit/:id',
         title: 'Edit Loyalty',
