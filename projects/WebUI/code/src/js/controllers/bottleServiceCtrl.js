@@ -20,12 +20,27 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             self.sum = 0;
             self.price = 0;
             self.bottleDateIsFocused = 'is-focused';
+            self.availableDays = [];
+            function  noWeekendsOrHolidays(iDate) {
+                if (typeof(self.availableDays) === 'undefined' || self.availableDays.length === 0) {
+                  return true;
+                }
+                var enabled = false;
+                for(var i = 0; i < self.availableDays.length; i++) {
+                  var startDate = new Date(self.availableDays[i].startDate.substring(0, 10));
+                  var endDate = new Date(self.availableDays[i].endDate.substring(0, 10));
+                  var strDate= iDate.getFullYear()+'-' + (iDate.getMonth()+1) + '-' + iDate.getDate();
+                  var date = new Date(strDate);
+                  enabled = enabled || (startDate.getTime() <= date.getTime() && endDate.getTime() >= date.getTime());
+                }
+                return enabled;
+            }
             self.init = function() {
                 //$("div.form-group").add("style", "margin-left: auto");
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
+               
                 self.venueid = $routeParams.venueid;
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
@@ -54,13 +69,20 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
                 self.tabParam = $routeParams.tabParam;
+                
                 self.getBottleProducts();
                 self.getMenus();
                 self.getEventType();
+                
                 setTimeout(function() {
                     self.getSelectedTab();
                 }, 600);
                 
+                AjaxService.getVenueServiceOpenDays($routeParams.venueid, 'bottle').then(function(response) {
+                  self.availableDays = response.data;
+                   $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd',
+                 beforeShowDay: noWeekendsOrHolidays});
+                });
                 AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.venueDetails = response;

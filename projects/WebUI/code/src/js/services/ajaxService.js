@@ -437,4 +437,11 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
 
         recordUTM(data);
     };
+
+    this.getVenueServiceOpenDays = function(venueId,serviceType) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'venues/' + venueId + '/opendays/' + serviceType
+        });
+    };
 }]);

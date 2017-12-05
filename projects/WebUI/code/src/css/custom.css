@@ -3247,3 +3247,6 @@ table.fc-border-separate {
 
 
 }
+.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover {
+  text-decoration: line-through;
+}
