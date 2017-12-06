@@ -3162,13 +3162,13 @@ table.fc-border-separate {
 }
 
 .guestBtn {
-  background-color: rgba(220,153,42, 0.80) !important;
+  background-color: rgba(220,17,42, 0.80) !important;
   color: #fff !important;
   border-color: white !important;
 }
 
 .partyBtn {
-  background-color: rgba(30,136,68, 0.80) !important;
+  background-color: rgba(30,60,168, 0.80) !important;
   color: #fff !important;
   border-color: white !important;
 }
@@ -3180,7 +3180,7 @@ table.fc-border-separate {
 }
 
 .eventListBtn {
-  background-color: rgba(218,6,21, 0.80) !important;
+  background-color: rgba(0,0,0, 0.80) !important;
   color: #fff !important;
   border-color: white !important;
 }
