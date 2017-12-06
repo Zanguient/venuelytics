@@ -8,7 +8,7 @@ app
     'clientImages': [{'image': 'assets/img/clients/1.png', 'link': '//www.rosiemccanns.com'},
     				  {'image': 'assets/img/clients/4.png', 'link': '//www.montecarloniteclub.com'},
     				  {'image': 'assets/img/clients/5.png', 'link': '//www.facebook.com/myth.taverna/'},
-    				  {'image': 'assets/img/clients/6.png', 'link': '//www.thecardifflounge.com/'},
+    				 /* {'image': 'assets/img/clients/6.png', 'link': '//www.thecardifflounge.com/'},*/
     				  {'image': 'assets/img/clients/mist.png', 'link': '//www.mist.com//'},
                       {'image': 'assets/img/clients/tsys.png', 'link': '//tsys.com/'},
     				  {'image': 'assets/img/clients/10.png', 'link': '//www.casinom8trix.com/'},
@@ -38,7 +38,10 @@ app
               {'image': 'assets/img/clients/fuz.jpg', 'link': '//www.fuzlounge.com/'},
               {'image': 'assets/img/clients/sjlive.png', 'link': '//www.sjlivesj.com/'},
               {'image': 'assets/img/clients/eighty1.png', 'link': '//eightyonesj.com/'},
-              {'image': 'assets/img/clients/shboom.jpg', 'link': '//www.shboomnightclub.com/'}
+              {'image': 'assets/img/clients/shboom.jpg', 'link': '//www.shboomnightclub.com/'},
+              {'image': 'assets/img/clients/bourbon.jpg', 'link': '//www.bourbonbarrelerie.com/vip'},
+              {'image': 'assets/img/clients/vip.png', 'link': '//bit.ly/VIPRoomBaltimoreBottleServiceReservations'}
+
             ]
   })
   .constant('APP_ARRAYS', {
