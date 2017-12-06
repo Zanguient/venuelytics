@@ -231,6 +231,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'landing/landing.html',
             controller: 'WifiController'
         })
+        .when('/landing', {
+            templateUrl: 'landing/landing_new.html',
+            controller: 'WifiController'
+        })
   
         .otherwise('/home');
 

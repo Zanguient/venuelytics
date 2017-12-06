@@ -471,6 +471,11 @@ select {
   height: 28px;
 }
 
+.service-icon {
+  width: auto;
+  height: 50px;
+}
+
 .reservation-tab {
   padding: 0px !important; margin-top:20px;
   border-right:2px solid #ffffff !important;
