@@ -251,7 +251,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
           
            // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
             addTab('eventListTab','eventlist', 'assets/img/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, 'eventListBtn', 'eventList');
-            if(self.tabParams === "VIP"){
+            //if(self.tabParams === "VIP"){
                 var firstEnabledTabBtnId = optimizeTabDisplay(self.displayTabs);
                 if (firstEnabledTabBtnId !== null) {  
                     setTimeout(function() {
@@ -259,7 +259,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                         $("#"+firstEnabledTabBtnId).click(); 
                     }, 500);
                 }
-            }
+            //}
         }
     }
     self.init();
