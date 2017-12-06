@@ -1,6 +1,18 @@
-<button id="{{buttonId}}" type="button" class="btn btn-responsive reservation-button buttonHeight col-xs-12" ng-class="btnClass" ng-click="onClick()" ng-disabled="{{disabled}}">
+<!-- <button id="{{buttonId}}" type="button" class="btn btn-responsive reservation-button buttonHeight col-xs-12" ng-class="btnClass" ng-click="onClick()" ng-disabled="{{disabled}}">
     <img ng-src="{{buttonImg}}" alt="button-image" class="reservation-icon" ></img>
     <br class="showInMobile">
     <span class="tabLabel"><strong>{{name | translate}}</strong></span><br>
     <em id="{{selected}}" style="display: none" class="fa fa-caret-down fa-2x tabSelected"></em>
 </button>
+ -->
+
+ <div class="col-xs-4 p-min service-btn mt-1" ng-disabled="{{disabled}}" id="{{selected}}">
+	<a href="javascript:void" ng-click="onClick()" >
+		<div class="card no-mb" ng-class="btnClass">
+		    <div class="card-block wow text-center no-p zoom-img-25">
+		        <img ng-src="{{buttonImg}}" class="mt-1 service-icon responsive"></img>
+		        <p class="tabLabel no-m mt-1">{{name | translate}}</p>
+		    </div>
+		</div>
+	</a>
+</div>

@@ -67,8 +67,8 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
             };
 
             self.getSelectedTab = function() {
-                $("em").hide();
-                $("#guestList").show();
+                $(".service-btn").removeClass("tabSelected");
+                $("#guestList").addClass("tabSelected");
             };
 
             self.glistSave = function(guest) {

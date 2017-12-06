@@ -41,8 +41,8 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
         self.calenderData = false;
     };
     self.getSelectedTab = function() {
-        $("em").hide();
-        $("#eventList").show();
+      $(".service-btn").removeClass("tabSelected");
+      $("#eventList").addClass("tabSelected");
     };
     self.eventCalender = function() {
       var today = new Date();

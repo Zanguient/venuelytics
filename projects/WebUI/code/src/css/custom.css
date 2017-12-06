@@ -473,7 +473,7 @@ select {
 
 .service-icon {
   width: auto;
-  height: 50px;
+  height: 40px;
 }
 
 .reservation-tab {
@@ -483,20 +483,26 @@ select {
 .tabLabel {
     font-weight: 400;
     letter-spacing: 0.14px;
-    line-height: 1.5em;
+    line-height: 1.25em;
     /* display: block; */
     white-space: pre-line;
     align-self: center;
     outline: rgba(0, 0, 0, 0.870588) none 0px;
     text-transform: uppercase;
     color: white;
+    height: 3em;
+    overflow: hidden;
 }
 
 .tabSelected {
-  color: #fff;
-  text-shadow: 1px 1px 1px #ccc;
+  -webkit-box-shadow:inset 0px 0px 0px 2px green;
+  -moz-box-shadow:inset 0px 0px 0px 2px green;
+  box-shadow:inset 0px 0px 0px 2px green;
 }
 
+.p-min {
+  padding: 3px;
+}
 .req-border {
   border: 1px solid;
 }

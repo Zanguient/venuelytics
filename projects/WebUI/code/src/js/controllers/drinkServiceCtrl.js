@@ -52,8 +52,8 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.getSelectedTab = function() {
-                $("em").hide();
-                $("#drinkServices").show();
+              $(".service-btn").removeClass("tabSelected");
+              $("#drinkServices").addClass("tabSelected");
             };
 
             self.removeDrinkItems = function(index,obj) {

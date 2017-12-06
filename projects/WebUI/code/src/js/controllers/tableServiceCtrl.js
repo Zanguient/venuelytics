@@ -91,8 +91,8 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
 
 
             self.getSelectedTab = function() {
-                $("em").hide();
-                $("#tableServices").show();
+                $(".service-btn").removeClass("tabSelected");
+                $("#tableServices").addClass("tabSelected");
             };
 
             self.getServiceTime = function() {

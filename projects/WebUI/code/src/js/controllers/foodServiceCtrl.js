@@ -46,8 +46,8 @@ app.controller('foodServiceController', ['$log', '$scope', '$location', 'DataSha
             };
 
             self.getSelectedTab = function() {
-                $("em").hide();
-                $("#foodServices").show();
+              $(".service-btn").removeClass("tabSelected");
+              $("#foodServices").addClass("tabSelected");
             };
 
             self.removeFoodItems = function(index,obj) {
