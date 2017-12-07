@@ -1,11 +1,11 @@
 <div  ng-controller="BottleServiceController">
-<form class="form-horizontal" parsley-validate autocomplete="off"  validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
-    <fieldset class="col-md-10 col-md-offset-1 col-md-offset-right-1">
-        <div class="col-md-12 form-group label-floating is-empty no-p {{bottleDateIsFocused}}" >
+<form class="form-horizontal col-xs-12" parsley-validate autocomplete="off"  validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
+    <fieldset class="col-xs-12">
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{bottleDateIsFocused}}" >
             <label class="control-label" >{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate" required/>
         </div>
-        <div class="col-md-12 form-group is-empty mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
+        <div class="col-xs-12 form-group is-empty mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
 
             <div id="mapSection">
                 <center>
@@ -45,31 +45,31 @@
         </div>
 
         <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" class="form-group"  ng-repeat="table in selectedVenueMap.elements" >
-            <div class="col-md-12 col-sm-12 tableItem">
-                <div class="col-md-3 col-sm-4"><label>
+            <div class="col-xs-12 tableItem">
+                <div class="col-md-3 col-xs-4"><label>
                     <input type="checkbox" id="checkData" name="{{table.name}}" ng-checked="isSelected(table)" ng-disabled="isReserved(table)" ng-click="selectTableForWithOutFloorMap(table,$index)" />&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
                     ng-hide="table.size <= 0">({{table.size}}&nbsp;<i
                         class="fa fa-user" aria-hidden="true" />)
                 </span></label>
                     <label class="tableReserved" ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
                 </div>
-                <div class="col-md-5 col-sm-5">
+                <div class="col-xs-5">
                     <img alt="table-images" class="table-carousel" class="img-responsive" data-ng-src="{{table.imageUrls[0].smallUrl}}"/>
                 </div>
-                <div class="col-md-4 col-sm-12 descriptionAlign">
+                <div class="col-md-4 col-xs-12 descriptionAlign">
                     <label>{{table.description}}</label>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 mt-4 is-empty mb-2"  ng-if="tableSelection.length > 0">
+        <div class="col-xs-12 mt-4 is-empty mb-2"  ng-if="tableSelection.length > 0">
             <b>{{'reservation.SELECT_TABLE' | translate}}</b>:
             <label ng-repeat="table in tableSelection">
             {{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
         </div>
 
-        <div class="col-md-12 is-empty"  ng-if="tableSelection">
-            <div class="col-sm-12 mb-2" ng-repeat="table in tableSelection">
-                <div class="col-md-6 col-sm-12">
+        <div class="col-xs-12 is-empty"  ng-if="tableSelection">
+            <div class="col-xs-12 mb-2" ng-repeat="table in tableSelection">
+                <div class="col-md-6 col-xs-12">
                     <table class="table">
                         <tr>
                             <td>Name:</td>
@@ -87,7 +87,7 @@
                     </table>
                     <button id="removeBtn" type="button" class="btn btn-danger btn-raised" ng-click="removeSelectedTables($index,table,tableSelection) ">{{'bottleServiceTab.REMOVE' | translate}}</button>
                 </div>
-                 <div class="col-md-6 col-sm-12">
+                 <div class="col-md-6 col-xs-12">
                     <div ng-show="table.imageUrls.length>0">
                         <img alt="{{table.name}} Image" ng-src="{{table.imageUrls[0].smallUrl}}" class="img-responsive center-block"/>
                     </div>
@@ -98,51 +98,51 @@
                 
             </div>
         </div>
-        <div class="col-md-12 form-group label-floating no-p is-empty {{isFocused}}">
+        <div class="col-xs-12 form-group label-floating no-p is-empty {{isFocused}}">
             <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
             <input type="text" class="form-control fontBold" ng-model="bottle.userFirstName" id="firstName" required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}" >
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{isFocused}}" >
             <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
             <input type="text" class="form-control fontBold fontChange"  ng-model="bottle.userLastName" id="lastName" required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}" >
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{isFocused}}" >
             <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
             <input type="email" class="form-control fontBold" id="email" ng-model="bottle.email"data-parsley-trigger="change" required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}">
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{isFocused}}">
             <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
             <input type="text" id="ms-form-pass" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="bottle.mobile" required data-parsley-trigger="change">
         </div>
        
-        <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}" >
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{isFocused}}" >
             <label class="control-label" >{{'reservation.ZIPCODE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="zipcode" ng-model="bottle.bottleZipcode"  required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}">
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{isFocused}}">
             <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
             <input type="text" class="form-control fontBold" id="totalGuest" ng-model="bottle.totalGuest" >
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}">
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{isFocused}}">
             <label class="control-label" >{{'reservation.OCCASION' | translate}}</label>
             <select class="form-control fontBold {{blackTheme}}" eqruired
                 ng-model="bottle.bottleOccasion" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p {{isFocused}}">
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{isFocused}}">
             <label class="control-label" >{{'reservation.INSTRUCTIONS' | translate}}</label>
             <input type="text" class="form-control fontBold" id="instructions" ng-model="bottle.instructions" placeholder="">
         </div>
-        <div class="col-md-4 form-group label-floating is-empty no-p {{isFocused}}" ng-hide ="!hostDate || hostDate.length == 0">
+        <div class="col-md-4 col-xs-6 form-group label-floating is-empty no-p {{isFocused}}" ng-hide ="!hostDate || hostDate.length == 0">
             <label class="control-label">{{'reservation.HOST' | translate}}</label>
             
             <select class="form-control fontBold {{blackTheme}}" ng-model="bottle.host" ng-options="x as x.name for x in hostDate  track by x.id">
             </select></div><img ng-hide ="!hostDate || hostDate.length == 0" class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
-        <div class="col-md-12 form-group is-empty" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-xs-12 form-group is-empty" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>
-        <div class="col-md-12 form-group is-empty" ng-if="bottleMinimum != ''" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-xs-12 form-group is-empty" ng-if="bottleMinimum != ''" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
         <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
             <table class="table table-responsive table-no-border" >
                 <thead>
@@ -164,7 +164,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-xs-12" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
             <table class="table table-no-border">
                 <tr>
                     <td>
@@ -207,7 +207,7 @@
                 </tr>
             </table>
         </div>
-        <div class="col-md-12">
+        <div class="col-xs-12">
             <div>
                 <label class="fontRegular table-font" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="bottle.authorize" required/>
@@ -215,7 +215,7 @@
                 </label>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-xs-12">
             <div>
                 <label class="fontRegular table-font" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="bottle.agree" required/>
@@ -223,7 +223,7 @@
                 </label>
             </div>
         </div>
-        <div class="col-md-12" ng-if="noTableSelected == true">
+        <div class="col-xs-12" ng-if="noTableSelected == true">
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="zmdi zmdi-close"></i></button>
                 <strong><i class="zmdi zmdi-close-circle"></i> {{"reservation.ERROR_MESSAGE" | translate}}!</strong> {{"reservation.FLOOR_MAP_SELECTION" | translate}} 
@@ -244,7 +244,7 @@
     <p class="fontRegular table-font">{{"reservation.DRESS_CODE_DESC" | translate}}</p>
 </div> <br/>  -->
 
-<div class="col-md-10 col-md-offset-1 col-md-offset-right-1" ng-if="bottleMenuUrl">
+<div class="col-xs-12" ng-if="bottleMenuUrl">
 
     <center>
         <h1 class="fontRegular color-success">{{'reservation.POLICIES' | translate}}</h1>
@@ -258,21 +258,21 @@
     </center>
 </div>
 
-<div class="col-md-10 col-md-offset-1 col-md-offset-right-1" ng-if="bottleVIPPolicy">
+<div class="col-xs-12" ng-if="bottleVIPPolicy">
     <center>
         <h3 class="color-success fontLight">{{'reservation.VIP_SERVICE_POLICY' | translate}}</h3>
     </center>
     <p class="fontRegular">{{bottleVIPPolicy}}</p>
 </div>
 
-<div class="col-md-10 col-md-offset-1 col-md-offset-right-1" ng-if="bottleMinimumRequirement">
+<div class="col-xs-12" ng-if="bottleMinimumRequirement">
     <center>
         <h3 class="color-success fontLight">{{"reservation.MIN_REQ" | translate}}</h3>
     </center>
      <p class="fontRegular">{{bottleMinimumRequirement}}</p>
 </div>
 
-<div class="col-md-10 col-md-offset-1 col-md-offset-right-1" ng-if="dressCode">
+<div class="col-xs-12" ng-if="dressCode">
     <center>
         <h3 class="color-success fontLight">{{'reservation.DRESS_CODE' | translate}}</h3>
     </center>
