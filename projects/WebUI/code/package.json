@@ -65,6 +65,7 @@
     "yargs": "^7.1.0"
   },
   "dependencies": {
+    "bower": "^1.8.2",
     "connect-s4a": "0.0.8"
   }
 }
