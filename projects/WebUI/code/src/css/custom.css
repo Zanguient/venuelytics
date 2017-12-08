@@ -688,13 +688,12 @@ a.btn.disabled,fieldset[disabled] a.btn {
  .downloadIcon{
    padding-top: 250px;
    margin-left: 137px;
- }
+  }
 
 
 }
 
-@media screen and (min-width: 1600px) and (max-width:
- 1990px) {
+@media screen and (min-width: 1600px) and (max-width: 1990px) {
 
   .withoutTabs {
     color:black;
@@ -723,8 +722,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
     background-color: #fff;
     background-size:cover;
     background-image: url("//is5.mzstatic.com/image/thumb/Purple127/v4/59/00/6e/59006e6e-c8c6-d557-4e43-58208377882e/source/175x175bb.jpg");
-}
-.smartbanner-info{
+  }
+  .smartbanner-info{
     position:absolute;
     left:120px;
     top:15px;
@@ -733,7 +732,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     line-height:1.2em;
     font-weight:bold;
     color:#999;
-}
+  }
 
   .downloadIcon{
     padding-top: 250px;
@@ -755,33 +754,33 @@ a.btn.disabled,fieldset[disabled] a.btn {
   #forMobile {
     height: 690px;
   }
+
   .container {
     width: 1400px;
   }
 }
 
-@media screen and (min-width: 730px) and (max-width:
-  1200px) {
+@media screen and (min-width: 730px) and (max-width: 1200px) {
 
-    .withoutTabs {
-      color:black;
-      font-size: 24px;
-    }
+  .withoutTabs {
+    color:black;
+    font-size: 24px;
+  }
 
-    .private-details {
-      width: 1030px;
-    }
+  .private-details {
+    width: 1030px;
+  }
 
-    .smartbanner-icon{
-      position:absolute;
-      left:50px;
-      top:10px;
-      display:block;
-      width:57px;
-      height:57px;
-      background-color: #fff;
-      background-size:cover;
-      background-image: url("//is5.mzstatic.com/image/thumb/Purple127/v4/59/00/6e/59006e6e-c8c6-d557-4e43-58208377882e/source/175x175bb.jpg");
+  .smartbanner-icon{
+    position:absolute;
+    left:50px;
+    top:10px;
+    display:block;
+    width:57px;
+    height:57px;
+    background-color: #fff;
+    background-size:cover;
+    background-image: url("//is5.mzstatic.com/image/thumb/Purple127/v4/59/00/6e/59006e6e-c8c6-d557-4e43-58208377882e/source/175x175bb.jpg");
   }
   .smartbanner-info{
       position:absolute;
@@ -827,24 +826,23 @@ a.btn.disabled,fieldset[disabled] a.btn {
    }
 
 
-    #removeBtn {
-      margin-left: 200px;
-    }
+  #removeBtn {
+    margin-left: 200px;
+  }
 
   
 
-    #forMobile {
-     height: 690px;
-    }
-
-    .backColor {
-      top: 0px;
-    }
+  #forMobile {
+   height: 690px;
   }
 
+  .backColor {
+    top: 0px;
+  }
+}
+
 /*Desktop*/
-@media screen and (min-width: 1200px) and (max-width:
- 1600px) {
+@media screen and (min-width: 1200px) and (max-width: 1600px) {
 
   .withoutTabs {
     color:black;
@@ -866,8 +864,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
     background-color: #fff;
     background-size:cover;
     background-image: url("//is5.mzstatic.com/image/thumb/Purple127/v4/59/00/6e/59006e6e-c8c6-d557-4e43-58208377882e/source/175x175bb.jpg");
-}
-.smartbanner-info{
+  }
+  .smartbanner-info{
     position:absolute;
     left:120px;
     top:15px;
@@ -876,8 +874,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
     line-height:1.2em;
     font-weight:bold;
     color:#999;
-}
-.smartbanner-icon{
+  }
+  .smartbanner-icon{
     position:absolute;
     left:50px;
     top:10px;
@@ -887,8 +885,9 @@ a.btn.disabled,fieldset[disabled] a.btn {
     background-color: #fff;
     background-size:cover;
     background-image: url("//is5.mzstatic.com/image/thumb/Purple127/v4/59/00/6e/59006e6e-c8c6-d557-4e43-58208377882e/source/175x175bb.jpg");
-}
-.smartbanner-info{
+  }
+  
+  .smartbanner-info{
     position:absolute;
     left:120px;
     top:15px;
@@ -897,9 +896,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     line-height:1.2em;
     font-weight:bold;
     color:#999;
-}
-
-
+  }
 
   .imageHeight {
     height: 730px;
@@ -910,7 +907,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     right: 50px;
     top: 250px; 
     color: white;
-   }
+  }
 
   .btnIcon {
     margin-top: 4px;
@@ -1133,10 +1130,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 }
 /*iPhone 5*/
-@media only screen and (min-width: 310px) and (max-width:
- 374px) {
-
-  
+@media only screen and (min-width: 310px) and (max-width: 374px) {
 
   .mobileImageWidht {
     width: 60px;
@@ -1214,19 +1208,17 @@ a.btn.disabled,fieldset[disabled] a.btn {
     background-color: #fff;
     background-size:cover;
     background-image: url("//is5.mzstatic.com/image/thumb/Purple127/v4/59/00/6e/59006e6e-c8c6-d557-4e43-58208377882e/source/175x175bb.jpg");
-}
-.smartbanner-info{
-    position:absolute;
-    left:90px;
-    top:15px;
-    width:44%;
-    font-size:12px;
-    line-height:1.2em;
-    font-weight:bold;
-    color:#999;
-}
-
-
+  }
+  .smartbanner-info{
+      position:absolute;
+      left:90px;
+      top:15px;
+      width:44%;
+      font-size:12px;
+      line-height:1.2em;
+      font-weight:bold;
+      color:#999;
+  }
 
   .textOnImg {
     position: absolute;left: 50px;color: white;
@@ -1436,9 +1428,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 /*iPhone 6*/
-@media only screen
-    and (min-width : 375px)
-    and (max-width : 413px) {
+@media only screen and (min-width : 375px) and (max-width : 413px) {
 
       .withoutTabs {
         color:black;
@@ -1454,8 +1444,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
       .buttonHeight {
         height: 100px
       }
-
-      
 
       .eventListPrice {
         margin-right: 48px;
@@ -1596,9 +1584,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 /*For iPhone 6 plus*/
-@media only screen
-    and (min-width : 414px)
-    and (max-width : 736px) {
+@media only screen and (min-width : 414px) and (max-width : 736px) {
 
       
       .withoutTabs {
@@ -2295,8 +2281,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     text-align: center;
 }
 
-@media only screen
-    and (max-width : 768px) {
+@media only screen and (max-width : 768px) {
 
   .col-xs-center {
     text-align: center;
@@ -2340,7 +2325,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   .col-xs-offset-right-0 {
     margin-right: 0;
   }
-
+}
 @media (min-width: 768px) {
   
   .col-sm-center {
@@ -2388,6 +2373,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 }
 @media (min-width: 992px) {
+  
   .col-md-offset-right-12 {
     margin-right: 100%;
   }
@@ -2817,8 +2803,8 @@ a.fc-event,
   }
   
 .fc-event-hori .ui-resizable-handle {
-  _padding-bottom: 14px; /* IE6 had 0 height */
-  }
+  padding-bottom: 14px; /* IE6 had 0 height */
+}
   
   
   
