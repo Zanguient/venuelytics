@@ -2364,7 +2364,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   .col-xs-offset-right-0 {
     margin-right: 0;
   }
-
+}
 @media (min-width: 768px) {
   
   .col-sm-center {
