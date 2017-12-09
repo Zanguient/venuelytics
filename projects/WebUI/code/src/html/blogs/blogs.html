@@ -1,20 +1,17 @@
 <ng-include src="'blogs/blog-header.html'"></ng-include>
 <div class="container">
-    <div class="masonry-container">
-        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="blog in blogs">
-            <article class="card card-info mb-4 wow materialUp animation-delay-5" style="height: 500px;">
+    <div class="masonry-container row">
+        <div class="col-md-4 col-sm-12 masonry-item wow fadeInUp animation-delay-2" ng-repeat="blog in blogs">
+            <article class="card card-info mb-4 wow materialUp animation-delay-5" >
                 <figure class="ms-thumbnail ms-thumbnail-left">
-                    <img src="{{blog.image}}" alt="blogs-image" class="img-responsive" style="height:235px">
+                    <img src="{{blog.image}}" alt="blogs-image" class="img-responsive">
                 </figure>
                 <div class="card-block">
                     <h3><a href="blogPost/{{blog.link}}">{{blog.title}}</a></h3>
                     <p>{{blog.description | limitTo: 120 }}{{blog.description.length > 120 ? '...' :''}}</p>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-8">
-                            <a href="blogPost/{{blog.link}}" class="btn btn-primary btn-sm btn-block animate-icon">Read more <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
-                        </div>
-                    </div>
+                    
+                    <a href="blogPost/{{blog.link}}" class="btn btn-primary btn-sm btn-block animate-icon">Read more <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
+                    
                 </div>
             </article>
         </div>

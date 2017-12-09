@@ -2200,9 +2200,17 @@ a.btn.disabled,fieldset[disabled] a.btn {
   height: 330px;
 }
 
-.owlCarousel {
-  width: 140px;
-  margin-right: 60px;
+.owl-carousel .oc-item {
+  display: flex;
+  align-items: center;
+  width: 180px;
+  margin-left: 0;
+  margin-right: 0;
+  margin: auto;
+}
+
+.owl-carousel .caption {
+  text-align: center;
 }
 
 .serviceTabIcons {
