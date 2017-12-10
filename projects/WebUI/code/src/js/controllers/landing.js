@@ -7,7 +7,9 @@
  		$rootScope.embeddedFlag = true;
 
  		$scope.actions = [];
-
+ 		
+ 		self.venueImage = '';
+ 		var self = $scope;
  		$scope.init = function () {
  			$scope.addAction('eventListBtn', 'EVENT_CAL', 'Event Calander', 'event_image.png');
  			$scope.addAction('tableBtn', 	 'TABLE', 'Table Service', 'table.png');
@@ -42,5 +44,45 @@
 
  		};
 
+ 		AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
+            self.detailsOfVenue = response;
+            venueService.saveVenue($routeParams.venueId, response);
+            $rootScope.description = self.detailsOfVenue.description;
+            self.selectedCity = self.detailsOfVenue.city;
+            self.venueName =  $rootScope.headerVenueName = self.detailsOfVenue.venueName;
+            $rootScope.headerAddress = self.detailsOfVenue.address;
+            $rootScope.headerWebsite = self.detailsOfVenue.website;
+            if (typeof(self.detailsOfVenue.imageUrls) !== 'undefined' && self.detailsOfVenue.imageUrls.length > 0) {
+            	self.venueImage = self.detailsOfVenue.imageUrls[0];
+        	}
+            AjaxService.getInfo(self.venueid).then(function(response) {
+                venueService.saveVenueInfo(self.venueid, response);
+                self.enableDrinks = response.data["Advance.DrinksService.enable"];
+                self.enableFood = response.data["Advance.FoodRequest.enable"];
+                self.bottleServiceButton = response.data["Advance.BottleService.enable"];
+                self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
+                self.guestServiceButton = response.data["Advance.GuestList.enable"];
+                self.tableServiceButton = response.data["Advance.tableService.enable"];
+                self.featuredEnable = response.data["Advance.featured"];
+                self.eventsEnable = response.data["venueEvents"];
+                $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
+                if(self.embeddedService === 'embed') {
+                    $rootScope.venueHeader = response.data["ui.custom.header"];
+                    $rootScope.venueFooter = response.data["ui.custom.footer"];
+                    $rootScope.embeddedFlag = true;
+                }
+                self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
+                self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
+                self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
+                self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
+                self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
+                self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
+                self.eventsEnable = self.eventsEnable === 'Y' ? false : true;
+                /* self.tabParams = self.bottleServiceButton === false ? 'VIP' : 'private-events'; */
+                self.dispatchToService(self.tabParams);
+                addTabs();
+            }); 
+        });
+    };
  		$scope.init();
  	}]);
