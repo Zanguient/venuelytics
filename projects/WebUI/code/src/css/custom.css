@@ -591,12 +591,6 @@ select {
   color: green;
 }
 
-.cityImage {
-  list-style-type: none;
-  cursor: pointer;
-  cursor: hand;
-  display: block;
-}
 
 .claimCard {
   margin-top: 65px;
@@ -616,10 +610,6 @@ select {
 
 .city {
   background-color: #fff;
-}
-
-.loadingCities {
-  margin-top: 16px;
 }
 
 .discover {
@@ -1287,14 +1277,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     top: 0px;
   }
 
-  .cityBox {
-    margin-top: 75px;
-  }
-
-  .searchVenue {
-    margin-top: 15px;
-  }
-
   .venueListCard {
     margin-top: 40px;
   }
@@ -1542,10 +1524,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-top: 75px;
   }
 
-  .searchVenue {
-    margin-top: 15px;
-  }
-
   .carouselImage {
     height: 600px;
     width: 100%;
@@ -1714,9 +1692,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-top: 75px;
   }
 
-  .searchVenue {
-    margin-top: 15px;
-  }
 
   .venueListCard {
     margin-top: 40px;
@@ -1902,8 +1877,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   border-right-width: 5px;
   border-bottom-width: 5px;
   background-color: black;
-  padding: 0px;
-  margin: 0px;
   height: 200px;
   text-align: center;
   vertical-align: bottom;
