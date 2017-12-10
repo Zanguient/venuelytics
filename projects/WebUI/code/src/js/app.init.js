@@ -16,7 +16,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         "127.0.0.1",
         // Allow loading from Google maps
         "https://dev.api.venuelytics.com/WebServices**",
-        "http://dev.api.venuelytics.com/WebServices**"
+        "http://dev.api.venuelytics.com/WebServices**",
+         "https://prod.api.venuelytics.com/WebServices**",
+          "http://prod.api.venuelytics.com/WebServices**",
     ]);
 
 
@@ -30,18 +32,6 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'home.html',
             controller: 'HomeController',
             title: 'Book VIP Reservations & Events'
-        })
-        .when('/home*', {
-            templateUrl: 'home.html',
-            controller: 'HomeController'
-        })
-        .when('/home?sb&orgId', {
-            templateUrl: 'home.html',
-            controller: 'HomeController'
-        })
-        .when('/home?nc&orgId', {
-            templateUrl: 'home.html',
-            controller: 'HomeController'
         })
         .when('/businessAlreadyClaimed/:venueid', {
             templateUrl: 'business/business-already-claim.html',
@@ -66,10 +56,6 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/cities/:cityName/:venueid/:tabParam/:new', {
             templateUrl: 'venue/service-tabs.html',
             controller: 'ServiceTabController'           
-        })
-        .when('/cities/:cityName/:venueid/:tabParam?i&orgId', {
-            templateUrl: 'venue/service-tabs.html',
-            controller: 'ServiceTabController'
         })
         .when('/searchBusiness', {
             templateUrl: 'business/business-search.html',
