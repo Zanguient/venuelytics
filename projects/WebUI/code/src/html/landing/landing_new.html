@@ -1,133 +1,28 @@
 
 <div class="container container-fluid">
-	<h2 class="text-center">PREMIUM SERVICES</h2>
+	<h2 class="text-center mb-2 mt-2">PREMIUM SERVICES</h2>
+	<div class="no-p no-m col-md-12 col-sm-12 col-xs-12">
+		<img ng-src="{{venueImage.largeUrl}}" class="img-responsive col-md-12 col-sm-12 col-xs-12 mb-4 no-m no-p row">
+	</div>
+	
 	<div class="row pr-1" ng-repeat="row in actions">
 		<div class="col-xs-4 no-p pl-1" ng-repeat="action in row">
 			<a href="{{action.actionUrl}}">
 				<div class="card no-mb" ng-class="action.bgColor">
-				    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-				        <img ng-src="assets/img/service/{{action.imageUrl}}" class="mt-1 service-icon responsive">
-				        <p class="tabLabel" ng-bind="action.name">Event Calender</p>
+				    <div class="card-block wow text-center no-p mt-1 zoom-img-25 service-btn" ng-disabled="!action.enabled">
+				        <img ng-src="assets/img/service/{{action.imageUrl}}" class="mt-1 service-icon responsive" >
+				        <div class="center_content" >
+				        	<p class="tabLabel" ng-bind="action.name"></p>
+				        </div>
 				    </div>
 				</div>
 			</a>
 		</div>
 	</div>
-	<!-- <div class="row pr-1">
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card eventListBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img ng-src="assets/img/service/event_image.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Event Calender</p>
-			    </div>
-			</div>
-		</div>
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card tableBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/service/table.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Table Service</p>
-			    </div>
-			</div>
-		</div>
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card privateBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/service/trophy.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel"><br>Contest</p>
-			    </div>
-			</div>
-		</div>
-	</div>
-	<div class="row pr-1">
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card bottleBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/service/vipbox_kidz_zone.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Kids<br>Zone</p>
-			    </div>
-			</div>
-		</div>
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card foodBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/service/foods.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Food Service</p>
-			    </div>
-			</div>
-		</div>
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card drinksBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/service/drink.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Drink Service</p>
-			    </div>
-			</div>
-		</div>
-	</div>
-	<div class="row pr-1">
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card bachelorBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/service/vipbox_ticketing.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Ticketing</p>
-			    </div>
-			</div>
-		</div>
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card guestBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/service/vipbox_amenities.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Amenities</p>
-			    </div>
-			</div>
-		</div>
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card partyBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/service/vipbox_survey.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Survey</p>
-			    </div>
-			</div>
-		</div>
-	</div> -->
-
-	<!-- <div class="row pr-1">
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card guestBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/guests.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Guest<br>List</p>
-			    </div>
-			</div>
-		</div>
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card partyBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/ic_party(2).png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Party Packages</p>
-			    </div>
-			</div>
-		</div>
-		<div class="col-xs-4 no-p pl-1">
-			<div class="card privateBtn no-mb">
-			    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-			        <img src="assets/img/privates.png" class="mt-1 service-icon responsive">
-			        <p class="tabLabel">Private Event</p>
-			    </div>
-			</div>
-		</div>
-	</div> 
-	<div class="col-xs-4 no-p pl-1">
-		<div class="card bottleBtn no-mb">
-		    <div class="card-block wow text-center no-p mt-1 zoom-img-25">
-		        <img src="assets/img/bottles.png" class="mt-1 service-icon responsive">
-		        <p class="tabLabel">Bottle Service</p>
-		    </div>
-		</div>
-	</div>
-
-
--->
+	
 </div>
-			
+<footer class="ms-footer mt-4">
+    <div class="container">
+        <p><span ng-bind="'footBar.COPY' | translate" class="ng-binding">Copyrights</span> © <span ng-bind="'footBar.RIGHTS' | translate" class="ng-binding">2017 All Rights Reserved by VenueLytics Inc</span></p>
+    </div>
+</footer>

@@ -217,7 +217,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'landing/landing.html',
             controller: 'WifiController'
         })
-        .when('/landing', {
+        .when('/landing/:venueId', {
             templateUrl: 'landing/landing_new.html',
             controller: 'LandingController'
         })
