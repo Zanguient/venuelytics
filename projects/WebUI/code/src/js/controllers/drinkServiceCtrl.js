@@ -6,8 +6,8 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             self.selectedDrinkItems = [];
             self.drinkType = 'Delivery';
             self.init = function() {
-                self.venueid = $routeParams.venueid;
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                self.venueId = $routeParams.venueId;
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
                 ngMeta.setTag('description', self.venueDetails.description + " Drink Services");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Drink Services";
                 ngMeta.setTitle($rootScope.title);
@@ -35,7 +35,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.getMenus = function() {
-                AjaxService.getInfo(self.venueid).then(function(response) {
+                AjaxService.getInfo(self.venueId).then(function(response) {
                     self.drinksWineListuUrl = response.data["Drinks.wineListuUrl"];
                     self.drinksHappyHourDrinkUrl = response.data["Drinks.happyHourDrinkUrl"];
                     self.drinksBeerMenuUrl = response.data["Drinks.beerMenuUrl"];
@@ -118,7 +118,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.getDrink = function() {
-                AjaxService.getPrivateHalls(self.venueid, 'Drinks').then(function(response) {
+                AjaxService.getPrivateHalls(self.venueId, 'Drinks').then(function(response) {
                     self.drinkDetails = response.data;
                     if((Object.keys(DataShare.selectedDrinks).length) !== 0) {
                         self.editDrinkItems = DataShare.selectedDrinks;
@@ -142,7 +142,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.getVenueType = function() {
-                AjaxService.getVenues(self.venueid,null,null).then(function(response) {
+                AjaxService.getVenues(self.venueId,null,null).then(function(response) {
                     self.venueType = response.venueType;
                     var venueTypeSplit = self.venueType.split(',');
                     angular.forEach(venueTypeSplit, function(value1) {
@@ -184,7 +184,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
                 }
                 self.serviceJSON = {
                   "serviceType": 'Drinks',
-                  "venueNumber": self.venueid,
+                  "venueNumber": self.venueId,
                   "reason": "",
                   "contactNumber": self.drink.mobileNumber,
                   "contactEmail": self.drink.emailId,
@@ -202,7 +202,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
                   "deliveryAddress": tableNumber,
                   "deliveryInstructions": null,
                   "order": {
-                      "venueNumber": self.venueid,
+                      "venueNumber": self.venueId,
                       "orderDate": dateValue,
                       "orderItems": []
                   },
@@ -213,7 +213,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
                 angular.forEach(self.drinkDetails, function(value, key) {
                     if(value.count) {
                         var items = {
-                        "venueNumber": self.venueid,
+                        "venueNumber": self.venueId,
                         "productId": value.id,
                         "productType": value.productType,
                         "quantity": value.count,
@@ -228,7 +228,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;
                 DataShare.selectedDrinks = self.selectedDrinkItems;
-                $location.url("/confirmDrinkService/" + self.selectedCity + "/" + self.venueid);
+                $location.url("/confirmDrinkService/" + self.selectedCity + "/" + self.venueId);
              };
             self.init();
     }]);

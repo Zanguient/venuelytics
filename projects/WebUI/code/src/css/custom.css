@@ -1,3 +1,7 @@
+.vertical_middle {
+  vertical-align: middle;
+  display: inline;
+}
 .hostImgs {
   width: auto;
   height: 100px;

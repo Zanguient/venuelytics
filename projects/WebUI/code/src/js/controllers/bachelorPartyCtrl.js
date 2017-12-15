@@ -8,7 +8,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
             var self = $scope;
             self.bachelorDateIsFocused = 'is-focused';
             self.init = function() {
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
                 ngMeta.setTag('description', self.venueDetails.description + " Bachelor Party");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bachelor Party Services";
                 ngMeta.setTitle($rootScope.title);
@@ -16,7 +16,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#bachelorDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
-                self.venueID = $routeParams.venueid;
+                self.venueID = $routeParams.venueId;
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.bachelor = DataShare.partyServiceData;
                 } else {
@@ -44,7 +44,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
                 }
             });
             self.getMenus = function() {
-                AjaxService.getInfo(self.venueid).then(function(response) {
+                AjaxService.getInfo(self.venueId).then(function(response) {
                     /* self.partyCateringMenu = response.data["PartyHall.cateringMenuUrl"];
                     self.partyMenu = response.data["PartyHall.Menu"];
                     self.partyInfoSheet = response.data["PartyHall.Details"];
@@ -77,7 +77,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.getEventType = function() {
-                AjaxService.getTypeOfEvents(self.venueid, 'PartyHall').then(function(response) {
+                AjaxService.getTypeOfEvents(self.venueId, 'PartyHall').then(function(response) {
                     self.eventTypes = response.data;
                     if(DataShare.partyFocus !== '') {
                       var selectedType;
@@ -113,7 +113,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
                     self.BacheolorDescription = response.data[0].description;
                     self.reservationData = [];
                     var partyDate = moment(self.bachelor.orderDate).format('YYYYMMDD');
-                    AjaxService.getVenueMapForADate(self.venueid,partyDate).then(function(response) {
+                    AjaxService.getVenueMapForADate(self.venueId,partyDate).then(function(response) {
                         self.reservations = response.data;
                         angular.forEach(self.bachelorPartyHall, function(value, key) {
                             value.reserve = false;
@@ -143,7 +143,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
                 DataShare.authBase64Str = authBase64Str;
                 self.serviceJSON = {
                   "serviceType": 'BachelorPartyService',
-                  "venueNumber": self.venueid,
+                  "venueNumber": self.venueId,
                   "reason": self.bachelor.partyEventType.name,
                   "contactNumber": self.bachelor.mobile,
                   "contactEmail": self.bachelor.email,
@@ -161,14 +161,14 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
                   "durationInMinutes": 0,
                   "deliveryType": "Pickup",
                   "order": {
-                      "venueNumber": self.venueid,
+                      "venueNumber": self.venueId,
                       "orderDate": dateValue,
                       "orderItems": []
                   }
                 };
 
                 var items = {
-                            "venueNumber": self.venueid,
+                            "venueNumber": self.venueId,
                             "productId": selectedBachelorParty.id,
                             "productType": selectedBachelorParty.productType,
                             "quantity": selectedBachelorParty.size,
@@ -180,7 +180,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;
                 DataShare.privateOrderItem = selectedBachelorParty;
-                $location.url("/confirmBachelorParty/" + self.selectedCity + "/" + self.venueid);
+                $location.url("/confirmBachelorParty/" + self.selectedCity + "/" + self.venueId);
              };
             self.init();
     }]);

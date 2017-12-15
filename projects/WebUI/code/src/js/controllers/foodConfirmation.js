@@ -12,10 +12,10 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
             self.totalChargedAmount = 0;
             self.init = function() {
                 
-                self.selectedVenueID = $routeParams.venueid;
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                self.selectedVenueID = $routeParams.venueId;
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Food Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Food Services Confirmation & Payment";

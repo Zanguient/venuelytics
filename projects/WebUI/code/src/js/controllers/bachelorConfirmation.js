@@ -10,13 +10,13 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
             self.orderPlaced = false;
             self.init = function() {
                 
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Bachelor party Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bachelor party Confirmation & Payment";
                 ngMeta.setTitle($rootScope.title);
                 self.city = $self.venueDetails.city;
-                self.selectedVenueID = $routeParams.venueid;
+                self.selectedVenueID = $routeParams.venueId;
                 self.bachelorData = DataShare.partyServiceData;
                 self.venueName = DataShare.venueName;
                 self.availableAmount = $window.localStorage.getItem("bachelorAmount");

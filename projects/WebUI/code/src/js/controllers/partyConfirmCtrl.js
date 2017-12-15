@@ -10,9 +10,9 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
-                self.selectedVenueID = $routeParams.venueid;
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                self.selectedVenueID = $routeParams.venueId;
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Party Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Party Services Confirmation & Payment";
@@ -21,7 +21,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
                 
                 self.partyPackageData = DataShare.partyServiceData;
                 self.venueName = DataShare.venueName;
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
                 self.availableAmount = $window.localStorage.getItem("partyAmount");
                 self.authBase64Str = DataShare.authBase64Str;
                 if(DataShare.privateOrderItem !== ''){

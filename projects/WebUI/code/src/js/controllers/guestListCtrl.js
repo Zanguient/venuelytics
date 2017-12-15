@@ -3,16 +3,19 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','ngMeta', 'VenueService',
-    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, ngMeta, venueService) {
+app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare', '$routeParams', 'AjaxService', '$rootScope','ngMeta', 'VenueService', '$timeout',
+    function ($log, $scope, $location, DataShare,  $routeParams, AjaxService,  $rootScope, ngMeta, venueService, $timeout) {
 
     		$log.log('Inside GuestList Controller.');
 
             var self = $scope;
-            self.guestDateIsFocused = 'is-focused';
+            self.guestMemberList = [];
+            self.member = {};
+           
+            //self.guestMemberList.push(obj);
             self.init = function() {
-                self.venueid = $routeParams.venueid;
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                self.venueId = $routeParams.venueId;
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
                 ngMeta.setTag('description', self.venueDetails.description + " Guest List");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Guest List";
                 ngMeta.setTitle($rootScope.title);
@@ -48,7 +51,7 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
             };
 
             self.getEventType = function() {
-                AjaxService.getTypeOfEvents(self.venueid, 'GuestList').then(function(response) {
+                AjaxService.getTypeOfEvents(self.venueId, 'GuestList').then(function(response) {
                     self.eventTypes = response.data;
                     if(DataShare.guestFocus !== '') {
                         
@@ -71,6 +74,13 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
                 $("#guestList").addClass("tabSelected");
             };
 
+            self.addMember = function(member) {
+
+                self.guestMemberList.push(member);
+                 self.member = {};
+                
+                 
+            };
             self.glistSave = function(guest) {
                 guest.guestEvent = guest.guestEvent === null ? '' : guest.guestEvent === undefined ? '': guest.guestEvent;
                 var guestTotal = parseInt(guest.guestMen) + parseInt(guest.guestWomen);
@@ -83,7 +93,7 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
                 var dateValue = moment(self.guest.requestedDate, 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss");
                 
                 var object = {
-                     "venueNumber" : self.venueid,
+                     "venueNumber" : self.venueId,
                      "email" :      guest.guestEmailId,
                      "phone" :      guest.guestMobileNumber,
                      "zip" :        guest.guestZip,
@@ -100,7 +110,7 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
                 self.guest.authorize = false;
                 self.guest.agree = false;
                 if(guestTotal === parseInt(guest.totalGuest)){
-                    $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueid);
+                    $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueId);
                 } else {
                     $('#guestError').modal('show');
                 }

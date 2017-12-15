@@ -10,8 +10,8 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$location', 'DataSh
 
     		var self = $scope;
     		
-			self.venueID = $routeParams.venueid;
-			self.venueDetails = venueService.getVenue($routeParams.venueid);
+			self.venueID = $routeParams.venueId;
+			self.venueDetails = venueService.getVenue($routeParams.venueId);
 			$rootScope.description = self.venueDetails.description;
 			self.selectedCityName = self.venueDetails.city;
 			ngMeta.setTag('description', self.venueDetails.description + " Bottle Order Confirmation");

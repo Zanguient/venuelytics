@@ -19,7 +19,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     $rootScope.searchVenue = false;
     $rootScope.newConsumerTab = 'active';
     $rootScope.homeTab = '';
-    self.venueid = $routeParams.venueid;
+    self.venueId = $routeParams.venueId;
     self.tabParams = $routeParams.tabParam;
     self.embeddedService = $routeParams.new;
 
@@ -34,12 +34,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
        
         $rootScope.embeddedFlag = self.embeddedService === 'embed';
 
-        venueService.saveProperty(self.venueid, 'embed', $rootScope.embeddedFlag);
+        venueService.saveProperty(self.venueId, 'embed', $rootScope.embeddedFlag);
 
-        if ((self.venueid === '70008') || (self.venueid === '170637')) {
+        if ((self.venueId === '70008') || (self.venueId === '170637')) {
             self.partyFlag = true;
         }
-        if (self.venueid === '170639') {
+        if (self.venueId === '170639') {
             self.bachelorFlag = true;
         }
         self.guest = DataShare.guestListData;
@@ -52,7 +52,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         var campaignName = $location.search().utm_campaign;
         var rawreq = $location.absUrl();
         
-        AjaxService.utmRequest(self.venueid, self.tabParams, utmSource, utmMedium, campaignName, rawreq );
+        AjaxService.utmRequest(self.venueId, self.tabParams, utmSource, utmMedium, campaignName, rawreq );
 
         if(DataShare.selectBottle) {
             self.bottleMinimum = DataShare.selectBottle;
@@ -61,9 +61,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.tableSelection = DataShare.tableSelection;
         }
 
-        AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
+        AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
             self.detailsOfVenue = response;
-            venueService.saveVenue($routeParams.venueid, response);
+            venueService.saveVenue($routeParams.venueId, response);
             $rootScope.description = self.detailsOfVenue.description;
             self.selectedCity = self.detailsOfVenue.city;
             self.venueName =  $rootScope.headerVenueName = self.detailsOfVenue.venueName;
@@ -72,8 +72,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.imageParam = $location.search().i;
             self.detailsOfVenue.imageUrls[0].active = 'active';
             self.venueImage = self.detailsOfVenue.imageUrls[0];
-            AjaxService.getInfo(self.venueid).then(function(response) {
-                venueService.saveVenueInfo(self.venueid, response);
+            AjaxService.getInfo(self.venueId).then(function(response) {
+                venueService.saveVenueInfo(self.venueId, response);
                 self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
                 self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
                 self.bottleServiceButton = response.data["Advance.BottleService.enable"];
@@ -105,7 +105,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         var reservationTime;
         var date = new Date();
         $scope.startDate = moment(date).format("MM-DD-YYYY");
-        AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
+        AjaxService.getServiceTime(self.venueId, 'venue').then(function(response) {
             reservationTime = response.data;
             angular.forEach(reservationTime, function(value, key) {
                 $scope.venueOpenTime = new Date(moment($scope.startDate + ' ' + value.startTime,'MM-DD-YYYY h:mm').format());
@@ -147,18 +147,18 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
     self.dispatchToService = function(serviceName) {
         if(self.imageParam === 'Y' || self.imageParam === 'y') {
-            $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + "?i=Y");
+            $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueId + "/" + serviceName + "?i=Y");
         } else if(serviceName === undefined) {
-            $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid );
+            $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueId );
         } else {
             if((self.embeddedService === 'embed') &&(typeof(serviceName) === 'undefined') ) {
-                $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid );
+                $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueId );
                 self.tabParams = serviceName;
             } else if((self.embeddedService === 'embed') && (typeof(serviceName) !== 'undefined')) {
-                $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/"+serviceName+ '/embed');
+                $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueId + "/"+serviceName+ '/embed');
                 self.tabParams = serviceName;
             }  else {
-                /* $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP"); */
+                /* $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueId + "/VIP"); */
                 self.tabParams = serviceName;
             }
         }

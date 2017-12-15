@@ -44,7 +44,7 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
                 self.embeddedVideo = APP_LINK.VIDEO_PLAY;
                 self.venueLyticsFeatures = APP_ARRAYS.features;
                 self.linkToPath = APP_ARRAYS.breakThrough;
-                self.venueid = $routeParams.venueid;
+                self.venueId = $routeParams.venueId;
                 self.states = APP_ARRAYS.cityName;
                 var urlPattern = $location.absUrl();
                 var data = urlPattern.split(".");
@@ -68,8 +68,8 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
                 self.listOfCategory = APP_ARRAYS.categories;
                 self.listOfRoles = APP_ARRAYS.roles;
                 self.deploymentServices = [];
-                if(self.venueid) {
-                    AjaxService.getClaimBusiness(self.venueid).then(function(response) {
+                if(self.venueId) {
+                    AjaxService.getClaimBusiness(self.venueId).then(function(response) {
                         self.businessUrl = response.data.status === undefined ? true : false;   
                         self.privateUrl = response.data["business.privateUrl"];
                         self.foodUrl = response.data["business.foodUrl"];
@@ -88,8 +88,8 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
                         setupEmbedScript();
                     });
                 }
-                if(typeof self.venueid !== 'undefined'){
-                    AjaxService.getVenues(self.venueid,null,null).then(function(response) {
+                if(typeof self.venueId !== 'undefined'){
+                    AjaxService.getVenues(self.venueId,null,null).then(function(response) {
                         self.selectedVenueName = response.venueName;
                         self.selectedVenueAddress = response.address;
                         self.selectedVenueWebsite = response.website;
@@ -101,7 +101,7 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
             };
 
             function setupEmbedScript() {
-                var premiumUrl = RestURL.adminURL + '/reservation/'+self.venueid +'?i=Y';
+                var premiumUrl = RestURL.adminURL + '/reservation/'+self.venueId +'?i=Y';
                 self.embedServicesHTML = $templateCache.get('business/iframe-integration.html');
                 self.embedServicesHTML = self.embedServicesHTML.replace('premiumUrl', premiumUrl);
             }
@@ -168,14 +168,14 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
                     "business.contactRole": businessClaim.role.role
                 };
 
-                AjaxService.claimBusiness(self.venueid , businessObject).then(function(response) {
+                AjaxService.claimBusiness(self.venueId , businessObject).then(function(response) {
                     $log.info("Claim business response: "+angular.toJson(response));
                 }, function(error) {
                      $log.info("Claim business response: "+angular.toJson(error.data));
                 });
                 self.businessData = true;
                 self.hideForm = true;
-                $location.path("/emailVerification/"+self.venueid);
+                $location.path("/emailVerification/"+self.venueId);
             };
 
             self.clickClaimBusiness = function(selectedVenue) {
@@ -221,7 +221,7 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
             };
 
             self.yesFunction = function() {
-                AjaxService.sendBusinessPage(self.venueid).then(function(response) {
+                AjaxService.sendBusinessPage(self.venueId).then(function(response) {
                     // may show success message
                 });
                 $location.path("/home");

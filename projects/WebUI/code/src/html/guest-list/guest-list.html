@@ -1,92 +1,135 @@
-<div ng-controller="GuestListController">
-<form class="col-xs-12" name="guestForm" autocomplete="off" validate-form="" parsley-validate novalidate ng-submit="glistSave(guest)" ng-cloak>
-        <fieldset>
-            <div class="col-xs-12 form-group label-floating is-empty no-p {{guestDateIsFocused}}">
-            <label class="control-label">{{'reservation.DATE' | translate}}</label>
-                <input type="text" class="form-control fontBold" id="requestedDate" ng-model="guest.requestedDate" required>
+<form class="col-md-12 col-sm-12 col-xs-12" name="guestForm" autocomplete="off" validate-form="" parsley-validate novalidate ng-submit="glistSave(guest)" ng-cloak ng-controller="GuestListController">
+    <fieldset class="col-md-6 col-xs-12">
+        <div class="col-xs-12 form-group label-floating is-empty no-p is-focused">
+        <label class="control-label">{{'reservation.DATE' | translate}}</label>
+            <input type="text" class="form-control fontBold" id="requestedDate" ng-model="guest.requestedDate" required>
+        </div>
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
+        <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
+        <input type="text" class="form-control fontBold" id="totalGuest" ng-model="guest.totalGuest">
+        </div>
+        <div class="col-xs-12 mb0 is-empty">
+            <div class="col-sm-6 col-md-4 form-group label-floating no-p is-empty {{guestFocus}}">
+                <label class="control-label" for="guestMen">{{'reservation.GUEST_MEN' | translate}}</label>
+                <input type="text" id="guestMen" name="guestMen" class="form-control fontBold" ng-model="guest.guestMen" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
-            <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
-            <input type="text" class="form-control fontBold" id="totalGuest" ng-model="guest.totalGuest">
+            <div class="col-sm-6 col-md-4 form-group label-floating no-p is-empty {{guestFocus}}" >
+                <label class="control-label ml-2" for="guestWomen">{{'reservation.GUEST_WOMEN' | translate}}</label>
+                <input type="text" id="guestWomen" name="guestWomen" class="form-control fontBold" ng-model="guest.guestWomen" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-xs-12 mb0 is-empty">
-                <div class="col-sm-6 col-md-4 form-group label-floating no-p is-empty {{guestFocus}}">
-                    <label class="control-label" for="guestMen">{{'reservation.GUEST_MEN' | translate}}</label>
-                    <input type="text" id="guestMen" name="guestMen" class="form-control fontBold" ng-model="guest.guestMen" required="" data-parsley-trigger="change">
-                </div>
-                <div class="col-sm-6 col-md-4 form-group label-floating no-p is-empty {{guestFocus}}" >
-                    <label class="control-label ml-2" for="guestWomen">{{'reservation.GUEST_WOMEN' | translate}}</label>
-                    <input type="text" id="guestWomen" name="guestWomen" class="form-control fontBold" ng-model="guest.guestWomen" required="" data-parsley-trigger="change">
-                </div>
-            </div>
-            <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
-            <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
-                <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="guest.guestMobileNumber" required="" data-parsley-trigger="change">
-            </div>
-            <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
-            <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
-                <input type="email" id="guestEmailId" name="guestEmailId" data-parsley-type="email" class="form-control fontBold" ng-model="guest.guestEmailId" required="" data-parsley-trigger="change">
-            </div>
+        </div>
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
+        <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
+            <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="guest.guestMobileNumber" required="" data-parsley-trigger="change">
+        </div>
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
+        <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
+            <input type="email" id="guestEmailId" name="guestEmailId" data-parsley-type="email" class="form-control fontBold" ng-model="guest.guestEmailId" required="" data-parsley-trigger="change">
+        </div>
+        
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
+        <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
+            <input type="text" id="guestFirstName" name="guestFirstName" class="form-control fontBold" ng-model="guest.guestFirstName" required="" data-parsley-trigger="change">
+        </div>
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
+        <label class="control-label">{{'reservation.LAST_NAME' | translate}}</label>
+            <input type="text" id="guestLastName" name="guestLastName" placeholder="" class="form-control fontBold" ng-model="guest.guestLastName" required="" data-parsley-trigger="change">
+        </div>
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" >
+            <label class="control-label" >{{"reservation.EVENT_TYPE"  | translate}}</label>
+            <select class="form-control fontBold {{blackTheme}}" ng-model="guest.guestEvent" ng-options="t.name for t in eventTypes">
+                <option value=""></option>
+            </select>
+        </div>            
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" >
+        <label class="control-label" >{{'reservation.ZIPCODE' | translate}}</label>
+            <input type="text" id="guestZip" name="guestZip" class="form-control fontBold" ng-model="guest.guestZip" data-parsley-trigger="change" required>
+        </div>
+        <div class="col-xs-12">
+        <div>
+            <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+                <input type="checkbox" ng-mode="guest.authorize" required/> {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
+            </label>
+        </div>
+        </div>
+        <div class="col-xs-12">    
+            <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+                <input type="checkbox" ng-model="guest.agree" required/> {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
+            </label>
+        </div>
+    </fieldset>
+    <div class="col-md-6 col-sm-12 col-xs-12  mt-6">
+        <div class="col-md-10 col-md-offset-2 col-xs-12 no-p">
+            <p class="h4">Enter Guest Information and Click <b>Add Guest</b> to add guests to the Guest List</p>
+            <div class="col-md-6 col-xs-12 form-group  no-pl label-floating is-empty" >
+                <label class="control-label" >{{"reservation.FIRST_NAME"  | translate}}</label>
+                <input type="text" class="form-control fontBold" ng-model="member.firstName">
+            </div> 
+            <div class="col-md-6 col-xs-12 form-group  no-pl label-floating is-empty " >
+                <label class="control-label" >{{"reservation.LAST_NAME"  | translate}}</label>
+                <input type="text" class="form-control fontBold"  ng-model="member.lastName">
+            </div> 
+       
+        
+            <div class="col-md-6 col-xs-12 form-group  no-pl label-floating is-empty " >
+                <label class="control-label" >{{"reservation.EMAIL"  | translate}}</label>
+                <input type="text" class="form-control fontBold" ng-model="member.email">
+            </div> 
+            <div class="col-md-6 col-xs-12 form-group  no-pl label-floating is-empty" >
+                <label class="control-label" >{{"reservation.MOBILE"  | translate}}</label>
+                <input type="text" class="form-control fontBold"  ng-model="member.phone">
+            </div> 
+            <button type="button" class="btn btn-raised btn-primary" ng-click="addMember(member)">+ Add Guest</button>
+        </div>
+
+        <div class="card card-primary col-md-10 col-md-offset-2 col-xs-12 no-p">
+            <!-- <div class="card-header">
+              <h3 class="card-title vertical_middle">
+                <i class="zmdi zmdi-accounts-list"></i>Guest Names</h3>
             
-            <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
-            <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
-                <input type="text" id="guestFirstName" name="guestFirstName" class="form-control fontBold" ng-model="guest.guestFirstName" required="" data-parsley-trigger="change">
-            </div>
-            <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}">
-            <label class="control-label">{{'reservation.LAST_NAME' | translate}}</label>
-                <input type="text" id="guestLastName" name="guestLastName" placeholder="" class="form-control fontBold" ng-model="guest.guestLastName" required="" data-parsley-trigger="change">
-            </div>
-            <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" >
-                <label class="control-label" >{{"reservation.EVENT_TYPE"  | translate}}</label>
-                <select class="form-control fontBold {{blackTheme}}" ng-model="guest.guestEvent" ng-options="t.name for t in eventTypes">
-                    <option value=""></option>
-                </select>
-            </div>            
-            <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" >
-            <label class="control-label" >{{'reservation.ZIPCODE' | translate}}</label>
-                <input type="text" id="guestZip" name="guestZip" class="form-control fontBold" ng-model="guest.guestZip" data-parsley-trigger="change" required>
-            </div>
-            <div class="col-xs-12">
-            <div>
-                <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
-                    <input type="checkbox" ng-mode="guest.authorize" required/> {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
-                </label>
-            </div>
-            </div>
-            <div class="col-xs-12">
-            <div>
-                <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
-                    <input type="checkbox" ng-model="guest.agree" required/> {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
-                </label>
-            </div>
-            </div>
-            <div class="modal modal-success" id="guestError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-                <div class="modal-dialog animated zoomIn animated-3x" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-                            <h3 class="modal-title" id="myModalLabel6">{{'reservation.TOTAL_GUEST_ERROR' | translate}}</h3>
-                        </div>
-                        <div class="modal-body">
-                            <p>{{'reservation.GUEST_ERROR' | translate}}</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
-                        </div>
-                    </div>
+            </div> -->
+            <table class="table table-no-border table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Guest Information</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="row in guestMemberList track by $index">
+                  <td>{{$index+1}}</td>
+                  <td><p>{{row.firstName}} {{row.lastName}}<br>
+                    <i class="mr-1 zmdi zmdi-email"></i>{{row.email}}<br><i class="mr-1 zmdi zmdi-phone"></i>{{row.phone}}</p></td>
+                </tr>
+                
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <center>
+            <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-disabled="guestForm.$invalid">
+                <span class="fontRegular">{{'business.DEPLOY_APPLY' | translate}}</span>
+            </button>
+            <button class="btn btn-raised btn-success">
+                <span class="fontRegular">{{'business.CANCEL' | translate}}</span>
+            </button>
+        </center>
+    </div>
+    <div class="modal modal-success" id="guestError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h3 class="modal-title" id="myModalLabel6">{{'reservation.TOTAL_GUEST_ERROR' | translate}}</h3>
+                </div>
+                <div class="modal-body">
+                    <p>{{'reservation.GUEST_ERROR' | translate}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
                 </div>
             </div>
-            <br><br>
-            <div class="col-xs-12">
-                <center>
-                    <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-disabled="guestForm.$invalid">
-                        <span class="fontRegular">{{'business.DEPLOY_APPLY' | translate}}</span>
-                    </button>
-                    <button class="btn btn-raised btn-success">
-                        <span class="fontRegular">{{'business.CANCEL' | translate}}</span>
-                    </button>
-                </center>
-            </div>
-        </fieldset>
-    </form>
-</div>
+        </div>
+    </div>
+</form>

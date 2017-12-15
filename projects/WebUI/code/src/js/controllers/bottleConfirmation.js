@@ -16,9 +16,9 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
-                $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueid, 'embed');
-                self.venueDetails =  venueService.getVenue($routeParams.venueid); 
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueId, 'embed');
+                self.venueDetails =  venueService.getVenue($routeParams.venueId); 
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
                 $rootScope.description = self.venueDetails.description; 
                 DataShare.venueDetails = self.venueDetails;  
                 self.selectedCity = DataShare.venueDetails.city;
@@ -26,7 +26,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                 $rootScope.title = self.venueDetails.venueName+' '+self.selectedCity+' '+self.venueDetails.state + " Venuelytics - Bottle Services Confirmation & Payment";
                 ngMeta.setTitle($rootScope.title);
                
-                self.venueID = $routeParams.venueid;
+                self.venueID = $routeParams.venueId;
                 self.userData = DataShare.bottleServiceData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;

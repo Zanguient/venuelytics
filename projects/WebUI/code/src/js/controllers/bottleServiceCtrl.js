@@ -41,7 +41,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                
-                self.venueid = $routeParams.venueid;
+                self.venueId = $routeParams.venueId;
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
                     self.sum = DataShare.count;
@@ -78,15 +78,15 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.getSelectedTab();
                 }, 600);
                 
-                AjaxService.getVenueServiceOpenDays($routeParams.venueid, 'bottle').then(function(response) {
+                AjaxService.getVenueServiceOpenDays($routeParams.venueId, 'bottle').then(function(response) {
                   self.availableDays = response.data;
                    $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd',
                  beforeShowDay: noWeekendsOrHolidays});
                 });
-                AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
+                AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.venueDetails = response;
-                    venueService.saveVenue($routeParams.venueid, self.venueDetails);
+                    venueService.saveVenue($routeParams.venueId, self.venueDetails);
 
                     ngMeta.setTag('description', response.description + " Bottle Services");
                     $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bottle Services";
@@ -98,7 +98,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.venueName =    self.detailsOfVenue.venueName;
                 });
 
-                AjaxService.getHosts(self.venueid).then(function(response) {
+                AjaxService.getHosts(self.venueId).then(function(response) {
                     self.hostDate = response.data;
                 });
             }; 
@@ -127,7 +127,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             }); 
 
             self.getBottleProducts = function() {
-                AjaxService.getProductOfBottle(self.venueid).then(function(response) {
+                AjaxService.getProductOfBottle(self.venueId).then(function(response) {
                     self.allBottle = response.data;
                 });
             };
@@ -148,7 +148,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.getMenus = function() {
-                AjaxService.getInfo(self.venueid).then(function(response) {
+                AjaxService.getInfo(self.venueId).then(function(response) {
                     self.bottleMenuUrl = response.data["Bottle.menuUrl"];
                     self.bottleVIPPolicy = response.data["Bottle.BottleVIPPolicy"];
                     self.bottleMinimumRequirement = response.data["Bottle.BottleMinimumrequirements"];
@@ -156,7 +156,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.enabledPayment =  response.data["Advance.enabledPayment"];
                     self.reservationFee =  response.data["Bottle.BottleReservationFee"];
                     $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
-                    venueService.saveVenueInfo(self.venueid, response);
+                    venueService.saveVenueInfo(self.venueId, response);
                 });
             };
 
@@ -169,7 +169,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             }
                         
             self.getEventType = function() {
-                AjaxService.getTypeOfEvents(self.venueid, 'Bottle').then(function(response) {
+                AjaxService.getTypeOfEvents(self.venueId, 'Bottle').then(function(response) {
                     self.eventTypes = response.data;
                     if(DataShare.editBottle === 'true') {
                       var selectedType;
@@ -256,7 +256,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                   self.selectionTableItems = [];
                 }
 
-                AjaxService.getVenueMap(self.venueid).then(function(response) {
+                AjaxService.getVenueMap(self.venueId).then(function(response) {
                     self.venueImageMapData = response.data;
                     DataShare.imageMapping.maps = [];
                     
@@ -300,7 +300,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     // self.setReservationColor();
                 });
                 $scope.reservationData = [];
-                AjaxService.getVenueMapForADate(self.venueid,self.bottleServiceDate).then(function(response) {
+                AjaxService.getVenueMapForADate(self.venueId,self.bottleServiceDate).then(function(response) {
                     self.reservations = response.data;
                     // $log.info("response:", angular.toJson(response));
                     angular.forEach(self.reservations, function(obj, key) {
@@ -571,7 +571,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 DataShare.price = self.price;
                 self.serviceJSON = {
                     "serviceType": 'Bottle',
-                    "venueNumber": self.venueid,
+                    "venueNumber": self.venueId,
                     "reason": self.bottle.bottleOccasion.name,
                     "contactNumber": self.bottle.mobile,
                     "contactEmail": self.bottle.email,
@@ -586,7 +586,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     "durationInMinutes": 0,
                     "deliveryType": "Pickup",
                     "order": {
-                        "venueNumber": self.venueid,
+                        "venueNumber": self.venueId,
                         "orderDate": dateValue,
                         "orderItems": []
                     },
@@ -598,7 +598,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                  if (self.tableSelection !== undefined) {
                     angular.forEach(self.tableSelection, function(value, key) {
                         var items = {
-                            "venueNumber": self.venueid,
+                            "venueNumber": self.venueId,
                             "productId": value.id,
                             "productType": value.productType,
                             "quantity": value.size,
@@ -612,7 +612,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 if (self.bottleMinimum !== undefined) {
                     angular.forEach(self.bottleMinimum, function(value1, key1) {
                         var items = {
-                            "venueNumber": self.venueid,
+                            "venueNumber": self.venueId,
                             "productId": value1.productId,
                             "productType": 'Bottle',
                             "quantity": value1.quantity,
@@ -624,7 +624,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.enablePayment = self.enabledPayment;
                 DataShare.venueName = self.venueName;
-                $location.url("/confirm/" + self.selectedCity + "/" + self.venueid);
+                $location.url("/confirm/" + self.selectedCity + "/" + self.venueId);
              };
             self.init();
     }]);

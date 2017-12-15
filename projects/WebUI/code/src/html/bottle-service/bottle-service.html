@@ -1,47 +1,34 @@
 <div  ng-controller="BottleServiceController">
-<form class="form-horizontal col-xs-12" parsley-validate autocomplete="off"  validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
-    <fieldset class="col-xs-12">
-        <div class="col-xs-12 form-group label-floating is-empty no-p {{bottleDateIsFocused}}" >
+<form class="form-horizontal" parsley-validate autocomplete="off"  validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
+    <fieldset class="col-md-12 col-sm-12 col-xs-12">
+        <div class="row col-md-12 col-sm-12 col-xs-12 form-group label-floating is-empty no-p {{bottleDateIsFocused}}" >
             <label class="control-label" >{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate" required/>
         </div>
-        <div class="col-xs-12 form-group is-empty mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
-
-            <div id="mapSection">
-                <center>
-                    <div>
-                        <table>
-                            <tr>
-                                <td>
-                                    <h4>
-                                        <span class="label label-warning" style="background-color: #e3e300;" translate="SELECTED"></span>
-                                    </h4>
-                                </td>
-                                <td>
-                                    <h4>
-                                        <span class="label label-success" translate="AVAILABLE"></span>
-                                    </h4>
-                                </td>
-                                <td>
-                                    <h4>
-                                        <span class="label label-danger" translate="BOOKED"></span>
-                                    </h4>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <img alt="bottleService-image" id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#ImgExam" class="map img-responsive"/>
-                    <map name="ImgExam">
-                        <area id="{{area.id}}"
-                            style="outline: red solid 2px;" shape="rect"
-                            coords="{{area.coords.join()}}" ng-repeat="area in selectedVenueMap.coordinates"
-                            ng-href="{{area.link_url || 'javascript:void(0)'}}"
-                            ng-click="selectTable(area.id, area.name)"
-                            data-maphilight='{"fillColor":"{{fillColor(area.id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{strokeColor(area.id)}}","strokeWidth":2}'>
-                        </area>
-                    </map>
-                </center>
-            </div>
+        <div class="row col-md-12 col-sm-12  col-xs-12  is-empty mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
+            <center>
+                <div class="row h4">
+                    
+                    
+                    <span class="label label-warning" style="background-color: #e3e300;" translate="SELECTED"></span>
+                
+                    <span class="label label-success" translate="AVAILABLE"></span>
+                
+                    <span class="label label-danger" translate="BOOKED"></span>
+                
+                           
+                </div>
+                <img alt="bottleService-image" id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#bottleImageMap" class="no-p no-m map img-responsive"/>
+                <map name="bottleImageMap">
+                    <area id="{{area.id}}"
+                        style="outline: red solid 2px;" shape="rect"
+                        coords="{{area.coords.join()}}" ng-repeat="area in selectedVenueMap.coordinates"
+                        ng-href="{{area.link_url || 'javascript:void(0)'}}"
+                        ng-click="selectTable(area.id, area.name)"
+                        data-maphilight='{"fillColor":"{{fillColor(area.id)}}","shadow":true,"shadowBackground":"ffffff","alwaysOn":true,"strokeColor":"{{strokeColor(area.id)}}","strokeWidth":2}'>
+                    </area>
+                </map>
+            </center>
         </div>
 
         <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" class="form-group"  ng-repeat="table in selectedVenueMap.elements" >

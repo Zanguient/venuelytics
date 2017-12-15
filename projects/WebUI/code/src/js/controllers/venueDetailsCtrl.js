@@ -11,7 +11,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             var self = $scope;
             self.init = function() {
 
-                AjaxService.getVenues($routeParams.venueid,null,null).then(function(response) {
+                AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
                     /*jshint maxcomplexity:10 */
                     self.detailsOfVenue = response;
                     self.selectedCity = $routeParams.cityName;

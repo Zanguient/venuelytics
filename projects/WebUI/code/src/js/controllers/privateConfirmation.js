@@ -10,10 +10,10 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$location', 'Data
 
             var self = $scope;
             self.init = function() {
-                self.editVenueID = $routeParams.venueid;
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                self.editVenueID = $routeParams.venueId;
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
                 $rootScope.description = self.venueDetails.description;
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
                 ngMeta.setTag('description', self.venueDetails.description + " Private Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Private Event Confirmation";
                 ngMeta.setTitle($rootScope.title);

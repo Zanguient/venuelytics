@@ -18,12 +18,12 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
      self.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
 
     self.init = function() {
-      self.venueDetails = venueService.getVenue($routeParams.venueid);
+      self.venueDetails = venueService.getVenue($routeParams.venueId);
       ngMeta.setTag('description', self.venueDetails.description + " Event Services");
       $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Event List";
       ngMeta.setTitle($rootScope.title);
         self.tabParam = $routeParams.tabParam;
-        AjaxService.getEvents($routeParams.venueid).then(function(response) {
+        AjaxService.getEvents($routeParams.venueId).then(function(response) {
           self.events = response.data['venue-events'];
           self.eventCalender();
           setTimeout(function() {

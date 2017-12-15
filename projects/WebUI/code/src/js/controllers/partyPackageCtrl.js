@@ -10,9 +10,9 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
             var self = $scope;
             self.partyDateIsFocused = 'is-focused';
             self.init = function() {
-                self.venueID = $routeParams.venueid;
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueid, 'ui.service.theme') || '';
+                self.venueID = $routeParams.venueId;
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
+                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
                 ngMeta.setTag('description', self.venueDetails.description + " Party Package");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + "Venuelytics - Party Package Services";
                 ngMeta.setTitle($rootScope.title);
@@ -48,7 +48,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                 }
             });
             self.getMenus = function() {
-                AjaxService.getInfo(self.venueid).then(function(response) {
+                AjaxService.getInfo(self.venueId).then(function(response) {
                     self.partyCateringMenu = response.data["PartyHall.cateringMenuUrl"];
                     self.partyMenu = response.data["PartyHall.Menu"];
                     self.partyInfoSheet = response.data["PartyHall.Details"];
@@ -81,7 +81,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.getEventType = function() {
-                AjaxService.getTypeOfEvents(self.venueid, 'PartyHall').then(function(response) {
+                AjaxService.getTypeOfEvents(self.venueId, 'PartyHall').then(function(response) {
                     self.eventTypes = response.data;
                     if(DataShare.partyFocus !== '') {
                       var selectedType;
@@ -116,7 +116,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                     self.partyHall = response.data;
                     self.reservationData = [];
                     var partyDate = moment(self.party.orderDate).format('YYYYMMDD');
-                    AjaxService.getVenueMapForADate(self.venueid,partyDate).then(function(response) {
+                    AjaxService.getVenueMapForADate(self.venueId,partyDate).then(function(response) {
                         self.reservations = response.data;
                         angular.forEach(self.partyHall, function(value, key) {
                             value.reserve = false;
@@ -144,7 +144,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                 DataShare.authBase64Str = authBase64Str;
                 self.serviceJSON = {
                   "serviceType": 'PartyPackageService',
-                  "venueNumber": self.venueid,
+                  "venueNumber": self.venueId,
                   "reason": self.party.partyEventType.name,
                   "contactNumber": self.party.mobile,
                   "contactEmail": self.party.email,
@@ -160,14 +160,14 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                   "durationInMinutes": 0,
                   "deliveryType": "Pickup",
                   "order": {
-                      "venueNumber": self.venueid,
+                      "venueNumber": self.venueId,
                       "orderDate": dateValue,
                       "orderItems": []
                   }
                 };
 
                 var items = {
-                            "venueNumber": self.venueid,
+                            "venueNumber": self.venueId,
                             "productId": selectedParty.id,
                             "productType": selectedParty.productType,
                             "quantity": selectedParty.size,
@@ -179,7 +179,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                 DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;
                 DataShare.privateOrderItem = selectedParty;
-                $location.url("/confirmPartyPackage/" + self.selectedCity + "/" + self.venueid);
+                $location.url("/confirmPartyPackage/" + self.selectedCity + "/" + self.venueId);
              };
             self.init();
     }]);

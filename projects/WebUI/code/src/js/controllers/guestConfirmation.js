@@ -7,8 +7,8 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataSh
     		var self = $scope;
             self.init = function() {
                 
-                self.selectedVenueID = $routeParams.venueid;
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                self.selectedVenueID = $routeParams.venueId;
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Guest Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Guest List Confirmation";

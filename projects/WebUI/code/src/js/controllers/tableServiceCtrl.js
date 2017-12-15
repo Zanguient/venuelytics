@@ -10,8 +10,8 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
             self.timeSlot = false;
             self.table = {};
             self.init = function() {
-                self.venueid = $routeParams.venueid;
-                self.venueDetails = venueService.getVenue($routeParams.venueid);
+                self.venueId = $routeParams.venueId;
+                self.venueDetails = venueService.getVenue($routeParams.venueId);
                 self.selectedVenue = self.venueDetails.venueName;
                 angular.forEach(self.venueDetails.imageUrls, function(value,key){
                     self.venueImage = value.originalUrl;
@@ -47,10 +47,10 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
             };
 
             self.editTableService = function() {
-                $location.url('/cities/' + self.selectedCity + '/' + self.venueid + '/table-services');
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueId + '/table-services');
             };
             self.venueInfo = function() {
-                AjaxService.getInfo(self.venueid).then(function(response) {
+                AjaxService.getInfo(self.venueId).then(function(response) {
                     self.heading = response.data['table.ui.reservation.heading'] || $translate.instance('TABLE_SERVICE_TIMEOUT');
                     self.description = response.data['table.ui.reservation.description'] || '';
                 });
@@ -61,7 +61,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
                 DataShare.guestFocus = self.table.tableDate +"T"+ self.table.reserveTime;
                 var date= moment(self.table.tableDate ).format('YYYYMMDD');
                 
-                AjaxService.getTime(self.venueid, date, self.table.reserveTime, self.table.guest).then(function(response) {
+                AjaxService.getTime(self.venueId, date, self.table.reserveTime, self.table.guest).then(function(response) {
                     var obj = response.data;
                     self.reservedTimeSlot = '';
                     self.timeSlot = true;
@@ -99,7 +99,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
                 self.reserveTimes = [];
                 var date = new Date();
                 $scope.startDate = moment(date).format("MM-DD-YYYY");
-                AjaxService.getServiceTime(self.venueid, 'venue').then(function(response) {
+                AjaxService.getServiceTime(self.venueId, 'venue').then(function(response) {
                     self.reservationData = response.data;
                     angular.forEach(self.reservationData, function(value1, key1) {
                         $scope.venueOpenTime = new Date(moment($scope.startDate + ' ' + value1.startTime,'MM-DD-YYYY h:mm').format());
@@ -121,12 +121,12 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
             self.confirmTableReserve = function(time) {
                 DataShare.editBottle = time;
                 DataShare.tableService = self.table;
-                $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueid);
+                $location.url("/confirmTableService/" + self.selectedCity + "/" + self.venueId);
             };
 
             self.backToTable = function() {
                 DataShare.tableService = '';
-                $location.url('/cities/' + self.selectedCity + '/' + self.venueid + '/table-services');
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueId + '/table-services');
             };
             self.tableGuests = DataShare.tableGuests;
             self.selectedDate= moment(DataShare.guestFocus).format('YYYY-MM-DD');
@@ -139,7 +139,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
                 var dateValue = moment(DataShare.guestFocus, 'YYYY-MM-DDThh:mm a').format("YYYY-MM-DDTHH:mm:ss");
                 self.serviceJSON = {
                   "serviceType": 'Restaurant',
-                  "venueNumber": self.venueid,
+                  "venueNumber": self.venueId,
                   "contactNumber": self.tableService.mobileNumber,
                   "contactEmail": self.tableService.emailId,
                   "noOfGuests": self.tableGuests,
@@ -149,7 +149,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
                   "deliveryType": "Pickup",
                   "deliveryInstructions": null,
                   "order": {
-                      "venueNumber": self.venueid,
+                      "venueNumber": self.venueId,
                       "orderDate": dateValue,
                       "orderItems": []
                   },
@@ -157,8 +157,8 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
                   "visitorName": fullName
                 };
 
-                AjaxService.createBottleService(self.venueid, self.serviceJSON, authBase64Str).then(function(response) {
-                    $location.url(self.selectedCity +'/table-success/'+ self.venueid);
+                AjaxService.createBottleService(self.venueId, self.serviceJSON, authBase64Str).then(function(response) {
+                    $location.url(self.selectedCity +'/table-success/'+ self.venueId);
                 });
             };
             self.init();
