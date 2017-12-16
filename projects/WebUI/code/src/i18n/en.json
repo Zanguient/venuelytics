@@ -442,6 +442,8 @@
 		"FIND_A_TABLE":"Find a Table",
 		"FIRST_NAME":"First Name",
 		"LAST_NAME":"Last Name",
+		"ORGANIZER_NAME": "Organizer Name",
+		"GUEST_NAME": "Guest Name",
 		"EMAIL":"Email",
 		"MOBILE":"Mobile",
 		"ZIPCODE":"Zipcode",

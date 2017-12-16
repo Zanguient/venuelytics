@@ -7,48 +7,61 @@
   	<div class="form-group">
   		<table class="table table-responsive table-no-border">
           <tbody>
-            <tr>
+            <tr >
               <td><label><b> {{'bottleServiceTab.DATE' | translate}} </b></label></td>
               <td>{{guestListData.requestedDate}}</td>
             </tr>
-             <tr>
-              <td> <label><b>{{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
-              <td>{{guestListData.totalGuest}}</td>
+            <tr ng-if="has('ORGANIZER_NAME')">
+              <td> <label><b>{{'reservation.ORGANIZER_NAME' | translate}}</b></label> </td>
+              <td>{{guestListData.organizerName}}</td>
             </tr>
-            <tr>
-              <td> <label><b>{{'bottleServiceTab.MEN' | translate}}</b></label> </td>
-              <td>{{guestListData.guestMen}}</td>
-            </tr>
-            <tr>
-              <td> <label><b>{{'bottleServiceTab.WOMEN' | translate}} </b></label></td>
-              <td>{{guestListData.guestWomen}}</td>
-            </tr>
-            <tr>
-              <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
-              <td>{{guestListData.guestMobileNumber}}</td>
-            </tr>
-            <tr>
+             <tr ng-if="has('EMAIL')">
               <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
               <td>{{guestListData.guestEmailId}}</td>
             </tr>
-            <tr>
+            <tr ng-if="has('MOBILE')">
+              <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
+              <td>{{guestListData.guestMobileNumber}}</td>
+            </tr>
+            <tr ng-if="has('TOTAL_GUEST')">
+              <td> <label><b>{{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
+              <td>{{guestListData.totalGuest}}</td>
+            </tr>
+            <tr ng-if="has('MEN_WOMEN')">
+              <td> <label><b>{{'bottleServiceTab.MEN' | translate}}</b></label> </td>
+              <td>{{guestListData.guestMen}}</td>
+            </tr>
+            <tr ng-if="has('MEN_WOMEN')">
+              <td> <label><b>{{'bottleServiceTab.WOMEN' | translate}} </b></label></td>
+              <td>{{guestListData.guestWomen}}</td>
+            </tr>
+            
+            <tr ng-if="has('EVENT_TYPE')">
                 <td><label><b> {{'reservation.EVENT_TYPE' | translate}}</b></label> </td>
                 <td>{{guestListData.guestEvent.name}}</td>
             </tr>
-            <tr>
-              <td> <label><b>{{'reservation.FIRST_NAME' | translate}}</b></label> </td>
-              <td>{{guestListData.guestFirstName}}</td>
-            </tr>
-            <tr>
-              <td> <label><b>{{'reservation.LAST_NAME' | translate}}</b></label> </td>
-              <td>{{guestListData.guestLastName}}</td>
-            </tr>
-            <tr>
+            <tr ng-if="has('ZIPCODE')">
               <td> <label><b>{{'reservation.ZIPCODE' | translate}} </b></label></td>
               <td>{{guestListData.guestZip}}</td>
             </tr>
           </tbody>
       </table>
+       <table class="table table-no-border table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Guest Information</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in guestListData.guestMemberList track by $index">
+              <td>{{$index+1}}</td>
+              <td><p>{{row.guestName}}<br>
+                <i class="mr-1 zmdi zmdi-email" ng-if="row.email"></i>{{row.email}}<br><i class="mr-1 zmdi zmdi-phone" ng-if="row.phone"></i>{{row.phone}}</p></td>
+            </tr>
+            
+          </tbody>
+        </table>
       <center>
         <div >
             <button type="submit" class="btn btn-raised btn-primary" ng-click="guestListSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>

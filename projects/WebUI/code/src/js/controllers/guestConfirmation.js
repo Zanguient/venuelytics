@@ -9,6 +9,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataSh
                 
                 self.selectedVenueID = $routeParams.venueId;
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
+                self.venueInfo();
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Guest Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Guest List Confirmation";
@@ -18,6 +19,19 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataSh
                 self.guestListData = DataShare.guestListData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;
+            };
+            self.venueInfo = function() {
+                var fields = venueService.getVenueInfo(self.selectedVenueID, 'GuestListService.ui.fields');
+                if (typeof(fields) !== 'undefined') {
+                    self.guestListFields = JSON.parse(fields) ;
+                } 
+            };
+
+            self.has = function(elementName) {
+                if (!self.guestListFields) {
+                    return true;
+                }
+                return self.guestListFields && self.guestListFields.hasOwnProperty(elementName);
             };
 
             self.editGuestPage = function() {

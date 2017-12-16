@@ -12,6 +12,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
             self.init = function() {
                 self.venueId = $routeParams.venueId;
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
+
                 self.selectedVenue = self.venueDetails.venueName;
                 angular.forEach(self.venueDetails.imageUrls, function(value,key){
                     self.venueImage = value.originalUrl;
@@ -49,12 +50,13 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
             self.editTableService = function() {
                 $location.url('/cities/' + self.selectedCity + '/' + self.venueId + '/table-services');
             };
+
             self.venueInfo = function() {
-                AjaxService.getInfo(self.venueId).then(function(response) {
-                    self.heading = response.data['table.ui.reservation.heading'] || $translate.instance('TABLE_SERVICE_TIMEOUT');
-                    self.description = response.data['table.ui.reservation.description'] || '';
-                });
+                self.heading = venueService.getVenueInfo(self.venueId, 'table.ui.reservation.heading') || $translate.instance('TABLE_SERVICE_TIMEOUT');    
+                self.description = venueService.getVenueInfo(self.venueId, 'table.ui.reservation.description') ;
+                //self.description =
             };
+            
             self.findTable = function() {
                 self.productItem = [];
                 DataShare.tableGuests = self.table.guest;
