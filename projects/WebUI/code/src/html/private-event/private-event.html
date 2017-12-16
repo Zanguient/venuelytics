@@ -55,7 +55,7 @@
             </center>
         </div>
         <div class="col-md-12">
-            <div class="col-md-5 form-group is-empty">
+            <div class="col-md-6 col-sm-12 col-xs-12 form-group is-empty">
                 <table>
                 <tr><td>
                     <select class="form-control fontBold {{blackTheme}}" required=""
@@ -71,23 +71,13 @@
                 </table>
             </div>
         </div>
-        <div class="col-lg-12 form-group is-empty">
-            <table>
-                <tr>
-                    <td>
-                        <div class="col-md-10 form-group label-floating is-empty no-p {{privateEventFocused}}">
-                        <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
-                        <input type="text" class="form-control fontBold" id="privateTotalGuest" ng-model="private.totalGuest">
-                        </div>
-                    </td>
-                    <td class="budgetPadding">
-                        <div class="col-md-10 form-group label-floating is-empty no-p {{privateEventFocused}}" >
-                        <label class="control-label" >{{'reservation.BUDGET' | translate}}</label>
-                        <input type="text" class="form-control fontBold" id="budget" ng-model="private.budget" data-parsley-trigger="change">
-                        </div>
-                    </td>
-                </tr>
-            </table>
+        <div class="col-md-12 form-group label-floating no-p is-empty">
+             <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
+            <input type="text" class="form-control fontBold" id="privateTotalGuest" ng-model="private.totalGuest">       
+        </div>
+        <div class="col-md-12 form-group label-floating no-p is-empty">
+            <label class="control-label" >{{'reservation.BUDGET' | translate}}</label>
+            <input type="text" class="form-control fontBold" id="budget" ng-model="private.budget" data-parsley-trigger="change">
         </div>
 
         <div class="col-md-12 form-group label-floating is-empty no-p {{privateEventFocused}}" >
