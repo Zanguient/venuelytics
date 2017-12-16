@@ -76,8 +76,8 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.getSelectedTab = function() {
-                $(".service-btn").removeClass("tabSelected");
-                $("#partyPackage").addClass("tabSelected");
+                $(".service-btn .card").removeClass("tabSelected");
+                $("#partyPackage > .partyBtn").addClass("tabSelected");
             };
 
             self.getEventType = function() {

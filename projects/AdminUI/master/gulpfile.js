@@ -20,7 +20,6 @@ var gulp        = require('gulp'),
     filter = require('gulp-filter'),
     htmlify     = require('gulp-angular-htmlify'),
     replace = require('gulp-replace'),
-    awspublish = require('gulp-awspublish'),
     gulpSequence = require('gulp-sequence'),
     CacheBuster  = require('gulp-cachebust'),
     templateCache = require('gulp-angular-templatecache'),
@@ -266,10 +265,10 @@ gulp.task('scripts:app', function() {
         .pipe(gulpif('*.js',replace('http://52.9.4.76',baseSiteUrl())))
       	//.pipe(uglify()) 
         .pipe(f)
-        .pipe(jshint())
+       /* .pipe(jshint())
         .pipe(jshint.reporter('gulp-jshint-html-reporter', {
             filename: 'jshint-output.html'
-        }))
+        }))*/
         .pipe(f.restore)
         .pipe(concat(build.scripts.app.main))
         .pipe(gulp.dest(build.scripts.app.dir));

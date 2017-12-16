@@ -93,8 +93,8 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
 
 
             self.getSelectedTab = function() {
-                $(".service-btn").removeClass("tabSelected");
-                $("#tableServices").addClass("tabSelected");
+                $(".service-btn .card").removeClass("tabSelected");
+                $("#tableServices > .tableBtn").addClass("tabSelected");
             };
 
             self.getServiceTime = function() {

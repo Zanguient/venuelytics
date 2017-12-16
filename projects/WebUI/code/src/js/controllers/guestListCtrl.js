@@ -90,8 +90,8 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
             };
 
             self.getSelectedTab = function() {
-                $(".service-btn").removeClass("tabSelected");
-                $("#guestList").addClass("tabSelected");
+                $(".service-btn .card").removeClass("tabSelected");
+                $("#guestList .guestBtn").addClass("tabSelected");
             };
 
             self.addMember = function(member) {

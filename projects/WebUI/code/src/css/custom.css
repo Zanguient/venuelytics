@@ -489,14 +489,16 @@ select {
 }
 
 .tabSelected {
-  -webkit-box-shadow:inset 0px 0px 0px 2px green;
-  -moz-box-shadow:inset 0px 0px 0px 2px green;
-  box-shadow:inset 0px 0px 0px 2px green;
+  -webkit-box-shadow:inset 0px 0px 0px 2px green !important;
+  -moz-box-shadow:inset 0px 0px 0px 2px green !important;
+  box-shadow:inset 0px 0px 0px 2px green !important;
 }
 
 .p-min {
-  padding: 3px;
+  padding: 4px;
 }
+
+
 .req-border {
   border: 1px solid;
 }
@@ -3045,6 +3047,9 @@ table.fc-border-separate {
    height: 50px !important;
 }
 
+.roundCornerBtn {
+  border-radius: 5px !important;
+}
 .bottleBtn {
   background-color: rgba(122,17,217, 0.80) !important;
   color: #fff !important;

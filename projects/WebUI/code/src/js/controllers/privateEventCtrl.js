@@ -81,8 +81,8 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.getSelectedTab = function() {
-                $(".service-btn").removeClass("tabSelected");
-                $("#privateEvents").addClass("tabSelected");
+                $(".service-btn .card").removeClass("tabSelected");
+                $("#privateEvents > .privateBtn").addClass("tabSelected");
             };
 
             self.createPrivateEvent = function(value) {

@@ -72,8 +72,8 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.getSelectedTab = function() {
-                $(".service-btn").removeClass("tabSelected");
-                $("#bachelorParty").addClass("tabSelected");
+                $(".service-btn .card").removeClass("tabSelected");
+                $("#bachelorParty > .bachelorBtn").addClass("tabSelected");
             };
 
             self.getEventType = function() {
