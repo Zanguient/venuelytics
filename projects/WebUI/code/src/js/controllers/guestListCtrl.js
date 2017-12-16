@@ -112,10 +112,16 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
 
                 var name = guest.organizerName;
 
+                var userType = guest.userType;
+                if (typeof(guest.userType) === 'undefined' || guest.userType !== 'PROMOTER') {
+                    userType = 'VISITOR';
+                    guest.userType = 'VISITOR';
+                }
                 var authBase64Str = window.btoa(name + ':' + guest.guestEmailId + ':' + guest.guestMobileNumber);
                
                 var dateValue = moment(self.guest.requestedDate, 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss");
                 guest.guestMemberList  = self.guestMemberList;
+
                 var object = {
                      "venueNumber" : self.venueId,
                      "email" :      guest.guestEmailId,
@@ -126,7 +132,8 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
                      "maleCount" :  guest.guestMen,
                      "femaleCount" : guest.guestWomen,
                      "eventName" :  guest.guestEvent.name,
-                     "venueGuests" : guest.guestMemberList
+                     "venueGuests" : guest.guestMemberList,
+                     "userType": userType
 
                 };
                 DataShare.guestListData = self.guest;

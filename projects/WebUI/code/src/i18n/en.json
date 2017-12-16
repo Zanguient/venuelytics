@@ -444,6 +444,7 @@
 		"LAST_NAME":"Last Name",
 		"ORGANIZER_NAME": "Organizer Name",
 		"GUEST_NAME": "Guest Name",
+		"IS_PROMOTER": "Is Promoter?",
 		"EMAIL":"Email",
 		"MOBILE":"Mobile",
 		"ZIPCODE":"Zipcode",

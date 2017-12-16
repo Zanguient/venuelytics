@@ -8,6 +8,13 @@
             <label class="control-label" >{{'reservation.ORGANIZER_NAME' | translate}}</label>
             <input type="text" id="organierName" class="form-control fontBold" ng-model="guest.organizerName" required="" data-parsley-trigger="change">
         </div>
+        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" ng-if="has('PROMOTER')">
+            <label class="control-label" >{{'reservation.IS_PROMOTER' | translate}}</label>
+            <select class="form-control fontBold {{blackTheme}}" ng-model="guest.userType">
+                <option value="PROMOTER">YES</option>
+                <option value="VISITOR">NO</option>
+            </select>
+        </div>
         <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" ng-if="has('EMAIL')">
             <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
             <input type="email" id="guestEmailId" data-parsley-type="email" class="form-control fontBold" ng-model="guest.guestEmailId" required="" data-parsley-trigger="change">

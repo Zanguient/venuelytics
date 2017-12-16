@@ -15,7 +15,11 @@
               <td> <label><b>{{'reservation.ORGANIZER_NAME' | translate}}</b></label> </td>
               <td>{{guestListData.organizerName}}</td>
             </tr>
-             <tr ng-if="has('EMAIL')">
+            <tr ng-if="has('PROMOTER')">
+              <td> <label><b>{{'reservation.PROMOTER' | translate}}</b></label> </td>
+              <td>{{guestListData.userType === 'PROMOTER' ? 'YES' : 'NO'}}</td>
+            </tr>
+            <tr ng-if="has('EMAIL')">
               <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
               <td>{{guestListData.guestEmailId}}</td>
             </tr>
