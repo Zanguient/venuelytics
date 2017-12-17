@@ -23,7 +23,7 @@ App.controller('AgenciesController', ['$scope', '$state','$compile','$timeout', 
 		    	"createdCell": function (td, cellData, rowData, row, col) {
 		    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit mr" ' +
 		    		'ng-click="editAgency('+cellData+')"></button>';
-		    		actionHtml += '<button title="Associate Venue" class="btn btn-default btn-oval fa fa-users mr" ' + 
+		    		actionHtml += '<button title="Associate Users" class="btn btn-default btn-oval fa fa-users mr" ' + 
 		    		'ng-click="agencyUsers(' +row +','+cellData+')"></button>';
 		    		if ($scope.agencyType === 'AGENCY') {
 		    			actionHtml += '<button title="Associate Stores" class="btn btn-default btn-oval mr fa fa-building"></button>';	

@@ -279,6 +279,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('jquery-ui', 'moment','fullcalendar')
     })
+    .state('app.guestList', {
+        url: '/guestlist',
+        title: 'GuestList',
+        templateUrl: basepath('guest/guestList.html'),
+        controller: 'GuestListController',
+        data: { authorizedRoles: [USER_ROLES.admin]},
+        resolve: resolveFor('jquery-ui', 'moment','fullcalendar')
+    })
     .state('app.eventsCalendar', {
         url: '/eventsCalendar',
         title: 'Events Calendar',

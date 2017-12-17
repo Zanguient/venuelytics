@@ -1,0 +1,61 @@
+<h3>
+   <div class="row">
+      <div class="col-lg-12">
+         GuestList - <small>Manage your guest requests here </small>
+      </div>
+    </div>
+</h3>
+<!-- START row-->
+<div class="calendar-app">
+   <div class="row gutter-2">
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+         <!-- START panel-->
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <!-- START calendar-->
+               <div id="calendarGuestList"></div>
+               <!-- END calendar-->
+            </div>
+         </div>
+         <!-- END panel-->
+      </div> 
+      <div class="col-lg-4 col-md-4" ng-show="selectCalender">
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <div class="card card-primary col-md-12  col-xs-12 no-p" ng-repeat="(key, value) in guestList">
+                 <table class="table table-no-border table-striped">
+                 <thead>
+                   <tr>
+                     <th>Name</th>
+                     <th>Value</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                     <tr>
+                        <td>Organizer Name</td>
+                        <td>{{value.visitorName}}</td>
+                     </tr>
+                     <tr>
+                        <td>Organizer Email</td>
+                        <td>{{value.email}}</td>
+                     </tr>
+                     <tr>
+                        <td>Total Guests</td>
+                        <td>{{value.totalCount}}</td>
+                     </tr>
+                     <tr>
+                        <td>Has Guest Name</td>
+                        <td>{{guestItem.venueGuests.length > 0 ? 'Yes': 'No'}}</td>
+                     </tr>
+                   
+                 </tbody>
+            </table>
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </div>
+   <!-- END row-->
+</div>
+

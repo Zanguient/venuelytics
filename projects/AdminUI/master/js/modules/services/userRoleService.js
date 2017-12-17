@@ -14,8 +14,8 @@
 	userRoles[6] = 'Karaoke Manager';
 	userRoles[7] = 'Artist';
 	userRoles[8] = 'Host';
-	userRoles[9] = 'Partner';
-	userRoles[10] = 'Agent';
+	userRoles[9] = 'Runner';
+	userRoles[10] = 'Store Agent';
 	userRoles[11] = 'Agent Manager';
 	userRoles[12] = 'Store Manager';
 	userRoles[75] = 'Service Manager';

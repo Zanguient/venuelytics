@@ -287,6 +287,7 @@
         "CONTEST":"Contest Management",
         "SETTINGS": "Application Settings",
         "RESERVATIONS": "Reservations",
+        "GUEST_LIST":"Guest List",
         "INBOX": "Inbox",
         "EVENTS_CALENDAR": "Events Calendar",
         "TICKET_COUNTER":"Ticket Counter",

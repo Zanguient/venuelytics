@@ -142,7 +142,7 @@
  					delete : {method: 'DELETE',  params: { id: '@id'},
  						url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"},
  					getGuests : {method: 'GET',  params: { id: '@id' }, isArray:true,
- 						url: urlTemplate.replace("@context", "venues") +"/guests/20170708"},
+ 						url: urlTemplate.replace("@context", "venues") +"/guests/:date"},
  					getEvents : {method: 'GET',  params: { id: '@id' }, isArray:false,
  						url: urlTemplate.replace("@context", "venues") +"/venueevents"},
  					getEvent : {method: 'GET',  params: { id: '@id' }, isArray:false,
@@ -269,6 +269,8 @@
  				return $resource(urlTemplate.replace("@context", "analytics"),{},{
  					get : { method: 'GET',  params: { id: '@id', anaType: '@anaType', aggPeriodType : '@aggPeriodType', filter: '@filter' }, 
  						url: urlTemplate.replace("@context", "analytics") + "/:anaType/:aggPeriodType?:filter"},
+ 					getArray : { method: 'GET',  params: { id: '@id', anaType: '@anaType', aggPeriodType : '@aggPeriodType', filter: '@filter' }, 
+ 						url: urlTemplate.replace("@context", "analytics") + "/:anaType/:aggPeriodType?:filter", isArray: true},
  					getTopNFavItems : {method: 'GET',  params: { id: '@id', aggPeriodType : '@aggPeriodType' }, 
  						url: urlTemplate.replace("@context", "analytics") +"/favitems/:aggPeriodType"},
  					

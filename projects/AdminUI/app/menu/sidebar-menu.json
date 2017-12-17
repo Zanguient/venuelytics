@@ -39,6 +39,14 @@
 	 "roleId": 100
   },
   {
+  	"text": "GuestList",
+	"sref": "app.guestList",
+	 "icon": "icon-calendar",
+	 "translate": "sidebar.nav.pages.GUEST_LIST",
+	 "submenu": [],
+	 "roleId": 100
+  },
+  {
   	"text": "Reservations",
 	"sref": "app.reservations",
 	 "icon": "icon-calendar",
