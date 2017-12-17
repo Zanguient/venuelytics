@@ -16,9 +16,9 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
 	    	
 	    	data.enabled = data.enabled ? "true" : "false";
 	    	$scope.data = data;
-            if (data.roleId === 9) {
-                $scope.getSecurityToken();
-            }
+            
+            $scope.getSecurityToken();
+            
 	    });
     } else {
     	var data = {};
@@ -76,8 +76,8 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     $scope.init =function() {
         $scope.securityCode = "XXXX-XXXX-XXXX";
         $scope.securityCodeSecure = '';
-        $scope.securityBarCode  = '';
-        
+        //$scope.securityBarCode  = '';
+        $scope.showHideText = "Show Security Code";
         $scope.getManagers();
 
         angular.element(document).ready(function() {

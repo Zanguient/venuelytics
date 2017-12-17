@@ -22,9 +22,9 @@
       <div class="row">
          <div class="date pull-left" style="margin: 10px;">
             <span class="binds"></span>
-            <span class="month" ng-bind="event.startDate | date: 'MMMM'"></span>
-            <h2 class="day" ng-bind="event.startDate | date: 'dd'"></h1>
-            <h5 class="weekday" ng-bind="event.startDate | date: 'EEE' | uppercase"> </h5>
+            <span class="month" ng-bind="UTC(event.startDate) | date: 'MMMM'"></span>
+            <h2 class="day" ng-bind="UTC(event.startDate) | date: 'dd'"></h1>
+            <h5 class="weekday" ng-bind="UTC(event.startDate) | date: 'EEE' | uppercase"> </h5>
             <h4 class="time" ng-bind="TIME(event.eventTime) | date:'h:mm a' "> </h4>
          </div>  
          <div>

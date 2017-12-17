@@ -25,6 +25,13 @@ App.directive('eventTile', function() {
     		return enabled === 'Y' ? 'fa fa-check' : '';
   		};	
 
+  		$scope.UTC = function(date) {
+
+  			var startDate = date.substring(0,10);
+            var from = startDate.split("-");
+            return new Date(from[0], from[1] - 1, from[2]);
+  		};
+
   		$scope.TIME = function(d) {
   			if (typeof d !== 'undefined') {
 		      var t = d.split(":");

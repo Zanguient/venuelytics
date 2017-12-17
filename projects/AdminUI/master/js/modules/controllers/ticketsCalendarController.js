@@ -42,8 +42,15 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
         }
         var obj = {};
         obj.title = event.eventName;  
-        var sDate = new Date(event.startDate);
-        var endDate = new Date(event.endDate);
+
+        var startDate = event.startDate.substring(0,10);
+        var from = startDate.split("-");
+        var sDate = new Date(from[0], from[1] - 1, from[2]);
+
+        var endDate = event.endDate.substring(0,10);
+        from = endDate.split("-");
+        var endDate = new Date(from[0], from[1] - 1, from[2]);
+
         var t = event.eventTime.split(":");
         var h = parseInt(t[0]);
         var m = parseInt(t[1]);
@@ -92,15 +99,15 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
           }
         }
       }
-      $('#calendar').fullCalendar( 'removeEvents');
-      $('#calendar').fullCalendar( 'addEventSource', $scope.calEvents );
-      $('#calendar').fullCalendar('rerenderEvents' );
+      $('#ticketCalendar').fullCalendar( 'removeEvents');
+      $('#ticketCalendar').fullCalendar( 'addEventSource', $scope.calEvents );
+      $('#ticketCalendar').fullCalendar('rerenderEvents' );
     });  
   };
 
 
   $scope.initCalendar = function () {
-    var calElement = $('#calendar');
+    var calElement = $('#ticketCalendar');
 	  	// check to remove elements from the list 
 	  calElement.fullCalendar({
       isRTL: $scope.app.layout.isRTL,

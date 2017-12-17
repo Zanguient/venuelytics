@@ -36,10 +36,10 @@ App.controller('ProfileController', ['$scope', '$state', 'RestServiceFactory', '
     $scope.showHideSecurityCode = function() {
         $scope.showSecurityCode = ! $scope.showSecurityCode;
         if ( $scope.showSecurityCode) {
-            $scope.securityCode = $scope.securityCodeSecure ;
+            $scope.securityCodeSecure = $scope.data.securityCode ;
             $scope.showHideText = "Hide Security Code";
         } else {
-            $scope.securityCode = "XXXX-XXXX-XXXX" ;
+            $scope.securityCodeSecure = "XXXX-XXXX-XXXX" ;
             $scope.showHideText = "Show Security Code";
         }
 
@@ -48,10 +48,11 @@ App.controller('ProfileController', ['$scope', '$state', 'RestServiceFactory', '
         return $scope.data.roleId === 9 && Session.roleId >= 10;
     };
     $scope.init =function() {
-        $scope.securityCode = "XXXX-XXXX-XXXX";
-        $scope.securityCodeSecure = '';
+        
+        $scope.securityCodeSecure = 'XXXX-XXXX-XXXX';
         $scope.securityBarCode  = '';
-
+        $scope.showSecurityCode = false;
+        $scope.showHideText = "Show Security Code";
         angular.element(document).ready(function() {
 
         var progressbar = $('#progressbar'),

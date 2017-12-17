@@ -66,9 +66,9 @@
       <div class="col-sm-12">
         <img ng-src="{{data.profileImageThumbnail}}" alt="" class="img-responsive" style="max-height: 300px; width: auto; margin:auto;"/>
       </div>
-      <div class="col-sm-12" ng-show="data.roleId == 9">
-        <img ng-src="{{securityBarCode}}" alt="" class="img-responsive"  style="max-height: 200px; width: auto; margin:auto;"/><br/>
-        <div ng-bind="securityCode" class="col-sm-9 text-center well well-sm"></div>
+      <div class="col-sm-12" >
+        <img ng-src="{{'data:image/png;base64,' + data.securityBarCode}}" alt="" class="img-responsive"  style="max-height: 200px; width: auto; margin:auto;"/><br/>
+        <div ng-bind="securityCodeSecure" class="col-sm-9 text-center well well-sm"></div>
         <div class="col-sm-3">
           <button type="button" class="btn btn-default well well-sm" ng-click="showHideSecurityCode()" ng-bind="showHideText"></button>
         </div>

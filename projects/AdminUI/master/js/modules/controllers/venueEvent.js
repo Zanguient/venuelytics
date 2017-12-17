@@ -8,9 +8,9 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, DialogService, ngDialog, DataTableService, $compile, contextService, Session) {
   'use strict';
     
-    var n = $scope.minDate = new Date(2017,1,1);
+    var n = $scope.minDate = new Date(2017,6,6);
     
-    $scope.maxDate = new Date(n.getFullYear()+1, n.getMonth(), n.getDate());
+    $scope.maxDate = new Date(2018,11,31);
     $scope.contextService = contextService;
     $scope.dateOptions = {
         formatYear: 'yy',
@@ -45,6 +45,15 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
 	    var promise = RestServiceFactory.VenueService().getEvent({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
 	    	$scope.data = data;
+
+            var startDate = $scope.data.startDate.substring(0,10);
+            var from = startDate.split("-");
+            $scope.data.startDate = new Date(from[0], from[1] - 1, from[2]);
+
+            var endDate = $scope.data.endDate.substring(0,10);
+            from = endDate.split("-");
+            $scope.data.endDate = new Date(from[0], from[1] - 1, from[2]);
+
 
             var t = data.eventTime.split(":");
             var h = parseInt(t[0]);
