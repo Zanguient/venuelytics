@@ -81,7 +81,7 @@
                   <td>{{selectedRow.eventName}}</td>
               </tr> 
               <tr ng-repeat="guest in selectedRow.venueGuests">
-                  <td><strong>Event Name<strong></td>
+                  <td><strong>Guest Name<strong></td>
                   <td><p>{{guest.firstName}} {{guest.lastName}}<br>
                     <i class="mr-sm fa fa-envelope " ng-if="guest.email"></i>{{guest.email}}<br><i class="mr-sm fa fa-phone" ng-if="guest.phone"></i>{{guest.phone}}</p></td>
               </tr>   
