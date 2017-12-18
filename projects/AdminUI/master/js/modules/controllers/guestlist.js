@@ -56,8 +56,8 @@
 
   $scope.initCalendar = function () {
     var calElement = $('#calendarGuestList');
-	  	// check to remove elements from the list 
-  	calElement.fullCalendar({
+      // check to remove elements from the list 
+    calElement.fullCalendar({
      isRTL: $scope.app.layout.isRTL,
      header: {
        left:   'prev,next today',

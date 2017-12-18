@@ -4,16 +4,15 @@
             <label class="control-label">{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="requestedDate" ng-model="guest.requestedDate" required>
         </div>
-        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" ng-if="has('ORGANIZER_NAME')">
-            <label class="control-label" >{{'reservation.ORGANIZER_NAME' | translate}}</label>
-            <input type="text" id="organierName" class="form-control fontBold" ng-model="guest.organizerName" required="" data-parsley-trigger="change">
-        </div>
-        <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" ng-if="has('PROMOTER')">
-            <label class="control-label" >{{'reservation.IS_PROMOTER' | translate}}</label>
-            <select class="form-control fontBold {{blackTheme}}" ng-model="guest.userType">
-                <option value="PROMOTER">YES</option>
-                <option value="VISITOR">NO</option>
-            </select>
+        <div class="col-md-12 col-sm-12 col-xs-12 no-p no-ml">
+            <div class="col-md-4 col-xs-12 form-group label-floating is-empty no-pl no-ml {{guestFocus}}" ng-if="has('ORGANIZER_NAME')">
+                <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
+                <input type="text" id="organierName" class="form-control fontBold" ng-model="guest.firstName" required="" data-parsley-trigger="change">
+            </div>
+            <div class="col-md-8 col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" ng-if="has('ORGANIZER_NAME')">
+                <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
+                <input type="text" id="organierName" class="form-control fontBold" ng-model="guest.lastName" required="" data-parsley-trigger="change">
+            </div>
         </div>
         <div class="col-xs-12 form-group label-floating is-empty no-p {{guestFocus}}" ng-if="has('EMAIL')">
             <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
