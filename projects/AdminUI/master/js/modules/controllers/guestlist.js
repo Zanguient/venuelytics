@@ -54,16 +54,6 @@
     });
   };
 
-  $scope.getDisplayProps = function(guestItem) {
-
-    var retObj = [];
-        retObj['Organizer Name'] = guestItem.visitorName;
-        retObj['Organizer Email'] = guestItem.email;
-        retObj['Total Guests'] = ""+guestItem.totalCount;
-        retObj['Has Guest Name'] = guestItem.venueGuests.length > 0 ? 'Yes': 'No';
-      return retObj;
-  };
-
   $scope.initCalendar = function () {
     var calElement = $('#calendarGuestList');
 	  	// check to remove elements from the list 
@@ -72,7 +62,7 @@
      header: {
        left:   'prev,next today',
        center: 'title',
-       right:  'month,agendaWeek,agendaDay'
+       right:  'month'
      },
       buttonIcons: { // note the space at the beginning
        prev:    ' fa fa-caret-left',
@@ -115,12 +105,14 @@
           $scope.selectedDate = date;
           $scope.getGuestList();
           $scope.selectCalender = true;
+          $scope.selectedRow = false;
 
         },
         eventClick: function( event, jsEvent, view ) {
           $scope.selectedDate = event.start;
           $scope.getGuestList($scope.selectedDate);
           $scope.selectCalender = true;
+           $scope.selectedRow = false;
         
         },
         eventDragStart: function (event, js, ui) {
@@ -145,19 +137,29 @@
   };
   
   
-  $scope.selectTable = function(tableId, name, table) {
-      
+  $scope.onRowClick = function(rowData) {
+
+    $scope.selectedRow = rowData;
   };
 
 
   $scope.getGuestList = function(date) {
 
-      RestServiceFactory.VenueService().getGuests({id: contextService.userVenues.selectedVenueNumber,  date: $scope.selectedDate.format("YYYYMMDD")}, function(data){
-        $scope.guestList =  data;
-      });
+    RestServiceFactory.VenueService().getGuests({id: contextService.userVenues.selectedVenueNumber,  date: $scope.selectedDate.format("YYYYMMDD")}, function(data){
+      $scope.guestList =  data;
+    });
   };
         
+  $scope.init = function() {
+   // $('#guestListTable').on('click', 'tbody tr', function() {
+      //$(this).addClass('highlight').siblings().removeClass('highlight');
+    //});​
+    $('#guestListTable').on('click', 'tbody tr', function() {
+      $(this).addClass('highlight').siblings().removeClass('highlight');
+    });
+  };
 
+  $scope.init();
   $scope.initCalendar();
   $scope.getGuestListSummary();
   
