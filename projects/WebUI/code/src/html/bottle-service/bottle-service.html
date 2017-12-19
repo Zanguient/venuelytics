@@ -30,8 +30,7 @@
                 </map>
             </center>
         </div>
-
-        <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" class="form-group"  ng-repeat="table in selectedVenueMap.elements" >
+        <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" ng-repeat="table in selectedVenueMap.elements" >
             <div class="col-xs-12 tableItem">
                 <div class="col-md-3 col-xs-4"><label>
                     <input type="checkbox" id="checkData" name="{{table.name}}" ng-checked="isSelected(table)" ng-disabled="isReserved(table)" ng-click="selectTableForWithOutFloorMap(table,$index)" />&nbsp;&nbsp;&nbsp;{{table.name}}&nbsp;<span
