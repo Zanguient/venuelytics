@@ -143,6 +143,8 @@
  						url:  urlTemplate.replace("@context", "venues")+"/:venueNumber"},
  					getGuests : {method: 'GET',  params: { id: '@id' }, isArray:true,
  						url: urlTemplate.replace("@context", "venues") +"/guests/:date"},
+ 					getGuestList : {method: 'GET',  params: { id: '@id', guestListId: '@guestListId' },
+ 						url: urlTemplate.replace("@context", "venues") +"/guestList/:guestListId"},
  					getEvents : {method: 'GET',  params: { id: '@id' }, isArray:false,
  						url: urlTemplate.replace("@context", "venues") +"/venueevents"},
  					getEvent : {method: 'GET',  params: { id: '@id' }, isArray:false,

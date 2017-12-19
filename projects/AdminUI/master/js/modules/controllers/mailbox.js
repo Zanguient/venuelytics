@@ -36,8 +36,8 @@
 
 });
 
- App.controller('MailFolderController', ['$cookieStore','$window','$scope', 'RestServiceFactory', '$stateParams', 'ContextService','$rootScope',
-  function($cookieStore, $window, $scope, RestServiceFactory, $stateParams, contextService, $rootScope) {
+ App.controller('MailFolderController', ['$window','$scope', 'RestServiceFactory', '$stateParams', 'ContextService','$rootScope',
+  function( $window, $scope, RestServiceFactory, $stateParams, contextService, $rootScope) {
     'use strict';
     $scope.folder = $stateParams.folder;
     $scope.notifications = [];
@@ -45,7 +45,6 @@
     $scope.init = function() {
 
       var target = {id:contextService.userVenues.selectedVenueNumber};
-      $cookieStore.put("venueNumber", contextService.userVenues.selectedVenueNumber);
       if ($scope.folder === 'REQUEST' || $scope.folder === 'ONHOLD' || $scope.folder === 'COMPLETED') {
         target.type = $scope.folder;
       } else if ($scope.folder !== 'all'){
@@ -94,15 +93,21 @@
     $scope.init();
   }]);
 
- App.controller('MailViewController', ['$cookieStore','$scope','RestServiceFactory', '$stateParams','$rootScope', 
-          function($cookieStore, $scope, RestServiceFactory, $stateParams, $rootScope) {
+ App.controller('MailViewController', ['$scope','RestServiceFactory', '$stateParams','$rootScope', 'ContextService',
+          function( $scope, RestServiceFactory, $stateParams, $rootScope, contextService) {
     'use strict';
-    var target = {id: $cookieStore.get('venueNumber')};
+    var target = {id: contextService.userVenues.selectedVenueNumber};
     target.productId = $stateParams.mid;
     RestServiceFactory.NotificationService().getCurrentNotifications(target ,function(data){
       $scope.notifications = data;
       $scope.selectOrderItems = [];
       $scope.profileImage = $scope.notifications.visitorId;
+      if ($scope.notifications.serviceType === 'GuestList' && $scope.notifications.vaService.refObjectId > 0){
+        target.guestListId = $scope.notifications.vaService.refObjectId;
+        RestServiceFactory.VenueService().getGuestList(target, function(guestListData) {
+          $scope.notifications.venueGuests = guestListData.venueGuests;
+        });
+      } 
       angular.forEach($scope.notifications.vaService.order.orderItems, function(value, key) {
         var venueImageId = {
           "orderId": value.orderId,
