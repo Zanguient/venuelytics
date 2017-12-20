@@ -148,7 +148,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     };
 
     self.dispatchToService = function(serviceName) {
-        if(self.imageParam === 'Y' || self.imageParam === 'y') {
+         self.tabParams = serviceName;
+       /* if(self.imageParam === 'Y' || self.imageParam === 'y') {
             $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/" + serviceName + "?i=Y");
         } else if(serviceName === undefined) {
             $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP");
@@ -163,10 +164,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP"+ "/" + self.embeddedService);
                 self.tabParams = serviceName === 'VIP' ? self.embeddedService : serviceName;                
             } else {
-                /* $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP"); */
+                 $location.url("/cities/"+ $routeParams.cityName + "/" + $routeParams.venueid + "/VIP"); 
                 self.tabParams = serviceName;
             }
-        }
+        }*/
     };
 
     function addTab(id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected) {
