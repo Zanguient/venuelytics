@@ -10,9 +10,8 @@ app.controller('BlogPostController', ['$log', '$scope', 'DataShare','$translate'
 
     	var self = $scope;
 	    self.blogPostUrl ='';
+        $rootScope.selectedTab = 'blogs';
         self.init = function() {
-            $rootScope.blogTab = 'active';
-            $rootScope.homeTab = '';
             self.postId = $routeParams.postId;
             self.blogPost = APP_ARRAYS.nightlife;
             self.blogPostUrl = APP_ARRAYS.blogPosts[self.postId];

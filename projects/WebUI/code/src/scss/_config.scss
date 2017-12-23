@@ -4,9 +4,13 @@ $color-primary: $mdc-green-500 !default;
 $color-primary-light: $mdc-green-400 !default;
 $color-primary-dark: $mdc-green-600 !default;
 
-$color-alt: $mdc-blue-grey-500 !default;
-$color-alt-light: $mdc-blue-grey-400 !default;
-$color-alt-dark: $mdc-blue-grey-700 !default;
+//$color-alt: $mdc-blue-grey-500 !default;
+//$color-alt-light: $mdc-blue-grey-400 !default;
+//$color-alt-dark: $mdc-blue-grey-700 !default;
+
+$color-alt: #000000 !default;
+$color-alt-light: #000000 !default;
+$color-alt-dark: $mdc-black-darker !default;
 
 $color-selector: #fff;
 

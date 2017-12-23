@@ -109,7 +109,7 @@ $(document).ready(function() {
                 //display: none
                 labels: {
                     fontColor: '#fff',
-                    fontFamily: 'Roboto'
+                    fontFamily: 'Montserrat'
                 },
             },
 
@@ -151,7 +151,7 @@ $(document).ready(function() {
                 //display: none
                 labels: {
                     fontColor: '#fff',
-                    fontFamily: 'Roboto'
+                    fontFamily: 'Montserrat'
                 },
             },
 
@@ -291,7 +291,7 @@ $(document).ready(function() {
                 text: 'Sales Report',
                 fontColor: '#fff',
                 fontSize: 20,
-                fontFamily: 'Roboto',
+                fontFamily: 'Montserrat',
                 fontStyle: 'normal',
                 padding: 20
             },
@@ -300,7 +300,7 @@ $(document).ready(function() {
                 labels: {
                     fontColor: '#fff',
 
-                    fontFamily: 'Roboto'
+                    fontFamily: 'Montserrat'
                 },
             },
 
@@ -380,7 +380,7 @@ $(document).ready(function() {
                 text: 'Sales Report',
                 //fontColor: '#fff',
                 fontSize: 20,
-                fontFamily: 'Roboto',
+                fontFamily: 'Montserrat',
                 fontStyle: 'normal',
                 padding: 20
             },
@@ -389,7 +389,7 @@ $(document).ready(function() {
                 labels: {
                     //fontColor: '#fff',
 
-                    fontFamily: 'Roboto'
+                    fontFamily: 'Montserrat'
                 },
             },
 

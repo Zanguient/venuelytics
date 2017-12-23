@@ -1,7 +1,9 @@
 .ms-footer {
     padding: 1.2rem 0;
     text-align: center;
-    background-color: darken($color-alt-dark, 5%);
+
+
+     background-color: $color-alt;
     color: $color-medium;
     box-shadow: inset 0 2px 2px 0 rgba(0, 0, 0, $mdb-shadow-key-penumbra-opacity),
     inset 0 3px 1px -2px rgba(0, 0, 0, $mdb-shadow-key-umbra-opacity),
@@ -61,7 +63,13 @@
 
         .ms-footbar-title {
             margin: 0 0 1.5rem 0;
+            font-weight: 800;
         }
+    }
+
+    li {
+        margin: 2em 0;
+        font-size: 12px;
     }
 }
 

@@ -106,7 +106,7 @@ $(document).ready(function() {
             labels: {
                 fontColor: '#fff',
 
-                fontFamily: 'Roboto'
+                fontFamily: 'Montserrat'
             },
         },
 
@@ -159,7 +159,7 @@ $(document).ready(function() {
             labels: {
                 fontColor: '#fff',
 
-                fontFamily: 'Roboto'
+                fontFamily: 'Montserrat'
             },
         },
 

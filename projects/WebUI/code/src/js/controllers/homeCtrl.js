@@ -13,115 +13,11 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
     $rootScope.businessSearch = false;
     $rootScope.searchVenue = false;
     $rootScope.showItzfun = false;
-    $rootScope.homeTab = 'active';
     self.clientImages = APP_CLIENTS.clientImages;
     $rootScope.businessRoles = APP_ARRAYS.roles;
-    /*var data = $location.search().sb;
-    self.showBusinessTab = parseInt(data);
-    var newConsumer = $location.search().nc;
-    self.showNewConsumer = parseInt(newConsumer);*/
+    $rootScope.selectedTab = 'home';
     $rootScope.videoUrl = APP_LINK.VIDEO_PLAY;
-    self.navBar = function(tab) {
-        if(tab === 'home') {
-            $rootScope.homeTab = 'active';
-            $rootScope.businessTab = '';
-            $rootScope.consumerTab = '';
-            $rootScope.newConsumerTab = '';
-            $rootScope.aboutTab = '';
-            $rootScope.contactTab = '';
-            $rootScope.blogTab = '';
-            $rootScope.priceTab = '';
-            $rootScope.venuelyticsApp = true;
-            $rootScope.itzfunApp = false;
-            $rootScope.panelShow = true;
-        } else if(tab === 'searchBusiness') {
-            $rootScope.homeTab = '';
-            $rootScope.businessTab = 'active';
-            $rootScope.consumerTab = '';
-            $rootScope.newConsumerTab = '';
-            $rootScope.aboutTab = '';
-            $rootScope.contactTab = '';
-            $rootScope.blogTab = '';
-            $rootScope.priceTab = '';
-            $rootScope.venuelyticsApp = false;
-            $rootScope.itzfunApp = false;
-            $rootScope.panelShow = false;
-        /* } else if(tab === 'cities') {
-            $rootScope.homeTab = '';
-            $rootScope.businessTab = '';
-            $rootScope.consumerTab = 'active';
-            $rootScope.newConsumerTab = '';
-            $rootScope.aboutTab = '';
-            $rootScope.contactTab = '';
-            $rootScope.blogTab = '';
-            $rootScope.itzfunApp = true;
-            $rootScope.venuelyticsApp = false;
-            $rootScope.panelShow = true; */
-        } else if(tab === 'cities') {
-            $rootScope.homeTab = '';
-            $rootScope.businessTab = '';
-            $rootScope.consumerTab = '';
-            $rootScope.newConsumerTab = 'active';
-            $rootScope.aboutTab = '';
-            $rootScope.contactTab = '';
-            $rootScope.blogTab = '';
-            $rootScope.priceTab = '';
-            $rootScope.itzfunApp = true;
-            $rootScope.venuelyticsApp = false;
-            $rootScope.panelShow = true;
-        } else if(tab === 'about') {
-            $rootScope.homeTab = '';
-            $rootScope.businessTab = '';
-            $rootScope.consumerTab = '';
-            $rootScope.newConsumerTab = '';
-            $rootScope.aboutTab = 'active';
-            $rootScope.contactTab = '';
-            $rootScope.blogTab = '';
-            $rootScope.priceTab = '';
-            $rootScope.venuelyticsApp = false;
-            $rootScope.itzfunApp = false;
-            $rootScope.panelShow = false;
-        } else if(tab === 'contact') {
-            $rootScope.homeTab = '';
-            $rootScope.businessTab = '';
-            $rootScope.consumerTab = '';
-            $rootScope.newConsumerTab = '';
-            $rootScope.aboutTab = '';
-            $rootScope.contactTab = 'active';
-            $rootScope.blogTab = '';
-            $rootScope.priceTab = '';
-            $rootScope.venuelyticsApp = false;
-            $rootScope.itzfunApp = false;
-            $rootScope.panelShow = false;
-        } else if(tab === 'blog') {
-            $rootScope.homeTab = '';
-            $rootScope.businessTab = '';
-            $rootScope.consumerTab = '';
-            $rootScope.newConsumerTab = '';
-            $rootScope.aboutTab = '';
-            $rootScope.contactTab = '';
-            $rootScope.blogTab = 'active';
-            $rootScope.priceTab = '';
-            $rootScope.venuelyticsApp = false;
-            $rootScope.itzfunApp = false;
-            $rootScope.panelShow = false;
-        } else if(tab === 'pricing') {
-            $rootScope.homeTab = '';
-            $rootScope.businessTab = '';
-            $rootScope.consumerTab = '';
-            $rootScope.newConsumerTab = '';
-            $rootScope.aboutTab = '';
-            $rootScope.contactTab = '';
-            $rootScope.blogTab = '';
-            $rootScope.priceTab = 'active';
-            $rootScope.venuelyticsApp = false;
-            $rootScope.itzfunApp = false;
-            $rootScope.panelShow = false;
-        } else {
-            $log.info("Else block");
-        }
-    };
-
+    
     $scope.$on('$locationChangeStart', function(event) {
         var userSelectedTab = $location.absUrl().split('/').pop().split('?');
         $rootScope.canonicalURL = $location.absUrl();

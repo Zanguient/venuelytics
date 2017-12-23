@@ -23,7 +23,7 @@
   position: relative;
   padding: 8px 30px;
   margin: 10px 1px;
-  @include typo-button();
+  //@include typo-button();
   will-change: box-shadow, transform;
   transition: box-shadow 0.2s $mdb-animation-curve-fast-out-linear-in,
   background-color 0.2s $mdb-animation-curve-default,

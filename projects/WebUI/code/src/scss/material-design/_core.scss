@@ -18,15 +18,22 @@ body {
     }
 
   }
+  letter-spacing: 1px;
 }
 
 
-body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+body, h1, h2, .h1, .h2,{
+  font-family: $font-family-sans-serif;
+  font-weight: 800;
+}
+
+body, h3, h4, h5, h6,  .h3, .h4 {
   font-family: $font-family-sans-serif;
   font-weight: 300;
 }
 
 h5, h6{
+  font-family: $font-family-sans-serif !important;
   font-weight: 400;
 }
 

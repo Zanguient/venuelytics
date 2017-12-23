@@ -17,8 +17,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     $rootScope.showSearchBox = true;
     $rootScope.businessSearch = false;
     $rootScope.searchVenue = false;
-    $rootScope.newConsumerTab = 'active';
-    $rootScope.homeTab = '';
+    $rootScope.selectedTab = 'consumer';
     self.venueId = $routeParams.venueId;
     self.tabParams = $routeParams.tabParam;
     self.embeddedService = $routeParams.new;

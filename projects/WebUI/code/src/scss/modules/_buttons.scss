@@ -1,5 +1,6 @@
 .btn {
-    font-weight: 400;
+    font-weight: 800;
+    font-family: Montserrat;
     letter-spacing: 0.14px;
     white-space: nowrap;
     align-self: center;
@@ -22,7 +23,7 @@
         &.btn-raised {
             color: #000;
             background-color: #fff;
-
+            font-size: 12px;
             &:hover,
             &:focus,
             &:active {

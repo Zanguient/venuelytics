@@ -15,12 +15,12 @@ html {
 }
 
 body {
-    color: $mdc-grey-600;
-    background-color: $color-light;
+    color: $mdc-black-opaque;
+    background-color: #F7F8F9;
 
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-family: Helvetica, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 300;
     line-height: 2.6rem;
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highcolor-light: rgba(0, 0, 0, 0);
