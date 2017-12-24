@@ -3,7 +3,7 @@
         background: none;
         opacity: 1;
         text-shadow: none;
-        top: 60%;
+        top: 40%;
         transform: translateY(-50%);
         bottom: auto;
         height: auto;
@@ -12,17 +12,17 @@
         transition: all ease 0.3s;
 
         &.left {
-            left: 10px;
+            left: 80px;
         }
 
         &.right {
-            right: 10px;
+            right: 80px;
         }
     }
 
     .carousel-indicators {
         top: 4%;
-        right: 5%;
+        right: auto;
         left: auto;
         bottom: auto;
         width: auto;

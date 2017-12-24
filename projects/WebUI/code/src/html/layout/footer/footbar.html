@@ -1,7 +1,7 @@
 <aside class="ms-footbar mt0" ng-hide="embeddedFlag === true">
     <div class="container" ng-controller="HomeController">
         <div class="">
-            <div class="col-md-offset-1 col-md-2 col-sm-12 col-xs-12 ms-footer-col">
+            <div class="col-md-offset-1 col-md-2 col-xs-12 ms-footer-col">
                 <div class="ms-footbar-block">
                     <h6 class="ms-footbar-title" ng-bind="'footBar.NAVIGATION' | translate">Navigation</h3>
                     <ul class="list-unstyled">
@@ -39,22 +39,8 @@
                         <li><a ng-click="changeLanguage('pseudo')"><i class=""></i>Pseudo</a></li> -->
                     </ul>
                 </div>
-
-                <!-- <div class="ms-footbar-block">
-                    <h3 class="ms-footbar-title" ng-bind="'footBar.SUBSCRIPBE' | translate">Subscribe</h3>
-                    <p class="" ng-bind="'footBar.DESCRIPTION' | translate">We believe in Personalized, Real-Time Venue Experiences.</p>
-                    <form>
-                        <div class="form-group label-floating mt-2 mb-1">
-                            <div class="input-group ms-input-subscribe">
-                                <label class="control-label" for="ms-subscribe"><i class="zmdi zmdi-email"></i><span ng-bind="'footBar.EMAIL_ADDRESS' | translate">Email Adress</span></label>
-                                <input type="email" id="ms-subscribe" class="form-control" ng-model="emailToSend">
-                            </div>
-                        </div>
-                        <button class="ms-subscribre-btn" type="button" ng-click="sendEmail(emailToSend)"><span ng-bind="'footBar.SUBSCRIPBE' | translate">Subscribe</span></button>
-                    </form>
-                </div> -->
             </div>
-            <div class="col-md-4 col-sm-12 col-xs-12 ms-footer-col">
+            <div class="col-md-4 col-xs-12 ms-footer-col">
                 <div class="ms-footbar-block">
                     <h6 class="ms-footbar-title" ng-bind="'footBar.GET_IN_TOUCH' | translate">Get In Touch</h3>
                     <ul class="list-unstyled">
@@ -83,9 +69,9 @@
                 </div>
             </div>
 
-            <div class="col-md-5 col-sm-12 col-xs-12 ms-footer-col">
+            <div class="col-md-5 col-xs-12 ms-footer-col">
                 <div class="ms-footbar-block">
-                    <h6 class="ms-footbar-title" ng-bind="'footBar.SUBSCRIBE' | translate">Subscribe</h3>
+                    <h6 class="ms-footbar-title" ng-bind="'footBar.SUBSCRIBE' | translate">Subscribe</h6>
                     <ul class="list-unstyled">
                         <li>
                             <p class="col-md-7 col-md-offset-right-5 no-p">We believe in Personalized, Real-Time Venue Experiences.</p>
@@ -97,8 +83,21 @@
                         </li>
                         
                     </ul>
+                    <div ng-if="showItzfun != true" class="img-singleline col-xs-12 mt-4">
+                        <a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8" target="_new"> <img class="footerApple" alt="App Store" ng-src="assets/img/apple-store.png" />
+                        </a>
+                        <a href="//play.google.com/store/apps/details?id=com.itzfun.biz&hl=en" target="_new"> <img class="footerAndroid" alt="Google Play Store" ng-src="assets/img/android.png" />
+                        </a>
+                    </div>
+                    <div ng-if="showItzfun === true" class="img-singleline">
+                        <a href="//itunes.apple.com/us/app/itzfun/id1035171101?mt=8" target="_new"> <img class="footerApple" alt="App Store" ng-src="assets/img/apple-store.png" />
+                        </a>
+                        <a href="//play.google.com/store/apps/details?id=com.itzfun&hl=en" target="_new"> <img class="footerAndroid" alt="Google Play Store" ng-src="assets/img/android.png" />
+                        </a>
+                    </div>  
                 </div>
             </div>
+
         </div>
     </div>
 </aside>
