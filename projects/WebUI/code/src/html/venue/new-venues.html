@@ -1,4 +1,4 @@
-<div class="container" ng-cloak>
+<div class="container nav_height" ng-cloak>
     <h1 class="text-center mt-6 animated zoomInDown animation-delay-5">{{selectedCityName}}</h1>
 
     <a href="cities"><h3>{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} -> {{selectedVenueType | titleCase}}</h3></a>
@@ -13,7 +13,6 @@
     </ul>
     <div class="form-group label-floating is-empty col-md-12">
         <div class="input-group col-md-3 pull-right">
-          <span></span>
           <!-- <label class="control-label" for="addon3a">{{"venue.SEARCH_VENUE" | translate}}... </label> -->
           <input class="form-control" type="text" placeholder="Venue Search..." ng-model="venueSearch" ng-keypress="getVenuesKeyEnter($event,venueSearch)">
           <span class="input-group-btn">
@@ -41,7 +40,7 @@
                                         <h5 class="pull-right " ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
                                     </div>
                                 </figure>
-                                <div class="card-block card-block-big">
+                                <div class="card-block card-block-big pt-2 no-mt">
                                   <a class="mt-1 mb-1 col-xs-12 no-p title-bold block-ellipsis-1" href="cities/{{selectedCityName}}/{{venue.id}}/VIP" 
                                   ng-click="selectVenue(venue)" title="{{venue.venueName}}">{{venue.venueName}}</a>
                                    

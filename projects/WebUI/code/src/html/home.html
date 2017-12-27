@@ -20,7 +20,7 @@
                 <img ng-src="<%= assets %>/img/{{item.image}}" alt="VenueLytics Experience" class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 no-p">
                 <div class="custom-carousel col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 no-p">
                     <p><h4 ng-bind="item.title | translate"></h4></p>
-                    <p  ng-bind="item.details | translate"></p>
+                    <p  class="loose_pack" ng-bind="item.details | translate"></p>
                 </div>
             </center>
             <ng-include src="'home-apps-image.html'"/>
@@ -55,7 +55,7 @@
     <div class="col-md-6 col-xs-12">
          <h2 class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 mb-2 wow fadeInDown animation-delay-3" ng-bind="'home.KNOW_OUR_FEATURES'
             | translate">Breakthrough Solutions</h2>
-        <p class="col-md-offset-2 col-md-6 col-md-offset-right-4 col-xs-12" ng-bind="'home.BREAKTHROUGH_DESC' | translate">
+        <p class="loose_pack col-md-offset-2 col-md-6 col-md-offset-right-4 col-xs-12" ng-bind="'home.BREAKTHROUGH_DESC' | translate">
             VenueLytics provides an integrated venue experience and management platform designed from the ground up for hospitality and entertainment industries.
         </p>
         <center>
@@ -85,7 +85,7 @@
     </div>
     <div class="col-md-7 col-xs-12 text" >
         <h2 class="mb-4 col-md-offset-1 col-md-6 col-md-offset-right-5 col-xs-12" ng-bind="'home.POWER_OF_TURNKEY' | translate">The Power of Turnkey Custom Integration</h2>
-        <p class="wow fadeInDown animation-delay-3 col-md-offset-1 col-md-8 col-md-offset-right-3 col-xs-12" ng-bind="'home.VENUE_DESCRIPTION'
+        <p class="loose_pack wow fadeInDown animation-delay-3 col-md-offset-1 col-md-8 col-md-offset-right-3 col-xs-12" ng-bind="'home.VENUE_DESCRIPTION'
         | translate">VenueLytics real-time platform integrates with Venue's Website, Social Media Sites, Mobile Apps, ItzFun Consumer App and 3rd party Apps. Our white-label consumer App 'ItzFun!,' provides access to an extensive level of information about the most important entertainment &amp; hospitality venues around the world. With ItzFun!, consumers can know, and see, what’s fun &amp; happening, right now, at the very moment of decision.</p>
     </div>
 </div>
@@ -107,7 +107,7 @@
 <div>
     <h2 class="text-center col-md-offset-4 col-md-5 col-xs-12 mb-4" ng-bind="'home.CLIENT_CAROUSEL_TITLE' | translate">OUR CUSTOMERS, PARTNERS &amp; FEATURED VENUES</h2>
     <div class="container">
-        <div class="col-md-offset-2 col-md-8 col-md-offset-right-2">
+        <div class="col-md-offset-1 col-md-9 col-md-offset-right-2">
             <div class="owl-carousel carousel-widget" data-autoplay="3000"  center="true" data-items-lg="6" data-items-md="6" data-items-sm="2" data-items-xs="2" data-items-xxs="2" data-loop="true" data-margin="13" data-nav="false" data-pagi="false" responsive="true" >
                 <div class="oc-item" ng-repeat="image in clientImages">
                     <img ng-src="{{image.image}}" alt="Client Images">
@@ -146,24 +146,24 @@
                     <h3 class="modal-title" id="myModalLabel6" ng-bind="'home.SUBSCRIPBE_MAIL' | translate">Subscribe Mail</h3>
                 </div>
                 <div class="modal-body">
-                    <div class="col-md-12 form-group label-floating is-empty no-p {{businessIsFocused}}" style="margin-left: auto;">
+                    <div class="col-md-12 form-group label-floating is-empty no-p {{businessIsFocused}}" >
                         <label class="control-label" for="emailId" ng-bind="'business.EMAIL' | translate">Email</label>
                         <input id="emailId" name="emailId" type="email" value="Email" class="form-control fontBold" ng-model="successEmail" required>
                     </div>
-                    <div class="col-md-12 form-group label-floating is-empty no-p" style="margin-left: auto;">
+                    <div class="col-md-12 form-group label-floating is-empty no-p" >
                         <label class="control-label" for="nameOfPerson" ng-bind="'business.NAME_OF_PERSION' | translate">Name of the Person</label>
                         <input id="nameOfPerson" name="nameOfPerson" type="text" value="NameOfPerson" class="form-control fontBold" ng-model="business.NameOfPerson" required>
                     </div>
-                    <div class="col-md-12 form-group label-floating is-empty no-p" style="margin-left: auto;">
+                    <div class="col-md-12 form-group label-floating is-empty no-p" >
                         <label class="control-label" for="businessName" ng-bind="'business.BUINESS_NAME' | translate">Business Name</label>
                         <input id="businessName" name="businessName" type="text" value="BusinessName" class="form-control fontBold" ng-model="business.businessName" required>
                     </div>
-                    <div class="col-md-12 form-group label-floating is-empty no-p" style="margin-left: auto;">
+                    <div class="col-md-12 form-group label-floating is-empty no-p" >
                         <label class="control-label" for="roldId" ng-bind="'business.ROLE_OPTIONAL' | translate">Role (Optional)</label>
                         <select id="roldId" name="roldId" class="btn dropdown-toggle form-control"  ng-model="business.businessRole" ng-options="r.role for r in businessRoles">
                         </select>
                     </div>
-                    <div class="col-md-12 form-group label-floating is-empty no-p" style="margin-left: auto;">
+                    <div class="col-md-12 form-group label-floating is-empty no-p" >
                         <label class="control-label" for="phoneNo" ng-bind="'business.PHONE_OPTIONAL' | translate">Phone number (Optional)</label>
                         <input id="phoneNo" name="phoneNo" type="text" class="form-control fontBold fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" ng-model="business.phoneNumber" data-parsley-trigger="change">
                     </div>
