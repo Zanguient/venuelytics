@@ -12,7 +12,7 @@
             <input type="text" class="form-control fontBold" ng-model="Search" id="Search">
         </div>
     </div><br/><br/>
-    <div class="form-group col-md-10 col-md-offset-right-10"  ng-if="eventListData == true">
+    <div class="form-group col-md-10 col-md-offset-right-2"  ng-if="eventListData == true">
         <div event-tile="" class="col-md-12 col-masonry eventListcal" ng-repeat="event in events track by $index">
             <table class="table">
                 <tr>
@@ -32,13 +32,13 @@
                     <div class="col-md-2 col-sm-6 col-xs-6">
                         <img class="eventlistImage" ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" alt="eventList-image">
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12 eventDescription">
+                    <div class="col-md-6 col-xs-12 eventDescription">
                         <h2 class="calEventName mb0">{{event.eventName}}</h2><br/>
                         <h5 class="eventListTime">
                             {{'event.EVENT_DOORS' | translate}}:{{event.eventTimes | date:'h:mm a'}} / {{'event.EVENT_SHOW' | translate}}: {{event.eventTimes | date:'h:mm a'}} ({{'event.EVENT_END' | translate}} :{{event.endtimes | date:'h:mm a'}})
                         </h5>
                     </div>
-                    <div class="col-md-2 col-sm-6 col-xs-6 eventButtonAling">
+                    <div class="col-md-2 col-xs-6 eventButtonAling">
                         <a href="{{event.bookingUrl}}" target="_new" class="btn btn-success btn-raised btn-sm">{{'event.EVENT_TICKET' | translate}}</a><br/>
                         <span class="pull-right eventListPrice">
                         <span ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">&dollar;</span><span>{{(event.price == null || event.price == 0 || event.price == undefined) ? "-" : event.price}}</span></span>
@@ -69,10 +69,10 @@
                     <table class="table table-no-border col-md-12">
                         <tr>
                             <td>
-                            <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="col-md-4 col-xs-12">
                                 <img ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" alt="eventList-image" class="img-responsive" style="margin-left: -20px"/>
                             </div>
-                            <div class="col-md-8 col-sm-12 col-xs-12" style="color:black;">
+                            <div class="col-md-8 col-xs-12" style="color:black;">
                                 <h2 class="calEventName fontBold">{{event.eventName}}</h2>
                                 <h4> {{event.scheduleDayOfWeek}} ({{event.eventTimes | date:'h:mm a'}} - {{event.endtimes | date:'h:mm a'}})</h4><hr>
                                 <h3 class="eventListName mt0 fontBold">{{'event.EVENT_TYPES' | translate}}:</h3><h4>{{event.eventType}}</h4>

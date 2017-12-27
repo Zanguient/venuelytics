@@ -1,11 +1,11 @@
 <div  ng-controller="BottleServiceController">
 <form class="form-horizontal" parsley-validate autocomplete="off"  validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
-    <fieldset class="col-md-12 col-sm-12 col-xs-12">
-        <div class="row col-md-12 col-sm-12 col-xs-12 form-group label-floating is-empty no-p {{bottleDateIsFocused}}" >
+    <fieldset class="col-xs-12">
+        <div class="row col-xs-12 form-group label-floating is-empty no-p {{bottleDateIsFocused}}" >
             <label class="control-label" >{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="requestDate" ng-model="bottle.requestedDate" required/>
         </div>
-        <div class="row col-md-12 col-sm-12  col-xs-12  is-empty mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
+        <div class="row col-xs-12  is-empty mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
             <center>
                 <div class="row h4">
                     

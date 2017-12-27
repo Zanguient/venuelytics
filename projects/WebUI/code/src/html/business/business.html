@@ -1,0 +1,43 @@
+<div class="container nav_height" ng-cloak>
+    <div class="row mt-2">
+        <div class="col-md-6 col-xs-12 mt-4">
+            <img ng-src="<%=assets%>/img/ipad-landscape.png" class="img-responsive mr-2">
+        </div>
+        <div class="col-md-6 col-xs-12 mt-1">
+            <p class="mega-title mt-4 col-md-10 col-dm-offset-2 col-xs-12" ng-bind="'home.WELCOME_HEADING_2' | translate"></p>
+            <p class="mt-1 col-xs-12" ng-bind="'home.WELCOME_DESCRIPTION' | translate"></p>
+        </div>
+    </div>
+    <div class="text-center col-xs-12 mt-6 mb-6">
+        <h2 class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 mt-6">{{'home.FREE_TRIAL' | translate}}</h2>
+        <div class="mb-6">
+            <center>
+                <input class="col-md-offset-3 col-md-offset-right-3 col-md-6 col-xs-12 black_border mt-4 mb-1" placeholder="Enter your email address" required ng-pattern="/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/" ng-model="subscribeEmails">
+                <span class="error-message" ng-show="myFormClaim.claimEmailId.$error.pattern">{{"business.FORM_EMAIL_REQUIRED" | translate}}</span>
+                <div class="col-xs-12 mt-2 mb-6">
+                    <a href="javascript:void(0)" class="btn btn-success btn-raised" ng-click="sendEmail(subscribeEmails)">{{'home.GET_STARTED' | translate}}</a>
+                </div>
+            </center>
+        </div>
+    
+    </div>
+    
+</div>
+<div class="bg-white">
+    <div ng-include="'break-through/real-time-reservations.html'"></div>
+</div>
+<div >
+    <div ng-include="'break-through/food-drink-services.html'"></div>
+</div>
+<div class="bg-white">
+    <div ng-include="'break-through/break-guest-list.html'"></div>
+</div>
+<div>
+    <div ng-include="'break-through/wifi-white-label.html'"></div>
+</div>
+<div class="bg-white">
+    <div ng-include="'break-through/break-private-events.html'"></div>
+</div>
+<div>
+    <div ng-include="'break-through/break-loyalty-management.html'"></div>
+</div>

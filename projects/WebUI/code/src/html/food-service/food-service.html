@@ -95,9 +95,9 @@
         </div>
         </div>
 
-        <div ng-show="((specificFood === 'Y' || specificFood === 'y') && (preOrder === 'y' || preOrder === 'Y'))" class="col-sm-12 col-md-8 form-group is-empty">
+        <div ng-show="((specificFood === 'Y' || specificFood === 'y') && (preOrder === 'y' || preOrder === 'Y'))" class="col-xs-12 col-md-8 form-group is-empty">
             <div class="row">
-            <div class="col-sm-12 ms-paper-content-container">
+            <div class="col-xs-12 ms-paper-content-container">
                 <div class="ms-paper-content">
                     <h2 class="text-primary" >{{"reservation.FOOD_ITEMS" | translate}}</h2>
                     <section class="ms-component-section">
@@ -141,12 +141,12 @@
             </div>
             </div>
         </div>
-        <div class="form-group col-sm-12 label-floating is-empty no-p {{isFoodFocused}}" >
+        <div class="form-group col-xs-12 label-floating is-empty no-p {{isFoodFocused}}" >
             <label class="control-label" for="focusedInput1">{{'reservation.SPECIAL_INSTRUCTION' | translate}}</label>
             <input type="text" class="form-control fontBold" ng-disabled="orderDisable === true" id="foodInstructions" ng-model="food.instructions">
         </div>
        	
-        <div class="col-sm-12">
+        <div class="col-xs-12">
             <center>
                 <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-disabled="foodForm.$invalid" ng-click="foodSave()">
                     <span class="fontRegular">{{'business.DEPLOY_APPLY' | translate}}</span>

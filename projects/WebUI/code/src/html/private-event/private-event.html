@@ -14,25 +14,25 @@
             <input type="text" class="form-control fontBold" id="privateDate" ng-model="private.orderDate" required>
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
-        <div class="col-sm-12 form-group is-empty">
+        <div class="col-xs-12 form-group is-empty">
             <center>
-                <a href="" class="col-md-3 col-sm-12 btn btn-success fontRegular btn-raised" ng-if="privateInfoSheet" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.VIEW_PRIVATE" | translate}}</a>
+                <a href="" class="col-md-3 col-xs-12 btn btn-success fontRegular btn-raised" ng-if="privateInfoSheet" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.VIEW_PRIVATE" | translate}}</a>
 
-                <a href="" class="col-md-3 col-sm-12 btn btn-success btn-raised fontRegular" ng-if="privateMenu" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span> {{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a>
+                <a href="" class="col-md-3 col-xs-12 btn btn-success btn-raised fontRegular" ng-if="privateMenu" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span> {{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a>
 
-                <a href="" class="col-md-3 col-sm-12 btn btn-success btn-raised fontRegular" ng-if="privateVideo" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>
-                <a href="" class="col-md-3 col-sm-12 btn btn-success btn-raised fontRegular" ng-if="privateFloorPlan" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
+                <a href="" class="col-md-3 col-xs-12 btn btn-success btn-raised fontRegular" ng-if="privateVideo" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>
+                <a href="" class="col-md-3 col-xs-12 btn btn-success btn-raised fontRegular" ng-if="privateFloorPlan" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
             </center> 
             
         </div>
         <div class="col-md-12 form-group  no-p is-empty">
            
-            <div class="col-md-4 col-sm-12 mr-1 form-group is-empty">
+            <div class="col-md-4 col-xs-12 mr-1 form-group is-empty">
                 <select class="form-control fontBold {{blackTheme}}" required="" ng-model="private.privateStartTime" ng-options="x.key as x.value for x in reserveStartTimes">
                     <option value="">{{"reservation.START_TIME"  | translate}}</option>
                 </select>
             </div>
-            <div class="col-md-4 col-sm-12  mr-1  form-group is-empty">
+            <div class="col-md-4 col-xs-12  mr-1  form-group is-empty">
                 <select id="alignmentTime" class="form-control fontBold {{blackTheme}}" required="" ng-model="private.privateEndTime" ng-options="x.key as x.value for x in reserveEndTimes">
                     <option value="">{{"reservation.END_TIME"  | translate}}</option>
                     </select>
@@ -40,38 +40,38 @@
         </div>
         <div class="col-md-12 form-group no-p is-empty">
            
-            <div class="col-md-4 col-sm-12 form-group  mr-1  is-empty{{privateEventFocused}}">
+            <div class="col-md-4 col-xs-12 form-group  mr-1  is-empty{{privateEventFocused}}">
                 <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
                 <input type="text" class="form-control fontBold" id="privateTotalGuest" ng-model="private.totalGuest">
             </div>
-            <div class="col-md-4 col-sm-12 form-group mr-1  is-empty  {{privateEventFocused}}" >
+            <div class="col-md-4 col-xs-12 form-group mr-1  is-empty  {{privateEventFocused}}" >
                 <label class="control-label" >{{'reservation.BUDGET' | translate}}</label>
                 <input type="text" class="form-control fontBold" id="budget" ng-model="private.budget" data-parsley-trigger="change">
             </div>
             
         </div>
 
-        <div class="col-md-12 form-group label-floating no-p is-empty {{privateEventFocused}}" >
+        <div class="col-xs-12 form-group label-floating no-p is-empty {{privateEventFocused}}" >
         <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
             <input type="text" class="form-control fontBold" ng-model="private.privateFirstName" id="firstName"  required>
         </div>
     
-        <div class="col-md-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
+        <div class="col-xs-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
             <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
             <input type="text" class="form-control fontBold" ng-model="private.privateLastName" id="lastName" >
         </div>
         
-        <div class="col-md-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
+        <div class="col-xs-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
         <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
             <input type="email" class="form-control fontBold" id="email" ng-model="private.privateEmail"  data-parsley-trigger="change" required>
         </div>
-        <div class="col-md-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
+        <div class="col-xs-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
         <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
             <input type="text" id="ms-form-pass" class="form-control fontBold" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" required data-parsley-trigger="change">
         </div>
     
         
-        <div class="col-md-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
+        <div class="col-xs-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
             <label class="control-label" >{{"reservation.EVENT_TYPE"  | translate}}</label>
             <select class="form-control fontBold {{blackTheme}}" required=""
                 ng-model="private.privateEvent" ng-options="t.name for t in eventTypes">
@@ -79,11 +79,11 @@
             </select>
         </div>
 
-        <div class="col-md-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
+        <div class="col-xs-12 form-group label-floating no-p is-empty {{privateEventFocused}}">
         <label class="control-label" >{{'reservation.COMMENT' | translate}}</label>
             <input type="text" class="form-control fontBold" id="instructions" ng-model="private.privateComment"  data-parsley-trigger="change">
         </div>
-        <div class="col-md-12 row no-p mt1">
+        <div class="col-xs-12 row no-p mt1">
            
             <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
                 <input type="checkbox" ng-model="private.authorize" required/>
@@ -91,7 +91,7 @@
             </label>    
             
         </div>
-        <div class="col-md-12 row no-p">
+        <div class="col-xs-12 row no-p">
           
             <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
                 <input type="checkbox" ng-model="private.agree" required/>
@@ -117,7 +117,7 @@
                                 <div>
                                     <div>
                                         <div
-                                            class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
+                                            class="col-md-4 col-xs-6 masonry-item wow fadeInUp animation-delay-2"
                                             ng-repeat="privateEvent in privateEventValueArray"
                                             ng-if="privateEvent.imageUrls[0].smallUrl">
                                             <article class="card card-info mb-4 wow materialUp animation-delay-5">

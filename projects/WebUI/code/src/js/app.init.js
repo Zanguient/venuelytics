@@ -38,8 +38,8 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             controller: 'BusinessController'
         })
         .when('/cities', {
-            templateUrl: 'new-city.html',
-            controller: 'NewCityController'
+            templateUrl: 'city.html',
+            controller: 'CityController'
         })
         .when('/cities/:cityName', {
             templateUrl: 'venue/new-venues.html',
@@ -57,8 +57,8 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'venue/service-tabs.html',
             controller: 'ServiceTabController'           
         })
-        .when('/searchBusiness', {
-            templateUrl: 'business/business-search.html',
+        .when('/business', {
+            templateUrl: 'business/business.html',
             controller: 'BusinessController'
         })
         .when('/completeBusinessClaim/:venueId', {

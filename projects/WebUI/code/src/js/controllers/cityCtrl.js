@@ -3,7 +3,7 @@
  * @date 18-MAY-2017
  */
 "use strict";
-app.controller('NewCityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope', 'APP_LINK','ngMeta',
+app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'AjaxService', 'APP_ARRAYS', '$rootScope', 'APP_LINK','ngMeta',
     function ($log, $scope, $http, $location, RestURL, DataShare, AjaxService, APP_ARRAYS, $rootScope, APP_LINK, ngMeta) {
 
     		$log.log('Inside New City Controller.');

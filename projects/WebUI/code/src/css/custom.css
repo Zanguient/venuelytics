@@ -2,19 +2,122 @@
 .mega-title {
   font-size: 3.5em;
   margin-top: 11.5rem;
+  font-family: Montserrat;
+  line-height: 1.08em;
+  font-weight: 800;
 }
 
 .nav_height {
   margin-top: 50px;
 }
 
+.mt100 {
+  margin-top: 10rem;
+}
 
+.mont-font-regular {
+  font-family: Montserrat;
+  font-size: 0.875em;
+  font-weight: 300;
+  line-height: 1.3em;
+
+}
+
+.black_border {
+  border: 1px solid black;
+  background-color: transparent;
+}
+
+.title-bold {
+  font-family: Montserrat;
+  font-size: 1.125em;
+  font-weight: 800;
+  color: black;
+}
+
+.venueImages {
+  height: 240px;
+}
+
+.venueDescription {
+  font-family: Montserrat;
+  font-size: 0.75em;
+  font-weight: 300;
+  color: black;
+}
+
+.block-ellipsis-1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+/* styles for '...' */ 
+.block-ellipsis-3  {
+  /* hide text if it more than N lines  */
+  overflow: hidden;
+  /* for set '...' in absolute position */
+  position: relative; 
+  /* use this value to count block height */
+  line-height: 1.2em;
+  /* max-height = line-height (1.2) * lines max number (3) */
+  max-height: 3.6em; 
+  /* fix problem when last visible word doesn't adjoin right side  */
+  text-align: justify;  
+  /* place for '...' */
+  margin-right: -1em;
+  padding-right: 1em;
+}
+
+/* create the ... */
+.block-ellipsis-3:before {
+  /* points in the end */
+  content: '...';
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of block */
+  right: 0;
+  bottom: 0;
+}
+/* hide ... if we have text, which is less than or equal to max lines */
+.block-ellipsis-3:after {
+  /* points in the end */
+  content: '';
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of text */
+  right: 0;
+  /* set width and height */
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
+  /* bg color = bg color under block */
+  background: white;
+}
+
+
+.mont-font-regular p {
+  font-family: Montserrat;
+  font-size: 1.6em;
+  font-weight: 300;
+  line-height: 2em;
+}
+
+.more_link { 
+  color: #666666 !important; 
+  font-family: Montserrat;  
+  font-size: 12px;  
+  font-style: italic; 
+  padding: 10px;
+  cursor: pointer;
+
+}
 .iphone-service {
   position: absolute;
   top: 7.5rem;
   right: 9.5vw;
   z-index: 1;
 }
+
 .platform-bar {  
     height: 30px; 
     width: 100vw;  
@@ -25,6 +128,7 @@
     font-weight: 500;
     color: white;
 }
+
 
 .carousel-inner .item img{
   margin-top: 0px;
@@ -177,10 +281,7 @@
 .faIconLeft {
   margin-left: 70px;
 }
-.price_header_bold {
-  font-weight: 600;
-  font-size: 2rem;
-}
+
 .price_trial_button {
   margin-bottom: 30px;
   margin-top: 30px;
@@ -189,10 +290,7 @@
   margin-top: -10px;
   margin-bottom: 30px;
 }
-.price_headter {
-  font-size: 18px;
-  font-weight: 700;
-}
+
 .price_enterprice {
   margin: 0;
   font-size: 19px;
@@ -305,9 +403,7 @@
   color:white;
 }
 
-.featureMargin{
-  margin-top: 100px;
-}
+
 .calEventName {
   margin-top: 0px;
   color: black;
@@ -421,27 +517,6 @@
   margin-top: 16px;
 }
 
-
-.fontRegular {
-  font-family: 'Source Sans Pro', 'sans-serif';
-  font-weight: 400;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-.fontBold {
-  font-family: 'Source Sans Pro', 'sans-serif';
-  font-weight: 700;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-.fontLight {
-  font-family: 'Source Sans Pro', 'sans-serif';
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-}
 
 .mt0 {
   margin-top: 0px;
@@ -617,9 +692,6 @@ select {
   color: red;
 }
 
-.venueDescription {
-  margin-top: 10px;
-}
 
 .free-trail {
   background-color: #FFFFFF;  
@@ -628,20 +700,8 @@ select {
 }
 
 
-.city {
-  background-color: #fff;
-}
-
 .discover {
   margin-top: 35px;
-}
-.city_card {
- box-shadow:none;
- box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
- border-radius:2px;
- background-color:#fff;
- margin-bottom:10px !important;
- margin-bottom:2rem !important;
 }
 
 
@@ -690,9 +750,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     font-size: 24px;
   }
 
-  .venueInCity {
-    height: 485px;
-  }
+
   .smartbanner-icon{
     position:absolute;
     left:50px;
@@ -839,10 +897,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-top: 4px;
   }
 
-  .cardAlignment{
-    margin-right: 20px;
-  }
-
 
   .wrapingSpace {
     margin-left: 15px;
@@ -892,10 +946,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     width: 550px;
   }
 
-
-  .venueCardBlock {
-    padding-left: 0px;
-  }
 
 
   #distance {
@@ -1137,10 +1187,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     height: 22px;
   }
 
-  #articleCart{
-    margin-top: 25px;
-  }
-
 
   .slider {
     width: 340px;
@@ -1156,11 +1202,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   #venueReservationFrame {
     height: 1000px;
     display: none;
-  }
-
-  .businessSearchForm {
-    padding-left: 15px;
-    padding-right: 15px;
   }
 
 
@@ -1450,12 +1491,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 
 
-  
-  .venueCardBlock {
-    padding-left: 20px;
-  }
-
-
   .navigation {
     margin-left: 10px;
   }
@@ -1470,12 +1505,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     height: 1000px;
     display: none;
   }
-
-  .businessSearchForm {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
 
   #deployStepsInput {
     margin-top: 5px;
@@ -1548,7 +1577,9 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 
 .serviceIcon {
-  padding-left: 15px;
+  padding: 10px;
+  margin-left: -1em;
+  margin-right: -1em;
 }
 
 .serviceSmallIcon {
@@ -1556,7 +1587,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   height: 20px;
   cursor: pointer;
   cursor: hand;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .buttonNav {
@@ -1593,12 +1624,12 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 .city-image-block {
-  border: solid white;
+  border: solid rgb(247, 248, 249);
   border-left-width:  3px;
   border-top-width: 3px;
   border-right-width: 5px;
   border-bottom-width: 5px;
-  background-color: black;
+   background-color: rgb(247, 248, 249); 
   height: 200px;
   text-align: center;
   vertical-align: bottom;
@@ -1607,8 +1638,9 @@ a.btn.disabled,fieldset[disabled] a.btn {
 .city-image-block > p {
   width: 100%;
   height: 100%;
-  font-weight: normal;
-  font-size: 19px;
+  font-weight: 800;
+  font-size: 24px;
+  font-family: Montserrat;
   padding-top: 150px;
   background-color: rgba(3,3,3,0.0);
   color: white;
@@ -1633,175 +1665,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 
-/* Justify Border Title
------------------------------------------------------------------*/
-
-.fancy-title {
-  position: relative;
-  margin-bottom: 30px;
-}
-
-.fancy-title h1,
-.fancy-title h2,
-.fancy-title h3,
-.fancy-title h4,
-.fancy-title h5,
-.fancy-title h6 {
-  position: relative;
-  display: inline-block;
-  background-color: #FFF;
-  padding-right: 15px;
-  margin-bottom: 0;
-}
-
-.fancy-title h4,
-.fancy-title h5,
-.fancy-title h6 {
-  padding-right: 10px;
-}
-
-.fancy-title.title-double-border:before,
-.fancy-title.title-border:before,
-.fancy-title.title-border-color:before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 0;
-  border-top: 3px double #E5E5E5;
-  left: auto;
-  top: 46%;
-  right: 0;
-}
-
-.fancy-title.title-border:before {
-  top: 49%;
-  border-top: 1px solid #EEE;
-}
-
-.fancy-title.title-border-color:before {
-  top: 49%;
-  border-top: 1px solid #1ABC9C;
-  opacity: 0.6;
-}
-
-/* Heading Block - with Subtitle
------------------------------------------------------------------*/
-
-.heading-block {
-  margin-bottom: 50px;
-}
-
-.heading-block h1,
-.heading-block h2,
-.heading-block h3,
-.heading-block h4,
-.emphasis-title h1,
-.emphasis-title h2 {
-  margin-bottom: 0;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #333;
-}
-
-.emphasis-title h1,
-.emphasis-title h2 {
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-.heading-block h1 {
-  font-size: 32px;
-}
-
-.heading-block h2 {
-  font-size: 30px;
-}
-
-.heading-block h3 {
-  font-size: 26px;
-}
-
-.heading-block h4 {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.heading-block > span:not(.before-heading) {
-  display: block;
-  margin-top: 10px;
-  font-weight: 300;
-  color: #777;
-}
-
-.heading-block .before-heading {
-  margin-bottom: 7px;
-}
-
-.heading-block.center > span,
-.heading-block.title-center > span,
-.center .heading-block > span {
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.heading-block h1 + span {
-  font-size: 24px;
-}
-
-.heading-block h2 + span {
-  font-size: 22px;
-}
-
-.heading-block h3 + span,
-.heading-block h4 + span {
-  font-size: 20px;
-}
-
-.heading-block ~ p:not(.lead) {
-  font-size: 15px;
-}
-
-.heading-block:after {
-  content: '';
-  display: block;
-  margin-top: 30px;
-  width: 40px;
-  border-top: 2px solid #444;
-}
-
-.center .heading-block:after,
-.heading-block.center:after,
-.heading-block.title-center:after {
-  margin: 30px auto 0;
-}
-
-
-.heading-block.noborder:after,
-.heading-block.nobottomborder:after {
-  display: none;
-}
-
-.heading-block.border-color:after {
-  border-color: #1ABC9C;
-}
-
-/* Fancy Title - Bottom Short Border
------------------------------------------------------------------*/
-
-.fancy-title.title-bottom-border h1,
-.fancy-title.title-bottom-border h2,
-.fancy-title.title-bottom-border h3,
-.fancy-title.title-bottom-border h4,
-.fancy-title.title-bottom-border h5,
-.fancy-title.title-bottom-border h6 {
-  display: block;
-  background: transparent;
-  padding: 0 0 10px;
-  border-bottom: 2px solid #1ABC9C;
-}
 
 .post-container {
   margin: 20px 20px 0 0;
@@ -1862,10 +1725,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 
-.businessSearchAddress {
-  color: black;
-}
-
 .owl-carousel .owl-stage {
  display: flex;
   align-items: center;
@@ -1913,11 +1772,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
   color: #f05050;
 }
 
-
-
-.locationIcon {
-  margin-right: 5px;
-}
 
 .searchCityText {
     color: white;
@@ -2909,6 +2763,27 @@ input:-moz-placeholder .control-box  {
   margin-bottom: 2.5em;
 }
 
+.about.container {
+  width: 100% !important;
+  background-color: #fff !important;
+  padding-bottom: 9rem;
+}
+
+.about_left {
+  position: relative;
+  bottom: -9.8rem;
+}
+.about .get-started {
+  background-color: #fff;
+  height: 3.5em;
+  font-weight: 800;
+  font-family: Montserrat;
+  border: 1px solid #000 !important;
+  font-size: 12px;
+  color: #000000;
+  margin-top: 2.8em;
+  margin-bottom: 2.5em;
+}
 
 .turnkey {
   margin-top: 10rem;
@@ -2954,8 +2829,8 @@ button {
   border: 1px solid #000 !important;
 }
 
-.solution-trends {
-  box-shadow: 0 20px 20px 0 rgba(0,0,0,0.3);
+.border_clouds {
+  box-shadow: 0 20px 40px 0 rgba(0,0,0,0.3) !important;
   z-index: 1;
 }
 

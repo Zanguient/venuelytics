@@ -27,6 +27,7 @@
       line-height: $line-height;
       color: $mdb-input-placeholder-color;
       font-weight: 400;
+
     
 }
     // margin-bottom must be specified to give help-block vertical space.
@@ -50,6 +51,7 @@
     line-height: $static-line-height;
     font-weight: 400;
     margin: 16px 0 0 0; // std and lg
+    padding-left: 1em;
   }
 
   .help-block {
@@ -78,8 +80,8 @@
   $static-font-size: ceil(($mdb-label-static-size-ratio * $placeholder-font-size)) !default;
   $static-line-height: ($mdb-label-static-size-ratio * $line-height) !default;
 
-  $label-as-placeholder-top: -1 * ($vertical-padding + $label-as-placeholder-shim) !default;
-  $label-top: $label-as-placeholder-top - ($placeholder-font-size + $vertical-padding) !default;
+  $label-as-placeholder-top: -1 * ($vertical-padding + $label-as-placeholder-shim + 2) !default;
+  $label-top: $label-as-placeholder-top - ($placeholder-font-size + $vertical-padding + 2) !default;
 
   $help-block-font-size: ceil(($mdb-help-block-size-ratio * $placeholder-font-size)) !default;
   $help-block-line-height: ($mdb-help-block-size-ratio * $line-height) !default;
@@ -134,24 +136,26 @@
 .form-control,
 .form-group .form-control {
   border: 0;
-  background-image: linear-gradient($brand-primary, $brand-primary), linear-gradient($mdb-input-underline-color, $mdb-input-underline-color);
+//  background-image: linear-gradient($brand-primary, $brand-primary), linear-gradient($mdb-input-underline-color, $mdb-input-underline-color);
   background-size: 0 2px, 100% 2px;
   background-repeat: no-repeat;
   background-position: center bottom, center calc(100% - 0.01em);
   background-position: center bottom, center -moz-calc(100% - 0.01em);
   background-position: center bottom, center -webkit-calc(100% - 0.01em);
 
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #F7F8F9;//rgba(0, 0, 0, 0);
   transition: background 0s ease-out;
   float: none;
   box-shadow: none;
   border-radius: 0;
+  font-weight: 800;
+  padding-left: 1em;
+  font-family: $mdb-font-family;
 
   // Placeholders and and labels-as-placeholders should look the same
   @include material-placeholder {
     color: $mdb-input-placeholder-color;
     font-weight: 400;
-  
 }
 
 

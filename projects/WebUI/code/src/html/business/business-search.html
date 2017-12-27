@@ -1,4 +1,20 @@
-<div class="container" ng-cloak>
+<div class="container nav_height" ng-cloak>
+    <div class="text-center mt-6">
+        <h2 >{{"business.BUSINESS_SEARCH" | translate}}</h2>
+        <form class="form-horizontal col-md-offset-4 col-md-4 col-offset-right-4 col-xs-12" autocomplete="off">
+            <fieldset>
+                <div class="input-group">
+                    <input type="text" class="form-control mb-2 whiteTheme  col-xs-6" ng-model="searchBusiness" placeholder="{{'business.BUSINESS_NAME' | translate}}" name="searchBox">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-raised btn-primary no-mb" ng-click="search(searchBusiness)">{{"business.SEARCH" | translate}}</button>
+                    </span>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<!-- <div class="container" ng-cloak>
     <div class="row">
         <div class="mt-6">
             <center>
@@ -10,26 +26,26 @@
                         <div class="row">
                             <div class="col-md-7 col-sm-6">
                                 <div class="slider">
-                                    <img ng-repeat="slide in business.imageUrls" class="slide businessImage col-sm-12" ng-swipe-right="showPrev(slide)"
+                                    <img ng-repeat="slide in business.imageUrls" class="slide businessImage col-xs-12" ng-swipe-right="showPrev(slide)"
                                         ng-swipe-left="showNext(slide)" ng-show="isActive($index)"
                                         ng-src="{{slide.originalUrl}}" alt="business-image" />
-                                       <!--  <ul class="buttonNav">
+                                       <ul class="buttonNav">
                                            <li ng-repeat="slide in business.imageUrls"
                                            ng-class="{'active':isActive($index)}"><img
                                            ng-src="{{slide.originalUrl}}"
                                            class="img-responsive sliderThumb" alt="busSearch-image" ng-click="showPhoto(slide,$index);" />
                                        </li>
-                                                                           </ul> -->
+                                                                           </ul>
                                 </div>
                             </div>
-                            <div class="col-md-5 col-sm-6">
+                            <div class="col-md-5 col-xs-6">
                                 <h3 class="no-mt">{{business.venueName}}</h3>
                                 <p class="mb-4">{{business.description | limitTo: 200
                                 }}{{business.description.length > 200 ? '...' :''}}</p>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-7 col-sm-6">
+                            <div class="col-md-7 col-xs-6">
                                 <i class="mr-1 fa fa-map-marker"></i>
                                 <label><b class="businessSearchAddress" >{{business.address}}</b></label>
                                 <br /> 
@@ -37,7 +53,7 @@
                                     <i class="fa fa-globe" aria-hidden="true"></i>Website
                                 </a>
                             </div>
-                            <div class="col-md-5 col-sm-6 text-right" >
+                            <div class="col-md-5 col-xs-6 text-right" >
                                 <button href="javascript:void(0)" class="btn btn-primary btn-raised btn-block animate-icon" ng-click="clickClaimBusiness(business)">
                                     <i class="zmdi zmdi-wrench"></i>{{(business.flag ? "business.CLAIMED_BUSINESS" : "business.CLAIM_BUSINESS") | translate}}
                                 </button>
@@ -91,13 +107,13 @@
     <div class="container mt-4" ng-cloak>
         <h2 class="text-center color-primary mb-2 wow fadeInDown animation-delay-3" ng-bind="'home.KNOW_OUR_FEATURES'
             | translate">VenueLytics Breakthrough Solutions</h2>
-        <!-- <p
+        <p
             class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4"
             ng-show="false">
             Lorem ipsum dolor sit amet, <span class="color-primary">consectetur
                 adipisicing</span> elit. Dolor alias provident excepturi eligendi, nam
             numquam iusto eum illum, ea quisquam.
-        </p> -->
+        </p>
         <div class="ms-feature col-lg-3 col-md-6 col-sm-6 card wow flipInX animation-delay-4" ng-repeat="feature in venueLyticsFeatures">
             <div class="text-center form-group card-block">
                 <a href="#{{feature.link}}">
@@ -150,3 +166,4 @@
         </form>
     </div>
 </div>
+ -->

@@ -1,10 +1,10 @@
-<form class="col-md-12 col-sm-12 col-xs-12" name="guestForm" autocomplete="off" validate-form="" parsley-validate novalidate ng-submit="glistSave(guest)" ng-cloak ng-controller="GuestListController">
+<form class="col-xs-12" name="guestForm" autocomplete="off" validate-form="" parsley-validate novalidate ng-submit="glistSave(guest)" ng-cloak ng-controller="GuestListController">
     <fieldset class="col-md-6 col-xs-12">
         <div class="col-xs-12 form-group label-floating is-empty no-p is-focused">
             <label class="control-label">{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control fontBold" id="requestedDate" ng-model="guest.requestedDate" required>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12 no-p no-ml">
+        <div class="col-xs-12 no-p no-ml">
             <div class="col-md-4 col-xs-12 form-group label-floating is-empty no-pl no-ml {{guestFocus}}" ng-if="has('ORGANIZER_NAME')">
                 <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
                 <input type="text" id="organierName" class="form-control fontBold" ng-model="guest.firstName" required="" data-parsley-trigger="change">
@@ -62,7 +62,7 @@
             </label>
         </div>
     </fieldset>
-    <div class="col-md-6 col-sm-12 col-xs-12  mt-6">
+    <div class="col-md-6 col-xs-12  mt-6">
         <div class="col-md-10 col-md-offset-2 col-xs-12 no-p" ng-if="has('memberList')">
             <p class="h4">Enter Guest Information and Click <b>Add Guest</b> to add guests to the Guest List</p>
             <div class="col-md-12 col-xs-12 form-group  no-pl label-floating is-empty" >

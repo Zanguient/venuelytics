@@ -1,13 +1,4 @@
-<div class="ms-hero-page ms-hero-img-keyboard" ng-cloak>
-    <div class="container">
-        <div class="text-center">
-            <h1
-                class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{selectedCityName}}</h1>
-        </div>
-    </div>
-</div>
-
-<div class="container container-full" ng-cloak>
+<div class="nav_height container container-full" ng-cloak>
     <a href="cities" id="navigation"><h3>{{"venue.HOME" |
             translate}} > {{"venue.CITIES" | translate}} -> {{selectedVenueType1 | titleCase}}</h3></a>
     <div class="ms-paper">
@@ -39,13 +30,13 @@
                     </div>
                   </div>
 
-                <div class="card-block venueCardBlock">
+                <div class="card-block">
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" id="clubs" class="tab-pane fade active in">
                             <div>
                                 <div class="container">
-                                    <div class="row masonry-container cardAlignment">
+                                    <div class="row masonry-container">
                                         <center>
                                             <h5 ng-show="listOfVenuesByCity.length == 0">{{"venue.NO_MATCHING_RESULTS"
                                                 | translate}}</h5>
@@ -54,13 +45,12 @@
                                             class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
                                             ng-repeat="venue in listOfVenuesByCity"
                                             ng-if="venue.imageUrls[0].smallUrl">
-                                            <article id="articleCart"
-                                                class="card card-info mb-4 wow materialUp animation-delay-5 venueInCity">
+                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
                                                 <figure class="ms-thumbnail ms-thumbnail-left"
                                                     ng-click="selectVenue(venue)" id="cityImage">
                                                     <div class="imgHolder">
-                                                            <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venue-image" class="img-responsive" id="venueImages">
-                                                            <h5 class="fontBold pull-right featureMargin" ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
+                                                            <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="venue-image" class="img-responsive">
+                                                            <h5 class="fontBold pull-right" ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
                                                         </div>
                                                 </figure>
                                                 <div class="card-block">

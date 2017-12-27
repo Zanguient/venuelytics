@@ -1,19 +1,13 @@
-<div class="ms-hero-page ms-hero-img-keyboard" ng-cloak ng-hide="embeddedFlag === true">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="no-m ms-site-title color-white center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{detailsOfVenue.venueName}} - {{selectedCity}}</h1>
-        </div>
-    </div>
-</div>
-<div class="container" ng-cloak>
+<div class="nav_height container" ng-cloak>
+    <h1 class="text-center mt-4 animated zoomInDown animation-delay-5">{{detailsOfVenue.venueName}} - {{selectedCity}}</h1>
     <h3 ng-hide="embeddedFlag === true">
         <a href="cities" class="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} </a>
         <a href="cities/{{selectedCity}}"> > {{selectedCity}}</a>
     </h3>
     <div class="venueTabs">
-        <div class="row col-sm-12 p-min">
+        <div class="row col-xs-12 p-min">
             
-            <article class="card card-primary wow slideInRight animation-delay-1 mb-4 {{blackTheme}}">
+            <article class="card card-dark border_clouds wow slideInRight animation-delay-1 mb-4 {{blackTheme}}">
                 <div class="container" ng-show="embeddedFlag === true">
                     <div class="text-center">
                         <h1 class="no-m ms-site-title center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{detailsOfVenue.venueName}} - {{selectedCity}}</h1>

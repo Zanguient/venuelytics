@@ -178,7 +178,7 @@
 .pricing-table-content {
     list-style-type: none;
     padding: 0;
-    font-size: .9em;
+    font-size: 16px;
     margin: 0;
 }
 
@@ -196,45 +196,52 @@
 .pricing-desc-title {
     font-size: 24px;
     text-align: center;
-    background-color: $color-primary;
-    color: #fff;
+  background-color: transparent;
+    color: #000;
     margin: 0;
     padding: 21px 5px 20px 5px;
     height: 122px;
 }
 
 .pricing-table-head {
-    background-color: $color-primary;
-    color: #fff;
+    background-color: transparent;
+    color: #000;
 
     h2 {
-        font-size: 1.3em;
+        font-size: 24px;
+         font-family: Montserrat;
         text-align: center;
-        background-color: rgba(0,0,0,0.1);
-        color: #fff;
+        background-color: transparent;
+        color: #000;
         margin: 0;
-        font-weight: 400;
-        height: 70px;
-        padding-top: 15px;
-
+        font-weight: 600;
+        height: 80px;
+        padding-top: 10px;
+        line-height: 2rem;
         span {
             font-size: 12px;
+             font-weight: 300;
             display: block;
             padding-top: 5px;
         }
     }
 
+    h3 {
+        font-size: 20px;
+         font-family: Montserrat;
+         font-weight: 600;
+    }
     .price {
         margin: 0;
-        font-size: 24px;
-        font-weight: 400;
+        font-size: 20px;
+        font-weight: 600;
         height: 52px;
         line-height: 52px;
         text-align: center;
 
         i {
             font-style: normal;
-            font-size: 32px;
+            font-size: 18px;
         }
     }
 }
