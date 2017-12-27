@@ -416,7 +416,7 @@
     }
 
     &.ms-navbar-white {
-        background-color: #fff;
+        background-color: #F5F5F5;
 
         .navbar-brand {
             color: $color-dark;
@@ -433,7 +433,7 @@
 
                     &:hover,
                     &:focus {
-                        color: #fff;
+                        color: #F5F5F5;
                         background-color: $color-dark;
                     }
                 }
@@ -442,13 +442,14 @@
                 &.open {
                     & > a {
                         background-color: $color-dark !important;
-                        color: #fff;
+                        color: #F5F5F5;
                     }
                 }
             }
         }
     }
 
+   
     &.ms-navbar-dark {
         background-color: $color-dark;
 
