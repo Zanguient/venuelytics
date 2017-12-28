@@ -290,7 +290,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         });
     };
 
-    this.sendSubscriptionMail = function(object) {
+    this.subscribe = function(object) {
         return $http({
             method: 'POST',
             url: RestURL.baseURL + 'venues/subscribeBusiness',

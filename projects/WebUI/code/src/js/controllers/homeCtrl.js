@@ -34,6 +34,10 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
         var userSelectedTab = $location.absUrl().split('/').pop().split('?');
         $rootScope.canonicalURL = $location.absUrl();
     });
+
+    self.featureClick = function(feature) {
+        $location.url('/business/#'+feature.ref);
+    };
     self.init = function() {
 
         self.venueLyticsFeatures = APP_ARRAYS.features;
@@ -119,7 +123,6 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
         $rootScope.panelShow = false;
     };
     self.sendEmail = function(email) {
-        $rootScope.businessIsFocused = 'is-focused';
         if((email !== undefined) && (email !== '')){
             $('#subscribeModal').modal('show');
             $('.modal-backdrop').remove();
@@ -137,15 +140,14 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
             "businessName": business.businessName,
             "role": role ,
              "utmSource" : "venuelytics.com",
-             "utmCampaign" :"homepage",
-             "utmMedium": "subscribe"
+             "utmCampaign" :"30DaysFree",
+             "utmMedium": "homepage-subscribe"
         };
-        AjaxService.sendSubscriptionMail(subscribeEmail).then(function(response) {
+        AjaxService.subscribe(subscribeEmail).then(function(response) {
             $rootScope.successEmail = subscribeEmail.email;
             $('#subscribeSuccessModal').modal('show');
             $('.modal-backdrop').remove();
             self.subscribeEmails = '';
-            $rootScope.businessIsFocused = '';
             $rootScope.emailToSend = '';
         });
     };
