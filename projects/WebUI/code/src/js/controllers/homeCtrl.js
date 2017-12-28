@@ -96,8 +96,10 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
                     1200:{ items: 6},
                 },
                 margin:60,
-                nav:false
+                nav:true
             });
+            $( ".owl-prev").html('<img src="assets/img/arrow_left.png">');
+            $( ".owl-next").html('<img src="assets/img/arrow_right.png">');
         });
     };
 

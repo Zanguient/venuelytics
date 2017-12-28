@@ -11,6 +11,19 @@
   margin-top: 50px;
 }
 
+.move_up_1 {
+  margin-top: -1.5em;  
+}
+
+.move_up_2 {
+  margin-top: -3em;  
+}
+
+.move_up_4 {
+  margin-top: -6em;  
+}
+
+
 .mt100 {
   margin-top: 10rem;
 }
@@ -1751,6 +1764,27 @@ a.btn.disabled,fieldset[disabled] a.btn {
 .owl-carousel .caption {
   text-align: center;
 }
+
+.owl-prev {
+    width: 15px;
+    height: auto;
+    position: absolute;
+    top: 40%;
+    margin-left: -50px;
+    display: block!IMPORTANT;
+    border:0px solid black;
+}
+
+.owl-next {
+    width: 15px;
+    height: auto;
+    position: absolute;
+    top: 40%;
+    right: -40px;
+    display: block !important;
+    border:0px solid black;
+}
+.owl-prev i, .owl-next i {transform : scale(1,6); color: #ccc;}
 
 .serviceTabIcons {
   width: 15px;
