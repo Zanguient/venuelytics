@@ -169,6 +169,7 @@
 .pricing-table-container {
     background-color: #fff;
     @include shadow-2dp;
+    padding: 15px;
 }
 
 .pricing-table {
@@ -185,6 +186,8 @@
 .pricing-table-content li {
     padding: 10px 10px;
     margin: 0;
+    font-size: 0.75em;
+
 }
 
 .border-fix-pricing {

@@ -1713,7 +1713,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0,0,0,0);
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
   transition: all ease 0.5s;
   position: relative;
   bottom: 25rem;
@@ -2816,9 +2816,15 @@ input:-moz-placeholder .control-box  {
   padding-bottom: 9rem;
 }
 
-.about_left {
+.about_parent {
   position: relative;
-  bottom: -9.8rem;
+}
+
+.about_left {
+  position: absolute;
+  /*bottom: -9.8rem;*/
+  bottom: 0;
+
 }
 .about .get-started {
   background-color: #fff;
@@ -2854,8 +2860,8 @@ input:-moz-placeholder .control-box  {
 .features-box {
   background-color: #FFFFFF;  
   box-shadow: 0 20px 40px 0 rgba(0,0,0,0.3);
-  padding-top: 5rem;
-  padding-bottom: 10rem;
+  padding-top: 3rem;
+  padding-bottom: 8rem;
 
 }
 

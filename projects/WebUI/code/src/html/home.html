@@ -19,7 +19,7 @@
             <center>
                 <img ng-src="<%= assets %>/img/{{item.image}}" alt="VenueLytics Experience" class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 no-p">
                 <div class="custom-carousel col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 no-p">
-                    <p><h4 ng-bind="item.title | translate"></h4></p>
+                    <p><h2 ng-bind="item.title | translate"></h2></p>
                     <p  class="loose_pack" ng-bind="item.details | translate"></p>
                 </div>
             </center>
@@ -53,15 +53,19 @@
 
 <div class="row move_up_4">
     <div class="col-md-6 col-xs-12">
-         <h2 class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 mb-2 wow fadeInDown animation-delay-3" ng-bind="'home.KNOW_OUR_FEATURES'
+        <div class="col-md-offset-4 col-md-8 col-xs-12">
+         <h2 class="col-xs-12 mb-2 wow fadeInDown animation-delay-3" ng-bind="'home.KNOW_OUR_FEATURES'
             | translate">Breakthrough Solutions</h2>
-        <p class="loose_pack col-md-offset-2 col-md-6 col-md-offset-right-4 col-xs-12" ng-bind="'home.BREAKTHROUGH_DESC' | translate">
+        <p class="loose_pack col-xs-12" ng-bind="'home.BREAKTHROUGH_DESC' | translate">
             VenueLytics provides an integrated venue experience and management platform designed from the ground up for hospitality and entertainment industries.
         </p>
         <center>
              <button href="javascript:void(0)" class="border-black btn mt-2 mb-4" >
                 Learn More
              </button>
+        </center>
+        </div>
+        <center>
              <img class="col-md-offset-2 col-md-12 col-xs-12 border_clouds no-p" src="<%=assets%>/img/7.jpg" alt="Integrated Business Solution" />
         </center>
     </div>
@@ -79,8 +83,8 @@
         </div>
     </div></div>
 </div>
-<div class="row turnkey bg-white">
-    <div class="col-md-5 col-xs-12 image-center">
+<div class="row turnkey bg-white image-center">
+    <div class="col-md-5 col-xs-12">
          <img src="<%= assets %>/img/demo/devices.png" alt="Turnkey Solution" class="img-responsive col-xs-11 wow zoomIn animation-delay-8 ">
     </div>
     <div class="col-md-7 col-xs-12 text" >
