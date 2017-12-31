@@ -1,43 +1,22 @@
 <div ng-controller="bachelorPartyController">
 <!-- <div class="col-lg-6"> -->
 <div class="showInWeb">
- <h4 class="fontRegular fontBold ">{{'bottleServiceTab.DESC' | translate}}</h4>
+ <h4 class="fontBold ">{{'bottleServiceTab.DESC' | translate}}</h4>
     <div class="form-group ">
-        <p id="banquetHallData" class="fontRegular">{{BacheolorDescription}}</p>
+        <p id="banquetHallData">{{BacheolorDescription}}</p>
     </div>
 </div>
 <div class="showInMobile">
- <h4 class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</h4>
+ <h4 class="">{{'bottleServiceTab.DESC' | translate}}</h4>
     <div class="form-group " ng-if="!desc">
-        <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION_MOBILE" | translate}}</p>
+        <p id="banquetHallData">{{"reservation.DESCRIPTION_MOBILE" | translate}}</p>
         <a class="btn btn-default btn-raised btn-xs pull-right" ng-click="privateDescription()">{{'reservation.READ_MORE' | translate}}</a>
     </div>
     <div class="form-group " ng-if="desc">
-        <p id="banquetHallData" class="fontRegular">{{"reservation.DESCRIPTION" | translate}}</p>
+        <p id="banquetHallData" >{{"reservation.DESCRIPTION" | translate}}</p>
     </div>
 </div>
-<!-- <div class="col-md-12 showInMobile">
-    <center>
-        <table>
-            <tr>
-                <td ng-if="privateInfoSheet">
-                    <a  href="" class="btn btn-success fontRegular btn-raised btn-xs" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE" | translate}}</a>
-                </td>
-                <td ng-if="privateMenu">
-                    <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a>
-                </td>
-            </tr>
-            <tr>
-                <td ng-if="privateVideo">
-                    <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.VIEW_VIDEO" | translate}}</a>
-                </td>
-                <td ng-if="privateFloorPlan">
-                    <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FLOOR" | translate}}</a>
-                </td>
-            </tr>
-        </table> 
-    </center>
-</div> -->
+
 <form class="form-horizontal privateFormHeight"  autocomplete="off" name="privateForm" parsley-validate validate-form="" ng-cloak>
     <fieldset>
         <div class="col-md-12 form-group label-floating is-empty no-p {{bachelorDateIsFocused}}" style="margin-left: auto;">
@@ -45,14 +24,7 @@
             <input type="text" class="form-control fontBold" id="bachelorDate" ng-model="bachelor.orderDate" required>
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
-        <!-- <div class="col-md-12 showInWeb">
-            <center>
-                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="privateInfoSheet" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE" | translate}}</a>&nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="privateMenu" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a> &nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="privateVideo" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.VIEW_VIDEO" | translate}}</a>&nbsp;&nbsp;
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="privateFloorPlan" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.FLOOR" | translate}}</a>
-            </center>
-        </div> -->
+        
         <div class="col-lg-12 form-group is-empty">
             <table>
                 <tr>
@@ -94,7 +66,7 @@
         </div>
         <div class="col-xs-12">
             <div>
-                <label class="check-box fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+                <label class="check-box" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="bachelor.authorize" required/>
                     {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
                 </label>
@@ -102,7 +74,7 @@
         </div>
         <div class="col-xs-12">
             <div>
-                <label class="check-box fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+                <label class="check-box" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="bachelor.agree" required> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
                 </label>
             </div>

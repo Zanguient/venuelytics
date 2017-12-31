@@ -57,16 +57,16 @@
 
         <div class="col-md-12">
     		<center>
-        		<a href="" class="btn btn-success fontRegular btn-raised" ng-if="foodBreakFastUrl" ng-click="menuUrlSelection(foodBreakFastUrl)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.BREAK_FAST" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodBranchUrl" ng-click="menuUrlSelection(foodBranchUrl)"><span class="glyphicon glyphicon-heart"></span> {{"reservation.FOOD_BRANCH" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodStartersUrl" ng-click="menuUrlSelection(foodStartersUrl)"><span class="glyphicon glyphicon-play"></span>{{"reservation.FOOD_STARTERS" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodMenuUrl" ng-click="menuUrlSelection(foodMenuUrl)"><span class="glyphicon glyphicon-home"></span> {{"reservation.FOOD_MENU" | translate}}</a>
-                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="foodHappyHourUrl" ng-click="menuUrlSelection(foodHappyHourUrl)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.FOOD_HAPPY_HOUR" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodDinnerUrl" ng-click="menuUrlSelection(foodDinnerUrl)"><span class="glyphicon glyphicon-heart"></span>{{"reservation.FOOD_DINNER" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodLunchUrl" ng-click="menuUrlSelection(foodLunchUrl)"><span class="glyphicon glyphicon-play"></span> {{"reservation.FOOD_LUNCH" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodDessertsUrl" ng-click="menuUrlSelection(foodDessertsUrl)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FOOD_DESSERTS" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodAppetizsersUrl" ng-click="menuUrlSelection(foodAppetizsersUrl)"><span class="glyphicon glyphicon-play"></span> {{"reservation.FOOD_APPETIZSER" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="foodGlutenfree" ng-click="menuUrlSelection(foodGlutenfree)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FOOD_GLUTEN" | translate}}</a>
+        		<a href="" class="btn btn-success  btn-raised" ng-if="foodBreakFastUrl" ng-click="menuUrlSelection(foodBreakFastUrl)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.BREAK_FAST" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised " ng-if="foodBranchUrl" ng-click="menuUrlSelection(foodBranchUrl)"><span class="glyphicon glyphicon-heart"></span> {{"reservation.FOOD_BRANCH" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised " ng-if="foodStartersUrl" ng-click="menuUrlSelection(foodStartersUrl)"><span class="glyphicon glyphicon-play"></span>{{"reservation.FOOD_STARTERS" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised " ng-if="foodMenuUrl" ng-click="menuUrlSelection(foodMenuUrl)"><span class="glyphicon glyphicon-home"></span> {{"reservation.FOOD_MENU" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodHappyHourUrl" ng-click="menuUrlSelection(foodHappyHourUrl)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.FOOD_HAPPY_HOUR" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodDinnerUrl" ng-click="menuUrlSelection(foodDinnerUrl)"><span class="glyphicon glyphicon-heart"></span>{{"reservation.FOOD_DINNER" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodLunchUrl" ng-click="menuUrlSelection(foodLunchUrl)"><span class="glyphicon glyphicon-play"></span> {{"reservation.FOOD_LUNCH" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodDessertsUrl" ng-click="menuUrlSelection(foodDessertsUrl)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FOOD_DESSERTS" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodAppetizsersUrl" ng-click="menuUrlSelection(foodAppetizsersUrl)"><span class="glyphicon glyphicon-play"></span> {{"reservation.FOOD_APPETIZSER" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodGlutenfree" ng-click="menuUrlSelection(foodGlutenfree)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FOOD_GLUTEN" | translate}}</a>
     		</center>
         </div> <br/>
         
@@ -149,11 +149,9 @@
         <div class="col-xs-12">
             <center>
                 <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-disabled="foodForm.$invalid" ng-click="foodSave()">
-                    <span class="fontRegular">{{'business.DEPLOY_APPLY' | translate}}</span>
+                    <span >{{'business.DEPLOY_APPLY' | translate}}</span>
                 </button>
-                <!-- <button class="btn btn-raised btn-success">
-                    <span class="fontRegular">{{'business.CANCEL' | translate}}</span>
-                </button> -->
+               
             </center>
         </div>
         </fieldset>

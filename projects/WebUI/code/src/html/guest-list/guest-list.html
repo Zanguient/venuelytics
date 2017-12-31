@@ -51,20 +51,20 @@
         </div>
         <div class="col-xs-12 mt-4">
             <div>
-                <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+                <label ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-mode="guest.authorize" required/> {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
                 </label>
             </div>
         </div>
         <div class="col-xs-12">    
-            <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+            <label ng-class="{'Check_box_label': blackTheme === ''}">
                 <input type="checkbox" ng-model="guest.agree" required/> {{"reservation.AGREE" | translate}} {{venueName}} {{"reservation.AGREE_1" | translate}}
             </label>
         </div>
     </fieldset>
     <div class="col-md-6 col-xs-12  mt-6">
         <div class="col-md-10 col-md-offset-2 col-xs-12 no-p" ng-if="has('memberList')">
-            <p class="h4">Enter Guest Information and Click <b>Add Guest</b> to add guests to the Guest List</p>
+            <p class="h6">Enter Guest Information and Click <b>Add Guest</b> to add guests to the Guest List</p>
             <div class="col-md-12 col-xs-12 form-group  no-pl label-floating is-empty" >
                 <label class="control-label" >{{"reservation.GUEST_NAME"  | translate}}</label>
                 <input type="text" class="form-control fontBold" ng-model="member.guestName">
@@ -109,10 +109,10 @@
     <div class="col-xs-12">
         <center>
             <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-disabled="guestForm.$invalid">
-                <span class="fontRegular">{{'business.DEPLOY_APPLY' | translate}}</span>
+                <span>{{'business.DEPLOY_APPLY' | translate}}</span>
             </button>
             <button class="btn btn-raised btn-success">
-                <span class="fontRegular">{{'business.CANCEL' | translate}}</span>
+                <span >{{'business.CANCEL' | translate}}</span>
             </button>
         </center>
     </div>

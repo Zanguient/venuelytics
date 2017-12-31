@@ -1,12 +1,5 @@
 <div ng-controller="PrivateEventController">
-<!-- <div class="col-lg-6"> -->
-   <!--  <div class="col-md-10 col-md-offset-right-2">
-    <h4 class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</h4>
-       <div class="form-group col-md-12">
-           <p id="banquetHallData" class="fontRegular">{{banquetHallDescription | limitTo: 160}}{{banquetHallDescription.length > 160 ? '...' :''}}</p>
-           <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(banquetHallDescription)" ng-if="banquetHallDescription.length > 160">Read More</a>
-       </div>
-   </div> -->
+
     <form class="form-horizontal col-xs-12" autocomplete="off" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
     <fieldset class="col-md-10 col-md-offset-right-2">
         <div class="col-md-12 form-group label-floating  no-p is-empty {{privateDateIsFocused}}">
@@ -16,12 +9,12 @@
         </div>
         <div class="col-xs-12 form-group is-empty">
             <center>
-                <a href="" class="col-md-3 col-xs-12 btn btn-success fontRegular btn-raised" ng-if="privateInfoSheet" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.VIEW_PRIVATE" | translate}}</a>
+                <a href="" class="col-md-3 col-xs-12 btn btn-success  btn-raised" ng-if="privateInfoSheet" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.VIEW_PRIVATE" | translate}}</a>
 
-                <a href="" class="col-md-3 col-xs-12 btn btn-success btn-raised fontRegular" ng-if="privateMenu" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span> {{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a>
+                <a href="" class="col-md-3 col-xs-12 btn btn-success btn-raised " ng-if="privateMenu" ng-click="menuUrlSelection(privateMenu)"><span class="glyphicon glyphicon-heart"></span> {{"reservation.VIEW_PRIVATE_EVENTS" | translate}}</a>
 
-                <a href="" class="col-md-3 col-xs-12 btn btn-success btn-raised fontRegular" ng-if="privateVideo" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>
-                <a href="" class="col-md-3 col-xs-12 btn btn-success btn-raised fontRegular" ng-if="privateFloorPlan" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
+                <a href="" class="col-md-3 col-xs-12 btn btn-success btn-raised" ng-if="privateVideo" ng-click="menuUrlSelection(privateVideo)"><span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>
+                <a href="" class="col-md-3 col-xs-12 btn btn-success btn-raised " ng-if="privateFloorPlan" ng-click="menuUrlSelection(privateFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
             </center> 
             
         </div>
@@ -85,7 +78,7 @@
         </div>
         <div class="col-xs-12 row no-p mt1">
            
-            <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+            <label ng-class="{'Check_box_label': blackTheme === ''}">
                 <input type="checkbox" ng-model="private.authorize" required/>
                 {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
             </label>    
@@ -93,7 +86,7 @@
         </div>
         <div class="col-xs-12 row no-p">
           
-            <label class="fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+            <label  ng-class="{'Check_box_label': blackTheme === ''}">
                 <input type="checkbox" ng-model="private.agree" required/>
                  {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
             </label>

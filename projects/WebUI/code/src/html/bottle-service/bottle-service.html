@@ -7,7 +7,7 @@
         </div>
         <div class="row col-xs-12  is-empty mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
             <center>
-                <div class="row h4">
+                <div class="row h6">
                     
                     
                     <span class="label label-warning" style="background-color: #e3e300;" translate="SELECTED"></span>
@@ -195,7 +195,7 @@
         </div>
         <div class="col-xs-12">
             <div>
-                <label class="fontRegular table-font" ng-class="{'Check_box_label': blackTheme === ''}">
+                <label class="table-font" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="bottle.authorize" required/>
                         {{"reservation.AUTHORIZE" | translate}} {{venueName}}.
                 </label>
@@ -203,7 +203,7 @@
         </div>
         <div class="col-xs-12">
             <div>
-                <label class="fontRegular table-font" ng-class="{'Check_box_label': blackTheme === ''}">
+                <label class="table-font" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="bottle.agree" required/>
                         {{"reservation.AGREE" | translate}} {{venueName}}'s {{"reservation.AGREE_1" | translate}}
                 </label>
@@ -215,25 +215,18 @@
                 <strong><i class="zmdi zmdi-close-circle"></i> {{"reservation.ERROR_MESSAGE" | translate}}!</strong> {{"reservation.FLOOR_MAP_SELECTION" | translate}} 
             </div>
         </div>       
-        <button class="btn btn-raised btn-success chk-button fontXLarge" type="submit" novalidate="novalidate" ng-disabled="bottleForm.$invalid">
-          <h2 class="mt0 mb0">{{"reservation.CHECKOUT" | translate}}</h2>
+        <button class="col-xs-12 col-md-4 col-md-offset-right-8 btn btn-raised btn-success" type="submit" novalidate="novalidate" ng-disabled="bottleForm.$invalid">
+          {{"reservation.CHECKOUT" | translate}}
           <div class="ripple-container"></div>
         </button>
     </fieldset>
 </form> 
 <br/>
 
-<!-- <div class="col-md-12 req-border">
-    <p class="fontRegular table-font"><font color="#4caf50">{{"reservation.MIN_REQ" | translate}}</font></p>
-    <p class="fontRegular table-font">{{"reservation.MIN_REQ_DESC" | translate}}</p>
-    <p class="fontRegular table-font"><font color="#4caf50">{{"reservation.DRESS_CODE" | translate}}</font></p>
-    <p class="fontRegular table-font">{{"reservation.DRESS_CODE_DESC" | translate}}</p>
-</div> <br/>  -->
-
 <div class="col-xs-12" ng-if="bottleMenuUrl">
 
     <center>
-        <h1 class="fontRegular color-success">{{'reservation.POLICIES' | translate}}</h1>
+        <h2 class="color-success">{{'reservation.POLICIES' | translate}}</h1>
     </center>
     <hr/>
 
@@ -248,21 +241,21 @@
     <center>
         <h3 class="color-success fontLight">{{'reservation.VIP_SERVICE_POLICY' | translate}}</h3>
     </center>
-    <p class="fontRegular">{{bottleVIPPolicy}}</p>
+    <p>{{bottleVIPPolicy}}</p>
 </div>
 
 <div class="col-xs-12" ng-if="bottleMinimumRequirement">
     <center>
         <h3 class="color-success fontLight">{{"reservation.MIN_REQ" | translate}}</h3>
     </center>
-     <p class="fontRegular">{{bottleMinimumRequirement}}</p>
+     <p>{{bottleMinimumRequirement}}</p>
 </div>
 
 <div class="col-xs-12" ng-if="dressCode">
     <center>
         <h3 class="color-success fontLight">{{'reservation.DRESS_CODE' | translate}}</h3>
     </center>
-    <p class="fontRegular">{{dressCode}}</p>
+    <p>{{dressCode}}</p>
 </div>
 
 

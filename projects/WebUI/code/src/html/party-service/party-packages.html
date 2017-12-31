@@ -1,34 +1,28 @@
 <div ng-controller="PartyPackageController">
 <!-- <div class="col-lg-6"> -->
 
-<!-- <div>
- <h4 class="fontRegular">{{'bottleServiceTab.DESC' | translate}}</h4>
-    <div class="form-group " ng-if="!desc">
-        <p id="banquetHallData" class="fontRegular">{{partyDescription | limitTo: 160}}{{partyDescription.length > 160 ? '...' :''}}</p>
-        <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyHallDescription(partyDescription)" ng-if="partyDescription.length > 160">Read More</a>
-    </div>
-</div> -->
+
 <div class="col-md-12 showInMobile" ng-if="((partyCateringMenu) || (partyMenu) || (partyVideo) || (partyFloorPlan) || (partyInfoSheet))">
         <center>
             <table>
                 <tr>
                     <td ng-if="partyCateringMenu">
-                        <a  href="" class="btn btn-success fontRegular btn-raised btn-xs" ng-click="menuUrlSelection(partyCateringMenu)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.CATERING_MENU" | translate}}</a>
+                        <a  href="" class="btn btn-success btn-raised btn-xs" ng-click="menuUrlSelection(partyCateringMenu)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.CATERING_MENU" | translate}}</a>
                     </td>
                     <td ng-if="partyMenu">
-                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(partyMenu)">
+                        <a href="" class="btn btn-success btn-raised btn-xs" ng-click="menuUrlSelection(partyMenu)">
                             <span class="glyphicon glyphicon-heart"></span>{{"reservation.VIEW_PARTY_EVENTS" | translate}}</a>
                     </td>
                 </tr>
                 <tr>
                     <td ng-if="partyVideo">
-                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(partyVideo)"><span class="glyphicon glyphicon-play"></span> {{"reservation.VIEW_VIDEO" | translate}}</a>
+                        <a href="" class="btn btn-success btn-raised  btn-xs" ng-click="menuUrlSelection(partyVideo)"><span class="glyphicon glyphicon-play"></span> {{"reservation.VIEW_VIDEO" | translate}}</a>
                     </td>
                     <td ng-if="partyFloorPlan">
-                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(partyFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
+                        <a href="" class="btn btn-success btn-raised btn-xs" ng-click="menuUrlSelection(partyFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
                     </td>
                     <td ng-if="partyInfoSheet">
-                        <a href="" class="btn btn-success btn-raised fontRegular btn-xs" ng-click="menuUrlSelection(partyInfoSheet)"><span class="glyphicon glyphicon-home"></span>{{"reservation.VIEW_PRIVATE" | translate}}</a>
+                        <a href="" class="btn btn-success btn-raised btn-xs" ng-click="menuUrlSelection(partyInfoSheet)"><span class="glyphicon glyphicon-home"></span>{{"reservation.VIEW_PRIVATE" | translate}}</a>
                     </td>
                 </tr>
             </table> 
@@ -43,11 +37,11 @@
         </div>
         <div class="col-md-12 showInWeb">
             <center>
-                <a href="" class="btn btn-success fontRegular btn-raised" ng-if="partyCateringMenu" ng-click="menuUrlSelection(partyCateringMenu)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.CATERING_MENU" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="partyMenu" ng-click="menuUrlSelection(partyMenu)"><span class="glyphicon glyphicon-heart"></span>{{"reservation.VIEW_PARTY_EVENTS" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="partyVideo" ng-click="menuUrlSelection(partyVideo)"><span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="partyFloorPlan" ng-click="menuUrlSelection(partyFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised fontRegular" ng-if="partyInfoSheet" ng-click="menuUrlSelection(partyInfoSheet)"><span class="glyphicon glyphicon-home"></span>{{"reservation.VIEW_PRIVATE" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="partyCateringMenu" ng-click="menuUrlSelection(partyCateringMenu)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.CATERING_MENU" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="partyMenu" ng-click="menuUrlSelection(partyMenu)"><span class="glyphicon glyphicon-heart"></span>{{"reservation.VIEW_PARTY_EVENTS" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="partyVideo" ng-click="menuUrlSelection(partyVideo)"><span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="partyFloorPlan" ng-click="menuUrlSelection(partyFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="partyInfoSheet" ng-click="menuUrlSelection(partyInfoSheet)"><span class="glyphicon glyphicon-home"></span>{{"reservation.VIEW_PRIVATE" | translate}}</a>
             </center>
         </div>
         
@@ -87,7 +81,7 @@
         </div>
         <div class="col-md-12">
             <div>
-                <label class="check-box fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+                <label class="check-box" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="party.authorize" required/>
                     {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
                 </label>
@@ -95,7 +89,7 @@
         </div>
         <div class="col-md-12">
             <div>
-                <label class="check-box fontRegular" ng-class="{'Check_box_label': blackTheme === ''}">
+                <label class="check-box" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="party.agree" required> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
                 </label>
             </div>

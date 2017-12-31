@@ -170,6 +170,13 @@
   margin-left: 30px;
 }
 
+.navigation {
+  color: #616161;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+
 /* BlackTheme start */
 .blackTheme {
   /*color: #fdfdfd !important;*/
@@ -551,9 +558,6 @@
   margin-bottom: 0px;
 }
 
-.fontXLarge {
-  font-size: x-large;
-}
 
 select {
   -moz-appearance: none;
@@ -928,10 +932,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     margin-left: 15px;
   }
 
-  .chk-button {
-    border-radius: 10px;
-    width: 630px;
-  }
 
 
   .venueSearch {
@@ -1148,10 +1148,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
       color:#999;
   }
 
-  .chk-button {
-    border-radius: 10px;
-    width: 100%;
-  }
 
   .buttonHeight {
     height: 100px
@@ -1219,13 +1215,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
     height: 200px;
   }
 
-
-  .navigation {
-    margin-left: 10px;
-  }
-
-
   #venueReservationFrame {
+
     height: 1000px;
     display: none;
   }
@@ -1341,11 +1332,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
         color:#999;
     }
 
-  .chk-button {
-    border-radius: 10px;
-    width: 100%;
-  }
-
+  
   .privateFormHeight {
     margin-top: 38px;
   }
@@ -1460,10 +1447,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
         color:#999;
     }
 
-  .chk-button {
-    border-radius: 10px;
-    width: 100%;
-  }
 
   .privateFormHeight {
     margin-top: 38px;
@@ -1514,11 +1497,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
   .cityBox {
     margin-top: 75px;
-  }
-
-
-  .navigation {
-    margin-left: 10px;
   }
 
 
@@ -2614,6 +2592,7 @@ table.fc-border-separate {
 
 .roundCornerBtn {
   border-radius: 5px !important;
+  box-shadow: none !important;
 }
 .bottleBtn {
   background-color: rgba(122,17,217, 0.80) !important;
