@@ -1,7 +1,7 @@
 <div class="container nav_height" ng-cloak>
     <h1 class="text-center mt-6 animated zoomInDown animation-delay-5">{{selectedCityName}}</h1>
-
-    <a href="cities"><h3>{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} -> {{selectedVenueType | titleCase}}</h3></a>
+    <h3>
+    <a href="cities" class="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} -> {{selectedVenueType | titleCase}}</a></h3>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs whiteTheme mont-font-regular nav-tabs-transparent nav-tabs-full nav-tabs-6" role="tablist">
         <li role="presentation" ng-repeat="type in serviceTypes">
