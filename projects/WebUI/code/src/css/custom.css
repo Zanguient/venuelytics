@@ -134,14 +134,15 @@
 }
 
 .platform-bar {  
-    height: 30px; 
+    height: 2em; 
     width: 100vw;  
     background-color: #7FBB45;
     font-family: Montserrat;
-    font-size: 1.1em;
+    font-size: 1.125em;
     letter-spacing: 0.5em;
     font-weight: 500;
     color: white;
+    line-height: 1.8em;
 }
 
 
