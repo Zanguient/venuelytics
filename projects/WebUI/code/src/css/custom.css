@@ -12,15 +12,15 @@
 }
 
 .move_up_1 {
-  margin-top: -1.5em;  
+  margin-top: -2em;  
 }
 
 .move_up_2 {
-  margin-top: -3em;  
+  margin-top: -6em;  
 }
 
 .move_up_4 {
-  margin-top: -6em;  
+  margin-top: -8em;  
 }
 
 
@@ -54,6 +54,8 @@
     letter-spacing: .2rem;  
     line-height: 2.1rem;
 }
+
+
 .title-bold {
   font-family: Montserrat;
   font-size: 1.125em;
@@ -139,8 +141,8 @@
 }
 .iphone-service {
   position: absolute;
-  top: 7.5rem;
-  right: 9.5vw;
+  top: -12.0rem;
+  right: 17.5vw;
   z-index: 1;
 }
 
@@ -155,10 +157,13 @@
     color: white;
 }
 
-
+#venuelytics-presentation .carousel-control {
+   position: absolute;
+   top: 30rem;
+}
 .carousel-inner .item img{
   margin-top: 0px;
-  box-shadow: 0 20px 20px 0 rgba(0,0,0,0.5);
+ /* box-shadow: 0 20px 20px 0 rgba(0,0,0,0.5);*/
 }
 .vertical_middle {
   vertical-align: middle;
@@ -1749,7 +1754,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
     position: absolute;
     top: 40%;
     margin-left: -50px;
-    display: block!IMPORTANT;
+    display: block!important;
     border:0px solid black;
 }
 

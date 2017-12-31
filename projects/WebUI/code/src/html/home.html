@@ -2,7 +2,7 @@
 
     <h1 class="text-center mega-title mb0 wow fadeInDown animation-delay-3" ng-bind="'home.REAL_TIME' | translate">Real-Time Venue</h1>
     <div class="platform-bar text-center" ng-bind="'home.PLATFORM' | translate">Experience Platform</div>
-    <img class="iphone-service" src="<%=assets%>/img/iphone.png" >
+    <!-- <img class="iphone-service animated fadeInDown animation-delay-1" src="<%=assets%>/img/iphone.png"  > -->
     <!-- <div class="container">
         
         <h3 class="text-center mb-6 wow fadeInDown animation-delay-4" ng-bind="'home.WELCOME_HEADING_2'| translate">Real-Time Venue Experience Platform</h3>
@@ -14,16 +14,44 @@
     
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
+    <div class="carousel-inner" role="listbox" style="overflow: visible;">
         <div class="item" ng-class="$index == 0 ? 'active' : ''" ng-repeat="item in carouselData track by $index" class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12"> 
-            <center>
-                <img ng-src="<%= assets %>/img/{{item.image}}" alt="VenueLytics Experience" class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 no-p">
-                <div class="custom-carousel col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 no-p">
-                    <p><h2 ng-bind="item.title | translate"></h2></p>
-                    <p  class="loose_pack" ng-bind="item.details | translate"></p>
+            <div class="no-m no-p col-xs-12" ng-if="$index == 0"  style="display: relative;">
+                <div class="col-md-offset-4 col-md-4 col-md-offset-right-4 col-xs-12 text-center title_desc token italic" style="display: absolute; top: 5em; z-index: 1">
+                    <p>Personalized Services to Consumers... <br>Real-Time Insights &amp; Loyalty To Venues!</p>
                 </div>
-            </center>
-            <ng-include src="'home-apps-image.html'"/>
+                <img class="iphone-service img-responsive" src="<%=assets%>/img/iphone.png"  >
+                <div class="text-center col-md-offset-2 col-md-8 col-md-offset-right-2" style="display: absolute; top: 3em; z-index: 2">
+
+                    <div ng-if="showItzfun != true" class="img-singleline col-xs-12 mt-4">
+                        <a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8" target="_new"> <img class="footerApple" alt="App Store" ng-src="assets/img/apple-store.png" />
+                        </a>
+                        <a href="//play.google.com/store/apps/details?id=com.itzfun.biz&hl=en" target="_new"> <img class="footerAndroid" alt="Google Play Store" ng-src="assets/img/android.png" />
+                        </a>
+                    </div>
+                    <div ng-if="showItzfun === true" class="img-singleline">
+                        <a href="//itunes.apple.com/us/app/itzfun/id1035171101?mt=8" target="_new"> 
+                            <img class="footerApple" alt="App Store" ng-src="assets/img/apple-store.png" />
+                        </a>
+                        <a href="//play.google.com/store/apps/details?id=com.itzfun&hl=en" target="_new"> 
+                            <img class="footerAndroid" alt="Google Play Store" ng-src="assets/img/android.png" />
+                        </a>
+                     </div> 
+                </div>
+                <center>
+                    <img ng-src="<%= assets %>/img/blank-slide.png" alt="VenueLytics Experience" class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 no-p">
+                </center>
+            </div>
+            <div class="no-m no-p col-xs-12" ng-if="$index > 0" >
+                <center>
+                    <img ng-src="<%= assets %>/img/{{item.image}}" alt="VenueLytics Experience" class="img-responsive col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 no-p">
+                    <div class="custom-carousel col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 no-p">
+                        <p><h2 ng-bind="item.title | translate"></h2></p>
+                        <p  class="loose_pack" ng-bind="item.details | translate"></p>
+                    </div>
+                </center>
+                <!-- <ng-include src="'home-apps-image.html'"/> -->
+            </div>
         </div>
     </div>
    
@@ -31,11 +59,11 @@
         <ol class="carousel-indicators">
             <li data-target="venuelytics-presentation" data-slide-to="0" class="active"></li>
             <li data-target="venuelytics-presentation" data-slide-to="1"></li>
-            <li data-target="venuelytics-presentation" data-slide-to="2"></li>
-            <li data-target="venuelytics-presentation" data-slide-to="3"></li>
-            <li data-target="venuelytics-presentation" data-slide-to="4"></li>
-            <li data-target="venuelytics-presentation" data-slide-to="5"></li>
-            <li data-target="venuelytics-presentation" data-slide-to="6"></li>
+           <!--  <li data-target="venuelytics-presentation" data-slide-to="2"></li>
+           <li data-target="venuelytics-presentation" data-slide-to="3"></li>
+           <li data-target="venuelytics-presentation" data-slide-to="4"></li>
+           <li data-target="venuelytics-presentation" data-slide-to="5"></li>
+           <li data-target="venuelytics-presentation" data-slide-to="6"></li> -->
         </ol>
     </center>
    
