@@ -9,7 +9,7 @@
     <div class="form-group col-md-10 col-md-offset-right-10"  ng-if="eventListData == true">
         <div class="col-md-12 form-group label-floating is-empty no-p" style="margin-left: auto;">
             <label class="control-label" >Search</label>
-            <input type="text" class="form-control fontBold" ng-model="Search" id="Search">
+            <input type="text" class="form-control " ng-model="Search" id="Search">
         </div>
     </div><br/><br/>
     <div class="form-group col-md-10 col-md-offset-right-2"  ng-if="eventListData == true">
@@ -63,7 +63,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-                    <h3 class="modal-title fontBold" id="eventModalLabel">{{'event.EVENT_VIEW' | translate}}</h3>
+                    <h3 class="modal-title " id="eventModalLabel">{{'event.EVENT_VIEW' | translate}}</h3>
                 </div>
                 <div class="modal-body">
                     <table class="table table-no-border col-md-12">
@@ -73,10 +73,10 @@
                                 <img ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" alt="eventList-image" class="img-responsive" style="margin-left: -20px"/>
                             </div>
                             <div class="col-md-8 col-xs-12" style="color:black;">
-                                <h2 class="calEventName fontBold">{{event.eventName}}</h2>
+                                <h2 class="calEventName ">{{event.eventName}}</h2>
                                 <h4> {{event.scheduleDayOfWeek}} ({{event.eventTimes | date:'h:mm a'}} - {{event.endtimes | date:'h:mm a'}})</h4><hr>
-                                <h3 class="eventListName mt0 fontBold">{{'event.EVENT_TYPES' | translate}}:</h3><h4>{{event.eventType}}</h4>
-                                <h3 class="eventListName mt0 fontBold">{{'bottleServiceTab.DESC' | translate}}:</h3><h4> {{event.description}}</h4>
+                                <h3 class="eventListName mt0 ">{{'event.EVENT_TYPES' | translate}}:</h3><h4>{{event.eventType}}</h4>
+                                <h3 class="eventListName mt0 ">{{'bottleServiceTab.DESC' | translate}}:</h3><h4> {{event.description}}</h4>
                                 <span class="eventListName" ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">
                                     <label class="eventListName">{{'event.EVENT_COVER' | translate}}:</label><span>&dollar;</span><span>{{(event.price == null || event.price == 0 || event.price == undefined) ? "-" : event.price}}</span>
                                 </span><br>

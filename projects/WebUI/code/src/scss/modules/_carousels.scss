@@ -4,7 +4,7 @@
         opacity: 1;
         text-shadow: none;
         top: 40%;
-        transform: translateY(-50%);
+        transform: translateY(-40%);
         bottom: auto;
         height: auto;
         position: absolute;
@@ -12,11 +12,11 @@
         transition: all ease 0.3s;
 
         &.left {
-            left: 80px;
+            left: -5rem;
         }
 
         &.right {
-            right: 80px;
+            right: -5rem;;
         }
     }
 
@@ -54,6 +54,7 @@
                 //bottom: -100%;
                 left: 0;
                 right: 0;
+
                 transition: all ease 0.5s;
             }
         }
@@ -174,7 +175,7 @@
 
     .carousel-inner {
         //overflow: visible;
-        padding-bottom: 6rem;
+        padding-bottom: 2rem;
 
         .item {
             .carousel-caption {

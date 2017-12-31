@@ -11,19 +11,6 @@
   margin-top: 50px;
 }
 
-.move_up_1 {
-  margin-top: -2em;  
-}
-
-.move_up_2 {
-  margin-top: -6em;  
-}
-
-.move_up_4 {
-  margin-top: -8em;  
-}
-
-
 .mt100 {
   margin-top: 10rem;
 }
@@ -141,8 +128,8 @@
 }
 .iphone-service {
   position: absolute;
-  top: -12.0rem;
-  right: 17.5vw;
+  top: -10.0em;
+  right: -10em;
   z-index: 1;
 }
 
@@ -157,9 +144,9 @@
     color: white;
 }
 
-#venuelytics-presentation .carousel-control {
-   position: absolute;
-   top: 30rem;
+
+.overflow-visible {
+  overflow: visible !important;
 }
 .carousel-inner .item img{
   margin-top: 0px;
@@ -1699,12 +1686,12 @@ a.btn.disabled,fieldset[disabled] a.btn {
   /* background-color: rgba(0, 0, 0, 0.4); */
   transition: all ease 0.5s;
   position: relative;
-  bottom: 25rem;
+  bottom: 7em;
 }
 
 .app_install {
   position: relative;
-  bottom: 20rem;
+  bottom: 7em;
 }
 
 .reservationCarousel {
