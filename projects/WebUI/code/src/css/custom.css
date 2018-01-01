@@ -912,6 +912,12 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 @media screen and (min-width: 730px) and (max-width: 1200px) {
   
+  .about_left {
+    position: absolute;
+    /*bottom: -9.8rem;*/
+    bottom: 0;
+
+  }
   .p-min {
     padding-top: 20px;
   }
@@ -984,10 +990,15 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 /*Desktop*/
 @media screen and (min-width: 1200px) and (max-width: 1600px) {
-    
-    .p-min {
-      padding-top: 20px;
-    }
+    .about_left {
+    position: absolute;
+    /*bottom: -9.8rem;*/
+    bottom: 0;
+
+  }
+  .p-min {
+    padding-top: 20px;
+  }
 
   .mt-md-100 {
     margin-top: 6.25em;
@@ -2067,6 +2078,12 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 }
 @media (min-width: 992px) {
+  .about_left {
+    position: absolute;
+    /*bottom: -9.8rem;*/
+    bottom: 0;
+
+  }
   .mt-md-100 {
     margin-top: 6.25em;
   }
@@ -2112,6 +2129,11 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 }
 @media (min-width: 1200px) {
+  .about_left {
+    position: absolute;
+    /*bottom: -9.8rem;*/
+    bottom: 0;
+  }
   .mt-md-100 {
     margin-top: 6.25em;
   }
@@ -2942,12 +2964,7 @@ input:-moz-placeholder .control-box  {
   position: relative;
 }
 
-.about_left {
-  position: absolute;
-  /*bottom: -9.8rem;*/
-  bottom: 0;
 
-}
 .about .get-started {
   background-color: #fff;
   height: 3.5em;
