@@ -15,7 +15,7 @@
   }
   h4,
   .h4 {
-    font-size: 1.5px;
+    font-size: 1.5em;
      font-weight: 700;
   }
   h5,
@@ -35,7 +35,7 @@
     line-height: 1.08em;
     font-weight: 800;
   }
-
+  
 }
 @media (max-width: 767px) {
     h1,
@@ -84,6 +84,10 @@
     width: 6rem;
     height: auto;
   }
+  .mt-xs-0 {
+    margin-top: 0;
+  }
+
 }
 
 
@@ -92,8 +96,9 @@
 }
 
 .mt100 {
-  margin-top: 10rem;
+  margin-top: 6.25em;
 }
+
 
 .mont-font-regular {
   font-family: Montserrat;
@@ -686,7 +691,7 @@ select {
 }
 
 .p-min {
-  padding: 5px;
+  padding-top: 10px;
 }
 
 
@@ -837,7 +842,13 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 
 @media screen and (min-width: 1990px) and (max-width: 5500px) {
+  .p-min {
+    padding-top: 20px;
+  }
 
+  .mt-md-100 {
+    margin-top: 6.25em;
+  }
   .playButton {
     position: absolute; 
     left: 50%; 
@@ -854,6 +865,14 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 @media screen and (min-width: 1600px) and (max-width: 1990px) {
+
+  .p-min {
+    padding-top: 20px;
+  }
+  .mt-md-100 {
+    margin-top: 6.25em;
+  }
+
   .playButton {
     position: absolute; 
     left: 50%; 
@@ -893,6 +912,13 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 @media screen and (min-width: 730px) and (max-width: 1200px) {
   
+  .p-min {
+    padding-top: 20px;
+  }
+  .mt-md-100 {
+    margin-top: 6.25em;
+  }
+
   .playButton {
     position: absolute; 
     left: 49%; 
@@ -958,7 +984,15 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 /*Desktop*/
 @media screen and (min-width: 1200px) and (max-width: 1600px) {
-  
+    
+    .p-min {
+      padding-top: 20px;
+    }
+
+  .mt-md-100 {
+    margin-top: 6.25em;
+  }
+
   .playButton {
     position: absolute; 
     left: 49%; 
@@ -1161,6 +1195,13 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 /*iPhone 5*/
 @media only screen and (min-width: 310px) and (max-width: 374px) {
+  
+  .p-min {
+    padding: 0px;
+  }
+  .mt-xs-0 {
+    margin-top: 0;
+  }
 
   .mobileImageWidht {
     width: 60px;
@@ -1380,6 +1421,12 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 /*iPhone 6*/
 @media only screen and (min-width : 375px) and (max-width : 413px) {
+    .p-min {
+      padding: 0px;
+    }
+    .mt-xs-0 {
+     margin-top: 0;
+    }
 
       .withoutTabs {
         color:black;
@@ -1494,6 +1541,12 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 /*For iPhone 6 plus*/
 @media only screen and (min-width : 414px) and (max-width : 736px) {
+      .p-min {
+        padding: 0;
+      }
+      .mt-xs-0 {
+        margin-top: 0;
+      }
 
       
       .withoutTabs {
@@ -1916,6 +1969,9 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 @media only screen and (max-width : 768px) {
+  .mt-xs-0 {
+    margin-top: 0;
+  }
 
   .col-xs-center {
     text-align: center;
@@ -1962,6 +2018,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 @media (min-width: 768px) {
   
+  .mt-md-100 {
+    margin-top: 6.25em;
+  }
+
   .col-sm-center {
     text-align: center;
   }
@@ -2007,7 +2067,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 }
 @media (min-width: 992px) {
-  
+  .mt-md-100 {
+    margin-top: 6.25em;
+  }
+
   .col-md-offset-right-12 {
     margin-right: 100%;
   }
@@ -2049,6 +2112,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
   }
 }
 @media (min-width: 1200px) {
+  .mt-md-100 {
+    margin-top: 6.25em;
+  }
+
   .col-lg-offset-right-12 {
     margin-right: 100%;
   }
