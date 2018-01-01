@@ -1,28 +1,32 @@
-
 @media (min-width: 768px) {
   h1,
   .h1 {
-    font-size: 2em;
+    font-size: 2.25em;
   }
   h2,
   .h2 {
-    font-size: 1.75em;
+    font-size: 2em;
+    line-height: 4rem;
   }
   h3,
   .h3 {
-    font-size: 1.5em;
+    font-size: 1.75em;
+    font-weight: 700;
   }
   h4,
   .h4 {
-    font-size: 1.25px;
+    font-size: 1.5px;
+     font-weight: 700;
   }
   h5,
   .h5 {
-    font-size: 1em;
+    font-size: 1.25em;
+    font-weight: 600;
   }
   h6,
   .h6 {
-    font-size: 0.75em;
+    font-size: 1em;
+    font-weight: 600;
   }
   .mega-title {
     font-size: 3.5em;
@@ -31,31 +35,38 @@
     line-height: 1.08em;
     font-weight: 800;
   }
+
 }
 @media (max-width: 767px) {
     h1,
   .h1 {
-    font-size: 1.5em;
+    font-size: 1.75em;
   }
   h2,
   .h2 {
-    font-size: 1.25em;
+    font-size: 1.5em;
+    line-height: 3rem;
+
   }
   h3,
   .h3 {
-    font-size: 1.125em;
+    font-size: 1.33em;
+     font-weight: 700;
   }
   h4,
   .h4 {
-    font-size: 1px;
+    font-size: 1.125px;
+    font-weight: 700;
   }
   h5,
   .h5 {
-    font-size: 0.875em;
+    font-size: 1em;
+    font-weight: 600;
   }
   h6,
   .h6 {
     font-size: 0.75em;
+    font-weight: 600;
   }
 
   .mega-title {
@@ -65,7 +76,16 @@
     line-height: 1.08em;
     font-weight: 800;
   }
+
+  .playButton {
+    position: absolute; 
+    left: 48%; 
+    top: 23%; 
+    width: 6rem;
+    height: auto;
+  }
 }
+
 
 .nav_height {
   margin-top: 50px;
@@ -818,6 +838,13 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 @media screen and (min-width: 1990px) and (max-width: 5500px) {
 
+  .playButton {
+    position: absolute; 
+    left: 50%; 
+    top: 30%; 
+    width: 6rem;
+    height: auto;
+  }
   .withoutTabs {
     color:black;
     font-size: 24px;
@@ -827,7 +854,13 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 @media screen and (min-width: 1600px) and (max-width: 1990px) {
-
+  .playButton {
+    position: absolute; 
+    left: 50%; 
+    top: 30%; 
+    width: 6rem;
+    height: auto;
+  }
   .withoutTabs {
     color:black;
     font-size: 24px;
@@ -859,6 +892,14 @@ a.btn.disabled,fieldset[disabled] a.btn {
 }
 
 @media screen and (min-width: 730px) and (max-width: 1200px) {
+  
+  .playButton {
+    position: absolute; 
+    left: 49%; 
+    top: 25%; 
+    width: 6rem;
+    height: auto;
+  }
 
   .withoutTabs {
     color:black;
@@ -917,6 +958,14 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 /*Desktop*/
 @media screen and (min-width: 1200px) and (max-width: 1600px) {
+  
+  .playButton {
+    position: absolute; 
+    left: 49%; 
+    top: 30%; 
+    width: 6rem;
+    height: auto;
+  }
 
   .withoutTabs {
     color:black;
@@ -2802,32 +2851,6 @@ input:-moz-placeholder .control-box  {
   color: rgb(255,255,255);
 }
 
-.h2, h2 {
-  font-size: 32px;
-  line-height: 4rem;
-
-}
-
-.h3, h3 {
-  font-size: 28px;
-  font-weight: 700;
-
-}
-
-.h4, h4 {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.h5, h5 {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.h6, h6 {
-  font-size: 16px;
-  font-weight: 600;
-}
 
 .get-started {
   background-color: #F3F4F5;

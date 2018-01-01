@@ -1,7 +1,12 @@
 <div class="container nav_height" ng-cloak>
     <div class="row mt-2">
         <div class="col-md-6 col-xs-12 mt-4">
-            <img ng-src="<%=assets%>/img/iPad-Landscape.png" class="img-responsive mr-2">
+            <a href="//www.youtube.com/watch?v=HZngJ7YtOuU" target="_new">
+                <img ng-src="<%=assets%>/img/iPad-Landscape.png" class="img-responsive mr-2">
+
+                <img alt="Play video" ng-src="assets/img/play.png" src="assets/img/play.png" class="img-responsive mr-2 playButton" 
+                > 
+            </a>
         </div>
         <div class="col-md-6 col-xs-12 mt-1">
             <p class="mega-title mt-4 col-md-10 col-dm-offset-2 col-xs-12" ng-bind="'home.WELCOME_HEADING_2' | translate"></p>
@@ -9,7 +14,7 @@
         </div>
     </div>
     <div class="text-center col-xs-12 mt-6 mb-4">
-        <h2 class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 mt-6">{{'home.FREE_TRIAL' | translate}}</h2>
+        <h2 class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 mt-4">{{'home.FREE_TRIAL' | translate}}</h2>
         <div class="mb-6">
             <center>
                 <input class="col-md-offset-3 col-md-offset-right-3 col-md-6 col-xs-12 pt-1 pb-1  black_border mt-4 mb-1" placeholder="Enter your email ..." required ng-pattern="/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/" ng-model="subscribeEmails">
@@ -40,4 +45,65 @@
 </div>
 <div id="loyalty-management">
     <div ng-include="'break-through/loyalty-management.html'"></div>
+</div>
+
+
+<div class="modal modal-success" id="subscribeSuccessModalBusiness" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <div class="modal-dialog animated zoomIn animated-3x" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="zmdi zmdi-close"></i></span>
+                </button>
+                <h3 class="modal-title" id="myModalLabel6" ng-bind="'home.SUBSCRIPBE_MAIL' | translate">Subscribe Mail</h3>
+            </div>
+            <div class="modal-body">
+                <center><span class="h4" ng-bind="'home.SUBSCRIPBE_TO_VENUELYTICS' | translate">Thank you for subscribing to VenueLytics!</span></center>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="subscribeModalBusiness" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+    <form name="subscribe" novalidate="">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
+                    <h2 class="modal-title" id="myModalLabel6" ng-bind="'home.SUBSCRIPBE_MAIL' | translate">Subscribe Mail</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 form-group label-floating is-empty no-p" ng-class="successEmail.length > 0 ? '' : 'is-empty'">
+                        <label class="control-label" for="emailId" ng-bind="'business.EMAIL' | translate">Email</label>
+                        <input  name="emailId" type="email" value="Email" class="form-control" ng-model="successEmail" required>
+                    </div>
+                    <div class="col-md-12 form-group label-floating is-empty no-p" >
+                        <label class="control-label" for="nameOfPerson" ng-bind="'business.NAME_OF_PERSION' | translate">Name of the Person</label>
+                        <input id="nameOfPerson" name="nameOfPerson" type="text" value="NameOfPerson" class="form-control" ng-model="business.NameOfPerson" required>
+                    </div>
+                    <div class="col-md-12 form-group label-floating is-empty no-p" >
+                        <label class="control-label" for="businessName" ng-bind="'business.BUINESS_NAME' | translate">Business Name</label>
+                        <input id="businessName" name="businessName" type="text" value="BusinessName" class="form-control" ng-model="business.businessName" required>
+                    </div>
+                    <div class="col-md-12 form-group label-floating is-empty no-p" >
+                        <label class="control-label" for="roldId" ng-bind="'business.ROLE_OPTIONAL' | translate">Role (Optional)</label>
+                        <select id="roldId" name="roldId" class="btn dropdown-toggle form-control"  ng-model="business.businessRole" ng-options="r.role for r in businessRoles">
+                        </select>
+                    </div>
+                    <div class="col-md-12 form-group label-floating is-empty no-p" >
+                        <label class="control-label" for="phoneNo" ng-bind="'business.PHONE_OPTIONAL' | translate">Phone number (Optional)</label>
+                        <input id="phoneNo" name="phoneNo" type="text" class="form-control" masked="" data-inputmask="'mask': '(999) 999-9999'" ng-model="business.phoneNumber" data-parsley-trigger="change">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-raised" data-dismiss="modal" ng-click="saveBusiness()" ng-disabled="subscribe.$invalid">{{'business.SUBMIT' | translate}}</button>
+                    <button type="button" class="btn btn-default btn-raised" data-dismiss="modal" ng-bind="'business.CANCEL' | translate">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>

@@ -159,7 +159,34 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
             self.email = function() {
                 $location.path("/deployment/"+DataShare.venueNumber);
             };
-
+            self.sendEmail = function(email) {
+                if((email !== undefined) && (email !== '')){
+                    $('#subscribeModalBusiness').modal('show');
+                    $('.modal-backdrop').remove();
+                    $rootScope.successEmail = email;
+                }
+            };
+            self.saveBusiness = function() {
+                var business = $scope.business;
+                var role = (typeof business.businessRole  === 'undefined') ? '' :  business.businessRole.role;
+                var subscribeEmail = {
+                    "email": $rootScope.successEmail,
+                    "mobile": business.phoneNumber,
+                    "name": business.NameOfPerson,
+                    "businessName": business.businessName,
+                    "role": role ,
+                     "utmSource" : "venuelytics.com",
+                     "utmCampaign" :"30DaysFree",
+                     "utmMedium": "homepage-subscribe"
+                };
+                AjaxService.subscribe(subscribeEmail).then(function(response) {
+                    $rootScope.successEmail = subscribeEmail.email;
+                    $('#subscribeSuccessModal').modal('show');
+                    $('.modal-backdrop').remove();
+                    self.subscribeEmails = '';
+                    $rootScope.emailToSend = '';
+                });
+            };
             self.businessSubmit = function(businessClaim) {
                 var businessObject = {
                     "business.contactName": businessClaim.name,
