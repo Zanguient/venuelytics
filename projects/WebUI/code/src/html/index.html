@@ -1,33 +1,34 @@
 <!-- build:include layout/header.html --><!-- /build -->
 <div ng-view autoscroll="true">
-	<div class="container venueBanner">
+	<div class="nav_height" >
+
+	    <h1 class="text-center mega-title mb0 wow fadeInDown animation-delay-3" >Real-Time Venue</h1>
+	    <div class="platform-bar text-center" >Experience Platform</div>
+
+	</div>
+	<div class="container venueBanner mb-6">
 		<div class="card venueCard">
 			<div class="item">
-			    <img ng-src="assets/img/screen2.jpg" alt="realTimeHome-image" class="carouselImage" src="assets/img/screen2.jpg">
-			    <div class="mt0">
-					<p class="mb0"></p><h1 class="mt0 mb0  ng-binding" ng-bind="'home.REAL_TIME_HOME' |
-						translate">REAL-TIME VENUE EXPERIENCE PLATFORM</h1><p></p>
-					<p class="mb0"></p><h4 class="mt0 mb0  ng-binding" ng-bind="'home.PERSONALIZED_SERVICES' |
-						translate">Personalized Services to Consumers...</h4><p></p>
-					<p class="mb0"></p><h4 class="mt0 mb0  ng-binding" ng-bind="'home.REALTIME_INSIGHTS' |
-						translate">Real-Time Insights &amp; Loyalty To Venues!</h4><p></p>
-			        <center class="downloadIcon ng-scope">
-						<div class="img-container">
-							<div class="img-singleline">
-								<a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&amp;mt=8" target="_new"> <img  alt="apple-image" ng-src="assets/img/apple-store.png" src="assets/img/apple-store.png">
-								</a>
-							</div>
-							<div class="img-singleline">
-								<a href="//play.google.com/store/apps/details?id=com.itzfun.biz&amp;hl=en" target="_new"> <img alt="android-image" ng-src="assets/img/android.png" src="assets/img/android.png">
-								</a>
-							</div>
-							<div class="img-singleline">
-								<a href="//www.youtube.com/watch?v=HZngJ7YtOuU" target="_new"> <img alt="video-image" ng-src="assets/img/play_full_color.png" src="assets/img/play.png">
-								</a>
-							</div>
-						</div>
-					</center>
-			    </div>
+			   <div class="no-m no-p"  style="position: relative;">
+	                <div class="col-xs-12 text-center title_desc token italic mt-4" >
+	                    <p>Personalized Services to Consumers... <br>Real-Time Insights &amp; Loyalty To Venues!</p>
+	                </div>
+                
+	                <div class="text-center col-md-offset-2 col-md-8 col-md-offset-right-2 mt-1">
+	            
+	                    <div class="img-singleline col-xs-12">
+	                        <a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8" target="_new"> 
+	                        	<img class="footerApple" alt="App Store" src="assets/img/apple-store.png" />
+	                        </a>
+	                        <a href="//play.google.com/store/apps/details?id=com.itzfun.biz&hl=en" target="_new"> 
+	                        	<img class="footerAndroid" alt="Google Play Store" src="assets/img/android.png" />
+	                        </a>
+	                    </div>
+	                </div>
+                
+                	<img  src="assets/img/iphone.png" style="position: absolute; top: -100px; right: 200px; z-index: 1; width: 250px; height: auto">
+                
+            	</div>
 			</div>
 		</div>
 	</div>
