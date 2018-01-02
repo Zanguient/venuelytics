@@ -10,8 +10,8 @@
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner overflow-visible" role="listbox" >
-        <div class="item col-xs-12" ng-class="$index == 0 ? 'active' : ''" ng-repeat="item in carouselData track by $index"> 
-            <div class="no-m no-p" ng-if="$index == 0"  style="display: relative;">
+        <div class="item col-xs-12 p-min" ng-class="$index == 0 ? 'active' : ''" ng-repeat="item in carouselData track by $index"> 
+            <div class="no-m no-p" ng-if="$index == 0"  style="position: relative;">
                 <div class="col-xs-12 text-center title_desc token italic mt-4" >
                     <p>Personalized Services to Consumers... <br>Real-Time Insights &amp; Loyalty To Venues!</p>
                 </div>
@@ -34,15 +34,15 @@
                      </div> 
                 </div>
                 <center>
-                    <img ng-src="<%= assets %>/img/blank-slide.png" alt="VenueLytics Experience" class="img-responsive col-xs-12">
+                    <img ng-src="<%= assets %>/img/blank-slide.png" alt="VenueLytics Experience" class="img-responsive col-xs-12 hidden-sm hidden-xs">
                 </center>
             </div>
             <div class="no-m no-p col-xs-12"  ng-if="$index > 0">
                 <center>
-                    <img ng-src="<%= assets %>/img/{{item.image}}" alt="VenueLytics Experience" class="img-responsive col-xs-12">
+                    <img ng-src="<%= assets %>/img/{{item.image}}" alt="VenueLytics Experience" class="img-responsive col-xs-12 no-p">
                     <div class="custom-carousel">
                         <h6 class="token bold" ng-bind="item.title | translate"></h6>
-                        <p  class="loose_pack" ng-bind="item.details | translate"></p>
+                        <p  class="loose_pack pl-1 pr-1" ng-bind="item.details | translate"></p>
                     </div>
                 </center>
                 <ng-include src="'home-apps-image.html'"/>

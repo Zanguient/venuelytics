@@ -27,7 +27,7 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
         
         //{image: '5-1.jpg', title: 'home.IMPROVE_PRODUCTIVITY', details: 'home.FOR_CASINOS_CLUBS'},
         //{image: '6(1).jpg', title: 'home.REAL_TIME_MOBILE', details: 'home.IMMEDIATE_WIFI_ENABLED'},
-        {image: '', title: '', details: ''},
+       // {image: '', title: '', details: ''},
         {image: '7.jpg', title: 'home.CUSTOMER_SERVICE', details: 'home.EXPERIENCE'}
 
 
