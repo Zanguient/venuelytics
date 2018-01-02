@@ -28,7 +28,10 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
         }
         ngMeta.setTag('image', 'assets/img/screen2.jpg');
         self.blogs = APP_ARRAYS.blogs;
-
+        self.news = [
+            {date:"December 6, 2017", name:"Bloomberg",image:"", title: "Fanlogic Signs Software and Marketing Partnership Agreement", url: "https://www.bloomberg.com/press-releases/2017-12-06/fanlogic-signs-software-and-marketing-partnership-agreement-with-palo-alto-peer-to-peer-consumer-concierge-leader-venuelytics", description: "Calgary, AB (FSCwire) - FanLogic Interactive Inc. (TSXV: FLGC – OTCQB: FNNGF) (“FanLogic” or the “Company”) is pleased to announce a partnership with VenueLytics, a technology firm based out of Palo Alto, California."},
+            {date:"December 6, 2017", name:"Yahoo! Finance",image:"", title: "Fanlogic Signs Software and Marketing Partnership Agreement", url: "https://finance.yahoo.com/news/fanlogic-signs-software-marketing-partnership-110000708.html", description: "Calgary, AB (FSCwire) - FanLogic Interactive Inc. (TSXV: FLGC – OTCQB: FNNGF) (“FanLogic” or the “Company”) is pleased to announce a partnership with VenueLytics, a technology firm based out of Palo Alto, California."}
+        ];
         self.readMore = function(blogPost) {
           DataShare.selectedBlog = blogPost;
           $location.url('/blogPost');
