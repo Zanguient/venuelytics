@@ -2,12 +2,7 @@
 
     <h1 class="text-center mega-title mb0 wow fadeInDown animation-delay-3" ng-bind="'home.REAL_TIME' | translate">Real-Time Venue</h1>
     <div class="platform-bar text-center" ng-bind="'home.PLATFORM' | translate">Experience Platform</div>
-    <!-- <img class="iphone-service animated fadeInDown animation-delay-1" src="<%=assets%>/img/iphone.png"  > -->
-    <!-- <div class="container">
-        
-        <h3 class="text-center mb-6 wow fadeInDown animation-delay-4" ng-bind="'home.WELCOME_HEADING_2'| translate">Real-Time Venue Experience Platform</h3>
-        <p class="lead text-center aco wow fadeInDown animation-delay-5 mw-800 center-block mb-4" ng-bind="'home.WELCOME_DESCRIPTION' | translate">VenueLytics empowers businesses, in the entertainment, hospitality and service industries, to engage their customers in real-time and deliver Table &amp; Bottle Service Reservations, Food &amp; Drink Ordering, Private Event Bookings, Events Booking, 360° degree view of the venue, Guest Lists, Campaigns, Loyalty Rewards &amp; other premium services across Omni-Channel &amp; WiFI. VenueLytics provides a patent-pending deep learning technology for venues to get real-time insights &amp; predictive recommendations.</p>
-    </div> -->
+
 </div>
 
 <div id="venuelytics-presentation" class="ms-carousel carousel slide col-md-offset-3 col-md-6 col-md-offset-right-3 col-xs-12" data-ride="carousel" >
@@ -15,7 +10,7 @@
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner overflow-visible" role="listbox" >
-        <div class="item" ng-class="$index == 0 ? 'active' : ''" ng-repeat="item in carouselData track by $index" class="col-xs-12"> 
+        <div class="item col-xs-12" ng-class="$index == 0 ? 'active' : ''" ng-repeat="item in carouselData track by $index"> 
             <div class="no-m no-p" ng-if="$index == 0"  style="display: relative;">
                 <div class="col-xs-12 text-center title_desc token italic mt-4" >
                     <p>Personalized Services to Consumers... <br>Real-Time Insights &amp; Loyalty To Venues!</p>

@@ -216,9 +216,9 @@
             & > a {
                 display: block;
                 padding: 12px 20px;
-                font-size: 16px;
+                font-size: 0.75em;
                 font-weight: 400;
-                color: $color-primary;
+                color: rgb(97, 97, 97);
                 background-color: $color-light-dark;
 
                 &:after {
