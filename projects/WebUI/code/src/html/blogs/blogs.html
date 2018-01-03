@@ -1,4 +1,4 @@
-<div class="container nav_height mb-6"> 
+<div class="container nav_height mb-6 ng-cloak"> 
     <div class="text-center mt-6">
         <h2 class="center-block mt-2 animated zoomInDown animation-delay-5">News</h2>
         
@@ -9,7 +9,7 @@
         <div class="col-md-4 col-xs-12 masonry-item wow fadeInUp animation-delay-2" ng-repeat="n in news">
             <article class="card card-dark border_clouds mb-4 wow materialUp animation-delay-5" >
                 <figure class="ms-thumbnail ms-thumbnail-left">
-                    <img src="{{n.image}}" alt="{{n.name}}" class="img-responsive">
+                    <img src="<%=assets%>/img/blog/{{n.image}}" alt="{{n.name}}" class="img-responsive">
                 </figure>
                 <div class="card-block">
                     <p class="more_link no-pb">{{n.name}} - {{n.date}}</p>
