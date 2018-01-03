@@ -19,21 +19,13 @@
                     <a ng-href="business" class="dropdown-toggle animated fadeIn animation-delay-6" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-bind="'navbar.BUSINESS' | translate">Business<i class="zmdi zmdi-chevron-down"></i></a>
 
                 </li>
-                <!-- <li class="dropdown {{$root.consumerTab}}">
-                    <a href="cities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities">{{"navbar.CONSUMERS" | translate}}<i class="zmdi zmdi-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li>
+                <li class="dropdown {{$root.selectedTab == 'solution' ? 'active' : ''}}">
+                    <a ng-href="solution" class="dropdown-toggle animated fadeIn animation-delay-6" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-bind="'navbar.SOLUTION' | translate">Solution<i class="zmdi zmdi-chevron-down"></i></a>
 
-                        </li>
-                    </ul>
-                </li> -->
+                </li>
                 <li class="dropdown {{$root.selectedTab == 'consumer' ? 'active' : ''}}">
                     <a href="cities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities" ng-bind="'navbar.CONSUMERS' | translate">Consumers<i class="zmdi zmdi-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li>
-
-                        </li>
-                    </ul>
+                    
                 </li>
                 <li class="dropdown {{$root.selectedTab == 'pricing' ? 'active' : ''}}">
                     <a ng-href="pricing" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-bind="'price.PRICE' | translate">Price<i class="zmdi zmdi-chevron-down"></i></a>
