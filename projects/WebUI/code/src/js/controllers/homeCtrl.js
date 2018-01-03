@@ -23,13 +23,14 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
        // {image: 'screen2.jpg', title: 'home.REAL_TIME_HOME', details: 'home.PERSONALIZED_SERVICES'},
         //{image: '2.jpg', title: 'home.REAL_TIME', details: 'home.RESERVATION_FOOD_DRINK'},
         //{image: '3.jpg', title: 'home.CREATE_NEW_SOURCES', details: 'home.WIFI_IN_VENUE_ORDERING'},
-        //{image: 'screen4.jpg', title: 'home.VIP_PERSONALLY', details: 'home.CONSISTENTLY_REWARD'},
+        
         
         //{image: '5-1.jpg', title: 'home.IMPROVE_PRODUCTIVITY', details: 'home.FOR_CASINOS_CLUBS'},
-        //{image: '6(1).jpg', title: 'home.REAL_TIME_MOBILE', details: 'home.IMMEDIATE_WIFI_ENABLED'},
-       // {image: '', title: '', details: ''},
-        {image: '7.jpg', title: 'home.CUSTOMER_SERVICE', details: 'home.EXPERIENCE'}
-
+        
+        {image: '', title: '', details: ''},
+        //{image: '7.jpg', title: 'home.CUSTOMER_SERVICE', details: 'home.EXPERIENCE'},
+        {image: 'screen4.jpg', title: 'home.VIP_PERSONALLY', details: 'home.CONSISTENTLY_REWARD'},
+        {image: '6(1).jpg', title: 'home.REAL_TIME_MOBILE', details: 'home.IMMEDIATE_WIFI_ENABLED'}
 
     ];
     $scope.$on('$locationChangeStart', function(event) {
