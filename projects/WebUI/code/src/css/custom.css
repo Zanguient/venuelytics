@@ -92,8 +92,8 @@
   .playButton {
     position: absolute; 
     left: 48%; 
-    top: 23%; 
-    width: 6rem;
+    top: 55%; 
+    width: 5rem;
     height: auto;
   }
   .mt-xs-0 {
@@ -855,7 +855,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   .playButton {
     position: absolute; 
     left: 50%; 
-    top: 32%; 
+    top: 60%; 
     width: 6rem;
     height: auto;
   }
@@ -893,8 +893,8 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
   .playButton {
     position: absolute; 
-    left: 49%; 
-    top: 30%; 
+    left: 50%; 
+    top: 60%; 
     width: 6rem;
     height: auto;
   }
