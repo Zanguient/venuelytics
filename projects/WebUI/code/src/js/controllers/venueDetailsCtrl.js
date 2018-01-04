@@ -9,6 +9,7 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
     		$log.log('Inside Venue Details Controller.');
     		
             var self = $scope;
+            $rootScope.selectedTab = 'consumer';
             self.init = function() {
 
                 AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {

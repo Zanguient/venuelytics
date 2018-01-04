@@ -75,11 +75,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/about', {
             templateUrl: 'about.html',
-            controller: 'BlogController'
+            controller: 'AboutController'
         })
         .when('/contact', {
             templateUrl: 'contact.html',
-            controller: 'BlogController'
+            controller: 'ContactController'
         })
         .when('/privacy', {
             templateUrl: 'privacy.html',

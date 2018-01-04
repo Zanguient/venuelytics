@@ -6,6 +6,7 @@ app.controller('PricingController', ['$log', '$scope', '$http', '$location', 'Re
     function ($log, $scope, $http, $location, RestURL, DataShare, $translate, PRICING_APP, $rootScope, AjaxService, ngMeta) {
 
         var self = $scope;
+        $rootScope.selectedTab = 'pricing';
         self.init = function() {
             self.basicPrice = PRICING_APP.BASIC_PRICE;
             self.professionalPrice = PRICING_APP.PROFESSIONAL_PRICE;

@@ -13,6 +13,7 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
             $rootScope.businessSearch = true;
             $rootScope.searchVenue = false;
             $rootScope.showItzfun = false;
+            $rootScope.selectedTab = 'business';
             self.newUser = {
                 businessName: '',
                 address: '',

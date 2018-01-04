@@ -8,7 +8,7 @@ app.controller('SolutionController', ['$scope', '$location', 'DataShare','$trans
 
     		
     		var self = $scope;
-    		
+    		$rootScope.selectedTab = 'solution';
 			
 			ngMeta.setTag('description', "Venuelytics - Business Solutions");
 			$rootScope.title = " Venuelytics - Business Solutions";

@@ -13,6 +13,7 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
         $rootScope.businessSearch = false;
         $rootScope.searchVenue = false;
         $rootScope.showItzfun = false;
+        $rootScope.selectedTab = 'blogs';
         var urlPattern = $location.$$url;
         if(urlPattern === '/about'){
             ngMeta.setTitle("About - Venuelytics");
