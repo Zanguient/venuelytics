@@ -9,9 +9,7 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
 	$log.log('Inside Home Controller.');
     ngMeta.setTitle("Home - Venuelytics");
     var self = $scope;
-    $rootScope.showSearchBox = true;
-    $rootScope.businessSearch = false;
-    $rootScope.searchVenue = false;
+   
     $rootScope.showItzfun = false;
     self.clientImages = APP_CLIENTS.clientImages;
     $rootScope.businessRoles = APP_ARRAYS.roles;
@@ -76,54 +74,42 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
             $rootScope.venuelyticsAppUrl = APP_LINK.APPLE_STORE_VENUELYTICS;
             $rootScope.itzfunAppUrl = APP_LINK.APPLE_STORE_ITZFUN;
         }
-        $(document).ready(function () {
-            
-             $('#venuelytics-presentation').carousel({
-                interval: 3000
-            });
-            var slides =$('#venuelytics-presentation').carousel('cycle');
-            
-            $('#venuelytics-presentation').on('slid.bs.carousel', function() {
-                self.$apply(function() {
-                    self.iPhoneImage =  $('div.active').index() == 0;
-                    console.log(self.iPhoneImage);
-                });
-            });
-            var owl = $('.owl-carousel');
-            owl.owlCarousel({
-                loop:true,
-                autoplay:true,
-                autoplayTimeout:1000,
-                dots:false,
-                mouseDrag:true,
-                touchDrag:true,
-                responsive: {
-                    0:{ items: 2},
-                    480:{ items: 3},
-                    768:{ items: 4},
-                    992:{ items: 5},
-                    1200:{ items: 6},
-                },
-                margin:60,
-                nav:true
-            });
-            $( ".owl-prev").html('<img src="assets/img/arrow_left.png">');
-            $( ".owl-next").html('<img src="assets/img/arrow_right.png">');
+    
+         $('#venuelytics-presentation').carousel({
+            interval: 3000
         });
+        var slides =$('#venuelytics-presentation').carousel('cycle');
+            
+        $('#venuelytics-presentation').on('slid.bs.carousel', function() {
+            self.$apply(function() {
+                self.iPhoneImage =  $('div.active').index() == 0;
+                console.log(self.iPhoneImage);
+            });
+        });
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            loop:true,
+            autoplay:true,
+            autoplayTimeout:1000,
+            dots:false,
+            mouseDrag:true,
+            touchDrag:true,
+            responsive: {
+                0:{ items: 2},
+                480:{ items: 3},
+                768:{ items: 4},
+                992:{ items: 5},
+                1200:{ items: 6},
+            },
+            margin:60,
+            nav:true
+        });
+        $( ".owl-prev").html('<img src="assets/img/arrow_left.png">');
+        $( ".owl-next").html('<img src="assets/img/arrow_right.png">');
+        
     };
 
-    $rootScope.getSearchBySearch = function(searchVenue){
-        $location.url('/cities');
-        setTimeout(function(){
-            $rootScope.getSearchBySearch(searchVenue);
-        },3000);        
-    };
-
-    $rootScope.getserchKeyEnter = function(keyEvent,searchVenue) {
-        if (keyEvent.which === 13){
-            $rootScope.getSearchBySearch(searchVenue);
-        }
-    };
+   
     
 	self.changeLanguage = function(lang){
 			$translate.use(lang);
@@ -133,16 +119,24 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
         $rootScope.itzfunApp = false;
         $rootScope.panelShow = false;
     };
-    self.sendEmail = function(email) {
+    self.sendEmail = function(email, medium, campaign, claimBusiness) {
+
         if((email !== undefined) && (email !== '')){
-            $('#subscribeModal').modal('show');
+            $rootScope.claimBusiness = typeof(claimBusiness) === 'undefined' ? false: !!claimBusiness;
+            $rootScope.subscribeMedium = medium;
+            $rootScope.subscribeCampaign = campaign;
+            $scope.business = {};
+            $('#subscribeModalHome').modal('show');
             $('.modal-backdrop').remove();
             $rootScope.successEmail = email;
         }
     };
-    
+    self.claimBusiness = function(email) {
+
+        self.sendEmail(email, 'homepage-claim-business', '30DaysFree', true);
+    };
     self.saveBusiness = function() {
-        var business = $scope.business;
+        var business =self.business;
         var role = (typeof business.businessRole  === 'undefined') ? '' :  business.businessRole.role;
         var subscribeEmail = {
             "email": $rootScope.successEmail,
@@ -151,15 +145,22 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
             "businessName": business.businessName,
             "role": role ,
              "utmSource" : "venuelytics.com",
-             "utmCampaign" :"30DaysFree",
-             "utmMedium": "homepage-subscribe"
+             "utmCampaign" : $rootScope.subscribeCampaign,
+             "utmMedium": $rootScope.subscribeMedium
         };
+
         AjaxService.subscribe(subscribeEmail).then(function(response) {
             $rootScope.successEmail = subscribeEmail.email;
-            $('#subscribeSuccessModal').modal('show');
-            $('.modal-backdrop').remove();
-            self.subscribeEmails = '';
-            $rootScope.emailToSend = '';
+            DataShare.claimBusiness = subscribeEmail;
+            if (!$rootScope.claimBusiness) {
+                $('#subscribeSuccessModalHome').modal('show');
+                $('.modal-backdrop').remove();
+                self.subscribeEmails = '';
+                $rootScope.emailToSend = '';
+            } else {
+                $location.url("/searchBusiness?s=" + subscribeEmail.businessName);
+            }
+            
         });
     };
     self.init();

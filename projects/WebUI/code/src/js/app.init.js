@@ -35,7 +35,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         })
         .when('/businessAlreadyClaimed/:venueId', {
             templateUrl: 'business/business-already-claim.html',
-            controller: 'BusinessController'
+            controller: 'BusinessSearchController'
         })
         .when('/cities', {
             templateUrl: 'city.html',
@@ -60,6 +60,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/business', {
             templateUrl: 'business/business.html',
             controller: 'BusinessController'
+        })
+        .when('/searchBusiness', {
+            templateUrl: 'business/business-search.html',
+            controller: 'BusinessSearchController'
         })
         .when('/completeBusinessClaim/:venueId', {
             templateUrl: 'business/business-verification.html',
@@ -88,10 +92,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/terms', {
             templateUrl: 'terms-of-use.html'
         })
-        .when('/claimBusiness/:venueId', {
-            templateUrl: 'business/claim-business.html',
-            controller: 'BusinessController'
-        })
+        
         .when('/deployment/:venueId', {
             templateUrl: 'business/deployment-steps.html',
             controller: 'BusinessController'

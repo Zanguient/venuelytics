@@ -9,9 +9,6 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
     		$log.log('Inside Blog Controller.');
 
         var self = $scope;
-        $rootScope.showSearchBox = true;
-        $rootScope.businessSearch = false;
-        $rootScope.searchVenue = false;
         $rootScope.showItzfun = false;
         $rootScope.selectedTab = 'blogs';
         var urlPattern = $location.$$url;
@@ -31,7 +28,13 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
         self.blogs = APP_ARRAYS.blogs;
         self.news = [
             {date:"December 6, 2017", name:"Bloomberg",image:"bloomberg.png", title: "Fanlogic Signs Software and Marketing Partnership Agreement", url: "https://www.bloomberg.com/press-releases/2017-12-06/fanlogic-signs-software-and-marketing-partnership-agreement-with-palo-alto-peer-to-peer-consumer-concierge-leader-venuelytics", description: "Calgary, AB (FSCwire) - FanLogic Interactive Inc. (TSXV: FLGC – OTCQB: FNNGF) (“FanLogic” or the “Company”) is pleased to announce a partnership with VenueLytics, a technology firm based out of Palo Alto, California."},
-            {date:"December 6, 2017", name:"Yahoo! Finance",image:"yahoo.png", title: "Fanlogic Signs Software and Marketing Partnership Agreement", url: "https://finance.yahoo.com/news/fanlogic-signs-software-marketing-partnership-110000708.html", description: "Calgary, AB (FSCwire) - FanLogic Interactive Inc. (TSXV: FLGC – OTCQB: FNNGF) (“FanLogic” or the “Company”) is pleased to announce a partnership with VenueLytics, a technology firm based out of Palo Alto, California."}
+            {date:"December 22, 2017", name:"App Advice",image:"app-advice.png", title: "The VenueLytics Business App is an integrated venue experience and management platform", url: "https://appadvice.com/app/venuelytics-venue-management/1155767700", description: "The VenueLytics Business App is an integrated venue experience and management platform which provides venues like Restaurant, Casinos, Clubs, Bars, Lounges, Karaoke, Stadiums, Concerts, Resorts & Bowling with features that generate incremental revenue through bottle/table reservation, ordering, mobile pay, analytics, rewards and more. "},
+            {date:"December 19, 2017", name:"Capterra",image:"capterra-2018.png", title: "Best Venue Management Software!", url: "https://www.capterra.com/p/168651/VenueLytics/", description: "VenueLytics empowers businesses, in the entertainment, hospitality and service industries, to engage their customers in real-time and deliver Table & Bottle Service Reservations, Food & Drink Ordering, Private Event Bookings, Events Booking, 360 degree view of the venue, Guest Lists, Campaigns, Loyalty Rewards & other premium services across Omni-Channel & WiFI. VenueLytics provides a patent-pending deep learning technology for venues to get real-time insights & predictive recommendations."},
+            {date:"December 6, 2017", name:"Yahoo! Finance",image:"yahoo.png", title: "Fanlogic Signs Software and Marketing Partnership Agreement", url: "https://finance.yahoo.com/news/fanlogic-signs-software-marketing-partnership-110000708.html", description: "Calgary, AB (FSCwire) - FanLogic Interactive Inc. (TSXV: FLGC – OTCQB: FNNGF) (“FanLogic” or the “Company”) is pleased to announce a partnership with VenueLytics, a technology firm based out of Palo Alto, California."},
+            {date:"December 22, 2017", name:"App Advice",image:"app-advice.png", title: "ItzFun: Digital Concierge App", url: "https://appadvice.com/app/itzfun-digital-concierge-app/1035171101", description: "ItzFun! is an entertainment platform for consumers who want to know what are the happening & fun venues near them, at this very moment! Which are the casinos, clubs and lounges nearest to them, and what's the vibe at those venues right now? Users can also learn which venues offer the exclusive ItzFun! "},
+            {date:"December 27, 2017", name:"App Advice",image:"get-app.png", title: "VenueLytics Pricing, Features, Reviews & Comparison of Alternatives", url: "https://www.getapp.com/operations-management-software/a/venuelytics/", description: "VenueLytics is a cloud-based event and venue management solution designed for businesses in the hospitality, entertainment, and service industries. The software includes tools for managing real-time reservations, food and drink services, guest lists, private events, customer loyalty and marketing campaigns, WiFi access, custom apps, and more."},
+
+
         ];
         self.readMore = function(blogPost) {
           DataShare.selectedBlog = blogPost;

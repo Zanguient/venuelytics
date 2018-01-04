@@ -14,9 +14,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.bottleMinimum = [];
     self.dispatchHandler = [];
     $rootScope.venueTotalHours = [];
-    $rootScope.showSearchBox = true;
-    $rootScope.businessSearch = false;
-    $rootScope.searchVenue = false;
+    
     $rootScope.selectedTab = 'consumer';
     self.venueId = $routeParams.venueId;
     self.tabParams = $routeParams.tabParam;

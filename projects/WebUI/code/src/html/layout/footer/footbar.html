@@ -3,7 +3,7 @@
         <div class="">
             <div class="col-md-offset-1 col-md-2 col-xs-12 ms-footer-col">
                 <div class="ms-footbar-block">
-                    <h6 class="ms-footbar-title" ng-bind="'footBar.NAVIGATION' | translate">Navigation</h3>
+                    <h6 class="ms-footbar-title" ng-bind="'footBar.NAVIGATION' | translate">Navigation</h6>
                     <ul class="list-unstyled">
                         <li>
                             <a href="home">
@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-4 col-xs-12 ms-footer-col">
                 <div class="ms-footbar-block">
-                    <h6 class="ms-footbar-title" ng-bind="'footBar.GET_IN_TOUCH' | translate">Get In Touch</h3>
+                    <h6 class="ms-footbar-title" ng-bind="'footBar.GET_IN_TOUCH' | translate">Get In Touch</h6>
                     <ul class="list-unstyled">
                         <li>
                             <a href="#">
@@ -59,7 +59,7 @@
                     </ul>
                 </div>
                 <div class="ms-footbar-block">
-                    <h6 class="ms-footbar-title" ng-bind="'footBar.SOCIAL'| translate">Social Media</h3>
+                    <h6 class="ms-footbar-title" ng-bind="'footBar.SOCIAL'| translate">Social Media</h6>
                     <div class="ms-footbar-social">
                         <a href="{{facebook | translate}}" class="btn-circle btn-facebook no-p no-m" target="_new"><i class="zmdi zmdi-facebook"></i></a>
                         <a href="{{twitter | translate}}" class="btn-circle btn-twitter  no-p no-m" target="_new"><i class="zmdi zmdi-twitter"></i></a>
@@ -77,8 +77,8 @@
                             <p class="col-md-7 col-md-offset-right-5 no-p">We believe in Personalized, Real-Time Venue Experiences.</p>
                         </li>
                         <li>
-                           <input class="pl-2 control-box" placeholder="Enter your email..."><br>
-                           <button type="button" class="btn btn-white btn-raised pull-right btn-square mt-2">Get Started</button>
+                           <input class="pl-2 control-box" placeholder="Enter your email..." ng-model="subscribeEmails"><br>
+                           <button type="button" class="btn btn-white btn-raised pull-right btn-square mt-2" ng-click="sendEmail(subscribeEmails, 'footer-subscribe', '')">Get Started</button>
 
                         </li>
                         
@@ -99,6 +99,7 @@
             </div>
 
         </div>
+        <ng-include src="'partials/subscribe.html'" ></ng-include>
     </div>
 </aside>
 <div ng-show="embeddedFlag === true">
@@ -106,3 +107,4 @@
         <h6 ng-bind-html="venueFooter | to_trusted"></h6>
     </center>
 </div>
+
