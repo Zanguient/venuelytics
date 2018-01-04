@@ -75,37 +75,42 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
             $rootScope.itzfunAppUrl = APP_LINK.APPLE_STORE_ITZFUN;
         }
     
-         $('#venuelytics-presentation').carousel({
-            interval: 3000
-        });
-        var slides =$('#venuelytics-presentation').carousel('cycle');
-            
-        $('#venuelytics-presentation').on('slid.bs.carousel', function() {
-            self.$apply(function() {
-                self.iPhoneImage =  $('div.active').index() == 0;
-                console.log(self.iPhoneImage);
+        $(document).ready(function () {
+             $('#venuelytics-presentation').carousel({
+                interval: 3000
             });
+            var slides =$('#venuelytics-presentation').carousel('cycle');
+                
+            $('#venuelytics-presentation').on('slid.bs.carousel', function() {
+                self.$apply(function() {
+                    self.iPhoneImage =  $('div.active').index() == 0;
+                    console.log(self.iPhoneImage);
+                });
+            });
+
+            var owl = $('.owl-carousel');
+            owl.owlCarousel({
+                loop:true,
+                autoplay:true,
+                autoplayTimeout:1000,
+                dots:false,
+                mouseDrag:true,
+                touchDrag:true,
+                responsive: {
+                    0:{ items: 2},
+                    480:{ items: 3},
+                    768:{ items: 4},
+                    992:{ items: 5},
+                    1200:{ items: 6},
+                },
+                margin:60,
+                nav:true
+            });
+
+            $( ".owl-prev").html('<img src="assets/img/arrow_left.png">');
+            $( ".owl-next").html('<img src="assets/img/arrow_right.png">');
         });
-        var owl = $('.owl-carousel');
-        owl.owlCarousel({
-            loop:true,
-            autoplay:true,
-            autoplayTimeout:1000,
-            dots:false,
-            mouseDrag:true,
-            touchDrag:true,
-            responsive: {
-                0:{ items: 2},
-                480:{ items: 3},
-                768:{ items: 4},
-                992:{ items: 5},
-                1200:{ items: 6},
-            },
-            margin:60,
-            nav:true
-        });
-        $( ".owl-prev").html('<img src="assets/img/arrow_left.png">');
-        $( ".owl-next").html('<img src="assets/img/arrow_right.png">');
+        
         
     };
 

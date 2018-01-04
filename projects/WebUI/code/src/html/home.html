@@ -12,11 +12,11 @@
     <div class="carousel-inner overflow-visible" role="listbox" >
         <div class="item col-xs-12 p-min" ng-class="$index == 0 ? 'active' : ''" ng-repeat="item in carouselData track by $index"> 
             <div class="no-m no-p" ng-if="$index == 0"  style="position: relative;">
-                <div class="col-xs-12 text-center title_desc token italic mt-4" >
-                    <p>Personalized Services to Consumers... <br>Real-Time Insights &amp; Loyalty To Venues!</p>
+                <div class="col-xs-12 text-center title_desc token italic mt-4 p-min" >
+                    <p class="title-bold p-min'">Personalized Services to Consumers... <br>Real-Time Insights &amp; Loyalty To Venues!</p>
                 </div>
                 <img class="iphone-service img-responsive col-xs-4" src="<%=assets%>/img/iphone.png"  >
-                <div class="text-center col-md-offset-2 col-md-8 col-md-offset-right-2 mt-1">
+                <div class="text-center col-md-offset-2 col-md-8 col-md-offset-right-2 mt-4">
             
                     <div ng-if="showItzfun != true" class="img-singleline col-xs-12">
                         <a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&mt=8" target="_new"> <img class="footerApple" alt="App Store" ng-src="assets/img/apple-store.png" />
@@ -38,13 +38,16 @@
                 </center>
             </div>
             <div class="no-m no-p col-xs-12"  ng-if="$index > 0">
-                <center>
-                    <img ng-src="<%= assets %>/img/{{item.image}}" alt="VenueLytics Experience" class="img-responsive col-xs-12 no-p">
-                    <div class="custom-carousel">
-                        <h6 class="token bold" ng-bind="item.title | translate"></h6>
-                        <p  class="loose_pack pl-1 pr-1" ng-bind="item.details | translate"></p>
-                    </div>
-                </center>
+                <div class="col-xs-12">
+                        <img ng-src="<%= assets %>/img/{{item.image}}" alt="VenueLytics Experience" class="img-responsive col-xs-12 no-p">
+                </div>
+                <div class="custom-carousel text-center">
+                    
+                    <h6 class="token bold" ng-bind="item.title | translate"></h6>
+                    <p  class="loose_pack pl-1 pr-1" ng-bind="item.details | translate"></p>
+                
+                </div>
+               
                 <ng-include src="'home-apps-image.html'"/>
             </div>
         </div>
