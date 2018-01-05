@@ -10,6 +10,8 @@
 .video.player img { display: none; }
 .video.player:after { display: none; }
 
+
+
 @media (min-width: 768px) {
   h1,
   .h1 {
