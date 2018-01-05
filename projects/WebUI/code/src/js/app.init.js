@@ -95,11 +95,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         
         .when('/deployment/:venueId', {
             templateUrl: 'business/deployment-steps.html',
-            controller: 'BusinessController'
+            controller: 'BusinessSearchController'
         })
         .when('/emailVerification/:venueId', {
             templateUrl: 'business/email-verification.html',
-            controller: 'BusinessController'
+            controller: 'BusinessSearchController'
         })
         .when('/confirm/:cityName/:venueId', {
             templateUrl: 'bottle-service/bottle-reservation.html',

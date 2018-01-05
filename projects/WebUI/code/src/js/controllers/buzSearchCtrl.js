@@ -127,7 +127,7 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
             self.selectedVenueAddress = selectedVenue.address;
             
             self.claimBusiness = true;
-            $rootScope.title = 'Venuelytics Claim Your Business - '+selectedVenue.venueName;
+            $rootScope.title = 'Venuelytics Claim Your Business Page- '+selectedVenue.venueName;
             ngMeta.setTitle($rootScope.title);
 
             self.businessSubmit(selectedVenue, DataShare.claimBusiness);
@@ -158,8 +158,8 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
         self.businessSubmit = function(selectedVenue, businessClaim) {
             var businessObject = {
                 "business.contactName": businessClaim.name,
-                "business.contactEmail": businessClaim.emailId,
-                "business.contactPhone": businessClaim.phone,
+                "business.contactEmail": businessClaim.email,
+                "business.contactPhone": businessClaim.mobile,
                 "business.contactRole": businessClaim.role
             };
 
