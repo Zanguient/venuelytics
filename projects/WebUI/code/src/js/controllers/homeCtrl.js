@@ -27,8 +27,8 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare','$t
         
         {image: '', title: '', details: ''},
         //{image: '7.jpg', title: 'home.CUSTOMER_SERVICE', details: 'home.EXPERIENCE'},
-        {image: 'screen4.jpg', title: 'home.VIP_PERSONALLY', details: 'home.CONSISTENTLY_REWARD'},
-        {image: '6(1).jpg', title: 'home.REAL_TIME_MOBILE', details: 'home.IMMEDIATE_WIFI_ENABLED'}
+       // {image: 'screen4.jpg', title: 'home.VIP_PERSONALLY', details: 'home.CONSISTENTLY_REWARD'},
+        //{image: '6(1).jpg', title: 'home.REAL_TIME_MOBILE', details: 'home.IMMEDIATE_WIFI_ENABLED'}
 
     ];
     $scope.$on('$locationChangeStart', function(event) {
