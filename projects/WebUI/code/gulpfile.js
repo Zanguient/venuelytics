@@ -229,7 +229,7 @@ gulp.task('js:main', function() {
     return gulp.src(['src/js/*.js','!src/js/configurator.js'])
        // .pipe(gulpi//false, concat('configurator.min.js'))) //config.compress
         .pipe(concat('app_main.js'))  
-       // .pipe(gulpif(config.compress, uglify()))   
+        .pipe(gulpif(config.compress, uglify()))   
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.js))
         //.pipe(connect.reload());
@@ -376,7 +376,7 @@ gulp.task('dist:pre', function(cb) {
 });
 
 gulp.task('dist',['dist:pre'], function(cb) {
-    config.environment = 'dev';
+    config.environment = 'prod';
     config.compress = true;
     return gulp.src('dist/index.html')
      .pipe(cachebust.references())

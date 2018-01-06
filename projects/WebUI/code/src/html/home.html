@@ -167,13 +167,13 @@
                         <input id="businessName" name="businessName" type="text" value="BusinessName" class="form-control" ng-model="business.businessName" required>
                     </div>
                     <div class="col-md-12 form-group label-floating is-empty no-p" >
-                        <label class="control-label" for="roldId" ng-bind="'business.ROLE_OPTIONAL' | translate">Role (Optional)</label>
-                        <select id="roldId" name="roldId" class="btn dropdown-toggle form-control"  ng-model="business.businessRole" ng-options="r.role for r in businessRoles">
+                        <label class="control-label" for="roldId" ng-bind="'business.ROLE_OPTIONAL' | translate">Role</label>
+                        <select id="roldId" name="roldId" class="select form-control" required="required" ng-model="business.businessRole" ng-options="r.role for r in businessRoles">
                         </select>
                     </div>
                     <div class="col-md-12 form-group label-floating is-empty no-p" >
-                        <label class="control-label" for="phoneNo" ng-bind="'business.PHONE_OPTIONAL' | translate">Phone number (Optional)</label>
-                        <input id="phoneNo" name="phoneNo" type="text" class="form-control" masked="" data-inputmask="'mask': '(999) 999-9999'" ng-model="business.phoneNumber" data-parsley-trigger="change">
+                        <label class="control-label" for="phoneNo" ng-bind="'business.PHONE_OPTIONAL' | translate">Phone number</label>
+                        <input id="phoneNo" name="phoneNo" type="text" class="form-control" required="required" masked="" data-inputmask="'mask': '(999) 999-9999'" ng-model="business.phoneNumber" data-parsley-trigger="change">
                     </div>
                 </div>
                 <div class="modal-footer">

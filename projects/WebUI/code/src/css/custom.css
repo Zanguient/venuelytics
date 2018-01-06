@@ -1736,6 +1736,10 @@ a.btn.disabled,fieldset[disabled] a.btn {
 
 @media only screen and (max-width : 768px) {
 
+.form-group label.control-label {
+    margin: 24px 0 0 0 !important;
+   }
+
   .iphone-service {
     width: 60%;
     margin-left: 4em;
@@ -2722,7 +2726,7 @@ table.fc-border-separate {
 }
 
 .service-btn {
-
+  padding: 5px;
 }
 .service-btn:hover {
   cursor: pointer;

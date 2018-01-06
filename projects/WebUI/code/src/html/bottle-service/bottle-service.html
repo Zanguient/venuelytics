@@ -241,21 +241,21 @@
     <center>
         <h3 class="color-success fontLight">{{'reservation.VIP_SERVICE_POLICY' | translate}}</h3>
     </center>
-    <p>{{bottleVIPPolicy}}</p>
+    <p class="title_desc">{{bottleVIPPolicy}}</p>
 </div>
 
 <div class="col-xs-12" ng-if="bottleMinimumRequirement">
     <center>
         <h3 class="color-success fontLight">{{"reservation.MIN_REQ" | translate}}</h3>
     </center>
-     <p>{{bottleMinimumRequirement}}</p>
+     <p class="title_desc">{{bottleMinimumRequirement}}</p>
 </div>
 
 <div class="col-xs-12" ng-if="dressCode">
     <center>
         <h3 class="color-success fontLight">{{'reservation.DRESS_CODE' | translate}}</h3>
     </center>
-    <p>{{dressCode}}</p>
+    <p class="title_desc">{{dressCode}}</p>
 </div>
 
 
@@ -267,7 +267,7 @@
                 <h3 class="modal-title" id="myModalLabel6">{{'bottleServiceTab.RESERVED' | translate}}</h3>
             </div>
             <div class="modal-body ">
-                <p>{{'bottleServiceTab.ALREADY_SELECTED' | translate}}</p>
+                <p class="loose_pack">{{'bottleServiceTab.ALREADY_SELECTED' | translate}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" ng-click="closeReservedModal()" data-backdrop="false">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
@@ -285,7 +285,7 @@
                 <h3 class="modal-title" id="myModalLabel6">Table Selected</h3>
             </div>
             <div class="modal-body">
-                <p>{{'reservation.TOTAL_GUEST_SELECTED' | translate}}</p>
+                <p class="title_desc">{{'reservation.TOTAL_GUEST_SELECTED' | translate}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" ng-click="closeMoreTableModal()" data-backdrop="false">Close</button>
