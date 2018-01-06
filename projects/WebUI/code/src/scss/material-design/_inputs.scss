@@ -117,6 +117,7 @@
       // static, focused, or autofill floating labels
       &.label-static,
       &.label-floating.is-focused,
+      &.label-floating.active,
       &.label-floating:not(.is-empty) {
         @include label-static($label-top, $static-font-size, $static-line-height);
       }

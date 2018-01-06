@@ -8,7 +8,6 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
 
 
             var self = $scope;
-            self.partyDateIsFocused = 'is-focused';
             self.init = function() {
                 self.venueID = $routeParams.venueId;
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
@@ -58,19 +57,13 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                 });
             };
 
-            if(DataShare.partyFocus !== '') {
-              self.partyFocus = DataShare.partyFocus;
-            }
-
             self.partyHallDescription = function(value) {
                 $rootScope.partyDescription = value;
             };
 
             self.tabClear = function() {
                 DataShare.partyServiceData = {};
-                DataShare.partyFocus = '';
                 self.party = {};
-                self.partyFocus = '';
                 $rootScope.serviceName = '';
                 self.party.orderDate = moment().format('YYYY-MM-DD');
             };
@@ -83,17 +76,17 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueId, 'PartyHall').then(function(response) {
                     self.eventTypes = response.data;
-                    if(DataShare.partyFocus !== '') {
-                      var selectedType;
-                      angular.forEach(self.eventTypes, function(tmpType) {
-                        if(tmpType.id === DataShare.partyServiceData.partyEventType.id) {
-                          selectedType = tmpType;
-                        }
-                      });
-                      if(selectedType) {
-                        self.party.partyEventType = selectedType;
-                      }
+                    
+                  var selectedType;
+                  angular.forEach(self.eventTypes, function(tmpType) {
+                    if(tmpType.id === DataShare.partyServiceData.partyEventType.id) {
+                      selectedType = tmpType;
                     }
+                  });
+                  if(selectedType) {
+                    self.party.partyEventType = selectedType;
+                  }
+                    
                 });
             };
 
@@ -134,7 +127,6 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
 
             self.confirmPartyPackage = function(selectedParty) {
                 $rootScope.serviceTabClear = true;
-                DataShare.partyFocus = 'is-focused';
                
                 
                 var dateValue = moment(self.party.orderDate, 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss");

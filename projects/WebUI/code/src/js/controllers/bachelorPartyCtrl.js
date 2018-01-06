@@ -6,7 +6,7 @@
 app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','ngMeta', 'VenueService',
     function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope,ngMeta, venueService) {
             var self = $scope;
-            self.bachelorDateIsFocused = 'is-focused';
+            
             self.init = function() {
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
                 ngMeta.setTag('description', self.venueDetails.description + " Bachelor Party");
@@ -54,19 +54,14 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
                 });
             };
 
-            if(DataShare.partyFocus !== '') {
-              self.bachelorPartyFocus = DataShare.partyFocus;
-            }
-
             self.partyHallDescription = function(value) {
                 $rootScope.BacheolorDescription = value;
             };
 
             self.tabClear = function() {
                 DataShare.partyServiceData = {};
-                DataShare.partyFocus = '';
+
                 self.bachelor = {};
-                self.bachelorPartyFocus = '';
                 $rootScope.serviceName = '';
                 self.bachelor.orderDate = moment().format('YYYY-MM-DD');
             };
@@ -79,17 +74,17 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueId, 'PartyHall').then(function(response) {
                     self.eventTypes = response.data;
-                    if(DataShare.partyFocus !== '') {
-                      var selectedType;
-                      angular.forEach(self.eventTypes, function(tmpType) {
-                        if(tmpType.id === DataShare.partyServiceData.partyEventType.id) {
-                          selectedType = tmpType;
-                        }
-                      });
-                      if(selectedType) {
-                        self.bachelor.partyEventType = selectedType;
-                      }
+                    
+                  var selectedType;
+                  angular.forEach(self.eventTypes, function(tmpType) {
+                    if(tmpType.id === DataShare.partyServiceData.partyEventType.id) {
+                      selectedType = tmpType;
                     }
+                  });
+                  if(selectedType) {
+                    self.bachelor.partyEventType = selectedType;
+                  }
+                    
                 });
             };
 
@@ -131,7 +126,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
 
             self.confirmPartyPackage = function(selectedBachelorParty) {
                 $rootScope.serviceTabClear = true;
-                DataShare.partyFocus = 'is-focused';
+              
                 var date = new Date(self.bachelor.orderDate);
                 var newDate = date.toISOString();
                 var parsedend = moment(newDate).format("MM-DD-YYYY");

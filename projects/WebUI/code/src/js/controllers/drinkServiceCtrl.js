@@ -76,10 +76,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
                 DataShare.selectedDrinks = '';
             };
 
-            if(DataShare.drinkFocused !== '') {
-              self.isDrinkFocused = DataShare.drinkFocused;
-            }
-
             self.menuUrlSelection = function(menu) {
                 var data = menu.split(".");
                 var splitLength = data.length;
@@ -165,7 +161,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.drinkSave = function() {
-                DataShare.drinkFocused = 'is-focused';
                 $rootScope.serviceTabClear = true;
                 var parsedend = moment().format("MM-DD-YYYY");
                 var date = new Date(moment(parsedend,'MM-DD-YYYY').format());

@@ -20,11 +20,8 @@ app.service('DataShare', function() {
   this.selectedDateForBottle = '';
   this.tableSelection = '';
   this.tab = '';
-  this.focused = '';
-  this.privateEventFocused = '';
+ 
   this.guestFocus = '';
-  this.partyFocus = '';
-  this.drinkFocused = '';
   this.userselectedTables = '';
   this.foodService = [];
   this.drinks = [];

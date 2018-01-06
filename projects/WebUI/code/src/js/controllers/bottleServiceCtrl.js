@@ -19,7 +19,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             self.moreCapacity = false;
             self.sum = 0;
             self.price = 0;
-            self.bottleDateIsFocused = 'is-focused';
             self.availableDays = [];
             function  noWeekendsOrHolidays(iDate) {
                 if (typeof(self.availableDays) === 'undefined' || self.availableDays.length === 0) {
@@ -141,7 +140,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 DataShare.bottleServiceData = {};
                 DataShare.tableSelection = '';
                 DataShare.selectBottle = '';
-                self.isFocused = '';
                 self.bottle = {};
                 $rootScope.serviceName = '';
                 self.bottle.requestedDate = moment().format('YYYY-MM-DD');
@@ -164,9 +162,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 arrayObj.splice(index, 1);
             };
 
-            if(DataShare.focused !== '') {
-              self.isFocused = DataShare.focused;
-            }
                         
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueId, 'Bottle').then(function(response) {
@@ -534,7 +529,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
         };
 
             self.confirmBottleService = function() {
-                DataShare.focused = 'is-focused';
                 DataShare.editBottle = 'true';
                 $rootScope.serviceTabClear = true;
                 

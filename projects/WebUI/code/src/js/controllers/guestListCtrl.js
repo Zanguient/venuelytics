@@ -44,13 +44,8 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
                     }, 600);
             };
 
-            if(DataShare.guestFocus !== '') {
-              self.guestFocus = DataShare.guestFocus;
-            }
 
             self.tabClear = function() {
-                DataShare.guestFocus = '';
-                self.guestFocus = '';
                 DataShare.guestListData = {};
                 $rootScope.serviceName = '';
                 self.guest = {};
@@ -73,19 +68,18 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueId, 'GuestList').then(function(response) {
                     self.eventTypes = response.data;
-                    if(DataShare.guestFocus !== '') {
-                        
-                        var selectedType;
-                        angular.forEach(self.eventTypes, function(tmpType) {
-                            if(tmpType.id === DataShare.guestListData.guestEvent.id) {
-                                selectedType = tmpType;
-                            }
-                        });
-                        if(selectedType) {
-                            self.guest.guestEvent = selectedType;
-                            $log.info("Inside datashare", angular.toJson(self.guest.guestEvent));
+                      
+                    var selectedType;
+                    angular.forEach(self.eventTypes, function(tmpType) {
+                        if(tmpType.id === DataShare.guestListData.guestEvent.id) {
+                            selectedType = tmpType;
                         }
+                    });
+                    if(selectedType) {
+                        self.guest.guestEvent = selectedType;
+                        $log.info("Inside datashare", angular.toJson(self.guest.guestEvent));
                     }
+                    
                 });
             };
 
@@ -106,8 +100,7 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
                 guest.guestEvent = guest.guestEvent === null ? '' : guest.guestEvent === undefined ? '': guest.guestEvent;
                 
                 DataShare.tab = 'G';
-                DataShare.guestFocus = 'is-focused';
-
+               
                 $rootScope.serviceTabClear = true;
 
                 var name = guest.firstName + ' ' + guest.lastName;

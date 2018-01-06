@@ -8,7 +8,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
 
 
             var self = $scope;
-            self.privateDateIsFocused = 'is-focused';
+            
             self.init = function() {
                 self.getReservationTime = APP_ARRAYS.time;
                 self.venueID = self.venueId = $routeParams.venueId;
@@ -74,7 +74,6 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
 
             self.tabClear = function() {
                 DataShare.privateEventData = {};
-                DataShare.privateEventFocused = '';
                 $rootScope.serviceName = '';
                 self.private = {};
                 self.private.orderDate = moment().format('YYYY-MM-DD');
@@ -88,7 +87,6 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
             self.createPrivateEvent = function(value) {
                 $rootScope.serviceTabClear = true;
                 DataShare.tab = 'P';
-                DataShare.privateEventFocused = 'is-focused';
                
                 var selectedDateTime = moment(self.private.orderDate, 'YYYY-MM-DD').format("MM-DD-YYYY");
                 
@@ -192,27 +190,24 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
                 }
             };
 
-            if(DataShare.privateEventFocused !== '') {
-              $log.info("insdie focused");
-              self.privateEventFocused = DataShare.privateEventFocused;
-            }
+            
 
             self.getEventType = function() {
                 AjaxService.getTypeOfEvents(self.venueId, 'BanquetHall').then(function(response) {
                     self.eventTypes = response.data;
-                    if(DataShare.privateEventFocused !== '') {
+                    
                         
-                        var selectedType;
-                        angular.forEach(self.eventTypes, function(tmpType) {
-                            if(tmpType.id === DataShare.privateEventData.privateEvent.id) {
-                                selectedType = tmpType;
-                            }
-                        });
-                        if(selectedType) {
-                            self.private.privateEvent = selectedType;
-                            $log.info("Inside datashare", angular.toJson(self.private.privateEvent));
+                    var selectedType;
+                    angular.forEach(self.eventTypes, function(tmpType) {
+                        if(tmpType.id === DataShare.privateEventData.privateEvent.id) {
+                            selectedType = tmpType;
                         }
+                    });
+                    if(selectedType) {
+                        self.private.privateEvent = selectedType;
+                        $log.info("Inside datashare", angular.toJson(self.private.privateEvent));
                     }
+                    
                 });
             };
 

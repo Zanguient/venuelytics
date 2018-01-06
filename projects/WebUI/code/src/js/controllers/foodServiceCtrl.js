@@ -168,7 +168,6 @@ app.controller('foodServiceController', ['$log', '$scope', '$location', 'DataSha
             };
 
             self.foodSave = function() {
-                DataShare.foodFocused = 'is-focused';
                 $rootScope.serviceTabClear = true;
                 var parsedend = moment().format("MM-DD-YYYY");
                 var date = new Date(moment(parsedend,'MM-DD-YYYY').format());
