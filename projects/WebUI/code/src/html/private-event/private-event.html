@@ -95,56 +95,30 @@
     </fieldset>
 </form>
 <hr>
-<div class="col-md-12 form-group">
-<h4>{{"reservation.PRIVATE_DETAILS" | translate}}</h4>
-<div class="container container-full private-details" ng-cloak>
-    <div class="ms-paper">
-        <div>
-            <!-- For Horizontal tabs -->
-            <div>
-                <div>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" id="clubs" class="tab-pane fade active in">
-                            <div>
-                                <div>
-                                    <div>
-                                        <div
-                                            class="col-md-4 col-xs-6 masonry-item wow fadeInUp animation-delay-2"
-                                            ng-repeat="privateEvent in privateEventValueArray"
-                                            ng-if="privateEvent.imageUrls[0].smallUrl">
-                                            <article class="card card-info mb-4 wow materialUp animation-delay-5">
-                                                <figure class="ms-thumbnail ms-thumbnail-left">
-                                                    <img ng-src="{{privateEvent.imageUrls[0].smallUrl}}" alt="private-image"
-                                                        class="img-responsive center-block">
-                                                </figure>
-                                                <div class="card-block color-dark">
-                                                    <h2 class="text-primary mt0 mb0">
-                                                        {{privateEvent.name
-                                                            | limitTo: 20 }}{{privateEvent.name.length > 20 ? '...'
-                                                            :''}}
-                                                    </h2>
-                                                    <p ng-if="privateEvent.servingSize != 0">{{privateEvent.servingSize}} people</p>
-                                                    <p ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
-                                                    <p class="mb-1">{{privateEvent.description | limitTo: 120
-                                                        }}{{privateEvent.description.length > 120 ? '...' :''}}
-                                                    <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#privateDescriptionModal" ng-click="privateEventDescription(privateEvent.description)" ng-if="privateEvent.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
-                                                    
-                                                    <button type="submit" id="privateEnquire" class="inverse btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" ng-if="privateEvent.reserve == false">{{"reservation.ENQUIRE" | translate}}</button>
-                                                    <span class="pull-right text-danger" ng-if="privateEvent.reserve == true">{{"reservation.RESERVED" | translate}}</span>
-                                                    </p>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="col-xs-12">
+    <h2 class="pt-2 pb-2">{{"reservation.PRIVATE_DETAILS" | translate}}</h2>
+       
+    <div class="col-md-4 col-xs-12 masonry-item wow fadeInUp animation-delay-2" ng-repeat="privateEvent in privateEventValueArray"
+        ng-if="privateEvent.imageUrls[0].smallUrl">
+        <article class="card border_clouds mb-4 wow materialUp animation-delay-5">
+            <figure class="ms-thumbnail ms-thumbnail-left">
+                <img ng-src="{{privateEvent.imageUrls[0].smallUrl}}" alt="{{privateEvent.name}}"  class="img-responsive center-block">
+            </figure>
+            <div class="card-block pt-2 pb-4 no-mt">
+                <a class="mt-1 mb-1 col-xs-12 no-p h6 block-ellipsis-1" href="#">
+                    {{privateEvent.name }}
+                </a>
+                <p class="venueDescription col-xs-12 no-p" ng-if="privateEvent.servingSize != 0">{{privateEvent.servingSize}} people</p>
+                <p class="venueDescription col-xs-12 no-p" ng-if="privateEvent.size != 0">{{privateEvent.size}} sq.ft</p>
+                <p class="venueDescription block-ellipsis-3">{{privateEvent.description }}</p>
+                
+                <a class="more_link"  ng-click="privateEventDescription(privateEvent.description)" data-toggle="modal" data-target="#privateDescriptionModal" ng-if="privateEvent.description.length > 60">{{"reservation.READ_MORE" | translate}}</a>
+                
+                <button type="submit" id="privateEnquire" class="inverse btn btn-sm btn-success  btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="createPrivateEvent(privateEvent)" ng-if="privateEvent.reserve == false">{{"reservation.ENQUIRE" | translate}}</button>
+                <span class="pull-right text-danger" ng-if="privateEvent.reserve == true">{{"reservation.RESERVED" | translate}}</span>
+                
+        </article>
     </div>
-</div>
 </div>
 </div>
 </div>

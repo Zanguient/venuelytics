@@ -52,7 +52,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
             };
 
             self.venueInfo = function() {
-                self.heading = venueService.getVenueInfo(self.venueId, 'table.ui.reservation.heading') || $translate.instance('TABLE_SERVICE_TIMEOUT');    
+                self.heading = venueService.getVenueInfo(self.venueId, 'table.ui.reservation.heading') /*|| $translate.instance('TABLE_SERVICE_TIMEOUT')*/;    
                 self.description = venueService.getVenueInfo(self.venueId, 'table.ui.reservation.description') ;
                 //self.description =
             };

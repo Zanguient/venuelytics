@@ -198,11 +198,11 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
                     
                         
                     var selectedType;
-                    angular.forEach(self.eventTypes, function(tmpType) {
+                    /*angular.forEach(self.eventTypes, function(tmpType) {
                         if(tmpType.id === DataShare.privateEventData.privateEvent.id) {
                             selectedType = tmpType;
                         }
-                    });
+                    });*/
                     if(selectedType) {
                         self.private.privateEvent = selectedType;
                         $log.info("Inside datashare", angular.toJson(self.private.privateEvent));
