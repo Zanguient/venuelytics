@@ -88,7 +88,7 @@ app.controller('VenueController', ['$rootScope','$log', '$scope', '$http', '$loc
                 self.selectedCityName = venue.city;
                 DataShare.selectedVenue = venue;
                 DataShare.venueNumber = venue.id;
-        			  $location.url('/cities/' + self.selectedCityName + '/' + venue.id);
+        			  $location.url('/cities/' + self.selectedCityName + '/' + venue.id +'/VIP');
         		};
 
             self.selectedServices = function(venue, serviceType) {
