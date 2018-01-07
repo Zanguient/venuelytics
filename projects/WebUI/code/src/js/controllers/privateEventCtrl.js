@@ -8,8 +8,9 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
 
 
             var self = $scope;
-            
+            self.private = {};
             self.init = function() {
+                
                 self.getReservationTime = APP_ARRAYS.time;
                 self.venueID = self.venueId = $routeParams.venueId;
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
