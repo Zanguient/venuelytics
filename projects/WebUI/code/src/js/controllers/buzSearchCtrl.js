@@ -165,9 +165,10 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
                 $('.modal-backdrop').remove();
                 return;
             }
+            self.businessSubmit(selectedVenue, businessClaim);
         };
         self.businessSubmit = function(selectedVenue, businessClaim) {
-            
+
             var businessObject = {
                 "business.contactName": businessClaim.name,
                 "business.contactEmail": businessClaim.email,
