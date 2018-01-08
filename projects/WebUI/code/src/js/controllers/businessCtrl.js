@@ -55,7 +55,10 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
         self.claimBusiness = function(email) {
             self.sendEmail(email, 'business-claim-business', '30DaysFree', true);
         };
+        
+        
         self.saveBusiness = function() {
+            
             var business = $scope.business;
             var role = (typeof business.businessRole  === 'undefined') ? '' :  business.businessRole.role;
             var subscribeEmail = {

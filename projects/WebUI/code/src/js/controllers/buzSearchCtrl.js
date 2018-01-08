@@ -19,6 +19,9 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
         utmPayload.referenceId = $location.search().reference_id;
         utmPayload.utmTerm = "VenueLytics";
         
+        function _UDF(o) {
+            return typeof(o) === 'undefined' || o.length === 0 ;
+        }
 
         self.init = function() {
 
@@ -130,7 +133,7 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
             $rootScope.title = 'Venuelytics Claim Your Business Page- '+selectedVenue.venueName;
             ngMeta.setTitle($rootScope.title);
 
-            self.businessSubmit(selectedVenue, DataShare.claimBusiness);
+            self.businessSubmitWithCheck(selectedVenue, DataShare.claimBusiness);
         };
 
         self.cancel = function() {
@@ -155,7 +158,16 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
             }
         };
 
+        self.businessSubmitWithCheck = function(selectedVenue, businessClaim) {
+            self.currentSelectedVenue = selectedVenue;
+            if (_UDF(businessClaim.name) || _UDF(businessClaim.email) || _UDF(businessClaim.mobile) || _UDF(businessClaim.role)) {
+                $('#subscribeModalSearch').modal('show');
+                $('.modal-backdrop').remove();
+                return;
+            }
+        };
         self.businessSubmit = function(selectedVenue, businessClaim) {
+            
             var businessObject = {
                 "business.contactName": businessClaim.name,
                 "business.contactEmail": businessClaim.email,
