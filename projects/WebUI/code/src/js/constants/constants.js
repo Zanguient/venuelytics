@@ -147,6 +147,9 @@ app
       "10-Must-Visit-Nightclubs-in-Las-Vegas":"blogs/Las-vegas.html",
       "Nyeelah-the-face-of-New-York-Nightlife":"blogs/nyeelah-blog.html",
       "7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online":"blogs/7-ways-nightlife-online.html",
+      "Las-Vegas-Nightlife":"blogs/Las-Vegas-Nightlife-bottle.html",
+      "New-York-Nightlife":"blogs/New-York-Nightlife-bottle.html",
+      "New-Orleans-Nightlife":"blogs/New-Orleans-Nightlife-bottle.html",
     },
     'blogPostsImages':{
       "What-Is-Bottle-Service-and-Facts-You-Should-Know":"assets/img/blog/blog-2.jpg",
@@ -194,6 +197,10 @@ app
               {"title":"10 Must Visit Nightclubs in Las Vegas", "image":"assets/img/blog/Vegas_xs_nightclub.jpg", "description":"Nightlife industry is growing and always glowing. Along with the growing nightlife venues, the party trends are also changing. The night clubs nowadays must know how to market their services to right the audience. We agree with the increasing number of nightclubs in the country, but the charm of certain nightclubs never fads. We are here today with yet another exciting blog that shows the best ten must-visit nightclubs in the USA", "link":"10-Must-Visit-Nightclubs-in-Las-Vegas"},
                {"title":"Nyeelah, the face of New York Nightlife.", "image":"assets/img/blog/nyeelah_blogs.jpg", "description":"Hello Nightlife freaks, recently we interviewed a nightlife promoter from New York City to understand the nightlife scene in NYC  and something more. We interviewed Nyeelah, who is also known as the Face of New York nightlife. ", "link":"Nyeelah-the-face-of-New-York-Nightlife"},
                {"title":"7 Ways to Imporve Nightlife Online", "image":"assets/img/blog/blog-7ways.gif", "description":"Promoting an existing nightclub or a bar and growing the business can be a more challenging these days. As a new business, It is even more difficult to pass the six months mark.  Statistics show that 75% of new businesses fail in the first six months.", "link":"7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online"},
+               {"title":"Las Vegas Nightlife and Bottle Service", "image":"assets/img/blog/las_vegas_bottle_service.png", "description":"Nobody really knows what happens in Vegas because everything that happens there, stays there.  But rumor has it that Las Vegas is the Disneyland for grownups.  Again, that is just a rumor!  You have to experience that on your own.", "link":"Las-Vegas-Nightlife"},
+               {"title":"New York Nightlife and Bottle Service", "image":"assets/img/blog/new_york_nightlife_bottle.png", "description":"The Big Apple is best known for its nightlife and dining experience.  It offers entertainment and nightlife venues that city barely sleeps.  New York City is also home to many celebs, DJs, music artists, etc ", "link":"New-York-Nightlife"},
+                {"title":"New Orleans Nightlife and Bottle Service", "image":"assets/img/blog/new_orleans_nightlife_bottle.png", "description":"If you are looking for a unique Jazz infuse cultural experience than you must visit New Orleans. In many ways it is an authentic historical city with an amazing charming nightlife and diverse culture. ", "link":"New-Orleans-Nightlife"},
+
               ],
     
     'nightlife': [{"title":"7 Mind Blowing Nightlife Cities in the United States", "image":"assets/img/blog/blog-1.jpg", "description":"Who doesn't like to Party? And who doesn't like Casinos, Clubs, and Live Music? We count down to Fridays just cut lose and have a great time with friends. Regardless of the city you live in, when it comes to the night life, we may have many choices and sometimes it is hard to choose. Well, let us all say TGIF and check out some cities with awesome nightlife in the USA that will make you say 'WOW.'", "link":"nightlife"},
