@@ -23,7 +23,7 @@
  		var loyalityProperties = ['name', 'venueNumber','rewardText', 'condition','displayAttributes', 'conditionType'];
 
  		var profileProperties = ['email', 'userName', 'phone', 'password','newpassword','profileImage', 'profileImageThumbnail'];
- 		var agencyProperties = ['name', 'budget', 'budgetType', 'phone', 'mobile', 'address', 'city','country','zip',"enabled"];
+ 		var agencyProperties = ['name', 'budget', 'budgetType', 'phone', 'mobile', 'address', 'city','country','zip',"enabled", 'accountNumber', 'groupNumber', 'region'];
  		var productProperties = ['id','venueNumber','name','description', 'unit', 'size', 'imageUrls', 'servingSize',
  			'productType', 'BanquetHall','category','brand','enabled','price'];
  		var venueMapProperties = ['id','type','section','imageMap','days','updatedAt','elements','imageUrls'];

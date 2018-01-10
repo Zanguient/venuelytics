@@ -22,6 +22,20 @@
                   <label class="control-label">Manager Name</label>
                   <input type="text" name="managerName" class="form-control" ng-model="data.managerName" readOnly = "true"/>
                </div>
+               <div class="row" ng-if="agencyType == 'STORE'">
+                  <div class="form-group col-sm-4">
+                     <label class="control-label nowrap">Account Number</label>
+                     <input type="text"  name="accNumber" class="form-control" ng-model="data.accountNumber"/>
+                  </div>
+                  <div class="form-group col-sm-4">
+                     <label class="control-label nowrap">Group Number</label>
+                     <input type="text" name="groupNumber" class="form-control" ng-model="data.groupNumber"/>
+                  </div>
+                  <div class="form-group col-sm-4">
+                     <label class="control-label nowrap">Region</label>
+                     <input type="text" name="region" class="form-control" ng-model="data.region"/>
+                  </div>
+               </div>
                <div class="row">
                   <div class="form-group col-sm-6">
                      <label class="control-label nowrap">Phone</label>
@@ -32,6 +46,7 @@
                      <input type="text" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" class="form-control" ng-model="data.mobile"/>
                   </div>
                </div>
+
                <div class="row">
                   <div class="form-group col-sm-6">
                      <label class="control-label nowrap">Address</label>
@@ -52,6 +67,7 @@
                      <input type="text" name="zip" required="required" class="form-control" ng-model="data.zip"/>
                   </div>
                </div>
+               
                <div class="row">
                   <div class="form-group col-sm-6">
                      <label class="control-label nowrap">Budget Type</label>
