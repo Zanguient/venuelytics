@@ -23,7 +23,9 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
       if (!$.fn.dataTable) return;
       var columnDefinitions = [
         { "sWidth": "20%", aTargets: [0,8]},
-        { "sWidth": "10%", aTargets: [1,4,5,6,7]},
+        { "sWidth": "15%", aTargets: [4,8]},
+        
+        { "sWidth": "10%", aTargets: [1,5,6,7]},
         { "sWidth": "5%",  aTargets: [2,3]},
         {
           "targets": [8],
