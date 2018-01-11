@@ -54,7 +54,10 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
             from = endDate.split("-");
             $scope.data.endDate = new Date(from[0], from[1] - 1, from[2]);
 
+            $scope.hours = Math.floor($scope.data.durationInMinutes / 60);
+            $scope.minutes = Math.floor($scope.data.durationInMinutes % 60);
 
+            
             var t = data.eventTime.split(":");
             var h = parseInt(t[0]);
             var m = parseInt(t[1]);
@@ -104,13 +107,14 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
    
     $scope.update = function(isValid, form, data) {
 
-        if (!isValid) {
+        if (!isValid || !$("#eventInfo").parsley().isValid()) {
             return;
         }
 
         data.venueNumber = $stateParams.venueNumber;
         var t = $scope.eventDisplayTime;
         data.eventTime = t.getHours() +":" + t.getMinutes();
+        data.durationInMinutes = parseInt($scope.hours)*60 + parseInt($scope.minutes);
     	var payload = RestServiceFactory.cleansePayload('VenueEventService', data);
         var target = {id: data.id};
         if ($stateParams.id === 'new'){

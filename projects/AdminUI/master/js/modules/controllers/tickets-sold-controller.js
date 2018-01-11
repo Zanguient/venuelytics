@@ -75,7 +75,7 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
         table.clear();
         data.map(function(ticketSold) {
           table.row.add([ticketSold.eventName, ticketSold.ticketType, ticketSold.quantity, ticketSold.cost,
-           moment(ticketSold.soldDate).format('MMM DD, YYYY'), moment(ticketSold.eventDate).format('MMM DD, YYYY'), 
+           moment(ticketSold.soldDate).format('MMM DD, YYYY HH:mm a'), moment(ticketSold.eventDate).format('MMM DD, YYYY'), 
            ticketSold.orderNumber, ticketSold.contactName, ticketSold]);
         });
         table.draw();
