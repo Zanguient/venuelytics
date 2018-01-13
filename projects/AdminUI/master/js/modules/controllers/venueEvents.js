@@ -13,11 +13,7 @@ App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout
   var target = {};
 
   $scope.init = function() {
-    if (typeof($stateParams.id) != 'undefined' ) {
-      $scope.getEvents($stateParams.id);
-    } else {
       $scope.getEvents(contextService.userVenues.selectedVenueNumber);
-    }
   };
   
   
@@ -42,11 +38,7 @@ App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout
 	};
 
   $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
-    if (typeof($stateParams.id) !== 'undefined' ) {
-      $scope.getEvents($stateParams.id);
-    } else {
       $scope.getEvents(contextService.userVenues.selectedVenueNumber);
-    }
   });
 
   $scope.init();

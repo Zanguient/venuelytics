@@ -194,8 +194,8 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/eventManagement',
         title: 'Manage Venue Event',
         templateUrl: basepath('venue-events/venue-events.html'),
-        controller: 'VenueEventController',
-        data: { authorizedRoles: [USER_ROLES.admin]},
+        controller: 'VenueEventsController',
+        data: { authorizedRoles: [USER_ROLES.admin, 51]},
         resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
     })
      .state('app.addVenueStore', {

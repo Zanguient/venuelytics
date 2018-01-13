@@ -26,7 +26,9 @@ App.directive('eventTile', function() {
   		};	
 
   		$scope.UTC = function(date) {
-
+  			if (typeof(date) === 'undefined') {
+  				return new Date();
+  			}
   			var startDate = date.substring(0,10);
             var from = startDate.split("-");
             return new Date(from[0], from[1] - 1, from[2]);

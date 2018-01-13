@@ -1,6 +1,12 @@
 
-<div ng-controller="VenueEventsController" class="container-fluid">
-   <span> <a class="btn btn-primary pull-right" style="margin-top: -225px;" ng-show="enableCreateEvent()" ng-click="createNewEvent()"><em class="fa fa-plus"></em>Add Event</a></span>
+<h3>Add / Edit Event
+   <small>Add a new Event or Edit an existing Event.</small>
+   <span>
+   		<a class="btn btn-primary pull-right" style="margin-top: -25px;" ng-show="enableCreateEvent()" ng-click="createNewEvent()"><em class="fa fa-plus"></em>Add Event</a>
+   </span>
+</h3>
+<div  class="container-fluid">
+  
    <div class="row-masonry row-masonry-lg-4 row-masonry-md-3 row-masonry-sm-1">
       <div event-tile="" ng-class="'col-masonry'" event="event" ng-repeat="event in events track by $index" />
          
