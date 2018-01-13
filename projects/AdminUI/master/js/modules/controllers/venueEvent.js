@@ -197,8 +197,8 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         var table = $('#event_ticket_table').DataTable();
        
         $scope.storeNames = [];
-        RestServiceFactory.VenueService().getAgencies({id: $stateParams.venueNumber}, function(data) {
-            $scope.agencies = data.agencies;
+        RestServiceFactory.AgencyService().getStores({id: 0}, function(data) {
+            $scope.agencies = data.stores;
             for (var i = 0; i < $scope.agencies.length; i++) {
                 $scope.storeNames[$scope.agencies[i].id] = $scope.agencies[i];
             }

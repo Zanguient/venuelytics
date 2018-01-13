@@ -55,6 +55,14 @@
 	 "roleId": 100
   },
   {
+	"text": "Event Management",
+	"sref": "app.eventManagement",
+	"icon": "icon-calendar",
+	"translate": "sidebar.nav.pages.EVENT_MANAGEMENT",
+	"submenu": [],
+	"roleId": 51
+  },
+  {
   	"text": "Events Calendar",
 	"sref": "app.eventsCalendar",
 	 "icon": "icon-calendar",

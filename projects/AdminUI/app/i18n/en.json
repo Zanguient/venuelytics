@@ -290,6 +290,7 @@
         "GUEST_LIST":"Guest List",
         "INBOX": "Inbox",
         "EVENTS_CALENDAR": "Events Calendar",
+        "EVENT_MANAGEMENT": "Event Management",
         "TICKET_COUNTER":"Ticket Counter",
         "SOLD_TICKETS":"Sold Tickets",
         "PARTNERS": "Partners",

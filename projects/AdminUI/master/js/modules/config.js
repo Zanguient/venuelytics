@@ -190,6 +190,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         data: { authorizedRoles: [USER_ROLES.admin]},
         resolve: resolveFor('parsley','inputmask','datatables', 'datatables-pugins','ngDialog')
     })
+     .state('app.eventManagement', {
+        url: '/eventManagement',
+        title: 'Manage Venue Event',
+        templateUrl: basepath('venue-events/venue-events.html'),
+        controller: 'VenueEventController',
+        data: { authorizedRoles: [USER_ROLES.admin]},
+        resolve: resolveFor('datatables', 'datatables-pugins','ngDialog')
+    })
      .state('app.addVenueStore', {
         url: '/venues/:id/stores',
         title: 'Add Venue Store',
