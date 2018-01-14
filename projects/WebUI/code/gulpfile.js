@@ -381,8 +381,8 @@ gulp.task('dist',['dist:pre'], function(cb) {
     config.compress = true;
     return gulp.src('dist/index.html')
      .pipe(cachebust.references())
-   //  .pipe(gulpif(config.compress, htmlmin({collapseWhitespace: true})))
-   //  .pipe(gulpif(config.compress, minifyInline()))
+     .pipe(gulpif(config.compress, htmlmin({collapseWhitespace: true})))
+     //.pipe(gulpif(config.compress, minifyInline()))
      .pipe(gulp.dest(config.folders.dist));
 });
 
