@@ -302,6 +302,7 @@ gulp.task('scss', function() {
             extname: '.css'
         })))*/
         //.pipe(gulpif(!config.compress, rename('style.' + config.defaultTheme + '.min.css')))
+        .pipe(cleanCSS())
         .pipe(cachebust.resources())
         .pipe(gulp.dest(paths.css))
        // .pipe(connect.reload());
