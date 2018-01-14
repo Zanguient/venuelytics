@@ -165,7 +165,7 @@ app
       "7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online":"assets/img/blog/blog-7ways.gif",
       "Las-Vegas-Nightlife":"assets/img/blog/las_vegas_bottle_service.png",
       "New-York-Nightlife":"assets/img/blog/new_york_nightlife_bottle.png",
-      "New-Orleans-Nightlife":"new_orleans_nightlife_bottle.png"
+      "New-Orleans-Nightlife":"assets/img/blog/new_orleans_nightlife_bottle.png"
 
     },
 
