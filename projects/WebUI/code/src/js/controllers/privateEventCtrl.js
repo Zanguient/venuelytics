@@ -14,7 +14,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
                 self.getReservationTime = APP_ARRAYS.time;
                 
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
-                self.venueId =  self.venueDetails,id;
+                self.venueId =  self.venueDetails.id;
                 ngMeta.setTag('description', self.venueDetails.description + " Private Event");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Private Event";
                 ngMeta.setTitle($rootScope.title);
