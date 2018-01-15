@@ -69,7 +69,6 @@ module.exports = {
             'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
             'bower_components/angular-translate-storage-local/angular-translate-storage-local.min.js',
             'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
-            'bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js', 
             'bower_components/parsleyjs/dist/parsley.min.js',
             'bower_components/inputmask/dist/min/jquery.inputmask.bundle.min.js',
             'bower_components/ngMeta/dist/ngMeta.min.js',

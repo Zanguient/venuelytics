@@ -23,7 +23,7 @@
 	"FEATURE_PRIVATE_EVENT_DESC":"Book Banquet Halls, Karaoke Rooms & Event Tickets",
 	"solution" : {
 		"BUSINESS_SOLUTION": "Business Solution",
-		"PAGE_DESC": "VenueLytics provides an end-to-end solution for the Hospitality &amp; Entertainment industry"
+		"PAGE_DESC": "VenueLytics provides an end-to-end solution for the Hospitality & Entertainment industry"
 	},
 	"home":{
 		"PRICING":"Pricing",
@@ -32,10 +32,10 @@
 		"TRY_VENUELYTICS_FREE":"Try VenueLytics free for 30 days, no credit card required",
 		"COLLECTS_SALES_TAXES":"VenueLytics collects sales taxes in states where it is required by law. Above mentioned prices do not include these taxes.",
 		"CLIENT_CAROUSEL_TITLE":"OUR CUSTOMERS, PARTNERS & FEATURED VENUES",
-		"REAL_TIME":"Real-Time Venue",
-		"PLATFORM":"Experience Platform",
+		"REAL_TIME":"Real-Time Customer",
+		"PLATFORM":"Experience & Venue Management",
 		"WELCOME_HEADING_1":"Welcome to VenueLytics!",
-		"WELCOME_HEADING_2":"Real-Time Venue Experience Platform",
+		"WELCOME_HEADING_2":"Real-Time Customer Experience & Venue Management",
 		"WELCOME_DESCRIPTION":"VenueLytics empowers businesses, in the entertainment, hospitality and service industries, to engage their customers in real-time. VenueLytics provides a patent-pending deep learning technology for venues to get real-time insights & predictive recommendations.",
 		"CUSTOMER_SERVICE":"CONTINUOUSLY ENHANCE CUSTOMER EXPERIENCE...",
 		"PERSONALIZED_SERVICES":"Personalized Services to Consumers! Real-Time Insights & Loyalty To Venues!",
@@ -73,7 +73,7 @@
 		"OUR_PRICING":"OUR PRICING",
 		"NEXT_BUTTON":"Next",
 		"PREVIOUS_BUTTON":"Previous",
-		"FREE_TRIAL":"Start your 30-day free trial today and claim your business!",
+		"FREE_TRIAL":"Start your 30-day free trial today and claim your business services page!",
 		"GET_STARTED":"Get Started",
 		"REAL_TIME_SERVICES":"Real-Time Premium Services...",
 		"RESERVATION_FOOD_DRINK":"Reservations, Food & Drink Ordering, WayFinding, Deals, Rewards...",
@@ -249,7 +249,7 @@
 		"TERMS":"Terms of Use",
 		"PRIVACY":"Privacy Policy",
 		"SUBSCRIBE":"Subscribe",
-		"DESCRIPTION":"We believe in Personalized, Real-Time Venue Experiences.",
+		"DESCRIPTION":"We believe in Personalized, Real-Time Customer Experience.",
 		"EMAIL_ADDRESS":"Email Adress",
 		"COPY_RIGHTS":"Copyrights (c) 2017-2018 All Rights Reserved by VenueLytics Inc",
 		"NAVIGATION" :"Navigation",

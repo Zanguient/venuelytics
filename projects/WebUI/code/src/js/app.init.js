@@ -1,6 +1,5 @@
 "use strict";
-var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies', 'ngclipboard',
- 'daterangepicker','ngMeta', 'satellizer', 'ngStorage']);
+var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies', 'ngclipboard','daterangepicker','ngMeta', 'satellizer', 'ngStorage']);
 
 
 // configure our routes
@@ -239,7 +238,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     ngMetaProvider.setDefaultTag('description', 'Venuelytics - is an entertainment platform for consumers to find fun places like Casinos,Clubs,Golf,Bars,Resorts,Stadium & order bottle service,food & drink,events...');
     ngMetaProvider.setDefaultTitle('Venuelytics');
     ngMetaProvider.setDefaultTitleSuffix(' | Book VIP Reservations & Events');
-    ngMetaProvider.setDefaultTag('image', 'assets/img/screen2.jpg');
+    ngMetaProvider.setDefaultTag('image', 'assets/img/7.jpg');
 
     function initAuthProvisers() {
         

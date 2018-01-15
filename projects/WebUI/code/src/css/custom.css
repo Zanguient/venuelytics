@@ -1,5 +1,4 @@
 
-
 .form-group .form-control {
   margin-top: 7px !important;
   background-clip: padding-box;
@@ -726,9 +725,6 @@ select {
   margin-top:200px;
  }
 
- .descriptionAlign {
-   text-align: justify;
- }
 
 .table-map-area {
   outline: red solid 2px;
@@ -1568,6 +1564,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   height: 200px;
   text-align: center;
   vertical-align: bottom;
+  padding: 0px;
 }
 
 .city-image-block > p {

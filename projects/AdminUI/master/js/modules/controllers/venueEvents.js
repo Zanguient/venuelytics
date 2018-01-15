@@ -38,7 +38,7 @@ App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout
 	};
 
   $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
-      $scope.getEvents(contextService.userVenues.selectedVenueNumber);
+      $scope.getEvents(contextService.userVenues.selectedVenueNumber); 
   });
 
   $scope.init();
