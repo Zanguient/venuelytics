@@ -40,7 +40,7 @@
                                         <h5 class="pull-right " ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
                                     </div>
                                 </figure>
-                                <div class="card-block card-block-big pt-2 no-mt">
+                                <div class="card-block card-block-big pb-6 pt-2 no-mt">
                                   <a class="mt-1 mb-1 col-xs-12 no-p title-bold block-ellipsis-1" href="cities/{{selectedCityName}}/{{venueRefId(venue)}}" 
                                   ng-click="selectVenue(venue)" title="{{venue.venueName}}">{{venue.venueName}}</a>
                                    
@@ -58,7 +58,7 @@
                                         <a href="{{venue.website}}" target="_blank" class="no-mb mont-font-regular pull-right"><i class="fa fa-globe" aria-hidden="true"></i>Website</a>
                                     </div>
                                    
-                                    <div ng-hide="!venue.distanceInMiles" id="distance" class="col-xs-12">{{venue.distanceInMiles | number : 2}} {{ "venue.MILES" | translate}}</div>
+                                    <h6 ng-hide="!venue.distanceInMiles" id="distance" class="col-xs-12 no-m">{{venue.distanceInMiles | number : 2}} {{ "venue.MILES" | translate}}</h6>
 
                                 </div> 
                             </article>
