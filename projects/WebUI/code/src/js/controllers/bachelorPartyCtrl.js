@@ -16,7 +16,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                 $( "#bachelorDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
-                self.venueID = $routeParams.venueId;
+                self.venueId = self.venueDetails.id;
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.bachelor = DataShare.partyServiceData;
                 } else {
@@ -40,7 +40,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
 
             self.$watch('bachelor.orderDate', function() {
                 if (self.bachelor.orderDate !== "") {
-                    self.getBachelorPartyHall(self.venueID);
+                    self.getBachelorPartyHall(self.venueId);
                 }
             });
             self.getMenus = function() {

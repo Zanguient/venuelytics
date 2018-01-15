@@ -16,7 +16,7 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bachelor party Confirmation & Payment";
                 ngMeta.setTitle($rootScope.title);
                 self.city = $self.venueDetails.city;
-                self.selectedVenueID = $routeParams.venueId;
+                self.venueId = self.venueDetails.id;
                 self.bachelorData = DataShare.partyServiceData;
                 self.venueName = DataShare.venueName;
                 self.availableAmount = $window.localStorage.getItem("bachelorAmount");
@@ -33,7 +33,7 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
 
             //Get Tax
             self.getTax = function() {
-                AjaxService.getTaxType(self.selectedVenueID,self.taxDate).then(function(response) {
+                AjaxService.getTaxType(self.venueId,self.taxDate).then(function(response) {
                     self.tax = response.data;
                     var amount = self.availableAmount;
                     if(self.tax.length !== 0) {
@@ -63,16 +63,16 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
             };
 
             self.editBachelorParty = function() {
-                $location.url("/cities/" + self.city + "/" + self.selectedVenueID + '/bachelor-party');
+                $location.url("/cities/" + self.city + "/" + self.venueId + '/bachelor-party');
             };
 
             self.paymentEnable = function() {
-                $location.url('/' + self.city + '/bachelorPayment/' + self.selectedVenueID);
+                $location.url('/' + self.city + '/bachelorPayment/' + self.venueId);
             };
 
             self.saveBachelorParty = function() {
                 if(self.orderPlaced === false) {
-                    AjaxService.createBottleService(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
+                    AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function(response) {
                         self.orderId = response.data.id;
                         self.orderPlaced = true;
                         if (self.cardPayment === true) {
@@ -80,7 +80,7 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.city +'/bachelor-success/'+ self.selectedVenueID);
+                            $location.url(self.city +'/bachelor-success/'+ self.venueId);
                         }
                     });
                 } else {
@@ -89,7 +89,7 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.city +'/bachelor-success/'+ self.selectedVenueID);
+                        $location.url(self.city +'/bachelor-success/'+ self.venueId);
                     }
                 }
             };
@@ -125,7 +125,7 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
             self.backToBachelor = function() {
               $rootScope.serviceName = 'BachelorParty';
               DataShare.partyServiceData = '';
-              $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/bachelor-party');
+              $location.url('/cities/' + self.city + '/' + self.venueId + '/bachelor-party');
             };
 
             self.creditCardPayment = function() {
@@ -166,8 +166,8 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
                     //Save Payment Transaction for card
                     var fullName = self.bachelorData.userFirstName + " " + self.bachelorData.userLastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.bachelorData.email + ':' + self.bachelorData.mobile);
-                    AjaxService.createTransaction(self.selectedVenueID, self.orderId, payment, authBase64Str).then(function(response) {
-                        $location.url(self.city +"/bachelorSuccess/" + self.selectedVenueID);
+                    AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
+                        $location.url(self.city +"/bachelorSuccess/" + self.venueId);
                     });
                 }
             });

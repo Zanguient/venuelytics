@@ -10,7 +10,7 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$location', 'DataSh
 
     		var self = $scope;
     		
-			self.venueID = $routeParams.venueId;
+			
 			self.venueDetails = venueService.getVenue($routeParams.venueId);
 			$rootScope.description = self.venueDetails.description;
 			self.selectedCityName = self.venueDetails.city;

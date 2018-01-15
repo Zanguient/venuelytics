@@ -51,6 +51,13 @@ app.controller('VenueController', ['$rootScope','$log', '$scope', '$http', '$loc
                 }
             };
 
+            self.venueRefId = function(venue) {
+                if (typeof(venue.uniqueName) === 'undefined' ) {
+                    return venue.id;
+                } else {
+                    return venue.uniqueName;
+                }
+            }
             self.venueDescription = function(value) {
                 $rootScope.privateDescription = value;
                 $('.modal-backdrop').remove();
@@ -88,7 +95,7 @@ app.controller('VenueController', ['$rootScope','$log', '$scope', '$http', '$loc
                 self.selectedCityName = venue.city;
                 DataShare.selectedVenue = venue;
                 DataShare.venueNumber = venue.id;
-        			  $location.url('/cities/' + self.selectedCityName + '/' + venue.id +'/VIP');
+        			  $location.url('/cities/' + self.selectedCityName + '/' + venue.id );
         		};
 
             self.selectedServices = function(venue, serviceType) {

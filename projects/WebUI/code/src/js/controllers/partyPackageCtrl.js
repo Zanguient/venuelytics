@@ -9,9 +9,10 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
 
             var self = $scope;
             self.init = function() {
-                self.venueID = $routeParams.venueId;
+                
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
+                self.venueId = self.venueDetails.id;
+                $rootScope.blackTheme = venueService.getVenueInfo(self.venueId , 'ui.service.theme') || '';
                 ngMeta.setTag('description', self.venueDetails.description + " Party Package");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + "Venuelytics - Party Package Services";
                 ngMeta.setTitle($rootScope.title);

@@ -7,8 +7,9 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataSh
     		var self = $scope;
             self.init = function() {
                 
-                self.selectedVenueID = $routeParams.venueId;
+                
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
+                self.venueId = self.venueDetails.id;
                 self.venueInfo();
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Guest Confirmation");
@@ -21,7 +22,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataSh
                 self.object = DataShare.payloadObject;
             };
             self.venueInfo = function() {
-                var fields = venueService.getVenueInfo(self.selectedVenueID, 'GuestListService.ui.fields');
+                var fields = venueService.getVenueInfo(self.venueId, 'GuestListService.ui.fields');
                 if (typeof(fields) !== 'undefined') {
                     self.guestListFields = JSON.parse(fields) ;
                 } 
@@ -35,19 +36,19 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.editGuestPage = function() {
-                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
+                $location.url('/cities/' + self.city + '/' + self.venueId + '/guest-list');
             };
 
             self.guestListSave = function() {
-                    AjaxService.createGuestList(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
-                        $location.url(self.city + '/guest-success/' + self.selectedVenueID);
+                    AjaxService.createGuestList(self.venueId, self.object, self.authBase64Str).then(function(response) {
+                        $location.url(self.city + '/guest-success/' + self.venueId);
                 });
             };
 
             self.backToGuest = function() {
                 $rootScope.serviceName = 'GuestList';
                 DataShare.guestListData = '';
-                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/guest-list');
+                $location.url('/cities/' + self.city + '/' + self.venueId + '/guest-list');
             };
 
             self.init();

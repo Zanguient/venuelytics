@@ -10,9 +10,9 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
             self.timeSlot = false;
             self.table = {};
             self.init = function() {
-                self.venueId = $routeParams.venueId;
+               
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
-
+                self.venueId = self.$venueDetails.id;
                 self.selectedVenue = self.venueDetails.venueName;
                 angular.forEach(self.venueDetails.imageUrls, function(value,key){
                     self.venueImage = value.originalUrl;

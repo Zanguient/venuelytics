@@ -10,8 +10,9 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$location', 'Data
 
             var self = $scope;
             self.init = function() {
-                self.editVenueID = $routeParams.venueId;
+                
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
+                self.venueId = self.venueDetails.id;
                 $rootScope.description = self.venueDetails.description;
                 $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
                 ngMeta.setTag('description', self.venueDetails.description + " Private Confirmation");
@@ -26,20 +27,20 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$location', 'Data
             };
 
             self.editPrivatePage = function() {
-                $location.url('/cities/' + self.selectedCity + '/' + self.editVenueID + '/private-events');
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueId + '/private-events');
             };
 
             self.privateEventSave = function() {
-                  AjaxService.createBottleService(self.editVenueID, self.object, self.authBase64Str).then(function(response) {
+                  AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function(response) {
                     $log.info("response: "+angular.toJson(response));
-                    $location.url(self.selectedCity + '/private-success/' + self.editVenueID);
+                    $location.url(self.selectedCity + '/private-success/' + self.venueId);
                 });
             };
 
             self.backToPrivate = function() {
                 $rootScope.serviceName = 'PrivateEvent';
                 DataShare.privateEventData = '';
-                $location.url('/cities/' + self.selectedCity + '/' + self.editVenueID + '/private-events');
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueId + '/private-events');
             };
 
              self.time24to12 = function(timeString) {

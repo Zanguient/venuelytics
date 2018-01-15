@@ -12,8 +12,9 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
             self.init = function() {
                 $window.localStorage.setItem($rootScope.blackTheme, 'blackTheme');
                 
-                self.selectedVenueID = $routeParams.venueId;
+                
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
+                self.venueId =  self.venueDetails.id;
                 $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Drink Confirmation");
@@ -46,7 +47,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
             //Get Tax
 
             self.getTax = function() {
-                AjaxService.getTaxType(self.selectedVenueID,self.taxDate).then(function(response) {
+                AjaxService.getTaxType(self.venueId,self.taxDate).then(function(response) {
                     self.tax = response.data;
                     self.amount = parseFloat(self.availableAmount);
                     self.chargedAmount = self.amount;
@@ -102,12 +103,12 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.editDrinkPage = function() {
-                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
+                $location.url('/cities/' + self.city + '/' + self.venueId + '/drink-services');
             };
 
             self.drinkServiceSave = function() {
                 if(self.orderPlaced === false) {
-                    AjaxService.createBottleService(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
+                    AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function(response) {
                         self.orderId = response.data.id;
                         self.orderPlaced = true;
                         if (self.cardPayment === true) {
@@ -115,7 +116,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.city +'/drink-success/'+ self.selectedVenueID);
+                            $location.url(self.city +'/drink-success/'+ self.venueId);
                         }
                     });
                 } else {
@@ -124,7 +125,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.city +'/drink-success/'+ self.selectedVenueID);
+                        $location.url(self.city +'/drink-success/'+ self.venueId);
                     }
                 }
             };
@@ -194,13 +195,13 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.paymentEnabled = function() {
-                $location.url(self.city +"/drinkPayment/" + self.selectedVenueID);
+                $location.url(self.city +"/drinkPayment/" + self.venueId);
             };
 
             self.backToDrink = function() {
                 $rootScope.serviceName = 'DrinkService';
                 DataShare.drinkServiceData = '';
-                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/drink-services');
+                $location.url('/cities/' + self.city + '/' + self.venueId + '/drink-services');
             };
 
             self.creditCardPayment = function() {
@@ -241,7 +242,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
                     //Save Payment Transaction for card
                     var fullName = self.drinkServiceDetails.firstName + " " + self.drinkServiceDetails.lastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.drinkServiceDetails.emailId + ':' + self.drinkServiceDetails.mobileNumber);
-                    AjaxService.createTransaction(self.selectedVenueID, self.orderId, payment, authBase64Str).then(function(response) {
+                    AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
                         $location.url(self.city +"/drinkSuccess/" + self.selectedVenueID);
                     });
                 }

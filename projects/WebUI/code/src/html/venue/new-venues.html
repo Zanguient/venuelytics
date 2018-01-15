@@ -41,7 +41,7 @@
                                     </div>
                                 </figure>
                                 <div class="card-block card-block-big pt-2 no-mt">
-                                  <a class="mt-1 mb-1 col-xs-12 no-p title-bold block-ellipsis-1" href="cities/{{selectedCityName}}/{{venue.id}}/VIP" 
+                                  <a class="mt-1 mb-1 col-xs-12 no-p title-bold block-ellipsis-1" href="cities/{{selectedCityName}}/{{venueRefId(venue)}}" 
                                   ng-click="selectVenue(venue)" title="{{venue.venueName}}">{{venue.venueName}}</a>
                                    
                                     <p class="venueDescription  col-xs-12 no-p block-ellipsis-1"><i class="fa fa-map-marker"></i>{{venue.address}}</p>

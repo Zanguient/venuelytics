@@ -11,7 +11,7 @@
  		
  		var self = $scope;
         self.venueImage = '';
-        self.venueId = $routeParams.venueId;
+       
  		$scope.init = function () {
 
             $scope.getVenue();
@@ -52,8 +52,10 @@
  		};
 
         $scope.getVenue = function() {
-     		AjaxService.getVenues(self.venueId,null,null).then(function(response) {
+
+     		AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
                 self.detailsOfVenue = response;
+                self.venueId = self.detailsOfVenue.id;
                 venueService.saveVenue(self.venueId, response);
                 $rootScope.description = self.detailsOfVenue.description;
                 self.selectedCity = self.detailsOfVenue.city;

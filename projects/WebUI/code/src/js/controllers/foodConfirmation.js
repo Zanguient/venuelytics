@@ -12,10 +12,11 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
             self.totalChargedAmount = 0;
             self.init = function() {
                 
-                self.selectedVenueID = $routeParams.venueId;
+                
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
+                self.venueId = self.venueDetails.id;
                 $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
+                
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Food Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Food Services Confirmation & Payment";
@@ -45,7 +46,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
 
             //Get Tax
             self.getTax = function() {
-                AjaxService.getTaxType(self.selectedVenueID,self.taxDate).then(function(response) {
+                AjaxService.getTaxType(self.venueId,self.taxDate).then(function(response) {
                     self.tax = response.data;
                     self.amount = parseFloat(self.availableAmount);
                     self.chargedAmount = self.amount;
@@ -101,12 +102,12 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
             };
 
             self.editFoodPage = function() {
-                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/food-services');
+                $location.url('/cities/' + self.city + '/' + self.venueId + '/food-services');
             };
 
             self.foodServiceSave = function() {
                 if(self.orderPlaced === false) {
-                    AjaxService.createBottleService(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
+                    AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function(response) {
                         self.orderId = response.data.id;
                         self.orderPlaced = true;
                         if (self.cardPayment === true) {
@@ -114,7 +115,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.city +'/food-success/'+ self.selectedVenueID); 
+                            $location.url(self.city +'/food-success/'+ self.venueId); 
                         }
                     });
                 } else {
@@ -123,7 +124,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.city +'/food-success/'+ self.selectedVenueID); 
+                        $location.url(self.city +'/food-success/'+ self.venueId); 
                     }
                 }
             };
@@ -193,13 +194,13 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
             };
 
             self.paymentEnabled = function() {
-                $location.url(self.city +"/foodPayment/" + self.selectedVenueID);
+                $location.url(self.city +"/foodPayment/" + self.venueId);
             };
 
             self.backToFood = function() {
                 $rootScope.serviceName = 'FoodService';
                 DataShare.foodServiceData = '';
-                $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/food-services');
+                $location.url('/cities/' + self.city + '/' + self.venueId + '/food-services');
             };
 
             self.creditCardPayment = function() {
@@ -240,8 +241,8 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
                     //Save Payment Transaction for card
                     var fullName = self.foodServiceDetails.firstName + " " + self.foodServiceDetails.lastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.foodServiceDetails.emailId + ':' + self.foodServiceDetails.mobileNumber);
-                    AjaxService.createTransaction(self.selectedVenueID, self.orderId, payment, authBase64Str).then(function(response) {
-                        $location.url(self.city +"/foodSuccess/" + self.selectedVenueID);
+                    AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
+                        $location.url(self.city +"/foodSuccess/" + self.venueId);
                     });
                 }
             });

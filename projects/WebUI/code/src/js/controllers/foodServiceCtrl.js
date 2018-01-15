@@ -9,8 +9,9 @@ app.controller('foodServiceController', ['$log', '$scope', '$location', 'DataSha
             self.selectedFoodList = [];
             self.foodType = 'Delivery';
             self.init = function() {
-              self.venueId = $routeParams.venueId;
+              
               self.venueDetails = venueService.getVenue($routeParams.venueId);
+              self.venueId = self.venueDetails.id;
               ngMeta.setTag('description', self.venueDetails.description + " Food Services");
               $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state +  " Venuelytics - Food Services";
               ngMeta.setTitle($rootScope.title);

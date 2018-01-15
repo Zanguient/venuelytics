@@ -18,8 +18,9 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
             //self.guestMemberList.push(obj);
             self.init = function() {
 
-                self.venueId = $routeParams.venueId;
+                
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
+                self.venueId = self.venueDetails.id;
                 self.venueInfo();
                 ngMeta.setTag('description', self.venueDetails.description + " Guest List");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Guest List";

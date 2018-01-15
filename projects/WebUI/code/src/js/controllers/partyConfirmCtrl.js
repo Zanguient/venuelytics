@@ -10,9 +10,10 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
             self.cardPayment = false;
             self.orderPlaced = false;
             self.init = function() {
-                self.selectedVenueID = $routeParams.venueId;
+               
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
+                self.venueId = self.venueDetails.id;
+                $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Party Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Party Services Confirmation & Payment";
@@ -36,7 +37,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
 
             //Get Tax
             self.getTax = function() {
-                AjaxService.getTaxType(self.selectedVenueID,self.taxDate).then(function(response) {
+                AjaxService.getTaxType(self.venueId,self.taxDate).then(function(response) {
                     self.tax = response.data;
                     var amount = self.availableAmount;
                     if(self.tax.length !== 0) {
@@ -66,16 +67,16 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.editPartyPackage = function() {
-                $location.url("/cities/" + self.city + "/" + self.selectedVenueID + '/party-packages');
+                $location.url("/cities/" + self.city + "/" + self.venueId + '/party-packages');
             };
 
             self.paymentEnable = function() {
-                $location.url('/' + self.city + '/partyPackagePayment/' + self.selectedVenueID);
+                $location.url('/' + self.city + '/partyPackagePayment/' + self.venueId);
             };
 
             self.savePartyPackage = function() {
                 if(self.orderPlaced === false) {
-                    AjaxService.createBottleService(self.selectedVenueID, self.object, self.authBase64Str).then(function(response) {
+                    AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function(response) {
                         self.orderId = response.data.id;
                         self.orderPlaced = true;
                         if (self.cardPayment === true) {
@@ -83,7 +84,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.city +'/party-success/'+ self.selectedVenueID);
+                            $location.url(self.city +'/party-success/'+ self.venueId);
                         }
                     });
                 } else {
@@ -92,7 +93,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.city +'/party-success/'+ self.selectedVenueID);
+                        $location.url(self.city +'/party-success/'+ self.venueId);
                     }
                 }
             };
@@ -128,7 +129,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
             self.backToParty = function() {
               $rootScope.serviceName = 'PartyPackages';
               DataShare.partyServiceData = '';
-              $location.url('/cities/' + self.city + '/' + self.selectedVenueID + '/party-packages');
+              $location.url('/cities/' + self.city + '/' + self.venueId + '/party-packages');
             };
 
             self.creditCardPayment = function() {
@@ -169,8 +170,8 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
                     //Save Payment Transaction for card
                     var fullName = self.partyPackageData.userFirstName + " " + self.partyPackageData.userLastName;
                     var authBase64Str = window.btoa(fullName + ':' + self.partyPackageData.email + ':' + self.partyPackageData.mobile);
-                    AjaxService.createTransaction(self.selectedVenueID, self.orderId, payment, authBase64Str).then(function(response) {
-                        $location.url(self.city +"/partySuccess/" + self.selectedVenueID);
+                    AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
+                        $location.url(self.city +"/partySuccess/" + self.venueId);
                     });
                 }
             });

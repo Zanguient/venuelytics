@@ -20,6 +20,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             self.sum = 0;
             self.price = 0;
             self.availableDays = [];
+            self.bottle = {};
+            self.bottle.requestedDate = moment().format('YYYY-MM-DD');
             function  noWeekendsOrHolidays(iDate) {
                 if (typeof(self.availableDays) === 'undefined' || self.availableDays.length === 0) {
                   return true;
@@ -34,13 +36,32 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 }
                 return enabled;
             }
-            self.init = function() {
+            self.init - function() {
+               AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
+                    self.detailsOfVenue = response;
+                    self.venueDetails = response;
+                    self.venueId = self.venueDetails.id;
+                    venueService.saveVenue($routeParams.venueId, self.venueDetails);
+                    venueService.saveVenue(self.venueId, self.venueDetails);
+
+                    ngMeta.setTag('description', response.description + " Bottle Services");
+                    $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bottle Services";
+                    ngMeta.setTitle($rootScope.title);
+                    angular.forEach(response.imageUrls, function(value,key){
+                        ngMeta.setTag('image', value.originalUrl);
+                    });
+                    self.selectedCity = self.venueDetails.city;
+                    self.venueName =    self.detailsOfVenue.venueName;
+
+                    self.initMore();
+                });
+            }
+            self.initMore = function() {
                 //$("div.form-group").add("style", "margin-left: auto");
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
                
-                self.venueId = $routeParams.venueId;
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
                     self.sum = DataShare.count;
@@ -77,25 +98,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.getSelectedTab();
                 }, 600);
                 
-                AjaxService.getVenueServiceOpenDays($routeParams.venueId, 'bottle').then(function(response) {
+                AjaxService.getVenueServiceOpenDays(self.venueId, 'bottle').then(function(response) {
                   self.availableDays = response.data;
                    $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd',
                  beforeShowDay: noWeekendsOrHolidays});
                 });
-                AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
-                    self.detailsOfVenue = response;
-                    self.venueDetails = response;
-                    venueService.saveVenue($routeParams.venueId, self.venueDetails);
-
-                    ngMeta.setTag('description', response.description + " Bottle Services");
-                    $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bottle Services";
-                    ngMeta.setTitle($rootScope.title);
-                    angular.forEach(response.imageUrls, function(value,key){
-                        ngMeta.setTag('image', value.originalUrl);
-                    });
-                    self.selectedCity = self.venueDetails.city;
-                    self.venueName =    self.detailsOfVenue.venueName;
-                });
+               
 
                 AjaxService.getHosts(self.venueId).then(function(response) {
                     self.hostDate = response.data;
@@ -440,9 +448,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             return false;
         };
         self.getHostImage = function () {
-            if (self.bottle.host && self.bottle.host.profileImage){
+          /*  if (self.bottle.host && self.bottle.host.profileImage){
                 return self.bottle.host.profileImage;
-            }
+            }*/
             return "";
         };
         self.selectTable = function(id, name) {
