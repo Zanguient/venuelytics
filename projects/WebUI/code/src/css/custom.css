@@ -1564,6 +1564,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
   height: 200px;
   text-align: center;
   vertical-align: bottom;
+  padding: 0px;
 }
 
 .city-image-block > p {
