@@ -123,10 +123,10 @@
             
             <select class="form-control  {{blackTheme}}" ng-model="bottle.host" ng-options="x as x.name for x in hostDate  track by x.id">
             </select></div><img ng-hide ="!hostDate || hostDate.length == 0" class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
-        <div class="col-xs-12 form-group is-empty" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-xs-12 form-group is-empty" ng-if="allBottle">
         <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>
-        <div class="col-xs-12 form-group is-empty" ng-if="bottleMinimum != ''" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-xs-12 form-group is-empty" ng-if="bottleMinimum != ''">
         <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
             <table class="table table-responsive table-no-border" >
                 <thead>
@@ -148,7 +148,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-xs-12" ng-show = "enabledPayment == 'Y' || enabledPayment == 'y'">
+        <div class="col-xs-12" ng-if="allBottle">
             <table class="table table-no-border">
                 <tr>
                     <td>
