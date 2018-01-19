@@ -164,7 +164,7 @@ app
       "Nyeelah-the-face-of-New-York-Nightlife":"assets/img/blog/nyeelah_blogs.jpg",
       "7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online":"assets/img/blog/blog-7ways.gif",
       "Las-Vegas-Nightlife":"assets/img/blog/las_vegas_bottle_service.png",
-      "New-York-Nightlife":"assets/img/blog/new_york_nightlife_bottle.png",
+      "New-York-Nightlife":"assets/img/blog/new_york_nightlife_bottle.jpg",
       "New-Orleans-Nightlife":"assets/img/blog/new_orleans_nightlife_bottle.png"
 
     },

@@ -296,7 +296,8 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     hostName = $window.location.href.toLowerCase();
     $rootScope.showBusinessLink = true;
     var defaultPage = '/home';
-    
+    $rootScope.baseUrl = $location.protocol() + "://" + location.host;
+    console.log("base url:" + $rootScope.baseUrl);
     setTimeout(function(){
         $('.wait_loading_above_fold').remove();
     },300);
