@@ -1,13 +1,7 @@
-/**
- * @author Saravanakumar K
- * @date 19-MAY-2017
- */
+
 "use strict";
-app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta', 'VenueService',
+app.controller('ReservationServiceController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta', 'VenueService',
     function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta, venueService) {
-
-            $log.debug('Inside Bottle Service Controller.');
-
 
             var self = $scope;
 
@@ -90,9 +84,10 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 self.restoreTab = DataShare.tab;
                 self.tabParam = $routeParams.tabParam;
                 
-                self.getBottleProducts();
+                self.getReservationProducts();
                 self.getMenus();
                 self.getEventType();
+                self.getPartyHall();
                 
                 setTimeout(function() {
                     self.getSelectedTab();
@@ -131,11 +126,13 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
                     self.showFloorMapByDate();
                 }
-            }); 
+            });
 
-            self.getBottleProducts = function() {
-                AjaxService.getProductOfBottle(self.venueId).then(function(response) {
+            self.getReservationProducts = function() {
+                console.log('self.getReservationProducts>>>>>>>>>>>>>>>>>>>>>>>',self.getReservationProducts);
+                AjaxService.getProductOfReservation(self.venueId).then(function(response) {
                     self.allBottle = response.data;
+                    console.log('self.allBottle>>>>>>>>>>>>>>>>>>>>',self.allBottle);
                 });
             };
 
@@ -188,6 +185,14 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 });
             };
 
+        self.getPartyHall = function() {
+            console.log('self.getPartyHall>>>>>>>>>>>>>>>>>>>>>',self.getPartyHall);
+            AjaxService.getPrivateHalls(self.venueId, 'PartyHall').then(function(response) {
+                   self.PartyHall = response.data;
+                   console.log('self.PartyHall>>>>>>>>>>>>>>>>>',self.PartyHall);
+            });
+        };
+
             self.minusValue = function() {
                 if(self.bottleCount > 0) {
                 self.bottleCount--;
@@ -199,9 +204,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.getBrandByBottleName = function(selectedBottleName) {
+                console.log('self.getBrandByBottleName>>>>>>>>>>>>>>>>>>>>>>',self.getBrandByBottleName);
                 self.chooseBottles.bottleName = selectedBottleName;
+                console.log('self.chooseBottles.bottleName>>>>>>>>>>>>>>>',self.chooseBottles.bottleName);
                 angular.forEach(self.allBottle, function(value, key) {
                 if(value.name === selectedBottleName) {
+                    console.log('value.name>>>>>>>>>>>>>>',value.name);
                     self.brandData = [];
                     self.productId =value.id;
                     self.chooseBottles.price = value.price;

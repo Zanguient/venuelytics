@@ -213,9 +213,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             addTab('partyEventTab','party', 'assets/img/service/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html',!self.partyFlag, 'partyBtn','partyPackage');
         }
 
+        addTab('reservationTab','reservation', 'assets/img/service/guests.png','RESERVARTION', 'reservation-service', 'reservation-service/reservation-service.html',false, 'guestBtn', 'reservationService');
+
        // self.tabPrivate = self.tabParams === 'private-events' ? 'private-events' : '';
         
         addTab('privateEventTab','private', 'assets/img/service/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, 'privateBtn', 'privateEvents');
+
 
         //self.tabGuest = self.tabParams === 'guest-list' ? 'guest-list' : '';
         addTab('guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, 'guestBtn', 'guestList');
