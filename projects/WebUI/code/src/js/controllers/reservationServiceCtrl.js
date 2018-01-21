@@ -83,11 +83,10 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
                 self.tabParam = $routeParams.tabParam;
-                
-                self.getReservationProducts();
+
                 self.getMenus();
                 self.getEventType();
-                self.getPartyHall();
+                self.getpartypackage();
                 
                 setTimeout(function() {
                     self.getSelectedTab();
@@ -127,14 +126,6 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                     self.showFloorMapByDate();
                 }
             });
-
-            self.getReservationProducts = function() {
-                console.log('self.getReservationProducts>>>>>>>>>>>>>>>>>>>>>>>',self.getReservationProducts);
-                AjaxService.getProductOfReservation(self.venueId).then(function(response) {
-                    self.allBottle = response.data;
-                    console.log('self.allBottle>>>>>>>>>>>>>>>>>>>>',self.allBottle);
-                });
-            };
 
             self.getSelectedTab = function() {
                 $(".service-btn .card").removeClass("tabSelected");
@@ -185,11 +176,9 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 });
             };
 
-        self.getPartyHall = function() {
-            console.log('self.getPartyHall>>>>>>>>>>>>>>>>>>>>>',self.getPartyHall);
-            AjaxService.getPrivateHalls(self.venueId, 'PartyHall').then(function(response) {
-                   self.PartyHall = response.data;
-                   console.log('self.PartyHall>>>>>>>>>>>>>>>>>',self.PartyHall);
+        self.getpartypackage = function() {
+            AjaxService.getPrivateHalls(self.venueId, 'partypackage').then(function(response) {
+                   self.partypackage = response.data;
             });
         };
 
@@ -204,12 +193,9 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             };
 
             self.getBrandByBottleName = function(selectedBottleName) {
-                console.log('self.getBrandByBottleName>>>>>>>>>>>>>>>>>>>>>>',self.getBrandByBottleName);
                 self.chooseBottles.bottleName = selectedBottleName;
-                console.log('self.chooseBottles.bottleName>>>>>>>>>>>>>>>',self.chooseBottles.bottleName);
                 angular.forEach(self.allBottle, function(value, key) {
                 if(value.name === selectedBottleName) {
-                    console.log('value.name>>>>>>>>>>>>>>',value.name);
                     self.brandData = [];
                     self.productId =value.id;
                     self.chooseBottles.price = value.price;
@@ -580,7 +566,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 DataShare.count = self.sum;
                 DataShare.price = self.price;
                 self.serviceJSON = {
-                    "serviceType": 'Bottle',
+                    "serviceType": 'party',
                     "venueNumber": self.venueId,
                     "reason": self.bottle.bottleOccasion.name,
                     "contactNumber": self.bottle.mobile,
@@ -624,7 +610,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                         var items = {
                             "venueNumber": self.venueId,
                             "productId": value1.productId,
-                            "productType": 'Bottle',
+                            "productType": 'partypackage',
                             "quantity": value1.quantity,
                             "name": value1.bottle
                         };
@@ -634,7 +620,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 DataShare.payloadObject = self.serviceJSON;
                 DataShare.enablePayment = self.enabledPayment;
                 DataShare.venueName = self.venueName;
-                $location.url("/confirm/" + self.selectedCity + "/" + self.venueId);
+                $location.url("/reserve/" + self.selectedCity + "/" + self.venueId);
              };
             self.init();
     }]);

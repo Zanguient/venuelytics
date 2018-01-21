@@ -110,7 +110,7 @@
         <div class="col-xs-12 form-group label-floating is-empty no-p">
             <label class="control-label" >{{'reservation.OCCASION' | translate}}</label>
             <select class="form-control  {{blackTheme}}" eqruired
-                ng-model="bottle.bottleOccasion" ng-options="t.name for t in eventTypes">
+                    ng-model="bottle.bottleOccasion" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>
         </div>
@@ -125,48 +125,16 @@
             </select></div><img ng-hide ="!hostDate || hostDate.length == 0" class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
         <div class="col-xs-12" >
         <center><h2>{{"reservation.PARTY_PACKAGE"  | translate}}</h2></center>
-            <!--<div>12121</div>-->
-            <div ng-repeat="partyObj in PartyHall">
-                <div>12121</div>
-            </div>
-            <!--<div ng-repeat="partyObj in partyHall">
-
-                <input type="radio" name="partydetails" value="{{partyObj.id}}"/>
-
-                <label>{{partyObj.name}}</label>
-
-            </div>-->
         </div>
-        <!--<div class="form-group" ng-repeat="partyObj in partyHall">
-            <label class="mr-2">{{partyObj.name}}
-                <input type="radio" name="name" value="{{partyObj.name}}" required="required"/>
-                {{"reservation.DELIVERY" | translate}}
+        
+        <div class="col-xs-12" ng-repeat="partyObj in partypackage">
+            <label class="mr-2">
+                <input type="radio" name="name" value="{{partyObj.name}} {{partyObj.description}}" ng-model="bottle.partyObj" required="required"/>
+                    <td>{{partyObj.name}}</td>
+                    <td>{{partyObj.description}}</td>
             </label>
-        </div>-->
-        <!--<table>
-            <tr ng-repeat="partyObj in partyHall">
-                <td>
-                    <input type="radio" ng-model="selectedOption" value="{{partyObj.value}}"
-                           id="partyObj-{{partyObj.value}}">
-                    <label for="partyObj-{{partyObj.value}}">{{partyObj.description}}</label>
-                </td>
-            </tr>
-        </table>-->
-        <!--<div class="col-xs-12">
-            <table class="table table-no-border">
-                <tr ng-repeat="partyObj in partyHall">
-                  <td>{{partyObj.name}}</td>
-                  <td>{{partyObj.description}}</td>
-            <td>
-                <input type="radio" name="name" ng-model="partyObj.name" />
-                {{"reservation.DELIVERY" | translate}}
-            </td>
-          </tr>
-            </table>
-        </div>-->
-        <div class="col-xs-12">
-
         </div>
+    
         <div class="col-xs-12">
             <div>
                 <label class="table-font" ng-class="{'Check_box_label': blackTheme === ''}">
