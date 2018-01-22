@@ -104,9 +104,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'bottle-service/bottle-reservation.html',
             controller: 'ConfirmReservationController'
         })
-        .when('/reserve/:cityName/:venueId', {
+        .when('/:cityName/:venueId/reserve', {
             templateUrl: 'reservation-service/reserve-reservation.html',
-            controller: 'ConfirmReservationController'
+            controller: 'ReservationPartyController'
         })
         .when('/confirmPartyPackage/:cityName/:venueId', {
             templateUrl: 'party-service/party-confirm.html',
