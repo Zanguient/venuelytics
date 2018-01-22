@@ -42,10 +42,10 @@
                   <td><label><b> {{"reservation.OCCASION"  | translate}}</b></label> </td>
                   <td>{{userData.bottleOccasion.name}}</td>
               </tr>
-              <tr ng-hide="userData.host.name === '' || userData.host.name === undefined">
+              <!-- <tr ng-hide="userData.host.name === '' || userData.host.name === undefined">
                   <td><label><b> {{"reservation.HOST"  | translate}}</b></label> </td>
                   <td>{{userData.host.name}}</td>
-              </tr>
+              </tr> -->
           </tbody>
       </table>
     </div>
@@ -80,7 +80,7 @@
                 <p>{{'reservation.BOOKING_REQUEST' | translate}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'CLOSE' | translate}}</button>
             </div>
         </div>
     </div>

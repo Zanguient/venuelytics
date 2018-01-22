@@ -22,6 +22,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             self.availableDays = [];
             self.bottle = {};
             self.bottle.requestedDate = moment().format('YYYY-MM-DD');
+
             function  noWeekendsOrHolidays(iDate) {
                 if (typeof(self.availableDays) === 'undefined' || self.availableDays.length === 0) {
                   return true;
@@ -36,6 +37,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 }
                 return enabled;
             }
+            
             self.init = function() {
                AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
                     self.detailsOfVenue = response;
@@ -69,23 +71,28 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 } else {
                     self.tabClear();
                 }
+             
                 if(($rootScope.serviceName === 'BottleService') || (DataShare.amount !== '')) {
                     self.tabClear();
                 } else {
                     self.bottle.authorize = false;
                     self.bottle.agree = false;
                 }
+             
                 if(DataShare.userselectedTables) {
                   self.selectionTableItems = DataShare.userselectedTables;
                 }
+             
                 self.totalGuest = DataShare.totalNoOfGuest;
                 if(DataShare.selectBottle) {
                     self.bottleMinimum = DataShare.selectBottle;
                 }
+             
                 if(DataShare.tableSelection) {
                     self.tableSelection = DataShare.tableSelection;
                     //self.showSelectedVenueMap();
                 }
+             
                 self.reservationTime = APP_ARRAYS.time;
                 self.restoreTab = DataShare.tab;
                 self.tabParam = $routeParams.tabParam;
@@ -108,6 +115,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 AjaxService.getHosts(self.venueId).then(function(response) {
                     self.hostDate = response.data;
                 });
+                self.refreshMap();
+
             }; 
                        
             $(window).resize(function() {
@@ -127,12 +136,15 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             });
 
             self.$watch('bottle.requestedDate', function() {
-                if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
-                    self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
-                    self.showFloorMapByDate();
-                }
+              self.refreshMap();
             }); 
 
+            self.refreshMap = function() {
+              if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
+                    self.startDate = moment(self.bottle.requestedDate).format('YYYYMMDD');
+                }
+                self.showFloorMapByDate();
+            }
             self.getBottleProducts = function() {
                 AjaxService.getProductOfBottle(self.venueId).then(function(response) {
                     self.allBottle = response.data;
@@ -472,47 +484,47 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
               $('.modal-backdrop').remove();
             }
 
-                if(data.fillColor === APP_COLORS.lightGreen) {
-                    data.fillColor = APP_COLORS.darkYellow;
-                    data.strokeColor = APP_COLORS.turbo;
-                    if (typeof dataValueObj.imageUrls !== 'undefined' && dataValueObj.imageUrls.length > 0) {
-                      dataValueObj.imageUrls[0].active = 'active';
-                    }
-                    self.selectionTableItems.push(dataValueObj);
-                    self.sum = dataValueObj.size + self.sum;
-                    self.price = dataValueObj.price + self.price;
-                    DataShare.userselectedTables = self.selectionTableItems;
+            if(data.fillColor === APP_COLORS.lightGreen) {
+                data.fillColor = APP_COLORS.darkYellow;
+                data.strokeColor = APP_COLORS.turbo;
+                if (typeof dataValueObj.imageUrls !== 'undefined' && dataValueObj.imageUrls.length > 0) {
+                  dataValueObj.imageUrls[0].active = 'active';
+                }
+                self.selectionTableItems.push(dataValueObj);
+                self.sum = dataValueObj.size + self.sum;
+                self.price = dataValueObj.price + self.price;
+                DataShare.userselectedTables = self.selectionTableItems;
 
 
-                    self.tableSelection = [];
-                    for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
-                        var table = {
-                            "id": self.selectionTableItems[itemIndex].id,
-                            "productType": self.selectionTableItems[itemIndex].productType,
-                            "name": self.selectionTableItems[itemIndex].name,
-                            "size": self.selectionTableItems[itemIndex].size,
-                            "price" : self.selectionTableItems[itemIndex].price,
-                            "imageUrls": self.selectionTableItems[itemIndex].imageUrls,
-                            "description": self.selectionTableItems[itemIndex].description,
-                            "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
-                        };
-                        self.tableSelection.push(table);
-                    }
-                    $('#tableSelectionModal').modal('show');
-                    $('.modal-backdrop').remove();
-                } else if (data.fillColor === APP_COLORS.darkYellow) {
-                    self.sum = self.sum - dataValueObj.size;
-                    self.price = self.price - dataValueObj.price;
-                    data.fillColor = APP_COLORS.lightGreen;
-                    data.strokeColor = APP_COLORS.darkGreen;
-                    angular.forEach(self.tableSelection, function(key, value) {
-                        if(dataValueObj.id === key.id) {
-                          self.tableSelection.splice(value, 1);
-                          self.selectionTableItems.splice(value, 1);
-                        }
-                    });
-                } 
-                $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
+                self.tableSelection = [];
+                for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
+                    var table = {
+                        "id": self.selectionTableItems[itemIndex].id,
+                        "productType": self.selectionTableItems[itemIndex].productType,
+                        "name": self.selectionTableItems[itemIndex].name,
+                        "size": self.selectionTableItems[itemIndex].size,
+                        "price" : self.selectionTableItems[itemIndex].price,
+                        "imageUrls": self.selectionTableItems[itemIndex].imageUrls,
+                        "description": self.selectionTableItems[itemIndex].description,
+                        "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
+                    };
+                    self.tableSelection.push(table);
+                }
+                $('#tableSelectionModal').modal('show');
+                $('.modal-backdrop').remove();
+              } else if (data.fillColor === APP_COLORS.darkYellow) {
+                  self.sum = self.sum - dataValueObj.size;
+                  self.price = self.price - dataValueObj.price;
+                  data.fillColor = APP_COLORS.lightGreen;
+                  data.strokeColor = APP_COLORS.darkGreen;
+                  angular.forEach(self.tableSelection, function(key, value) {
+                      if(dataValueObj.id === key.id) {
+                        self.tableSelection.splice(value, 1);
+                        self.selectionTableItems.splice(value, 1);
+                      }
+                  });
+              } 
+              $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
             };
 
         self.removeSelectedTables = function(index,arrayObj,table) {
@@ -536,97 +548,105 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             self.selectionTableItems.splice(index, 1);
         };
 
-            self.confirmBottleService = function() {
-                DataShare.editBottle = 'true';
-                $rootScope.serviceTabClear = true;
-                
-                var dateValue = self.bottle.requestedDate + 'T00:00:00';
+        self.confirmBottleService = function() {
+            DataShare.editBottle = 'true';
+            $rootScope.serviceTabClear = true;
+            
+            var dateValue = self.bottle.requestedDate + 'T00:00:00';
 
-                DataShare.selectedDateForBottle = self.bottleServiceDate;
-                var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
-                var authBase64Str = window.btoa(fullName + ':' + self.bottle.email + ':' + self.bottle.mobile);
-                
-                self.sum = 0;
-                self.price = 0;
-                for (var i = 0; i < $scope.tableSelection.length; i++) {
-                  self.sum += $scope.tableSelection[i].size;
-                  self.price += $scope.tableSelection[i].price;
-                }
-                
-                DataShare.bottleServiceData = self.bottle;
-                DataShare.bottleZip = self.bottle.bottleZipcode;
-                DataShare.authBase64Str = authBase64Str;
-                DataShare.selectBottle = self.bottleMinimum;
-                DataShare.tableSelection = self.tableSelection;
-                if($scope.tableSelection.length === 0) {
-                    self.noTableSelected = true;
-                    return;
-                }
-                if (self.sum !== 0) {
-                  if(self.bottle.totalGuest > self.sum) {
-                      $('#moreTableModal').modal('show');
-                      $('.modal-backdrop').remove();
-                      return;
-                  }
-                }
-                DataShare.count = self.sum;
-                DataShare.price = self.price;
-                self.serviceJSON = {
-                    "serviceType": 'Bottle',
+            DataShare.selectedDateForBottle = self.bottleServiceDate;
+            var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
+            var authBase64Str = window.btoa(fullName + ':' + self.bottle.email + ':' + self.bottle.mobile);
+            
+            self.sum = 0;
+            self.price = 0;
+            for (var i = 0; i < $scope.tableSelection.length; i++) {
+              self.sum += $scope.tableSelection[i].size;
+              self.price += $scope.tableSelection[i].price;
+            }
+            
+            DataShare.bottleServiceData = self.bottle;
+            DataShare.bottleZip = self.bottle.bottleZipcode;
+            DataShare.authBase64Str = authBase64Str;
+            DataShare.selectBottle = self.bottleMinimum;
+            DataShare.tableSelection = self.tableSelection;
+            if($scope.tableSelection.length === 0) {
+                self.noTableSelected = true;
+                return;
+            }
+            if (self.sum !== 0) {
+              if(self.bottle.totalGuest > self.sum) {
+                  $('#moreTableModal').modal('show');
+                  $('.modal-backdrop').remove();
+                  return;
+              }
+            }
+            DataShare.count = self.sum;
+            DataShare.price = self.price;
+            self.serviceJSON = {
+                "serviceType": 'Bottle',
+                "venueNumber": self.venueId,
+                "reason": self.bottle.bottleOccasion.name,
+                "contactNumber": self.bottle.mobile,
+                "contactEmail": self.bottle.email,
+                "contactZipcode": self.bottle.bottleZipcode,
+                "noOfGuests": parseInt(self.bottle.totalGuest),
+                "noOfMaleGuests": 0,
+                "noOfFemaleGuests": 0,
+                "budget": 0,
+                "serviceInstructions": self.bottle.instructions,
+                "status": "REQUEST",
+                "fulfillmentDate": dateValue,
+                "durationInMinutes": 0,
+                "deliveryType": "Pickup",
+                "order": {
                     "venueNumber": self.venueId,
-                    "reason": self.bottle.bottleOccasion.name,
-                    "contactNumber": self.bottle.mobile,
-                    "contactEmail": self.bottle.email,
-                    "contactZipcode": self.bottle.bottleZipcode,
-                    "noOfGuests": parseInt(self.bottle.totalGuest),
-                    "noOfMaleGuests": 0,
-                    "noOfFemaleGuests": 0,
-                    "budget": 0,
-                    "serviceInstructions": self.bottle.instructions,
-                    "status": "REQUEST",
-                    "fulfillmentDate": dateValue,
-                    "durationInMinutes": 0,
-                    "deliveryType": "Pickup",
-                    "order": {
+                    "orderDate": dateValue,
+                    "orderItems": []
+                },
+                "prebooking": false,
+                "employeeName": "",
+                "visitorName": fullName
+            };  
+
+            if (self.tableSelection !== undefined) {
+                angular.forEach(self.tableSelection, function(value, key) {
+                    var items = {
                         "venueNumber": self.venueId,
-                        "orderDate": dateValue,
-                        "orderItems": []
-                    },
-                    "prebooking": false,
-                    "employeeName": "",
-                    "visitorName": fullName
-                };
+                        "productId": value.id,
+                        "productType": value.productType,
+                        "quantity": value.size,
+                        "comments": value.comments,
+                        "name": value.name
+                    };
+                    self.serviceJSON.order.orderItems.push(items);
+                });
+            }
 
-                 if (self.tableSelection !== undefined) {
-                    angular.forEach(self.tableSelection, function(value, key) {
-                        var items = {
-                            "venueNumber": self.venueId,
-                            "productId": value.id,
-                            "productType": value.productType,
-                            "quantity": value.size,
-                            "comments": value.comments,
-                            "name": value.name
-                        };
-                        self.serviceJSON.order.orderItems.push(items);
-                    });
-                }
+            if (self.bottleMinimum !== undefined) {
+                angular.forEach(self.bottleMinimum, function(value1, key1) {
+                    var items = {
+                        "venueNumber": self.venueId,
+                        "productId": value1.productId,
+                        "productType": 'Bottle',
+                        "quantity": value1.quantity,
+                        "name": value1.bottle
+                    };
+                    self.serviceJSON.order.orderItems.push(items);
+                });
+            }
+            DataShare.payloadObject = self.serviceJSON;
+            DataShare.enablePayment = self.enabledPayment;
+            DataShare.venueName = self.venueName;
+            $location.url( self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/confirm");
+        };
+        self.venueRefId = function(venue) {
+          if (typeof(venue.uniqueName) === 'undefined' ) {
+              return venue.id;
+          } else {
+              return venue.uniqueName;
+          }
+        };
+        self.init();
 
-                if (self.bottleMinimum !== undefined) {
-                    angular.forEach(self.bottleMinimum, function(value1, key1) {
-                        var items = {
-                            "venueNumber": self.venueId,
-                            "productId": value1.productId,
-                            "productType": 'Bottle',
-                            "quantity": value1.quantity,
-                            "name": value1.bottle
-                        };
-                        self.serviceJSON.order.orderItems.push(items);
-                    });
-                }
-                DataShare.payloadObject = self.serviceJSON;
-                DataShare.enablePayment = self.enabledPayment;
-                DataShare.venueName = self.venueName;
-                $location.url("/confirm/" + self.selectedCity + "/" + self.venueId);
-             };
-            self.init();
     }]);

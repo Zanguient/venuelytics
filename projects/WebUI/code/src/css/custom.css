@@ -698,9 +698,7 @@ select {
 }
 
 .tabSelected {
-  -webkit-box-shadow:inset 0px 0px 0px 2px green !important;
-  -moz-box-shadow:inset 0px 0px 0px 2px green !important;
-  box-shadow:inset 0px 0px 0px 2px green !important;
+ border: 2px solid green !important;
 }
 
 .p-min {
@@ -2594,55 +2592,55 @@ table.fc-border-separate {
 .bottleBtn {
   background-color: rgba(122,17,217, 0.80) !important;
   color: #fff !important;
-  border-color: white !important;
+  border-color: white;
 }
 
 .tableBtn {
   background-color: rgba(220,153,42, 0.80) !important;
   color: #fff !important;
-  border-color: white !important;
+  border-color: white;
 }
 
 .drinksBtn {
   background-color: rgba(218,6,21, 0.80) !important;
   color: #fff !important;
-  border-color: white !important;
+  border-color: white;
 }
 
 .foodBtn {
   background-color: rgba(30,134,68, 0.80) !important;
   color: #fff !important;
-  border-color: white !important;
+  border-color: white;
 }
 
 .privateBtn {
   background-color: rgba(14,104,167, 0.80) !important;
   color: #fff !important;
-  border-color: white !important;
+  border-color: white;
 }
 
 .guestBtn {
   background-color: rgba(220,17,42, 0.80) !important;
   color: #fff !important;
-  border-color: white !important;
+  border-color: white;
 }
 
 .partyBtn {
   background-color: rgba(30,60,168, 0.80) !important;
   color: #fff !important;
-  border-color: white !important;
+  border-color: white;
 }
 
 .bachelorBtn {
   background-color: rgba(103,111,121, 0.80) !important;
   color: #fff !important;
-  border-color: white !important;
+  border-color: white;
 }
 
 .eventListBtn {
   background-color: rgba(0,0,0, 0.80) !important;
   color: #fff !important;
-  border-color: white !important;
+  border-color: white;
 }
 
 /* is */
@@ -2724,9 +2722,18 @@ table.fc-border-separate {
   cursor: pointer;
 }
 
+.service-btn.selected {
+  cursor: pointer;
+}
+
 .service-btn[disabled]:hover {
   cursor: not-allowed !important;
 }
+
+.service-btn[disabled]:hover {
+  cursor: not-allowed !important;
+}
+
 
 .control-box {
   height: 40px !important; 

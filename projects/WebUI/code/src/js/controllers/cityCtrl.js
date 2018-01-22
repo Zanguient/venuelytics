@@ -168,12 +168,18 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
                     $rootScope.getSearchBySearch(venueSearch);
                 }
             };
-
+            self.venueRefId = function(venue) {
+                if (typeof(venue.uniqueName) === 'undefined' ) {
+                    return venue.id;
+                } else {
+                    return venue.uniqueName;
+                }
+            }
             self.selectVenue = function(venue) {
                 self.selectedCityName = venue.city;
                 DataShare.selectedVenue = venue;
                 DataShare.venueNumber = venue.id;
-                $location.url('/cities/' + self.selectedCityName + '/' + venue.id + '/bottle-service');
+                $location.url('/cities/' + self.selectedCityName + '/' + self.venueRefId(venue) );
             };
 
             self.getCityKeyEnter = function(keyEvent,citySearch) {

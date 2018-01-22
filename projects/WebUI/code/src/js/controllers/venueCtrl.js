@@ -57,7 +57,8 @@ app.controller('VenueController', ['$rootScope','$log', '$scope', '$http', '$loc
                 } else {
                     return venue.uniqueName;
                 }
-            }
+            };
+            
             self.venueDescription = function(value) {
                 $rootScope.privateDescription = value;
                 $('.modal-backdrop').remove();
@@ -90,17 +91,16 @@ app.controller('VenueController', ['$rootScope','$log', '$scope', '$http', '$loc
                 }
             };
 
-        		self.selectVenue = function(venue) {
-                //DataShare.selectedVenueDetails = venue;
-                self.selectedCityName = venue.city;
-                DataShare.selectedVenue = venue;
-                DataShare.venueNumber = venue.id;
-        			  $location.url('/cities/' + self.selectedCityName + '/' + venue.id );
-        		};
-
+    		self.selectVenue = function(venue) {
+            //DataShare.selectedVenueDetails = venue;
+            self.selectedCityName = venue.city;
+            DataShare.selectedVenue = venue;
+            DataShare.venueNumber = venue.id;
+    			  $location.url('/cities/' + self.selectedCityName + '/' + self.venueRefId(venue) );
+    		};
             self.selectedServices = function(venue, serviceType) {
                 self.selectedCityName = venue.city;
-                $location.url('/cities/' + self.selectedCityName + '/' + venue.id + '/' + serviceType);
+                $location.url('/cities/' + self.selectedCityName + '/' + self.venueRefId(venue) + '/' + serviceType);
             };
     		self.init();
     }])

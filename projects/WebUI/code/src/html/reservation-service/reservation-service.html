@@ -1,11 +1,11 @@
 <div  ng-controller="ReservationServiceController">
 <form class="form-horizontal" parsley-validate autocomplete="off"  validate-form="" name="bottleForm" ng-submit="confirmBottleService()" novalidate>     
     <fieldset class="col-xs-12">
-        <div class="row col-xs-12 form-group label-floating is-empty no-p" ng-class = "{'active' : bottle.requestedDate.length > 0}">
+        <div class="row col-xs-12 form-group label-floating no-p" ng-class = "{'active' : bottle.requestedDate.length > 0}">
             <label class="control-label" >{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control " id="requestDate" ng-model="bottle.requestedDate" required/>
         </div>
-        <div class="row col-xs-12  is-empty mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
+        <div class="row col-xs-12 mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
             <center>
                 <div class="row h6">
                     
@@ -18,7 +18,7 @@
                 
                            
                 </div>
-                <img alt="bottleService-image" id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#bottleImageMap" class="no-p no-m map img-responsive"/>
+                <img alt="venuemap Image" id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#bottleImageMap" class="no-p no-m map img-responsive"/>
                 <map name="bottleImageMap">
                     <area id="{{area.id}}"
                         style="outline: red solid 2px;" shape="rect"
@@ -45,13 +45,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 mt-4 is-empty mb-2"  ng-if="tableSelection.length > 0">
+        <div class="col-xs-12 mt-4 mb-2"  ng-if="tableSelection.length > 0">
             <b>{{'reservation.SELECT_TABLE' | translate}}</b>:
             <label ng-repeat="table in tableSelection">
             {{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
         </div>
 
-        <div class="col-xs-12 is-empty"  ng-if="tableSelection">
+        <div class="col-xs-12"  ng-if="tableSelection">
             <div class="col-xs-12 mb-2" ng-repeat="table in tableSelection">
                 <div class="col-md-6 col-xs-12">
                     <table class="table">
@@ -82,47 +82,49 @@
                 
             </div>
         </div>
-        <div class="col-xs-12 form-group label-floating no-p is-empty">
+        <div class="col-xs-12 form-group label-floating no-p">
             <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
             <input type="text" class="form-control " ng-model="bottle.userFirstName" id="firstName" required>
         </div>
-        <div class="col-xs-12 form-group label-floating is-empty no-p" >
+        <div class="col-xs-12 form-group label-floating no-p" >
             <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
             <input type="text" class="form-control  fontChange"  ng-model="bottle.userLastName" id="lastName" required>
         </div>
-        <div class="col-xs-12 form-group label-floating is-empty no-p" >
+        <div class="col-xs-12 form-group label-floating no-p" >
             <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
             <input type="email" class="form-control " id="email" ng-model="bottle.email"data-parsley-trigger="change" required>
         </div>
-        <div class="col-xs-12 form-group label-floating is-empty no-p">
+        <div class="col-xs-12 form-group label-floating no-p">
             <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
             <input type="text" id="ms-form-pass" class="form-control  fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="bottle.mobile" required data-parsley-trigger="change">
         </div>
        
-        <div class="col-xs-12 form-group label-floating is-empty no-p" >
+        <div class="col-xs-12 form-group label-floating no-p" >
             <label class="control-label" >{{'reservation.ZIPCODE' | translate}}</label>
             <input type="text" class="form-control " id="zipcode" ng-model="bottle.bottleZipcode"  required>
         </div>
-        <div class="col-xs-12 form-group label-floating is-empty no-p">
+        <div class="col-xs-12 form-group label-floating no-p">
             <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
             <input type="text" class="form-control " id="totalGuest" ng-model="bottle.totalGuest" >
         </div>
-        <div class="col-xs-12 form-group label-floating is-empty no-p">
+        <div class="col-xs-12 form-group label-floating no-p">
             <label class="control-label" >{{'reservation.OCCASION' | translate}}</label>
             <select class="form-control  {{blackTheme}}" eqruired
                     ng-model="bottle.bottleOccasion" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>
         </div>
-        <div class="col-xs-12 form-group label-floating is-empty no-p">
+        <div class="col-xs-12 form-group label-floating no-p">
             <label class="control-label" >{{'reservation.INSTRUCTIONS' | translate}}</label>
             <input type="text" class="form-control " id="instructions" ng-model="bottle.instructions" placeholder="">
         </div>
-        <div class="col-md-4 col-xs-6 form-group label-floating is-empty no-p" ng-hide ="!hostDate || hostDate.length == 0">
-            <label class="control-label">{{'reservation.HOST' | translate}}</label>
-            
-            <select class="form-control  {{blackTheme}}" ng-model="bottle.host" ng-options="x as x.name for x in hostDate  track by x.id">
-            </select></div><img ng-hide ="!hostDate || hostDate.length == 0" class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
+       <!--  <div class="col-md-4 col-xs-6 form-group label-floating no-p" ng-hide ="!hostDate || hostDate.length == 0">
+           <label class="control-label">{{'reservation.HOST' | translate}}</label>
+           
+           <select class="form-control  {{blackTheme}}" ng-model="bottle.host" ng-options="x as x.name for x in hostDate  track by x.id">
+           </select>
+           <img ng-hide ="!hostDate || hostDate.length == 0" class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
+       </div> -->
         <div class="col-xs-12" >
         <center><h2>{{"reservation.PARTY_PACKAGE"  | translate}}</h2></center>
         </div>
@@ -212,7 +214,7 @@
                 <p class="loose_pack">{{'bottleServiceTab.ALREADY_SELECTED' | translate}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" ng-click="closeReservedModal()" data-backdrop="false">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
+                <button type="button" class="btn btn-primary" ng-click="closeReservedModal()" data-backdrop="false">{{'CLOSE' | translate}}</button>
             </div>
         </div>
     </div>
@@ -272,7 +274,7 @@
                 </table>
             </div>
             <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-primary" ng-click="closeModal()" data-backdrop="false">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button> 
+                <button type="button" class="btn btn-primary" ng-click="closeModal()" data-backdrop="false">{{'CLOSE' | translate}}</button> 
             </div>
         </div>
     </div>

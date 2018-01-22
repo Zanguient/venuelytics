@@ -100,7 +100,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'business/email-verification.html',
             controller: 'BusinessSearchController'
         })
-        .when('/confirm/:cityName/:venueId', {
+        .when('/:cityName/:venueId/confirm', {
             templateUrl: 'bottle-service/bottle-reservation.html',
             controller: 'ConfirmReservationController'
         })
@@ -140,7 +140,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'break-through/through-post.html',
             controller: 'Breakthrough'
         })
-        .when('/:cityName/orderConfirm/:venueId', {
+        .when('/:cityName/:venueId/orderConfirm', {
             templateUrl: 'order-confirm.html',
             controller:'OrderConfirmController'
         })

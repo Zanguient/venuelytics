@@ -92,18 +92,18 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
             };
 
             self.editConfirmPage = function() {
-                $location.url("/cities/" + self.selectedCity + "/" + self.venueId + '/bottle-service');
+                $location.url("/cities/" + self.selectedCity + "/" + self.venueRefId(self.venueDetails) + '/bottle-service');
             };
 
             self.paymentEnable = function() {
-                $location.url(self.selectedCity +"/bottlePayment/" + self.venueId);
+                $location.url(self.selectedCity +"/bottlePayment/" + self.venueRefId(self.venueDetails));
             };
 
             self.backToReservation = function() {
                 $rootScope.serviceName = 'BottleService';
                 DataShare.editBottle = 'false';
                 DataShare.bottleServiceData = '';
-                $location.url('/cities/' + self.selectedCity + '/' + self.venueId + '/bottle-service');
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueRefId(self.venueDetails) + '/bottle-service');
             };
 
             self.cardPaymentData = function(value) {
@@ -144,7 +144,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.selectedCity +'/orderConfirm/'+ self.venueId);
+                            $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
                         }
                     });
                 } else {
@@ -153,49 +153,57 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.selectedCity +'/orderConfirm/'+ self.venueId);
+                        $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm/');
                     }
                 }
             };
 
-            self.creditCardPayment = function() {
-            var pay,chargeAmountValue;
-            pay = self.chargedAmount * 100;
-            chargeAmountValue = parseFloat(self.chargedAmount).toFixed(2);
-            var amount = self.availableAmount;
-            var currencyType = 'USD';
-            var taxValue = 0;
-            var orderAmount = 0;
-            var handler = StripeCheckout.configure({
-                key: 'pk_test_v3iaPvbv4UeKkRWrH3O5etYU',
-                image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-                locale: 'auto',
-                token: function(token) {
-                    if(token.card.country === 'INR') {
-                        currencyType = 'INR';
-                    }
-                    taxValue = self.taxAmount.toFixed(2);
-                    orderAmount = amount.toFixed(2);
-                    var payment = {
-                                    "gatewayId":1,
-                                    "token":token.id,
-                                    "currencyCode":currencyType,
-                                    "orderAmount":parseFloat(orderAmount),
-                                    "tax":parseFloat(taxValue),
-                                    "gratuity":self.gratuity,
-                                    "processingFee":self.processingFee,
-                                    "discountAmount":self.discount,
-                                    "paymentType":"CREDIT_CARD",
-                                    "chargedAmount":parseFloat(chargeAmountValue)
-                                };
-                    DataShare.amount = chargeAmountValue;
-                    //Save Payment Transaction for card
-                    var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
-                    var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
-                    AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
-                        $location.url(self.selectedCity +"/paymentSuccess/" + self.venueId);
-                    });
+            self.venueRefId = function(venue) {
+                if (typeof(venue.uniqueName) === 'undefined' ) {
+                    return venue.id;
+                } else {
+                    return venue.uniqueName;
                 }
+            };
+
+            self.creditCardPayment = function() {
+                var pay,chargeAmountValue;
+                pay = self.chargedAmount * 100;
+                chargeAmountValue = parseFloat(self.chargedAmount).toFixed(2);
+                var amount = self.availableAmount;
+                var currencyType = 'USD';
+                var taxValue = 0;
+                var orderAmount = 0;
+                var handler = StripeCheckout.configure({
+                    key: 'pk_test_v3iaPvbv4UeKkRWrH3O5etYU',
+                    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                    locale: 'auto',
+                    token: function(token) {
+                        if(token.card.country === 'INR') {
+                            currencyType = 'INR';
+                        }
+                        taxValue = self.taxAmount.toFixed(2);
+                        orderAmount = amount.toFixed(2);
+                        var payment = {
+                                        "gatewayId":1,
+                                        "token":token.id,
+                                        "currencyCode":currencyType,
+                                        "orderAmount":parseFloat(orderAmount),
+                                        "tax":parseFloat(taxValue),
+                                        "gratuity":self.gratuity,
+                                        "processingFee":self.processingFee,
+                                        "discountAmount":self.discount,
+                                        "paymentType":"CREDIT_CARD",
+                                        "chargedAmount":parseFloat(chargeAmountValue)
+                                    };
+                        DataShare.amount = chargeAmountValue;
+                        //Save Payment Transaction for card
+                        var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
+                        var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
+                        AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
+                            $location.url(self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails));
+                        });
+                    }
             });
             handler.open({
                 name: self.venueName,

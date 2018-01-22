@@ -42,7 +42,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.initMore = function() {
         //localStorage.clear();
         AjaxService.getInfo(self.venueId).then(function(response) {
-                venueService.saveVenueInfo(self.venueId, response);
+            venueService.saveVenueInfo(self.venueId, response);
                 self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
                 self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
                 self.bottleServiceButton = response.data["Advance.BottleService.enable"];
@@ -77,12 +77,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
 
         venueService.saveProperty(self.venueId, 'embed', $rootScope.embeddedFlag);
 
-        if ((self.venueId === '70008') || (self.venueId === '170637')) {
-            self.partyFlag = true;
-        }
-        if (self.venueId === '170639') {
-            self.bachelorFlag = true;
-        }
         self.guest = DataShare.guestListData;
         self.private = DataShare.privateEventData;
         self.totalGuest = DataShare.totalNoOfGuest;
@@ -204,25 +198,30 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         addTab('bottleTab','bottle', 'assets/img/service/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, 'bottleBtn', 'bottleService');
 
       // self.tabBachelor = self.tabParams === 'bachelor-party' ? 'bachelor-party' : '';
-        if (self.bachelorFlag) {
+       /* if (self.bachelorFlag) {
             addTab('bachelorTab','bachelor', 'assets/img/service/trophy.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party/bachelor-party.html',!self.bachelorFlag, 'bachelorBtn', 'bachelorParty');
-        }
+        }*/
 
        // self.tabParty = self.tabParams === 'party-packages' ? 'party-packages' : '';
-        if (self.partyFlag) {
+       /* if (self.partyFlag) {
             addTab('partyEventTab','party', 'assets/img/service/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html',!self.partyFlag, 'partyBtn','partyPackage');
+        }*/
+
+        if (self.venueId === 70008) {
+            addTab('reservationTab','party', 'assets/img/service/ic_party(2).png','RESERVATION', 'reservation-service', 'reservation-service/reservation-service.html',false, 'partyBtn', 'reservationService');
+            addTab('guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, 'guestBtn', 'guestList');
+
+        } else {
+            addTab('privateEventTab','private', 'assets/img/service/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, 'privateBtn', 'privateEvents');
+            addTab('guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, 'guestBtn', 'guestList');
+
         }
-
-        addTab('reservationTab','reservation', 'assets/img/service/guests.png','RESERVATION', 'reservation-service', 'reservation-service/reservation-service.html',false, 'guestBtn', 'reservationService');
-
+        
        // self.tabPrivate = self.tabParams === 'private-events' ? 'private-events' : '';
         
-        addTab('privateEventTab','private', 'assets/img/service/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, 'privateBtn', 'privateEvents');
 
 
-        //self.tabGuest = self.tabParams === 'guest-list' ? 'guest-list' : '';
-        addTab('guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, 'guestBtn', 'guestList');
-
+        
         // self.tabTable = self.tabParams === 'table-services' ? 'table-services' : '';
         addTab('tableServiceTab','tableService', 'assets/img/service/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, 'tableBtn', 'tableServices');
 

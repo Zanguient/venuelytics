@@ -17,7 +17,7 @@
                                     <article id="articleCart" class="card border_clouds mb-4 wow materialUp animation-delay-5">
                                         <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" >
                                             <div class="imgHolder">
-                                                <img ng-src="{{venue.imageUrls[0].smallUrl || venue.imageUrls[0].originalUrl}}" alt="venueInNewCity-image" class="img-responsive" >
+                                                <img ng-src="{{venue.imageUrls[0].smallUrl || venue.imageUrls[0].originalUrl}}" alt="{{venue.venueName}}" class="img-responsive" >
                                                 <h5 class=" pull-right" ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
                                             </div>
                                         </figure>
@@ -78,7 +78,7 @@
                 <p>{{privateDescription}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'reservation.FOOD_DRINK_CLOSE' | translate}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'CLOSE' | translate}}</button>
             </div>
         </div>
     </div>

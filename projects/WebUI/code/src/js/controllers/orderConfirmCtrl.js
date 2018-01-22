@@ -10,16 +10,29 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$location', 'DataSh
 
     		var self = $scope;
     		
+    		self.venueRefId = function(venue) {
+                if (typeof(venue.uniqueName) === 'undefined' ) {
+                    return venue.id;
+                } else {
+                    return venue.uniqueName;
+                }
+            };
+
+            self.init = function() {
 			
-			self.venueDetails = venueService.getVenue($routeParams.venueId);
-			$rootScope.description = self.venueDetails.description;
-			self.selectedCityName = self.venueDetails.city;
-			ngMeta.setTag('description', self.venueDetails.description + " Bottle Order Confirmation");
-			$rootScope.title = self.venueDetails.venueName+' '+self.selectedCityName+' '+self.venueDetails.state + " Venuelytics - Bottle Services Confirmation";
-			ngMeta.setTitle($rootScope.title);
-        	self.backToReservation = function() {
-				$rootScope.serviceName = 'BottleService';
-				DataShare.editBottle = 'false';
-            	$location.url('/cities/' + self.selectedCityName + '/' + self.venueID + '/bottle-service');
-        	};
+				self.venueDetails = venueService.getVenue($routeParams.venueId);
+				$rootScope.description = self.venueDetails.description;
+				self.selectedCityName = self.venueDetails.city;
+				ngMeta.setTag('description', self.venueDetails.description + " Bottle Order Confirmation");
+				$rootScope.title = self.venueDetails.venueName+' '+self.selectedCityName+' '+self.venueDetails.state + " Venuelytics - Bottle Services Confirmation";
+				ngMeta.setTitle($rootScope.title);
+	        	self.backToReservation = function() {
+					$rootScope.serviceName = 'BottleService';
+					DataShare.editBottle = 'false';
+	            	$location.url('/cities/' + self.selectedCityName + '/' + self.venueRefId(self.venueDetails) + '/bottle-service');
+	        	};
+	        };
+
+	       self.init();
+
     }]);
