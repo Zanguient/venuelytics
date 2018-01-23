@@ -133,9 +133,15 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
                 DataShare.payloadObject = object;
                 self.guest.authorize = false;
                 self.guest.agree = false;
-                
-                $location.url("/confirmGuestList/" + self.selectedCity + "/" + self.venueId);
-                
+                $location.url( self.selectedCity + "/" + self.venueId + "/confirmGuestList");
             };
+
+            /*self.venueRefId = function(venue) {
+                if (typeof(venue.uniqueName) === 'undefined' ) {
+                    return venue.id;
+                } else {
+                    return venue.uniqueName;
+                }
+            };*/
             self.init();
     }]);

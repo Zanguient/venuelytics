@@ -48,6 +48,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.bottleServiceButton = response.data["Advance.BottleService.enable"];
                 self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
                 self.guestServiceButton = response.data["Advance.GuestList.enable"];
+                console.log('self.guestServiceButton',self.guestServiceButton);
                 self.tableServiceButton = response.data["Advance.tableService.enable"];
                 self.featuredEnable = response.data["Advance.featured"];
                 self.eventsEnable = response.data["venueEvents"];

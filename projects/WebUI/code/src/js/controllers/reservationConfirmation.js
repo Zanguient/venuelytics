@@ -6,7 +6,7 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
     		$log.log('Inside Confirm Party Reservation Controller.');
 
     		var self = $scope;
-            self.selectTables = [];
+            self.selectReserveTables = [];
             self.selectPartyOrders = [];
             self.availableAmount = 0;
             self.paypal = false;
@@ -16,8 +16,8 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                 $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueId, 'embed');
                 self.venueDetails =  venueService.getVenue($routeParams.venueId); 
                 $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
-                $rootScope.description = self.venueDetails.description; 
-                DataShare.venueDetails = self.venueDetails;  
+                $rootScope.description = self.venueDetails.description;
+                DataShare.venueDetails = self.venueDetails;
                 self.selectedCity = DataShare.venueDetails.city;
                 ngMeta.setTag('description', self.venueDetails.description + " Party Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.selectedCity+' '+self.venueDetails.state + " Venuelytics - Party Services Confirmation & Payment";
@@ -41,7 +41,7 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                 }
                 if(self.object !== '') {
                     angular.forEach(self.object.order.orderItems, function(value, key) {
-                    if(value.productType === 'partypackage') {
+                    if(value.productType === 'VenueMap') {
                         var items = {
                             "venueNumber": value.venueNumber,
                             "productId": value.productId,
@@ -49,7 +49,7 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                             "quantity": value.quantity,
                             "name": value.name
                         };
-                            self.selectTables.push(items);
+                            self.selectReserveTables.push(items);
                         }
                     });
                 }
@@ -89,18 +89,18 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
             };
 
             self.editConfirmPage = function() {
-                $location.url("/cities/" + self.selectedCity + "/" + self.venueRefId(self.venueDetails) + '/reservation-service');
+                $location.url("/cities/" + self.selectedCity + "/" + self.venueId + '/reservation-service');
             };
 
             self.paymentEnable = function() {
-                $location.url(self.selectedCity +"/partyPayment/" + self.venueRefId(self.venueDetails));
+                $location.url(self.selectedCity +"/partyPayment/" + self.venueId);
             };
 
             self.backToReservation = function() {
                 $rootScope.serviceName = 'BottleService';
                 DataShare.editParty = 'false';
                 DataShare.partyServiceData = '';
-                $location.url('/cities/' + self.selectedCity + '/' + self.venueRefId(self.venueDetails) + '/reservation-service');
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueId + '/reservation-service');
             };
 
             self.cardPaymentData = function(value) {
@@ -141,7 +141,7 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
+                            $location.url(self.selectedCity +'/'+ self.venueId +'/orderConfirm');
                         }
                     });
                 } else {
@@ -150,18 +150,18 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm/');
+                        $location.url(self.selectedCity +'/'+ self.venueId +'/orderConfirm/');
                     }
                 }
             };
 
-            self.venueRefId = function(venue) {
+            /*self.venueRefId = function(venue) {
                 if (typeof(venue.uniqueName) === 'undefined' ) {
                     return venue.id;
                 } else {
                     return venue.uniqueName;
                 }
-            };
+            };*/
 
             self.creditCardPayment = function() {
                 var pay,chargeAmountValue;
@@ -198,7 +198,7 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                         var fullName = self.userPartyData.userFirstName + " " + self.userPartyData.userLastName;
                         var authBase64Str = window.btoa(fullName + ':' + self.userPartyData.email + ':' + self.userPartyData.mobile);
                         AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
-                            $location.url(self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails));
+                            $location.url(self.selectedCity +"/paymentSuccess/" + self.venueId);
                         });
                     }
             });

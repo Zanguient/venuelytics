@@ -92,18 +92,18 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
             };
 
             self.editConfirmPage = function() {
-                $location.url("/cities/" + self.selectedCity + "/" + self.venueRefId(self.venueDetails) + '/bottle-service');
+                $location.url("/cities/" + self.selectedCity + "/" + self.venueId + '/bottle-service');
             };
 
             self.paymentEnable = function() {
-                $location.url(self.selectedCity +"/bottlePayment/" + self.venueRefId(self.venueDetails));
+                $location.url(self.selectedCity +"/bottlePayment/" + self.venueId);
             };
 
             self.backToReservation = function() {
                 $rootScope.serviceName = 'BottleService';
                 DataShare.editBottle = 'false';
                 DataShare.bottleServiceData = '';
-                $location.url('/cities/' + self.selectedCity + '/' + self.venueRefId(self.venueDetails) + '/bottle-service');
+                $location.url('/cities/' + self.selectedCity + '/' + self.venueId + '/bottle-service');
             };
 
             self.cardPaymentData = function(value) {
@@ -144,7 +144,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                         } else if (self.paypal === true) {
                             self.paypalPayment();
                         } else {
-                            $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
+                            $location.url(self.selectedCity +'/'+ self.venueId +'/orderConfirm');
                         }
                     });
                 } else {
@@ -153,18 +153,18 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm/');
+                        $location.url(self.selectedCity +'/'+ self.venueId +'/orderConfirm/');
                     }
                 }
             };
 
-            self.venueRefId = function(venue) {
+            /*self.venueRefId = function(venue) {
                 if (typeof(venue.uniqueName) === 'undefined' ) {
                     return venue.id;
                 } else {
                     return venue.uniqueName;
                 }
-            };
+            };*/
 
             self.creditCardPayment = function() {
                 var pay,chargeAmountValue;
@@ -201,7 +201,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                         var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
                         var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
                         AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
-                            $location.url(self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails));
+                            $location.url(self.selectedCity +"/paymentSuccess/" + self.venueId);
                         });
                     }
             });

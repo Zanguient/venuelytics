@@ -75,8 +75,8 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 if(DataShare.selectParty) {
                     self.partyMinimum = DataShare.selectParty;
                 }
-                if(DataShare.tableSelection) {
-                    self.tableSelection = DataShare.tableSelection;
+                if(DataShare.reserveTableSelection) {
+                    self.reserveTableSelection = DataShare.reserveTableSelection;
                     //self.showSelectedVenueMap();
                 }
                 self.reservationTime = APP_ARRAYS.time;
@@ -133,7 +133,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
 
             self.tabClear = function() {
                 DataShare.partyServiceData = {};
-                DataShare.tableSelection = '';
+                DataShare.reserveTableSelection = '';
                 DataShare.selectParty = '';
                 self.party = {};
                 $rootScope.serviceName = '';
@@ -182,8 +182,8 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
         };
 
             self.showReserveFloorMapByDate = function() {
-                if(!DataShare.tableSelection) {
-                    self.tableSelection = [];
+                if(!DataShare.reserveTableSelection) {
+                    self.reserveTableSelection = [];
                     self.selectionTableItems = [];
                 }
                 if(!DataShare.count){
@@ -196,7 +196,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 var day = moment(self.startDate).format('ddd').toUpperCase();
 
                 if(DataShare.selectedDateForParty !== self.partyServiceDate) {
-                  self.tableSelection = [];
+                  self.reserveTableSelection = [];
                   self.selectionTableItems = [];
                 }
 
@@ -257,10 +257,10 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             self.fillColor = function(id) {
               var obj = $scope.reservationData[id];
               // $log.info("Reservation Data:", angular.toJson(obj));
-              // $log.info("tableSelection data:", angular.toJson(self.tableSelection));
-              if (self.tableSelection.length !== 0) {
-                  for (var i = 0; i < self.tableSelection.length; i++) {
-                      var obj2 = self.tableSelection[i].id;
+              // $log.info("reserveTableSelection data:", angular.toJson(self.reserveTableSelection));
+              if (self.reserveTableSelection.length !== 0) {
+                  for (var i = 0; i < self.reserveTableSelection.length; i++) {
+                      var obj2 = self.reserveTableSelection[i].id;
                       if (obj2 === id) {
                           // $log.info("Inside yellow");
                           return APP_COLORS.darkYellow;
@@ -308,9 +308,9 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             self.strokeColor = function(id) {
               var obj = $scope.reservationData[id];
 
-            	if(self.tableSelection.length !== 0) {
-                  for(var i = 0; i < self.tableSelection.length; i++) {
-                      var obj2 = self.tableSelection[i].id;
+            	if(self.reserveTableSelection.length !== 0) {
+                  for(var i = 0; i < self.reserveTableSelection.length; i++) {
+                      var obj2 = self.reserveTableSelection[i].id;
                       if(obj2 === id) {
                         // $log.info("Inside yellow");
                         return APP_COLORS.turbo;
@@ -337,10 +337,10 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             } else {
                 self.selectionTableItems.splice(index,1);
             }
-            self.tableSelection = [];
+            self.reserveTableSelection = [];
 
             for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
-                var table = {
+                var reserveTable = {
                     "id": self.selectionTableItems[itemIndex].id,
                     "productType": self.selectionTableItems[itemIndex].productType,
                     "name": self.selectionTableItems[itemIndex].name,
@@ -349,7 +349,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                     "description": self.selectionTableItems[itemIndex].description,
                     "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
                   };
-                  self.tableSelection.push(table);
+                  self.reserveTableSelection.push(reserveTable);
               }
         };
 
@@ -365,12 +365,12 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
           $('#reservedPartyTable').modal('hide');
         };
 
-        self.isReserved = function (table) {
-            table.reserved = false;
+        self.isReserved = function (reserveTable) {
+            reserveTable.reserved = false;
             if (self.reservations && typeof self.reservations !== 'undefined') {
                 for (var resIndex = 0; resIndex < self.reservations.length; resIndex++) {
-                    if (table.id === self.reservations[resIndex].productId) {
-                        table.reserved = true;
+                    if (reserveTable.id === self.reservations[resIndex].productId) {
+                        reserveTable.reserved = true;
                         return true;
                     }
                 }
@@ -378,10 +378,10 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             return false;
         };  
 
-        self.isPartyTableSelected = function (table) {
-            if (self.tableSelection && typeof self.tableSelection !== 'undefined') {
-                for (var resIndex = 0; resIndex < self.tableSelection.length; resIndex++) {
-                    if (table.id === self.tableSelection[resIndex].id) {
+        self.isPartyTableSelected = function (reserveTable) {
+            if (self.reserveTableSelection && typeof self.reserveTableSelection !== 'undefined') {
+                for (var resIndex = 0; resIndex < self.reserveTableSelection.length; resIndex++) {
+                    if (reserveTable.id === self.reserveTableSelection[resIndex].id) {
                         return true;
                     }
                 }
@@ -425,9 +425,9 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                     DataShare.userselectedTables = self.selectionTableItems;
 
 
-                    self.tableSelection = [];
+                    self.reserveTableSelection = [];
                     for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
-                        var table = {
+                        var reserveTable = {
                             "id": self.selectionTableItems[itemIndex].id,
                             "productType": self.selectionTableItems[itemIndex].productType,
                             "name": self.selectionTableItems[itemIndex].name,
@@ -437,7 +437,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                             "description": self.selectionTableItems[itemIndex].description,
                             "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
                         };
-                        self.tableSelection.push(table);
+                        self.reserveTableSelection.push(reserveTable);
                     }
                     $('#reserveTableSelectionModal').modal('show');
                     $('.modal-backdrop').remove();
@@ -446,9 +446,9 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                     self.price = self.price - dataValueObj.price;
                     data.fillColor = APP_COLORS.lightGreen;
                     data.strokeColor = APP_COLORS.darkGreen;
-                    angular.forEach(self.tableSelection, function(key, value) {
+                    angular.forEach(self.reserveTableSelection, function(key, value) {
                         if(dataValueObj.id === key.id) {
-                          self.tableSelection.splice(value, 1);
+                          self.reserveTableSelection.splice(value, 1);
                           self.selectionTableItems.splice(value, 1);
                         }
                     });
@@ -456,7 +456,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 $('#' + id).data('maphilight', data).trigger('alwaysOn.maphilight');
             };
 
-        self.removeReserveSelectedTables = function(index,arrayObj,table) {
+        self.removeReserveSelectedTables = function(index,arrayObj,reserveTable) {
             angular.forEach(DataShare.elements, function(key, value) {
                 if(arrayObj.name === key.name) {
                     var id = key.id;
@@ -473,7 +473,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             });
             self.sum = self.sum - arrayObj.size;
             self.price = self.price - arrayObj.price;
-            table.splice(index, 1);
+            reserveTable.splice(index, 1);
             self.selectionTableItems.splice(index, 1);
         };
 
@@ -489,17 +489,17 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             
             self.sum = 0;
             self.price = 0;
-            for (var i = 0; i < $scope.tableSelection.length; i++) {
-              self.sum += $scope.tableSelection[i].size;
-              self.price += $scope.tableSelection[i].price;
+            for (var i = 0; i < $scope.reserveTableSelection.length; i++) {
+              self.sum += $scope.reserveTableSelection[i].size;
+              self.price += $scope.reserveTableSelection[i].price;
             }
             
             DataShare.partyServiceData = self.party;
             DataShare.partyZip = self.party.partyZipcode;
             DataShare.authBase64Str = authBase64Str;
             DataShare.selectParty = self.partyMinimum;
-            DataShare.tableSelection = self.tableSelection;
-            if($scope.tableSelection.length === 0) {
+            DataShare.reserveTableSelection = self.reserveTableSelection;
+            if($scope.reserveTableSelection.length === 0) {
                 self.noTableSelected = true;
                 return;
             }
@@ -538,8 +538,8 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 "visitorName": fullName
             };
 
-             if (self.tableSelection !== undefined) {
-                angular.forEach(self.tableSelection, function(value, key) {
+             if (self.reserveTableSelection !== undefined) {
+                angular.forEach(self.reserveTableSelection, function(value, key) {
                     var items = {
                         "venueNumber": self.venueId,
                         "productId": value.id,
@@ -567,15 +567,15 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             DataShare.payloadObject = self.serviceJSON;
             DataShare.enablePayment = self.enabledPayment;
             DataShare.venueName = self.venueName;
-            $location.url( self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/reserve/");
+            $location.url( self.selectedCity + "/" + self.venueId + "/reserve/");
          };
 
-         self.venueRefId = function(venue) {
+         /*self.venueRefId = function(venue) {
           if (typeof(venue.uniqueName) === 'undefined' ) {
               return venue.id;
           } else {
               return venue.uniqueName;
           }
-        };
+        };*/
         self.init();
     }]);

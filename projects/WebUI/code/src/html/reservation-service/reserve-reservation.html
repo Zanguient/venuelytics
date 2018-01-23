@@ -49,7 +49,25 @@
           </tbody>
       </table>
     </div>
- 
+
+      <div class="form-group">
+          <h4 class="color-success">{{"reservation.SELECT_TABLE"  | translate}}</h4>
+          <table class="table table-responsive table-no-border">
+              <thead>
+              <tr>
+                  <th>{{"reservation.TABLE_NAME"  | translate}}</th>
+                  <th>{{"reservation.CAPACITY"  | translate}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="reserveTable in selectReserveTables">
+                  <td>{{reserveTable.name}}</td>
+                  <td>{{(reserveTable == null || reserveTable.quantity == 0 || reserveTable.quantity == undefined) ? "-" : reserveTable.quantity}}</td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+
     <div class="form-group">
         <h4 class="color-success">{{"reservation.PARTY_PACKAGE"  | translate}}</h4>
         <th>{{userPartyData.partyObj}}</th>

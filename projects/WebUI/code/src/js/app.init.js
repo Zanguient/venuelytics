@@ -124,7 +124,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'private-event/private-confirm.html',
             controller: 'PrivateConfirmController'
         })
-        .when('/confirmGuestList/:cityName/:venueId', {
+        .when('/:cityName/:venueId/confirmGuestList', {
             templateUrl: 'guest-list/guest-confirmation.html',
             controller: 'GuestConfirmController'
         })

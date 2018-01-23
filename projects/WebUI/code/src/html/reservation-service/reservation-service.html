@@ -28,52 +28,52 @@
                 </map>
             </center>
         </div>
-        <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" ng-repeat="table in selectedVenueMap.elements" >
+        <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" ng-repeat="reserveTable in selectedVenueMap.elements" >
             <div class="alternative col-xs-12 mb-4">
                 <div class="col-md-3 col-xs-4"><label>
-                    <input class="mr-1" type="checkbox" id="checkData" name="{{table.name}}" ng-checked="isPartyTableSelected(table)" ng-disabled="isReserved(table)" ng-click="selectReserveTableForWithOutFloorMap(table,$index)" />{{table.name}}<span
-                    ng-hide="table.size <= 0">({{table.size}}<i class="fa fa-user" aria-hidden="true" />)
-                    </span></label><label class="tableReserved" ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
+                    <input class="mr-1" type="checkbox" id="checkData" name="{{reserveTable.name}}" ng-checked="isPartyTableSelected(reserveTable)" ng-disabled="isReserved(reserveTable)" ng-click="selectReserveTableForWithOutFloorMap(reserveTable,$index)" />{{reserveTable.name}}<span
+                    ng-hide="reserveTable.size <= 0">({{reserveTable.size}}<i class="fa fa-user" aria-hidden="true" />)
+                    </span></label><label class="tableReserved" ng-if="reserveTable.reserved === true">{{"reservation.RESERVED" | translate}}</label>
                 </div>
                 <div class="col-md-5 col-xs-8">
-                    <img alt="table-images" class="table-carousel" class="img-responsive" data-ng-src="{{table.imageUrls[0].smallUrl}}"/>
+                    <img alt="table-images" class="table-carousel" class="img-responsive" data-ng-src="{{reserveTable.imageUrls[0].smallUrl}}"/>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                    <label>{{table.description}}</label>
+                    <label>{{reserveTable.description}}</label>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 mt-4 mb-2"  ng-if="tableSelection.length > 0">
+        <div class="col-xs-12 mt-4 mb-2"  ng-if="reserveTableSelection.length > 0">
             <b>{{'reservation.SELECT_TABLE' | translate}}</b>:
-            <label ng-repeat="table in tableSelection">
-            {{table.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
+            <label ng-repeat="reserveTable in reserveTableSelection">
+            {{reserveTable.name}}{{$last? '' : ($index==reserveTableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
         </div>
 
-        <div class="col-xs-12"  ng-if="tableSelection">
-            <div class="col-xs-12 mb-2" ng-repeat="table in tableSelection">
+        <div class="col-xs-12"  ng-if="reserveTableSelection">
+            <div class="col-xs-12 mb-2" ng-repeat="reserveTable in reserveTableSelection">
                 <div class="col-md-6 col-xs-12">
                     <table class="table">
                         <tr>
                             <td>Name:</td>
-                            <td>{{table.name}}</td>
+                            <td>{{reserveTable.name}}</td>
                         </tr>
-                        <tr ng-hide="table.size <= 0">
+                        <tr ng-hide="reserveTable.size <= 0">
                             <td>{{'bottleServiceTab.CAPACITY' | translate}}:</td>
-                            <td>{{table.size}}</td>
+                            <td>{{reserveTable.size}}</td>
                         </tr>
-                        <tr ng-hide="((table.description == null) || (table.description == ''))">
+                        <tr ng-hide="((reserveTable.description == null) || (reserveTable.description == ''))">
                             <td>{{'bottleServiceTab.DESC' | translate}}:</td>
-                            <td> {{table.description}}</td>
+                            <td> {{reserveTable.description}}</td>
                             
                         </tr>
                     </table>
-                    <button id="removeBtn" type="button" class="btn btn-danger btn-raised" ng-click="removeReserveSelectedTables($index,table,tableSelection) ">{{'bottleServiceTab.REMOVE' | translate}}</button>
+                    <button id="removeBtn" type="button" class="btn btn-danger btn-raised" ng-click="removeReserveSelectedTables($index,reserveTable,reserveTableSelection) ">{{'bottleServiceTab.REMOVE' | translate}}</button>
                 </div>
                  <div class="col-md-6 col-xs-12">
-                    <div ng-show="table.imageUrls.length>0">
-                        <img alt="{{table.name}} Image" ng-src="{{table.imageUrls[0].smallUrl}}" class="img-responsive center-block"/>
+                    <div ng-show="reserveTable.imageUrls.length>0">
+                        <img alt="{{reserveTable.name}} Image" ng-src="{{reserveTable.imageUrls[0].smallUrl}}" class="img-responsive center-block"/>
                     </div>
-                    <div ng-show="table.imageUrls.length == 0" class="center-block image-block">
+                    <div ng-show="reserveTable.imageUrls.length == 0" class="center-block image-block">
 
                     </div>
                 </div>
@@ -272,7 +272,7 @@
                             <span>{{'reservation.TABLE_NAME' | translate}}</span>
                         </td>
                         <td>
-                            <span ng-repeat="tableInfo in tableSelection">{{tableInfo.name}}{{$last? '' : ($index==tableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</span>
+                            <span ng-repeat="tableInfo in reserveTableSelection">{{tableInfo.name}}{{$last? '' : ($index==reserveTableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</span>
                         </td>
                     </tr>
                     <tr ng-hide="sum <=0">

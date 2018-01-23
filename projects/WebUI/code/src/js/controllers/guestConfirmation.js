@@ -51,5 +51,13 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataSh
                 $location.url('/cities/' + self.city + '/' + self.venueId + '/guest-list');
             };
 
+            /*self.venueRefId = function(venue) {
+                if (typeof(venue.uniqueName) === 'undefined' ) {
+                    return venue.id;
+                } else {
+                    return venue.uniqueName;
+                }
+            };*/
+
             self.init();
     }]);
