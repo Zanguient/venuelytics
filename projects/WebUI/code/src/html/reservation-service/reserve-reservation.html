@@ -1,4 +1,4 @@
-<div class="container card {{blackTheme}}">
+<div class="container nav_height card {{blackTheme}}">
   <div class="text-center"  ng-show="embeddedFlag === true">
       <h1 class="no-m ms-site-title center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{venueDetails.venueName}} - {{selectedCity}}</h1>
   </div>
@@ -11,40 +11,40 @@
   		<table class="table table-responsive table-no-border">
           <tbody>
               <tr>
-                  <td><label><b> {{'bottleServiceTab.DATE' | translate}}</b></label> </td>
-                  <td>{{userData.requestedDate}}</td>
+                  <td><label><b> {{'reservation.DATE' | translate}}</b></label> </td>
+                  <td>{{userPartyData.requestedDate}}</td>
               </tr>
               <tr>
                   <td><label><b> {{'reservation.FIRST_NAME' | translate}} </b></label></td>
-                  <td>{{userData.userFirstName}}</td>
+                  <td>{{userPartyData.userFirstName}}</td>
               </tr>
               <tr>
                   <td> <label><b>{{'reservation.LAST_NAME' | translate}} </b></label></td>
-                  <td>{{userData.userLastName}}</td>
+                  <td>{{userPartyData.userLastName}}</td>
               </tr>
               <tr>
                   <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
-                  <td>{{userData.email}}</td>
+                  <td>{{userPartyData.email}}</td>
               </tr>
               <tr>
                   <td><label><b> {{'reservation.MOBILE' | translate}}</b></label> </td>
-                  <td>{{userData.mobile}}</td>
+                  <td>{{userPartyData.mobile}}</td>
               </tr>
               <tr>
                   <td><label><b> {{'reservation.TOTAL_GUEST' | translate}}</b></label> </td>
-                  <td>{{userData.totalGuest}}</td>
+                  <td>{{userPartyData.totalGuest}}</td>
               </tr>
               <tr>
                   <td><label><b> {{'reservation.INSTRUCTIONS' | translate}}</b></label> </td>
-                  <td>{{userData.instructions}}</td>
+                  <td>{{userPartyData.instructions}}</td>
               </tr>
               <tr>
                   <td><label><b> {{"reservation.OCCASION"  | translate}}</b></label> </td>
-                  <td>{{userData.bottleOccasion.name}}</td>
+                  <td>{{userPartyData.partyOccasion.name}}</td>
               </tr>
-              <!-- <tr ng-hide="userData.host.name === '' || userData.host.name === undefined">
+              <!-- <tr ng-hide="userPartyData.host.name === '' || userPartyData.host.name === undefined">
                   <td><label><b> {{"reservation.HOST"  | translate}}</b></label> </td>
-                  <td>{{userData.host.name}}</td>
+                  <td>{{userPartyData.host.name}}</td>
               </tr> -->
           </tbody>
       </table>
@@ -52,13 +52,13 @@
  
     <div class="form-group">
         <h4 class="color-success">{{"reservation.PARTY_PACKAGE"  | translate}}</h4>
-        <th>{{userData.partyObj}}</th>
+        <th>{{userPartyData.partyObj}}</th>
     </div>
   </div>
  
   <center>
       <div ng-if="enablePayment != 'Y'">
-          <button type="submit" class="btn btn-raised btn-primary" ng-click="createBottleSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+          <button type="submit" class="btn btn-raised btn-primary" ng-click="createPartySave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
           <button type="button" class="btn btn-raised btn-danger" ng-click="editConfirmPage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
       </div>
       <div ng-if="enablePayment == 'Y'">
@@ -69,7 +69,7 @@
 </div>
 
 
-<div class="modal modal-success" id="bottleServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+<div class="modal modal-success" id="partyServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
     <div class="modal-dialog animated zoomIn animated-3x" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,7 +80,7 @@
                 <p>{{'reservation.BOOKING_REQUEST' | translate}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'CLOSE' | translate}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closePartyModal()">{{'CLOSE' | translate}}</button>
             </div>
         </div>
     </div>
