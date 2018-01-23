@@ -30,7 +30,7 @@
  		
  		var venueEventProperties =['id', 'venueNumber', 'eventName', 'description', 
  		'eventType', 'eventTime','durationInMinutes','startDate', 'endDate', 'scheduleDayOfMonth',
- 		'scheduleDayOfWeek','imageURL','bookingUrl', 'price', 'enabled', 'performerId', 'processingFeeMode'];
+ 		'scheduleDayOfWeek','imageURL','bookingUrl', 'price', 'enabled', 'performerId', 'processingFeeMode', 'agencyId', 'needSponsor'];
 
  		var eventTicketProperties =['id', 'storeNumber', 'name', 'description', 
  		'price', 'discountedPrice','sectionName','seatStartNumber', 'count', 'row', 'eventDate', 'uiAttribute'];

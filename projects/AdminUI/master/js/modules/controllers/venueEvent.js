@@ -41,6 +41,8 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     $scope.eventDisplayTime.setMinutes(0);
     $scope.eventDisplayTime.setSeconds(0);
     console.log($scope.eventDisplayTime);
+
+    $scope.data = {};
     if($stateParams.id !== 'new') {
 	    var promise = RestServiceFactory.VenueService().getEvent({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
@@ -68,6 +70,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
             d.setSeconds(0);
             $scope.eventDisplayTime = d;
             $scope.config.scheduleRadio = data.scheduleDayOfWeek.length >0 ? 'W' : data.scheduleDayOfMonth.length >0 ? 'M' : 'N';
+            $scope.getStores();
             //$scope.changed();
 	    });
     } else {
@@ -76,6 +79,8 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     	data.enabled = 'N';
         data.processingFeeMode = 0;
     	$scope.data = data;
+        $scope.data.agencyId = -1;
+
     }
 	$scope.changed = function() {
         
@@ -194,28 +199,38 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         $('#event_ticket_table').on('click', '.fa-edit', function() {
           $scope.editTicket(this, table);
         });
+
         var table = $('#event_ticket_table').DataTable();
        
-        $scope.storeNames = [];
-        RestServiceFactory.AgencyService().getStores({id: 0}, function(data) {
-            $scope.agencies = data.stores;
-            for (var i = 0; i < $scope.agencies.length; i++) {
-                $scope.storeNames[$scope.agencies[i].id] = $scope.agencies[i];
-            }
-
-            RestServiceFactory.VenueEventService().getEventTickets({id: $stateParams.id}, function(data) {
-                data.map(function(t) {
-                    table.row.add([t.name, _STORE_NAME(t.storeNumber), _SEC(t), t.price, t.discountedPrice, t]);
-                });
-                table.draw();
-            });
+        RestServiceFactory.VenueService().getAgencies({id: $stateParams.venueNumber}, function(data) {
+            $scope.agencies = data.agencies;
         });
 
+       
+
     };
+
+    $scope.getStores = function() {
+            $scope.storeNames = [];
+            RestServiceFactory.AgencyService().getStores({id: $scope.data.agencyId}, function(data) {
+                $scope.stores = data.stores;
+                for (var i = 0; i < $scope.stores.length; i++) {
+                    $scope.storeNames[$scope.stores[i].id] = $scope.stores[i];
+                }
+
+                RestServiceFactory.VenueEventService().getEventTickets({id: $stateParams.id}, function(data) {
+                    data.map(function(t) {
+                        table.row.add([t.name, _STORE_NAME(t.storeNumber), _SEC(t), t.price, t.discountedPrice, t]);
+                    });
+                    table.draw();
+                });
+            });
+        };
     function _STORE_NAME(id) {
         var store = $scope.storeNames[id]
         return typeof name ==='undefined' ? id : store.name;
     }
+    
     $scope.editTicket = function(button, table) {
         var targetRow = $(button).closest("tr");
         var d = table.row( targetRow).data();
@@ -227,6 +242,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         $scope.store = store;
         _updateTicket(targetRow);
     };
+    
     $scope.addTicket = function() {
         $scope.ticket = {};
         $scope.ticket.sectionName = "GA";
@@ -235,6 +251,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         
         _updateTicket(null);
     };
+    
     function _SEC(t) {
         var section = t.sectionName;
         if (typeof t.row !='undefined' && typeof t.seatStartNumber != 'undefined') {
@@ -246,6 +263,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         } 
         return section;
     }
+    
     function _updateTicket(targetRow) {
         var dialog = ngDialog.open({
             template: 'app/views/venue-events/event-ticket-edit.html',

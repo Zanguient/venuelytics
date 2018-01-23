@@ -133,7 +133,20 @@
               </label>
             </div>
           </div>
-
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="control-label">Sponsored Agency Name</label>
+            <select name="agency" ngRequired class="form-control col-sm-12" ng-model="data.agencyId" onchange="getStores()">  
+                <option ng-repeat="agency in agencies" value="{{agency.id}}">{{agency.name}}</option>  
+              </select>
+          </div>
+          <div class="form-group  col-sm-12">
+            <div class="checkbox c-checkbox">
+              <label>
+                <input type="checkbox" name="sponsorship"  ng-model="data.needSponsor" ng-true-value="Y"  ng-false-value="N"/>
+                <span class="fa fa-check"></span>Interested in the sponsorship
+              </label>
+            </div>
+          </div>
           <div class="form-group  col-sm-12" ng-show="{{showEnableDisable()}}">
             <div class="checkbox c-checkbox">
               <label>

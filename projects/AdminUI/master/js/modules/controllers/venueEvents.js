@@ -34,7 +34,7 @@ App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout
   };
 
 	$scope.createNewEvent = function() {
-		$state.go('app.editVenueEvent', {venueNumber: $stateParams.id, id: 'new'});
+		$state.go('app.editVenueEvent', {venueNumber: contextService.userVenues.selectedVenueNumber, id: 'new'});
 	};
 
   $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
