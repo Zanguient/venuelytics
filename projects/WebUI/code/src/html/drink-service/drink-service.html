@@ -11,23 +11,23 @@
                     <font size="3">{{"reservation.PICKUP" | translate}}</font>
                 </label>
             </div>
-            <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
+            <div class="col-md-11 form-group label-floating no-p {{isDrinkFocused}}" style="margin-left: auto;">
                 <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" id="drinkFirstName" name="drinkFirstName" class="form-control " ng-model="drink.firstName" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
+            <div class="col-md-11 form-group label-floating no-p {{isDrinkFocused}}" style="margin-left: auto;">
                 <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" id="drinkLastName" name="drinkLastName" class="form-control " ng-model="drink.lastName" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
+            <div class="col-md-11 form-group label-floating no-p {{isDrinkFocused}}" style="margin-left: auto;">
                 <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="email" id="drinkEmailId" name="drinkEmailId" data-parsley-type="email" class="form-control " ng-model="drink.emailId" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
+            <div class="col-md-11 form-group label-floating no-p {{isDrinkFocused}}" style="margin-left: auto;">
                 <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" id="ms-form-pass" class="form-control " masked="" data-inputmask="'mask': '(999) 999-9999'" name="drinkMobile" ng-model="drink.mobileNumber" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
+            <div class="col-md-11 form-group label-floating no-p {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" >{{"reservation.TABLE_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control  {{blackTheme}}" ng-model="drink.tableNumber">
                     <option value=""></option>
@@ -35,7 +35,7 @@
                 </select>
             </div>
 
-            <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
+            <div class="col-md-11 form-group label-floating no-p {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" >{{"reservation.SEAT_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control  {{blackTheme}}" id="drinkSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="drink.seatNumber">
                     <option value=""></option>
@@ -43,14 +43,14 @@
                 </select>
             </div>
 
-             <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
+             <div class="col-md-11 form-group label-floating no-p {{isDrinkFocused}}" style="margin-left: auto;" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
                 <label class="control-label" >{{"reservation.LANE_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control  {{blackTheme}}" id="drinkLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="drink.laneNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(30) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
             </div>
-            <!-- <div class="col-lg-12 form-group is-empty" ng-hide="drinkType == 'Pickup'">
+            <!-- <div class="col-lg-12 form-group" ng-hide="drinkType == 'Pickup'">
                 <input type="text" ng-model="drink.location" id="drinkLocation" placeholder="Location" name="drinkLocation" class="form-control">
             </div> -->
 
@@ -89,7 +89,7 @@
               </div>
         </div>
 
-        <div ng-show="specificDrink === 'Y' || specificDrink === 'y'" ng-hide="orderDisable === true" class="col-md-8 form-group is-empty">
+        <div ng-show="specificDrink === 'Y' || specificDrink === 'y'" ng-hide="orderDisable === true" class="col-md-8 form-group">
             <div class="row">
             <div class="col-md-8 ms-paper-content-container">
                 <div class="ms-paper-content">
@@ -136,7 +136,7 @@
             </div>
             </div>
         </div>
-        <div class="col-md-11 form-group label-floating is-empty no-p {{isDrinkFocused}}" style="margin-left: auto;">
+        <div class="col-md-11 form-group label-floating no-p {{isDrinkFocused}}" style="margin-left: auto;">
             <label class="control-label" >{{'reservation.SPECIAL_INSTRUCTION' | translate}}</label>
             <input ng-disabled="orderDisable === true" type="text" class="form-control " id="drinkInstructions" ng-model="drink.instructions">
         </div>

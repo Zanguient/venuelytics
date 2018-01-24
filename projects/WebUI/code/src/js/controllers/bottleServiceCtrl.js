@@ -640,6 +640,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             DataShare.venueName = self.venueName;
             $location.url( self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/confirm");
         };
+
         self.venueRefId = function(venue) {
           if (typeof(venue.uniqueName) === 'undefined' ) {
               return venue.id;

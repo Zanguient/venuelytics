@@ -2,12 +2,12 @@
 
     <form class="form-horizontal col-xs-12" autocomplete="off" name="privateForm" parsley-validate validate-form="" novalidate ng-cloak>
     <fieldset>
-        <div class="col-xs-12 form-group label-floating  no-p is-empty" ng-class = "{'active' : private.orderDate.length > 0}">
+        <div class="col-xs-12 form-group label-floating  no-p" ng-class = "{'active' : private.orderDate.length > 0}">
             <label class="control-label" >{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control " id="privateDate" ng-model="private.orderDate" required>
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
-        <div class="col-xs-12 form-group is-empty">
+        <div class="col-xs-12 form-group">
             <center>
                 <a href="" class="col-md-3 col-xs-12 btn btn-success  btn-raised" ng-if="privateInfoSheet" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.VIEW_PRIVATE" | translate}}</a>
 
@@ -18,53 +18,53 @@
             </center> 
             
         </div>
-        <div class="col-md-12 form-group  no-p is-empty">
+        <div class="col-md-12 form-group  no-p">
            
-            <div class="col-md-4 col-xs-12 mr-1 form-group is-empty">
+            <div class="col-md-4 col-xs-12 mr-1 form-group">
                 <select class="form-control  {{blackTheme}}" required="" ng-model="private.privateStartTime" ng-options="x.key as x.value for x in reserveStartTimes">
                     <option value="">{{"reservation.START_TIME"  | translate}}</option>
                 </select>
             </div>
-            <div class="col-md-4 col-xs-12  mr-1  form-group is-empty">
+            <div class="col-md-4 col-xs-12  mr-1  form-group">
                 <select id="alignmentTime" class="form-control  {{blackTheme}}" required="" ng-model="private.privateEndTime" ng-options="x.key as x.value for x in reserveEndTimes">
                     <option value="">{{"reservation.END_TIME"  | translate}}</option>
                     </select>
             </div>
         </div>
-        <div class="col-md-12 form-group no-p is-empty">
+        <div class="col-md-12 form-group no-p">
            
-            <div class="col-md-4 col-xs-12 form-group  mr-1  is-empty ">
+            <div class="col-md-4 col-xs-12 form-group  mr-1">
                 <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
                 <input type="text" class="form-control " id="privateTotalGuest" ng-model="private.totalGuest">
             </div>
-            <div class="col-md-4 col-xs-12 form-group mr-1  is-empty" >
+            <div class="col-md-4 col-xs-12 form-group mr-1" >
                 <label class="control-label" >{{'reservation.BUDGET' | translate}}</label>
                 <input type="text" class="form-control " id="budget" ng-model="private.budget" data-parsley-trigger="change">
             </div>
             
         </div>
 
-        <div class="col-xs-12 form-group label-floating no-p is-empty" >
+        <div class="col-xs-12 form-group label-floating no-p" >
         <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
             <input type="text" class="form-control " ng-model="private.privateFirstName" id="firstName"  required>
         </div>
     
-        <div class="col-xs-12 form-group label-floating no-p is-empty">
+        <div class="col-xs-12 form-group label-floating no-p">
             <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
             <input type="text" class="form-control " ng-model="private.privateLastName" id="lastName" >
         </div>
         
-        <div class="col-xs-12 form-group label-floating no-p is-empty">
+        <div class="col-xs-12 form-group label-floating no-p">
         <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
             <input type="email" class="form-control " id="email" ng-model="private.privateEmail"  data-parsley-trigger="change" required>
         </div>
-        <div class="col-xs-12 form-group label-floating no-p is-empty">
+        <div class="col-xs-12 form-group label-floating no-p">
         <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
             <input type="text" id="ms-form-pass" class="form-control " masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="private.privateMobileNumber" required data-parsley-trigger="change">
         </div>
     
         
-        <div class="col-xs-12 form-group label-floating no-p is-empty">
+        <div class="col-xs-12 form-group label-floating no-p">
             <label class="control-label" >{{"reservation.EVENT_TYPE"  | translate}}</label>
             <select class="form-control  {{blackTheme}}" required=""
                 ng-model="private.privateEvent" ng-options="t.name for t in eventTypes">
@@ -72,7 +72,7 @@
             </select>
         </div>
 
-        <div class="col-xs-12 form-group label-floating no-p is-empty">
+        <div class="col-xs-12 form-group label-floating no-p">
         <label class="control-label" >{{'reservation.COMMENT' | translate}}</label>
             <input type="text" class="form-control " id="instructions" ng-model="private.privateComment"  data-parsley-trigger="change">
         </div>

@@ -120,7 +120,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'table-service/tableService-form.html',
             controller: 'TableServiceController'
         })
-        .when('/confirmEvent/:cityName/:venueId', {
+        .when('/:cityName/:venueId/confirmEvent', {
             templateUrl: 'private-event/private-confirm.html',
             controller: 'PrivateConfirmController'
         })
@@ -156,11 +156,11 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'bachelor-party/bachelor-payment.html',
             controller:'bachelorConfirmController'
         })
-        .when('/confirmFoodService/:cityName/:venueId', {
+        .when('/:cityName/:venueId/confirmFoodService', {
             templateUrl: 'food-service/food-confirmation.html',
             controller:'FoodConfirmController'
         })
-        .when('/confirmDrinkService/:cityName/:venueId', {
+        .when('/:cityName/:venueId/confirmDrinkService', {
             templateUrl: 'drink-service/drink-confirmation.html',
             controller:'DrinkConfirmController'
         })
