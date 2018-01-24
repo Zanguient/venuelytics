@@ -36,28 +36,28 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.editGuestPage = function() {
-                $location.url('/cities/' + self.city + '/' + self.venueId + '/guest-list');
+                $location.url('/cities/' + self.city + '/' + self.venueRefId(self.venueDetails) + '/guest-list');
             };
 
             self.guestListSave = function() {
                     AjaxService.createGuestList(self.venueId, self.object, self.authBase64Str).then(function(response) {
-                        $location.url(self.city + '/guest-success/' + self.venueId);
+                        $location.url(self.city + '/guest-success/' + self.venueRefId(self.venueDetails));
                 });
             };
 
             self.backToGuest = function() {
                 $rootScope.serviceName = 'GuestList';
                 DataShare.guestListData = '';
-                $location.url('/cities/' + self.city + '/' + self.venueId + '/guest-list');
+                $location.url('/cities/' + self.city + '/' + self.venueRefId(self.venueDetails) + '/bottle-service');
             };
 
-            /*self.venueRefId = function(venue) {
+            self.venueRefId = function(venue) {
                 if (typeof(venue.uniqueName) === 'undefined' ) {
                     return venue.id;
                 } else {
                     return venue.uniqueName;
                 }
-            };*/
+            };
 
             self.init();
     }]);

@@ -638,15 +638,15 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             DataShare.payloadObject = self.serviceJSON;
             DataShare.enablePayment = self.enabledPayment;
             DataShare.venueName = self.venueName;
-            $location.url( self.selectedCity + "/" + self.venueId + "/confirm");
+            $location.url( self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/confirm");
         };
-        /*self.venueRefId = function(venue) {
+        self.venueRefId = function(venue) {
           if (typeof(venue.uniqueName) === 'undefined' ) {
               return venue.id;
           } else {
               return venue.uniqueName;
           }
-        };*/
+        };
         self.init();
 
     }]);

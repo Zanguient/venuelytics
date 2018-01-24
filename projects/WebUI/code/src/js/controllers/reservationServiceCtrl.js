@@ -567,15 +567,15 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             DataShare.payloadObject = self.serviceJSON;
             DataShare.enablePayment = self.enabledPayment;
             DataShare.venueName = self.venueName;
-            $location.url( self.selectedCity + "/" + self.venueId + "/reserve/");
+            $location.url( self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/reserve/");
          };
 
-         /*self.venueRefId = function(venue) {
+         self.venueRefId = function(venue) {
           if (typeof(venue.uniqueName) === 'undefined' ) {
               return venue.id;
           } else {
               return venue.uniqueName;
           }
-        };*/
+        };
         self.init();
     }]);
