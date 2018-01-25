@@ -335,6 +335,15 @@
   color: #fff !important; 
 }
 
+.blackTheme .tabSelected {
+ /* border: 2px solid green !important; */
+
+ -webkit-box-shadow: 0 7px 10px #fdfdfd !important;
+  -moz-box-shadow: 0 7px 10px #fdfdfd !important;
+  box-shadow: 0 7px 10px #fdfdfd !important;
+
+}
+
 /* BlackTheme End */
 
 .whiteTheme {
@@ -724,7 +733,12 @@ select {
 }
 
 .tabSelected {
- border: 2px solid green !important;
+ /* border: 2px solid green !important; */
+
+ -webkit-box-shadow: 0 7px 10px #222 !important;
+  -moz-box-shadow: 0 7px 10px #222 !important;
+  box-shadow: 0 7px 10px #222 !important;
+
 }
 
 .p-min {
@@ -2613,7 +2627,7 @@ table.fc-border-separate {
 
 .roundCornerBtn {
   border-radius: 5px !important;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 .bottleBtn {
   background-color: rgba(122,17,217, 0.80) !important;
