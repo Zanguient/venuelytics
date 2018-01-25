@@ -28,11 +28,11 @@
             <input type="text" class="form-control " id="totalGuest" ng-model="guest.totalGuest">
         </div>
         <div class="col-xs-12 mb0" ng-if="has('MEN_WOMEN')">
-            <div class="col-sm-6 col-md-4 form-group label-floating no-p">
+            <div class="col-xs-12 col-md-4 form-group label-floating ">
                 <label class="control-label" for="guestMen">{{'reservation.GUEST_MEN' | translate}}</label>
                 <input type="text" id="guestMen" name="guestMen" class="form-control " ng-model="guest.guestMen" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-sm-6 col-md-4 form-group label-floating no-p" >
+            <div class="col-xs-12 col-md-4 form-group label-floating" >
                 <label class="control-label ml-2" for="guestWomen">{{'reservation.GUEST_WOMEN' | translate}}</label>
                 <input type="text"  name="guestWomen" class="form-control " ng-model="guest.guestWomen" required="" data-parsley-trigger="change">
             </div>

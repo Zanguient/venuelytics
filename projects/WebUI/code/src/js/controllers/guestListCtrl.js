@@ -72,7 +72,7 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
                       
                     var selectedType;
                     angular.forEach(self.eventTypes, function(tmpType) {
-                        if(tmpType.id === DataShare.guestListData.guestEvent.id) {
+                        if( typeof(DataShare.guestListData) !=='undefined' && typeof(DataShare.guestListData.guestEvent) !== 'undefined' && tmpType.id === DataShare.guestListData.guestEvent.id) {
                             selectedType = tmpType;
                         }
                     });
