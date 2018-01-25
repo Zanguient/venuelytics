@@ -15,7 +15,8 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
             self.init = function() {
                 $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueId, 'embed');
                 self.venueDetails =  venueService.getVenue($routeParams.venueId); 
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
+                self.venueId = self.venueDetails.id;
+                $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
                 $rootScope.description = self.venueDetails.description;
                 DataShare.venueDetails = self.venueDetails;
                 self.selectedCity = DataShare.venueDetails.city;
@@ -23,7 +24,7 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                 $rootScope.title = self.venueDetails.venueName+' '+self.selectedCity+' '+self.venueDetails.state + " Venuelytics - Party Services Confirmation & Payment";
                 ngMeta.setTitle($rootScope.title);
                
-                self.venueId = self.venueDetails.id;
+                
                 self.userPartyData = DataShare.partyServiceData;
                 self.authBase64Str = DataShare.authBase64Str;
                 self.object = DataShare.payloadObject;

@@ -142,7 +142,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
               className: 'ngdialog-theme-default'
             });
           
-          $state.go('app.venueedit', {id: $stateParams.venueNumber});
+          $state.go('app.eventManagement');
         },function(error){
           if (typeof error.data !== 'undefined') {
            toaster.pop('error', "Server Error", error.data.developerMessage);

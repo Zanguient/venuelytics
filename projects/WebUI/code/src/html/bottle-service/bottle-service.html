@@ -7,16 +7,10 @@
         </div>
         <div class="row col-xs-12 mt0 center_content" ng-show="selectedVenueMap.imageUrls[0].originalUrl" >
             <center>
-                <div class="row h6">
-                    
-                    
+                <div class="row h6"> 
                     <span class="label label-warning" style="background-color: #e3e300;" translate="SELECTED"></span>
-                
                     <span class="label label-success" translate="AVAILABLE"></span>
-                
                     <span class="label label-danger" translate="BOOKED"></span>
-                
-                           
                 </div>
                 <img alt="Venuemap Image" id="imagemap" ng-src="{{selectedVenueMap.imageUrls[0].originalUrl}}" usemap="#bottleImageMap" class="no-p no-m map img-responsive"/>
                 <map name="bottleImageMap">
@@ -126,10 +120,10 @@
             <img ng-hide ="!hostDate || hostDate.length == 0" class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
         </div> -->
         <div class="col-xs-12 form-group" ng-if="allBottle">
-        <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
+            <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>
-        <div class="col-xs-12 form-group" ng-if="bottleMinimum != ''">
-        <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
+        <div class="col-xs-12 form-group" ng-show="bottleMinimum.length > 0">
+            <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
             <table class="table table-responsive table-no-border" >
                 <thead>
                     <tr>
@@ -155,25 +149,25 @@
                 <tr>
                     <td>
                         <div class="row">
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-xs-12 form-group">
                                 <div>{{"reservation.BOTTLE" | translate}}</div>
                                     <div>
-                                        <select ng-change="getBrandByBottleName(chooseBottles.bottleName)" class="form-control col-xs-3 {{blackTheme}}" ng-options="x.name as x.name for x in allBottle" ng-model="chooseBottles.bottleName"></select>
+                                        <select ng-change="getBrandByBottleName(chooseBottles.bottleName)" class="form-control" ng-options="x.name as x.name for x in allBottle" ng-model="chooseBottles.bottleName"></select>
                                     </div>
                              </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-xs-12 ml-1 form-group">
                                 <div>{{"reservation.BRAND" | translate}}</div>
                                     <div>
-                                        <select class="form-control {{blackTheme}}" ng-options="x.brand as x.brand for x in brandData" ng-model="chooseBottles.brandName"></select>
+                                        <select class="form-control" ng-options="x.brand as x.brand for x in brandData" ng-model="chooseBottles.brandName"></select>
                                     </div>
                             </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-xs-12 ml-1 form-group" ng-show="chooseBottles.price !== ''">
                                 <div>{{"reservation.PRICE" | translate}}</div>
                                     <div>
                                         <input type="text" placeholder="Price" class="form-control" readonly="readonly" ng-model="chooseBottles.price">
                                     </div>
                             </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-xs-12 ml-1 form-group">
                                 <div>{{"reservation.QUANTITY" | translate}}</div>
                                     <div>
                                         <table>

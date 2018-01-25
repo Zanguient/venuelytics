@@ -269,6 +269,8 @@
 
 
 /* BlackTheme start */
+
+
 .blackTheme {
   /*color: #fdfdfd !important;*/
   color: #fdfdfd !important;
@@ -278,14 +280,23 @@
 .blackTheme label {
   color: #fdfdfd !important;
 }
-.blackTheme input {
-  color: #fdfdfd !important;
+
+.blackTheme input{
+  color: #000 !important;
+  background-color: #ffffff !important;
 }
+
 .blackTheme tr:hover {
   background-color: #000000 !important;
 }
+
 .blackTheme tr {
   background-color: #000000 !important;
+}
+
+.blackTheme select {
+  color: #000 !important;
+  background-color: #fff !important;
 }
 
 .blackTheme .btn:disabled {
@@ -294,6 +305,9 @@
    color: #fff;
 }
 
+.blackTheme .form-control {
+
+}
 .blackTheme .btn[disabled][disabled] {
  /*  background-color: #3a943a !important; */
   opacity: .35 !important; 
@@ -305,10 +319,22 @@
   background-color: #000000 !important;
 }
 
-
 .blackTheme .borderLine{
   border-color: #fff !important;
 }
+
+.blackTheme .form-group.label-floating label.control-label {
+  color: #616161 !important;
+} 
+
+.blackTheme .form-group.label-placeholder label.control-label {
+  color: #616161 !important;
+}
+
+.blackTheme .form-group.label-floating:not(.is-empty) label.control-label, .form-group.label-static label.control-label {
+  color: #fff !important; 
+}
+
 /* BlackTheme End */
 
 .whiteTheme {

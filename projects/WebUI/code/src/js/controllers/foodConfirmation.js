@@ -15,7 +15,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
 
             self.venueDetails = venueService.getVenue($routeParams.venueId);
             self.venueId = self.venueDetails.id;
-            $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
+            $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
 
             $rootScope.description = self.venueDetails.description;
             ngMeta.setTag('description', self.venueDetails.description + " Food Confirmation");

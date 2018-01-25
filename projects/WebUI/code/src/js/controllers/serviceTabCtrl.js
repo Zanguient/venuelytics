@@ -42,33 +42,34 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.initMore = function() {
         //localStorage.clear();
         AjaxService.getInfo(self.venueId).then(function(response) {
+            
             venueService.saveVenueInfo(self.venueId, response);
-                self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
-                self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
-                self.bottleServiceButton = response.data["Advance.BottleService.enable"];
-                self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
-                self.guestServiceButton = response.data["Advance.GuestList.enable"];
-                console.log('self.guestServiceButton',self.guestServiceButton);
-                self.tableServiceButton = response.data["Advance.tableService.enable"];
-                self.featuredEnable = response.data["Advance.featured"];
-                self.eventsEnable = response.data["venueEvents"];
-                $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
-                if(self.embeddedService === 'embed') {
-                    $rootScope.venueHeader = response.data["ui.custom.header"];
-                    $rootScope.venueFooter = response.data["ui.custom.footer"];
-                    $rootScope.embeddedFlag = true;
-                }
-                self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
-                self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
-                self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
-                self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
-                self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
-                self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
-                self.eventsEnable = self.eventsEnable === 'Y' ? false : true;
-                /* self.tabParams = self.bottleServiceButton === false ? 'VIP' : 'private-events'; */
-                self.dispatchToService(self.tabParams);
-                addTabs();
-            }); 
+            self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
+            self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
+            self.bottleServiceButton = response.data["Advance.BottleService.enable"];
+            self.privateServiceButton = response.data["Advance.BookBanqetHall.enable"];
+            self.guestServiceButton = response.data["Advance.GuestList.enable"];
+            console.log('self.guestServiceButton',self.guestServiceButton);
+            self.tableServiceButton = response.data["Advance.tableService.enable"];
+            self.featuredEnable = response.data["Advance.featured"];
+            self.eventsEnable = response.data["venueEvents"];
+            $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
+            if(self.embeddedService === 'embed') {
+                $rootScope.venueHeader = response.data["ui.custom.header"];
+                $rootScope.venueFooter = response.data["ui.custom.footer"];
+                $rootScope.embeddedFlag = true;
+            }
+            self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
+            self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
+            self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
+            self.privateServiceButton = self.privateServiceButton === 'Y' ? false : true;
+            self.guestServiceButton = self.guestServiceButton === 'Y' ? false : true;
+            self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
+            self.eventsEnable = self.eventsEnable === 'Y' ? false : true;
+            /* self.tabParams = self.bottleServiceButton === false ? 'VIP' : 'private-events'; */
+            self.dispatchToService(self.tabParams);
+            addTabs();
+        }); 
         /*jshint maxcomplexity:14 */
         if($rootScope.serviceName === 'GuestList') {
             DataShare.guestListData = '';

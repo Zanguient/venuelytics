@@ -18,7 +18,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
             self.init = function() {
                 $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueId, 'embed');
                 self.venueDetails =  venueService.getVenue($routeParams.venueId); 
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
+                $rootScope.blackTheme = venueService.getVenueInfo(self.venueDetails.id, 'ui.service.theme') || '';
                 $rootScope.description = self.venueDetails.description; 
                 DataShare.venueDetails = self.venueDetails;  
                 self.selectedCity = DataShare.venueDetails.city;

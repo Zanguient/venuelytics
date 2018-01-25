@@ -15,7 +15,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
 
             self.venueDetails = venueService.getVenue($routeParams.venueId);
             self.venueId = self.venueDetails.id;
-            $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
+            $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
             $rootScope.description = self.venueDetails.description;
             ngMeta.setTag('description', self.venueDetails.description + " Drink Confirmation");
             $rootScope.title = self.venueDetails.venueName + ' ' + self.venueDetails.city + ' ' + self.venueDetails.state + " Venuelytics - Drink Services Confirmation & Payment";

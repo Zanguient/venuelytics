@@ -22,7 +22,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
                 
                 self.partyPackageData = DataShare.partyServiceData;
                 self.venueName = DataShare.venueName;
-                $rootScope.blackTheme = venueService.getVenueInfo($routeParams.venueId, 'ui.service.theme') || '';
+                $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
                 self.availableAmount = $window.localStorage.getItem("partyAmount");
                 self.authBase64Str = DataShare.authBase64Str;
                 if(DataShare.privateOrderItem !== ''){

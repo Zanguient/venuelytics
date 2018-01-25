@@ -22,7 +22,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             self.availableDays = [];
             self.bottle = {};
             self.bottle.requestedDate = moment().format('YYYY-MM-DD');
-
+            self.chooseBottles = {};
             function  noWeekendsOrHolidays(iDate) {
                 if (typeof(self.availableDays) === 'undefined' || self.availableDays.length === 0) {
                   return true;
@@ -224,15 +224,17 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.selectedBottles = function() {
-                self.totalValue = self.chooseBottles.price * self.bottleCount;
+                var totalValue = self.chooseBottles.price * self.bottleCount;
+                console.log(totalValue);
                 var userSelectedBottles = {
-                    "price" : self.totalValue,
+                    "price" : totalValue,
                     "bottle" : self.chooseBottles.bottleName,
                     "brand" : self.chooseBottles.brandName,
                     "quantity": self.bottleCount,
                     "productId": self.productId
                 };
                 self.bottleMinimum.push(userSelectedBottles);
+                console.log(self.bottleMinimum);
                 self.chooseBottles = {};
                 self.bottleCount = 1;
             };
