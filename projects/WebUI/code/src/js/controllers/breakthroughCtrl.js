@@ -10,8 +10,8 @@ app.controller('Breakthrough', ['$log', '$scope', 'DataShare','$translate', '$ro
 
     	var self = $scope;
         self.init = function() {
-            $rootScope.title = 'Venuelytics Breakthrough Solutions';
-            ngMeta.setTitle('Venuelytics Breakthrough Solutions');
+            $rootScope.title = 'Venuelytics Digital Concierge Solutions';
+            ngMeta.setTitle('Venuelytics Digital Concierge Solutions');
             self.throughId = $routeParams.throughId;	
             self.breakThroughUrl = APP_ARRAYS.breakThrough[self.throughId];
         };
