@@ -238,9 +238,6 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
     this.getVenueMapForADate = function(venueId,date) {
         return $http({
             method: 'GET',
-            headers: {
-                    "X-XSRF-TOKEN": "XX-YY-XX-V"
-                },
             url: RestURL.baseURL + 'reservations/' + venueId + '/date/' + date
         }).then(function(success) {
             return success;

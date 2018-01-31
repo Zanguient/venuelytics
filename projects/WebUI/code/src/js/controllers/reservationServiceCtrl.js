@@ -7,7 +7,6 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
 
             self.selectionTableItems = [];
             self.selectedVenueMap = {};
-            self.partyMinimum = [];
             self.noTableSelected = false;
             self.moreCapacity = false;
             self.sum = 0;
@@ -62,19 +61,14 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 } else {
                     self.tabClear();
                 }
-                if(($rootScope.serviceName === 'BottleService') || (DataShare.amount !== '')) {
+                if(($rootScope.serviceName === 'party') || (DataShare.amount !== '')) {
                     self.tabClear();
-                } else {
-                    self.party.authorize = false;
-                    self.party.agree = false;
-                }
+                } 
                 if(DataShare.userselectedTables) {
                   self.selectionTableItems = DataShare.userselectedTables;
                 }
                 self.totalGuest = DataShare.totalNoOfGuest;
-                if(DataShare.selectParty) {
-                    self.partyMinimum = DataShare.selectParty;
-                }
+                
                 if(DataShare.reserveTableSelection) {
                     self.reserveTableSelection = DataShare.reserveTableSelection;
                     //self.showSelectedVenueMap();
@@ -134,7 +128,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             self.tabClear = function() {
                 DataShare.partyServiceData = {};
                 DataShare.reserveTableSelection = '';
-                DataShare.selectParty = '';
+                
                 self.party = {};
                 $rootScope.serviceName = '';
                 self.party.requestedDate = moment().format('YYYY-MM-DD');
@@ -144,7 +138,6 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 AjaxService.getInfo(self.venueId).then(function(response) {
                     self.partyMenuUrl = response.data["Bottle.menuUrl"];
                     self.partyVIPPolicy = response.data["Bottle.BottleVIPPolicy"];
-                    self.partyMinimumRequirement = response.data["Bottle.BottleMinimumrequirements"];
                     self.dressCode =  response.data["Advance.dressCode"];
                     self.enabledPayment =  response.data["Advance.enabledPayment"];
                     self.reservationFee =  response.data["Bottle.BottleReservationFee"];
@@ -497,7 +490,6 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             DataShare.partyServiceData = self.party;
             DataShare.partyZip = self.party.partyZipcode;
             DataShare.authBase64Str = authBase64Str;
-            DataShare.selectParty = self.partyMinimum;
             DataShare.reserveTableSelection = self.reserveTableSelection;
             if($scope.reserveTableSelection.length === 0) {
                 self.noTableSelected = true;
@@ -552,17 +544,17 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 });
             }
 
-            if (self.partyMinimum !== undefined) {
-                angular.forEach(self.partyMinimum, function(value1, key1) {
-                    var items = {
-                        "venueNumber": self.venueId,
-                        "productId": value1.productId,
-                        "productType": 'partypackage',
-                        "quantity": value1.quantity,
-                        "name": value1.party
-                    };
-                    self.serviceJSON.order.orderItems.push(items);
-                });
+            if (self.party.partyObj !== undefined) {
+               
+                  var item = {
+                      "venueNumber": self.venueId,
+                      "productId": self.party.partyObj.id,
+                      "productType": 'partypackage',
+                      "quantity": 1,
+                      "name": self.party.partyObj.name
+                  };
+                  self.serviceJSON.order.orderItems.push(item);
+               
             }
             DataShare.payloadObject = self.serviceJSON;
             DataShare.enablePayment = self.enabledPayment;

@@ -34,12 +34,15 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                 self.selectPartyOrders = DataShare.selectParty;
                 self.enablePayment = DataShare.enablePayment;
                 self.venueName =  DataShare.venueDetails.venueName;
+                
                 angular.forEach(self.selectPartyOrders, function(value1, key1) {
                     self.availableAmount = self.availableAmount + value1.price;
                 });
+
                 if(DataShare.amount) {
                     self.availableAmount = DataShare.amount;
                 }
+                
                 if(self.object !== '') {
                     angular.forEach(self.object.order.orderItems, function(value, key) {
                     if(value.productType === 'VenueMap') {
@@ -54,6 +57,7 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                         }
                     });
                 }
+                
                 self.getTax();
             };
 
@@ -70,11 +74,11 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                                 self.taxAmount = (amount * taxData)/100;
                                 self.chargedAmount = amount + self.taxAmount;
                             } else if(value.type === 'convenience-fee'){
-                                    self.processingFee = value.value;
+                                self.processingFee = value.value;
                             } else if(value.type === 'discount'){
-                                    self.discount = value.value;
+                                self.discount = value.value;
                             } else if(value.type === 'service-fee'){
-                                    self.gratuity = value.value;
+                                self.gratuity = value.value;
                             } else{
                                 $log.info("Else block:");
                             }

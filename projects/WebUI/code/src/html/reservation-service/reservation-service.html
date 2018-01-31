@@ -130,7 +130,6 @@
         <div class="col-xs-12"  ng-if="partypackage">
             <div class="col-xs-12 mb-2" ng-repeat="partyObj in partypackage">
                 <div class="col-md-6 col-xs-12">
-                    <input type="radio" name="name" value="{{partyObj.name}} {{partyObj.description}}" ng-model=" party.partyObj" required="required"/>
                     <table class="table">
                         <tr>
                             <td>Name:</td>
@@ -142,6 +141,11 @@
 
                         </tr>
                     </table>
+                    <br>
+                    <label>
+                        <input type="radio" name="name" ng-value="partyObj" ng-model="party.partyObj" required="required"/>
+                        Select this package.
+                    </label>
                 </div>
                 <div class="col-md-6 col-xs-12">
                     <div ng-show="partyObj.imageUrls.length>0">
