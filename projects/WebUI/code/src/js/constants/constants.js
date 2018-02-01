@@ -150,7 +150,10 @@ app
       "Las-Vegas-Nightlife":"blogs/Las-Vegas-Nightlife-bottle.html",
       "New-York-Nightlife":"blogs/New-York-Nightlife-bottle.html",
       "New-Orleans-Nightlife":"blogs/New-Orleans-Nightlife-bottle.html",
-      "Official-DJ-West": "blogs/Official-DJ-West.html"
+      "Official-DJ-West": "blogs/Official-DJ-West.html",
+      "dj-epps": "blogs/DJ-Epps.html",
+      "Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot":"blogs/Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot.html"
+
     },
 
     'blogPostsImages':{
@@ -167,11 +170,13 @@ app
       "Las-Vegas-Nightlife":"assets/img/blog/las_vegas_bottle_service.png",
       "New-York-Nightlife":"assets/img/blog/new_york_nightlife_bottle.jpg",
       "New-Orleans-Nightlife":"assets/img/blog/new_orleans_nightlife_bottle.png",
-      "Official-DJ-West": "assets/img/blog/Official-DJ-West.png"
-
+      "Official-DJ-West": "assets/img/blog/Official-DJ-West.png",
+      "dj-epps": "assets/img/blog/DJEPPS.png",
+      "Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot":"assets/img/blog/placeholder.gif",
     },
 
     'blogPostsTitle':{
+      "dj-epps": "Our Exclusive Interview with DJ EPPS",
       "Official-DJ-West": "Our Exclusive Interview with Official DJ West",
       "Las-Vegas-Nightlife":"Las Vegas Nightlife and Bottle Service",
       "New-York-Nightlife":"New York Nightlife and Bottle Service",
@@ -185,8 +190,9 @@ app
       "7-Popular-Cocktails-Every-Bartender-and-Cocktail-Enthusiast-Must-Know":"7 Popular Cocktails Every Bartender and Cocktail Enthusiast Must Know",
       "10-Must-Visit-Nightclubs-in-Las-Vegas":"10 Must Visit Nightclubs in Las Vegas",
       "Nyeelah-the-face-of-New-York-Nightlife":"Nyeelah, the face of New York Nightlife.",
-      "7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online":"7 Incredible Ways To Promote Your Nightlife Venue Online"
-     
+      "7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online":"7 Incredible Ways To Promote Your Nightlife Venue Online",
+      "Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot":"Mobile Tech Increases Crowds and Bottle Service Revenue for San Francisco Hot Spot",
+
     },
     'blogPostDescription':{
       "7-Mind-Blowing-Nightlife-Cities-in-the-United-States":"Who doesn't like to Party? And who doesn't like Casinos, Clubs, and Live Music Bars? We all wait till Friday just to get our own time from the hectic busy schedules so that we go out and have some fun with our friends and family. When it comes to the United States, you will have many choices to have a good time, and it's hard to select one city over other since every city here has its own charisma. Well, let us all say TGIF and check out some mind blowing nightlife cities in the USA that will make you say 'WOW'.",
@@ -198,14 +204,18 @@ app
       "7-Popular-Cocktails-Every-Bartender-and-Cocktail-Enthusiast-Must-Know":"A margarita is a cocktail of tequila, triple sec, and lime or lemon extract, usually served with salt on the rim of the glasses. The drink is served shaken with ice, blended with ice, or without ice.",
       "10-Must-Visit-Nightclubs-in-Las-Vegas":"Nightlife industry is growing and always glowing. Along with the growing nightlife venues, the party trends are also changing. The night clubs nowadays must know how to market their services to right the audience. We agree with the increasing number of nightclubs in the country, but the charm of certain nightclubs never fads. We are here today with yet another exciting blog that shows the best ten must-visit nightclubs in the USA",
        "Nyeelah-the-face-of-New-York-Nightlife":"Hello Nightlife freaks, recently we interviewed a nightlife promoter from New York City to understand the nightlife scene in NYC  and something more. We interviewed Nyeelah, who is also known as the Face of New York nightlife. ",
-      "7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online":"Promoting an existing nightclub or a bar and growing the business can be a more challenging these days. As a new business, It is even more difficult to pass the six months mark.  Statistics show that 75% of new businesses fail in the first six months.",   
+      "7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online":"Promoting an existing nightclub or a bar and growing the business can be a more challenging these days. As a new business, It is even more difficult to pass the six months mark.  Statistics show that 75% of new businesses fail in the first six months.",
 
       "Las-Vegas-Nightlife":"Nobody really knows what happens in Vegas because everything that happens there, stays there.  But rumor has it that Las Vegas is the Disneyland for grownups.  Again, that is just a rumor!  You have to experience that on your own.",
       "New-York-Nightlife":"The Big Apple is best known for its nightlife and dining experience.  It offers entertainment and nightlife venues that city barely sleeps.  New York City is also home to many celebs, DJs, music artists, etc ",
       "New-Orleans-Nightlife":"If you are looking for a unique Jazz infuse cultural experience than you must visit New Orleans. In many ways it is an authentic historical city with an amazing charming nightlife and diverse culture.",
-      "Official-DJ-West": "We had the opportunity to interview the Official DJ West, and it was fun talking to him and his journey towards becoming one of the best DJs. Below is the whole conversation we had with him. Sit back, relax and go through this fun interview."
-  },
+      "Official-DJ-West": "We had the opportunity to interview the Official DJ West, and it was fun talking to him and his journey towards becoming one of the best DJs. Below is the whole conversation we had with him. Sit back, relax and go through this fun interview.",
+      "dj-epps": "Today we have with us the DJ Epps to share his experience about Djing and other facets of his life.",
+      "Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot":"Mayes Oster House is a restaurant by day and dance club by night. Located on Polk Street in San Francisco, California, the restaurant uses VenueLytics to pack the house and increase its bottle service offerings."
+
+    },
     'blogs': [
+              {"title":"Our Exclusive Interview With DJ Epps", "image":"assets/img/blog/DJEPPS.png", "description":"Today we have with us the DJ Epps to share his experience about Djing and other facets of his life.", "link":"dj-epps"},  
               {"title":"Our Exclusive Interview with Official DJ West", "image":"assets/img/blog/Official-DJ-West.png", "description":"We had the opportunity to interview the Official DJ West, and it was fun talking to him and his journey towards becoming one of the best DJs. Below is the whole conversation we had with him. Sit back, relax and go through this fun interview.", "link":"Official-DJ-West"},
               {"title":"Las Vegas Nightlife and Bottle Service", "image":"assets/img/blog/las_vegas_bottle_service.png", "description":"Nobody really knows what happens in Vegas because everything that happens there, stays there.  But rumor has it that Las Vegas is the Disneyland for grownups.  Again, that is just a rumor!  You have to experience that on your own.", "link":"Las-Vegas-Nightlife"},
               {"title":"New York Nightlife and Bottle Service", "image":"assets/img/blog/new_york_nightlife_bottle.png", "description":"The Big Apple is best known for its nightlife and dining experience.  It offers entertainment and nightlife venues that city barely sleeps.  New York City is also home to many celebs, DJs, music artists, etc ", "link":"New-York-Nightlife"},
@@ -219,9 +229,11 @@ app
               {"title":"7 Popular Cocktails Every Bartender and Cocktail Enthusiast Must Know", "image":"assets/img/blog/margarita_blog.jpg", "description":"A margarita is a cocktail of tequila, triple sec, and lime or lemon extract, usually served with salt on the rim of the glasses. The drink is served shaken with ice, blended with ice, or without ice.", "link":"7-Popular-Cocktails-Every-Bartender-and-Cocktail-Enthusiast-Must-Know"},
               {"title":"10 Must Visit Nightclubs in Las Vegas", "image":"assets/img/blog/Vegas_xs_nightclub.jpg", "description":"Nightlife industry is growing and always glowing. Along with the growing nightlife venues, the party trends are also changing. The night clubs nowadays must know how to market their services to right the audience. We agree with the increasing number of nightclubs in the country, but the charm of certain nightclubs never fads. We are here today with yet another exciting blog that shows the best ten must-visit nightclubs in the USA", "link":"10-Must-Visit-Nightclubs-in-Las-Vegas"},
               {"title":"Nyeelah, the face of New York Nightlife.", "image":"assets/img/blog/nyeelah_blogs.jpg", "description":"Hello Nightlife freaks, recently we interviewed a nightlife promoter from New York City to understand the nightlife scene in NYC  and something more. We interviewed Nyeelah, who is also known as the Face of New York nightlife. ", "link":"Nyeelah-the-face-of-New-York-Nightlife"},
-              {"title":"7 Ways to Imporve Nightlife Online", "image":"assets/img/blog/blog-7ways.gif", "description":"Promoting an existing nightclub or a bar and growing the business can be a more challenging these days. As a new business, It is even more difficult to pass the six months mark.  Statistics show that 75% of new businesses fail in the first six months.", "link":"7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online"}
-        
-              ],
+              {"title":"7 Ways to Imporve Nightlife Online", "image":"assets/img/blog/blog-7ways.gif", "description":"Promoting an existing nightclub or a bar and growing the business can be a more challenging these days. As a new business, It is even more difficult to pass the six months mark.  Statistics show that 75% of new businesses fail in the first six months.", "link":"7-Incredible-Ways-To-Promote-Your-Nightlife-Venue-Online"},
+            //  {"title":"Mobile Tech Increases Crowds and Bottle Service Revenue for San Francisco Hot Spot", "image":"assets/img/blog/placeholder.gif", "description":"Mayes Oster House is a restaurant by day and dance club by night. Located on Polk Street in San Francisco, California, the restaurant uses VenueLytics to pack the house and increase its bottle service offerings.", "link":"Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot"},
+              
+
+    ],
     
     'nightlife': [{"title":"7 Mind Blowing Nightlife Cities in the United States", "image":"assets/img/blog/blog-1.jpg", "description":"Who doesn't like to Party? And who doesn't like Casinos, Clubs, and Live Music? We count down to Fridays just cut lose and have a great time with friends. Regardless of the city you live in, when it comes to the night life, we may have many choices and sometimes it is hard to choose. Well, let us all say TGIF and check out some cities with awesome nightlife in the USA that will make you say 'WOW.'", "link":"nightlife"},
                   {"title":"Las Vegas", "image":"assets/img/blog/city-1.jpg", "description":"Las Vegas has gained its status as America's playground for a valid reason. Some of the world's most riotous nightclubs stay in the city's glitzy hotels and casinos. Travel to Fremont Street for a break from the Strip. And apparently, every hotel on the Las Vegas Strip has at least one nightclub to keep you dancing and enjoying with your newest friends."},
