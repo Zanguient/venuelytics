@@ -26,9 +26,15 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$location', 'DataSh
 				ngMeta.setTag('description', self.venueDetails.description + " Bottle Order Confirmation");
 				$rootScope.title = self.venueDetails.venueName+' '+self.selectedCityName+' '+self.venueDetails.state + " Venuelytics - Bottle Services Confirmation";
 				ngMeta.setTitle($rootScope.title);
+				DataShare.bottleServiceData = {};
+                DataShare.tableSelection = '';
+                DataShare.selectBottle = '';
+                DataShare.editBottle = 'false';
+                DataShare.partyServiceData = {};
+                DataShare.reserveTableSelection = '';
+                DataShare.partyPackageObj = '';
 	        	self.backToReservation = function() {
 					$rootScope.serviceName = 'BottleService';
-					DataShare.editBottle = 'false';
 	            	$location.url('/cities/' + self.selectedCityName + '/' + self.venueRefId(self.venueDetails) + '/bottle-service');
 	        	};
 	        };

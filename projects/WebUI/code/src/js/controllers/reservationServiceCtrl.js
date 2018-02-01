@@ -136,11 +136,11 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
 
             self.getReserveMenus = function() {
                 AjaxService.getInfo(self.venueId).then(function(response) {
-                    self.partyMenuUrl = response.data["Bottle.menuUrl"];
-                    self.partyVIPPolicy = response.data["Bottle.BottleVIPPolicy"];
+                    self.partyMenuUrl = response.data["Party.menuUrl"];
+                    self.partyVIPPolicy = response.data["Party.PartyVIPPolicy"];
                     self.dressCode =  response.data["Advance.dressCode"];
                     self.enabledPayment =  response.data["Advance.enabledPayment"];
-                    self.reservationFee =  response.data["Bottle.BottleReservationFee"];
+                    self.reservationFee =  response.data["Party.PartyReservationFee"];
                     $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
                     venueService.saveVenueInfo(self.venueId, response);
                 });
@@ -554,10 +554,11 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                       "name": self.party.partyObj.name
                   };
                   self.serviceJSON.order.orderItems.push(item);
-               
+
             }
             DataShare.payloadObject = self.serviceJSON;
             DataShare.enablePayment = self.enabledPayment;
+
             DataShare.venueName = self.venueName;
             $location.url( self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/reserve/");
          };
