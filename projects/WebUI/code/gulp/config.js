@@ -73,7 +73,8 @@ module.exports = {
             'bower_components/inputmask/dist/min/jquery.inputmask.bundle.min.js',
             'bower_components/ngMeta/dist/ngMeta.min.js',
             'bower_components/satellizer/satellizer.min.js',
-            'bower_components/ngstorage/ngStorage.min.js'
+            'bower_components/ngstorage/ngStorage.min.js',
+            'bower_components/ngclipboard/dist/ngclipboard.min.js'
         ],
         css : [
             'bower_components/animate.css/animate.min.css',

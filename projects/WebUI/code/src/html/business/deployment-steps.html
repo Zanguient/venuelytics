@@ -1,58 +1,155 @@
-<div class="container nav_height" ng-cloak>
+<div class="container nav_height mb-4" ng-cloak>
+    <center><h1>{{selectedVenueName || newUser.businessName}}</h1></center>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="mt-2">
+                <img ng-src="{{businessImage}}" class="img-responsive mt-2 mr-2">
+                <p class="title_desc mt-2">
+                    <i class="fa fa-map-marker"></i>{{newUser.address}} {{selectedVenueAddress}}
+                    <p class="mt-1"><a href="{{selectedVenueWebsite}}"><i class="fa fa-globe" aria-hidden="true"></i>Website</a></p>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <p class="mega-title mt-4 col-md-10 col-md-offset-right-2 col-xs-12" ng-bind="'business.DEPLOY_STEPS' | translate"></p>
+            <p class="title_desc mt-1 col-md-10 col-md-offset-right-2 col-xs-12" ng-bind="'home.WELCOME_DESCRIPTION' | translate"></p>
+        </div>
+    </div>
+    <div class="text-center col-xs-12 mt-6 mb-4">
+        <h2 class="col-md-offset-2 col-md-8 col-md-offset-right-2 col-xs-12 mt-4">{{'business.FINAL_STEPS' | translate}}</h2>
+    </div>
+    
+</div>
+<div class="bg-white">
+    <div class="container">
+        <div class="col-md-offset-1 col-md-10 col-md-offset-right-1 col-xs-12 mt-4">
+            <div class="animated materialUp animation-delay-5">
+                <div class="">
+                    <h2 ng-bind="'business.DOWNLOAD_VENUELYTICS_APP' | translate"></h2>
+                    <p>{{"business.DOWNLOAD_VENUELYTICS" | translate}}</p>
+                    <!-- <img src="<%= assets %>/img/BreakThrough/reservation.png" alt="breakThroughReservation" class="img-responsive mb-4"> -->
+                </div>
 
+                <div class="col-xs-12 mt-1 p-min">
+                    <div class="col-md-7 col-xs-12 mb-4 no-p">
+                        <img src="<%= assets %>/img/BreakThrough/business/businessAnalytics-2.png" alt="" class="img-responsive ">
+                    </div>
+                    <div class="col-md-5 col-xs-12 mt-2 p-min">
+                        <div class="col-xs-12 p-min image-center">
+                            <div class="no-p pt-2">
+                                <a href="//itunes.apple.com/us/app/venuelytics-for-business/id1155767700?ls=1&amp;mt=8" target="_new"> 
+                                    <img class="img-responsive col-xs-8" alt="App Store" ng-src="assets/img/apple-store-400.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 p-min image-center">
+                            <div class="no-p pt-2">
+                                <a href="//play.google.com/store/apps/details?id=com.itzfun.biz&amp;hl=en" target="_new"> 
+                                    <img class="img-responsive  col-xs-8" alt="Google Play Store" ng-src="assets/img/android-playstore-400.png" >
+                                </a>
+                            </div>
+                        </div>    
+                           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <h1 class="text-center wow fadeInDown animation-delay-5 discover ng-binding" >{{"business.DEPLOY_STEPS" | translate}}</h1>
+<div>
+    <div class="container">
+        <div class="col-md-offset-1 col-md-10 col-md-offset-right-1 col-xs-12 mt-4">
+            <div class="animated materialUp animation-delay-5">
+                <div class="">
+                    <h2 ng-bind="'business.DOWNLOAD_VENUELYTICS_WHITE' | translate"></h2>
+                    <p>{{"business.DOWNLOAD_VENUELYTICS_WHITE" | translate}}</p>
+                    <!-- <img src="<%= assets %>/img/BreakThrough/reservation.png" alt="breakThroughReservation" class="img-responsive mb-4"> -->
+                </div>
 
-	<div class="form-group">
-		<div class="col-md-10 col-md-offset-2">	
-			<h2 ng-show="successMessage">Your Business Account is successfully activated. </h2>
-
-			<h2 class="mt-1  col-xs-12"> {{"business.FINAL_STEPS" | translate}} </h2>
-
-			<div class="post-container">
-			    <div class="post-thumb"><img class="deployPost" ng-src="{{businessImage}}" alt="deploy-image"/></div>
-			    <div class="post-content">
-			        <h3 >{{selectedVenueName || newUser.businessName}}</h3>
-			        <i class="fa fa-map-marker"></i>{{newUser.address}} {{selectedVenueAddress}}
-			        <p class="mt-1"><a href="{{selectedVenueWebsite}}"><i class="fa fa-globe" aria-hidden="true"></i>Website</a></p>
-			    </div>
-			</div>
-		<hr >
-		<br>
-	
-		<h2>{{"business.DOWNLOAD_VENUELYTICS" | translate}}</h2>
-		<label><h4>{{"business.LINK_DOWNLOAD" | translate}}:</h4></label>
-		<a href="//onelink.to/xw558c" target="_blank">{{"business.DOWNLOAD_VENUELYTICS_URL" | translate}}</a>
-		<hr >
-	
-
-		<h2>{{"business.DOWNLOAD_VENUELYTICS_WHITE" | translate}}</h2>
-		<label><h4>{{"business.LINK_DOWNLOAD" | translate}}:</h4></label>
-		<a href="//onelink.to/98dmnv" target="_blank">{{"business.DOWNLOAD_VENUELYTICS_WHITE_URL" | translate}}</a>
-		<hr >
-		
-		<div ng-show = "businessUrl === true">
-		
-			<h2>{{"business.FOR_SHARING" | translate}}</h2>
-
-			<div class="control-label" ng-repeat="depItem in deploymentServices">
-				<h4 ng-bind="depItem.displayName | translate"></h4>
-				<label><a ng-href="{{depItem.url}}" target="_blank">{{depItem.url}}</a></label>
-				<hr class="underLine">
-			</div>
-
-		</div>	
-	
-		<h2>{{"business.CONFIG_SCRIPT" | translate}}</h2>
-		<div class="control-label">
-	   		<h4> 
-	   			<pre>
-	   				<code> <p ng-bind="embedServicesHTML"></p></code>
-	   			</pre> 
-	   		</h4>
-	   		<hr class="underLine">
-		</div>
-		
-	</div>	
-
+                <div class="col-xs-12 mt-1 p-min">
+                    <div class="col-md-5 col-xs-12 mt-2 p-min">
+                        <div class="col-xs-12 p-min image-center">
+                            <div class="no-p pt-2">
+                                <a href="//onelink.to/98dmnv" target="_new"> 
+                                    <img class="img-responsive col-xs-8" alt="App Store" ng-src="assets/img/apple-store-400.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 p-min image-center">
+                            <div class="no-p pt-2">
+                                <a href="//onelink.to/98dmnv" target="_new"> 
+                                    <img class="img-responsive  col-xs-8" alt="Google Play Store" ng-src="assets/img/android-playstore-400.png" >
+                                </a>
+                            </div>
+                        </div>     
+                    </div>
+                    <div class="col-md-7 col-xs-12 mb-4 no-p">
+                        <img src="<%= assets %>/img/digital_concierge.png" alt="" class="img-responsive ">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-white">
+    <div class="container">
+        <div class="col-md-offset-1 col-md-10 col-md-offset-right-1 col-xs-12 mt-4">
+            <div class="animated materialUp animation-delay-5">
+                <div class="">
+                    <h2>{{"business.FOR_SHARING" | translate}}</h2>
+                    <p class="title_desc">Publish and Share the links on your social media pages (Facebook, Twitter, Instagram ...).</p>
+                    <!-- <img src="<%= assets %>/img/BreakThrough/privateEvent.png" alt="breakThroughPrivate" class="img-responsive mb-4"> -->
+                </div>
+                <div class="col-xs-12 p-min">
+                    <div class="col-md-4 col-xs-12 p-min">
+                        <div class="col-xs-12 mt-2 no-p" ng-repeat="depItem in deploymentServices">
+                            <div ng-if="$even">
+                                <span class="title-bold mb0">{{depItem.displayName | translate}}</span>
+                                <p class="mb0">{{depItem.url}}</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <img src="<%= assets %>/img/hand2.png" alt="" class="img-responsive ">
+                    </div>
+                    <div class="col-md-4 col-xs-12 p-min pull-right">
+                        <div class="col-xs-12 mt-2 no-p" ng-repeat="depItem in deploymentServices">
+                            <div ng-if="$odd">
+                                <span class="title-bold mb0">{{depItem.displayName | translate}}</span>
+                                <p class="mb0">{{depItem.url}}</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="container">
+        <div class="col-xs-12 mt-4">
+            <div class="animated materialUp animation-delay-5">
+                <center>
+                    <h2>{{"business.CONFIG_SCRIPT" | translate}}</h2>
+                    <p class="title_desc"></p>
+                    <!-- <img src="<%= assets %>/img/BreakThrough/privateEvent.png" alt="breakThroughPrivate" class="img-responsive mb-4"> -->
+                </center>
+                <div class="col-xs-12 mb-6 p-min">
+                    <pre>
+                        <code> <p ng-bind="embedServicesHTML" id="code"></p></code>
+                    <button class="btn btn-success mt-4 mb-0 btn-raised" ngclipboard ngclipboard data-clipboard-target="#code">
+                        Copy to clipboard
+                    </button>
+                    </pre> 
+                    
+                </div>
+                    
+            </div>
+        </div>
+    </div>
 </div>

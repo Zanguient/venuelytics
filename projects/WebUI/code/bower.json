@@ -63,7 +63,7 @@
     "angular-dynamic-locale": "^0.1.32",
     "angular-i18n": "^1.6.7",
     "angular-cookies": "^1.6.7",
-    "ngclipboard": "^1.1.1",
+    "ngclipboard": "^1.1.3",
     "parsleyjs": "^2.7.2",
     "inputmask": "^3.3.7",
     "source-sans-pro-fontface": "^1.1.0",

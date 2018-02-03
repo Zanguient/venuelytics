@@ -31,8 +31,6 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
              // initial image index
             self._Index = 0;
 
-            self.venueId = $routeParams.venueId;
-            
             var urlPattern = $location.absUrl();
            
             self.searchBusiness = $location.search().s;
@@ -58,6 +56,20 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
                 AjaxService.recordUTM(utmPayload);
             }
             
+            AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
+                self.venueId = response.id;
+                self.selectedVenueName = response.venueName;
+                self.selectedVenueAddress = response.address;
+                self.selectedVenueWebsite = response.website;
+                if (typeof response.imageUrls !== 'undefined') {
+                    self.businessImage = response.imageUrls[0].largeUrl;
+                }
+
+                self.initMore();
+            });
+        }
+
+        self.initMore = function() {
             self.deploymentServices = [];
             if(self.venueId) {
                 AjaxService.getClaimBusiness(self.venueId).then(function(response) {
@@ -80,16 +92,7 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
                 });
             }
 
-            if(typeof self.venueId !== 'undefined'){
-                AjaxService.getVenues(self.venueId,null,null).then(function(response) {
-                    self.selectedVenueName = response.venueName;
-                    self.selectedVenueAddress = response.address;
-                    self.selectedVenueWebsite = response.website;
-                    if (typeof response.imageUrls !== 'undefined') {
-                        self.businessImage = response.imageUrls[0].largeUrl;
-                    }
-                });
-            }
+            
             
             if(typeof(self.searchBusiness) !== 'undefined' && self.searchBusiness.length > 0)  {
                 self.search(self.searchBusiness);
