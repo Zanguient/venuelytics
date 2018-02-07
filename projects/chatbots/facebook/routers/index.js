@@ -33,7 +33,7 @@ router.get('/facebook/webhook', (req, res) => {
  * 1. Regular messages
  * 2. Postbacks
  */
-router.post('/webhook', (req, res) => {
+router.post('/facebook/webhook', (req, res) => {
     /*
     You must send back a status of 200(success) within 20 seconds
     to let us know you've successfully received the callback.
