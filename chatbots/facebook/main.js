@@ -14,7 +14,7 @@ var config = require('./config');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 
-var venulyticsHandler = require("./routers");
+var chatbotHandlers = require("./routers");
 /*============Initialize and COnfiguration===============*/
 
 const app = express();
@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/venuelytics', venulyticsHandler)
+app.use('/chatbots', chatbotHandlers)
 app.all("/", function (req, res) {
     res.status(200).sendFile(path.join(__dirname, "/views/index.html"));
 });
