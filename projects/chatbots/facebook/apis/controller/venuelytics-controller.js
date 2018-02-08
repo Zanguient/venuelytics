@@ -10,7 +10,7 @@ var config = require('../../config');
 var sendApi = require( '../send');
 
 const chatContextFactory = require( '../../lib/chat-context');
-const chatContext = chatContextFactory.get("chatContext");
+const generalContext = chatContextFactory.getOrCreate("generalContext");
 
 var fuzzy = require( 'fuzzy')
 
@@ -35,18 +35,18 @@ const SERVICES = [
 const handleReceivePostback = (event) => {
   
   const type = event.postback.payload;
-  
   const senderId = event.sender.id;
-  let ctx = chatContext.getOrCreate(senderId);
+  
+  processMessage(senderId, type);
+};
+
+function processMessage(senderId, type) {
+  let user = Users.getUser(senderId);
+  let ctx = user.getOrCreateContext();
   if (!ctx.isSet()) {
     initServices(senderId);
   }
-  processMessage(senderId, type, chatContext);
-};
-
-function processMessage(senderId, type, chatContext) {
   
-  let ctx = chatContext.getOrCreate(senderId);
   ctx.match(type, function(err, match, contextCb) {
     if(!err) {
       contextCb(senderId, match);
@@ -59,8 +59,9 @@ function processMessage(senderId, type, chatContext) {
 }
 
 function initServices(userId) {
-  let ctx = chatContext.getOrCreate(userId);
   let user = Users.getUser(userId);
+  let ctx = user.getOrCreateContext();
+  
   let ids = SERVICES.map(function(e){
     return e.id;
   }).join("|");
@@ -72,8 +73,8 @@ function initServices(userId) {
 function processServiceType(userId, serviceType) {
   let user = Users.getUser(userId);
   user.state.set("serviceType", serviceType);
-  user.state.set("currentLevel", 1);
-  let ctx = chatContext.getOrCreate(userId);
+ 
+  let ctx = user.getOrCreateContext();
   ctx.set(/.*/,(userId, match) =>searchVenue(userId, match));
   sendApi.sendMessage(userId, 'Enter the Venue name');
 
@@ -81,7 +82,6 @@ function processServiceType(userId, serviceType) {
 
 function searchVenue(userId, venueName) {
   let user = Users.getUser(userId);
-  user.state.set("currentLevel", 2);
   sendApi.sendMessage(userId, "Searching your venue...");
   
   serviceApi.searchVenueByName(venueName, function(venues) {
@@ -116,7 +116,7 @@ function searchVenue(userId, venueName) {
       }
     };
     sendApi.sendMessage(userId, messageData);
-    let ctx = chatContext.getOrCreate(userId);
+    let ctx = user.getOrCreateContext();
     ctx.set(/.*/, (userId, match) =>selectVenue(userId, match));
 
   });
@@ -124,7 +124,6 @@ function searchVenue(userId, venueName) {
 
 function selectVenue(userId, venueId) {
   let user = Users.getUser(userId);
-  user.state.set("currentLevel", 3);
   user.state.set("selectedVenueId", venueId);
   
   var listOfVenues = user.state.get("listOfVenues");
@@ -156,7 +155,7 @@ function selectVenue(userId, venueId) {
   selectionTemplate.push(object)
 
   user.state.set("selectionTemplate", selectionTemplate);
-  let ctx = chatContext.getOrCreate(userId);
+  let ctx = user.getOrCreateContext();
   ctx.set(/.*/, (userId, dateStr) => selectDate(userId, dateStr));
   sendApi.sendMessage(userId, "Enter the reservation date in MM/DD/YYYY format");
 
@@ -233,7 +232,7 @@ function selectDate(userId, dateStr) {
           }
         }
       };
-      let ctx = chatContext.getOrCreate(userId);
+      let ctx = user.getOrCreateContext();
       ctx.set(/.*/, (userId, tableId) => selectTable(userId, tableId));
       sendApi.sendMessage(userId, messageData);
     });
@@ -243,7 +242,6 @@ function selectDate(userId, dateStr) {
 
 function selectTable(userId, tableId) {
   let user = Users.getUser(userId);
-  user.state.set("currentLevel", 6);
   user.state.set("tableSelected", tableId);
   
   var selectionTemplate = user.state.get("selectionTemplate");
@@ -259,7 +257,7 @@ function selectTable(userId, tableId) {
   selectionTemplate.push(selectedTemplate);
   user.state.set("selectionTemplate", selectionTemplate);
 
-  let ctx = chatContext.getOrCreate(userId);
+  let ctx = user.getOrCreateContext();
   ctx.set(/.*/, (userId, guestCount) => selectNoOfGuests(userId, guestCount));
   sendApi.sendMessage(userId, "Enter No of Guests");
 }
@@ -267,7 +265,6 @@ function selectTable(userId, tableId) {
 
 function selectNoOfGuests(userId, guestCount) {
   let user = Users.getUser(userId);
-  user.state.set("currentLevel", 7);
   user.state.set("noOfGuests", guestCount);
   
   var object = {
@@ -288,7 +285,7 @@ function selectNoOfGuests(userId, guestCount) {
   }
   var selectionTemplate = user.state.get("selectionTemplate");
   selectionTemplate.push(object);
-  let ctx = chatContext.getOrCreate(userId);
+  let ctx = user.getOrCreateContext();
   ctx.set(/.*/, (userId, email) => emailAddress(userId, email));
   sendApi.sendMessage(userId, "What is your mail address, we need it to track and manage your orders");
 
@@ -299,7 +296,8 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 function emailAddress(userId, email) {
-  let ctx = chatContext.getOrCreate(userId);
+  let user = Users.getUser(userId);
+  let ctx = user.getOrCreateContext();
   if (!validateEmail) {
     sendApi.sendMessage(userId, "You have entered invalid email address. Please enter a valid email.");
   } else {
@@ -308,7 +306,8 @@ function emailAddress(userId, email) {
   }
 }
 function confirmEmailAddress(userId, YESNO, email) {
-  let ctx = chatContext.getOrCreate(userId);
+  let user = Users.getUser(userId);
+  let ctx = user.getOrCreateContext();
   if (YESNO.toLowerCase() === 'yes' ){
     let user = Users.getUser(userId);
     user.state.set("currentLevel", 8);
@@ -354,6 +353,7 @@ function confirmReservation(userId, command) {
            
           } else {
             sendApi.sendMessage(userId, `You Bottle Service reservation is successfully reserved. Your order Id is ${result.order.orderNumber}`);
+            restartTheFlow();
           }
         });
       });
@@ -377,20 +377,90 @@ const handleReceiveMessage = (event) => {
   // spamming the bot if the requests take some time to return.
   sendApi.sendReadReceipt(senderId);
   //botContext.getOrCreate(senderId);
-  let ctx = chatContext.getOrCreate(senderId);
+    
+  let ctx = generalContext.getOrCreate(-1);
+
   if (!ctx.isSet()) {
-    let user = Users.getUser(senderId);
-    user.state.set("currentLevel", 0);
-    ctx.set(/(hi|hai|hello|cancel|restart)/, (senderId, match) => { 
-      user.state.set("currentLevel", 0);
-      sendApi.sendMessage(senderId, getWelcomeMessage());
-      initServices(senderId);
-    });
+    ctx.set(/(hi|hai|hello|howdy|hey|cancel|bye|cool|thanks)/, (senderId, match, passedText) => processOutOfBandMessage(senderId, match, passedText));
   }
-  processMessage(senderId, message.text, chatContext);
+  ctx.match(message.text.toLowerCase(), function(err, match, contextCb) {
+      if(!err) {
+        contextCb(senderId, match, message.text);
+      } else {
+        let usrCtx = generalContext.getOrCreate(senderId);
+        if (usrCtx.isSet()) {
+          usrCtx.match(message.text.toLowerCase(), function(err, match, contextCb){
+            if(!err) {
+              contextCb(senderId, match);
+              return;
+            } else {
+              sendApi.sendMessage(senderId, "Humm! I didn't get it. Please try again...");
+              return;
+            }
+          });
+        } else {
+          generalContext.removeContext(senderId);
+          processMessage(senderId, message.text);
+        }
+      }
+  });
 };
 
+function processOutOfBandMessage(senderId, match, text) {
+  let user = Users.getUser(senderId);
+  let ctx = user.getOrCreateContext();
+  var hasConvesationContext = user.hasConversationContext();
+  
+  var generatCtx = generalContext.getOrCreate(senderId);
+  if ("hey" === match.toLowerCase() || "howdy" === match.toLowerCase() || "hi" === match.toLowerCase() || "hello" === match.toLowerCase() ||  "hai" === match.toLowerCase()) {
+    if (!!hasConvesationContext) {
+      processMessage(senderId, text);
+    } else {
+      restartTheFlow(senderId);
+    }
+   
+  } else if ("cancel" === match.toLowerCase()){
+    if (!!hasConvesationContext) {
+      sendApi.sendMessage(senderId, "Do you want to cancel the current Booking? ");
+      generatCtx.set(/(yes|no)/, (senderId, match) => cancelCurrentBooking(senderId, match));
+    } else {
+      sendApi.sendMessage(senderId, "DO you want to cancel an existing booking? Please call the venue.");
+    }
+  } else if ("bye" === match.toLowerCase() || "cool" === match.toLowerCase()){
+    if (!!hasConvesationContext) {
+      sendApi.sendMessage(senderId, "OK, cancelling the current booking.");
+      restartTheFlow(senderId);
+    } else {
+      restartTheFlow(senderId);
+    }
+  } else if ("thanks" === match.toLowerCase() ){
+    if (!!hasConvesationContext) {
+      sendApi.sendMessage(senderId, "Do you want to cancel the current Booking? ");
+      generatCtx.set(/(yes|no)/, (senderId, match) => cancelCurrentBooking(senderId, match));
+    } else {
+      sendApi.sendMessage(senderId, "My pleasure!!");
+      restartTheFlow(senderId);
+    }
+  } 
+}
 
+function restartTheFlow(senderId) {
+  let user = Users.getUser(senderId);
+  user.clear();
+  generalContext.removeContext(senderId);
+  sendApi.sendMessage(senderId, "Hey! What would you like to do today?");
+  sendApi.sendMessage(senderId, getWelcomeMessage());
+}
+function cancelCurrentBooking(senderId, match) {
+  if("yes" === match) {
+   restartTheFlow(senderId);
+  } else {
+    sendApi.sendMessage(senderId, "OK, Continue from where you left!");
+    generalContext.removeContext(senderId);
+  }
+ 
+
+}
 const getWelcomeMessage = () => {
   var welcomeMessage = {
     "attachment": {

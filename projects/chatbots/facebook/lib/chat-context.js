@@ -36,6 +36,10 @@ class ChatContext extends Map {
             return this.create(userId);
         }
     }
+
+    removeContext(userId) {
+        this.delete(userId);
+    }
 }
 
 class ChatContextFactory extends Map {
@@ -44,9 +48,9 @@ class ChatContextFactory extends Map {
         super(...args);
     }
 
-    get(type) {
+    getOrCreate(type) {
         if(this.has(type)) {
-            return this.get(userId);
+            return this.get(type);
         } else {
             return this.create(type);
         }
