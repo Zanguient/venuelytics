@@ -399,6 +399,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
     .state('page.recover', {
         url: '/recover',
         title: "Recover",
+        controller: 'PasswordResetController',
         templateUrl: 'app/pages/recover.html'
     })
     .state('page.reset', {

@@ -24,7 +24,7 @@ App.controller('PasswordResetController',  ['$state','$scope',  '$location', 'Re
 		if (response.statusCode < 0 ) {
 			toaster.pop('error', "Reset Password", response.reason);
 		} else {
-			toaster.pop('success', "Reset Password", "Congratulatons! You have successfully changed your password.");
+			toaster.pop('success', "Reset Password", "Congratulations! You have successfully changed your password.");
 			$timeout(function() {
 				$state.go('page.login');
 			}, 3000);
@@ -32,6 +32,18 @@ App.controller('PasswordResetController',  ['$state','$scope',  '$location', 'Re
 	  }, function () {
 
 	  });
+  };
+
+  $scope.goResetScreen = function() {
+	$state.go('page.reset');
+  }
+  $scope.recoverPassword = function(account) {
+  	RestServiceFactory.UserService().recoverPassword({email: account.email}, function (response) {
+		toaster.pop('success', "Reset Password", "We have send you an email with instructions on how to reset password.");
+		$timeout(function() {
+			$state.go('page.login');
+		}, 3000)
+	});
   };
   
 }]);

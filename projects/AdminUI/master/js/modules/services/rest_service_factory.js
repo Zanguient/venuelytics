@@ -70,7 +70,9 @@
  					saveMyProfile : {method: 'POST',  params: { id: '@id'}, 
  						url: urlTemplate.replace("@context", "users") +"/myProfile"},
  					getManagers : {method: 'GET',  params: { id: '@id'}, isArray: true,
- 						url: urlTemplate.replace("@context", "users") +"/managers"},	
+						 url: urlTemplate.replace("@context", "users") +"/managers"},	
+					recoverPassword : {method: 'POST',  params: { id: '@id'}, isArray: false,
+ 						url: urlTemplate.replace("@context", "users") +"/forgotpassword"},	
 
  				});
  			},
