@@ -157,7 +157,7 @@ function selectVenue(userId, venueId) {
   user.state.set("selectionTemplate", selectionTemplate);
   let ctx = user.getOrCreateContext();
   ctx.set(/.*/, (userId, dateStr) => selectDate(userId, dateStr));
-  sendApi.sendMessage(userId, "Enter the reservation date in MM/DD/YYYY format");
+  sendApi.sendMessage(userId, "Enter the reservation date in MM/DD/YY format");
 
   //
 }
@@ -170,7 +170,7 @@ function selectDate(userId, dateStr) {
   var venueImageUrl = user.state.get("venueImageUrl");
 
   if (selectedDate == null) {
-    sendApi.sendMessage(userId, "Invalid Date. Re-enter in MM/DD/YYYY format");
+    sendApi.sendMessage(userId, "Invalid Date. Re-enter in MM/DD/YY format");
   } else {
     user.state.set("selectedDate", selectedDate);
     var selectionTemplate = user.state.get("selectionTemplate");
@@ -197,7 +197,7 @@ function selectDate(userId, dateStr) {
     var bottleTables = [];
     var templateObjects = [];
     if (typeof(venueMap) == 'undefined' ) {
-      sendApi.sendMessage(userId, "Reservation not available for this date. Try another date (MM/DD/YYYY) format");
+      sendApi.sendMessage(userId, "Reservation not available for this date. Try another date (MM/DD/YY) format");
       return;
     }
     for (var i = 0; i < venueMap.elements.length; i++) {
@@ -352,7 +352,7 @@ function confirmReservation(userId, command) {
             sendApi.sendMessage(userId, `Unable to process your Bottle Service reservation request. ${result.message}`);
            
           } else {
-            sendApi.sendMessage(userId, `You Bottle Service reservation is successfully reserved. Your order Id is ${result.order.orderNumber}`);
+            sendApi.sendMessage(userId, `Your Bottle Service reservation is successfully reserved. Your order Id is ${result.order.orderNumber}`);
             restartTheFlow();
           }
         });
@@ -494,8 +494,8 @@ const getWelcomeMessage = () => {
 }; 
 
 function parseDate(str) {
-  var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  return (m) ? new Date(m[3], m[2]-1, m[1]) : null;
+  var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/);
+  return (m) ? new Date(2000+m[3], m[2]-1, m[1]) : null;
 }
 
 function getYYYMMDDDate(date) {
