@@ -45,6 +45,7 @@ class User {
     clear() {
         this._state = new Map();
         this.conversationContext = null;
+        chatContext.removeContext(this._id);
     }
 }
 
