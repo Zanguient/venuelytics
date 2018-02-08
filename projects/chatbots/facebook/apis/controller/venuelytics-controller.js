@@ -259,7 +259,7 @@ function selectTable(userId, tableId) {
 
   let ctx = user.getOrCreateContext();
   ctx.set(/.*/, (userId, guestCount) => selectNoOfGuests(userId, guestCount));
-  sendApi.sendMessage(userId, "Enter No of Guests");
+  sendApi.sendMessage(userId, "Enter Number of Guests");
 }
 
 
@@ -287,7 +287,7 @@ function selectNoOfGuests(userId, guestCount) {
   selectionTemplate.push(object);
   let ctx = user.getOrCreateContext();
   ctx.set(/.*/, (userId, email) => emailAddress(userId, email));
-  sendApi.sendMessage(userId, "What is your mail address, we need it to track and manage your orders");
+  sendApi.sendMessage(userId, "Please enter your email address?, we need it to track and manage your orders");
 
 }
 
@@ -495,7 +495,7 @@ const getWelcomeMessage = () => {
 
 function parseDate(str) {
   var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/);
-  return (m) ? new Date(2000+m[3], m[2]-1, m[1]) : null;
+  return (m) ? new Date(2000 + parseInt(m[3]), m[2]-1, m[1]) : null;
 }
 
 function getYYYMMDDDate(date) {
