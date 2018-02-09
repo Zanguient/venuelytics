@@ -7,24 +7,24 @@
 var moment = require('moment');
 var config = require('../../config');
 
-var sendApi = require( '../send');
+var sendApi = require('../send');
 
-const chatContextFactory = require( '../../lib/chat-context');
+const chatContextFactory = require('../../lib/chat-context');
 const generalContext = chatContextFactory.getOrCreate("generalContext");
 
-var fuzzy = require( 'fuzzy')
+var fuzzy = require('fuzzy')
 
-var Users = require( '../../models/users');
+var Users = require('../../models/users');
 var serviceApi = require('../app-api');
 
 const SERVICES = [
-    {"title": "Book Bottle Service", "id": "BottleService", "enabled": true},
-    {"title": "Reserve Party Table", "id": "PartyService", "enabled": true},
-    {"title": "Reserve a Table", "id": "TableService", "enabled": true},
-    //{"title": "Book Private Room", "id": "PrivateEventService", "enabled": true},
-    //{"title": "Reserve a Table", "id": "BottleService", "enabled": true},
-    //{"title": "Add to Guest List", "id": "BottleService", "enabled": true},
-   // {"title": "Start from Begining", "id": "get_started", "enabled": true}
+  { "title": "Book Bottle Service", "id": "BottleService", "enabled": true },
+  { "title": "Reserve Party Table", "id": "PartyService", "enabled": true },
+  { "title": "Reserve a Table", "id": "TableService", "enabled": true },
+  //{"title": "Book Private Room", "id": "PrivateEventService", "enabled": true},
+  //{"title": "Reserve a Table", "id": "BottleService", "enabled": true},
+  //{"title": "Add to Guest List", "id": "BottleService", "enabled": true},
+  // {"title": "Start from Begining", "id": "get_started", "enabled": true}
 ];
 
 /*
@@ -33,10 +33,10 @@ const SERVICES = [
  * developers.facebook.com/docs/messenger-platform/webhook-reference/postback
  */
 const handleReceivePostback = (event) => {
-  
+
   const type = event.postback.payload;
   const senderId = event.sender.id;
-  
+
   processMessage(senderId, type);
 };
 
@@ -46,36 +46,36 @@ function processMessage(senderId, type) {
   if (!ctx.isSet()) {
     initServices(senderId);
   }
-  
-  ctx.match(type, function(err, match, contextCb) {
-    if(!err) {
+
+  ctx.match(type, function (err, match, contextCb) {
+    if (!err) {
       contextCb(senderId, match);
     } else {
-       // eslint-enable camelcase
+      // eslint-enable camelcase
       sendApi.sendMessage(senderId, `Unable to process your input: ${type}`);
     }
   });
-  
+
 }
 
 function initServices(userId) {
   let user = Users.getUser(userId);
   let ctx = user.getOrCreateContext();
-  
-  let ids = SERVICES.map(function(e){
+
+  let ids = SERVICES.map(function (e) {
     return e.id;
   }).join("|");
   ctx.set(
     `(${ids})`, (userId, serviceType) => processServiceType(userId, serviceType)
-    );
+  );
 }
 
 function processServiceType(userId, serviceType) {
   let user = Users.getUser(userId);
   user.state.set("serviceType", serviceType);
- 
+
   let ctx = user.getOrCreateContext();
-  ctx.set(/.*/,(userId, match) =>searchVenue(userId, match));
+  ctx.set(/.*/, (userId, match) => searchVenue(userId, match));
   sendApi.sendMessage(userId, 'Enter the Venue name');
 
 }
@@ -83,14 +83,14 @@ function processServiceType(userId, serviceType) {
 function searchVenue(userId, venueName) {
   let user = Users.getUser(userId);
   sendApi.sendMessage(userId, "Searching your venue...");
-  
-  serviceApi.searchVenueByName(venueName, function(venues) {
-    var listOfVenues=[];
+
+  serviceApi.searchVenueByName(venueName, function (venues) {
+    var listOfVenues = [];
     for (var i = 0; i < venues.length && i < 10; i++) {
-      
+
       var object = {
         "title": venues[i].venueName,
-        "subtitle" : venues[i].address,
+        "subtitle": venues[i].address,
         "image_url": venues[i].imageUrls[0].smallUrl,
         "buttons": [
           {
@@ -100,7 +100,7 @@ function searchVenue(userId, venueName) {
           }
         ]
       };
-      
+
       listOfVenues.push(object);
     }
 
@@ -110,14 +110,22 @@ function searchVenue(userId, venueName) {
       "attachment": {
         "type": "template",
         "payload": {
-          "template_type": "generic",
-          "elements": listOfVenues.slice(0,9)
+          "template_type": "list",
+          "top_element_style": "compact",
+          "elements": listOfVenues.slice(0, 9),
+          // "buttons": [
+          //   {
+          //     "title": "Read More",
+          //     "type": "postback",
+          //     "payload": "payload",
+          //   }
+          ]
         }
       }
     };
     sendApi.sendMessage(userId, messageData);
     let ctx = user.getOrCreateContext();
-    ctx.set(/.*/, (userId, match) =>selectVenue(userId, match));
+    ctx.set(/.*/, (userId, match) => selectVenue(userId, match));
 
   });
 }
@@ -125,11 +133,11 @@ function searchVenue(userId, venueName) {
 function selectVenue(userId, venueId) {
   let user = Users.getUser(userId);
   user.state.set("selectedVenueId", venueId);
-  
+
   var listOfVenues = user.state.get("listOfVenues");
   var selectedVenue = null;
   for (var i = 0; i < listOfVenues.length; i++) {
-    if (listOfVenues[i].id ==   venueId) {
+    if (listOfVenues[i].id == venueId) {
       selectedVenue = listOfVenues[i];
     }
   }
@@ -140,16 +148,16 @@ function selectVenue(userId, venueId) {
     "title": selectedVenue.venueName,
     "subtitle": "Venue Name",
     "image_url": selectedVenue.imageUrls[0].smallUrl,
-    "buttons": [ {
-        "type": "postback",
-        "title": "Change Venue",
-        "payload": 'changeVenue'
-        },
-        {
-          "type": "postback",
-          "title": "Confirm Reservation",
-          "payload": 'confirmReservation'
-        }
+    "buttons": [{
+      "type": "postback",
+      "title": "Change Venue",
+      "payload": 'changeVenue'
+    },
+    {
+      "type": "postback",
+      "title": "Confirm Reservation",
+      "payload": 'confirmReservation'
+    }
     ]
   };
   selectionTemplate.push(object)
@@ -192,26 +200,26 @@ function selectDate(userId, dateStr) {
       ]
     };
     selectionTemplate.push(object);
-  
-    serviceApi.getAvailableBottleReservations(user.state.get("selectedVenueId"), formattedDate, function(venueMap) {
-    var bottleTables = [];
-    var templateObjects = [];
-    if (typeof(venueMap) == 'undefined' ) {
-      sendApi.sendMessage(userId, "Reservation not available for this date. Try another date (MM/DD/YY) format");
-      return;
-    }
-    for (var i = 0; i < venueMap.elements.length; i++) {
 
-      var title = venueMap.elements[i].name ;
-      if (venueMap.elements[i].price > 0) {
-          title = `${title} - $${venueMap.elements[i].price}`;
+    serviceApi.getAvailableBottleReservations(user.state.get("selectedVenueId"), formattedDate, function (venueMap) {
+      var bottleTables = [];
+      var templateObjects = [];
+      if (typeof (venueMap) == 'undefined') {
+        sendApi.sendMessage(userId, "Reservation not available for this date. Try another date (MM/DD/YY) format");
+        return;
       }
+      for (var i = 0; i < venueMap.elements.length; i++) {
 
-      var object = {
-        "title": title,
-        "subtitle" : `Can sit max of ${venueMap.elements[i].servingSize} guests`,
-        "image_url": venueMap.elements[i].imageUrls[0].smallUrl,
-        "buttons": [
+        var title = venueMap.elements[i].name;
+        if (venueMap.elements[i].price > 0) {
+          title = `${title} - $${venueMap.elements[i].price}`;
+        }
+
+        var object = {
+          "title": title,
+          "subtitle": `Can sit max of ${venueMap.elements[i].servingSize} guests`,
+          "image_url": venueMap.elements[i].imageUrls[0].smallUrl,
+          "buttons": [
             {
               "type": "postback",
               "title": "Reserve Table",
@@ -221,14 +229,22 @@ function selectDate(userId, dateStr) {
         };
         templateObjects[venueMap.elements[i].id] = object;
         bottleTables.push(object);
+        console.log('object####>>>>>>>>>>>>>>>>>>', object);
       }
       user.state.set("tableTemplateObjects", templateObjects);
       var messageData = {
         "attachment": {
           "type": "template",
           "payload": {
-            "template_type": "generic",
-            "elements": bottleTables.slice(0,9)
+            "template_type": "list",
+            "elements": bottleTables.slice(0, 3),
+            // "buttons": [
+            //   {
+            //     "title": "Read More",
+            //     "type": "postback",
+            //     "payload": "payload",
+            //   }
+            // ]
           }
         }
       };
@@ -243,11 +259,11 @@ function selectDate(userId, dateStr) {
 function selectTable(userId, tableId) {
   let user = Users.getUser(userId);
   user.state.set("tableSelected", tableId);
-  
+
   var selectionTemplate = user.state.get("selectionTemplate");
   var selectedTemplate = user.state.get("tableTemplateObjects")[tableId];
-  selectedTemplate.buttons[0].payload="changeTable"
-  selectedTemplate.buttons[0].title="Change Table"
+  selectedTemplate.buttons[0].payload = "changeTable"
+  selectedTemplate.buttons[0].title = "Change Table"
   selectedTemplate.buttons.push(
     {
       "type": "postback",
@@ -266,7 +282,7 @@ function selectTable(userId, tableId) {
 function selectNoOfGuests(userId, guestCount) {
   let user = Users.getUser(userId);
   user.state.set("noOfGuests", guestCount);
-  
+
   var object = {
     "title": `Total Guests: ${guestCount}`,
     "subtitle": "Number of guests",
@@ -301,14 +317,14 @@ function emailAddress(userId, email) {
   if (!validateEmail) {
     sendApi.sendMessage(userId, "You have entered invalid email address. Please enter a valid email.");
   } else {
-    sendApi.sendMessage(userId, `Your have entered your email as ${email}. Type YES to continue, NO to correct your email.` );
+    sendApi.sendMessage(userId, `Your have entered your email as ${email}. Type YES to continue, NO to correct your email.`);
     ctx.set(/.*/, (userId, YESNO) => confirmEmailAddress(userId, YESNO, email));
   }
 }
 function confirmEmailAddress(userId, YESNO, email) {
   let user = Users.getUser(userId);
   let ctx = user.getOrCreateContext();
-  if (YESNO.toLowerCase() === 'yes' ){
+  if (YESNO.toLowerCase() === 'yes') {
     let user = Users.getUser(userId);
     user.state.set("currentLevel", 8);
     user.state.set("contactEmail", email);
@@ -332,32 +348,32 @@ function confirmEmailAddress(userId, YESNO, email) {
 }
 function confirmReservation(userId, command) {
   if (command === 'confirmReservation') {
-    serviceApi.getUserFBDetails(userId, (err, {statusCode}, body) =>{
-      
+    serviceApi.getUserFBDetails(userId, (err, { statusCode }, body) => {
+
       if (err || statusCode !== 200) {
         return sendApi.sendMessage(userId, "Unable to get your account details to create reservation under your name.");
       }
       let user = Users.getUser(userId);
       var email = user.state.get("contactEmail");
       body.email = email;
-      serviceApi.fbLogin(body, (result)=>{
+      serviceApi.fbLogin(body, (result) => {
         let user = Users.getUser(userId);
         var venueId = user.state.get("selectedVenueId");
         var tableId = user.state.get("tableSelected");
         var noOfGuests = user.state.get("noOfGuests");
         var selectedDate = user.state.get("selectedDate");
         var email = user.state.get("contactEmail");
-        serviceApi.createOrder(body, venueId, tableId, selectedDate, noOfGuests, email, result.sessionId, (result)=>{
-          if (typeof(result.code) != 'undefined') {
+        serviceApi.createOrder(body, venueId, tableId, selectedDate, noOfGuests, email, result.sessionId, (result) => {
+          if (typeof (result.code) != 'undefined') {
             sendApi.sendMessage(userId, `Unable to process your Bottle Service reservation request. ${result.message}`);
-           
+
           } else {
             sendApi.sendMessage(userId, `Your Bottle Service reservation is successfully reserved. Your order Id is ${result.order.orderNumber}`);
             restartTheFlow();
           }
         });
       });
-        
+
     });
   }
 }
@@ -377,32 +393,32 @@ const handleReceiveMessage = (event) => {
   // spamming the bot if the requests take some time to return.
   sendApi.sendReadReceipt(senderId);
   //botContext.getOrCreate(senderId);
-    
+
   let ctx = generalContext.getOrCreate(-1);
 
   if (!ctx.isSet()) {
     ctx.set(/(hi|hai|hello|howdy|hey|cancel|bye|cool|thanks)/, (senderId, match, passedText) => processOutOfBandMessage(senderId, match, passedText));
   }
-  ctx.match(message.text.toLowerCase(), function(err, match, contextCb) {
-      if(!err) {
-        contextCb(senderId, match, message.text);
+  ctx.match(message.text.toLowerCase(), function (err, match, contextCb) {
+    if (!err) {
+      contextCb(senderId, match, message.text);
+    } else {
+      let usrCtx = generalContext.getOrCreate(senderId);
+      if (usrCtx.isSet()) {
+        usrCtx.match(message.text.toLowerCase(), function (err, match, contextCb) {
+          if (!err) {
+            contextCb(senderId, match);
+            return;
+          } else {
+            sendApi.sendMessage(senderId, "Humm! I didn't get it. Please try again...");
+            return;
+          }
+        });
       } else {
-        let usrCtx = generalContext.getOrCreate(senderId);
-        if (usrCtx.isSet()) {
-          usrCtx.match(message.text.toLowerCase(), function(err, match, contextCb){
-            if(!err) {
-              contextCb(senderId, match);
-              return;
-            } else {
-              sendApi.sendMessage(senderId, "Humm! I didn't get it. Please try again...");
-              return;
-            }
-          });
-        } else {
-          generalContext.removeContext(senderId);
-          processMessage(senderId, message.text);
-        }
+        generalContext.removeContext(senderId);
+        processMessage(senderId, message.text);
       }
+    }
   });
 };
 
@@ -410,30 +426,30 @@ function processOutOfBandMessage(senderId, match, text) {
   let user = Users.getUser(senderId);
   let ctx = user.getOrCreateContext();
   var hasConvesationContext = user.hasConversationContext();
-  
+
   var generatCtx = generalContext.getOrCreate(senderId);
-  if ("hey" === match.toLowerCase() || "howdy" === match.toLowerCase() || "hi" === match.toLowerCase() || "hello" === match.toLowerCase() ||  "hai" === match.toLowerCase()) {
+  if ("hey" === match.toLowerCase() || "howdy" === match.toLowerCase() || "hi" === match.toLowerCase() || "hello" === match.toLowerCase() || "hai" === match.toLowerCase()) {
     if (!!hasConvesationContext) {
       processMessage(senderId, text);
     } else {
       restartTheFlow(senderId);
     }
-   
-  } else if ("cancel" === match.toLowerCase()){
+
+  } else if ("cancel" === match.toLowerCase()) {
     if (!!hasConvesationContext) {
       sendApi.sendMessage(senderId, "Do you want to cancel the current Booking? ");
       generatCtx.set(/(yes|no)/, (senderId, match) => cancelCurrentBooking(senderId, match));
     } else {
       sendApi.sendMessage(senderId, "DO you want to cancel an existing booking? Please call the venue.");
     }
-  } else if ("bye" === match.toLowerCase() || "cool" === match.toLowerCase()){
+  } else if ("bye" === match.toLowerCase() || "cool" === match.toLowerCase()) {
     if (!!hasConvesationContext) {
       sendApi.sendMessage(senderId, "OK, cancelling the current booking.");
       restartTheFlow(senderId);
     } else {
       restartTheFlow(senderId);
     }
-  } else if ("thanks" === match.toLowerCase() ){
+  } else if ("thanks" === match.toLowerCase()) {
     if (!!hasConvesationContext) {
       sendApi.sendMessage(senderId, "Do you want to cancel the current Booking? ");
       generatCtx.set(/(yes|no)/, (senderId, match) => cancelCurrentBooking(senderId, match));
@@ -441,7 +457,7 @@ function processOutOfBandMessage(senderId, match, text) {
       sendApi.sendMessage(senderId, "My pleasure!!");
       restartTheFlow(senderId);
     }
-  } 
+  }
 }
 
 function restartTheFlow(senderId) {
@@ -452,13 +468,13 @@ function restartTheFlow(senderId) {
   sendApi.sendMessage(senderId, getWelcomeMessage());
 }
 function cancelCurrentBooking(senderId, match) {
-  if("yes" === match) {
-   restartTheFlow(senderId);
+  if ("yes" === match) {
+    restartTheFlow(senderId);
   } else {
     sendApi.sendMessage(senderId, "OK, Continue from where you left!");
     generalContext.removeContext(senderId);
   }
- 
+
 
 }
 const getWelcomeMessage = () => {
@@ -475,10 +491,10 @@ const getWelcomeMessage = () => {
       }
     }
   };
-  
 
-  SERVICES.forEach(function(service){
-   
+
+  SERVICES.forEach(function (service) {
+
     if (service.enabled) {
       var button = {
         "type": "postback",
@@ -488,14 +504,14 @@ const getWelcomeMessage = () => {
       welcomeMessage.attachment.payload.elements[0].buttons.push(button);
     }
   });
-  
-  
+
+
   return welcomeMessage;
-}; 
+};
 
 function parseDate(str) {
   var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/);
-  return (m) ? new Date(2000+m[3], m[2]-1, m[1]) : null;
+  return (m) ? new Date(2000 + m[3], m[2] - 1, m[1]) : null;
 }
 
 function getYYYMMDDDate(date) {
@@ -506,12 +522,12 @@ function getYYYMMDDDate(date) {
 
   var day = date.getDate().toString();
   day = day.length > 1 ? day : '0' + day;
-  
-  return year +  month +  day;
+
+  return year + month + day;
 }
 
 module.exports = {
-  handleReceivePostback : handleReceivePostback,
+  handleReceivePostback: handleReceivePostback,
   handleReceiveMessage: handleReceiveMessage,
 };
 
