@@ -1,0 +1,1 @@
+exports.smschatbot = require("./smschatroute");
