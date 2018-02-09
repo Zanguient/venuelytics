@@ -152,6 +152,9 @@ app
       "New-Orleans-Nightlife":"blogs/New-Orleans-Nightlife-bottle.html",
       "Official-DJ-West": "blogs/Official-DJ-West.html",
       "dj-epps": "blogs/DJ-Epps.html",
+      "kat-bein": "blogs/kat_bein.html",
+      "7tips-bar": "blogs/7tips-bar.html",
+      
       "Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot":"blogs/Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot.html"
 
     },
@@ -172,10 +175,14 @@ app
       "New-Orleans-Nightlife":"assets/img/blog/new_orleans_nightlife_bottle.png",
       "Official-DJ-West": "assets/img/blog/Official-DJ-West.png",
       "dj-epps": "assets/img/blog/DJEPPS.png",
+      "kat-bein": "assets/img/blog/kat-bein.png",
+      "7tips-bar": "assets/img/blog/7tips-bar.png",
       "Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot":"assets/img/blog/placeholder.gif",
     },
 
     'blogPostsTitle':{
+      "kat-bein":"Our Exclusive Interview with The Queen of Nightlife, Kat Bein",
+      "7tips-bar":"7 Tips to Become a Successful Bar Manager",
       "dj-epps": "Our Exclusive Interview with DJ EPPS",
       "Official-DJ-West": "Our Exclusive Interview with Official DJ West",
       "Las-Vegas-Nightlife":"Las Vegas Nightlife and Bottle Service",
@@ -211,10 +218,14 @@ app
       "New-Orleans-Nightlife":"If you are looking for a unique Jazz infuse cultural experience than you must visit New Orleans. In many ways it is an authentic historical city with an amazing charming nightlife and diverse culture.",
       "Official-DJ-West": "We had the opportunity to interview the Official DJ West, and it was fun talking to him and his journey towards becoming one of the best DJs. Below is the whole conversation we had with him. Sit back, relax and go through this fun interview.",
       "dj-epps": "Today we have with us the DJ Epps to share his experience about Djing and other facets of his life.",
+      "kat-bein": "Kat Bein is the name when it comes to nightlife articles on the internet. Her amazing writing style and in depth knowledge on music has made her a notable influencer in the entertainment industry.",
+      "7tips-bar": "The United States has so many bars, and all these bars have bar managers. Have you ever thought about being a bar manager? You just want to be a bar manager or a successful bar manager?",
       "Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot":"Mayes Oster House is a restaurant by day and dance club by night. Located on Polk Street in San Francisco, California, the restaurant uses VenueLytics to pack the house and increase its bottle service offerings."
 
     },
     'blogs': [
+              {"title":"7 Tips to Become a Successful Bar Manager", "image":"assets/img/blog/7tips-bar.png", "description":"The United States has so many bars, and all these bars have bar managers. Have you ever thought about being a bar manager? You just want to be a bar manager or a successful bar manager?", "link":"7tips-bar"},  
+              {"title":"Our Exclusive Interview with The Queen of Nightlife, Kat Bein", "image":"assets/img/blog/kat_bein.png", "description":"Kat Bein is the name when it comes to nightlife articles on the internet. Her amazing writing style and in depth knowledge on music has made her a notable influencer in the entertainment industry.", "link":"kat-bein"},  
               {"title":"Our Exclusive Interview With DJ Epps", "image":"assets/img/blog/DJEPPS.png", "description":"Today we have with us the DJ Epps to share his experience about Djing and other facets of his life.", "link":"dj-epps"},  
               {"title":"Our Exclusive Interview with Official DJ West", "image":"assets/img/blog/Official-DJ-West.png", "description":"We had the opportunity to interview the Official DJ West, and it was fun talking to him and his journey towards becoming one of the best DJs. Below is the whole conversation we had with him. Sit back, relax and go through this fun interview.", "link":"Official-DJ-West"},
               {"title":"Las Vegas Nightlife and Bottle Service", "image":"assets/img/blog/las_vegas_bottle_service.png", "description":"Nobody really knows what happens in Vegas because everything that happens there, stays there.  But rumor has it that Las Vegas is the Disneyland for grownups.  Again, that is just a rumor!  You have to experience that on your own.", "link":"Las-Vegas-Nightlife"},
