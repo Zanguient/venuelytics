@@ -2,20 +2,20 @@
  * Modified: Jan 2018
  * @author khalisaran/Suryanarayana Mangipudi
  */
-'use strict'
+'use strict';
 
 var moment = require('moment');
-var config = require('../../config');
+var config = require('../config');
 
-var sendApi = require('../send');
+var sendApi = require('../apis/send');
 
-const chatContextFactory = require('../../lib/chat-context');
+const chatContextFactory = require('../lib/chat-context');
 const generalContext = chatContextFactory.getOrCreate("generalContext");
 
 var fuzzy = require('fuzzy')
 
-var Users = require('../../models/users');
-var serviceApi = require('../app-api');
+var Users = require('../models/users');
+var serviceApi = require('../apis/app-api');
 
 const SERVICES = [
   { "title": "Book Bottle Service", "id": "BottleService", "enabled": true },
@@ -119,7 +119,7 @@ function searchVenue(userId, venueName) {
           //     "type": "postback",
           //     "payload": "payload",
           //   }
-          ]
+          //]
         }
       }
     };

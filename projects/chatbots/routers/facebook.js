@@ -12,7 +12,7 @@ var receiveApi = require('../apis/receive');
  * The Webhook token must be set in your app's configuration page
  * as well as in your servers environment.
  */
-router.get('/facebook/webhook', (req, res) => {
+router.get('/webhook', (req, res) => {
 
     if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === config.WEBHOOK_TOKEN) {
         console.log('WEBHOOK_VERIFIED');
