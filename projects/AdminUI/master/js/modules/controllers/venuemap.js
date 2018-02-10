@@ -95,7 +95,7 @@ App.controller('VenueMapController', ['$scope', '$state','$compile','$timeout', 
     $('#tables_table').on('click', '.fa-edit',function() {
       $scope.editTable(this, table);
     });
-    var promise = RestServiceFactory.VenueMapService().getAll({id: $stateParams.venueNumber});
+    var promise = RestServiceFactory.VenueMapService().getAll({id: $stateParams.venueNumber, type: 'ALL'});
     $scope.venueNumber = $stateParams.venueNumber;
     if($stateParams.id !== ""){
       promise.$promise.then(function(data) {

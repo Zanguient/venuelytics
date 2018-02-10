@@ -190,7 +190,7 @@ $scope.initCalendar = function () {
       });
       $scope.selectedDate = calElement.fullCalendar('getDate');
      
-      var promise = RestServiceFactory.VenueMapService().getAll({id: $scope.venueNumber});
+      var promise = RestServiceFactory.VenueMapService().getAll({id: $scope.venueNumber, type: 'VenueMap'});
 
       promise.$promise.then(function(data) {
         $scope.venueMapData = data;
