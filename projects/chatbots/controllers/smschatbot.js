@@ -54,12 +54,6 @@ module.exports.getwebhook = function (req, res) {
 }
 
 function processMessage(number, to, message) {
-  for (var i = 0; i < questions.length; i++) {
-    if (message.toLowerCase() === questions[i].keyword.toLowerCase()) {
-      useTwlMsg(questions[i].value, number);
-      return;
-    }
-  }
 
   if ((message.toLowerCase() === 'reservation') || (message.toLowerCase() === 'hai') || (message.toLowerCase() === 'hi')) {
     useTwlMsg(message + '! Welcome to Venuelytics!   Please enter the venue name to book', number);
@@ -87,28 +81,28 @@ function processMessage(number, to, message) {
   }
   else if (eventsVenue) {
     eventsVenue = false;
-    date = true;
+    guest = true;
     if (message.toLowerCase() === 'events') {
       request.get(getEventsApi(venueId), function (error, response, body) {
         var result = JSON.parse(body);
         console.log('result>>>>>>>>>>>>>>>>', result);
         if (result['venue-events'].length == 0) {
-          useTwlMsg('No events');
+          useTwlMsg('No events! Enter the reservation date MM/DD/YY');
         } else {
-          useTwlMsg('Venue events');
+          useTwlMsg('Venue events! Enter the reservation date MM/DD/YY');
         }
       })
     } else {
-      useTwlMsg('Venue events')
+      useTwlMsg('Venue events! Enter the reservation date MM/DD/YY')
     }
   }
-  else if (date) {
-    date = false;
-    guest = true;
-    var dateVenue = message
-    useTwlMsg('Enter the reservation date MM/DD/YY');
-
-  } else if (guest) {
+  // else if (date) {
+  //   date = false;
+  //   guest = true;
+  //   var dateVenue = message
+  //   useTwlMsg('Enter the reservation date MM/DD/YY');
+  // }
+  else if (guest) {
     table = true;
     guest = false;
     userDate = message;
@@ -190,6 +184,19 @@ function processMessage(number, to, message) {
       useTwlMsg(' ** Sorry your request table is not reserved. Thank you! ** ');
     }
   }
+
+
+  for (var i = 0; i < questions.length; i++) {
+    if (message.toLowerCase() === questions[i].keyword.toLowerCase()) {
+      useTwlMsg(questions[i].value, number);
+      return;
+    }
+    // else if ((questions.length === i + 1) && ((message.toLowerCase() !== 'reservation') && (message.toLowerCase() !== 'hai') && (message.toLowerCase() !== 'hi'))) {
+    //   useTwlMsg(' ** Sorry! Your Request Details Not Yet. Please Try Again Later. For more details contact 8000880008 **');
+    //   //return;
+    // }
+  }
+
 }
 
 // var debug = true;
@@ -229,6 +236,7 @@ const questions = [
   { keyword: 'checkout time', value: '11:00 AM' },
   { keyword: 'checkin time', value: '2:00 PM' },
   { keyword: 'WiFi password', value: 'Name: Venuelytics, Password: Venuelytics' },
+  { keyword: 'WiFi', value: 'Name: Venuelytics, Password: Venuelytics' },
   { keyword: 'Breakfast time', value: '08:00 AM - 10:00 AM' },
   { keyword: 'Ironing Boards', value: 'yes' },
   { keyword: 'iPhone charger?', value: 'yes' },
