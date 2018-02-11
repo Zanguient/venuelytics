@@ -23,7 +23,7 @@
 	"FEATURE_PRIVATE_EVENT_DESC":"Book Banquet Halls, Karaoke Rooms & Event Tickets",
 	"CLOSE":"close",
 	"solution" : {
-		"BUSINESS_SOLUTION": "Business Solution",
+		"BUSINESS_SOLUTION": "Enterprise Solution",
 		"PAGE_DESC": "VenueLytics provides an end-to-end solution for the Hospitality & Entertainment industry"
 	},
 	"home":{
