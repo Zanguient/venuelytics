@@ -19,17 +19,17 @@
 
 <form class="form-horizontal privateFormHeight"  autocomplete="off" name="privateForm" parsley-validate validate-form="" ng-cloak>
     <fieldset>
-        <div class="col-md-12 form-group label-floating is-empty no-p" ng-class = "{'active' : bachelor.orderDate.length > 0}">
+        <div class="col-md-12 form-group label-floating no-p" ng-class = "{'active' : bachelor.orderDate.length > 0}">
             <label class="control-label" >{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control" id="bachelorDate" ng-model="bachelor.orderDate" required>
             <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
         </div>
         
-        <div class="col-lg-12 form-group is-empty">
+        <div class="col-lg-12 form-group">
             <table>
                 <tr>
                     <td>
-                        <div class="col-md-10 form-group label-floating is-empty no-p " > 
+                        <div class="col-md-10 form-group label-floating no-p " > 
                         <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
                         <input type="text" class="form-control" id="privateTotalGuest" ng-model="bachelor.totalGuest" >
                         </div>
@@ -37,30 +37,30 @@
                 </tr>
             </table>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p" >
+        <div class="col-md-12 form-group label-floating no-p" >
             <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
             <input type="text" class="form-control" ng-model="bachelor.userFirstName" id="firstName"  required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p " >
+        <div class="col-md-12 form-group label-floating no-p " >
             <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
             <input type="text" class="form-control" ng-model="bachelor.userLastName" id="lastName" >
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p" >
+        <div class="col-md-12 form-group label-floating no-p" >
             <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
             <input type="email" class="form-control" id="email" ng-model="bachelor.email" data-parsley-trigger="change" required>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p" >
+        <div class="col-md-12 form-group label-floating no-p" >
             <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
             <input type="text" id="ms-form-pass" class="form-control" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="bachelor.mobile" required data-parsley-trigger="change">
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p" >
+        <div class="col-md-12 form-group label-floating no-p" >
             <label class="control-label" >{{"reservation.EVENT_TYPE"  | translate}}</label>
             <select class="form-control  {{blackTheme}}" required=""
                 ng-model="bachelor.partyEventType" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>
         </div>
-        <div class="col-md-12 form-group label-floating is-empty no-p" >
+        <div class="col-md-12 form-group label-floating no-p" >
         <label class="control-label" >{{'reservation.COMMENT' | translate}}</label>
             <input type="text" class="form-control " id="instructions" ng-model="bachelor.instructions" data-parsley-trigger="change">
         </div>

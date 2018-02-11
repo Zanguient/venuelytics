@@ -26,19 +26,19 @@
             <br><br>
             <h2 ng-bind="heading"></h2>
             <h4 ng-bind="description"></h4>
-            <div class="col-md-12 form-group label-floating is-empty no-p">
+            <div class="col-md-12 form-group label-floating no-p">
                 <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
                 <input type="text" id="tableServiceFirstName" name="tableServiceFirstName" class="form-control " ng-model="tableService.firstName" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-12 form-group label-floating is-empty no-p">
+            <div class="col-md-12 form-group label-floating no-p">
                 <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
                 <input type="text" id="tableServiceLastName" name="tableServiceLastName" class="form-control " ng-model="tableService.lastName" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-12 form-group label-floating is-empty no-p">
+            <div class="col-md-12 form-group label-floating no-p">
                 <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
                 <input type="text" id="ms-form-pass" class="form-control " masked="" data-inputmask="'mask': '(999) 999-9999'" name="tableServiceMobile" ng-model="tableService.mobileNumber" required="" data-parsley-trigger="change">
             </div>
-            <div class="col-md-12 form-group label-floating is-empty no-p">
+            <div class="col-md-12 form-group label-floating no-p">
                 <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
                 <input type="email" id="tableServiceEmailId" name="tableServiceEmailId" data-parsley-type="email" class="form-control " ng-model="tableService.emailId" required="" data-parsley-trigger="change">
             </div>

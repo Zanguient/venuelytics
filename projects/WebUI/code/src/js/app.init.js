@@ -63,6 +63,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         .when('/searchBusiness', {
             templateUrl: 'business/business-search.html',
             controller: 'BusinessSearchController'
+        }).when('/createBusiness', {
+            templateUrl: 'business/create-business.html',
+            controller: 'BusinessCreateController'
         })
         .when('/completeBusinessClaim/:venueId', {
             templateUrl: 'business/business-verification.html',

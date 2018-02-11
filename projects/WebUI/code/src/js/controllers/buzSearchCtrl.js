@@ -6,7 +6,6 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
 		
 		var self = $scope;
         
-        self.claimForm = false;
         $rootScope.showItzfun = false;
         $rootScope.selectedTab = 'business';
         
@@ -34,7 +33,6 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
             var urlPattern = $location.absUrl();
            
             self.searchBusiness = $location.search().s;
-
 
             var data = urlPattern.split(".");
             if(data[1] === "itzfun") {
@@ -147,12 +145,7 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
             $location.path("/deployment/"+DataShare.venueNumber);
         };
 
-        self.createBusinessAccount = function(){
-            $window.scrollTo(0, 0);
-            self.claimForm = false;
-            self.searchBusiness = '';
-        };
-
+        
         self.sendEmail = function(email) {
             if((email !== undefined) && (email !== '')){
                 $('#subscribeModalBusiness').modal('show');
@@ -231,17 +224,10 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
             $location.path("/home");
         };
 
-        self.createBusinessUser = function(newAccount) {
-            AjaxService.createBusinessUser(newAccount).then(function(response) {
-                $('#successView').modal('show');
-            });
-          
-        };
+        
 
         self.createBusinessMethod = function() {
-            $window.scrollTo(0, 0);
-            self.businessDetailLength = 1;
-            self.claimForm = true;
+            $location.path('/createBusiness');
         };
 
         self.showMessage = function(input) {
