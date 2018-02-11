@@ -88,7 +88,6 @@
 		"BUSINESS":"Business",
 		"SOLUTION":"Solution",
 		"ENTERPRISE":"Enterprise",
-
 		"CONSUMERS":"Consumers",
 		"APPLE_STORE":"Download link for Venuelytics App",
 		"GOOGLE_PLAY":"Download link for Itzfun App",
@@ -130,7 +129,7 @@
 		"BUSINESS_NAME":"Enter business name",
 		"SEARCH":"Search",
 		"CLAIM_BUSINESS":"CLAIM BUSINESS",
-		"CREATE_BUSINESS_LISTING": "Create you Business Listing Page",
+		"CREATE_BUSINESS_LISTING": "Create your Business Listing Page and start your 30 days free trail.",
 		"CLAIMED_BUSINESS":"BUSINESS CLAIMED",
 		"EMAIL":"Email",
 		"PHONE":"Phone Number",
