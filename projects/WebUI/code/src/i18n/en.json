@@ -129,7 +129,9 @@
 		"BUSINESS_NAME":"Enter business name",
 		"SEARCH":"Search",
 		"CLAIM_BUSINESS":"CLAIM BUSINESS",
-		"CREATE_BUSINESS_LISTING": "Create your Business Listing Page and start your 30 days free trail.",
+		"CREATE_BUSINESS_LISTING": "Create your Business Listing Page",
+		"CREATE_BUSINESS_LISTING_1": "and start your 30 days free trail.",
+		
 		"CLAIMED_BUSINESS":"BUSINESS CLAIMED",
 		"EMAIL":"Email",
 		"PHONE":"Phone Number",
