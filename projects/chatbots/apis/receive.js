@@ -1,6 +1,6 @@
 'use strict';
 
-var controller = require('../controllers/venuelytics-controller');
+var controller = require('../controllers/facebook-controller');
 
 /*
  * handleReceivePostback — Postback event handler triggered by a postback
