@@ -28,6 +28,7 @@ function simplify(response) {
     obj.sessionId = response.sessionId;
     obj.status = response.status;
     obj.source = response.result.source;
+    obj.queryText = response.result.resolvedQuery;
     obj.action = response.result.action;
     obj.score = response.result.score;
     obj.responseSpeech = response.result.fulfillment.speech;

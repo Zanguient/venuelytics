@@ -24,18 +24,29 @@ SERVICE_TYPE_SPEC['TABLE'] = ['VENUE', 'NO_OF_GUEST', 'RESERVATION_DATE', 'TABLE
 
 const QUESTIONS =[];
 QUESTIONS['Q_CHARGER'] = fxCharger;
-QUESTIONS['Q_GYM'] = curry(fxInfo, 'GYM');
+QUESTIONS['Q_GYM'] = curry(fxInfo)('Q_GYM');
 QUESTIONS['Q_WIFI'] = curry(fxInfo, 'Q_WIFI');
 QUESTIONS['Q_WIFI_PASSWORD'] = curry(fxInfo, 'Q_WIFI');
 QUESTIONS['Q_CHECKIN_TIME'] = curry(fxInfo, 'Q_CHECKIN_TIME');
 QUESTIONS['Q_ADDRESS'] = curry(fxInfo, 'Q_ADDRESS');
-QUESTIONS['Q_CHECKOUT_TIME'] = curry(fxInfo, 'Q_CHECKOUT_TIME');
+QUESTIONS['Q_CHECKOUT_TIME'] = curry(fxInfo)('Q_CHECKOUT_TIME');
 QUESTIONS['Q_LASTCALL_TIME'] = curry(fxInfo, 'Q_LASTCALL_TIME');
 QUESTIONS['Q_RESTAURANT_OPEN'] = curry(fxInfo, 'Q_RESTAURANT_OPEN');
 QUESTIONS['Q_RESTAURANT_CLOSE'] = curry(fxInfo, 'Q_RESTAURANT_CLOSE');
 QUESTIONS['Q_CLOSE_TIME'] = curry(fxInfo, 'Q_CLOSE_TIME');
 QUESTIONS['Q_OPEN_TIME'] = curry(fxInfo, 'Q_OPEN_TIME');
 QUESTIONS['Q_RESERVATION'] = fxReservation
+
+ANSWERS[Q_CHECKOUT_TIME] = 'Checkout time for $VENUE_NAME is $VALUE';
+ANSWERS[Q_CHECKIN_TIME]  = 'Checkin time for $VENUE_NAME is $VALUE';
+ANSWERS[Q_LASTCALL_TIME] = 'Lastcall Time for $VENUE_NAME is $VALUE';
+ANSWERS[Q_RESTAURANT_OPEN] = '$VENUE_NAME opens at $VALUE';
+ANSWERS[Q_RESTAURANT_CLOSE] = '$VENUE_NAME closes at $VALUE';
+ANSWERS[Q_OPEN_TIME] = '$VENUE_NAME opens at $VALUE';
+ANSWERS[Q_CLOSE_TIME] = '$VENUE_NAME closes at $VALUE';
+ANSWERS[Q_WIFI] = '$VENUE_NAME offers free wifi to all guests. Wifi name is $WIFI_NAME and password is $WIFI_PASSWORD';
+ANSWERS[Q_GYM] = '$VENUE_NAME provides 24/7 free access to all its guests';
+ANSWERS[Q_ADDRESS] = '$VENUE_ADDRESS';
 
 
 const SERVICES = [
@@ -71,8 +82,13 @@ function processMessage(senderId, text) {
 
 const aiResponse = function(senderId, response) {
     console.log(JSON.stringify(response));
-    if (response.action.startsWith("Q_")) {
-        
+    let user = Users.getUser(senderId);
+    if (response.action.startsWith("Q_") || user.isInConversation()) {
+        if (user.isInConversation()) {
+          user.dispatch(response);
+        } else {
+          QUESTIONS[response.action](senderId, response);
+        }
     } else {
         sendApi.sendMessage(senderId, response.responseSpeech); 
     }
@@ -83,20 +99,20 @@ const aiError = function(fromNumber, error) {
 };
 
 
-function fxCharger (response) {
+function fxCharger (userId, response) {
     let user = Users.getUser(userId);
 }
 
-function fxInfo (type, response) {
+function fxInfo (type, userId, response) {
     let user = Users.getUser(userId);
     var venueName = response.parameters.Venue;
     
-    if (user.state.has("venueId")){
-        
-    } else if (typeof(venueName) == 'undefined'){
-        sendApi.sendMessage(userId, 'Can you please give me the Venue name and City name?');
-        user.createContext(type, /.*/, response, searchVenue);
-        //ctx.set(, (userId, match) => searchVenue(userId, match, type, response));
+    if (user.state.has("selectedVenueId")){
+        const venue = user.state.get("venue");
+        sendApi.sendMessage(userId, `Checkout time for venue ${venue.venueName} is 12:00 PM` ); 
+    } else if (typeof(venueName) == 'undefined' || venueName ==''){
+        sendApi.sendMessage(userId, 'Can you please give me the Venue name?');
+        user.setConversationContext(type, response, searchVenue);
     } else {
         searchVenue(userId, venueName, type, response);
     }
@@ -116,15 +132,6 @@ function initServices(userId) {
   
 }
 
-function processServiceType(userId, serviceType) {
-  let user = Users.getUser(userId);
-  user.state.set("serviceType", serviceType);
-
-  let ctx = user.getOrCreateContext();
-  ctx.set(/.*/, (userId, match) => searchVenue(userId, match));
-  sendApi.sendMessage(userId, 'Enter the Venue name');
-
-}
 
 function searchVenue(userId, venueName, type, response) {
   let user = Users.getUser(userId);
@@ -170,13 +177,12 @@ function searchVenue(userId, venueName, type, response) {
       }
     };
     sendApi.sendMessage(userId, messageData);
-    let ctx = user.getOrCreateContext();
-    ctx.set(/.*/, (userId, match) => selectVenue(userId, match));
-
+    user.setConversationContext(type, response, selectVenue);
+ 
   });
 }
 
-function selectVenue(userId, venueId) {
+function selectVenue(userId, venueId, type, response) {
   let user = Users.getUser(userId);
   user.state.set("selectedVenueId", venueId);
 
@@ -187,7 +193,7 @@ function selectVenue(userId, venueId) {
       selectedVenue = listOfVenues[i];
     }
   }
-
+  user.state.set("venue", selectedVenue);
   user.state.set("venueImageUrl", selectedVenue.imageUrls[0].smallUrl)
   var selectionTemplate = [];
   var object = {
@@ -209,11 +215,9 @@ function selectVenue(userId, venueId) {
   selectionTemplate.push(object)
 
   user.state.set("selectionTemplate", selectionTemplate);
-  let ctx = user.getOrCreateContext();
-  ctx.set(/.*/, (userId, dateStr) => selectDate(userId, dateStr));
-  sendApi.sendMessage(userId, "Enter the reservation date in MM/DD/YY format");
-
-  //
+  
+  QUESTIONS[type](userId, response);
+  
 }
 
 function selectDate(userId, dateStr) {

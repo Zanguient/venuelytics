@@ -8,7 +8,12 @@ class Node {
             parent.next = this;
         }
     }
-
+    pop() {
+        if (this.prev != null) {
+            this.prev.next = null;
+        }
+        return this.prev;
+    }
     set(patternFn, callback) {
         this.patternFn = patternFn;
         this.contextHandler = callback;
@@ -61,6 +66,7 @@ class Context {
         }
         var matchFound = false;
         const contextHandler = this.handlers.contextHandler;
+        
         this.handlers.patternFn(text, function(err, match){
             if(!!match) {
                 matchFound = true;
@@ -71,7 +77,8 @@ class Context {
                 );
             }
         });
-        
+
+        this.handlers = this.handlers.pop();
 
         /*var handlerStack = [...this.handlers].reverse();
         var matchFound = false;

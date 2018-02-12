@@ -33,13 +33,25 @@ class User {
         return this._state;
     }
 
-    hasConversationContext() {
+    isInConversation() {
         return this.conversationContext !== null && this.conversationContext.isSet();
     }
 
-    getOrCreateContext() {
+    setConversationContext(type, response, fxCallback) {
         this.conversationContext = chatContext.getOrCreate(this._id);
-        return this.conversationContext;
+        this.conversationContext.set(/.*/, (userId, match) => fxCallback(userId, match, type, response));
+    }
+    dispatch(response) {
+        var type = response.queryText;
+        var senderId = this._id;
+        if (this.conversationContext != null && this.conversationContext.isSet()) {
+            this.conversationContext.match(type, function (err, match, contextCb) {
+                if (!err) {
+                  contextCb(senderId, match);
+                } 
+              });
+        }
+        
     }
     
     clear() {
