@@ -8,9 +8,9 @@ config.devMode = true
 config.WEBHOOK_TOKEN = "venuelytics-fb-agent-EAAcYqcwl1BwBANOAT";
 config.PAGE_ACCESS_TOKEN = "EAAcYqcwl1BwBANOATkspAplSbNdTDvXmbhyE8VdnQj44yjvfJROCcEn7uVy6NYZAPmbAQyZCxgzjbFNQQ5uN94ZB28ZAIoKewqSxCEUmHBdZAjL8MOh8BZBrtgh43AmLr708IHZBV0ZC8DedkvR8PYb8D8MiEWOT7U9vBC2KDPb3VgZDZD";
 
-//const DEV_SRVR = 'http://dev.api.venuelytics.com';
+const DEV_SRVR = 'https://dev.api.venuelytics.com';
 const PROD_SRVR = 'https://prod.api.venuelytics.com';
-const DEV_SRVR = 'http://localhost:8080';
+
 
 config.ai_client_access_token = 'f90c7a6106fa420a9d1f7cb4078cbaf0';
 config.getAppUrl = () => {

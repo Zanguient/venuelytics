@@ -56,8 +56,8 @@
                     </li>
                     <li class="price_header"> </li>
                     <li ng-repeat="premium in premiumServicesArray">
-                        <i class="hidden-sm hidden-xs fa" ng-class="premium.basicDetails === 'BASIC' ? '': (premium.basicDetails === 'YES' ? 'fa-check':'fa-times')"></i> <span class="hidden-sm hidden-xs" ng-bind="premium.basicDetails === 'BASIC' ? 'BASIC' :''"></span>
-                        <span class="text-justify faIconLeft  hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="premium.basicDetails === 'BASIC' ? '': (premium.basicDetails === 'YES' ? 'fa-check':'fa-times')"></i>{{premium.title}}<span class="pricingText" ng-bind="premium.basicDetails === 'BASIC' ? 'BASIC' :''"></span></span>
+                        <i class="hidden-sm hidden-xs fa" ng-class="premium.FreeDetails === 'BASIC' ? '': (premium.FreeDetails === 'YES' ? 'fa-check':'fa-times')"></i> <span class="hidden-sm hidden-xs" ng-bind="premium.FreeDetails === 'BASIC' ? 'BASIC' :''"></span>
+                        <span class="text-justify faIconLeft  hidden-md hidden-lg"><i class="faIconWidth fa" ng-class="premium.FreeDetails === 'BASIC' ? '': (premium.FreeDetails === 'YES' ? 'fa-check':'fa-times')"></i>{{premium.title}}<span class="pricingText" ng-bind="premium.FreeDetails === 'BASIC' ? 'BASIC' :''"></span></span>
                     </li>
                     <li class="price_header"> </li>
                     <li ng-repeat="wifi in wifiMonetizationArray">

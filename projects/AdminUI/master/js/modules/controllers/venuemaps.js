@@ -15,9 +15,10 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
     var columnDefinitions = [
         { sWidth: "10%", aTargets: [0] },
         { sWidth: "30%", aTargets: [1] },
-        { sWidth: "10%", aTargets: [2] },
+        { sWidth: "20%", aTargets: [2] },
+        { sWidth: "10%", aTargets: [3] },
         {
-	    	"targets": [3],
+	    	"targets": [4],
 	    	"orderable": false,
 	    	"createdCell": function (td, cellData, rowData, row, col) {
 	    		var actionHtml = '<button title="Edit User" class="btn btn-default btn-oval fa fa-edit" '+
@@ -31,13 +32,13 @@ App.controller('VenueMapsController', ['$scope', '$state','$compile','$timeout',
     
 	  DataTableService.initDataTable('venue_map_table', columnDefinitions);
    
-    var promise = RestServiceFactory.VenueMapService().getAll({id: $stateParams.id});
+    var promise = RestServiceFactory.VenueMapService().getAll({id: $stateParams.id, type: 'ALL'});
     promise.$promise.then(function(data) {
   	 
     	var table = $('#venue_map_table').DataTable();
     	
     	data.map(function(venueMap) {
-    		table.row.add([venueMap.section, venueMap.days, venueMap.elements.length, venueMap.id]);
+    		table.row.add([venueMap.section, venueMap.days, venueMap.type, venueMap.elements.length, venueMap.id]);
     	});
     	table.draw();
     });
