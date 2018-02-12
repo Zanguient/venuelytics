@@ -347,7 +347,7 @@ app
     "WIFI_MONETIZATION_ARRAY":[
       {'title':'On-site Food/Drinks Ordering', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
       {'title':'VIP Services / Concierge', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
-      {'title':'Digital Loyaty Management', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
+      {'title':'Digital Loyalty Management', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
       {'title':'Beacon Integration', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
       {'title':'White Label - Private App', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'},
       {'title':'Way Finder', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES'}
