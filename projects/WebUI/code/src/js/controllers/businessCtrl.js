@@ -1,81 +1,94 @@
 "use strict";
-app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window','AjaxService', 'APP_ARRAYS', '$rootScope','$routeParams', 'APP_LINK', '$templateCache','ngMeta',
+app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', 'AjaxService', 'APP_ARRAYS', '$rootScope', '$routeParams', 'APP_LINK', '$templateCache', 'ngMeta',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams, APP_LINK, $templateCache, ngMeta) {
 
-		$log.log('Inside Business Controller');
-		
-		var self = $scope;
-        
+        $log.log('Inside Business Controller');
+
+        var self = $scope;
+
         $rootScope.showItzfun = false;
         $rootScope.selectedTab = 'business';
-        
-        self.init = function() {
+
+        self.init = function () {
             ngMeta.setTitle("Real Time Venue Management Platform");
             ngMeta.setTag('image', 'assets/img/screen2.jpg');
             ngMeta.setTag('description', 'VenueLytics empowers businesses, in the entertainment, hospitality and service industries, to engage their customers in real-time and deliver Table & Bottle Service Reservations, Food & Drink Ordering, Private Event Bookings, Events Booking');
-        
+
             var urlPattern = $location.absUrl();
             var data = urlPattern.split(".");
-            if(data[1] === "itzfun") {
+            if (data[1] === "itzfun") {
                 $rootScope.facebook = APP_LINK.FACEBOOK_VENUELYTICS;
                 $rootScope.twitter = APP_LINK.TWITTER_VENUELYTICS;
                 $rootScope.instagram = APP_LINK.INSTAGRAM_VENUELYTICS;
                 utmPayload.utmTerm = "ItzFun";
             }
-            
-            
-            var videos  = $(".video");
 
-            videos.on("click", function(){
+
+            var videos = $(".video");
+
+            videos.on("click", function () {
                 var elm = $(this),
-                    conts   = elm.contents(),
-                    le      = conts.length,
-                    ifr     = null;
+                    conts = elm.contents(),
+                    le = conts.length,
+                    ifr = null;
 
-                for(var i = 0; i<le; i++){
-                  if(conts[i].nodeType == 8) ifr = conts[i].textContent;
+                for (var i = 0; i < le; i++) {
+                    if (conts[i].nodeType == 8) ifr = conts[i].textContent;
                 }
 
                 elm.addClass("player").html(ifr);
                 elm.off("click");
             });
         };
-        self.sendEmail = function(email, medium, campaign, claimBusiness) {
+        self.sendEmail = function (email, medium, campaign, claimBusiness) {
 
-            if((email !== undefined) && (email !== '')){
-                $rootScope.claimBusiness = typeof(claimBusiness) === 'undefined' ? false: !!claimBusiness;
+            if ((email !== undefined) && (email !== '')) {
+                $rootScope.claimBusiness = typeof (claimBusiness) === 'undefined' ? false : !!claimBusiness;
                 $rootScope.subscribeMedium = medium;
                 $rootScope.subscribeCampaign = campaign;
-               
+
                 $('#subscribeModalBusiness').modal('show');
                 $('.modal-backdrop').remove();
                 $rootScope.successEmail = email;
             }
         };
-        self.claimBusiness = function(email) {
+        self.claimBusiness = function (email) {
             self.sendEmail(email, 'business-claim-business', '30DaysFree', true);
         };
-        
-        
-        self.saveBusiness = function() {
-            
+
+
+        self.searchName = function (subscribeName) {
             var business = $scope.business;
-            var role = (typeof business.businessRole  === 'undefined') ? '' :  business.businessRole.role;
+            var subscribeName = {
+                "email": $rootScope.successEmail,
+                "businessName": business.businessName
+            }
+            AjaxService.searchBusiness(subscribeName).then(function (response) {
+                $rootScope.subscribeName = subscribeName.businessName;
+                $rootScope.subscribeName = subscribeName.email;
+                $location.url("/searchBusiness?s=" + subscribeName.businessName);
+            })
+        };
+
+        self.saveBusiness = function () {
+            var business = $scope.business;
+            var role = (typeof business.businessRole === 'undefined') ? '' : business.businessRole.role;
             var subscribeEmail = {
                 "email": $rootScope.successEmail,
                 "mobile": business.phoneNumber,
                 "name": business.NameOfPerson,
                 "businessName": business.businessName,
-                "role": role ,
-                "utmSource" : "venuelytics.com",
-                "utmCampaign" : $rootScope.subscribeCampaign,
+                "role": role,
+                "utmSource": "venuelytics.com",
+                "utmCampaign": $rootScope.subscribeCampaign,
                 "utmMedium": $rootScope.subscribeMedium
             };
 
-            AjaxService.subscribe(subscribeEmail).then(function(response) {
+            AjaxService.subscribe(subscribeEmail).then(function (response) {
                 $rootScope.successEmail = subscribeEmail.email;
                 DataShare.claimBusiness = subscribeEmail;
                 if (!$rootScope.claimBusiness) {
+                    window.alert('5');
                     $('#subscribeSuccessModalBusiness').modal('show');
                     $('.modal-backdrop').remove();
                     self.subscribeEmails = '';
@@ -83,13 +96,12 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
                 } else {
                     $location.url("/searchBusiness?s=" + subscribeEmail.businessName);
                 }
-            
             });
         };
-        self.init(); 		
+        self.init();
     }]).filter('trusted', ['$sce', function ($sce) {
-        return function(url) {
-                var video_id = url.split('v=')[1].split('&')[0];
+        return function (url) {
+            var video_id = url.split('v=')[1].split('&')[0];
             return $sce.trustAsResourceUrl("//www.youtube.com/embed/" + video_id);
         };
     }]);
