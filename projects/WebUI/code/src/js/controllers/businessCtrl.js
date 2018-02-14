@@ -88,7 +88,6 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
                 $rootScope.successEmail = subscribeEmail.email;
                 DataShare.claimBusiness = subscribeEmail;
                 if (!$rootScope.claimBusiness) {
-                    window.alert('5');
                     $('#subscribeSuccessModalBusiness').modal('show');
                     $('.modal-backdrop').remove();
                     self.subscribeEmails = '';
