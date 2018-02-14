@@ -11,8 +11,23 @@ const twilio = require('twilio');
 const client = new twilio(accountSid, authToken);
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const twiml = new MessagingResponse();
-const aiClient = require('../apis/ai-api');
+const venueService = require('../services/venue-service');
 
+
+const sendInterface = {
+  sendMessage : function(senderId, message) {
+    //sendApi.sendMessage(senderId, Message);
+    console.log(`Sender Id: ${senderId}, Message: ${message}`);
+  },
+  
+  sendVenueList : function(senderId, venues) {
+    console.log(`Sender Id: ${senderId}`);
+    venues.forEach(element => {
+      console.log(`${element.searchIndex} : ${element.venueName} - ${element.address}`)  
+    });
+    
+  }
+}
 module.exports.setwebhook = function (req, res) {
   var body = req.query.Body;
   var number = req.query.From;
@@ -27,7 +42,7 @@ if (config.smsDebug) {
   var stdin = process.openStdin();
 
   stdin.addListener("data", function (d) {
-    processMessage(0, 0, d.toString().trim());
+    venueService.processMessage('4087740976', d.toString().trim(), sendInterface);
   });
 }
 
@@ -36,21 +51,10 @@ module.exports.getwebhook = function (req, res) {
   var fromNumber = req.query.From;
   var twilioNumber = req.query.To;
 
-  processMessage(fromNumber, twilioNumber, message);
+  venueService.processMessage(fromNumber, message, sendInterface);
   res.end();
 }
 
-function processMessage(fromNumber, twilioNumber, text) {
-  aiClient.aiProcessText(fromNumber, text, aiResponse, aiError);
-}
-
-const aiResponse = function(fromNumber, response) {
-  console.log(JSON.stringify(response));
-};
-
-const aiError = function(fromNumber, error) {
-  console.log(JSON.stringify(error));
-};
 
 var useTwlMsg = function (message, number) {
    if (config.smsDebug) {

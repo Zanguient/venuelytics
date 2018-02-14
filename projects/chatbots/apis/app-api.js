@@ -21,9 +21,13 @@ const getDetailsFromFacebook = (userId, callback) => {
     );
   };
   
-const searchVenueByName = function(venuename, callback) {
+const searchVenueByName = function(venuename,address, callback) {
+    var url = `${config.getAppUrl()}/venues/q?dist=50&name=${venuename}&count=5`;
+    if (address != null && address.trim() != ''){
+        url += "&search="+address;
+    }
     var options = {
-        url: `${config.getAppUrl()}/venues/q?dist=50&name=${venuename}&count=10`
+        url: url
     };
     
     request.get(options, function (error, response, body) {
@@ -63,7 +67,18 @@ const fbLogin = function (fbPayload, callback) {
         retOBJ(body, callback);
     });
 };
+const getServiceTimes = function(venueId, callback) {
 
+    var options = {
+        method: 'GET',
+        url: `${config.getAppUrl()}/venues/${venueId}/servicehours`,
+    };
+
+    request.get(options, function (error, response, body) {
+        retOBJ(body, callback);
+    });
+
+}
 const createOrder = function (user, venueId, tableNumber, orderDate, noOfGuests, email, accessToken, callback) {
     var venueNumber = parseInt(venueId);
     var options = {
@@ -109,10 +124,12 @@ function retOBJ(body, callback) {
     }
 }
 
+
 module.exports= {
     searchVenueByName : searchVenueByName,
     getAvailableBottleReservations: getAvailableBottleReservations,
     getUserFBDetails: getDetailsFromFacebook,
     fbLogin : fbLogin,
-    createOrder: createOrder
+    createOrder: createOrder,
+    getServiceTimes: getServiceTimes
 };

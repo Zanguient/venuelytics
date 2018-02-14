@@ -7,47 +7,14 @@
 var moment = require('moment');
 var config = require('../config');
 
-var sendApi = require('../apis/send');
+const sendApi = require('../apis/send');
 
-var Users = require('../models/users');
-var serviceApi = require('../apis/app-api');
-const aiClient = require('../apis/ai-api');
-var curry =  require('lodash/curry');
+const Users = require('../models/users');
+const serviceApi = require('../apis/app-api');
+
+const venueService = require('../services/venue-service');
+
 const chatContextFactory = require('../lib/chat-context');
-const generalContext = chatContextFactory.getOrCreate("generalContext");
-
-const SERVICE_TYPE_SPEC = [];
-SERVICE_TYPE_SPEC['BOTTLE'] = ['VENUE', 'NO_OF_GUEST', 'RESERVATION_DATE', 'TABLE_NUMBER', 'occasion', 'specialRequet'];
-SERVICE_TYPE_SPEC['PRIVATE_HALL'] = ['VENUE', 'NO_OF_GUEST', 'RESERVATION_DATE', 'HALL_NAME'];
-SERVICE_TYPE_SPEC['GUEST_LIST'] = ['VENUE', 'NO_OF_GUEST', 'RESERVATION_DATE', 'MALES','FEMALES'];
-SERVICE_TYPE_SPEC['TABLE'] = ['VENUE', 'NO_OF_GUEST', 'RESERVATION_DATE', 'TABLE_NUMBER', 'occasion', 'specialRequet'];
-
-const QUESTIONS =[];
-QUESTIONS['Q_CHARGER'] = fxCharger;
-QUESTIONS['Q_GYM'] = curry(fxInfo)('Q_GYM');
-QUESTIONS['Q_WIFI'] = curry(fxInfo, 'Q_WIFI');
-QUESTIONS['Q_WIFI_PASSWORD'] = curry(fxInfo, 'Q_WIFI');
-QUESTIONS['Q_CHECKIN_TIME'] = curry(fxInfo, 'Q_CHECKIN_TIME');
-QUESTIONS['Q_ADDRESS'] = curry(fxInfo, 'Q_ADDRESS');
-QUESTIONS['Q_CHECKOUT_TIME'] = curry(fxInfo)('Q_CHECKOUT_TIME');
-QUESTIONS['Q_LASTCALL_TIME'] = curry(fxInfo, 'Q_LASTCALL_TIME');
-QUESTIONS['Q_RESTAURANT_OPEN'] = curry(fxInfo, 'Q_RESTAURANT_OPEN');
-QUESTIONS['Q_RESTAURANT_CLOSE'] = curry(fxInfo, 'Q_RESTAURANT_CLOSE');
-QUESTIONS['Q_CLOSE_TIME'] = curry(fxInfo, 'Q_CLOSE_TIME');
-QUESTIONS['Q_OPEN_TIME'] = curry(fxInfo, 'Q_OPEN_TIME');
-QUESTIONS['Q_RESERVATION'] = fxReservation
-
-ANSWERS[Q_CHECKOUT_TIME] = 'Checkout time for $VENUE_NAME is $VALUE';
-ANSWERS[Q_CHECKIN_TIME]  = 'Checkin time for $VENUE_NAME is $VALUE';
-ANSWERS[Q_LASTCALL_TIME] = 'Lastcall Time for $VENUE_NAME is $VALUE';
-ANSWERS[Q_RESTAURANT_OPEN] = '$VENUE_NAME opens at $VALUE';
-ANSWERS[Q_RESTAURANT_CLOSE] = '$VENUE_NAME closes at $VALUE';
-ANSWERS[Q_OPEN_TIME] = '$VENUE_NAME opens at $VALUE';
-ANSWERS[Q_CLOSE_TIME] = '$VENUE_NAME closes at $VALUE';
-ANSWERS[Q_WIFI] = '$VENUE_NAME offers free wifi to all guests. Wifi name is $WIFI_NAME and password is $WIFI_PASSWORD';
-ANSWERS[Q_GYM] = '$VENUE_NAME provides 24/7 free access to all its guests';
-ANSWERS[Q_ADDRESS] = '$VENUE_ADDRESS';
-
 
 const SERVICES = [
   { "title": "Book Bottle Service", "id": "BottleService", "enabled": true },
@@ -67,157 +34,51 @@ const SERVICES = [
 
 
 const handleReceivePostback = (event) => {
-
   const type = event.postback.payload;
   const senderId = event.sender.id;
-
-  processMessage(senderId, type);
+  venueService.processMessage(senderId, type, sendApi);
 };
 
-function processMessage(senderId, text) {
-    let user = Users.getUser(senderId);
-    aiClient.aiProcessText(senderId, text, aiResponse, aiError);
+const sendInterface = {
+  sendMessage : function(senderId, message) {
+    sendApi.sendMessage(senderId, Message);
+  },
   
+  sendVenueList : sendVenueListData
+
 }
 
-const aiResponse = function(senderId, response) {
-    console.log(JSON.stringify(response));
-    let user = Users.getUser(senderId);
-    if (response.action.startsWith("Q_") || user.isInConversation()) {
-        if (user.isInConversation()) {
-          user.dispatch(response);
-        } else {
-          QUESTIONS[response.action](senderId, response);
+function sendVenueListData (senderId, venues) {
+
+  for (var i = 0; i < venues.length && i < 10; i++) {
+    var object = {
+      "title": venues[i].venueName,
+      "subtitle": venues[i].address,
+      "image_url": venues[i].imageUrls[0].smallUrl,
+      "buttons": [
+        {
+          "type": "postback",
+          "title": "Select Venue",
+          "payload": venues[i].searchIndex,
         }
-    } else {
-        sendApi.sendMessage(senderId, response.responseSpeech); 
-    }
-};
-
-const aiError = function(fromNumber, error) {
-    console.log(JSON.stringify(error));
-};
-
-
-function fxCharger (userId, response) {
-    let user = Users.getUser(userId);
-}
-
-function fxInfo (type, userId, response) {
-    let user = Users.getUser(userId);
-    var venueName = response.parameters.Venue;
-    
-    if (user.state.has("selectedVenueId")){
-        const venue = user.state.get("venue");
-        sendApi.sendMessage(userId, `Checkout time for venue ${venue.venueName} is 12:00 PM` ); 
-    } else if (typeof(venueName) == 'undefined' || venueName ==''){
-        sendApi.sendMessage(userId, 'Can you please give me the Venue name?');
-        user.setConversationContext(type, response, searchVenue);
-    } else {
-        searchVenue(userId, venueName, type, response);
-    }
-}
-
-function fxReservation(response) {
-
-}
-
-function initServices(userId) {
-  let user = Users.getUser(userId);
-
-  let ids = SERVICES.map(function (e) {
-    return e.id;
-  }).join("|");
-
-  
-}
-
-
-function searchVenue(userId, venueName, type, response) {
-  let user = Users.getUser(userId);
-  sendApi.sendMessage(userId, "Searching your venue...");
-
-  serviceApi.searchVenueByName(venueName, function (venues) {
-    var listOfVenues = [];
-    for (var i = 0; i < venues.length && i < 10; i++) {
-
-      var object = {
-        "title": venues[i].venueName,
-        "subtitle": venues[i].address,
-        "image_url": venues[i].imageUrls[0].smallUrl,
-        "buttons": [
-          {
-            "type": "postback",
-            "title": "Select Venue",
-            "payload": venues[i].id,
-          }
-        ]
-      };
-
-      listOfVenues.push(object);
-    }
-
-    user.state.set("listOfVenues", venues);
-
-    var messageData = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "list",
-          "top_element_style": "compact",
-          "elements": listOfVenues.slice(0, 9),
-          // "buttons": [
-          //   {
-          //     "title": "Read More",
-          //     "type": "postback",
-          //     "payload": "payload",
-          //   }
-          //]
-        }
-      }
+      ]
     };
-    sendApi.sendMessage(userId, messageData);
-    user.setConversationContext(type, response, selectVenue);
- 
-  });
-}
 
-function selectVenue(userId, venueId, type, response) {
-  let user = Users.getUser(userId);
-  user.state.set("selectedVenueId", venueId);
-
-  var listOfVenues = user.state.get("listOfVenues");
-  var selectedVenue = null;
-  for (var i = 0; i < listOfVenues.length; i++) {
-    if (listOfVenues[i].id == venueId) {
-      selectedVenue = listOfVenues[i];
-    }
+    listOfVenues.push(object);
   }
-  user.state.set("venue", selectedVenue);
-  user.state.set("venueImageUrl", selectedVenue.imageUrls[0].smallUrl)
-  var selectionTemplate = [];
-  var object = {
-    "title": selectedVenue.venueName,
-    "subtitle": "Venue Name",
-    "image_url": selectedVenue.imageUrls[0].smallUrl,
-    "buttons": [{
-      "type": "postback",
-      "title": "Change Venue",
-      "payload": 'changeVenue'
-    },
-    {
-      "type": "postback",
-      "title": "Confirm Reservation",
-      "payload": 'confirmReservation'
-    }
-    ]
-  };
-  selectionTemplate.push(object)
 
-  user.state.set("selectionTemplate", selectionTemplate);
-  
-  QUESTIONS[type](userId, response);
-  
+  var messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "list",
+        "top_element_style": "compact",
+        "elements": listOfVenues.slice(0, 9),
+      }
+    }
+    
+  }
+  sendApi.sendMessage(userId, messageData);
 }
 
 function selectDate(userId, dateStr) {
@@ -288,13 +149,6 @@ function selectDate(userId, dateStr) {
           "payload": {
             "template_type": "list",
             "elements": bottleTables.slice(0, 3),
-            // "buttons": [
-            //   {
-            //     "title": "Read More",
-            //     "type": "postback",
-            //     "payload": "payload",
-            //   }
-            // ]
           }
         }
       };
@@ -446,138 +300,6 @@ const handleReceiveMessage = (event) => {
   processMessage(senderId, message.text);
 }
 
-function junk(){
-  let ctx = generalContext.getOrCreate(-1);
-
-  if (!ctx.isSet()) {
-    ctx.set(/(hi|hai|hello|howdy|hey|cancel|bye|cool|thanks)/, (senderId, match, passedText) => processOutOfBandMessage(senderId, match, passedText));
-  }
-  ctx.match(message.text.toLowerCase(), function (err, match, contextCb) {
-    if (!err) {
-      contextCb(senderId, match, message.text);
-    } else {
-      let usrCtx = generalContext.getOrCreate(senderId);
-      if (usrCtx.isSet()) {
-        usrCtx.match(message.text.toLowerCase(), function (err, match, contextCb) {
-          if (!err) {
-            contextCb(senderId, match);
-            return;
-          } else {
-            sendApi.sendMessage(senderId, "Humm! I didn't get it. Please try again...");
-            return;
-          }
-        });
-      } else {
-        generalContext.removeContext(senderId);
-        processMessage(senderId, message.text);
-      }
-    }
-  });
-};
-
-function processOutOfBandMessage(senderId, match, text) {
-  let user = Users.getUser(senderId);
-  let ctx = user.getOrCreateContext();
-  var hasConvesationContext = user.hasConversationContext();
-
-  var generatCtx = generalContext.getOrCreate(senderId);
-  if ("hey" === match.toLowerCase() || "howdy" === match.toLowerCase() || "hi" === match.toLowerCase() || "hello" === match.toLowerCase() || "hai" === match.toLowerCase()) {
-    if (!!hasConvesationContext) {
-      processMessage(senderId, text);
-    } else {
-      restartTheFlow(senderId);
-    }
-
-  } else if ("cancel" === match.toLowerCase()) {
-    if (!!hasConvesationContext) {
-      sendApi.sendMessage(senderId, "Do you want to cancel the current Booking? ");
-      generatCtx.set(/(yes|no)/, (senderId, match) => cancelCurrentBooking(senderId, match));
-    } else {
-      sendApi.sendMessage(senderId, "DO you want to cancel an existing booking? Please call the venue.");
-    }
-  } else if ("bye" === match.toLowerCase() || "cool" === match.toLowerCase()) {
-    if (!!hasConvesationContext) {
-      sendApi.sendMessage(senderId, "OK, cancelling the current booking.");
-      restartTheFlow(senderId);
-    } else {
-      restartTheFlow(senderId);
-    }
-  } else if ("thanks" === match.toLowerCase()) {
-    if (!!hasConvesationContext) {
-      sendApi.sendMessage(senderId, "Do you want to cancel the current Booking? ");
-      generatCtx.set(/(yes|no)/, (senderId, match) => cancelCurrentBooking(senderId, match));
-    } else {
-      sendApi.sendMessage(senderId, "My pleasure!!");
-      restartTheFlow(senderId);
-    }
-  }
-}
-
-function restartTheFlow(senderId) {
-  let user = Users.getUser(senderId);
-  user.clear();
-  generalContext.removeContext(senderId);
-  sendApi.sendMessage(senderId, "Hey! What would you like to do today?");
-  sendApi.sendMessage(senderId, getWelcomeMessage());
-}
-function cancelCurrentBooking(senderId, match) {
-  if ("yes" === match) {
-    restartTheFlow(senderId);
-  } else {
-    sendApi.sendMessage(senderId, "OK, Continue from where you left!");
-    generalContext.removeContext(senderId);
-  }
-
-
-}
-const getWelcomeMessage = () => {
-  var welcomeMessage = {
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "generic",
-        "elements": [{
-          "title": "Welcome to VenueLytics!",
-          "image_url": "http://www.venuelytics.com/assets/img/2.jpg",
-          "buttons": []
-        }]
-      }
-    }
-  };
-
-
-  SERVICES.forEach(function (service) {
-
-    if (service.enabled) {
-      var button = {
-        "type": "postback",
-        "title": `${service.title}`,
-        "payload": `${service.id}`
-      };
-      welcomeMessage.attachment.payload.elements[0].buttons.push(button);
-    }
-  });
-
-
-  return welcomeMessage;
-};
-
-function parseDate(str) {
-  var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/);
-  return (m) ? new Date(2000 + m[3], m[2] - 1, m[1]) : null;
-}
-
-function getYYYMMDDDate(date) {
-  var year = date.getFullYear();
-
-  var month = (1 + date.getMonth()).toString();
-  month = month.length > 1 ? month : '0' + month;
-
-  var day = date.getDate().toString();
-  day = day.length > 1 ? day : '0' + day;
-
-  return year + month + day;
-}
 
 module.exports = {
   handleReceivePostback: handleReceivePostback,
