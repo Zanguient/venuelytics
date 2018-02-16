@@ -37,6 +37,7 @@
     $scope.tabs = [
       {name: 'Venue Information', content: 'app/views/venue/form-venue.html', icon: 'fa-home'},
       {name: 'Attributes', content: 'app/views/venue/venue-attributes.html', icon: 'fa-list-ul'},
+        {name: 'Service Hours', content: 'app/views/venue/service-hours.html', icon: 'fa-home'},
       {name: 'Private Events', content: 'app/views/venue/private-events.html', icon: 'fa-birthday-cake'},
       {name: 'Reservations', content: 'app/views/venue/venue-bottle.html', icon: 'fa-cutlery'},
       {name: 'Party Packages', content: 'app/views/venue/party-events.html', icon: 'fa-trophy'},
