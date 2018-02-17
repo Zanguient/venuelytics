@@ -23,6 +23,28 @@ const aiProcessText = function(senderId, text, success, failure) {
     
 };
 
+const aiProcessTextWithContext = function(context, text, success, failure) {
+    var options = {
+        sessionId: 'none-session',
+        contexts: [
+            {
+                name: `${context}`,
+            }
+        ]
+    };
+    
+    var request = app.textRequest(text, options);
+    request.on('response', function(response) {
+        success(simplify(response));
+    });
+    
+    request.on('error', function(error) {
+        failure(error);
+    });
+    
+    request.end();
+    
+};
 function simplify(response) {
     var obj ={};
     obj.sessionId = response.sessionId;
@@ -37,5 +59,6 @@ function simplify(response) {
 
 }
 module.exports = {
-    aiProcessText : aiProcessText
+    aiProcessText : aiProcessText,
+    aiProcessTextWithContext : aiProcessTextWithContext
 };

@@ -1,15 +1,16 @@
 
 class Node {
     
-    constructor(parent) {
+    constructor(parent, ignoreTextProcessing) {
         this.prev = parent;
+        this.ignoreTextProcessing = !!ignoreTextProcessing;
         this.next = null;
-        if (parent != null) {
+        if (parent !== null) {
             parent.next = this;
         }
     }
     pop() {
-        if (this.prev != null) {
+        if (this.prev !== null) {
             this.prev.next = null;
         }
         return this.prev;
@@ -35,7 +36,7 @@ class Context {
 
     /**
      */
-    set(pattern, callback) {
+    set(pattern, ignoreTextProcessing, callback) {
         var patternFn = pattern;
         if(typeof patternFn !== 'function') {
             patternFn = function(text, cb) {
@@ -46,12 +47,12 @@ class Context {
                 } else {
                     return null;
                 }
-            }
+            };
         }
         // Delete and set to ensure the new context is at the end.
         // According to spec, entries in map are stored in insertion order.
         //this.handlers.delete(patternFn);
-        this.handlers = new Node(this.handlers)
+        this.handlers = new Node(this.handlers, ignoreTextProcessing);
         this.handlers.set(patternFn, callback);
     }
 
@@ -60,16 +61,20 @@ class Context {
         return this.handlers !== null;
     }
 
+    ignoreTextProcessing() {
+        return this.handlers  && this.handlers.ignoreTextProcessing;
+    }
     match(text, cb) {
         if(!text) {
             return cb('input text cannot be empty');
         }
         var matchFound = false;
         const contextHandler = this.handlers.contextHandler;
-        
+        const self = this;
         this.handlers.patternFn(text, function(err, match){
             if(!!match) {
                 matchFound = true;
+                self.handlers = self.handlers.pop();
                 return cb(
                     null,
                     match,
@@ -78,7 +83,7 @@ class Context {
             }
         });
 
-        this.handlers = this.handlers.pop();
+        
 
         /*var handlerStack = [...this.handlers].reverse();
         var matchFound = false;

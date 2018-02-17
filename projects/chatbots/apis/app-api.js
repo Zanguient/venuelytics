@@ -23,7 +23,7 @@ const getDetailsFromFacebook = (userId, callback) => {
   
 const searchVenueByName = function(venuename,address, callback) {
     var url = `${config.getAppUrl()}/venues/q?dist=50&name=${venuename}&count=5`;
-    if (address != null && address.trim() != ''){
+    if (address !== null && address.trim() !== ''){
         url += "&search="+address;
     }
     var options = {
@@ -31,11 +31,29 @@ const searchVenueByName = function(venuename,address, callback) {
     };
     
     request.get(options, function (error, response, body) {
-        retOBJ(body, function(result){
-            if (result != null) {
+        retOBJ(body, response, function(result){
+            if (result !== null) {
                 callback(result.venues);
             } else {
                 callback([]);
+            }
+        });
+    });
+};
+
+const searchVenueById = function(venueNumber, callback) {
+    var url = `${config.getAppUrl()}/venues/${venueNumber}`;
+
+    var options = {
+        url: url
+    };
+    
+    request.get(options, function (error, response, body) {
+        retOBJ(body, response, function(result){
+            if (result !== null) {
+                callback(result);
+            } else {
+                callback(null);
             }
         });
     });
@@ -49,7 +67,7 @@ const getAvailableBottleReservations = function(venueId, YYYYMMDD, callback) {
     };
     
     request.get(options, function (error, response, body) {
-        retOBJ(body, callback);
+        retOBJ(body, response, callback);
     });
 };
 
@@ -64,7 +82,7 @@ const fbLogin = function (fbPayload, callback) {
     };
     
     request.post(options, function (error, response, body) {
-        retOBJ(body, callback);
+        retOBJ(body, response, callback);
     });
 };
 const getServiceTimes = function(venueId, callback) {
@@ -75,12 +93,36 @@ const getServiceTimes = function(venueId, callback) {
     };
 
     request.get(options, function (error, response, body) {
-        retOBJ(body, callback);
+        retOBJ(body, response, callback);
     });
 
-}
-const createOrder = function (user, venueId, tableNumber, orderDate, noOfGuests, email, accessToken, callback) {
+};
+
+const getBotAgents = function(callback) {
+    var options = {
+        method: 'GET',
+        url: `${config.getAppUrl()}/bots`,
+    };
+
+    request.get(options, function (error, response, body) {
+        retOBJ(body, response, callback);
+    });
+};
+const createOrder = function (firstName, lastName, venueId, tableNumber, orderDate, noOfGuests, email, accessToken, mobile, callback) {
     var venueNumber = parseInt(venueId);
+    var headers = {
+        "Content-Type": "application/json",
+    };
+    if (!!accessToken && accessToken !== "") {
+        headers["X-XSRF-TOKEN"] = accessToken;
+    } else {
+        var fullName = firstName + " " + lastName;
+        var s = fullName + ':' + email + ':' + mobile;
+        var authBase64Str  = new Buffer(s).toString('base64');
+        headers["Authorization"] = "Anonymous " + authBase64Str;
+    }
+    
+
     var options = {
       method: 'POST',
       url: `${config.getAppUrl()}/vas/${venueId}/orders`,
@@ -90,8 +132,9 @@ const createOrder = function (user, venueId, tableNumber, orderDate, noOfGuests,
         "noOfGuests": parseInt(noOfGuests),
         "serviceInstructions": "none",
         "fulfillmentDate": orderDate,
-        "visitorName": `${user.first_name} ${user.last_name}`,
+        "visitorName": `${firstName} ${lastName}`,
         "contactEmail": `${email}`,
+        "contactNumber": `${mobile}`,
         "order": {
           "venueNumber": venueNumber,
           "orderDate": orderDate,
@@ -103,20 +146,17 @@ const createOrder = function (user, venueId, tableNumber, orderDate, noOfGuests,
           ]
         },
       }),
-      headers: {
-        "Content-Type": "application/json",
-        "X-XSRF-TOKEN": accessToken
-      }
+      headers: headers
     };
     request.post(options, function (error, response, body) {
-        retOBJ(body, callback);
+        retOBJ(body, response, callback);
     });
-  }
+  };
 
-function retOBJ(body, callback) {
+function retOBJ(body, response, callback) {
     if (body) {
         var result = JSON.parse(body);
-        if (result) {
+        if (result && response.statusCode >=200 && response.statusCode < 300) {
           callback(result);
         } else {
           callback(null);
@@ -127,9 +167,11 @@ function retOBJ(body, callback) {
 
 module.exports= {
     searchVenueByName : searchVenueByName,
+    searchVenueById : searchVenueById,
     getAvailableBottleReservations: getAvailableBottleReservations,
     getUserFBDetails: getDetailsFromFacebook,
     fbLogin : fbLogin,
     createOrder: createOrder,
-    getServiceTimes: getServiceTimes
+    getServiceTimes: getServiceTimes,
+    getBotAgents:getBotAgents
 };

@@ -12,7 +12,6 @@ var sendApi = require('../apis/send');
 const chatContextFactory = require('../lib/chat-context');
 const generalContext = chatContextFactory.getOrCreate("generalContext");
 
-var fuzzy = require('fuzzy')
 
 var Users = require('../models/users');
 var serviceApi = require('../apis/app-api');
@@ -364,7 +363,7 @@ function confirmReservation(userId, command) {
         var selectedDate = user.state.get("selectedDate");
         var email = user.state.get("contactEmail");
         serviceApi.createOrder(body, venueId, tableId, selectedDate, noOfGuests, email, result.sessionId, (result) => {
-          if (typeof (result.code) != 'undefined') {
+          if (typeof (result.code) !== 'undefined') {
             sendApi.sendMessage(userId, `Unable to process your Bottle Service reservation request. ${result.message}`);
 
           } else {

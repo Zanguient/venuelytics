@@ -2,29 +2,12 @@
  * Modified: Jan 2018
  * @author Suryanarayana Mangipudi
  */
-'use strict';
-
-var moment = require('moment');
-var config = require('../config');
+"use strict";
 
 const sendApi = require('../apis/send');
-
 const Users = require('../models/users');
 const serviceApi = require('../apis/app-api');
-
 const venueService = require('../services/venue-service');
-
-const chatContextFactory = require('../lib/chat-context');
-
-const SERVICES = [
-  { "title": "Book Bottle Service", "id": "BottleService", "enabled": true },
-  { "title": "Reserve Party Table", "id": "PartyService", "enabled": true },
-  { "title": "Reserve a Table", "id": "TableService", "enabled": true },
-  //{"title": "Book Private Room", "id": "PrivateEventService", "enabled": true},
-  //{"title": "Reserve a Table", "id": "BottleService", "enabled": true},
-  //{"title": "Add to Guest List", "id": "BottleService", "enabled": true},
-  // {"title": "Start from Begining", "id": "get_started", "enabled": true}
-];
 
 /*
  * handleReceivePostback — Postback event handler triggered by a postback
@@ -32,24 +15,78 @@ const SERVICES = [
  * developers.facebook.com/docs/messenger-platform/webhook-reference/postback
  */
 
-
 const handleReceivePostback = (event) => {
   const type = event.postback.payload;
   const senderId = event.sender.id;
   venueService.processMessage(senderId, type, sendApi);
 };
 
-const sendInterface = {
-  sendMessage : function(senderId, message) {
-    sendApi.sendMessage(senderId, Message);
-  },
+class FBChannel {
   
-  sendVenueList : sendVenueListData
+  constructore(channelId) {
+    this.channelId = channelId;
+  }
+
+  sendMessage(senderId, message) {
+    sendApi.sendMessage(senderId, message);
+  }
+  
+  sendVenueList (senderId, venues) {
+    sendVenueListData(senderId, venues);
+  } 
+  sendTableList(senderId, tables) {
+    sendTableListImpl(senderId, tables);
+  } 
+  
+  sendReservationConfirmation(user, type) {
+    sendReservationConfirmationImpl(user, type);
+  } 
+  
+  login(userId, type, loginCallback) {
+    fbLogin(userId, type, loginCallback, this);
+  } 
+}
+
+function sendReservationConfirmationImpl(user, type) {
 
 }
 
-function sendVenueListData (senderId, venues) {
+function sendTableListImpl(senderId, tables) {
+  var reservationTables = [];
+  for (var i = 0; i < tables.length; i++) {
+    var title = tables[i].name;
+    if (tables[i].price > 0) {
+      title = `${title} - $${tables[i].price}`;
+    }
 
+    var object = {
+      "title": title,
+      "subtitle": `Can sit max of ${tables[i].servingSize} guests`,
+      "image_url": tables[i].imageUrls[0].smallUrl,
+      "buttons": [
+        {
+          "type": "postback",
+          "title": "Reserve Table",
+          "payload": tables[i].id
+        }
+      ]
+    };
+    reservationTables.push(object);
+
+  }
+  
+  var messageData = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "list",
+        "elements": reservationTables.slice(0, 10),
+      }
+    }
+  };
+}
+function sendVenueListData (senderId, venues) {
+  var listOfVenues = [];
   for (var i = 0; i < venues.length && i < 10; i++) {
     var object = {
       "title": venues[i].venueName,
@@ -77,86 +114,8 @@ function sendVenueListData (senderId, venues) {
       }
     }
     
-  }
-  sendApi.sendMessage(userId, messageData);
-}
-
-function selectDate(userId, dateStr) {
-  let user = Users.getUser(userId);
-  user.state.get("currentLevel");
-  var selectedDate = parseDate(dateStr);
-  var formattedDate = getYYYMMDDDate(selectedDate);
-  var venueImageUrl = user.state.get("venueImageUrl");
-
-  if (selectedDate == null) {
-    sendApi.sendMessage(userId, "Invalid Date. Re-enter in MM/DD/YY format");
-  } else {
-    user.state.set("selectedDate", selectedDate);
-    var selectionTemplate = user.state.get("selectionTemplate");
-    var object = {
-      "title": dateStr,
-      "subtitle": "Reservation Date",
-      "image_url": venueImageUrl,
-      "buttons": [
-        {
-          "type": "postback",
-          "title": "Change Date",
-          "payload": 'changeDate'
-        },
-        {
-          "type": "postback",
-          "title": "Confirm Reservation",
-          "payload": 'confirmReservation'
-        }
-      ]
-    };
-    selectionTemplate.push(object);
-
-    serviceApi.getAvailableBottleReservations(user.state.get("selectedVenueId"), formattedDate, function (venueMap) {
-      var bottleTables = [];
-      var templateObjects = [];
-      if (typeof (venueMap) == 'undefined') {
-        sendApi.sendMessage(userId, "Reservation not available for this date. Try another date (MM/DD/YY) format");
-        return;
-      }
-      for (var i = 0; i < venueMap.elements.length; i++) {
-
-        var title = venueMap.elements[i].name;
-        if (venueMap.elements[i].price > 0) {
-          title = `${title} - $${venueMap.elements[i].price}`;
-        }
-
-        var object = {
-          "title": title,
-          "subtitle": `Can sit max of ${venueMap.elements[i].servingSize} guests`,
-          "image_url": venueMap.elements[i].imageUrls[0].smallUrl,
-          "buttons": [
-            {
-              "type": "postback",
-              "title": "Reserve Table",
-              "payload": venueMap.elements[i].id
-            }
-          ]
-        };
-        templateObjects[venueMap.elements[i].id] = object;
-        bottleTables.push(object);
-        console.log('object####>>>>>>>>>>>>>>>>>>', object);
-      }
-      user.state.set("tableTemplateObjects", templateObjects);
-      var messageData = {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "list",
-            "elements": bottleTables.slice(0, 3),
-          }
-        }
-      };
-      let ctx = user.getOrCreateContext();
-      ctx.set(/.*/, (userId, tableId) => selectTable(userId, tableId));
-      sendApi.sendMessage(userId, messageData);
-    });
-  }
+  };
+  sendApi.sendMessage(senderId, messageData);
 }
 
 
@@ -166,14 +125,13 @@ function selectTable(userId, tableId) {
 
   var selectionTemplate = user.state.get("selectionTemplate");
   var selectedTemplate = user.state.get("tableTemplateObjects")[tableId];
-  selectedTemplate.buttons[0].payload = "changeTable"
-  selectedTemplate.buttons[0].title = "Change Table"
-  selectedTemplate.buttons.push(
-    {
+  selectedTemplate.buttons[0].payload = "changeTable";
+  selectedTemplate.buttons[0].title = "Change Table";
+  selectedTemplate.buttons.push({
       "type": "postback",
       "title": "Confirm Reservation",
       "payload": 'confirmReservation',
-    });
+  });
   selectionTemplate.push(selectedTemplate);
   user.state.set("selectionTemplate", selectionTemplate);
 
@@ -202,37 +160,22 @@ function selectNoOfGuests(userId, guestCount) {
         "payload": 'confirmReservation',
       }
     ]
-  }
+  };
   var selectionTemplate = user.state.get("selectionTemplate");
   selectionTemplate.push(object);
   let ctx = user.getOrCreateContext();
-  ctx.set(/.*/, (userId, email) => emailAddress(userId, email));
+  //ctx.set(/.*/, (userId, email) => emailAddress(userId, email));
   sendApi.sendMessage(userId, "What is your mail address, we need it to track and manage your orders");
 
 }
 
-function validateEmail(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-}
-function emailAddress(userId, email) {
-  let user = Users.getUser(userId);
-  let ctx = user.getOrCreateContext();
-  if (!validateEmail) {
-    sendApi.sendMessage(userId, "You have entered invalid email address. Please enter a valid email.");
-  } else {
-    sendApi.sendMessage(userId, `Your have entered your email as ${email}. Type YES to continue, NO to correct your email.`);
-    ctx.set(/.*/, (userId, YESNO) => confirmEmailAddress(userId, YESNO, email));
-  }
-}
+
 function confirmEmailAddress(userId, YESNO, email) {
   let user = Users.getUser(userId);
   let ctx = user.getOrCreateContext();
   if (YESNO.toLowerCase() === 'yes') {
     let user = Users.getUser(userId);
-    user.state.set("currentLevel", 8);
     user.state.set("contactEmail", email);
-    ctx.set(/.*/, (userId, command) => confirmReservation(userId, command));
     sendApi.sendMessage(userId, "Please Verify and Confirm your Reservation");
     var selectionTemplate = user.state.get("selectionTemplate");
     var messageData = {
@@ -246,40 +189,25 @@ function confirmEmailAddress(userId, YESNO, email) {
     };
     sendApi.sendMessage(userId, messageData);
   } else {
-    ctx.set(/.*/, (userId, email) => emailAddress(userId, email));
+    //ctx.set(/.*/, (userId, email) => emailAddress(userId, email));
     sendApi.sendMessage(userId, "What is your mail address, we need it to track and manage your orders");
   }
 }
-function confirmReservation(userId, command) {
-  if (command === 'confirmReservation') {
-    serviceApi.getUserFBDetails(userId, (err, { statusCode }, body) => {
 
-      if (err || statusCode !== 200) {
-        return sendApi.sendMessage(userId, "Unable to get your account details to create reservation under your name.");
-      }
-      let user = Users.getUser(userId);
-      var email = user.state.get("contactEmail");
-      body.email = email;
-      serviceApi.fbLogin(body, (result) => {
-        let user = Users.getUser(userId);
-        var venueId = user.state.get("selectedVenueId");
-        var tableId = user.state.get("tableSelected");
-        var noOfGuests = user.state.get("noOfGuests");
-        var selectedDate = user.state.get("selectedDate");
-        var email = user.state.get("contactEmail");
-        serviceApi.createOrder(body, venueId, tableId, selectedDate, noOfGuests, email, result.sessionId, (result) => {
-          if (typeof (result.code) != 'undefined') {
-            sendApi.sendMessage(userId, `Unable to process your Bottle Service reservation request. ${result.message}`);
-
-          } else {
-            sendApi.sendMessage(userId, `Your Bottle Service reservation is successfully reserved. Your order Id is ${result.order.orderNumber}`);
-            restartTheFlow();
-          }
-        });
-      });
-
+function fbLogin(userId, type, loginCallback, channel) {
+  let user = Users.getUser(userId);
+  serviceApi.getUserFBDetails(userId, (err, { statusCode }, body) => {
+    if (err || statusCode !== 200) {
+      sendApi.sendMessage(userId, "Unable to get your account details to create reservation under your name.");
+      loginCallback(userId, type, null, channel);
+      return;
+    }
+    user.state.set("firstName", body.first_name);
+    user.state.set("lastName", body.last_name);
+    serviceApi.fbLogin(body, (result) => {
+      loginCallback(userId, type, result.sessionId, channel);
     });
-  }
+  });
 }
 
 /*
@@ -297,12 +225,11 @@ const handleReceiveMessage = (event) => {
   // spamming the bot if the requests take some time to return.
   sendApi.sendReadReceipt(senderId);
   //botContext.getOrCreate(senderId);
-  processMessage(senderId, message.text);
-}
+  venueService.processMessage(senderId, message.text, sendApi);
+};
 
 
 module.exports = {
   handleReceivePostback: handleReceivePostback,
   handleReceiveMessage: handleReceiveMessage,
 };
-

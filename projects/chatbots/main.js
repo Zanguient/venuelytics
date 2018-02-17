@@ -1,34 +1,37 @@
 'use strict';
-var express = require('express');
-var morgan = require('morgan');
-var session = require('express-session');
-var cookieParser = require("cookie-parser");
-var path = require('path');
+const express = require('express');
+const morgan = require('morgan');
+const session = require('express-session');
+const cookieParser = require("cookie-parser");
+const path = require('path');
 
-var clientPath = path.resolve(__dirname, "client");
-var http = require("http");
-var bodyParser = require('body-parser');
+const clientPath = path.resolve(__dirname, "client");
+const http = require("http");
+const bodyParser = require('body-parser');
 
-var ejs = require("ejs");
-var config = require('./config');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+const ejs = require("ejs");
+const config = require('./config');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
 
-var chatbotHandlers = require("./routers");
-
-
+const chatbotHandlers = require("./routers");
+const appApi = require('./apis/app-api');
+const botAgents = require('./models/botagents');
 /*============Initialize and COnfiguration===============*/
 
 const app = express();
 const demo = config.demo_mode;
 app.use(logger('dev'));
 
-if (demo) { console.log(' ======IN DEMO MODE========='); }
-
-
 app.use(bodyParser.json({ limit: '50mb' }));
 app.set('view engine', 'ejs');
-
+appApi.getBotAgents((result) => {
+  if (!!result) {
+    result.forEach(element => {
+      botAgents.addBotAgent(element.value, element.venueNumber);
+    });
+  }
+});
 
 /* ----------  Static Assets  ---------- */
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico'))); // eslint-disable-line
@@ -47,7 +50,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/chatbots', chatbotHandlers)
+app.use('/chatbots', chatbotHandlers);
 app.all("/", function (req, res) {
     res.status(200).sendFile(path.join(__dirname, "/views/index.html"));
 });

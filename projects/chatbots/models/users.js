@@ -8,7 +8,7 @@ const users = [];
 const getUser = (userId) => {
     let user = users.find((u) => u.id === userId);
     
-    if (typeof(user) == 'undefined') {
+    if (typeof(user) === 'undefined') {
         user =  new User(userId);
         users.push(user);
     }
@@ -32,22 +32,32 @@ class User {
     get state() {
         return this._state;
     }
+    isNotEmpty(str) {
+        return !(!str || 0 === str.length);
+    }
+    hasParameter(parameterName) {
+        return this.isNotEmpty(this._state.get(parameterName));
+    }
 
     isInConversation() {
         return this.conversationContext !== null && this.conversationContext.isSet();
     }
-
-    setConversationContext(type, response, fxCallback) {
-        this.conversationContext = chatContext.getOrCreate(this._id);
-        this.conversationContext.set(/.*/, (userId, match) => fxCallback(userId, match, type, response));
+    ignoreTextProcessing() {
+        return this.conversationContext !== null  && this.conversationContext.ignoreTextProcessing(); 
     }
+    
+    setConversationContext(type, ignoreTextProcessing, fxCallback) {
+        this.conversationContext = chatContext.getOrCreate(this._id);
+        this.conversationContext.set(/.*/, ignoreTextProcessing, (userId, match, response) => fxCallback(userId, match, type, response));
+    }
+    
     dispatch(response) {
         var type = response.queryText;
         var senderId = this._id;
-        if (this.conversationContext != null && this.conversationContext.isSet()) {
+        if (this.conversationContext !== null && this.conversationContext.isSet()) {
             this.conversationContext.match(type, function (err, match, contextCb) {
                 if (!err) {
-                  contextCb(senderId, match);
+                  contextCb(senderId, match, response);
                 } 
               });
         }
