@@ -239,6 +239,10 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					method: 'GET', params: { id: '@id' }, isArray: true,
 					url: urlTemplate.replace("@context", "venues") + "/servicehours"
 				},
+				getServiceTimingById: {
+					method: 'GET', params: { id: '@id', objId: '@objId' },
+					url: urlTemplate.replace("@context", "venues") + "/servicehours/:objId"
+				},
 				saveServiceTimings: {
 					method: 'POST', params: { id: '@id' },
 					url: urlTemplate.replace("@context", "venues") + "/servicehours"

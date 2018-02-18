@@ -167,12 +167,12 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog')
             })
             .state('app.editServiceHours', {
-                url: '/:venueNumber/:serviceHours/:id',
+                url: '/editServiceHours/:venueNumber/:id',
                 title: 'Edit ServiceHours',
                 templateUrl: basepath('venue/service-hours-edit.html'),
-                controller: 'VenueServiceTimeController',
+                controller: 'VenueServiceTimeEditController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins')
+                resolve: resolveFor('parsley', 'inputmask')
             })
             .state('app.editBanquetHall', {
                 url: '/editBanquetHall/:venueNumber/:id',

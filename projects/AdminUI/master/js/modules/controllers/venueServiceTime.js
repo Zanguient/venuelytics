@@ -11,6 +11,8 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
         $scope.startServiceTime = "09:00";
         $scope.endServiceTime = "22:00";
         $scope.lastServiceTime = "21:00";
+
+
         $scope.initServiceTimeTable = function () {
             if (!$.fn.dataTable || $stateParams.id === 'new') {
                 return;
@@ -35,21 +37,24 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
 
             DataTableService.initDataTable('venue_service_time_table', columnDefinitions, false);
             var table = $('#venue_service_time_table').DataTable();
+
             $('#venue_service_time_table').on('click', '.fa-edit', function () {
-                $scope.editService(this, table);
+                $scope.editService(this);
             });
+
+            $scope.editService = function (button) {
+                var targetRow = $(button).closest("tr");
+                var rowData = table.row(targetRow).data();
+                console.log("rowData", rowData);
+                $state.go('app.editServiceHours', { venueNumber: $stateParams.id, id: rowData[5].id });
+            };
+
             var target = { id: $stateParams.id };
             RestServiceFactory.VenueService().getServiceTimings(target, function (data) {
                 $scope.data = data;
                 $.each(data, function (i, d) {
                     table.row.add([d.day, d.type, d.startTime + " - " + d.endTime, d.lastCallTime, d.value, d]);
                 });
-
-                $scope.editService = function (button, productId) {
-                    var targetRow = $(button).closest("tr");
-                    var rowData = table.row(targetRow).data();
-                    $state.go('app.editServiceHours', { venueNumber: $stateParams.id, id:rowData[5].id});
-                };
                 table.draw()
             });
         }
