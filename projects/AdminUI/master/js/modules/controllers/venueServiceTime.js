@@ -45,7 +45,6 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
             $scope.editService = function (button) {
                 var targetRow = $(button).closest("tr");
                 var rowData = table.row(targetRow).data();
-                console.log("rowData", rowData);
                 $state.go('app.editServiceHours', { venueNumber: $stateParams.id, id: rowData[5].id });
             };
 
