@@ -62,33 +62,7 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
             $state.go('app.editServiceHours', { venueNumber: $stateParams.id, id: 'new' });
         };
 
-        $scope.update = function (isValid, form, data) {
-            if (!isValid || !$("#serviceInfo").parsley().isValid()) {
-                return;
-            }
-            $scope.venueNumber = $stateParams.venueNumber;
-            var p = $scope.lastServiceTime;
-            var q = $scope.startServiceTime;
-            var r = $scope.endServiceTime;
-            data.lastCallTime = p.getHours() + ":" + p.getMinutes();
-            data.startTime = q.getHours() + ":" + q.getMinutes();
-            data.endTime = r.getHours() + ":" + r.getMinutes();
-            var target = { id: data.venueNumber };
-            var payload = [];
-            payload.push(data);
-            RestServiceFactory.VenueService().saveServiceTimings(target, payload, function (success) {
-                ngDialog.openConfirm({
-                    template: '<p>Service Hours information  successfully saved</p>',
-                    plain: true,
-                    className: 'ngdialog-theme-default'
-                });
-
-            }, function (error) {
-                if (typeof error.data !== 'undefined') {
-                    toaster.pop('error', "Server Error", error.data.developerMessage);
-                }
-            });
-        };
+        
         $timeout(function () {
             $scope.initServiceTimeTable();
         });

@@ -29,6 +29,11 @@ appApi.getBotAgents((result) => {
   if (!!result) {
     result.forEach(element => {
       botAgents.addBotAgent(element.value, element.venueNumber);
+      if (element.value.startsWith('+')) {
+        botAgents.addBotAgent(element.value.substring(1), element.venueNumber);
+      } else {
+        botAgents.addBotAgent('+'+element.value, element.venueNumber);
+      }
     });
   }
 });

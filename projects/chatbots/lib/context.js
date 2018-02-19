@@ -28,6 +28,14 @@ class Context {
     constructor(key) {
         this.key = key;
         this.handlers = null;
+        this._callbackResponse = null;
+    }
+
+    setCallbackResponse(callbackResponse) {
+        this._callbackResponse = callbackResponse;
+    }
+    get callbackResponse (){
+        return this._callbackResponse;
     }
 
     /**

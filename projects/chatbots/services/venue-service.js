@@ -166,7 +166,7 @@ function fxInfo(type, userId, response, channel) {
     }
   } else if (typeof venueName === "undefined" || venueName === "") {
     channel.sendMessage(userId, "Can you please give me the Venue name?");
-    user.setConversationContext(type, true, curry(searchVenue)(channel));
+    user.setConversationContext(type, true, curry(searchVenue)(channel), response);
   } else {
     searchVenue(channel, userId, venueName, type, response);
   }
@@ -201,11 +201,11 @@ function searchVenueImpl(channel, userId, venueName, address, type, response) {
   serviceApi.searchVenueByName(venueName, address, function(venues) {
     if (venues.length > 4) {
       channel.sendMessage(userId,"I found many venues with this name, Please enter the city name or zipcode to narrow down the result.");
-      user.setConversationContext(type, true, curry(searchVenueWithAddress)(channel)(venueName));
+      user.setConversationContext(type, true, curry(searchVenueWithAddress)(channel)(venueName), response);
       return;
     } else if (venues.length === 0) {
       channel.sendMessage(userId,"I didn't find any venues. Please try again. Enter the venue name.");
-      user.setConversationContext(type, false, curry(searchVenue)(channel));
+      user.setConversationContext(type, false, curry(searchVenue)(channel), response);
       return;
     }
 
@@ -215,7 +215,7 @@ function searchVenueImpl(channel, userId, venueName, address, type, response) {
 
     user.state.set("listOfVenues", venues);
     channel.sendVenueList(userId, venues);
-    user.setConversationContext(type, true, curry(selectVenue)(channel));
+    user.setConversationContext(type, true, curry(selectVenue)(channel), response);
   });
 }
 
@@ -440,7 +440,7 @@ function fxGetEmailResponse(channel, userId, email, type, response) {
     channel.sendMessage(userId, "You have entered invalid email address. Please enter a valid email.");
     user.setConversationContext(type, true, curry(fxGetEmailResponse)(channel));
   } else {
-    channel.sendMessage(userId,`Your have entered your email as ${email}. Type YES to continue, NO to correct your email.` );
+    channel.sendMessage(userId,`You have entered your email as ${email}. Type YES to continue, NO to correct your email.` );
     user.state.set("email", email);
     user.setConversationContext(type, false, curry(fxConfirmEmail)(channel));
   }
@@ -449,7 +449,7 @@ function fxGetEmailResponse(channel, userId, email, type, response) {
 function fxConfirmEmail(channel, userId, yesno, type, response) {
   let user = Users.getUser(userId);
   if (response.action === "smalltalk.confirmation.yes") {
-    channel.sendReservationConfirmation(user, type);
+    channel.sendReservationConfirmation(userId, user, type);
     user.setConversationContext(type, false, curry(fxConfirmReservationResponse)(channel));
   } else {
     fxGetEmail(type, userId, response, channel);

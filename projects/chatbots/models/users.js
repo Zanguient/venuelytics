@@ -46,8 +46,9 @@ class User {
         return this.conversationContext !== null  && this.conversationContext.ignoreTextProcessing(); 
     }
     
-    setConversationContext(type, ignoreTextProcessing, fxCallback) {
+    setConversationContext(type, ignoreTextProcessing, fxCallback, callbackResponse) {
         this.conversationContext = chatContext.getOrCreate(this._id);
+        this.conversationContext.setCallbackResponse(callbackResponse);
         this.conversationContext.set(/.*/, ignoreTextProcessing, (userId, match, response) => fxCallback(userId, match, type, response));
     }
     
@@ -55,9 +56,14 @@ class User {
         var type = response.queryText;
         var senderId = this._id;
         if (this.conversationContext !== null && this.conversationContext.isSet()) {
+            var callbackResponse = this.conversationContext.callbackResponse;
             this.conversationContext.match(type, function (err, match, contextCb) {
                 if (!err) {
-                  contextCb(senderId, match, response);
+                    if (!callbackResponse) {
+                        contextCb(senderId, match, response);
+                    } else {
+                        contextCb(senderId, match, callbackResponse);
+                    }
                 } 
               });
         }

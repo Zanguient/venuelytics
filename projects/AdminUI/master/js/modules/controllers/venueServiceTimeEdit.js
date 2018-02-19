@@ -76,10 +76,12 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
             data.startTime = q.getHours() + ":" + q.getMinutes();
             data.endTime = r.getHours() + ":" + r.getMinutes();
             var target = { id: data.venueNumber };
-            var payload = [];
-            payload.push(data);
-
-            RestServiceFactory.VenueService().saveServiceTimings(target, payload, function (success) {
+            var target = { id: data.venueNumber };
+            if ( $stateParams.id !== 'new') {
+                target.objId = $stateParams.id;
+            }
+           
+            RestServiceFactory.VenueService().saveServiceTimings(target, data, function (success) {
                 ngDialog.openConfirm({
                     template: '<p>Service Hours information  successfully saved</p>',
                     plain: true,
@@ -91,6 +93,9 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
                     toaster.pop('error', "Server Error", error.data.developerMessage);
                 }
             });
+            $timeout(function () {
+                $state.go('app.venueedit', { id: $stateParams.venueNumber});
+            });
         };
-
+        
     }]);

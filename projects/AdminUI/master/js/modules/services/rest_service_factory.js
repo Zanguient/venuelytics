@@ -235,17 +235,21 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					method: 'DELETE', params: { id: '@id' },
 					url: urlTemplate.replace("@context", "venueevents")
 				},
+				deleteServiceHour: {
+					method: 'DELETE', params: { id: '@id' },
+					url: urlTemplate.replace("@context", "servicehours") + "/:objId"
+				},
 				getServiceTimings: {
 					method: 'GET', params: { id: '@id' }, isArray: true,
-					url: urlTemplate.replace("@context", "venues") + "/servicehours"
+					url: urlTemplate.replace("@context", "servicehours")
 				},
 				getServiceTimingById: {
 					method: 'GET', params: { id: '@id', objId: '@objId' },
-					url: urlTemplate.replace("@context", "venues") + "/servicehours/:objId"
+					url: urlTemplate.replace("@context", "servicehours") + "/:objId"
 				},
 				saveServiceTimings: {
-					method: 'POST', params: { id: '@id' },
-					url: urlTemplate.replace("@context", "venues") + "/servicehours"
+					method: 'POST', params: { id: '@id', objId: '@objId' },
+					url: urlTemplate.replace("@context", "servicehours") + "/:objId"
 				},
 				getTaxNFees: {
 					method: 'GET', params: { id: '@id', YYMMDD: '@YYMMDD' }, isArray: true,

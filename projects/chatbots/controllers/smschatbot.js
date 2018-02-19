@@ -39,11 +39,11 @@ class SMSChannel {
     venueService.processMessage(senderId, tableList[0].searchIndex, this);
   }
  
-  sendReservationConfirmation(user, type) {
+  sendReservationConfirmation(senderId, user, type) {
     var text ="Please verify the reservation information and say yes to confirm the information is correct or say no if you want to change it.\n";
     text += "Date: " + user.state.get("reservationDate") +"\n No of Guests: " + user.state.get("noOfGuests");
     //sendApi.sendMessage(user.id, text);
-    sendSMS(`Sender Id: ${user.id}, Message: ${text}`);
+    sendSMS(this.channelId, senderId, text);
   }
 
   login(userId, type, loginCallback) {
