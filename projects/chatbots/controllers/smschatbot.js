@@ -61,6 +61,7 @@ module.exports.setwebhook = function (req, res) {
 
   var twiml = new MessagingResponse();
   twiml.message('Welcome to Venuelytics!');
+  console.log("registration successful");
   res.send('');
 };
 
@@ -78,6 +79,7 @@ module.exports.getwebhook = function (req, res) {
   var twilioNumber = req.query.To;
 
   venueService.processMessage(fromNumber, message, new SMSChannel(twilioNumber));
+
   res.end();
 };
 
