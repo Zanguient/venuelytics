@@ -8,8 +8,8 @@ config.devMode = true;
 config.WEBHOOK_TOKEN = "venuelytics-fb-agent-EAAcYqcwl1BwBANOAT";
 config.PAGE_ACCESS_TOKEN = "EAAcYqcwl1BwBANOATkspAplSbNdTDvXmbhyE8VdnQj44yjvfJROCcEn7uVy6NYZAPmbAQyZCxgzjbFNQQ5uN94ZB28ZAIoKewqSxCEUmHBdZAjL8MOh8BZBrtgh43AmLr708IHZBV0ZC8DedkvR8PYb8D8MiEWOT7U9vBC2KDPb3VgZDZD";
 
-//const DEV_SRVR = 'https://dev.api.venuelytics.com';
-const DEV_SRVR = 'http://localhost:8280';
+const DEV_SRVR = 'https://dev.api.venuelytics.com';
+//const DEV_SRVR = 'http://localhost:8280';
 const PROD_SRVR = 'https://prod.api.venuelytics.com';
 
 

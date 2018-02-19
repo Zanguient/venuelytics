@@ -31,11 +31,11 @@ class SMSChannel {
     venues.forEach(element => {
       message += `${element.searchIndex} : ${element.venueName} - ${element.address}\n`;
     });
-    sendSMS(senderId, message);
+    sendSMS(this.channelId, senderId, message);
   }
 
   sendTableList(senderId, tableList) {
-    sendSMS(`senderId: ${senderId} , I found a table for you let me confirm it.`);
+    sendSMS(this.channelId, senderId, `senderId: ${senderId} , I found a table for you let me confirm it.`);
     venueService.processMessage(senderId, tableList[0].searchIndex, this);
   }
  

@@ -103,7 +103,11 @@ const aiResponse = function(channel, senderId, response) {
 
 function fxInfo(type, userId, response, channel) {
   let user = Users.getUser(userId);
-  var venueName = response.parameters.venue;
+
+  var venueName = null;
+  if( response && response.parameters) {
+    venueName = response.parameters.venue;
+  }
 
   if (user.hasParameter("selectedVenueId")) {
     if (FACILITY_TYPE.indexOf(type) > 0 ) {
@@ -177,11 +181,7 @@ function selectVenue(channel, userId, searchIndex, type, response) {
     return;
   }
   const listOfVenues = user.state.get("listOfVenues");
-  if (
-    isNaN(searchIndex) ||
-    searchIndex < 1 ||
-    searchIndex > listOfVenues.length
-  ) {
+  if (isNaN(searchIndex) || searchIndex < 1 || searchIndex > listOfVenues.length) {
     channel.sendMessage(userId, "Opps, You have selected a venue which is not in my list. Please select again...");
     channel.sendVenueList(userId, listOfVenues);
     user.setConversationContext(type, false, curry(selectVenue)(channel));
