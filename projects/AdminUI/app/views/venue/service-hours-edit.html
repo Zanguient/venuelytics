@@ -15,38 +15,41 @@
 					<div class="row">
 						<div class="form-group col-sm-8">
 							<label class="control-label">Day*</label>
-							<input type="text" name="day" required="required" class="form-control" ng-model="data.day" />
+							<input type="text" name="day" required="required" class="form-control" ng-model="day" />
 						</div>
 						<div class="form-group col-sm-4">
 							<label class="control-label">Venue Number*</label>
-							<input type="text" name="venueNumber" data-parsley-type="integer" class="form-control" ng-model="data.venueNumber" />
+							<input type="text" name="venueNumber" data-parsley-type="integer" readonly class="form-control" ng-model="venueNumber" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
 							<label class="control-label nowrap">Type*</label>
-							<input type="text" name="type" placeholder="type" required="required" class="form-control" ng-model="data.type" />
+							<input type="text" name="type" placeholder="type" required="required" class="form-control" ng-model="type" />
 						</div>
 
 						<div class="form-group col-md-6 col-sm-12">
 							<label class="control-label nowrap">Last Call Time* </label>
-							<timepicker ng-model="lastServiceTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"></timepicker>
+							<timepicker name="lastServiceTime" ng-model="lastServiceTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"
+							 min="min" max="max"></timepicker>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-md-6 col-sm-12">
 							<label class="control-label nowrap">Start Time* </label>
-							<timepicker ng-model="startServiceTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"></timepicker>
+							<timepicker name="startServiceTime" ng-model="startServiceTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"
+							 min="min" max="max"></timepicker>
 						</div>
 						<div class="form-group col-md-6 col-sm-12">
 							<label class="control-label nowrap">End Time* </label>
-							<timepicker ng-model="endServiceTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"></timepicker>
+							<timepicker name="endServiceTime" ng-model="endServiceTime" ng-change="changed()" hour-step="1" minute-step="15" show-meridian="true"
+							 min="min" max="max"></timepicker>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-8">
 							<label class="control-label">Price($)*</label>
-							<input type="text" name="value" required="required" class="form-control" ng-model="data.value" />
+							<input type="text" name="value" required="required" class="form-control" ng-model="value" />
 						</div>
 					</div>
 					<div class="required">* Required fields</div>
