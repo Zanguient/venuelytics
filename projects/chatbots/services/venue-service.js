@@ -27,8 +27,12 @@ QUESTIONS["Q_CHECKOUT_TIME"] = curry(fxInfo)("Q_CHECKOUT_TIME");
 QUESTIONS["Q_LASTCALL_TIME"] = curry(fxInfo)("Q_LASTCALL_TIME");
 QUESTIONS["Q_RESTAURANT_OPEN"] = curry(fxInfo)("Q_RESTAURANT_OPEN");
 QUESTIONS["Q_RESTAURANT_CLOSE"] = curry(fxInfo)("Q_RESTAURANT_CLOSE");
+QUESTIONS["Q_AMENITIES"] = curry(fxInfo)("Q_AMENITIES");
+QUESTIONS["Q_EVENTS"] = curry(fxInfo)("Q_EVENTS");
+
 QUESTIONS["Q_CLOSE_TIME"] = curry(fxInfo)("Q_CLOSE_TIME");
 QUESTIONS["Q_OPEN_TIME"] = curry(fxInfo)("Q_OPEN_TIME");
+QUESTIONS["Q_DEALS_AND_SPECIALS"] = dealsAndSpecials;
 
 QUESTIONS["Q_RESERVATION"] = fxReservation;
 QUESTIONS["noOfGuests"] = fxNumberOfGuests;
@@ -42,6 +46,8 @@ const FACILITY_TYPE = [
 
 const ANSWERS = [];
 ANSWERS["Q_WIFI_PASSWORD"] = { text: "VALUE", api_name: "info", value: "wifi-password"};
+ANSWERS["Q_AMENITIES"] = { text: "VALUE", api_name: "info", value: "aminities"};
+ANSWERS["Q_EVENTS"] = { text: "VALUE", api_name: "info", value: "_events"};
 ANSWERS["Q_ADDRESS"] = { text: "Address: VALUE", api_name: "venue", value: "address"};
 
 function processMessage(senderId, text, channel) {
@@ -51,10 +57,7 @@ function processMessage(senderId, text, channel) {
     let agent = botagents.getBotAgent(channelId);
     if (agent && agent.venueNumber) {
       user.state.set("selectedVenueId", agent.venueNumber);
-      serviceApi.searchVenueById(
-        agent.venueNumber,
-        curry(fxReadVenue)(senderId)(text)(channel)
-      );
+      serviceApi.searchVenueById(agent.venueNumber, curry(fxReadVenue)(senderId)(text)(channel));
       return;
     }
   }
@@ -101,6 +104,50 @@ const aiResponse = function(channel, senderId, response) {
   }
 };
 
+function dealsAndSpecials(userId, response, channel) {
+  let user = Users.getUser(userId);
+
+  if (user.hasParameter("selectedVenueId")) {
+    if (!response || !response.parameters || !response.parameters.dealsNSpecials){
+      channel.sendMessage(userId, "Can you please repeat the question?");
+      return;  
+    }
+    var deals = response.parameters.dealsNSpecials;
+    var data = user.state.get('info');
+    if (!data) {
+      var venue = user.state.get("venue");
+      data = venue.info;
+      user.state.set("info", data);
+    }
+    if (deals === 'deals' || deals === 'specials') {
+     
+      if (typeof(data['_deals']) !== 'undefined') {
+        channel.sendMessage(user.id, data['_deals']);
+        return;
+      } else if (data['_vip-deals']) {
+        channel.sendMessage(user.id, "We have specials for our vip customers.");  
+      } else {
+        channel.sendMessage(user.id, "sorry, currently we are not running any deals / specials.");        
+      }
+    } else if(deals === 'vip specials') {
+      if (data['_vip-deals']) {
+        channel.sendMessage(user.id, "We have specials for our vip customers.");
+      } else {
+        channel.sendMessage(user.id, "sorry, currently we are not running any vip specials.");
+      }
+    } else if(deals === 'happy hour') {
+      if (data['_happyhours']) {
+        channel.sendMessage(user.id, "We have specials for our vip customers.");
+      } else {
+        channel.sendMessage(user.id, "sorry, currently we are not running any happy hour deals.");
+      }
+    }
+  } else {
+    channel.sendMessage(userId, "Can you please give me the Venue name?");
+    user.setConversationContext('Q_DEALS_AND_SPECIALS', true, curry(searchVenue)(channel));
+  }
+  
+}
 function fxInfo(type, userId, response, channel) {
   let user = Users.getUser(userId);
 
@@ -110,7 +157,7 @@ function fxInfo(type, userId, response, channel) {
   }
 
   if (user.hasParameter("selectedVenueId")) {
-    if (FACILITY_TYPE.indexOf(type) > 0 ) {
+    if (FACILITY_TYPE.indexOf(type) >= 0 ) {
       facility.sendAnswer(type, userId, response, channel);
       return;
     } else { 
