@@ -236,7 +236,7 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					url: urlTemplate.replace("@context", "venueevents")
 				},
 				deleteServiceHour: {
-					method: 'DELETE', params: { id: '@id' },
+					method: 'DELETE', params: { id: '@id', objId: '@objId' },
 					url: urlTemplate.replace("@context", "servicehours") + "/:objId"
 				},
 				getServiceTimings: {

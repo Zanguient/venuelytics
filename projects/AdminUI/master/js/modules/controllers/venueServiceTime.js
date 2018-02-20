@@ -71,7 +71,7 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
             DialogService.confirmYesNo('Delete Service?', 'Are you sure want to delete selected service hours?', function() {
                 var targetRow = $(button).closest("tr");
                 var rowData = table.row( targetRow).data();
-                var target = {id: rowData[5].id};
+                var target = {id: $stateParams.id, objId: rowData[5].id};
                 RestServiceFactory.VenueService().deleteServiceHour(target, function(data){
                     table.row(targetRow).remove().draw();
                 },function(error){
