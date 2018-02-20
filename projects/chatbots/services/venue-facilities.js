@@ -19,9 +19,9 @@ ANSWERS["Q_OPEN_TIME"] = {
 ANSWERS["Q_CLOSE_TIME"] = {
   text: "VENUE_NAME closes at VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: "endTime"};
 ANSWERS["Q_FACILITY_OPEN_CLOSE_TIME"] = {
-    text: "VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: "startTIme"};
+    text: "VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: ""};
 ANSWERS["Q_OPEN_CLOSE_TIME"] = {
-      text: "VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: "startTIme"};
+      text: "VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: ""};
     
 
   
@@ -94,7 +94,14 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
       venueTimes = data[j];
     }
     if (data[j].type === answer.type) {
-      channel.sendMessage(user.id, formatText(answer, venueName, formatTime(data[j][answer.value])));
+      if (answer.value && answer.value !== ''){
+        channel.sendMessage(user.id, formatText(answer, venueName, formatTime(data[j][answer.value])));
+      } else {
+        var startTime = formatTime(data[j]['startTime']);
+        var endTime = formatTime(data[j]['endTime']);
+        channel.sendMessage(user.id, `Opening time: ${startTime}, Closing time: ${endTime}` );
+      }
+      
       return;
     }
   }
