@@ -1,8 +1,23 @@
-<h3>
+<h3>Chat Bot
+  <small>Manage your Facebook Chat and SMS chat </small>
+</h3>
+<div ng-controller="ChatbotController" class="container-fluid">
   <div class="row">
-    <div class="col-lg-12">
-      Chat Bot -
-      <small>Manage your Facebook Chat and SMS chat here</small>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
+        <tabset type="pills" >
+          <tab ng-repeat="tabId in tabs">
+            <tab-heading class="bold"><em class="fa fa-lg pr-sm"  ng-class="tabId.icon"></em>{{tabId.name}}</tab-heading>
+            <hr>
+            <div ng-include="tabId.content"></div>
+          </tab>
+
+        </tabset>
+      </div>
     </div>
   </div>
-</h3>
+  <!-- END row-->
+
+</div>
+

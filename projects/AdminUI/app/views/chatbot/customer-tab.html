@@ -1,0 +1,44 @@
+<div class="col-sm-6">
+    <form  name="customerInfo" validate-form="" novalidate role="form">
+        <!-- START panel-->
+
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Customer Name</label>
+                <div class="col-sm-8">
+                    <input type="text" name="major" required="required"  class="form-control" ng-model="data.name"/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Customer Number</label>
+                <div class="col-sm-8">
+                    <input type="text" name="major" required="required"  class="form-control" ng-model="data.number"/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Checkout Day and Time</label>
+                <div class="col-sm-8">
+                    <input type="text" name="major" required="required"  class="form-control" ng-model="data.dayTime"/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Customer Message</label>
+                <div class="col-sm-8">
+                    <textarea placeholder="..." rows="5" ng-model="data.message" class="form-control ng-pristine ng-valid"></textarea>
+                </div>
+            <div class ="col-sm-12">
+                <button  type="submit" class="btn btn-primary pull-right" ng-click="">Clear Message</button>
+            </div>
+            </div>
+        </fieldset>
+        <div class="col-sm-8">
+        <button  type="submit" class="col-sm-8 btn btn-primary pull-right" ng-click="updateCustomer(customerInfo.$valid,data)">Send Message</button>
+        </div>
+    </form>
+</div>
