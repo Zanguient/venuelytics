@@ -159,7 +159,7 @@ function retOBJ(body, response, callback) {
         if (result && response.statusCode >=200 && response.statusCode < 300) {
           callback(result);
         } else {
-          callback(null);
+          callback({});
         }
     }
 }

@@ -35,13 +35,13 @@ class SMSChannel {
   }
 
   sendTableList(senderId, tableList) {
-    sendSMS(this.channelId, senderId, `senderId: ${senderId} , I found a table for you let me confirm it.`);
+    sendSMS(this.channelId, senderId, `We have found a table for the requested date.`);
     venueService.processMessage(senderId, tableList[0].searchIndex, this);
   }
  
   sendReservationConfirmation(senderId, user, type) {
     var text ="Please verify the reservation information and say yes to confirm the information is correct or say no if you want to change it.\n";
-    text += "Date: " + user.state.get("reservationDate") +"\n No of Guests: " + user.state.get("noOfGuests");
+    text += "\nDate: " + formatToDisplayDate(user.state.get("reservationDate")) +"\nNumber of Guests: " + user.state.get("noOfGuests");
     //sendApi.sendMessage(user.id, text);
     sendSMS(this.channelId, senderId, text);
   }
@@ -53,6 +53,9 @@ class SMSChannel {
   }
 }
 
+function formatToDisplayDate(Y_M_D) {
+  return moment(Y_M_D, "YYYY-MM-DD").format('MMMM Do YYYY');
+}
 
 module.exports.setwebhook = function (req, res) {
   var body = req.query.Body;

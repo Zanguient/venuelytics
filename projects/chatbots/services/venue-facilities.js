@@ -18,7 +18,13 @@ ANSWERS["Q_OPEN_TIME"] = {
   text: "VENUE_NAME opens at VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: "startTime"};
 ANSWERS["Q_CLOSE_TIME"] = {
   text: "VENUE_NAME closes at VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: "endTime"};
+ANSWERS["Q_FACILITY_OPEN_CLOSE_TIME"] = {
+    text: "VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: "startTIme"};
+ANSWERS["Q_OPEN_CLOSE_TIME"] = {
+      text: "VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: "startTIme"};
+    
 
+  
   
   const FACILITY_TYPE = ['Q_FACILITY', 'Q_FREE_FACILITY', 'Q_COUNT_FACILITY'];
 
@@ -59,11 +65,30 @@ function sendAnswerImpl(type, user, answer, response, channel) {
 }
 
 function sendAnswerFacilityTimes(type, user, answer, response, channel) {
+
+  
   const venue = user.state.get("venue");
   var venueName = venue.venueName;
 
   var data = user.state.get(answer.api_name);
   var venueTimes = null;
+  
+  if ((type === 'Q_OPEN_CLOSE_TIME' || type === 'Q_FACILITY_OPEN_CLOSE_TIME') 
+        && response.parameters && response.parameters.openClosingTimes) {
+    var timeType = response.parameters.openClosingTimes;
+    var venueType = response.parameters.serviceType;
+    if (timeType === 'Open') {
+      answer.value = 'startTime';
+    } else if (timeType === 'Close') {
+      answer.value = 'endTime';
+    } else if (timeType === 'Lastcall') {
+      answer.value = 'lastCallTime';
+    }
+  }
+  if (!!response.parameters.health) {
+    answer.type = response.parameters.health;
+  }
+
   for (var j = 0; j < data.length; j++) {
     if (data[j].type === 'Venue') {
       venueTimes = data[j];
@@ -73,6 +98,8 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
       return;
     }
   }
+
+  
 
   if (!!venueTimes) {
     var openTime = formatTime(venueTimes.startTime);

@@ -32,6 +32,9 @@ QUESTIONS["Q_EVENTS"] = curry(fxInfo)("Q_EVENTS");
 
 QUESTIONS["Q_CLOSE_TIME"] = curry(fxInfo)("Q_CLOSE_TIME");
 QUESTIONS["Q_OPEN_TIME"] = curry(fxInfo)("Q_OPEN_TIME");
+QUESTIONS["Q_OPEN_CLOSE_TIME"] = curry(fxInfo)("Q_OPEN_CLOSE_TIME");
+QUESTIONS["Q_FACILITY_OPEN_CLOSE_TIME"] = curry(fxInfo)("Q_FACILITY_OPEN_CLOSE_TIME");
+
 QUESTIONS["Q_DEALS_AND_SPECIALS"] = dealsAndSpecials;
 
 QUESTIONS["Q_RESERVATION"] = fxReservation;
@@ -42,7 +45,7 @@ QUESTIONS["email"] = fxGetEmail;
 
 const FACILITY_TYPE = [
   'Q_FACILITY', 'Q_FREE_FACILITY', 'Q_COUNT_FACILITY', 'Q_CHECKOUT_TIME', 'Q_CHECKIN_TIME' , 'Q_LASTCALL_TIME', 'Q_RESTAURANT_OPEN',
-  'Q_OPEN_TIME', 'Q_CLOSE_TIME'];
+  'Q_OPEN_TIME', 'Q_CLOSE_TIME', 'Q_OPEN_CLOSE_TIME', 'Q_FACILITY_OPEN_CLOSE_TIME'];
 
 const ANSWERS = [];
 ANSWERS["Q_WIFI_PASSWORD"] = { text: "VALUE", api_name: "info", value: "wifi-password"};
@@ -430,7 +433,7 @@ function fxSelectTableResponse(channel, userId, tableIndex, type, response) {
 
 function fxGetEmail(type, userId, response, channel) {
   const user = Users.getUser(userId);
-  channel.sendMessage(userId, "What is your email address? We need it to track and manage your orders");
+  channel.sendMessage(userId, "Please enter your email address to confirm and manage your order status.");
   user.setConversationContext(type, true, curry(fxGetEmailResponse)(channel));
 }
 
@@ -498,7 +501,7 @@ function createOrder(channel, userId, name, type, response) {
   var venueId = user.state.get("selectedVenueId");
   var table = user.state.get("selectedTable");
   var noOfGuests = user.state.get("noOfGuests");
-  var selectedDate = getYYYMMDDDate(user.state.get("reservationDate"));
+  var selectedDate = toDate(user.state.get("reservationDate"));
   var email = user.state.get("email");
   var loginToken = user.state.get("loginToken");
   var moblieNumber = user.state.get("mobileNumber");
@@ -558,7 +561,10 @@ function parseDate(str) {
   var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/);
   return m ? new Date(2000 + m[3], m[2] - 1, m[1]) : null;
 }
-
+function toDate(YYYY_MM_DD) {
+  var m = YYYY_MM_DD.split("-");
+  return new Date(parseInt(m[0]), parseInt(m[1])-1 , parseInt(m[2]));
+}
 function getYYYMMDDDate(dashFormat) {
   return dashFormat.replace(new RegExp("-", "g"), "");
 }
