@@ -19,7 +19,21 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
         $scope.lastServiceTime.setMinutes(0);
         console.log($scope.lastServiceTime);
 
+        /*$scope.serviceTypes = [
+            {label : "Venue"},
+            {label : "SPA"},
+            {label : "Sauna"},
+            {label : "Bar"},
+            {label : "Hotel"},
+            {label : "Restaurant"},
+            {label : "Indoor pool"},
+            {label : "Heated Pool"},
+            {label : "Business Center"},
+            {label : "Steam Room"},
+        ];*/
+
         $scope.data = {};
+        //$scope.data.type = $scope.serviceTypes[0];
         if ($stateParams.id !== 'new') {
             var promise = RestServiceFactory.VenueService().getServiceTimingById({ id: $stateParams.venueNumber, objId: $stateParams.id });
             promise.$promise.then(function (data) {
@@ -57,9 +71,9 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
             $scope.data = data;
         }
 
-        $scope.changed = function () {
-
-        };
+        /*$scope.onServiceChange = function() {
+            console.log('>>>>>>>>>>>>>>>>>>>>',angular.toJson($scope.data.type));
+        };*/
 
         $scope.update = function (isValid, form, data) {
 
@@ -75,7 +89,7 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
             data.lastCallTime = p.getHours() + ":" + p.getMinutes();
             data.startTime = q.getHours() + ":" + q.getMinutes();
             data.endTime = r.getHours() + ":" + r.getMinutes();
-            var target = { id: data.venueNumber };
+            //var target = { id: data.venueNumber };
             var target = { id: data.venueNumber };
             if ( $stateParams.id !== 'new') {
                 target.objId = $stateParams.id;
