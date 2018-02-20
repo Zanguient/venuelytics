@@ -3,10 +3,9 @@
  * smangipudi
  =========================================================*/
 
-App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams',
-    'RestServiceFactory', 'toaster', 'FORMATS', '$timeout', 'DataTableService', '$compile', 'ngDialog',
-    function ($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
-        $timeout, DataTableService, $compile, ngDialog) {
+App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout', 'DataTableService', '$compile', 'DialogService', 'ngDialog',
+    function ($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout, DataTableService, $compile, DialogService, ngDialog) {
+        'use strict';
 
         $scope.startServiceTime = "09:00";
         $scope.endServiceTime = "22:00";
@@ -28,7 +27,9 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
                     "orderable": false,
                     "createdCell": function (td, cellData, rowData, row, col) {
 
-                        var actionHtml = ('<button title="Edit" class="btn btn-default btn-oval fa fa-edit"></button>');
+                        // var actionHtml = ('<button title="Edit" class="btn btn-default btn-oval fa fa-edit"></button>');
+                        var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit"></button>'+
+                            '&nbsp;&nbsp;<button title="Delete" class="btn btn-default btn-oval fa fa-trash"></button>';
 
                         $(td).html(actionHtml);
                         $compile(td)($scope);
@@ -40,6 +41,10 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
 
             $('#venue_service_time_table').on('click', '.fa-edit', function () {
                 $scope.editService(this);
+            });
+
+            $('#venue_service_time_table').on('click', '.fa-trash', function() {
+                $scope.deleteService(this,table);
             });
 
             $scope.editService = function (button) {
@@ -62,6 +67,20 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
             $state.go('app.editServiceHours', { venueNumber: $stateParams.id, id: 'new' });
         };
 
+        $scope.deleteService = function(button, table) {
+            DialogService.confirmYesNo('Delete Service?', 'Are you sure want to delete selected service hours?', function() {
+                var targetRow = $(button).closest("tr");
+                var rowData = table.row( targetRow).data();
+                var target = {id: rowData[5].id};
+                RestServiceFactory.VenueService().deleteServiceHour(target, function(data){
+                    table.row(targetRow).remove().draw();
+                },function(error){
+                    if (typeof error.data !== 'undefined') {
+                        toaster.pop('error', "Server Error", error.data.developerMessage);
+                    }
+                });
+            });
+        };
         
         $timeout(function () {
             $scope.initServiceTimeTable();

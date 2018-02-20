@@ -143,12 +143,12 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 resolve: resolveFor('datatables', 'datatables-pugins')
             })
             .state('app.chatbot', {
-                url: '/chatbot',
+                url: '/chatbot/:id',
                 title: 'Chat Bot',
                 templateUrl: basepath('chatbot/chatbot.html'),
                 controller: 'ChatbotController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins')
+                resolve: resolveFor('datatables', 'datatables-pugins','parsley', 'inputmask', 'ngDialog')
             })
             .state('app.loyaltyedit', {
                 url: '/loyaltyedit/:id',
