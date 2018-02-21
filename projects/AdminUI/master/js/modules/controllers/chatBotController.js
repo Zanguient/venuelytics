@@ -1,8 +1,10 @@
 
  App.controller('ChatbotController', ['$translate','$scope', '$state', '$stateParams',
-     'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
+     'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog','ContextService',
      function($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
-              $timeout,DataTableService, $compile, ngDialog) {
+              $timeout,DataTableService, $compile, ngDialog,contextService) {
+
+         $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
 
           $scope.tabs = [
               {name: 'SMS Chatbot', content: 'app/views/chatbot/smsChat-tab.html', icon: 'fa-user-circle-o'},
@@ -11,6 +13,17 @@
               {name: 'Customer Service', content: 'app/views/chatbot/customer-tab.html', icon: 'fa-address-book-o'},
           ];
 
+
+         $scope.data = {};
+         if ($stateParams.id !== 'new') {
+             var promise = RestServiceFactory.VenueService().getInfo({ id: $scope.venueNumber });
+             promise.$promise.then(function (data) {
+                 $scope.data = data;
+             });
+         } else {
+             var data = {};
+             $scope.data = data;
+         }
 
          $scope.initInfoTable = function() {
              if ( ! $.fn.dataTable || $stateParams.id === 'new') {
@@ -92,7 +105,7 @@
          };
 
          $scope.chatUpdate = function(payload){
-             var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
+             var promise = RestServiceFactory.VenueService().updateAttribute({id: $scope.venueNumber}, payload, function(data){
                  toaster.pop('data', "Attribute updated successfull");
              },function(error){
                  if (typeof error.data !== 'undefined') {
@@ -106,7 +119,7 @@
              if (!isValid || !$("#smsChatInfo").parsley().isValid()) {
                  return;
              }
-             var target = {id:$stateParams.id};
+             var target = {id: $scope.venueNumber};
              console.log('jksfdsfff',target);
              RestServiceFactory.VenueService().updateAttribute(target,sms,function (success) {
                  ngDialog.openConfirm({
@@ -131,7 +144,7 @@
              if (!isValid || !$("#facebookChatInfo").parsley().isValid()) {
                  return;
              }
-             var target = {id:$stateParams.id};
+             var target = {id: $scope.venueNumber};
              RestServiceFactory.VenueService().updateAttribute(target, facebook, function (success) {
                  ngDialog.openConfirm({
                      template: '<p>Facebook chat information  successfully saved</p>',
