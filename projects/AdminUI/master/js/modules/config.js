@@ -150,6 +150,14 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('datatables', 'datatables-pugins','parsley', 'inputmask', 'ngDialog')
             })
+            /*.state('app.smsChatbot', {
+                url: '/venues/:venueNumber/chatbot/:id',
+                title: 'SMS Chat Bot',
+                templateUrl: basepath('chatbot/smsChat-tab.html'),
+                controller: 'smsChatbotController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('parsley', 'inputmask', 'ngDialog')
+            })*/
             .state('app.loyaltyedit', {
                 url: '/loyaltyedit/:id',
                 title: 'Edit Loyalty',
@@ -165,6 +173,14 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'NullController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog')
+            })
+            .state('app.editProducts', {
+                url: '/editProducts/:venueNumber/:id',
+                title: 'Edit Products',
+                templateUrl: basepath('venue/products-edit.html'),
+                controller: 'ProductsEditController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('parsley', 'inputmask')
             })
             .state('app.editServiceHours', {
                 url: '/editServiceHours/:venueNumber/:id',
