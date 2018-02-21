@@ -19,21 +19,19 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
         $scope.lastServiceTime.setMinutes(0);
         console.log($scope.lastServiceTime);
 
-        /*$scope.serviceTypes = [
-            {label : "Venue"},
-            {label : "SPA"},
-            {label : "Sauna"},
-            {label : "Bar"},
-            {label : "Hotel"},
-            {label : "Restaurant"},
-            {label : "Indoor pool"},
-            {label : "Heated Pool"},
-            {label : "Business Center"},
-            {label : "Steam Room"},
-        ];*/
+        $scope.serviceTypes = [{name: 'Venue', label: "Venue"},
+            {name: 'SPA', label: "SPA"},
+            {name: 'Sauna', label: "Sauna"},
+            {name: 'Bar', label: "Bar"},
+            {name: 'Hotel', label: "Hotel"},
+            {name: 'Restaurant', label: "Restaurant"},
+            {name: 'Indoor pool', label: "Indoor pool"},
+            {name: 'Heated Pool', label: "Heated Pool"},
+            {name: 'Business Center', label: "Business Center"},
+            {name: 'Steam Room', label: "Steam Room"},
+        ];
 
         $scope.data = {};
-        //$scope.data.type = $scope.serviceTypes[0];
         if ($stateParams.id !== 'new') {
             var promise = RestServiceFactory.VenueService().getServiceTimingById({ id: $stateParams.venueNumber, objId: $stateParams.id });
             promise.$promise.then(function (data) {
@@ -69,11 +67,12 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
             data.venueNumber = $stateParams.venueNumber;
             //data.enabled = 'N';
             $scope.data = data;
+            $scope.data.type = "Venue";
         }
 
-        /*$scope.onServiceChange = function() {
+        $scope.onServiceChange = function(type) {
             console.log('>>>>>>>>>>>>>>>>>>>>',angular.toJson($scope.data.type));
-        };*/
+        };
 
         $scope.update = function (isValid, form, data) {
 
@@ -86,10 +85,10 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
             var q = $scope.endServiceTime;
             var r = $scope.lastServiceTime;
 
-            data.lastCallTime = p.getHours() + ":" + p.getMinutes();
-            data.startTime = q.getHours() + ":" + q.getMinutes();
-            data.endTime = r.getHours() + ":" + r.getMinutes();
-            //var target = { id: data.venueNumber };
+            data.startTime = p.getHours() + ":" + p.getMinutes();
+            data.endTime = q.getHours() + ":" + q.getMinutes();
+            data.lastCallTime = r.getHours() + ":" + r.getMinutes();
+
             var target = { id: data.venueNumber };
             if ( $stateParams.id !== 'new') {
                 target.objId = $stateParams.id;

@@ -22,11 +22,15 @@ App.controller('VenueProductsController', ['$scope', '$state','$compile','$timeo
 		    	"targets": [8],
 		    	"orderable": false,
 		    	"createdCell": function (td, cellData, rowData, row, col) {
-		    	/*	var actionHtml = '<button title="Edit Product" class="btn btn-default btn-oval fa fa-edit"'+
-            ' ng-click="editProduct('+row +"," +cellData+')"></button>&nbsp;&nbsp;';
+		    		/*var actionHtml = '<button title="Edit Product" class="btn btn-default btn-oval fa fa-edit"'+
+                            ' ng-click="editProduct('+row +"," +cellData+')"></button>&nbsp;&nbsp;';*/
+
+                    var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ng-click="editProduct(' +row +','+cellData+')">' +
+                        '</button>&nbsp;&nbsp;<button title="Delete" class="btn btn-default btn-oval fa fa-trash" '+
+                        'ng-click="deleteProduct(' +row +','+cellData+')"></button>';
 		    		
 		    		$(td).html(actionHtml);
-		    		$compile(td)($scope);*/
+		    		$compile(td)($scope);
 		    	  }
 	        }];
     
@@ -87,11 +91,11 @@ App.controller('VenueProductsController', ['$scope', '$state','$compile','$timeo
   	};
     
   	$scope.deleteProduct = function(rowId, productId) {
-  		
-  		
+  		//
   	};
-  	$scope.createNewVenueMap = function() {
-  		$state.go('app.venueMapedit', {id: 'new'});
+  	$scope.createNewProducts = function() {
+  		$state.go('app.editProducts', {venueNumber: $stateParams.id, id: 'new' });
   	};
+
   });
 }]);
