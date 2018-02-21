@@ -40,6 +40,20 @@ app.controller('AboutController', ['$scope', '$http', '$location', 'RestURL', 'D
             $rootScope.successEmail = email;
         }
     };
+
+        self.searchAboutName = function (subscribeName) {
+            var business = $scope.business;
+            var subscribeName = {
+                "email": $rootScope.successEmail,
+                "businessName": business.businessName
+            }
+            AjaxService.searchBusiness(subscribeName).then(function (response) {
+                $rootScope.subscribeName = subscribeName.businessName;
+                $rootScope.subscribeName = subscribeName.email;
+                $location.url("/searchBusiness?s=" + subscribeName.businessName);
+            })
+        };
+
     self.saveBusiness = function() {
         var business =self.business;
         var role = (typeof business.businessRole  === 'undefined') ? '' :  business.businessRole.role;
