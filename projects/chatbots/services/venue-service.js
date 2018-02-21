@@ -77,14 +77,10 @@ const fxReadVenue = function(senderId, text, channel, venue) {
     response.queryText = text;
     user.dispatch(response);
   } else {
-    aiClient.aiProcessText(
-      senderId,
-      text,
-      curry(aiResponse)(channel),
-      curry(aiError)(channel)
-    );
+    aiClient.aiProcessText(senderId, text, curry(aiResponse)(channel), curry(aiError)(channel));
   }
 };
+
 const aiResponse = function(channel, senderId, response) {
   console.log(JSON.stringify(response));
   let user = Users.getUser(senderId);
@@ -241,6 +237,9 @@ function selectVenue(channel, userId, searchIndex, type, response) {
   user.state.set("selectedVenueId", selectedVenue.id);
   user.state.set("venue", selectedVenue);
   user.state.set("venueImageUrl", selectedVenue.imageUrls[0].smallUrl);
+  if (response && response.parameters && response.parameters.venue) {
+    response.parameters.venue = selectedVenue.venueName;
+  }
   QUESTIONS[type](userId, response, channel);
 }
 

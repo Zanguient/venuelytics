@@ -8,6 +8,7 @@ const sendApi = require('../apis/send');
 const Users = require('../models/users');
 const serviceApi = require('../apis/app-api');
 const venueService = require('../services/venue-service');
+const moment = require('moment');
 
 /*
  * handleReceivePostback — Postback event handler triggered by a postback
@@ -18,12 +19,12 @@ const venueService = require('../services/venue-service');
 const handleReceivePostback = (event) => {
   const type = event.postback.payload;
   const senderId = event.sender.id;
-  venueService.processMessage(senderId, type, sendApi);
+  venueService.processMessage(senderId, type, new FBChannel("0"));
 };
 
 class FBChannel {
   
-  constructore(channelId) {
+  constructor(channelId) {
     this.channelId = channelId;
   }
 
@@ -38,8 +39,8 @@ class FBChannel {
     sendTableListImpl(senderId, tables);
   } 
   
-  sendReservationConfirmation(user, type) {
-    sendReservationConfirmationImpl(user, type);
+  sendReservationConfirmation(senderId, user, type) {
+    sendReservationConfirmationImpl(senderId, user, type);
   } 
   
   login(userId, type, loginCallback) {
@@ -47,9 +48,17 @@ class FBChannel {
   } 
 }
 
-function sendReservationConfirmationImpl(user, type) {
-
+function sendReservationConfirmationImpl(senderId, user, type) {
+  var text ="Please verify the reservation information and say yes to confirm the information is correct or say no if you want to change it.\n";
+  text += "\nDate: " + formatToDisplayDate(user.state.get("reservationDate")) +"\nNumber of Guests: " + user.state.get("noOfGuests");
+  //sendApi.sendMessage(user.id, text);
+  sendApi.sendMessage(senderId, text);
 }
+
+function formatToDisplayDate(Y_M_D) {
+  return moment(Y_M_D, "YYYY-MM-DD").format('MMMM Do YYYY');
+}
+
 
 function sendTableListImpl(senderId, tables) {
   var reservationTables = [];
@@ -67,7 +76,7 @@ function sendTableListImpl(senderId, tables) {
         {
           "type": "postback",
           "title": "Reserve Table",
-          "payload": tables[i].id
+          "payload": tables[i].searchIndex
         }
       ]
     };
@@ -80,10 +89,11 @@ function sendTableListImpl(senderId, tables) {
       "type": "template",
       "payload": {
         "template_type": "list",
-        "elements": reservationTables.slice(0, 10),
+        "elements": reservationTables.slice(0, 4),
       }
     }
   };
+  sendApi.sendMessage(senderId, messageData);
 }
 function sendVenueListData (senderId, venues) {
   var listOfVenues = [];
@@ -225,7 +235,7 @@ const handleReceiveMessage = (event) => {
   // spamming the bot if the requests take some time to return.
   sendApi.sendReadReceipt(senderId);
   //botContext.getOrCreate(senderId);
-  venueService.processMessage(senderId, message.text, sendApi);
+  venueService.processMessage(senderId, message.text, new FBChannel("0"));
 };
 
 
