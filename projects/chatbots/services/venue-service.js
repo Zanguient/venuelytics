@@ -504,12 +504,12 @@ function createOrder(channel, userId, name, type, response) {
   var email = user.state.get("email");
   var loginToken = user.state.get("loginToken");
   var moblieNumber = user.state.get("mobileNumber");
-
+  var venue = user.state.get("venue");
   serviceApi.createOrder(user.state.get("firstName"), user.state.get("lastName"),venueId, table.id, selectedDate, noOfGuests, email, loginToken, userId, result => {
       if (typeof result.code !== "undefined") {
         channel.sendMessage(userId,`Unable to process your Bottle Service reservation request. ${result.message}`);
       } else {
-        channel.sendMessage(userId,`Your Bottle Service reservation is successfully reserved. Your order Id is ${result.order.orderNumber}`);
+        channel.sendMessage(userId,`Thank you for your Bottle Service request. ${venue.venueName} has received it. Here is your Bottle Service Request.\n\nOrder Number: ${result.order.orderNumber}.\n\nYou will be contacted by the venue to discuss the price details for the final confirmation.`);
         //restartTheFlow();
       }
     }

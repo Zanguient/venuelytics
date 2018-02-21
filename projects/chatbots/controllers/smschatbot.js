@@ -40,8 +40,10 @@ class SMSChannel {
   }
  
   sendReservationConfirmation(senderId, user, type) {
-    var text ="Please verify the reservation information and say yes to confirm the information is correct or say no if you want to change it.\n";
-    text += "\nDate: " + formatToDisplayDate(user.state.get("reservationDate")) +"\nNumber of Guests: " + user.state.get("noOfGuests");
+    var text ="Please verify the reservation information and say YES to confirm the information is correct or say NO if you want to change it.\n";
+    text += "\nDate: " + formatToDisplayDate(user.state.get("reservationDate")) +
+    "\nNumber of Guests: " + user.state.get("noOfGuests") + 
+    "\nTable Name: " + user.state.get("selectedTable").name;
     //sendApi.sendMessage(user.id, text);
     sendSMS(this.channelId, senderId, text);
   }
