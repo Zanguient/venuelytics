@@ -1,10 +1,12 @@
 
  App.controller('ChatbotController', ['$translate','$scope', '$state', '$stateParams',
-     'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog','ContextService',
+     'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog','ContextService', '$log',
      function($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
-              $timeout,DataTableService, $compile, ngDialog,contextService) {
+              $timeout,DataTableService, $compile, ngDialog, contextService, $log) {
 
          $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
+         
+         //$scope.islogoChanged=false;
 
           $scope.tabs = [
               {name: 'SMS Chatbot', content: 'app/views/chatbot/smsChat-tab.html', icon: 'fa-user-circle-o'},
@@ -25,88 +27,55 @@
              $scope.data = data;
          }
 
-         $scope.initInfoTable = function() {
-             if ( ! $.fn.dataTable || $stateParams.id === 'new') {
+         var adminSettings = [
+             {"displayName":"SMS Bot Number", "name":"sms.bot.number", "type" :"text", "value":""},
+             {"displayName":"Aminities", "name":"aminities", "type" :"text", "value":""},
+             {"displayName":"Happy Hours", "name":"_happyhours", "type" :"text", "value":""},
+             {"displayName":"Events For The Week", "name":"_events", "type":"text", "value":"" },
+             {"displayName":"VIP deals", "name":"_vip_deals", "type":"text", "value":"" },
+             {"displayName":"Deals",  "name":"_deals" , "type":"text", "value":""},
+             {"displayName":"Wifi Info",  "name":"wifi-password", "type":"text", "value":""},
+         ];
+
+         $scope.adminSettings = $.Apputil.makeMap(adminSettings);
+
+         var promise = RestServiceFactory.AppSettingsService().get();
+
+         promise.$promise.then(function(data) {
+
+             for (var itemKey in data){
+                 if (data.hasOwnProperty(itemKey)) {
+                     var setting =  $scope.adminSettings[itemKey];
+
+                     if (setting != null && typeof setting !== 'undefined') {
+                         setting.value = data[itemKey];
+                         $scope.adminSettings[itemKey] = setting;
+                     }
+                 }
+             }
+
+         });
+
+         $scope.update = function(isValid,form, data) {
+
+             if (!isValid || !$("#admin").parsley().isValid()) {
                  return;
              }
-             var columnDefinitions = [
-                 {
-                     "sWidth" : "50%", aTargets:[1],
-                     "sWidth" : "20%", aTargets:[0,2]
 
-                 },
-                 {
-                     "targets": [0,1,2],
-                     "orderable": false,
-                 },
-                 {
-                     "targets": [2],
-                     "orderable": false,
-                     "createdCell": function (td, cellData, rowData, row, col) {
-                         var actionHtml = ('<button title="Edit" class="btn btn-default btn-oval fa fa-edit" '+
-                             'ng-click="updateAdminChat(\'' + row + '\'  )"></button>&nbsp;&nbsp;');
-
-                         $(td).html(actionHtml);
-                         $compile(td)($scope);
-                     }
-                 }];
-             DataTableService.initDataTable('admin_info_table', columnDefinitions);
-             var table = $('#admin_info_table').DataTable();
-
-             $.each($scope.data, function (k,v) {
-                 table.row.add([$translate.instant(k), v, k]);
-                 /*if ($scope.advanceSwitches.hasOwnProperty(k)) {
-                     $scope.advanceSwitches[k] = (v === 'Y' ? true : false);
-                 } else {
-                     table.row.add([$translate.instant(k), v, k]);
-                 }*/
-             });
-             table.draw();
-         };
-
-
-         $scope.updateAdminChat = function (rowId) {
-             var table = $('#admin_info_table').DataTable();
-             var createTitle;
-             var rowData = '';
-             if(rowId === undefined){
-                 createTitle = "Create chat admin";
-             } else {
-                 rowData = table.row(rowId).data();
-                 createTitle = "Update chat admin";
-                 var hideKeyText = true;
-             }
-             ngDialog.openConfirm({
-                 template: 'modalDialogId',
-                 className: 'ngdialog-theme-default',
-                 data: {key: rowData[0], value: rowData[1], title: createTitle, text:hideKeyText},
-             }).then(function (value) {
-                 var payload = {};
-                 if (rowId === undefined) {
-                     var attributeValue = value.value;
-                     var attributeKey =value.key;
-                     payload[attributeKey]= attributeValue;
-                     $scope.chatUpdate(payload);
-                     $scope.data[attributeKey] = attributeValue;
-                 } else {
-                     value = value.value;
-                     payload[rowData[2]] = value;
-                     $scope.chatUpdate(payload);
-                     $scope.data[rowData[2]] = value;
+             var payload = {};
+             for (var type in data) {
+                 if (data.hasOwnProperty(type)) {
+                     payload[type] = data[type].value;
                  }
-                 table.clear();
-                 $.each($scope.data, function (k,v) {
-                     table.row.add([$translate.instant(k), v, k]);
-                 });
-                 table.draw();
-             }, function (reason) {
-                 //mostly cancelled
-             });
-         };
+             }
+             var target = {id: $scope.venueNumber};
+             RestServiceFactory.VenueService().updateAttribute(target, payload, function(success){
 
-         $scope.chatUpdate = function(payload){
-             var promise = RestServiceFactory.VenueService().updateAttribute({id: $scope.venueNumber}, payload, function(data){
-                 toaster.pop('data', "Attribute updated successfull");
+                 $log.log("success: ",data);
+                 /*if($scope.islogoChanged){
+                     $scope.islogoChanged=false;
+                 }*/
+
              },function(error){
                  if (typeof error.data !== 'undefined') {
                      toaster.pop('error', "Server Error", error.data.developerMessage);
