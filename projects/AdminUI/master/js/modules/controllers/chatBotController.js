@@ -6,8 +6,6 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
 
         $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
 
-        //$scope.islogoChanged=false;
-
         $scope.tabs = [
             { name: 'SMS Chatbot', content: 'app/views/chatbot/smsChat-tab.html', icon: 'fa-user-circle-o' },
             { name: 'Facebook Chatbot', content: 'app/views/chatbot/facebookChat-tab.html', icon: 'fa-address-book-o' },
@@ -39,10 +37,9 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
 
         $scope.adminSettings = $.Apputil.makeMap(adminSettings);
 
-        var promise = RestServiceFactory.AppSettingsService().get();
+        var promise = RestServiceFactory.VenueService().getInfo({ id: $scope.venueNumber });
 
         promise.$promise.then(function (data) {
-
             for (var itemKey in data) {
                 if (data.hasOwnProperty(itemKey)) {
                     var setting = $scope.adminSettings[itemKey];
@@ -72,9 +69,6 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
             RestServiceFactory.VenueService().updateAttribute(target, payload, function (success) {
 
                 $log.log("success: ", data);
-                /*if($scope.islogoChanged){
-                    $scope.islogoChanged=false;
-                }*/
 
             }, function (error) {
                 if (typeof error.data !== 'undefined') {
