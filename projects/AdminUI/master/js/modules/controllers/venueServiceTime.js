@@ -28,7 +28,7 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
                     "createdCell": function (td, cellData, rowData, row, col) {
 
                         // var actionHtml = ('<button title="Edit" class="btn btn-default btn-oval fa fa-edit"></button>');
-                        var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit"></button>'+
+                        var actionHtml = '<button title="Edit" class="btn btn-default btn-oval fa fa-edit"></button>' +
                             '&nbsp;&nbsp;<button title="Delete" class="btn btn-default btn-oval fa fa-trash"></button>';
 
                         $(td).html(actionHtml);
@@ -43,8 +43,8 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
                 $scope.editService(this);
             });
 
-            $('#venue_service_time_table').on('click', '.fa-trash', function() {
-                $scope.deleteService(this,table);
+            $('#venue_service_time_table').on('click', '.fa-trash', function () {
+                $scope.deleteService(this, table);
             });
 
             $scope.editService = function (button) {
@@ -57,31 +57,44 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
             RestServiceFactory.VenueService().getServiceTimings(target, function (data) {
                 $scope.data = data;
                 $.each(data, function (i, d) {
-                    table.row.add([d.day, d.type, d.startTime + " - " + d.endTime, d.lastCallTime, d.value, d]);
+                    table.row.add([d.day, d.type, formatTime(d.startTime) + " - " + formatTime(d.endTime), formatTime(d.lastCallTime), d.value, d]);
                 });
                 table.draw()
             });
+        }
+
+        function formatTime(normalizedTime) {
+            // Check correct time format and split into components
+            var time = normalizedTime.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [normalizedTime];
+
+            if (time.length > 1) {
+                // If time format correct
+                time = time.slice(1); // Remove full string match value
+                time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
+                time[0] = +time[0] % 12 || 12; // Adjust hours
+            }
+            return time.join(""); // return adjusted time or original string
         }
 
         $scope.createServiceTimings = function () {
             $state.go('app.editServiceHours', { venueNumber: $stateParams.id, id: 'new' });
         };
 
-        $scope.deleteService = function(button, table) {
-            DialogService.confirmYesNo('Delete Service?', 'Are you sure want to delete selected service hours?', function() {
+        $scope.deleteService = function (button, table) {
+            DialogService.confirmYesNo('Delete Service?', 'Are you sure want to delete selected service hours?', function () {
                 var targetRow = $(button).closest("tr");
-                var rowData = table.row( targetRow).data();
-                var target = {id: $stateParams.id, objId: rowData[5].id};
-                RestServiceFactory.VenueService().deleteServiceHour(target, function(data){
+                var rowData = table.row(targetRow).data();
+                var target = { id: $stateParams.id, objId: rowData[5].id };
+                RestServiceFactory.VenueService().deleteServiceHour(target, function (data) {
                     table.row(targetRow).remove().draw();
-                },function(error){
+                }, function (error) {
                     if (typeof error.data !== 'undefined') {
                         toaster.pop('error', "Server Error", error.data.developerMessage);
                     }
                 });
             });
         };
-        
+
         $timeout(function () {
             $scope.initServiceTimeTable();
         });
