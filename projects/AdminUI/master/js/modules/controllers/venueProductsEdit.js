@@ -4,18 +4,12 @@ App.controller('ProductsEditController', ['$scope', '$state', '$stateParams',
     function ($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
         $timeout, $compile, ngDialog) {
 
-
         $scope.data = {};
         if ($stateParams.id !== 'new') {
-            var promise = RestServiceFactory.ProductService().get({id:$stateParams.venueNumber, productId: $stateParams.id});
+            var promise = RestServiceFactory.ProductService().getProduct({ id: $stateParams.venueNumber, productId: $stateParams.id });
             promise.$promise.then(function (data) {
-                console.log('data',data);
+                console.log('data', data);
                 $scope.data = data;
-                /*$scope.name = data.name;
-                $scope.brand = data.brand;
-                $scope.productType = data.productType;
-                $scope.category = data.category;
-                $scope.subCategory = data.subCategory;*/
 
             });
         } else {
@@ -23,18 +17,21 @@ App.controller('ProductsEditController', ['$scope', '$state', '$stateParams',
             $scope.data = data;
         }
 
-
         $scope.update = function (isValid, form, data) {
 
             if (!isValid || !$("#productInfo").parsley().isValid()) {
                 return;
             }
 
-            var payload = RestServiceFactory.cleansePayload('ProductService', data);
-            var target = {id: $stateParams.id};
-           
-            RestServiceFactory.ProductService().createProduct(target, payload, function (success) {
-                if(target.productId == success.id){
+            $scope.venueNumber = $stateParams.venueNumber;
+            var target = { id: $stateParams.venueNumber };
+
+            if ($stateParams.id !== 'new') {
+                target.productId = $stateParams.id;
+            }
+
+            RestServiceFactory.ProductService().updateProduct(target, data, function (success) {
+                if (target.productId == success.id) {
                     ngDialog.openConfirm({
                         template: '<p>Your information update successfull</p>',
                         plain: true,
@@ -52,9 +49,10 @@ App.controller('ProductsEditController', ['$scope', '$state', '$stateParams',
                     toaster.pop('error', "Server Error", error.data.developerMessage);
                 }
             });
+
             $timeout(function () {
-                $state.go('app.venueedit', { id: $stateParams.venueNumber});
+                $state.go('app.venueedit', { id: $stateParams.venueNumber });
             });
         };
-        
+
     }]);
