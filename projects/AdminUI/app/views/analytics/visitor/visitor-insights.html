@@ -1,0 +1,57 @@
+<h3>
+   <div class="row">
+     <div class="col-lg-7">
+     Dashboard - <strong>Visitor Insights</strong>
+     </div>
+    <div class="col-lg-3 pull-right">
+         <div class="btn-group">
+               <button type="button" class="btn" ng-repeat="period in PERIODS" ng-class="selectedPeriod == period ? 'btn-primary':'btn-default'" ng-click="setPeriod(period)">{{period | translate}}</button>
+              
+         </div>  
+      </div>
+    </div>
+</h3>
+
+<div class="container-fluid">
+  
+   <!-- START DATATABLE 2 -->
+   <div class="row">
+      <div class="col-md-4 col-sm-12">
+            <!-- START widget-->
+            <div id="visitorBarChart" class="panel panel-default">
+               <div class="panel-heading">
+                  <div class="panel-title">By Time</div>
+               </div>
+               <div collapse="visitorBarChart" class="panel-wrapper">
+                  <div class="panel-body">
+                     <stacked-bar-chart id="visitorsChart" url="{{visitorRequestUrl}}" format-data-fx="formatStackData"
+                     class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+                  </div>
+               </div>
+            </div>
+            <!-- END widget-->
+         </div>
+         <div class="col-md-4 col-sm-12">
+            <!-- START widget-->
+            <div id="panelReservationBarChart" class="panel panel-default">
+               <div class="panel-heading">
+                  <div class="panel-title">By Service</div>
+               </div>
+               <div collapse="panelReservationBarChart" class="panel-wrapper">
+                  <div class="panel-body">
+                     <stacked-bar-chart id="bookingRequestChart" url="{{bookingRequestUrl}}" format-data-fx="formatStackData"
+                     class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+                  </div>
+               </div>
+            </div>
+            <!-- END widget-->
+         </div>
+         <div class="col-md-4 col-sm-12">
+            <!-- START widget-->
+            <div ng-include="'app/templates/chart/donut-panel.html'" onload="donutInit()" ></div>
+            <!-- END widget-->
+         </div>
+   </div>
+   <!-- END DATATABLE 2 -->
+   
+</div>

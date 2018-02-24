@@ -50,11 +50,11 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('analytics/dashboard.html'),
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'flot-chart-plugins')
-            }).state('app.customer', {
-                url: '/customer-insight',
-                title: 'Customer Insight',
-                templateUrl: basepath('analytics/customer-insights.html'),
-                controller: 'CustomerInsightController',
+            }).state('app.visitorInsight', {
+                url: '/dashboard/visitor-insight',
+                title: 'Visitor Insight',
+                templateUrl: basepath('analytics/visitor/visitor-insights.html'),
+                controller: 'VisitorDashBoardController',
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'flot-chart-plugins')
             }).state('app.masonry', {

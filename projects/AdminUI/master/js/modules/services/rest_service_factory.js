@@ -336,6 +336,10 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
                     method: 'POST', params: { id: '@id'},
                     url: urlTemplate.replace("@context", "products")
                 },
+                updateProduct: {
+                    method: 'POST', params: { id: '@id', productId: '@productId'},
+                    url: urlTemplate.replace("@context", "products") + "/:productId"
+                },
 				delete: {
 					method: 'DELETE', params: { id: '@id', productId: '@productId' },
 					url: urlTemplate.replace("@context", "products") + "/:productId"

@@ -336,7 +336,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                 value: dataObject.value || 0,
                 name: dataObject.label,
                 icon: dataObject.icon,
-                link: "#",
+                link: "#/app/dashboard/visitor-insight",
                 linkDescription: "View Details",
                 contentColorCode : { "color": "#fff", "background-color": color, "border-color": "#cfdbe2"},
                 linkColorCode :  { "background-color":"#3a3f51"}
@@ -637,8 +637,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
            
         var temp = $scope.selectedPeriod.toLowerCase();
         var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
-        $scope.bookingRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 
-                            'ServiceTypeByModeBy2', aggPeriodType, 'scodes=BPK');
+        $scope.bookingRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ServiceTypeByModeBy2', aggPeriodType, 'scodes=BPK');
         $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
          $scope.xAxisMode = 'categories'; 
         if ($scope.selectedPeriod === 'DAILY') {
