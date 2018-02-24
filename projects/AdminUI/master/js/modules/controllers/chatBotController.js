@@ -13,7 +13,6 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
             { name: 'Customer Service', content: 'app/views/chatbot/customer-tab.html', icon: 'fa-address-book-o' },
         ];
 
-
         $scope.data = {};
         $scope.sms = {};
         $scope.facebook = {};
@@ -148,6 +147,8 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
             };
 
         };
+
+        $scope.init();
 
         $scope.$on(APP_EVENTS.venueSelectionChange, function (event, data) {
 
