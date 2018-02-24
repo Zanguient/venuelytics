@@ -38,9 +38,9 @@ app
     { 'image': 'assets/img/clients/fuz-1.png', 'link': '//www.fuzlounge.com/' },
     { 'image': 'assets/img/clients/sjlive-1.png', 'link': '//www.sjlivesj.com/' },
     { 'image': 'assets/img/clients/eighty-1.png', 'link': '//eightyonesj.com/' },
-    { 'image': 'assets/img/clients/shboom.png', 'link': '//www.shboomnightclub.com/' },
+    { 'image': 'assets/img/clients/shboom-logo.png', 'link': '//www.shboomnightclub.com/' },
     { 'image': 'assets/img/clients/bourbon.png', 'link': '//www.bourbonbarrelerie.com/vip' },
-    { 'image': 'assets/img/clients/vip-1.png', 'link': '//bit.ly/VIPRoomBaltimoreBottleServiceReservations' },
+    { 'image': 'assets/img/clients/vip-room-1.png', 'link': '//bit.ly/VIPRoomBaltimoreBottleServiceReservations' },
     { 'image': 'assets/img/clients/zenreach-white-1.png', 'link': '' },
 
 
