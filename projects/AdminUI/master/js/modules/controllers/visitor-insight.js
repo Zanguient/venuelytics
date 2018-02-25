@@ -1,25 +1,95 @@
 'use strict';
-App.controller('VisitorDashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService', 'RestServiceFactory','$translate','colors', 'APP_EVENTS','Session','$state',
-                                      function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors, APP_EVENTS, session, $state) {
+App.controller('VisitorDashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService', 'APP_EVENTS', 'RestServiceFactory','$translate','Session','$state',
+                                      function($log, $scope, $window, $http, $timeout, contextService, APP_EVENTS, RestServiceFactory, $translate, session, $state) {
 	
-    if (session.roleId >= 10 && session.roleId <= 12) {
-        $state.go('app.ticketsCalendar'); 
-        return;
-    }
-    $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
-    $scope.selectedPeriod = 'WEEKLY';
     
+    $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
+    
+    $scope.selectedPeriod = 'WEEKLY';
+    $scope.xAxisMode = 'categories';
+    $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
+    $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
+    
+    $scope.visitorRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'NewVisitorCount', 'Weekly', 'scodes=BPK');
+    $scope.visitorRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'NewVisitorsByServiceType', 'Weekly', 'scodes=BPK');
+    $scope.visitorRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'NewVisitorsByValue', 'Weekly', 'scodes=BPK');
+
+    $scope.repeatVisitorRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorCount', 'Weekly', 'scodes=BPK');
+    $scope.repeatVisitorRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorsByServiceType', 'Weekly', 'scodes=BPK');
+    $scope.repeatVisitorRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorsByValue', 'Weekly', 'scodes=BPK');
+
+    $scope.percentVisitorRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorPercent', 'Weekly', 'scodes=BPK');
+    $scope.percentVisitorRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorsPercentByServiceType', 'Weekly', 'scodes=BPK');
+    $scope.percentVisitorRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorsPercentByValue', 'Weekly', 'scodes=BPK');
+
     $scope.init = function() {
+        $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
+        $scope.vistorStatsChart();
 
     };
-     $scope.setPeriod = function(period) {
+    angular.element(document).ready(function () {
+
+    // Bar chart
+    (function () {
+        var Selector = '.chart-bar';
+        $(Selector).each(function() {
+            var source = $(this).data('source') || $.error('Bar: No source defined.');
+            var chart = new FlotChart(this, source),
+                //panel = $(Selector).parents('.panel'),
+                option = {
+                    series: {
+                        bars: {
+                            align: 'center',
+                            lineWidth: 0,
+                            show: true,
+                            barWidth: 0.6,
+                            fill: 0.9
+                        }
+                    },
+                    grid: {
+                        borderColor: '#eee',
+                        borderWidth: 1,
+                        hoverable: true,
+                        backgroundColor: '#fcfcfc'
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: '%x : %y'
+                    },
+                    xaxis: {
+                        tickColor: '#fcfcfc',
+                        mode: 'categories'
+                    },
+                    yaxis: {
+                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
+                        tickColor: '#eee'
+                    },
+                    shadowSize: 0
+                };
+            // Send Request
+            chart.requestData(option);
+        });
+
+    })();
+});
+
+    
+    $scope.setPeriod = function(period) {
         if ($scope.selectedPeriod !== period){
             $scope.selectedPeriod = period;
-            //$scope.setDisplayData();
+            $scope.vistorStatsChart();
         }
     };
     
     $scope.formatStackData = function(data) {
+        return formatStackDataImpl(data, 'name');
+    };
+
+    $scope.formatStackDataForSubName = function(data) {
+        return formatStackDataImpl(data, 'subName');
+    };
+
+    function formatStackDataImpl(data, propertyName) {
         var retData = [];
         var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
         var colorIndex = 0;
@@ -27,7 +97,7 @@ App.controller('VisitorDashBoardController',['$log','$scope','$window', '$http',
             for (var index in data[0].series) {
                 var d = data[0].series[index];
                 var elem = {};
-                elem.label = $translate.instant(d.subName);
+                elem.label = $translate.instant(d[propertyName]);
                 elem.color = colors[colorIndex % colors.length];
                 colorIndex++;
 
@@ -47,10 +117,39 @@ App.controller('VisitorDashBoardController',['$log','$scope','$window', '$http',
             }
         }
         return retData;
-    };
-
+    }
     $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
         // register on venue change;
        $scope.init();
     });
+
+
+    $scope.vistorStatsChart = function() {
+           
+        var temp = $scope.selectedPeriod.toLowerCase();
+        var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
+        
+        $scope.visitorRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'NewVisitorCount', aggPeriodType, 'scodes=BPK');
+        $scope.visitorRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'NewVisitorsByServiceType', aggPeriodType, 'scodes=BPK');
+        $scope.visitorRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'NewVisitorsByValue', aggPeriodType, 'scodes=BPK');
+
+        
+        $scope.repeatVisitorRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorCount', aggPeriodType, 'scodes=BPK');
+        $scope.repeatVisitorRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorsByServiceType', aggPeriodType, 'scodes=BPK');
+        $scope.repeatVisitorRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorsByValue', aggPeriodType, 'scodes=BPK');
+    
+        $scope.percentVisitorRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorPercent', aggPeriodType, 'scodes=BPK');
+        $scope.percentVisitorRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorsPercentByServiceType', aggPeriodType, 'scodes=BPK');
+        $scope.percentVisitorRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'RepeatVisitorsPercentByValue', aggPeriodType, 'scodes=BPK');
+
+
+        $scope.xAxisMode = 'categories'; 
+        if ($scope.selectedPeriod === 'DAILY') {
+            $scope.xAxisMode = 'time';
+        } else {
+            $scope.xAxisMode = 'categories';               
+        }
+    };
+    
+    
 }]);

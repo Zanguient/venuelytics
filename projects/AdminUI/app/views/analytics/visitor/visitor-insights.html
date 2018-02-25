@@ -15,43 +15,149 @@
 <div class="container-fluid">
   
    <!-- START DATATABLE 2 -->
-   <div class="row">
-      <div class="col-md-4 col-sm-12">
-            <!-- START widget-->
-            <div id="visitorBarChart" class="panel panel-default">
-               <div class="panel-heading">
-                  <div class="panel-title">By Time</div>
-               </div>
-               <div collapse="visitorBarChart" class="panel-wrapper">
-                  <div class="panel-body">
-                     <stacked-bar-chart id="visitorsChart" url="{{visitorRequestUrl}}" format-data-fx="formatStackData"
-                     class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
-                  </div>
-               </div>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">New Visitors</div>
+         </div>
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="panel-body">
+               <stacked-bar-chart id="visitorsChart" url="{{visitorRequestUrl}}" format-data-fx="formatStackData"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
             </div>
-            <!-- END widget-->
          </div>
-         <div class="col-md-4 col-sm-12">
-            <!-- START widget-->
-            <div id="panelReservationBarChart" class="panel panel-default">
-               <div class="panel-heading">
-                  <div class="panel-title">By Service</div>
-               </div>
-               <div collapse="panelReservationBarChart" class="panel-wrapper">
-                  <div class="panel-body">
-                     <stacked-bar-chart id="bookingRequestChart" url="{{bookingRequestUrl}}" format-data-fx="formatStackData"
-                     class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
-                  </div>
-               </div>
+      </div>
+      <!-- END widget-->
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">New Visitors - By Service Type</div>
+         </div>
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="panel-body">
+               <stacked-bar-chart id="visitorsChartServiceType" url="{{visitorRequestByServiceType}}" format-data-fx="formatStackData"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
             </div>
-            <!-- END widget-->
          </div>
-         <div class="col-md-4 col-sm-12">
-            <!-- START widget-->
-            <div ng-include="'app/templates/chart/donut-panel.html'" onload="donutInit()" ></div>
-            <!-- END widget-->
+      </div>
+      <!-- END widget-->
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">New Visitors - By Occasio</div>
          </div>
-   </div>
-   <!-- END DATATABLE 2 -->
-   
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="panel-body">
+               <stacked-bar-chart id="visitorsChartReason" url="{{visitorRequestByValue}}" format-data-fx="formatStackDataForSubName"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+            </div>
+         </div>
+      </div>
+      <!-- END widget-->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">Repeat Visitors</div>
+         </div>
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="panel-body">
+               <stacked-bar-chart id="repeatVisitorsChart" url="{{repeatVisitorRequestUrl}}" format-data-fx="formatStackData"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+            </div>
+         </div>
+      </div>
+      <!-- END widget-->
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">Repeat Visitors - By Service Type</div>
+         </div>
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="panel-body">
+               <stacked-bar-chart id="repeatVisitorsChartServiceType" url="{{repeatVisitorRequestByServiceType}}" format-data-fx="formatStackData"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+            </div>
+         </div>
+      </div>
+      <!-- END widget-->
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">Repeat Visitors - By Occasio</div>
+         </div>
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="panel-body">
+               <stacked-bar-chart id="repeatVisitorsChartReason" url="{{repeatVisitorRequestByValue}}" format-data-fx="formatStackDataForSubName"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+            </div>
+         </div>
+      </div>
+      <!-- END widget-->
+    </div>
+  </div>
+<div class="row">
+    <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">%Repeat Visitors</div>
+         </div>
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="panel-body">
+               <stacked-bar-chart id="percentVisitorsChart" url="{{percentVisitorRequestUrl}}" format-data-fx="formatStackData"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+            </div>
+         </div>
+      </div>
+      <!-- END widget-->
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">%Repeat Visitors - By Service Type</div>
+         </div>
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="panel-body">
+               <stacked-bar-chart id="percentVisitorsChartServiceType" url="{{percentVisitorRequestByServiceType}}" format-data-fx="formatStackData"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+            </div>
+         </div>
+      </div>
+      <!-- END widget-->
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">%Repeat Visitors - By Occasio</div>
+         </div>
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="panel-body">
+               <stacked-bar-chart id="percentVisitorsChartReason" url="{{percentVisitorRequestByValue}}" format-data-fx="formatStackDataForSubName"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+            </div>
+         </div>
+      </div>
+      <!-- END widget-->
+    </div>
+  </div>   
 </div>
