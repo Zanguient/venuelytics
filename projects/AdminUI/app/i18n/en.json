@@ -286,6 +286,7 @@
         "LOYALTY": "Loyalty Management",
         "CONTEST": "Contest Management",
         "CHATBOT": "Chat Bot",
+        "BUSINESS":"Business Request",
         "SETTINGS": "Application Settings",
         "RESERVATIONS": "Reservations",
         "GUEST_LIST": "Guest List",
