@@ -133,8 +133,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         } else {
             $scope.requestByStatus = {};
         }
-        if (typeof data.VENUE_BOOKINGS_BYZIP_COUNT   !== 'undefined' && data.VENUE_BOOKINGS_BYZIP_COUNT .length > 0) {
-            processRequestsByZip(data.VENUE_BOOKINGS_BYZIP_COUNT);
+        if (typeof data.VENUE_BOOKINGS_CITY_COUNT   !== 'undefined' && data.VENUE_BOOKINGS_CITY_COUNT.length > 0) {
+            processRequestsByZip(data.VENUE_BOOKINGS_CITY_COUNT);
         } else {
             $scope.requestByStatusZip = {};
         }
