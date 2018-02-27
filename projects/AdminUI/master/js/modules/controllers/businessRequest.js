@@ -47,7 +47,7 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 					"createdCell": function (td, cellData, rowData, row, col) {
 
 						var actionHtml = '<em class="fa fa-check-square-o"></em>';
-						if (cellData === false) {
+						if (cellData !== 'Y') {
 							actionHtml = '<em class="fa fa-square-o"></em>';
 						}
 						$(td).html(actionHtml);
