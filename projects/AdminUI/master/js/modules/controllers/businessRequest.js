@@ -1,12 +1,12 @@
 
-App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$timeout', 'RestServiceFactory', 'DataTableService', 'toaster', 'UserRoleService', 'DialogService','$stateParams',
+App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$timeout', 'RestServiceFactory', 'DataTableService', 'toaster', 'UserRoleService', 'DialogService', '$stateParams',
 	function ($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, UserRoleService, DialogService, $stateParams) {
 		'use strict';
 
-        $scope.initServiceTimeTable = function () {
-            if (!$.fn.dataTable || $stateParams.id === 'new') {
-                return;
-            }
+		$scope.initServiceTimeTable = function () {
+			if (!$.fn.dataTable || $stateParams.id === 'new') {
+				return;
+			}
 			var columnDefinitions = [
 				{ sWidth: "5%", aTargets: [0] },
 				{ sWidth: "15%", aTargets: [1, 2, 3] },
@@ -41,7 +41,7 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 						$compile(td)($scope);
 					}
 				},
-				/*{
+				{
 					"targets": [4],
 					"orderable": false,
 					"createdCell": function (td, cellData, rowData, row, col) {
@@ -53,22 +53,20 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 						$(td).html(actionHtml);
 						$compile(td)($scope);
 					}
-				}*/
+				}
 			];
 
 			DataTableService.initDataTable('business_request_table', columnDefinitions);
 
-			var promise = RestServiceFactory.BusinessService().get({ id: $stateParams.id});
+			var promise = RestServiceFactory.BusinessService().get({ id: $stateParams.id });
 			promise.$promise.then(function (data) {
-				console.log('>>>>>>>>???????????',data);
 				var table = $('#business_request_table').DataTable();
 				data.map(function (business) {
-					console.log('++++++++++++++++',business);
 					var img = business.profileImageThumbnail;
 					if (typeof img === 'undefined') {
 						img = '';
 					}
-					table.row.add([img,business.businessName, business.address, business.category, business.city, business.role, business]);
+					table.row.add([img, business.businessName, business.address, business.category, business.unRead, business.role, business]);
 				});
 				table.draw();
 			});
@@ -88,7 +86,7 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 		$scope.editBusiness = function (button, table) {
 			var targetRow = $(button).closest("tr");
 			var rowData = table.row(targetRow).data();
-			$state.go('app.businessrequestedit', { venueNumber: $stateParams.id , id: rowData[6].id });
+			$state.go('app.businessrequestedit', { venueNumber: $stateParams.id, id: rowData[6].id });
 		};
 
 		$scope.deleteBusiness = function (button, table) {
@@ -109,8 +107,8 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 		/*$scope.createNewUser = function () {
 			$state.go('app.useredit', { id: 'new' });
 		};*/
-        $timeout(function () {
-            $scope.initServiceTimeTable();
-        });
+		$timeout(function () {
+			$scope.initServiceTimeTable();
+		});
 
-    }]);
+	}]);

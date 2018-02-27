@@ -79,13 +79,13 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
             }).state('app.businessRequest', {
-            url: '/businessRequest',
-            title: 'Business Request',
-            templateUrl: basepath('businessRequest/business-request.html'),
-            controller: 'BusinessRequestController',
-            data: { authorizedRoles: [USER_ROLES.admin] },
-            resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
-        }).state('app.agencies', {
+                url: '/businessRequest',
+                title: 'Business Request',
+                templateUrl: basepath('businessRequest/business-request.html'),
+                controller: 'BusinessRequestController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+            }).state('app.agencies', {
                 url: '/agencies',
                 title: 'Agencies',
                 templateUrl: basepath('agency/agencies.html'),
@@ -154,7 +154,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('chatbot/chatbot.html'),
                 controller: 'ChatbotController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins','parsley', 'inputmask', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-pugins', 'parsley', 'inputmask', 'ngDialog')
             })
             /*.state('app.smsChatbot', {
                 url: '/venues/:venueNumber/chatbot/:id',
@@ -258,7 +258,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('businessRequest/business_request_edit.html'),
                 controller: 'BusinessRequestEditController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask','datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog')
             })
             .state('app.uservenues', {
                 url: '/uservenue/:id',
