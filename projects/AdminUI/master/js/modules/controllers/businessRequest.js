@@ -34,8 +34,8 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 					"orderable": false,
 					"createdCell": function (td, cellData, rowData, row, col) {
 
-						var actionHtml = '<button title="Edit Business" class="btn btn-default btn-oval fa fa-edit"></button>' +
-							'&nbsp;&nbsp;<button title="Delete Business" class="btn btn-default btn-oval fa fa-trash"></button>';
+						var actionHtml = '<button title="Edit Business" class="btn btn-default btn-oval fa fa-edit"></button>' ;
+							/*+ '&nbsp;&nbsp;<button title="Delete Business" class="btn btn-default btn-oval fa fa-trash"></button>';*/
 
 						$(td).html(actionHtml);
 						$compile(td)($scope);
@@ -47,7 +47,7 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 					"createdCell": function (td, cellData, rowData, row, col) {
 
 						var actionHtml = '<em class="fa fa-check-square-o"></em>';
-						if (cellData !== 'Y') {
+						if (cellData !== 'N') {
 							actionHtml = '<em class="fa fa-square-o"></em>';
 						}
 						$(td).html(actionHtml);
@@ -73,9 +73,9 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 
 			var table = $('#business_request_table').DataTable();
 
-			$('#business_request_table').on('click', '.fa-trash', function () {
+			/*$('#business_request_table').on('click', '.fa-trash', function () {
 				$scope.deleteBusiness(this, table);
-			});
+			});*/
 
 			$('#business_request_table').on('click', '.fa-edit', function () {
 				$scope.editBusiness(this, table);
@@ -89,7 +89,7 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 			$state.go('app.businessrequestedit', { venueNumber: $stateParams.id, id: rowData[6].id });
 		};
 
-		$scope.deleteBusiness = function (button, table) {
+		/*$scope.deleteBusiness = function (button, table) {
 			DialogService.confirmYesNo('Delete Business Request?', 'Are you sure want to delete selected business request?', function () {
 				var targetRow = $(button).closest("tr");
 				var rowData = table.row(targetRow).data();
@@ -102,7 +102,7 @@ App.controller('BusinessRequestController', ['$scope', '$state', '$compile', '$t
 					}
 				});
 			});
-		};
+		};*/
 
 		/*$scope.createNewUser = function () {
 			$state.go('app.useredit', { id: 'new' });

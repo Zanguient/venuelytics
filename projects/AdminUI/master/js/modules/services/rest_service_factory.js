@@ -106,10 +106,10 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					method: 'GET', params: { id: '@id', businessId: '@businessId' },
 					url: urlTemplate.replace("@context", "business") + "/:businessId"
 				},
-				delete: {
+				/*delete: {
 					method: 'DELETE', params: { id: '@id', businessId: '@businessId' },
 					url: urlTemplate.replace("@context", "business") + "/:businessId"
-				}
+				}*/
 			});
 		},
 		AgencyService: function () {
