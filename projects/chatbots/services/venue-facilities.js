@@ -73,8 +73,7 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
   var data = user.state.get(answer.api_name);
   var venueTimes = null;
   
-  if ((type === 'Q_OPEN_CLOSE_TIME' || type === 'Q_FACILITY_OPEN_CLOSE_TIME') 
-        && response.parameters && response.parameters.openClosingTimes) {
+  if ((type === 'Q_OPEN_CLOSE_TIME' || type === 'Q_FACILITY_OPEN_CLOSE_TIME') && response.parameters && response.parameters.openClosingTimes) {
     var timeType = response.parameters.openClosingTimes;
     var venueType = response.parameters.serviceType;
     if (timeType === 'Open') {

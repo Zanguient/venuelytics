@@ -57,7 +57,15 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'VisitorDashBoardController',
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'flot-chart-plugins')
-            }).state('app.masonry', {
+            }).state('app.reservationInsight', {
+                url: '/dashboard/reservation-insight',
+                title: 'Reservation Insight',
+                templateUrl: basepath('analytics/reservation-insights.html'),
+                controller: 'ReservationDashBoardController',
+                data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
+                resolve: resolveFor('flot-chart', 'flot-chart-plugins')
+            })
+            .state('app.masonry', {
                 url: '/content',
                 title: 'Content Image View',
                 templateUrl: basepath('content.html'),

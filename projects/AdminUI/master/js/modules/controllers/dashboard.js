@@ -30,10 +30,10 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
         $scope.top3Stats = [];
 
-        $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"New Visitors", "value":0, "icon":"icon-users"});
-        $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Total Visitors", "value":0, "icon":"icon-users"});
-        $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"Total Bookings", "value":0, "icon":"fa fa-shopping-cart"});
-        $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"});
+        $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"New Visitors", "value":0, "icon":"icon-users"}, "#/app/dashboard/visitor-insight");
+        $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Total Visitors", "value":0, "icon":"icon-users"}, "#/app/dashboard/visitor-insight");
+        $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"Total Bookings", "value":0, "icon":"fa fa-shopping-cart"}, "#/app/dashboard/reservation-insight");
+        $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"}, "#/app/dashboard/reservation-insight");
         
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
 
@@ -329,14 +329,14 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             $scope.notificationCount = data.count;
         });
 	};
-	function createPDO( color, dataObject){
+	function createPDO( color, dataObject, link){
         
         var obj={
                 id: dataObject.id,
                 value: dataObject.value || 0,
                 name: dataObject.label,
                 icon: dataObject.icon,
-                link: "#/app/dashboard/visitor-insight",
+                link: link,
                 linkDescription: "View Details",
                 contentColorCode : { "color": "#fff", "background-color": color, "border-color": "#cfdbe2"},
                 linkColorCode :  { "background-color":"#3a3f51"}

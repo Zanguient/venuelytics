@@ -116,7 +116,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                   return this;
                 };
                 // Public method
-                this.requestData = function (option, method, callback, processData) {
+                this.requestData = function (option, method, callback, processData, barSeries) {
                   var self = this;
                   
                   // support params (option), (option, method, callback) or (option, callback)
@@ -132,6 +132,10 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                   }).success(function (data) {
                       if ( self.processData !== null && typeof self.processData !== 'undefined') {
                         data = self.processData()(data);
+                      }
+                      if (typeof(barSeries) !== 'undefined' && barSeries === true){
+                         option.xaxis.ticks = data.ticks;
+                         data = data.data;
                       }
                       $.plot( self.element, data, option );
                       
