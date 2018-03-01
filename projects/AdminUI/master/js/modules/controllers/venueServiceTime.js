@@ -65,7 +65,9 @@ App.controller('VenueServiceTimeController', ['$scope', '$state', '$stateParams'
 
         function formatTime(normalizedTime) {
             // Check correct time format and split into components
-            
+            if (!normalizedTime) {
+                return "";
+            }
             var time = normalizedTime.match(/^([01]?[0-9]|2[0-3])(:)([0-5]|[0-9]\d)(:[0-5]|[0-9]\d)?$/) || [normalizedTime];
 
             if (time.length > 1) {
