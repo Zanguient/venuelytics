@@ -20,6 +20,8 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 	var userProperties = ['badgeNumber', 'businessName', 'email', 'loginId', 'roleId', 'userName', 'phone',
 		'storeNumber', 'enabled', 'password', 'profileImage', 'profileImageThumbnail', 'supervisorId'];
 
+	var businessProperties = ['id', 'businessName', 'address', 'state', 'city', 'category', 'role', 'email', 'phone', 'unRead'];
+
 	var loyalityProperties = ['name', 'venueNumber', 'rewardText', 'condition', 'displayAttributes', 'conditionType'];
 
 	var profileProperties = ['email', 'userName', 'phone', 'password', 'newpassword', 'profileImage', 'profileImageThumbnail'];
@@ -40,6 +42,7 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 	REQ_PROP['VenueService'] = storeProperties;
 	REQ_PROP['BeaconService'] = beaconProperties;
 	REQ_PROP['UserService'] = userProperties;
+	REQ_PROP['BusinessService'] = businessProperties;
 	REQ_PROP['LoyaltyService'] = loyalityProperties;
 	REQ_PROP['ProfileService'] = profileProperties;
 	REQ_PROP['AgencyService'] = agencyProperties;
@@ -89,7 +92,24 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					method: 'POST', params: { id: '@id' }, isArray: false,
 					url: urlTemplate.replace("@context", "users") + "/forgotpassword"
 				},
+			});
+		},
+		BusinessService: function () {
+			return $resource(urlTemplate.replace("@context", "business"), {}, {
+				get: { method: 'GET', params: { id: '@id' }, isArray: true },
 
+				updateBusiness: {
+					method: 'POST', params: { id: '@id', businessId: '@businessId' },
+					url: urlTemplate.replace("@context", "business") + "/:businessId"
+				},
+				getBusiness: {
+					method: 'GET', params: { id: '@id', businessId: '@businessId' },
+					url: urlTemplate.replace("@context", "business") + "/:businessId"
+				},
+				/*delete: {
+					method: 'DELETE', params: { id: '@id', businessId: '@businessId' },
+					url: urlTemplate.replace("@context", "business") + "/:businessId"
+				}*/
 			});
 		},
 		AgencyService: function () {
@@ -170,8 +190,6 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					method: 'POST', params: { id: '@id' },
 					url: urlTemplate.replace("@context", "biz")
 				},
-
-
 			});
 		},
 		UserVenueService: function () {
@@ -332,18 +350,18 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					method: 'POST', params: { id: '@id', productId: '@productId' },
 					url: urlTemplate.replace("@context", "products") + "/:productId"
 				},
-                createProduct: {
-                    method: 'POST', params: { id: '@id'},
-                    url: urlTemplate.replace("@context", "products")
-                },
-       		     updateProduct: {
-                    method: 'POST', params: { id: '@id', productId: '@productId'},
-                    url: urlTemplate.replace("@context", "products") + "/:productId"
-                },
-                getProduct: {
-                    method: 'GET', params: { id: '@id', productId: '@productId' },
-                    url: urlTemplate.replace("@context", "products") + "/:productId"
-                },
+				createProduct: {
+					method: 'POST', params: { id: '@id' },
+					url: urlTemplate.replace("@context", "products")
+				},
+				updateProduct: {
+					method: 'POST', params: { id: '@id', productId: '@productId' },
+					url: urlTemplate.replace("@context", "products") + "/:productId"
+				},
+				getProduct: {
+					method: 'GET', params: { id: '@id', productId: '@productId' },
+					url: urlTemplate.replace("@context", "products") + "/:productId"
+				},
 				delete: {
 					method: 'DELETE', params: { id: '@id', productId: '@productId' },
 					url: urlTemplate.replace("@context", "products") + "/:productId"

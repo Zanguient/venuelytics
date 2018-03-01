@@ -135,6 +135,14 @@
 		"roleId": 100
 	},
 	{
+		"text": "Business Request",
+		"sref": "app.businessRequest",
+		"icon": "icon-users",
+		"translate": "sidebar.nav.pages.BUSINESS",
+		"submenu": [],
+		"roleId": 100
+	},
+	{
 		"text": "Agency Management",
 		"sref": "app.agencies",
 		"icon": "fa fa-building-o",
