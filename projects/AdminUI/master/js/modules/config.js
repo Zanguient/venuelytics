@@ -49,7 +49,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'DashBoardController',
                 templateUrl: basepath('analytics/dashboard.html'),
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
-                resolve: resolveFor('flot-chart', 'flot-chart-plugins')
+                resolve: resolveFor('flot-chart', 'moment','flot-chart-plugins')
             }).state('app.visitorInsight', {
                 url: '/dashboard/visitor-insight',
                 title: 'Visitor Insight',

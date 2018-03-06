@@ -20,7 +20,7 @@
       <!-- START widget-->
       <div id="bookingsBarChart1" class="panel panel-default">
          <div class="panel-heading">
-            <div class="panel-title">All Resevations</div>
+            <div class="panel-title">All Reservations</div>
          </div>
          <div collapse="bookingsBarChart1" class="panel-wrapper">
             <div class="panel-body  mb-lg">
@@ -36,7 +36,7 @@
       <!-- START widget-->
       <div id="bookingsBarChart2" class="panel panel-default">
          <div class="panel-heading">
-            <div class="panel-title">Resevations - By Service Type</div>
+            <div class="panel-title">Reservations - By Service Type</div>
          </div>
          <div collapse="bookingsBarChart2" class="panel-wrapper">
             <div class="panel-body  mb-lg">
@@ -71,7 +71,7 @@
       <!-- START widget-->
       <div id="canceledBarChart1" class="panel panel-default">
          <div class="panel-heading">
-            <div class="panel-title">Canceled Resevations</div>
+            <div class="panel-title">Canceled Reservations</div>
          </div>
          <div collapse="canceledBarChart1" class="panel-wrapper">
             <div class="panel-body  mb-lg">
@@ -87,7 +87,7 @@
       <!-- START widget-->
       <div id="canceledBarChart2" class="panel panel-default">
          <div class="panel-heading">
-            <div class="panel-title">Cancled Resevations - By Service Type</div>
+            <div class="panel-title">Canceled Reservations - By Service Type</div>
          </div>
          <div collapse="canceledBarChart2" class="panel-wrapper">
             <div class="panel-body  mb-lg">
@@ -121,7 +121,7 @@
       <!-- START widget-->
       <div id="zipBarChart1" class="panel panel-default">
          <div class="panel-heading">
-            <div class="panel-title">Resevations by City</div>
+            <div class="panel-title">Reservations by City</div>
          </div>
          <div collapse="zipBarChart1" class="panel-wrapper">
             <div class="panel-body mb-xxl">
@@ -137,7 +137,7 @@
       <!-- START widget-->
       <div id="zipBarChart2" class="panel panel-default">
          <div class="panel-heading">
-            <div class="panel-title">Resevations - By Service Type and Cities</div>
+            <div class="panel-title">Reservations - By Service Type and Cities</div>
          </div>
          <div collapse="zipBarChart2" class="panel-wrapper">
             <div class="panel-body  mb-xxl">
@@ -149,5 +149,22 @@
       <!-- END widget-->
     </div>
   </div> 
+  <div class="row">
+    <div class="col-md-8 col-sm-12 mb6">
+      <!-- START widget-->
+      <div id="zipBarChart2" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">Advance Bookings (In days)</div>
+         </div>
+         <div collapse="zipBarChart2" class="panel-wrapper">
+            <div class="panel-body  mb-xxl">
+               <series-line-chart id="AdvanceBookingsByAVG" url="{{performanceRequestByServiceType}}" format-data-fx="formatLineDataForSubName"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-line-chart>
+            </div>
+         </div>
+      </div>
+      <!-- END widget-->
+    </div>
+  </div>
 
 </div>

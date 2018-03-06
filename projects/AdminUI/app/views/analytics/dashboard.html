@@ -1,6 +1,6 @@
 <h3>
    <div class="row">
-	   <div class="col-lg-7">
+	   <div class="col-md-7">
 	   Dashboard - <strong>{{ 'dashboard.WELCOME' | translate:{ appName: app.name } }} !</strong>
 	   </div>
    	<div class="col-lg-3 pull-right">
@@ -13,168 +13,125 @@
 </h3>
 <!-- START widgets box-->
 <div class="row">
-   <div class="col-lg-3 col-sm-6" ng-repeat="stats in top3Stats">
+   <div class="col-md-3 col-sm-6" ng-repeat="stats in top3Stats">
       <card-widget card="stats"></card-widget>
-   </div>
-   
+   </div>   
 </div>
-<!-- END widgets box-->
+
+
 <div class="row">
-   <!-- START dashboard main content-->
    <div class="col-md-6 col-sm-12">
-      <!-- START chart-->
-      <div class="row">
-         <div class="col-md-6 col-sm-12">
-            <!-- START widget-->
-            <div id="panelReservationBarChart" class="panel panel-default">
-               <div class="panel-heading">
-                  <paneltool tool-collapse="tool-collapse"></paneltool>
-                  <div class="panel-title">Booking Requests</div>
-               </div>
-               <div collapse="panelReservationBarChart" class="panel-wrapper">
-                  <div class="panel-body">
-                     <stacked-bar-chart id="bookingRequestChart" url="{{bookingRequestUrl}}" format-data-fx="formatStackData"
-                     class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
-                  </div>
-               </div>
-            </div>
-            <!-- END widget-->
+     
+     <div id="panelReservationBarChart" class="panel panel-default">
+        <div class="panel-heading">
+           <paneltool tool-collapse="tool-collapse"></paneltool>
+           <div class="panel-title">Booking Requests</div>
+        </div>
+        <div collapse="panelReservationBarChart" class="panel-wrapper">
+           <div class="panel-body">
+              <stacked-bar-chart id="bookingRequestChart" url="{{bookingRequestUrl}}" format-data-fx="formatStackData"
+              class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+           </div>
+        </div>
+     </div>
+     
+  </div> 
+  <div class="col-md-6 col-sm-12">
+     
+     <div id="panelTopProductsBarChart" class="panel panel-default">
+        <div class="panel-heading">
+           <paneltool tool-collapse="tool-collapse"></paneltool>
+           <div class="panel-title">Top Products</div>
+        </div>
+        <div collapse="panelTopProductsBarChart" class="panel-wrapper">
+           <div class="panel-body col-xs-12 mb-xxl">
+              <series-bar-chart id="topRequestChart1" chart-data="{{topProductsData}}" 
+              class="flot-chart rotateLabel" mode="categories"></series-bar-chart>
+           
+
+           </div>
+        </div>
+     </div>
+     
+  </div> 
+</div>
+<div class="row">
+   <div class="col-md-4 col-sm-12">
+
+      <!-- START widget-->
+      <div id="panelReqByZipBarChart" class="panel panel-default cpointer"  ng-click="reservationInsight()">
+         <div class="panel-heading">
+            <paneltool tool-collapse="tool-collapse"></paneltool>
+            <div class="panel-title">Booking Requests by City</div>
          </div>
-         <div class="col-md-6">
-            <!-- START widget-->
-            <div id="panelReqByZipBarChart" class="panel panel-default">
-               <div class="panel-heading">
-                  <paneltool tool-collapse="tool-collapse"></paneltool>
-                  <div class="panel-title">Booking Requests by Zipcode</div>
-               </div>
-               <div collapse="panelReqByZipBarChart" class="panel-wrapper">
-                  <div class="panel-body">
-                     <stacked-bar-chart id="bookingRequestByZipChart" chart-data="{{bookingRequestByZipcodeData}}" 
-                     class="chart-bar-stacked flot-chart rotateLabel" mode="categories" y-pos="{{yPos}}"></stacked-bar-chart>
-                  </div>
-               </div>
+         <div collapse="panelReqByZipBarChart" class="panel-wrapper">
+            <div class="panel-body mb-lg">
+               <stacked-bar-chart id="bookingRequestByZipChart" chart-data="{{bookingRequestByZipcodeData}}" 
+               class="chart-bar-stacked flot-chart rotateLabel" mode="categories" y-pos="{{yPos}}"></stacked-bar-chart>
             </div>
-            <!-- END widget-->
          </div>
       </div>
-      <!-- END chart-->
-      
-      <div class="row">
+         
+   </div>
+   <div class="col-md-4 col-sm-12">
+      <sparkline-pie-chart id="rb" title="Reserved Bookings" piedata="{{reservedBookings.currentBookingPercentage}}" barlabel="This {{reservedBookings.aggregateType}}" bartotal="{{reservedBookings.maxPossibleBookings}}" class="cpointer"  ng-click="reservationInsight()"></sparkline-pie-chart>
+   </div>
+   <div class="col-md-4 col-sm-12">
+      <div ng-include="'app/templates/chart/donut-panel.html'" onload="donutInit()" class="cpointer"  ng-click="reservationInsight()"></div>
+   </div>
+</div>
+<div class="row">
+   <div class="col-md-4 col-sm-12">
+      <!-- START widget-->
+      <div class="panel widget bg-danger panel_grad_darker cpointer"  ng-click="inbox()" >
         
-         <div class="col-md-12">
-            <div class="panel panel-default">
-               <div class="panel-heading">
-                  <div class="pull-right label label-danger">Unread: {{notificationCount}}</div>
-                          <div class="panel-title">Booking Requests</div>
+         <div class="row row-table">
+            <div class="col-xs-4 text-center bg-danger-dark panel_grad_darker pv-lg">
+               <em class="fa fa-inbox fa-3x"></em>
+            </div>
+            <div class="col-xs-8 pv-lg">
+               <div class="h1 m0 text-bold">{{notificationCount}}</div>
+               <div class="text-uppercase">New Messages</div>
+            </div>
+         </div>
+        
+      </div>
+   </div>
+   <div class="col-md-4 col-sm-12">
+      <div class="panel widget bg-success panel_grad_darker">
+         <div class="row row-table">
+            <div class="col-xs-3 text-center bg-success-dark panel_grad_darker pv-lg">
+               <em class="icon-login fa-3x"></em>
+               <div class="text-uppercase">CHECKINS</div>
+            </div>
+            <div class="col-xs-9 pv-lg text-center">
+               <div class="col-xs-4">
+                  <div class="h1 m0 text-bold">{{venueCheckinValue}}</div>
+                  <div class="text-uppercase">Venue</div>
                </div>
-               <!-- START list group-->
-               <scrollable height="290" class="list-group">
-                  <!-- START list group item-->
-                  <div ng-include="'app/templates/dashboard/notifications.html'"></div>
-                  <!-- END list group item-->
-               </scrollable>
-               <!-- END list group-->
-               <!-- START panel footer-->
-               <div class="panel-footer clearfix">
-                  <div class="input-group">
-                     <input type="text" placeholder="Search message .." class="form-control input-sm" />
-                     <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-search"></i>
-                        </button>
-                     </span>
-                  </div>
+               <div class="col-xs-4">
+                  <div class="h1 m0 text-bold">{{visitorCheckinValue}}</div>
+                  <div class="text-uppercase">Guest</div>
                </div>
-               <!-- END panel-footer-->
+               <div class="col-xs-4">
+                  <div class="h1 m0 text-bold">{{venueCheckinBookingValue}}</div>
+                  <div class="text-uppercase">Reservation</div>
+               </div>
             </div>
          </div>
       </div>
    </div>
-   <!-- END dashboard main content-->
-   <!-- START dashboard sidebar-->
-   <aside class="col-lg-3">
-      <!-- START loader widget-->
-      <sparkline-pie-chart id="rb" title="Reserved Bookings" piedata="{{reservedBookings.currentBookingPercentage}}" barlabel="This {{reservedBookings.aggregateType}}" bartotal="{{reservedBookings.maxPossibleBookings}}"></sparkline-pie-chart>
-      <!-- END loader widget-->
-      <!-- START messages and activity-->
-      <div class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">Today's GuestList</div>
-         </div>
-         <!-- START list group-->
-         <scrollable height="290" class="list-group" ng-init="guests.total = 0">
-            <!-- START list group item-->
-            <div class="list-group-item" ng-repeat="item in guests">
-               <div class="media">
-                  <div class="pull-left">
-                     <span class="fa-stack">
-                        <em class="fa fa-circle fa-stack-2x text-yellow"></em>
-                     </span>
-                  </div>
-                  <div class="media-body clearfix">
-                     <small class="text-muted pull-right ml" ng-init="guests.total = guests.total + item.totalCount">{{item.totalCount}} people</small>
-                     <div class="media-heading"><a href="#" class="text-purple m0">{{item.visitorName}}</a>
-                     </div>
-                     <p class="m0">
-                        <small>{{item.email}} | {{item.phone}}</small>
-                     </p>
-                  </div>
-               </div>
+   <div class="col-md-4 col-sm-12">
+      <div class="panel widget bg-warning panel_grad_darker">
+         <div class="row row-table">
+            <div class="col-xs-4 text-center bg-warning-dark panel_grad_darker pv-lg">
+               <em class="fa fa-file-text-o  fa-3x"></em>
+            </div> 
+            <div class="col-xs-8 pv-lg">
+               <div class="h1 m0 text-bold">{{guests.length}}</div>
+               <div class="text-uppercase">Today's Guest Count</div>
             </div>
-            <!-- END list group item-->
-            
-         </scrollable>
-         <!-- END list group-->
-         <!-- START panel footer-->
-         <div class="panel-footer clearfix">
-            <a href="#" class="pull-left">
-               <small>Total Guests: {{guests.total }}</small>
-            </a>
          </div>
-         <!-- END panel-footer-->
       </div>
-      <!-- END messages and activity-->
-   </aside>
-   <aside class="col-lg-3">
-      <!-- START loader widget-->
-      <div ng-include="'app/templates/chart/donut-panel.html'" onload="donutInit()" ></div>
-      <!-- END loader widget-->
-      <!-- START messages and activity-->
-      <div class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">Top 3 Favorites</div>
-         </div>
-         <!-- START list group-->
-         <scrollable height="290" class="list-group">
-            <!-- START list group item-->
-            <div class="list-group-item" ng-repeat="(name, value) in topItemsList">
-               <div class="media">
-                  <div class="pull-left">
-                     <span class="fa-stack">
-                        <em ng-class="getNotificationIconClass(name)"></em>
-                     </span>
-                  </div>
-                  <div class="media-body clearfix">
-                     <div class="media-heading"><a href="#" class="text-purple m0">{{name}}</a>
-                     </div>
-                     <p class="m0" ng-repeat="item in value.split(',')">
-                        <small>{{item}}</small>
-                     </p>
-                  </div>
-               </div>
-            </div>
-            <!-- END list group item-->
-            
-         </scrollable>
-         <!-- END list group-->
-         <!-- START panel footer-->
-         <div class="panel-footer clearfix">
-            <a href="#" class="pull-left">
-               <small>**</small>
-            </a>
-         </div>
-         <!-- END panel-footer-->
-      </div>
-      <!-- END messages and activity-->
-   </aside>
-   <!-- END dashboard sidebar-->
+   </div>
 </div>

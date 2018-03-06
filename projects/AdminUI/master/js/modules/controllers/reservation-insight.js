@@ -37,6 +37,10 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
     $scope.cityRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByOccasion', 'Weekly', 'scodes=BPK');
 
 
+    $scope.performanceRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'AdvanceBookingsByAVG', 'Weekly', 'scodes=BPK');
+
+
+
     $scope.init = function() {
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
         $scope.reservationStatsChart();
@@ -74,6 +78,53 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
          return formatDataAggBysubNameImpl(data, 'subName');
     }
 
+    $scope.formatLineDataForSubName = function(data) {
+       var propertyName = "subName";
+       var retData = [];
+       
+        var colorIndex = 0;
+        if (data.length > 0){
+            var ticks = [];
+
+            for (var idx in data[0].ticks){
+                ticks[data[0].ticks[idx][1]] = parseInt(idx);
+                data[0].ticks[idx][0] = parseInt(idx);
+            }
+            $scope.barTicks = data[0].ticks;
+            for (var index in data[0].series) {
+                var d = data[0].series[index];
+                var elem = {};
+                elem.label = $translate.instant(d[propertyName]);
+                elem.color = colors[colorIndex % colors.length];
+                colorIndex++;
+                elem.lines= {
+                    show: true
+                };
+                 elem.data = [];
+                if ($scope.selectedPeriod !== 'DAILY') {
+                    
+                    for (var i =0; i < d.data.length; i++){
+                     
+                        var dataElem = [ticks[d.data[i][0]], d.data[i][1]];
+                        elem.data.push(dataElem);
+                    }
+
+                }
+                else{
+                   
+                    for (var i =0; i < d.data.length; i++){
+                        var from = d.data[i][0].split("-");
+                        var f = new Date(from[0], from[1] - 1, from[2]);
+                        var dataElem = [f.getTime(), d.data[i][1]];
+                        elem.data.push(dataElem);
+                    }
+                }
+                retData.push(elem);
+            }
+        }
+        return {data: retData, ticks: $scope.barTicks};
+    }
+
     $scope.formatBarDataBy12 = function(data) {
         
        var retData = [];
@@ -104,7 +155,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
                         fillColor:  elem.color
                     };
                     seriesMap[d['name']]  = elem;
-                     retData.push(elem);
+                    retData.push(elem);
                 }
                 var total = 0;
                 for (var i =0; i < d.data.length; i++){
@@ -155,6 +206,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
         return retData;
 
     }
+
     function formatBarDataImpl(data, propertyName) {
       
         var retData = [];
@@ -206,7 +258,8 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
             }
         }
         return {data: retData, ticks: $scope.barTicks};
-    };
+    }
+    
     function formatStackDataImpl(data, propertyName) {
         var retData = [];
         
@@ -257,6 +310,9 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
 
         $scope.cityRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByServiceType', aggPeriodType, 'scodes=BPK');
         $scope.cityRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByOccasion', aggPeriodType, 'scodes=BPK');
+
+
+         $scope.performanceRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'AdvanceBookingsByAVG', aggPeriodType, 'scodes=BPK');
 
 
         $scope.xAxisMode = 'categories'; 

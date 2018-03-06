@@ -17,6 +17,39 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.xAxisMode = 'categories';
     $scope.requestByStatusZip =[];
     $scope.bookingRequestByZipcodeData = [];
+    $scope.venueBookingRevenue = {};
+    $scope.topProductsData = {};
+    $scope.venueCheckinValue = 0;
+    $scope.visitorCheckinValue = 0;
+    $scope.venueCheckinBookingValue = 0;
+
+    $scope.topProductsDay = {};
+    $scope.topProductsWeek = {};
+    $scope.topProductsMonth = {};
+    $scope.topProductsYear = {};
+
+    $scope.currencyFormatter =  {
+        format : function(num) {
+                if (num >= 1000000000) {
+                    return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+                }
+                if (num >= 1000000) {
+                    return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+                }
+                if (num >= 1000) {
+                    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+                }
+                return num;
+            }
+    };
+
+
+    /*new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 2,
+      // the default value for minimumFractionDigits depends on the currency
+      // and is usually already 2
+    });*/
+
 
     $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
         // register on venue change;
@@ -33,7 +66,10 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"New Visitors", "value":0, "icon":"icon-users"}, "#/app/dashboard/visitor-insight");
         $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Total Visitors", "value":0, "icon":"icon-users"}, "#/app/dashboard/visitor-insight");
         $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"Total Bookings", "value":0, "icon":"fa fa-shopping-cart"}, "#/app/dashboard/reservation-insight");
-        $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"}, "#/app/dashboard/reservation-insight");
+        $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"Total Revenue", "value":0, "icon":"fa fa-dollar"}, "#");       
+       
+
+        //$scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"}, "#/app/dashboard/reservation-insight");
         
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
 
@@ -48,7 +84,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                 toaster.pop('error', "Server Error", error.data.developerMessage);
             }*/
         });
-        RestServiceFactory.VenueService().getGuests({id: $scope.effectiveVenueId}, function(data){
+        RestServiceFactory.VenueService().getGuests({id: $scope.effectiveVenueId, date: moment().format('YYYYMMDD')}, function(data){
            $scope.guests = data;
         },function(error){
             /*if (typeof error.data !== 'undefined') { 
@@ -64,9 +100,13 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[0].value =  addForType($scope.venueNewVisitors, $scope.selectedPeriod);
         $scope.top3Stats[1].value = addForType($scope.venueAllVisitors, $scope.selectedPeriod);
         $scope.top3Stats[2].value = addForType($scope.venueBookings, $scope.selectedPeriod);
-        $scope.top3Stats[3].value = addForType($scope.venueCheckin, $scope.selectedPeriod);
-        $scope.top3Stats[3].value += addForType($scope.visitorCheckin, $scope.selectedPeriod);
-        $scope.top3Stats[3].value += addForType($scope.venueCheckinBooking, $scope.selectedPeriod);
+        $scope.top3Stats[3].value = $scope.currencyFormatter.format(addForType($scope.venueBookingRevenue, $scope.selectedPeriod));
+        
+        
+
+        $scope.venueCheckinValue = addForType($scope.venueCheckin, $scope.selectedPeriod);
+        $scope.visitorCheckinValue = addForType($scope.visitorCheckin, $scope.selectedPeriod);
+        $scope.venueCheckinBookingValue = addForType($scope.venueCheckinBooking, $scope.selectedPeriod);
         
         var stackedBarDataStage =  $scope.requestByStatusZip[$scope.selectedPeriod];
         $scope.bookingRequestByZipcodeData=  [];
@@ -77,18 +117,31 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         }
         
         console.log(JSON.stringify($scope.bookingRequestByZipcodeData));
-        $scope.top3FavItems(); 
+        //$scope.top3FavItems(); 
         $scope.bookingRequestChart();
         $scope.reservedBookingChart();
         $scope.donutInit();
+
+        if ($scope.selectedPeriod === 'YEARLY') {
+            $scope.topProductsData = makeSeries($scope.topProductsYear);
+        } else if ($scope.selectedPeriod === 'MONTHLY') {
+            $scope.topProductsData = makeSeries($scope.topProductsMonth);
+        } else if ($scope.selectedPeriod === 'WEEKLY') {
+            $scope.topProductsData = makeSeries($scope.topProductsWeek);
+        } else if ($scope.selectedPeriod === 'DAILY') {
+            $scope.topProductsData = makeSeries($scope.topProductsDay);
+        }
     };
+
+    
+        
     $scope.top3FavItems = function () {
-        var temp = $scope.selectedPeriod.toLowerCase();
+       /* var temp = $scope.selectedPeriod.toLowerCase();
         var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
         var promise = RestServiceFactory.AnalyticsService().getTopNFavItems({id: $scope.effectiveVenueId, aggPeriodType: aggPeriodType, n: 3});   
         promise.$promise.then(function(data) {
             $scope.topItemsList = data;
-        });
+        });*/
     };
 
     $scope.processAnalytics = function(data) {
@@ -138,7 +191,36 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         } else {
             $scope.requestByStatusZip = {};
         }
+        if (typeof data.VENUE_BOOKINGS_REVENUE   !== 'undefined' && data.VENUE_BOOKINGS_REVENUE.length > 0) {
+             $scope.venueBookingRevenue = data.VENUE_BOOKINGS_REVENUE;
+        } else {
+            $scope.venueBookingRevenue = null;
+        }
         
+        if (typeof data.TPQ_LAST_DAY   !== 'undefined' && data.TPQ_LAST_DAY[0].productTypes) {
+             $scope.topProductsDay = data.TPQ_LAST_DAY[0].productTypes;
+        } else {
+            $scope.topProductsDay = {};
+        }
+
+        if (typeof data.TPQ_LAST_WEEK   !== 'undefined' && data.TPQ_LAST_WEEK[0].productTypes) {
+             $scope.topProductsWeek = data.TPQ_LAST_WEEK[0].productTypes;
+        } else {
+            $scope.topProductsWeek = {};
+        }
+
+        if (typeof data.TPQ_LAST_MONTH   !== 'undefined' && data.TPQ_LAST_MONTH[0].productTypes) {
+             $scope.topProductsMonth = data.TPQ_LAST_MONTH[0].productTypes;
+        } else {
+            $scope.topProductsMonth = {};
+        }
+
+        if (typeof data.TPQ_LAST_YEAR   !== 'undefined' && data.TPQ_LAST_YEAR[0].productTypes) {
+             $scope.topProductsYear  = data.TPQ_LAST_YEAR[0].productTypes;
+        } else {
+            $scope.topProductsYear = {};
+        }
+
         $scope.setDisplayData();
 
     };
@@ -216,6 +298,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         
         // keep only top 10.
         tuples = tuples.slice(0, 10);
+        
         var top10Zip = [];
         for (var k = 0; k < tuples.length; k++) {
             var obj = tuples[k];
@@ -353,49 +436,6 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
   // 
   angular.element(document).ready(function () {
 
-    // Bar chart
-    (function () {
-        var Selector = '.chart-bar';
-        $(Selector).each(function() {
-            var source = $(this).data('source') || $.error('Bar: No source defined.');
-            var chart = new FlotChart(this, source),
-                //panel = $(Selector).parents('.panel'),
-                option = {
-                    series: {
-                        bars: {
-                            align: 'center',
-                            lineWidth: 0,
-                            show: true,
-                            barWidth: 0.6,
-                            fill: 0.9
-                        }
-                    },
-                    grid: {
-                        borderColor: '#eee',
-                        borderWidth: 1,
-                        hoverable: true,
-                        backgroundColor: '#fcfcfc'
-                    },
-                    tooltip: true,
-                    tooltipOpts: {
-                        content: '%x : %y'
-                    },
-                    xaxis: {
-                        tickColor: '#fcfcfc',
-                        mode: 'categories'
-                    },
-                    yaxis: {
-                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                        tickColor: '#eee'
-                    },
-                    shadowSize: 0
-                };
-            // Send Request
-            chart.requestData(option);
-        });
-
-    })();
-
     
     // Spline chart
     (function () {
@@ -439,53 +479,6 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                         position: ($scope.app.layout.isRTL ? 'right' : 'left'),
                         tickFormatter: function (v) {
                             return v/* + ' visitors'*/;
-                        }
-                    },
-                    shadowSize: 0
-                };
-            
-            // Send Request and Listen for refresh events
-            chart.requestData(option).listen();
-
-        });
-    })();
-    // Area chart
-    (function () {
-        var Selector = '.chart-area';
-        $(Selector).each(function() {
-            var source = $(this).data('source') || $.error('Area: No source defined.');
-            var chart = new FlotChart(this, source),
-                option = {
-                    series: {
-                        lines: {
-                            show: true,
-                            fill: 0.8
-                        },
-                        points: {
-                            show: true,
-                            radius: 4
-                        }
-                    },
-                    grid: {
-                        borderColor: '#eee',
-                        borderWidth: 1,
-                        hoverable: true,
-                        backgroundColor: '#fcfcfc'
-                    },
-                    tooltip: true,
-                    tooltipOpts: {
-                        content: '%x : %y'
-                    },
-                    xaxis: {
-                        tickColor: '#fcfcfc',
-                        mode: 'categories'
-                    },
-                    yaxis: {
-                        min: 0,
-                        tickColor: '#eee',
-                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                        tickFormatter: function (v) {
-                            return v + ' visitors';
                         }
                     },
                     shadowSize: 0
@@ -677,6 +670,42 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             }
         });
     };
+    
+    $scope.inbox = function() {
+        $state.go('app.mailbox.all');
+    };
+
+    $scope.reservationInsight =function() {
+        $state.go('app.reservationInsight');
+    };
+
     $scope.donutInit();
     $scope.init();
+
+
+    function makeSeries(data) {
+        var series = [];
+        var serie = {
+            data: [],
+             bars: {
+                  show: true,
+                  barWidth: 0.9,
+                  align: 'center'
+              }
+        }; 
+         series.push(serie);
+        createSeries(data, 'VenueMap', 'Bottle Service',serie);
+        createSeries(data, 'BanquetHall', 'Private Event',serie);
+        createSeries(data, 'Bottle', 'Bottle', serie);
+        return series;
+    }
+    
+    function createSeries(data, name, seriesName, serie) {
+        if (!!data[name]) {
+            serie.data.push([serie.data.length, 0]);
+            for (var i = 0; i < data[name].length && i < 3; i++) {
+                serie.data.push([data[name][i].productName, data[name][i].value])
+            } 
+        }
+    }
 }]);

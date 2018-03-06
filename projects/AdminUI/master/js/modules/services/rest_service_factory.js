@@ -230,7 +230,7 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					url: urlTemplate.replace("@context", "venues") + "/:venueNumber"
 				},
 				getGuests: {
-					method: 'GET', params: { id: '@id' }, isArray: true,
+					method: 'GET', params: { id: '@id', date: '@date' }, isArray: true,
 					url: urlTemplate.replace("@context", "venues") + "/guests/:date"
 				},
 				getGuestList: {

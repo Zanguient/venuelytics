@@ -25,7 +25,7 @@ config.accountSid =  'AC227acd740f9ff82b02f09298a8c13e0d';
 config.authToken = "1d9fa8df3728c108929887407cc0c552";
 
 config.smsDebug = true;
-config.sms_debug_agent_number = '+15102983683';
+config.sms_debug_agent_number = '+17027660204';
 config.getPort = () => {
     return config.service.port;
 };

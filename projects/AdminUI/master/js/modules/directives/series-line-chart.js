@@ -3,7 +3,7 @@
  * Module: stacked-bar-chart.js
 *
  =========================================================*/
-App.directive('seriesBarChart',   function() {
+App.directive('seriesLineChart',   function() {
   'use strict';
  
   return {
@@ -37,10 +37,8 @@ App.directive('seriesBarChart',   function() {
       $scope.chart = new FlotChart($('#'+$scope.id), null);
       $scope.option = {
           series: {
-              bars: {
-                  show: true,
-                  barWidth: 0.25,
-                  align: 'center'
+              lines: {
+                  show: true
               }
           },
           grid: {
@@ -60,7 +58,6 @@ App.directive('seriesBarChart',   function() {
            yaxis: {
               position: $scope.yPos,
               tickColor: '#eee',
-                min: 0.1
 
           },
           shadowSize: 0
@@ -68,9 +65,7 @@ App.directive('seriesBarChart',   function() {
 
       $scope.drawChart = function() {
         $scope.option.xaxis.mode = $scope.mode;
-        if ($scope.mode === 'time') {
-          $scope.option.series.bars.lineWidth = 1;
-        } else {
+        if ($scope.mode !== 'time') {
            $scope.option.xaxis.mode = 'categories';
         }
         
