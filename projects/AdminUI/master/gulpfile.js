@@ -170,7 +170,8 @@ var dynamicScriptFiles = [
     '../vendor/fontawesome/fonts/fontawesome-webfont.woff2',
     '../vendor/weathericons/fonts/weathericons-regular-webfont.woff',
     '../vendor/simplelineicons/fonts/Simple-Line-Icons.woff',
-    '../vendor/ngwig/ng-wig.min.js'
+    '../vendor/ngwig/ng-wig.min.js',
+    '../vendor/flot/jquery.flot.orderBars.js',
 ];
 
 

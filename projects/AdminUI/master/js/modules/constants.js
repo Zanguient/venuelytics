@@ -73,7 +73,7 @@ App
       'google-map':         ['vendor/gmap/jquery.gmap.min.js'],
       'flot-chart':         ['vendor/flot/jquery.flot.min.js'],
       'flot-chart-plugins': ['vendor/flot/jquery.flot.tooltip.min.js','vendor/flot/jquery.flot.resize.min.js','vendor/flot/jquery.flot.pie.min.js',
-      'vendor/flot/jquery.flot.time.min.js','vendor/flot/jquery.flot.categories.js','vendor/flot/jquery.flot.spline.min.js', 'vendor/flot/jquery.flot.stack.js', 'vendor/flot/jquery.flot.orderBars.js' ],
+      'vendor/flot/jquery.flot.time.min.js','vendor/flot/jquery.flot.categories.min.js','vendor/flot/jquery.flot.spline.min.js', 'vendor/flot/jquery.flot.stack.js', 'vendor/flot/jquery.flot.orderBars.js' ],
       'jquery-ui':          ['vendor/jqueryui/jquery-ui.min.js', 'vendor/touch-punch/jquery.ui.touch-punch.min.js'],
       'chosen':             ['vendor/chosen/chosen.jquery.min.js', 'vendor/chosen/chosen.min.css'],
       'slider':             ['vendor/slider/js/bootstrap-slider.js', 'vendor/slider/css/slider.css'],
