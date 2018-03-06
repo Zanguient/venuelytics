@@ -308,8 +308,17 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     setTimeout(function(){
         $('.wait_loading_above_fold').remove();
     },300);
+    
+    var dataLayer = $window.dataLayer = $window.dataLayer || [];
 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+
+        dataLayer.push({
+            event: 'ngRouteChange',
+            attributes: {
+            route: $location.path()
+            }
+        });
 
         if (current.hasOwnProperty('$$route')) {
             if(current.$$route.title) {
