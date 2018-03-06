@@ -58,7 +58,6 @@ App.directive('seriesBarChart',   function() {
               mode: 'categories'              
           },
            yaxis: {
-              position: $scope.yPos,
               tickColor: '#eee'
 
           },
