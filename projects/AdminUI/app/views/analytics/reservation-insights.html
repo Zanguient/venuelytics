@@ -117,7 +117,7 @@
 
 
   <div class="row">
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-12 col-sm-12">
       <!-- START widget-->
       <div id="zipBarChart1" class="panel panel-default">
          <div class="panel-heading">
@@ -125,7 +125,7 @@
          </div>
          <div collapse="zipBarChart1" class="panel-wrapper">
             <div class="panel-body mb-xxl">
-               <stacked-bar-chart id="zipChart" url="{{cityRequestByValue}}" format-data-fx="formatDataAggBysubName"
+               <stacked-bar-chart id="zipChart" url="{{cityRequestByValue}}" format-data-fx="formatDataAggBysubNameByTotal"
                class="chart-bar-stacked flot-chart rotateLabel" mode="categories"></stacked-bar-chart>
             </div>
          </div>
@@ -133,7 +133,7 @@
       <!-- END widget-->
     </div>
 
-    <div class="col-md-8 col-sm-12 mb6">
+    <div class="col-md-12 col-sm-12 mb6">
       <!-- START widget-->
       <div id="zipBarChart2" class="panel panel-default">
          <div class="panel-heading">
@@ -149,22 +149,22 @@
       <!-- END widget-->
     </div>
   </div> 
-  <div class="row">
-    <div class="col-md-8 col-sm-12 mb6">
-      <!-- START widget-->
-      <div id="zipBarChart2" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">Advance Bookings (In days)</div>
-         </div>
-         <div collapse="zipBarChart2" class="panel-wrapper">
-            <div class="panel-body  mb-xxl">
-               <series-line-chart id="AdvanceBookingsByAVG" url="{{performanceRequestByServiceType}}" format-data-fx="formatLineDataForSubName"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-line-chart>
-            </div>
-         </div>
-      </div>
-      <!-- END widget-->
-    </div>
-  </div>
+ <!--  <div class="row">
+   <div class="col-md-8 col-sm-12 mb6">
+     START widget
+     <div id="zipBarChart2" class="panel panel-default">
+        <div class="panel-heading">
+           <div class="panel-title">Advance Bookings (In days)</div>
+        </div>
+        <div collapse="zipBarChart2" class="panel-wrapper">
+           <div class="panel-body  mb-xxl">
+              <series-line-chart id="AdvanceBookingsByAVG" url="{{performanceRequestByServiceType}}" format-data-fx="formatLineDataForSubName"
+              class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-line-chart>
+           </div>
+        </div>
+     </div>
+     END widget
+   </div>
+ </div> -->
 
 </div>

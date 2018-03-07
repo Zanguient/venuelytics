@@ -74,6 +74,41 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
         return formatBarDataImpl(data, 'subName');
     };
     
+    $scope.formatDataAggBysubNameByTotal = function(data){
+        var resultData = $scope.formatDataAggBysubName(data);
+        
+        return sortAndAggregareFor(resultData, 75);
+
+    }
+
+    function sortAndAggregareFor(resultData, N) {
+
+
+        for (var tIdx = 0; tIdx < resultData.length; tIdx++){
+             resultData[tIdx].data.sort(compare);
+        
+            // add first 75 and remaining as others
+            
+            if (resultData[tIdx].data.length > N) {
+                var firstOne = resultData[tIdx].data.slice(0,N-1);
+                var second = resultData[tIdx].data.slice(N);
+
+                var remainingTotal = 0;
+                for (var idx = 0; idx < second.length; idx++) {
+                    remainingTotal += second[idx][1];
+                }
+
+                firstOne.push(["Other " +  second.length +" cities", remainingTotal]);
+                resultData[tIdx].data = firstOne;
+            }
+        }
+       return resultData;
+    }
+
+    function compare(a, b) {
+        return b[1] - a[1];
+    }
+    
     $scope.formatDataAggBysubName = function(data) {
          return formatDataAggBysubNameImpl(data, 'subName');
     }
@@ -172,7 +207,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
                
             }
         }
-        return {data: retData, ticks: ticks};
+        return {data: sortAndAggregareFor(retData, 75), ticks: ticks};
 
     }
     function formatDataAggBysubNameImpl(data, propertyName) {
@@ -185,7 +220,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
         elem.label = "";
         elem.color = colors[colorIndex % colors.length];
         colorIndex++;
-        var errorCount = 0;
+        
         if (data.length > 0){
             for (var index in data[0].series) {
                 var series = data[0].series[index];
@@ -195,14 +230,12 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
                     total += series.data[i][1];
                     
                 }
-                /*if (series[propertyName].length !== 5) {   
-                    errorCount += total;
-                } else {*/
-                    elem.data.push([series[propertyName], total]);
-                //}
+                
+                elem.data.push([series[propertyName], total]);
             }
             retData.push(elem);
         }
+        
         return retData;
 
     }
@@ -322,11 +355,5 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
             $scope.xAxisMode = 'categories';               
         }
     };
-    
-    
-    
-    
-    
-
 
 }]);
