@@ -66,7 +66,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"New Visitors", "value":0, "icon":"icon-users"}, "#/app/dashboard/visitor-insight");
         $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Total Visitors", "value":0, "icon":"icon-users"}, "#/app/dashboard/visitor-insight");
         $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"Total Bookings", "value":0, "icon":"fa fa-shopping-cart"}, "#/app/dashboard/reservation-insight");
-        $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"Total Revenue", "value":0, "icon":"fa fa-dollar"}, "#");       
+        $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"Total Revenue", "value":0, "icon":"fa fa-dollar"}, "#/app/dashboard/revenue-insight");       
        
 
         //$scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"}, "#/app/dashboard/reservation-insight");
@@ -476,10 +476,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                     yaxis: {
                         min: 0,
                         tickColor: '#eee',
-                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                        tickFormatter: function (v) {
-                            return v/* + ' visitors'*/;
-                        }
+                        position: ($scope.app.layout.isRTL ? 'right' : 'left')
                     },
                     shadowSize: 0
                 };

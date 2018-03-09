@@ -13,9 +13,11 @@ App.directive('seriesBarChart',   function() {
       id: '@',
       mode: '@',
       formatDataFx : '&',
-      chartData: '@'
+      chartData: '@',
+       yAxisFormatter: '&' 
   	},
     link: function(scope, element, attrs) {
+      scope.yFn = angular.isUndefined(attrs.yAxisFormatter) === false;
       if (typeof scope.url !== 'undefined' && scope.url.length > 0) {
         scope.$watch('url',function(newValue,oldValue) {
           if (!newValue || angular.equals(newValue, oldValue)) {
@@ -58,7 +60,13 @@ App.directive('seriesBarChart',   function() {
               mode: 'categories'              
           },
            yaxis: {
-              tickColor: '#eee'
+              tickColor: '#eee',
+               tickFormatter: function(val, axis){
+                if ($scope.yFn) {
+                  return $scope.yAxisFormatter({val: val});
+                } 
+                return val;
+              }
 
           },
           shadowSize: 0

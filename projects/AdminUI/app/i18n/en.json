@@ -1,4 +1,6 @@
 {
+  "REVENUE_CAPACITY": "Revenue Capacity",
+  "REVENUE": "Actual Revenue",
   "EMAIL_OPEN": "Email Open",
   "NOTIF_OPEN": " Notification Open",
   "SMS_OPEN": "SMS Open",

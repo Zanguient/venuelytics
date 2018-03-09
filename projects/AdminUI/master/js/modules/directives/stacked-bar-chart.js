@@ -14,9 +14,12 @@ App.directive('stackedBarChart',   function() {
       mode: '@',
       formatDataFx : '&',
       yPos: '@',
-      chartData: '@'
+      chartData: '@',
+      yAxisFormatter: '&' 
   	},
     link: function(scope, element, attrs) {
+      scope.yFn = angular.isUndefined(attrs.yAxisFormatter) === false;
+
       if (typeof scope.url !== 'undefined' && scope.url.length > 0) {
         scope.$watch('url',function(newValue,oldValue) {
           if (!newValue || angular.equals(newValue, oldValue)) {
@@ -63,7 +66,14 @@ App.directive('stackedBarChart',   function() {
           },
           yaxis: {
               position: $scope.yPos,
-              tickColor: '#eee'
+              tickColor: '#eee', 
+              tickFormatter: function(val, axis){
+                if ($scope.yFn) {
+                  return $scope.yAxisFormatter({val: val});
+                } 
+                return val;
+              }
+
           },
           shadowSize: 0
       };
@@ -73,6 +83,11 @@ App.directive('stackedBarChart',   function() {
         if ($scope.mode === 'time') {
           $scope.option.series.bars.lineWidth = 1;
         }
+
+        /*if ($scope.yFn) {
+          $scope.option.yaxis.tickFormatter = $scope.yAxisFormatter;
+        }*/
+        
         if (typeof $scope.url !== 'undefined' && $scope.url.length > 0) {
           $scope.chart.setDataUrl($scope.url);
           $scope.chart.requestData($scope.option, 'GET', null, $scope.formatDataFx);

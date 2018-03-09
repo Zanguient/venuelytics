@@ -64,6 +64,13 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'ReservationDashBoardController',
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'flot-chart-plugins')
+            }).state('app.revenueInsight', {
+                url: '/dashboard/revenue-insight',
+                title: 'Revenue Insight',
+                templateUrl: basepath('analytics/revenue-insights.html'),
+                controller: 'RevenueDashBoardController',
+                data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
+                resolve: resolveFor('flot-chart', 'flot-chart-plugins')
             })
             .state('app.masonry', {
                 url: '/content',
