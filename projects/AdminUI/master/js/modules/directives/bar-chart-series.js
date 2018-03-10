@@ -41,7 +41,7 @@ App.directive('seriesBarChart',   function() {
           series: {
               bars: {
                   show: true,
-                  barWidth: 0.25,
+                  barWidth: 0.15,
                   align: 'center'
               }
           },

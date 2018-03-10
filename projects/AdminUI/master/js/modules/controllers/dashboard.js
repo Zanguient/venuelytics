@@ -133,7 +133,9 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         }
     };
 
-    
+    $scope.productInsight = function() {
+        $state.go('app.productInsight');
+    };
         
     $scope.top3FavItems = function () {
        /* var temp = $scope.selectedPeriod.toLowerCase();

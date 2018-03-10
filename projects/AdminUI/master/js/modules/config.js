@@ -57,6 +57,13 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'VisitorDashBoardController',
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'flot-chart-plugins')
+            }).state('app.vipInsight', {
+                url: '/dashboard/vip-insight',
+                title: 'VIP Visitor Insight',
+                templateUrl: basepath('analytics/vip-insights.html'),
+                controller: 'VIPDashBoardController',
+                data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
+                resolve: resolveFor('flot-chart', 'flot-chart-plugins')
             }).state('app.reservationInsight', {
                 url: '/dashboard/reservation-insight',
                 title: 'Reservation Insight',
@@ -69,6 +76,13 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 title: 'Revenue Insight',
                 templateUrl: basepath('analytics/revenue-insights.html'),
                 controller: 'RevenueDashBoardController',
+                data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
+                resolve: resolveFor('flot-chart', 'flot-chart-plugins')
+            }) .state('app.productInsight', {
+                url: '/dashboard/product-insight',
+                title: 'Product Insight',
+                templateUrl: basepath('analytics/product-insights.html'),
+                controller: 'ProductDashBoardController',
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'flot-chart-plugins')
             })
