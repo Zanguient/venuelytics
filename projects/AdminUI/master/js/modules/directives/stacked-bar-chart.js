@@ -67,6 +67,7 @@ App.directive('stackedBarChart',   function() {
           yaxis: {
               position: $scope.yPos,
               tickColor: '#eee', 
+              tickDecimals:0,
               tickFormatter: function(val, axis){
                 if ($scope.yFn) {
                   return $scope.yAxisFormatter({val: val});

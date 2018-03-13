@@ -79,7 +79,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
         
         return sortAndAggregareFor(resultData, 75);
 
-    }
+    };
 
     function sortAndAggregareFor(resultData, N) {
 
@@ -158,7 +158,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
             }
         }
         return {data: retData, ticks: $scope.barTicks};
-    }
+    };
 
     $scope.formatBarDataBy12 = function(data) {
         

@@ -61,6 +61,7 @@ App.directive('seriesBarChart',   function() {
           },
            yaxis: {
               tickColor: '#eee',
+              tickDecimals: 0,
                tickFormatter: function(val, axis){
                 if ($scope.yFn) {
                   return $scope.yAxisFormatter({val: val});

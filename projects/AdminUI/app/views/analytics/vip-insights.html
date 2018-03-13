@@ -18,13 +18,13 @@
   <div class="row">
     <div class="col-md-12 col-sm-12">
       <!-- START widget-->
-      <div id="visitorBarChart" class="panel panel-default">
+      <div id="vipBarChart" class="panel panel-default">
          <div class="panel-heading">
             <div class="panel-title">Top Customers by Visits</div>
          </div>
-         <div collapse="visitorBarChart" class="panel-wrapper">
+         <div collapse="vipBarChart" class="panel-wrapper">
             <div class="panel-body mb-lg">
-               <stacked-bar-chart id="visitorsChart" url="{{visitorRequestUrl}}" format-data-fx="formatStackData"
+               <stacked-bar-chart id="vipBarChartComponent" url="{{vipRequestUrl}}" format-data-fx="formatDataAggByNameByTotal"
                class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
             </div>
          </div>
@@ -35,18 +35,19 @@
   <div class="row">
     <div class="col-md-12 col-sm-12">
       <!-- START widget-->
-      <div id="visitorBarChart" class="panel panel-default">
+      <div id="vipBarChart1" class="panel panel-default">
          <div class="panel-heading">
-            <div class="panel-title">Top Customers by Spend</div>
+            <div class="panel-title">Top Customers by Visits</div>
          </div>
-         <div collapse="visitorBarChart" class="panel-wrapper">
+         <div collapse="vipBarChart1" class="panel-wrapper">
             <div class="panel-body mb-lg">
-               <series-bar-chart id="visitorsChartServiceType" url="{{visitorRequestByServiceType}}" format-data-fx="formatBarData"
-               class="flot-chart rotateLabel" mode="{{xAxisMode}}" ></series-bar-chart>
+               <stacked-bar-chart id="vipBarChartComponent1" url="{{vipRequestRevenueUrl}}" format-data-fx="formatDataAggByNameByTotal"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
             </div>
          </div>
       </div>
       <!-- END widget-->
     </div>
   </div>
+ 
 </div>
