@@ -67,7 +67,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-6 col-sm-12">
       <!-- START widget-->
       <div id="canceledBarChart1" class="panel panel-default">
          <div class="panel-heading">
@@ -83,8 +83,8 @@
       <!-- END widget-->
     </div>
 
-    <!-- <div class="col-md-4 col-sm-12">
-      START widget
+    <div class="col-md-6 col-sm-12">
+     
       <div id="canceledBarChart2" class="panel panel-default">
          <div class="panel-heading">
             <div class="panel-title">Canceled Reservations - By Service Type</div>
@@ -96,23 +96,22 @@
             </div>
          </div>
       </div>
-      END widget
+     
     </div>
-    <div class="col-md-4 col-sm-12">
-      START widget
+    <div class="col-md-12 col-sm-12">
+     
       <div id="canceledBarChart3" class="panel panel-default">
          <div class="panel-heading">
             <div class="panel-title">Canceled Reservations - By Occasion</div>
          </div>
          <div collapse="canceledBarChart3" class="panel-wrapper">
             <div class="panel-body  mb-lg">
-               <stacked-bar-chart id="canceledChartReason" url="{{canceledRequestByValue}}" format-data-fx="formatStackDataForSubName"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+               <stacked-bar-chart id="canceledChartReason" url="{{canceledRequestByValue}}" format-data-fx="formatDataAggBysubNameByTotal"
+               class="flot-chart rotateLabel" mode="{{xAxisMode}}" ></stacked-bar-chart>
             </div>
          </div>
       </div>
-      END widget
-    </div> -->
+    </div>
   </div>
 
 
@@ -126,7 +125,7 @@
          <div collapse="zipBarChart1" class="panel-wrapper">
             <div class="panel-body mb-xxl">
                <stacked-bar-chart id="zipChart" url="{{cityRequestByValue}}" format-data-fx="formatDataAggBysubNameByTotal"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="categories"></stacked-bar-chart>
+               class="flot-chart rotateLabel" mode="categories"></stacked-bar-chart>
             </div>
          </div>
       </div>

@@ -98,7 +98,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
                     remainingTotal += second[idx][1];
                 }
 
-                firstOne.push(["Other " +  second.length +" cities", remainingTotal]);
+                firstOne.push(["Remaining: " +  second.length , remainingTotal]);
                 resultData[tIdx].data = firstOne;
             }
         }
@@ -210,6 +210,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
         return {data: sortAndAggregareFor(retData, 75), ticks: ticks};
 
     }
+
     function formatDataAggBysubNameImpl(data, propertyName) {
 
         var retData = [];
