@@ -16,7 +16,7 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare', '$
         $rootScope.selectedTab = 'home';
         $rootScope.videoUrl = APP_LINK.VIDEO_PLAY;
         $scope.iPhoneImage = true;
-
+        $scope.business = {};
         $scope.carouselData = [
             // {image: 'screen2.jpg', title: 'home.REAL_TIME_HOME', details: 'home.PERSONALIZED_SERVICES'},
             //{image: '2.jpg', title: 'home.REAL_TIME', details: 'home.RESERVATION_FOOD_DRINK'},
@@ -141,17 +141,22 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare', '$
             self.sendEmail(email, 'homepage-claim-business', '30DaysFree', true);
         };
 
-        self.searchName = function (subscribeName) {
-            var business = $scope.business;
-            var subscribeName = {
-                "email": $rootScope.successEmail,
-                "businessName": business.businessName
+        self.searchName = function () {
+            
+            $rootScope.businessName = $scope.business.businessName;
+            $rootScope.businessAddress = $scope.business.businessAddress;
+            
+            var q = "";
+
+            if ( typeof($scope.business.businessName) != 'undefined' && $scope.business.businessName.length > 0) {
+                q = q + "name=" + $scope.business.businessName;
             }
-            AjaxService.searchBusiness(subscribeName).then(function (response) {
-                $rootScope.subscribeName = subscribeName.businessName;
-                $rootScope.subscribeName = subscribeName.email;
-                $location.url("/searchBusiness?s=" + subscribeName.businessName);
-            })
+
+            if ( typeof($scope.business.businessAddress) != 'undefined' && $scope.business.businessAddress.length > 0) {
+                q = q + "&s=" + $scope.business.businessAddress;
+            }
+             
+            $location.url("/searchBusiness?" + q);
         };
 
         self.saveBusiness = function () {

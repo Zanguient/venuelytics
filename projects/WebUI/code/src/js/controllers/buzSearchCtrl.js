@@ -31,9 +31,19 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
             self._Index = 0;
 
             var urlPattern = $location.absUrl();
+            self.searchAddress = "";
+            self.searchName = "";
 
-            self.searchBusiness = $location.search().s;
+            if (!!$location.search().s) {
+                self.searchAddress = $location.search().s;    
+            }
 
+            if (!!$location.search().name) {
+                self.searchName = $location.search().name;
+
+            }
+
+            
             var data = urlPattern.split(".");
             if (data[1] === "itzfun") {
                 $rootScope.facebook = APP_LINK.FACEBOOK_VENUELYTICS;
@@ -92,15 +102,15 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
 
 
 
-            if (typeof (self.searchBusiness) !== 'undefined' && self.searchBusiness.length > 0) {
-                self.search(self.searchBusiness);
+            if (typeof (self.searchName) !== 'undefined' && self.searchName.length > 0) {
+                self.search(self.searchName, self.searchAddress);
             }
         };
 
-        self.search = function (business) {
-            self.searchBusiness = business;
+        self.search = function (name, address) {
+            
             $window.scrollTo(0, 0);
-            AjaxService.searchBusiness(business).then(function (response) {
+            AjaxService.searchBusiness(name, address).then(function (response) {
                 self.businessDetails = response.data.venues;
                 self.businessDetailLength = self.businessDetails.length;
                 angular.forEach(self.businessDetails, function (value, key) {

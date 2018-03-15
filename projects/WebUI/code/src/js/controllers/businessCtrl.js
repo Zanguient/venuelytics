@@ -8,6 +8,7 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
 
         $rootScope.showItzfun = false;
         $rootScope.selectedTab = 'business';
+        $scope.business = {};
 
         self.init = function () {
             ngMeta.setTitle("Real Time Venue Management Platform");
@@ -57,17 +58,23 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
         };
 
 
-        self.searchName = function (subscribeName) {
-            var business = $scope.business;
-            var subscribeName = {
-                "email": $rootScope.successEmail,
-                "businessName": business.businessName
+        self.searchName = function () {
+            
+            $rootScope.businessName = $scope.business.businessName;
+            $rootScope.businessAddress = $scope.business.businessAddress;
+            
+            var q = "";
+
+            if ( typeof($scope.business.businessName) != 'undefined' && $scope.business.businessName.length > 0) {
+                q = q + "name=" + $scope.business.businessName;
             }
-            AjaxService.searchBusiness(subscribeName).then(function (response) {
-                $rootScope.subscribeName = subscribeName.businessName;
-                $rootScope.subscribeName = subscribeName.email;
-                $location.url("/searchBusiness?s=" + subscribeName.businessName);
-            })
+
+            if ( typeof($scope.business.businessAddress) != 'undefined' && $scope.business.businessAddress.length > 0) {
+                q = q + "&s=" + $scope.business.businessAddress;
+            }
+
+            $location.url("/searchBusiness?" + q);
+
         };
 
         self.saveBusiness = function () {

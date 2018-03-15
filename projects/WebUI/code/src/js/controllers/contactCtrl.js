@@ -21,7 +21,9 @@ app.controller('AboutController', ['$scope', '$http', '$location', 'RestURL', 'D
     function ( $scope, $http, $location, RestURL, DataShare, $translate, PRICING_APP, $rootScope, AjaxService, ngMeta) {
 
     var self = $scope;
+    
     $rootScope.selectedTab = 'about';
+    $scope.business = {};
 
     self.claimBusiness = function(email) {
 
@@ -41,17 +43,23 @@ app.controller('AboutController', ['$scope', '$http', '$location', 'RestURL', 'D
         }
     };
 
-        self.searchAboutName = function (subscribeName) {
-            var business = $scope.business;
-            var subscribeName = {
-                "email": $rootScope.successEmail,
-                "businessName": business.businessName
+        self.searchAboutName = function () {
+            
+            $rootScope.businessName = $scope.business.businessName;
+            $rootScope.businessAddress = $scope.business.businessAddress;
+            
+            var q = "";
+
+            if ( typeof($scope.business.businessName) != 'undefined' && $scope.business.businessName.length > 0) {
+                q = q + "name=" + $scope.business.businessName;
             }
-            AjaxService.searchBusiness(subscribeName).then(function (response) {
-                $rootScope.subscribeName = subscribeName.businessName;
-                $rootScope.subscribeName = subscribeName.email;
-                $location.url("/searchBusiness?s=" + subscribeName.businessName);
-            })
+
+            if ( typeof($scope.business.businessAddress) != 'undefined' && $scope.business.businessAddress.length > 0) {
+                q = q + "&s=" + $scope.business.businessAddress;
+            }
+
+            $location.url("/searchBusiness?" + q);
+           
         };
 
     self.saveBusiness = function() {
