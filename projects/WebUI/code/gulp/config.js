@@ -76,6 +76,10 @@ module.exports = {
             'bower_components/ngstorage/ngStorage.min.js',
             'bower_components/ngclipboard/dist/ngclipboard.min.js'
         ],
+        js_sourcemap: [
+            'bower_components/iframe-resizer/js/iframeResizer.contentWindow.map',
+            'bower_components/iframe-resizer/js/iframeResizer.map',
+        ],
         css : [
             'bower_components/animate.css/animate.min.css',
             'bower_components/bootstrap/dist/css/bootstrap.min.css',
