@@ -167,6 +167,8 @@ app
       { key: "23:30", value: "11:30 PM" },
     ],
     'blogPosts': {
+      "dj-playboi":"blogs/dj-Playboi.html",
+      "Bottle-vs-Table-Service":"blogs/bottlevstable.html",
       "What-Is-Bottle-Service-and-Facts-You-Should-Know": "blogs/blog-bottle-service.html",
       "What-Is-the-Guest-List-and-How-to-Get-On-It": "blogs/blog-guest-list.html",
       "7-Mind-Blowing-Nightlife-Cities-in-the-United-States": "blogs/blog-post-list.html",
@@ -190,6 +192,8 @@ app
     },
 
     'blogPostsImages': {
+      "dj-playboi":"blogs/dj-Playboi.jpg",
+      "Bottle-vs-Table-Service":"assets/img/blog/bottlevstable.jpg",
       "What-Is-Bottle-Service-and-Facts-You-Should-Know": "assets/img/blog/blog-2.jpg",
       "What-Is-the-Guest-List-and-How-to-Get-On-It": "assets/img/blog/blog-3.jpg",
       "7-Mind-Blowing-Nightlife-Cities-in-the-United-States": "assets/img/blog/blog-1.jpg",
@@ -211,6 +215,8 @@ app
     },
 
     'blogPostsTitle': {
+      "dj-playboi":"Our Exclusive Interview with the One and Only DJ Playboi",
+      "Bottle-vs-Table-Service":"Bottle Service and Table Service - What Is the Difference?",
       "kat-bein": "Our Exclusive Interview with The Queen of Nightlife, Kat Bein",
       "7tips-bar": "7 Tips to Become a Successful Bar Manager",
       "dj-epps": "Our Exclusive Interview with DJ EPPS",
@@ -232,6 +238,8 @@ app
 
     },
     'blogPostDescription': {
+      "dj-playboi":"We recently got a chance to interview the amazingly talented DJ Playboi. And, here we present to you the multi talented DJ Playboi and our amazing Q&A.",
+      "Bottle-vs-Table-Service":"Bottle service and Table service are pretty popular in the major metropolitan cities. Many people are confused with the terms 'Bottle Service' and 'Table Service' ... ",
       "7-Mind-Blowing-Nightlife-Cities-in-the-United-States": "Who doesn't like to Party? And who doesn't like Casinos, Clubs, and Live Music Bars? We all wait till Friday just to get our own time from the hectic busy schedules so that we go out and have some fun with our friends and family. When it comes to the United States, you will have many choices to have a good time, and it's hard to select one city over other since every city here has its own charisma. Well, let us all say TGIF and check out some mind blowing nightlife cities in the USA that will make you say 'WOW'.",
       "What-Is-Bottle-Service-and-Facts-You-Should-Know": "Bottle service is also called table service, and it is the ONLY way to secure a table at your favorite party place (Bar, Pub, Nightclub, etc.). Almost all clubs these days have VIP tables arranged throughout the club. The only way to get on the guest list and bypass the line for any bar/pub/nightclub is to reserve a table. Wikipedia defines bottle service as the sale of liquor by the bottle in most American lounges and nightclubs. The purchase of bottle service typically includes a reserved table for the patron's party and mixers of the patron's choice.",
       "What-Is-the-Guest-List-and-How-to-Get-On-It": "Guest list might be a bit confusing term to some people who are new to nightclubs, bars, and pubs. Today, we are going to explain this term and some more things attached to it. All these nightlife venues maintain their own dignity and culture, and you cannot just enter any nightclub and have your drinks. Well, you can go and have drinks, but at the famous places and the partying places with high demand, it is not easy.",
@@ -254,6 +262,8 @@ app
 
     },
     'blogs': [
+      { "title": "Our Exclusive Interview with the One and Only DJ Playboi", "image": "assets/img/blog/dj-playboi.jpg", "description": "We recently got a chance to interview the amazingly talented DJ Playboi. And, here we present to you the multi talented DJ Playboi and our amazing Q&A.", "link": "dj-playboi" },
+      { "title": "Bottle Service and Table Service - What Is the Difference?", "image": "assets/img/blog/bottlevstable.jpg", "description": "Bottle service and Table service are pretty popular in the major metropolitan cities. Many people are confused with the terms 'Bottle Service' and 'Table Service' ... ", "link": "Bottle-vs-Table-Service" },
       { "title": "7 Tips to Become a Successful Bar Manager", "image": "assets/img/blog/7tips-bar.png", "description": "The United States has so many bars, and all these bars have bar managers. Have you ever thought about being a bar manager? You just want to be a bar manager or a successful bar manager?", "link": "7tips-bar" },
       { "title": "Our Exclusive Interview with The Queen of Nightlife, Kat Bein", "image": "assets/img/blog/kat_bein.png", "description": "Kat Bein is the name when it comes to nightlife articles on the internet. Her amazing writing style and in depth knowledge on music has made her a notable influencer in the entertainment industry.", "link": "kat-bein" },
       { "title": "Our Exclusive Interview With DJ Epps", "image": "assets/img/blog/DJEPPS.png", "description": "Today we have with us the DJ Epps to share his experience about Djing and other facets of his life.", "link": "dj-epps" },
