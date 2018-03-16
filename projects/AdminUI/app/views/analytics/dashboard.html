@@ -18,6 +18,12 @@
    </div>   
 </div>
 
+<div class="row">
+  <plain-card-widget card="popularDay"></plain-card-widget>
+  <plain-card-widget card="popularTime"></plain-card-widget>
+  <plain-card-widget card="cancels"></plain-card-widget>
+  <plain-card-widget card="advBooking"></plain-card-widget>
+</div>
 
 <div class="row">
    <div class="col-md-6 col-sm-12">
@@ -28,7 +34,7 @@
            <div class="panel-title">Booking Requests</div>
         </div>
         <div collapse="panelReservationBarChart" class="panel-wrapper">
-           <div class="panel-body">
+           <div class="panel-body mb-xxl">
               <stacked-bar-chart id="bookingRequestChart" url="{{bookingRequestUrl}}" format-data-fx="formatStackData"
               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
            </div>
@@ -44,7 +50,7 @@
            <div class="panel-title">Top Products</div>
         </div>
         <div collapse="panelTopProductsBarChart" class="panel-wrapper">
-           <div class="panel-body col-xs-12 mb-xxl">
+           <div class="panel-body mb-xxl">
               <series-bar-chart id="topRequestChart1" chart-data="{{topProductsData}}" 
               class="flot-chart rotateLabel" mode="categories"></series-bar-chart>
            
@@ -81,22 +87,8 @@
    </div>
 </div>
 <div class="row">
-   <div class="col-md-4 col-sm-12">
-      <!-- START widget-->
-      <div class="panel widget bg-danger panel_grad_darker cpointer"  ng-click="inbox()" >
-        
-         <div class="row row-table">
-            <div class="col-xs-4 text-center bg-danger-dark panel_grad_darker pv-lg">
-               <em class="fa fa-inbox fa-3x"></em>
-            </div>
-            <div class="col-xs-8 pv-lg">
-               <div class="h1 m0 text-bold">{{notificationCount}}</div>
-               <div class="text-uppercase">New Messages</div>
-            </div>
-         </div>
-        
-      </div>
-   </div>
+  <plain-card-widget card="messages" class="cpointer" ng-click="inbox()"></plain-card-widget>
+
    <div class="col-md-4 col-sm-12">
       <div class="panel widget bg-success panel_grad_darker">
          <div class="row row-table">
@@ -121,17 +113,5 @@
          </div>
       </div>
    </div>
-   <div class="col-md-4 col-sm-12">
-      <div class="panel widget bg-warning panel_grad_darker">
-         <div class="row row-table">
-            <div class="col-xs-4 text-center bg-warning-dark panel_grad_darker pv-lg">
-               <em class="fa fa-file-text-o  fa-3x"></em>
-            </div> 
-            <div class="col-xs-8 pv-lg">
-               <div class="h1 m0 text-bold">{{guests.length}}</div>
-               <div class="text-uppercase">Today's Guest Count</div>
-            </div>
-         </div>
-      </div>
-   </div>
+   <plain-card-widget card="guestsCard" class="cpointer"></plain-card-widget>
 </div>

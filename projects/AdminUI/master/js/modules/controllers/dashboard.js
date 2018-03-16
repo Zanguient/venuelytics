@@ -27,7 +27,13 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.topProductsWeek = {};
     $scope.topProductsMonth = {};
     $scope.topProductsYear = {};
-
+    $scope.popularDay = {icon: 'fa-sun-o', bgColor: 'bg-purple', bgColorSecondary: 'bg-purple-dark', label: 'Popular Day', value: ' '};
+    $scope.popularTime = {icon: 'fa-clock-o', bgColor: 'bg-info', bgColorSecondary: 'bg-info-dark', label: 'Popular Time', value: ' '};
+    $scope.cancels = {icon: 'fa-times-circle-o',bgColor: 'bg-green', bgColorSecondary: 'bg-green-dark', label: 'Cancelations', value: 0};
+    $scope.messages = {bgColor: 'bg-danger', bgColorSecondary: 'bg-danger-dark', label: 'New Messages', value: ''};
+    $scope.guestsCard = {bgColor: 'bg-warning', bgColorSecondary: 'bg-warning-dark', label: 'Today\'s Guest Count', value: 0};
+    $scope.advBooking = {icon: 'fa-ticket',bgColor: 'bg-gray', bgColorSecondary: 'bg-gray-dark', label: 'Total Advance Bookings', value: 0};
+    
     $scope.currencyFormatter =  {
         format : function(num) {
                 if (num >= 1000000000) {
@@ -86,6 +92,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         });
         RestServiceFactory.VenueService().getGuests({id: $scope.effectiveVenueId, date: moment().format('YYYYMMDD')}, function(data){
            $scope.guests = data;
+           guestsCard.value = $scope.guests.length;
         },function(error){
             /*if (typeof error.data !== 'undefined') { 
                 toaster.pop('error', "Server Error", error.data.developerMessage);
@@ -115,7 +122,10 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                  $scope.bookingRequestByZipcodeData.push(stackedBarDataStage[key]);
             }
         }
-        
+        $scope.popularDay.value = findMaxForType($scope.popularDays, $scope.selectedPeriod);
+        $scope.popularTime.value = findMaxForType($scope.popularTimes, $scope.selectedPeriod);
+        $scope.advBooking.value = addForType($scope.advBookings, $scope.selectedPeriod);
+
         console.log(JSON.stringify($scope.bookingRequestByZipcodeData));
         //$scope.top3FavItems(); 
         $scope.bookingRequestChart();
@@ -222,6 +232,25 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         } else {
             $scope.topProductsYear = {};
         }
+
+        if (typeof data.POPULAR_DAY   !== 'undefined' && data.POPULAR_DAY.length > 0) {
+             $scope.popularDays = data.POPULAR_DAY;
+        } else {
+            $scope.popularDays = [];
+        }
+
+        if (typeof data.POPULAR_TIME   !== 'undefined' && data.POPULAR_TIME.length > 0) {
+             $scope.popularTimes = data.POPULAR_TIME;
+        } else {
+            $scope.popularTimes = [];
+        }
+
+        if (typeof data.VENUE_BOOKINGS_ADV   !== 'undefined' && data.VENUE_BOOKINGS_ADV.length > 0) {
+             $scope.advBookings = data.VENUE_BOOKINGS_ADV;
+        } else {
+            $scope.advBookings = [];
+        }
+
 
         $scope.setDisplayData();
 
@@ -389,7 +418,26 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         }
         return sum;
     }
+    function findMaxForType(dataArray, type) {
+        var popularDay = 'N/A';
+        if (dataArray == null || typeof dataArray === 'undefined') {
+            return popularDay;
+        }
+        var maxValue = -1;
+        for (var i = 0; i < dataArray.length; i++) {
+            if (type === 'YEARLY' && maxValue < dataArray[i].lastYearValue) {
+                popularDay = dataArray[i].analyticsLabel;
+            } else if (type === 'MONTHLY' && maxValue < dataArray[i].lastMonthValue) {
+                popularDay = dataArray[i].analyticsLabel;               
+            } else if (type === 'WEEKLY' && maxValue < dataArray[i].lastWeekValue) {
+                popularDay = dataArray[i].analyticsLabel;
+            } else if (type === 'DAILY' && maxValue < dataArray[i].lastDayValue) {
+                popularDay = dataArray[i].analyticsLabel;
+            }
+        }
+        return popularDay;
 
+    }
     $scope.setPeriod = function(period) {
         if ($scope.selectedPeriod !== period){
             $scope.selectedPeriod = period;
@@ -412,6 +460,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         var promise2 = RestServiceFactory.NotificationService().getUnreadNotificationCount({id: $scope.effectiveVenueId});   
         promise2.$promise.then(function(data) {
             $scope.notificationCount = data.count;
+            $scope.messages.value = data.count;
         });
 	};
 	function createPDO( color, dataObject, link){
