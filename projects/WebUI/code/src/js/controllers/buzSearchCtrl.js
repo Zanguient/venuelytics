@@ -150,19 +150,15 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
             self.claimB = {};
         };
 
-        self.email = function () {
-            $location.path("/deployment/" + DataShare.venueNumber);
+        
+        self.sendViaEmail = function() {
+            var mail = 'mailto:?subject=Re:Deployment Steps for venue: ' + self.selectedVenueName +
+               '&body=' + escape($scope.embedServicesHTML);
+               console.log(mail);
+            $window.open(mail);
         };
 
-
-        self.sendEmail = function (email) {
-            if ((email !== undefined) && (email !== '')) {
-                $('#subscribeModalBusiness').modal('show');
-                $('.modal-backdrop').remove();
-                $rootScope.successEmail = email;
-            }
-        };
-
+    
         self.businessSubmitWithCheck = function (selectedVenue, businessClaim) {
             self.currentSelectedVenue = selectedVenue;
             if (_UDF(businessClaim.name) || _UDF(businessClaim.email) || _UDF(businessClaim.mobile) || _UDF(businessClaim.role)) {
