@@ -92,7 +92,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         });
         RestServiceFactory.VenueService().getGuests({id: $scope.effectiveVenueId, date: moment().format('YYYYMMDD')}, function(data){
            $scope.guests = data;
-           guestsCard.value = $scope.guests.length;
+           $scope.guestsCard.value = $scope.guests.length;
         },function(error){
             /*if (typeof error.data !== 'undefined') { 
                 toaster.pop('error', "Server Error", error.data.developerMessage);
@@ -441,12 +441,16 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         for (var i = 0; i < dataArray.length; i++) {
             if (type === 'YEARLY' && maxValue < dataArray[i].lastYearValue) {
                 popularDay = dataArray[i].analyticsLabel;
+                maxValue = dataArray[i].lastYearValue;
             } else if (type === 'MONTHLY' && maxValue < dataArray[i].lastMonthValue) {
-                popularDay = dataArray[i].analyticsLabel;               
+                popularDay = dataArray[i].analyticsLabel;   
+                 maxValue = dataArray[i].lastMonthValue;            
             } else if (type === 'WEEKLY' && maxValue < dataArray[i].lastWeekValue) {
                 popularDay = dataArray[i].analyticsLabel;
+                maxValue = dataArray[i].lastWeekValue;
             } else if (type === 'DAILY' && maxValue < dataArray[i].lastDayValue) {
                 popularDay = dataArray[i].analyticsLabel;
+                maxValue = dataArray[i].lastDayValue;
             }
         }
         return popularDay;
