@@ -78,11 +78,18 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'RevenueDashBoardController',
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'flot-chart-plugins')
-            }) .state('app.productInsight', {
+            }).state('app.productInsight', {
                 url: '/dashboard/product-insight',
                 title: 'Product Insight',
                 templateUrl: basepath('analytics/product-insights.html'),
                 controller: 'ProductDashBoardController',
+                data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
+                resolve: resolveFor('flot-chart', 'flot-chart-plugins')
+            }).state('app.cityInsight', {
+                url: '/dashboard/city-insight',
+                title: 'City Insight',
+                templateUrl: basepath('analytics/city-insights.html'),
+                controller: 'CityInsightController',
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'flot-chart-plugins')
             }).state('app.cancelInsight', {

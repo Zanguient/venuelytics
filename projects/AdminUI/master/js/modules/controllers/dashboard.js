@@ -745,6 +745,10 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $state.go('app.reservationInsight');
     };
 
+    $scope.cityInsight = function() {
+        $state.go('app.cityInsight');
+    };
+
     $scope.donutInit();
     $scope.init();
 
