@@ -160,7 +160,7 @@ app.controller('BusinessSearchController', ['$log', '$translate','$scope', '$htt
                 text += $scope.deploymentServices[idx].url +'\n\n ';
 
             }
-            var mail = 'mailto:?subject=Re:Deployment Steps for venue: ' + self.selectedVenueName +
+            var mail = 'mailto:?subject=Re: Deployment Steps for venue: ' + self.selectedVenueName +
                '&body=' + encodeURIComponent(text) + '\n\n' +encodeURIComponent($scope.embedServicesHTML);
                console.log(mail);
             $window.open(mail);
