@@ -1,6 +1,6 @@
 "use strict";
-app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', 'AjaxService', 'APP_ARRAYS', '$rootScope', '$routeParams', 'APP_LINK', '$templateCache', 'ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams, APP_LINK, $templateCache, ngMeta) {
+app.controller('BusinessSearchController', ['$log', '$translate','$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', 'AjaxService', 'APP_ARRAYS', '$rootScope', '$routeParams', 'APP_LINK', '$templateCache', 'ngMeta',
+    function ($log, translate, $scope, $http, $location, RestURL, DataShare, $window, AjaxService, APP_ARRAYS, $rootScope, $routeParams, APP_LINK, $templateCache, ngMeta) {
 
         $log.log('Inside Business Search Controller');
 
@@ -152,8 +152,16 @@ app.controller('BusinessSearchController', ['$log', '$scope', '$http', '$locatio
 
         
         self.sendViaEmail = function() {
+
+            var text ='Share the following links on your social media.\n\n';
+
+            for (var idx in $scope.deploymentServices) {
+                text +=  translate.instant($scope.deploymentServices[idx].displayName) +'\n ';
+                text += $scope.deploymentServices[idx].url +'\n\n ';
+
+            }
             var mail = 'mailto:?subject=Re:Deployment Steps for venue: ' + self.selectedVenueName +
-               '&body=' + escape($scope.embedServicesHTML);
+               '&body=' + encodeURIComponent(text) + '\n\n' +encodeURIComponent($scope.embedServicesHTML);
                console.log(mail);
             $window.open(mail);
         };
