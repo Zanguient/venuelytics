@@ -125,6 +125,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.popularDay.value = findMaxForType($scope.popularDays, $scope.selectedPeriod);
         $scope.popularTime.value = findMaxForType($scope.popularTimes, $scope.selectedPeriod);
         $scope.advBooking.value = addForType($scope.advBookings, $scope.selectedPeriod);
+        $scope.cancels.value = addForType($scope.cancelBookings, $scope.selectedPeriod);
 
         console.log(JSON.stringify($scope.bookingRequestByZipcodeData));
         //$scope.top3FavItems(); 
@@ -146,7 +147,14 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.productInsight = function() {
         $state.go('app.productInsight');
     };
-        
+     $scope.popularInsight = function() {
+        $state.go('app.popularInsight');
+    };
+    
+    $scope.cancelInsights = function() {
+      $state.go('app.cancelInsight');  
+    };
+
     $scope.top3FavItems = function () {
        /* var temp = $scope.selectedPeriod.toLowerCase();
         var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
@@ -249,6 +257,12 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
              $scope.advBookings = data.VENUE_BOOKINGS_ADV;
         } else {
             $scope.advBookings = [];
+        }
+
+         if (typeof data.VENUE_BOOKINGS_CANCELED   !== 'undefined' && data.VENUE_BOOKINGS_CANCELED.length > 0) {
+             $scope.cancelBookings = data.VENUE_BOOKINGS_CANCELED;
+        } else {
+            $scope.cancelBookings = [];
         }
 
 

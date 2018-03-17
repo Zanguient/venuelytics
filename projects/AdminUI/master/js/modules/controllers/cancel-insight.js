@@ -1,22 +1,10 @@
 'use strict';
-App.controller('ReservationDashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService', 'APP_EVENTS', 'RestServiceFactory','$translate','Session','$state',
+App.controller('CancelDashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService', 'APP_EVENTS', 'RestServiceFactory','$translate','Session','$state',
                                       function($log, $scope, $window, $http, $timeout, contextService, APP_EVENTS, RestServiceFactory, $translate, session, $state) {
 	
     
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
-    var monthNames = [];
-    monthNames["Jan"] = 0;
-    monthNames["Feb"] = 1;
-    monthNames["Mar"] = 2;
-    monthNames["Apr"] = 3;
-    monthNames["May"] = 4;
-    monthNames["Jun"] = 5;
-    monthNames["Jul"] = 6;
-    monthNames["Aug"] = 7;
-    monthNames["Sep"] = 8;
-    monthNames["Oct"] = 9;
-    monthNames["Nov"] = 10;
-    monthNames["Dec"] = 11;
+   
     var colors = ["#51bff2", "#4a8ef1", "#3cb44b","#0082c8", "#911eb4", "#e6194b","#f0693a", "#f032e6 ", "#f58231","#d2f53c", "#ffe119","#a869f2", "#008080","#aaffc3", "#e6beff", "#aa6e28", "#fffac8","#800000","#808000 ","#ffd8b1","#808080","#808080"];
     $scope.barTicks =[];
 
@@ -25,22 +13,15 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
     $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
     $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
     
-    $scope.reservationRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ReservedBookingsCount', 'Weekly', 'scodes=BPK');
-    $scope.reservationDayRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ReservedBookingsCount', 'Day', 'scodes=BPK');
-    $scope.reservationRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ReservedBookingsByServiceType', 'Weekly', 'scodes=BPK');
-    $scope.reservationRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ServiceTypeByReason', 'Weekly', 'scodes=BPK');
-
-    $scope.cityRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByServiceType', 'Weekly', 'scodes=BPK');
-    $scope.cityRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByOccasion', 'Weekly', 'scodes=BPK');
-
-
-    $scope.performanceRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'AdvanceBookingsByAVG', 'Weekly', 'scodes=BPK');
-
+   
+    $scope.canceledRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CanceledBookingsCount', 'Weekly', 'scodes=BPK');
+    $scope.canceledRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CanceledBookingsByServiceType', 'Weekly', 'scodes=BPK');
+    $scope.canceledRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CanceledByOccasion', 'Weekly', 'scodes=BPK');
 
 
     $scope.init = function() {
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
-        $scope.reservationStatsChart();
+        $scope.cancelStatsChart();
        
     };
 
@@ -50,7 +31,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
     $scope.setPeriod = function(period) {
         if ($scope.selectedPeriod !== period){
             $scope.selectedPeriod = period;
-            $scope.reservationStatsChart();
+            $scope.cancelStatsChart();
              
         }
     };
@@ -326,23 +307,14 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
     });  
 
 
-    $scope.reservationStatsChart = function() {
+    $scope.cancelStatsChart = function() {
            
         var temp = $scope.selectedPeriod.toLowerCase();
         var aggPeriodType = temp.charAt(0).toUpperCase() + temp.slice(1);
         
-        $scope.reservationRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ReservedBookingsCount', aggPeriodType, 'scodes=BPK');
-        $scope.reservationDayRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ReservedBookingsCount', 'Day', 'scodes=BPK');
-        
-        $scope.reservationRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ReservedBookingsByServiceType', aggPeriodType, 'scodes=BPK');
-        $scope.reservationRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ServiceTypeByReason', aggPeriodType, 'scodes=BPK');
-
-        $scope.cityRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByServiceType', aggPeriodType, 'scodes=BPK');
-        $scope.cityRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByOccasion', aggPeriodType, 'scodes=BPK');
-
-
-         $scope.performanceRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'AdvanceBookingsByAVG', aggPeriodType, 'scodes=BPK');
-
+        $scope.canceledRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CanceledBookingsCount', aggPeriodType, 'scodes=BPK');
+        $scope.canceledRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CanceledBookingsByServiceType', aggPeriodType, 'scodes=BPK');
+        $scope.canceledRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CanceledByOccasion', aggPeriodType, 'scodes=BPK');
 
         $scope.xAxisMode = 'categories'; 
         if ($scope.selectedPeriod === 'DAILY') {
