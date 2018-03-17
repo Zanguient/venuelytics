@@ -1,3 +1,32 @@
+<style>
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 46%; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}    
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+  
+  .x.axis path {
+    display: none;
+  }
+  
+  </style>
+
 <h3>
    <div class="row">
      <div class="col-lg-7">
@@ -47,16 +76,33 @@
       </div>
       <!-- END widget-->
     </div>
+
     <div class="col-md-12 col-sm-12">
       <!-- START widget-->
       <div id="visitorBarChart" class="panel panel-default">
          <div class="panel-heading">
-            <div class="panel-title">New Visitors - By Occasion</div>
+            <div class="panel-title">New Visitors - By Occasion - Old</div>
          </div>
          <div collapse="visitorBarChart" class="panel-wrapper">
             <div class="panel-body">
                <series-bar-chart id="visitorsChartReason" url="{{visitorRequestByValue}}" format-data-fx="formatBarDataForSubName"
                class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart>
+            </div>
+         </div>
+      </div>
+      <!-- END widget-->
+    </div>
+
+    <div class="col-md-12 col-sm-12">
+      <!-- START widget-->
+      <div id="visitorBarChart" class="panel panel-default">
+         <div class="panel-heading">
+            <div class="panel-title">New Visitors - By Occasion - New</div>
+         </div>
+         <div collapse="visitorBarChart" class="panel-wrapper">
+            <div class="svg-container">
+               <nj-bar-chart id="visitorsChartReasonD3"  parameter="{{responseValue}}"
+                ></nj-bar-chart>
             </div>
          </div>
       </div>
