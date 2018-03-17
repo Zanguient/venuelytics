@@ -85,6 +85,20 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'ProductDashBoardController',
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'flot-chart-plugins')
+            }).state('app.cancelInsight', {
+                url: '/dashboard/cancel-insight',
+                title: 'Cancel Insight',
+                templateUrl: basepath('analytics/cancel-insights.html'),
+                controller: 'CancelDashBoardController',
+                data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
+                resolve: resolveFor('flot-chart', 'flot-chart-plugins')
+            }).state('app.popularInsight', {
+                url: '/dashboard/popular-insight',
+                title: 'Cancel Insight',
+                templateUrl: basepath('analytics/popular-day-time.html'),
+                controller: 'PopularDayTimeController',
+                data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
+                resolve: resolveFor('flot-chart', 'flot-chart-plugins')
             })
             .state('app.masonry', {
                 url: '/content',

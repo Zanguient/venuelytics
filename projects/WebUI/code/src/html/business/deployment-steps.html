@@ -13,8 +13,6 @@
         <div class="col-md-6 col-xs-12">
             <p class="mega-title mt-4 col-md-10 col-md-offset-right-2 col-xs-12" ng-bind="'business.DEPLOY_STEPS' | translate"></p>
             <p ng-show="successMessage">Your Business Account is successfully activated. </p>
-
-            <p class="title_desc mt-1 col-md-10 col-md-offset-right-2 col-xs-12" ng-bind="'home.WELCOME_DESCRIPTION' | translate"></p>
         </div>
     </div>
     <div class="text-center col-xs-12 mt-6 mb-4">
@@ -109,7 +107,7 @@
                         <div class="col-xs-12 mt-2 no-p" ng-repeat="depItem in deploymentServices">
                             <div ng-if="$even">
                                 <span class="title-bold mb0">{{depItem.displayName | translate}}</span>
-                                <p class="mb0">{{depItem.url}}</p>
+                                <p class="mb0"><a href="{{depItem.url}}">{{depItem.url}}</a></p>
                             </div>
                         </div>
                         
@@ -121,7 +119,7 @@
                         <div class="col-xs-12 mt-2 no-p" ng-repeat="depItem in deploymentServices">
                             <div ng-if="$odd">
                                 <span class="title-bold mb0">{{depItem.displayName | translate}}</span>
-                                <p class="mb0">{{depItem.url}}</p>
+                                 <p class="mb0"><a href="{{depItem.url}}">{{depItem.url}}</a></p>
                             </div>
                         </div>
                         
@@ -144,11 +142,16 @@
                 <div class="col-xs-12 mb-6 p-min">
                     <pre>
                         <code> <p ng-bind="embedServicesHTML" id="code"></p></code>
-                    <button class="btn btn-success mt-4 mb-0 btn-raised" ngclipboard ngclipboard data-clipboard-target="#code">
-                        Copy to clipboard
-                    </button>
+
                     </pre> 
-                    
+                    <div class="row no-mt">
+                        <button class="btn btn-success mt-1 mb-0 btn-raised" ngclipboard data-clipboard-target="#code">
+                            Copy to clipboard
+                        </button>
+                        <button class="btn btn-success mt-1 mb-0 btn-raised" id="mail-link" ng-click="sendViaEmail()">
+                            Send Via Email
+                        </button>
+                    </div>
                 </div>
                     
             </div>
