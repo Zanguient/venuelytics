@@ -9,7 +9,7 @@ config.WEBHOOK_TOKEN = "venuelytics-fb-agent-EAAcYqcwl1BwBANOAT";
 config.PAGE_ACCESS_TOKEN = "EAAcYqcwl1BwBANOATkspAplSbNdTDvXmbhyE8VdnQj44yjvfJROCcEn7uVy6NYZAPmbAQyZCxgzjbFNQQ5uN94ZB28ZAIoKewqSxCEUmHBdZAjL8MOh8BZBrtgh43AmLr708IHZBV0ZC8DedkvR8PYb8D8MiEWOT7U9vBC2KDPb3VgZDZD";
 
 //const DEV_SRVR = 'https://dev.api.venuelytics.com';
-const DEV_SRVR = 'http://localhost:8080';
+const DEV_SRVR = 'http://localhost:8280';
 const PROD_SRVR = 'https://prod.api.venuelytics.com';
 
 
@@ -25,7 +25,7 @@ config.accountSid =  'AC227acd740f9ff82b02f09298a8c13e0d';
 config.authToken = "1d9fa8df3728c108929887407cc0c552";
 
 config.smsDebug = true;
-config.sms_debug_agent_number = '+17027660204';
+config.sms_debug_agent_number = '+170e60204';
 config.getPort = () => {
     return config.service.port;
 };

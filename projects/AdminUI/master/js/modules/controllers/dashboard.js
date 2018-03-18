@@ -33,7 +33,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.messages = {icon: 'fa-inbox',bgColor: 'bg-danger', bgColorSecondary: 'bg-danger-dark', label: 'New Messages', value: ''};
     $scope.guestsCard = {icon:'icon-users',bgColor: 'bg-warning', bgColorSecondary: 'bg-warning-dark', label: 'Today\'s Guest Count', value: 0};
     $scope.advBooking = {icon: 'fa-ticket',bgColor: 'bg-gray', bgColorSecondary: 'bg-gray-dark', label: 'Total Advance Bookings', value: 0};
-    
+    $scope.responseTime = {icon: 'fa-clock-o',bgColor: 'bg-primary', bgColorSecondary: 'bg-primary-dark', label: 'AVG Response Time', value: 'N/A'};
+
     $scope.currencyFormatter =  {
         format : function(num) {
                 if (num >= 1000000000) {
@@ -127,6 +128,17 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $scope.advBooking.value = addForType($scope.advBookings, $scope.selectedPeriod);
         $scope.cancels.value = addForType($scope.cancelBookings, $scope.selectedPeriod);
 
+        var responseTime = addForType($scope.responseTimes, $scope.selectedPeriod);
+        if (responseTime === 0) {
+            $scope.responseTime.value = 'N/A';    
+        } else if (responseTime < 60) {
+            $scope.responseTime.value = responseTime +' Sec';
+        } else if (responseTime < 3600) {
+            $scope.responseTime.value = Math.round(responseTime/60.0) +' Min';
+        } else {
+            $scope.responseTime.value = Math.round(responseTime/3600.0) + ' HRS';
+        }
+       
         console.log(JSON.stringify($scope.bookingRequestByZipcodeData));
         //$scope.top3FavItems(); 
         $scope.bookingRequestChart();
@@ -259,12 +271,17 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             $scope.advBookings = [];
         }
 
-         if (typeof data.VENUE_BOOKINGS_CANCELED   !== 'undefined' && data.VENUE_BOOKINGS_CANCELED.length > 0) {
+        if (typeof data.VENUE_BOOKINGS_CANCELED   !== 'undefined' && data.VENUE_BOOKINGS_CANCELED.length > 0) {
              $scope.cancelBookings = data.VENUE_BOOKINGS_CANCELED;
         } else {
             $scope.cancelBookings = [];
         }
 
+        if (typeof data.RESPONSE_TIME   !== 'undefined' && data.RESPONSE_TIME.length > 0) {
+             $scope.responseTimes = data.RESPONSE_TIME;
+        } else {
+            $scope.responseTimes = [];
+        }
 
         $scope.setDisplayData();
 

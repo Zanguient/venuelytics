@@ -21,7 +21,7 @@
 <div class="row">
   <plain-card-widget card="popularDay" ng-click="popularInsight()"></plain-card-widget>
   <plain-card-widget card="popularTime" ng-click="popularInsight()"></plain-card-widget>
-  <plain-card-widget card="cancels" ng-click="cancelInsights()"></plain-card-widget>
+  <plain-card-widget card="responseTime" ng-click="ResponseTime()"></plain-card-widget>
   <plain-card-widget card="advBooking"></plain-card-widget>
 </div>
 
@@ -87,12 +87,12 @@
    </div>
 </div>
 <div class="row">
-  <plain-card-widget card="messages" class="cpointer" ng-click="inbox()"></plain-card-widget>
-
+  <plain-card-widget card="messages" ng-click="inbox()"></plain-card-widget>
+   <plain-card-widget card="cancels" ng-click="cancelInsights()"></plain-card-widget>
    <div class="col-md-3 col-sm-12">
-      <div class="panel widget bg-success panel_grad_darker">
+      <div class="panel widget bg-success panel_grad_dark">
          <div class="row row-table">
-            <div class="col-xs-3 text-center bg-success-dark panel_grad_darker pv-lg">
+            <div class="col-xs-3 text-center bg-success-dark panel_grad_dark pv-lg">
                <em class="icon-login fa-2x"></em>
                <div class="text-uppercase">CHECKINS</div>
             </div>
@@ -114,5 +114,6 @@
          </div>
       </div>
    </div>
-   <plain-card-widget card="guestsCard" class="cpointer"></plain-card-widget>
+   <plain-card-widget card="guestsCard"></plain-card-widget>
+
 </div>
