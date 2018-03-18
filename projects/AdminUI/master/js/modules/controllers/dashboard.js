@@ -30,8 +30,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     $scope.popularDay = {icon: 'fa-sun-o', bgColor: 'bg-purple', bgColorSecondary: 'bg-purple-dark', label: 'Popular Day', value: ' '};
     $scope.popularTime = {icon: 'fa-clock-o', bgColor: 'bg-info', bgColorSecondary: 'bg-info-dark', label: 'Popular Time', value: ' '};
     $scope.cancels = {icon: 'fa-times-circle-o',bgColor: 'bg-green', bgColorSecondary: 'bg-green-dark', label: 'Cancelations', value: 0};
-    $scope.messages = {bgColor: 'bg-danger', bgColorSecondary: 'bg-danger-dark', label: 'New Messages', value: ''};
-    $scope.guestsCard = {bgColor: 'bg-warning', bgColorSecondary: 'bg-warning-dark', label: 'Today\'s Guest Count', value: 0};
+    $scope.messages = {icon: 'fa-inbox',bgColor: 'bg-danger', bgColorSecondary: 'bg-danger-dark', label: 'New Messages', value: ''};
+    $scope.guestsCard = {icon:'icon-users',bgColor: 'bg-warning', bgColorSecondary: 'bg-warning-dark', label: 'Today\'s Guest Count', value: 0};
     $scope.advBooking = {icon: 'fa-ticket',bgColor: 'bg-gray', bgColorSecondary: 'bg-gray-dark', label: 'Total Advance Bookings', value: 0};
     
     $scope.currencyFormatter =  {
