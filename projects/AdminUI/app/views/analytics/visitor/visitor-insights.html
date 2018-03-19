@@ -2,7 +2,7 @@
 
 .svg-container {
     display: inline-block;
-    position: relative;
+    position: center;
     width: 100%;
     padding-bottom: 46%; /* aspect ratio */
     vertical-align: top;
@@ -11,20 +11,74 @@
 .svg-content-responsive {
     display: inline-block;
     position: absolute;
-    top: 10px;
-    left: 0;
-}    
-  .axis path,
-  .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-  }
-  
-  .x.axis path {
+    top: 20px;
+    left: 5px;
+}   
+
+.toolTip {
+    position: absolute;
     display: none;
-  }
-  
+    width: auto;
+    height: auto;
+    background: none repeat scroll 0 0 white;
+    border: 0 none;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: -3px 3px 15px #888888;
+    color: rgb(207, 24, 24);
+    font: 12px sans-serif;
+    padding: 5px;
+    text-align: center;
+}
+
+.legend {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 60%;
+}
+
+rect {
+    stroke-width: 2;
+}
+
+.axis path{
+  fill: none;
+  stroke: #000;
+}
+
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis .tick line {
+  stroke-width: 1;
+  stroke: rgba(0, 0, 0, 0.2);
+}
+
+.axisHorizontal path{
+  fill: none;
+}
+
+.axisHorizontal line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axisHorizontal .tick line {
+  stroke-width: 1;
+  stroke: rgba(0, 0, 0, 0.2);
+}
+
+.bar {
+  fill: steelblue;
+  fill-opacity: .9;
+}
+
+.x.axis path {
+  display: none;
+}
+
   </style>
 
 <h3>
