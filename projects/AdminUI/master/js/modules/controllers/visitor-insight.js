@@ -218,4 +218,14 @@ App.controller('VisitorDashBoardController', ['$log', '$scope', '$window', '$htt
         };
 
 
-    }]);
+    }]).factory('getChartData', ['$http', function ($http) {
+        return {
+            getAll: function (url) {
+                console.log("factory:", url);
+                return $http.get(url)
+                            .then(function (result) {
+                                return result;
+                            });
+            }
+        }
+    }]);    

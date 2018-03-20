@@ -3,7 +3,7 @@
  * Module: stacked-bar-chart.js
 *
  =========================================================*/
- App.directive('seriesBarChart', function () {
+App.directive('seriesBarChart', function () {
     'use strict';
 
     return {
@@ -93,35 +93,6 @@
                 }
 
             };
-
-            $scope.formatDataForD3JS = function (data) {
-                var response = data[0];
-
-                var categorieNames = response.ticks.map(function (item) {
-                    return item[1];
-                });
-                var dataValues = [];
-                categorieNames.forEach(function (categorie) {
-                    var obj = {};
-                    obj.categorie = categorie;
-                    obj.values = [];
-                    var value = response.series.map(function (item) {
-                        var e = item.data.filter(function (c) { return c[0] === categorie });
-                        if (e.length > 0) return e[0].pop();
-                        else return 0;
-                    });
-                    var rate = response.series.map(function (elem) { return elem.subName });
-                    for (var index = 0; index < value.length; index++) {
-                        var v = { "value": value[index], "rate": rate[index] };
-                        obj.values.push(v);
-                    }
-                    dataValues.push(obj);
-                });
-
-                // console.log("MyData:",dataValues); 
-                return dataValues;
-            }
-
             $scope.drawChart();
         }
 
@@ -130,22 +101,31 @@
 });
 
 
-App.directive('njBarChart', function () {
+App.directive('njBarChart', function (getChartData) {
     'use strict';
 
     return {
         restrict: 'E',
         replace: true,
         scope: {
-            parameter: '@'
+            url: '@',
+            id: '@'
         },
         link: function (scope, element, attrs) {
 
-            scope.$watch('parameter', function (newValue, oldValue) {
-                scope.drawD3Js(newValue);
+            scope.$watch('url', function (newValue, oldValue) {
+                getChartData.getAll(scope.url).then(function (response) {
+                    scope.drawD3Js(response.data, scope.id);
+                });
             });
         }, controller: function ($scope) {
-            $scope.drawD3Js = function (data) {
+
+            $scope.drawD3Js = function (data, id) {
+                if (id === "visitorsChartReasonD3") {
+                    $('.visitorsChartReasonD3').remove();
+                } else if (id === "repeatVisitorsChartReason") {
+                    $('.repeatVisitorsChartReason').remove();
+                }
                 var margin = { top: 20, right: 20, bottom: 30, left: 40 },
                     width = 960 - margin.left - margin.right,
                     height = 400 - margin.top - margin.bottom;
@@ -165,35 +145,34 @@ App.directive('njBarChart', function () {
 
                 var yAxis = d3.svg.axis()
                     .scale(y)
-                    .orient("left");
+                    .orient("left")
+                    .ticks(10)
+                    .innerTickSize(-width)
+                    .outerTickSize(0)
+                    .tickPadding(2);
 
-                d3.select("svg").remove();
-                
                 //Tooltip
                 var divTooltip = d3.select("body").append("div").attr("class", "toolTip");
-                
+
                 var color = d3.scale.ordinal()
                     .range(["#ca0020", "#f4a582", "#d5d5d5", "#92c5de", "#0571b0", "#FF8C00", "#6B486B"]);
-                
-                var svg = d3.select('#visitorsChartReasonD3').append("svg")
+                var svg = d3.select('#' + id).append("svg")
                     .classed("svg-container", true)
                     .attr("preserveAspectRatio", "xMinYMin meet")
                     .attr("viewBox", "0 0 960 400")
                     .classed("svg-content-responsive", true)
+                    .attr("class", id)
                     // .attr("width", width + margin.left + margin.right)
                     // .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                    svg.append("rect")
+                svg.append("rect")
                     .attr("width", "86%")
                     .attr("height", "88%")
                     .attr("fill", "#FCFCFC");
 
-               
-
-                var fullJson = JSON.parse(data);
-                var response = fullJson[0];
+                var response = data[0];
                 var categorieNames = response.ticks.map(function (item) {
                     return item[1];
                 });
@@ -209,7 +188,7 @@ App.directive('njBarChart', function () {
                     });
                     var rate = response.series.map(function (elem) { return elem.subName });
                     for (var index = 0; index < value.length; index++) {
-                        if(rate[index] !== "") {
+                        if (rate[index] !== "") {
                             var v = { "value": value[index], "rate": rate[index] };
                             obj.values.push(v);
                         }
@@ -232,12 +211,12 @@ App.directive('njBarChart', function () {
                     .call(xAxis)
                     .selectAll("text")
                     .style("text-anchor", "end")
-                    .attr("y", -5)
-                    .attr("dx", "-.8em")
-                    .attr("dy", ".15em")
-                    .attr("transform", function (d) {
-                        return "rotate(-65)"
-                    });
+                    .style("font-size", ".70em")
+                    .style("color", "#b5b5b5")
+                    // .attr("y", -5)
+                    .attr("dx", "-.1em")
+                    // .attr("dy", ".15em")
+                    .attr("transform", "rotate(-65)");
 
                 svg.append("g")
                     .attr("class", "y axis")
@@ -248,14 +227,15 @@ App.directive('njBarChart', function () {
                     .attr("y", 6)
                     .attr("dy", ".71em")
                     .style("text-anchor", "end")
-                    .style('font-weight', 'bold')
+                    // .style("font-size",".65em")
+                    .style("color", "#b5b5b5")
                     .text("");
 
                 var bar = svg.selectAll(".bar")
                     .data(dataValues)
                     .enter().append("g")
                     .attr("class", "rect")
-                    .attr("transform", function(d) { return "translate(" + x0(d.categorie) + ",0)"; });
+                    .attr("transform", function (d) { return "translate(" + x0(d.categorie) + ",0)"; });
 
                 svg.select('.y').transition().duration(500).delay(1300).style('opacity', '1');
 
@@ -264,47 +244,45 @@ App.directive('njBarChart', function () {
                 //     .enter().append("g")
                 //     .attr("class", "g")
                 //     .attr("transform", function (d) { return "translate(" + x0(d.categorie) + ",0)"; });
-                
-                if(response.aggregateType === "Weekly" || response.aggregateType === "Monthly") {
+
+                if (response.aggregateType === "Weekly" || response.aggregateType === "Monthly") {
                     bar.selectAll("rect")
-                    .data(function (d) { return d.values; })
-                    .enter().append("rect")
-                    .attr("width", "20px")
-                    .attr("x", function (d) { return x1(d.rate); })
-                    .style("fill", function (d) { return color(d.rate) })
-                    .attr("y", function (d) { return y(0); })
-                    .attr("height", function (d) { return height - y(0); });
+                        .data(function (d) { return d.values; })
+                        .enter().append("rect")
+                        .attr("width", "5px")
+                        .attr("x", function (d) { return x1(d.rate); })
+                        .style("fill", function (d) { return color(d.rate) })
+                        .attr("y", function (d) { return y(0); })
+                        .attr("height", function (d) { return height - y(0); });
                 } else {
                     bar.selectAll("rect")
-                    .data(function (d) { return d.values; })
-                    .enter().append("rect")
-                    .attr("width", x1.rangeBand())
-                    .attr("x", function (d) { return x1(d.rate); })
-                    .style("fill", function (d) { return color(d.rate) })
-                    .attr("y", function (d) { return y(0); })
-                    .attr("height", function (d) { return height - y(0); });
+                        .data(function (d) { return d.values; })
+                        .enter().append("rect")
+                        .attr("width", x1.rangeBand())
+                        .attr("x", function (d) { return x1(d.rate); })
+                        .style("fill", function (d) { return color(d.rate) })
+                        .attr("y", function (d) { return y(0); })
+                        .attr("height", function (d) { return height - y(0); });
                 }
-            
 
-                bar
-                    .on("mousemove", function(d){
-                        divTooltip.style("left", d3.event.pageX+10+"px");
-                        divTooltip.style("top", d3.event.pageY-25+"px");
-                        divTooltip.style("display", "inline-block");
-                        divTooltip.style("color", "black");
-                        divTooltip.style("z-index", "11");
-                        var x = d3.event.pageX, y = d3.event.pageY
-                        var elements = document.querySelectorAll(':hover');
-                        var l = elements.length
-                        l = l-1
-                        var elementData = elements[l].__data__
-                        divTooltip.html(elementData.rate+"<br>"+elementData.value+"%");
-                    });
 
-                bar
-                    .on("mouseout", function(d){
-                        divTooltip.style("display", "none");
-                    });
+                bar.on("mousemove", function (d) {
+                    divTooltip.style("left", d3.event.pageX + 10 + "px");
+                    divTooltip.style("top", d3.event.pageY - 25 + "px");
+                    divTooltip.style("display", "inline-block");
+                    divTooltip.style("color", "black");
+                    divTooltip.style("z-index", "11");
+                    var x = d3.event.pageX, y = d3.event.pageY
+                    var elements = document.querySelectorAll(':hover');
+                    var l = elements.length
+                    l = l - 1
+                    var elementData = elements[l].__data__
+                    divTooltip.html(elementData.rate + "<br>" + elementData.value);
+                });
+
+                bar.on("mouseout", function (d) {
+                    divTooltip.style("display", "none");
+                });
 
                 bar.selectAll("rect")
                     .transition()
@@ -312,8 +290,8 @@ App.directive('njBarChart', function () {
                     .duration(1000)
                     .attr("y", function (d) { return y(d.value); })
                     .attr("height", function (d) { return height - y(d.value); });
-                
-               
+
+
                 //Legend
                 var legend = svg.selectAll(".legend")
                     .data(dataValues[0].values.map(function (d) { return d.rate; }).reverse())
@@ -336,6 +314,7 @@ App.directive('njBarChart', function () {
                     .text(function (d) { return d; });
 
                 legend.transition().duration(500).delay(function (d, i) { return 1300 + 100 * i; }).style("opacity", "1");
+
             }
 
         }
