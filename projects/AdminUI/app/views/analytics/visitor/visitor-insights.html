@@ -1,21 +1,21 @@
 <style>
-
-.svg-container {
+  .svg-container {
     display: inline-block;
     position: center;
     width: 100%;
-    padding-bottom: 46%; /* aspect ratio */
+    /* padding-bottom: 46%;  */
     vertical-align: top;
     overflow: hidden;
-}
-.svg-content-responsive {
+  }
+
+  .svg-content-responsive {
     display: inline-block;
     position: absolute;
     top: 20px;
     left: 5px;
-}   
+  }
 
-.toolTip {
+  .toolTip {
     position: absolute;
     display: none;
     width: auto;
@@ -28,89 +28,94 @@
     font: 12px sans-serif;
     padding: 5px;
     text-align: center;
-}
+  }
 
-.legend {
+  .tick {
+    color: #b5b5b5
+  }
+
+  .legend {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 60%;
-}
+  }
 
-rect {
+  rect {
     stroke-width: 2;
-}
+  }
 
-.axis path{
-  fill: none;
-  stroke: #000;
-}
+  .axis path {
+    fill: none;
+    stroke: #000;
+  }
 
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
 
-.axis .tick line {
-  stroke-width: 1;
-  stroke: rgba(0, 0, 0, 0.2);
-}
+  .axis .tick line {
+    stroke-width: 1;
+    stroke: rgba(0, 0, 0, 0.2);
+  }
 
-.axisHorizontal path{
-  fill: none;
-}
+  .axisHorizontal path {
+    fill: none;
+  }
 
-.axisHorizontal line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
+  .axisHorizontal line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
 
-.axisHorizontal .tick line {
-  stroke-width: 1;
-  stroke: rgba(0, 0, 0, 0.2);
-}
+  .axisHorizontal .tick line {
+    stroke-width: 1;
+    stroke: rgba(0, 0, 0, 0.2);
+  }
 
-.bar {
-  fill: steelblue;
-  fill-opacity: .9;
-}
+  .bar {
+    fill: steelblue;
+    fill-opacity: .9;
+  }
 
-.x.axis path {
-  display: none;
-}
-
-  </style>
+  .x.axis path {
+    display: none;
+  }
+</style>
 
 <h3>
-   <div class="row">
-     <div class="col-lg-7">
-     Dashboard - <strong>Visitor Insights</strong>
-     </div>
+  <div class="row">
+    <div class="col-lg-7">
+      Dashboard -
+      <strong>Visitor Insights</strong>
+    </div>
     <div class="col-lg-3 pull-right">
-         <div class="btn-group">
-               <button type="button" class="btn" ng-repeat="period in PERIODS" ng-class="selectedPeriod == period ? 'btn-primary':'btn-default'" ng-click="setPeriod(period)">{{period | translate}}</button>
-              
-         </div>  
+      <div class="btn-group">
+        <button type="button" class="btn" ng-repeat="period in PERIODS" ng-class="selectedPeriod == period ? 'btn-primary':'btn-default'"
+          ng-click="setPeriod(period)">{{period | translate}}</button>
+
       </div>
     </div>
+  </div>
 </h3>
 
 <div class="container-fluid">
-  
-   <!-- START DATATABLE 2 -->
+
+  <!-- START DATATABLE 2 -->
   <div class="row">
     <div class="col-md-4 col-sm-12">
       <!-- START widget-->
       <div id="visitorBarChart" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">New Visitors</div>
-         </div>
-         <div collapse="visitorBarChart" class="panel-wrapper">
-            <div class="panel-body mb-lg">
-               <stacked-bar-chart id="visitorsChart" url="{{visitorRequestUrl}}" format-data-fx="formatStackData"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">New Visitors</div>
+        </div>
+        <div collapse="visitorBarChart" class="panel-wrapper">
+          <div class="panel-body mb-lg">
+            <stacked-bar-chart id="visitorsChart" url="{{visitorRequestUrl}}" format-data-fx="formatStackData" class="chart-bar-stacked flot-chart rotateLabel"
+              mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
@@ -118,15 +123,15 @@ rect {
     <div class="col-md-8 col-sm-12">
       <!-- START widget-->
       <div id="visitorBarChart" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">New Visitors - By Service Type</div>
-         </div>
-         <div collapse="visitorBarChart" class="panel-wrapper">
-            <div class="panel-body mb-lg">
-               <series-bar-chart id="visitorsChartServiceType" url="{{visitorRequestByServiceType}}" format-data-fx="formatBarData"
-               class="flot-chart rotateLabel" mode="{{xAxisMode}}" ></series-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">New Visitors - By Service Type</div>
+        </div>
+        <div collapse="visitorBarChart" class="panel-wrapper">
+          <div class="panel-body mb-lg">
+            <series-bar-chart id="visitorsChartServiceType" url="{{visitorRequestByServiceType}}" format-data-fx="formatBarData" class="flot-chart rotateLabel"
+              mode="{{xAxisMode}}"></series-bar-chart>
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
@@ -134,15 +139,15 @@ rect {
     <div class="col-md-12 col-sm-12">
       <!-- START widget-->
       <div id="visitorBarChart" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">New Visitors - By Occasion - Old</div>
-         </div>
-         <div collapse="visitorBarChart" class="panel-wrapper">
-            <div class="panel-body">
-               <series-bar-chart id="visitorsChartReason" url="{{visitorRequestByValue}}" format-data-fx="formatBarDataForSubName"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">New Visitors - By Occasion - Old</div>
+        </div>
+        <div collapse="visitorBarChart" class="panel-wrapper">
+          <div class="panel-body">
+            <series-bar-chart id="visitorsChartReason" url="{{visitorRequestByValue}}" format-data-fx="formatBarDataForSubName" class="chart-bar-stacked flot-chart rotateLabel"
+              mode="{{xAxisMode}}"></series-bar-chart>
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
@@ -150,15 +155,14 @@ rect {
     <div class="col-md-12 col-sm-12">
       <!-- START widget-->
       <div id="visitorBarChart" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">New Visitors - By Occasion - New</div>
-         </div>
-         <div collapse="visitorBarChart" class="panel-wrapper">
-            <div class="svg-container">
-               <nj-bar-chart id="visitorsChartReasonD3"  parameter="{{responseValue}}"
-                ></nj-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">New Visitors - By Occasion - New</div>
+        </div>
+        <div collapse="visitorBarChart" class="panel-wrapper">
+          <div class="svg-container">
+            <nj-bar-chart id="visitorsChartReasonD3" url="{{visitorRequestByValue}}"></nj-bar-chart>
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
@@ -168,15 +172,15 @@ rect {
     <div class="col-md-4 col-sm-12">
       <!-- START widget-->
       <div id="repeatVisitorBarChart" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">Repeat Visitors</div>
-         </div>
-         <div collapse="repeatVisitorBarChart" class="panel-wrapper">
-            <div class="panel-body mb-lg">
-               <stacked-bar-chart id="repeatVisitorsChart" url="{{repeatVisitorRequestUrl}}" format-data-fx="formatStackData"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">Repeat Visitors</div>
+        </div>
+        <div collapse="repeatVisitorBarChart" class="panel-wrapper">
+          <div class="panel-body mb-lg">
+            <stacked-bar-chart id="repeatVisitorsChart" url="{{repeatVisitorRequestUrl}}" format-data-fx="formatStackData" class="chart-bar-stacked flot-chart rotateLabel"
+              mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
@@ -184,47 +188,48 @@ rect {
     <div class="col-md-8 col-sm-12">
       <!-- START widget-->
       <div id="repeatVisitorBarChart1" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">Repeat Visitors - By Service Type</div>
-         </div>
-         <div collapse="repeatVisitorBarChart1" class="panel-wrapper">
-            <div class="panel-body mb-lg">
-               <series-bar-chart id="repeatVisitorsChartServiceType" url="{{repeatVisitorRequestByServiceType}}" format-data-fx="formatBarData"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">Repeat Visitors - By Service Type</div>
+        </div>
+        <div collapse="repeatVisitorBarChart1" class="panel-wrapper">
+          <div class="panel-body mb-lg">
+            <series-bar-chart id="repeatVisitorsChartServiceType" url="{{repeatVisitorRequestByServiceType}}" format-data-fx="formatBarData"
+              class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart>
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
     <div class="col-md-12 col-sm-12">
       <!-- START widget-->
       <div id="repeatVisitorBarChart2" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">Repeat Visitors - By Occasions</div>
-         </div>
-         <div collapse="repeatVisitorBarChart2" class="panel-wrapper">
-            <div class="panel-body mb-lg">
-               <series-bar-chart id="repeatVisitorsChartReason" url="{{repeatVisitorRequestByValue}}" format-data-fx="formatBarDataForSubName"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">Repeat Visitors - By Occasions</div>
+        </div>
+        <div collapse="repeatVisitorBarChart2" class="panel-wrapper">
+          <div class="svg-container">
+            <nj-bar-chart id="repeatVisitorsChartReason" url="{{repeatVisitorRequestByValue}}"></nj-bar-chart>
+            <!-- <series-bar-chart id="repeatVisitorsChartReason" url="{{repeatVisitorRequestByValue}}" format-data-fx="formatBarDataForSubName"
+               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart> -->
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
   </div>
-<div class="row">
+  <div class="row">
     <div class="col-md-4 col-sm-12">
       <!-- START widget-->
       <div id="percentVisitorsChart0" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">%Repeat Visitors</div>
-         </div>
-         <div collapse="percentVisitorsChart0" class="panel-wrapper">
-            <div class="panel-body mb-lg">
-               <stacked-bar-chart id="percentVisitorsChart" url="{{percentVisitorRequestUrl}}" format-data-fx="formatStackData"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">%Repeat Visitors</div>
+        </div>
+        <div collapse="percentVisitorsChart0" class="panel-wrapper">
+          <div class="panel-body mb-lg">
+            <stacked-bar-chart id="percentVisitorsChart" url="{{percentVisitorRequestUrl}}" format-data-fx="formatStackData" class="chart-bar-stacked flot-chart rotateLabel"
+              mode="{{xAxisMode}}" y-pos="{{yPos}}"></stacked-bar-chart>
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
@@ -232,32 +237,32 @@ rect {
     <div class="col-md-8 col-sm-12">
       <!-- START widget-->
       <div id="percentVisitorsChart2" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">%Repeat Visitors - By Service Type</div>
-         </div>
-         <div collapse="percentVisitorsChart2" class="panel-wrapper">
-            <div class="panel-body mb-lg">
-               <series-bar-chart id="percentVisitorsChartServiceType" url="{{percentVisitorRequestByServiceType}}" format-data-fx="formatBarData"
-               class="flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">%Repeat Visitors - By Service Type</div>
+        </div>
+        <div collapse="percentVisitorsChart2" class="panel-wrapper">
+          <div class="panel-body mb-lg">
+            <series-bar-chart id="percentVisitorsChartServiceType" url="{{percentVisitorRequestByServiceType}}" format-data-fx="formatBarData"
+              class="flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart>
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
     <div class="col-md-12 col-sm-12">
       <!-- START widget-->
       <div id="visitorBarChart100" class="panel panel-default">
-         <div class="panel-heading">
-            <div class="panel-title">%Repeat Visitors - By Occasion</div>
-         </div>
-         <div collapse="visitorBarChart100" class="panel-wrapper">
-            <div class="panel-body mb-lg">
-               <series-bar-chart id="percentVisitorsChartReason" url="{{percentVisitorRequestByValue}}" format-data-fx="formatBarDataForSubName"
-               class="flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></series-bar-chart>
-            </div>
-         </div>
+        <div class="panel-heading">
+          <div class="panel-title">%Repeat Visitors - By Occasion</div>
+        </div>
+        <div collapse="visitorBarChart100" class="panel-wrapper">
+          <div class="panel-body mb-lg">
+            <series-bar-chart id="percentVisitorsChartReason" url="{{percentVisitorRequestByValue}}" format-data-fx="formatBarDataForSubName"
+              class="flot-chart rotateLabel" mode="{{xAxisMode}}" y-pos="{{yPos}}"></series-bar-chart>
+          </div>
+        </div>
       </div>
       <!-- END widget-->
     </div>
-  </div>   
+  </div>
 </div>
