@@ -20,27 +20,23 @@
                             <div id="carousel-{{$index}}" class="ms-carousel carousel slide" data-ride="carousel">
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner carousel-inner-class" role="listbox">
-                                    <div class="item {{venus.active}}" ng-repeat="venus in venueImage.imageUrls">
-                                        <img id="venueImage" ng-src="{{venus.originalUrl}}" alt="venus-image" class="galleryLrg"/>
+                                    <div class="item {{venue.active}}" ng-repeat="venue in detailsOfVenue.imageUrls">
+                                        <img  ng-src="{{venue.originalUrl}}" alt="Venue Image" class="galleryLrg"/>
                                     </div>
                                 </div>
                                 <!-- Controls -->
-                                <span data-target="#carousel-{{$index}}1" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control" role="button" data-slide="prev" ng-show="venueImage.imageUrls.length > 1" style="margin-left: 25px;">
+                                <span data-target="#carousel-{{$index}}1" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control" role="button" data-slide="prev" ng-show="detailsOfVenue.imageUrls.length > 1" style="margin-left: 25px;">
                                     <i class="zmdi zmdi-chevron-left"></i>
                                 </span> 
-                                <span data-target="#carousel-{{$index}}1" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary right carousel-control" role="button" data-slide="next" ng-show="venueImage.imageUrls.length > 1" style="margin-right: 25px;">
+                                <span data-target="#carousel-{{$index}}1" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary right carousel-control" role="button" data-slide="next" ng-show="detailsOfVenue.imageUrls.length > 1" style="margin-right: 25px;">
                                     <i class="zmdi zmdi-chevron-right"></i>
                                 </span>
                             </div>
                         </center>
-                        <!-- <div id="serviceTabs" class="btn-group btn-group-justified" ng-hide="removeAllTabs === true">
-                            <center>
-                                <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" btn-class="{{tab.btnClass}}" selected="{{tab.selected}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" disabled="{{tab.disabled}}" class="reservation-tab col-md-4 col-sm-6 col-xs-6"></div>
-                            </center>
-                        </div> -->
+                        
                         <div ng-hide="removeAllTabs === true">
                             <center>
-                                <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName)" ng-repeat="tab in displayTabs" btn-class="{{tab.btnClass}}" selected="{{tab.selected}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" disabled="{{tab.disabled}}"></div>
+                                <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName, enabled)" ng-repeat="tab in displayTabs" btn-class="{{tab.btnClass}}" selected="{{tab.selected}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" disabled="{{tab.disabled}}"></div>
                             </center>
                         </div>
                         <br>
