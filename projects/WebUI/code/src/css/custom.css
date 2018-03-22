@@ -144,6 +144,15 @@
     line-height: 2.1rem;
 }
 
+.title_desc.blackTheme 
+ {  
+
+    color: white; 
+    font-size: 1.4rem;  
+    font-style: oblique;  
+    letter-spacing: .2rem;  
+    line-height: 2.1rem;
+}
 
 .title-bold {
   font-family: Montserrat;

@@ -119,10 +119,10 @@
             </select>
             <img ng-hide ="!hostDate || hostDate.length == 0" class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
         </div> -->
-        <div class="col-xs-12 form-group" ng-if="allBottle">
+        <div class="col-xs-12 form-group" ng-if="allBottle  && enableBottleSelection == 'Y' ">
             <center><h2>{{"reservation.SELECT_BOTTLES"  | translate}}</h2></center>
         </div>
-        <div class="col-xs-12 form-group" ng-show="bottleMinimum.length > 0">
+        <div class="col-xs-12 form-group" ng-show="bottleMinimum.length > 0 && enableBottleSelection == 'Y'">
             <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
             <table class="table table-responsive table-no-border" >
                 <thead>
@@ -144,7 +144,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-xs-12" ng-if="allBottle">
+        <div class="col-xs-12" ng-if="allBottle && enableBottleSelection == 'Y' ">
             <table class="table table-no-border">
                 <tr>
                     <td>
@@ -235,21 +235,21 @@
     <center>
         <h3 class="color-success fontLight">{{'reservation.VIP_SERVICE_POLICY' | translate}}</h3>
     </center>
-    <p class="title_desc">{{bottleVIPPolicy}}</p>
+    <p class="title_desc" ng-class="blackTheme">{{bottleVIPPolicy}}</p>
 </div>
 
 <div class="col-xs-12" ng-if="bottleMinimumRequirement">
     <center>
         <h3 class="color-success fontLight">{{"reservation.MIN_REQ" | translate}}</h3>
     </center>
-     <p class="title_desc">{{bottleMinimumRequirement}}</p>
+     <p class="title_desc" ng-class="blackTheme">{{bottleMinimumRequirement}}</p>
 </div>
 
 <div class="col-xs-12" ng-if="dressCode">
     <center>
         <h3 class="color-success fontLight">{{'reservation.DRESS_CODE' | translate}}</h3>
     </center>
-    <p class="title_desc">{{dressCode}}</p>
+    <p class="title_desc" ng-class="blackTheme">{{dressCode}}</p>
 </div>
 
 
