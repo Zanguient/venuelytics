@@ -67,7 +67,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.tableServiceButton = self.tableServiceButton === 'Y' ? false : true;
             self.eventsEnable = self.eventsEnable === 'Y' ? false : true;
             /* self.tabParams = self.bottleServiceButton === false ? 'VIP' : 'private-events'; */
-            self.dispatchToService(self.tabParams);
+            self.dispatchToService(self.tabParams, true);
             addTabs();
         }); 
         /*jshint maxcomplexity:14 */
@@ -142,8 +142,11 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         return 'bottle-service/bottle-service.html';
     };
 
-    self.dispatchToService = function(serviceName) {
-        self.tabParams = serviceName;
+    self.dispatchToService = function(serviceName, enabled) {
+        console.log("click for " + serviceName + ':' + enabled);
+        if (enabled){
+            self.tabParams = serviceName;
+        }
     };
 
     function addTab(id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected) {
