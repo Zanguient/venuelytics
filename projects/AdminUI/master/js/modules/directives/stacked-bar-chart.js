@@ -38,7 +38,7 @@ App.directive('stackedBarChart',   function() {
       }
     },
   	controller: function ($scope) {
-      $scope.chart = new FlotChart($('#'+$scope.id), null);
+      $scope.chart = new FlotChart('#'+$scope.id, null);
       $scope.option = {
           series: {
               stack: true,
@@ -54,11 +54,14 @@ App.directive('stackedBarChart',   function() {
               borderColor: '#eee',
               borderWidth: 1,
               hoverable: true,
-              backgroundColor: '#fcfcfc'
+              backgroundColor: '#fcfcfc',
+              clickable: true
           },
           tooltip: true,
           tooltipOpts: {
-              content: '%y'
+              content: function(label, x, y){
+                return x + " - %y";
+              }
           },
           xaxis: {
               tickColor: '#fcfcfc',

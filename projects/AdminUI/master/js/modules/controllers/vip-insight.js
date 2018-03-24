@@ -20,7 +20,14 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
     $scope.init = function() {
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
         $scope.vipChart();
-
+        $("#vipBarChartComponent").bind("plotclick", function (event, pos, item) {
+            if (typeof (item) !== 'undefined') {
+                var label = item.series.data[item.dataIndex][0];
+                console.log( label + " - " +item.series.data[item.dataIndex][1]);
+                $state.go('app.profile', {visitorId: item.series.altData[label]});
+            }
+            
+        });
     };
     
     
@@ -74,16 +81,17 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
     }
 
     $scope.formatDataAggByName = function(data) {
-         return formatDataAggByImpl(data, 'name');
+         return formatDataAggByImpl(data, 'name', 'subName');
     };
 
-    function formatDataAggByImpl(data, propertyName) {
+    function formatDataAggByImpl(data, propertyName, altName) {
 
         var retData = [];
         
         var colorIndex = 0;
         var elem = {};
         elem.data = [];
+        elem.altData= [];
         elem.label = "";
         elem.color = colors[colorIndex % colors.length];
         colorIndex++;
@@ -99,6 +107,7 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
                 }
                 
                 elem.data.push([series[propertyName], total]);
+                elem.altData[series[propertyName]] = series[altName];
             }
             retData.push(elem);
         }
@@ -122,6 +131,6 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
             $scope.xAxisMode = 'categories';               
         }
     };
-
+    $scope.init();
 
 }]);

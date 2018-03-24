@@ -138,7 +138,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                          data = data.data;
                       }
                       $.plot( self.element, data, option );
-                      
+                     
                       if(callback) callback();
 
                   }).error(function(){

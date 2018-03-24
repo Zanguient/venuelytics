@@ -465,6 +465,10 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					method: 'GET', params: { id: '@id', aggPeriodType: '@aggPeriodType' },
 					url: urlTemplate.replace("@context", "analytics") + "/favitems/:aggPeriodType"
 				},
+				getVisitorAnalytics: {
+					method: 'GET', params: { id: '@id', visitorId: '@visitorId' },
+					url: urlTemplate.replace("@context", "analytics") + "/visitor/:visitorId"
+				}
 
 			});
 		},

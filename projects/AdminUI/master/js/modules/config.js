@@ -432,11 +432,11 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 resolve: resolveFor('bwizard', 'parsley')
             })
             .state('app.profile', {
-                url: '/visitorAnalytics',
+                url: '/visitorAnalytics/:visitorId',
                 title: '',
                 templateUrl: basepath('analytics/profile.html'),
-                controller: 'NullController',
-                data: { authorizedRoles: [11, 12] },
+                controller: 'VisitorAnalyticsController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('bwizard', 'parsley')
             })
 
