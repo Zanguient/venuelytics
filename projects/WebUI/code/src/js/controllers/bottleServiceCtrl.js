@@ -174,6 +174,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.enabledPayment =  response.data["Advance.enabledPayment"];
                     self.reservationFee =  response.data["Bottle.BottleReservationFee"];
                     $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
+                    self.enableBottleSelection = response.data["Bottle.SpecificServiceBottle.enable"] || 'N';
                     venueService.saveVenueInfo(self.venueId, response);
                 });
             };

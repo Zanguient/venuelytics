@@ -19,7 +19,8 @@ app.directive('serviceTab', function() {
   	},
   	controller: [ '$scope', function ($scope) {
   		$scope.onClick = function () {
-        $scope.clickCb({serviceName: $scope.serviceName});
+        var enabled = $scope.disabled === 'false';
+        $scope.clickCb({serviceName: $scope.serviceName, enabled: enabled});
       };
 
   	}],

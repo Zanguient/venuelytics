@@ -79,6 +79,10 @@ module.exports = {
         js_sourcemap: [
             'bower_components/iframe-resizer/js/iframeResizer.contentWindow.map',
             'bower_components/iframe-resizer/js/iframeResizer.map',
+            'bower_components/iframe-resizer/js/iframeResizer.map',
+        ],
+        css_sourcemap: [
+            'bower_components/bootstrap/dist/css/bootstrap.min.css.map'
         ],
         css : [
             'bower_components/animate.css/animate.min.css',
