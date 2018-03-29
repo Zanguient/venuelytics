@@ -185,7 +185,9 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                  $timeout(function(){
                     if (Session.roleId >= 10 && Session.roleId <= 12) {
                        $state.go('app.ticketsCalendar'); 
-                    }  else {
+                    }  else if (Session.roleId >= 50 && Session.roleId < 100){
+                      $state.go('app.ticketingDashboard'); 
+                    } else {
                       $state.go('app.dashboard'); 
                     }
                  }, 200);

@@ -8,6 +8,14 @@
 		"roleId": 100
 	},
 	{
+		"text": "Tickets Dashboard",
+		"sref": "app.ticketingDashboard",
+		"submenu": [],
+		"translate": "Tickets Dashboard",
+		"icon": "icon-speedometer",
+		"roleId": [50, 51, 75]
+	},
+	{
 		"text": "Inbox",
 		"sref": "app.mailbox.all",
 		"icon": "fa fa-inbox",
@@ -123,7 +131,8 @@
 		"roleId": [
 			10,
 			11,
-			12
+			12,
+			51
 		]
 	},
 	{

@@ -6,8 +6,8 @@
  * =========================================================
  */
 
-App.controller('PasswordResetController',  ['$state','$scope',  '$location', 'RestServiceFactory','toaster', '$timeout',
-                                     function ($state, $scope,  $location, RestServiceFactory, toaster, $timeout) {
+App.controller('PasswordResetController',  ['$state','$scope','RestServiceFactory','toaster', '$timeout',
+                                     function ($state, $scope, RestServiceFactory, toaster, $timeout) {
   // bind here all data from the form
   'use strict';
   $scope.account = {};

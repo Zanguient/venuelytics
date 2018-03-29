@@ -92,6 +92,11 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					method: 'POST', params: { id: '@id' }, isArray: false,
 					url: urlTemplate.replace("@context", "users") + "/forgotpassword"
 				},
+				getMyStores: {
+					method: 'GET',  isArray: true,
+					url: urlTemplate.replace("@context", "users") + "/mystores"
+					
+				} 
 			});
 		},
 		BusinessService: function () {
@@ -305,9 +310,9 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					method: 'DELETE', params: { id: '@eventId', ticketId: '@ticketId' },
 					url: urlTemplate.replace("@context", "venueevents") + '/soldTicket/' + ':ticketId'
 				},
-				getReport: {
+				getCancelReport: {
 					method: 'GET', params: { id: '@id' }, isArray: true,
-					url: urlTemplate.replace("@context", "venueevents") + '/report/'
+					url: urlTemplate.replace("@context", "venueevents") + '/report/cancel'
 				}
 			});
 		},
@@ -468,7 +473,12 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 				getVisitorAnalytics: {
 					method: 'GET', params: { id: '@id', visitorId: '@visitorId' },
 					url: urlTemplate.replace("@context", "analytics") + "/visitor/:visitorId"
-				}
+				},
+				getTicketingAnalytics: {
+					method: 'GET', params: { id: '@id', type: '@type' },
+					url: urlTemplate.replace("@context", "analytics") + "/ticketing/:type"
+				},
+
 
 			});
 		},

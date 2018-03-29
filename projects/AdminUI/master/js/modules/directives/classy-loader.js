@@ -11,13 +11,26 @@ App.directive('classyloader', function($timeout) {
 
   return {
     restrict: 'A',
+    scope : {
+      trigger: '@',
+      percentage: '@'
+    },
     link: function(scope, element, attrs) {
+      scope.$watch('percentage', function (newValue, oldValue) {
+          console.log('dataPercentage Changed: ' + scope.percentage);
+          if (!newValue || angular.equals(newValue, oldValue)) {
+              return;
+          }
+          scope.options.percentage = scope.percentage;
+          scope.thisElement.ClassyLoader(scope.options).draw();
+      });
       // run after interpolation  
       $timeout(function(){
   
         var $element = $(element),
             options  = $element.data();
-        
+        scope.options = options;
+        scope.thisElement = $element;
         // At lease we need a data-percentage attribute
         if(options) {
           if( options.triggerInView ) {

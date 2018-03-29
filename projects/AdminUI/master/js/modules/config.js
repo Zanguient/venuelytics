@@ -50,6 +50,13 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('analytics/dashboard.html'),
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
                 resolve: resolveFor('flot-chart', 'moment','flot-chart-plugins')
+            }).state('app.ticketingDashboard', {
+                url: '/ticketing-dashboard',
+                title: 'Ticketing Dashboard',
+                controller: 'TicketDashBoardController',
+                templateUrl: basepath('analytics/ticket-dashboard.html'),
+                data: { authorizedRoles: [50,51,75,100] },
+                resolve: resolveFor('flot-chart', 'moment','flot-chart-plugins')
             }).state('app.visitorInsight', {
                 url: '/dashboard/visitor-insight',
                 title: 'Visitor Insight',
@@ -419,8 +426,24 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 url: '/ve-reports',
                 title: 'Reports',
                 templateUrl: basepath('venue-events/venue-event-report.html'),
+                controller: 'NullController',
+                data: { authorizedRoles: [10, 11, 12, 51] },
+                resolve: resolveFor('datatables', 'datatables-pugins', 'moment', 'fullcalendar', 'parsley', 'inputmask')
+            })
+            .state('app.cancelReports', {
+                url: '/ve-reports/cancel',
+                title: 'Canceled Tickets Reports',
+                templateUrl: basepath('venue-events/venue-event-cancel-report.html'),
                 controller: 'VenueEventReportController',
-                data: { authorizedRoles: [10, 11, 12] },
+                data: { authorizedRoles: [10, 11, 12, 51] },
+                resolve: resolveFor('datatables', 'datatables-pugins', 'moment', 'fullcalendar', 'parsley', 'inputmask')
+            })
+            .state('app.soldReports', {
+                url: '/ve-reports/sold',
+                title: 'Sold Tickets Reports',
+                templateUrl: basepath('venue-events/venue-event-sold-report.html'),
+                controller: 'VenueEventReportController',
+                data: { authorizedRoles: [10, 11, 12, 51] },
                 resolve: resolveFor('datatables', 'datatables-pugins', 'moment', 'fullcalendar', 'parsley', 'inputmask')
             })
             .state('app.registerComputer', {

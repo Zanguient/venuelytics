@@ -4,8 +4,8 @@
  * https://medium.com/opinionated-angularjs/techniques-for-authentication-in-angularjs-applications-7bbf0346acec
  =========================================================*/
  
-App.service('ContextService',['$location','RestServiceFactory', '$rootScope', 'AUTH_EVENTS',
-	function($location, RestServiceFactory, $rootScope, AUTH_EVENTS) {
+App.service('ContextService',['RestServiceFactory', '$rootScope', 'AUTH_EVENTS',
+	function( RestServiceFactory, $rootScope, AUTH_EVENTS) {
 			
 	//dev.api.venuelytics.com
 	'use strict';

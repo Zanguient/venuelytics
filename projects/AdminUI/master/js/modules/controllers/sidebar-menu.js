@@ -4,8 +4,8 @@
  * next to the current element (sibling)
  * Targeted elements must have [data-toggle="collapse-next"]
  =========================================================*/
-App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$location', '$http', '$timeout', 'APP_MEDIAQUERY', 'Session',
-  function($rootScope, $scope, $state, $location, $http, $timeout, mq, Session){
+App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$http', '$timeout', 'APP_MEDIAQUERY', 'Session',
+  function($rootScope, $scope, $state, $http, $timeout, mq, Session){
     'use strict';
     var currentState = $rootScope.$state.current.name;
     var $win = $(window);

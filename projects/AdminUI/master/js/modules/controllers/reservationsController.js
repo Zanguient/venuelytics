@@ -6,10 +6,9 @@
  * =========================================================
  */
 
- App.controller('ReservationsController',  ['$state', '$stateParams','$scope', '$rootScope', '$location','AUTH_EVENTS',
+ App.controller('ReservationsController',  ['$state', '$stateParams','$scope', '$rootScope','AUTH_EVENTS',
   'AuthService', '$cookies', 'Session', 'ContextService', 'RestServiceFactory', 'APP_EVENTS',
-        function ($state, $stateParams, $scope, $rootScope, $location, AUTH_EVENTS, 
-            AuthService, $cookies, Session, contextService, RestServiceFactory, APP_EVENTS) {
+        function ($state, $stateParams, $scope, $rootScope, AUTH_EVENTS, AuthService, $cookies, Session, contextService, RestServiceFactory, APP_EVENTS) {
     "use strict";
 
   $scope.venueMapData = [];

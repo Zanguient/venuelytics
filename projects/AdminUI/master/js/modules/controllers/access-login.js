@@ -6,9 +6,9 @@
  * =========================================================
  */
 
-App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$rootScope', '$location','AUTH_EVENTS',
+App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$rootScope','AUTH_EVENTS',
 										'AuthService', '$cookies', 'Session', 'ContextService','$timeout',
-                                     function ($state, $stateParams, $scope, $rootScope, $location, AUTH_EVENTS, 
+                                     function ($state, $stateParams, $scope, $rootScope,  AUTH_EVENTS, 
                                      	AuthService, $cookies, Session, ContextService, timeout) {
   // bind here all data from the form
   'use strict';
