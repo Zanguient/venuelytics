@@ -11,31 +11,31 @@
                     {{"reservation.PICKUP" | translate}}
                 </label> 
             </div>
-            <div class="form-group label-floating  {{isFoodFocused}}" >
+            <div class="form-group label-floating" >
                 <label class="control-label" for="focusedInput1">{{'reservation.FIRST_NAME' | translate}}</label>
                 <input type="text" ng-disabled="orderDisable === true" id="foodFirstName" name="foodFirstName" class="form-control " ng-model="food.firstName" required="" data-parsley-trigger="change">
             </div>
-            <div class="form-group label-floating {{isFoodFocused}}">
+            <div class="form-group label-floating">
                 <label class="control-label" for="focusedInput1">{{'reservation.LAST_NAME' | translate}}</label>
                 <input type="text" ng-disabled="orderDisable === true" id="foodLastName" name="foodLastName" class="form-control " ng-model="food.lastName" required="" data-parsley-trigger="change">
             </div>
-            <div class="form-group label-floating {{isFoodFocused}}" >
+            <div class="form-group label-floating" >
                 <label class="control-label" for="focusedInput1">{{'reservation.EMAIL' | translate}}</label>
                 <input type="email" ng-disabled="orderDisable === true" id="foodEmailId" name="foodEmailId" data-parsley-type="email" class="form-control " ng-model="food.emailId" required="" data-parsley-trigger="change">
             </div>
-            <div class="form-group label-floating {{isFoodFocused}}" >
+            <div class="form-group label-floating" >
                 <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
-                <input type="text" ng-disabled="orderDisable === true" id="ms-form-pass" class="form-control " masked="" data-inputmask="'mask': '(999) 999-9999'" name="foodMobile" ng-model="food.mobileNumber" required="" data-parsley-trigger="change">
+                <input type="text" ng-disabled="orderDisable === true" id="ms-form-pass" class="form-control "  name="foodMobile" ng-model="food.mobileNumber" required="" >
             </div>
-            <div class="form-group label-floating {{isFoodFocused}}"  ng-hide="(foodType === 'Pickup')" ng-if="venueTypeCasino === 'CASINO'">
+            <div class="form-group label-floating"  ng-hide="(foodType === 'Pickup')" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" for="focusedInput1">{{"reservation.TABLE_NUMBER" | translate}}</label>
-                <select class="form-control  {{blackTheme}}" ng-disabled="orderDisable === true" ng-model="drink.tableNumber">
+                <select class="form-control  {{blackTheme}}" ng-disabled="orderDisable === true" ng-model="food.tableNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(32) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
             </div>
 
-            <div class="form-group label-floating  {{isFoodFocused}}" ng-hide="foodType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
+            <div class="form-group label-floating" ng-hide="foodType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" for="focusedInput1">{{"reservation.SEAT_NUMBER" | translate}}</label>
                 <select class="form-control  {{blackTheme}}" ng-disabled="orderDisable === true" id="foodSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.seatNumber">
                     <option value=""></option>
@@ -43,7 +43,7 @@
                 </select>
             </div>
 
-             <div class="form-group label-floating {{isFoodFocused}}"  ng-hide="foodType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
+             <div class="form-group label-floating"  ng-hide="foodType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
                 <label class="control-label" for="focusedInput1">{{"reservation.LANE_NUMBER" | translate}}</label>
                 <select class="form-control  {{blackTheme}}" ng-disabled="orderDisable === true" id="foodLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.laneNumber">
                     <option value=""></option>
@@ -57,81 +57,91 @@
 
         <div class="col-md-12">
     		<center>
-        		<a href="" class="btn btn-success  btn-raised" ng-if="foodBreakFastUrl" ng-click="menuUrlSelection(foodBreakFastUrl)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.BREAK_FAST" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised " ng-if="foodBranchUrl" ng-click="menuUrlSelection(foodBranchUrl)"><span class="glyphicon glyphicon-heart"></span> {{"reservation.FOOD_BRANCH" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised " ng-if="foodStartersUrl" ng-click="menuUrlSelection(foodStartersUrl)"><span class="glyphicon glyphicon-play"></span>{{"reservation.FOOD_STARTERS" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised " ng-if="foodMenuUrl" ng-click="menuUrlSelection(foodMenuUrl)"><span class="glyphicon glyphicon-home"></span> {{"reservation.FOOD_MENU" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="foodHappyHourUrl" ng-click="menuUrlSelection(foodHappyHourUrl)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.FOOD_HAPPY_HOUR" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="foodDinnerUrl" ng-click="menuUrlSelection(foodDinnerUrl)"><span class="glyphicon glyphicon-heart"></span>{{"reservation.FOOD_DINNER" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="foodLunchUrl" ng-click="menuUrlSelection(foodLunchUrl)"><span class="glyphicon glyphicon-play"></span> {{"reservation.FOOD_LUNCH" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="foodDessertsUrl" ng-click="menuUrlSelection(foodDessertsUrl)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FOOD_DESSERTS" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="foodAppetizsersUrl" ng-click="menuUrlSelection(foodAppetizsersUrl)"><span class="glyphicon glyphicon-play"></span> {{"reservation.FOOD_APPETIZSER" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="foodGlutenfree" ng-click="menuUrlSelection(foodGlutenfree)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FOOD_GLUTEN" | translate}}</a>
+        		<a href="" class="btn btn-success  btn-raised" ng-if="foodBreakFastUrl" ng-click="menuUrlSelection(foodBreakFastUrl)">
+                    <span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.BREAK_FAST" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised " ng-if="foodBranchUrl" ng-click="menuUrlSelection(foodBranchUrl)">
+                    <span class="glyphicon glyphicon-heart"></span> {{"reservation.FOOD_BRANCH" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised " ng-if="foodStartersUrl" ng-click="menuUrlSelection(foodStartersUrl)">
+                    <span class="glyphicon glyphicon-play"></span>{{"reservation.FOOD_STARTERS" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised " ng-if="foodMenuUrl" ng-click="menuUrlSelection(foodMenuUrl)">
+                    <span class="glyphicon glyphicon-home"></span> {{"reservation.FOOD_MENU" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodHappyHourUrl" ng-click="menuUrlSelection(foodHappyHourUrl)">
+                    <span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.FOOD_HAPPY_HOUR" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodDinnerUrl" ng-click="menuUrlSelection(foodDinnerUrl)">
+                    <span class="glyphicon glyphicon-heart"></span>{{"reservation.FOOD_DINNER" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodLunchUrl" ng-click="menuUrlSelection(foodLunchUrl)">
+                    <span class="glyphicon glyphicon-play"></span> {{"reservation.FOOD_LUNCH" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodDessertsUrl" ng-click="menuUrlSelection(foodDessertsUrl)">
+                    <span class="glyphicon glyphicon-home"></span>{{"reservation.FOOD_DESSERTS" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodAppetizsersUrl" ng-click="menuUrlSelection(foodAppetizsersUrl)">
+                    <span class="glyphicon glyphicon-play"></span> {{"reservation.FOOD_APPETIZSER" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="foodGlutenfree" ng-click="menuUrlSelection(foodGlutenfree)">
+                    <span class="glyphicon glyphicon-home"></span>{{"reservation.FOOD_GLUTEN" | translate}}</a>
     		</center>
         </div> <br/>
         
-        <div ng-if="selectedFoodList.length != 0">
-        <h2 class="text-primary" >Selected Foods:</h2>
-        <div>
-            <table class="table table-no-border table-striped table-responsive">
-                <thead>
-                    <tr>
-                      <th>{{'reservation.NAME' | translate}}</th>
-                      <th>{{'reservation.BRAND' | translate}}</th>
-                      <th>{{'reservation.QUANTITY' | translate}}</th>
-                      <th>{{'reservation.PRICE' | translate}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="foods in selectedFoodList">
-                      <td>{{foods.name}}</td>
-                      <td>{{foods.brand}}</td>
-                      <td>{{foods.count}}</td>
-                      <td><span ng-hide="((foods == null || foods.total == 0 || foods.total == undefined))">&dollar;</span>{{(foods == null || foods.total == 0 || foods.total == undefined) ? "-" : foods.total | number:2}}</td>
-                      <td><button type="submit" class="btn btn-raised btn-sm btn-danger" ng-click="removeFoodItems($index,foods)">X</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div ng-if="selectedFoodList.length != 0" ng-class="blackTheme">
+            <h2>Selected Foods</h2>
+            <div class="row" ng-class="blackTheme">
+                <table class="table table-no-border table-striped table-responsive h6">
+                    <thead>
+                        <tr>
+                          <th>{{'reservation.NAME' | translate}}</th>
+                          <th>{{'reservation.QUANTITY' | translate}}</th>
+                          <th>{{'reservation.PRICE' | translate}}</th>
+                          <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="foods in selectedFoodList">
+                          <td>{{foods.name}} - {{foods.brand}}</td>
+                          <td>{{foods.count}}</td>
+                          <td><span ng-hide="((foods == null || foods.total == 0 || foods.total == undefined))">&dollar;</span>
+                            {{(foods == null || foods.total == undefined) ? "0" : foods.total | number:2}}<td>
+                          <td><button type="submit" class="btn btn-raised btn-sm btn-danger" ng-click="removeFoodItems($index,foods)">X</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div ng-show="((specificFood === 'Y' || specificFood === 'y') && (preOrder === 'y' || preOrder === 'Y'))" class="col-xs-12 col-md-8 form-group">
-            <div class="row">
-            <div class="col-xs-12 ms-paper-content-container">
+
+        <div ng-show="((specificFood === 'Y' || specificFood === 'y') && (preOrder === 'y' || preOrder === 'Y'))" class="form-group">
+            <div class="row" ng-class="blackTheme">
+            <div class="ms-paper-content-container">
                 <div class="ms-paper-content">
                     <h2 class="text-primary" >{{"reservation.FOOD_ITEMS" | translate}}</h2>
                     <section class="ms-component-section">
                         <div class="panel-group ms-collapse" id="accordion2" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-primary" ng-repeat="items in foodDetails">
                                 <div class="panel-heading" role="tab" id="{{items.id}}">
-                                    <h4 class="panel-title">
+                                    <h3 class="panel-title">
                                         <a class="{{$index == 0 ? '' : 'collapsed'}} withripple" role="button" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}" aria-controls="collapse{{items.id}}">
-                                            {{items.brand}} (Category)
+                                            {{items.brand}}
                                         </a>
-                                    </h4>
+                                    </h3>
                                 </div>
                                 <div id="collapse{{items.id}}" class="panel-collapse collapse {{$index == 0 ? 'collapse in' : ''}}" role="tabpanel" aria-labelledby="{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}">
                                     <div class="panel-body">
-                                        <table class="table table-responsive table-no-border">
-                                        <tr>
-                                            <td rowspan="4" class="col-md-3 no-p" >
-                                                <img class="img-responsive center-block" alt="foodTable-image" data-ng-src="" > 
-                                            </td>
-                                            <td class="col-md-3"><h4><strong>{{items.name}}</strong></h4></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-3"><span class="mr-1">{{'reservation.PRICE' | translate}}:</span> &dollar;{{items.price}}<br>
-                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#foodPopUp" ng-if="items.description != null" ng-click="showPopUp(items.description)">{{'reservation.FOOD_DRINK_DETAILS' | translate}}</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-2">
-                                            <select class="form-control {{blackTheme}}" ng-change="userSelectedFood(items)" ng-model="items.count" value="{{items.count || 0}}">
-                                                    <option value="">{{"reservation.QUANTITY" | translate}}</option>
-                                                    <option ng-repeat="n in [].constructor(20) track by $index" value="{{$index+1}}">{{$index+1}}</option>
-                                            </select>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                        <div class=" col-md-6 col-sm-12">
+                                            <table class="table table-responsive table-no-border">
+                                                <tr>
+                                                    <td><h3><strong>{{items.name}}</strong></h3></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="mr-1">{{'reservation.PRICE' | translate}}:</span> &dollar;{{items.price}}<br>
+                                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#foodPopUp" ng-if="items.description != null" ng-click="showPopUp(items.description)">{{'reservation.FOOD_DRINK_DETAILS' | translate}}</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                    <select class="form-control {{blackTheme}}" ng-change="userSelectedFood(items)" ng-model="items.count" value="{{items.count || 0}}">
+                                                            <option value="">{{"reservation.QUANTITY" | translate}}</option>
+                                                            <option ng-repeat="n in [].constructor(20) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                                    </select>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +151,7 @@
             </div>
             </div>
         </div>
-        <div class="form-group label-floating {{isFoodFocused}}" >
+        <div class="form-group label-floating" >
             <label class="control-label" for="focusedInput1">{{'reservation.SPECIAL_INSTRUCTION' | translate}}</label>
             <input type="text" class="form-control " ng-disabled="orderDisable === true" id="foodInstructions" ng-model="food.instructions">
         </div>

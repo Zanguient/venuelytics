@@ -11,23 +11,23 @@
                     <font size="3">{{"reservation.PICKUP" | translate}}</font>
                 </label>
             </div>
-            <div class="form-group label-floating {{isDrinkFocused}}">
+            <div class="form-group label-floating">
                 <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" id="drinkFirstName" name="drinkFirstName" class="form-control " ng-model="drink.firstName" required="" data-parsley-trigger="change">
             </div>
-            <div class="form-group label-floating  {{isDrinkFocused}}">
+            <div class="form-group label-floating">
                 <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" id="drinkLastName" name="drinkLastName" class="form-control " ng-model="drink.lastName" required="" data-parsley-trigger="change">
             </div>
-            <div class="form-group label-floating {{isDrinkFocused}}">
+            <div class="form-group label-floating">
                 <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="email" id="drinkEmailId" name="drinkEmailId" data-parsley-type="email" class="form-control " ng-model="drink.emailId" required="" data-parsley-trigger="change">
             </div>
-            <div class="form-group label-floating {{isDrinkFocused}}">
+            <div class="form-group label-floating">
                 <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" id="ms-form-pass" class="form-control " masked="" data-inputmask="'mask': '(999) 999-9999'" name="drinkMobile" ng-model="drink.mobileNumber" required="" data-parsley-trigger="change">
+                <input ng-disabled="orderDisable === true" type="text" id="ms-form-pass" class="form-control " name="drinkMobile" ng-model="drink.mobileNumber" required="">
             </div>
-            <div class="form-group label-floating {{isDrinkFocused}}" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
+            <div class="form-group label-floating" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" >{{"reservation.TABLE_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control  {{blackTheme}}" ng-model="drink.tableNumber">
                     <option value=""></option>
@@ -35,7 +35,7 @@
                 </select>
             </div>
 
-            <div class="form-group label-floating {{isDrinkFocused}}" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
+            <div class="form-group label-floating" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" >{{"reservation.SEAT_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control  {{blackTheme}}" id="drinkSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="drink.seatNumber">
                     <option value=""></option>
@@ -43,7 +43,7 @@
                 </select>
             </div>
 
-             <div class="form-group label-floating {{isDrinkFocused}}" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
+             <div class="form-group label-floating" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
                 <label class="control-label" >{{"reservation.LANE_NUMBER" | translate}}</label>
                 <select ng-disabled="orderDisable === true" class="form-control  {{blackTheme}}" id="drinkLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="drink.laneNumber">
                     <option value=""></option>
@@ -56,32 +56,36 @@
 
         <div class="col-md-12">
     		<center>
-        		<a href="" class="btn btn-success btn-raised" ng-if="drinksWineListuUrl" ng-click="menuUrlSelection(drinksWineListuUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_WINE" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="drinksHappyHourDrinkUrl" ng-click="menuUrlSelection(drinksHappyHourDrinkUrl)"><span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.DRINK_HAPPY_HOUR" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="drinksBeerMenuUrl" ng-click="menuUrlSelection(drinksBeerMenuUrl)"><span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.DRINK_BEER_MENU" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="drinksMenuUrl" ng-click="menuUrlSelection(drinksMenuUrl)"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.DRINK_MENU_URL" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="drinksCocktailsUrl" ng-click="menuUrlSelection(drinksCocktailsUrl)"><span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_COCKTAILS" | translate}}</a>
+        		<a href="" class="btn btn-success btn-raised" ng-if="drinksWineListuUrl" ng-click="menuUrlSelection(drinksWineListuUrl)">
+                    <span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_WINE" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="drinksHappyHourDrinkUrl" ng-click="menuUrlSelection(drinksHappyHourDrinkUrl)">
+                    <span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.DRINK_HAPPY_HOUR" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="drinksBeerMenuUrl" ng-click="menuUrlSelection(drinksBeerMenuUrl)">
+                    <span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.DRINK_BEER_MENU" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="drinksMenuUrl" ng-click="menuUrlSelection(drinksMenuUrl)">
+                    <span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.DRINK_MENU_URL" | translate}}</a>
+                <a href="" class="btn btn-success btn-raised" ng-if="drinksCocktailsUrl" ng-click="menuUrlSelection(drinksCocktailsUrl)">
+                    <span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_COCKTAILS" | translate}}</a>
     		</center>
         </div> <br/>
         
-        <div ng-if="userSelectedDrinks.length != 0">
-        <h1>Selected Foods:</h1>
-        <div>
-                <table class="table table-no-border table-striped table-responsive">
+        <div ng-if="userSelectedDrinks.length != 0" ng-class="blackTheme">
+        <h2>Selected Foods</h2>
+        <div class="row" ng-class="blackTheme">
+                <table class="table table-no-border table-striped table-responsive h6">
                   <thead>
                     <tr>
                       <th>{{'reservation.NAME' | translate}}</th>
-                      <th>{{'reservation.BRAND' | translate}}</th>
                       <th>{{'reservation.QUANTITY' | translate}}</th>
                       <th>{{'reservation.PRICE' | translate}}</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat="drink in userSelectedDrinks">
-                      <td>{{drink.name}}</td>
-                      <td>{{drink.brand}}</td>
+                      <td>{{drink.name}} - {{drink.brand}}</td>
                       <td>{{drink.count}}</td>
-                      <td><span ng-hide="((drink == null || drink.total == 0 || drink.total == undefined))">&dollar;</span>{{(drink == null || drink.total == 0 || drink.total == undefined) ? "-" : drink.total | number:2}}</td>
+                      <td><span ng-hide="((drink == null || drink.total == 0 || drink.total == undefined))">&dollar;</span>{{(drink == null || drink.total == 0 || drink.total == undefined) ? "0" : drink.total | number:2}}</td>
                        <td><button type="submit" class="btn btn-raised btn-sm btn-danger" ng-click="removeDrinkItems($index,drink)">X</td>
                     </tr>
                   </tbody>
@@ -89,44 +93,43 @@
               </div>
         </div>
 
-        <div ng-show="specificDrink === 'Y' || specificDrink === 'y'" ng-hide="orderDisable === true" class="col-md-8 form-group">
-            <div class="row">
-            <div class="col-md-8 ms-paper-content-container">
+        <div ng-show="specificDrink === 'Y' || specificDrink === 'y'" ng-hide="orderDisable === true" class="form-group" ng-class="blackTheme">
+            <div class="row" ng-if="drinkDetails.size() > 0">
+            <div class="ms-paper-content-container">
                 <div class="ms-paper-content">
-                    <h1>{{"reservation.DRINK_ITEMS" | translate}}</h1>
+                    <h2>{{"reservation.DRINK_ITEMS" | translate}}</h2>
                     <section class="ms-component-section">
                         <div class="panel-group ms-collapse" id="accordion2" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-primary" ng-repeat="items in drinkDetails">
                                 <div class="panel-heading" role="tab" id="{{items.id}}">
-                                    <h4 class="panel-title">
+                                    <h3 class="panel-title">
                                         <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}" aria-controls="collapse{{items.id}}">
-                                            {{items.brand}} (Category)
+                                            {{items.brand}}
                                         </a>
-                                    </h4>
+                                    </h3>
                                 </div>
                                 <div id="collapse{{items.id}}" class="panel-collapse collapse {{$index == 0 ? 'collapse in' : ''}}" role="tabpanel" aria-labelledby="{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}">
                                     <div class="panel-body">
-                                        <table class="table table-responsive table-no-border">
-                                        <tr>
-                                            <td rowspan="4" class="col-md-3" style="padding-right: 0px;padding-left: 0px;">
-                                                <img class="img-responsive" alt="drinkTable-image" data-ng-src="" style="height:100px;width:100px;"> 
-                                            </td>
-                                            <td class="col-md-3"><font size="4"><strong>{{items.name}}</strong></font></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-3"><font size="2">{{'reservation.PRICE' | translate}}: &dollar;{{items.price}}</font><br>
-                                            <font size="2"><a href="javascript:void(0)" data-toggle="modal" data-target="#drinkPopUp" ng-if="items.description != null" ng-click="drinkPopUp(items.description)">{{'reservation.FOOD_DRINK_DETAILS' | translate}}</a></font></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-2">
-                                            <select class="form-control {{blackTheme}}" ng-change="drinkService(items)" ng-model="items.count" value="{{items.count || 0}}">
-                                                    <option value="">{{"reservation.QUANTITY" | translate}}</option>
-                                                    <option ng-repeat="n in [].constructor(20) track by $index" value="{{$index+1}}">{{$index+1}}</option>
-                                            </select>
-                                            </td>
-                                        </tr>
-                                        
-                                    </table>
+                                        <div class=" col-md-6 col-sm-12">
+                                            <table class="table table-responsive table-no-border">
+                                                <tr>
+                                                   
+                                                    <td><h3><strong>{{items.name}}</strong></h3></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="mr-1">{{'reservation.PRICE' | translate}}:</span> &dollar;{{items.price}}<br>
+                                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#drinkPopUp" ng-if="items.description != null" ng-click="drinkPopUp(items.description)">{{'reservation.FOOD_DRINK_DETAILS' | translate}}</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                    <select class="form-control {{blackTheme}}" ng-change="drinkService(items)" ng-model="items.count" value="{{items.count || 0}}">
+                                                            <option value="">{{"reservation.QUANTITY" | translate}}</option>
+                                                            <option ng-repeat="n in [].constructor(20) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                                    </select>
+                                                    </td>
+                                                </tr>   
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +139,7 @@
             </div>
             </div>
         </div>
-        <div class="form-group label-floating {{isDrinkFocused}}">
+        <div class="form-group label-floating">
             <label class="control-label" >{{'reservation.SPECIAL_INSTRUCTION' | translate}}</label>
             <input ng-disabled="orderDisable === true" type="text" class="form-control " id="drinkInstructions" ng-model="drink.instructions">
         </div>
