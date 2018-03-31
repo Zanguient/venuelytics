@@ -10,66 +10,66 @@
         <table>
             <tr>
                 <td>
-                    <label>{{"reservation.VENUE_NAME"  | translate}} :</label>
+                    <label>{{"reservation.VENUE_NAME"  | translate}}</label>
                 </td>
                 <td>
-                    <label>&nbsp;&nbsp;{{venueName}}</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>{{"reservation.AMOUNT"  | translate}} :</label>
-                </td>
-                <td>
-                    &nbsp;&nbsp;$<label>{{availableAmount | number:2}}</label>
+                    <label>{{venueName}}</label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label>{{"reservation.SALES_TAX"  | translate}} :</label>
+                    <label>{{"reservation.AMOUNT"  | translate}}</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{taxAmount | number:2}}</label>
+                    $<label>{{availableAmount | number:2}}</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>{{"reservation.SALES_TAX"  | translate}}</label>
+                </td>
+                <td>
+                   $<label>{{taxAmount | number:2}}</label>
                 </td>
             </tr>
             <tr ng-show = "processingFee > 0">
                 <td>
-                    <label>{{"reservation.PROCESS_FEE"  | translate}} :</label>
+                    <label>{{"reservation.PROCESS_FEE"  | translate}}</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{processingFee | number:2}}</label>
+                    $<label>{{processingFee | number:2}}</label>
                 </td>
             </tr>
             <tr ng-show = "discount > 0">
                 <td>
-                    <label>{{"reservation.DISCOUNT"  | translate}} :</label>
+                    <label>{{"reservation.DISCOUNT"  | translate}}</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{discount | number:2}}</label>
+                    $<label>{{discount | number:2}}</label>
                 </td>
             </tr>
             <tr ng-show = "gratuity > 0">
                 <td>
-                    <label>{{"reservation.SERVICE_FEE"  | translate}} :</label>
+                    <label>{{"reservation.SERVICE_FEE"  | translate}}</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{gratuity | number:2}}</label>
+                    $<label>{{gratuity | number:2}}</label>
                 </td>
             </tr>
             <tr ng-show = "tipsFee > 0">
                 <td>
-                    <label>{{"reservation.TIPS"  | translate}} :</label>
+                    <label>{{"reservation.TIPS"  | translate}}</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{tipsFee | number:2}}</label>
+                   $<label>{{tipsFee | number:2}}</label>
                 </td>
             </tr>
             <tr ng-show = "foodFee > 0"> 
                 <td>
-                    <label>{{"reservation.DELIVERY_FEE"  | translate}} :</label>
+                    <label>{{"reservation.DELIVERY_FEE"  | translate}}</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{foodFee | number:2}}</label>
+                    $<label>{{foodFee | number:2}}</label>
                 </td>
             </tr>
             <tr ng-if = "paypal === true && payPalFee > 0">
@@ -77,41 +77,41 @@
                     <label>{{"reservation.PAY_PAL_FEE"  | translate}} :</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{payPalFee | number:2}}</label>
+                    $<label>{{payPalFee | number:2}}</label>
                 </td>
             </tr>
             <tr ng-if = "cardPayment === true && creditCardFee > 0">
                 <td>
-                    <label>{{"reservation.CREDIT_CARD_FEE"  | translate}} :</label>
+                    <label>{{"reservation.CREDIT_CARD_FEE"  | translate}}</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{creditCardFee | number:2}}</label>
+                   $<label>{{creditCardFee | number:2}}</label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label>{{"reservation.TOTAL"  | translate}} :</label>
+                    <label>{{"reservation.TOTAL"  | translate}}</label>
                 </td>
                 <td>
-                    &nbsp;&nbsp;$<label>{{chargedAmount | number:2}}</label>
+                    $<label>{{chargedAmount | number:2}}</label>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>{{"reservation.PAYMENT"  | translate}}</label>
                 </td>
-                <td style="white-space: nowrap">&nbsp;&nbsp;
+                <td >
                     <label>
-                    <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>&nbsp;&nbsp;
-                        <font size="3">{{"reservation.PAYPAL"  | translate}}</font>
-                    </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>
+                        {{"reservation.PAYPAL"  | translate}}
+                    </label><br>
                     <label>
-                    <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>&nbsp;&nbsp;
-                        <font size="3">{{"reservation.CREDIT_CARD"  | translate}}</font>
-                    </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>
+                        {{"reservation.CREDIT_CARD"  | translate}}
+                    </label><br>
                     <label>
-                    <input type="radio" name="type" ng-change="payAtVenue(test)" ng-model="test" value="Phone/In Venue"/>&nbsp;&nbsp;
-                        <font size="3">{{"reservation.PAY_AT_VENUE"  | translate}}</font>
+                    <input type="radio" name="type" ng-change="payAtVenue(test)" ng-model="test" value="Phone/In Venue"/>
+                        {{"reservation.PAY_AT_VENUE"  | translate}}
                     </label>
                 </td>
             </tr>
