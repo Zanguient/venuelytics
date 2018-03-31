@@ -1,11 +1,11 @@
 <div  ng-controller="ReservationServiceController">
-    <form class="form-horizontal" parsley-validate autocomplete="off"  validate-form="" name="partyForm" ng-submit="confirmPartyService()" novalidate>
-    <fieldset class="col-xs-12">
-        <div class="row col-xs-12 form-group label-floating no-p" ng-class = "{'active' : party.requestedDate.length > 0}">
+    <form parsley-validate autocomplete="off"  validate-form="" name="partyForm" ng-submit="confirmPartyService()" novalidate>
+    <fieldset>
+        <div class="form-group label-floating" ng-class = "{'active' : party.requestedDate.length > 0}">
             <label class="control-label" >{{'reservation.DATE' | translate}}</label>
             <input type="text" class="form-control " id="reserveRequestDate" ng-model="party.requestedDate" required/>
         </div>
-        <div class="row col-xs-12 mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
+        <div class=" mt0 center_content" ng-if="selectedVenueMap.imageUrls[0].originalUrl" >
             <center>
                 <div class="row h6">
                     
@@ -31,9 +31,9 @@
         <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" ng-repeat="reserveTable in selectedVenueMap.elements" >
             <div class="alternative col-xs-12 mb-4">
                 <div class="col-md-3 col-xs-4"><label>
-                    <input class="mr-1" type="checkbox" id="checkData" name="{{reserveTable.name}}" ng-checked="isPartyTableSelected(reserveTable)" ng-disabled="isReserved(reserveTable)" ng-click="selectReserveTableForWithOutFloorMap(reserveTable,$index)" />{{reserveTable.name}}<span
-                    ng-hide="reserveTable.size <= 0">({{reserveTable.size}}<i class="fa fa-user" aria-hidden="true" />)
-                    </span></label><label class="tableReserved" ng-if="reserveTable.reserved === true">{{"reservation.RESERVED" | translate}}</label>
+                    <input class="mr-1" type="checkbox" id="checkData" name="{{reserveTable.name}}" ng-checked="isPartyTableSelected(reserveTable)" ng-disabled="isReserved(reserveTable)" ng-click="selectReserveTableForWithOutFloorMap(reserveTable,$index)" />{{reserveTable.name}}
+                    <span ng-hide="reserveTable.size <= 0">({{reserveTable.size}}</span></label>
+                    <label class="tableReserved" ng-if="reserveTable.reserved === true">{{"reservation.RESERVED" | translate}}</label>
                 </div>
                 <div class="col-md-5 col-xs-8">
                     <img alt="table-images" class="table-carousel" class="img-responsive" data-ng-src="{{reserveTable.imageUrls[0].smallUrl}}"/>
@@ -43,13 +43,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 mt-4 mb-2"  ng-if="reserveTableSelection.length > 0">
+        <div class="row mt-4 mb-2" ng-class="blackTheme" ng-if="reserveTableSelection.length > 0">
             <b>{{'reservation.SELECT_TABLE' | translate}}</b>:
             <label ng-repeat="reserveTable in reserveTableSelection">
             {{reserveTable.name}}{{$last? '' : ($index==reserveTableSelection.length-2) ?'&nbsp;and&nbsp;' : ',&nbsp;'}}</label>
         </div>
 
-        <div class="col-xs-12"  ng-if="reserveTableSelection">
+        <div class="row" ng-class="blackTheme" ng-if="reserveTableSelection">
             <div class="col-xs-12 mb-2" ng-repeat="reserveTable in reserveTableSelection">
                 <div class="col-md-6 col-xs-12">
                     <table class="table">
@@ -80,39 +80,39 @@
                 
             </div>
         </div>
-        <div class="col-xs-12 form-group label-floating no-p">
+        <div class="form-group label-floating">
             <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
             <input type="text" class="form-control " ng-model="party.userFirstName" id="reserveFirstName" required>
         </div>
-        <div class="col-xs-12 form-group label-floating no-p" >
+        <div class="form-group label-floating" >
             <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
-            <input type="text" class="form-control  fontChange"  ng-model="party.userLastName" id="reserveLastName" required>
+            <input type="text" class="form-control"  ng-model="party.userLastName" id="reserveLastName" required>
         </div>
-        <div class="col-xs-12 form-group label-floating no-p" >
+        <div class="form-group label-floating" >
             <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
-            <input type="email" class="form-control " id="reserveEmail" ng-model="party.email"data-parsley-trigger="change" required>
+            <input type="email" class="form-control " id="reserveEmail" ng-model="party.email" data-parsley-trigger="change" required>
         </div>
-        <div class="col-xs-12 form-group label-floating no-p">
+        <div class="form-group label-floating">
             <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
-            <input type="text" id="ms-form-pass" class="form-control  fontChange" masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="party.mobile" required data-parsley-trigger="change">
+            <input type="text" id="ms-form-pass" class="form-control" name="mobile" ng-model="party.mobile" required data-parsley-trigger="change">
         </div>
        
-        <div class="col-xs-12 form-group label-floating no-p" >
+        <div class="form-group label-floating" >
             <label class="control-label" >{{'reservation.ZIPCODE' | translate}}</label>
             <input type="text" class="form-control " id="reserveZipcode" ng-model="party.partyZipcode"  required>
         </div>
-        <div class="col-xs-12 form-group label-floating no-p">
+        <div class="form-group label-floating">
             <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
             <input type="text" class="form-control " id="reservetTotalGuest" ng-model="party.totalGuest" >
         </div>
-        <div class="col-xs-12 form-group label-floating no-p">
+        <div class="form-group label-floating">
             <label class="control-label" >{{'reservation.OCCASION' | translate}}</label>
             <select class="form-control  {{blackTheme}}" eqruired
                     ng-model="party.partyOccasion" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>
         </div>
-        <div class="col-xs-12 form-group label-floating no-p">
+        <div class="form-group label-floating">
             <label class="control-label" >{{'reservation.INSTRUCTIONS' | translate}}</label>
             <input type="text" class="form-control " id="reserveInstructions" ng-model="party.instructions" placeholder="">
         </div>
@@ -123,11 +123,11 @@
            </select>
            <img ng-hide ="!hostDate || hostDate.length == 0" class="hostImgs" alt="host-image" ng-src="{{getHostImage()}}"/>
        </div> -->
-        <div class="col-xs-12" >
-        <center><h2>{{"reservation.PARTY_PACKAGE"  | translate}}</h2></center>
+        <div  ng-class="blackTheme" >
+            <center><h2>{{"reservation.PARTY_PACKAGE"  | translate}}</h2></center>
         </div>
 
-        <div class="col-xs-12"  ng-if="partypackage">
+        <div  ng-if="partypackage" ng-class="blackTheme">
             <div class="col-xs-12 mb-2" ng-repeat="partyObj in partypackage">
                 <div class="col-md-6 col-xs-12">
                     <table class="table">
@@ -157,11 +157,7 @@
                 </div>
             </div>
         </div>
-
-
-
-
-        <div class="col-xs-12">
+        <div>
             <div>
                 <label class="table-font" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="reserve.authorize" required/>
@@ -169,7 +165,7 @@
                 </label>
             </div>
         </div>
-        <div class="col-xs-12">
+        <div>
             <div>
                 <label class="table-font" ng-class="{'Check_box_label': blackTheme === ''}">
                     <input type="checkbox" ng-model="party.agree" required/>
@@ -177,7 +173,7 @@
                 </label>
             </div>
         </div>
-        <div class="col-xs-12" ng-if="noTableSelected == true">
+        <div ng-if="noTableSelected == true">
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="zmdi zmdi-close"></i></button>
                 <strong><i class="zmdi zmdi-close-circle"></i> {{"reservation.ERROR_MESSAGE" | translate}}!</strong> {{"reservation.FLOOR_MAP_SELECTION" | translate}} 
@@ -191,10 +187,10 @@
 </form> 
 <br/>
 
-<div class="col-xs-12" ng-if="partyMenuUrl">
+<div ng-if="partyMenuUrl">
 
     <center>
-        <h2 class="color-success">{{'reservation.POLICIES' | translate}}</h1>
+        <h2 class="color-success">{{'reservation.POLICIES' | translate}}</h2>
     </center>
     <hr/>
 
@@ -205,21 +201,21 @@
     </center>
 </div>
 
-<div class="col-xs-12" ng-if="partyVIPPolicy">
+<div ng-if="partyVIPPolicy">
     <center>
         <h3 class="color-success fontLight">{{'reservation.VIP_SERVICE_POLICY' | translate}}</h3>
     </center>
     <p class="title_desc">{{partyVIPPolicy}}</p>
 </div>
 
-<div class="col-xs-12" ng-if="partyMinimumRequirement">
+<div ng-if="partyMinimumRequirement">
     <center>
         <h3 class="color-success fontLight">{{"reservation.MIN_REQ" | translate}}</h3>
     </center>
      <p class="title_desc">{{partyMinimumRequirement}}</p>
 </div>
 
-<div class="col-xs-12" ng-if="dressCode">
+<div ng-if="dressCode">
     <center>
         <h3 class="color-success fontLight">{{'reservation.DRESS_CODE' | translate}}</h3>
     </center>

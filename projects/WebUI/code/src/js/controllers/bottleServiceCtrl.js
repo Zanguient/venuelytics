@@ -39,6 +39,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             }
             
             self.init = function() {
+
+               
                AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
                     self.detailsOfVenue = response;
                     self.venueDetails = response;
@@ -56,6 +58,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.venueName =    self.detailsOfVenue.venueName;
 
                     self.initMore();
+                    self.$watch('bottle.requestedDate', function() {
+                        self.refreshMap();
+                    }); 
                 });
             }
             self.initMore = function() {
@@ -108,7 +113,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 AjaxService.getVenueServiceOpenDays(self.venueId, 'bottle').then(function(response) {
                   self.availableDays = response.data;
                    $( "#requestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd',
-                 beforeShowDay: noWeekendsOrHolidays});
+                    beforeShowDay: noWeekendsOrHolidays}).on('changeDate', function(ev){
+                        console.log("changeDate event");
+                        self.bottle.requestedDate = $("#requestDate").val();
+                        self.refreshMap();
+                    });
+
                 });
                
 
@@ -135,9 +145,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 }, 7000);
             });
 
-            self.$watch('bottle.requestedDate', function() {
-              self.refreshMap();
-            }); 
+            
 
             self.refreshMap = function() {
               if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {

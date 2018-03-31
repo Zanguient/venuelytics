@@ -26,6 +26,9 @@ module.exports = {
             'bower_components/html5shiv/dist/html5shiv.min.js',
             'bower_components/respond/dest/respond.min.js',
         ],
+        angular : [
+            'bower_components/angular/angular.min.js'
+        ],
         jsConcat : [
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/jquery-ui/jquery-ui.min.js',
@@ -55,7 +58,6 @@ module.exports = {
             'bower_components/typed.js/dist/typed.min.js',
             "bower_components/snackbar/dist/snackbar.min.js",
             "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
-			'bower_components/angular/angular.min.js',
 			'bower_components/angular-route/angular-route.min.js',
            /* 'bower_components/momentjs/min/moment.min.js',*/
             'bower_components/bootstrap-daterangepicker/daterangepicker.js',

@@ -42,6 +42,11 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
                 startDate: today,
                 minDate: 0,
                 format: 'yyyy-mm-dd'
+            }).on('changeDate' ,function(ev) {
+                self.private.orderDate = $("#privateDate").val();
+                if (self.private.orderDate !== "") {
+                    self.getBanquetHall(self.venueId);
+                }
             });
             self.private.authorize = false;
             self.private.agree = false;
