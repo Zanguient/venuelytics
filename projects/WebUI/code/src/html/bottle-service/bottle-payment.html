@@ -7,55 +7,55 @@
     </div>
     <div class="form-group">
         <center>
-            <table>
+            <table class="table table-responsive table-no-border">
                 <tr>
                     <td>
-                        <label>{{"reservation.VENUE_NAME"  | translate}} :</label>
+                        <label>{{"reservation.VENUE_NAME"  | translate}}</label>
                     </td>
                     <td>
-                        <label>&nbsp;&nbsp;{{venueName}}</label>
+                        <label>{{venueName}}</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>{{"reservation.AMOUNT"  | translate}} :</label>
+                        <label>{{"reservation.AMOUNT"  | translate}}</label>
                     </td>
                     <td>
-                        &nbsp;&nbsp;$<label>{{availableAmount | number:2}}</label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>{{"reservation.SALES_TAX"  | translate}} :</label>
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;$<label>{{taxAmount | number:2}}</label>
+                        $<label>{{availableAmount | number:2}}</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label>{{"reservation.TOTAL"  | translate}} :</label>
+                        <label>{{"reservation.SALES_TAX"  | translate}}</label>
                     </td>
                     <td>
-                        &nbsp;&nbsp;$<label>{{chargedAmount | number:2}}</label>
+                        $<label>{{taxAmount | number:2}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{"reservation.TOTAL"  | translate}}</label>
+                    </td>
+                    <td>
+                        $<label>{{chargedAmount | number:2}}</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label>{{"reservation.PAYMENT"  | translate}}</label>
                     </td>
-                    <td style="white-space: nowrap">&nbsp;&nbsp;
+                    <td>
                         <label>
-                            <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>&nbsp;&nbsp;
-                            <font size="3">{{"reservation.PAYPAL"  | translate}}</font>
-                        </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>
+                            {{"reservation.PAYPAL"  | translate}}
+                        </label><br>
                         <label>
-                            <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>&nbsp;&nbsp;
-                            <font size="3">{{"reservation.CREDIT_CARD"  | translate}}</font>
-                        </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>
+                            {{"reservation.CREDIT_CARD"  | translate}}
+                        </label><br>
                         <label>
-                            <input type="radio" name="type" ng-change="payAtVenue(test)" ng-model="test" value="Phone/In Venue"/>&nbsp;&nbsp;
-                            <font size="3">{{"reservation.PAY_AT_VENUE"  | translate}}</font>
+                            <input type="radio" name="type" ng-change="payAtVenue(test)" ng-model="test" value="Phone/In Venue"/>
+                            {{"reservation.PAY_AT_VENUE"  | translate}}
                         </label>
                     </td>
                 </tr>
