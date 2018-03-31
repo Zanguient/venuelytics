@@ -88,7 +88,15 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 AjaxService.getVenueServiceOpenDays(self.venueId, 'party').then(function(response) {
                   self.availableDays = response.data;
                    $( "#reserveRequestDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd',
-                 beforeShowDay: noWeekendsOrHolidays});
+                 beforeShowDay: noWeekendsOrHolidays}).on('changeDate', function(ev){
+                        console.log("changeDate event");
+                         self.party.requestedDate = $("#reserveRequestDate").val();
+                        if((self.party.requestedDate !== "") || (self.party.requestedDate !== undefined)) {
+                          self.startDate = moment(self.party.requestedDate).format('YYYYMMDD');
+                          self.showReserveFloorMapByDate();
+                        }
+                    });
+
                 });
                
 
@@ -168,11 +176,11 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                 });
             };
 
-        self.getpartypackage = function() {
-            AjaxService.getPrivateHalls(self.venueId, 'partypackage').then(function(response) {
-                   self.partypackage = response.data;
-            });
-        };
+            self.getpartypackage = function() {
+                AjaxService.getPrivateHalls(self.venueId, 'partypackage').then(function(response) {
+                       self.partypackage = response.data;
+                });
+            };
 
             self.showReserveFloorMapByDate = function() {
                 if(!DataShare.reserveTableSelection) {

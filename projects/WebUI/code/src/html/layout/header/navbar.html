@@ -1,4 +1,4 @@
-<nav class="navbar navbar-fixed-top yamm ms-navbar navbar-mode no-mb <%= navbarClass %>"  ng-hide="embeddedFlag === true">
+<nav class="navbar navbar-fixed-top yamm ms-navbar navbar-mode no-mb <%= navbarClass %>"  ng-cloak ng-hide="embeddedFlag === true">
     <div class="container container-full" >
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">
@@ -27,10 +27,10 @@
                     <a href="cities" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" data-name="cities" ng-bind="'navbar.CONSUMERS' | translate">Consumers<i class="zmdi zmdi-chevron-down"></i></a>
                     
                 </li>
-                <li class="dropdown {{$root.selectedTab == 'pricing' ? 'active' : ''}}">
+                <!-- <li class="dropdown {{$root.selectedTab == 'pricing' ? 'active' : ''}}">
                     <a ng-href="pricing" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-bind="'price.PRICE' | translate">Price<i class="zmdi zmdi-chevron-down"></i></a>
-
-                </li>
+                
+                </li> -->
                 <li class="dropdown {{$root.selectedTab == 'about' ? 'active' : ''}} ">
                     <a ng-href="about" class="dropdown-toggle animated fadeIn animation-delay-5" data-toggle="dropdown" data-hover="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-name="portfolio" ng-bind="'footBar.ABOUT' | translate">About Us<i class="zmdi zmdi-chevron-down"></i></a>
 

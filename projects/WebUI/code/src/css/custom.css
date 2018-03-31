@@ -108,6 +108,14 @@
     margin-top: 0;
   }
 
+  .form-group.label-floating label.control-label,.form-group.label-placeholder label.control-label {
+    top:-15px !important;
+  }
+
+  .form-group.label-floating.active label.control-label,.form-group.label-floating.is-focused label.control-label,.form-group.label-floating:not(.is-empty) label.control-label,.form-group.label-static label.control-label {
+    top:-38px !important;
+  }
+
 }
 
 
@@ -315,9 +323,19 @@
    border: 1px solid white;
 }
 
+.inverse {
+   border: 1px solid #757575 !important;
+   color: #757575 !important;
+}
+
+.blackTheme .card .card-block {
+  color: #000;
+}
+
 .blackTheme .form-control {
 
 }
+
 .blackTheme .btn[disabled][disabled] {
  /*  background-color: #3a943a !important; */
   opacity: .35 !important; 
@@ -413,10 +431,6 @@
 }
 /* BalckGoldTheme End */
 
-.inverse {
-   border: 1px solid #757575 !important;
-   color: #757575 ;
-}
 
 /* Break through css start */
 

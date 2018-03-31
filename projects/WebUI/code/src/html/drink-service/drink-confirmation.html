@@ -23,14 +23,18 @@
                   <td>{{drinkServiceDetails.emailId}}</td>
               </tr>
               <tr>
+                  <td><label><b> Seating Location</b></label> </td>
+                  <td>Table: {{drinkServiceDetails.tableNumber}}, Seat: {{drinkServiceDetails.seatNumber}}, Lane: {{drinkServiceDetails.laneNumber}}</td>
+              </tr>
+              <tr>
                   <td><label><b> {{'reservation.SPECIAL_INSTRUCTION' | translate}}</b></label> </td>
                   <td>{{drinkServiceDetails.instructions}}</td>
               </tr>
           </tbody>
       </table>
       <div class="form-group">
-      <h4 class="color-success">{{"reservation.SELECTED_DRINK_ITEMS"  | translate}}</h4>
-          <table class="table table-responsive table-no-border">
+      <h6 class="color-success">{{"reservation.SELECTED_DRINK_ITEMS"  | translate}}</h6>
+          <table class="table table-responsive table-no-border h6">
               <thead>
                 <tr>
                   <th><label><b>{{"reservation.DRINK_TYPE"  | translate}}</b></label></th>

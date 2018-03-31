@@ -110,7 +110,7 @@ var targets = {
     },
 };
 
-gulp.task('plugins', ['plugins:js', 'plugins:js:sourcemap','plugins:css', 'plugins:css:sourcemap','plugins:fonts', 'plugins:img'],function() {   
+gulp.task('plugins', ['plugins:js', 'angular:js','plugins:js:sourcemap','plugins:css', 'plugins:css:sourcemap','plugins:fonts', 'plugins:img'],function() {   
     return gulp.src(config.plugins.jsConcat)
         .pipe(gulpif(config.concat, concat('plugins.min.js')))
         .pipe(gulpif(config.compress, uglify())) 
@@ -131,6 +131,10 @@ gulp.task('plugins:css:sourcemap', function() {
 gulp.task('plugins:js', function() {
     return gulp.src(config.plugins.js)
         .pipe(cachebust.resources())
+        .pipe(gulp.dest(paths.js));
+});
+gulp.task('angular:js', function() {
+    return gulp.src(config.plugins.angular)
         .pipe(gulp.dest(paths.js));
 });
 
