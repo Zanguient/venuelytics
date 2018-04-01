@@ -89,13 +89,16 @@ App.controller('TicketDashBoardController',['$log','$scope','$window', '$http', 
             var percent = (data.soldTickets*100/data.totalTickets);
             $scope.soldPercent = Math.round(percent);
             $scope.cancelPercent = Math.round(data.canceledTickets*100/data.totalTickets);
+            $scope.checkedInPercent = Math.round(data.checkedIn*100/data.soldTickets);
             $scope.soldPercentText = ''+data.soldTickets + ' of ' + data.totalTickets;
-             $scope.cancelPercentText = ''+data.canceledTickets + ' of ' + data.totalTickets;
+            $scope.checkedInPercentText = ''+data.checkedIn + ' of ' + data.soldTickets;
+
         } else {
             $scope.soldPercent = 0;
             $scope.cancelPercent = 0;
             $scope.soldPercentText = '0 of ' + data.totalTickets;
             $scope.cancelPercentText = '0 of ' + data.totalTickets;
+            $scope.checkedInPercentText = '0 of ' + data.soldTickets;
         }
 
         $scope.processTicketsPerEvent(data.ticketAnalyticItems);
@@ -116,6 +119,7 @@ App.controller('TicketDashBoardController',['$log','$scope','$window', '$http', 
                 eventItem.soldTickets = 0;
                 eventItem.canceledTickets = 0;
                 eventItem.totalSales = 0;
+                eventItem.checkedInTickets = 0;
                 $scope.statsPerEventMap[id] = eventItem;
                 $scope.statsPerEvent.push(eventItem);
             }
@@ -123,6 +127,7 @@ App.controller('TicketDashBoardController',['$log','$scope','$window', '$http', 
             if (item.status === 'CANCELED') {
                 eventItem.canceledTickets += item.soldCount;
             } else {
+                eventItem.checkedInTickets += item.checkedIn;
                 eventItem.soldTickets += item.soldCount;
                 eventItem.totalSales += item.totalPrice;
             }
