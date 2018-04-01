@@ -28,6 +28,16 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
             }
             
         });
+
+         $("#vipBarChartComponent1").bind("plotclick", function (event, pos, item) {
+            if (typeof (item) !== 'undefined') {
+                var label = item.series.data[item.dataIndex][0];
+                console.log( label + " - " +item.series.data[item.dataIndex][1]);
+                $state.go('app.profile', {visitorId: item.series.altData[label]});
+            }
+            
+        });
+
     };
     
     
