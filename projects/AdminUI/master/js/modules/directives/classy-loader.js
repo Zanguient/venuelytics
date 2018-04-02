@@ -21,7 +21,11 @@ App.directive('classyloader', function($timeout) {
           if (!newValue || angular.equals(newValue, oldValue)) {
               return;
           }
+           var $element = $(element),
+            options  = $element.data();
+          scope.options = options;
           scope.options.percentage = scope.percentage;
+          scope.thisElement = $element;
           scope.thisElement.ClassyLoader(scope.options).draw();
       });
       // run after interpolation  

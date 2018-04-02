@@ -112,7 +112,7 @@ var dynamicScriptFiles = [
     '../vendor/sparklines/jquery.sparkline.min.js',
     '../vendor/slimscroll/jquery.slimscroll.min.js',
     '../vendor/screenfull/screenfull.min.js',
-    '../vendor/classyloader/js/jquery.classyloader.min.js',
+    '../vendor/classyloader/js/jquery.classyloader.js',
     '../vendor/jvectormap/jquery-jvectormap-1.2.2.min.js',
     '../vendor/jvectormap/maps/jquery-jvectormap-world-mill-en.js',
     '../vendor/jvectormap/jquery-jvectormap-1.2.2.css',

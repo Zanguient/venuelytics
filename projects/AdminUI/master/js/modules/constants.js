@@ -66,7 +66,7 @@ App
       'sparklines':         ['vendor/sparklines/jquery.sparkline.min.js'],
       'slimscroll':         ['vendor/slimscroll/jquery.slimscroll.min.js'],
       'screenfull':         ['vendor/screenfull/screenfull.min.js'],
-      'classyloader':       ['vendor/classyloader/js/jquery.classyloader.min.js'],
+      'classyloader':       ['vendor/classyloader/js/jquery.classyloader.js'],
       'vector-map':         ['vendor/jvectormap/jquery-jvectormap-1.2.2.min.js', 'vendor/jvectormap/maps/jquery-jvectormap-world-mill-en.js', 
                             'vendor/jvectormap/jquery-jvectormap-1.2.2.css'],
       'loadGoogleMapsJS':   ['vendor/gmap/load-google-maps.js'],

@@ -1,21 +1,26 @@
 
-App.controller('TicketDashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService',
-    'RestServiceFactory','$translate','colors', 'APP_EVENTS','Session','$state', 
-    function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors, APP_EVENTS, session, $state) {
+App.controller('EventDashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService',
+    'RestServiceFactory','$translate','colors', 'APP_EVENTS','Session','$state', '$stateParams',
+    function($log, $scope, $window, $http, $timeout, contextService, RestServiceFactory, $translate, colors, APP_EVENTS, session, $state, $stateParams) {
 	'use strict';
     if (session.roleId >= 10 && session.roleId <= 12) {
         $state.go('app.ticketsCalendar'); 
         return;
     }
     $scope.TYPES = ['ACTIVE', 'HISTORY', 'ALL'];
+
+    $scope.colors = ["#0094cb", "#ff3366", "#ff3366", "#51bff2", "#4a8ef1", "#3cb44b", "#0082c8", "#911eb4", "#e6194b", "#f0693a", "#f032e6 ", "#f58231", "#d2f53c", "#ffe119", "#a869f2", "#008080", "#aaffc3", "#e6beff", "#aa6e28", "#fffac8", "#800000", "#808000 ", "#ffd8b1", "#808080", "#808080"];
+
     $scope.selectedType = 'ACTIVE';
     
     $scope.totalDays = {icon: 'fa-sun-o', bgColor: 'bg-purple', bgColorSecondary: 'bg-purple-dark', label: 'Total Days', value: ' '};
     $scope.totalTickets = {icon: 'fa-ticket', bgColor: 'bg-info', bgColorSecondary: 'bg-info-dark', label: 'Total Tickets', value: ' '};
     $scope.canceledTickets = {icon: 'fa-ticket', bgColor: 'bg-green', bgColorSecondary: 'bg-green-dark', label: 'Canceled Tickets', value: ' '};
     $scope.numberOfStores = {icon: 'fa-building', bgColor: 'bg-danger', bgColorSecondary: 'bg-danger-dark', label: 'Number of Stores', value: ' '};
-    $scope.statsPerEvent = [];
-    $scope.pieData = [];
+    $scope.statsPerStore = [];
+    $scope.eventId = $stateParams.eventId;
+    $scope.eventName = '';
+    $scope.statusPerTicketype = [];
     $scope.currencyFormatter =  {
         format : function(num) {
                 if (num >= 1000000000) {
@@ -52,7 +57,7 @@ App.controller('TicketDashBoardController',['$log','$scope','$window', '$http', 
         $scope.top3Stats = [];
 
         $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"Total Revenue", "value":0, "icon":"fa fa-dollar"}, "#");
-        $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Tickets Sold", "value":0, "icon":"fa fa-ticket"}, "#");
+        $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Tickets Solds", "value":0, "icon":"fa fa-ticket"}, "#");
         $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"Number of Shows", "value":0, "icon":"fa fa-shopping-cart"}, "#");
         $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"Number of Events", "value":0, "icon":"fa fa-diamond"}, "#");       
        
@@ -65,13 +70,8 @@ App.controller('TicketDashBoardController',['$log','$scope','$window', '$http', 
        $scope.setDisplayData();
     
 	};
-
-    $scope.eventDrillDown = function(item) {
-        $state.go('app.eventDashboard', {eventId: item.eventId});
-    };
-
     $scope.setDisplayData = function() {
-        RestServiceFactory.AnalyticsService().getTicketingAnalytics({id: $scope.effectiveVenueId, type: $scope.selectedType}, function(data){
+        RestServiceFactory.AnalyticsService().getTicketingAnalytics({id: $scope.effectiveVenueId, type: $scope.selectedType, eventId: $scope.eventId}, function(data){
             $scope.processAnalytics(data);
         },function(error){
             /*if (typeof error.data !== 'undefined') { 
@@ -80,8 +80,17 @@ App.controller('TicketDashBoardController',['$log','$scope','$window', '$http', 
         });   
     };
 
+    $scope.P = function(a,b) {
+        if (b <= 0) {
+            return 0;
+        }
+        return Math.round(a*1000/b)/10;
+    };
 
     $scope.processAnalytics = function(data) {
+        if (data.ticketAnalyticItems && data.ticketAnalyticItems.length > 0) {
+            $scope.eventName = data.ticketAnalyticItems[0].eventName;
+        }
         $scope.top3Stats[0].value = $scope.currencyFormatter.format(data.totalSales);
         $scope.top3Stats[1].value = $scope.currencyFormatter.format(data.soldTickets);
         $scope.top3Stats[2].value = $scope.currencyFormatter.format(data.totalShows);
@@ -108,92 +117,83 @@ App.controller('TicketDashBoardController',['$log','$scope','$window', '$http', 
             $scope.checkedInPercentText = '0 of ' + data.soldTickets;
         }
 
-        $scope.processTicketsPerEvent(data.ticketAnalyticItems);
-        $scope.initAmountCollectedChart(data.paidAmounAnalytics);
+        $scope.processTicketsPerStore(data.ticketAnalyticItems);
     };
+    
+    $scope.processTicketsPerStore = function(items) {
+        $scope.statsPerStore = [];
+        $scope.statsPerStoreMap = [];
+        $scope.statusPerTicketype = [];
 
-    $scope.initAmountCollectedChart = function(data) {
-        
-        var option = {
-                series: {
-                    pie: {
-                        show: true,
-                        innerRadius: 0.2, // This makes the donut shape,
-                        radius: 1,
-                        label: {
-                            show: "true",
-                            formatter: function(label, slice) {
-                                return "<div style='font-size:small;text-align:center;padding:2px;color:#fff;'><strong>" + label + "<br/>$" + slice.data[0][1] + "</strong></div>";
-                            },  // formatter function
-                            radius: 2/3,  // radius at which to place the labels (based on full calculated radius if <=1, or hard pixel value)
-                            threshold: 0    // percentage at which to hide the label (i.e. the slice is too narrow)
-                        }
+        var statusPerTicketypeMap = [];
 
-                    }
-
-                },
-                legend: {
-                        show: false
-                    },
-                grid: {
-                    hoverable: true
-                },
-                tooltip: true,
-                tooltipOpts: {
-                    cssClass: "flotTip",
-                    content: "%s: %y.0",
-                    defaultTheme: true
-                } 
-                
-            };
-        // Send Request
-        
-      
-       $scope.pieData = [];
-        
-        angular.forEach(data, function(value, colorIndex) {
-            //console.log(colorIndex +": " + value.paidAmount);
-            $scope.pieData.push(createPieElem($scope.colorPalattes[colorIndex % $scope.colorPalattes.length],value.storeName,value.paidAmount));
-        });
-        var chart = new FlotChart($('#amountedCollectedPieId'), null);
-       chart.setData(option, $scope.pieData);
-        
-    };
-    $scope.P = function(a,b) {
-        if (b <= 0) {
-            return 0;
-        }
-        return Math.round(a*1000/b)/10;
-    };
-
-    $scope.processTicketsPerEvent = function(items) {
-        $scope.statsPerEvent = [];
-         $scope.statsPerEventMap = [];
         for (var idx in items) {
-            var id = "event-" + items[idx].eventId;
+            var id = "store-" + items[idx].storeNumber;
             var item = items[idx];
-            var eventItem = $scope.statsPerEventMap[id];
+            var eventItem = $scope.statsPerStoreMap[id];
             if (typeof (eventItem) == 'undefined') {
                 eventItem = {};
-                eventItem.eventName = item.eventName;
+                eventItem.storeName = item.storeName;
                 eventItem.id = id;
-                eventItem.eventId = items[idx].eventId;
                 eventItem.totalTickets = 0;
                 eventItem.soldTickets = 0;
                 eventItem.canceledTickets = 0;
                 eventItem.totalSales = 0;
                 eventItem.checkedInTickets = 0;
-                $scope.statsPerEventMap[id] = eventItem;
-                $scope.statsPerEvent.push(eventItem);
+                $scope.statsPerStoreMap[id] = eventItem;
+                eventItem.statusPerTicketype = [];
+                eventItem.statusPerTicketypeMap = [];
+                $scope.statsPerStore.push(eventItem);
             }
+
+            var ticketTypeStat = statusPerTicketypeMap[item.ticketName];
+            if (typeof (ticketTypeStat) == 'undefined') {
+                ticketTypeStat = {};
+                ticketTypeStat.ticketName = item.ticketName;
+                ticketTypeStat.totalTickets = 0;
+                ticketTypeStat.soldTickets = 0;
+                ticketTypeStat.canceledTickets = 0;
+                ticketTypeStat.totalSales = 0;
+                statusPerTicketypeMap[item.ticketName] = ticketTypeStat;
+                $scope.statusPerTicketype.push(ticketTypeStat);
+
+            }
+
+            var eventTicketTypeStat = eventItem.statusPerTicketypeMap[item.ticketName];
+            if (typeof (eventTicketTypeStat) == 'undefined') {
+                eventTicketTypeStat = {};
+                eventTicketTypeStat.ticketName = item.ticketName;
+                eventTicketTypeStat.totalTickets = 0;
+                eventTicketTypeStat.soldTickets = 0;
+                eventTicketTypeStat.canceledTickets = 0;
+                eventTicketTypeStat.totalSales = 0;
+                eventItem.statusPerTicketypeMap[item.ticketName] = eventTicketTypeStat;
+                eventItem.statusPerTicketype.push(eventTicketTypeStat);
+
+            }
+
+
+            eventTicketTypeStat.totalTickets += item.totalCount;
+            ticketTypeStat.totalTickets += item.totalCount;
             eventItem.totalTickets += item.totalCount;
+
             if (item.status === 'CANCELED') {
                 eventItem.canceledTickets += item.soldCount;
+                ticketTypeStat.totalTickets += item.totalCount;
+                eventTicketTypeStat.totalTickets += item.totalCount;
             } else {
                 eventItem.checkedInTickets += item.checkedIn;
                 eventItem.soldTickets += item.soldCount;
                 eventItem.totalSales += item.totalPrice;
+                ticketTypeStat.soldTickets += item.soldCount;
+                ticketTypeStat.totalSales += item.totalPrice;
+
+                eventTicketTypeStat.soldTickets += item.soldCount;
+                eventTicketTypeStat.totalSales += item.totalPrice;
             }
+
+
+
 
         }
     };

@@ -475,8 +475,8 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', functio
 					url: urlTemplate.replace("@context", "analytics") + "/visitor/:visitorId"
 				},
 				getTicketingAnalytics: {
-					method: 'GET', params: { id: '@id', type: '@type' },
-					url: urlTemplate.replace("@context", "analytics") + "/ticketing/:type"
+					method: 'GET', params: { id: '@id', type: '@type', eventId: '@eventId' },
+					url: urlTemplate.replace("@context", "analytics") + "/ticketing/:type/:eventId"
 				},
 
 

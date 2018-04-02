@@ -16,9 +16,9 @@ App.directive('donutChart', function () {
         link: function (scope, element, attrs) {
 
             scope.$watch('chartData', function (newValue, oldValue) {
-                /*if (!newValue || angular.equals(newValue, oldValue)) {
+                if (!newValue || angular.equals(newValue, oldValue)) {
                     return;
-                }*/
+                }
                 scope.drawChart();
             });
         },

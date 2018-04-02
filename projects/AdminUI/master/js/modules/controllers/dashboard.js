@@ -415,8 +415,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         var colorIndex = 0;
         for(var key in requestByStatus) {
             elem = requestByStatus[key];
-            var pieElem = {};
-
+            
             returnData['DAILY'].push(createPieElem($scope.colorPalattes[colorIndex % $scope.colorPalattes.length],key,elem.daily));
             returnData['WEEKLY'].push(createPieElem($scope.colorPalattes[colorIndex % $scope.colorPalattes.length],key,elem.weekly));
             returnData['MONTHLY'].push(createPieElem($scope.colorPalattes[colorIndex % $scope.colorPalattes.length],key,elem.monthly));
@@ -613,8 +612,8 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             chart.requestData(option);
         });
     })();
-    // Pïe
-    (function () {
+
+        /*(function () {
         var Selector = '.chart-pie';
         $(Selector).each(function() {
             var chart = new FlotChart(this, null),
@@ -644,7 +643,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
             chart.setData(option, $scope.requestByStatus[$scope.selectedPeriod]);
         });
     })();
-    
+    */
   });
     
   $scope.setVenue = function(venueName, venueNumber) {
@@ -725,33 +724,31 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
     };
     // Donut
     $scope.donutInit = function () {
-        var Selector = '.chart-donut';
-        $(Selector).each(function() {
-            //var source = $(this).data('source') || $.error('Donut: No source defined.');
-            var chart = new FlotChart(this, null);
-            var option = {
-                    series: {
-                        pie: {
-                            show: true,
-                            innerRadius: 0.5 // This makes the donut shape,
+        
+        var chart = new FlotChart($('#reservationStatusId'), null);
+        var option = {
+                series: {
+                    pie: {
+                        show: true,
+                        innerRadius: 0.5 // This makes the donut shape,
 
-                        }
-                    },
-                    grid: {
-                        hoverable: true
-                    },
-                    tooltip: true,
-                    tooltipOpts: {
-                        cssClass: "flotTip",
-                        content: "%s: %p.0%",
-                        defaultTheme: false
                     }
-                };
-            // Send Request
-            if ($scope.requestByStatus[$scope.selectedPeriod] !== 'undefined') {
-                chart.setData(option, $scope.requestByStatus[$scope.selectedPeriod]);
-            }
-        });
+                },
+                grid: {
+                    hoverable: true
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    cssClass: "flotTip",
+                    content: "%s: %p.0%",
+                    defaultTheme: false
+                }
+            };
+        // Send Request
+        if ($scope.requestByStatus && $scope.requestByStatus[$scope.selectedPeriod] !== 'undefined') {
+            chart.setData(option, $scope.requestByStatus[$scope.selectedPeriod]);
+        }
+
     };
     
     $scope.inbox = function() {

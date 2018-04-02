@@ -83,7 +83,17 @@
       <sparkline-pie-chart id="rb" title="Reserved Bookings" piedata="{{reservedBookings.currentBookingPercentage}}" barlabel="This {{reservedBookings.aggregateType}}" bartotal="{{reservedBookings.maxPossibleBookings}}" class="cpointer"  ng-click="reservationInsight()"></sparkline-pie-chart>
    </div>
    <div class="col-md-4 col-sm-12">
-      <div ng-include="'app/templates/chart/donut-panel.html'" onload="donutInit()" class="cpointer"  ng-click="reservationInsight()"></div>
+      <div id="panelChart_reservation_by_status" class="panel panel-default"  onload="donutInit()" class="cpointer"  ng-click="reservationInsight()">
+         <div class="panel-heading">
+            <paneltool tool-collapse="tool-collapse"></paneltool>
+            <div class="panel-title">Reservation by Status</div>
+         </div>
+         <div collapse="panelChart_reservation_by_status" class="panel-wrapper">
+            <div class="panel-body">
+               <div id="reservationStatusId" class="flot-chart"></div>
+            </div>
+         </div>
+      </div>
    </div>
 </div>
 <div class="row">

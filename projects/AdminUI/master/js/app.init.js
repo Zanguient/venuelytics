@@ -65,7 +65,8 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                       toState.name === 'app.editVenueMap'
                      ) {
                       $rootScope.hideNavVenueDropdown = true;
-                  }       
+                  } 
+                  console.log("from: " + fromState.name +", to: " + toState.name);      
 	            	  var authorizedRoles = toState.data.authorizedRoles;
 	            	  if (AuthService.needAuthorization(authorizedRoles) && !AuthService.isAuthenticated()) {
 	        	    	  // user is not logged in

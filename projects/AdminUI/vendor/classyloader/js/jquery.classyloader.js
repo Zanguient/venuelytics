@@ -77,7 +77,10 @@
                     ctx.font = settings.fontSize + " " + settings.fontFamily;
                     ctx.textAlign = "center";
                     ctx.textBaseline = "middle";
-                    ctx.fillText(a + 1 + "%", hw, hh);
+                    
+                    ctx.fillText(settings.percentage + "%", hw, hh);
+                    
+
                 }
             };
             setTimeout(function c() {

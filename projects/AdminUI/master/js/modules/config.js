@@ -57,6 +57,13 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('analytics/ticket-dashboard.html'),
                 data: { authorizedRoles: [50,51,75,100] },
                 resolve: resolveFor('flot-chart', 'moment','flot-chart-plugins')
+            }).state('app.eventDashboard', {
+                url: '/event-dashboard/:eventId',
+                title: 'Event Dashboard',
+                controller: 'EventDashBoardController',
+                templateUrl: basepath('analytics/event-dashboard.html'),
+                data: { authorizedRoles: [50,51,75,100] },
+                resolve: resolveFor('flot-chart', 'moment','flot-chart-plugins')
             }).state('app.visitorInsight', {
                 url: '/dashboard/visitor-insight',
                 title: 'Visitor Insight',
