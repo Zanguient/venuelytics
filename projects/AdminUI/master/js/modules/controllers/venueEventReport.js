@@ -8,9 +8,9 @@
 
       'use strict';
       $scope.report = {};
-      $scope.report.name = 'SoldTickets Tickets';
-      $scope.report.fields = ['Event Name', 'StoreName', 'Event Date', 'Ticket Type', 'Quantity', 'Total Cost', 'Sold On'];
-      $scope.report.fieldWidth = ['25%','10%','10%','5%', '10','40%'];
+      $scope.report.name = 'Sold Tickets';
+      $scope.report.fields = ['Event Name', 'StoreName', 'Event Date', 'Ticket Type', 'Contact Name', 'Contact Email', 'Contact Number','Quantity', 'Total Cost', 'Sold On'];
+      $scope.report.fieldWidth = ['15%','10%','10%','10%', '10%','10%', '10%','5%','10%','10%'];
 	$scope.eventName = '';
 	$scope.eventDate = '';
       $scope.stores = [];
@@ -21,7 +21,8 @@
       if (path.indexOf("cancel") > -1) {
             $scope.useCancelApi = true;
             $scope.report.name = 'Canceled Tickets';
-            $scope.report.fields = ['Event Name', 'StoreName', 'Event Date', 'Contact Name', 'Quantity', 'Total Cost', 'Reason'];
+            $scope.report.fields = ['Event Name', 'StoreName', 'Event Date', 'Contact Name', 'Contact Email', 'Contact Number', 'Quantity', 'Total Cost', 'Reason'];
+            $scope.report.fieldWidth = ['20%','10%','10%','10%', '10%','10%','10%','10%', '10%'];
       }
       RestServiceFactory.UserService().getMyStores({}, function(data) {
             $scope.stores = data;
@@ -62,7 +63,7 @@
                   table.clear();
                   //['Event Name', 'Event Date', 'Contact Name', 'Count', 'price','Reason'];
                   data.map(function(ticket) {
-                        table.row.add([ticket.eventName, ticket.storeName, moment(ticket.eventDate).format('MMM DD, YYYY'), ticket.contactName, ticket.quantity, '$'+ticket.totalPrice, ticket.cancelReason ]);
+                        table.row.add([ticket.eventName, ticket.storeName, moment(ticket.eventDate).format('MMM DD, YYYY'), ticket.contactName, ticket.contactEmail, ticket.contactPhone, ticket.quantity, '$'+ticket.totalPrice, ticket.cancelReason ]);
                   });
                   table.draw();
                   });
@@ -72,7 +73,7 @@
                         table.clear();
                         //['Event Name', 'Event Date', 'Contact Name', 'Count', 'price','Reason'];
                         data.map(function(ticket) {
-                              table.row.add([ticket.eventName, ticket.storeName, moment(ticket.eventDate).format('MMM DD, YYYY'), ticket.ticketType, ticket.quantity, '$'+ticket.cost, moment(ticket.soldDate).format('MMM DD, YYYY')]);
+                              table.row.add([ticket.eventName, ticket.storeName, moment(ticket.eventDate).format('MMM DD, YYYY'), ticket.ticketType, ticket.contactName,  ticket.contactEmail, ticket.contactPhone, ticket.quantity, '$'+ticket.cost, moment(ticket.soldDate).format('MMM DD, YYYY')]);
                         });
                         table.draw();
                   });
