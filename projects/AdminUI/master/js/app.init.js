@@ -17,9 +17,9 @@ if (typeof $ === 'undefined') { throw new Error('This application\'s JavaScript 
 var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','ngAnimate', 'ngStorage', 'ngCookies', 
           'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'angular-loading-bar','ngDialog','ngImgMap', 'templates'])
           .run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache','AUTH_EVENTS', 'AuthService', 'FORMATS',
-           'Session','$timeout','$log','$cookies', '$http','ContextService','ngDialog',
+           'Session','$timeout','$log','$cookies', '$http','ContextService','ngDialog','$translate',
                function ($rootScope, $state, $stateParams, $window, $templateCache, AUTH_EVENTS, AuthService, FORMATS,
-                 Session, $timeout, $log,$cookies, $http, contextService,ngDialog) {
+                 Session, $timeout, $log,$cookies, $http, contextService,ngDialog,$translate) {
         	   'use strict';
               // Set reference to access them from any scope
               $rootScope.$state = $state;
@@ -50,7 +50,9 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
             	  $state.go('page.login');
               };
               
-             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+              
+
+              $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             	  // Uncomment this to disables template cache
                /* if (typeof(toState) !== 'undefined'){
                       $templateCache.remove(toState.templateUrl);
@@ -81,6 +83,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                 }
               });
 				
+
               // Scope Globals
               // ----------------------------------- 
               $rootScope.app = {
@@ -136,6 +139,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                       }
                       if (typeof(barSeries) !== 'undefined' && barSeries === true){
                          option.xaxis.ticks = data.ticks;
+                         //data = data.data;
                          data = data.data;
                       }
                       $.plot( self.element, data, option );
@@ -177,8 +181,7 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
 
               };
 
-
-
+              
               /// initialize session
               if (session !== null && typeof session !== 'undefined' && session.hasOwnProperty("sessionId")) {
          		     Session.init(session);

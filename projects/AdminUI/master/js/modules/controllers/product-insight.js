@@ -31,19 +31,19 @@ App.controller('ProductDashBoardController',['$log','$scope','$window', '$http',
     };
     
     $scope.formatStackData = function(data) {
-        return formatStackDataImpl(data, 'name');
+        return RestServiceFactory.formatStackData(data, 'name', $scope.selectedPeriod);
     };
 
     $scope.formatStackDataForSubName = function(data) {
-        return formatStackDataImpl(data, 'subName');
+        return RestServiceFactory.formatStackData(data, 'subName', $scope.selectedPeriod);
     };
 
     $scope.formatBarData = function(data) {
-        return formatBarDataImpl(data, 'name');
+        return RestServiceFactory.formatBarData(data, 'name', $scope.selectedPeriod);
     };
 
     $scope.formatBarDataForSubName = function(data) {
-        return formatBarDataImpl(data, 'subName');
+        return RestServiceFactory.formatBarData(data, 'subName', $scope.selectedPeriod);
     };
 
     $scope.formatAggStackDataBySubName = function(data) {
@@ -83,88 +83,9 @@ App.controller('ProductDashBoardController',['$log','$scope','$window', '$http',
     function compare(a, b) {
         return b[1] - a[1];
     }
-    function formatBarDataImpl(data, propertyName) {
-      
-        var retData = [];
-       
-        var colorIndex = 0;
-        if (data.length > 0){
-            var ticks = [];
 
-            for (var idx in data[0].ticks){
-                ticks[data[0].ticks[idx][1]] = parseInt(idx);
-                data[0].ticks[idx][0] = parseInt(idx);
-            }
-            $scope.barTicks = data[0].ticks;
-            for (var index in data[0].series) {
-                var d = data[0].series[index];
-                var elem = {};
-                elem.label = $translate.instant(d[propertyName]);
-                elem.color = colors[colorIndex % colors.length];
-                colorIndex++;
-                elem.bars= {
-                    show: true,
-                    barWidth: 0.15,
-                    fill: true,
-                    lineWidth: 1,
-                    align: 'center',
-                    order: colorIndex,
-                    fillColor:  elem.color
-                };
-                 elem.data = [];
-                if ($scope.selectedPeriod !== 'DAILY') {
-                    
-                    for (var i =0; i < d.data.length; i++){
-                     
-                        var dataElem = [ticks[d.data[i][0]], d.data[i][1]];
-                        elem.data.push(dataElem);
-                    }
-
-                }
-                else{
-                   
-                    for (var i =0; i < d.data.length; i++){
-                        var from = d.data[i][0].split("-");
-                        var f = new Date(from[0], from[1] - 1, from[2]);
-                        var dataElem = [f.getTime(), d.data[i][1]];
-                        elem.data.push(dataElem);
-                    }
-                }
-                retData.push(elem);
-            }
-        }
-        return {data: retData, ticks: $scope.barTicks};
-    }
-
-    function formatStackDataImpl(data, propertyName) {
-        var retData = [];
-        var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
-        var colorIndex = 0;
-        if (data.length > 0){
-            for (var index in data[0].series) {
-                var d = data[0].series[index];
-                var elem = {};
-                elem.label = $translate.instant(d[propertyName]);
-                elem.color = colors[colorIndex % colors.length];
-                colorIndex++;
-
-                if ($scope.selectedPeriod !== 'DAILY') {
-                    elem.data = d.data;
-                }
-                else {
-                    elem.data = [];
-                    for (var i =0; i < d.data.length; i++){
-                        var from = d.data[i][0].split("-");
-                        var f = new Date(from[0], from[1] - 1, from[2]);
-                        var dataElem = [f.getTime(), d.data[i][1]];
-                        elem.data.push(dataElem);
-                    }
-                }
-                retData.push(elem);
-            }
-        }
-        return retData;
-    }
+    
+    
     $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
         // register on venue change;
        $scope.init();
@@ -186,52 +107,5 @@ App.controller('ProductDashBoardController',['$log','$scope','$window', '$http',
             $scope.xAxisMode = 'categories';               
         }
     };
-
-    angular.element(document).ready(function () {
-
-    // Bar chart
-    (function () {
-        var Selector = '.chart-bar';
-        $(Selector).each(function() {
-            var source = $(this).data('source') || $.error('Bar: No source defined.');
-            var chart = new FlotChart(this, source),
-                //panel = $(Selector).parents('.panel'),
-                option = {
-                    series: {
-                        bars: {
-                            align: 'center',
-                            lineWidth: 0,
-                            show: true,
-                            barWidth: 0.6,
-                            fill: 0.9
-                        }
-                    },
-                    grid: {
-                        borderColor: '#eee',
-                        borderWidth: 1,
-                        hoverable: true,
-                        backgroundColor: '#fcfcfc'
-                    },
-                    tooltip: true,
-                    tooltipOpts: {
-                        content: '%x : %y'
-                    },
-                    xaxis: {
-                        tickColor: '#fcfcfc',
-                        mode: 'categories'
-                    },
-                    yaxis: {
-                        position: ($scope.app.layout.isRTL ? 'right' : 'left'),
-                        tickColor: '#eee'
-                    },
-                    shadowSize: 0
-                };
-            // Send Request
-            chart.requestData(option);
-        });
-
-    })();
-});
-
 
 }]);

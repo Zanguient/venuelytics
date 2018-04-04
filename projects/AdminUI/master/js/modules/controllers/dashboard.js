@@ -662,14 +662,15 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                 colorIndex++;
 
                 if ($scope.selectedPeriod !== 'DAILY') {
-                    elem.data = d.data;
+                    elem.data = d.data.reverse();
                 }
                 else {
                     elem.data = [];
-                    for (var i =0; i < d.data.length; i++){
-                        var from = d.data[i][0].split("-");
+                    var rData = d.data.reverse();
+                    for (var i =0; i < rData.length; i++){
+                        var from = rData[i][0].split("-");
                         var f = new Date(from[0], from[1] - 1, from[2]);
-                        var dataElem = [f.getTime(), d.data[i][1]];
+                        var dataElem = [f.getTime(), rData[i][1]];
                         elem.data.push(dataElem);
                     }
                 }
@@ -741,7 +742,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
                 tooltipOpts: {
                     cssClass: "flotTip",
                     content: "%s: %p.0%",
-                    defaultTheme: false
+                    defaultTheme: true
                 }
             };
         // Send Request

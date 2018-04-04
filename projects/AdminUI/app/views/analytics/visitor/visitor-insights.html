@@ -1,88 +1,3 @@
-<style>
-  .svg-container {
-    display: inline-block;
-    position: center;
-    width: 100%;
-    /* padding-bottom: 46%;  */
-    vertical-align: top;
-    overflow: hidden;
-  }
-
-  .svg-content-responsive {
-    display: inline-block;
-    position: absolute;
-    top: 20px;
-    left: 5px;
-  }
-
-  .toolTip {
-    position: absolute;
-    display: none;
-    width: auto;
-    height: auto;
-    background: none repeat scroll 0 0 white;
-    border: 0 none;
-    border-radius: 8px 8px 8px 8px;
-    box-shadow: -3px 3px 15px #888888;
-    color: rgb(207, 24, 24);
-    font: 12px sans-serif;
-    padding: 5px;
-    text-align: center;
-  }
-
-  .tick {
-    color: #b5b5b5
-  }
-
-  .legend {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 60%;
-  }
-
-  rect {
-    stroke-width: 2;
-  }
-
-  .axis path {
-    fill: none;
-    stroke: #000;
-  }
-
-  .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-  }
-
-  .axis .tick line {
-    stroke-width: 1;
-    stroke: rgba(0, 0, 0, 0.2);
-  }
-
-  .axisHorizontal path {
-    fill: none;
-  }
-
-  .axisHorizontal line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-  }
-
-  .axisHorizontal .tick line {
-    stroke-width: 1;
-    stroke: rgba(0, 0, 0, 0.2);
-  }
-
-  .bar {
-    fill: steelblue;
-    fill-opacity: .9;
-  }
-
-  .x.axis path {
-    display: none;
-  }
-</style>
 
 <h3>
   <div class="row">
@@ -140,7 +55,7 @@
       <!-- START widget-->
       <div id="visitorBarChart" class="panel panel-default">
         <div class="panel-heading">
-          <div class="panel-title">New Visitors - By Occasion - Old</div>
+          <div class="panel-title">New Visitors - By Occasion</div>
         </div>
         <div collapse="visitorBarChart" class="panel-wrapper">
           <div class="panel-body">
@@ -151,22 +66,6 @@
       </div>
       <!-- END widget-->
     </div>
-
-    <div class="col-md-12 col-sm-12">
-      <!-- START widget-->
-      <div id="visitorBarChart" class="panel panel-default">
-        <div class="panel-heading">
-          <div class="panel-title">New Visitors - By Occasion - New</div>
-        </div>
-        <div collapse="visitorBarChart" class="panel-wrapper">
-          <div class="svg-container">
-            <nj-bar-chart id="visitorsChartReasonD3" url="{{visitorRequestByValue}}"></nj-bar-chart>
-          </div>
-        </div>
-      </div>
-      <!-- END widget-->
-    </div>
-  </div>
 
   <div class="row">
     <div class="col-md-4 col-sm-12">
@@ -195,22 +94,6 @@
           <div class="panel-body mb-lg">
             <series-bar-chart id="repeatVisitorsChartServiceType" url="{{repeatVisitorRequestByServiceType}}" format-data-fx="formatBarData"
               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart>
-          </div>
-        </div>
-      </div>
-      <!-- END widget-->
-    </div>
-    <div class="col-md-12 col-sm-12">
-      <!-- START widget-->
-      <div id="repeatVisitorBarChart2" class="panel panel-default">
-        <div class="panel-heading">
-          <div class="panel-title">Repeat Visitors - By Occasions</div>
-        </div>
-        <div collapse="repeatVisitorBarChart2" class="panel-wrapper">
-          <div class="svg-container">
-            <nj-bar-chart id="repeatVisitorsChartReason" url="{{repeatVisitorRequestByValue}}"></nj-bar-chart>
-            <!-- <series-bar-chart id="repeatVisitorsChartReason" url="{{repeatVisitorRequestByValue}}" format-data-fx="formatBarDataForSubName"
-               class="chart-bar-stacked flot-chart rotateLabel" mode="{{xAxisMode}}"></series-bar-chart> -->
           </div>
         </div>
       </div>

@@ -37,19 +37,19 @@ App.controller('CancelDashBoardController',['$log','$scope','$window', '$http', 
     };
     
     $scope.formatStackData = function(data) {
-        return formatStackDataImpl(data, 'name');
+        return RestServiceFactory.formatStackData(data, 'name', $scope.selectedPeriod);
     };
 
     $scope.formatStackDataForSubName = function(data) {
-        return formatStackDataImpl(data, 'subName');
+        return RestServiceFactory.formatStackData(data, 'subName', $scope.selectedPeriod);
     };
 
     $scope.formatBarData = function(data) {
-        return formatBarDataImpl(data, 'name');
+        return RestServiceFactory.formatBarData(data, 'name', $scope.selectedPeriod);
     };
 
     $scope.formatBarDataForSubName = function(data) {
-        return formatBarDataImpl(data, 'subName');
+        return RestServiceFactory.formatBarDataImpl(data, 'subName', $scope.selectedPeriod);
     };
     
     $scope.formatDataAggBysubNameByTotal = function(data){
@@ -91,104 +91,7 @@ App.controller('CancelDashBoardController',['$log','$scope','$window', '$http', 
          return formatDataAggBysubNameImpl(data, 'subName');
     }
 
-    $scope.formatLineDataForSubName = function(data) {
-       var propertyName = "subName";
-       var retData = [];
-       
-        var colorIndex = 0;
-        if (data.length > 0){
-            var ticks = [];
-
-            for (var idx in data[0].ticks){
-                ticks[data[0].ticks[idx][1]] = parseInt(idx);
-                data[0].ticks[idx][0] = parseInt(idx);
-            }
-            $scope.barTicks = data[0].ticks;
-            for (var index in data[0].series) {
-                var d = data[0].series[index];
-                var elem = {};
-                elem.label = $translate.instant(d[propertyName]);
-                elem.color = colors[colorIndex % colors.length];
-                colorIndex++;
-                elem.lines= {
-                    show: true
-                };
-                 elem.data = [];
-                if ($scope.selectedPeriod !== 'DAILY') {
-                    
-                    for (var i =0; i < d.data.length; i++){
-                     
-                        var dataElem = [ticks[d.data[i][0]], d.data[i][1]];
-                        elem.data.push(dataElem);
-                    }
-
-                }
-                else{
-                   
-                    for (var i =0; i < d.data.length; i++){
-                        var from = d.data[i][0].split("-");
-                        var f = new Date(from[0], from[1] - 1, from[2]);
-                        var dataElem = [f.getTime(), d.data[i][1]];
-                        elem.data.push(dataElem);
-                    }
-                }
-                retData.push(elem);
-            }
-        }
-        return {data: retData, ticks: $scope.barTicks};
-    };
-
-    $scope.formatBarDataBy12 = function(data) {
-        
-       var retData = [];
-       
-        var colorIndex = 0;
-        if (data.length > 0){
-            var ticks = [];
-            var ticksMapIndex = {};
-            var currentTickIndex = 0;
-            var seriesMap = [];
-            for (var index in data[0].series) {
-                var d = data[0].series[index];
-                
-                var elem = seriesMap[d['name']];
-                if (!elem) {
-                    elem = {};
-                    elem.data = [];
-                    elem.label = d['name'];
-                    elem.color = colors[colorIndex % colors.length];
-                    colorIndex++;
-                    elem.bars= {
-                        show: true,
-                        barWidth: 0.25,
-                        fill: true,
-                        lineWidth: 1,
-                        align: 'center',
-                        order: colorIndex,
-                        fillColor:  elem.color
-                    };
-                    seriesMap[d['name']]  = elem;
-                    retData.push(elem);
-                }
-                var total = 0;
-                for (var i =0; i < d.data.length; i++){
-                      total += d.data[i][1];
-                }
-                var tickIndex = ticksMapIndex[d['subName']];
-                if (!tickIndex) {
-                    tickIndex = currentTickIndex;
-                    ticksMapIndex[d['subName']] = tickIndex;
-                    currentTickIndex++;
-                    ticks.push([tickIndex, d['subName']]);
-                }
-                elem.data.push([tickIndex, total]);
-               
-            }
-        }
-        return {data: sortAndAggregareFor(retData, 75), ticks: ticks};
-
-    }
-
+    
     function formatDataAggBysubNameImpl(data, propertyName) {
 
         var retData = [];
@@ -219,88 +122,7 @@ App.controller('CancelDashBoardController',['$log','$scope','$window', '$http', 
 
     }
 
-    function formatBarDataImpl(data, propertyName) {
-      
-        var retData = [];
-       
-        var colorIndex = 0;
-        if (data.length > 0){
-            var ticks = [];
-
-            for (var idx in data[0].ticks){
-                ticks[data[0].ticks[idx][1]] = parseInt(idx);
-                data[0].ticks[idx][0] = parseInt(idx);
-            }
-            $scope.barTicks = data[0].ticks;
-            for (var index in data[0].series) {
-                var d = data[0].series[index];
-                var elem = {};
-                elem.label = $translate.instant(d[propertyName]);
-                elem.color = colors[colorIndex % colors.length];
-                colorIndex++;
-                elem.bars= {
-                    show: true,
-                    barWidth: 0.25,
-                    fill: true,
-                    lineWidth: 1,
-                    align: 'center',
-                    order: colorIndex,
-                    fillColor:  elem.color
-                };
-                 elem.data = [];
-                if ($scope.selectedPeriod !== 'DAILY') {
-                    
-                    for (var i =0; i < d.data.length; i++){
-                     
-                        var dataElem = [ticks[d.data[i][0]], d.data[i][1]];
-                        elem.data.push(dataElem);
-                    }
-
-                }
-                else{
-                   
-                    for (var i =0; i < d.data.length; i++){
-                        var from = d.data[i][0].split("-");
-                        var f = new Date(from[0], from[1] - 1, from[2]);
-                        var dataElem = [f.getTime(), d.data[i][1]];
-                        elem.data.push(dataElem);
-                    }
-                }
-                retData.push(elem);
-            }
-        }
-        return {data: retData, ticks: $scope.barTicks};
-    }
     
-    function formatStackDataImpl(data, propertyName) {
-        var retData = [];
-        
-        var colorIndex = 0;
-        if (data.length > 0){
-            for (var index in data[0].series) {
-                var d = data[0].series[index];
-                var elem = {};
-                elem.label = $translate.instant(d[propertyName]);
-                elem.color = colors[colorIndex % colors.length];
-                colorIndex++;
-
-                if ($scope.selectedPeriod !== 'DAILY') {
-                    elem.data = d.data;
-                }
-                else {
-                    elem.data = [];
-                    for (var i =0; i < d.data.length; i++){
-                        var from = d.data[i][0].split("-");
-                        var f = new Date(from[0], from[1] - 1, from[2]);
-                        var dataElem = [f.getTime(), d.data[i][1]];
-                        elem.data.push(dataElem);
-                    }
-                }
-                retData.push(elem);
-            }
-        }
-        return retData;
-    }
     $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
         // register on venue change;
        $scope.init();

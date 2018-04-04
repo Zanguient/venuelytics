@@ -249,7 +249,7 @@ App.directive('njBarChart', function (getChartData) {
                     bar.selectAll("rect")
                         .data(function (d) { return d.values; })
                         .enter().append("rect")
-                        .attr("width", "5px")
+                        .attr("width", "20px")
                         .attr("x", function (d) { return x1(d.rate); })
                         .style("fill", function (d) { return color(d.rate) })
                         .attr("y", function (d) { return y(0); })
