@@ -41,7 +41,11 @@ App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$roo
 	  }
 	  $scope.fx = function() {
 		if (ContextService.userVenues.available.length > 0) {
-	  		$state.go("app.dashboard");
+		      if (Session.roleId >= 50 && Session.roleId < 100) {
+		        $state.go("app.ticketingDashboard");
+		      } else {
+		        $state.go("app.dashboard");
+		      }
 	  		$rootScope.exitDashboardRetry = true;
 	  	} else {
 	  		retryCall($scope.fx);
