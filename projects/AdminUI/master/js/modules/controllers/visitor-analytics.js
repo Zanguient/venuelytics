@@ -13,11 +13,15 @@ App.controller('VisitorAnalyticsController',['$log','$scope','ContextService',  
     		
     		$scope.serviceRequests = $scope.addValues(data.servicesUsed, "count");
     		$scope.reservations = $scope.addValues(data.reservationsMade, "count");
+            $scope.cancelations = $scope.addValues(data.reservationsMade, "canceledCount");
     		$scope.revenueEstimate = $scope.addValues(data.reservationsMade, "revenueEstimate");
     		$scope.totalGuest = $scope.addValues(data.reservationsMade, "totalGuests");
 
     		$scope.favProducts = $scope.categories(data.favProducts);
-
+            $scope.reservations = $scope.reservations - $scope.cancelations;
+            if ($scope.reservations < 0) {
+                $scope.reservations = 0;
+            }
     		for (var idx in $scope.favProducts ) {
     			$scope.favProducts[idx].data.sort(compare);
     		}

@@ -1,12 +1,12 @@
 <div class="unwrap">
    <div  class="bg-cover" style="background-image: url(app/img/bg1.jpg)">
-      <div class="p-xl text-center">
+      <div class="p-xl text-center text-white">
          <img ng-src="{{userImage}}" alt="Image" class="img-thumbnail img-circle thumb128" ng-if="!!data.userImage" />
-         <em class="fa fa-user fa-5x" ng-if="!data.userImage"></em>
-         <h3 class="m0" >{{data.firstName}} {{data.lastName}}</h3>
-         <p ng-if="!!data.email">Email: {{data.email}}</p>
-         <p ng-if="!!data.phone">Phone: {{data.phone}}</p>
-         <h4 ng-if="!!data.memberSince" class="strong">Member since: {{data.memberSince}}</h4>
+         <em class="fa fa-user text-white fa-5x" ng-if="!data.userImage"></em>
+         <h3 class="m0  text-white " >{{data.firstName}} {{data.lastName}}</h3>
+         <p ng-if="!!data.email"><span class="bg-gray-light">Email: {{data.email}}</span></p>
+         <p ng-if="!!data.phone"><span  class="bg-gray-light">Phone: {{data.phone}}</span></p>
+         <h4 ng-if="!!data.memberSince" class="strong text-white "><span class="bg-gray-light">Member since: {{data.memberSince | date : 'MMM d, y h:mm a' }}</span></h4>
       </div>
    </div>
    <div class="text-center bg-gray-dark p-lg mb-xl">
@@ -20,6 +20,10 @@
          <div class="col-xs-3 br">
             <h3 class="m0">{{reservations}}</h3>
             <p class="m0">Reservations</p>
+         </div>
+         <div class="col-xs-3 br">
+            <h3 class="m0">{{cancelations}}</h3>
+            <p class="m0">Cancelations</p>
          </div>
          <div class="col-xs-3">
             <h3 class="m0">${{revenueEstimate}}</h3>
@@ -38,7 +42,7 @@
             <ul class="timeline">
                <li data-datetime="Today" class="timeline-separator"></li>
                
-               <li timeline-item="" data-datetime="{{item.timelineLabel}}" time-separator="{{item.timelineSeparator}}" ng-class="'{{item.timelineSeparator ? 'timeline-separator' : ''}}'" ng-class-even="'timeline-inverted'" inverted="{{$even}}" current-item="item" bg-class="{{getBgClass(item.serviceType)}}" 
+               <li timeline-item="" data-datetime="{{item.timelineLabel}}" time-separator="{{item.timelineSeparator}}" ng-class="'{{item.timelineSeparator ? 'timeline-separator' : ''}}'" ng-class-even="item.timelineSeparator ? '' : 'timeline-inverted'" inverted="{{$even}}" current-item="item" bg-class="{{getBgClass(item.serviceType)}}" 
                 icon="{{getIcon(item.serviceType)}}" ng-repeat="(key, item) in services" ></li>
                
                <li class="timeline-end">
@@ -66,7 +70,7 @@
                            <span class="media-heading" >
                                  <small class="text-muted">Member Since</small>
                                  <br>
-                                 <strong >{{data.memberSince}}</strong>
+                                 <strong >{{data.memberSince | date : 'MMM d, y h:mm a'}}</strong>
                            </span>
                         </span>
                      </p>
@@ -75,7 +79,7 @@
                            <span class="media-heading">
                                  <small class="text-muted">Last Service</small>
                                  <br>
-                                 <strong>{{data.lastLogin}}</strong>
+                                 <strong>{{data.lastLogin | date : 'MMM d, y h:mm a'}}</strong>
                            </span>
                         </span>
                      </p>
