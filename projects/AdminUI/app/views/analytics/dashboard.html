@@ -13,7 +13,7 @@
 </h3>
 <!-- START widgets box-->
 <div class="row">
-   <div class="col-md-3 col-sm-6" ng-repeat="stats in top3Stats">
+   <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" ng-repeat="stats in top3Stats">
       <card-widget card="stats"></card-widget>
    </div>   
 </div>
@@ -26,7 +26,7 @@
 </div>
 
 <div class="row">
-   <div class="col-md-6 col-sm-12">
+   <div class="col-lg-6 col-sm-12">
      
      <div id="panelReservationBarChart" class="panel panel-default">
         <div class="panel-heading">
@@ -42,7 +42,7 @@
      </div>
      
   </div> 
-  <div class="col-md-6 col-sm-12">
+  <div class="col-lg-6 col-sm-12">
      
      <div id="panelTopProductsBarChart" class="panel panel-default cpointer" ng-click="productInsight()">
         <div class="panel-heading" >
@@ -62,7 +62,7 @@
   </div> 
 </div>
 <div class="row">
-   <div class="col-md-4 col-sm-12">
+   <div class="col-lg-4 col-sm-12">
 
       <!-- START widget-->
       <div id="panelReqByZipBarChart" class="panel panel-default cpointer"  ng-click="cityInsight()">
@@ -79,10 +79,10 @@
       </div>
          
    </div>
-   <div class="col-md-4 col-sm-12">
+   <div class="col-lg-4 col-md-6 col-sm-12">
       <sparkline-pie-chart id="rb" title="Reserved Bookings" piedata="{{reservedBookings.currentBookingPercentage}}" barlabel="This {{reservedBookings.aggregateType}}" bartotal="{{reservedBookings.maxPossibleBookings}}" class="cpointer"  ng-click="reservationInsight()"></sparkline-pie-chart>
    </div>
-   <div class="col-md-4 col-sm-12">
+   <div class="col-lg-4 col-md-6 col-sm-12">
       <div id="panelChart_reservation_by_status" class="panel panel-default"  onload="donutInit()" class="cpointer"  ng-click="reservationInsight()">
          <div class="panel-heading">
             <paneltool tool-collapse="tool-collapse"></paneltool>
@@ -99,7 +99,7 @@
 <div class="row">
   <plain-card-widget card="messages" ng-click="inbox()"></plain-card-widget>
    
-   <div class="col-md-6 col-sm-12">
+   <div class="col-lg-6 col-sm-12">
       <div class="panel widget bg-success panel_grad_dark">
          <div class="row row-table">
             <div class="col-xs-3 text-center bg-success-dark panel_grad_dark pv-lg">

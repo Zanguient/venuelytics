@@ -14,7 +14,7 @@
 </h3>
 <!-- START widgets box-->
 <div class="row">
-   <div class="col-md-3 col-sm-6" ng-repeat="stats in top3Stats">
+   <div class="col-lg-3 col-sm-6" ng-repeat="stats in top3Stats">
       <card-widget card="stats"></card-widget>
    </div>   
 </div>
@@ -25,7 +25,7 @@
   <plain-card-widget card="numberOfStores"></plain-card-widget>
 </div>
 <div class="row">
-  <div class="col-md-6 col-sm-12">
+  <div class="col-lg-6 col-sm-12">
     <div class="panel panel-default">    
        <div class="panel-body">
           <div class="panel-heading"><strong>High Level Summary - Tickets Sold</strong></div>
@@ -51,7 +51,7 @@
        </div>
     </div>
   </div>
-  <div class="col-md-6 col-sm-12">
+  <div class="col-lg-6 col-sm-12">
     <div class="panel panel-default">    
        <div class="panel-body">
           <div class="panel-heading"><strong>High Level Summary - Amount Collected</strong></div>
@@ -62,7 +62,7 @@
     </div>
   </div>
 </div>
-<div class="col-md-6 col-sm-12" ng-repeat="item in statsPerEvent track by $index" class="cpointer" ng-click="eventDrillDown(item)">
+<div class="col-lg-6 col-sm-12" ng-repeat="item in statsPerEvent track by $index" class="cpointer" ng-click="eventDrillDown(item)">
   <div class="panel panel-default cpointer" >    
    <div class="panel-body">
       <a href="#" class="text-muted pull-right">
