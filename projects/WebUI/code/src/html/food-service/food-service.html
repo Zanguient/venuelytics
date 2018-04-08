@@ -1,5 +1,5 @@
 <div ng-controller="foodServiceController">
-<form name="foodForm" autocomplete="off" validate-form="" parsley-validate novalidate ng-cloak>
+    <form name="foodForm" autocomplete="off" validate-form="" parsley-validate novalidate ng-cloak>
         <fieldset >
             <div class="form-group">
                 <label class="mr-2">
@@ -25,11 +25,11 @@
             </div>
             <div class="form-group label-floating" >
                 <label class="control-label" for="focusedInput1">{{'reservation.MOBILE' | translate}}</label>
-                <input type="text" ng-disabled="orderDisable === true" id="ms-form-pass" class="form-control "  name="foodMobile" ng-model="food.mobileNumber" required="" >
+                <input type="text" ng-disabled="orderDisable === true" class="form-control "  name="foodMobile" ng-model="food.mobileNumber" required="" >
             </div>
             <div class="form-group label-floating"  ng-hide="(foodType === 'Pickup')" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" for="focusedInput1">{{"reservation.TABLE_NUMBER" | translate}}</label>
-                <select class="form-control  {{blackTheme}}" ng-disabled="orderDisable === true" ng-model="food.tableNumber">
+                <select class="form-control" ng-disabled="orderDisable === true" ng-model="food.tableNumber" ng-class="blackTheme == 'blackTheme' ? blackThema : ''">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(32) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -37,7 +37,7 @@
 
             <div class="form-group label-floating" ng-hide="foodType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" for="focusedInput1">{{"reservation.SEAT_NUMBER" | translate}}</label>
-                <select class="form-control  {{blackTheme}}" ng-disabled="orderDisable === true" id="foodSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.seatNumber">
+                <select class="form-control" ng-disabled="orderDisable === true" ng-class="blackTheme == 'blackTheme' ? blackThema : ''" id="foodSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.seatNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(10) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -45,7 +45,7 @@
 
              <div class="form-group label-floating"  ng-hide="foodType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
                 <label class="control-label" for="focusedInput1">{{"reservation.LANE_NUMBER" | translate}}</label>
-                <select class="form-control  {{blackTheme}}" ng-disabled="orderDisable === true" id="foodLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.laneNumber">
+                <select class="form-control" ng-disabled="orderDisable === true" ng-class="blackTheme == 'blackTheme' ? blackThema : ''" id="foodLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="food.laneNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(30) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -165,7 +165,7 @@
             </center>
         </div>
         </fieldset>
-</form>
+    </form>
 </div>
 
 <div class="modal modal-success" id="foodMenuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">

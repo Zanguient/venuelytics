@@ -25,11 +25,11 @@
             </div>
             <div class="form-group label-floating">
                 <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" id="ms-form-pass" class="form-control " name="drinkMobile" ng-model="drink.mobileNumber" required="">
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="drinkMobile" ng-model="drink.mobileNumber" required="">
             </div>
             <div class="form-group label-floating" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" >{{"reservation.TABLE_NUMBER" | translate}}</label>
-                <select ng-disabled="orderDisable === true" class="form-control  {{blackTheme}}" ng-model="drink.tableNumber">
+                <select ng-disabled="orderDisable === true" class="form-control" ng-model="drink.tableNumber" ng-class="blackTheme == 'blackTheme' ? blackThema : ''">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(32) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -37,7 +37,7 @@
 
             <div class="form-group label-floating" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeCasino === 'CASINO'">
                 <label class="control-label" >{{"reservation.SEAT_NUMBER" | translate}}</label>
-                <select ng-disabled="orderDisable === true" class="form-control  {{blackTheme}}" id="drinkSeatNumber" class="btn btn-default dropdown-toggle form-control" ng-model="drink.seatNumber">
+                <select ng-disabled="orderDisable === true" class="form-control" id="drinkSeatNumber" ng-class="blackTheme == 'blackTheme' ? blackThema : ''" class="btn btn-default dropdown-toggle form-control" ng-model="drink.seatNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(10) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -45,7 +45,7 @@
 
              <div class="form-group label-floating" ng-hide="drinkType === 'Pickup'" ng-if="venueTypeBowling === 'BOWLING'">
                 <label class="control-label" >{{"reservation.LANE_NUMBER" | translate}}</label>
-                <select ng-disabled="orderDisable === true" class="form-control  {{blackTheme}}" id="drinkLaneNumber" class="btn btn-default dropdown-toggle form-control" ng-model="drink.laneNumber">
+                <select ng-disabled="orderDisable === true" class="form-control" id="drinkLaneNumber" ng-class="blackTheme == 'blackTheme' ? blackThema : ''" class="btn btn-default dropdown-toggle form-control" ng-model="drink.laneNumber">
                     <option value=""></option>
                     <option ng-repeat="n in [].constructor(30) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                 </select>
@@ -57,15 +57,15 @@
         <div class="col-md-12">
     		<center>
         		<a href="" class="btn btn-success btn-raised" ng-if="drinksWineListuUrl" ng-click="menuUrlSelection(drinksWineListuUrl)">
-                    <span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_WINE" | translate}}</a>
+                    <span class="glyphicon glyphicon-heart-empty"></span>  {{"reservation.DRINK_WINE" | translate}}</a>
                 <a href="" class="btn btn-success btn-raised" ng-if="drinksHappyHourDrinkUrl" ng-click="menuUrlSelection(drinksHappyHourDrinkUrl)">
-                    <span class="glyphicon glyphicon-heart"></span> &nbsp;&nbsp;{{"reservation.DRINK_HAPPY_HOUR" | translate}}</a>
+                    <span class="glyphicon glyphicon-heart"></span> {{"reservation.DRINK_HAPPY_HOUR" | translate}}</a>
                 <a href="" class="btn btn-success btn-raised" ng-if="drinksBeerMenuUrl" ng-click="menuUrlSelection(drinksBeerMenuUrl)">
-                    <span class="glyphicon glyphicon-play"></span> &nbsp;&nbsp;{{"reservation.DRINK_BEER_MENU" | translate}}</a>
+                    <span class="glyphicon glyphicon-play"></span> {{"reservation.DRINK_BEER_MENU" | translate}}</a>
                 <a href="" class="btn btn-success btn-raised" ng-if="drinksMenuUrl" ng-click="menuUrlSelection(drinksMenuUrl)">
-                    <span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;{{"reservation.DRINK_MENU_URL" | translate}}</a>
+                    <span class="glyphicon glyphicon-home"></span> {{"reservation.DRINK_MENU_URL" | translate}}</a>
                 <a href="" class="btn btn-success btn-raised" ng-if="drinksCocktailsUrl" ng-click="menuUrlSelection(drinksCocktailsUrl)">
-                    <span class="glyphicon glyphicon-heart-empty"></span> &nbsp;&nbsp;{{"reservation.DRINK_COCKTAILS" | translate}}</a>
+                    <span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.DRINK_COCKTAILS" | translate}}</a>
     		</center>
         </div> <br/>
         

@@ -55,7 +55,7 @@
         </div>
         <div class="col-md-12 form-group label-floating no-p" >
             <label class="control-label" >{{"reservation.EVENT_TYPE"  | translate}}</label>
-            <select class="form-control  {{blackTheme}}" required=""
+            <select class="form-control" required="" ng-class="blackTheme == 'blackTheme' ? blackThema : ''"
                 ng-model="bachelor.partyEventType" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>

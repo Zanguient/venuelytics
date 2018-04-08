@@ -72,7 +72,7 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
 
             self.saveBachelorParty = function() {
                 if(self.orderPlaced === false) {
-                    AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function(response) {
+                    AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function(response) {
                         self.orderId = response.data.id;
                         self.orderPlaced = true;
                         if (self.cardPayment === true) {

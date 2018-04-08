@@ -31,9 +31,14 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$location', 'Data
         };
 
         self.privateEventSave = function () {
-            AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function (response) {
-                $log.info("response: " + angular.toJson(response));
-                $location.url(self.selectedCity + '/private-success/' + self.venueRefId(self.venueDetails));
+            AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function (response) {
+                if (response.status == 200 ||  response.srtatus == 201) {
+                 $location.url(self.selectedCity + '/private-success/' + self.venueRefId(self.venueDetails));
+                } else {
+                    if (response.data && response.data.message) {
+                        alert("Saving order failed with message: " + response.data.message );
+                    }
+                }
             });
         };
 

@@ -94,7 +94,7 @@
         </div>
         <div class="form-group label-floating">
             <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
-            <input type="text" id="ms-form-pass" class="form-control" name="mobile" ng-model="party.mobile" required data-parsley-trigger="change">
+            <input type="text" class="form-control" name="mobile" ng-model="party.mobile" required data-parsley-trigger="change">
         </div>
        
         <div class="form-group label-floating" >
@@ -107,7 +107,7 @@
         </div>
         <div class="form-group label-floating">
             <label class="control-label" >{{'reservation.OCCASION' | translate}}</label>
-            <select class="form-control  {{blackTheme}}" eqruired
+            <select class="form-control" eqruired ng-class="blackTheme == 'blackTheme' ? blackThema : ''"
                     ng-model="party.partyOccasion" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>

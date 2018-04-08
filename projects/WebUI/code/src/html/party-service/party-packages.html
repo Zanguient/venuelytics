@@ -63,13 +63,13 @@
         </div>
         <div class="col-md-12 form-group label-floating no-p ">
         <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
-            <input type="text" id="ms-form-pass" class="form-control " masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="party.mobile" required data-parsley-trigger="change">
+            <input type="text" class="form-control " masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="party.mobile" required data-parsley-trigger="change">
         </div>
         
         
         <div class="col-md-12 form-group label-floating no-p ">
             <label class="control-label" >{{"reservation.EVENT_TYPE"  | translate}}</label>
-            <select class="form-control  {{blackTheme}}" required=""
+            <select class="form-control" required="" ng-class="blackTheme == 'blackTheme' ? blackThema : ''"
                 ng-model="party.partyEventType" ng-options="t.name for t in eventTypes">
                 <option value=""></option>
             </select>

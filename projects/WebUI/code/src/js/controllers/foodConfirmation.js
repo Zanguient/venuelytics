@@ -107,15 +107,21 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
 
         self.foodServiceSave = function () {
             if (self.orderPlaced === false) {
-                AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function (response) {
-                    self.orderId = response.data.id;
-                    self.orderPlaced = true;
-                    if (self.cardPayment === true) {
-                        self.creditCardPayment();
-                    } else if (self.paypal === true) {
-                        self.paypalPayment();
+                AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function (response) {
+                    if (response.status == 200 ||  response.srtatus == 201) {
+                        self.orderId = response.data.id;
+                        self.orderPlaced = true;
+                        if (self.cardPayment === true) {
+                            self.creditCardPayment();
+                        } else if (self.paypal === true) {
+                            self.paypalPayment();
+                        } else {
+                            $location.url(self.city + '/food-success/' + self.venueRefId(self.venueDetails));
+                        }
                     } else {
-                        $location.url(self.city + '/food-success/' + self.venueRefId(self.venueDetails));
+                        if (response.data && response.data.message) {
+                            alert("Saving order failed with message: " + response.data.message );
+                        }
                     }
                 });
             } else {

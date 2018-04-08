@@ -136,8 +136,8 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
 
             self.createBottleSave = function() {
                 if (self.orderId <= 0) {
-                    AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function(response) {
-                        //if (response.status == 200 ||  response.srtatus == 201) {
+                    AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function(response) {
+                        if (response.status == 200 ||  response.srtatus == 201) {
                             self.orderId = response.data.id;
                             if (self.cardPayment === true) {
                                 self.creditCardPayment();
@@ -146,11 +146,11 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                             } else {
                                 $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
                             }
-                        //} else {
+                        } else {
                             if (response.data && response.data.message) {
-                               // alert("Saving order failed with message: " + response.data.message );
+                                alert("Saving order failed with message: " + response.data.message );
                             }
-                       // }
+                        }
                     });
                 } else { // order is already placed.
                     if (self.cardPayment === true) {

@@ -159,8 +159,14 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
                   "visitorName": fullName
                 };
 
-                AjaxService.createBottleService(self.venueId, self.serviceJSON, authBase64Str).then(function(response) {
-                    $location.url(self.selectedCity +'/table-success/'+ self.venueId);
+                AjaxService.placeServiceOrder(self.venueId, self.serviceJSON, authBase64Str).then(function(response) {
+                    if (response.status == 200 ||  response.srtatus == 201) {
+                        $location.url(self.selectedCity +'/table-success/'+ self.venueId);
+                    } else {
+                        if (response.data && response.data.message) {
+                            alert("Saving order failed with message: " + response.data.message );
+                        }
+                    }
                 });
             };
             self.init();
