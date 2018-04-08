@@ -27,7 +27,7 @@
             <div id="mapSection" ng-if="!selectedVenueMap.imageUrls[0].originalUrl" ng-repeat="table in selectedVenueMap.elements" >
                 <div class="alternative col-xs-12 mb-4">
                     <div class="col-md-3 col-xs-4"><label>
-                        <input class="mr-1" type="checkbox" id="checkData" name="{{table.name}}" ng-checked="isSelected(table)" ng-disabled="isReserved(table)" ng-click="selectTableForWithOutFloorMap(table,$index)" />{{table.name}}
+                        <input class="mr-1" type="checkbox"  name="{{table.name}}" ng-checked="isSelected(table)" ng-disabled="isReserved(table)" ng-click="selectTableForWithOutFloorMap(table,$index)" />{{table.name}}
                         <span ng-hide="table.size <= 0">({{table.size}})
                         </span></label><label class="tableReserved" ng-if="table.reserved === true">{{"reservation.RESERVED" | translate}}</label>
                     </div>

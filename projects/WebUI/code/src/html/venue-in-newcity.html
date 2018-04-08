@@ -21,7 +21,7 @@
                                                 <h5 class=" pull-right" ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
                                             </div>
                                         </figure>
-                                        <div class="card-block">
+                                        <div class="card-block {{venue.distanceInMiles ? 'pb-4' : ''}}" >
                                             <h3 class="no-mb">
                                                 <a ng-href="cities/{{selectedCityName}}/{{venueRefId(venue)}}" ng-click="selectVenue(venue)">{{venue.venueName
                                                     | limitTo: 25 }}{{venue.venueName.length > 25 ? '...' : ''}}</a>

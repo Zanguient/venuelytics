@@ -14,7 +14,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
             self.availableAmount = 0;
             self.paypal = false;
             self.cardPayment = false;
-            self.orderPlaced = false;
+           
             self.init = function() {
                 $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueId, 'embed');
                 self.venueDetails =  venueService.getVenue($routeParams.venueId); 
@@ -25,7 +25,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                 ngMeta.setTag('description', self.venueDetails.description + " Bottle Confirmation");
                 $rootScope.title = self.venueDetails.venueName+' '+self.selectedCity+' '+self.venueDetails.state + " Venuelytics - Bottle Services Confirmation & Payment";
                 ngMeta.setTitle($rootScope.title);
-               
+                self.orderId = -1;
                 self.venueId = self.venueDetails.id;
                 self.userData = DataShare.bottleServiceData;
                 self.authBase64Str = DataShare.authBase64Str;
@@ -135,27 +135,33 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
             };
 
             self.createBottleSave = function() {
-                if(self.orderPlaced === false) {
+                if (self.orderId <= 0) {
                     AjaxService.createBottleService(self.venueId, self.object, self.authBase64Str).then(function(response) {
-                        self.orderId = response.data.id;
-                        self.orderPlaced = true;
-                        if (self.cardPayment === true) {
-                            self.creditCardPayment();
-                        } else if (self.paypal === true) {
-                            self.paypalPayment();
-                        } else {
-                            $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
-                        }
+                        //if (response.status == 200 ||  response.srtatus == 201) {
+                            self.orderId = response.data.id;
+                            if (self.cardPayment === true) {
+                                self.creditCardPayment();
+                            } else if (self.paypal === true) {
+                                self.paypalPayment();
+                            } else {
+                                $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
+                            }
+                        //} else {
+                            if (response.data && response.data.message) {
+                               // alert("Saving order failed with message: " + response.data.message );
+                            }
+                       // }
                     });
-                } else {
+                } else { // order is already placed.
                     if (self.cardPayment === true) {
                         self.creditCardPayment();
                     } else if (self.paypal === true) {
                         self.paypalPayment();
                     } else {
-                        $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm/');
+                        $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
                     }
                 }
+                
             };
 
             self.venueRefId = function(venue) {

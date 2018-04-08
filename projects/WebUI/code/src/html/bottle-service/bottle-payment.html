@@ -1,5 +1,5 @@
-<div class="container card {{blackTheme}}">
-    <div>
+<div class="container nav_height card {{blackTheme}}">
+   
     <div>
         <center>
             <h1>{{"reservation.PAYMENT"  | translate}}</h1>
@@ -62,13 +62,11 @@
             </table>
         </center>
     </div>
-</div>
     <div>
         <center>
             <input type="button" class="btn btn-success btn-raised" ng-click="createBottleSave()" value="Pay Now">
         </center>
     </div>
-</div>
     <div class="form-group" ng-hide="true">
         <input type="text" id="stripeAmount" placeholder="payAmount" ng-model="availableAmount">
         <input type="text" id="taxDate" placeholder="taxDate" ng-model="taxDate">
@@ -196,4 +194,6 @@
         }
         setTimeout(function(){ payPalInit(); }, 2000);
         </script>
-        </div>
+    </div>
+</div>
+
