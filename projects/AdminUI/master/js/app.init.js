@@ -123,6 +123,8 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                 this.requestData = function (option, method, callback, processData, barSeries) {
                   var self = this;
                   
+                  var chartPanel = this.element.parents('.panel').eq(0);
+                  chartPanel.addClass('csspinner double-up');
                   // support params (option), (option, method, callback) or (option, callback)
                   callback = (method && $.isFunction(method)) ? method : callback;
                   method = (method && typeof method === 'string') ? method : 'GET';
@@ -143,10 +145,11 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                          data = data.data;
                       }
                       $.plot( self.element, data, option );
-                     
+                      chartPanel.removeClass('csspinner double-up');
                       if(callback) callback();
 
                   }).error(function(){
+                    chartPanel.removeClass('csspinner double-up');
                     $.error('Bad chart request.');
                   });
 

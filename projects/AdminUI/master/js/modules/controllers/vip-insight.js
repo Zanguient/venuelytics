@@ -5,12 +5,14 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
 	
     
     $scope.PERIODS = ['WEEKLY', 'MONTHLY', 'YEARLY'];
-    
+    $scope.USERCOUNT = [20, 50, 75];
     $scope.selectedPeriod = 'WEEKLY';
     $scope.xAxisMode = 'categories';
     $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
     $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
-    
+    $scope.selectedTopVisitCount = 20;
+    $scope.selectedTopRevenueCount = 20;
+
     $scope.vipRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'VipCustomersByVisits', 'Weekly', 'scodes=BPK');
     $scope.vipRequestRevenueUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'VipCustomersByRevenue', 'Weekly', 'scodes=BPK');
     
@@ -32,15 +34,28 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
          $("#vipBarChartComponent1").bind("plotclick", function (event, pos, item) {
             if (typeof (item) !== 'undefined') {
                 var label = item.series.data[item.dataIndex][0];
+                
                 console.log( label + " - " +item.series.data[item.dataIndex][1]);
-                $state.go('app.profile', {visitorId: item.series.altData[label]});
+               $state.go('app.profile', {visitorId: item.series.altData[label]});
             }
             
         });
 
     };
     
-    
+   
+    $scope.setTopRevenueCount = function(count) {
+        $scope.selectedTopRevenueCount = count;
+        $scope.vipRequestRevenueUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'VipCustomersByRevenue', 'Weekly', 'scodes=BPK') +'&c='+count;
+     
+    }
+
+    $scope.setTopVisitorCount = function(count) {
+        $scope.selectedTopVisitCount = count;
+         $scope.vipRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'VipCustomersByVisits', 'Weekly', 'scodes=BPK') +'&c='+count;
+    }
+
+
     $scope.setPeriod = function(period) {
         if ($scope.selectedPeriod !== period) {
             $scope.selectedPeriod = period;
@@ -48,13 +63,19 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
         }
     };
     
-    $scope.formatDataAggByNameByTotal = function(data){
+    $scope.formatDataAggByNameByTotalVisit = function(data){
         var resultData = $scope.formatDataAggByName(data);
         
-        return sortAndAggregareFor(resultData, 75);
+        return sortAndAggregareFor(resultData, $scope.selectedTopVisitCount);
 
     };
 
+     $scope.formatDataAggByNameByTotalRevenue = function(data){
+        var resultData = $scope.formatDataAggByName(data);
+        
+        return sortAndAggregareFor(resultData, $scope.selectedTopRevenueCount);
+
+    };
     
     $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
         // register on venue change;
@@ -109,15 +130,22 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
         if (data.length > 0){
             for (var index in data[0].series) {
                 var series = data[0].series[index];
-
+                var label = series[propertyName];
+                if (label === null) {
+                    continue;
+                }
                 var total = 0;
                 for (var i =0; i < series.data.length; i++){
                     total += series.data[i][1];
                     
                 }
                 
-                elem.data.push([series[propertyName], total]);
-                elem.altData[series[propertyName]] = series[altName];
+                var id = series[altName];
+                if (!!elem.altData[label]) {
+                    label = label +"-" + elem.data.length;
+                }
+                elem.data.push([label, total]);
+                elem.altData[label] = series[altName];
             }
             retData.push(elem);
         }
