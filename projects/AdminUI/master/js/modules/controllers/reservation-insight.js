@@ -25,18 +25,6 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
     $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
     $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
     
-    $scope.reservationRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ReservedBookingsCount', 'Weekly', 'scodes=BPK');
-    $scope.reservationDayRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ReservedBookingsCount', 'Day', 'scodes=BPK');
-    $scope.reservationRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ReservedBookingsByServiceType', 'Weekly', 'scodes=BPK');
-    $scope.reservationRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'ServiceTypeByReason', 'Weekly', 'scodes=BPK');
-
-    $scope.cityRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByServiceType', 'Weekly', 'scodes=BPK');
-    $scope.cityRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByOccasion', 'Weekly', 'scodes=BPK');
-
-
-    $scope.performanceRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'AdvanceBookingsByAVG', 'Weekly', 'scodes=BPK');
-
-
 
     $scope.init = function() {
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
@@ -269,5 +257,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
             $scope.xAxisMode = 'categories';               
         }
     };
+
+    $scope.init();
 
 }]);

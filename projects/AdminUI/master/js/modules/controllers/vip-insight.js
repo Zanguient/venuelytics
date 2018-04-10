@@ -12,10 +12,6 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
     $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
     $scope.selectedTopVisitCount = 20;
     $scope.selectedTopRevenueCount = 20;
-
-    $scope.vipRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'VipCustomersByVisits', 'Weekly', 'scodes=BPK');
-    $scope.vipRequestRevenueUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'VipCustomersByRevenue', 'Weekly', 'scodes=BPK');
-    
     
     var colors = ["#51bff2", "#4a8ef1", "#3cb44b","#0082c8", "#911eb4", "#e6194b","#f0693a", "#f032e6 ", "#f58231","#d2f53c", "#ffe119","#a869f2", "#008080","#aaffc3", "#e6beff", "#aa6e28", "#fffac8","#800000","#808000 ","#ffd8b1","#808080","#808080"];
     

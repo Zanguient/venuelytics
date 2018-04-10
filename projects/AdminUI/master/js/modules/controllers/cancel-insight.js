@@ -13,11 +13,6 @@ App.controller('CancelDashBoardController',['$log','$scope','$window', '$http', 
     $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
     $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
     
-   
-    $scope.canceledRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CanceledBookingsCount', 'Weekly', 'scodes=BPK');
-    $scope.canceledRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CanceledBookingsByServiceType', 'Weekly', 'scodes=BPK');
-    $scope.canceledRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CanceledByOccasion', 'Weekly', 'scodes=BPK');
-
 
     $scope.init = function() {
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
@@ -145,5 +140,7 @@ App.controller('CancelDashBoardController',['$log','$scope','$window', '$http', 
             $scope.xAxisMode = 'categories';               
         }
     };
+
+    $scope.init();
 
 }]);

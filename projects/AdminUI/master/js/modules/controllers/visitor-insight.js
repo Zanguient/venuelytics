@@ -10,18 +10,6 @@ App.controller('VisitorDashBoardController', ['$log', '$scope', '$window', '$htt
         $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
 
-        $scope.visitorRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 'NewVisitorCount', 'Weekly', 'scodes=BPK');
-        $scope.visitorRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 'NewVisitorsByServiceType', 'Weekly', 'scodes=BPK');
-        $scope.visitorRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 'NewVisitorsByValue', 'Weekly', 'scodes=BPK');
-
-        $scope.repeatVisitorRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 'RepeatVisitorCount', 'Weekly', 'scodes=BPK');
-        $scope.repeatVisitorRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 'RepeatVisitorsByServiceType', 'Weekly', 'scodes=BPK');
-        $scope.repeatVisitorRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 'RepeatVisitorsByValue', 'Weekly', 'scodes=BPK');
-
-        $scope.percentVisitorRequestUrl = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 'RepeatVisitorPercent', 'Weekly', 'scodes=BPK');
-        $scope.percentVisitorRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 'RepeatVisitorsPercentByServiceType', 'Weekly', 'scodes=BPK');
-        $scope.percentVisitorRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId, 'RepeatVisitorsPercentByValue', 'Weekly', 'scodes=BPK');
-        
 
         $scope.init = function () {
             $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
@@ -135,7 +123,7 @@ App.controller('VisitorDashBoardController', ['$log', '$scope', '$window', '$htt
                 $scope.xAxisMode = 'categories';
             }
         };
-
+        $scope.init();
 
     }]).factory('getChartData', ['$http', function ($http) {
         return {

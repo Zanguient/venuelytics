@@ -25,9 +25,6 @@ App.controller('CityInsightController',['$log','$scope','$window', '$http', '$ti
     $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
     $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
     
-    $scope.cityRequestByServiceType = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByServiceType', 'Weekly', 'scodes=BPK');
-    $scope.cityRequestByValue = RestServiceFactory.getAnalyticsUrl($scope.effectiveVenueId,  'CityByOccasion', 'Weekly', 'scodes=BPK');
-
     $scope.init = function() {
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
         $scope.reservationStatsChart();
@@ -185,5 +182,7 @@ App.controller('CityInsightController',['$log','$scope','$window', '$http', '$ti
             $scope.xAxisMode = 'categories';               
         }
     };
+
+     $scope.init();
 
 }]);
