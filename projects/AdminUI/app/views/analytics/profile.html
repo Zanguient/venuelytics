@@ -1,12 +1,12 @@
 <div class="unwrap">
-   <div  class="bg-cover" style="background-image: url(app/img/bg1.jpg)">
-      <div class="p-xl text-center text-white">
+   <div  class="bg-cover" style="background-color: white">
+      <div class="p-xl text-center">
          <img ng-src="{{userImage}}" alt="Image" class="img-thumbnail img-circle thumb128" ng-if="!!data.userImage" />
-         <em class="fa fa-user text-white fa-5x" ng-if="!data.userImage"></em>
-         <h3 class="m0  text-white " >{{data.firstName}} {{data.lastName}}</h3>
-         <p ng-if="!!data.email"><span class="bg-gray-light">Email: {{data.email}}</span></p>
-         <p ng-if="!!data.phone"><span  class="bg-gray-light">Phone: {{data.phone}}</span></p>
-         <h4 ng-if="!!data.memberSince" class="strong text-white "><span class="bg-gray-light">Member since: {{data.memberSince | date : 'MMM d, y h:mm a' }}</span></h4>
+         <em class="fa fa-user fa-5x" ng-if="!data.userImage"></em>
+         <h3 class="m0 " >{{data.firstName}} {{data.lastName}}</h3>
+         <p ng-if="!!data.email"><span>Email: {{data.email}}</span></p>
+         <p ng-if="!!data.phone"><span>Phone: {{data.phone}}</span></p>
+         <h4 ng-if="!!data.memberSince" class="strong"><span>Member since: {{data.memberSince | date : 'MMM d, y h:mm a' }}</span></h4>
       </div>
    </div>
    <div class="text-center bg-gray-dark p-lg mb-xl">
