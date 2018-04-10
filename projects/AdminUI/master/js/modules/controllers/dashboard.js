@@ -9,7 +9,7 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         return;
     }
     $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
-    $scope.selectedPeriod = 'WEEKLY';
+    $scope.selectedPeriod = 'YEARLY';
     $scope.notificationCount = 0;
     $scope.reservedBookings = {};
     $scope.requestByStatus = {};

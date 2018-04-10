@@ -6,7 +6,7 @@ App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$t
     
     $scope.PERIODS = ['WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.USERCOUNT = [20, 50, 75];
-    $scope.selectedPeriod = 'WEEKLY';
+    $scope.selectedPeriod = 'YEARLY';
     $scope.xAxisMode = 'categories';
     $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
     $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;

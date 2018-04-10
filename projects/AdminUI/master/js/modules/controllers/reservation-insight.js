@@ -20,7 +20,7 @@ App.controller('ReservationDashBoardController',['$log','$scope','$window', '$ht
     var colors = ["#51bff2", "#4a8ef1", "#3cb44b","#0082c8", "#911eb4", "#e6194b","#f0693a", "#f032e6 ", "#f58231","#d2f53c", "#ffe119","#a869f2", "#008080","#aaffc3", "#e6beff", "#aa6e28", "#fffac8","#800000","#808000 ","#ffd8b1","#808080","#808080"];
     $scope.barTicks =[];
 
-    $scope.selectedPeriod = 'WEEKLY';
+    $scope.selectedPeriod = 'YEARLY';
     $scope.xAxisMode = 'categories';
     $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
     $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;

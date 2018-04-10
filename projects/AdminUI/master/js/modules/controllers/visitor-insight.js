@@ -5,7 +5,7 @@ App.controller('VisitorDashBoardController', ['$log', '$scope', '$window', '$htt
 
         $scope.PERIODS = ['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'];
 
-        $scope.selectedPeriod = 'WEEKLY';
+        $scope.selectedPeriod = 'YEARLY';
         $scope.xAxisMode = 'categories';
         $scope.yPos = $scope.app.layout.isRTL ? 'right' : 'left';
         $scope.effectiveVenueId = contextService.userVenues.selectedVenueNumber;
