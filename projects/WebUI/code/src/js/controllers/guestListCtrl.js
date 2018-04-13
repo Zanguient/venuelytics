@@ -23,7 +23,7 @@ app.controller('GuestListController', ['$log', '$scope', '$location', 'DataShare
                 self.venueId = self.venueDetails.id;
                 self.venueInfo();
                 ngMeta.setTag('description', self.venueDetails.description + " Guest List");
-                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Guest List";
+                $rootScope.title = self.venueDetails.venueName+ " Venuelytics - Guest List";
                 ngMeta.setTitle($rootScope.title);
 
                 var date = new Date();

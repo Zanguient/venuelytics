@@ -60,6 +60,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'business/business.html',
             controller: 'BusinessController'
         })
+        .when('/games/:venueId', {
+            templateUrl: 'venue/games-tournament.html',
+            controller: 'GamesTournamentController'
+        })
         .when('/searchBusiness', {
             templateUrl: 'business/business-search.html',
             controller: 'BusinessSearchController'

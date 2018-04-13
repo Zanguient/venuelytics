@@ -425,4 +425,19 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
             url: RestURL.baseURL + 'venues/' + venueId + '/opendays/' + serviceType
         });
     };
+
+    this.getGames = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'venues/' + venueId + '/games'
+        });
+    };
+
+    this.getTournament = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + 'tournaments/' + venueId + '/active'
+        });
+    };
+
 }]);
