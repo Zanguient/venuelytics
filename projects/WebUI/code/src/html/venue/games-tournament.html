@@ -22,7 +22,7 @@
           <tbody>
             <tr ng-repeat="game in games track by $index" class="venueDescription">
               <td>{{$index+1}}</td>
-               <td class="col-sm-1"><i class="hidden-sm hidden-xs fa" ng-class="game.active === 'Y' ? 'fa-check text-success': 'fa-times text-danger'"></i></td>
+               <td class="col-sm-1"><i class="hidden-sm hidden-xs fa" ng-class="game.active === 'Y' ? 'fa-check text-green': 'fa-times text-danger'"></i></td>
               <td>{{game.name}}</td>
               <td class="col-sm-6">{{game.waitTimeInMinutes}} minutes</td>
             </tr>
@@ -47,7 +47,7 @@
           <tbody>
             <tr ng-repeat="tournament in tournaments track by $index" class="venueDescription">
               <td>{{$index+1}}</td>
-              <td class="col-sm-1"><i class="hidden-sm hidden-xs fa" ng-class="game.active === 'Y' ? 'fa-check text-success': 'fa-times text-danger'"></i></td>
+              <td class="col-sm-1"><i class="hidden-sm hidden-xs fa" ng-class="game.active === 'Y' ? 'fa-check text-green': 'fa-times text-danger'"></i></td>
               <td>{{tournament.title}}</td>
               
               <td class="col-sm-6">{{tournament.description}}</td>
