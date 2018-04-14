@@ -26,6 +26,11 @@ app.controller('GamesTournamentController', ['$log', '$scope', '$http', '$locati
         };
         
         self.initMore = function() {
+            AjaxService.getInfo(self.venueId).then(function(response) {
+                //$rootScope.blackTheme = response.data["ui.service.theme"]  || '';
+                //$rootScope.blackTheme = 'blackTheme';
+            }); 
+
             AjaxService.getGames(self.detailsOfVenue.id).then(function(response){
                 self.games = response.data;
             });

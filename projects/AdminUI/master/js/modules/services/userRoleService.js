@@ -19,7 +19,7 @@
 	userRoles[11] = 'Agent Manager';
 	userRoles[12] = 'Store Manager';
 	userRoles[75] = 'Service Manager';
-	userRoles[50] = 'Promotor';
+	userRoles[50] = 'Promoter';
 	userRoles[51] = 'Event Manager';
 	userRoles[100] = 'Manager';
 	userRoles[500] = 'Owner';

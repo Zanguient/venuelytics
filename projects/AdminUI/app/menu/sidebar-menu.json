@@ -33,7 +33,7 @@
 	{
 		"text": "Contest Management",
 		"sref": "app.contest",
-		"icon": "fa fa-id-card-o",
+		"icon": "icon-trophy",
 		"translate": "sidebar.nav.pages.CONTEST",
 		"submenu": [],
 		"roleId": 100
@@ -41,7 +41,7 @@
 	{
 		"text": "Chat Bot",
 		"sref": "app.chatbot",
-		"icon": "fa fa-id-card-o",
+		"icon": "icon-bubbles",
 		"translate": "sidebar.nav.pages.CHATBOT",
 		"submenu": [],
 		"roleId": 100
@@ -49,7 +49,7 @@
 	{
 		"text": "Loyalty Management",
 		"sref": "app.loyalty",
-		"icon": "fa fa-id-card-o",
+		"icon": "icon-badge",
 		"translate": "sidebar.nav.pages.LOYALTY",
 		"submenu": [],
 		"roleId": 100
@@ -57,7 +57,7 @@
 	{
 		"text": "GuestList",
 		"sref": "app.guestList",
-		"icon": "icon-calendar",
+		"icon": "icon-book-open",
 		"translate": "sidebar.nav.pages.GUEST_LIST",
 		"submenu": [],
 		"roleId": 100
@@ -73,7 +73,7 @@
 	{
 		"text": "Event Management",
 		"sref": "app.eventManagement",
-		"icon": "icon-calendar",
+		"icon": "icon-event",
 		"translate": "sidebar.nav.pages.EVENT_MANAGEMENT",
 		"submenu": [],
 		"roleId": 51
@@ -138,7 +138,7 @@
 	{
 		"text": "Users Management",
 		"sref": "app.users",
-		"icon": "icon-users",
+		"icon": "icon-people",
 		"translate": "sidebar.nav.pages.USERS",
 		"submenu": [],
 		"roleId": 100
@@ -146,7 +146,7 @@
 	{
 		"text": "Business Request",
 		"sref": "app.businessRequest",
-		"icon": "icon-users",
+		"icon": "icon-layers",
 		"translate": "sidebar.nav.pages.BUSINESS",
 		"submenu": [],
 		"roleId": 100
@@ -154,7 +154,7 @@
 	{
 		"text": "Agency Management",
 		"sref": "app.agencies",
-		"icon": "fa fa-building-o",
+		"icon": "icon-organization",
 		"translate": "sidebar.nav.pages.AGENCIES",
 		"submenu": [],
 		"roleId": 1000
