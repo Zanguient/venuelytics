@@ -99,11 +99,10 @@
             <div class="row">
                 <h2 class="pt-2 pb-2">{{"reservation.PRIVATE_DETAILS" | translate}}</h2>
                    
-                <div class="col-md-4 col-xs-12 masonry-item wow fadeInUp animation-delay-2" ng-repeat="privateEvent in privateEventValueArray"
-                    ng-if="privateEvent.imageUrls[0].smallUrl">
+                <div class="col-md-4 col-xs-12 masonry-item wow fadeInUp animation-delay-2" ng-repeat="privateEvent in privateEventValueArray">
                     <article class="card border_clouds mb-4 wow materialUp animation-delay-5">
                         <figure class="ms-thumbnail ms-thumbnail-left">
-                            <img ng-src="{{privateEvent.imageUrls[0].smallUrl}}" alt="{{privateEvent.name}}"  class="img-responsive center-block">
+                            <img ng-src="{{privateEvent.imageUrls[0] ? privateEvent.imageUrls[0].smallUrl :'<%= assets %>/img/placeholder.jpg'}}" alt="{{privateEvent.name}}"  class="img-responsive center-block">
                         </figure>
                         <div class="card-block pt-2 pb-6 no-mt">
                             <a class="mt-1 mb-1 col-xs-12 no-p h6 block-ellipsis-1" href="#">
