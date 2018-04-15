@@ -2890,3 +2890,19 @@ button {
 .footer-text {
   font-size: 0.65em;
 }
+
+
+.bottom-right {
+  
+  position: relative;
+  top: -70px;
+  left: -5px;
+  background-color: #f5f5f5;
+  font-size: .8rem;
+  font-style: oblique;
+  letter-spacing: .25rem;
+  line-height: 1.3rem;
+  font-weight: 500;
+  margin-bottom: -70px;
+  padding: 5px;
+}

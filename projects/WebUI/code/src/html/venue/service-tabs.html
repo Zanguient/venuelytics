@@ -24,6 +24,7 @@
                                     <img  ng-src="{{venue.originalUrl}}" alt="Venue Image" class="galleryLrg"/>
                                 </div>
                             </div>
+                            
                             <!-- Controls -->
                             <span data-target="#carousel-{{$index}}1" class="btn-circle btn-circle-xs btn-circle-raised btn-circle-primary left carousel-control" role="button" data-slide="prev" ng-show="detailsOfVenue.imageUrls.length > 1" style="margin-left: 25px;">
                                 <i class="zmdi zmdi-chevron-left"></i>
@@ -32,31 +33,35 @@
                                 <i class="zmdi zmdi-chevron-right"></i>
                             </span>
                         </div>
+
                     </center>
-                    
+                    <div ng-hide="removeAllTabs === true" class="mont-font-regular bottom-right pull-right">
+                            <div>Address: {{detailsOfVenue.address}}</div>
+                            <div>Contact: {{detailsOfVenue.phone}}</div>
+                            <div>Hours: <span ng-repeat="venueHours in venueTotalHours">{{venueHours.sTime}} - {{venueHours.eTime}}{{$last ? '' : ' and '}}</span></div>
+                            <div><a href="{{detailsOfVenue.website}}" target="_new" >Website: {{detailsOfVenue.website}}</a> </div>
+                    </div>
+
                     <div class="row" ng-hide="removeAllTabs === true">
                         <center>
                             <div service-tab="" button-id="{{tab.buttonId}}" click-cb="dispatchToService(serviceName, enabled)" ng-repeat="tab in displayTabs" btn-class="{{tab.btnClass}}" selected="{{tab.selected}}" button-img="{{tab.buttonImg}}" name="{{tab.name}}" id="{{tab.id}}" service-name="{{tab.serviceName}}" disabled="{{tab.disabled}}"></div>
                         </center>
                     </div>
-                    <br>
-                    <div ng-include="selectedPage()" ng-hide="removeAllTabs === true"></div><br>
-                    <div class="eventListcal" ng-if="removeAllTabs == true">
-                        <table class="table">
-                            <tr><td>
-                                <center><div class="withoutTabs">{{detailsOfVenue.venueName}}</div></center>
-                                <div class="withOutTabDec"><span class="">{{"venue.WORKING_HOUR" | translate}} :</span><span ng-repeat="venueHours in venueTotalHours">{{venueHours.sTime}} - {{venueHours.eTime}}{{$last ? '' : ' and '}}</span></div>
-                                <div class="withOutTabDec"><span class="">{{"business.ADDRESS" | translate}}:</span><br>&emsp;{{detailsOfVenue.address}}</div>
-                                <div class="withOutTabDec">&emsp;{{detailsOfVenue.state}}</div>
-                                <div class="withOutTabDec">&emsp;{{detailsOfVenue.country}}</div>
-                                <div class="withOutTabDec">&emsp;{{detailsOfVenue.phone}}</div>
-                                <a href="{{detailsOfVenue.website}}" target="_new" class="withOutTabDec">&emsp;{{detailsOfVenue.website}}</a>
-                                <div class="withOutTabDec"><span class="">{{"bottleServiceTab.DESC" | translate}}:</span><br>&emsp;{{detailsOfVenue.description}}</div>
-                            </td></tr>
-                        </table>
-                    </div>            
-                    
                 </div>
+                <div ng-include="selectedPage()" ng-hide="removeAllTabs === true"></div><br>
+                <div class="eventListcal" ng-if="removeAllTabs == true">
+                    <table class="table">
+                        <tr><td>
+                            <center><div class="withoutTabs">{{detailsOfVenue.venueName}}</div></center>
+                            <div class="withOutTabDec"><span class="">{{"venue.WORKING_HOUR" | translate}} :</span><span ng-repeat="venueHours in venueTotalHours">{{venueHours.sTime}} - {{venueHours.eTime}}{{$last ? '' : ' and '}}</span></div>
+                            <div class="withOutTabDec"><span class="">{{"business.ADDRESS" | translate}}:</span><br>&emsp;{{detailsOfVenue.address}}</div>
+                            <div class="withOutTabDec">&emsp;{{detailsOfVenue.phone}}</div>
+                            <a href="{{detailsOfVenue.website}}" target="_new" class="withOutTabDec">&emsp;{{detailsOfVenue.website}}</a>
+                            <div class="withOutTabDec"><span class="">{{"bottleServiceTab.DESC" | translate}}:</span><br>&emsp;{{detailsOfVenue.description}}</div>
+                        </td></tr>
+                    </table>
+                </div>            
+                    
             </div>
         </article>
     </div>
