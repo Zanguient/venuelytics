@@ -2673,7 +2673,7 @@ table.fc-border-separate {
 }
 
 .partyBtn {
-  background-color: rgba(30,60,168, 0.80) !important;
+  background-color: rgba(30,30,168, 0.90) !important;
   color: #fff !important;
   border-color: white;
 }
@@ -2689,6 +2689,39 @@ table.fc-border-separate {
   color: #fff !important;
   border-color: white;
 }
+
+.dealsBtn {
+  background-color: rgba(152,57,157, 0.80) !important;
+  color: #fff !important;
+  border-color: white;
+}
+
+
+.waitTimeBtn {
+  background-color: rgba(60,60,60, 0.90) !important;
+  color: #fff !important;
+  border-color: white;
+}
+
+
+.contestsBtn {
+  background-color: rgba(200,60,60, 0.90) !important;
+  color: #fff !important;
+  border-color: white;
+}
+
+.rewardsBtn {
+  background-color: rgba(200,200,30, 0.90) !important;
+  color: #fff !important;
+  border-color: white;
+}
+
+.eventListBtn {
+  background-color: rgba(30,60,250, 0.80) !important;
+  color: #fff !important;
+  border-color: white;
+}
+
 
 /* is */
 

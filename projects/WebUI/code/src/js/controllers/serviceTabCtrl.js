@@ -181,11 +181,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 removeRows.push(i);
             } 
         }
-
-        for (var j = removeRows.length-1; j >=0; j--) {
-            tabArray.splice(removeRows[j],3);
-            if(tabArray.length === 0){
-                self.removeAllTabs = true;
+        if (self.venueId != 170649) {
+            for (var j = removeRows.length-1; j >=0; j--) {
+                tabArray.splice(removeRows[j],3);
+                if(tabArray.length === 0){
+                    self.removeAllTabs = true;
+                }
             }
         }
 
@@ -236,9 +237,19 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
        // self.tabDrink = self.tabParams === 'drink-services' ? 'drink-services' : '';
         addTab('drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, 'drinksBtn', 'drinkServices');
         
-      
+        if(self.venueId === 170649) {
+            //id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected
+            addTab('dealsServiceTab','deals', 'assets/img/service/event_image.png','Deals', 'deals-list', 'deals/event-list.html',true, 'dealsBtn', 'deals');
+            addTab('waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'casino/wait-time.html',true, 'waitTimeBtn', 'waittime');
+            addTab('contestsTab','contests', 'assets/img/service/event_image.png','Contests', 'contests', 'casino/contests.html',true, 'contestsBtn', 'contests');
+            addTab('rewardsTab','rewards', 'assets/img/service/event_image.png','Rewards', 'rewards', 'casino/rewards.html',true, 'rewardsBtn', 'rewards');
+        }
+
        // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
         addTab('eventListTab','eventlist', 'assets/img/service/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, 'eventListBtn', 'eventList');
+
+
+        
         //if(self.tabParams === "VIP"){
             var firstEnabledTabBtnId = optimizeTabDisplay(self.displayTabs);
             if (firstEnabledTabBtnId !== null) {  
