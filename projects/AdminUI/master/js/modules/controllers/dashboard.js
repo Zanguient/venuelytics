@@ -649,36 +649,16 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
   $scope.setVenue = function(venueName, venueNumber) {
         $scope.init();
    };
-   $scope.formatStackData = function(data) {
-        var retData = [];
-        var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
-        var colorIndex = 0;
+   $scope.formatBarData = function(data) {
         if (data.length > 0){
             for (var index in data[0].series) {
                 var d = data[0].series[index];
-                var elem = {};
-                elem.label = $translate.instant(d.subName);
-                elem.color = colors[colorIndex % colors.length];
-                colorIndex++;
-
-                if ($scope.selectedPeriod !== 'DAILY') {
-                    elem.data = d.data.reverse();
-                }
-                else {
-                    elem.data = [];
-                    var rData = d.data.reverse();
-                    for (var i =0; i < rData.length; i++){
-                        var from = rData[i][0].split("-");
-                        var f = new Date(from[0], from[1] - 1, from[2]);
-                        var dataElem = [f.getTime(), rData[i][1]];
-                        elem.data.push(dataElem);
-                    }
-                }
-                retData.push(elem);
+                d.data = d.data.reverse();
             }
         }
-        return retData;
+        return RestServiceFactory.formatBarData(data, 'subName',$scope.selectedPeriod);
     };
+   
 
     $scope.reservedBookingChart = function() {
         var temp = $scope.selectedPeriod.toLowerCase();
