@@ -12,8 +12,8 @@ const LOCAL_SRVR = 'http://localhost:8080';
 const PROD_SRVR = 'https://prod.api.venuelytics.com';
 
 const DEV_WEBUI = "http://dev.api.venuelytics.com";
-const PROD_WEBUI = "http://www.venuelytics.com";
-const LOCAL_WEBUI = "http://www.venuelytics.com";
+const PROD_WEBUI = "https://www.venuelytics.com";
+const LOCAL_WEBUI = "http://localhost:8000/";
 
 
 config.ai_client_access_token = 'f90c7a6106fa420a9d1f7cb4078cbaf0';
@@ -28,13 +28,7 @@ config.getAppUrl = () => {
 };
 
 config.getWebUIUrl = () => {
-    console.log("LOCAL: " +process.env.LOCAL);
-    if (process.env.LOCAL === 'true') {
-        return `${LOCAL_WEBUI}`;
-    } else {
-        return config.devMode ? `${DEV_WEBUI}`: `${PROD_WEBUI}`;
-    }
-    
+    return config.devMode ? `${DEV_WEBUI}`: `${PROD_WEBUI}`;
 };
 
 
