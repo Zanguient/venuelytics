@@ -22,11 +22,15 @@ ANSWERS["Q_FACILITY_OPEN_CLOSE_TIME"] = {
     text: "VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: ""};
 ANSWERS["Q_OPEN_CLOSE_TIME"] = {
       text: "VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: ""};
-    
+ 
+ANSWERS["Q_CHARGE"] = {
+        text: "VALUE", parameters: ["VALUE"], api_name: "service-time", type: "CoverCharge", value: "value"};
 
   
   
   const FACILITY_TYPE = ['Q_FACILITY', 'Q_FREE_FACILITY', 'Q_COUNT_FACILITY'];
+
+
 
 //// DO yo have GYM, Sauna, Restaurant, Pool etc
 //// Supported Facility types - GYM,SPA,Pool, Adult Pool, Indoor Pool, Sauna, steam room, breakfast,wifi, gift shop, clothing shop, tour, heater Pool,
@@ -40,15 +44,35 @@ else if (typeof data !== "undefined" && answer.api_name === "service-time") {
     }
   }
 */
-const sendAnswer = function(type, userId, response, channel) {
-  let user = Users.getUser(userId);
-  const venue = user.state.get("venue");
-  var venueName = venue.venueName;
 
+const sendAnswer = function(type, userId, response, channel) {
+  const user = Users.getUser(userId);
+  const venue = user.state.get("venue");
+  let venueName = venue.venueName;
+  const info = venue.info;
+  // one off
+  if (response.parameters && response.parameters.DressCode && response.parameters.DressCode.length > 0) {
+    if (info['Advance.dressCode'] && info['Advance.dressCode'].length > 0) {
+      channel.sendMessage(userId, `Dress code: ${info['Advance.dressCode'] }` );
+    } else {
+      channel.sendMessage(userId, `We don't have a dress code at our venue.` );
+    }
+    return;
+  }
   var answer = ANSWERS_DEFAULT;
   if (!!ANSWERS[type]) {
     answer = ANSWERS[type];
   }
+  if (response.parameters.Facilities && response.parameters.Facilities.toLowerCase().indexOf("guest")) {
+    if (venue.info['Advance.GuestList.enable'] && venue.info['Advance.GuestList.enable'].toLowerCase() === 'y' ) {
+      let guestListUrl = serviceApi.getGuestListUrl(venue.uniqueName, venue.id, venue.city);
+      channel.sendMessage(userId, `YES! we do have Guest List. You can access our guest list at ${guestListUrl}`);
+    } else {
+      channel.sendMessage(userId, `No, we donot have Guest List.`);
+    }
+    return;
+  }
+
   if (user.hasParameter(answer.api_name)) {
     sendAnswerImpl(type, user, answer, response, channel);
   } else {
@@ -57,7 +81,9 @@ const sendAnswer = function(type, userId, response, channel) {
 };
 
 function sendAnswerImpl(type, user, answer, response, channel) {
-  if (FACILITY_TYPE.indexOf(type) >= 0 ) {
+  if (type === 'Q_CHARGE') {
+   sendChargeImpl(type, user, answer, response, channel);
+  } else if (FACILITY_TYPE.indexOf(type) >= 0 ) {
     sendAnswerFacilityImpl(type, user, answer, response, channel);
   } else {
     sendAnswerFacilityTimes(type, user, answer, response, channel);
@@ -84,15 +110,18 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
       answer.value = 'lastCallTime';
     }
   }
-  if (!!response.parameters.health) {
-    answer.type = response.parameters.health;
+  if (!!response.parameters.Facilities) {
+    answer.type = response.parameters.Facilities;
   }
 
+  if (answer.type && answer.type.toLowerCase() === 'kitchen' ) {
+    answer.type = 'Restaurant';
+  }
   for (var j = 0; j < data.length; j++) {
-    if (data[j].type === 'Venue') {
+    if (data[j].type.toLowerCase() === 'venue') {
       venueTimes = data[j];
     }
-    if (data[j].type === answer.type) {
+    if (data[j].type.toLowerCase() === answer.type.toLowerCase()) {
       if (answer.value && answer.value !== ''){
         channel.sendMessage(user.id, formatText(answer, venueName, formatTime(data[j][answer.value])));
       } else {
@@ -133,8 +162,38 @@ function formatTime(normalizedTime) {
   return time.join(""); // return adjusted time or original string
 }
 
+function sendChargeImpl(type, user, answer, response, channel) {
+  const chargeType = response.parameters.chargeType;
+  var data = user.state.get(answer.api_name);
+  let name="";
+  if (chargeType.toLowerCase().indexOf("cover") >=0 ) {
+    name = "CoverCharges";
+  } else if (chargeType.toLowerCase().indexOf("fastlane") >=0 || chargeType.toLowerCase().indexOf("fast lane")){
+    name = "FastLaneCharges";
+  }
+  
+
+  if (typeof(data) !== "undefined") {
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].type.toLowerCase() === name) {
+        var startTime = formatTime(data[i]['startTime']);
+        var endTime = formatTime(data[i]['endTime']);
+        if (data[i].value > 0.0) {
+          channel.sendMessage(user.id, `We charge a cover charge of ${data[i].value} between ${startTime} and ${endTime}`);
+        } else {
+          channel.sendMessage(user.id, `We don't have ${chargeType}`);
+        }
+        
+        return;
+      }
+    }
+  }
+
+  channel.sendMessage(user.id, `We don't have ${chargeType}`);
+
+}
 function sendAnswerFacilityImpl(type, user, answer, response, channel) {
-  const facilityType = response.parameters.health;
+  const facilityType = response.parameters.Facilities;
   
   var data = user.state.get(answer.api_name);
   var hasFacility = false;
@@ -143,7 +202,7 @@ function sendAnswerFacilityImpl(type, user, answer, response, channel) {
   var locations = [];
   if (typeof(data) !== "undefined") {
     for (var i = 0; i < data.length; i++) {
-      if (data[i].type.toUpperCase() === facilityType.toUpperCase()) {
+      if (data[i].type.toLowerCase() === facilityType.toLowerCase()) {
         hasFacility = true;
         facilityText = data[i].valueText;
         if (type === 'Q_COUNT_FACILITY') {

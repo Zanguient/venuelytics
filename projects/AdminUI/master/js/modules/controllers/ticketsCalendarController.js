@@ -307,7 +307,8 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
           return Number(ticket.discountedPrice*$scope.ticketSale.quantity + cal.value).toFixed(2) ;
         };
 
-        $scope.sellTicket = function(ticketInfo) {
+      
+      $scope.sellTicket = function(ticketInfo) {
           
           if (ticketInfo.$valid && $("#sellTicketId").parsley().isValid()) {
             if (typeof $scope.ticketSale.contactName !== 'undefined' 
@@ -328,16 +329,8 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
               self.getAgencyInfo();
               //var base64data = "data:application/pdf;base64," + data.pdfDoc;
               $timeout(function(){
-                /*ngDialog.openConfirm({
-                  template: 'ticketPopUP',
-                  className: 'ngdialog-theme-default',
-                  data: {base64data: base64data},
-                }).then(function (value) {
-                }, function (reason) {
-                });*/
-
-                $window.open("data:application/pdf;base64," + data.pdfDoc); 
-                //$window.open("data:application/octet-stream;base64," + data.pdfDoc);  /*download Pdf*/
+                self.openPdf(data.pdfDoc);
+              
               }, 300);
             }, function(error, s) {
                if (typeof error.data !== 'undefined') { 
@@ -353,7 +346,60 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
       }]
     });
   };
+  function b64toBlob(b64Data, contentType, sliceSize) {
+          contentType = contentType || '';
+          sliceSize = sliceSize || 512;
 
+          var byteCharacters = atob(b64Data);
+          var byteArrays = [];
+
+          for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+              byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+          }
+          try{
+             return new Blob( byteArrays, {type : contentType});
+          } catch(e){
+            console.log(e);
+            window.BlobBuilder = window.BlobBuilder || 
+                             window.WebKitBlobBuilder || 
+                             window.MozBlobBuilder || 
+                             window.MSBlobBuilder;
+            if(e.name == 'TypeError' && window.BlobBuilder){
+                var bb = new BlobBuilder();
+                bb.append(byteArrays);
+                blob = bb.getBlob(contentType);
+                return blob;
+            } else if(e.name == "InvalidStateError"){
+              blob = new Blob(byteArrays, {type : contentType});
+              return blob;
+          }
+        }
+        return null;   
+      }
+  $scope.openPdf = function(base64Data) {
+            
+    var blob = b64toBlob(base64Data, 'application/pdf');
+    var fileURL = URL.createObjectURL(blob);
+
+    //or try to download file
+    var link = document.createElement('a');
+    link.download = 'ticket.pdf';
+    link.href= fileURL;
+    link.textContent = 'Download PDF';
+
+    document.body.appendChild(link);
+           // window.open(fileURL)        ;
+    link.click();
+  };
   $scope.resetBudget = function() {
     var target = {id: $scope.agency.id};
             

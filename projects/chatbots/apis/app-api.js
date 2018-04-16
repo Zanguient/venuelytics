@@ -108,6 +108,67 @@ const getBotAgents = function(callback) {
         retOBJ(body, response, callback);
     });
 };
+
+const getActiveTournaments = function(venueId, callback) {
+    var options = {
+        method: 'GET',
+        url: `${config.getAppUrl()}/tournaments/${venueId}/active`,
+    };
+
+    request.get(options, function (error, response, body) {
+        retOBJ(body, response, callback);
+    });
+};
+
+const getTournamentsUrl = function(venueUniqueName, venueId) {
+    if (!!venueUniqueName) {
+        return  `${config.getWebUIUrl()}/games/${venueUniqueName}`;
+    } else {
+        return `${config.getWebUIUrl()}/games/${venueId}`;
+    }
+};
+
+const getGamesUrl = function(venueUniqueName, venueId) {
+    if (!!venueUniqueName) {
+        return  `${config.getWebUIUrl()}/games/${venueUniqueName}`;
+    } else {
+        return `${config.getWebUIUrl()}/games/${venueId}`;
+    }
+};
+
+const getGuestListUrl = function(venueUniqueName, venueId, city) {
+     if (!!venueUniqueName) {
+        return  `${config.getWebUIUrl()}/cities/${city}/${venueUniqueName}/guest-list`;
+    } else {
+        return `${config.getWebUIUrl()}/cities//${city}/${venueId}/guest-list`;
+    }
+};
+const getActiveGames = function(venueId, gameName, callback) {
+    var url = `${config.getAppUrl()}/venues/${venueId}/games/active`;
+    if (gameName !== null && gameName.trim() !== '') {
+        url += `?name=${gameName}`;
+    }
+    var options = {
+        method: 'GET',
+        url: url
+    };
+
+    request.get(options, function (error, response, body) {
+        retOBJ(body, response, callback);
+    });
+};
+
+const getGamesAvailableNow = function(venueId, callback) {
+    var options = {
+        method: 'GET',
+        url: `${config.getAppUrl()}/venues/${venueId}/games/active?maxWaiting=5`,
+    };
+
+    request.get(options, function (error, response, body) {
+        retOBJ(body, response, callback);
+    });
+};
+
 const createOrder = function (firstName, lastName, venueId, tableNumber, orderDate, noOfGuests, email, accessToken, mobile, callback) {
     var venueNumber = parseInt(venueId);
     var headers = {
@@ -159,6 +220,7 @@ function retOBJ(body, response, callback) {
         if (result && response.statusCode >=200 && response.statusCode < 300) {
           callback(result);
         } else {
+            console.error(body);
           callback({});
         }
     }
@@ -173,5 +235,10 @@ module.exports= {
     fbLogin : fbLogin,
     createOrder: createOrder,
     getServiceTimes: getServiceTimes,
-    getBotAgents:getBotAgents
+    getBotAgents:getBotAgents,
+    getGamesAvailableNow: getGamesAvailableNow,
+    getActiveTournaments: getActiveTournaments,
+    getActiveGames: getActiveGames,
+    getGamesUrl: getGamesUrl,
+    getTournamentsUrl : getTournamentsUrl
 };

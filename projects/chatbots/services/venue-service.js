@@ -6,6 +6,9 @@ const curry = require("lodash/curry");
 const serviceApi = require("../apis/app-api");
 const botagents = require("../models/botagents");
 const facility = require("./venue-facilities");
+const casino = require("./venue-casino");
+const restaurant = require("./venue-restaurant");
+
 const SERVICE_NAMES = ["Bottle", "PrivateParty", "GuestList", "Table"];
 
 const SERVICE_TYPE_SPEC = [];
@@ -29,11 +32,16 @@ QUESTIONS["Q_RESTAURANT_OPEN"] = curry(fxInfo)("Q_RESTAURANT_OPEN");
 QUESTIONS["Q_RESTAURANT_CLOSE"] = curry(fxInfo)("Q_RESTAURANT_CLOSE");
 QUESTIONS["Q_AMENITIES"] = curry(fxInfo)("Q_AMENITIES");
 QUESTIONS["Q_EVENTS"] = curry(fxInfo)("Q_EVENTS");
+QUESTIONS["Q_CHARGE"] = curry(fxInfo)("Q_CHARGE");
 
 QUESTIONS["Q_CLOSE_TIME"] = curry(fxInfo)("Q_CLOSE_TIME");
 QUESTIONS["Q_OPEN_TIME"] = curry(fxInfo)("Q_OPEN_TIME");
 QUESTIONS["Q_OPEN_CLOSE_TIME"] = curry(fxInfo)("Q_OPEN_CLOSE_TIME");
 QUESTIONS["Q_FACILITY_OPEN_CLOSE_TIME"] = curry(fxInfo)("Q_FACILITY_OPEN_CLOSE_TIME");
+QUESTIONS["Q_RESTAURANT_MENU"] = fxRestaurant;
+
+
+QUESTIONS["Q_CASINO"] = fxCasino;
 
 QUESTIONS["Q_DEALS_AND_SPECIALS"] = dealsAndSpecials;
 
@@ -45,7 +53,7 @@ QUESTIONS["email"] = fxGetEmail;
 
 const FACILITY_TYPE = [
   'Q_FACILITY', 'Q_FREE_FACILITY', 'Q_COUNT_FACILITY', 'Q_CHECKOUT_TIME', 'Q_CHECKIN_TIME' , 'Q_LASTCALL_TIME', 'Q_RESTAURANT_OPEN',
-  'Q_OPEN_TIME', 'Q_CLOSE_TIME', 'Q_OPEN_CLOSE_TIME', 'Q_FACILITY_OPEN_CLOSE_TIME'];
+  'Q_OPEN_TIME', 'Q_CLOSE_TIME', 'Q_OPEN_CLOSE_TIME', 'Q_FACILITY_OPEN_CLOSE_TIME', 'Q_CHARGE'];
 
 const ANSWERS = [];
 ANSWERS["Q_WIFI_PASSWORD"] = { text: "VALUE", api_name: "info", value: "wifi-password"};
@@ -99,10 +107,34 @@ const aiResponse = function(channel, senderId, response) {
       }
     }
   } else {
-    channel.sendMessage(senderId, response.responseSpeech);
+    if (response.action === "smalltalk.greetings.hello") {
+      channel.sendMessage(senderId, response.responseSpeech +"\nWelcome to Personalized Digital Concierge Service! How can I help?");
+    } else {
+      channel.sendMessage(senderId, response.responseSpeech);
+    }
   }
 };
 
+function fxRestaurant(userId, response, channel) {
+  let user = Users.getUser(userId);
+  if (user.hasParameter("selectedVenueId")) {
+    restaurant.sendAnswer(userId, response, channel);  
+  } else {
+    channel.sendMessage(userId, "Can you please give me the Venue name?");
+    user.setConversationContext('Q_RESTAURANT_MENU', true, curry(searchVenue)(channel), response);
+  }       
+}
+
+function fxCasino(userId, response, channel) {
+  let user = Users.getUser(userId);
+  if (user.hasParameter("selectedVenueId")) {
+    casino.sendAnswer(userId, response, channel);  
+  } else {
+    channel.sendMessage(userId, "Can you please give me the Venue name?");
+    user.setConversationContext('Q_CASINO', true, curry(searchVenue)(channel), response);
+  }
+
+}
 function dealsAndSpecials(userId, response, channel) {
   let user = Users.getUser(userId);
 
