@@ -93,8 +93,8 @@
               </div>
         </div>
 
-        <div ng-show="specificDrink === 'Y' || specificDrink === 'y'" ng-hide="orderDisable === true" class="form-group" ng-class="blackTheme">
-            <div class="row" ng-if="drinkDetails.size() > 0">
+        <div ng-show="specificDrink === 'Y' || specificDrink === 'y'"  class="form-group" ng-class="blackTheme">
+            <div class="row">
             <div class="ms-paper-content-container">
                 <div class="ms-paper-content">
                     <h2>{{"reservation.DRINK_ITEMS" | translate}}</h2>
@@ -104,7 +104,7 @@
                                 <div class="panel-heading" role="tab" id="{{items.id}}">
                                     <h3 class="panel-title">
                                         <a class="collapsed withripple" role="button" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse{{items.id}}" aria-expanded="{{$index == 0 ? true : false}}" aria-controls="collapse{{items.id}}">
-                                            {{items.brand}}
+                                            {{items.name}}
                                         </a>
                                     </h3>
                                 </div>

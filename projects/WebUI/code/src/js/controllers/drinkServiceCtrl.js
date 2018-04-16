@@ -10,7 +10,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             self.venueDetails = venueService.getVenue($routeParams.venueId);
             self.venueId = self.venueDetails.id;
             ngMeta.setTag('description', self.venueDetails.description + " Drink Services");
-            $rootScope.title = self.venueDetails.venueName + ' ' + self.venueDetails.city + ' ' + self.venueDetails.state + " Venuelytics - Drink Services";
+            $rootScope.title = self.venueDetails.venueName + " Venuelytics - Drink Services";
             ngMeta.setTitle($rootScope.title);
 
             self.selectedCity = self.venueDetails.city;
