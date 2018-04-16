@@ -42,6 +42,12 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
                 { "displayName": "VIP deals", "name": "_vip_deals", "type": "text", "value": "" },
                 { "displayName": "Deals", "name": "_deals", "type": "text", "value": "" },
                 { "displayName": "Wifi Info", "name": "wifi-password", "type": "text", "value": "" },
+                { "displayName": "Airport Shuttle", "name": "_airport-shuttle", "type": "text", "value": "" },
+                { "displayName": "Nearby Restaurant", "name": "_nearby-restaurants", "type": "text", "value": "" },
+                { "displayName": "Nearby Bars", "name": "_nearby-bars", "type": "text", "value": "" },
+                { "displayName": "Cleanup my Room", "name": "_clean-room", "type": "text", "value": "" },
+                { "displayName": "Order Food/Drinks", "name": "_order-food-drinks", "type": "text", "value": "" },
+                { "displayName": "Additional Free Parking", "name": "_additional_free_parking", "type": "text", "value": "" },
             ];
 
             $scope.adminSettings = $.Apputil.makeMap(adminSettings);

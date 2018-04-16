@@ -7,6 +7,7 @@ const serviceApi = require("../apis/app-api");
 const botagents = require("../models/botagents");
 const facility = require("./venue-facilities");
 const casino = require("./venue-casino");
+const hotel = require("./venue-hotel");
 const restaurant = require("./venue-restaurant");
 
 const SERVICE_NAMES = ["Bottle", "PrivateParty", "GuestList", "Table"];
@@ -42,6 +43,10 @@ QUESTIONS["Q_RESTAURANT_MENU"] = fxRestaurant;
 
 
 QUESTIONS["Q_CASINO"] = fxCasino;
+
+
+QUESTIONS["Q_HOTEL"] = curry(fxHotel)("Q_HOTEL");
+QUESTIONS["Q_SHUTTLE"] = curry(fxHotel)("Q_SHUTTLE");
 
 QUESTIONS["Q_DEALS_AND_SPECIALS"] = dealsAndSpecials;
 
@@ -132,6 +137,16 @@ function fxCasino(userId, response, channel) {
   } else {
     channel.sendMessage(userId, "Can you please give me the Venue name?");
     user.setConversationContext('Q_CASINO', true, curry(searchVenue)(channel), response);
+  }
+
+}
+function fxHotel(type, userId, response, channel) {
+  let user = Users.getUser(userId);
+  if (user.hasParameter("selectedVenueId")) {
+    hotel.sendAnswer(type, userId, response, channel);  
+  } else {
+    channel.sendMessage(userId, "Can you please give me the Venue name?");
+    user.setConversationContext('Q_HOTEL', true, curry(searchVenue)(channel), response);
   }
 
 }
