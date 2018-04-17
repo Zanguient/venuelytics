@@ -113,7 +113,12 @@ const aiResponse = function(channel, senderId, response) {
     }
   } else {
     if (response.action === "smalltalk.greetings.hello") {
-      channel.sendMessage(senderId, response.responseSpeech +"\nWelcome to Personalized Digital Concierge Service! How can I help?");
+      let venueName = "";
+      if (user && user.hasParameter("selectedVenueId")) {
+        venueName = user.state.get("venue").venueName;
+        venueName += "'s";
+      }
+      channel.sendMessage(senderId, response.responseSpeech +`\nWelcome to ${venueName} Personalized Digital Concierge Service! How can I help?`);
     } else {
       channel.sendMessage(senderId, response.responseSpeech);
     }
