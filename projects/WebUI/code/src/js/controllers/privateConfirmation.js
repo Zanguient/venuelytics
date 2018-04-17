@@ -16,7 +16,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$location', 'Data
             $rootScope.description = self.venueDetails.description;
             $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
             ngMeta.setTag('description', self.venueDetails.description + " Private Confirmation");
-            $rootScope.title = self.venueDetails.venueName + ' ' + self.venueDetails.city + ' ' + self.venueDetails.state + " Venuelytics - Private Event Confirmation";
+            $rootScope.title = self.venueDetails.venueName +  " Venuelytics - Private Event Confirmation";
             ngMeta.setTitle($rootScope.title);
             self.selectedCity = self.venueDetails.city;
 

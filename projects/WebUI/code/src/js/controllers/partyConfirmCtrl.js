@@ -16,7 +16,7 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
                 $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Party Confirmation");
-                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Party Services Confirmation & Payment";
+                $rootScope.title = self.venueDetails.venueName + " Venuelytics - Party Services Confirmation & Payment";
                 ngMeta.setTitle($rootScope.title);
                 self.city = self.venueDetails.city;
                 

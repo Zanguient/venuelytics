@@ -13,7 +13,7 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Bachelor party Confirmation");
-                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bachelor party Confirmation & Payment";
+                $rootScope.title = self.venueDetails.venueName+ " Venuelytics - Bachelor party Confirmation & Payment";
                 ngMeta.setTitle($rootScope.title);
                 self.city = $self.venueDetails.city;
                 self.venueId = self.venueDetails.id;

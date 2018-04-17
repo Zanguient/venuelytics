@@ -24,7 +24,7 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$location', 'DataSh
 				$rootScope.description = self.venueDetails.description;
 				self.selectedCityName = self.venueDetails.city;
 				ngMeta.setTag('description', self.venueDetails.description + " Bottle Order Confirmation");
-				$rootScope.title = self.venueDetails.venueName+' '+self.selectedCityName+' '+self.venueDetails.state + " Venuelytics - Bottle Services Confirmation";
+				$rootScope.title = self.venueDetails.venueName+  " Venuelytics - Bottle Services Confirmation";
 				ngMeta.setTitle($rootScope.title);
 				DataShare.bottleServiceData = {};
                 DataShare.tableSelection = '';

@@ -13,7 +13,7 @@ app.controller('GuestConfirmController', ['$log', '$scope', '$location', 'DataSh
                 self.venueInfo();
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Guest Confirmation");
-                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Guest List Confirmation";
+                $rootScope.title = self.venueDetails.venueName+ " Venuelytics - Guest List Confirmation";
                 ngMeta.setTitle($rootScope.title);
                 self.city = self.venueDetails.city;
                 

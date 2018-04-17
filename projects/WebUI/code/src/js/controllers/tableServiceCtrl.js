@@ -19,7 +19,7 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
                 });
                 $rootScope.description = self.venueDetails.description;
                 ngMeta.setTag('description', self.venueDetails.description + " Table Services");
-                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Table Services";
+                $rootScope.title = self.venueDetails.venueName+  " Venuelytics - Table Services";
                 ngMeta.setTitle($rootScope.title);
                 var embed = $routeParams.embed;
                 if(embed === "embed") {

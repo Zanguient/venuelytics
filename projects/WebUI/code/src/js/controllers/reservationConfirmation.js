@@ -21,7 +21,7 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
                 DataShare.venueDetails = self.venueDetails;
                 self.selectedCity = DataShare.venueDetails.city;
                 ngMeta.setTag('description', self.venueDetails.description + " Party Confirmation");
-                $rootScope.title = self.venueDetails.venueName+' '+self.selectedCity+' '+self.venueDetails.state + " Venuelytics - Party Services Confirmation & Payment";
+                $rootScope.title = self.venueDetails.venueName+  " Venuelytics - Party Services Confirmation & Payment";
                 ngMeta.setTitle($rootScope.title);
                
                 

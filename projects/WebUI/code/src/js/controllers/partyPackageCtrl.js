@@ -14,7 +14,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                 self.venueId = self.venueDetails.id;
                 $rootScope.blackTheme = venueService.getVenueInfo(self.venueId , 'ui.service.theme') || '';
                 ngMeta.setTag('description', self.venueDetails.description + " Party Package");
-                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + "Venuelytics - Party Package Services";
+                $rootScope.title = self.venueDetails.venueName + "Venuelytics - Party Package Services";
                 ngMeta.setTitle($rootScope.title);
                 $rootScope.serviceTabClear = false;
                 var date = new Date();

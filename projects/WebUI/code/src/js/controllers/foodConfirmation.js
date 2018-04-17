@@ -19,7 +19,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
 
             $rootScope.description = self.venueDetails.description;
             ngMeta.setTag('description', self.venueDetails.description + " Food Confirmation");
-            $rootScope.title = self.venueDetails.venueName + ' ' + self.venueDetails.city + ' ' + self.venueDetails.state + " Venuelytics - Food Services Confirmation & Payment";
+            $rootScope.title = self.venueDetails.venueName + " Venuelytics - Food Services Confirmation & Payment";
             ngMeta.setTitle($rootScope.title);
             self.city = self.venueDetails.city;
 

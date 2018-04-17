@@ -10,7 +10,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
             self.init = function() {
                 self.venueDetails = venueService.getVenue($routeParams.venueId);
                 ngMeta.setTag('description', self.venueDetails.description + " Bachelor Party");
-                $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bachelor Party Services";
+                $rootScope.title = self.venueDetails.venueName+ " Venuelytics - Bachelor Party Services";
                 ngMeta.setTitle($rootScope.title);
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
