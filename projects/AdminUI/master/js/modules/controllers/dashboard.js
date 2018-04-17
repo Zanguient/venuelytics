@@ -744,6 +744,9 @@ App.controller('DashBoardController',['$log','$scope','$window', '$http', '$time
         $state.go('app.cityInsight');
     };
 
+    $scope.requestsInsight = function() {
+        $state.go('app.requestsDashboard');
+    };
     $scope.donutInit();
     $scope.init();
 
