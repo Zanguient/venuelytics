@@ -49,7 +49,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     venueService.saveVenue(self.venueId, self.venueDetails);
 
                     ngMeta.setTag('description', response.description + " Bottle Services");
-                    $rootScope.title = self.venueDetails.venueName+' '+self.venueDetails.city+' '+self.venueDetails.state + " Venuelytics - Bottle Services";
+                    $rootScope.title = self.venueDetails.venueName+ " Venuelytics - Bottle Services";
                     ngMeta.setTitle($rootScope.title);
                     angular.forEach(response.imageUrls, function(value,key){
                         ngMeta.setTag('image', value.originalUrl);

@@ -28,7 +28,10 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
+                $( "#tableServiceDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'}).on('changeDate', function(ev){
+                    console.log("changeDate event");
+                    self.table.tableDate = $("#tableServiceDate").val();
+                });
                 
                 self.getServiceTime();
                 self.venueInfo();
