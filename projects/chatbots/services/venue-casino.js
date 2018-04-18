@@ -58,7 +58,7 @@ const sendAnswer = function(userId, response, channel) {
             }
         });
     }
- }
+ };
   
 function sendAnswerImpl(user, venueId, games, title, channel, userId, gameName) {
     const venue = user.state.get("venue");

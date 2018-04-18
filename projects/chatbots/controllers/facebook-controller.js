@@ -39,6 +39,38 @@ class FBChannel {
     sendTableListImpl(senderId, tables);
   } 
   
+  sendGenericList(senderId, basicList, message) {
+    var list = [];
+    for (var i = 0; i < basicList.length; i++) {
+      
+      
+      var object = {
+        "title": basicList[i].text,
+        "subtitle": ``,
+        "buttons": [
+          {
+            "type": "postback",
+            "title": "Select",
+            "payload": basicList[i].text
+          }
+        ]
+      };
+      list.push(object);
+
+    }
+  
+    var messageData = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "list",
+          "elements": list.slice(0, 4),
+        }
+      }
+    };
+    sendApi.sendMessage(senderId, messageData); 
+  }
+
   sendReservationConfirmation(senderId, user, type) {
     sendReservationConfirmationImpl(senderId, user, type);
   } 

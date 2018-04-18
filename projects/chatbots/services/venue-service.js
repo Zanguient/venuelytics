@@ -118,7 +118,9 @@ const aiResponse = function(channel, senderId, response) {
         venueName = user.state.get("venue").venueName;
         venueName += "'s";
       }
-      channel.sendMessage(senderId, response.responseSpeech +`\nWelcome to ${venueName} Personalized Digital Concierge Service! How can I help?`);
+      let message = `\nWelcome to ${venueName} Personalized Digital Concierge Service!  You can request:\n Reservations, Bookings, Deals, Events, Rate the service, Amenities, Food & Drink Ordering. How can I help?`;
+      
+      channel.sendMessage(senderId, response.responseSpeech + message);
     } else {
       channel.sendMessage(senderId, response.responseSpeech);
     }

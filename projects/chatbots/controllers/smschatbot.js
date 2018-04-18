@@ -27,13 +27,20 @@ class SMSChannel {
   }
   
   sendVenueList(senderId, venues) {
-    var message = "";
+    var message = "Please select one of the Venue by entering 1, 2, 3...\n";
     venues.forEach(element => {
       message += `${element.searchIndex} : ${element.venueName} - ${element.address}\n`;
     });
     sendSMS(this.channelId, senderId, message);
   }
+  sendGenericList(senderId, basicList, message) {
+    
+    basicList.forEach(element => {
+      message += `${element.text},\n`;
+    });
 
+    sendSMS(this.channelId, senderId, message);  
+  };
   sendTableList(senderId, tableList) {
     sendSMS(this.channelId, senderId, `We have found a table for the requested date.`);
     venueService.processMessage(senderId, tableList[0].searchIndex, this);
