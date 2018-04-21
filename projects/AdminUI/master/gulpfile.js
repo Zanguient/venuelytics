@@ -38,7 +38,7 @@ var gulp        = require('gulp'),
 // LiveReload port. Change it only if there's a conflict
 var lvr_port = 35729;
 
-var mode = 'prod';
+var mode = 'dev';
 
 var W3C_OPTIONS = {
   // Set here your local validator if your using one. leave it empty if not
