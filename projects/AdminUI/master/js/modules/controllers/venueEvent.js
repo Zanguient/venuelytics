@@ -116,6 +116,10 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
             return;
         }
 
+        if (data.startDate > data.endDate) {
+            toaster.pop('error', "End Date Error", "End date needs to be same or after Start date.");
+            return;
+        }
         data.venueNumber = $stateParams.venueNumber;
         var t = $scope.eventDisplayTime;
         data.eventTime = t.getHours() +":" + t.getMinutes();
@@ -134,6 +138,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
             payload.scheduleDayOfMonth = '';
         }
         console.log(JSON.stringify(payload))
+
         RestServiceFactory.VenueService().saveEvent(target, payload, function(success){
          
             ngDialog.openConfirm({

@@ -36,7 +36,8 @@ App
 	  notAuthenticated: 'auth-not-authenticated',
 	  notAuthorized: 'auth-not-authorized'
 	}).constant('APP_EVENTS', {
-    venueSelectionChange: 'venueSelectionChange'
+    venueSelectionChange: 'venueSelectionChange',
+    deleteEvent: 'deleteEvent'
   })
 	.constant('USER_ROLES', {
 		 any: {id: 0, name: 'Public'},

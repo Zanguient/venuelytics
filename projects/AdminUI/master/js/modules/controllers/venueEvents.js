@@ -38,7 +38,21 @@ App.controller('VenueEventsController', ['$scope', '$state','$compile','$timeout
 	};
 
   $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
-      $scope.getEvents(contextService.userVenues.selectedVenueNumber); 
+    $scope.getEvents(contextService.userVenues.selectedVenueNumber);
+  });
+
+  $scope.$on(APP_EVENTS.deleteEvent, function(event, data) {
+    var index = -1;
+
+    for (var idx = 0 ; idx < $scope.events.length;  idx++) {
+      if ($scope.events[idx].id === data.event.id ) {
+        index = idx;
+      }
+    }
+    if (index > -1) {
+      $scope.events.splice(index,1);
+    }
+
   });
 
   $scope.init();

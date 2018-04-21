@@ -11,8 +11,8 @@ App.directive('eventTile', function() {
     scope:{
 	  event: '='
   	},
-  	controller : [ '$scope', 'RestServiceFactory', '$state', 'ngDialog', 
-  			function($scope, RestServiceFactory, $state, ngDialog) {
+  	controller : [ '$scope', '$rootScope','RestServiceFactory', '$state', 'ngDialog', 'APP_EVENTS',
+  			function($scope, $rootScope, RestServiceFactory, $state, ngDialog, APP_EVENTS) {
 		
 		$scope.$watch('event', function() {
         	
@@ -57,7 +57,7 @@ App.directive('eventTile', function() {
 	      }).then(function (value) {
 	        var target = {id: eventId};
 	        RestServiceFactory.VenueService().deleteEvent(target,  function(success){
-	          $scope.events.splice(index,1);
+	          $rootScope.$broadcast(APP_EVENTS.deleteEvent, {event: $scope.event});
 	        },function(error){
 	          if (typeof error.data !== 'undefined') { 
 	            toaster.pop('error', "Server Error", error.data.developerMessage);
