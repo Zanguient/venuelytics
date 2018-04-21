@@ -209,6 +209,10 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
        
         RestServiceFactory.VenueService().getAgencies({id: $stateParams.venueNumber}, function(data) {
             $scope.agencies = data.agencies;
+           /* if ($stateParams.id === 'new' && typeof( data.agencies) !== 'undefined' && data.agencies.length > 0) {
+                data.agencyId = data.agencies[0].id;
+            }*/
+            
         });
 
        
