@@ -38,7 +38,7 @@ var gulp        = require('gulp'),
 // LiveReload port. Change it only if there's a conflict
 var lvr_port = 35729;
 
-var mode = 'dev';
+var mode = 'prod';
 
 var W3C_OPTIONS = {
   // Set here your local validator if your using one. leave it empty if not
@@ -274,7 +274,7 @@ gulp.task('scripts:app', function() {
         }))*/
         .pipe(f.restore)
         .pipe(concat(build.scripts.app.main))
-        .pipe(gulpif(mode === 'prod',cachebust.resources()))
+       /// .pipe(gulpif(mode === 'prod',cachebust.resources()))
         .pipe(gulp.dest(build.scripts.app.dir));
 });
 
@@ -284,7 +284,7 @@ gulp.task('scripts:vendor', function() {
     return gulp.src(source.scripts.vendor)
       //  .pipe(uglify())  /* UNCOMMENT TO MINIFY */
         .pipe(concat(build.scripts.vendor.main))
-         .pipe(gulpif(mode === 'prod',cachebust.resources()))
+       //  .pipe(gulpif(mode === 'prod',cachebust.resources()))
         .pipe(gulp.dest(build.scripts.vendor.dir));
 });
 
@@ -436,6 +436,20 @@ gulp.task('start_server', function (){
 
  });
 
+
+gulp.task('run_dist', function (){
+
+  return gulp.src('../dist/')
+    .pipe(webserver({
+      livereload: true,
+      path: '/mgmtconsole',
+      directoryListing: false,
+      open: 'http://localhost:8000/mgmtconsole',
+      fallback: 'index.html'
+    }));
+
+ });
+
 gulp.task('remove-template-cache', function() {
   return del.sync(['../app/js/templates.js'], {force: true});
 });
@@ -455,12 +469,17 @@ gulp.task('build', gulpSequence([
                       'templates:views'
                     ], 'bust-template'));
 
-gulp.task('package:src', ['build'], function () {
-	const f = filter([ '!../index.html', '../app/js/**', '../app/css/**' ], {restore: true});
-	return gulp.src(['../app/**',  '../index.html'], {base: '../'})
-     .pipe(f)
-     .pipe(gulpif(mode === 'prod',cachebust.resources()))
-     .pipe(f.restore)
+gulp.task('package:src', ['package:js'], function () {
+	return gulp.src(['!../app/js/','!../app/js/**','../app/**'], {base: '../'})
+     .pipe(gulp.dest('../dist'));
+     
+    
+});
+
+gulp.task('package:js', ['build'], function () {
+  return gulp.src(['../app/js/**'], {base: '../'})
+
+      .pipe(gulpif(mode === 'prod',cachebust.resources()))
      .pipe(gulp.dest('../dist'));
     
 });
@@ -469,7 +488,7 @@ gulp.task('bust-template', function () {
 	
 	return gulp.src(['../app/templates/**/*.html',  '../app/pages/**/*.html', '../app/views/**/*.html'])
 	 .pipe(templateCache('templates.js', {root: 'app/views/'}))
-   .pipe(gulpif(mode === 'prod',cachebust.resources()))
+  // .pipe(gulpif(mode === 'prod',cachebust.resources()))
    .pipe(gulp.dest('../app/js/'));
     
 });
@@ -483,7 +502,7 @@ gulp.task('package:vendor', function () {
 
 gulp.task('package:build', ['package:src', 'package:vendor'], function () {
 	
-	return gulp.src('../dist/index.html')
+	return gulp.src('../index.html')
 	.pipe(gulpif(mode === 'prod',cachebust.references()))
     .pipe(gulp.dest('../dist'));
 });
