@@ -2,7 +2,7 @@
 const Users = require("../models/users");
 const serviceApi = require("../apis/app-api");
 const curry = require("lodash/curry");
-const venueService = require("venue-service");
+const venueService = require("./venue-service");
 const SERVICE_NAMES = ["Bottle", "PrivateParty", "GuestList", "Table"];
 
 const SERVICE_TYPE_SPEC = [];
@@ -54,7 +54,7 @@ const reservationService = function(userId, response, channel) {
         return;
         }
     }
-}
+};
 
 function fxNumberOfGuests(type, userId, response, channel) {
   let user = Users.getUser(userId);

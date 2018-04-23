@@ -92,9 +92,15 @@ function sendAnswerImpl(type, user, answer, response, channel) {
 
 function sendAnswerFacilityTimes(type, user, answer, response, channel) {
 
-  
   const venue = user.state.get("venue");
   var venueName = venue.venueName;
+
+  if (venue.id === 960) {
+    channel.sendMessage(user.id, `We are open 24 hours!` );
+    return;
+  }
+  
+  
 
   var data = user.state.get(answer.api_name);
   var venueTimes = null;
@@ -110,6 +116,7 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
       answer.value = 'lastCallTime';
     }
   }
+  
   if (!!response.parameters.Facilities) {
     answer.type = response.parameters.Facilities;
   }

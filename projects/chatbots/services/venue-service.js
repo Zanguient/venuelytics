@@ -265,7 +265,7 @@ function sendAnswer(user, answer, venueName, channel) {
 function fxCharger(userId, response, channel) {
   let user = Users.getUser(userId);
   if (user.hasParameter("selectedVenueId")) {
-    casino.sendAnswer(userId, response, channel);  
+    channel.sendMessage("We do carry chargers for iPhone, Android and other Micro-USB chargers for phones. Please call front desk to see if they are available and not borrowed by other guests.");
   } else {
     getVenueName('Q_CHARGER', user, channel, response);
   }
@@ -307,7 +307,7 @@ function getVenueName(type, user, channel, response) {
 
 const aiServiceQuery = function(context, query, success, error) {
   aiClient.aiProcessTextWithContext(context, query, success, error);
-}
+};
 
 const aiError = function(channel, fromNumber, error) {
   console.log(JSON.stringify(error));

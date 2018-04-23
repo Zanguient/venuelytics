@@ -51,7 +51,7 @@ const sendAnswer = function(userId, response, channel) {
 
     channel.sendMessage(userId,`Sorry We don't carry menu for ${menuType}`);
 
- }
+ };
   
 
 

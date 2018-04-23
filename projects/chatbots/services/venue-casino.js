@@ -18,6 +18,10 @@ const sendAnswer = function(userId, response, channel) {
             gameName = response.parameters.GameName;
     }
 
+    if (venueId == 960 && !!gameName && gameName.toLowerCase() === 'roulette') {
+        channel.sendMessage(userId,`Casino M8trix is card game casino. We don't have Roulette type games.`);
+        return;
+    }
 
     if (response.parameters && response.parameters.Facilities ) {
             facility = response.parameters.Facilities;
@@ -35,11 +39,18 @@ const sendAnswer = function(userId, response, channel) {
     }
 
 
-    if (facility && facility.toLowerCase().indexOf("game") >=0 && availability ) {
-        serviceApi.getGamesAvailableNow(venueId, function(games) {
-            let title = "Here are some games which will be available shortly.\n";
-            sendAnswerImpl(user, venueId, games, title, channel, userId, gameName);
-        });
+    if (facility && facility.toLowerCase().indexOf("game") >=0 ) {
+        if (availability) {
+            serviceApi.getGamesAvailableNow(venueId, function(games) {
+                let title = "Here are some games which will be available shortly.\n";
+                sendAnswerImpl(user, venueId, games, title, channel, userId, gameName);
+            });
+        } else {
+            const venue = user.state.get("venue");
+            const gamesUrl = serviceApi.getGamesUrl(venue.uniqueName, venueId);
+            channel.sendMessage(userId,`Sorry we didn't have the game you are looking for! You can find the game and their wait time here ${gamesUrl}`);
+            return;
+        }
     }
 
     if (facility && facility.toLowerCase().indexOf("tournament") >=0 ) { // send send schedules or
