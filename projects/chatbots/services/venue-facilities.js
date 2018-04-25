@@ -95,10 +95,10 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
   const venue = user.state.get("venue");
   var venueName = venue.venueName;
 
-  if (venue.id === 960) {
-    channel.sendMessage(user.id, `We are open 24 hours!` );
-    return;
-  }
+  //if (venue.id === 960) {
+    //channel.sendMessage(user.id, `We are open 24 hours!` );
+    //return;
+  //}
   
   
 
@@ -134,7 +134,11 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
       } else {
         var startTime = formatTime(data[j]['startTime']);
         var endTime = formatTime(data[j]['endTime']);
-        channel.sendMessage(user.id, `Opening time: ${startTime}, Closing time: ${endTime}` );
+        if (startTime === endTime) {
+          channel.sendMessage(user.id, `we are open 24 hours.` );
+        } else {
+          channel.sendMessage(user.id, `Opening time: ${startTime}, Closing time: ${endTime}` );
+        }
       }
       
       return;
@@ -146,7 +150,11 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
   if (!!venueTimes) {
     var openTime = formatTime(venueTimes.startTime);
     var closeTime = formatTime(venueTimes.endTime);
-    var reply = "Humm, not sure what you asked. We open at " + openTime + " and close at " + closeTime;
+    var reply = `Humm, not sure what you asked. We open at ${openTime} and close at ${closeTime}` ;
+    if (openTime === closeTime) {
+      reply = "Humm, not sure what you asked. We are open 24 hours!";
+    }
+    
     channel.sendMessage(user.id, reply);
     return;
   }

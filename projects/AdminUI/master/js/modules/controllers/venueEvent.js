@@ -29,6 +29,9 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     $scope.eventTypes['KARAOKE'] = 'Karaoke';
     $scope.eventTypes['DANCE'] = 'Dance Night';
     $scope.eventTypes['MUSICAL'] = 'Musical Night';
+    $scope.eventTypes['Jaripeo'] = 'Jaripeo';
+    $scope.eventTypes['Jaripeo y Concerto'] = 'Jaripeo y Concerto';
+    $scope.eventTypes['Baile'] = 'Baile';
 
    
   // Disable weekend selection
