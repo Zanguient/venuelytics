@@ -15,6 +15,7 @@
 	$scope.eventDate = '';
       $scope.stores = [];
       $scope.stores.push({id: -1, name: "ALL"});
+      $scope.storeId = -1;
 
       var path = $location.path();
        $scope.useCancelApi = false;
@@ -28,6 +29,7 @@
             $scope.stores = data;
             $scope.stores.push({id: -1, name: "ALL"});
 
+
       });
       $timeout(function() {
       	if ( ! $.fn.dataTable ) return;
@@ -38,11 +40,12 @@
 	    }
     
 	    DataTableService.initDataTable('report_table', columnDefinitions, false);
+          $scope.showReport(null);
       });
 
       $scope.showReport = function(form) {
       	//form.parsley();
-      	if (form.$invalid) {
+      	if (form && form.$invalid) {
       		return;
       	}
       	

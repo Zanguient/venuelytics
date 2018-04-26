@@ -51,10 +51,10 @@ App.controller('TicketDashBoardController',['$log','$scope','$window', '$http', 
         $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
         $scope.top3Stats = [];
 
-        $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"Total Revenue", "value":0, "icon":"fa fa-dollar"}, "#");
-        $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Tickets Sold", "value":0, "icon":"fa fa-ticket"}, "#");
-        $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"Number of Shows", "value":0, "icon":"fa fa-shopping-cart"}, "#");
-        $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"Number of Events", "value":0, "icon":"fa fa-diamond"}, "#");       
+        $scope.top3Stats[0] = createPDO($scope.colorPalattes[0],{"label":"Total Revenue", "value":0, "icon":"fa fa-dollar"}, "javascript:void();");
+        $scope.top3Stats[1] = createPDO($scope.colorPalattes[1],{"label":"Tickets Sold", "value":0, "icon":"fa fa-ticket"}, "javascript:void();");
+        $scope.top3Stats[2] = createPDO($scope.colorPalattes[2],{"label":"Number of Shows", "value":0, "icon":"fa fa-shopping-cart"}, "javascript:void();");
+        $scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"Number of Events", "value":0, "icon":"fa fa-diamond"}, "javascript:void();");       
        
         //$scope.top3Stats[3] = createPDO($scope.colorPalattes[3],{"label":"CheckIns", "value":0, "icon":"icon-login"}, "#/app/dashboard/reservation-insight");
         

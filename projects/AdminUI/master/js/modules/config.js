@@ -19,7 +19,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
 
         // LAZY MODULES
         // ----------------------------------- 
-
+         $compileProvider.aHrefSanitizationWhitelist(/^\s*(http?|https?|file|tel|javascript):/);
         $ocLazyLoadProvider.config({
             debug: false,
             events: true,
