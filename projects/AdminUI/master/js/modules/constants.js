@@ -86,7 +86,7 @@ App
       'taginput' :          ['vendor/tagsinput/bootstrap-tagsinput.min.js', 'vendor/tagsinput/bootstrap-tagsinput.css'],
       'inputmask':          ['vendor/inputmask/jquery.inputmask.bundle.min.js'],
       'bwizard':            ['vendor/wizard/js/bwizard.min.js'],
-      'parsley':            ['vendor/parsley/parsley.min.js'],
+      'parsley':            ['vendor/parsley/parsley-2.8.1.min.js'],
       'datatables':         ['vendor/datatable/media/js/jquery.dataTables.min.js', 
                               'vendor/datatable/extensions/datatable-bootstrap/css/dataTables.bootstrap.css'],
       'datatables-pugins':  ['vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js',

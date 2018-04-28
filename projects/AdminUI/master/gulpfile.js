@@ -148,7 +148,7 @@ var dynamicScriptFiles = [
     '../vendor/tagsinput/bootstrap-tagsinput.css',
     '../vendor/inputmask/jquery.inputmask.bundle.min.js',
     '../vendor/wizard/js/bwizard.min.js',
-    '../vendor/parsley/parsley.min.js',
+    '../vendor/parsley/parsley-2.8.1.min.js',
     '../vendor/datatable/media/js/jquery.dataTables.min.js', 
     '../vendor/datatable/extensions/datatable-bootstrap/css/dataTables.bootstrap.css',
     '../vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js',

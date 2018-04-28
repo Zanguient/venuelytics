@@ -41,12 +41,13 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
     		table.row.add([venue.venueName, venue.address, venue.city, venue.country, venue.venueNumber]);
     	});
     	table.draw();
-      
+
     });
 
     
 
   });
+  
   $('#users_venue_table').on('click', '.fa-unlink',function() {
     var table = $('#search_user_table').DataTable();
     $scope.deleteUserVenue(this, table);

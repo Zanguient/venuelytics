@@ -20,18 +20,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     $scope.config.scheduleRadio = "N";
 
     $scope.eventTypes = {};
-    $scope.eventTypes['DJ'] = 'DJ';
-    $scope.eventTypes['VJ'] = 'VJ';
-    $scope.eventTypes['COUNTRY WESTERN'] = 'Country Western';
-    $scope.eventTypes['LATIN NIGHT'] = 'Latin Nights';
-    $scope.eventTypes['ROCK BAND'] = 'Rock Band';
-    $scope.eventTypes['COMEDY'] = 'Comedy';
-    $scope.eventTypes['KARAOKE'] = 'Karaoke';
-    $scope.eventTypes['DANCE'] = 'Dance Night';
-    $scope.eventTypes['MUSICAL'] = 'Musical Night';
-    $scope.eventTypes['Jaripeo'] = 'Jaripeo';
-    $scope.eventTypes['Jaripeo y Concerto'] = 'Jaripeo y Concerto';
-    $scope.eventTypes['Baile'] = 'Baile';
+
 
     $scope.ageRestrictions = {};
 
@@ -106,8 +95,18 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         data.processingFeeMode = 0;
     	$scope.data = data;
         $scope.data.agencyId = -1;
+       
 
     }
+    var self =  $scope;
+    RestServiceFactory.VenueService().getEventCategories({id:  $stateParams.venueNumber}, function(data){
+        for (var i = 0; i < data.length; i++) {
+            self.eventTypes[data[i].name] = data[i].name;
+        }
+        if ($stateParams.id === 'new' && data.length > 0) {
+            self.data.eventType = data[0].name;
+        }
+    });
 	$scope.changed = function() {
         
     };
@@ -347,9 +346,15 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
       
     };
 
+    $scope.init = function() {
+        if($stateParams.id === 'new') {
+            $scope.data.agePricePolicy = "13-";
+            $scope.data.ageRestriction = "NONE";
+        }
+    }
     
     $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
         $state.go('app.eventManagement');
     });
-
+    $scope.init();
 }]);

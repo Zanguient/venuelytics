@@ -31,8 +31,8 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 	var venueMapProperties = ['id', 'type', 'section', 'imageMap', 'days', 'updatedAt', 'elements', 'imageUrls'];
 
 	var venueEventProperties = ['id', 'venueNumber', 'eventName', 'description',
-		'eventType', 'eventTime', 'durationInMinutes', 'startDate', 'endDate', 'scheduleDayOfMonth',
-		'scheduleDayOfWeek', 'imageURL', 'bookingUrl', 'price', 'enabled', 'performerId', 'processingFeeMode', 'agencyId', 'needSponsor'];
+		'eventType', 'eventTime', 'durationInMinutes', 'startDate', 'endDate', 'scheduleDayOfMonth','ageRestriction','agePricePolicy',
+		'scheduleDayOfWeek', 'imageURL', 'bookingUrl', 'price', 'enabled', 'performerId', 'processingFeeMode', 'agencyId', 'needSponsor', 'address'];
 
 	var eventTicketProperties = ['id', 'storeNumber', 'name', 'description',
 		'price', 'discountedPrice', 'sectionName', 'seatStartNumber', 'count', 'row', 'eventDate', 'uiAttribute'];
@@ -290,6 +290,10 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 					method: 'GET', params: { id: '@id' }, isArray: false,
 					url: urlTemplate.replace("@context", "venues") + "/non-users"
 				},
+				getEventCategories : {
+					method: 'GET', params: { id: '@id' }, isArray: true,
+					url: urlTemplate.replace("@context", "vas") + "/categories?st=Events&type=EVENT"
+				}
 
 			});
 		},

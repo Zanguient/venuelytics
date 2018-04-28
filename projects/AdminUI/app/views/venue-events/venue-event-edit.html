@@ -26,8 +26,8 @@
           </div>
           <div class="form-group col-md-6 col-sm-12">
             <label class="control-label">Event Type *</label>
-              <select name="eventType" required="required" ngRequired class="form-control col-sm-12" ng-model="data.eventType" >  
-                <option ng-repeat="(key, value) in eventTypes" value="{{key}}">{{value}}</option>  
+              <select name="eventType" required="required" class="form-control col-sm-12" ng-model="data.eventType" >  
+                <option ng-selected="{{key == data.eventType}}" ng-repeat="(key, value) in eventTypes" value="{{key}}">{{value}}</option>  
               </select>
           </div>
             
@@ -117,7 +117,7 @@
           </div>
         
           <div class="form-group col-md-6  col-sm-12">
-            <label class="control-label">Booking URL</label>
+            <label class="control-label">Online Booking URL</label>
             <input type="text" name="bookingUrl" class="form-control" ng-model="data.bookingUrl"/>
           </div>
 
@@ -130,15 +130,15 @@
             <textarea placeholder="Enter the location and address of the event." rows="3" ng-model="data.address" class="form-control"></textarea>
           </div>
           <div class="form-group col-md-6 col-sm-12">
-            <label class="control-label">Age Restriction</label>
-              <select name="ageRestriction" required="required" ngRequired class="form-control col-sm-12" ng-model="data.ageRestriction" >  
-                <option ng-repeat="(key, value) in ageRestrictions" value="{{key}}">{{value}}</option>  
+            <label class="control-label">Age Restriction*</label>
+              <select name="ageRestriction" required="required" class="form-control col-sm-12" ng-model="data.ageRestriction" >  
+                <option ng-selected="{{key == data.ageRestriction}}" ng-repeat="(key, value) in ageRestrictions" value="{{key}}">{{value}}</option>  
               </select>
           </div>
           <div class="form-group col-md-6 col-sm-12">
-            <label class="control-label">Age Policy</label>
-              <select name="agePolicy" required="required" ngRequired class="form-control col-sm-12" ng-model="data.agePricePolicy" >  
-                <option ng-repeat="(key, value) in agePricePolicies" value="{{key}}">{{value}}</option>  
+            <label class="control-label">Age Policy*</label>
+              <select name="agePolicy" required="required" class="form-control col-sm-12" ng-model="data.agePricePolicy" >  
+                <option ng-selected="{{key == data.agePricePolicy}}" ng-repeat="(key, value) in agePricePolicies" value="{{key}}">{{value}}</option>  
               </select>
           </div>
           <div class="form-group  col-sm-12">
@@ -156,6 +156,7 @@
               </label>
             </div>
           </div>
+
           <div class="form-group col-md-6 col-sm-12">
             <label class="control-label">Sponsored Agency Name</label>
             <select name="agency" ngRequired class="form-control col-sm-12" ng-model="data.agencyId" onchange="getStores()">  
@@ -170,7 +171,7 @@
               </label>
             </div>
           </div>
-          <div class="form-group  col-sm-12" ng-show="{{showEnableDisable()}}">
+          <div class="form-group col-sm-12" ng-show="{{showEnableDisable()}}">
             <div class="checkbox c-checkbox">
               <label>
                 <input type="checkbox" name="enabled"  ng-model="data.enabled" ng-true-value="Y"  ng-false-value="N"/>
