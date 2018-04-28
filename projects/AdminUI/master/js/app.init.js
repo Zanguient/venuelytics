@@ -64,7 +64,14 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                       toState.name === 'app.venues' ||
                       toState.name === 'app.editBanquetHall' ||
                       toState.name === 'app.editPartyHall' ||
-                      toState.name === 'app.editVenueMap'
+                      toState.name === 'app.editVenueMap' ||
+                      toState.name === 'app.venueUsers' ||
+                      toState.name === 'app.agencies'  ||
+                      toState.name === 'app.agencyedit'  ||
+                      toState.name === 'app.stores'   ||
+                      toState.name === 'app.storeedit' 
+                       
+
                      ) {
                       $rootScope.hideNavVenueDropdown = true;
                   } 

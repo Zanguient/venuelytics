@@ -41,52 +41,56 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
     		table.row.add([venue.venueName, venue.address, venue.city, venue.country, venue.venueNumber]);
     	});
     	table.draw();
-      $('#users_venue_table').on('click', '.fa-unlink',function() {
-        $scope.deleteUserVenue(this, table);
-      });
+      
     });
 
-    $scope.deleteUserVenue = function(button, tableAPI) {
+    
 
-      var targetRow = $(button).closest("tr");
-      var rowData = tableAPI.row( targetRow).data();   
-      var target = {id:$stateParams.id, venueNumber: rowData[4]};   
-      RestServiceFactory.UserVenueService().deleteVenues(target, function(success){
-        tableAPI.row(targetRow).remove().draw();
+  });
+  $('#users_venue_table').on('click', '.fa-unlink',function() {
+    var table = $('#search_user_table').DataTable();
+    $scope.deleteUserVenue(this, table);
+  });
+  $scope.deleteUserVenue = function(button, tableAPI) {
+
+    var targetRow = $(button).closest("tr");
+    var rowData = tableAPI.row( targetRow).data();   
+    var target = {id:$stateParams.id, venueNumber: rowData[4]};   
+    RestServiceFactory.UserVenueService().deleteVenues(target, function(success){
+      tableAPI.row(targetRow).remove().draw();
+    },function(error){
+      if (typeof error.data !== 'undefined') { 
+        toaster.pop('error', "Server Error", error.data.developerMessage);
+      }
+    });
+  };
+
+  $scope.search = function(venueName) {
+      var promise = RestServiceFactory.VenueService().get({search: venueName});
+      promise.$promise.then(function(data) {
+      
+        $scope.venues = data.venues;
+        
+      });
+    };
+
+    $scope.doneAction = function() {
+      $state.go('app.uservenues', {id:$stateParams.id});
+    };
+    
+    
+    $scope.addUserVenue = function(venue) {
+      var venues = [];
+      venues[0] = venue.venueNumber;
+      var target = {id: $stateParams.id};
+      RestServiceFactory.UserVenueService().save(target, venues,  function(success){
+        var index = $scope.venues.indexOf(venue);
+        $scope.venues.splice(index, 1);
       },function(error){
         if (typeof error.data !== 'undefined') { 
           toaster.pop('error', "Server Error", error.data.developerMessage);
         }
       });
+      
     };
-
-  	$scope.search = function(venueName) {
-  		var promise = RestServiceFactory.VenueService().get({search: venueName});
-  		promise.$promise.then(function(data) {
-    	
-  			$scope.venues = data.venues;
-	    	
-  		});
-  	};
-
-  	$scope.doneAction = function() {
-  		$state.go('app.uservenues', {id:$stateParams.id});
-  	};
-  	
-  	
-  	$scope.addUserVenue = function(venue) {
-  		var venues = [];
-  		venues[0] = venue.venueNumber;
-  		var target = {id: $stateParams.id};
-  		RestServiceFactory.UserVenueService().save(target, venues,  function(success){
-  			var index = $scope.venues.indexOf(venue);
-  			$scope.venues.splice(index, 1);
-    	},function(error){
-    		if (typeof error.data !== 'undefined') { 
-    			toaster.pop('error', "Server Error", error.data.developerMessage);
-    		}
-    	});
-  		
-  	};
-  });
 }]);

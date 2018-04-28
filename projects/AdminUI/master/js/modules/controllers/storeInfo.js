@@ -45,6 +45,8 @@
       {name: 'Offers/Deals', content: 'app/views/venue/venue-deals.html', icon: 'fa-money'},
       {name: 'Outlets', content: 'app/views/venue/venue-stores.html', icon: 'fa-building-o'},
       {name: 'Portal', content: 'app/views/venue/venue-portal.html', icon: 'fa-home'},
+      {name: 'Users', content: 'app/views/venue/venue-users.html', icon: 'fa-users'},
+
     ];
   }
   
@@ -264,6 +266,7 @@
     } else {
       var data = {};
       $scope.imageUrl = [];
+
       data.country = "USA";
       data.venueTypeCode = 0;
       $scope.venueTypeCodes(data);

@@ -258,7 +258,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
     $scope.ticketSale.eventDate =  moment($scope.selectedDate).format("YYYY-MM-DDTHH:mm:00");
     $scope.ticketSale.soldMacId = $scope.registration.registrationCode;
     $scope.ticketSale.quantity = 1;
-
+    var self = $scope;
     $scope.dialog = ngDialog.open({
         template: 'app/views/venue-events/buy-ticket.html',
         scope : $scope,
@@ -290,13 +290,24 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
                 }
               }
             }
+
+            if (self.agency.commissionType === 'F') {
+              var s = ' commission ($' +self.agency.commission+ ')= <span class="pull-right">$' + quantity*self.agency.commission +'</span>';
+              totalTaxNFees += self.agency.commission;
+              result.push(s);
+            } else if (self.agency.commissionType === 'P'){
+              var cost = Number(($scope.ticket.discountedPrice*quantity*self.agency.commission)*0.01).toFixed(2);
+              var s = ' commission (' +self.agency.commission+ '%) = <span class="pull-right">$' + cost +'</span>';
+              totalTaxNFees += cost;
+              result.push(s);
+            }
             if (result.length > 0) {
               result.push("<hr class=\"mb0\"/>");
             }
             result.push('Total Taxes and Fees ($) = <span class="pull-right">$' + Number(totalTaxNFees).toFixed(2) +'</span>');
             var retResult = {};
             retResult.textHtml = result.join("<br>");
-            retResult.value = totalTaxNFees;
+            retResult.value = Number(totalTaxNFees).toFixed(2);
             return retResult;
           }
           return {text: "Total Taxes and Fees ($) = 0", value: 0};
@@ -304,7 +315,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
         };
         $scope.totalPriceWithTaxNFees = function(ticket) {
           var cal = $scope.calculateTaxNFees(ticket);
-          return Number(ticket.discountedPrice*$scope.ticketSale.quantity + cal.value).toFixed(2) ;
+          return Number(ticket.discountedPrice*$scope.ticketSale.quantity + Number(cal.value)).toFixed(2) ;
         };
 
       

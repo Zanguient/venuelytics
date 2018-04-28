@@ -247,7 +247,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 url: '/venues/:id',
                 title: 'Edit Store',
                 templateUrl: basepath('venue/store_edit.html'),
-                controller: 'NullController',
+                controller: 'StoreController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog')
             })
@@ -336,6 +336,13 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 title: 'Manage User Venues',
                 templateUrl: basepath('user/user_venue.html'),
                 controller: 'NullController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('datatables', 'datatables-pugins')
+            }).state('app.venueUsers', {
+                url: '/venueUsers/:id',
+                title: 'Add users to Venue',
+                templateUrl: basepath('venue/add-venue-user.html'),
+                controller: 'AddVenueUsersController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('datatables', 'datatables-pugins')
             })

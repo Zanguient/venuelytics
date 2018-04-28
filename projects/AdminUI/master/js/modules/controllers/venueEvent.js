@@ -4,8 +4,8 @@
  =========================================================*/
 
 App.controller('VenueEventController', ['$scope', '$timeout', '$state','$stateParams', 'RestServiceFactory', 
-    'toaster','DialogService','ngDialog','DataTableService','$compile','ContextService', 'Session',
-    function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, DialogService, ngDialog, DataTableService, $compile, contextService, Session) {
+    'toaster','DialogService','ngDialog','DataTableService','$compile','ContextService', 'Session', 'APP_EVENTS',
+    function($scope, $timeout, $state, $stateParams, RestServiceFactory, toaster, DialogService, ngDialog, DataTableService, $compile, contextService, Session, APP_EVENTS) {
   'use strict';
     
     var n = $scope.minDate = new Date(2017,6,6);
@@ -33,6 +33,29 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     $scope.eventTypes['Jaripeo y Concerto'] = 'Jaripeo y Concerto';
     $scope.eventTypes['Baile'] = 'Baile';
 
+    $scope.ageRestrictions = {};
+
+    $scope.ageRestrictions['NONE'] = "No restriction";
+    $scope.ageRestrictions['2+'] = "2 years and above";
+    $scope.ageRestrictions['3+'] = "3 years and above";
+    $scope.ageRestrictions['5+'] = "5 years and above";
+    $scope.ageRestrictions['8+'] = "8 years and above";
+    $scope.ageRestrictions['10+'] = "10 years and above";
+    $scope.ageRestrictions['13+'] = "13 years and above";
+    $scope.ageRestrictions['15+'] = "15 years and above";
+    $scope.ageRestrictions['18+'] = "18 years and above";
+    $scope.ageRestrictions['21+'] = "21 years and above";
+    $scope.ageRestrictions['25+'] = "25 years and above";
+
+    $scope.agePricePolicies = {};
+    $scope.agePricePolicies['2-'] = 'Free for age 2 years and younger';
+    $scope.agePricePolicies['3-'] = 'Free for age 3 years and younger';
+    $scope.agePricePolicies['5-'] = 'Free for age 5 years and younger';    
+    $scope.agePricePolicies['8-'] = 'Free for age 8 years and younger';
+    $scope.agePricePolicies['10-'] = 'Free for age 10 years and younger';
+    $scope.agePricePolicies['12-'] = 'Free for age 12 years and younger';
+    $scope.agePricePolicies['13-'] = 'Free for age 13 years and younger';
+     
    
   // Disable weekend selection
     $scope.disabled = function(date, mode) {
@@ -323,4 +346,10 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         });
       
     };
+
+    
+    $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
+        $state.go('app.eventManagement');
+    });
+
 }]);

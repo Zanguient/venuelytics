@@ -25,7 +25,7 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 	var loyalityProperties = ['name', 'venueNumber', 'rewardText', 'condition', 'displayAttributes', 'conditionType'];
 
 	var profileProperties = ['email', 'userName', 'phone', 'password', 'newpassword', 'profileImage', 'profileImageThumbnail'];
-	var agencyProperties = ['name', 'budget', 'budgetType', 'phone', 'mobile', 'address', 'city', 'country', 'zip', "enabled", 'accountNumber', 'groupNumber', 'region'];
+	var agencyProperties = ['name', 'budget', 'budgetType', 'commissionType', 'commission', 'phone', 'mobile', 'address', 'city', 'country', 'zip', "enabled", 'accountNumber', 'groupNumber', 'region'];
 	var productProperties = ['id', 'venueNumber', 'name', 'description', 'unit', 'size', 'imageUrls', 'servingSize',
 		'productType', 'BanquetHall', 'category', 'brand', 'enabled', 'price'];
 	var venueMapProperties = ['id', 'type', 'section', 'imageMap', 'days', 'updatedAt', 'elements', 'imageUrls'];
@@ -281,7 +281,16 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 				getInfo: {
 					method: 'GET', params: { id: '@id' }, isArray: false,
 					url: urlTemplate.replace("@context", "venues") + "/info"
-				}
+				},
+				getVenueUsers: {
+					method: 'GET', params: { id: '@id' }, isArray: false,
+					url: urlTemplate.replace("@context", "venues") + "/users"
+				},
+				getNonVenueUsers : {
+					method: 'GET', params: { id: '@id' }, isArray: false,
+					url: urlTemplate.replace("@context", "venues") + "/non-users"
+				},
+
 			});
 		},
 		VenueEventService: function () {

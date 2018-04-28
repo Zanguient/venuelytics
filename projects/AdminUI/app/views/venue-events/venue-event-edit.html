@@ -12,7 +12,14 @@
         </div>
         <div class="panel-body">
         	<toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
-        	
+        	<div class="form-group col-md-6 col-sm-12">
+            <label class="control-label">Selected Venue *</label>
+            <input type="text" name="eventName" disabled class="form-control col-sm-6" ng-model="contextService.userVenues.selectedVenueName"/>
+          </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="control-label"></label>
+            <p><i>(You can change the Venue via Venue dropdown located at the top right side.)</i></p>
+          </div>
         	<div class="form-group col-md-6 col-sm-12">
             <label class="control-label">Event Name *</label>
             <input type="text" name="eventName" required="required" class="form-control" ng-model="data.eventName"/>
@@ -116,7 +123,23 @@
 
           <div class="form-group col-sm-12">
             <label>Description</label>
-            <textarea placeholder="Enter venue description" rows="4" ng-model="data.description" class="form-control"></textarea>
+            <textarea placeholder="Enter venue description" rows="3" ng-model="data.description" class="form-control"></textarea>
+          </div>
+          <div class="form-group col-sm-12">
+            <label>Event Address</label>
+            <textarea placeholder="Enter the location and address of the event." rows="3" ng-model="data.address" class="form-control"></textarea>
+          </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="control-label">Age Restriction</label>
+              <select name="ageRestriction" required="required" ngRequired class="form-control col-sm-12" ng-model="data.ageRestriction" >  
+                <option ng-repeat="(key, value) in ageRestrictions" value="{{key}}">{{value}}</option>  
+              </select>
+          </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <label class="control-label">Age Policy</label>
+              <select name="agePolicy" required="required" ngRequired class="form-control col-sm-12" ng-model="data.agePricePolicy" >  
+                <option ng-repeat="(key, value) in agePricePolicies" value="{{key}}">{{value}}</option>  
+              </select>
           </div>
           <div class="form-group  col-sm-12">
              <label>Processing Fee</label>

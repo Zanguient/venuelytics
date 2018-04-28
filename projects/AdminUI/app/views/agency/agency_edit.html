@@ -68,7 +68,7 @@
                   </div>
                </div>
                
-               <div class="row">
+               <div class="row" ng-if="agencyType == 'STORE'">
                   <div class="form-group col-sm-6">
                      <label class="control-label nowrap">Budget Type</label>
                       <select name="budgetType" required="required" class="form-control col-sm-12" ng-model="data.budgetType" ng-options="type.name as type.label for type in budgetTypes" ng-selected="onSectionChange(data.budgetType)">  
@@ -77,6 +77,24 @@
                   <div class="form-group col-sm-6" ng-hide="data.budgetType=='NM' ">
                      <label class="control-label nowrap">Budget</label>
                      <input type="text" name="zip"  class="form-control" ng-model="data.budget"/>
+                  </div>
+                  
+               </div>
+               <div class="row" ng-if="agencyType == 'STORE'">
+                  <div class="form-group col-sm-6">
+                     <label class="control-label nowrap">Commission Type</label>
+                      <select name="commissionType" required="required" class="form-control col-sm-12" ng-model="data.commissionType" >
+                        <option value="F">Flat Fee</option>  
+                        <option value="P">Percentage Fee</option>  
+                     </select>
+                  </div>
+                  <div class="form-group col-sm-6">
+                     <label class="control-label nowrap">Commission</label>
+                     <div class="input-group m-b">
+                        <span class="input-group-addon" ng-hide="data.commissionType == 'P'">$</span> 
+                        <input type="text" name="commissionType"  data-parsley-type="number" class="form-control" masked="" data-inputmask="'mask': '99.99'" ng-model="data.commission"/>
+                        <span class="input-group-addon" ng-hide="data.commissionType == 'F'">%</span> 
+                     </div>
                   </div>
                   
                </div>
