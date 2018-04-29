@@ -131,13 +131,15 @@
           </div>
           <div class="form-group col-md-6 col-sm-12">
             <label class="control-label">Age Restriction*</label>
-              <select name="ageRestriction" required="required" class="form-control col-sm-12" ng-model="data.ageRestriction" >  
+              <select name="ageRestriction" ng-required="true" class="form-control col-sm-12" ng-model="data.ageRestriction" > 
+                <option></option> 
                 <option ng-selected="{{key == data.ageRestriction}}" ng-repeat="(key, value) in ageRestrictions" value="{{key}}">{{value}}</option>  
               </select>
           </div>
           <div class="form-group col-md-6 col-sm-12">
             <label class="control-label">Age Policy*</label>
               <select name="agePolicy" required="required" class="form-control col-sm-12" ng-model="data.agePricePolicy" >  
+                <option></option> 
                 <option ng-selected="{{key == data.agePricePolicy}}" ng-repeat="(key, value) in agePricePolicies" value="{{key}}">{{value}}</option>  
               </select>
           </div>
