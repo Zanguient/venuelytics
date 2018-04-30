@@ -438,8 +438,17 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
       
     });
   };
-  $scope.authorizationCode = 0;
-  $scope.initCalendar();
-  $scope.getAgencyInfo();
-  
+  $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
+        // register on venue change;
+    $scope.init();
+  });
+
+
+  $scope.init = function() {
+    $scope.authorizationCode = 0;
+    $scope.initCalendar();
+    $scope.getAgencyInfo();
+  };
+   
+  $scope.init(); 
 }]);

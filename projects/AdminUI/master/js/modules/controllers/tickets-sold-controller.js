@@ -3,15 +3,15 @@
  *smangipudi
  =========================================================*/
 App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$compile', '$timeout',
-  'DataTableService', 'RestServiceFactory', 'toaster', 'FORMATS', 'DialogService', '$rootScope', 'ContextService',
+  'DataTableService', 'RestServiceFactory', 'toaster', 'FORMATS', 'DialogService', '$rootScope', 'ContextService', 'APP_EVENTS',
   function($scope, $state, $stateParams, $compile, $timeout, DataTableService, RestServiceFactory, toaster,
-    FORMATS, DialogService, $rootScope, contextService) {
+    FORMATS, DialogService, $rootScope, contextService, APP_EVENTS) {
     'use strict';
     $scope.config = {};
     $scope.config.opened = false;
     $scope.calendarDate = '';
-    var n = $scope.minDate = new Date(2017,1,1);
-    $scope.maxDate = new Date(n.getFullYear()+1, n.getMonth(), n.getDate());
+    var n = $scope.minDate = new Date(2017,6,1);
+    $scope.maxDate = new Date(n.getFullYear()+2, n.getMonth(), n.getDate());
       
     $scope.dateOptions = {
       formatYear: 'yy',
@@ -44,21 +44,20 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
       ];
 
       DataTableService.initDataTable('tickets_table', columnDefinitions, false);
-       
-     
-      $('#tickets_table').on('click', '.fa-times', function() {
-        $scope.cancelTicket(this);
-      });
-
-      $('#eventDateCalendarId').on('click', function ($event) {
+      
+      $scope.readData();
+    });
+    
+    $('#tickets_table').on('click', '.fa-times', function() {
+      $scope.cancelTicket(this);
+    });
+    
+    $('#eventDateCalendarId').on('click', function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
         $timeout(function() {
             $scope.config.opened = !$scope.config.opened;
         }, 200);
-      });
-      
-      $scope.readData();
     });
 
     $scope.readData = function () {
@@ -86,6 +85,12 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
     $scope.$watch('calendarDate',  function() {
         $scope.readData();
     });
+
+    $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
+        // register on venue change;
+       $scope.readData();
+    });
+
     $scope.cancelTicket = function(button) {
       var table = $('#tickets_table').DataTable();
       var targetRow = $(button).closest("tr");

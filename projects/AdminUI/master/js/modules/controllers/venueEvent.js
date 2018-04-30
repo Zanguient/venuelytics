@@ -22,28 +22,32 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
     $scope.eventTypes = {};
 
 
-    $scope.ageRestrictions = {};
+    $scope.ageRestrictions = [
+        { label: "No restriction", value: "NONE"}
+    ];
 
-    $scope.ageRestrictions['NONE'] = "No restriction";
-    $scope.ageRestrictions['2+'] = "2 years and above";
-    $scope.ageRestrictions['3+'] = "3 years and above";
-    $scope.ageRestrictions['5+'] = "5 years and above";
-    $scope.ageRestrictions['8+'] = "8 years and above";
-    $scope.ageRestrictions['10+'] = "10 years and above";
-    $scope.ageRestrictions['13+'] = "13 years and above";
-    $scope.ageRestrictions['15+'] = "15 years and above";
-    $scope.ageRestrictions['18+'] = "18 years and above";
-    $scope.ageRestrictions['21+'] = "21 years and above";
-    $scope.ageRestrictions['25+'] = "25 years and above";
+    for (var idx = 2; idx <=21; idx++) {
+        var obj = {};
+        obj.label = idx + " years and above";
+        obj.value = idx +"+";
+        $scope.ageRestrictions.push(obj);
+    }
 
-    $scope.agePricePolicies = {};
-    $scope.agePricePolicies['2-'] = 'Free for age 2 years and younger';
+    $scope.agePricePolicies = [{label: "NONE", value: "No free passes."}];
+
+    for (idx = 1; idx <=14; idx++) {
+        var obj = {};
+        obj.label = "Free for age " + idx + " years and younger";
+        obj.value = idx +"-";
+        $scope.agePricePolicies.push(obj);
+    }
+   /* $scope.agePricePolicies['2-'] = '';
     $scope.agePricePolicies['3-'] = 'Free for age 3 years and younger';
     $scope.agePricePolicies['5-'] = 'Free for age 5 years and younger';    
     $scope.agePricePolicies['8-'] = 'Free for age 8 years and younger';
     $scope.agePricePolicies['10-'] = 'Free for age 10 years and younger';
     $scope.agePricePolicies['12-'] = 'Free for age 12 years and younger';
-    $scope.agePricePolicies['13-'] = 'Free for age 13 years and younger';
+    $scope.agePricePolicies['13-'] = 'Free for age 13 years and younger';*/
      
    
   // Disable weekend selection
@@ -111,7 +115,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         
     };
     $scope.showEnableDisable = function() {
-        return Session.roleId >= 500? true : false;
+        return Session.roleId >= 100 || Session.roleId === 11;
     };
 
     $scope.performers = [];
