@@ -19,7 +19,7 @@ const sendAnswer = function(userId, response, channel) {
     }
 
     if (venueId == 960 && !!gameName && (gameName.toLowerCase().indexOf('crap') || gameName.toLowerCase().indexOf('roulette') || gameName.toLowerCase().indexOf("slot") >=0)) {
-        channel.sendMessage(userId,`Casino M8trix is card game casino. We don't have Roulette type games.`);
+        channel.sendMessage(userId,`Casino M8trix is card game casino. We don't have Roulette, Crap or Slot type games.`);
         return;
     }
 
