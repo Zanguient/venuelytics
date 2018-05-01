@@ -102,7 +102,7 @@
           <div class="form-group col-md-6  col-sm-12">
             <label class="control-label">Performer Name</label>
             <select name="performer" ngRequired class="form-control col-sm-12" ng-model="data.performerId" >  
-                <option ng-repeat="performer in performers" value="{{performer.id}}">{{performer.performerName}}</option>  
+                <option ng-repeat="performer in performers" ng-selected="{{performer.id == data.performerId}}"  value="{{performer.id}}">{{performer.performerName}}</option>  
               </select>
           </div>
            
