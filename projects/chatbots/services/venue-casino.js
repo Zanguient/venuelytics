@@ -18,7 +18,7 @@ const sendAnswer = function(userId, response, channel) {
             gameName = response.parameters.GameName;
     }
 
-    if (venueId == 960 && !!gameName && (gameName.toLowerCase().indexOf('crap') || gameName.toLowerCase().indexOf('roulette') || gameName.toLowerCase().indexOf("slot") >=0)) {
+    if (venueId === 960 && !!gameName && (gameName.toLowerCase().indexOf('crap') >= 0 || gameName.toLowerCase().indexOf('roulette') >=0  || gameName.toLowerCase().indexOf("slot") >=0)) {
         channel.sendMessage(userId,`Casino M8trix is card game casino. We don't have Roulette, Crap or Slot type games.`);
         return;
     }
@@ -34,6 +34,9 @@ const sendAnswer = function(userId, response, channel) {
     if (sendWaitTime) { // get wait time for a game
         serviceApi.getActiveGames(venueId, gameName, function(games) {
             var title = "Here are some games with least waiting time.\n";
+            if (games.length === 1) {
+                title = "\n";
+            }
             sendAnswerImpl(user, venueId,games, title, channel, userId, gameName);
         });
     }
