@@ -10,7 +10,7 @@ const casino = require("./venue-casino");
 const hotel = require("./venue-hotel");
 const restaurant = require("./venue-restaurant");
 const dealsSpecials = require("./deals-specials");
-const reservation = require("./reservation");
+
 
 const QUESTIONS = [];
 QUESTIONS["Q_CHARGER"] = fxCharger;
@@ -39,7 +39,7 @@ QUESTIONS["Q_CASINO"] = fxCasino;
 QUESTIONS["Q_HOTEL"] = curry(fxHotel)("Q_HOTEL");
 QUESTIONS["Q_SHUTTLE"] = curry(fxHotel)("Q_SHUTTLE");
 QUESTIONS["Q_DEALS_AND_SPECIALS"] = dealsAndSpecials;
-QUESTIONS["Q_RESERVATION"] = fxReservation;
+QUESTIONS["Q_RESERVATION"] = fxReservationDispatcher;
 
 const FACILITY_TYPE = [
   'Q_FACILITY', 'Q_FREE_FACILITY', 'Q_COUNT_FACILITY', 'Q_CHECKOUT_TIME', 'Q_CHECKIN_TIME' , 'Q_LASTCALL_TIME', 'Q_RESTAURANT_OPEN',
@@ -64,6 +64,8 @@ function processMessage(senderId, text, channel) {
   }
   fxReadVenue(senderId, text, channel, null);
 }
+
+
 const fxReadVenue = function(senderId, text, channel, venue) {
   let user = Users.getUser(senderId);
   if (!!venue) {
@@ -282,23 +284,6 @@ function isNotEmpty(str) {
   return !(!str || 0 === str.length);
 }
 
-function fxReservation(userId, response, channel) {
-  let user = Users.getUser(userId);
-
-  if (response && isNotEmpty(response.parameters.venue)) {
-    if (user.hasParameter("venue") && user.state.get("venue").venueName !== response.parameters.venue) {
-      user.state.delete("venue");
-      user.state.delete("selectedVenueId");
-      user.state.delete("venueImageUrl");
-    }
-  }
-
-  if (!user.hasParameter("venue")) {
-    getVenueName("Q_RESERVATION", user, channel, null);
-    return;
-  }
-  reservation.reservationService(userId, response, channel);
-}
   
 function getVenueName(type, user, channel, response) {
   channel.sendMessage(user.id, "Can you please give me the Venue name?");
@@ -317,7 +302,14 @@ const aiError = function(channel, fromNumber, error) {
 module.exports = {
   ANSWERS: ANSWERS,
   QUESTIONS: QUESTIONS,
-  fxReservation: fxReservation,
-  aiServiceQuery:aiServiceQuery,
+  aiServiceQuery: aiServiceQuery,
+  getVenueName: getVenueName,
   processMessage: processMessage
 };
+const reservation = require("./reservation");
+
+function fxReservationDispatcher(userId, response, channel) {
+  reservation.fxReservation(userId, response, channel);
+}
+
+

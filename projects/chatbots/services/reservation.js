@@ -16,6 +16,7 @@ QUESTIONS["noOfGuests"] = fxNumberOfGuests;
 QUESTIONS["reservationDate"] = fxReservationDate;
 QUESTIONS["tableNumber"] = fxTableNumber;
 QUESTIONS["email"] = fxGetEmail;
+QUESTIONS["Q_RESERVATION"] = fxReservation;
 
 function isNotEmpty(str) {
     return !(!str || 0 === str.length);
@@ -72,6 +73,24 @@ function fxNumberOfGuestsResponse(channel, userId, noOfGuests, type, response) {
   const user = Users.getUser(userId);
   user.state.set("noOfGuests", guests);
   QUESTIONS[type](userId, response, channel);
+}
+
+function fxReservation(userId, response, channel) {
+  let user = Users.getUser(userId);
+
+  if (response && isNotEmpty(response.parameters.venue)) {
+    if (user.hasParameter("venue") && user.state.get("venue").venueName !== response.parameters.venue) {
+      user.state.delete("venue");
+      user.state.delete("selectedVenueId");
+      user.state.delete("venueImageUrl");
+    }
+  }
+
+  if (!user.hasParameter("venue")) {
+    venueService.getVenueName("Q_RESERVATION", user, channel, null);
+    return;
+  }
+  reservationService(userId, response, channel);
 }
 
 
@@ -305,5 +324,6 @@ function createOrder(channel, userId, name, type, response) {
 
   
 module.exports = {
-    reservationService: reservationService
+    reservationService: reservationService,
+    fxReservation:fxReservation
 };
