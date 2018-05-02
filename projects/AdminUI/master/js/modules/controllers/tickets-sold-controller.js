@@ -17,7 +17,7 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
       formatYear: 'yy',
       startingDay: 1
     };
-     
+    $scope.tableInitialized = false;
     $timeout(function() {
 
       if (!$.fn.dataTable) return;
@@ -44,7 +44,7 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
       ];
 
       DataTableService.initDataTable('tickets_table', columnDefinitions, false);
-      
+      $scope.tableInitialized = true;
       $scope.readData();
     });
     
@@ -62,6 +62,10 @@ App.controller('TicketsSoldController', ['$scope', '$state', '$stateParams', '$c
 
     $scope.readData = function () {
       
+      if ($scope.tableInitialized === false) {
+        return;
+      }
+
       var date = '';
       if ($scope.calendarDate != '') {
         date = moment($scope.calendarDate).format('YYYYMMDD');
