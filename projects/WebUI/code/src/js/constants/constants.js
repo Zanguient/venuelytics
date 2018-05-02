@@ -167,6 +167,7 @@ app
       { key: "23:30", value: "11:30 PM" },
     ],
     'blogPosts': {
+      "event-management": "blogs/event-management.html",
       "dj-playboi":"blogs/dj-Playboi.html",
       "Bottle-vs-Table-Service":"blogs/bottlevstable.html",
       "What-Is-Bottle-Service-and-Facts-You-Should-Know": "blogs/blog-bottle-service.html",
@@ -192,6 +193,7 @@ app
     },
 
     'blogPostsImages': {
+      "event-management": "blogs/event-management.png",
       "dj-playboi":"blogs/dj-Playboi.jpg",
       "Bottle-vs-Table-Service":"assets/img/blog/bottlevstable.jpg",
       "What-Is-Bottle-Service-and-Facts-You-Should-Know": "assets/img/blog/blog-2.jpg",
@@ -215,6 +217,7 @@ app
     },
 
     'blogPostsTitle': {
+      "event-management": "7 Facts to Consider Before Selecting Your Event Management Tool",
       "dj-playboi":"Our Exclusive Interview with the One and Only DJ Playboi",
       "Bottle-vs-Table-Service":"Bottle Service and Table Service - What Is the Difference?",
       "kat-bein": "Our Exclusive Interview with The Queen of Nightlife, Kat Bein",
@@ -238,6 +241,7 @@ app
 
     },
     'blogPostDescription': {
+      "event-management": "In the olden days, we had fewer choices, and some brands used to have a monopoly and had the power to crush the small competitors, but that is not the scene today. Thanks to the internet and the era of technology, the crowded market offers customers with a lot of choices nowadays, no to mention, with so many options, there comes a headache too. How to choose the best product or service?",
       "dj-playboi":"We recently got a chance to interview the amazingly talented DJ Playboi. And, here we present to you the multi talented DJ Playboi and our amazing Q&A.",
       "Bottle-vs-Table-Service":"Bottle service and Table service are pretty popular in the major metropolitan cities. Many people are confused with the terms 'Bottle Service' and 'Table Service' ... ",
       "7-Mind-Blowing-Nightlife-Cities-in-the-United-States": "Who doesn't like to Party? And who doesn't like Casinos, Clubs, and Live Music Bars? We all wait till Friday just to get our own time from the hectic busy schedules so that we go out and have some fun with our friends and family. When it comes to the United States, you will have many choices to have a good time, and it's hard to select one city over other since every city here has its own charisma. Well, let us all say TGIF and check out some mind blowing nightlife cities in the USA that will make you say 'WOW'.",
@@ -262,6 +266,7 @@ app
 
     },
     'blogs': [
+      { "title": "7 Facts to Consider Before Selecting Your Event Management Tool", "image": "assets/img/blog/event-management.png", "description": "In the olden days, we had fewer choices, and some brands used to have a monopoly and had the power to crush the small competitors, but that is not the scene today. Thanks to the internet and the era of technology, the crowded market offers customers with a lot of choices nowadays, no to mention, with so many options, there comes a headache too. How to choose the best product or service?", "link": "event-management" },
       { "title": "Our Exclusive Interview with the One and Only DJ Playboi", "image": "assets/img/blog/dj-playboi.jpg", "description": "We recently got a chance to interview the amazingly talented DJ Playboi. And, here we present to you the multi talented DJ Playboi and our amazing Q&A.", "link": "dj-playboi" },
       { "title": "Bottle Service and Table Service - What Is the Difference?", "image": "assets/img/blog/bottlevstable.jpg", "description": "Bottle service and Table service are pretty popular in the major metropolitan cities. Many people are confused with the terms 'Bottle Service' and 'Table Service' ... ", "link": "Bottle-vs-Table-Service" },
       { "title": "7 Tips to Become a Successful Bar Manager", "image": "assets/img/blog/7tips-bar.png", "description": "The United States has so many bars, and all these bars have bar managers. Have you ever thought about being a bar manager? You just want to be a bar manager or a successful bar manager?", "link": "7tips-bar" },
