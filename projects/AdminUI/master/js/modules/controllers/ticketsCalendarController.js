@@ -318,20 +318,25 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
           return Number(ticket.discountedPrice*$scope.ticketSale.quantity + Number(cal.value)).toFixed(2) ;
         };
 
-      
+      function isNotEmpty(str) {
+        return (!!str && str.trim().length > 0);
+      }
       $scope.sellTicket = function(ticketInfo) {
           
           if (ticketInfo.$valid && $("#sellTicketId").parsley().isValid()) {
-            if (typeof $scope.ticketSale.contactName !== 'undefined' 
-                  || typeof $scope.ticketSale.contactEmail !== 'undefined' 
-                  || typeof $scope.ticketSale.contactPhone !== 'undefined') {
-
-              if (!( typeof $scope.ticketSale.contactName !== 'undefined' && 
-                  (typeof $scope.ticketSale.contactEmail !== 'undefined' || typeof $scope.ticketSale.contactPhone !== 'undefined'))){
-                  toaster.pop({ type: 'error', body: 'Atleast EMAIL or MOBILE number is required.', toasterId: 150 });
+            if ( isNotEmpty($scope.ticketSale.contactName)
+                  || isNotEmpty($scope.ticketSale.contactEmail )
+                  || isNotEmpty($scope.ticketSale.contactPhone)) {
+                if (!isNotEmpty($scope.ticketSale.contactName)) {
+                  toaster.pop({ type: 'error', body: 'Contact Name is required along with Email or Phone.', toasterId: 150 });
+                  return;
+                }
+              if (!isNotEmpty($scope.ticketSale.contactEmail) && !isNotEmpty($scope.ticketSale.contactPhone )){                  
+                  toaster.pop({ type: 'error', body: 'Atleast EMAIL or MOBILE number is required along with Contact Name.', toasterId: 150 });
                 return;
               }
             }
+            
             var target = {id: $scope.event.id, ticketId: ticket.id};
             
             RestServiceFactory.VenueEventService().buyTicket(target, $scope.ticketSale, function(data){
