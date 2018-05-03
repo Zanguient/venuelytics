@@ -65,12 +65,13 @@ function fxNumberOfGuests(type, userId, response, channel) {
 
 function fxNumberOfGuestsResponse(channel, userId, noOfGuests, type, response) {
   var guests = parseInt(noOfGuests);
+  const user = Users.getUser(userId);
   if (isNaN(guests)) {
     channel.sendMessage(userId, "Please enter a number like 2 or say 2 guests.");
-    fxNumberOfGuests(type, userId, channel);
+    user.setConversationContext(type, false, curry(fxNumberOfGuestsResponse)(channel));
     return;
   }
-  const user = Users.getUser(userId);
+  
   user.state.set("noOfGuests", guests);
   QUESTIONS[type](userId, response, channel);
 }
@@ -78,7 +79,7 @@ function fxNumberOfGuestsResponse(channel, userId, noOfGuests, type, response) {
 function fxReservation(userId, response, channel) {
   let user = Users.getUser(userId);
 
-  if (response && isNotEmpty(response.parameters.venue)) {
+  if (response && response.parameters && isNotEmpty(response.parameters.venue)) {
     if (user.hasParameter("venue") && user.state.get("venue").venueName !== response.parameters.venue) {
       user.state.delete("venue");
       user.state.delete("selectedVenueId");
@@ -223,7 +224,7 @@ function fxConfirmReservationResponse(channel, userId, email, type, response) {
     user.state.delete("tableNumber");
     user.state.delete("email");
     user.state.delete("selectedTable");
-    venueService.fxReservation(userId, null, channel);
+    fxReservation(userId, null, channel);
   }
 }
 

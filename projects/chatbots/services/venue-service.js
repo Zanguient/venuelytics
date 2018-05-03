@@ -146,7 +146,7 @@ function dealsAndSpecials(userId, response, channel) {
   let user = Users.getUser(userId);
 
   if (user.hasParameter("selectedVenueId")) {
-    dealsSpecials.dealsSpecials(userId, response,channel);
+    dealsSpecials.dealsAndSpecials(userId, response,channel);
   } else {
     getVenueName('Q_DEALS_AND_SPECIALS', user, channel, response);
   }
@@ -267,7 +267,7 @@ function sendAnswer(user, answer, venueName, channel) {
 function fxCharger(userId, response, channel) {
   let user = Users.getUser(userId);
   if (user.hasParameter("selectedVenueId")) {
-    channel.sendMessage("We do carry chargers for iPhone, Android and other Micro-USB chargers for phones. Please call front desk to see if they are available and not borrowed by other guests.");
+    channel.sendMessage(userId,"We do carry chargers for iPhone, Android and other Micro-USB chargers for phones. Please call front desk to see if they are available and not borrowed by other guests.");
   } else {
     getVenueName('Q_CHARGER', user, channel, response);
   }

@@ -39,19 +39,18 @@ class FBChannel {
     sendTableListImpl(senderId, tables);
   } 
   
-  sendGenericList(senderId, basicList, message) {
+  sendGenericViewList(senderId, basicList, infoUrl) {
     var list = [];
     for (var i = 0; i < basicList.length; i++) {
-      
-      
+    
       var object = {
         "title": basicList[i].text,
-        "subtitle": ``,
+        "subtitle": basicList[i].subText,
         "buttons": [
           {
-            "type": "postback",
-            "title": "Select",
-            "payload": basicList[i].text
+            "type": "web_url",
+            "title": "View Website",
+            "url": infoUrl
           }
         ]
       };
@@ -63,8 +62,8 @@ class FBChannel {
       "attachment": {
         "type": "template",
         "payload": {
-          "template_type": "list",
-          "elements": list.slice(0, 4),
+          "template_type": "generic",
+          "elements": list.slice(0, 9),
         }
       }
     };
@@ -146,18 +145,30 @@ function sendVenueListData (senderId, venues) {
 
     listOfVenues.push(object);
   }
-
-  var messageData = {
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "list",
-        "top_element_style": "compact",
-        "elements": listOfVenues.slice(0, 9),
+  
+  let messageData = null;
+  if (listOfVenues.length > 1) {
+    messageData = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "list",
+          "top_element_style": "compact",
+          "elements": listOfVenues.slice(0, 9),
+        }
       }
-    }
-    
-  };
+    };
+  } else {
+    messageData = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": listOfVenues,
+        }
+      }
+    };
+  }
   sendApi.sendMessage(senderId, messageData);
 }
 

@@ -63,7 +63,7 @@ const sendAnswer = function(type, userId, response, channel) {
   if (!!ANSWERS[type]) {
     answer = ANSWERS[type];
   }
-  if (response.parameters.Facilities && response.parameters.Facilities.toLowerCase().indexOf("guest")) {
+  if (response.parameters.Facilities && response.parameters.Facilities.toLowerCase().indexOf("guest") >= 0) {
     if (venue.info['Advance.GuestList.enable'] && venue.info['Advance.GuestList.enable'].toLowerCase() === 'y' ) {
       let guestListUrl = serviceApi.getGuestListUrl(venue.uniqueName, venue.id, venue.city);
       channel.sendMessage(userId, `YES! we do have Guest List. You can access our guest list at ${guestListUrl}`);
@@ -173,8 +173,16 @@ function formatTime(normalizedTime) {
     time = time.slice(1); // Remove full string match value
     time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
     time[0] = +time[0] % 12 || 12; // Adjust hours
+    return time.join(""); // return adjusted time or original string
+  } else {
+    var x = time[0];
+    var hms = x.split(':'),
+          h = +hms[0],
+          suffix = (h < 12) ? ' AM' : ' PM';
+      hms[0] = h % 12 || 12;        
+      return hms.join(':') + suffix;
   }
-  return time.join(""); // return adjusted time or original string
+  
 }
 
 function sendChargeImpl(type, user, answer, response, channel) {
@@ -183,7 +191,7 @@ function sendChargeImpl(type, user, answer, response, channel) {
   let name="";
   if (chargeType.toLowerCase().indexOf("cover") >=0 ) {
     name = "CoverCharges";
-  } else if (chargeType.toLowerCase().indexOf("fastlane") >=0 || chargeType.toLowerCase().indexOf("fast lane")){
+  } else if (chargeType.toLowerCase().indexOf("fastlane") >=0 || chargeType.toLowerCase().indexOf("fast lane") >= 0){
     name = "FastLaneCharges";
   }
   

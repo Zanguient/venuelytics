@@ -33,14 +33,17 @@ class SMSChannel {
     });
     sendSMS(this.channelId, senderId, message);
   }
-  sendGenericList(senderId, basicList, message) {
-    
+  sendGenericViewList(senderId, basicList, infoUrl) {
+    let padding = Array(20).join(' ');
+      
+    let message = '';
     basicList.forEach(element => {
-      message += `${element.text},\n`;
+      message += (element.text + padding).substring(0, padding.length) + ' - '+  element.subText + '\n';
     });
-
+    message += `You can get the latest information by visiting - ${infoUrl}`;
     sendSMS(this.channelId, senderId, message);  
-  };
+  }
+
   sendTableList(senderId, tableList) {
     sendSMS(this.channelId, senderId, `We have found a table for the requested date.`);
     venueService.processMessage(senderId, tableList[0].searchIndex, this);

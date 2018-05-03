@@ -240,5 +240,6 @@ module.exports= {
     getActiveTournaments: getActiveTournaments,
     getActiveGames: getActiveGames,
     getGamesUrl: getGamesUrl,
-    getTournamentsUrl : getTournamentsUrl
+    getTournamentsUrl : getTournamentsUrl,
+    getGuestListUrl: getGuestListUrl
 };
