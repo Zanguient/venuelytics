@@ -265,7 +265,8 @@ App.controller('BandsController', ['$scope', '$state', 'RestServiceFactory', '$t
 				"orderable": false,
 				"createdCell": function (td, cellData, rowData, row, col) {
 
-					var actionHtml = '<button title="Edit Band" class="btn btn-default btn-oval fa fa-edit"></button>';
+					var actionHtml = '<button title="Edit Band" class="btn btn-default btn-oval fa fa-edit"></button>' +
+						'&nbsp;&nbsp;<button title="Add Performer" class="btn btn-default btn-oval fa fa-user-o"></button>'
 						'&nbsp;&nbsp;<button title="Delete Band" class="btn btn-default btn-oval fa fa-trash"></button>';
 
 					$(td).html(actionHtml);
@@ -303,6 +304,12 @@ App.controller('BandsController', ['$scope', '$state', 'RestServiceFactory', '$t
 
 		$('#bands_table').on('click', '.fa-trash', function () {
 			$scope.deleteBand(this, table);
+		});
+
+		$('#bands_table').on('click', '.fa-user-o', function () {
+			var targetRow = $(this).closest("tr");
+			var rowData = table.row(targetRow).data();
+			$state.go('app.band-performers', { id: rowData[5].id });
 		});
 
 		$('#bands_table').on('click', '.fa-edit', function () {
@@ -452,3 +459,136 @@ App.controller('BandController', ['$scope', '$state', '$stateParams', 'RestServi
 	
 
 }]);
+
+App.controller('BandPerformerController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'Session', '$timeout', 'DataTableService', '$compile', 
+    function( $scope, $state, $stateParams, RestServiceFactory, toaster , Session, $timeout, DataTableService, $compile) {
+
+	'use strict';
+    $scope.band = {};
+    if($stateParams.id !== 'new') {
+	    var promise = RestServiceFactory.BandService().get({id:$stateParams.id});
+	    promise.$promise.then(function(data) {
+	    	$scope.band = data;
+            
+	    });
+    } 
+
+  	$timeout(function(){
+
+    	if ( ! $.fn.dataTable ) return;
+    	var columnDefinitions = [
+	        { sWidth: "25%", aTargets: [0] },
+	        { sWidth: "15%", aTargets: [1] },
+	        { sWidth: "50%", aTargets: [2] },
+	        { sWidth: "10%", aTargets: [3] },
+	        
+	        {
+		    	"targets": [3],
+		    	"orderable": false,
+		    	"createdCell": function (td, cellData, rowData, row, col) {
+		    		var actionHtml = '<button type="button" class="btn btn-default btn-oval fa fa-unlink"></button>';
+		    		
+		    		$(td).html(actionHtml);
+		    		$compile(td)($scope);
+		    	  }
+	    	} ];
+
+    	DataTableService.initDataTable('band_performer_table', columnDefinitions);
+
+	    var promise = RestServiceFactory.BandService().getPerformers({id:$stateParams.id});
+	    promise.$promise.then(function(data) {
+			$scope.performers = data;
+			var table = $('#band_performer_table').DataTable();
+			data.map(function(performer) {
+				table.row.add([performer.performerName, performer.artistType, performer.description, performer]);
+			});
+			table.draw();
+		});
+	});
+    
+    $('#band_performer_table').on('click', '.fa-unlink', function () {
+    	var table = $('#band_performer_table').DataTable();
+		var targetRow = $(this).closest("tr");
+		var rowData = table.row(targetRow).data();
+		var target = { id: $scope.band.id, performerId: rowData[3].id };
+		RestServiceFactory.BandService().removePerformer(target, function (success) {
+			table.row(targetRow).remove().draw();
+		}, function (error) {
+			if (typeof error.data !== 'undefined') {
+				toaster.pop('error', "Server Error", error.data.developerMessage);
+			}
+		});
+	});
+
+  	$scope.init =function() {
+       
+  		var self  = $scope;
+        
+    } ;
+
+}]);
+
+
+App.controller('AddBandPerformerController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'Session', '$timeout', 'DataTableService', '$compile', 
+    function( $scope, $state, $stateParams, RestServiceFactory, toaster , Session, $timeout, DataTableService, $compile) {
+
+	'use strict';
+    $scope.band = {};
+    if($stateParams.id !== 'new') {
+	    RestServiceFactory.BandService().get({id:$stateParams.id}, function(data) {
+	    	$scope.band = data;
+            
+	    });
+    } 
+
+  	$timeout(function(){
+
+    	if ( ! $.fn.dataTable ) return;
+    	var columnDefinitions = [
+	        { sWidth: "25%", aTargets: [0] },
+	        { sWidth: "15%", aTargets: [1] },
+	        { sWidth: "50%", aTargets: [2] },
+	        { sWidth: "10%", aTargets: [3] },
+	        
+	        {
+		    	"targets": [3],
+		    	"orderable": false,
+		    	"createdCell": function (td, cellData, rowData, row, col) {
+		    		var actionHtml = '<button type="button" class="btn btn-default btn-oval fa fa-link"></button>';
+		    		
+		    		$(td).html(actionHtml);
+		    		$compile(td)($scope);
+		    	  }
+	    	} ];
+
+    	DataTableService.initDataTable('search_performer_table', columnDefinitions);
+
+	    var promise = RestServiceFactory.PerformerService().get({}, function(data) {
+			var table = $('#search_performer_table').DataTable();
+			data.performers.map(function(performer) {
+				table.row.add([performer.performerName, performer.artistType, performer.description, performer]);
+			});
+			table.draw();
+		});
+	});
+    
+    $('#search_performer_table').on('click', '.fa-link', function () {
+    	var table = $('#search_performer_table').DataTable();
+		var targetRow = $(this).closest("tr");
+		var rowData = table.row(targetRow).data();
+		var target = { id: $scope.band.id, performerId: rowData[3].id };
+		RestServiceFactory.BandService().addPerformer(target, function (success) {
+			table.row(targetRow).remove().draw();
+		}, function (error) {
+			if (typeof error.data !== 'undefined') {
+				toaster.pop('error', "Server Error", error.data.developerMessage);
+			}
+		});
+	});
+	
+  	$scope.doneAction = function() {
+  		$state.go("app.band-performers", {id: $scope.band.id});
+  	}
+}]);
+
+

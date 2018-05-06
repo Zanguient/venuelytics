@@ -514,10 +514,23 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 			});
 		},
 		PerformerService: function () {
-			return $resource(urlTemplate.replace("@context", "performers"),);
+			return $resource(urlTemplate.replace("@context", "performers"));
 		},
 		BandService: function () {
-			return $resource(urlTemplate.replace("@context", "bands"));
+			return $resource(urlTemplate.replace("@context", "bands"), {}, {
+				getPerformers: {
+					method: 'GET', params: { id: '@id'}, isArray: true,
+					url: urlTemplate.replace("@context", "bands") + "/performers"
+				}, 
+				addPerformer: {
+					method: 'POST', params: { id: '@id', performerId: '@performerId'},
+					url: urlTemplate.replace("@context", "bands") + "/performers/:performerId"
+				},
+				removePerformer: {
+					method: 'DELETE', params: { id: '@id', performerId: '@performerId'},
+					url: urlTemplate.replace("@context", "bands") + "/performers/:performerId"
+				}
+			});
 		},
 		cleansePayload: function (serviceName, payload) {
 			var rProps = REQ_PROP[serviceName];

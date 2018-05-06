@@ -40,8 +40,6 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.owner, USER_ROLES.manager] },
                 resolve: angular.extend(resolveFor('fastclick', 'modernizr', 'icons', 'screenfull', 'animo', 'sparklines',
                     'slimscroll', 'classyloader', 'toaster', 'csspiner', 'angularSpectrumColorpicker', 'spectrum'))
-
-
             })
             .state('app.dashboard', {
                 url: '/dashboard',
@@ -163,6 +161,20 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'BandController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('parsley', 'inputmask')
+            }).state('app.band-performers', {
+                url: '/bandperformers/:id',
+                title: 'Performers in the Band',
+                templateUrl: basepath('artists/associate_artists.html'),
+                controller: 'BandPerformerController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+            }).state('app.newbandperformer', {
+                url: '/newbandperformer/:id',
+                title: 'Associate Performer to Band',
+                templateUrl: basepath('artists/new_band_performer.html'),
+                controller: 'AddBandPerformerController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
             }).state('app.users', {
                 url: '/users',
                 title: 'Users',
@@ -421,8 +433,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('app_settings.html'),
                 controller: 'NullController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'codemirror', 'codemirror-plugins', 'moment', 'taginput', 'inputmask', 'chosen',
-                    'slider', 'filestyle')
+                resolve: resolveFor('parsley', 'codemirror', 'codemirror-plugins', 'moment', 'taginput', 'inputmask', 'chosen', 'slider', 'filestyle')
             })
             .state('app.reservations', {
                 url: '/reservations',
