@@ -4,6 +4,8 @@
 
 App.controller('RegisterComputerController', ['$scope', '$state', 'RestServiceFactory', 'toaster','Session',
 	function($scope, $state, RestServiceFactory, toaster, session) {
+
+	'use strict';
 	$scope.option = {};
 	$scope.option.selectedOption = 1;
 	$scope.submitTitle = "Register";

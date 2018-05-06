@@ -1,9 +1,7 @@
 
-App.controller('ProductsEditController', ['$scope', '$state', '$stateParams',
-    'RestServiceFactory', 'toaster', 'FORMATS', '$timeout', '$compile', 'ngDialog',
-    function ($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
-        $timeout, $compile, ngDialog) {
-
+App.controller('ProductsEditController', ['$scope', '$state', '$stateParams', 'RestServiceFactory', 'toaster', 'FORMATS', '$timeout', '$compile', 'ngDialog',
+    function ($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout, $compile, ngDialog) {
+    'use strict';
         $scope.data = {};
         if ($stateParams.id !== 'new') {
             var promise = RestServiceFactory.ProductService().getProduct({ id: $stateParams.venueNumber, productId: $stateParams.id });

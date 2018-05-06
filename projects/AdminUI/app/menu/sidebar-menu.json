@@ -39,6 +39,14 @@
 		"roleId": 100
 	},
 	{
+		"text": "Bands And Performers",
+		"sref": "app.band_artists",
+		"icon": "icon-trophy",
+		"translate": "sidebar.nav.pages.BAND_ARTIST",
+		"submenu": [],
+		"roleId": 100
+	},
+	{
 		"text": "Chat Bot",
 		"sref": "app.chatbot",
 		"icon": "icon-bubbles",

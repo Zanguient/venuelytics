@@ -51,7 +51,7 @@
     var fd = new FormData();
     fd.append("file", portalLogos[0]);
     var payload = RestServiceFactory.cleansePayload('venueImage', fd);
-    var target = {objectType: 'venue-portal'}
+    var target = {objectType: 'venue-portal'};
     RestServiceFactory.VenueImage().uploadImage(target,payload, function(response){
       if(response !== {}){
         $scope.portal.logo =response;

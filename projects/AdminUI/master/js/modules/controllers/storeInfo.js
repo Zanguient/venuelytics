@@ -122,7 +122,8 @@
   $scope.deleteImage = function(index, deletedImage) {
       var id= {
           "id" : deletedImage.id
-      }
+      };
+      
       RestServiceFactory.VenueImage().deleteVenueImage(id, function(data){
         deletedImage.status = "DELETED";
         toaster.pop('data', "Deleted the selected Image successfull");
@@ -230,6 +231,7 @@
       }
     });
   };
+
   $scope.uploadFile = function(venueImage) {
     var fd = new FormData();
     fd.append("file", venueImage[0]);
@@ -237,7 +239,7 @@
     RestServiceFactory.VenueImage().uploadVenueImage(payload, function(success){
       if(success !== {}){
         $scope.imageUrl.push(success);
-        toaster.pop('success', "Image upload successfull");
+        toaster.pop('success', "Image upload successfully");
         document.getElementById("control").value = "";
       }
     },function(error){

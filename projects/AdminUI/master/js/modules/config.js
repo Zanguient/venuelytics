@@ -142,11 +142,32 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'StoresController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+            }).state('app.band_artists', {
+                url: '/performers',
+                title: 'Bands And performers',
+                templateUrl: basepath('artists/band_artists.html'),
+                controller: 'BandArtistController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+            }).state('app.artistedit', {
+                url: '/artist/:id',
+                title: 'Edit Artist',
+                templateUrl: basepath('artists/artist_edit.html'),
+                controller: 'ArtistController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('parsley', 'inputmask')
+            }).state('app.bandedit', {
+                url: '/band/:id',
+                title: 'Edit Band',
+                templateUrl: basepath('artists/band_edit.html'),
+                controller: 'BandController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('parsley', 'inputmask')
             }).state('app.users', {
                 url: '/users',
                 title: 'Users',
                 templateUrl: basepath('user/users.html'),
-                controller: 'NullController',
+                controller: 'UsersController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
             }).state('app.businessRequest', {

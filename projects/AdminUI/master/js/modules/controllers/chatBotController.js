@@ -3,7 +3,7 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
     'RestServiceFactory', 'toaster', 'FORMATS', '$timeout', 'DataTableService', '$compile', 'ngDialog', 'ContextService', '$log', 'APP_EVENTS', 'AUTH_EVENTS',
     function ($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
         $timeout, DataTableService, $compile, ngDialog, contextService, $log, APP_EVENTS, AUTH_EVENTS) {
-
+        'use strict';
         $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
 
         $scope.tabs = [

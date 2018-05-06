@@ -2,6 +2,7 @@
 App.controller('VisitorAnalyticsController',['$log','$scope','ContextService',  'RestServiceFactory','$translate','Session','$state', '$stateParams',
                                       function($log, $scope, contextService,  RestServiceFactory, $translate, session, $state, $stateParams) {
 	
+    'use strict';
     $scope.favProducts = [];
     
     $scope.init = function() {

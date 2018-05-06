@@ -37,6 +37,13 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 	var eventTicketProperties = ['id', 'storeNumber', 'name', 'description',
 		'price', 'discountedPrice', 'sectionName', 'seatStartNumber', 'count', 'row', 'eventDate', 'uiAttribute'];
 
+	var performerService = ['id', 'performerName', 'groupName', 'description', 'imageUrl', 'thumbnailImageUrl', 'performanceUrl', 'phone', 'email',
+	 'website', 'facebookSocial', 'instagramSocial', 'twitterSocial', 'soundCloud', 'enabled', 'artistTypeCode'];
+
+	var bandService = ['id', 'name', 'type', 'description', 'imageUrls', 'performanceUrl', 'website', 'facebookSocial', 'instagramSocial', 'twitterSocial',
+	 'enabled'];
+
+
 	var REQ_PROP = {};
 
 	REQ_PROP['VenueService'] = storeProperties;
@@ -50,8 +57,11 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 	REQ_PROP['VenueMapService'] = venueMapProperties;
 	REQ_PROP['VenueEventService'] = venueEventProperties;
 	REQ_PROP['EventTicket'] = eventTicketProperties;
-
+	REQ_PROP['PerformerService'] = performerService;
+	REQ_PROP['BandService'] = bandService;
+	
 	var urlTemplate = BASE_URL + "/v1/@context/:id";
+
 	var contentActivateUrl = BASE_URL + "/v1/content/:id/@activate";
 	var self = this;
 	return {
@@ -504,7 +514,10 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 			});
 		},
 		PerformerService: function () {
-			return $resource(urlTemplate.replace("@context", "performers"));
+			return $resource(urlTemplate.replace("@context", "performers"),);
+		},
+		BandService: function () {
+			return $resource(urlTemplate.replace("@context", "bands"));
 		},
 		cleansePayload: function (serviceName, payload) {
 			var rProps = REQ_PROP[serviceName];

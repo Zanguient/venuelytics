@@ -3,7 +3,7 @@
 App.controller('VIPDashBoardController',['$log','$scope','$window', '$http', '$timeout','ContextService', 'APP_EVENTS', 'RestServiceFactory','$translate','Session','$state',
                                       function($log, $scope, $window, $http, $timeout, contextService, APP_EVENTS, RestServiceFactory, $translate, session, $state) {
 	
-    
+    'use strict';
     $scope.PERIODS = ['WEEKLY', 'MONTHLY', 'YEARLY'];
     $scope.USERCOUNT = [20, 50, 75];
     $scope.selectedPeriod = 'YEARLY';

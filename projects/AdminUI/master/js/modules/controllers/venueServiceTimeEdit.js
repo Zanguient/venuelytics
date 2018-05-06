@@ -1,9 +1,9 @@
 
 App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$stateParams',
     'RestServiceFactory', 'toaster', 'FORMATS', '$timeout', '$compile', 'ngDialog',
-    function ($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
-        $timeout, $compile, ngDialog) {
+    function ($scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, $timeout, $compile, ngDialog) {
 
+        'use strict';
         $scope.startServiceTime = new Date();
         $scope.startServiceTime.setHours(0);
         $scope.startServiceTime.setMinutes(0);
