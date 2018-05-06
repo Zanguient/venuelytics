@@ -21,6 +21,13 @@ App.directive('eventTile', function() {
     		$state.go('app.editVenueEvent', {venueNumber: $scope.event.venueNumber, id: eventId});
   		};
 
+  		$scope.previewEventUrl = function(eventId) {
+  			return "v1/download/"+ $scope.event.venueNumber +"/pdf/ticket/preview/" + eventId ;
+  		};
+  		$scope.getPreviewFileName = function(eventId) {
+  			return "event-pdf-preview-" + eventId + ".pdf"; 
+  		};
+
   		$scope.enableDisableColor = function(enabled) {
     		return enabled === 'Y' ? 'fa fa-check' : '';
   		};	
