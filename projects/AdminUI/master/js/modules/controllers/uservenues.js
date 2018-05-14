@@ -49,7 +49,7 @@ App.controller('UserVenueController', ['$scope', '$state', '$stateParams', '$com
   });
   
   $('#users_venue_table').on('click', '.fa-unlink',function() {
-    var table = $('#search_user_table').DataTable();
+    var table = $('#users_venue_table').DataTable();
     $scope.deleteUserVenue(this, table);
   });
   $scope.deleteUserVenue = function(button, tableAPI) {

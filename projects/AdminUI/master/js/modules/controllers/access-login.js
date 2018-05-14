@@ -7,9 +7,9 @@
  */
 
 App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$rootScope','AUTH_EVENTS',
-										'AuthService', '$cookies', 'Session', 'ContextService','$timeout',
+										'AuthService', '$cookies', 'Session', 'ContextService','$timeout', '$location',
                                      function ($state, $stateParams, $scope, $rootScope,  AUTH_EVENTS, 
-                                     	AuthService, $cookies, Session, ContextService, timeout) {
+                                     	AuthService, $cookies, Session, ContextService, timeout, $location) {
   // bind here all data from the form
   'use strict';
   $scope.account = {};
@@ -19,6 +19,13 @@ App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$roo
 
   $scope.serverName = ContextService.serverName;
   // place the message if something goes wrong
+  
+  var host =  $location.host();
+  host = host.replace("www.", "");
+  if (host === 'localhost') {
+  	host = "venuelytics.com";
+  }
+  $scope.partner = host;
   $scope.authMsg = '';
   $scope.loginAction = true;
   $scope.userName = Session.userName;

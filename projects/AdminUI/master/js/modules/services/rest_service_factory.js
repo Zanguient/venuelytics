@@ -307,7 +307,7 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 
 			});
 		},
-		VenueEventService: function () {
+		VenueEventService: function (customHeaders) {
 			return $resource(urlTemplate.replace("@context", "venueevents"), {}, {
 				getEventTickets: {
 					method: 'GET', params: { id: '@id' }, isArray: true,
@@ -323,6 +323,7 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 				},
 				buyTicket: {
 					method: 'POST', params: { id: '@id', ticketId: '@ticketId' },
+					headers: customHeaders || {},
 					url: urlTemplate.replace("@context", "venueevents") + '/ticket/:ticketId/sell'
 				},
 				getSoldTickets: {
