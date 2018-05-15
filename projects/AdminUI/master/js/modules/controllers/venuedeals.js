@@ -5,8 +5,8 @@
  * =========================================================
  */
 
-App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams','ngDialog',
-                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams, ngDialog) {
+App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams','ngDialog', 'ContextService', 'APP_EVENTS',
+                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams, ngDialog, contextService, APP_EVENTS) {
   'use strict';
   
   $timeout(function(){
@@ -43,52 +43,60 @@ App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout'
 		    	  }
 	        }];
     
-	    DataTableService.initDataTable('deals_table', columnDefinitions);
+	    DataTableService.initDataTable('deals_table', columnDefinitions, false);
    
+      $scope.init();
 
-      var table = $('#deals_table').DataTable();
+  	
+  });
+
+  $scope.init = function() {
+    var table = $('#deals_table').DataTable();
       
-	    var promise = RestServiceFactory.CouponService().get({id: $stateParams.id});
-	    promise.$promise.then(function(data) {
-    	
+    RestServiceFactory.CouponService().get({id: contextService.userVenues.selectedVenueNumber}, function(data) {
+       table.clear();
       $scope.dealMap = [];
+      $scope.deals = data;
       data.map(function(deal) {
           $scope.dealMap[deal.id] = deal;
-    		  table.row.add([ deal.title, deal.description, deal.couponType, deal.discountAmount, deal.actionUrl, 
+          table.row.add([ deal.title, deal.description, deal.couponType, deal.discountAmount, deal.actionUrl, 
               formatDate(new Date(deal.startDate)), formatDate(new Date(deal.expiryDate)), deal.enabled, deal.id]);
-    	});
-    	
+      });
+      
       table.draw(); 
     });
-    function formatDate(value)
-    {
-      return value.getMonth()+1 + "/" + value.getDate() + "/" + value.getYear();
-    }
-    $scope.editDeal = function(rowId, colId) {
-  		var table = $('#deals_table').DataTable();
-      var d = table.row(rowId).data();
-      $scope.deal = $scope.dealMap[d[8]];
-      
-      ngDialog.openConfirm({
-          template: 'app/templates/content/form-deal-info.html',
-          // plain: true,
-          className: 'ngdialog-theme-default',
-          scope : $scope 
-        }).then(function (value) {
-          $('#tables_table').dataTable().fnDeleteRow(rowId);
-          var t = $scope.deal;
-          table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id]);
-          table.draw();
-          },function(error){
-            
-         });
-  	};
+  };
+
+  function formatDate(value){
+    return value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear();
+  }
+
+  $scope.editDeal = function(rowId, colId) {
+    var table = $('#deals_table').DataTable();
+    var d = table.row(rowId).data();
+    $scope.deal = $scope.dealMap[d[8]];
     
-  	$scope.deleteProduct = function(rowId, productId) {
-  			
-  	};
-  	$scope.createNewDeal = function() {
-  		$state.go('app.venueMapedit', {id: 'new'});
-  	};
-  });
+    ngDialog.openConfirm({
+        template: 'app/templates/content/form-deal-info.html',
+        // plain: true,
+        className: 'ngdialog-theme-default',
+        scope : $scope 
+      }).then(function (value) {
+        $('#tables_table').dataTable().fnDeleteRow(rowId);
+        var t = $scope.deal;
+        table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id]);
+        table.draw();
+        },function(error){
+          
+       });
+    };
+
+  $scope.createNewDeal = function() {
+    $state.go('app.venueMapedit', {id: 'new'});
+  };
+
+  $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
+        // register on venue change;
+      $scope.init();
+    });
 }]);

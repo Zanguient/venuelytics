@@ -4,23 +4,21 @@
  * ===========================
  */
 
-App.directive('eventTile', function() {
+App.directive('dealTile', function() {
   "use strict";
   return {
     restrict: 'A',
     scope:{
-	  event: '='
+	  deal: '='
   	},
   	controller : [ '$scope', '$rootScope','RestServiceFactory', '$state', 'ngDialog', 'APP_EVENTS',
   			function($scope, $rootScope, RestServiceFactory, $state, ngDialog, APP_EVENTS) {
 		
-		$scope.editEvent = function(eventId) {
+		$scope.editDeal = function(eventId) {
     		$state.go('app.editVenueEvent', {venueNumber: $scope.event.venueNumber, id: eventId});
   		};
 
-  		$scope.previewEventUrl = function(eventId) {
-  			return "v1/download/"+ $scope.event.venueNumber +"/pdf/ticket/preview/" + eventId ;
-  		};
+  		
   		$scope.getPreviewFileName = function(eventId) {
   			return "event-pdf-preview-" + eventId + ".pdf"; 
   		};
@@ -53,13 +51,13 @@ App.directive('eventTile', function() {
 		    return new Date();
   		};
 
-		$scope.deleteEvent = function(index, eventId) {
+		$scope.deleteDeal = function(index, dealId) {
 
 	      ngDialog.openConfirm({
 	        template: 'deleteVenueEventId',
 	        className: 'ngdialog-theme-default'
 	      }).then(function (value) {
-	        var target = {id: eventId};
+	        var target = {id: dealId};
 	        RestServiceFactory.VenueService().deleteEvent(target,  function(success){
 	          $rootScope.$broadcast(APP_EVENTS.deleteEvent, {event: $scope.event});
 	        },function(error){
@@ -71,6 +69,6 @@ App.directive('eventTile', function() {
 			
 		};
   	}],
-    templateUrl: 'app/templates/event-tile.html'
+    templateUrl: 'app/templates/deal-tile.html'
   };
 });

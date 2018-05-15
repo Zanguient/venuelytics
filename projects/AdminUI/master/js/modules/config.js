@@ -332,6 +332,14 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog')
             })
+            .state('app.dealsManagement', {
+                url: '/dealsManagement',
+                title: 'Manage Venue Deals',
+                templateUrl: basepath('venue/venue-deals.html'),
+                controller: 'VenueDealsController',
+                data: { authorizedRoles: [USER_ROLES.admin, 51] },
+                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+            })
             .state('app.eventManagement', {
                 url: '/eventManagement',
                 title: 'Manage Venue Event',
