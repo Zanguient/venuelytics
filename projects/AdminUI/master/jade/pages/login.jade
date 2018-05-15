@@ -3,7 +3,7 @@
   .panel.panel-dark.panel-flat
     .panel-heading.text-center.bg-info-dark
       a(href="#")
-        img.block-center.img-rounded(src='app/img/{{partner}}/logo.png', alt='Image')
+        img.block-center.img-rounded.img-responsive(src='app/img/{{partner}}/logo.png', alt='Image')
     .panel-body
       p.text-center.pv {{"login.SIGNIN" | translate}}
       form(role='form', ng-submit="login(account)", validate-form='', novalidate='').mb-lg
