@@ -11,6 +11,7 @@ App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthServ
 	if (host === 'localhost') {
 		host = "venuelytics.com";
 	}
+	console.log(host);
 	$scope.partner = host;
 
 	$scope.appLogo = "app/img/itzfun_logo.png";

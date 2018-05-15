@@ -25,6 +25,7 @@ App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$roo
   if (host === 'localhost') {
   	host = "venuelytics.com";
   }
+  console.log(host);
   $scope.partner = host;
   $scope.authMsg = '';
   $scope.loginAction = true;
