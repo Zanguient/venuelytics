@@ -1,9 +1,9 @@
 .block-center.mt-xl.wd-xl(ng-controller="LoginFormController")
   // START panel
   .panel.panel-dark.panel-flat
-    .panel-heading.text-center
+    .panel-heading.text-center.bg-info-dark
       a(href="#")
-        img.block-center.img-rounded(src='app/img/logo.png', alt='Image')
+        img.block-center.img-rounded(src='app/img/{{partner}}/logo.png', alt='Image')
     .panel-body
       p.text-center.pv {{"login.SIGNIN" | translate}}
       form(role='form', ng-submit="login(account)", validate-form='', novalidate='').mb-lg
@@ -28,7 +28,7 @@
       p.pt-lg.text-center {{"login.SIGNUP" | translate}}
       a(ui-sref="page.register").btn.btn-block.btn-default {{"login.REGISTER" | translate}}
   // END panel
-  .p-lg.text-center
+  .p-lg.text-center.text-white
     span &copy; 
     span(ng-bind="app.year") 
     span  - 
