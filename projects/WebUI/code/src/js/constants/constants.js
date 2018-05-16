@@ -167,6 +167,7 @@ app
       { key: "23:30", value: "11:30 PM" },
     ],
     'blogPosts': {
+      "concierge-service":"blogs/concierge-service.html",
       "event-management": "blogs/event-management.html",
       "dj-playboi":"blogs/dj-Playboi.html",
       "Bottle-vs-Table-Service":"blogs/bottlevstable.html",
@@ -193,6 +194,7 @@ app
     },
 
     'blogPostsImages': {
+      "concierge-service":"assets/img/blog/concierge-service.png",
       "event-management": "blogs/event-management.png",
       "dj-playboi":"blogs/dj-Playboi.jpg",
       "Bottle-vs-Table-Service":"assets/img/blog/bottlevstable.jpg",
@@ -215,8 +217,9 @@ app
       "7tips-bar": "assets/img/blog/7tips-bar.png",
       "Mobile-Tech-Increases-Crowds-and-Bottle-Service-Revenue-for-San-Francisco-Hot-Spot": "assets/img/blog/placeholder.gif",
     },
-
+    
     'blogPostsTitle': {
+      "concierge-service":"What is a Concierge Service? Facts You Should Know",
       "event-management": "7 Facts to Consider Before Selecting Your Event Management Tool",
       "dj-playboi":"Our Exclusive Interview with the One and Only DJ Playboi",
       "Bottle-vs-Table-Service":"Bottle Service and Table Service - What Is the Difference?",
@@ -241,6 +244,7 @@ app
 
     },
     'blogPostDescription': {
+      "concierge-service":"A concierge is a caretaker or assistant who helps people with different tasks in hotels, resorts, and lounges. A concierge assists guests by managing various tasks such as,",
       "event-management": "In the olden days, we had fewer choices, and some brands used to have a monopoly and had the power to crush the small competitors, but that is not the scene today. Thanks to the internet and the era of technology, the crowded market offers customers with a lot of choices nowadays, no to mention, with so many options, there comes a headache too. How to choose the best product or service?",
       "dj-playboi":"We recently got a chance to interview the amazingly talented DJ Playboi. And, here we present to you the multi talented DJ Playboi and our amazing Q&A.",
       "Bottle-vs-Table-Service":"Bottle service and Table service are pretty popular in the major metropolitan cities. Many people are confused with the terms 'Bottle Service' and 'Table Service' ... ",
@@ -266,6 +270,7 @@ app
 
     },
     'blogs': [
+      { "title": "What is a Concierge Service? Facts You Should Know", "image": "assets/img/blog/concierge-service.png", "description": "A concierge is a caretaker or assistant who helps people with different tasks in hotels, resorts, and lounges. A concierge assists guests by managing various tasks such as,", "link": "concierge-service" },
       { "title": "7 Facts to Consider Before Selecting Your Event Management Tool", "image": "assets/img/blog/event-management.png", "description": "In the olden days, we had fewer choices, and some brands used to have a monopoly and had the power to crush the small competitors, but that is not the scene today. Thanks to the internet and the era of technology, the crowded market offers customers with a lot of choices nowadays, no to mention, with so many options, there comes a headache too. How to choose the best product or service?", "link": "event-management" },
       { "title": "Our Exclusive Interview with the One and Only DJ Playboi", "image": "assets/img/blog/dj-playboi.jpg", "description": "We recently got a chance to interview the amazingly talented DJ Playboi. And, here we present to you the multi talented DJ Playboi and our amazing Q&A.", "link": "dj-playboi" },
       { "title": "Bottle Service and Table Service - What Is the Difference?", "image": "assets/img/blog/bottlevstable.jpg", "description": "Bottle service and Table service are pretty popular in the major metropolitan cities. Many people are confused with the terms 'Bottle Service' and 'Table Service' ... ", "link": "Bottle-vs-Table-Service" },
