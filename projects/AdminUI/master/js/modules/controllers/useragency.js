@@ -17,7 +17,7 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
 		        { sWidth: "15%", aTargets: [0,1,3] },
 		        { sWidth: "5%", aTargets: [2] },
 		        {
-			    	"targets": [4],
+			    	"targets": [5],
 			    	"orderable": false,
 			    	"createdCell": function (td, cellData, rowData, row, col) {
 			    		var actionHtml = '<button title="Add User" class="btn btn-default btn-oval fa fa-link"></button>&nbsp;&nbsp;';
@@ -27,7 +27,7 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
 			    	  }
 		    	},
 		    	{
-			    	"targets": [2],
+			    	"targets": [3],
 			    	"orderable": false,
 			    	"createdCell": function (td, cellData, rowData, row, col) {
 			    		
@@ -64,7 +64,7 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
 		    			role = user.role;
 		    		}
 	    			if (user.agencyId === -1) {
-	    				table.row.add([user.userName, user.loginId, user.enabled, role, user.id]);
+	    				table.row.add([user.userName, user.loginId, user.businessName, user.enabled, role, user.id]);
 	    			}
 		    	});
 		    	table.draw();
@@ -94,8 +94,7 @@ App.controller('UserAgencyController', ['$scope', '$state', '$stateParams', '$co
 		});
 	};
 
-	var promise = RestServiceFactory.AgencyService().get({id:$stateParams.id});
-    promise.$promise.then(function(data) {
+	RestServiceFactory.AgencyService().get({id:$stateParams.id}, function(data) {
     	$scope.agency = data;
     	$scope.init();
     });
