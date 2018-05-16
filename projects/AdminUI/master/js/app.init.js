@@ -17,9 +17,9 @@ if (typeof $ === 'undefined') { throw new Error('This application\'s JavaScript 
 var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','ngAnimate', 'ngStorage', 'ngCookies', 
           'pascalprecht.translate', 'ui.bootstrap', 'ui.router', 'oc.lazyLoad', 'angular-loading-bar','ngDialog','ngImgMap', 'templates'])
           .run(["$rootScope", "$state", "$stateParams",  '$window', '$templateCache','AUTH_EVENTS', 'AuthService', 'FORMATS',
-           'Session','$timeout','$log','$cookies', '$http','ContextService','ngDialog','$translate',
+           'Session','$timeout','$log','$cookies', '$http','ContextService','ngDialog','$translate', '$location',
                function ($rootScope, $state, $stateParams, $window, $templateCache, AUTH_EVENTS, AuthService, FORMATS,
-                 Session, $timeout, $log,$cookies, $http, contextService,ngDialog,$translate) {
+                 Session, $timeout, $log,$cookies, $http, contextService,ngDialog,$translate, $location) {
         	   'use strict';
               // Set reference to access them from any scope
               $rootScope.$state = $state;
@@ -105,6 +105,17 @@ var App = angular.module('venuelytics', ['ngRoute', 'ngSanitize', 'ngResource','
                 },
                 viewAnimation: 'ng-fadeInUp'
               };
+
+              var host =  $location.host();
+              host = host.replace("www.", "");
+              if (host === 'localhost') {
+                host = "venuelytics.com";
+              }
+              console.log(host);
+              
+              $rootScope.partner = host;
+              
+              
               /**
                * Global object to load data for charts using ajax 
                * Request the chart data from the server via post

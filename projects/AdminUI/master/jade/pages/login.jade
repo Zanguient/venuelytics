@@ -1,7 +1,7 @@
 .block-center.mt-xl.wd-xl(ng-controller="LoginFormController")
   // START panel
   .panel.panel-dark.panel-flat
-    .panel-heading.text-center.bg-info-dark
+    .p-lg.text-center.bg-info-dark
       a(href="#")
         img.block-center.img-rounded.img-responsive(src='app/img/{{partner}}/logo.png', alt='Image')
     .panel-body
@@ -20,13 +20,13 @@
               span.fa.fa-check
               |  {{"login.REMEMBER" | translate}}
           .pull-right
-            a.text-muted(ui-sref="page.recover") {{"login.FORGOT_PASSWORD" | translate}}
+            a.text-muted(ui-sref="page.recover" ng-show='!isPartnerSite')  {{"login.FORGOT_PASSWORD" | translate}}
         
         button.btn.btn-block.btn-primary.mt-lg(type='submit') {{"login.LOGIN" | translate}}
       
       .alert.alert-danger.text-center(ng-show='authMsg') {{authMsg | translate}}
       p.pt-lg.text-center {{"login.SIGNUP" | translate}}
-      a(ui-sref="page.register").btn.btn-block.btn-default {{"login.REGISTER" | translate}}
+      a(ui-sref="page.register" ng-show='!isPartnerSite').btn.btn-block.btn-default {{"login.REGISTER" | translate}}
   // END panel
   .p-lg.text-center.text-white
     span &copy; 
