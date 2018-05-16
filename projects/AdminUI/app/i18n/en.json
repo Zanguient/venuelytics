@@ -303,7 +303,8 @@
         "SOLD_TICKETS": "Sold Tickets",
         "PARTNERS": "Partners",
         "REPORTS": "Reports",
-        "BAND_ARTIST": "Band And Performers"
+        "BAND_ARTIST": "Band And Performers",
+        "DEALS" : "Deals"
       }
     }
   }

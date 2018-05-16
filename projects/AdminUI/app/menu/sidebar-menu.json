@@ -79,6 +79,14 @@
 		"roleId": 100
 	},
 	{
+		"text": "Deals",
+		"sref": "app.dealsManagement",
+		"icon": "fa fa-percent",
+		"translate": "sidebar.nav.pages.DEALS",
+		"submenu": [],
+		"roleId": [50,51,100, 500, 1000]
+	},
+	{
 		"text": "Event Management",
 		"sref": "app.eventManagement",
 		"icon": "icon-event",

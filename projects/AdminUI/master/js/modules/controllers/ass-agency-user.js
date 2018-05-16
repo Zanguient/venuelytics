@@ -42,7 +42,7 @@ App.controller('AssociateAgencyUserController', ['$scope', '$state', '$statePara
             { sWidth: "20%", aTargets: [1,2] },
             { sWidth: "10%", aTargets: [3,4] },
             { sWidth: "20%", aTargets: [5] },
-            { "targets": [0,1,2,3,4,5], 
+            { "targets": [0,1,2,3,4,5, 6], 
               "orderable": false
            },
            {
@@ -63,7 +63,7 @@ App.controller('AssociateAgencyUserController', ['$scope', '$state', '$statePara
               }
             },
             {
-             "targets": [3],
+             "targets": [4],
              "orderable": false,
              "createdCell": function (td, cellData, rowData, row, col) {
               
@@ -76,7 +76,7 @@ App.controller('AssociateAgencyUserController', ['$scope', '$state', '$statePara
               }
            },
           {
-            "targets": [5],
+            "targets": [6],
             "orderable": false,
             "createdCell": function (td, cellData, rowData, row, col) {
               var actionHtml = '<button title="Unlink User " class="btn btn-default btn-oval fa fa-link"></button>';
@@ -102,7 +102,7 @@ App.controller('AssociateAgencyUserController', ['$scope', '$state', '$statePara
             if (typeof img === 'undefined') {
               img = '';
             }
-            table.row.add([img, user.userName, user.loginId, user.enabled, userRoleService.getRoles()[user.roleId], user]);
+            table.row.add([img, user.userName, user.loginId, user.businessName, user.enabled, userRoleService.getRoles()[user.roleId], user]);
           });
           table.draw();
         });

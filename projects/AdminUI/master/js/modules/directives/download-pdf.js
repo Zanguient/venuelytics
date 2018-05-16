@@ -7,7 +7,7 @@ App.directive('pdfDownload', ['$compile', function($compile) {
         },
         link: function(scope, element, attr) {
             var anchor = element.children()[0];
-
+            scope.anchor = anchor;
             // When the download starts, disable the link	
             scope.$on('download-start', function() {
                 $(anchor).attr('disabled', 'disabled');
@@ -57,13 +57,25 @@ App.directive('pdfDownload', ['$compile', function($compile) {
             });
 	
         },
-        controller: ['$scope', '$attrs', '$http', 'ContextService', function($scope, $attrs, $http, contextService) {
+        controller: ['$scope', '$attrs', '$http', 'ContextService', 'DialogService',function($scope, $attrs, $http, contextService, DialogService) {
             $scope.downloadPdf = function() {
-                $scope.$emit('download-start');
-                var fullUrl = contextService.contextName + '/' + $attrs.url;
-                $http.get(fullUrl).then(function(response) {
-                    $scope.$emit('downloaded', response.data);
+                DialogService.getUserInput("Authenticate", "Enter password to Authenticate to download the contents.", "Password", "Enter Your account password.", function(password){
+                    $scope.$emit('download-start');
+                    var fullUrl = contextService.contextName + '/' + $attrs.url;
+                    var userPassword = 'self:'+password;
+                    var headers = { headers: {'X-Authorization': 'Basic '+ window.btoa(userPassword)} };
+                    $http.get(fullUrl, headers).then(function(response) {
+                        $scope.$emit('downloaded', response.data);
+                    }, function(error) {
+                        if (error.data.hasOwnProperty("message")) {
+                            DialogService.displayMessage(error.data.message);
+                        } else {
+                            DialogService.displayMessage("Server Error:" + JSON.stringify(error));    
+                        }
+                        $($scope.anchor).removeAttr('disabled')
+                    });
                 });
+                
             };
         }]
     }

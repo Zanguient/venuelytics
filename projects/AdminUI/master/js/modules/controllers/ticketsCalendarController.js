@@ -263,7 +263,7 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
         template: 'app/views/venue-events/buy-ticket.html',
         scope : $scope,
         className: 'ngdialog-theme-default custom-width',
-        controller: ['$scope','$timeout', 'toaster',function($scope, $timeout, toaster) {
+        controller: ['$scope','$timeout', 'toaster', 'DialogService',function($scope, $timeout, toaster, DialogService) {
         //$("#eventTicketId").parsley();
         $scope.calculateTaxNFees = function(ticket) {
           var quantity = $scope.ticketSale.quantity;
@@ -322,24 +322,33 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
         return (!!str && str.trim().length > 0);
       }
       $scope.sellTicket = function(ticketInfo) {
+        self = $scope;
+        if (ticketInfo.$valid && $("#sellTicketId").parsley().isValid()) {
+          if ( isNotEmpty($scope.ticketSale.contactName) || isNotEmpty($scope.ticketSale.contactEmail) || isNotEmpty($scope.ticketSale.contactPhone)) {
+            if (!isNotEmpty($scope.ticketSale.contactName)) {
+              toaster.pop({ type: 'error', body: 'Contact Name is required along with Email or Phone.', toasterId: 150 });
+              return;
+            }
+            if (!isNotEmpty($scope.ticketSale.contactEmail) && !isNotEmpty($scope.ticketSale.contactPhone )){                  
+              toaster.pop({ type: 'error', body: 'Atleast EMAIL or MOBILE number is required along with Contact Name.', toasterId: 150 });
+              return;
+            }
+          }
+
+          DialogService.getUserInput("Authenticate", "Enter password to Authenticate to download the contents.", "Password", "Enter Your account password.", function(password){
+            var userPassword = 'self:'+password;
+            var headers =  {'X-Authorization': 'Basic '+ window.btoa(userPassword)};
+             self.sellTicketImpl(ticketInfo, headers);
+          });
+        }
+      }
+
+      $scope.sellTicketImpl = function(ticketInfo, headers) {
           
           if (ticketInfo.$valid && $("#sellTicketId").parsley().isValid()) {
-            if ( isNotEmpty($scope.ticketSale.contactName)
-                  || isNotEmpty($scope.ticketSale.contactEmail )
-                  || isNotEmpty($scope.ticketSale.contactPhone)) {
-                if (!isNotEmpty($scope.ticketSale.contactName)) {
-                  toaster.pop({ type: 'error', body: 'Contact Name is required along with Email or Phone.', toasterId: 150 });
-                  return;
-                }
-              if (!isNotEmpty($scope.ticketSale.contactEmail) && !isNotEmpty($scope.ticketSale.contactPhone )){                  
-                  toaster.pop({ type: 'error', body: 'Atleast EMAIL or MOBILE number is required along with Contact Name.', toasterId: 150 });
-                return;
-              }
-            }
-            
             var target = {id: $scope.event.id, ticketId: ticket.id};
             
-            RestServiceFactory.VenueEventService().buyTicket(target, $scope.ticketSale, function(data){
+            RestServiceFactory.VenueEventService(headers).buyTicket(target, $scope.ticketSale, function(data){
               $scope.dialog.close();
               self.getEventTickets(self.event, self.selectedDate);
               self.getAgencyInfo();

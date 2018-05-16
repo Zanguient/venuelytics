@@ -3,14 +3,20 @@
 
  =========================================================*/
 
-App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthService','Session',
-	'$http', '$state','$log','$rootScope', 'ContextService', 'AUTH_EVENTS', '$timeout',
-     	function($scope, RestServiceFactory, AuthService, Session,$http, $state, $log, $rootScope,
-      	contextService, AUTH_EVENTS, $timeout) {
+App.controller('ApplicationController', ['$scope','RestServiceFactory','AuthService','Session', '$http', '$state','$log','$rootScope', 'ContextService', 'AUTH_EVENTS', 
+	'$timeout', '$location', function($scope, RestServiceFactory, AuthService, Session,$http, $state, $log, $rootScope, contextService, AUTH_EVENTS, $timeout, $location) {
     'use strict';
+    var host =  $location.host();
+	host = host.replace("www.", "");
+	if (host === 'localhost') {
+		host = "venuelytics.com";
+	}
+	console.log(host);
+	$scope.partner = host;
+
 	$scope.appLogo = "app/img/itzfun_logo.png";
 	$scope.appLogoSingle = "app/img/itzfun_logo.png";
-	$scope.serverName = contextService.serverName;
+	$scope.serverName = contextService.serverName.indexOf("prod.api") >= 0 ? "Production" : "Development";
 	$scope.notificationSummaries = {};
 	$scope.totalTypes = 0;
 	$rootScope.unreadMessages = 0;

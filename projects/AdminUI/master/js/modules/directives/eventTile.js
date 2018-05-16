@@ -14,9 +14,6 @@ App.directive('eventTile', function() {
   	controller : [ '$scope', '$rootScope','RestServiceFactory', '$state', 'ngDialog', 'APP_EVENTS',
   			function($scope, $rootScope, RestServiceFactory, $state, ngDialog, APP_EVENTS) {
 		
-		$scope.$watch('event', function() {
-        	
-    	});
 		$scope.editEvent = function(eventId) {
     		$state.go('app.editVenueEvent', {venueNumber: $scope.event.venueNumber, id: eventId});
   		};
@@ -73,30 +70,6 @@ App.directive('eventTile', function() {
 	      });
 			
 		};
-
-		$scope.printEvent = function(event) {
-			var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-		    mywindow.document.write('<html><head><title> VenueLytics - ' + event.eventName  + '</title>');
-		    mywindow.document.write('<link rel="stylesheet" href="app/css/app.css">');
-		    mywindow.document.write('<link rel="stylesheet" href="app/css/theme-e.css">');
-		    mywindow.document.write('</head><body >');
-
-		    mywindow.document.write('<h1>' + event.eventName  + '</h1>');
-
-		    var elementId = 'event-id-'+event.id +'-'+event.startDate;
-		    var html = document.getElementById(elementId).outerHTML;
-		    mywindow.document.write('<div style="position: relative; left: 50px; width: 320px !important; height:auto">' + html + '</div>');
-		    mywindow.document.write('</body></html>');
-
-		    mywindow.document.close(); // necessary for IE >= 10
-		    mywindow.focus(); // necessary for IE >= 10*/
-
-		    mywindow.print();
-		   // mywindow.close();
-
-		    return true;
-		}
   	}],
     templateUrl: 'app/templates/event-tile.html'
   };
