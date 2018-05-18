@@ -127,9 +127,9 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
     calElement.fullCalendar({
       isRTL: false,
       header: {
-        left:   'prev,next today',
+        left:   'prev',
         center: 'title',
-        right:  'month,agendaWeek,agendaDay'
+        right:  'next'
       },
       buttonIcons: { // note the space at the beginning
         prev:    ' fa fa-caret-left',

@@ -615,9 +615,9 @@
   color:black;
 }
 .eventlistImage {
-  width: 100px; 
-  height: 100px;
-  margin-left: -20px;
+  width: 110%;
+  height: 180px;
+  margin-left: -30px;
 }
 /*This is for imgae tiles row*/
 
