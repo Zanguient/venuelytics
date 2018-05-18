@@ -27,7 +27,7 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
         ngMeta.setTag('image', 'assets/img/screen2.jpg');
         self.blogs = APP_ARRAYS.blogs;
         self.news = [
-            {date:"May 14, 2018", name:"glimpse",image:"Glimpse-logo.png", title: "7 BEST RESTAURANT RESERVATION APPS", url: "https://www.glimpsecorp.com/7-best-restaurant-reservation-apps/", 
+            {date:"May 14, 2018", name:"glimpse",image:"Glimpse-logo-1.png", title: "7 BEST RESTAURANT RESERVATION APPS", url: "https://www.glimpsecorp.com/7-best-restaurant-reservation-apps/", 
             description: "Gone are the days of calling and making appointments or reservations because now everyone expects, even simple tasks, to be done instantly with the click of a button. Over 75% of Americans now own a smartphone, which makes digital applications crucial to the success of any business"},
             {date:"March 1, 2018", name:"Casino Journal",image:"casino-journal.png", title: "VL Enterprise digital concierge answer — VENUELYTICS", url: "https://www.casinojournal.com/articles/91954-vl-enterprise-digital-concierge-solution----venuelytics", 
             description: "VenueLytics, the main supplier of built-in venue administration and buyer expertise platform and AI Automation, just lately introduced VenueLytics VL Enterprise."},

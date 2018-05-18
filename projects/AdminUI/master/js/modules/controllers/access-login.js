@@ -27,7 +27,7 @@ App.controller('LoginFormController',  ['$state', '$stateParams','$scope', '$roo
   }
   console.log(host);
   $scope.partner = host;
-  $scope.isVenuelytics = host.indexOf("partner") < 0;
+  $scope.isVenuelytics = host.toLowerCase().indexOf("venuelytics.com") === 0;
 
   $scope.authMsg = '';
   $scope.loginAction = true;

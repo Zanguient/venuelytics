@@ -914,6 +914,14 @@ a.btn.disabled,fieldset[disabled] a.btn {
     height: 30px;
   }
 
+.mediumApple {
+    width: auto;
+    height: 35px;
+  }
+  .mediumAndroid {
+    width: auto;
+    height: 35px;
+  }
 
 @media screen and (min-width: 1600px)  {
   .loose_pack {
