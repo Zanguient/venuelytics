@@ -9,7 +9,7 @@
 
    $scope.tabs = [
    	  {name: 'Performers', content: 'app/views/artists/artists.html', icon: 'fa-list-ul'},
-      {name: 'Bands', content: 'app/views/artists/bands.html', icon: 'fa-home'},
+      //{name: 'Bands', content: 'app/views/artists/bands.html', icon: 'fa-home'},
     ];
 
 }]);
@@ -25,12 +25,12 @@ App.controller('ArtistsController', ['$scope', '$state', 'RestServiceFactory', '
 
 		if (!$.fn.dataTable) return;
 		var columnDefinitions = [
-			{ sWidth: "6%", aTargets:  [0] },
-			{ sWidth: "12%", aTargets: [1,2] },
-			{ sWidth: "10%", aTargets: [3] },
+			{ sWidth: "5%", aTargets:  [0] },
+			{ sWidth: "25%", aTargets: [1] },
+			{ sWidth: "10%", aTargets: [2] },
+			{ sWidth: "35%", aTargets: [3] },
 			{ sWidth: "5%", aTargets:  [5] },
-			{ sWidth: "35%", aTargets: [4] },
-			{ sWidth: "20%", aTargets: [6] },
+			{ sWidth: "20%", aTargets: [4] },
 			{
 					"targets": [0],
 					"orderable": false,
@@ -49,7 +49,7 @@ App.controller('ArtistsController', ['$scope', '$state', 'RestServiceFactory', '
 					}
 			},
 			{
-				"targets": [6],
+				"targets": [5],
 				"orderable": false,
 				"createdCell": function (td, cellData, rowData, row, col) {
 
@@ -61,7 +61,7 @@ App.controller('ArtistsController', ['$scope', '$state', 'RestServiceFactory', '
 				}
 			},
 			{
-				"targets": [5],
+				"targets": [4],
 				"orderable": false,
 				"createdCell": function (td, cellData, rowData, row, col) {
 
@@ -82,7 +82,7 @@ App.controller('ArtistsController', ['$scope', '$state', 'RestServiceFactory', '
 			var table = $('#artists_table').DataTable();
 			data.performers.map(function (performer) {
 				
-				table.row.add([performer.thumbnailImageUrl, performer.performerName, performer.groupName, performer.artistType, performer.description, performer.enabled, performer]);
+				table.row.add([performer.thumbnailImageUrl, performer.performerName, performer.artistType, performer.description, performer.enabled, performer]);
 			});
 			table.draw();
 		});
@@ -102,7 +102,7 @@ App.controller('ArtistsController', ['$scope', '$state', 'RestServiceFactory', '
 	$scope.editArtist = function (button, table) {
 		var targetRow = $(button).closest("tr");
 		var rowData = table.row(targetRow).data();
-		$state.go('app.artistedit', { id: rowData[6].id });
+		$state.go('app.artistedit', { id: rowData[5].id });
 	};
 
 

@@ -31,7 +31,7 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 	var venueMapProperties = ['id', 'type', 'section', 'imageMap', 'days', 'updatedAt', 'elements', 'imageUrls'];
 
 	var venueEventProperties = ['id', 'venueNumber', 'eventName', 'description',
-		'eventType', 'eventTime', 'durationInMinutes', 'startDate', 'endDate', 'scheduleDayOfMonth','ageRestriction','agePricePolicy',
+		'eventType', 'eventTime', 'durationInMinutes', 'startDate', 'endDate', 'scheduleDayOfMonth','ageRestriction','agePricePolicy', 'performers',
 		'scheduleDayOfWeek', 'imageURL', 'bookingUrl', 'price', 'enabled', 'performerId', 'processingFeeMode', 'agencyId', 'needSponsor', 'address'];
 
 	var eventTicketProperties = ['id', 'storeNumber', 'name', 'description',

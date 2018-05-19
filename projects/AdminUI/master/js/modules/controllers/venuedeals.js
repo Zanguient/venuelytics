@@ -8,6 +8,30 @@
 App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams','ngDialog', 'ContextService', 'APP_EVENTS',
                                    function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams, ngDialog, contextService, APP_EVENTS) {
   'use strict';
+
+  $scope.listClicked = function() {
+    $scope.content = 'app/views/venue/deal-list-include.html';
+
+  };
+
+  $scope.tableClicked = function() {
+    $scope.content = 'app/views/venue/deal-table-include.html';
+  };
+  $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
+        // register on venue change;
+      $scope.init();
+  });
+
+  $scope.init = function() {
+    $scope.listClicked();
+  };
+
+  $scope.init();
+}]);
+
+App.controller('VenueDealsTableController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams','ngDialog', 'ContextService', 'APP_EVENTS',
+                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams, ngDialog, contextService, APP_EVENTS) {
+  'use strict';
   
   $timeout(function(){
 
@@ -54,9 +78,8 @@ App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout'
     var table = $('#deals_table').DataTable();
       
     RestServiceFactory.CouponService().get({id: contextService.userVenues.selectedVenueNumber}, function(data) {
-       table.clear();
+      table.clear();
       $scope.dealMap = [];
-      $scope.deals = data;
       data.map(function(deal) {
           $scope.dealMap[deal.id] = deal;
           table.row.add([ deal.title, deal.description, deal.couponType, deal.discountAmount, deal.actionUrl, 
@@ -99,4 +122,50 @@ App.controller('VenueDealsController', ['$scope', '$state','$compile','$timeout'
         // register on venue change;
       $scope.init();
     });
+}]);
+
+
+
+App.controller('VenueDealsListController', ['$scope', '$state','$compile','$timeout', 'RestServiceFactory','DataTableService', 'toaster', '$stateParams','ngDialog', 'ContextService', 'APP_EVENTS',
+                                   function($scope, $state, $compile, $timeout, RestServiceFactory, DataTableService, toaster, $stateParams, ngDialog, contextService, APP_EVENTS) {
+  'use strict';
+  
+
+  $scope.init = function() {
+     
+    RestServiceFactory.CouponService().get({id: contextService.userVenues.selectedVenueNumber}, function(data) {
+      $scope.deals = data;
+    });
+  };
+
+  
+  $scope.editDeal = function(rowId, colId) {
+    var table = $('#deals_table').DataTable();
+    var d = table.row(rowId).data();
+    $scope.deal = $scope.dealMap[d[8]];
+    
+    ngDialog.openConfirm({
+        template: 'app/templates/content/form-deal-info.html',
+        // plain: true,
+        className: 'ngdialog-theme-default',
+        scope : $scope 
+      }).then(function (value) {
+        $('#tables_table').dataTable().fnDeleteRow(rowId);
+        var t = $scope.deal;
+        table.row.add([t.name, t.price, t.servingSize, t.description, t.enabled,  t.id]);
+        table.draw();
+        },function(error){
+          
+       });
+    };
+
+  $scope.createNewDeal = function() {
+    $state.go('app.venueMapedit', {id: 'new'});
+  };
+
+  $scope.$on(APP_EVENTS.venueSelectionChange, function(event, data) {
+        // register on venue change;
+      $scope.init();
+    });
+  $scope.init();
 }]);

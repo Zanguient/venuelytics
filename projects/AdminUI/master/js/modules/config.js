@@ -330,7 +330,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/venue-event-edit.html'),
                 controller: 'VenueEventController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog', 'taginput','chosen')
             })
             .state('app.dealsManagement', {
                 url: '/dealsManagement',

@@ -41,13 +41,22 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         obj.value = idx +"-";
         $scope.agePricePolicies.push(obj);
     }
-   /* $scope.agePricePolicies['2-'] = '';
-    $scope.agePricePolicies['3-'] = 'Free for age 3 years and younger';
-    $scope.agePricePolicies['5-'] = 'Free for age 5 years and younger';    
-    $scope.agePricePolicies['8-'] = 'Free for age 8 years and younger';
-    $scope.agePricePolicies['10-'] = 'Free for age 10 years and younger';
-    $scope.agePricePolicies['12-'] = 'Free for age 12 years and younger';
-    $scope.agePricePolicies['13-'] = 'Free for age 13 years and younger';*/
+   
+   $scope.performers = [];
+    var self = $scope;
+    RestServiceFactory.PerformerService().get(function(data) {
+        self.performers = data.performers;
+        setTimeout(function () {
+            $('#performerList').trigger('chosen:updated');
+        });
+       /* setTimeout(function () {
+            self.$apply(function () {
+                
+                self.chosenTS = 1;
+            });
+        });*/
+        
+    });
      
    
   // Disable weekend selection
@@ -66,6 +75,9 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
 	    var promise = RestServiceFactory.VenueService().getEvent({id:$stateParams.id});
 	    promise.$promise.then(function(data) {
 	    	$scope.data = data;
+            if (typeof data.performers != 'undefined') {
+                $scope.data.performers = data.performers.split(";");
+            }
 
             var startDate = $scope.data.startDate.substring(0,10);
             var from = startDate.split("-");
@@ -118,10 +130,7 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         return Session.roleId >= 100 || Session.roleId === 11;
     };
 
-    $scope.performers = [];
-    RestServiceFactory.PerformerService().get(function(data) {
-        $scope.performers = data.performers;
-    });
+
 
     // $scope.startOpened = true;
     $('#startDtCalendarId').on('click', function ($event) {
@@ -153,7 +162,12 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
         var t = $scope.eventDisplayTime;
         data.eventTime = t.getHours() +":" + t.getMinutes();
         data.durationInMinutes = parseInt($scope.hours)*60 + parseInt($scope.minutes);
-    	var payload = RestServiceFactory.cleansePayload('VenueEventService', data);
+    	
+        
+        var payload = RestServiceFactory.cleansePayload('VenueEventService', data);
+        payload.performers = payload.performers.join(";");
+        payload.performerId = -1;
+
         var target = {id: data.id};
         if ($stateParams.id === 'new'){
           target = {};

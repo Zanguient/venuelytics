@@ -99,10 +99,11 @@
             <input type="text" name="scheduleDayOfMonth" class="form-control" 
             ng-model="data.scheduleDayOfMonth" placeholder="1,2,3, ... 30" ng-readonly="config.scheduleRadio != 'M'"/>
           </div>
-          <div class="form-group col-md-6  col-sm-12">
-            <label class="control-label">Performer Name</label>
-            <select name="performer" ngRequired class="form-control col-sm-12" ng-model="data.performerId" >  
-                <option ng-repeat="performer in performers" ng-selected="{{performer.id == data.performerId}}"  value="{{performer.id}}">{{performer.performerName}}</option>  
+          <div class="form-group col-sm-12">
+            <label class="control-label">Performers</label>
+            <select id="performerList"  class="form-control col-sm-12" multiple="" chosen ="" ng-model="data.performers" ng-options="performer.performerName as performer.performerName for performer in performers">  
+                <!-- <option ng-repeat="performer in performers" ng-selected="{{performer.id == data.performerId}}"  value="{{performer.id}}">{{performer.performerName}}</option>   -->
+                <option value=""></option>
               </select>
           </div>
            
