@@ -21,7 +21,7 @@
 	"FEATURE_LOYALTY_DESC":"Personalized Deals, Offers, Digital Rewards, Events and Booking.",
 	"FEATURE_PRIVATE_EVENT":"Private Events",
 	"FEATURE_PRIVATE_EVENT_DESC":"Book Banquet Halls, Karaoke Rooms & Event Tickets",
-	"CLOSE":"close",
+	"CLOSE":"Close",
 	"solution" : {
 		"BUSINESS_SOLUTION": "Enterprise Solution",
 		"PAGE_DESC": "VenueLytics provides an end-to-end solution for the Hospitality & Entertainment industry"
@@ -72,6 +72,7 @@
 		"BUSINESS_ANALYTICS":"BUSINESS ANALYTICS",
 		"BUSINESS_ANALYTICS_DESCRIPTION":"Customer insights, Prediction, Personalized Services, Cab & Limo Booking, Valet Parkings & VIP Access",
 		"OUR_PRICING":"OUR PRICING",
+		"BUSINESS_LISTING_PAGE":"Business Listing Page",
 		"NEXT_BUTTON":"Next",
 		"PREVIOUS_BUTTON":"Previous",
 		"FREE_TRIAL":"Claim or Create your business listing & services page for Free!",
@@ -98,9 +99,9 @@
 	"event":{
 		"EVENT_LIST":"List",
 		"EVENT_CALENDAR":"Calender",
-		"EVENT_DOORS":"Doors",
-		"EVENT_SHOW":"Show",
-		"EVENT_END":"Event ends at",
+		"EVENT_DOORS":"Door Opens",
+		"EVENT_SHOW":"Show Start",
+		"EVENT_END":"Show End",
 		"EVENT_TICKET":"BUY TICKETS",
 		"EVENT_WEEK":"Date Of The Week",
 		"EVENT_TYPES":"Event Type",

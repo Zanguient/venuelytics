@@ -3,8 +3,8 @@
  * @date 05-sep-2017
  */
 "use strict";
-app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','$timeout','ngMeta', 'VenueService',
-    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, $timeout, ngMeta, venueService) {
+app.controller('EventListCtrl', ['$log', '$scope', '$routeParams', 'AjaxService', '$rootScope','$timeout','ngMeta', 'VenueService',
+    function ($log, $scope,  $routeParams, AjaxService, $rootScope, $timeout, ngMeta, venueService) {
         
     var self = $scope;
     var DAYS = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
@@ -15,8 +15,7 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
     */
     self.events = [];
     self.calEvents = [];
-     self.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
-
+    
     self.init = function() {
       self.venueDetails = venueService.getVenue($routeParams.venueId);
       self.venueId = self.venueDetails.id;
@@ -54,9 +53,9 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
         continue;
       }
       var obj = {};
-      obj.title = event.eventType  + ':' +  event.eventName;  
-      var sDate = new Date(event.startDate);
-      var endDate = new Date(event.endDate);
+      obj.title = "\n\n\n\n";//event.eventName;  
+      var sDate = $scope.UTC(event.startDate);
+      var endDate = $scope.UTC(event.endDate);
       var t = event.eventTime.split(":");
       var h = parseInt(t[0]);
       var m = parseInt(t[1]);
@@ -73,6 +72,7 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
       obj.end = moment(sDate).add(event.durationInMinutes, 'm');
       obj.allDay = false;
       event.eventTimes = obj.start;
+      event.doorOpens = moment(sDate).add(-45, 'm').toDate();
       var dateValue = moment(obj.end).format("HH:mm a");
       var H = + dateValue.substr(0, 2);
       h = (H % 12) || 12;
@@ -83,8 +83,8 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
         dateValue = h + ':'+ dateValue.substr(2, 3) + ampm;
       }
       event.endtimes = dateValue;
-      obj.backgroundColor = self.colorPalattes[i % self.colorPalattes.length];
-      obj.borderColor = self.colorPalattes[i % self.colorPalattes.length];
+      obj.backgroundColor = 'rgba(0,0,0,0);';
+      obj.borderColor = 'rgba(0,0,0,0);';
       obj.className = '__event_id_class';
       var tempDays = event.scheduleDayOfMonth.split(",");
       var mDays = [];
@@ -103,7 +103,7 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
         var day = DAYS[d.getDay()];
         cloneObj.venueEvent = event;
         if (event.scheduleDayOfWeek.length > 0) {
-          if (event.scheduleDayOfWeek.indexOf(day) >=0) {
+          if (event.scheduleDayOfWeek.indexOf(day) >=0  || event.scheduleDayOfWeek === "*") {
             self.calEvents.push(cloneObj);
           }
         } else if (event.scheduleDayOfMonth.length > 0) {
@@ -127,9 +127,9 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
     calElement.fullCalendar({
       isRTL: false,
       header: {
-        left:   'prev,next today',
+        left:   'prev',
         center: 'title',
-        right:  'month,agendaWeek,agendaDay'
+        right:  'next'
       },
       buttonIcons: { // note the space at the beginning
         prev:    ' fa fa-caret-left',
@@ -141,6 +141,7 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
         week:  'week',
         day:   'day'
       },
+      timeFormat: 'h(:mm) A',
       editable: false,
       selectable: true,
       droppable: false, // this allows things to be dropped onto the calendar 
@@ -176,6 +177,7 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
       eventClick: function( event, jsEvent, view ) {
         self.selectCalender = false;
         self.event = event.venueEvent;
+        self.eventSelectedDate = event.start.toDate();
         $timeout(function() {
           $('#eventView').modal('show');
           $('.modal-backdrop').remove();
@@ -187,8 +189,47 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
         //draggingEvent = event;
       },
       eventRender: function(event, eventElement) {
+        var dId = event.start.format("Y-MM-DD");
+        //console.log();
+        var image = event.venueEvent.imageURL || 'assets/img/placeholder.jpg';
+        event.venueEvent.noImage = false;
+        if (!event.venueEvent.imageURL) {
+          event.venueEvent.noImage = true;
+        }
+        $('#'+dId).css("background", "url("+image+") no-repeat center center");
+        $('#'+dId).css("background-size", "cover");
+        $('#'+dId).css("margin", "30px");
+        $(eventElement).css("margin-top", "30px");
+        $(eventElement).css("margin-top", "30px");
+        if (!event.venueEvent.noImage) {
+          $(eventElement).find('.fc-event-time').hide();
+        } else {
+          $(eventElement).css("background-color", "rgba(0,0,0,0.7)");
+          $(eventElement).find('.fc-event-title').text(event.venueEvent.eventName);
+        }
+       // console.log(eventElement);
+       // console.log(eventElement[0]);
+       // eventElement[0].setAttribute("style","background-image: url('https://d1hx7mabke4m1h.cloudfront.net/artist/image/2864/01May2018182949.jpg') no-repeat center center cover;");
+        //eventElement.append("<img src='https://d1hx7mabke4m1h.cloudfront.net/artist/image/2864/01May2018182949.jpg'>");
+        //
       },
+      eventMouseover: function(event, jsEvent, view) {
+        $(this).css("background-color", "rgba(0,0,0,0.7)");
+        $(this).find('.fc-event-time').show();
+        $(this).find('.fc-event-title').text(event.venueEvent.eventName);
+
+
+
         // This array is the events sourc === 'BottleService'es
+      },
+      eventMouseout: function(event, jsEvent, view) {
+       
+        if (!event.venueEvent.noImage) {
+           $(this).css("background-color", "rgba(0,0,0,0)");
+          $(this).find('.fc-event-time').hide();
+          $(this).find('.fc-event-title').html("<br><br><br><br>");
+        }
+      }, 
       events: self.calEvents
     });
     self.selectedDate = calElement.fullCalendar('getDate');
@@ -196,5 +237,49 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
   setTimeout(function() { 
     self.initCalendar();
   }, 2500);
+
+  $scope.listItemClicked = function(event) {
+    $scope.event = event; 
+    $scope.eventSelectedDate = $scope.UTC(event.startDate);
+    $timeout(function() {
+          $('#eventView').modal('show');
+          $('.modal-backdrop').remove();
+        }, 300);
+  };
+  $scope.getAgeRestriction = function(event) {
+    if (!event || event.ageRestriction === 'NONE' || typeof(event.ageRestriction) == 'undefined' || event.ageRestriction.trim() == "") {
+      return "No Restriction";
+    } 
+
+    return event.ageRestriction.replace("+", "") + " years and above";
+  };
+
+  $scope.getPricePolicy = function(event) {
+    if (!event || event.agePricePolicy === 'NONE' || typeof(event.agePricePolicy) == 'undefined' || event.agePricePolicy.trim() == "") {
+      return "No Free Passes";
+    } 
+
+    if (event.agePricePolicy.endsWith("-")) {
+      return "Free for " + event.agePricePolicy.replace("-", "") + " years and younger";
+    }
+    return event.agePricePolicy;
+  };
+  $scope.UTC = function(date) {
+      if (typeof(date) === 'undefined') {
+        return new Date();
+      }
+      var startDate = date.substring(0,10);
+      var from = startDate.split("-");
+      return new Date(from[0], from[1] - 1, from[2]);
+  };
+
+  $scope.getPerformers = function(event) {
+    if (event && !!event.performer) {
+      return event.performer.performerName;
+    } else if (event && !!event.performers) {
+      return event.performers;
+    }
+    return "";
+  }
   self.init();
 }]);

@@ -372,7 +372,9 @@
   box-shadow: 0 7px 10px #fdfdfd !important;
 
 }
-
+.blackTheme .fc table , html .fc .blackTheme {
+  color: white;
+}
 /* BlackTheme End */
 
 .whiteTheme {
@@ -576,10 +578,6 @@
   box-shadow: 0 0 3px #ccc;
 }
 
-.dateMargin {
-  margin-left: 20px;
-}
-
 .imgHolder h5 {
   position: absolute;
   right: 20px;
@@ -587,38 +585,13 @@
   color:white;
 }
 
-
-.calEventName {
-  margin-top: 0px;
-  color: black;
-}
-.eventDescription {
-  margin-left: -20px;
-}
-.eventModalTop {
-  margin-top: 50px;
-}
 /* Date End */
 .eventListcal {
   border:1px solid black;
   margin-top:15px;
 }
-.eventListName {
-  color:black;
-  font-size: 24px;
-}
-.eventListTime {
-  margin-top: 0px; 
-  margin-bottom: 0px;
-}
-.eventListPrice {
-  color:black;
-}
-.eventlistImage {
-  width: 100px; 
-  height: 100px;
-  margin-left: -20px;
-}
+
+
 /*This is for imgae tiles row*/
 
 .smartbanner {
@@ -1156,14 +1129,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
     width: 50px;
   }
 
-  .eventListPrice {
-    margin-right: 20px;
-    color: black;
-  }
-  .eventButtonAling {
-    margin-left: -22px;
-  }
-
   
 
   .fc-header-title {
@@ -1331,13 +1296,6 @@ a.btn.disabled,fieldset[disabled] a.btn {
         height: 100px
       }
 
-      .eventListPrice {
-        margin-right: 48px;
-        color: black;
-      }
-      .eventButtonAling {
-        margin-left: -22px;
-      }
 
       .fc-header-title {
         display: inline-block;
@@ -1430,9 +1388,7 @@ a.btn.disabled,fieldset[disabled] a.btn {
         margin-right: 64px;
         color: black;
       }
-      .eventButtonAling {
-        margin-left: -22px;
-      }
+      
 
       .fc-header-title {
         display: inline-block;
