@@ -154,6 +154,7 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
       eventClick: function( event, jsEvent, view ) {
         $scope.selectCalender = false;
         $scope.event = event.venueEvent;
+        $scope.eventSelectedDate = event.start;
         $('.__event_id_class').css('border-color', '');
         $(this).css('border-color', 'red');
         $scope.$digest();

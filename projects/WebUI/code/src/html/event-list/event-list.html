@@ -1,4 +1,4 @@
-<div ng-controller="eventListCtrl" ng-cloak>
+<div ng-controller="EventListCtrl" ng-cloak>
     <div>
         <button type="button" class="btn btn-primary pull-right eventListClass" ng-model="eventListData" ng-click="listEventView()">
             <i class="fa fa-list" aria-hidden="true"></i>{{'event.EVENT_LIST' | translate}}
@@ -12,7 +12,7 @@
     <!-- <div event-tile="" ng-class="'col-masonry'" event="event" ng-repeat="event in events track by $index" /> -->
     <div class="row" ng-if="eventListData == true">
         <div class="col-md-12 masonry-item wow fadeInUp animation-delay-2 mb-2 bg-medium" ng-repeat="event in events track by $index">
-            <article class="card border_clouds mb-4 wow materialUp animation-delay-3">
+            <article class="card border_clouds mb-4 wow materialUp animation-delay-3" >
                  <figure class="col-lg-4 col-md-6 col-sm-12">
                     <img class="img-responsive center-block" ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" alt="Event Image">
                 </figure>
@@ -21,12 +21,12 @@
                     
                     <div class="pull-left col-sm-12">
                         <div class="pull-left h5 mr-1">
-                            <div class="text-danger" ng-bind="event.startDate | date: 'EEE' | uppercase"> </div>
+                            <div class="text-danger" ng-bind="UTC(event.startDate) | date: 'EEE' | uppercase"> </div>
                             
-                            <span  class="mt-1" ng-bind="event.startDate | date: 'MMMM' | uppercase"></span>
+                            <span  class="mt-1" ng-bind="UTC(event.startDate) | date: 'MMMM' | uppercase"></span>
                         </div>
 
-                        <div class="mega-title pull-left mt0" ng-bind="event.startDate | date: 'dd'"></div>
+                        <div class="mega-title pull-left mt0" ng-bind="UTC(event.startDate) | date: 'dd'"></div>
                          <div class="pull-right">
                             <span class="h6">Age</span><br> {{getAgeRestriction(event)}}
                         </div>
@@ -35,16 +35,26 @@
                     <div class="col-sm-12 mt-4">
                         <h5 class="mb0" >{{event.eventName | uppercase}}</h5>
                         <div class="loose_pack mt-1" >
-                            {{'event.EVENT_DOORS' | translate}}: <span class="title-bold">{{event.eventTimes | date:'h:mm a'}} </span><br>
-                            {{'event.EVENT_SHOW' | translate}}: <span class="title-bold">{{event.eventTimes | date:'h:mm a'}} </span><br>
-                            {{'event.EVENT_END' | translate}} : <span class="title-bold">{{event.endtimes | date:'h:mm a'}}
-                        </div>
-
+                                <table class="table table-responsive table-condensed table-no-border " >
+                                    <tbody>
+                                    <tr><td  class="bg-medium" style="padding: 5px !important; ">{{'event.EVENT_DOORS' | translate}}:</td>
+                                        <td  class="bg-medium" style="padding: 5px !important;"><span class="title-bold">{{event.doorOpens | date:'h:mm a'}} </span></td></tr>
+                                    <tr><td  class="bg-medium" style="padding: 5px !important;">{{'event.EVENT_SHOW' | translate}}:</td>
+                                        <td  class="bg-medium" style="padding: 5px !important;"><span class="title-bold">{{event.eventTimes | date:'h:mm a'}} </span></td></tr>
+                                    <tr><td  class="bg-medium" style="padding: 5px !important;">{{'event.EVENT_END' | translate}}:</td>
+                                        <td  class="bg-medium" style="padding: 5px !important;"><span class="title-bold">{{event.endtimes | date:'h:mm a'}} </span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <p class="mt-2">
+                            Location: {{event.address || venueDetails.address | uppercase}}
+                        </p>
                         <div class="h3" ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">
                             Price: &dollar;{{event.price}}
                             <br>
                             <span class="title_desc">{{getPricePolicy(event)}}</span>
                         </div>
+                        <a href="#" ng-click="listItemClicked(event)" class="btn btn-success btn-raised btn-sm">More Info</a>
                         <a href="{{event.bookingUrl}}" target="_new" class="btn btn-success btn-raised btn-sm">{{'event.EVENT_TICKET' | translate}}</a>
                     </div>
                 </div>
@@ -83,24 +93,34 @@
                     <div class="card-block col-lg-7 col-md-6 col-sm-12">
                         <div class="pull-left col-sm-12">
                             <div class="pull-left h5 mr-1">
-                                <div class="text-danger" ng-bind="event.startDate | date: 'EEE' | uppercase"> </div>
+                                <div class="text-danger" ng-bind="eventSelectedDate || event.start.toDate() | date: 'EEE' | uppercase"> </div>
                                 
-                                <span  class="mt-1" ng-bind="event.startDate | date: 'MMMM' | uppercase"></span>
+                                <span  class="mt-1" ng-bind="eventSelectedDate || event.start.toDate() | date: 'MMMM' | uppercase"></span>
                             </div>
-                            <div class="mega-title pull-left mt0" ng-bind="event.startDate | date: 'dd'"></div>
+                            <div class="mega-title pull-left mt0" ng-bind="eventSelectedDate || event.start.toDate() | date: 'dd'"></div>
                             <div class="pull-right">
                                 <span class="h6">Age</span><br> {{getAgeRestriction(event)}}
                             </div>
+
                         </div>
                         
                         <div class="col-sm-12 mt-4">
                             <h5 class="mb0" >{{event.eventName | uppercase}}</h5>
                             <div class="loose_pack mt-1" >
-                                {{'event.EVENT_DOORS' | translate}}: <span class="title-bold">{{event.eventTimes | date:'h:mm a'}} </span><br>
-                                {{'event.EVENT_SHOW' | translate}}: <span class="title-bold">{{event.eventTimes | date:'h:mm a'}} </span><br>
-                                {{'event.EVENT_END' | translate}} : <span class="title-bold">{{event.endtimes | date:'h:mm a'}}
+                                <table class="table table-responsive table-condensed table-no-border  whiteTheme" >
+                                    <tbody>
+                                    <tr><td style="padding: 5px !important;">{{'event.EVENT_DOORS' | translate}}:</td>
+                                        <td style="padding: 5px !important;"><span class="title-bold">{{event.doorOpens | date:'h:mm a'}} </span></td></tr>
+                                    <tr><td style="padding: 5px !important;">{{'event.EVENT_SHOW' | translate}}:</td>
+                                        <td style="padding: 5px !important;"><span class="title-bold">{{event.eventTimes | date:'h:mm a'}} </span></td></tr>
+                                    <tr><td style="padding: 5px !important;">{{'event.EVENT_END' | translate}}:</td>
+                                        <td style="padding: 5px !important;"><span class="title-bold">{{event.endtimes | date:'h:mm a'}} </span></td></tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            
+                            <p class="mt-2">
+                                Location: {{event.address || venueDetails.address | uppercase}}
+                            </p>
                             <div class="h3" ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">
                                 Price: &dollar;{{event.price}}
                                 <br>
@@ -120,6 +140,10 @@
                         <h6>{{'bottleServiceTab.DESC' | translate}}</h6>
                         <div class="loose_pack">
                              {{event.description}}
+                        </div>
+                        <h6>Performers</h6>
+                        <div class="loose_pack">
+                             {{getPerformers(event)}}
                         </div>
                     </div>
                     <!-- <table class="table table-no-border col-md-12">

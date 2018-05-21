@@ -249,7 +249,7 @@ app
     "MONTHLY_PRICE": "Monthly price",
     "PER_MONTH": "Per Month",
     "BASIC_PRICE": "99",
-    "PROFESSIONAL_PRICE": "199",
+    "PROFESSIONAL_PRICE": "249",
     "ENTER_PRICE": "Contact For Pricing",
     "PLAN_FEATURE": "Plan Feature",
     "MONTHLY_PRICE": "Monthly price",
@@ -272,7 +272,7 @@ app
     ],
     "PREMIUM_SERVICES": "Premium Services",
     "PREMIUM_SERVICES_ARRAY": [
-      { 'title': 'Event & Ticketing', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES' },
+     /* { 'title': 'Event & Ticketing', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES' },
       { 'title': 'Mobile Payment', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES (2.90% + $0.25)', 'enterPriseDetails': 'YES (2.45% + $0.25)' },
       { 'title': 'Artist/DJ Promotion', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES' },
       { 'title': 'Integration', 'FreeDetails': 'NO', 'basicDetails': '-', 'professionalDetails': '-', 'enterPriseDetails': '-' },
@@ -288,15 +288,15 @@ app
       { 'title': 'Fast Pass', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES' },
       { 'title': 'Lost & Found', 'FreeDetails': 'NO', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES' },
       { 'title': 'Valet Services', 'FreeDetails': 'NO', 'basicDetails': 'YES', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES' },
-      { 'title': 'Guest Registration', 'FreeDetails': 'NO', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES' }
+      { 'title': 'Guest Registration', 'FreeDetails': 'NO', 'basicDetails': 'NO', 'professionalDetails': 'YES', 'enterPriseDetails': 'YES' }*/
     ],
     "WIFI_MONETIZATION": "WiFi Monetization",
     "WIFI_MONETIZATION_ARRAY": [
-      { 'title': 'On-site Food/Drinks Ordering', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES' },
+     /* { 'title': 'On-site Food/Drinks Ordering', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES' },
       { 'title': 'VIP Services / Concierge', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES' },
       { 'title': 'Digital Loyalty Management', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES' },
       { 'title': 'Beacon Integration', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES' },
       { 'title': 'White Label - Private App', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES' },
-      { 'title': 'Way Finder', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES' }
+      { 'title': 'Way Finder', 'basicDetails': 'NO', 'professionalDetails': 'NO', 'enterPriseDetails': 'YES' }*/
     ]
   });

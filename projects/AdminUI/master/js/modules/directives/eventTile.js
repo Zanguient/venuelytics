@@ -34,8 +34,8 @@ App.directive('eventTile', function() {
   				return new Date();
   			}
   			var startDate = date.substring(0,10);
-            var from = startDate.split("-");
-            return new Date(from[0], from[1] - 1, from[2]);
+        var from = startDate.split("-");
+        return new Date(from[0], from[1] - 1, from[2]);
   		};
 
   		$scope.TIME = function(d) {

@@ -3,8 +3,8 @@
  * @date 05-sep-2017
  */
 "use strict";
-app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope','$timeout','ngMeta', 'VenueService',
-    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, $timeout, ngMeta, venueService) {
+app.controller('EventListCtrl', ['$log', '$scope', '$routeParams', 'AjaxService', '$rootScope','$timeout','ngMeta', 'VenueService',
+    function ($log, $scope,  $routeParams, AjaxService, $rootScope, $timeout, ngMeta, venueService) {
         
     var self = $scope;
     var DAYS = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
@@ -54,8 +54,8 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
       }
       var obj = {};
       obj.title = "\n\n\n\n";//event.eventName;  
-      var sDate = new Date(event.startDate);
-      var endDate = new Date(event.endDate);
+      var sDate = $scope.UTC(event.startDate);
+      var endDate = $scope.UTC(event.endDate);
       var t = event.eventTime.split(":");
       var h = parseInt(t[0]);
       var m = parseInt(t[1]);
@@ -72,6 +72,7 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
       obj.end = moment(sDate).add(event.durationInMinutes, 'm');
       obj.allDay = false;
       event.eventTimes = obj.start;
+      event.doorOpens = moment(sDate).add(-45, 'm').toDate();
       var dateValue = moment(obj.end).format("HH:mm a");
       var H = + dateValue.substr(0, 2);
       h = (H % 12) || 12;
@@ -176,6 +177,7 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
       eventClick: function( event, jsEvent, view ) {
         self.selectCalender = false;
         self.event = event.venueEvent;
+        self.eventSelectedDate = event.start.toDate();
         $timeout(function() {
           $('#eventView').modal('show');
           $('.modal-backdrop').remove();
@@ -236,6 +238,14 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
     self.initCalendar();
   }, 2500);
 
+  $scope.listItemClicked = function(event) {
+    $scope.event = event; 
+    $scope.eventSelectedDate = $scope.UTC(event.startDate);
+    $timeout(function() {
+          $('#eventView').modal('show');
+          $('.modal-backdrop').remove();
+        }, 300);
+  };
   $scope.getAgeRestriction = function(event) {
     if (!event || event.ageRestriction === 'NONE' || typeof(event.ageRestriction) == 'undefined' || event.ageRestriction.trim() == "") {
       return "No Restriction";
@@ -254,5 +264,22 @@ app.controller('eventListCtrl', ['$log', '$scope', '$location', 'DataShare', '$w
     }
     return event.agePricePolicy;
   };
+  $scope.UTC = function(date) {
+      if (typeof(date) === 'undefined') {
+        return new Date();
+      }
+      var startDate = date.substring(0,10);
+      var from = startDate.split("-");
+      return new Date(from[0], from[1] - 1, from[2]);
+  };
+
+  $scope.getPerformers = function(event) {
+    if (event && !!event.performer) {
+      return event.performer.performerName;
+    } else if (event && !!event.performers) {
+      return event.performers;
+    }
+    return "";
+  }
   self.init();
 }]);
