@@ -8,6 +8,7 @@ app.controller('ContactController', ['$scope', '$http', '$location', 'RestURL', 
 
         var self = $scope;
         $rootScope.selectedTab = 'contact';
+        $rootScope.blackTheme = "";
         
 
     }]);
@@ -24,7 +25,7 @@ app.controller('AboutController', ['$scope', '$http', '$location', 'RestURL', 'D
     
     $rootScope.selectedTab = 'about';
     $scope.business = {};
-
+    $rootScope.blackTheme = "";
     self.claimBusiness = function(email) {
 
     	self.sendEmail(email, 'about-claim-business', '30DaysFree', true);

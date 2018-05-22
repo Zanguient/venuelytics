@@ -9,7 +9,7 @@ app.controller('sidebarController', ['$log', '$scope', '$http', '$location', 'Re
     		$log.log('Inside Sidebar Controller.');
     		
     		var self = $scope;
-
+            $rootScope.blackTheme = "";
             self.init = function() {
                 var data = $location.search().sb;
                 $rootScope.showBusinessTab = parseInt(data);

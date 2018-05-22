@@ -6,7 +6,7 @@
  app.controller('WifiController', ['$log', '$scope','$location','$rootScope','$auth',
  	function ($log, $scope, $location,$rootScope, $auth) {
  		$rootScope.embeddedFlag = true;
-
+ 		$rootScope.blackTheme = "";
  		$scope.login = function() {
  			$auth.login($scope.user)
  			.then(function() {

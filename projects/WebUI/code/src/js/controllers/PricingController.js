@@ -7,6 +7,7 @@ app.controller('PricingController', ['$log', '$scope', '$http', '$location', 'Re
 
         var self = $scope;
         $rootScope.selectedTab = 'pricing';
+        $rootScope.blackTheme = "";
         self.init = function() {
             self.basicPrice = PRICING_APP.BASIC_PRICE;
             self.professionalPrice = PRICING_APP.PROFESSIONAL_PRICE;

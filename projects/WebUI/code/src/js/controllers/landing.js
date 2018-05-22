@@ -11,7 +11,7 @@
  		
  		var self = $scope;
         self.venueImage = '';
-       
+        $rootScope.blackTheme = "";
  		$scope.init = function () {
 
             $scope.getVenue();

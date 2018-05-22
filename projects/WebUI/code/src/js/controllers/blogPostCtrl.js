@@ -11,6 +11,7 @@ app.controller('BlogPostController', ['$log', '$scope', 'DataShare', '$translate
         var self = $scope;
         self.blogPostUrl = '';
         $rootScope.selectedTab = 'blogs';
+        $rootScope.blackTheme = "";
         self.init = function () {
             self.postId = $routeParams.postId;
             self.blogPost = APP_ARRAYS.nightlife;

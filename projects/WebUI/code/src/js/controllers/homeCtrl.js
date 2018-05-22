@@ -9,7 +9,7 @@ app.controller('HomeController', ['$log', '$scope', '$location', 'DataShare', '$
         $log.log('Inside Home Controller.');
         ngMeta.setTitle("Home - Venuelytics");
         var self = $scope;
-
+        $rootScope.blackTheme = "";
         $rootScope.showItzfun = false;
         self.clientImages = APP_CLIENTS.clientImages;
         $rootScope.businessRoles = APP_ARRAYS.roles;

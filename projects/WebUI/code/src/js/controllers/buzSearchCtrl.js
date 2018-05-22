@@ -8,7 +8,7 @@ app.controller('BusinessSearchController', ['$log', '$translate','$scope', '$htt
 
         $rootScope.showItzfun = false;
         $rootScope.selectedTab = 'business';
-
+        $rootScope.blackTheme = "";
         self.successMessage = !!$location.search().successful;
         var utmPayload = {};
         utmPayload.utmSource = $location.search().utm_source;

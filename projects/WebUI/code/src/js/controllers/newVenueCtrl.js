@@ -11,6 +11,7 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
             var self = $scope;
            
             $rootScope.selectedTab = 'consumer';
+            $rootScope.blackTheme = "";
             self.init = function() {
                 DataShare.bottleServiceData = {};
                 DataShare.guestListData = {};

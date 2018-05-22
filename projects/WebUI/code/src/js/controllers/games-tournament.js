@@ -7,6 +7,7 @@ app.controller('GamesTournamentController', ['$log', '$scope', '$http', '$locati
 
         var self = $scope;
         $rootScope.selectedTab = 'consumer';
+        $rootScope.blackTheme = "";
         self.init = function() {
             AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
                     /*jshint maxcomplexity:10 */

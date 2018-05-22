@@ -6,12 +6,13 @@
 app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'APP_ARRAYS', '$rootScope', 'AjaxService','ngMeta',
     function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_ARRAYS, $rootScope, AjaxService, ngMeta) {
 
-    		$log.log('Inside Blog Controller.');
+    	$log.log('Inside Blog Controller.');
 
         var self = $scope;
         $rootScope.showItzfun = false;
         $rootScope.selectedTab = 'blogs';
-        var urlPattern = $location.$$url;
+        var urlPattern = $location.$$url; 
+        $rootScope.blackTheme = "";
         if(urlPattern === '/about'){
             ngMeta.setTitle("About - Venuelytics");
             ngMeta.setTag('description', 'VenueLytics provides Next-Generation Entertainment Experience & VIP services for consumers with Real Time Smart Data Technology');

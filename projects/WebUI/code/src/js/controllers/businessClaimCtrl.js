@@ -3,7 +3,7 @@ app.controller('BusinessClaimController', ['$log', '$scope', '$rootScope','$http
  function ($log, $scope, $rootScope, $http, $location, AjaxService, $routeParams, APP_LINK) {
 
     var self = $scope;
-
+    $rootScope.blackTheme = "";
     self.init = function() {
         self.venueNumber = $routeParams.venueId;
         var urlPattern = $location.absUrl();

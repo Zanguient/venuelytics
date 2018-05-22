@@ -7,7 +7,7 @@ app.controller('Breakthrough', ['$log', '$scope', 'DataShare','$translate', '$ro
     function ($log, $scope, DataShare, $translate, $routeParams, APP_ARRAYS, $rootScope, ngMeta) {
 
     	$log.log('Inside BreakThrough Controller.');
-
+        $rootScope.blackTheme = "";
     	var self = $scope;
         self.init = function() {
             $rootScope.title = 'Venuelytics Digital Concierge Solution';

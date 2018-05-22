@@ -15,6 +15,7 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             self.searchVenue = false;
             $rootScope.showItzfun = true;
             $rootScope.selectedTab = 'consumer';
+            $rootScope.blackTheme = "";
             self.gettingLocation = function(lat, long, country) {
                 self.loadingBar = true;
                 AjaxService.gettingLocation(lat, long, country).then(function(response) {

@@ -9,7 +9,7 @@ app.controller('BusinessController', ['$log', '$scope', '$http', '$location', 'R
         $rootScope.showItzfun = false;
         $rootScope.selectedTab = 'business';
         $scope.business = {};
-
+        $rootScope.blackTheme = "";
         self.init = function () {
             ngMeta.setTitle("Real Time Venue Management Platform");
             ngMeta.setTag('image', 'assets/img/screen2.jpg');

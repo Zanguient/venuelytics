@@ -3,13 +3,14 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$sce',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $sce) {
+app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location', 'RestURL', '$rootScope', '$routeParams', 'AjaxService', '$sce',
+    function ($log, $scope, $http, $location, RestURL, $rootScope, $routeParams, AjaxService, $sce) {
 
     		$log.log('Inside Venue Details Controller.');
     		
             var self = $scope;
             $rootScope.selectedTab = 'consumer';
+            $rootScope.blackTheme = "";
             self.init = function() {
 
                 AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {

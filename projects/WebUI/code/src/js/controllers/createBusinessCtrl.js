@@ -6,7 +6,7 @@ app.controller('BusinessCreateController', ['$log', '$scope', '$http', '$locatio
 
         var self = $scope;
 
-
+        $rootScope.blackTheme = "";
         self.init = function () {
 
             ngMeta.setTitle("Create Business Listing Page - Real Time Venue Management Platform");
