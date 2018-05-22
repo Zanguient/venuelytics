@@ -69,7 +69,7 @@ App.controller('VisitorAnalyticsController',['$log','$scope','ContextService',  
     			series.name = parts[0];
     			series.data  = [];
     		}
-			elem = {};
+			var elem = {};
 			elem.type = parts[0];
 			elem.name = parts[1];
 			elem.value = value;
