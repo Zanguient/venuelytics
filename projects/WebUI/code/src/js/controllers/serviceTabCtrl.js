@@ -239,12 +239,13 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         
         if(self.venueId === 170649) {
             //id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected
-            addTab('dealsServiceTab','deals', 'assets/img/ic_deals.png','Deals', 'deals-list', 'deals/event-list.html',true, 'dealsBtn', 'deals');
             addTab('waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'casino/wait-time.html',true, 'waitTimeBtn', 'waittime');
             addTab('contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, 'contestsBtn', 'contests');
             addTab('rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, 'rewardsBtn', 'rewards');
         }
-
+        if(self.venueId === 170649 || self.venueId === 10314) {
+             addTab('dealsServiceTab','deals', 'assets/img/ic_deals.png','Deals', 'deals-list', 'event-list/deals-list.html',false, 'dealsBtn', 'deals');
+        }
        // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
         addTab('eventListTab','eventlist', 'assets/img/service/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, 'eventListBtn', 'eventList');
 

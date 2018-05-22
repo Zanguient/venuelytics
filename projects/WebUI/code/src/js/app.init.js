@@ -1,5 +1,5 @@
 "use strict";
-var app = angular.module('Mobinite', ['ngRoute', 'templates','pascalprecht.translate', 'ngCookies', 'ngclipboard','daterangepicker','ngMeta', 'satellizer', 'ngStorage', 'ngclipboard']);
+var app = angular.module('Mobinite', ['ngRoute', 'matchMedia','templates','pascalprecht.translate', 'ngCookies', 'ngclipboard','daterangepicker','ngMeta', 'satellizer', 'ngStorage', 'ngclipboard']);
 
 
 // configure our routes

@@ -71,6 +71,7 @@
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "ngMeta": "^1.0.2",
     "satellizer": "0.14.1",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "^0.3.11",
+    "angular-media-queries": "^0.6.1"
   }
 }

@@ -13,10 +13,7 @@
         self.venueImage = '';
         $rootScope.blackTheme = "";
  		$scope.init = function () {
-
             $scope.getVenue();
-            
-
  		};
 
         $scope.populateButtons = function() {

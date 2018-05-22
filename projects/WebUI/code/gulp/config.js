@@ -76,7 +76,8 @@ module.exports = {
             'bower_components/ngMeta/dist/ngMeta.min.js',
             'bower_components/satellizer/satellizer.min.js',
             'bower_components/ngstorage/ngStorage.min.js',
-            'bower_components/ngclipboard/dist/ngclipboard.min.js'
+            'bower_components/ngclipboard/dist/ngclipboard.min.js',
+            'bower_components/angular-media-queries/match-media.js'
         ],
         js_sourcemap: [
             'bower_components/iframe-resizer/js/iframeResizer.contentWindow.map',

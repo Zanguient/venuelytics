@@ -301,21 +301,24 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                           self.selectedVenueMap.productsByName[obj.name] = obj;
                         });
                         var tableMaps = JSON.parse(venueMap.imageMap);
+
                         var maps =[];
-                        tableMaps.map(function(t){
-                          var arc = JSON.parse("["+t.coordinates+"]");
-                          var elem = {};
-                          elem.name = t.TableName;
-                          if (typeof $scope.selectedVenueMap.productsByName[elem.name] !== 'undefined') {
-                            elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
-                            elem.coords = [];
-                            elem.coords[0] = arc[0];
-                            elem.coords[1] = arc[1];
-                            elem.coords[2] = arc[4];
-                            elem.coords[3] = arc[5];
-                            maps.push(elem);
-                          }
-                        });
+                        if (!!tableMaps) {
+                            tableMaps.map(function(t){
+                              var arc = JSON.parse("["+t.coordinates+"]");
+                              var elem = {};
+                              elem.name = t.TableName;
+                              if (typeof $scope.selectedVenueMap.productsByName[elem.name] !== 'undefined') {
+                                elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
+                                elem.coords = [];
+                                elem.coords[0] = arc[0];
+                                elem.coords[1] = arc[1];
+                                elem.coords[2] = arc[4];
+                                elem.coords[3] = arc[5];
+                                maps.push(elem);
+                              }
+                            });
+                        }
                         DataShare.imageMapping.maps = maps;
                         
                         self.selectedVenueMap.coordinates = maps;

@@ -308,10 +308,10 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         });
     };
     
-    this.getEvents = function(venueIds) {
+    this.getEvents = function(venueId) {
         return $http({
             method: 'GET',
-            url: RestURL.baseURL + '/venues/' + venueIds + '/venueevents'
+            url: RestURL.baseURL + '/venues/' + venueId + '/venueevents'
         }).then(function(success) {
             return success;
         }, function(error) {
@@ -319,6 +319,22 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
             return error;
         });
     };
+
+    this.getDeals = function(venueId) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + '/coupons/' + venueId + '/active',
+            headers: {
+                "X-XSRF-TOKEN": "XX-YY-XX-V"
+            }
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    };
+
     this.getServiceTime = function(venueId, serviceType) {
         var url = RestURL.baseURL + 'venues/' + venueId + '/servicehours?type=' + serviceType;
         return $http({

@@ -1,9 +1,9 @@
 <div ng-controller="EventListCtrl" ng-cloak>
     <div>
-        <button type="button" class="btn btn-primary pull-right eventListClass" ng-model="eventListData" ng-click="listEventView()">
+        <button type="button" class="btn btn-primary pull-right" ng-click="listEventView()">
             <i class="fa fa-list" aria-hidden="true"></i>{{'event.EVENT_LIST' | translate}}
         </button>
-        <button type="button" class="btn btn-primary pull-right eventCalendarClass" ng-model="calenderData" ng-click="calenderEventView()">
+        <button type="button" ng-hide="{{isSmallScreen()}}"  class="btn btn-primary pull-right" ng-click="calenderEventView()">
             <i class="fa fa-calendar" aria-hidden="true"></i>{{'event.EVENT_CALENDAR' | translate}}
         </button>
     </div>
@@ -35,17 +35,17 @@
                     <div class="col-sm-12 mt-4">
                         <h5 class="mb0" >{{event.eventName | uppercase}}</h5>
                         <div class="loose_pack mt-1" >
-                                <table class="table table-responsive table-condensed table-no-border " >
-                                    <tbody>
-                                    <tr><td  class="bg-medium" style="padding: 5px !important; ">{{'event.EVENT_DOORS' | translate}}:</td>
-                                        <td  class="bg-medium" style="padding: 5px !important;"><span class="title-bold">{{event.doorOpens | date:'h:mm a'}} </span></td></tr>
-                                    <tr><td  class="bg-medium" style="padding: 5px !important;">{{'event.EVENT_SHOW' | translate}}:</td>
-                                        <td  class="bg-medium" style="padding: 5px !important;"><span class="title-bold">{{event.eventTimes | date:'h:mm a'}} </span></td></tr>
-                                    <tr><td  class="bg-medium" style="padding: 5px !important;">{{'event.EVENT_END' | translate}}:</td>
-                                        <td  class="bg-medium" style="padding: 5px !important;"><span class="title-bold">{{event.endtimes | date:'h:mm a'}} </span></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table table-responsive table-condensed table-no-border " >
+                                <tbody>
+                                <tr><td  class="bg-medium" style="padding: 5px !important; ">{{'event.EVENT_DOORS' | translate}}:</td>
+                                    <td  class="bg-medium" style="padding: 5px !important;"><span class="title-bold">{{event.doorOpens | date:'h:mm a'}} </span></td></tr>
+                                <tr><td  class="bg-medium" style="padding: 5px !important;">{{'event.EVENT_SHOW' | translate}}:</td>
+                                    <td  class="bg-medium" style="padding: 5px !important;"><span class="title-bold">{{event.eventTimes | date:'h:mm a'}} </span></td></tr>
+                                <tr><td  class="bg-medium" style="padding: 5px !important;">{{'event.EVENT_END' | translate}}:</td>
+                                    <td  class="bg-medium" style="padding: 5px !important;"><span class="title-bold">{{event.endtimes | date:'h:mm a'}} </span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <p class="mt-2">
                             Location: {{event.address || venueDetails.address | uppercase}}
                         </p>
@@ -146,33 +146,6 @@
                              {{getPerformers(event)}}
                         </div>
                     </div>
-                    <!-- <table class="table table-no-border col-md-12">
-                        <tr>
-                            <td>
-                                <div class="col-md-6 col-xs-12">
-                                    <img ng-src="{{event.imageURL || 'assets/img/placeholder.jpg'}}" alt="eventList-image" class="img-responsive"/>
-                                </div>
-                                <div class="col-md-6 col-xs-12">
-                                    <h2>{{event.eventName}}</h2>
-                                    <h4> {{event.scheduleDayOfWeek}} ({{event.eventTimes | date:'h:mm a'}} - {{event.endtimes
-                                        | date:'h:mm a'}})</h4>
-                                    <hr>
-                                    <h3 class="mt0 ">{{'event.EVENT_TYPES' | translate}}:</h3>
-                                    <h4>{{event.eventType}}</h4>
-                                    <h3 class="mt0 ">{{'bottleServiceTab.DESC' | translate}}:</h3>
-                                    <h4> {{event.description}}</h4>
-                                    <span class="" ng-hide="((event.price == null || event.price == 0 || event.price == undefined))">
-                                        <label class="">{{'event.EVENT_COVER' | translate}}:</label>
-                                        <span>&dollar;</span>
-                                        <span>{{(event.price == null || event.price == 0 || event.price == undefined) ? "-" : event.price}}</span>
-                                    </span>
-                                    <br>
-                                    <a href="{{event.bookingUrl}}" target="_new" class="btn btn-success btn-raised btn-sm">{{'event.EVENT_TICKET' | translate}}</a>
-                                    <br/>
-                                </div>
-                            </td>
-                        </tr>
-                    </table> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeEventModal()" data-backdrop="false">{{'CLOSE' | translate}}</button>
