@@ -228,7 +228,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
         };
 
         self.venueRefId = function (venue) {
-            if (typeof(venue.uniqueName) === 'undefined') {
+            if (!venue.uniqueName) {
                 return venue.id;
             } else {
                 return venue.uniqueName;

@@ -53,7 +53,7 @@ app.controller('VenueController', ['$rootScope','$log', '$scope', '$http', '$loc
             };
 
             self.venueRefId = function(venue) {
-                if (typeof(venue.uniqueName) === 'undefined' ) {
+                if (!venue.uniqueName ) {
                     return venue.id;
                 } else {
                     return venue.uniqueName;

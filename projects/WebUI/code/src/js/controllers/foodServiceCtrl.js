@@ -241,7 +241,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$location', 'DataSha
         };
 
         self.venueRefId = function (venue) {
-            if (typeof(venue.uniqueName) === 'undefined') {
+            if (!venue.uniqueName) {
                 return venue.id;
             } else {
                 return venue.uniqueName;

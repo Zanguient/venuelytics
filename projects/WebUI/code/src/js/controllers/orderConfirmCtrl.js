@@ -11,7 +11,7 @@ app.controller('OrderConfirmController', ['$log', '$scope', '$location', 'DataSh
     		var self = $scope;
     		
     		self.venueRefId = function(venue) {
-                if (typeof(venue.uniqueName) === 'undefined' ) {
+                if (!venue.uniqueName) {
                     return venue.id;
                 } else {
                     return venue.uniqueName;
