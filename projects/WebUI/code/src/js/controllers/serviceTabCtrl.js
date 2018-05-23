@@ -243,13 +243,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             addTab('contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, 'contestsBtn', 'contests');
             addTab('rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, 'rewardsBtn', 'rewards');
         }
-        if(self.venueId === 170649 || self.venueId === 10314) {
+        if(self.venueId === 170649 || self.venueId === 10314 || self.venueId === 170941 || self.venueId === 170931 || self.venueId === 170933 || self.venueId === 170932 
+            || self.venueId === 170930 || self.venueId === 170612) {
              addTab('dealsServiceTab','deals', 'assets/img/ic_deals.png','Deals', 'deals-list', 'event-list/deals-list.html',false, 'dealsBtn', 'deals');
         }
        // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
         addTab('eventListTab','eventlist', 'assets/img/service/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, 'eventListBtn', 'eventList');
-
-
         
         //if(self.tabParams === "VIP"){
             var firstEnabledTabBtnId = optimizeTabDisplay(self.displayTabs);
