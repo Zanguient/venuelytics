@@ -9,7 +9,18 @@ app.controller('ContactController', ['$scope', '$http', '$location', 'RestURL', 
         var self = $scope;
         $rootScope.selectedTab = 'contact';
         $rootScope.blackTheme = "";
-        
+
+        $scope.name = "";
+        $scope.email = "";
+        $scope.subject = "";
+        $scope.message = "";
+
+        self.sendContactMessage = function(isValid) {
+           
+            if (isValid) {
+                AjaxService.sendContactMeMessage($scope.name, $scope.email, $scope.subject, $scope.message);
+            } 
+        };
 
     }]);
 

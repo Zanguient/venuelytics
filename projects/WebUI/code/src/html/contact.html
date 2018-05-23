@@ -7,22 +7,22 @@
             <div class="card border_clouds animated fadeInUp animation-delay-7">
                 
                 <div class="card-block">
-                    <form class="">
+                    <form novalidate parsley-validate validate-form="" name="contactForm" ng-submit="sendContactMessage(contactForm.$valid)">
                         <div class="form-group label-floating">
                             <label for="inputName" class="control-label">{{"contact.NAME" | translate}}</label>
-                            <input type="text" class="form-control" id="inputName">
+                            <input type="text" class="form-control" id="inputName" ng-model="name" required="">
                         </div>
                         <div class="form-group label-floating">
                             <label for="inputEmail" class="control-label">{{"contact.EMAIL" | translate}}</label>
-                            <input type="email" class="form-control" id="inputEmail">
+                            <input type="email" class="form-control" id="inputEmail" ng-model="email" required="">
                         </div>
                         <div class="form-group label-floating">
                             <label for="inputSubject" class="control-label">{{"contact.SUBJECT" | translate}}</label>
-                            <input type="text" class="form-control" id="inputSubject">
+                            <input type="text" class="form-control" id="inputSubject" ng-model="subject" required="">
                         </div>
                         <div class="form-group label-floating">
                             <label for="textArea" class="control-label">{{"contact.MESSAGE" | translate}}</label>
-                            <textarea class="form-control" rows="5" id="textArea"></textarea>
+                            <textarea class="form-control" rows="5" id="textArea" ng-model="message" required=""></textarea>
                         </div>
                         <div class="form-group text-right">
                             <button type="submit" class="btn btn-raised btn-primary">{{"contact.SUBMIT" | translate}}</button>

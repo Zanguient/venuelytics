@@ -456,4 +456,18 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         });
     };
 
+    this.sendContactMeMessage = function(name, email, subject, message) {
+        var payload  = {};
+        payload.parameters = {};
+        payload.parameters.name = name;
+        payload.parameters.email = email;
+        payload.subject = subject;
+        payload.message = message;
+        return $http({
+            method: 'POST',
+            data: payload,
+            url: RestURL.baseURL + 'messanger/contact'
+        });
+    };
+
 }]);

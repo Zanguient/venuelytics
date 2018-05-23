@@ -21,7 +21,7 @@ app.controller('DealListCtrl', ['$log', '$scope', '$routeParams', 'AjaxService',
 
    
     self.init = function() {
-       self.dealListData = false ||self.isSmallScreen();
+      self.dealListData = false ||self.isSmallScreen();
       self.venueDetails = venueService.getVenue($routeParams.venueId);
       self.venueId = self.venueDetails.id;
       ngMeta.setTag('description', self.venueDetails.description + " Deals Services");
