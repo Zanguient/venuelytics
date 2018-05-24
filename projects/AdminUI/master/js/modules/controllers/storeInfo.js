@@ -9,6 +9,7 @@
         $timeout,DataTableService, $compile, ngDialog) {
   'use strict';
   $scope.deletedVenueImage = [];
+  $scope.shortCuts = [];
   $scope.advanceSwitches = {
     "Advance.BottleService.enable" : false,
     "Advance.BookBanqetHall.enable": false,
@@ -46,6 +47,7 @@
       {name: 'Outlets', content: 'app/views/venue/venue-stores.html', icon: 'fa-building-o'},
       {name: 'Portal', content: 'app/views/venue/venue-portal.html', icon: 'fa-home'},
       {name: 'Users', content: 'app/views/venue/venue-users.html', icon: 'fa-users'},
+      {name: 'Shortcuts', content: 'app/views/venue/venue-shortcuts.html', icon: 'fa-fa-bookmark'},
 
     ];
   }
@@ -249,11 +251,49 @@
     });
   };
 
+  function __URL(path) {
+    return "https://www.venuelytics.com" + path;
+  }
+  $scope.initShortCuts = function() {
+    $scope.shortCuts.push({name: "Web Page", link: __URL("/cities/" + $scope.data.city + "/" +unqName() )});
+    const serviceNames = [["Bottle Service", "bottle-service"], ["Private Events","private-events"], ["Guest List","guest-list"], 
+      ["Food Service","food-services"], ["Drinks Service","drink-services"], ["Table Service", "table-services"], ["Wait Time", "wait-time"], ["Deals", "deals-list"], ["Event List","event-list"]]; 
+
+    for (var i=0; i < serviceNames.length; i++) {
+      const obj = serviceNames[i];
+      $scope.shortCuts.push({name: obj[0], link: __URL("/cities/" + $scope.data.city + "/" +unqName() +"/" + obj[1])});  
+    }      
+   
+
+   for (var i=0; i < serviceNames.length; i++) {
+      const obj = serviceNames[i];
+      $scope.shortCuts.push({name: obj[0] +" - embeded", link: __URL("/cities/" + $scope.data.city + "/" +unqName() +"/" + obj[1] +"/emded")});  
+    }      
+    
+  };
+
+  function unqName() {
+    if (!$scope.data.uniqueName) {
+      return $scope.data.id;
+    } else {
+      return $scope.data.uniqueName;
+    }
+  }
+  $scope.copyToClipboard = function(text) {
+      const el = document.createElement('textarea');
+      el.value = text;
+      el.setAttribute('readonly', '');
+      el.style.position = 'absolute';
+      el.style.left = '-9999px';
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+  };
 
   $timeout(function () {
     if($stateParams.id !== 'new') {
-      var promise = RestServiceFactory.VenueService().get({id:$stateParams.id});
-      promise.$promise.then(function(data) {
+      RestServiceFactory.VenueService().get({id:$stateParams.id}, function(data) {
         data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
         $scope.imageUrl = [];
         for (var imgIndex = 0; imgIndex < data.imageUrls.length; imgIndex++) {
@@ -264,6 +304,7 @@
         $scope.venueTypeCodes(data);
         $scope.data = data; 
         $scope.initInfoTable();
+        $scope.initShortCuts();
       });
     } else {
       var data = {};

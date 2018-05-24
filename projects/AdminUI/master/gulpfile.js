@@ -411,7 +411,7 @@ gulp.task('watch', function() {
 // DEFAULT TASK
 //---------------
 
-gulp.task('dev',gulpSequence('setDevMode',[
+gulp.task('work',gulpSequence('setDevMode',[
           'scripts:vendor',
           'scripts:app',
           'styles:app',
