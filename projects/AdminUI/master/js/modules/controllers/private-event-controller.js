@@ -9,6 +9,7 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
     'use strict';
 
     $scope.deletedPrivateImage = [];
+    $scope.imageUrl = [];
     var promise = RestServiceFactory.ProductService().getPrivateEvent({id:$stateParams.venueNumber, productId: $stateParams.id, role: 'admin'});
     $scope.venueNumber = $stateParams.venueNumber;
     $scope.data = {enabled: 'N'};
@@ -22,15 +23,21 @@ App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$
         $scope.displayTypeName = "Banquet Hall";
         $scope.displayName = "Banquet Hall Name *"
     }
-
-    $scope.deleteImage = function(imageId, imageArray, deletedImage) {
-        imageArray.splice(imageId, 1);
-            var id= {
-                "id" : deletedImage.id
-            }
-        $scope.deletedPrivateImage.push(id);
-        toaster.pop('id', "Deleted the selected Image successfull");
+    $scope.deleteImage = function(index, deletedImage) {
+      var id= {
+          "id" : deletedImage.id
+      };
+      
+      RestServiceFactory.VenueImage().deleteVenueImage(id, function(data){
+        deletedImage.status = "DELETED";
+        toaster.pop('data', "Deleted the selected Image successfull");
+      },function(error){
+        if (typeof error.data !== 'undefined') {
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
     };
+    
 
 	$scope.update = function(isValid, data, num) {
         if($state.current.name === 'app.editBanquetHall'){
