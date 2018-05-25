@@ -3,9 +3,20 @@
 	<div class="col-sm-6">
 		<div class="col-sm-12">
 			<div class="panel panel-default">
-				<label class="panel-heading"><h3>Advance Options</h3></label>
-				<switch-panel class="panel-body" switches="advanceSwitches" on-update="onUpdate()"></switch-panel>
+				<label class="panel-heading"><h3>Enable Services</h3></label>
+				<switch-panel class="panel-body" switches="advanceSwitches" on-update="onEnableServices()"></switch-panel>
 			</div>
+		</div>
+		<div class="panel panel-default col-sm-12">
+			<label class="panel-heading"><h3>Update Service Options</h3></label>
+     		<form  name="storeInfo" validate-form="" novalidate role="form">
+
+				<div class="form-group col-sm-12" ng-repeat="field in additionalFields">
+	                <label class="control-label nowrap">{{field.displayName}}</label>
+	                <input type="text" name="{{field.name}}" class="form-control" ng-model="field.value"/>
+	            </div>
+	            <button type="submit" ng-click="onUpdateOptions()">Update</button>
+	        </form>
 		</div>
 	</div>
 	<div class="col-sm-6">

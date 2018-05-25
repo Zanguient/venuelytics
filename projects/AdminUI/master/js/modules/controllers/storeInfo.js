@@ -30,6 +30,36 @@
     "Advance.KarokeRequest.enable": false 
   };
   
+  $scope.additionalFields = [
+    F("ui.service.theme","Background Theme"),
+    F("Advance.fav-items","Populat Categories"),
+    F("Bottle.ContactName","Bottle Service Contact Name"),
+    F("Bottle.ContactPhone","Bottle Service Contact Phone"),
+    F("Bottle.ContactEmail","Bottle Service Contact Email"),
+    F("Bottle.BottleVIPPolicy","Bottle Service VIP Policy"),
+    F("Bottle.BottleMinimumrequirements","Bottle Service Minimum Requirements"),
+    F("Bottle.formUrl","Bottle Service Request Form"),
+    F("Bottle.menuUrl","Bottle Service Menu url"),
+    
+
+    F("BanquetHall.ContactName","Private Event Contact Name"),
+    F("BanquetHall.ContactPhone","Private Event Contact Phone"),
+    F("BanquetHall.ContactEmail","Private Event Contact Email"),
+    F("BanquetHall.formUrl","Private Event Request From"),
+    F("BanquetHall.Menu","Private Event Menu"),
+    F("BanquetHall.ThreeSixtyVideo","Private Event 360 Video"),
+    F("BanquetHall.Video","Private Event Video"),
+    F("BanquetHall.FloorMap","Private Event Floor Plan"),
+    F("BanquetHall.Details","Private Event Details"),
+
+    F("Drinks.menuUrl","Drinks Menu URL"),
+    F("Drinks.cocktailsUrl","Drinks Cocktails Menu URL"),
+    F("Drinks.beerMenuUrl","Drinks Beer Menu URL"),
+    F("Drinks.wineListuUrl","Drinks Wine List Menu URL"),
+    F("Drinks.happyHourDrinkUrl","Drinks Happy Hour Menu URL"),
+   
+
+  ];
   if ($stateParams.id === 'new') {
     $scope.tabs = [
        {name: 'Venue Information', content: 'app/views/venue/form-venue.html', icon: 'fa-home'}
@@ -52,11 +82,20 @@
     ];
   }
   
-  $scope.onUpdate = function() {
+  $scope.onEnableServices = function() {
     var payload = {};
     angular.forEach($scope.advanceSwitches, function(v, k, o) {
       $scope.data.info[k] = v ? 'Y' : 'N';
       payload[k] = v ? 'Y' : 'N';
+    });
+    $scope.updateServices(payload);
+  };
+
+  $scope.onUpdateOptions = function() {
+    var payload = {};
+    angular.forEach($scope.additionalFields, function(v, k, o) {
+      $scope.data.info[v.name] = v.value;
+      payload[v.name] = v.value ;
     });
     $scope.updateServices(payload);
   };
@@ -88,7 +127,7 @@
     }];
     DataTableService.initDataTable('venue_info_table', columnDefinitions);
     var table = $('#venue_info_table').DataTable();
-
+    $scope.initAdditionalFields();
     $.each($scope.data.info, function (k,v) {
       if ($scope.advanceSwitches.hasOwnProperty(k)) {
         $scope.advanceSwitches[k] = (v === 'Y' ? true : false);
@@ -97,7 +136,27 @@
       }
     });
     table.draw();
+    
   };
+  $scope.initAdditionalFields = function() {
+    $.each($scope.data.info, function (k,v) {
+        for (var j = 0; j < $scope.additionalFields.length; j++) {
+          if ( k == $scope.additionalFields[j].name){
+            $scope.additionalFields[j].value = v;
+            delete $scope.data.info[k];
+            break;
+          }
+        }
+    });
+      
+  }
+  function F(name, displayName) {
+      return {
+          name : name,
+          displayName: displayName,
+          value : ""
+      };
+  }
   function addType(typeName, typeValue, displayName, venueTypeCode) {
 
     var obj = {
@@ -116,10 +175,15 @@
     addType("clubType", 2, "Club", data.venueTypeCode);
     addType("loungeType", 4, "Lounge", data.venueTypeCode);
     addType("casinoType", 8, "Casino", data.venueTypeCode);
+    addType("concertType", 16, "Concert", data.venueTypeCode);
     addType("nightClubType", 32, "Night Club", data.venueTypeCode);
     addType("restaurantType", 64, "Restaurant", data.venueTypeCode);
     addType("bowlingType", 128, "Bowling", data.venueTypeCode);
     addType("karaokeType", 256, "Karaoke", data.venueTypeCode);
+    //addType("adultType", 512, "Adult", data.venueTypeCode);
+    addType("golfType", 1024, "Golf", data.venueTypeCode);
+    addType("liveEventType", 2048, "Live Event", data.venueTypeCode);
+    addType("hotelType", 4096, "Hotel", data.venueTypeCode);
   };
   $scope.deleteImage = function(index, deletedImage) {
       var id= {
@@ -267,7 +331,7 @@
 
    for (var i=0; i < serviceNames.length; i++) {
       const obj = serviceNames[i];
-      $scope.shortCuts.push({name: obj[0] +" - embeded", link: __URL("/cities/" + $scope.data.city + "/" +unqName() +"/" + obj[1] +"/emded")});  
+      $scope.shortCuts.push({name: obj[0] +" - embeded", link: __URL("/cities/" + $scope.data.city + "/" +unqName() +"/" + obj[1] +"/embed")});  
     }      
     
   };

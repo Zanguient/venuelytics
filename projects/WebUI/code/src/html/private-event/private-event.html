@@ -7,7 +7,7 @@
                 <input type="text" class="form-control " id="privateDate" ng-model="private.orderDate" required>
                 <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
             </div>
-            <div class="form-group" ng-if="privateInfoSheet || privateMenu || privateVideo || privateFloorPlan">
+            <div class="form-group col-md-12 col-sm-12 col-xs-12" ng-if="privateInfoSheet || privateMenu || privateVideo || privateFloorPlan">
                 <center>
                     <a href="" class="col-md-3 col-xs-12 btn btn-success  btn-raised" ng-if="privateInfoSheet" ng-click="menuUrlSelection(privateInfoSheet)"><span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.VIEW_PRIVATE" | translate}}</a>
 
