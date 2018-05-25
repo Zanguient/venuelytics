@@ -83,11 +83,12 @@
 				</div><br />	
 				<carousel interval="5000" class="col-md-12">
 				    <slide ng-repeat="slide in imageUrl" active="slide.active">
-				      <img ng-src="{{slide.originalUrl}}" alt="" class="img-responsive" style="width: 100% !important"/>
-				        <div class="row row-table bg-gray-darker col-md-12" style="padding: 15px;" ng-show="imageUrl.length > 0">
-				          <span> Image {{$index + 1}}</span> <a href="javascript:void(0)"> <em class="fa fa-trash fa-2x" style="padding-left: 155px;" ng-click="deleteImage(slide.id, imageUrl, slide)" /></a>
-				        </div>
-				    </slide>
+				      <img ng-src="{{slide.mediumUrl}}" alt="" class="img-responsive" style="width: 100%;max-width: 640px; height: 300px; max-height: 300px; margin: auto;"/>
+				         <div class="carousel-caption"><h2  ng-bind="slide.status"></h2></div>
+							<div style="position: absolute; top:5px; right:5px; z-index: 999" ng-show="imageUrl.length > 0"> 
+				          		<button class="btn btn-sm btn-danger fa fa-trash fa-2x" ng-click="deleteImage($index,slide)"> </button>
+				      		</div>
+				    </slide>    
 				 </carousel>
 			</div>
 		</div>
