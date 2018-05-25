@@ -26,6 +26,8 @@ App.controller('VenueDealsController', ['$scope', '$state', '$compile', '$timeou
       $scope.listClicked();
       $scope.data = {};
       $scope.config = {};
+      $scope.dealTypes = { OFFER: "OFFER", AD: "AD" }
+      $scope.serviceTypes = { Food: "Food", Drinks: "Drinks", Bottle: "Bottle", }
     };
 
     $('#startDtCalendarId').on('click', function ($event) {
@@ -45,7 +47,6 @@ App.controller('VenueDealsController', ['$scope', '$state', '$compile', '$timeou
     });
 
     $scope.update = function (isValid, form, data) {
-      console.log("data--->", data);
       data.venueNumber = contextService.userVenues.selectedVenueNumber;
       data.enabled = data.enabled === "Y" ? "true" : "false";
       var target = { id: data.id };
@@ -53,14 +54,13 @@ App.controller('VenueDealsController', ['$scope', '$state', '$compile', '$timeou
         target = {};
       }
       RestServiceFactory.VenueDeals().saveDeal(target, data, function (success) {
-
         ngDialog.openConfirm({
-          template: '<p>venue Event information  successfully saved</p>',
+          template: '<p>Venue Deals information successfully saved</p>',
           plain: true,
           className: 'ngdialog-theme-default'
         });
 
-        $state.go('app.eventManagement');
+        $state.go('app.dealsManagement');
       }, function (error) {
         if (typeof error.data !== 'undefined') {
           toaster.pop('error', "Server Error", error.data.developerMessage);
@@ -69,7 +69,6 @@ App.controller('VenueDealsController', ['$scope', '$state', '$compile', '$timeou
     }
 
     $scope.createNewDeals = function () {
-      console.log("test");
       $state.go('app.editVenueDeals', { venueNumber: contextService.userVenues.selectedVenueNumber, id: 'new' });
     };
     $scope.init();

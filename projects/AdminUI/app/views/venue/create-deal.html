@@ -32,7 +32,7 @@
 
           <div class="form-group col-md-6 col-sm-12">
             <label class="control-label">Deal Type *</label>
-            <select name="dealType" required="required" class="form-control col-sm-12" ng-model="data.dealType">
+            <select name="dealType" required="required" class="form-control col-sm-12" ng-model="data.couponType">
               <option ng-selected="{{key == data.dealType}}" ng-repeat="(key, value) in dealTypes" value="{{key}}">{{value}}</option>
             </select>
           </div>
@@ -78,7 +78,7 @@
             <label class="control-label">Original Price</label>
             <div class="input-group m-b">
               <span class="input-group-addon">$</span>
-              <input type="text" class="form-control" ng-model="data.originalPrice" />
+              <input type="number" class="form-control" ng-model="data.originalPrice" />
               <span class="input-group-addon">.00</span>
             </div>
           </div>
@@ -87,7 +87,7 @@
             <label class="control-label">Discount Amount</label>
             <div class="input-group m-b">
               <span class="input-group-addon">$</span>
-              <input type="text" class="form-control" ng-model="discountAmount" />
+              <input type="number" class="form-control" ng-model="data.discountAmount" />
               <span class="input-group-addon">.00</span>
             </div>
           </div>
@@ -96,7 +96,7 @@
             <label class="control-label">Discount Percentage</label>
             <div class="input-group m-b">
               <span class="input-group-addon">$</span>
-              <input type="text" class="form-control" ng-model="discountPercentage" />
+              <input type="number" class="form-control" ng-model="data.discountPercent" />
               <span class="input-group-addon">.00</span>
             </div>
           </div>

@@ -13,11 +13,10 @@ App.directive('dealTile', function() {
   	},
   	controller : [ '$scope', '$rootScope','RestServiceFactory', '$state', 'ngDialog', 'APP_EVENTS',
   			function($scope, $rootScope, RestServiceFactory, $state, ngDialog, APP_EVENTS) {
-		
-		$scope.editDeal = function(eventId) {
-    		$state.go('app.editVenueEvent', {venueNumber: $scope.event.venueNumber, id: eventId});
-  		};
 
+			$scope.editDeal = function(deal) {
+    		$state.go('app.editVenueDeals', {venueNumber: deal.venueNumber, id: deal.id});
+  		};
   		
   		$scope.getPreviewFileName = function(eventId) {
   			return "event-pdf-preview-" + eventId + ".pdf"; 
