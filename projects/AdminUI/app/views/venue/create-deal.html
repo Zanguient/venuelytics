@@ -122,4 +122,12 @@
         <label>Deal Image</label>
         <input type="file" id="control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)" />
       </div>
-      <!-- END row-->
+      <br />
+      <center>
+        <div col-sm-6>
+          <img ng-src="{{data.imageURL}}" alt="" class="img-responsive" style="max-height: 300px; width: auto; margin:auto;" />
+        </div>
+      </center>
+  </form>
+</div>
+  <!-- END row-->

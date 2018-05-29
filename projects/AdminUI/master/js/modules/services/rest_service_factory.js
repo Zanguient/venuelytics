@@ -222,9 +222,22 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 		VenueDeals: function () {
 			return $resource(urlTemplate.replace("@context", "coupons"), {}, {
 				saveDeal: {
-					method: 'POST', params: { id: '@id', venueNumber: '@venueNumber' },
+					method: 'POST', params: { venueNumber: '@venueNumber' },
 					url: urlTemplate.replace("@context","coupons") + "/:venueNumber"
 				},
+				getDeals: {
+					method: 'GET', params: { vid: '@vid', venueNumber: '@venueNumber' },
+					url: urlTemplate.replace("@context","coupons") + "/:venueNumber/:vid"
+				},
+				updateDeals: {
+					method: 'POST', params: { vid: '@vid', venueNumber: '@venueNumber' },
+					url: urlTemplate.replace("@context","coupons") + "/:venueNumber/:vid"
+				},
+				deleteDeals: {
+					method: 'DELETE', params: { vid: '@vid', venueNumber: '@venueNumber' },
+					url: urlTemplate.replace("@context","coupons") + "/:venueNumber/:vid"
+				},
+				
 			});
 		},
 		VenueService: function () {

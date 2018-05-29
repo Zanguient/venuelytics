@@ -13,7 +13,7 @@
          <button type="button" class="btn btn-default btn-sm" ng-click="editDeal(deal)">
             <em class="fa fa-pencil fa-2x text-gray-dark"></em>
          </button>
-         <button type="button" class="btn btn-default btn-sm" ng-click="deleteDeal($index, deal.id)">
+         <button type="button" class="btn btn-default btn-sm" ng-click="deleteDeal($index, deal)">
             <em class="fa fa-trash fa-2x text-gray-dark"></em>
          </button>
       </div>
@@ -43,3 +43,13 @@
       <span ng-show="deal.couponType != 'AD'" class="pull-right" style="font-size: 150%; position: relative; top: -10px; left: -20px;"><em class="fa fa-dollar"/>{{showDiscount(deal)}}</span>
    </div>
 </div>
+
+<script type="text/ng-template" id="deleteVenueDealId">
+    <div class="modal-header">
+      <h3>Delete Venue Deal?</h3>
+    </div>
+    <div class="modal-body"><h5>Are you sure want to delete this Venue Deal? </h5>
+      <button type="button" ng-click="closeThisDialog('button')" class="btn btn-default pull-right">Cancel</button>&nbsp;
+      <button type="button" style=" margin-left: 6px; " ng-click="confirm(confirmValue)" class="btn btn-danger mr pull-right">Confirm</button>
+    </div>
+  </script>

@@ -17,7 +17,7 @@ App.directive('dealTile', function() {
 			$scope.editDeal = function(deal) {
     		$state.go('app.editVenueDeals', {venueNumber: deal.venueNumber, id: deal.id});
   		};
-  		
+	
   		$scope.getPreviewFileName = function(eventId) {
   			return "event-pdf-preview-" + eventId + ".pdf"; 
   		};
@@ -50,15 +50,19 @@ App.directive('dealTile', function() {
 		    return new Date();
   		};
 
-		$scope.deleteDeal = function(index, dealId) {
+		$scope.deleteDeal = function(index, deal) {
 
 	      ngDialog.openConfirm({
-	        template: 'deleteVenueEventId',
+	        template: 'deleteVenueDealId',
 	        className: 'ngdialog-theme-default'
 	      }).then(function (value) {
-	        var target = {id: dealId};
-	        RestServiceFactory.VenueService().deleteEvent(target,  function(success){
-	          $rootScope.$broadcast(APP_EVENTS.deleteEvent, {event: $scope.event});
+	        var target = {vid: deal.id, venueNumber: deal.venueNumber};
+	        RestServiceFactory.VenueDeals().deleteDeals(target,  function(success){
+						ngDialog.openConfirm({
+							template: '<p>Venue Deals information delete</p>',
+							plain: true,
+							className: 'ngdialog-theme-default'
+						});
 	        },function(error){
 	          if (typeof error.data !== 'undefined') { 
 	            toaster.pop('error', "Server Error", error.data.developerMessage);

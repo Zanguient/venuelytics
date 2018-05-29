@@ -11,7 +11,6 @@ App.controller('VenueDealsController', ['$scope', '$state', '$compile', '$timeou
 
     $scope.listClicked = function () {
       $scope.content = 'app/views/venue/deal-list-include.html';
-
     };
 
     $scope.tableClicked = function () {
@@ -28,6 +27,18 @@ App.controller('VenueDealsController', ['$scope', '$state', '$compile', '$timeou
       $scope.config = {};
       $scope.dealTypes = { OFFER: "OFFER", AD: "AD" }
       $scope.serviceTypes = { Food: "Food", Drinks: "Drinks", Bottle: "Bottle", }
+      if ($stateParams.id !== 'new' && $stateParams.id !== undefined) {
+        $scope.getDeals($stateParams.id);
+      }
+
+    };
+    $scope.getDeals = function (id) {
+      var target = { vid: id, venueNumber: $stateParams.venueNumber };
+      var promise = RestServiceFactory.VenueDeals().getDeals(target);
+      promise.$promise.then(function (data) {
+        $scope.data = data;
+        $scope.data.enabled = data.enabled === true ? 'Y' : 'N';
+      });
     };
 
     $('#startDtCalendarId').on('click', function ($event) {
@@ -49,24 +60,56 @@ App.controller('VenueDealsController', ['$scope', '$state', '$compile', '$timeou
     $scope.update = function (isValid, form, data) {
       data.venueNumber = contextService.userVenues.selectedVenueNumber;
       data.enabled = data.enabled === "Y" ? "true" : "false";
-      var target = { id: data.id };
+      var target = { vid: $stateParams.id, venueNumber: $stateParams.venueNumber };
       if ($stateParams.id === 'new') {
         target = {};
-      }
-      RestServiceFactory.VenueDeals().saveDeal(target, data, function (success) {
-        ngDialog.openConfirm({
-          template: '<p>Venue Deals information successfully saved</p>',
-          plain: true,
-          className: 'ngdialog-theme-default'
+        RestServiceFactory.VenueDeals().saveDeal(target, data, function (success) {
+          ngDialog.openConfirm({
+            template: '<p>Venue Deals information successfully saved</p>',
+            plain: true,
+            className: 'ngdialog-theme-default'
+          });
+          $state.go('app.dealsManagement');
+        }, function (error) {
+          if (typeof error.data !== 'undefined') {
+            toaster.pop('error', "Server Error", error.data.developerMessage);
+          }
         });
+      } else {
+        delete data['href'];
+        delete data['finalPrice'];
+        RestServiceFactory.VenueDeals().updateDeals(target, data, function (success) {
+          ngDialog.openConfirm({
+            template: '<p>Venue Deals information successfully updated</p>',
+            plain: true,
+            className: 'ngdialog-theme-default'
+          });
+          $state.go('app.dealsManagement');
+        }, function (error) {
+          if (typeof error.data !== 'undefined') {
+            toaster.pop('error', "Server Error", error.data.developerMessage);
+          }
+        });
+      }
+    }
 
-        $state.go('app.dealsManagement');
+    $scope.uploadFile = function (images) {
+      var payload = new FormData();
+      payload.append("file", images[0]);
+      var target = { objectType: 'venueDeal' };
+      RestServiceFactory.VenueImage().uploadImage(target, payload, function (success) {
+        if (success !== {}) {
+          $scope.data.imageURL = success.originalUrl;
+          $scope.data.thumbnailUrl = success.smallUrl;
+          toaster.pop('success', "Image upload successfull");
+          document.getElementById("control").value = "";
+        }
       }, function (error) {
         if (typeof error.data !== 'undefined') {
           toaster.pop('error', "Server Error", error.data.developerMessage);
         }
       });
-    }
+    };
 
     $scope.createNewDeals = function () {
       $state.go('app.editVenueDeals', { venueNumber: contextService.userVenues.selectedVenueNumber, id: 'new' });
