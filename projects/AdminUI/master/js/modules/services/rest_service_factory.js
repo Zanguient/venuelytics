@@ -3,7 +3,7 @@
  * smangipudi
  =========================================================*/
 
-App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$translate', function ($resource, Session, USER_ROLES, $translate ) {
+App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$translate', function ($resource, Session, USER_ROLES, $translate) {
 	'use strict';
 	var BASE_URL = "//dev.api.venuelytics.com/WebServices/rsapi";
 	var BASE_SITE_URL = "http://52.9.4.76";
@@ -31,22 +31,23 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 	var venueMapProperties = ['id', 'type', 'section', 'imageMap', 'days', 'updatedAt', 'elements', 'imageUrls'];
 
 	var venueEventProperties = ['id', 'venueNumber', 'eventName', 'description',
-		'eventType', 'eventTime', 'durationInMinutes', 'startDate', 'endDate', 'scheduleDayOfMonth','ageRestriction','agePricePolicy', 'performers',
+		'eventType', 'eventTime', 'durationInMinutes', 'startDate', 'endDate', 'scheduleDayOfMonth', 'ageRestriction', 'agePricePolicy', 'performers',
 		'scheduleDayOfWeek', 'imageURL', 'bookingUrl', 'price', 'enabled', 'performerId', 'processingFeeMode', 'agencyId', 'needSponsor', 'address'];
 
 	var eventTicketProperties = ['id', 'storeNumber', 'name', 'description',
 		'price', 'discountedPrice', 'sectionName', 'seatStartNumber', 'count', 'row', 'eventDate', 'uiAttribute'];
 
 	var performerService = ['id', 'performerName', 'groupName', 'description', 'imageUrl', 'thumbnailImageUrl', 'performanceUrl', 'phone', 'email',
-	 'website', 'facebookSocial', 'instagramSocial', 'twitterSocial', 'soundCloud', 'enabled', 'artistTypeCode'];
+		'website', 'facebookSocial', 'instagramSocial', 'twitterSocial', 'soundCloud', 'enabled', 'artistTypeCode'];
 
 	var bandService = ['id', 'name', 'type', 'description', 'imageUrls', 'performanceUrl', 'website', 'facebookSocial', 'instagramSocial', 'twitterSocial',
-	 'enabled'];
+		'enabled'];
 
 
 	var REQ_PROP = {};
 
 	REQ_PROP['VenueService'] = storeProperties;
+	REQ_PROP['VenueDeals'] = storeProperties;
 	REQ_PROP['BeaconService'] = beaconProperties;
 	REQ_PROP['UserService'] = userProperties;
 	REQ_PROP['BusinessService'] = businessProperties;
@@ -59,7 +60,7 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 	REQ_PROP['EventTicket'] = eventTicketProperties;
 	REQ_PROP['PerformerService'] = performerService;
 	REQ_PROP['BandService'] = bandService;
-	
+
 	var urlTemplate = BASE_URL + "/v1/@context/:id";
 
 	var contentActivateUrl = BASE_URL + "/v1/content/:id/@activate";
@@ -103,10 +104,10 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 					url: urlTemplate.replace("@context", "users") + "/forgotpassword"
 				},
 				getMyStores: {
-					method: 'GET',  isArray: true,
+					method: 'GET', isArray: true,
 					url: urlTemplate.replace("@context", "users") + "/mystores"
-					
-				} 
+
+				}
 			});
 		},
 		BusinessService: function () {
@@ -218,6 +219,27 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 		BeaconService: function () {
 			return $resource(urlTemplate.replace("@context", "sensors"));
 		},
+		VenueDeals: function () {
+			return $resource(urlTemplate.replace("@context", "coupons"), {}, {
+				saveDeal: {
+					method: 'POST', params: { venueNumber: '@venueNumber' },
+					url: urlTemplate.replace("@context","coupons") + "/:venueNumber"
+				},
+				getDeals: {
+					method: 'GET', params: { vid: '@vid', venueNumber: '@venueNumber' },
+					url: urlTemplate.replace("@context","coupons") + "/:venueNumber/:vid"
+				},
+				updateDeals: {
+					method: 'POST', params: { vid: '@vid', venueNumber: '@venueNumber' },
+					url: urlTemplate.replace("@context","coupons") + "/:venueNumber/:vid"
+				},
+				deleteDeals: {
+					method: 'DELETE', params: { vid: '@vid', venueNumber: '@venueNumber' },
+					url: urlTemplate.replace("@context","coupons") + "/:venueNumber/:vid"
+				},
+				
+			});
+		},
 		VenueService: function () {
 			return $resource(urlTemplate.replace("@context", "venues"), {}, {
 				updateAttribute: {
@@ -296,11 +318,11 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 					method: 'GET', params: { id: '@id' }, isArray: false,
 					url: urlTemplate.replace("@context", "venues") + "/users"
 				},
-				getNonVenueUsers : {
+				getNonVenueUsers: {
 					method: 'GET', params: { id: '@id' }, isArray: false,
 					url: urlTemplate.replace("@context", "venues") + "/non-users"
 				},
-				getEventCategories : {
+				getEventCategories: {
 					method: 'GET', params: { id: '@id' }, isArray: true,
 					url: urlTemplate.replace("@context", "vas") + "/categories?st=Events&type=EVENT"
 				}
@@ -520,15 +542,15 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 		BandService: function () {
 			return $resource(urlTemplate.replace("@context", "bands"), {}, {
 				getPerformers: {
-					method: 'GET', params: { id: '@id'}, isArray: true,
+					method: 'GET', params: { id: '@id' }, isArray: true,
 					url: urlTemplate.replace("@context", "bands") + "/performers"
-				}, 
+				},
 				addPerformer: {
-					method: 'POST', params: { id: '@id', performerId: '@performerId'},
+					method: 'POST', params: { id: '@id', performerId: '@performerId' },
 					url: urlTemplate.replace("@context", "bands") + "/performers/:performerId"
 				},
 				removePerformer: {
-					method: 'DELETE', params: { id: '@id', performerId: '@performerId'},
+					method: 'DELETE', params: { id: '@id', performerId: '@performerId' },
 					url: urlTemplate.replace("@context", "bands") + "/performers/:performerId"
 				}
 			});
@@ -540,102 +562,102 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 			}
 			return payload;
 		},
-		formatStackData: function(data, propertyName, selectedPeriod) {
-            var retData = [];
-            var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
-            var colorIndex = 0;
-            if (data.length > 0) {
-                for (var index in data[0].series) {
-                    var d = data[0].series[index];
-                    var elem = {};
-                    elem.label = $translate.instant(d[propertyName]);
-                    elem.color = colors[colorIndex % colors.length];
-                    colorIndex++;
+		formatStackData: function (data, propertyName, selectedPeriod) {
+			var retData = [];
+			var colors = ["#51bff2", "#4a8ef1", "#f0693a", "#a869f2"];
+			var colorIndex = 0;
+			if (data.length > 0) {
+				for (var index in data[0].series) {
+					var d = data[0].series[index];
+					var elem = {};
+					elem.label = $translate.instant(d[propertyName]);
+					elem.color = colors[colorIndex % colors.length];
+					colorIndex++;
 
-                    if (selectedPeriod !== 'DAILY') {
-                        elem.data = d.data.reverse();
-                    }
-                    else {
-                        elem.data = [];
-                        var rData = d.data.reverse();
-                        for (var i =0; i < rData.length; i++){
-                            var from = rData[i][0].split("-");
-                            var f = new Date(from[0], from[1] - 1, from[2]);
-                            var dataElem = [f.getTime(), rData[i][1]];
-                            elem.data.push(dataElem);
-                        }
-                    }
-                    retData.push(elem);
-                }
-            }
-            return retData;
-        },
-		formatBarData: function(data, propertyName, selectedPeriod) {
+					if (selectedPeriod !== 'DAILY') {
+						elem.data = d.data.reverse();
+					}
+					else {
+						elem.data = [];
+						var rData = d.data.reverse();
+						for (var i = 0; i < rData.length; i++) {
+							var from = rData[i][0].split("-");
+							var f = new Date(from[0], from[1] - 1, from[2]);
+							var dataElem = [f.getTime(), rData[i][1]];
+							elem.data.push(dataElem);
+						}
+					}
+					retData.push(elem);
+				}
+			}
+			return retData;
+		},
+		formatBarData: function (data, propertyName, selectedPeriod) {
 			var colors = ["#51bff2", "#4a8ef1", "#3cb44b", "#0082c8", "#911eb4", "#e6194b", "#f0693a", "#f032e6 ", "#f58231", "#d2f53c", "#ffe119", "#a869f2", "#008080", "#aaffc3", "#e6beff", "#aa6e28", "#fffac8", "#800000", "#808000 ", "#ffd8b1", "#808080", "#808080"];
-            var retData = [];
+			var retData = [];
 
-            var colorIndex = 0;
-            if (data.length > 0) {
-                var ticks = [];
+			var colorIndex = 0;
+			if (data.length > 0) {
+				var ticks = [];
 
-                for (var idx in data[0].ticks) {
-                    var p = data[0].ticks.length-parseInt(idx)-1;
-                    ticks[data[0].ticks[parseInt(idx)][1]] = p;
-                    data[0].ticks[parseInt(idx)][0] = p;
-                }
-                
-                var barTicks = data[0].ticks;
+				for (var idx in data[0].ticks) {
+					var p = data[0].ticks.length - parseInt(idx) - 1;
+					ticks[data[0].ticks[parseInt(idx)][1]] = p;
+					data[0].ticks[parseInt(idx)][0] = p;
+				}
 
-                for (var index in data[0].series) {
-                    var d = data[0].series[index];
-                    var elem = {};
-                    elem.label = $translate.instant(d[propertyName]);
-                    elem.color = colors[colorIndex % colors.length];
-                    colorIndex++;
-                    elem.bars = {
-                        show: true,
-                        barWidth: 0.12,
-                        fill: true,
-                        lineWidth: 1,
-                        align: 'center',
-                        order: colorIndex,
-                        fillColor: elem.color
-                    };
-                    elem.data = [];
-                   
-                    if (selectedPeriod !== 'DAILY') {
-                        var existing = [];
-                        for (var i = 0; i < d.data.length; i++) {
-                            var dataElem = [ticks[d.data[i][0]], d.data[i][1]];
-                            existing[ticks[d.data[i][0]]] = 1;
-                            elem.data.push(dataElem);
-                        }
+				var barTicks = data[0].ticks;
 
-                        for (var j = 0; j < data[0].ticks.length; j++ ){
-                            if (existing[j] !== 1) {
-                                var dataElem = [j, null];
-                                elem.data.push(dataElem);        
-                            }
-                            
-                        }
+				for (var index in data[0].series) {
+					var d = data[0].series[index];
+					var elem = {};
+					elem.label = $translate.instant(d[propertyName]);
+					elem.color = colors[colorIndex % colors.length];
+					colorIndex++;
+					elem.bars = {
+						show: true,
+						barWidth: 0.12,
+						fill: true,
+						lineWidth: 1,
+						align: 'center',
+						order: colorIndex,
+						fillColor: elem.color
+					};
+					elem.data = [];
 
-                    }
-                    else {
+					if (selectedPeriod !== 'DAILY') {
+						var existing = [];
+						for (var i = 0; i < d.data.length; i++) {
+							var dataElem = [ticks[d.data[i][0]], d.data[i][1]];
+							existing[ticks[d.data[i][0]]] = 1;
+							elem.data.push(dataElem);
+						}
 
-                        for (var i = 0; i < d.data.length; i++) {
-                            var from = d.data[i][0].split("-");
-                            var f = new Date(from[0], from[1] - 1, from[2]);
-                            var dataElem = [f.getTime(), d.data[i][1]];
-                            elem.data.push(dataElem);
-                        }
-                    }
-                    retData.push(elem);
-                }
-            }
-                        
-            return { data: retData.reverse(), ticks: barTicks.reverse() };
-        }
+						for (var j = 0; j < data[0].ticks.length; j++) {
+							if (existing[j] !== 1) {
+								var dataElem = [j, null];
+								elem.data.push(dataElem);
+							}
 
-     };
+						}
+
+					}
+					else {
+
+						for (var i = 0; i < d.data.length; i++) {
+							var from = d.data[i][0].split("-");
+							var f = new Date(from[0], from[1] - 1, from[2]);
+							var dataElem = [f.getTime(), d.data[i][1]];
+							elem.data.push(dataElem);
+						}
+					}
+					retData.push(elem);
+				}
+			}
+
+			return { data: retData.reverse(), ticks: barTicks.reverse() };
+		}
+
+	};
 
 }]);
