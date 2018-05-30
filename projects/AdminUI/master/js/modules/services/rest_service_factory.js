@@ -34,6 +34,10 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 		'eventType', 'eventTime', 'durationInMinutes', 'startDate', 'endDate', 'scheduleDayOfMonth', 'ageRestriction', 'agePricePolicy', 'performers',
 		'scheduleDayOfWeek', 'imageURL', 'bookingUrl', 'price', 'enabled', 'performerId', 'processingFeeMode', 'agencyId', 'needSponsor', 'address'];
 
+	var VenueDeal = ['id', 'venueNumber', 'title', 'longTitle', 'description', 'serviceType', 'couponType', 'promoCode',
+		'actionUrl', 'contentUrl', 'originalPrice', 'discountAmount', 'discountPercent', 'imageUrl', 'thumbnailUrl', 'startDate',
+		'expiryDate', 'displayEndDate', 'deleted', 'enabled']
+
 	var eventTicketProperties = ['id', 'storeNumber', 'name', 'description',
 		'price', 'discountedPrice', 'sectionName', 'seatStartNumber', 'count', 'row', 'eventDate', 'uiAttribute'];
 
@@ -60,6 +64,8 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 	REQ_PROP['EventTicket'] = eventTicketProperties;
 	REQ_PROP['PerformerService'] = performerService;
 	REQ_PROP['BandService'] = bandService;
+	REQ_PROP['venueDeal'] = VenueDeal;
+
 
 	var urlTemplate = BASE_URL + "/v1/@context/:id";
 
@@ -223,21 +229,21 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 			return $resource(urlTemplate.replace("@context", "coupons"), {}, {
 				saveDeal: {
 					method: 'POST', params: { venueNumber: '@venueNumber' },
-					url: urlTemplate.replace("@context","coupons") + "/:venueNumber"
+					url: urlTemplate.replace("@context", "coupons") + "/:venueNumber"
 				},
 				getDeals: {
 					method: 'GET', params: { vid: '@vid', venueNumber: '@venueNumber' },
-					url: urlTemplate.replace("@context","coupons") + "/:venueNumber/:vid"
+					url: urlTemplate.replace("@context", "coupons") + "/:venueNumber/:vid"
 				},
 				updateDeals: {
 					method: 'POST', params: { vid: '@vid', venueNumber: '@venueNumber' },
-					url: urlTemplate.replace("@context","coupons") + "/:venueNumber/:vid"
+					url: urlTemplate.replace("@context", "coupons") + "/:venueNumber/:vid"
 				},
 				deleteDeals: {
 					method: 'DELETE', params: { vid: '@vid', venueNumber: '@venueNumber' },
-					url: urlTemplate.replace("@context","coupons") + "/:venueNumber/:vid"
+					url: urlTemplate.replace("@context", "coupons") + "/:venueNumber/:vid"
 				},
-				
+
 			});
 		},
 		VenueService: function () {
