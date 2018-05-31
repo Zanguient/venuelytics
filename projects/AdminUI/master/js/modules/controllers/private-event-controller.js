@@ -3,9 +3,8 @@
  *smangipudi
  =========================================================*/
 App.controller('PrivateEventController', ['$scope', '$state', '$stateParams', '$compile',
- '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','$rootScope','ngDialog',  
-            function($scope, $state, $stateParams, $compile, $timeout, DataTableService, 
-								RestServiceFactory, toaster, FORMATS, $rootScope, ngDialog) {
+ '$timeout', 'DataTableService','RestServiceFactory', 'toaster', 'FORMATS','$rootScope','ngDialog', function($scope, $state, $stateParams,
+  $compile, $timeout, DataTableService, RestServiceFactory, toaster, FORMATS, $rootScope, ngDialog) {
     'use strict';
 
     $scope.deletedPrivateImage = [];
