@@ -232,6 +232,10 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
     });
   };
 
+  $scope.canSellTicketClass = function(ticket) {
+    return ticket.storeNumber == $scope.agency.id;
+  }
+
   $scope.getEventTickets = function(event, date) {
     RestServiceFactory.VenueEventService().getEventTickets({id: event.id, date: moment(date).format("YYYYMMDD")}, function(data) {
         $scope.tickets = data;
@@ -246,6 +250,10 @@ App.controller('TicketsCalendarController',  ['$state', '$stateParams','$scope',
   };
 
   $scope.buyTicket = function(ticket) {
+    if (ticket.storeNumber !== $scope.agency.id) {
+       toaster.pop({ type: 'error', body: 'This ticket is not available for this store.', toasterId: 250 });
+      return;
+    }
     $scope.ticket = ticket;
     var t = $scope.event.eventTime.split(":");
     var h = parseInt(t[0]);

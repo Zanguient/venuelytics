@@ -89,28 +89,23 @@
             </div>
             <div class="col-md-7 col-sm-12">
                <h3 class="mb0 text-primary" ng-show="!!event.performer">{{event.performer.performerName}}</h3>
-               <h4>Enjoy the night with the salso dons and laughter</h4>
+               <h4>{{event.description}}</h4>
                <br>
                <p><div class="col-sm-4 h5"><strong>SECTION:</strong> {{ticket.sectionName}} </div><div class="col-sm-4 h5"><strong>ROW:</strong> {{ticket.row}} </div><div class="col-sm-4 h5"><strong>SEAT:</strong> GA</div></p>
 
             </div>
-
+           <toaster-container toaster-options="{'toaster-id': 250, 'position-class': 'toast-top-center', 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
             <div class="col-sm-12">
                <p class="col-sm-2 h4">{{event.eventType}}</p>
-               <p class="col-sm-10 h4 text-muted">DOORS: {{mkDate(event.eventTime, -30) | date:'h:mm a'}} | SHOW TIME: {{mkDate(event.eventTime) | date:'h:mm a'}} - {{mkDate(event.eventTime, event.durationInMinutes) | date:'h:mm a'}}</p>
-               <div class="clearfix media-heading pull-right rb0" >
-                  <button class="btn btn-oval btn-sm btn-success btn-raised pull-right" ng-click="buyTicket(ticket)">Sell Ticket</a>
+               <p class="col-md-10 col-sm-10 h4 text-muted">DOORS: {{mkDate(event.eventTime, -30) | date:'h:mm a'}} | SHOW TIME: {{mkDate(event.eventTime) | date:'h:mm a'}} - {{mkDate(event.eventTime, event.durationInMinutes) | date:'h:mm a'}}</p>
+               <br class="hidden-md hidden-lg"/>
+               
+               <div class="col-sm-12 clearfix media-heading rb0" >
+                  <button class="btn btn-oval btn-sm btn-success btn-raised pull-right" ng-show="canSellTicketClass(ticket)" ng-click="buyTicket(ticket)">Sell Ticket</button>
+                  <Label class="btn btn-oval btn-sm btn-info pull-right" ng-show="!canSellTicketClass(ticket)">NOT SOLD in this store</Label>
                </div>  
             </div>
          </div>
       </div>
    </div>
 </div>
-
-<script type="text/ng-template" id="ticketPopUP">
-	<div class="ngdialog-message">
-        <!-- <iframe style="width: 412px; height: 202px;" src="{{ngDialogData.base64data}}"/> -->
-        <!-- <embed src="{{ngDialogData.base64data}}" width="500" height="375" type='application/pdf'> -->
-        <object width="100%" height="100%" type='application/pdf' data="{{ngDialogData.base64data}}"/>
-	</div>
-</script>

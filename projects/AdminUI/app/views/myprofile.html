@@ -14,16 +14,16 @@
             <toaster-container toaster-options="{'toaster-id': 1000, 'position-class': 'toast-top-center', 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
                <div class="form-group">
                   <label class="control-label">User Name *</label>
-                  <input type="text" name="name" required="required" class="form-control" ng-model="data.userName"/>
+                  <input type="text" name="name" required="required" class="form-control" ng-model="data.userName" readonly="readonly" />
                </div>
                <div class="form-group">
                   <label class="control-label">Email *</label>
-                  <input type="email" name="description" data-parsley-type="email" required="required" class="form-control" ng-model="data.email"/>
+                  <input type="email" name="email" data-parsley-type="email" required="required" class="form-control" ng-model="data.email" readonly="readonly"/>
                </div>
              
                <div class="form-group">
                   <label class="control-label">Phone *</label>
-                  <input type="text" id="phoneNumberId" masked="" data-inputmask="'mask': '(999) 999-9999'" name="phone" required="required" class="form-control" ng-model="data.phone"/>
+                  <input type="text" id="phoneNumberId" masked="" data-inputmask="'mask': '(999) 999-9999'" name="phone" required="required" class="form-control" ng-model="data.phone" readonly="readonly"/>
                </div>
                <div class="form-group">
                   <label class="control-label">Current Password *</label>
