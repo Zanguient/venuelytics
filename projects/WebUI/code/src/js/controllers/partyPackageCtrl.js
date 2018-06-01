@@ -106,7 +106,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
             };
 
             self.getPartyHall = function(venueId) {
-                AjaxService.getPrivateHalls(venueId, 'PartyHall').then(function(response) {
+                AjaxService.getProductsByType(venueId, 'PartyHall').then(function(response) {
                     self.partyHall = response.data;
                     self.reservationData = [];
                     var partyDate = moment(self.party.orderDate).format('YYYYMMDD');
