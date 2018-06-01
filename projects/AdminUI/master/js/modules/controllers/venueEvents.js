@@ -10,15 +10,18 @@ App.controller('VenueEventsController', ['$scope', '$state', '$compile', '$timeo
     'use strict';
 
     $scope.calendarClicked = function () {
+      $scope.activebutton = "calendar";
       $scope.content = 'app/views/venue/eventCalendar.html';
     };
     $scope.listClicked = function () {
+      $scope.activebutton = "list";
       $scope.content = 'app/views/venue-events/venue-event-list.html';
     }
     $scope.events = [];
     var target = {};
 
     $scope.init = function () {
+      $scope.listClicked();
       $scope.getEvents(contextService.userVenues.selectedVenueNumber);
     };
 

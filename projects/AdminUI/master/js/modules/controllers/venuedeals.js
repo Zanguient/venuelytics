@@ -10,18 +10,21 @@ App.controller('VenueDealsController', ['$scope', '$state', '$compile', '$timeou
     'use strict';
 
     $scope.listClicked = function () {
+      $scope.activebutton = "list";
       $scope.content = 'app/views/venue/deal-list-include.html';
     };
 
     $scope.tableClicked = function () {
+      $scope.activebutton = "table";
       $scope.content = 'app/views/venue/deal-table-include.html';
     };
     $scope.$on(APP_EVENTS.venueSelectionChange, function (event, data) {
-      // register on venue change;  
+      // register on venue change;
       $scope.init();
     });
-
+    
     $scope.init = function () {
+      // $scope.activebutton = "list";
       $scope.listClicked();
       $scope.data = {};
       $scope.config = {};
