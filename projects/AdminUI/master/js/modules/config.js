@@ -354,7 +354,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/venue-events.html'),
                 controller: 'VenueEventsController',
                 data: { authorizedRoles: [USER_ROLES.admin, 51] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog','jquery-ui', 'moment', 'fullcalendar')
             })
             .state('app.addVenueStore', {
                 url: '/venues/:id/stores',
@@ -467,14 +467,14 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('jquery-ui', 'moment', 'fullcalendar')
             })
-            .state('app.eventsCalendar', {
+            /*.state('app.eventsCalendar', {
                 url: '/eventsCalendar',
                 title: 'Events Calendar',
                 templateUrl: basepath('venue/eventCalendar.html'),
                 controller: 'EventsCalendarController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('jquery-ui', 'moment', 'fullcalendar')
-            })
+            })*/
             .state('app.ticketsCalendar', {
                 url: '/ticketsCalendar',
                 title: 'Tickets Calendar',
