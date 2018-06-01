@@ -1,16 +1,16 @@
 <h3>Add / Edit Deals
   <small>Add a new Deals or Edit an existing Deals.</small>
   <span>
-      <a class="btn btn-primary pull-right" ng-click="createNewDeals()" style="margin-top: -25px;"><em class="fa fa-plus"></em>Add Deals</a>
+    <a class="btn btn-primary pull-right" ng-click="createNewDeals()" style="margin-top: -25px;">
+      <em class="fa fa-plus"></em>Add Deals</a>
   </span>
 </h3>
 <div ng-controller="VenueDealsController" class="container-fluid">
   <!-- START DATATABLE 2 -->
-   <div class="col-sm-12 row ">
-    <i class="fa fa-list fa-2x fa-fw mr-lg pull-right block-center" ng-click="tableClicked()"></i>
-     <!-- <i class="fa fa-table fa-2x fa-fw mr-lg pull-right block-center" ng-click="tableClicked()"></i> -->
-    <i class="fa fa-calendar fa-2x fa-fw mr-lg pull-right block-center" ng-click="listClicked()"></i>
-   </div>
-    <div ng-include="content"></div>
+  <div class="col-sm-12 row ">
+    <i class="fa fa-table fa-2x fa-fw mr-lg pull-right block-center" ng-click="tableClicked()"></i>
+    <i class="fa fa-list fa-2x fa-fw mr-lg pull-right block-center" ng-click="listClicked()"></i>
+    <!-- <i class="fa fa-calendar fa-2x fa-fw mr-lg pull-right block-center" ng-click="listClicked()"></i> -->
+  </div>
+  <div ng-include="content"></div>
 </div>
-
