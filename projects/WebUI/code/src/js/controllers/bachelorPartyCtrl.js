@@ -103,7 +103,7 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.getBachelorPartyHall = function(venueId) {
-                AjaxService.getPrivateHalls(venueId, 'PartyHall').then(function(response) {
+                AjaxService.getProductsByType(venueId, 'PartyHall').then(function(response) {
                     self.bachelorPartyHall = response.data;
                     self.BacheolorDescription = response.data[0].description;
                     self.reservationData = [];

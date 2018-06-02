@@ -159,7 +159,7 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
         };
 
         self.getBanquetHall = function (venueId) {
-            AjaxService.getPrivateHalls(venueId, 'BanquetHall').then(function (response) {
+            AjaxService.getProductsByType(venueId, 'BanquetHall').then(function (response) {
                 self.privateEventValueArray = response.data;
                 self.reservationData = [];
                 var privateDate = moment(self.private.orderDate).format('YYYYMMDD');

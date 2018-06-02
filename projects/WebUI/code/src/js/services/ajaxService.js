@@ -160,10 +160,10 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         });
     };
 
-    this.getPrivateHalls = function(venueId, hallType) {
+    this.getProductsByType = function(venueId, type) {
         return $http({
             method: 'GET',
-            url: RestURL.baseURL + 'products/' + venueId + '/type/' + hallType
+            url: RestURL.baseURL + 'products/' + venueId + '/type/' + type
         }).then(function(success) {
             return success;
         }, function(error) {

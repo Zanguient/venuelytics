@@ -54,6 +54,11 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.featuredEnable = response.data["Advance.featured"];
             self.eventsEnable = response.data["venueEvents"];
             $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
+            if ($rootScope.blackTheme === '') {
+                $rootScope.bgMask = 'bg-mask-white';
+            } else {
+                $rootScope.bgMask = 'bg-mask-black';
+            }
             if(self.embeddedService === 'embed') {
                 $rootScope.venueHeader = response.data["ui.custom.header"];
                 $rootScope.venueFooter = response.data["ui.custom.footer"];

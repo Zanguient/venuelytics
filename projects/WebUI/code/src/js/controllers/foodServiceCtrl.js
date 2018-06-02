@@ -8,6 +8,8 @@ app.controller('foodServiceController', ['$log', '$scope', '$location', 'DataSha
         self.selectedFoodItems = [];
         self.selectedFoodList = [];
         self.foodType = 'Delivery';
+        self.foodCategories = {};
+        
         self.init = function () {
 
             self.venueDetails = venueService.getVenue($routeParams.venueId);
@@ -124,10 +126,23 @@ app.controller('foodServiceController', ['$log', '$scope', '$location', 'DataSha
         self.showPopUp = function (value) {
             $rootScope.description = value;
         };
+        self.isMenuSelected = function(name) {
+            return name == self.menuTab
+        };
 
+        self.selectMenu = function(name) {
+            self.menuTab = name;
+        };
         self.getFood = function () {
-            AjaxService.getPrivateHalls(self.venueId, 'Food').then(function (response) {
+            AjaxService.getProductsByType(self.venueId, 'Food').then(function (response) {
                 self.foodDetails = response.data;
+            
+
+                for(var j=0; j < response.data.length; j++) {
+                    self.foodCategories[response.data[j].category] = response.data[j].category;                     
+                }
+                self.menuTab = response.data[0].category;
+                console.log(self.foodCategories);
                 if ((Object.keys(DataShare.selectedFoods).length) !== 0) {
                     self.editFoodItems = DataShare.selectedFoods;
                     angular.forEach(self.editFoodItems, function (value, key) {
