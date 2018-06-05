@@ -1,26 +1,27 @@
 "use strict";
-app.service('DataShare', function() {
+app.service('DataShare', function () {
   this.latitude = '';
   this.tableGuests = '';
   this.longitude = '';
   this.venueNumber = '';
   this.venueName = '';
   this.selectedVenue = {};
-  this.bottleServiceData = { };
+  this.bottleServiceData = {};
   this.claimBusiness = {};
-  this.privateEventData = { };
-  this.partyServiceData = { };
-  this.guestListData = { };
-  this.foodServiceData = { };
-  this.drinkServiceData = { };
-  this.authBase64Str = { };
+  this.privateEventData = {};
+  this.partyServiceData = {};
+  this.guestListData = {};
+  this.foodServiceData = {};
+  this.drinkServiceData = {};
+  this.wineServiceData = {};
+  this.authBase64Str = {};
   this.bottleZip = '';
   this.payloadObject = '';
   this.selectBottle = '';
   this.selectedDateForBottle = '';
   this.tableSelection = '';
   this.tab = '';
- 
+
   this.guestFocus = '';
   this.userselectedTables = '';
   this.foodService = [];
@@ -30,17 +31,17 @@ app.service('DataShare', function() {
   this.enablePayment = '';
   this.serviceTypes = '';
   this.tableService = {};
-  this.imageMapping={
-      "pictureURL": "",
-      "pictureURLThumbnail":"",
-          "maps": []
+  this.imageMapping = {
+    "pictureURL": "",
+    "pictureURLThumbnail": "",
+    "maps": []
   };
-  this.elements=[];
+  this.elements = [];
   this.selectedFoods = '';
   this.selectedDrinks = '';
   this.amount = '';
   this.privateOrderItem = '';
-  
+
   /*this.getCurrentLocation = function() {
 
     if (navigator && navigator.geolocation) {

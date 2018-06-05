@@ -23,6 +23,7 @@
             $scope.addAction('bottleBtn',    'KIDS_ZONE', 'Kids Zone', 'vipbox_kidz_zone.png', self.enableBottleService);
             $scope.addAction('foodBtn',      'cities/Fremont/70008/food-service', 'Food Service', 'foods.png', self.enableFood);
             $scope.addAction('drinksBtn',    'cities/Fremont/70008/drink-service', 'Drink Service', 'drink.png', self.enableDrinks);
+            $scope.addAction('wineToHomeBtn','cities/Fremont/70008/wine-to-home', 'Wine To Home', 'drink.png', self.wineToHomeButton);
             $scope.addAction('bachelorBtn',  'TICKETING', 'Ticketing', 'vipbox_ticketing.png', self.enableBachelorParty);
             $scope.addAction('guestBtn',     'cities/Fremont/70008/guestList', 'Amenities', 'vipbox_amenities.png', self.enableGuestList);
             $scope.addAction('partyBtn',     'cities/Fremont/70008/party-service', 'Survey', 'vipbox_survey.png', self.enablePartyPackageService);
