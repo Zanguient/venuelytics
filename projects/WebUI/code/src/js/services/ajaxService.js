@@ -255,7 +255,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         });
     };
 
-    this.createTransaction = function(venueId,orderId,object,authBase64Str) {
+    this.createTransaction = function(venueId, orderId, object, authBase64Str) {
         return $http({
             method: 'POST',
             url: RestURL.baseURL + 'vas' + '/' + venueId + '/charge/' + orderId,
@@ -467,6 +467,17 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
             method: 'POST',
             data: payload,
             url: RestURL.baseURL + 'messanger/contact'
+        });
+    };
+
+
+    this.getSettings = function() {
+        return $http({
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer dCZU-Fs7coA:APA91bHrcgo1fipja2ncMF1SettKyANMxewopu1IyyqfWLo1PDECdX7V3lWwf"
+            },
+            url: RestURL.baseURL + 'settings'
         });
     };
 

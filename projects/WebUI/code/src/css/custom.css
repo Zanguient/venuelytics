@@ -3027,3 +3027,7 @@ button {
 .menu-item select.form-control {
   font-weight: 500;
 }
+
+.paypal-color-gold {
+  background: #ffc439 !important;
+}

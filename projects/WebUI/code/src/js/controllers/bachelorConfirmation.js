@@ -108,16 +108,16 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
                 } 
             };
 
-            self.cardPaymentData = function(value) {
+            self.payUsingCard = function() {
                 $scope.cardPayment = true;
                 $scope.paypal = false;
             };
 
-            self.paypalData = function(value) {
+            self.payUsingPaypal = function() {
                 $scope.paypal = true;
                 $scope.cardPayment = false;
             };
-            self.payAtVenue = function(value){
+            self.payAtVenue = function(){
                 $scope.paypal = false;
                 $scope.cardPayment = false;
             }

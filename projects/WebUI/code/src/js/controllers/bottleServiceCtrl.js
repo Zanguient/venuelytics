@@ -581,7 +581,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             
             DataShare.bottleServiceData = self.bottle;
             DataShare.bottleZip = self.bottle.bottleZipcode;
-            DataShare.authBase64Str = authBase64Str;
             DataShare.selectBottle = self.bottleMinimum;
             DataShare.tableSelection = self.tableSelection;
             if($scope.tableSelection.length === 0) {

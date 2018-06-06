@@ -77,12 +77,15 @@ module.exports = {
             'bower_components/satellizer/satellizer.min.js',
             'bower_components/ngstorage/ngStorage.min.js',
             'bower_components/ngclipboard/dist/ngclipboard.min.js',
-            'bower_components/angular-media-queries/match-media.js'
+            'bower_components/angular-media-queries/match-media.js',
+            'bower_components/AngularJS-Toaster/toaster.min.js',
+            'bower_components/angular-animate/angular-animate.min.js'
         ],
         js_sourcemap: [
             'bower_components/iframe-resizer/js/iframeResizer.contentWindow.map',
             'bower_components/iframe-resizer/js/iframeResizer.map',
             'bower_components/iframe-resizer/js/iframeResizer.map',
+            'bower_components/angular-animate/angular-animate.min.js.map'
         ],
         css_sourcemap: [
             'bower_components/bootstrap/dist/css/bootstrap.min.css.map'
@@ -105,7 +108,9 @@ module.exports = {
             'bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
 			'bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
 			'bower_components/owl.carousel/dist/assets/owl.theme.default.min.css',
-			'src/css/custom.css'
+			'src/css/custom.css',
+            'bower_components/AngularJS-Toaster/toaster.min.css',
+            
         ],
         fonts : [
             'bower_components/bootstrap/dist/fonts/*',

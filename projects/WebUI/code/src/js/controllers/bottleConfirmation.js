@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('ConfirmReservationController', ['$log', '$scope', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService', 
-    function ($log, $scope, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope,  ngMeta, venueService) {
+app.controller('ConfirmReservationController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope,  ngMeta, venueService) {
 
     		$log.log('Inside Confirm Reservation Controller.');
 
@@ -12,9 +12,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
             self.selectTables = [];
             self.selectBottleOrders = [];
             self.availableAmount = 0;
-            self.paypal = false;
-            self.cardPayment = false;
-           
+          
             self.init = function() {
                 $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueId, 'embed');
                 self.venueDetails =  venueService.getVenue($routeParams.venueId); 
@@ -28,10 +26,16 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                 self.orderId = -1;
                 self.venueId = self.venueDetails.id;
                 self.userData = DataShare.bottleServiceData;
-                self.authBase64Str = DataShare.authBase64Str;
+                var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
+                self.authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
+
                 self.object = DataShare.payloadObject;
-               
+                self.redirectUrl = self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails);
+
                 self.availableAmount = $window.localStorage.getItem("bottleAmount");
+                if (!isNaN(self.availableAmount)  ) {
+                    self.availableAmount = 0;
+                }
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');
                 self.selectBottleOrders = DataShare.selectBottle;
                 self.enablePayment = DataShare.enablePayment;
@@ -77,9 +81,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                                     self.discount = value.value;
                             } else if(value.type === 'service-fee'){
                                     self.gratuity = value.value;
-                            } else{
-                                $log.info("Else block:");
-                            }
+                            } 
                         });
                     } else {
                         self.chargedAmount = parseInt(self.availableAmount);
@@ -106,46 +108,27 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                 $location.url('/cities/' + self.selectedCity + '/' + self.venueRefId(self.venueDetails) + '/bottle-service');
             };
 
-            self.cardPaymentData = function(value) {
-                self.cardPayment = true;
-                self.paypal = false;
+        
+            
+            self.payAtVenue = function() {
+                 $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
             };
 
-            self.paypalData = function(value) {
-                self.paypal = true;
-                self.cardPayment = false;
-            };
-            self.payAtVenue = function(value){
-                self.paypal = false;
-                self.cardPayment = false;
-            }
-
-            self.paypalPayment = function() { 
-                DataShare.amount = self.chargedAmount;
-                var popup = window.open("","directories=no,height=100,width=100,menubar=no,resizable=no,scrollbars=no,status=no,titlebar=no,top=0,location=no");
-                if (!popup || popup.closed || typeof popup.closed==='undefined'){
-                    alert("Popup Blocker is enabled!");
-                    popup.close();
+            self.continuePayment = function(type) {
+                if (type === 'CC') {
+                    self.creditCardPayment();
+                } else if (type === 'PP') {
+                    self.paypalPayment();
                 } else {
-                    //Popup Allowed
-                    popup.close();
-                    var paypalElement = document.getElementById('paypal-button');
-                    jQuery(paypalElement).trigger('click');
-                } 
-            };
-
-            self.createBottleSave = function() {
+                    $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
+                }
+            }
+            self.placeOrder = function(type) {
                 if (self.orderId <= 0) {
                     AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function(response) {
                         if (response.status == 200 ||  response.srtatus == 201) {
                             self.orderId = response.data.id;
-                            if (self.cardPayment === true) {
-                                self.creditCardPayment();
-                            } else if (self.paypal === true) {
-                                self.paypalPayment();
-                            } else {
-                                $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
-                            }
+                            self.continuePayment(type);
                         } else {
                             if (response.data && response.data.message) {
                                 alert("Saving order failed with message: " + response.data.message );
@@ -153,13 +136,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                         }
                     });
                 } else { // order is already placed.
-                    if (self.cardPayment === true) {
-                        self.creditCardPayment();
-                    } else if (self.paypal === true) {
-                        self.paypalPayment();
-                    } else {
-                        $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
-                    }
+                    self.continuePayment(type);
                 }
                 
             };
@@ -204,9 +181,8 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                                     };
                         DataShare.amount = chargeAmountValue;
                         //Save Payment Transaction for card
-                        var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
-                        var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
-                        AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
+                        
+                        AjaxService.createTransaction(self.venueId, self.orderId, payment, self.authBase64Str).then(function(response) {
                             $location.url(self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails));
                         });
                     }
