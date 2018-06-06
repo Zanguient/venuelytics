@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', '$cookieStore','VenueService',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, $cookieStore, venueService) {
+app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope','VenueService',
+    function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, venueService) {
 
 	$log.log('Inside ServiceTab Controller.');
 
@@ -54,11 +54,13 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.featuredEnable = response.data["Advance.featured"];
             self.eventsEnable = response.data["venueEvents"];
             $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
+
             if ($rootScope.blackTheme === '') {
                 $rootScope.bgMask = 'bg-mask-white';
             } else {
                 $rootScope.bgMask = 'bg-mask-black';
             }
+            self.wineToHomeEnable = false;
             if(self.embeddedService === 'embed') {
                 $rootScope.venueHeader = response.data["ui.custom.header"];
                 $rootScope.venueFooter = response.data["ui.custom.footer"];
@@ -254,7 +256,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
        // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
         addTab('eventListTab','eventlist', 'assets/img/service/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, 'eventListBtn', 'eventList');
-        
+        addTab('wineToHomeTab','winetohome', 'assets/img/service/event_image.png','reservation.WINE_TO_HOME', 'wine-to-home', 'wine-to-home/wine-to-home.html',self.wineToHomeEnable, 'winetohomeBtn', 'wineToHome');
+
         //if(self.tabParams === "VIP"){
             var firstEnabledTabBtnId = optimizeTabDisplay(self.displayTabs);
             if (firstEnabledTabBtnId !== null) {  

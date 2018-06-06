@@ -2616,6 +2616,12 @@ table.fc-border-separate {
   border-color: white;
 }
 
+.wineToHomeBtn {
+  background-color:rgba(122,17,217, 0.80) !important;
+  color: #fff !important;
+  border-color: white;
+}
+
 .foodBtn {
   background-color: rgba(30,134,68, 0.80) !important;
   color: #fff !important;
@@ -2679,6 +2685,12 @@ table.fc-border-separate {
 }
 
 .eventListBtn {
+  background-color: rgba(30,60,250, 0.80) !important;
+  color: #fff !important;
+  border-color: white;
+}
+
+.winetohomeBtn {
   background-color: rgba(30,60,250, 0.80) !important;
   color: #fff !important;
   border-color: white;

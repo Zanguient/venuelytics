@@ -1,0 +1,40 @@
+<div class="container nav_height card {{blackTheme}}">
+	<center>
+		<h2 class="color-success">{{'reservation.WINE_CONFIRM' | translate}}</h2>
+	<div class="form-group">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 col-md-offset-right-3">
+		  <table class="table table-responsive table-no-border">
+          <tbody>
+              <tr>
+                  <td> <label><b>{{'reservation.FIRST_NAME' | translate}}</b></label> </td>
+                  <td>{{wineServiceDetails.firstName}}</td>
+              </tr>
+              <tr>
+                  <td> <label><b>{{'reservation.LAST_NAME' | translate}}</b></label> </td>
+                  <td>{{wineServiceDetails.lastName}}</td>
+              </tr>
+              <tr>
+                  <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
+                  <td>{{wineServiceDetails.mobileNumber}}</td>
+              </tr>
+              <tr>
+                  <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
+                  <td>{{wineServiceDetails.emailId}}</td>
+              </tr>
+              <td><label><b> {{'reservation.BILLING_ADDRESS' | translate}}</b></label> </td>
+                <td>{{wineServiceDetails.billingAddress}}</td>
+            </tr>
+            <tr>
+                <td><label><b> {{'reservation.SHIPPING_ADDRESS' | translate}}</b></label> </td>
+                <td>{{wineServiceDetails.shippingAddress}}</td>
+            </tr>
+          </tbody>
+      </table>
+      <h6 class="color-success">{{"reservation.SELECTED_DRINK_ITEMS"  | translate}}</h6>
+    </div>
+  </div>
+ </center>
+</div>
+
+
+
