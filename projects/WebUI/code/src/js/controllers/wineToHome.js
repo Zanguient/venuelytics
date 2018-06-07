@@ -4,6 +4,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
 
         var self = $scope;
         self.selectedDrinkItems = [];
+        self.drinkCategories = {};
         self.init = function () {
 
             self.venueDetails = venueService.getVenue($routeParams.venueId);
@@ -20,7 +21,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
             }
 
             if ((Object.keys(DataShare.wineServiceData).length) !== 0) {
-                self.drink = DataShare.wineServiceData;
+                self.wine = DataShare.wineServiceData;
                 self.drinkType = DataShare.serviceTypes;
                 self.userSelectedDrinks = DataShare.drinks;
             } else {
@@ -110,10 +111,21 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
             }
             DataShare.drinks = self.userSelectedDrinks;
         };
+        self.isMenuSelected = function(name) {
+            return name == self.menuTab
+        };
+
+        self.selectMenu = function(name) {
+            self.menuTab = name;
+        };
 
         self.getDrink = function () {
             AjaxService.getProductsByType(self.venueId, 'Drinks').then(function (response) {
                 self.drinkDetails = response.data;
+                for(var j=0; j < response.data.length; j++) {
+                    self.drinkCategories[response.data[j].category] = response.data[j].category;                     
+                }
+                self.menuTab = response.data[0].category;
                 if ((Object.keys(DataShare.selectedDrinks).length) !== 0) {
                     self.editDrinkItems = DataShare.selectedDrinks;
                     angular.forEach(self.editDrinkItems, function (value, key) {
@@ -155,12 +167,12 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                 "noOfMaleGuests": 0,
                 "noOfFemaleGuests": 0,
                 "budget": 0,
-                "serviceInstructions": self.drink.instructions,
+                "serviceInstructions": self.wine.instructions,
                 "status": "REQUEST",
                 "serviceDetail": null,
                 "fulfillmentDate": dateValue,
                 "durationInMinutes": 0,
-                "deliveryType": self.drinkType,
+                // "deliveryType": self.drinkType,
                 //"deliveryAddress": tableNumber,
                 "deliveryInstructions": null,
                 "order": {

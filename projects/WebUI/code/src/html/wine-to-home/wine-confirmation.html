@@ -31,10 +31,36 @@
           </tbody>
       </table>
       <h6 class="color-success">{{"reservation.SELECTED_DRINK_ITEMS"  | translate}}</h6>
+      <table class="table table-responsive table-no-border h6">
+        <thead>
+          <tr>
+            <th><label><b>{{"reservation.DRINK_TYPE"  | translate}}</b></label></th>
+            <th><label><b>{{"reservation.BRAND"  | translate}}</b></label></th>
+            <th><label><b>{{"reservation.QUANTITY"  | translate}}</b></label></th>
+            <th><label><b>{{"reservation.PRICE"  | translate}}</b></label></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="drinkItem in selectedDrinkItems">
+            <td>{{drinkItem.brand}}</td>
+            <td>{{drinkItem.name}}</td>
+            <td>{{drinkItem.count}}</td>
+            <td><span ng-hide="((drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined))">&dollar;</span>{{(drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined) ? "-" : drinkItem.total | number:2}}</td>
+          </tr>
+        </tbody>
+    </table>
+    
+    <div ng-if="enabledPayment != 'Y'">
+        <button type="submit" class="btn btn-raised btn-primary" ng-click="wineServiceSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
+        <button type="button" class="btn btn-raised btn-danger" ng-click="editWinePage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
+    </div>
+    <div ng-if="enabledPayment == 'Y'">
+        <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnabled()">{{"reservation.PAYMENT"  | translate}}</button>
+        <button type="button" class="btn btn-raised btn-danger" ng-click="editWinePage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
     </div>
   </div>
- </center>
 </div>
-
+</center>
+</div>
 
 
