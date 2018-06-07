@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('ConfirmReservationController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService',
-    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope,  ngMeta, venueService) {
+app.controller('ConfirmReservationController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService', 'toaster',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope,  ngMeta, venueService. toaster) {
 
     		$log.log('Inside Confirm Reservation Controller.');
 
@@ -153,7 +153,14 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                     return venue.uniqueName;
                 }
             };
-
+            self.toast = function(message) {
+                toaster.pop({
+                  type: 'error',
+                  title: 'Paypal - Payment Error',
+                  body: message,
+                  timeout: 3000
+                });
+            };
             self.creditCardPayment = function() {
                 var pay,chargeAmountValue;
                 pay = self.chargedAmount * 100;
@@ -188,7 +195,12 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                         //Save Payment Transaction for card
                         
                         AjaxService.createTransaction(self.venueId, self.orderId, payment, self.authBase64Str).then(function(response) {
-                            $location.url(self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails));
+                            if (response.data.status >= 200 && response.data.status < 300) {
+                               $location.url(self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails));
+                            } else {
+                              self.toast(response.data.message);
+                            }
+                           
                         });
                     }
             });
