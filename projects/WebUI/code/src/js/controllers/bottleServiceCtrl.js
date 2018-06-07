@@ -581,7 +581,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             
             DataShare.bottleServiceData = self.bottle;
             DataShare.bottleZip = self.bottle.bottleZipcode;
-            DataShare.authBase64Str = authBase64Str;
             DataShare.selectBottle = self.bottleMinimum;
             DataShare.tableSelection = self.tableSelection;
             if($scope.tableSelection.length === 0) {
@@ -631,7 +630,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                         "productType": value.productType,
                         "quantity": value.size,
                         "comments": value.comments,
-                        "name": value.name
+                        "name": value.name,
+                        "totalPrice": value.price
                     };
                     self.serviceJSON.order.orderItems.push(items);
                 });

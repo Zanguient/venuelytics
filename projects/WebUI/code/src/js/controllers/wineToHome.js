@@ -1,28 +1,27 @@
 "use strict";
-app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope', 'ngMeta', 'VenueService',
+app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope', 'ngMeta', 'VenueService',
     function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, ngMeta, venueService) {
 
         var self = $scope;
         self.selectedDrinkItems = [];
-        self.drinkType = 'Delivery';
-         self.drinkCategories = {};
+        self.drinkCategories = {};
         self.init = function () {
 
             self.venueDetails = venueService.getVenue($routeParams.venueId);
             self.venueId = self.venueDetails.id;
-            ngMeta.setTag('description', self.venueDetails.description + " Drink Services");
-            $rootScope.title = self.venueDetails.venueName + " Venuelytics - Drink Services";
+            ngMeta.setTag('description', self.venueDetails.description + " Wine To Home Services");
+            $rootScope.title = self.venueDetails.venueName + " Venuelytics - Wine To Home Services";
             ngMeta.setTitle($rootScope.title);
 
             self.selectedCity = self.venueDetails.city;
             $rootScope.serviceTabClear = false;
 
-            if (($rootScope.serviceName === 'DrinkService') || (DataShare.amount !== '')) {
+            if (($rootScope.serviceName === 'WineToHome') || (DataShare.amount !== '')) {
                 self.tabClear();
             }
 
-            if ((Object.keys(DataShare.drinkServiceData).length) !== 0) {
-                self.drink = DataShare.drinkServiceData;
+            if ((Object.keys(DataShare.wineServiceData).length) !== 0) {
+                self.wine = DataShare.wineServiceData;
                 self.drinkType = DataShare.serviceTypes;
                 self.userSelectedDrinks = DataShare.drinks;
             } else {
@@ -30,7 +29,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             }
             self.getMenus();
             self.getDrink();
-            self.getVenueType();
             setTimeout(function () {
                 self.getSelectedTab();
             }, 600);
@@ -55,7 +53,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
 
         self.getSelectedTab = function () {
             $(".service-btn .card").removeClass("tabSelected");
-            $("#drinkServices > .drinksBtn").addClass("tabSelected");
+            $("#wineToHome > .winetohomeBtn").addClass("tabSelected");
         };
 
         self.removeDrinkItems = function (index, obj) {
@@ -68,7 +66,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
         };
 
         self.tabClear = function () {
-            DataShare.drinkServiceData = {};
+            DataShare.wineServiceData = {};
             self.isDrinkFocused = '';
             self.drink = {};
             DataShare.serviceTypes = '';
@@ -93,7 +91,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
         };
 
         self.userSelectedDrinks = [];
-
 
         self.drinkService = function (item) {
             if (item.count !== undefined && item.count !== '') {
@@ -150,64 +147,33 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             $rootScope.description = value;
         };
 
-        self.getVenueType = function () {
-            AjaxService.getVenues(self.venueId, null, null).then(function (response) {
-                self.venueType = response.venueType;
-                var venueTypeSplit = self.venueType.split(',');
-                angular.forEach(venueTypeSplit, function (value1) {
-                    var value = value1.trim();
-                    if (value === 'CLUB') {
-                        self.venueTypesClub = value;
-                    } else if (value === 'BAR') {
-                        self.venueTypesBar = value;
-                    } else if (value === 'LOUNGE') {
-                        self.venueTypesLounge = value;
-                    } else if (value === 'BOWLING') {
-                        self.venueTypeBowling = value;
-                    } else if (value === 'CASINO') {
-                        self.venueTypeCasino = value;
-                    } else if (value === 'RESTAURANT') {
-                        self.venueTypeRestaurant = value;
-                    }
-                });
-            });
-        };
-
-        self.drinkSave = function () {
+        self.wineSave = function () {
             $rootScope.serviceTabClear = true;
             var parsedend = moment().format("MM-DD-YYYY");
             var date = new Date(moment(parsedend, 'MM-DD-YYYY').format());
             var dateValue = moment(date).format("YYYY-MM-DDTHH:mm:ss");
-            var fullName = self.drink.firstName + " " + self.drink.lastName;
-            var authBase64Str = window.btoa(fullName + ':' + self.drink.emailId + ':' + self.drink.mobileNumber);
+            var fullName = self.wine.firstName + " " + self.wine.lastName;
+            var authBase64Str = window.btoa(fullName + ':' + self.wine.emailId + ':' + self.wine.mobileNumber + ':' + self.wine.billingAddress + ':' + self.wine.shippingAddress);
             DataShare.authBase64Str = authBase64Str;
-            DataShare.drinkServiceData = self.drink;
-            var tableNumber;
-            if ((self.drink.tableNumber) && (self.drink.seatNumber)) {
-                tableNumber = self.drink.tableNumber + "-" + self.drink.seatNumber;
-            } else if (self.drink.tableNumber) {
-                tableNumber = self.drink.tableNumber;
-            } else {
-                tableNumber = self.drink.laneNumber;
-            }
+            DataShare.wineServiceData = self.wine;
             self.serviceJSON = {
                 "serviceType": 'Drinks',
                 "venueNumber": self.venueId,
                 "reason": "",
-                "contactNumber": self.drink.mobileNumber,
-                "contactEmail": self.drink.emailId,
+                "contactNumber": self.wine.mobileNumber,
+                "contactEmail": self.wine.emailId,
                 "contactZipcode": "",
                 "noOfGuests": 0,
                 "noOfMaleGuests": 0,
                 "noOfFemaleGuests": 0,
                 "budget": 0,
-                "serviceInstructions": self.drink.instructions,
+                "serviceInstructions": self.wine.instructions,
                 "status": "REQUEST",
                 "serviceDetail": null,
                 "fulfillmentDate": dateValue,
                 "durationInMinutes": 0,
-                "deliveryType": self.drinkType,
-                "deliveryAddress": tableNumber,
+                // "deliveryType": self.drinkType,
+                //"deliveryAddress": tableNumber,
                 "deliveryInstructions": null,
                 "order": {
                     "venueNumber": self.venueId,
@@ -236,7 +202,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             DataShare.venueName = self.venueName;
             DataShare.enablePayment = self.enabledPayment;
             DataShare.selectedDrinks = self.selectedDrinkItems;
-            $location.url(self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/confirmDrinkService");
+            $location.url(self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/confirmWineService");
         };
 
         self.venueRefId = function (venue) {
@@ -247,4 +213,4 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             }
         };
         self.init();
-    }]);
+}]);

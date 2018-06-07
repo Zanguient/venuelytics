@@ -10,12 +10,12 @@
          <button type="button" class="btn btn-default btn-sm" ng-click="printEvent(event)">
             <em class="fa fa-print fa-2x text-gray-dark"></em>
          </button> -->
-         <pdf-download c="'fa fa-eye fa-2x text-gray-dark'"  title="Download Ticket" url="{{previewEventUrl(event.id)}}" 
-         filename="{{getPreviewFileName(event.id)}}"></pdf-download>
-         <button type="button" class="btn btn-default btn-sm" ng-click="editEvent(event.id)">
+         <pdf-download c="'fa fa-eye fa-2x text-gray-dark'"  title="Download Ticket" url="{{previewEventUrl(event)}}" 
+         filename="{{getPreviewFileName(event)}}"></pdf-download>
+         <button type="button" class="btn btn-default btn-sm" ng-click="editEvent(event)">
             <em class="fa fa-pencil fa-2x text-gray-dark"></em>
          </button>
-         <button type="button" class="btn btn-default btn-sm" ng-click="deleteEvent($index, event.id)">
+         <button type="button" class="btn btn-default btn-sm" ng-click="deleteEvent($index, event)">
             <em class="fa fa-trash fa-2x text-gray-dark"></em>
          </button>
       </div>

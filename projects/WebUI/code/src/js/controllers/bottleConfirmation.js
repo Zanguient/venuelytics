@@ -3,8 +3,8 @@
  * @date 07-JULY-2017
  */
 "use strict";
-app.controller('ConfirmReservationController', ['$log', '$scope', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService', 
-    function ($log, $scope, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope,  ngMeta, venueService) {
+app.controller('ConfirmReservationController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService', 'toaster',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope,  ngMeta, venueService. toaster) {
 
     		$log.log('Inside Confirm Reservation Controller.');
 
@@ -12,9 +12,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
             self.selectTables = [];
             self.selectBottleOrders = [];
             self.availableAmount = 0;
-            self.paypal = false;
-            self.cardPayment = false;
-           
+          
             self.init = function() {
                 $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueId, 'embed');
                 self.venueDetails =  venueService.getVenue($routeParams.venueId); 
@@ -28,33 +26,44 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                 self.orderId = -1;
                 self.venueId = self.venueDetails.id;
                 self.userData = DataShare.bottleServiceData;
-                self.authBase64Str = DataShare.authBase64Str;
+                var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
+                self.authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
+
                 self.object = DataShare.payloadObject;
-               
+                self.redirectUrl = self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails);
+
                 self.availableAmount = $window.localStorage.getItem("bottleAmount");
+                if (!isNaN(self.availableAmount)  ) {
+                    self.availableAmount = 0;
+                }
                 self.taxDate = moment(self.userData.requestedDate).format('YYYYMMDD');
                 self.selectBottleOrders = DataShare.selectBottle;
                 self.enablePayment = DataShare.enablePayment;
                 self.venueName =  DataShare.venueDetails.venueName;
                 angular.forEach(self.selectBottleOrders, function(value1, key1) {
-                    self.availableAmount = self.availableAmount + value1.price;
+                    self.availableAmount +=  value1.price;
                 });
-                if(DataShare.amount) {
-                    self.availableAmount = DataShare.amount;
-                }
+                
                 if(self.object !== '') {
                     angular.forEach(self.object.order.orderItems, function(value, key) {
-                    if(value.productType === 'VenueMap') {
-                        var items = {
-                            "venueNumber": value.venueNumber,
-                            "productId": value.productId,
-                            "productType": value.productType,
-                            "quantity": value.quantity,
-                            "name": value.name
-                        };
+                        if(value.productType === 'VenueMap') {
+                            var items = {
+                                "venueNumber": value.venueNumber,
+                                "productId": value.productId,
+                                "productType": value.productType,
+                                "quantity": value.quantity,
+                                "name": value.name,
+                                "totalPrice" : value.totalPrice
+                            }; 
+                            if (!isNaN(value.price)) {
+                                self.availableAmount += value.price;
+                            }
                             self.selectTables.push(items);
                         }
                     });
+                }
+                if(DataShare.amount) {
+                    self.availableAmount = DataShare.amount;
                 }
                 self.getTax();
             };
@@ -77,9 +86,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                                     self.discount = value.value;
                             } else if(value.type === 'service-fee'){
                                     self.gratuity = value.value;
-                            } else{
-                                $log.info("Else block:");
-                            }
+                            } 
                         });
                     } else {
                         self.chargedAmount = parseInt(self.availableAmount);
@@ -106,46 +113,27 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                 $location.url('/cities/' + self.selectedCity + '/' + self.venueRefId(self.venueDetails) + '/bottle-service');
             };
 
-            self.cardPaymentData = function(value) {
-                self.cardPayment = true;
-                self.paypal = false;
+        
+            
+            self.payAtVenue = function() {
+                 $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
             };
 
-            self.paypalData = function(value) {
-                self.paypal = true;
-                self.cardPayment = false;
-            };
-            self.payAtVenue = function(value){
-                self.paypal = false;
-                self.cardPayment = false;
-            }
-
-            self.paypalPayment = function() { 
-                DataShare.amount = self.chargedAmount;
-                var popup = window.open("","directories=no,height=100,width=100,menubar=no,resizable=no,scrollbars=no,status=no,titlebar=no,top=0,location=no");
-                if (!popup || popup.closed || typeof popup.closed==='undefined'){
-                    alert("Popup Blocker is enabled!");
-                    popup.close();
+            self.continuePayment = function(type) {
+                if (type === 'CC') {
+                    self.creditCardPayment();
+                } else if (type === 'PP') {
+                    self.paypalPayment();
                 } else {
-                    //Popup Allowed
-                    popup.close();
-                    var paypalElement = document.getElementById('paypal-button');
-                    jQuery(paypalElement).trigger('click');
-                } 
-            };
-
-            self.createBottleSave = function() {
+                    $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
+                }
+            }
+            self.placeOrder = function(type) {
                 if (self.orderId <= 0) {
                     AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function(response) {
                         if (response.status == 200 ||  response.srtatus == 201) {
                             self.orderId = response.data.id;
-                            if (self.cardPayment === true) {
-                                self.creditCardPayment();
-                            } else if (self.paypal === true) {
-                                self.paypalPayment();
-                            } else {
-                                $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
-                            }
+                            self.continuePayment(type);
                         } else {
                             if (response.data && response.data.message) {
                                 alert("Saving order failed with message: " + response.data.message );
@@ -153,13 +141,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                         }
                     });
                 } else { // order is already placed.
-                    if (self.cardPayment === true) {
-                        self.creditCardPayment();
-                    } else if (self.paypal === true) {
-                        self.paypalPayment();
-                    } else {
-                        $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
-                    }
+                    self.continuePayment(type);
                 }
                 
             };
@@ -171,7 +153,14 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                     return venue.uniqueName;
                 }
             };
-
+            self.toast = function(message) {
+                toaster.pop({
+                  type: 'error',
+                  title: 'Paypal - Payment Error',
+                  body: message,
+                  timeout: 3000
+                });
+            };
             self.creditCardPayment = function() {
                 var pay,chargeAmountValue;
                 pay = self.chargedAmount * 100;
@@ -204,10 +193,14 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                                     };
                         DataShare.amount = chargeAmountValue;
                         //Save Payment Transaction for card
-                        var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
-                        var authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
-                        AjaxService.createTransaction(self.venueId, self.orderId, payment, authBase64Str).then(function(response) {
-                            $location.url(self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails));
+                        
+                        AjaxService.createTransaction(self.venueId, self.orderId, payment, self.authBase64Str).then(function(response) {
+                            if (response.data.status >= 200 && response.data.status < 300) {
+                               $location.url(self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails));
+                            } else {
+                              self.toast(response.data.message);
+                            }
+                           
                         });
                     }
             });

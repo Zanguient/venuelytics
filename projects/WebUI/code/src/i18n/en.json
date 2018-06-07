@@ -443,6 +443,10 @@
 		"VENUELYTICS_INC":"VenueLytics Inc - ItzFun Consumer & VenueLytics Business App Version v1.8(Build 18027)"
 	},
 	"reservation": {
+		"WINE_TO_HOME": "Wine To Home",
+		"BILLING_ADDRESS":"Billing Address",
+		"SHIPPING_ADDRESS":"Shipping Address",
+		"WINE_ITEMS":"Wine Items",
 		"BACHELOR":"Bachelor Party",
 		"TABLE_TIME":"Time",
 		"TABLE_GUEST":"Guests",
@@ -584,6 +588,7 @@
 		"TOTAL_GUEST_SELECTED":"Please choose a different table(s). The selected table(s) cannot accommodate the requested number of guests.",
 		"FOOD_CONFIRM":"Confirm your Food Service Details",
 		"DRINK_CONFIRM":"Confirm your Drink Service Details",
+		"WINE_CONFIRM":"Confirm your Wine Service Details",
 		"ENQUIRE":"Enquire",
 		"RESERVED":"Already Reserved",
 		"READ_MORE":"Read More",

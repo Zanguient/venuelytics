@@ -5,8 +5,9 @@
             <h1>{{"reservation.PAYMENT"  | translate}}</h1>
         </center>
     </div>
-    <div class="form-group">
-        <center>
+    <center>
+        <div class="col-md-offset-3 col-md-9 col-sm-12">
+        
             <table class="table table-responsive table-no-border">
                 <tr>
                     <td>
@@ -40,37 +41,28 @@
                         $<label>{{chargedAmount | number:2}}</label>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <label>{{"reservation.PAYMENT"  | translate}}</label>
-                    </td>
-                    <td>
-                        <label>
-                            <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal" disabled="true" />
-                            {{"reservation.PAYPAL"  | translate}}
-                        </label><br>
-                        <label>
-                            <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>
-                            {{"reservation.CREDIT_CARD"  | translate}}
-                        </label><br>
-                        <label>
-                            <input type="radio" name="type" ng-change="payAtVenue(test)" ng-model="test" value="Phone/In Venue"/>
-                            {{"reservation.PAY_AT_VENUE"  | translate}}
-                        </label>
-                    </td>
-                </tr>
             </table>
-        </center>
-    </div>
-    <div>
-        <center>
-            <input type="button" class="btn btn-success btn-raised" ng-click="createBottleSave()" value="Pay Now">
-        </center>
-    </div>
+            <div>
+                <toaster-container toaster-options="{'time-out': 3000, 'animation-class': 'toast-top-full-width'}"></toaster-container>
+                <paypal-button class="btn btn-raised btn-sm paypal-color-gold"  venue-number="{{venueId}}" tax-date="{{taxDate}}" 
+                order="object" amount="availableAmount" auth-token="{{authBase64Str}}" service-type="Bottle" provider-type="paypal" 
+                redirect-url="{{redirectUrl}}" id="papalButtonId">
+                </paypal-button>
+                <div class="btn btn-raised btn-primary" ng-click="placeOrder('CC')">
+                    <i class="fa fa-2x fa-credit-card"></i> {{ 'reservation.CREDIT_CARD'  | translate}}</div>
+
+                <div class="btn btn-raised btn-primary no-mt no-mb" ng-click="placeOrder('VEN')">
+                    <i class="zmdi zmdi-store zmdi-hc-2x"></i>  {{'reservation.PAY_AT_VENUE'  | translate}}</div>
+            </div>
+            <input type="button" class="btn btn-raised btn-default" value="Cancel & return to Bottle Service" ng-click="backToReservation()">
+            
+        </div>
+
+    </center>
     <div class="form-group" ng-hide="true">
         <input type="text" id="stripeAmount" placeholder="payAmount" ng-model="availableAmount">
         <input type="text" id="taxDate" placeholder="taxDate" ng-model="taxDate">
-        <input type="text" id="venueNumber" placeholder="venueNumber" ng-model="venueID">
+        <input type="text" id="venueNumber" placeholder="venueNumber" ng-model="venueId">
         <input type="text" id="orderIdValue" placeholder="orderIdValue" ng-model="orderId">
         <input type="text" id="cityName" placeholder="cityName" ng-model="editCity">
     </div>

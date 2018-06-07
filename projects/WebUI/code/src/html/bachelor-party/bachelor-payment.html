@@ -46,15 +46,15 @@
                     </td>
                     <td >
                         <label>
-                            <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal"/>
+                            <input type="radio" ng-change="payUsingPaypal()" name="type" value="Paypal"/>
                             {{"reservation.PAYPAL"  | translate}}
                         </label><br>
                         <label>
-                            <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>;
-                            {{"reservation.CREDIT_CARD"  | translate}}</font>
+                            <input type="radio" ng-change="payUsingCard()" name="type" value="CreditCard"/>;
+                            {{"reservation.CREDIT_CARD"  | translate}}
                         </label><br>
                         <label>
-                            <input type="radio" ng-change="payAtVenue(test)" name="type" ng-model="test" value="Phone/In Venue"/>
+                            <input type="radio" ng-change="payAtVenue()" name="type" value="payAtVenue"/>
                             {{"reservation.PAY_AT_VENUE"  | translate}}
                         </label>
                     </td>
@@ -76,124 +76,4 @@
     <input type="text" id="orderIdValue" placeholder="orderIdValue" ng-model="orderId">
     <input type="text" id="cityName" placeholder="cityName" ng-model="city">
 </div>
-    <div ng-hide="true">
-            <script src="//www.paypalobjects.com/api/button.js?" data-merchant="w96ttbwry6xdg326" data-id="paypal-button" data-button="checkout" data-color="gold" data-size="medium" data-shape="pill" data-button_type="submit" data-button_disabled="false"></script>
-            <script type="text/javascript">
-
-                function payPalInit() {
-                    var paypalButton = document.getElementById('paypal-button');
-
-                    // Create a Client component
-                    braintree.client.create({
-                        //authorization: 'sandbox_h98jshvp_w96ttbwry6xdg326'
-                        authorization: 'sandbox_h4tjv72p_k6s4n37yv42h5x2x'
-                    }, function(clientErr, clientInstance) {
-                        // Create PayPal component
-                        braintree.paypal.create({
-                            client: clientInstance
-                        }, function(err, paypalInstance) {
-                                console.log('paypalButton:' + paypalButton);
-                                var chargeAmountValue;
-                                var amount = $("#stripeAmount").val();
-                                var taxDate = $("#taxDate").val();
-                                var venueNumber = $("#venueNumber").val();
-                                var cityName = $("#cityName").val();
-                                var tax, taxAmount;
-                                var chargedAmount, gratuity;
-                                var processingFee, discount, payFlag = false;
-                                //Get Tax
-                                $.get('//dev.api.venuelytics.com/WebServices/rsapi/v1//vas/' + venueNumber + '/taxNfees/' + taxDate, {
-                                    }, function (response) {
-                                    if(response.length !== 0) {
-                                        for(var i=0;i<response.length;i++) {
-                                            if(response[i].type == 'tax') {
-                                                tax = response[i].value; 
-                                                taxAmount = (amount * tax)/100;
-                                                var amountValue = parseFloat(amount).toFixed(2);
-                                                taxAmount = taxAmount.toFixed(2);
-                                                chargedAmounts = parseFloat(amount)+parseFloat(taxAmount);
-                                                chargedAmounts = chargedAmounts.toFixed(2);
-                                                chargedAmount = parseFloat(chargedAmounts);
-                                            } else if(response[i].type == 'convenience-fee'){
-                                                processingFee = response[i].value;
-                                            } else if(response[i].type == 'discount'){
-                                                discount = response[i].value; 
-                                            } else if(response[i].type == 'service-fee'){
-                                                gratuity = response[i].value;
-                                            } else{}
-                                        }
-                                    } else {
-                                        chargedAmount = amount;
-                                        taxAmount = 0;
-                                        gratuity = 0;
-                                        discount = 0;
-                                        processingFee = 0;
-                                    }
-                            pay = chargedAmount * 100;
-                            chargeAmountValue = chargedAmount;
-                            paypalButton.addEventListener('click', function() {
-                                // Tokenize here!
-                                paypalInstance.tokenize({
-                                    flow: 'checkout', // Required
-                                    amount: chargeAmountValue, // Required
-                                    currency: 'USD', // Required
-                                    locale: 'en_US'
-                                }, function(err, tokenizationPayload) {
-                                    console.log('PayPal Payment:' + JSON.stringify(tokenizationPayload));
-                                    var currencyType;
-                                    if(tokenizationPayload.details.countryCode == 'US') {
-                                        currencyType = 'USD';
-                                    } else {
-                                        currencyType = 'INR';
-                                    }
-                                    var paypalDetails = tokenizationPayload; 
-                                    var orderIdValue = $("#orderIdValue").val(); 
-                                    console.log('orderIdValue:' + orderIdValue);  
-                                    if((taxAmount == null) || (taxAmount == undefined) || (taxAmount == '')) {
-                                        taxAmount = 0; 
-                                    }               
-                                    var payment = {
-                                                    "gatewayId":2,
-                                                    "token":paypalDetails.nonce,
-                                                    "currencyCode":currencyType,
-                                                    "orderAmount":parseFloat(amountValue),
-                                                    "tax":parseFloat(taxAmount),
-                                                    "gratuity":gratuity,
-                                                    "processingFee":processingFee,
-                                                    "discountAmount":discount,
-                                                    "paymentType":"PAYPAL",
-                                                    "chargedAmount":chargeAmountValue
-                                                }                            
-                                var name = paypalDetails.details.firstName + " " + paypalDetails.details.lastName;
-                                var authBase64Str = window.btoa(name + ':' + paypalDetails.details.email + ':' + paypalDetails.details.phone);
-                                //Save Payment Transaction for Paypal          
-                                $.ajax({
-                                        type: "POST",
-                                        url: '//dev.api.venuelytics.com/WebServices/rsapi/v1/vas/' + venueNumber + '/charge/' + orderIdValue,
-                                        // The key needs to match your method's input parameter (case-sensitive).
-                                        data: JSON.stringify(payment),
-                                        contentType: "application/json; charset=utf-8",
-                                        dataType: "json",
-                                        headers: {
-                                            "Authorization": "Anonymous " + authBase64Str
-                                        },
-                                        success: function(data){
-                                        if (typeof(Storage) !== "undefined") {
-                                            localStorage.setItem("bachelorAmount",chargeAmountValue);  
-                                        }
-                                        window.location.replace(cityName+"/bachelorSuccess/"+venueNumber);
-                                        },
-                                        failure: function(errMsg) {
-                                        alert(errMsg);
-                                        }
-                                    });
-                            });
-                        });
-                        });
-                });
-            });
-
-        }
-        setTimeout(function(){ payPalInit(); }, 2000);
-    </script>
-</div>
+  

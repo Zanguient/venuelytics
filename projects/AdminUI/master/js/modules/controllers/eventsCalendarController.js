@@ -20,7 +20,6 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
   $scope.calEvents = [];
   $scope.colorPalattes = ["rgb(45,137,239)", "rgb(153,180,51)", "rgb(227,162,26)",  "rgb(0,171,169)","#f05050", "rgb(135,206,250)", "rgb(255,196,13)"];
   $scope.getEvents = function() {
-
     var promise = RestServiceFactory.VenueService().getEvents({id: contextService.userVenues.selectedVenueNumber});
     promise.$promise.then(function(data) {
       $scope.events = data['venue-events'];
@@ -169,7 +168,7 @@ App.controller('EventsCalendarController',  ['$state', '$stateParams','$scope', 
     });
     $scope.selectedDate = calElement.fullCalendar('getDate');
      
-    var promise = RestServiceFactory.VenueMapService().getAll({id: $scope.venueNumber});
+    var promise = RestServiceFactory.VenueMapService().getAll({id: contextService.userVenues.selectedVenueNumber});
 
     promise.$promise.then(function(data) {
           

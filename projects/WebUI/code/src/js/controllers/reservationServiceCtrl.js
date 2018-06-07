@@ -177,7 +177,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             };
 
             self.getpartypackage = function() {
-                AjaxService.getPrivateHalls(self.venueId, 'partypackage').then(function(response) {
+                AjaxService.getProductsByType(self.venueId, 'partypackage').then(function(response) {
                        self.partypackage = response.data;
                 });
             };

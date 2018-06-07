@@ -57,12 +57,14 @@
               <tr>
                 <th>{{"reservation.TABLE_NAME"  | translate}}</th>
                 <th>{{"reservation.CAPACITY"  | translate}}</th>
+                 <th>Price</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="table in selectTables">
                 <td>{{table.name}}</td>
                 <td>{{(table == null || table.quantity == 0 || table.quantity == undefined) ? "-" : table.quantity}}</td>
+                <td>{{(!table || !table.totalPrice) ? "-" : "$" + table.totalPrice.toFixed(2)}}</td>
               </tr>
             </tbody>
         </table>

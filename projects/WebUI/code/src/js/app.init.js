@@ -1,5 +1,5 @@
 "use strict";
-var app = angular.module('Mobinite', ['ngRoute', 'matchMedia','templates','pascalprecht.translate', 'ngCookies', 'ngclipboard','daterangepicker','ngMeta', 'satellizer', 'ngStorage', 'ngclipboard']);
+var app = angular.module('Mobinite', ['ngRoute', 'matchMedia','templates','pascalprecht.translate', 'ngCookies', 'ngclipboard','daterangepicker','ngMeta', 'satellizer', 'ngStorage', 'ngclipboard', 'ngAnimate','toaster']);
 
 
 // configure our routes
@@ -8,6 +8,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $locationProvider.hashPrefix('');
     $httpProvider.defaults.withCredentials = true;
 
+    
     initAuthProvisers();
     $sceDelegateProvider.resourceUrlWhitelist([
         // Allow same origin resource loads.
@@ -171,6 +172,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'drink-service/drink-confirmation.html',
             controller:'DrinkConfirmController'
         })
+        .when('/:cityName/:venueId/confirmWineService', {
+            templateUrl: 'wine-to-home/wine-confirmation.html',
+            controller:'WineConfirmController'
+        })
         .when('/:cityName/paymentSuccess/:venueId', {
             templateUrl: 'payment-success.html',
             controller:'ConfirmReservationController'          
@@ -251,6 +256,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     ngMetaProvider.setDefaultTitleSuffix(' | Book VIP Reservations & Events');
     ngMetaProvider.setDefaultTag('image', 'assets/img/7.jpg');
 
+
     function initAuthProvisers() {
         
 
@@ -297,9 +303,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         return function(text) {
             return $sce.trustAsHtml(text);
         };
-}]).run(['$location', '$rootScope','$window','ngMeta',function($location, $rootScope, $window, ngMeta) {
+}]).run(['$location', '$rootScope','$window','ngMeta', 'AjaxService',function($location, $rootScope, $window, ngMeta, AjaxService) {
 
     ngMeta.init();
+
     var hostName = $location.host();
     if (typeof hostName === 'undefined') {
         hostName = '';
@@ -334,5 +341,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
              $location.path( defaultPage );
         }
     });
+
+    AjaxService.getSettings().then(function (response) {
+        $rootScope.settings = response.data;
+    });
+
 }]);
 angular.module('templates', []);

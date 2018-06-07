@@ -14,15 +14,24 @@ App.directive('eventTile', function() {
   	controller : [ '$scope', '$rootScope','RestServiceFactory', '$state', 'ngDialog', 'APP_EVENTS',
   			function($scope, $rootScope, RestServiceFactory, $state, ngDialog, APP_EVENTS) {
 		
-		$scope.editEvent = function(eventId) {
-    		$state.go('app.editVenueEvent', {venueNumber: $scope.event.venueNumber, id: eventId});
-  		};
+		  $scope.editEvent = function(event) {
+        if (!!event) {
+      	 $state.go('app.editVenueEvent', {venueNumber: $scope.event.venueNumber, id: event.id});
+        }
+  	 };
 
-  		$scope.previewEventUrl = function(eventId) {
-  			return "v1/download/"+ $scope.event.venueNumber +"/pdf/ticket/preview/" + eventId ;
+  		$scope.previewEventUrl = function(event) {
+        if (!!event) {
+  			 return "v1/download/"+ $scope.event.venueNumber +"/pdf/ticket/preview/" + event.id ;
+        } else {
+          return '#';
+        }
   		};
-  		$scope.getPreviewFileName = function(eventId) {
-  			return "event-pdf-preview-" + eventId + ".pdf"; 
+  		$scope.getPreviewFileName = function(event) {
+        if (!!event) {
+  			 return "event-pdf-preview-" + event.id + ".pdf"; 
+        }
+        return "event-pdf-preview.pdf";
   		};
 
   		$scope.enableDisableColor = function(enabled) {
@@ -53,8 +62,10 @@ App.directive('eventTile', function() {
 		    return new Date();
   		};
 
-		$scope.deleteEvent = function(index, eventId) {
-
+		$scope.deleteEvent = function(index, event) {
+        if(!event) {
+          return;
+        }
 	      ngDialog.openConfirm({
 	        template: 'deleteVenueEventId',
 	        className: 'ngdialog-theme-default'

@@ -1,0 +1,130 @@
+<div ng-controller="WineToHomeCtrl">
+    <form name="wineForm" autocomplete="off" validate-form="" parsley-validate novalidate ng-cloak>
+        <fieldset>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.FIRST_NAME' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" id="wineFirstName" name="wineFirstName" class="form-control " ng-model="wine.firstName"
+                    required="" data-parsley-trigger="change">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.LAST_NAME' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" id="wineLastName" name="wineLastName" class="form-control " ng-model="wine.lastName"
+                    required="" data-parsley-trigger="change">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.EMAIL' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="email" id="wineEmailId" name="wineEmailId" data-parsley-type="email" class="form-control "
+                    ng-model="wine.emailId" required="" data-parsley-trigger="change">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.MOBILE' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineMobile" ng-model="wine.mobileNumber"
+                    required="">
+            </div>
+
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.BILLING_ADDRESS' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillingSelection" ng-model="wine.billingAddress"
+                    required="">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.SHIPPING_ADDRESS' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShippingAddress" ng-model="wine.shippingAddress"
+                    required="">
+            </div>
+            <div class="col-md-12">
+                <center>
+                    <a href="" class="btn btn-success btn-raised" ng-if="drinksWineListuUrl" ng-click="menuUrlSelection(drinksWineListuUrl)">
+                        <span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.DRINK_WINE" | translate}}</a>
+                    <a href="" class="btn btn-success btn-raised" ng-if="drinksHappyHourDrinkUrl" ng-click="menuUrlSelection(drinksHappyHourDrinkUrl)">
+                        <span class="glyphicon glyphicon-heart"></span> {{"reservation.DRINK_HAPPY_HOUR" | translate}}</a>
+                    <a href="" class="btn btn-success btn-raised" ng-if="drinksBeerMenuUrl" ng-click="menuUrlSelection(drinksBeerMenuUrl)">
+                        <span class="glyphicon glyphicon-play"></span> {{"reservation.DRINK_BEER_MENU" | translate}}</a>
+                    <a href="" class="btn btn-success btn-raised" ng-if="drinksMenuUrl" ng-click="menuUrlSelection(drinksMenuUrl)">
+                        <span class="glyphicon glyphicon-home"></span> {{"reservation.DRINK_MENU_URL" | translate}}</a>
+                    <a href="" class="btn btn-success btn-raised" ng-if="drinksCocktailsUrl" ng-click="menuUrlSelection(drinksCocktailsUrl)">
+                        <span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.DRINK_COCKTAILS" | translate}}</a>
+                </center>
+            </div>
+            <br/>
+
+            <div ng-if="userSelectedDrinks.length != 0" ng-class="blackTheme">
+                <h2>Selected Drinks</h2>
+                <div class="row" ng-class="blackTheme">
+                    <table class="table table-no-border table-striped table-responsive h6">
+                        <thead>
+                            <tr>
+                                <th>{{'reservation.NAME' | translate}}</th>
+                                <th>{{'reservation.QUANTITY' | translate}}</th>
+                                <th>{{'reservation.PRICE' | translate}}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="drink in userSelectedDrinks">
+                                <td>{{drink.name}} - {{drink.brand}}</td>
+                                <td>{{drink.count}}</td>
+                                <td>
+                                    <span ng-hide="((drink == null || drink.total == 0 || drink.total == undefined))">&dollar;</span>{{(drink == null || drink.total == 0 || drink.total == undefined) ? "0"
+                                    : drink.total | number:2}}</td>
+                                <td>
+                                    <button type="submit" class="btn btn-raised btn-sm btn-danger" ng-click="removeDrinkItems($index,drink)">X</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                <div ng-show="specificDrink === 'Y' || specificDrink === 'y'"  class="form-group" ng-class="blackTheme">
+                    <div ng-class="blackTheme">
+                    <div class="ms-paper-content-container">
+                        <div class="ms-paper-content">
+                            <h2 class="text-primary">{{"reservation.DRINK_ITEMS" | translate}}</h2>
+                            <section class="food-menu-section" >
+                                <ul class="menus">
+                                    <li class="filter-button text-capitalize" ng-class="{'active': isMenuSelected(value)}" data-filter="{{value}}" ng-repeat="(key,value) in  drinkCategories" ng-click="selectMenu(value)">
+                                        {{key | lowercase}}
+                                    </li>
+                                </ul>
+                            </section>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12 " ng-repeat="item in drinkDetails | filter: {category: menuTab}">
+                                    <div class="menu-item">
+                                        <div class="menu-title">
+                                            <div class="title" ng-class="bgMask">
+                                                {{item.name}}
+                                            </div>
+                                            <span ng-class="bgMask">
+                                                $ {{item.price | number:2}}
+                                            </span>
+                                        </div>
+                                        <p>{{item.description}}</p>
+                                        <div class="col-sm-5 col-xs-6">
+                                            <select class="form-control {{blackTheme}}" ng-change="drinkService(item)" ng-model="item.count" value="{{item.count || 0}}">
+                                                <option value="">{{"reservation.QUANTITY" | translate}}</option>
+                                                <option ng-repeat="n in [].constructor(10) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.SPECIAL_INSTRUCTION' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " id="wineInstructions" ng-model="wine.instructions">
+            </div>
+            <br>
+            <br>
+            <div class="col-lg-12">
+                <center>
+                    <button type="submit" class="btn btn-raised btn-success" novalidate="novalidate" ng-disabled="wineForm.$invalid" ng-click="wineSave()">
+                        <span>{{'business.DEPLOY_APPLY' | translate}}</span>
+                    </button>
+                </center>
+            </div>
+        </fieldset>
+    </form>
+</div>

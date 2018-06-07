@@ -2616,6 +2616,12 @@ table.fc-border-separate {
   border-color: white;
 }
 
+.wineToHomeBtn {
+  background-color:rgba(122,17,217, 0.80) !important;
+  color: #fff !important;
+  border-color: white;
+}
+
 .foodBtn {
   background-color: rgba(30,134,68, 0.80) !important;
   color: #fff !important;
@@ -2679,6 +2685,12 @@ table.fc-border-separate {
 }
 
 .eventListBtn {
+  background-color: rgba(30,60,250, 0.80) !important;
+  color: #fff !important;
+  border-color: white;
+}
+
+.winetohomeBtn {
   background-color: rgba(30,60,250, 0.80) !important;
   color: #fff !important;
   border-color: white;
@@ -2900,4 +2912,134 @@ button {
   font-weight: 500;
   margin-bottom: -70px;
   padding: 5px;
+}
+
+/* the below are specifically for Food and Drinks menu*/
+.food-menu-heading, .drinks-menu-heading {
+    font-family: 'Dancing Script', cursive;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.food-menu-title, .drinks-menu-title {
+    font-family: 'Dancing Script', cursive !important;
+}
+
+.food-menu-title > a, .drinks-menu-title > a {
+    font-family: 'Dancing Script', cursive !important;
+    font-size: 20px !important;
+}
+
+.food-menu-section {
+    background-size: cover;
+    color: fff;
+}
+
+.food-menu-section .menus {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 50px;
+  display: inline-block;
+}
+
+.food-menu-section .menus li {
+  float: left;
+  border: 1px solid #ffad18;
+  padding: 1.5rem 1.8rem;
+  min-height: 48px;
+  position: relative;
+  font-family: 'Dancing Script', cursive;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.2em;
+  -webkit-transition: .3s all;
+  -o-transition: .3s all;
+  transition: .3s all;
+  margin-right: -1px;
+  margin-bottom: 1.5rem;
+}
+
+.food-menu-section .menus li:hover,
+.food-menu-section .menus li.active {
+  background-color: #ffad18;
+}
+
+.bg-mask-black {
+  background-color: black;
+}
+
+.bg-mask-white {
+  background-color: white;
+}
+
+
+.food-menu-section .menus li i {
+  font-size: 30px;
+  margin-right: 5px;
+  vertical-align: middle;
+  font-weight: 400;
+}
+
+.food-menu-section .menus li:last-child {
+  border-right: 1px solid #ffad18;
+}
+
+.menu-item {
+    position: relative;
+    min-height: 90px;
+    margin: 0 auto 20px;
+    font-family: 'Dancing Script', cursive !important;
+}
+
+.menu-item a {
+  display: block;
+}
+
+.menu-item .menu-title {
+  position: relative;
+  z-index: 0;
+  margin-bottom: 7px;
+}
+
+.menu-item .menu-title::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  bottom: 2px;
+  width: 100%;
+  left: 0;
+  z-index: -1;
+  border-bottom: 1px dashed #959595;
+
+}
+
+.menu-item .menu-title .title {
+
+  display: inline-block;
+  font-size: 1.2em;
+  padding: 0px 5px 0px 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.menu-item .menu-title .title:hover {
+  color: #ffad18;
+}
+
+
+.menu-item .menu-title span {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  height: 100%;
+}
+
+.menu-item select.form-control {
+  font-weight: 500;
+}
+
+.paypal-color-gold {
+  background: #ffc439 !important;
 }
