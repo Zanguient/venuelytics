@@ -23,7 +23,7 @@ app.service('TaxNFessService', function() {
         return payment;
 	}
 	this.calculateTotalAmount = function(taxesNFees, amount, serviceType, providerFeeType) {
-		var payment = this.initPayment();
+		var payment = this.initPayment(amount);
 		if (taxesNFees.length !== 0) {
 	        angular.forEach(taxesNFees, function (value, key) {
 	            if (value.type === 'tax') {
@@ -55,7 +55,6 @@ app.service('TaxNFessService', function() {
 	    var tax = 0;
 	    if (payment.taxPercent > 0) {
 	    	tax = discountedAmount*payment.taxPercent*0.01;
-	    	tax = tax.toFixed(2);
 	    }
 	    payment.taxAmount = tax;
 	    payment.finalCost += tax;
@@ -74,6 +73,6 @@ app.service('TaxNFessService', function() {
 
 	function calculate(amt, fv, fvt ) {
 		var r = fvt === '%' ? amt*fv*0.01 : fv;
-		return r.toFixed(2);
+		return r;
 	}
 });

@@ -112,7 +112,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
         };
 
         self.getDrink = function () {
-            AjaxService.getPrivateHalls(self.venueId, 'Drinks').then(function (response) {
+            AjaxService.getProductsByType(self.venueId, 'Drinks').then(function (response) {
                 self.drinkDetails = response.data;
                 if ((Object.keys(DataShare.selectedDrinks).length) !== 0) {
                     self.editDrinkItems = DataShare.selectedDrinks;

@@ -11,19 +11,29 @@ app.directive('paypalButton', function() {
      id: '@',
      venueNumber: '@',
      taxDate: '@',
-     amount: '@',
+     amount: '=',
      serviceType: '@',
      providerType: '@',
-     orderId: '@',
+     order: '=',
      authToken: '@',
      redirectUrl: '@'
   	},
     
   	controller: [ '$scope', 'AjaxService', 'TaxNFessService', '$location', 'toaster',function ($scope, AjaxService, TaxNFessService, $location, toaster) {
   	  var self = $scope;
+      self.orderId = -1;
       self.taxNFeeRates = -[];
       self.paymentData = TaxNFessService.initPayment(0);
-      $scope.initPaypalButton = function() {
+
+      self.toast = function(message) {
+        toaster.pop({
+          type: 'error',
+          title: 'Paypal - Payment Error',
+          body: message,
+          timeout: 3000
+        });
+      };
+      self.initPaypalButton = function() {
         console.log('initPaypalButton');
         braintree.client.create({
           authorization: 'sandbox_h4tjv72p_k6s4n37yv42h5x2x' 
@@ -63,11 +73,34 @@ app.directive('paypalButton', function() {
 
               payment: function () {
                 self.paymentData = TaxNFessService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.amount), self.serviceType, self.providerType + '-convenience-fee');
+                if (self.orderId <= 0) {
+                    AjaxService.placeServiceOrder(self.venueNumber, self.order, self.authToken).then(function(response) {
+                        if (response.status == 200 ||  response.srtatus == 201) {
+                          self.orderId = response.data.id;
+                          return paypalCheckoutInstance.createPayment({
+                                  // Your PayPal options here. For available options, see
+                                  // http://braintree.github.io/braintree-web/current/PayPalCheckout.html#createPayment
+                                  flow: 'checkout',
+                                  amount: self.paymentData.finalAmount.toFixed(2),
+                                  currency: 'USD',
+                                  intent: 'sale',
+                                  locale: 'en_US'
+                                });
+                        } else {
+                            if (response.data && response.data.message) {
+                              self.toast("Saving order failed with message: " + response.data.message );
+                              return;
+                            }
+                             self.toast("Saving order failed");
+                            return;
+                        }
+                    });
+                }
                 return paypalCheckoutInstance.createPayment({
                   // Your PayPal options here. For available options, see
                   // http://braintree.github.io/braintree-web/current/PayPalCheckout.html#createPayment
                   flow: 'checkout',
-                  amount: 10,
+                  amount: self.paymentData.finalAmount.toFixed(2),
                   currency: 'USD',
                   intent: 'sale',
                   locale: 'en_US'
@@ -91,23 +124,12 @@ app.directive('paypalButton', function() {
                   };                           
                   AjaxService.createTransaction(self.venueNumber, self.orderId, JSON.stringify(payment), self.authToken).then(function(response) {
                     if (response.data.status >= 200 && response.data.status < 300) {
-                      $location.url(redirectUrl);
+                      $location.url(self.redirectUrl);
                     } else {
-                      toaster.pop({
-                        type: 'error',
-                        title: 'Paypal - Payment Error',
-                        body: response.data.message,
-                        timeout: 3000
-                      });
+                      self.toast(response.data.message);
                     }
                   }, function(error) {
-                     console.error('checkout.js error', err);
-                     toaster.pop({
-                        type: 'error',
-                        title: 'Paypal - Payment Error',
-                        body: 'Unexpected error: ' +error.error+ ' occured while process this request. Please try again.',
-                        timeout: 3000
-                      });
+                     self.toast('Unexpected error: ' +error.error+ ' occured while process this request. Please try again.');
                   });
                   
                 });
@@ -118,13 +140,7 @@ app.directive('paypalButton', function() {
               },
 
               onError: function (err) {
-                console.error('checkout.js error', err);
-                toaster.pop({
-                  type: 'error',
-                  title: 'Paypal - Payment Error',
-                  body: 'Unexpected error. Please try again.',
-                  timeout: 3000
-                });
+                self.toast('Unexpected error. Please try again.');
               }
             }, '#' + $scope.id).then(function () {
             // The PayPal button will be rendered in an html element with the id

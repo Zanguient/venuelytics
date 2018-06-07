@@ -41,24 +41,29 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                 self.enablePayment = DataShare.enablePayment;
                 self.venueName =  DataShare.venueDetails.venueName;
                 angular.forEach(self.selectBottleOrders, function(value1, key1) {
-                    self.availableAmount = self.availableAmount + value1.price;
+                    self.availableAmount +=  value1.price;
                 });
-                if(DataShare.amount) {
-                    self.availableAmount = DataShare.amount;
-                }
+                
                 if(self.object !== '') {
                     angular.forEach(self.object.order.orderItems, function(value, key) {
-                    if(value.productType === 'VenueMap') {
-                        var items = {
-                            "venueNumber": value.venueNumber,
-                            "productId": value.productId,
-                            "productType": value.productType,
-                            "quantity": value.quantity,
-                            "name": value.name
-                        };
+                        if(value.productType === 'VenueMap') {
+                            var items = {
+                                "venueNumber": value.venueNumber,
+                                "productId": value.productId,
+                                "productType": value.productType,
+                                "quantity": value.quantity,
+                                "name": value.name,
+                                "totalPrice" : value.totalPrice
+                            }; 
+                            if (!isNaN(value.price)) {
+                                self.availableAmount += value.price;
+                            }
                             self.selectTables.push(items);
                         }
                     });
+                }
+                if(DataShare.amount) {
+                    self.availableAmount = DataShare.amount;
                 }
                 self.getTax();
             };

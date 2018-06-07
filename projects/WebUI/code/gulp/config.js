@@ -54,7 +54,7 @@ module.exports = {
             'bower_components/owl.carousel/dist/owl.carousel.min.js',
             'bower_components/jquery.countdown/dist/jquery.countdown.min.js',
             'bower_components/mixitup/build/jquery.mixitup.min.js',
-            'bower_components/smooth-scroll/dist/js/smooth-scroll.min.js',
+            'bower_components/smooth-scroll/dist/smooth-scroll.polyfills.min.js',
             'bower_components/typed.js/dist/typed.min.js',
             "bower_components/snackbar/dist/snackbar.min.js",
             "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",

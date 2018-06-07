@@ -630,7 +630,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                         "productType": value.productType,
                         "quantity": value.size,
                         "comments": value.comments,
-                        "name": value.name
+                        "name": value.name,
+                        "totalPrice": value.price
                     };
                     self.serviceJSON.order.orderItems.push(items);
                 });
