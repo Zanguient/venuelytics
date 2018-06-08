@@ -3,7 +3,7 @@
  * @date JUNE'4 2018
  */
 "use strict";
-app.service('TaxNFessService', function() {
+app.service('TaxNFeesService', function() {
 	const CONVENIENCE_FEE = 'convenience-fee';
 	const DISCOUNT = 'discount';
 	const SERVICE_FEE = 'service-fee';

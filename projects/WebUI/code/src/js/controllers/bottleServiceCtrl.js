@@ -651,7 +651,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             }
             DataShare.payloadObject = self.serviceJSON;
             DataShare.enablePayment = self.enabledPayment;
-            DataShare.venueName = self.venueName;
             $location.url( self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/confirm");
         };
 

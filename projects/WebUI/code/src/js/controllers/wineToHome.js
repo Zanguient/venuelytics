@@ -199,7 +199,6 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
             });
             DataShare.serviceTypes = self.drinkType;
             DataShare.payloadObject = self.serviceJSON;
-            DataShare.venueName = self.venueName;
             DataShare.enablePayment = self.enabledPayment;
             DataShare.selectedDrinks = self.selectedDrinkItems;
             $location.url(self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/confirmWineService");

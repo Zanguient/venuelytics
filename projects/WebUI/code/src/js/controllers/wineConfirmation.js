@@ -27,7 +27,7 @@ app.controller('WineConfirmController', ['$log', '$scope', '$location', 'DataSha
             self.wineServiceDetails = DataShare.wineServiceData;
             self.selectedDrinkItems = DataShare.selectedDrinks;
             self.enabledPayment = DataShare.enablePayment;
-            self.venueName = DataShare.venueName;
+            self.venueName = self.venueDetails.venueName;
             self.taxDate = moment().format('YYYYMMDD');
             self.getTax();
             var amountValue = 0;

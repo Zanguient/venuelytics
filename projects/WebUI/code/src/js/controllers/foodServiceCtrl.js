@@ -249,7 +249,6 @@ app.controller('foodServiceController', ['$log', '$scope', '$location', 'DataSha
             });
             DataShare.serviceTypes = self.foodType;
             DataShare.payloadObject = self.serviceJSON;
-            DataShare.venueName = self.venueName;
             DataShare.enablePayment = self.enabledPayment;
             DataShare.selectedFoods = self.selectedFoodItems;
             $location.url(self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/confirmFoodService");

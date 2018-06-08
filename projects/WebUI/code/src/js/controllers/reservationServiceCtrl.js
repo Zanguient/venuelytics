@@ -569,7 +569,6 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
             DataShare.payloadObject = self.serviceJSON;
             DataShare.enablePayment = self.enabledPayment;
 
-            DataShare.venueName = self.venueName;
             $location.url( self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/reserve/");
          };
 
