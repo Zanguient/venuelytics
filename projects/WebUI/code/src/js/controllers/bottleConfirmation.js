@@ -26,12 +26,10 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
         self.orderId = -1;
         self.venueId = self.venueDetails.id;
         self.userData = DataShare.bottleServiceData;
-        var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
-        self.authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
+        
 
         self.object = DataShare.payloadObject;
-        self.redirectUrl = self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails);
-        self.payAtVenueUrl = self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm';
+        
 
         self.availableAmount = $window.localStorage.getItem("bottleAmount");
         if (!isNaN(self.availableAmount)  ) {
@@ -41,6 +39,13 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
         self.selectBottleOrders = DataShare.selectBottle;
         self.enablePayment = DataShare.enablePayment;
         self.venueName =  DataShare.venueDetails.venueName;
+
+        var fullName = self.userData.userFirstName + " " + self.userData.userLastName;
+        self.authBase64Str = window.btoa(fullName + ':' + self.userData.email + ':' + self.userData.mobile);
+
+        self.redirectUrl = self.selectedCity +"/paymentSuccess/" + self.venueRefId(self.venueDetails);
+        self.payAtVenueUrl = self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm';
+
         angular.forEach(self.selectBottleOrders, function(value1, key1) {
             self.availableAmount +=  value1.price;
         });
@@ -63,9 +68,7 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
                 }
             });
         }
-        if(DataShare.amount) {
-            self.availableAmount = DataShare.amount;
-        }
+        
         AjaxService.getTaxType(self.venueId, self.taxDate).then(function(response) {
             self.taxNFeeRates = response.data;
             self.paymentData = TaxNFeesService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.availableAmount), "Bottle", '');

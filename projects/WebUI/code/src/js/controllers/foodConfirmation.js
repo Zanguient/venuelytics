@@ -36,7 +36,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
                 self.availableAmount  += total;
             });
             
-             AjaxService.getTaxType(self.venueId, self.taxDate).then(function(response) {
+            AjaxService.getTaxType(self.venueId, self.taxDate).then(function(response) {
                 self.taxNFeeRates = response.data;
                 self.paymentData = TaxNFeesService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.availableAmount), "FOOD", '');
             });
