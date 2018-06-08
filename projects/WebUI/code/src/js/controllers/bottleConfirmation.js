@@ -4,7 +4,7 @@
  */
 "use strict";
 app.controller('ConfirmReservationController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService', 'toaster',
-    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope,  ngMeta, venueService. toaster) {
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope,  ngMeta, venueService, toaster) {
 
     		$log.log('Inside Confirm Reservation Controller.');
 
