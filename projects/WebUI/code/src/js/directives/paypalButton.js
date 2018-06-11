@@ -19,11 +19,11 @@ app.directive('paypalButton', function() {
      redirectUrl: '@'
   	},
     
-  	controller: [ '$scope', 'AjaxService', 'TaxNFessService', '$location', 'toaster',function ($scope, AjaxService, TaxNFessService, $location, toaster) {
+  	controller: [ '$scope', 'AjaxService', 'TaxNFeesService', '$location', 'toaster',function ($scope, AjaxService, TaxNFeesService, $location, toaster) {
   	  var self = $scope;
       self.orderId = -1;
       self.taxNFeeRates = -[];
-      self.paymentData = TaxNFessService.initPayment(0);
+      self.paymentData = TaxNFeesService.initPayment(0);
 
       self.toast = function(message) {
         toaster.pop({
@@ -72,7 +72,7 @@ app.directive('paypalButton', function() {
               },
 
               payment: function () {
-                self.paymentData = TaxNFessService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.amount), self.serviceType, self.providerType + '-convenience-fee');
+                self.paymentData = TaxNFeesService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.amount), self.serviceType, self.providerType + '-convenience-fee');
                 if (self.orderId <= 0) {
                     AjaxService.placeServiceOrder(self.venueNumber, self.order, self.authToken).then(function(response) {
                         if (response.status == 200 ||  response.srtatus == 201) {

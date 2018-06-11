@@ -172,7 +172,6 @@ app.controller('bachelorPartyController', ['$log', '$scope', '$location', 'DataS
                         };
                 self.serviceJSON.order.orderItems.push(items);
                 DataShare.payloadObject = self.serviceJSON;
-                DataShare.venueName = self.venueName;
                 DataShare.enablePayment = self.enabledPayment;
                 DataShare.privateOrderItem = selectedBachelorParty;
                 $location.url("/confirmBachelorParty/" + self.selectedCity + "/" + self.venueId);

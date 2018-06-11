@@ -233,7 +233,6 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             });
             DataShare.serviceTypes = self.drinkType;
             DataShare.payloadObject = self.serviceJSON;
-            DataShare.venueName = self.venueName;
             DataShare.enablePayment = self.enabledPayment;
             DataShare.selectedDrinks = self.selectedDrinkItems;
             $location.url(self.selectedCity + "/" + self.venueRefId(self.venueDetails) + "/confirmDrinkService");

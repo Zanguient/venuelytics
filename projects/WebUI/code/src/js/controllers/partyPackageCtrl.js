@@ -126,53 +126,59 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                 });
             };
 
-            self.confirmPartyPackage = function(selectedParty) {
-                $rootScope.serviceTabClear = true;
-               
-                
-                var dateValue = moment(self.party.orderDate, 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss");
-                var fullName = self.party.userFirstName + " " + self.party.userLastName;
-                var authBase64Str = window.btoa(fullName + ':' + self.party.email + ':' + self.party.mobile);
-                DataShare.partyServiceData = self.party;
-                DataShare.authBase64Str = authBase64Str;
-                self.serviceJSON = {
-                  "serviceType": 'PartyPackageService',
+        self.confirmPartyPackage = function(selectedParty) {
+            $rootScope.serviceTabClear = true;
+           
+            
+            var dateValue = moment(self.party.orderDate, 'YYYY-MM-DD').format("YYYY-MM-DDTHH:mm:ss");
+            var fullName = self.party.userFirstName + " " + self.party.userLastName;
+            var authBase64Str = window.btoa(fullName + ':' + self.party.email + ':' + self.party.mobile);
+            DataShare.partyServiceData = self.party;
+            DataShare.authBase64Str = authBase64Str;
+            self.serviceJSON = {
+              "serviceType": 'PartyPackageService',
+              "venueNumber": self.venueId,
+              "reason": self.party.partyEventType.name,
+              "contactNumber": self.party.mobile,
+              "contactEmail": self.party.email,
+              "contactZipcode": "",
+              "noOfGuests": self.party.totalGuest,
+              "noOfMaleGuests": 0,
+              "noOfFemaleGuests": 0,
+              "budget": 0,
+              
+              "serviceInstructions": self.party.instructions,
+              "status": "REQUEST",
+              "fulfillmentDate": dateValue,
+              "durationInMinutes": 0,
+              "deliveryType": "Pickup",
+              "order": {
                   "venueNumber": self.venueId,
-                  "reason": self.party.partyEventType.name,
-                  "contactNumber": self.party.mobile,
-                  "contactEmail": self.party.email,
-                  "contactZipcode": "",
-                  "noOfGuests": self.party.totalGuest,
-                  "noOfMaleGuests": 0,
-                  "noOfFemaleGuests": 0,
-                  "budget": 0,
-                  
-                  "serviceInstructions": self.party.instructions,
-                  "status": "REQUEST",
-                  "fulfillmentDate": dateValue,
-                  "durationInMinutes": 0,
-                  "deliveryType": "Pickup",
-                  "order": {
-                      "venueNumber": self.venueId,
-                      "orderDate": dateValue,
-                      "orderItems": []
-                  }
-                };
+                  "orderDate": dateValue,
+                  "orderItems": []
+              }
+            };
 
-                var items = {
-                            "venueNumber": self.venueId,
-                            "productId": selectedParty.id,
-                            "productType": selectedParty.productType,
-                            "quantity": selectedParty.size,
-                            "comments": selectedParty.comments,
-                            "name": selectedParty.name
-                        };
-                self.serviceJSON.order.orderItems.push(items);
-                DataShare.payloadObject = self.serviceJSON;
-                DataShare.venueName = self.venueName;
-                DataShare.enablePayment = self.enabledPayment;
-                DataShare.privateOrderItem = selectedParty;
-                $location.url("/confirmPartyPackage/" + self.selectedCity + "/" + self.venueId);
-             };
-            self.init();
+            var items = {
+                        "venueNumber": self.venueId,
+                        "productId": selectedParty.id,
+                        "productType": selectedParty.productType,
+                        "quantity": selectedParty.size,
+                        "comments": selectedParty.comments,
+                        "name": selectedParty.name
+                    };
+            self.serviceJSON.order.orderItems.push(items);
+            DataShare.payloadObject = self.serviceJSON;
+            DataShare.enablePayment = self.enabledPayment;
+            DataShare.privateOrderItem = selectedParty;
+            $location.url("/confirmPartyPackage/" + self.selectedCity + "/" + self.venueRefId(self.venueDetails));
+        };
+        self.venueRefId = function (venue) {
+            if (!venue.uniqueName) {
+                return venue.id;
+            } else {
+                return venue.uniqueName;
+            }
+        };
+        self.init();
     }]);

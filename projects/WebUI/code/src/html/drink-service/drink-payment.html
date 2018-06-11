@@ -1,138 +1,78 @@
 <div class="container nav_height card {{blackTheme}}">
-
-    <div>
-        <center>
-            <h1>{{"reservation.PAYMENT"  | translate}}</h1>
-        </center>
+    <div class="text-center"  ng-show="embeddedFlag === true">
+      <h1 class="no-m ms-site-title center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{venueDetails.venueName}}</h1>
     </div>
-    <div class="form-group">
-        <div class="col-xs-12 col-md-6 col-md-offset-3 col-md-offset-right-3">
-            <center>
-                <table class="table table-responsive table-no-border">
-                    <tr>
-                        <td>
-                            <label><b>{{"reservation.VENUE_NAME"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            {{venueName}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label><b>{{"reservation.AMOUNT"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            $ {{availableAmount | number:2}}
-                        </td>
-                    </tr>
-                    <tr ng-show = "taxAmount > 0">
-                        <td>
-                            <label><b>{{"reservation.SALES_TAX"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            $ {{taxAmount | number:2}}
-                        </td>
-                    </tr>
-                    <tr ng-show = "processingFee > 0">
-                        <td>
-                            <label><b>{{"reservation.PROCESS_FEE"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            $ {{processingFee | number:2}}
-                        </td>
-                    </tr>
-                    <tr ng-show = "discount > 0">
-                        <td>
-                            <label><b>{{"reservation.DISCOUNT"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            $ {{discount | number:2}}
-                        </td>
-                    </tr>
-                    <tr ng-show = "gratuity > 0">
-                        <td>
-                            <label><b>{{"reservation.SERVICE_FEE"  | translate}}</b></label>
-                        </td>
-                        <td>
-                           $ {{gratuity | number:2}}
-                        </td>
-                    </tr>
-                    <tr ng-show = "tipsFee > 0">
-                        <td>
-                            <label><b>{{"reservation.TIPS"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            $ {{tipsFee | number:2}}
-                        </td>
-                    </tr>
-                    <tr ng-show = "drinksFee > 0"> 
-                        <td>
-                            <label><b>{{"reservation.DELIVERY_FEE"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            $ {{drinksFee | number:2}}
-                        </td>
-                    </tr>
-                    <tr ng-if = "paypal === true && payPalFee > 0">
-                        <td>
-                            <label><b>{{"reservation.PAY_PAL_FEE"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            $ {{payPalFee | number:2}}
-                        </td>
-                    </tr>
-                    <tr ng-if = "cardPayment === true && creditCardFee > 0">
-                        <td>
-                            <label><b>{{"reservation.CREDIT_CARD_FEE"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            $ {{creditCardFee | number:2}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label><b>{{"reservation.TOTAL"  | translate}}</b></label>
-                        </td>
-                        <td>
-                            $ {{chargedAmount | number:2}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label><b>{{"reservation.PAYMENT"  | translate}}</b></label>
-                        </td>
-                        <td >
-                            <label>
-                            <input type="radio" ng-change="paypalData(test)" name="type" ng-model="test" value="Paypal" disabled="true" />
-                                {{"reservation.PAYPAL"  | translate}}
-                            </label><br>
-                            <label>
-                            <input type="radio" ng-change="cardPaymentData(test)" name="type" ng-model="test" value="Credit/Debit Card"/>
-                                {{"reservation.CREDIT_CARD"  | translate}}
-                            </label><br>
-                            <label>
-                            <input type="radio" ng-change="payAtVenue(test)" name="type" ng-model="test" value="Phone/In Venue"/>
-                                {{"reservation.PAY_AT_VENUE"  | translate}}
-                            </label>
-                        </td>
-                    </tr>
-                </table>
-            </center>
+    
+    
+    <center>
+        <h1>{{"reservation.PAYMENT"  | translate}}</h1>
+        <div class="col-xs-12 col-md-9 col-md-offset-3">
+        
+            <table class="table table-responsive table-no-border">
+                <tr>
+                    <td>
+                        <label><b>{{"reservation.VENUE_NAME"  | translate}}</b></label>
+                    </td>
+                    <td>
+                        {{venueName}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>{{"reservation.AMOUNT"  | translate}}</b></label>
+                    </td>
+                    <td>
+                        $ {{availableAmount | number:2}}
+                    </td>
+                </tr>
+                <tr ng-show = "paymentData.taxAmount > 0">
+                    <td>
+                        <label><b>{{"reservation.SALES_TAX"  | translate}}</b></label>
+                    </td>
+                    <td>
+                        $ {{paymentData.taxAmount | number:2}}
+                    </td>
+                </tr>
+                <tr ng-show = "paymentData.processingFee > 0">
+                    <td>
+                        <label><b>{{"reservation.PROCESS_FEE"  | translate}}</b></label>
+                    </td>
+                    <td>
+                        $ {{paymentData.processingFee | number:2}}
+                    </td>
+                </tr>
+                <tr ng-show = "paymentData.processingFee > 0">
+                    <td>
+                        <label><b>{{"reservation.SERVICE_FEE"  | translate}}</b></label>
+                    </td>
+                    <td>
+                       $ {{paymentData.processingFee | number:2}}
+                    </td>
+                </tr>
+                <tr ng-show = "paymentData.serviceFee  > 0"> 
+                    <td>
+                        <label><b>{{"reservation.DELIVERY_FEE"  | translate}}</b></label>
+                    </td>
+                    <td>
+                        $ {{paymentData.serviceFee  | number:2}}
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <label><b>{{"reservation.TOTAL"  | translate}}</b></label>
+                    </td>
+                    <td>
+                        $ {{paymentData.finalCost | number:2}}
+                    </td>
+                </tr>
+            </table>
+       
+            <payment-button venue-number="{{venueId}}" tax-date="{{taxDate}}" order="object" amount="availableAmount" auth-token="{{authBase64Str}}" service-type="DRINKS" redirect-url="{{redirectUrl}}" pay-at-venue-url="{{payAtVenueUrl}}">
+             </payment-button>
+
+            <input type="button" class="btn btn-raised btn-default" value="Return to Drinks Service" ng-click="backToDrink()">
         </div>
-    </div>
-    <div>
-        <center>
-            <input type="button" class="btn btn-success btn-raised" ng-click="drinkServiceSave()" value="Pay Now">
-        </center>
-    </div>
-
-    <div class="form-group" ng-hide="true">
-            <input type="text" id="stripeAmount" placeholder="payAmount" ng-model="availableAmount">
-            <input type="text" id="payPalchargedAmount" placeholder="payChargedAmount" ng-model="totalChargedAmount">
-            <input type="text" id="taxDate" placeholder="taxDate" ng-model="taxDate">
-            <input type="text" id="venueNumber" placeholder="venueNumber" ng-model="selectedVenueID">
-            <input type="text" id="orderIdValue" placeholder="orderIdValue" ng-model="orderId">
-            <input type="text" id="cityName" placeholder="cityName" ng-model="city">
-    </div>
+    </center>
 </div>
 
