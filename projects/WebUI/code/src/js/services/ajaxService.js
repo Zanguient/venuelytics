@@ -323,10 +323,7 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
     this.getDeals = function(venueId) {
         return $http({
             method: 'GET',
-            url: RestURL.baseURL + '/coupons/' + venueId + '/active',
-            headers: {
-                "X-XSRF-TOKEN": "XX-YY-XX-V"
-            }
+            url: RestURL.baseURL + '/coupons/' + venueId + '/active'
         }).then(function(success) {
             return success;
         }, function(error) {
