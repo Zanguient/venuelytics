@@ -282,6 +282,11 @@
     if ($stateParams.id === 'new'){
       target = {};
     }
+    if (payload.cleansed===true || payload.cleansed=== "true" ) {
+      payload.options = 1;
+    } else {
+      payload.options = 0;
+    }
     RestServiceFactory.VenueService().save(target,payload, function(success){
      
         ngDialog.openConfirm({
