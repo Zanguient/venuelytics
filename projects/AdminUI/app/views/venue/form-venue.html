@@ -94,7 +94,7 @@
     <slide ng-repeat="slide in imageUrl track by slide.id" active="slide.active">
      
       <div style="display: inline-block; width: 100%;">
-        <img ng-src="{{slide.mediumUrl}}" class="img-responsive" style="width: 100%;max-width: 640px; height: 300px; max-height: 300px; margin: auto;"/>
+        <img ng-src="{{slide.mediumUrl}}" class="img-responsive"/>
         <div class="carousel-caption"><h2  ng-bind="slide.status"></h2></div>
       </div>
     
