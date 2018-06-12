@@ -136,8 +136,8 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.venues', {
                 url: '/venues',
                 title: 'Venues',
-                templateUrl: basepath('venue/stores.html'),
-                controller: 'StoresController',
+                templateUrl: basepath('venue/venues.html'),
+                controller: 'VenuesController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
             }).state('app.band_artists', {
@@ -207,8 +207,8 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             .state('app.stores', {
                 url: '/stores',
                 title: 'Stores',
-                templateUrl: basepath('agency/agencies.html'),
-                controller: 'AgenciesController',
+                templateUrl: basepath('agency/stores.html'),
+                controller: 'StoresController',
                 data: { authorizedRoles: [USER_ROLES.admin], type: 'STORE' },
                 resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
             })

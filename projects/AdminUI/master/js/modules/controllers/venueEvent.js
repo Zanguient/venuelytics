@@ -214,7 +214,9 @@ App.controller('VenueEventController', ['$scope', '$timeout', '$state','$statePa
             }
         });
     };
-
+    $scope.storeSpec = function(store) {
+        return store.name + " - " + store.address +", " + store.city;
+    }
     $scope.initEventTickets = function() {
         if ( ! $.fn.dataTable ) return;
         var columnDefinitions = [
