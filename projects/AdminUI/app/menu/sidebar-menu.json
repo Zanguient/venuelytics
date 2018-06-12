@@ -13,7 +13,7 @@
 		"submenu": [],
 		"translate": "Tickets Dashboard",
 		"icon": "icon-speedometer",
-		"roleId": [50, 51, 75]
+		"roleId": [50, 51, 75, 100]
 	},
 	{
 		"text": "Inbox",
@@ -52,7 +52,7 @@
 		"icon": "icon-bubbles",
 		"translate": "sidebar.nav.pages.CHATBOT",
 		"submenu": [],
-		"roleId": 100
+		"roleId": 1000
 	},
 	{
 		"text": "Loyalty Management",
@@ -60,7 +60,7 @@
 		"icon": "icon-badge",
 		"translate": "sidebar.nav.pages.LOYALTY",
 		"submenu": [],
-		"roleId": 100
+		"roleId": 1000
 	},
 	{
 		"text": "GuestList",
@@ -92,7 +92,7 @@
 		"icon": "icon-event",
 		"translate": "sidebar.nav.pages.EVENT_MANAGEMENT",
 		"submenu": [],
-		"roleId": 51
+		"roleId": [51,100]
 	},
 	{
 		"text": "Ticket Counter",
@@ -157,7 +157,7 @@
 		"icon": "icon-layers",
 		"translate": "sidebar.nav.pages.BUSINESS",
 		"submenu": [],
-		"roleId": 100
+		"roleId": 1000
 	},
 	{
 		"text": "Agency Management",
@@ -173,7 +173,7 @@
 		"icon": "fa fa-building",
 		"translate": "sidebar.nav.pages.STORES",
 		"submenu": [],
-		"roleId": 1000
+		"roleId": 100
 	},
 	{
 		"text": "My Profile",

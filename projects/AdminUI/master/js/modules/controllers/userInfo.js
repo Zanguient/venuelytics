@@ -26,7 +26,14 @@ App.controller('UserController', ['$scope', '$state', '$stateParams', 'RestServi
     	$scope.data = data;
     }
 	
-    $scope.userRoles = UserRoleService.getRoles();
+    var allRoles = UserRoleService.getRoles();
+    $scope.userRoles = {};
+    self = $scope;
+    angular.forEach(allRoles, function(value, key) {
+        if (key <= Session.roleId) {
+            self.userRoles[key] = value;
+        }
+    });
     $scope.managerUsers = [];
     $scope.getManagers = function() {
         RestServiceFactory.UserService().getManagers({}, function(managerUsers) {
