@@ -3,22 +3,24 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
     function ($state, $stateParams, $scope, $rootScope, contextService, RestServiceFactory, APP_EVENTS) {
         "use strict";
 
-        $(function () {
+       
+        
+        $scope.init = function() {
             $("#dragtarget, #sortable2").sortable({
                 connectWith: ".connectedSortable"
-            })
-            $("#dragtarget").draggable()
-                .click(function () {
+            });
+            
+            $("#dragtarget").draggable().click(function () {
                     $(this).draggable({ disabled: false });
-                })
-                .dblclick(function () {
-                    $(this).draggable({ disabled: true });
-                });
-        });
+            }).dblclick(function () {
+                $(this).draggable({ disabled: true });
+            });
+        };
+        
         $scope.submit = function () {
-        }
+        };
 
-        var ExternalEvent = function (elements) {
+        /*var ExternalEvent = function (elements) {
 
             if (!elements) return;
 
@@ -41,9 +43,9 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
                 });
 
             });
-        };
+        };*/
 
-        function initExternalEvents(calElement) {
+        /*function initExternalEvents(calElement) {
             // Panel with the external events list
             var externalEvents = $('.external-events');
 
@@ -116,6 +118,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
                 // Clear input
                 eventNameInput.val('');
             });
-        }
+        }*/
 
+        $scope.init();
     }]);
