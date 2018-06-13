@@ -459,6 +459,14 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('jquery-ui', 'moment', 'fullcalendar')
             })
+            .state('app.webuibuttons', {
+                url: '/webuibuttons',
+                title: 'Webui Buttons',
+                templateUrl: basepath('webui/webui-buttons.html'),
+                controller: 'WebuiButtonsController',
+                data: { authorizedRoles: [USER_ROLES.admin] },
+                resolve: resolveFor('jquery-ui', 'moment', 'fullcalendar')
+            })
             .state('app.guestList', {
                 url: '/guestlist',
                 title: 'GuestList',

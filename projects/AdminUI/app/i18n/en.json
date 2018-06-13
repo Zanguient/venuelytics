@@ -295,6 +295,7 @@
         "BUSINESS":"Business Request",
         "SETTINGS": "Application Settings",
         "RESERVATIONS": "Reservations",
+        "WEBUI":"Webui Buttons",
         "GUEST_LIST": "Guest List",
         "INBOX": "Inbox",
         "EVENTS_CALENDAR": "Events Calendar",
