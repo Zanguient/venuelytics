@@ -101,13 +101,22 @@ const aiResponse = function(channel, senderId, response) {
   } else {
     if (response.action === "smalltalk.greetings.hello") {
       let venueName = "";
+      let venue = {};
+      let smsMessage = null;
       if (user && user.hasParameter("selectedVenueId")) {
-        venueName = user.state.get("venue").venueName;
+        venue = user.state.get("venue");
+        venueName = venue.venueName;
         venueName += "'s";
-      }
-      let message = `\nWelcome to ${venueName} Personalized Digital Concierge Service!  You can request Reservations, Bookings, Deals, Events, Rate the service, Amenities, Food & Drink Ordering. How can I help?`;
 
-      channel.sendMessage(senderId, response.responseSpeech + message);
+        let info = venue.info;
+        smsMessage = info[`${channel.getName()}.defaultWelcomeMessage`] ;
+      }
+
+      let defaultMessage = `\nWelcome to ${venueName} Personalized Digital Concierge Service!  You can request Reservations, Bookings, Deals, Events, Rate the service, Amenities, Food & Drink Ordering. How can I help?`;
+
+      let message = smsMessage || defaultMessage;
+
+      channel.sendMessage(senderId, response.responseSpeech + " "+ message);
     } else {
       channel.sendMessage(senderId, response.responseSpeech);
     }

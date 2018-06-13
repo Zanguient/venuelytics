@@ -28,6 +28,9 @@ class FBChannel {
     this.channelId = channelId;
   }
 
+  getName () {
+    return "facebook";
+  }
   sendMessage(senderId, message) {
     sendApi.sendMessage(senderId, message);
   }

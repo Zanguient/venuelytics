@@ -21,6 +21,9 @@ class SMSChannel {
     this.channelId = channelId;
   }
 
+  getName () {
+    return "sms";
+  }
 
   sendMessage(senderId, message) {
     sendSMS(this.channelId, senderId, message);
