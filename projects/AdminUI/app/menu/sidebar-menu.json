@@ -92,7 +92,7 @@
 		"icon": "icon-event",
 		"translate": "sidebar.nav.pages.EVENT_MANAGEMENT",
 		"submenu": [],
-		"roleId": [51,100]
+		"roleId": [51,100, 1000]
 	},
 	{
 		"text": "Ticket Counter",
