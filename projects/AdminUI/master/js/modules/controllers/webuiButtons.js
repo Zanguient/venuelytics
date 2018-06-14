@@ -3,22 +3,45 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
     function ($state, $stateParams, $scope, $rootScope, contextService, RestServiceFactory, APP_EVENTS) {
         "use strict";
 
-       
-        
-        $scope.init = function() {
+        $scope.init = function () {
+            $scope.editBtton = {};
+            $scope.submitDetails = [];
+            $scope.IsVisible = false;
             $("#dragtarget, #sortable2").sortable({
-                connectWith: ".connectedSortable"
+                connectWith: ".external-events"
             });
-            
+
             $("#dragtarget").draggable().click(function () {
-                    $(this).draggable({ disabled: false });
+                $(this).draggable({ disabled: false });
             }).dblclick(function () {
                 $(this).draggable({ disabled: true });
             });
         };
-        
-        $scope.submit = function () {
+
+        $scope.add = function () {
+            $scope.buttonsUI.push({
+                "name": "askdjf ",
+                "type": "bottle",
+                "colorCode": "red"
+            })
         };
+
+        $scope.currentButton = function (data) {
+            $scope.editBtton = data;
+            $scope.IsVisible=$scope.IsVisible ? false:true;
+        }
+
+        $scope.submit = function (editBtton) {
+            $scope.submitDetails.push(editBtton);
+        }
+
+        $scope.buttonsUI = [
+            {
+                "name": "suresh",
+                "type": "bottle",
+                "colorCode": "red"
+            }
+        ];
 
         /*var ExternalEvent = function (elements) {
 

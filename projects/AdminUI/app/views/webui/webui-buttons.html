@@ -11,12 +11,11 @@
             <!-- Default external events list-->
             <div class="external-events-trash">
               <div class="panel-body">
-                <div class="external-events" id="dragtarget" >
-                  <div class="bg-green" contenteditable="true" ng-model="BottleName">Bottle</div>
-                  <div class="bg-danger" contenteditable="true" >Private</div>
-                  <div class="bg-info" contenteditable="true" >Drinks</div>
-                  <div class="bg-warning" contenteditable="true">Food</div>
+                <div class="external-events" id="dragtarget" ng-model="buttonsUI" data-drop="true">
+                  <div class="bg-green" ng-repeat="data in buttonsUI" ng-click="currentButton(data)" ng-show="data.name" data-drag="{{data.drag}}"
+                    ng-model="buttonsUI">{{data.name}}</div>
                 </div>
+                <button type="button" ng-click="add(data)">Add</button>
               </div>
             </div>
           </div>
@@ -76,13 +75,30 @@
     <div class="col-lg-9 col-md-8">
       <!-- START panel-->
       <div class="panel panel-default">
-        <div class="panel-body" style="height: 400px;">
-          <div id="sortable2" class="connectedSortable" contenteditable="true"></div>
+        <div class="panel-body button-drag">
+          <div id="sortable2" class="external-events"></div>
+          <div class="editBttonShow" ng-show="IsVisible">
+            <h4>Details About WebUI </h4>
+            <label class="leftLabel">
+              <strong>Name:</strong>
+            </label>
+            <input type="text" class="rightText" ng-model="editBtton.name">
+            <br/>
+            <label class="leftLabel">
+              <strong>Type:</strong>
+            </label>
+            <input type="text" class="rightText" ng-model="editBtton.type">
+            <br/>
+            <label class="leftLabel">
+              <strong>Color:</strong>
+            </label>
+            <input type="text" class="rightText" ng-model="editBtton.colorCode">
+            <input type="submit" class="submit-det" ng-click="submit(editBtton)" />
+          </div>
         </div>
-        <input type="submit" ng-click="submit()"/>
+        <!-- END panel-->
       </div>
-      <!-- END panel-->
     </div>
+    <!-- END row-->
   </div>
-  <!-- END row-->
 </div>
