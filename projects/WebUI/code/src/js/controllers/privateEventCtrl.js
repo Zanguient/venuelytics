@@ -223,6 +223,10 @@ app.controller('PrivateEventController', ['$log', '$scope', '$location', 'DataSh
             });
         };
 
+        self.closeModal = function() {
+          $('#privateDescriptionModal').modal('hide');
+        };
+        
         self.venueRefId = function (venue) {
             if (!venue.uniqueName) {
                 return venue.id;

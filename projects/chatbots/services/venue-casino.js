@@ -8,22 +8,42 @@ const sendAnswer = function(userId, response, channel) {
     const venueId = user.state.get("selectedVenueId");
     let sendWaitTime = false;
     let gameName = null;
+    let originalGameName = null;
     let facility = null; //games game tournament
     let availability = false;
     let criteria = null;
     let props = null;
     let minBet = false;
+    const venue = user.state.get("venue");
+    const info = venue.info;
     if (response.parameters && response.parameters.WaitTime ) {
             sendWaitTime = true;
     }
     
-    if (response.parameters && response.parameters.GameName ) {
+
+    if (response.parameters && response.parameters.GameName && response.parameters.GameName.length > 0) {
             gameName = response.parameters.GameName;
+            originalGameName = response.parameters.originalGameName;
+            originalGameName = originalGameName.replace("?", "");
+            originalGameName = originalGameName.replace("game", "");
+            originalGameName = originalGameName.replace("games", "");
+            originalGameName = originalGameName.trim();
+    }
+    let validGames = [];
+    let validGamesStr = info['_casino.valid.games'];
+    let validGamesText = info['_casino.valid.games.text'];
+    if (validGamesStr && validGamesStr.length > 0) {
+        validGames = validGamesStr.split(",");
     }
 
-    if (venueId === 960 && !!gameName && (gameName.toLowerCase().indexOf('crap') >= 0 || gameName.toLowerCase().indexOf('roulette') >=0  || gameName.toLowerCase().indexOf("slot") >=0)) {
-        channel.sendMessage(userId,`Casino M8trix is card game casino. We don't have Roulette, Crap or Slot type games.`);
-        return;
+    if (gameName && gameName.length > 0) {
+        gameName = gameName.toLowerCase();
+        if (gameName === "poker" || gameName === "crap" || gameName === "roulette") {
+            if (validGames.indexOf(gameName) < 0){
+                channel.sendMessage(userId, validGamesText);
+                return;
+            } 
+        }
     }
 
     if (response.parameters && response.parameters.Facilities ) {
@@ -53,31 +73,19 @@ const sendAnswer = function(userId, response, channel) {
 
     }
     if (sendWaitTime || minBet) { // get wait time for a game
-        serviceApi.getActiveGames(venueId, gameName, function(games) {
+        serviceApi.getActiveGames(venueId, originalGameName, function(games) {
             
             if (sendWaitTime) {
                 let t0 = games.length === 1 ? "\n":"Here are some games with least waiting time.\n";
-                sendWaitTimeImpl(user, venueId,games, t0, channel, userId, gameName);
+                sendWaitTimeImpl(user, venueId,games, t0, channel, userId, originalGameName);
+                return;
             } else {
                 let t1 = games.length === 1 ? "\n":"Here are some games with their minimum bets.\n";
-                sendBetInfoImpl(user, venueId,games, t1, channel, userId, gameName); 
+                sendBetInfoImpl(user, venueId,games, t1, channel, userId, originalGameName); 
+                return;
             }
         });
-    }
-
-
-    if (facility && facility.toLowerCase().indexOf("game") >=0 ) {
-        if (availability) {
-            serviceApi.getGamesAvailableNow(venueId, function(games) {
-                let title = "Here are some games which will be available shortly.\n";
-                sendWaitTimeImpl(user, venueId, games, title, channel, userId, gameName);
-            });
-        } else {
-            const venue = user.state.get("venue");
-            const gamesUrl = serviceApi.getGamesUrl(venue.uniqueName, venueId);
-            channel.sendMessage(userId,`Sorry we didn't have the game you are looking for! You can find the game and their wait time here ${gamesUrl}`);
-            return;
-        }
+        return;
     }
 
     if (facility && facility.toLowerCase().indexOf("tournament") >=0 ) { // send send schedules or
@@ -96,6 +104,30 @@ const sendAnswer = function(userId, response, channel) {
             }
         });
     }
+
+    
+    if (availability) {
+        serviceApi.getGamesAvailableNow(venueId, function(games) {
+            let title = "Here are some games which will be available shortly.\n";
+            sendWaitTimeImpl(user, venueId, games, title, channel, userId, gameName);
+        });
+    } else {
+        serviceApi.searchGamesByName(venueId, originalGameName, function(games) {
+            if (games.length > 0) {
+                if (games.length === 1) {
+                    channel.sendMessage(userId,`Yes, we have ${originalGameName}`);
+                } else {
+                    channel.sendMessage(userId,`Yes, we have various ${originalGameName} games`);
+                }
+            } else {
+                const venue = user.state.get("venue");
+                const gamesUrl = serviceApi.getGamesUrl(venue.uniqueName, venueId);
+                channel.sendMessage(userId,`Sorry we didn't have the game you are looking for! You can find the game and their wait time here ${gamesUrl}`);
+        
+            }
+        });
+    }
+    
  };
 
 function sendBetInfoImpl(user, venueId, games, title, channel, userId, gameName) {

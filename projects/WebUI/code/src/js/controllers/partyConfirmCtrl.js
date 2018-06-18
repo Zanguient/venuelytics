@@ -1,6 +1,6 @@
 "use strict";
-app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope','ngMeta', 'VenueService',
-    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope, ngMeta, venueService) {
+app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope','ngMeta', 'VenueService','TaxNFeesService',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope, ngMeta, venueService, TaxNFeesService ) {
 
 	$log.log('Inside Party Confirm Controller.');
 
@@ -21,13 +21,13 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
         self.partyPackageData = DataShare.partyServiceData;
         self.venueName = self.venueDetails.venueName;
         $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
-        self.availableAmount = $window.localStorage.getItem("partyAmount");
+       
         var fullName = self.partyPackageData.userFirstName + " " + self.partyPackageData.userLastName;
         self.authBase64Str = window.btoa(fullName + ':' + self.partyPackageData.email + ':' + self.partyPackageData.mobile);
-        if(DataShare.privateOrderItem !== ''){
-            self.availableAmount = DataShare.privateOrderItem.price;
+        if(!!DataShare.partyOrderItem){
+            self.availableAmount = DataShare.partyOrderItem.price;
         }                    
-        self.privateOrderItem = DataShare.privateOrderItem;
+        self.partyOrderItem = DataShare.partyOrderItem;
         self.taxDate = moment(self.partyPackageData.orderDate).format('YYYYMMDD');
         self.object = DataShare.payloadObject;
         self.enabledPayment = DataShare.enablePayment;
@@ -44,6 +44,20 @@ app.controller('PartyConfirmController', ['$log', '$scope', '$location', 'DataSh
 
     self.editPartyPackage = function() {
         $location.url("/cities/" + self.city + "/" + self.venueRefId(self.venueDetails) + '/party-packages');
+    };
+
+     self.savePartyPackage = function() {
+        
+        AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function(response) {
+            if (response.status == 200 || response.srtatus == 201) {
+                self.orderId = response.data.id;
+                $location.url(self.city +'/party-success/'+ self.venueRefId(self.venueDetails));
+            } else {
+                if (response.data && response.data.message) {
+                    alert("Saving order failed with message: " + response.data.message );
+                }
+            }
+        });
     };
 
     self.paymentEnable = function() {

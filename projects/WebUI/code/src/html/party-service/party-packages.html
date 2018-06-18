@@ -1,13 +1,13 @@
-<div ng-controller="PartyPackageController">
-<!-- <div class="col-lg-6"> -->
+<div ng-controller="PartyPackageController"  ng-cloak>
 
 
-<div class="col-md-12 showInMobile" ng-if="((partyCateringMenu) || (partyMenu) || (partyVideo) || (partyFloorPlan) || (partyInfoSheet))">
+    <div class="col-md-12 showInMobile" ng-if="((partyCateringMenu) || (partyMenu) || (partyVideo) || (partyFloorPlan) || (partyInfoSheet))">
         <center>
             <table>
                 <tr>
                     <td ng-if="partyCateringMenu">
-                        <a  href="" class="btn btn-success btn-raised btn-xs" ng-click="menuUrlSelection(partyCateringMenu)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.CATERING_MENU" | translate}}</a>
+                        <a  href="" class="btn btn-success btn-raised btn-xs" ng-click="menuUrlSelection(partyCateringMenu)">
+                            <span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.CATERING_MENU" | translate}}</a>
                     </td>
                     <td ng-if="partyMenu">
                         <a href="" class="btn btn-success btn-raised btn-xs" ng-click="menuUrlSelection(partyMenu)">
@@ -28,134 +28,122 @@
             </table> 
         </center>
     </div>
-<form class="form-horizontal" name="privateForm" autocomplete="off" parsley-validate validate-form="" ng-cloak>
-    <fieldset class="col-md-10 col-md-offset-right-2">
-        <div class="col-md-12 form-group label-floating no-p" ng-class = "{'active' : party.orderDate.length > 0}">
-        <label class="control-label" >{{'reservation.DATE' | translate}}</label>
-            <input type="text" class="form-control " id="partyDate" ng-model="party.orderDate" required>
-            <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
-        </div>
-        <div class="col-md-12 showInWeb">
-            <center>
-                <a href="" class="btn btn-success btn-raised" ng-if="partyCateringMenu" ng-click="menuUrlSelection(partyCateringMenu)"><span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.CATERING_MENU" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="partyMenu" ng-click="menuUrlSelection(partyMenu)"><span class="glyphicon glyphicon-heart"></span>{{"reservation.VIEW_PARTY_EVENTS" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="partyVideo" ng-click="menuUrlSelection(partyVideo)"><span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="partyFloorPlan" ng-click="menuUrlSelection(partyFloorPlan)"><span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
-                <a href="" class="btn btn-success btn-raised" ng-if="partyInfoSheet" ng-click="menuUrlSelection(partyInfoSheet)"><span class="glyphicon glyphicon-home"></span>{{"reservation.VIEW_PRIVATE" | translate}}</a>
-            </center>
-        </div>
-        
-        <div class="col-md-12 form-group label-floating no-p"> 
-            <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
-            <input type="text" class="form-control " id="privateTotalGuest" ng-model="party.totalGuest" >
-        </div>
-        <div class="col-md-12 form-group label-floating no-p">
-            <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
-            <input type="text" class="form-control " ng-model="party.userFirstName" id="firstName"  required>
-        </div>
-        <div class="col-md-12 form-group label-floating no-p">
-            <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
-            <input type="text" class="form-control " ng-model="party.userLastName" id="lastName" >
-        </div>
-        <div class="col-md-12 form-group label-floating no-p ">
-        <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
-            <input type="email" class="form-control " id="email" ng-model="party.email" data-parsley-trigger="change" required>
-        </div>
-        <div class="col-md-12 form-group label-floating no-p ">
-        <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
-            <input type="text" class="form-control " masked="" data-inputmask="'mask': '(999) 999-9999'" name="mobile" ng-model="party.mobile" required data-parsley-trigger="change">
-        </div>
-        
-        
-        <div class="col-md-12 form-group label-floating no-p ">
-            <label class="control-label" >{{"reservation.EVENT_TYPE"  | translate}}</label>
-            <select class="form-control" required="" ng-class="blackTheme == 'blackTheme' ? blackThema : ''"
-                ng-model="party.partyEventType" ng-options="t.name for t in eventTypes">
-                <option value=""></option>
-            </select>
-        </div>
+    <form class="form-horizontal" name="partyForm" autocomplete="off" parsley-validate validate-form="" >
+        <fieldset>
+            <div class="form-group label-floating" ng-class = "{'active' : party.orderDate.length > 0}">
+                <label class="control-label" >{{'reservation.DATE' | translate}}</label>
+                <input type="text" class="form-control " id="partyDate" ng-model="party.orderDate" required>
+                <!-- <label for="inputEmail" class="fa fa-calendar"></label> -->
+            </div>
+            <div class="col-md-12 showInWeb">
+                <center>
+                    <a href="" class="btn btn-success btn-raised" ng-if="partyCateringMenu" ng-click="menuUrlSelection(partyCateringMenu)">
+                        <span class="glyphicon glyphicon-heart-empty"></span>{{"reservation.CATERING_MENU" | translate}}</a>
+                    <a href="" class="btn btn-success btn-raised" ng-if="partyMenu" ng-click="menuUrlSelection(partyMenu)">
+                        <span class="glyphicon glyphicon-heart"></span>{{"reservation.VIEW_PARTY_EVENTS" | translate}}</a>
+                    <a href="" class="btn btn-success btn-raised" ng-if="partyVideo" ng-click="menuUrlSelection(partyVideo)">
+                        <span class="glyphicon glyphicon-play"></span>{{"reservation.VIEW_VIDEO" | translate}}</a>
+                    <a href="" class="btn btn-success btn-raised" ng-if="partyFloorPlan" ng-click="menuUrlSelection(partyFloorPlan)">
+                        <span class="glyphicon glyphicon-home"></span>{{"reservation.FLOOR" | translate}}</a>
+                    <a href="" class="btn btn-success btn-raised" ng-if="partyInfoSheet" ng-click="menuUrlSelection(partyInfoSheet)">
+                        <span class="glyphicon glyphicon-home"></span>{{"reservation.VIEW_PRIVATE" | translate}}</a>
+                </center>
+            </div>
+            
+            <div class="form-group label-floating"> 
+                <label class="control-label" >{{'reservation.TOTAL_GUEST' | translate}}</label>
+                <input type="text" class="form-control " id="privateTotalGuest" ng-model="party.totalGuest" >
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label" >{{'reservation.FIRST_NAME' | translate}}</label>
+                <input type="text" class="form-control " ng-model="party.userFirstName" id="firstName"  required>
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label" >{{'reservation.LAST_NAME' | translate}}</label>
+                <input type="text" class="form-control " ng-model="party.userLastName" id="lastName" >
+            </div>
+            <div class="form-group label-floating">
+            <label class="control-label" >{{'reservation.EMAIL' | translate}}</label>
+                <input type="email" class="form-control " id="email" ng-model="party.email" data-parsley-trigger="change" required>
+            </div>
+            <div class="form-group label-floating">
+            <label class="control-label" >{{'reservation.MOBILE' | translate}}</label>
+                <input type="text" class="form-control "  name="mobile" ng-model="party.mobile" required>
+            </div>
+            
+            
+            <div class="form-group label-floating">
+                <label class="control-label" >{{"reservation.EVENT_TYPE"  | translate}}</label>
+                <select class="form-control" required="" ng-class="blackTheme == 'blackTheme' ? blackThema : ''"
+                    ng-model="party.partyEventType" ng-options="t.name for t in eventTypes">
+                    <option value=""></option>
+                </select>
+            </div>
 
-        <div class="col-md-12 form-group label-floating no-p">
-        <label class="control-label" >{{'reservation.COMMENT' | translate}}</label>
-            <input type="text" class="form-control " id="instructions" ng-model="party.instructions" data-parsley-trigger="change">
-        </div>
-        <div class="col-md-12">
-            <div>
-                <label class="check-box" ng-class="{'Check_box_label': blackTheme === ''}">
-                    <input type="checkbox" ng-model="party.authorize" required/>
-                    {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
-                </label>
+            <div class="form-group label-floating">
+                <label class="control-label" >{{'reservation.COMMENT' | translate}}</label>
+                <input type="text" class="form-control " id="instructions" ng-model="party.instructions" data-parsley-trigger="change">
             </div>
-        </div>
-        <div class="col-md-12">
-            <div>
-                <label class="check-box" ng-class="{'Check_box_label': blackTheme === ''}">
-                    <input type="checkbox" ng-model="party.agree" required> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
-                </label>
-            </div>
-        </div>
-    </fieldset>
-</form>
-<hr>
-<div class="col-md-12" ng-cloak>
-    <h4>{{"reservation.PARTY_PACKAGE" | translate}}</h4>
-    <div class="ms-paper">
-        <div>
-            <!-- For Horizontal tabs -->
             <div>
                 <div>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" id="clubs" class="tab-pane fade active in">   
-                            <div
-                                class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2"
-                                ng-repeat="partyObj in partyHall" ng-if="partyObj.imageUrls[0].smallUrl">
-                                <article id="articleCart" class="card card-info mb-4 wow materialUp animation-delay-5">
-                                    <figure class="ms-thumbnail ms-thumbnail-left">
-                                        <img ng-src="{{partyObj.imageUrls[0].smallUrl}}" alt="party-image"
-                                            class="img-responsive center-block" >
-                                    </figure>
-                                    <div class="card-block color-dark">
-                                        <h2 class="text-primary mt0 mb0">
-                                            {{partyObj.name | limitTo: 20 }}{{partyObj.name.length > 20 ? '...'
-                                                :''}}
-                                        </h2>
-                                        <p ng-if="partyObj.servingSize != 0">{{partyObj.servingSize}} people</p>
-                                        <p ng-if="partyObj.size != 0">{{partyObj.size}} sq.ft</p>
-                                        <p class="mb-1">{{partyObj.description | limitTo: 120
-                                            }}{{partyObj.description.length > 120 ? '...' :''}}
-                                        <a class="btn btn-default btn-raised btn-xs pull-right" data-toggle="modal" data-target="#partyDescriptionModal" ng-click="partyHallDescription(partyObj.description)" ng-if="partyObj.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
-                                        
-                                        <button type="submit" id="partyEnquire" class="inverse btn btn-success btn-md btn-raised pull-right" novalidate="novalidate" ng-disabled="privateForm.$invalid" ng-click="confirmPartyPackage(partyObj)" ng-if="partyObj.reserve == false">{{"reservation.ENQUIRE" | translate}}</button>
-                                        <label class="pull-right" ng-if="partyObj.reserve == true">{{"reservation.RESERVED" | translate}}</label>
-                                        </p>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
+                    <label class="table-font" ng-class="{'Check_box_label': blackTheme === ''}">
+                        <input type="checkbox" ng-model="party.authorize" required/>
+                        {{"reservation.TO_AUTHORIZE" | translate}} {{venueName}}
+                    </label>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label class="table-font" ng-class="{'Check_box_label': blackTheme === ''}">
+                        <input type="checkbox" ng-model="party.agree" required> {{"reservation.TO_AGREE" | translate}} {{venueName}} {{"reservation.PRIVACY_POLICY" | translate}}
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <hr>
+    <div  class="row">
+        <h2 class="pt-2 pb-2">{{"reservation.PARTY_PACKAGE" | translate}}</h2>
+          
+        <div class="col-md-4 col-sm-6 masonry-item wow fadeInUp animation-delay-2" ng-repeat="partyObj in partyHall" ng-if="partyObj.imageUrls[0].smallUrl">
+            <article id="articleCart" class="card card-info mb-4 wow materialUp animation-delay-5">
+                <figure class="ms-thumbnail ms-thumbnail-left">
+                    <img ng-src="{{partyObj.imageUrls[0].smallUrl}}" alt="party-image" class="img-responsive center-block" >
+                </figure>
+                 <div class="card-block pt-2 pb-6 no-mt">
+                    <a class="mt-1 mb-1 col-xs-12 no-p h6 block-ellipsis-1" href="#">
+                        {{partyObj.name | limitTo: 20 }}{{partyObj.name.length > 20 ? '...' :''}}
+                    </a>
+                    <p ng-if="partyObj.servingSize != 0">{{partyObj.servingSize}} people</p>
+                    <p ng-if="partyObj.size != 0">{{partyObj.size}} sq.ft</p>
+                    <p class="mb-1">{{partyObj.description | limitTo: 120}} {{partyObj.description.length > 120 ? '...' :''}}</p>
+                  
+                    <a class="more_link"  ng-click="partyHallDescription(partyObj.description)" data-toggle="modal" 
+                    data-target="#partyDescriptionModal" ng-if="partyObj.description.length > 120">{{"reservation.READ_MORE" | translate}}</a>
+                            
+                    <button type="submit" id="partyEnquire" class="inverse btn btn-sm btn-success btn-raised pull-right" novalidate="novalidate" 
+                    ng-disabled="partyForm.$invalid" ng-click="confirmPartyPackage(partyObj)" ng-if="partyObj.reserve == false">{{"reservation.ENQUIRE" | translate}}</button>
+                    <span class="pull-right text-danger" ng-if="partyObj.reserve == true">{{"reservation.RESERVED" | translate}}</span>
+
+                </div>
+            </article>
+        </div>
+    </div>
+    <div class="modal modal-success" id="partyDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+        <div class="modal-dialog animated zoomIn animated-3x" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-close"></i></button>
+                    <h3 class="modal-title" id="myModalLabel6">{{'bottleServiceTab.DESC' | translate}}</h3>
+                </div>
+                <div class="modal-body">
+                    <p>{{partyDescription}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeModal()">{{'CLOSE' | translate}}</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-
-<div class="modal modal-success" id="partyDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
-    <div class="modal-dialog animated zoomIn animated-3x" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="zmdi zmdi-close"></i></span></button>
-                <h3 class="modal-title" id="myModalLabel6">{{'bottleServiceTab.DESC' | translate}}</h3>
-            </div>
-            <div class="modal-body">
-                <p>{{partyDescription}}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeBottleModal()">{{'CLOSE' | translate}}</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 </div>
-
