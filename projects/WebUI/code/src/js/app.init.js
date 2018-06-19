@@ -342,6 +342,23 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
         }
     });
 
+    $rootScope.scrollToTop  = function(window) {
+
+        if(inIframe(window)) {
+            window.parent.postMessage("scrollToTop", "*");
+        }
+        console.log("scroll to top");
+
+    };
+
+    function inIframe (window) {
+        try {
+                return window.self !== window.top;
+        } catch (e) {
+            return true;
+        }
+    }
+
     AjaxService.getSettings().then(function (response) {
         $rootScope.settings = response.data;
     });

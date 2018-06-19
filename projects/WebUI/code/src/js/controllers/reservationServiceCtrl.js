@@ -219,7 +219,12 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
                         angular.forEach(venueMap.elements, function(obj, key){
                           self.selectedVenueMap.productsByName[obj.name] = obj;
                         });
-                        var tableMaps = JSON.parse(venueMap.imageMap);
+                        
+                        var tableMaps = [];
+                        if (venueMap.imageMap && venueMap.imageMap.length > 1) {
+                            tableMaps = JSON.parse(venueMap.imageMap);
+                        }
+
                         var maps =[];
                         if (!!tableMaps) {
                           tableMaps.map(function(t){

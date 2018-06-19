@@ -300,7 +300,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                         angular.forEach(venueMap.elements, function(obj, key){
                           self.selectedVenueMap.productsByName[obj.name] = obj;
                         });
-                        var tableMaps = JSON.parse(venueMap.imageMap);
+
+                        var tableMaps = [];
+                        if (venueMap.imageMap && venueMap.imageMap.length > 1) {
+                            tableMaps = JSON.parse(venueMap.imageMap);
+                        }
+                        
 
                         var maps =[];
                         if (!!tableMaps) {
