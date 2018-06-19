@@ -58,5 +58,6 @@ app.controller('VenueDetailsController', ['$log', '$scope', '$http', '$location'
             };
 
             self.init();
+            self.scrollToTop($window);
     		
     }]);

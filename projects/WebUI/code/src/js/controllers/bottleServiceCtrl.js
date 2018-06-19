@@ -667,5 +667,5 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
           }
         };
         self.init();
-
+        self.scrollToTop($window);
     }]);

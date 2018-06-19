@@ -82,8 +82,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             DataShare.guestListData = '';
         }
        
-        $rootScope.embeddedFlag = self.embeddedService === 'embed';
-
+        $rootScope.embeddedFlag = self.embeddedService === 'embed' || $location.search().embeded === 'Y';
+ 
         venueService.saveProperty(self.venueId, 'embed', $rootScope.embeddedFlag);
 
         self.guest = DataShare.guestListData;
@@ -270,4 +270,5 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             //}
     }
     self.init();
+    self.scrollToTop($window);
 }]);
