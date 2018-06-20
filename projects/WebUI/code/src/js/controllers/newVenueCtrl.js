@@ -13,7 +13,9 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
             $rootScope.selectedTab = 'consumer';
             $rootScope.blackTheme = "";
             $rootScope.embeddedFlag = $location.search().embeded === 'Y';
-             console.log("embeded flag=" +$rootScope.embeddedFlag);
+            var tabType = $location.search().type || 'CLUB';
+            
+            console.log("embeded flag=" +$rootScope.embeddedFlag);
             self.init = function() {
                 DataShare.bottleServiceData = {};
                 DataShare.guestListData = {};
@@ -42,20 +44,20 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
 
                 if(DataShare.latitude && DataShare.longitude &&
                     DataShare.latitude !== '' && DataShare.longitude !== ''){
-                    self.setTab('CLUB');
+                    self.setTab(tabType);
                 } else{
 
                     if (navigator && navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function(position){
                             DataShare.latitude = position.coords.latitude;
                             DataShare.longitude = position.coords.longitude;
-                            self.setTab('CLUB');
+                            self.setTab(tabType);
                             self.$apply(function(){
                                 self.position = position;
                             });
                         },
                         function (error) {
-                            self.setTab('CLUB');
+                            self.setTab(tabType);
                         });
                     }
                 }
