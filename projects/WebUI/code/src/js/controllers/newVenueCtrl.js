@@ -13,8 +13,8 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
             $rootScope.selectedTab = 'consumer';
             $rootScope.blackTheme = "";
             $rootScope.embeddedFlag = $location.search().embeded === 'Y';
-            var tabType = $location.search().type || 'CLUB';
-            
+            var tabType = $location.search().type || 'CLUBS';
+
             console.log("embeded flag=" +$rootScope.embeddedFlag);
             self.init = function() {
                 DataShare.bottleServiceData = {};
@@ -75,6 +75,10 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                 $rootScope.privateDescription = value;
                 $('.modal-backdrop').remove();
             };
+
+            self.isActive = function(type) {
+                return self.selectedVenueType === $translate.instant(type) ? 'active current' : '';
+            }
 
             self.setTab = function(type){
                 $(window).trigger('resize');

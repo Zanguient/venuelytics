@@ -4,8 +4,8 @@
     <a href="cities" class="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} -> {{selectedVenueType | titleCase}}</a></h3>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs whiteTheme mont-font-regular nav-tabs-transparent nav-tabs-full nav-tabs-6" role="tablist">
-        <li role="presentation" ng-repeat="type in serviceTypes">
-            <a href ng-click="setTab(type.title)" class="withoutripple text-nowrap" aria-controls="clubs" role="tab" data-toggle="tab"> <!-- ng-init="$index == 0 ? setTab('CLUB') : ''" -->
+        <li role="presentation" ng-class="isActive(type.title)" ng-repeat="type in serviceTypes">
+            <a href ng-click="setTab(type.title)" class="withoutripple text-nowrap"  aria-controls="clubs" role="tab" data-toggle="tab"> <!-- ng-init="$index == 0 ? setTab('CLUB') : ''" -->
                 <img ng-src="{{type.icon}}" class="serviceTabIcons" alt="serviceTab-image">
                 <span class="hidden-xs">{{type.title | translate}}</span>
             </a>

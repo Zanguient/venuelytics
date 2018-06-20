@@ -2611,7 +2611,7 @@ table.fc-border-separate {
 }
 
 .drinksBtn {
-  background-color: rgba(218,6,21, 0.80) !important;
+  background-color: rgba(30,134,68, 0.80) !important;
   color: #fff !important;
   border-color: white;
 }
@@ -2623,7 +2623,7 @@ table.fc-border-separate {
 }
 
 .foodBtn {
-  background-color: rgba(30,134,68, 0.80) !important;
+  background-color: rgba(218,6,21, 0.80) !important;
   color: #fff !important;
   border-color: white;
 }

@@ -155,7 +155,25 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.tabParams = serviceName;
         }
     };
+    self.venueTimeFormatted = function() {
+        
+        if (!!self.venueTotalHours && self.venueTotalHours.length == 1 && self.venueTotalHours[0].sTime ===  self.venueTotalHours[0].eTime) {
+            return "Open 24 Hours";
+        }
 
+        var venueTime = '';
+        for (var i = 0; i < self.venueTotalHours.length; i++) {
+            if (i > 0 && i < self.venueTotalHours.length -1) {
+                venueTime += ', ';
+            } else if (i > 0 && i === self.venueTotalHours.length -1){
+                venueTime += ' and ';
+            }
+
+            venueTime +=  self.venueTotalHours[i].sTime + " - " + self.venueTotalHours[i].eTime ;
+        }
+
+        return venueTime;
+    }
     function addTab(id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected) {
         self.displayTabs.push({
            id: id,
