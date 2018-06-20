@@ -12,10 +12,8 @@
             <div class="external-events-trash">
               <div class="panel-body">
                 <div class="external-events" id="dragtarget" ng-model="buttonsUI" data-drop="true">
-                  <div class="bg-green" ng-repeat="data in buttonsUI" ng-click="currentButton(data)" ng-show="data.name" data-drag="{{data.drag}}"
-                    ng-model="buttonsUI">{{data.name}}</div>
+                  <div class="bg-green" ng-repeat="data in buttonsUI" ng-click="currentButton(data,$index)" ng-show="data.name" ng-model="data.name">{{data.name}}</div>
                 </div>
-                <button type="button" ng-click="add(data)">Add</button>
               </div>
             </div>
           </div>
@@ -76,7 +74,9 @@
       <!-- START panel-->
       <div class="panel panel-default">
         <div class="panel-body button-drag">
-          <div id="sortable2" class="external-events"></div>
+          <div id="sortable2" class="external-events">
+            <div ng-repeat="data in buttonsUI1"></div>
+          </div>
           <div class="editBttonShow" ng-show="IsVisible">
             <h4>Details About WebUI </h4>
             <label class="leftLabel">
@@ -85,17 +85,16 @@
             <input type="text" class="rightText" ng-model="editBtton.name">
             <br/>
             <label class="leftLabel">
-              <strong>Type:</strong>
-            </label>
-            <input type="text" class="rightText" ng-model="editBtton.type">
-            <br/>
-            <label class="leftLabel">
               <strong>Color:</strong>
             </label>
-            <input type="text" class="rightText" ng-model="editBtton.colorCode">
+            <input type="text" class="rightText" ng-model="editBtton.color">
             <input type="submit" class="submit-det" ng-click="submit(editBtton)" />
           </div>
         </div>
+        <div class="panel bgcolor">
+        <button id="bgcolor-button">Choose background</button>
+      </div>
+        <button type="button" ng-click="arrayShow()">Submit</button>
         <!-- END panel-->
       </div>
     </div>

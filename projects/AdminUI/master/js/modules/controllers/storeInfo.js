@@ -2,348 +2,348 @@
  * Module: storeInfo.js
  * smangipudi
  =========================================================*/
- /*jshint bitwise: false*/
- App.controller('StoreController', ['$translate','$scope', '$state', '$stateParams',
-  'RestServiceFactory', 'toaster', 'FORMATS', '$timeout','DataTableService','$compile','ngDialog',
-      function($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
-        $timeout,DataTableService, $compile, ngDialog) {
-  'use strict';
-  $scope.deletedVenueImage = [];
-  $scope.shortCuts = [];
-  $scope.advanceSwitches = {
-    "Advance.BottleService.enable" : false,
-    "Advance.BookBanqetHall.enable": false,
-    "Advance.tableService.enable": false,
-    "Advance.DrinksService.enable": false,
-     "Advance.FoodRequest.enable": false,
-    "Advance.BookKaroakeRoom.enable": false,
-    "Advance.Bowling.enable": false,
-    "Advance.ClickerOption.enable": false,
-    "Advance.deals.enable": false,
-    "Advance.DJRequest.enable": false,
-    "Advance.enabledPayment": false,
-    "Advance.FastPass.enable": false,
-    "Advance.game.enable": false,
-    "Advance.LostFacus.enable": false,
-    "Advanced.tournaments.enable": false,
-    "Advance.GuestList.enable": false,
-    "Advance.KarokeRequest.enable": false 
-  };
-  
-  $scope.additionalFields = [
-    F("ui.service.theme","Background Theme"),
-    F("Advance.fav-items","Populat Categories"),
-    F("Bottle.ContactName","Bottle Service Contact Name"),
-    F("Bottle.ContactPhone","Bottle Service Contact Phone"),
-    F("Bottle.ContactEmail","Bottle Service Contact Email"),
-    F("Bottle.BottleVIPPolicy","Bottle Service VIP Policy"),
-    F("Bottle.BottleMinimumrequirements","Bottle Service Minimum Requirements"),
-    F("Bottle.formUrl","Bottle Service Request Form"),
-    F("Bottle.menuUrl","Bottle Service Menu url"),
-    
+/*jshint bitwise: false*/
+App.controller('StoreController', ['$translate', '$scope', '$state', '$stateParams',
+  'RestServiceFactory', 'toaster', 'FORMATS', '$timeout', 'DataTableService', '$compile', 'ngDialog',
+  function ($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
+    $timeout, DataTableService, $compile, ngDialog) {
+    'use strict';
+    $scope.deletedVenueImage = [];
+    $scope.shortCuts = [];
+    $scope.advanceSwitches = {
+      "Advance.BottleService.enable": false,
+      "Advance.BookBanqetHall.enable": false,
+      "Advance.tableService.enable": false,
+      "Advance.DrinksService.enable": false,
+      "Advance.FoodRequest.enable": false,
+      "Advance.BookKaroakeRoom.enable": false,
+      "Advance.Bowling.enable": false,
+      "Advance.ClickerOption.enable": false,
+      "Advance.deals.enable": false,
+      "Advance.DJRequest.enable": false,
+      "Advance.enabledPayment": false,
+      "Advance.FastPass.enable": false,
+      "Advance.game.enable": false,
+      "Advance.LostFacus.enable": false,
+      "Advanced.tournaments.enable": false,
+      "Advance.GuestList.enable": false,
+      "Advance.KarokeRequest.enable": false
+    };
 
-    F("BanquetHall.ContactName","Private Event Contact Name"),
-    F("BanquetHall.ContactPhone","Private Event Contact Phone"),
-    F("BanquetHall.ContactEmail","Private Event Contact Email"),
-    F("BanquetHall.formUrl","Private Event Request From"),
-    F("BanquetHall.Menu","Private Event Menu"),
-    F("BanquetHall.ThreeSixtyVideo","Private Event 360 Video"),
-    F("BanquetHall.Video","Private Event Video"),
-    F("BanquetHall.FloorMap","Private Event Floor Plan"),
-    F("BanquetHall.Details","Private Event Details"),
+    $scope.additionalFields = [
+      F("ui.service.theme", "Background Theme"),
+      F("Advance.fav-items", "Populat Categories"),
+      F("Bottle.ContactName", "Bottle Service Contact Name"),
+      F("Bottle.ContactPhone", "Bottle Service Contact Phone"),
+      F("Bottle.ContactEmail", "Bottle Service Contact Email"),
+      F("Bottle.BottleVIPPolicy", "Bottle Service VIP Policy"),
+      F("Bottle.BottleMinimumrequirements", "Bottle Service Minimum Requirements"),
+      F("Bottle.formUrl", "Bottle Service Request Form"),
+      F("Bottle.menuUrl", "Bottle Service Menu url"),
 
-    F("Drinks.menuUrl","Drinks Menu URL"),
-    F("Drinks.cocktailsUrl","Drinks Cocktails Menu URL"),
-    F("Drinks.beerMenuUrl","Drinks Beer Menu URL"),
-    F("Drinks.wineListuUrl","Drinks Wine List Menu URL"),
-    F("Drinks.happyHourDrinkUrl","Drinks Happy Hour Menu URL"),
-   
 
-  ];
-  if ($stateParams.id === 'new') {
-    $scope.tabs = [
-       {name: 'Venue Information', content: 'app/views/venue/form-venue.html', icon: 'fa-home'}
-    ];
-  } else {
-    $scope.tabs = [
-      {name: 'Venue Information', content: 'app/views/venue/form-venue.html', icon: 'fa-home'},
-      {name: 'Attributes', content: 'app/views/venue/venue-attributes.html', icon: 'fa-list-ul'},
-        {name: 'Service Hours', content: 'app/views/venue/service-hours.html', icon: 'fa-home'},
-      {name: 'Private Events', content: 'app/views/venue/private-events.html', icon: 'fa-birthday-cake'},
-      {name: 'Reservations', content: 'app/views/venue/venue-bottle.html', icon: 'fa-cutlery'},
-      {name: 'Party Packages', content: 'app/views/venue/party-events.html', icon: 'fa-trophy'},
-      {name: 'Products', content: 'app/views/venue/venue-products.html', icon: 'fa-shopping-basket'},
-      {name: 'Offers/Deals', content: 'app/views/venue/venue-deals.html', icon: 'fa-money'},
-      {name: 'Outlets', content: 'app/views/venue/venue-stores.html', icon: 'fa-building-o'},
-      {name: 'Portal', content: 'app/views/venue/venue-portal.html', icon: 'fa-home'},
-      {name: 'Users', content: 'app/views/venue/venue-users.html', icon: 'fa-users'},
-      {name: 'Shortcuts', content: 'app/views/venue/venue-shortcuts.html', icon: 'fa-fa-bookmark'},
+      F("BanquetHall.ContactName", "Private Event Contact Name"),
+      F("BanquetHall.ContactPhone", "Private Event Contact Phone"),
+      F("BanquetHall.ContactEmail", "Private Event Contact Email"),
+      F("BanquetHall.formUrl", "Private Event Request From"),
+      F("BanquetHall.Menu", "Private Event Menu"),
+      F("BanquetHall.ThreeSixtyVideo", "Private Event 360 Video"),
+      F("BanquetHall.Video", "Private Event Video"),
+      F("BanquetHall.FloorMap", "Private Event Floor Plan"),
+      F("BanquetHall.Details", "Private Event Details"),
+
+      F("Drinks.menuUrl", "Drinks Menu URL"),
+      F("Drinks.cocktailsUrl", "Drinks Cocktails Menu URL"),
+      F("Drinks.beerMenuUrl", "Drinks Beer Menu URL"),
+      F("Drinks.wineListuUrl", "Drinks Wine List Menu URL"),
+      F("Drinks.happyHourDrinkUrl", "Drinks Happy Hour Menu URL"),
+
 
     ];
-  }
-  
-  $scope.onEnableServices = function() {
-    var payload = {};
-    angular.forEach($scope.advanceSwitches, function(v, k, o) {
-      $scope.data.info[k] = v ? 'Y' : 'N';
-      payload[k] = v ? 'Y' : 'N';
-    });
-    $scope.updateServices(payload);
-  };
-
-  $scope.onUpdateOptions = function() {
-    var payload = {};
-    angular.forEach($scope.additionalFields, function(v, k, o) {
-      $scope.data.info[v.name] = v.value;
-      payload[v.name] = v.value ;
-    });
-    $scope.updateServices(payload);
-  };
-
-  $scope.initInfoTable = function() {
-    if ( ! $.fn.dataTable || $stateParams.id === 'new') {
-      return;
+    if ($stateParams.id === 'new') {
+      $scope.tabs = [
+        { name: 'Venue Information', content: 'app/views/venue/form-venue.html', icon: 'fa-home' }
+      ];
+    } else {
+      $scope.tabs = [
+        { name: 'Venue Information', content: 'app/views/venue/form-venue.html', icon: 'fa-home' },
+        { name: 'Attributes', content: 'app/views/venue/venue-attributes.html', icon: 'fa-list-ul' },
+        { name: 'Service Hours', content: 'app/views/venue/service-hours.html', icon: 'fa-home' },
+        { name: 'Private Events', content: 'app/views/venue/private-events.html', icon: 'fa-birthday-cake' },
+        { name: 'Reservations', content: 'app/views/venue/venue-bottle.html', icon: 'fa-cutlery' },
+        { name: 'Party Packages', content: 'app/views/venue/party-events.html', icon: 'fa-trophy' },
+        { name: 'Products', content: 'app/views/venue/venue-products.html', icon: 'fa-shopping-basket' },
+        { name: 'Offers/Deals', content: 'app/views/venue/venue-deals.html', icon: 'fa-money' },
+        { name: 'Outlets', content: 'app/views/venue/venue-stores.html', icon: 'fa-building-o' },
+        { name: 'Portal', content: 'app/views/venue/venue-portal.html', icon: 'fa-home' },
+        { name: 'Users', content: 'app/views/venue/venue-users.html', icon: 'fa-users' },
+        { name: 'Shortcuts', content: 'app/views/venue/venue-shortcuts.html', icon: 'fa-fa-bookmark' },
+        { name: 'WebUI Buttons', content: 'app/views/webui/webui-buttons.html', icon: 'fa-fa-bookmark' },
+      ];
     }
-    var columnDefinitions = [
-    {
-     "sWidth" : "50%", aTargets:[1],
-     "sWidth" : "20%", aTargets:[0,2]
 
-    },
-    {
-      "targets": [0,1,2],
-      "orderable": false,
-    },
-    {
-      "targets": [2],
-      "orderable": false,
-      "createdCell": function (td, cellData, rowData, row, col) {
-        var actionHtml = ('<button title="Edit" class="btn btn-default btn-oval fa fa-edit" '+
-            'ng-click="updateAttribute(\'' + row + '\'  )"></button>&nbsp;&nbsp;');
+    $scope.onEnableServices = function () {
+      var payload = {};
+      angular.forEach($scope.advanceSwitches, function (v, k, o) {
+        $scope.data.info[k] = v ? 'Y' : 'N';
+        payload[k] = v ? 'Y' : 'N';
+      });
+      $scope.updateServices(payload);
+    };
 
-        $(td).html(actionHtml);
-        $compile(td)($scope);
+    $scope.onUpdateOptions = function () {
+      var payload = {};
+      angular.forEach($scope.additionalFields, function (v, k, o) {
+        $scope.data.info[v.name] = v.value;
+        payload[v.name] = v.value;
+      });
+      $scope.updateServices(payload);
+    };
+
+    $scope.initInfoTable = function () {
+      if (!$.fn.dataTable || $stateParams.id === 'new') {
+        return;
       }
-    }];
-    DataTableService.initDataTable('venue_info_table', columnDefinitions);
-    var table = $('#venue_info_table').DataTable();
-    $scope.initAdditionalFields();
-    $.each($scope.data.info, function (k,v) {
-      if ($scope.advanceSwitches.hasOwnProperty(k)) {
-        $scope.advanceSwitches[k] = (v === 'Y' ? true : false);
-      } else {
-        table.row.add([$translate.instant(k), v, k]);
-      }
-    });
-    table.draw();
-    
-  };
-  $scope.initAdditionalFields = function() {
-    $.each($scope.data.info, function (k,v) {
+      var columnDefinitions = [
+        {
+          "sWidth": "50%", aTargets: [1],
+          "sWidth": "20%", aTargets: [0, 2]
+
+        },
+        {
+          "targets": [0, 1, 2],
+          "orderable": false,
+        },
+        {
+          "targets": [2],
+          "orderable": false,
+          "createdCell": function (td, cellData, rowData, row, col) {
+            var actionHtml = ('<button title="Edit" class="btn btn-default btn-oval fa fa-edit" ' +
+              'ng-click="updateAttribute(\'' + row + '\'  )"></button>&nbsp;&nbsp;');
+
+            $(td).html(actionHtml);
+            $compile(td)($scope);
+          }
+        }];
+      DataTableService.initDataTable('venue_info_table', columnDefinitions);
+      var table = $('#venue_info_table').DataTable();
+      $scope.initAdditionalFields();
+      $.each($scope.data.info, function (k, v) {
+        if ($scope.advanceSwitches.hasOwnProperty(k)) {
+          $scope.advanceSwitches[k] = (v === 'Y' ? true : false);
+        } else {
+          table.row.add([$translate.instant(k), v, k]);
+        }
+      });
+      table.draw();
+
+    };
+    $scope.initAdditionalFields = function () {
+      $.each($scope.data.info, function (k, v) {
         for (var j = 0; j < $scope.additionalFields.length; j++) {
-          if ( k == $scope.additionalFields[j].name){
+          if (k == $scope.additionalFields[j].name) {
             $scope.additionalFields[j].value = v;
             delete $scope.data.info[k];
             break;
           }
         }
-    });
-      
-  }
-  function F(name, displayName) {
+      });
+
+    }
+    function F(name, displayName) {
       return {
-          name : name,
-          displayName: displayName,
-          value : ""
+        name: name,
+        displayName: displayName,
+        value: ""
       };
-  }
-  function addType(typeName, typeValue, displayName, venueTypeCode) {
+    }
+    function addType(typeName, typeValue, displayName, venueTypeCode) {
 
-    var obj = {
-      typeName : typeName,
-      typeValue: typeValue,
-      value: (venueTypeCode & typeValue)  > 0,
-      displayName: displayName,
+      var obj = {
+        typeName: typeName,
+        typeValue: typeValue,
+        value: (venueTypeCode & typeValue) > 0,
+        displayName: displayName,
+      };
+
+      $scope.venueTypes.push(obj);
+
+    }
+    $scope.venueTypeCodes = function (data) {
+      $scope.venueTypes = [];
+      addType("barType", 1, "Bar", data.venueTypeCode);
+      addType("clubType", 2, "Club", data.venueTypeCode);
+      addType("loungeType", 4, "Lounge", data.venueTypeCode);
+      addType("casinoType", 8, "Casino", data.venueTypeCode);
+      addType("concertType", 16, "Concert", data.venueTypeCode);
+      addType("nightClubType", 32, "Night Club", data.venueTypeCode);
+      addType("restaurantType", 64, "Restaurant", data.venueTypeCode);
+      addType("bowlingType", 128, "Bowling", data.venueTypeCode);
+      addType("karaokeType", 256, "Karaoke", data.venueTypeCode);
+      //addType("adultType", 512, "Adult", data.venueTypeCode);
+      addType("golfType", 1024, "Golf", data.venueTypeCode);
+      addType("liveEventType", 2048, "Live Event", data.venueTypeCode);
+      addType("hotelType", 4096, "Hotel", data.venueTypeCode);
     };
-
-    $scope.venueTypes.push(obj);
-
-  }
-  $scope.venueTypeCodes = function(data){
-    $scope.venueTypes = [];
-    addType("barType", 1, "Bar", data.venueTypeCode);
-    addType("clubType", 2, "Club", data.venueTypeCode);
-    addType("loungeType", 4, "Lounge", data.venueTypeCode);
-    addType("casinoType", 8, "Casino", data.venueTypeCode);
-    addType("concertType", 16, "Concert", data.venueTypeCode);
-    addType("nightClubType", 32, "Night Club", data.venueTypeCode);
-    addType("restaurantType", 64, "Restaurant", data.venueTypeCode);
-    addType("bowlingType", 128, "Bowling", data.venueTypeCode);
-    addType("karaokeType", 256, "Karaoke", data.venueTypeCode);
-    //addType("adultType", 512, "Adult", data.venueTypeCode);
-    addType("golfType", 1024, "Golf", data.venueTypeCode);
-    addType("liveEventType", 2048, "Live Event", data.venueTypeCode);
-    addType("hotelType", 4096, "Hotel", data.venueTypeCode);
-  };
-  $scope.deleteImage = function(index, deletedImage) {
-      var id= {
-          "id" : deletedImage.id
+    $scope.deleteImage = function (index, deletedImage) {
+      var id = {
+        "id": deletedImage.id
       };
-      
-      RestServiceFactory.VenueImage().deleteVenueImage(id, function(data){
+
+      RestServiceFactory.VenueImage().deleteVenueImage(id, function (data) {
         deletedImage.status = "DELETED";
         toaster.pop('data', "Deleted the selected Image successfull");
-      },function(error){
+      }, function (error) {
         if (typeof error.data !== 'undefined') {
           toaster.pop('error', "Server Error", error.data.developerMessage);
         }
       });
-  };
-  $scope.isVenueType = function(code) {
-  	if (typeof $scope.venueType === 'undefined'){
-  		return true;
-  	}
-  	var val = $scope.venueType[code]; 
-  	return val === 1;
-  };
-  $scope.updateAttribute = function (rowId) {
-    var table = $('#venue_info_table').DataTable();
-    var createTitle;
-    var rowData = '';
-    if(rowId === undefined){
-      createTitle = "Create Venue Attribute";
-    } else {
-      rowData = table.row(rowId).data();
-      createTitle = "Update Venue Attribute";
-      var hideKeyText = true;
-    }
-    ngDialog.openConfirm({
-      template: 'modalDialogId',
-      className: 'ngdialog-theme-default',
-      data: {key: rowData[0], value: rowData[1], title: createTitle, text:hideKeyText},
-    }).then(function (value) {
-      var payload = {};
+    };
+    $scope.isVenueType = function (code) {
+      if (typeof $scope.venueType === 'undefined') {
+        return true;
+      }
+      var val = $scope.venueType[code];
+      return val === 1;
+    };
+    $scope.updateAttribute = function (rowId) {
+      var table = $('#venue_info_table').DataTable();
+      var createTitle;
+      var rowData = '';
       if (rowId === undefined) {
-        var attributeValue = value.value;
-        var attributeKey =value.key;
-        payload[attributeKey]= attributeValue;
-        $scope.updateServices(payload);
-        $scope.data.info[attributeKey] = attributeValue;
+        createTitle = "Create Venue Attribute";
       } else {
-        value = value.value;
-        payload[rowData[2]] = value;
-        $scope.updateServices(payload);
-        $scope.data.info[rowData[2]] = value;
+        rowData = table.row(rowId).data();
+        createTitle = "Update Venue Attribute";
+        var hideKeyText = true;
       }
-      table.clear();
-      $.each($scope.data.info, function (k,v) {
-        table.row.add([$translate.instant(k), v, k]);
-      });
-      table.draw();    
-    }, function (reason) {
-  	//mostly cancelled  
-    });
-  };
-  $scope.updateServices = function(payload){
-    var promise = RestServiceFactory.VenueService().updateAttribute({id:$stateParams.id}, payload, function(data){
-      toaster.pop('data', "Attribute updated successfull");
-    },function(error){
-      if (typeof error.data !== 'undefined') {
-        toaster.pop('error', "Server Error", error.data.developerMessage);
-      }
-    });
-  };
-  $scope.update = function(isValid, data) {
-    if (!isValid) {
-      return;
-    }
-    var venueTypeCode  = 0; 
-    for (var tIndex = 0; tIndex < $scope.venueTypes.length; tIndex++) {
-      if ($scope.venueTypes[tIndex].value) {
-        venueTypeCode += $scope.venueTypes[tIndex].typeValue;
-      }
-    }    
-    data.venueTypeCode = venueTypeCode;
-    $scope.imageId = [];
-    angular.forEach($scope.imageUrl, function(value, key){
-      var venueImageId = {
-        "id" : value.id
-      };
-      angular.forEach($scope.deletedVenueImage, function(value1, key1) {
-        if(venueImageId.id === value1.id) {
-            delete venueImageId.id;
-            }
+      ngDialog.openConfirm({
+        template: 'modalDialogId',
+        className: 'ngdialog-theme-default',
+        data: { key: rowData[0], value: rowData[1], title: createTitle, text: hideKeyText },
+      }).then(function (value) {
+        var payload = {};
+        if (rowId === undefined) {
+          var attributeValue = value.value;
+          var attributeKey = value.key;
+          payload[attributeKey] = attributeValue;
+          $scope.updateServices(payload);
+          $scope.data.info[attributeKey] = attributeValue;
+        } else {
+          value = value.value;
+          payload[rowData[2]] = value;
+          $scope.updateServices(payload);
+          $scope.data.info[rowData[2]] = value;
+        }
+        table.clear();
+        $.each($scope.data.info, function (k, v) {
+          table.row.add([$translate.instant(k), v, k]);
         });
-      $scope.imageId.push(venueImageId);
-    });
-    data.imageUrls = $scope.imageId;
-    var payload = RestServiceFactory.cleansePayload('VenueService', data);
-    var target = {id: data.id};
-    if ($stateParams.id === 'new'){
-      target = {};
-    }
-    RestServiceFactory.VenueService().save(target,payload, function(success){
-     
+        table.draw();
+      }, function (reason) {
+        //mostly cancelled  
+      });
+    };
+    $scope.updateServices = function (payload) {
+      var promise = RestServiceFactory.VenueService().updateAttribute({ id: $stateParams.id }, payload, function (data) {
+        toaster.pop('data', "Attribute updated successfull");
+      }, function (error) {
+        if (typeof error.data !== 'undefined') {
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+    };
+    $scope.update = function (isValid, data) {
+      if (!isValid) {
+        return;
+      }
+      var venueTypeCode = 0;
+      for (var tIndex = 0; tIndex < $scope.venueTypes.length; tIndex++) {
+        if ($scope.venueTypes[tIndex].value) {
+          venueTypeCode += $scope.venueTypes[tIndex].typeValue;
+        }
+      }
+      data.venueTypeCode = venueTypeCode;
+      $scope.imageId = [];
+      angular.forEach($scope.imageUrl, function (value, key) {
+        var venueImageId = {
+          "id": value.id
+        };
+        angular.forEach($scope.deletedVenueImage, function (value1, key1) {
+          if (venueImageId.id === value1.id) {
+            delete venueImageId.id;
+          }
+        });
+        $scope.imageId.push(venueImageId);
+      });
+      data.imageUrls = $scope.imageId;
+      var payload = RestServiceFactory.cleansePayload('VenueService', data);
+      var target = { id: data.id };
+      if ($stateParams.id === 'new') {
+        target = {};
+      }
+      RestServiceFactory.VenueService().save(target, payload, function (success) {
+
         ngDialog.openConfirm({
           template: '<p>venue information saved successfully</p>',
           plain: true,
           className: 'ngdialog-theme-default'
         });
-      
-      $state.go('app.venues');
-    },function(error){
-      if (typeof error.data !== 'undefined') {
-       toaster.pop('error', "Server Error", error.data.developerMessage);
-      }
-    });
-  };
 
-  $scope.uploadFile = function(venueImage) {
-    var fd = new FormData();
-    fd.append("file", venueImage[0]);
-    var payload = RestServiceFactory.cleansePayload('venueImage', fd);
-    RestServiceFactory.VenueImage().uploadVenueImage(payload, function(success){
-      if(success !== {}){
-        $scope.imageUrl.push(success);
-        toaster.pop('success', "Image upload successfully");
-        document.getElementById("control").value = "";
-      }
-    },function(error){
-      if (typeof error.data !== 'undefined') {
-       toaster.pop('error', "Server Error", error.data.developerMessage);
-      }
-    });
-  };
+        $state.go('app.venues');
+      }, function (error) {
+        if (typeof error.data !== 'undefined') {
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+    };
 
-  function __URL(path) {
-    return "https://www.venuelytics.com" + path;
-  }
-  $scope.initShortCuts = function() {
-    $scope.shortCuts.push({name: "Web Page", link: __URL("/cities/" + $scope.data.city + "/" +unqName() )});
-    const serviceNames = [["Bottle Service", "bottle-service"], ["Private Events","private-events"], ["Guest List","guest-list"], 
-      ["Food Service","food-services"], ["Drinks Service","drink-services"], ["Table Service", "table-services"], ["Wait Time", "wait-time"], ["Deals", "deals-list"], ["Event List","event-list"]]; 
+    $scope.uploadFile = function (venueImage) {
+      var fd = new FormData();
+      fd.append("file", venueImage[0]);
+      var payload = RestServiceFactory.cleansePayload('venueImage', fd);
+      RestServiceFactory.VenueImage().uploadVenueImage(payload, function (success) {
+        if (success !== {}) {
+          $scope.imageUrl.push(success);
+          toaster.pop('success', "Image upload successfully");
+          document.getElementById("control").value = "";
+        }
+      }, function (error) {
+        if (typeof error.data !== 'undefined') {
+          toaster.pop('error', "Server Error", error.data.developerMessage);
+        }
+      });
+    };
 
-    for (var i=0; i < serviceNames.length; i++) {
-      const obj = serviceNames[i];
-      $scope.shortCuts.push({name: obj[0], link: __URL("/cities/" + $scope.data.city + "/" +unqName() +"/" + obj[1])});  
-    }      
-   
-
-   for (var i=0; i < serviceNames.length; i++) {
-      const obj = serviceNames[i];
-      $scope.shortCuts.push({name: obj[0] +" - embeded", link: __URL("/cities/" + $scope.data.city + "/" +unqName() +"/" + obj[1] +"/embed")});  
-    }      
-    
-  };
-
-  function unqName() {
-    if (!$scope.data.uniqueName) {
-      return $scope.data.id;
-    } else {
-      return $scope.data.uniqueName;
+    function __URL(path) {
+      return "https://www.venuelytics.com" + path;
     }
-  }
-  $scope.copyToClipboard = function(text) {
+    $scope.initShortCuts = function () {
+      $scope.shortCuts.push({ name: "Web Page", link: __URL("/cities/" + $scope.data.city + "/" + unqName()) });
+      const serviceNames = [["Bottle Service", "bottle-service"], ["Private Events", "private-events"], ["Guest List", "guest-list"],
+      ["Food Service", "food-services"], ["Drinks Service", "drink-services"], ["Table Service", "table-services"], ["Wait Time", "wait-time"], ["Deals", "deals-list"], ["Event List", "event-list"]];
+
+      for (var i = 0; i < serviceNames.length; i++) {
+        const obj = serviceNames[i];
+        $scope.shortCuts.push({ name: obj[0], link: __URL("/cities/" + $scope.data.city + "/" + unqName() + "/" + obj[1]) });
+      }
+
+
+      for (var i = 0; i < serviceNames.length; i++) {
+        const obj = serviceNames[i];
+        $scope.shortCuts.push({ name: obj[0] + " - embeded", link: __URL("/cities/" + $scope.data.city + "/" + unqName() + "/" + obj[1] + "/embed") });
+      }
+
+    };
+
+    function unqName() {
+      if (!$scope.data.uniqueName) {
+        return $scope.data.id;
+      } else {
+        return $scope.data.uniqueName;
+      }
+    }
+    $scope.copyToClipboard = function (text) {
       const el = document.createElement('textarea');
       el.value = text;
       el.setAttribute('readonly', '');
@@ -353,32 +353,32 @@
       el.select();
       document.execCommand('copy');
       document.body.removeChild(el);
-  };
+    };
 
-  $timeout(function () {
-    if($stateParams.id !== 'new') {
-      RestServiceFactory.VenueService().get({id:$stateParams.id}, function(data) {
-        data.phone = $.inputmask.format(data.phone,{ mask: FORMATS.phoneUS} );
-        $scope.imageUrl = [];
-        for (var imgIndex = 0; imgIndex < data.imageUrls.length; imgIndex++) {
-          if ( data.imageUrls[imgIndex].id !== null) {
-            $scope.imageUrl.push(data.imageUrls[imgIndex]);
+    $timeout(function () {
+      if ($stateParams.id !== 'new') {
+        RestServiceFactory.VenueService().get({ id: $stateParams.id }, function (data) {
+          data.phone = $.inputmask.format(data.phone, { mask: FORMATS.phoneUS });
+          $scope.imageUrl = [];
+          for (var imgIndex = 0; imgIndex < data.imageUrls.length; imgIndex++) {
+            if (data.imageUrls[imgIndex].id !== null) {
+              $scope.imageUrl.push(data.imageUrls[imgIndex]);
+            }
           }
-        }
-        $scope.venueTypeCodes(data);
-        $scope.data = data; 
-        $scope.initInfoTable();
-        $scope.initShortCuts();
-      });
-    } else {
-      var data = {};
-      $scope.imageUrl = [];
+          $scope.venueTypeCodes(data);
+          $scope.data = data;
+          $scope.initInfoTable();
+          $scope.initShortCuts();
+        });
+      } else {
+        var data = {};
+        $scope.imageUrl = [];
 
-      data.country = "USA";
-      data.venueTypeCode = 0;
-      $scope.venueTypeCodes(data);
-      $scope.data = data;
-      $scope.initInfoTable();
-    }
-  });
-}]);
+        data.country = "USA";
+        data.venueTypeCode = 0;
+        $scope.venueTypeCodes(data);
+        $scope.data = data;
+        $scope.initInfoTable();
+      }
+    });
+  }]);
