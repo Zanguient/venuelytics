@@ -75,7 +75,7 @@
                <div class="form-group col-sm-6">
                    <div class="checkbox c-checkbox">
                      <label>
-                        <input type="checkbox" name="cleansed_venue" value="true" ng-model="data.cleansed" ng-true-value="true"  ng-false-value="false" ng-checked="cleansed==true"/>
+                        <input type="checkbox" name="cleansed_venue" value="true" ng-model="data.cleansed" ng-true-value="true"  ng-false-value="false" ng-checked="data.cleansed==true"/>
                         <span class="fa fa-check"></span>Cleansed
                         </label>
                   </div>
@@ -94,7 +94,7 @@
     <slide ng-repeat="slide in imageUrl track by slide.id" active="slide.active">
      
       <div style="display: inline-block; width: 100%;">
-        <img ng-src="{{slide.mediumUrl}}" class="img-responsive" style="width: 100%;max-width: 640px; height: 300px; max-height: 300px; margin: auto;"/>
+        <img ng-src="{{slide.mediumUrl}}" class="img-responsive"/>
         <div class="carousel-caption"><h2  ng-bind="slide.status"></h2></div>
       </div>
     

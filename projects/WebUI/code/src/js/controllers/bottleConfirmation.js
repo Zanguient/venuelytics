@@ -78,6 +78,12 @@ app.controller('ConfirmReservationController', ['$log', '$scope', '$location', '
 
     //Get Tax
 
+    self.createBottleSave = function() {
+        AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function(response) {
+            self.orderId = response.data.id;
+            $location.url(self.selectedCity +'/'+ self.venueRefId(self.venueDetails) +'/orderConfirm');
+        });
+    };
     
     self.editConfirmPage = function() {
         $location.url("/cities/" + self.selectedCity + "/" + self.venueRefId(self.venueDetails) + '/bottle-service');

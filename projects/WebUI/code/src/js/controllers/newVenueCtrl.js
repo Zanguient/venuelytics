@@ -12,6 +12,8 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
            
             $rootScope.selectedTab = 'consumer';
             $rootScope.blackTheme = "";
+            $rootScope.embeddedFlag = $location.search().embeded === 'Y';
+             console.log("embeded flag=" +$rootScope.embeddedFlag);
             self.init = function() {
                 DataShare.bottleServiceData = {};
                 DataShare.guestListData = {};
@@ -98,17 +100,29 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                 }
             };
 
+            self.getVenueDetailUrl = function(venue) {
+                //DataShare.selectedVenueDetails = venue;
+                DataShare.selectedVenue = venue;
+                DataShare.venueNumber = venue.id;
+                self.selectedCityName = venue.city;
+                var q = "";    
+                if ($rootScope.embeddedFlag) {
+                    q = "?embeded=Y";
+                }
+                return '/cities/' + self.selectedCityName + '/' + self.venueRefId(venue)+q;
+            }
     		self.selectVenue = function(venue) {
-            //DataShare.selectedVenueDetails = venue;
-            DataShare.selectedVenue = venue;
-            DataShare.venueNumber = venue.id;
-            self.selectedCityName = venue.city;
-    			  $location.url('/cities/' + self.selectedCityName + '/' + self.venueRefId(venue));
+                
+    			$location.url(getVenueDetailUrl(venue));
     		};
 
             self.selectedServices = function(venue, serviceType) {
                 self.selectedCityName = venue.city;
-                $location.url('/cities/' + self.selectedCityName +'/'+ self.venueRefId(venue) + '/' + serviceType);
+                var q = "";    
+                if ($rootScope.embeddedFlag) {
+                    q = "?embeded=Y";
+                }
+                $location.url('/cities/' + self.selectedCityName +'/'+ self.venueRefId(venue) + '/' + serviceType + q);
             };
     		self.init();
     }])

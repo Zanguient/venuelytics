@@ -274,16 +274,20 @@ App.controller('StoreController', ['$translate', '$scope', '$state', '$statePara
             delete venueImageId.id;
           }
         });
-        $scope.imageId.push(venueImageId);
-      });
-      data.imageUrls = $scope.imageId;
-      var payload = RestServiceFactory.cleansePayload('VenueService', data);
-      var target = { id: data.id };
-      if ($stateParams.id === 'new') {
-        target = {};
-      }
-      RestServiceFactory.VenueService().save(target, payload, function (success) {
-
+      $scope.imageId.push(venueImageId);
+    });
+    data.imageUrls = $scope.imageId;
+    var payload = RestServiceFactory.cleansePayload('VenueService', data);
+    var target = {id: data.id};
+    if ($stateParams.id === 'new'){
+      target = {};
+    }
+    if (payload.cleansed===true || payload.cleansed=== "true" ) {
+      payload.options = 1;
+    } else {
+      payload.options = 0;
+    }
+    RestServiceFactory.VenueService().save(target,payload, function(success){
         ngDialog.openConfirm({
           template: '<p>venue information saved successfully</p>',
           plain: true,

@@ -82,8 +82,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             DataShare.guestListData = '';
         }
        
-        $rootScope.embeddedFlag = self.embeddedService === 'embed';
-
+        $rootScope.embeddedFlag = self.embeddedService === 'embed' || $location.search().embeded === 'Y';
+ 
         venueService.saveProperty(self.venueId, 'embed', $rootScope.embeddedFlag);
 
         self.guest = DataShare.guestListData;
@@ -256,8 +256,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
        // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
         addTab('eventListTab','eventlist', 'assets/img/service/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, 'eventListBtn', 'eventList');
-        addTab('wineToHomeTab','winetohome', 'assets/img/service/event_image.png','reservation.WINE_TO_HOME', 'wine-to-home', 'wine-to-home/wine-to-home.html',self.wineToHomeEnable, 'winetohomeBtn', 'wineToHome');
-
+        if(self.venueId === 170649) {
+            addTab('wineToHomeTab','winetohome', 'assets/img/service/event_image.png','reservation.WINE_TO_HOME', 'wine-to-home', 'wine-to-home/wine-to-home.html',self.wineToHomeEnable, 'winetohomeBtn', 'wineToHome');
+        }
         //if(self.tabParams === "VIP"){
             var firstEnabledTabBtnId = optimizeTabDisplay(self.displayTabs);
             if (firstEnabledTabBtnId !== null) {  
@@ -269,4 +270,5 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             //}
     }
     self.init();
+    self.scrollToTop($window);
 }]);

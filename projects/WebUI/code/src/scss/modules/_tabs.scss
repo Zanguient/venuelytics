@@ -84,7 +84,7 @@
             content: "";
             width: 0px;
             height: 3px;
-            background-color: #fff;
+            background-color: $color-success-dark;
 
             position: absolute;
             bottom: 0;
@@ -131,7 +131,7 @@
 
             &.active {
                 a {
-                    color: $color-dark !important;
+                    color: $color-success-dark !important;
                 }
             }
         }

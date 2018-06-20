@@ -5,8 +5,8 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs whiteTheme mont-font-regular nav-tabs-transparent nav-tabs-full nav-tabs-6" role="tablist">
         <li role="presentation" ng-repeat="type in serviceTypes">
-            <a href ng-click="setTab(type.title)" class="withoutripple" aria-controls="clubs" role="tab" data-toggle="tab"> <!-- ng-init="$index == 0 ? setTab('CLUB') : ''" -->
-                <img ng-src="{{type.icon}}" class="serviceTabIcons mr-1" alt="serviceTab-image">
+            <a href ng-click="setTab(type.title)" class="withoutripple text-nowrap" aria-controls="clubs" role="tab" data-toggle="tab"> <!-- ng-init="$index == 0 ? setTab('CLUB') : ''" -->
+                <img ng-src="{{type.icon}}" class="serviceTabIcons" alt="serviceTab-image">
                 <span class="hidden-xs">{{type.title | translate}}</span>
             </a>
         </li>
@@ -41,10 +41,9 @@
                                     </div>
                                 </figure>
                                 <div class="card-block card-block-big pb-6 pt-2 no-mt">
-                                  <a class="mt-1 mb-1 col-xs-12 no-p title-bold block-ellipsis-1" href="cities/{{selectedCityName}}/{{venueRefId(venue)}}" 
-                                  ng-click="selectVenue(venue)" title="{{venue.venueName}}">{{venue.venueName}}</a>
+                                  <a class="mt-1 mb-1 col-xs-12 no-p title-bold block-ellipsis-1" href="{{getVenueDetailUrl(venue)}}" title="{{venue.venueName}}">{{venue.venueName}}</a>
                                    
-                                    <p class="venueDescription  col-xs-12 no-p block-ellipsis-1"><i class="fa fa-map-marker"></i>{{venue.address}}</p>
+                                    <p class="venueDescription col-xs-12 no-p block-ellipsis-1"><i class="fa fa-map-marker"></i>{{venue.address}}</p>
                                     
                                     <p class="venueDescription block-ellipsis-3">{{venue.description}}</p>
                                      <a class="more_link"  ng-click="newVenueDescription(venue.description)" ng-if="venue.description.length > 60">{{"reservation.READ_MORE" | translate}}</a>

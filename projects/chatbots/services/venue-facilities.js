@@ -1,6 +1,7 @@
 "use strict";
 const Users = require("../models/users");
 const serviceApi = require("../apis/app-api");
+const pluralize = require('pluralize');
 const ANSWERS = [];
 const ANSWERS_DEFAULT = { text: "VALUE", api_name: "service-time", value: "facility" };
 
@@ -61,7 +62,7 @@ const sendAnswer = function(type, userId, response, channel) {
   }
   var answer = ANSWERS_DEFAULT;
   if (!!ANSWERS[type]) {
-    answer = ANSWERS[type];
+    answer = Object.assign({}, ANSWERS[type]); 
   }
   if (response.parameters.Facilities && response.parameters.Facilities.toLowerCase().indexOf("guest") >= 0) {
     if (venue.info['Advance.GuestList.enable'] && venue.info['Advance.GuestList.enable'].toLowerCase() === 'y' ) {
@@ -83,13 +84,38 @@ const sendAnswer = function(type, userId, response, channel) {
 function sendAnswerImpl(type, user, answer, response, channel) {
   if (type === 'Q_CHARGE') {
    sendChargeImpl(type, user, answer, response, channel);
-  } else if (FACILITY_TYPE.indexOf(type) >= 0 ) {
+  } else if(type === 'Q_PET_POLICY') {
+    sendAnswerPetPolicy(type, user, answer, response, channel);
+  }else if (FACILITY_TYPE.indexOf(type) >= 0 ) {
     sendAnswerFacilityImpl(type, user, answer, response, channel);
   } else {
     sendAnswerFacilityTimes(type, user, answer, response, channel);
   }
 }
 
+function sendAnswerPetPolicy(type, user, answer, response, channel) {
+  let pets = response.parameters.pets;
+  let petName = response.parameters.petName;
+  let propName = '_pet_policy_others';
+  if (pets && pets.toLowerCase() === 'pet policy') {
+    propName = '_pet_policy';
+  } else if (petName && petName.toLowerCase().indexOf('dog') > -1 || petName.toLowerCase().indexOf('poodle') > -1 ){
+    propName = '_pet_policy_dogs';
+  } else if (petName && petName.toLowerCase().indexOf('cat')> -1 ){
+    propName = '_pet_policy_cats';
+  } 
+  const venue = user.state.get("venue");
+  let venueName = venue.venueName;
+  const info = venue.info;
+
+  const infoText = info[propName];
+  if (!infoText) {
+    channel.sendMessage(user.id, "Sorry, I don't know about our pet policy.");
+  } else {
+    channel.sendMessage(user.id, infoText);
+  }
+  
+}
 function sendAnswerFacilityTimes(type, user, answer, response, channel) {
 
   const venue = user.state.get("venue");
@@ -103,7 +129,7 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
   
 
   var data = user.state.get(answer.api_name);
-  var venueTimes = null;
+  let venueTimes = null;
   
   if ((type === 'Q_OPEN_CLOSE_TIME' || type === 'Q_FACILITY_OPEN_CLOSE_TIME') && response.parameters && response.parameters.openClosingTimes) {
     var timeType = response.parameters.openClosingTimes;
@@ -117,35 +143,27 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
     }
   }
   
-  if (!!response.parameters.Facilities) {
-    answer.type = response.parameters.Facilities;
+  if (response.parameters.facilityOriginal) {
+    answer.type = response.parameters.facilityOriginal;
+    answer.type = answer.type.replace("?", "");
+    answer.type = pluralize.singular(answer.type);
   }
 
-  if (answer.type && answer.type.toLowerCase() === 'kitchen' ) {
-    answer.type = 'Restaurant';
+  let success = findAndReply(answer, data, channel, user, venueName, false);
+  if (success) {
+    return;
+  }
+  answer.type = response.parameters.Facilities;
+  success = findAndReply(answer, data, channel, user, venueName, true);
+  
+  if (success) {
+    return;
   }
   for (var j = 0; j < data.length; j++) {
     if (data[j].type.toLowerCase() === 'venue') {
       venueTimes = data[j];
     }
-    if (data[j].type.toLowerCase() === answer.type.toLowerCase()) {
-      if (answer.value && answer.value !== ''){
-        channel.sendMessage(user.id, formatText(answer, venueName, formatTime(data[j][answer.value])));
-      } else {
-        var startTime = formatTime(data[j]['startTime']);
-        var endTime = formatTime(data[j]['endTime']);
-        if (startTime === endTime) {
-          channel.sendMessage(user.id, `we are open 24 hours.` );
-        } else {
-          channel.sendMessage(user.id, `Opening time: ${startTime}, Closing time: ${endTime}` );
-        }
-      }
-      
-      return;
-    }
   }
-
-  
 
   if (!!venueTimes) {
     var openTime = formatTime(venueTimes.startTime);
@@ -164,6 +182,31 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
 
 }
 
+function findAndReply(answer, data, channel, user, venueName, generic) {
+  if (answer.type && answer.type.toLowerCase() === 'kitchen' ) {
+    answer.type = 'Restaurant';
+  }
+  for (var j = 0; j < data.length; j++) {
+    
+    if ((data[j].type.toLowerCase() === answer.type.toLowerCase() && !generic) || (data[j].type.toLowerCase().indexOf(answer.type.toLowerCase())> -1 && generic)) {
+      if (answer.value && answer.value !== ''){
+        channel.sendMessage(user.id, formatText(answer, venueName, formatTime(data[j][answer.value])));
+      } else {
+        var startTime = formatTime(data[j]['startTime']);
+        var endTime = formatTime(data[j]['endTime']);
+        if (startTime === endTime) {
+          channel.sendMessage(user.id, `we are open 24 hours.` );
+        } else {
+          channel.sendMessage(user.id, `Opening time: ${startTime}, Closing time: ${endTime}` );
+        }
+      }
+      
+      return true;
+    }
+  }
+  return false;
+}
+
 function formatTime(normalizedTime) {
   // Check correct time format and split into components
   var time = normalizedTime.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [normalizedTime];
@@ -176,6 +219,9 @@ function formatTime(normalizedTime) {
     return time.join(""); // return adjusted time or original string
   } else {
     var x = time[0];
+    if (x.length < 5) {
+      x += '0';
+    }
     var hms = x.split(':'),
           h = +hms[0],
           suffix = (h < 12) ? ' AM' : ' PM';
@@ -216,8 +262,12 @@ function sendChargeImpl(type, user, answer, response, channel) {
 
 }
 function sendAnswerFacilityImpl(type, user, answer, response, channel) {
-  const facilityType = response.parameters.Facilities;
-  
+  let facilityType = response.parameters.facilityOriginal;
+
+  facilityType = facilityType.replace("?", "");
+  facilityType = pluralize.singular(facilityType);
+  let facilityTypeOriginal = facilityType;
+
   var data = user.state.get(answer.api_name);
   var hasFacility = false;
   var facilityText = "";
@@ -242,22 +292,47 @@ function sendAnswerFacilityImpl(type, user, answer, response, channel) {
         }
       }
     } 
+    var names = [];
+    if (!hasFacility) {
+      facilityType = response.parameters.Facilities; // generic
+      
+      for (i = 0; i < data.length; i++) {
+        if (data[i].type.toLowerCase().indexOf(facilityType.toLowerCase())>-1) {
+          hasFacility = true;
+          facilityText = data[i].valueText;
+          if (type === 'Q_COUNT_FACILITY') {
+            count += data[i].count;
+            locations.push(data[i].location);
+          } else if (type === 'Q_FACILITY'){
+            names.push(data[i].type);
+          } else if (type === 'Q_FREE_FACILITY'){
+            if (data[i].value <= 0){
+              channel.sendMessage(user.id, data[i].valueText);
+              return;
+            }
+          }
+        }
+      } 
+    }
+  
   }
-
+  
   if (hasFacility && type === 'Q_COUNT_FACILITY') {
     if (count === 1) {
       channel.sendMessage(user.id, `There is one ${facilityType} located in the ${locations[0]}`);
       return;
     } else {
-      
       var locationsStr = locations.slice(0, -1).join(', ') +', and '+ locations.slice(-1);
-      channel.sendMessage(user.id, `There are ${count} ${facilityType}s located in the ${locationsStr}`);
+      channel.sendMessage(user.id, `There are ${count} ${facilityType}'s located in the ${locationsStr}`);
       return;
     }
+  } else if (hasFacility && type === 'Q_FACILITY') {
+    let namesStr = names.slice(0, -1).join(', ') +', and '+ names.slice(-1);
+    channel.sendMessage(user.id, `We have the following kind of ${facilityType}'s - ${namesStr}`);
   } else if (hasFacility && type === 'Q_FREE_FACILITY') {
     channel.sendMessage(user.id, `Sorry, We don't have free ${facilityType}. ${facilityText}`);
   } else {
-    channel.sendMessage(user.id, `Sorry, We don't have ${facilityType}.`);
+    channel.sendMessage(user.id, `Sorry, We don't have ${facilityTypeOriginal}.`);
   }
   
 }

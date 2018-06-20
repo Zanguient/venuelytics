@@ -33,7 +33,7 @@ app.controller('bachelorConfirmController', ['$log', '$scope',  '$location', 'Da
 
         AjaxService.getTaxType(self.venueId, self.taxDate).then(function(response) {
             self.taxNFeeRates = response.data;
-            self.paymentData = TaxNFeesService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.availableAmount), "Bottle", '');
+            self.paymentData = TaxNFeesService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.availableAmount), "PrivateEvent", '');
         });
         self.redirectUrl = self.city +"/bachelorSuccess/" + self.venueRefId(self.venueDetails);
         self.payAtVenueUrl = self.city +'/bachelor-success/'+ self.venueRefId(self.venueDetails);

@@ -38,7 +38,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
 
             AjaxService.getTaxType(self.venueId, self.taxDate).then(function(response) {
                 self.taxNFeeRates = response.data;
-                self.paymentData = TaxNFeesService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.availableAmount), "DRINKS", '');
+                self.paymentData = TaxNFeesService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.availableAmount), "Drinks", '');
             });
             self.redirectUrl = self.city +"/drinkSuccess/" + self.venueRefId(self.venueDetails);
             self.payAtVenueUrl = self.city +'/drink-success/'+ self.venueRefId(self.venueDetails);
@@ -51,7 +51,15 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
         };
 
         
-
+        self.drinkServiceSave = function () {
+            
+            AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function (response) {
+                self.orderId = response.data.id;
+                $location.url(self.city + '/drink-success/' + self.venueRefId(self.venueDetails));
+                
+            });
+            
+        };
         self.paymentEnabled = function () {
             $location.url(self.city + "/drinkPayment/" + self.venueRefId(self.venueDetails));
         };

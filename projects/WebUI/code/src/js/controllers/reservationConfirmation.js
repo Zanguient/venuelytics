@@ -11,7 +11,7 @@ app.controller('ReservationPartyController', ['$log', '$scope', '$location', 'Re
     self.availableAmount = 0;
     self.paymentData = {};
     self.init = function() {
-        $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueId, 'embed');
+        $rootScope.embeddedFlag = venueService.getProperty($routeParams.venueId, 'embed') || $location.search().embeded === 'Y';
         self.venueDetails =  venueService.getVenue($routeParams.venueId); 
         self.venueId = self.venueDetails.id;
         $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';

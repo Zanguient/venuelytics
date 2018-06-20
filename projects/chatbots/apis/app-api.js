@@ -143,6 +143,7 @@ const getGuestListUrl = function(venueUniqueName, venueId, city) {
         return `${config.getWebUIUrl()}/cities//${city}/${venueId}/guest-list`;
     }
 };
+
 const getActiveGames = function(venueId, gameName, callback) {
     var url = `${config.getAppUrl()}/venues/${venueId}/games/active`;
     if (gameName !== null && gameName.trim() !== '') {
@@ -162,6 +163,22 @@ const getGamesAvailableNow = function(venueId, callback) {
     var options = {
         method: 'GET',
         url: `${config.getAppUrl()}/venues/${venueId}/games/active?maxWaiting=5`,
+    };
+
+    request.get(options, function (error, response, body) {
+        retOBJ(body, response, callback);
+    });
+};
+
+const searchGamesByName = function(venueId, gameName, callback) {
+
+    var url = `${config.getAppUrl()}/venues/${venueId}/games`;
+    if (gameName !== null && gameName.trim() !== '') {
+        url += `?name=${gameName}`;
+    }
+    var options = {
+        method: 'GET',
+        url: url
     };
 
     request.get(options, function (error, response, body) {
@@ -239,6 +256,7 @@ module.exports= {
     getGamesAvailableNow: getGamesAvailableNow,
     getActiveTournaments: getActiveTournaments,
     getActiveGames: getActiveGames,
+    searchGamesByName: searchGamesByName,
     getGamesUrl: getGamesUrl,
     getTournamentsUrl : getTournamentsUrl,
     getGuestListUrl: getGuestListUrl

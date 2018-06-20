@@ -40,7 +40,7 @@ config.authToken = "1d9fa8df3728c108929887407cc0c552";
 
 config.smsDebug = (process.env.PROD === "false" ) || false;
 console.log("sms bebug: " + config.smsDebug);
-config.sms_debug_agent_number = '+170e60204';
+config.sms_debug_agent_number = '+17025000196';
 config.getPort = () => {
     return config.service.port;
 };

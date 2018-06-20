@@ -21,6 +21,9 @@ class SMSChannel {
     this.channelId = channelId;
   }
 
+  getName () {
+    return "sms";
+  }
 
   sendMessage(senderId, message) {
     sendSMS(this.channelId, senderId, message);
@@ -86,7 +89,7 @@ if (config.smsDebug) {
   stdin.addListener("data", function (d) {
     venueService.processMessage('4087740976', d.toString().trim(), new SMSChannel(config.sms_debug_agent_number));
   });
-} 
+}
 
 module.exports.getwebhook = function (req, res) {
   var message = req.query.Body;

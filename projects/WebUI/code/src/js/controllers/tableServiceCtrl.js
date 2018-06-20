@@ -21,10 +21,9 @@ app.controller('TableServiceController', ['$log', '$scope', '$location',  'DataS
                 ngMeta.setTag('description', self.venueDetails.description + " Table Services");
                 $rootScope.title = self.venueDetails.venueName+  " Venuelytics - Table Services";
                 ngMeta.setTitle($rootScope.title);
-                var embed = $routeParams.embed;
-                if(embed === "embed") {
-                    $rootScope.embeddedFlag = true;
-                }
+                
+                $rootScope.embeddedFlag = $routeParams.embed === 'embed' || $location.search().embeded === 'Y';
+                
                 var date = new Date();
                 $rootScope.serviceTabClear = false;
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());

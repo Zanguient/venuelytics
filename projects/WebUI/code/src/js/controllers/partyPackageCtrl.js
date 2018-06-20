@@ -19,7 +19,12 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                 $rootScope.serviceTabClear = false;
                 var date = new Date();
                 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, format: 'yyyy-mm-dd'});
+                $( "#partyDate" ).datepicker({autoclose:true, todayHighlight: true, startDate: today, minDate: 0, 
+                    format: 'yyyy-mm-dd'}).on('changeDate', function(ev){
+                        console.log("changeDate event");
+                        self.party.orderDate = $("#partyDate").val();
+                        self.getPartyHall(self.venueId);
+                    });
                 
                 if((Object.keys(DataShare.partyServiceData).length) !== 0) {
                     self.party = DataShare.partyServiceData;
@@ -44,7 +49,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
 
             self.$watch('party.orderDate', function() {
                 if (self.party.orderDate !== "") {
-                    self.getPartyHall(self.venueID);
+                    self.getPartyHall(self.venueId);
                 }
             });
             self.getMenus = function() {
@@ -127,6 +132,7 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
             };
 
         self.confirmPartyPackage = function(selectedParty) {
+           
             $rootScope.serviceTabClear = true;
            
             
@@ -165,14 +171,20 @@ app.controller('PartyPackageController', ['$log', '$scope', '$location', 'DataSh
                         "productType": selectedParty.productType,
                         "quantity": selectedParty.size,
                         "comments": selectedParty.comments,
-                        "name": selectedParty.name
+                        "name": selectedParty.name,
+                        "totalPrice": selectedParty.price
                     };
             self.serviceJSON.order.orderItems.push(items);
             DataShare.payloadObject = self.serviceJSON;
             DataShare.enablePayment = self.enabledPayment;
-            DataShare.privateOrderItem = selectedParty;
+            DataShare.partyOrderItem = selectedParty;
             $location.url("/confirmPartyPackage/" + self.selectedCity + "/" + self.venueRefId(self.venueDetails));
         };
+
+        self.closeModal = function() {
+          $('#partyDescriptionModal').modal('hide');
+        };
+
         self.venueRefId = function (venue) {
             if (!venue.uniqueName) {
                 return venue.id;

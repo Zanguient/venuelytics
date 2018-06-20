@@ -44,7 +44,14 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
             self.payAtVenueUrl = self.city +'/food-success/'+ self.venueRefId(self.venueDetails);
         };
 
-        
+        self.foodServiceSave = function () {
+            
+            AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function (response) {
+                self.orderId = response.data.id;
+                $location.url(self.city + '/food-success/' + self.venueRefId(self.venueDetails));
+            });
+            
+        };
 
         self.editFoodPage = function () {
             $location.url('/cities/' + self.city + '/' + self.venueRefId(self.venueDetails) + '/food-services');

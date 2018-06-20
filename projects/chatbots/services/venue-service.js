@@ -14,7 +14,7 @@ const dealsSpecials = require("./deals-specials");
 
 const QUESTIONS = [];
 QUESTIONS["Q_CHARGER"] = fxCharger;
-QUESTIONS["Q_FACILITY"] = curry(fxInfo)("Q_FACILITY");
+  QUESTIONS["Q_FACILITY"] = curry(fxInfo)("Q_FACILITY");
 QUESTIONS["Q_FREE_FACILITY"] = curry(fxInfo)("Q_FREE_FACILITY");
 QUESTIONS["Q_WIFI_PASSWORD"] = curry(fxInfo)("Q_WIFI_PASSWORD");
 QUESTIONS["Q_COUNT_FACILITY"] = curry(fxInfo)("Q_COUNT_FACILITY");
@@ -40,10 +40,11 @@ QUESTIONS["Q_HOTEL"] = curry(fxHotel)("Q_HOTEL");
 QUESTIONS["Q_SHUTTLE"] = curry(fxHotel)("Q_SHUTTLE");
 QUESTIONS["Q_DEALS_AND_SPECIALS"] = dealsAndSpecials;
 QUESTIONS["Q_RESERVATION"] = fxReservationDispatcher;
+QUESTIONS["Q_PET_POLICY"] = curry(fxInfo)("Q_PET_POLICY");
 
 const FACILITY_TYPE = [
   'Q_FACILITY', 'Q_FREE_FACILITY', 'Q_COUNT_FACILITY', 'Q_CHECKOUT_TIME', 'Q_CHECKIN_TIME' , 'Q_LASTCALL_TIME', 'Q_RESTAURANT_OPEN',
-  'Q_OPEN_TIME', 'Q_CLOSE_TIME', 'Q_OPEN_CLOSE_TIME', 'Q_FACILITY_OPEN_CLOSE_TIME', 'Q_CHARGE'];
+  'Q_OPEN_TIME', 'Q_CLOSE_TIME', 'Q_OPEN_CLOSE_TIME', 'Q_FACILITY_OPEN_CLOSE_TIME', 'Q_CHARGE', 'Q_PET_POLICY'];
 
 const ANSWERS = [];
 ANSWERS["Q_WIFI_PASSWORD"] = { text: "VALUE", api_name: "info", value: "wifi-password"};
@@ -101,13 +102,22 @@ const aiResponse = function(channel, senderId, response) {
   } else {
     if (response.action === "smalltalk.greetings.hello") {
       let venueName = "";
+      let venue = {};
+      let smsMessage = null;
       if (user && user.hasParameter("selectedVenueId")) {
-        venueName = user.state.get("venue").venueName;
+        venue = user.state.get("venue");
+        venueName = venue.venueName;
         venueName += "'s";
-      }
-      let message = `\nWelcome to ${venueName} Personalized Digital Concierge Service!  You can request Reservations, Bookings, Deals, Events, Rate the service, Amenities, Food & Drink Ordering. How can I help?`;
 
-      channel.sendMessage(senderId, response.responseSpeech + message);
+        let info = venue.info;
+        smsMessage = info[`${channel.getName()}.defaultWelcomeMessage`] ;
+      }
+
+      let defaultMessage = `\nWelcome to ${venueName} Personalized Digital Concierge Service!  You can request Reservations, Bookings, Deals, Events, Rate the service, Amenities, Food & Drink Ordering. How can I help?`;
+
+      let message = smsMessage || defaultMessage;
+
+      channel.sendMessage(senderId, response.responseSpeech + " "+ message);
     } else {
       channel.sendMessage(senderId, response.responseSpeech);
     }
