@@ -15,6 +15,14 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             }).disableSelection();
         });
 
+        $("#basicColor").spectrum({
+            color: "#37bc9b",
+            preferredFormat: "hex",
+            change: function (color) {
+                $scope.editBtton.color = color.toHexString();
+            }
+        });
+
         $scope.buttonsUI = [{
             "id": "bottleTab",
             "buttonId": "bottle",
@@ -24,7 +32,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "self.bottleServiceButton",
             "btnClass": "bottleBtn",
             "selected": "bottleService",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "privateEventTab",
@@ -35,7 +43,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "self.privateServiceButton",
             "btnClass": "privateBtn",
             "selected": "privateEvents",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "guestlistTab",
@@ -46,7 +54,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "self.guestServiceButton",
             "btnClass": "guestBtn",
             "selected": "guestList",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "tableServiceTab",
@@ -57,7 +65,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "self.tableServiceButton",
             "btnClass": "tableBtn",
             "selected": "tableServices",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "foodServiceTab",
@@ -68,7 +76,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "self.foodSeriveButton",
             "btnClass": "foodBtn",
             "selected": "foodServices",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "drinkServiceTab",
@@ -79,7 +87,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "self.drinkSeriveButton",
             "btnClass": "'drinksBtn",
             "selected": "drinkServices",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "waitTimeTab",
@@ -90,7 +98,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "true",
             "btnClass": "waitTimeBtn",
             "selected": "waittime",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "contestsTab",
@@ -101,7 +109,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "true",
             "btnClass": "contestsBtn",
             "selected": "contests",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "rewardsTab",
@@ -112,7 +120,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "true",
             "btnClass": "rewardsBtn",
             "selected": "rewards",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "dealsServiceTab",
@@ -123,7 +131,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "false",
             "btnClass": "dealsBtn",
             "selected": "deals",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "eventListTab",
@@ -134,7 +142,7 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "self.eventsEnable",
             "btnClass": "eventListBtn",
             "selected": "eventList",
-            "color": "red"
+            "color": "#37bc9b"
         },
         {
             "id": "wineToHomeTab",
@@ -145,15 +153,16 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "disabled": "self.wineToHomeEnable",
             "btnClass": "winetohomeBtn",
             "selected": "wineToHome",
-            "color": "red"
+            "color": "#37bc9b"
         }];
 
         $scope.currentButton = function (data, index) {
             $scope.editBtton = data;
-            $scope.IsVisible = $scope.IsVisible ? false : true;
+            $scope.IsVisible = true;
         }
 
         $scope.submit = function (editBtton) {
+            editBtton.color = $scope.editBtton.color;
             if ($scope.submitDetails.indexOf(editBtton) === -1) {
                 $scope.submitDetails.push(editBtton);
             } else {
@@ -169,106 +178,6 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
         $scope.arrayShow = function () {
             console.log($scope.submitDetails);
         }
-
-        /*var ExternalEvent = function (elements) {
- 
-            if (!elements) return;
- 
-            elements.each(function () {
-                var $this = $(this);
-                // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-                // it doesn't need to have a start or end
-                var calendarEventObject = {
-                    title: $.trim($this.text()) // use the element's text as the event title
-                };
- 
-                // store the Event Object in the DOM element so we can get to it later
-                $this.data('calendarEventObject', calendarEventObject);
- 
-                // make the event draggable using jQuery UI
-                $this.draggable({
-                    zIndex: 1070,
-                    revert: true, // will cause the event to go back to its
-                    revertDuration: 0  //  original position after the drag
-                });
- 
-            });
-        };*/
-
-        /*function initExternalEvents(calElement) {
-            // Panel with the external events list
-            var externalEvents = $('.external-events');
- 
-            // init the external events in the panel
-            new ExternalEvent(externalEvents.children('div'));
- 
-            // External event color is danger-red by default
-            var currColor = '#f6504d';
-            // Color selector button
-            var eventAddBtn = $('.external-event-add-btn');
-            // New external event name input
-            var eventNameInput = $('.external-event-name');
-            // Color switchers
-            var eventColorSelector = $('.external-event-color-selector .circle');
- 
-            // Trash events Droparea 
-            $('.external-events-trash').droppable({
-                accept: '.fc-event',
-                activeClass: 'active',
-                hoverClass: 'hovered',
-                tolerance: 'touch',
-                drop: function (event, ui) {
- 
-                    // You can use this function to send an ajax request
-                    // to remove the event from the repository
- 
-                    if (draggingEvent) {
-                        var eid = draggingEvent.id || draggingEvent._id;
-                        // Remove the event
-                        calElement.externalevents('removeEvents', eid);
-                        // Remove the dom element
-                        ui.draggable.remove();
-                        // clear
-                        draggingEvent = null;
-                    }
-                }
-            });
- 
-            eventColorSelector.click(function (e) {
-                e.preventDefault();
-                var $this = $(this);
- 
-                // Save color
-                currColor = $this.css('background-color');
-                // De-select all and select the current one
-                eventColorSelector.removeClass('selected');
-                $this.addClass('selected');
-            });
- 
-            eventAddBtn.click(function (e) {
-                e.preventDefault();
- 
-                // Get event name from inputs 
-                var val = eventNameInput.val();
-                // Dont allow empty values
-                if ($.trim(val) === '') return;
- 
-                // Create new event element
-                var newEvent = $('<div/>').css({
-                    'background-color': currColor,
-                    'border-color': currColor,
-                    'color': '#fff'
-                })
-                    .html(val);
- 
-                // Prepends to the external events list
-                externalEvents.prepend(newEvent);
-                // Initialize the new event element
-                new ExternalEvent(newEvent);
-                // Clear input
-                eventNameInput.val('');
-            });
-        }*/
 
         $scope.init();
     }]);

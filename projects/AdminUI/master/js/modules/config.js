@@ -19,7 +19,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
 
         // LAZY MODULES
         // ----------------------------------- 
-         $compileProvider.aHrefSanitizationWhitelist(/^\s*(http?|https?|file|tel|javascript):/);
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(http?|https?|file|tel|javascript):/);
         $ocLazyLoadProvider.config({
             debug: false,
             events: true,
@@ -47,28 +47,28 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 controller: 'DashBoardController',
                 templateUrl: basepath('analytics/dashboard.html'),
                 data: { authorizedRoles: [USER_ROLES.admin, USER_ROLES.manager] },
-                resolve: resolveFor('flot-chart', 'moment','flot-chart-plugins')
+                resolve: resolveFor('flot-chart', 'moment', 'flot-chart-plugins')
             }).state('app.ticketingDashboard', {
                 url: '/ticketing-dashboard',
                 title: 'Ticketing Dashboard',
                 controller: 'TicketDashBoardController',
                 templateUrl: basepath('analytics/ticket-dashboard.html'),
-                data: { authorizedRoles: [50,51,75,100] },
-                resolve: resolveFor('flot-chart', 'moment','flot-chart-plugins')
+                data: { authorizedRoles: [50, 51, 75, 100] },
+                resolve: resolveFor('flot-chart', 'moment', 'flot-chart-plugins')
             }).state('app.eventDashboard', {
                 url: '/event-dashboard/:eventId',
                 title: 'Event Dashboard',
                 controller: 'EventDashBoardController',
                 templateUrl: basepath('analytics/event-dashboard.html'),
-                data: { authorizedRoles: [50,51,75,100] },
-                resolve: resolveFor('flot-chart', 'moment','flot-chart-plugins')
+                data: { authorizedRoles: [50, 51, 75, 100] },
+                resolve: resolveFor('flot-chart', 'moment', 'flot-chart-plugins')
             }).state('app.requestsDashboard', {
                 url: '/requests-dashboard',
                 title: 'Requests Dashboard',
                 controller: 'RequestsDetailController',
                 templateUrl: basepath('analytics/requests-details.html'),
-                data: { authorizedRoles: [50,51,75,100] },
-                resolve: resolveFor('flot-chart', 'moment','flot-chart-plugins')
+                data: { authorizedRoles: [50, 51, 75, 100] },
+                resolve: resolveFor('flot-chart', 'moment', 'flot-chart-plugins')
             }).state('app.visitorInsight', {
                 url: '/dashboard/visitor-insight',
                 title: 'Visitor Insight',
@@ -282,7 +282,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue/store_edit.html'),
                 controller: 'StoreController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog', 'jquery-ui','moment')
             })
             .state('app.editProducts', {
                 url: '/editProducts/:venueNumber/:id',
@@ -330,7 +330,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/venue-event-edit.html'),
                 controller: 'VenueEventController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog', 'taginput','chosen')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog', 'taginput', 'chosen')
             })
             .state('app.editVenueDeals', {
                 url: '/venues/:venueNumber/deals/:id',
@@ -338,7 +338,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue/create-deal.html'),
                 controller: 'VenueDealsController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog', 'taginput','chosen')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog', 'taginput', 'chosen')
             })
             .state('app.dealsManagement', {
                 url: '/dealsManagement',
@@ -354,7 +354,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/venue-events.html'),
                 controller: 'VenueEventsController',
                 data: { authorizedRoles: [USER_ROLES.admin, 51] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog','jquery-ui', 'moment', 'fullcalendar')
+                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog', 'jquery-ui', 'moment', 'fullcalendar')
             })
             .state('app.addVenueStore', {
                 url: '/venues/:id/stores',
@@ -456,14 +456,6 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 title: 'Reservations',
                 templateUrl: basepath('reservations.html'),
                 controller: 'ReservationsController',
-                data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('jquery-ui', 'moment', 'fullcalendar')
-            })
-            .state('app.webuibuttons', {
-                url: '/webuibuttons',
-                title: 'Webui Buttons',
-                templateUrl: basepath('webui/webui-buttons.html'),
-                controller: 'WebuiButtonsController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('jquery-ui', 'moment', 'fullcalendar')
             })

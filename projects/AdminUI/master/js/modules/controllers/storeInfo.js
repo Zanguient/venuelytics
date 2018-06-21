@@ -78,7 +78,7 @@ App.controller('StoreController', ['$translate', '$scope', '$state', '$statePara
         { name: 'Portal', content: 'app/views/venue/venue-portal.html', icon: 'fa-home' },
         { name: 'Users', content: 'app/views/venue/venue-users.html', icon: 'fa-users' },
         { name: 'Shortcuts', content: 'app/views/venue/venue-shortcuts.html', icon: 'fa-fa-bookmark' },
-        { name: 'WebUI Buttons', content: 'app/views/webui/webui-buttons.html', icon: 'fa-fa-bookmark' },
+        { name: 'Venue Services', content: 'app/views/webui/webui-buttons.html', icon: 'fa-fa-bookmark' },
       ];
     }
 

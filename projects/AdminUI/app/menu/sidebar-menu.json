@@ -190,13 +190,5 @@
 		"translate": "sidebar.nav.pages.SETTINGS",
 		"submenu": [],
 		"roleId": 1000
-	},
-	{
-		"text": "Webui Buttons",
-		"sref": "app.webuibuttons",
-		"icon": "icon-settings",
-		"translate": "sidebar.nav.pages.WEBUI",
-		"submenu": [],
-		"roleId": 1000
 	}
 ]

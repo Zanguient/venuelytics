@@ -6,68 +6,20 @@
           <!-- START panel-->
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title">WebUI Buttons</h4>
+              <h4 class="panel-title">Venue Services</h4>
             </div>
             <!-- Default external events list-->
             <div class="external-events-trash">
               <div class="panel-body">
                 <div class="external-events" id="dragtarget" ng-model="buttonsUI" data-drop="true">
-                  <div class="bg-green" ng-repeat="data in buttonsUI" ng-click="currentButton(data,$index)" ng-show="data.name" ng-model="data.name">{{data.name}}</div>
+                  <div ng-repeat="data in buttonsUI" ng-style="{background: data.color}" ng-click="currentButton(data,$index)" ng-show="data.name"
+                    ng-model="data.name">{{data.name}}</div>
                 </div>
               </div>
             </div>
           </div>
           <!-- END panel-->
         </div>
-        <!-- <div class="col-md-12 col-sm-6 col-xs-12 co-xs-push-12">
-          START panel
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Create Event</h3>
-            </div>
-            <div class="panel-body">
-              <div class="input-group mb">
-                <input type="text" placeholder="Event name..." class="form-control external-event-name" />
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-default external-event-add-btn">Add</button>
-                </div>
-              </div>
-              <p class="text-muted">
-                <small>Choose a Color</small>
-              </p>
-              <ul class="list-inline external-event-color-selector">
-                <li class="p0">
-                  <a href="#" class="circle circle-danger circle-xl selected"></a>
-                </li>
-                <li class="p0">
-                  <a href="#" class="circle circle-primary circle-xl"></a>
-                </li>
-                <li class="p0">
-                  <a href="#" class="circle circle-info circle-xl"></a>
-                </li>
-                <li class="p0">
-                  <a href="#" class="circle circle-success circle-xl"></a>
-                </li>
-                <li class="p0">
-                  <a href="#" class="circle circle-warning circle-xl"></a>
-                </li>
-                <li class="p0">
-                  <a href="#" class="circle circle-green circle-xl"></a>
-                </li>
-                <li class="p0">
-                  <a href="#" class="circle circle-pink circle-xl"></a>
-                </li>
-                <li class="p0">
-                  <a href="#" class="circle circle-inverse circle-xl"></a>
-                </li>
-                <li class="p0">
-                  <a href="#" class="circle circle-purple circle-xl"></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          END panel
-        </div> -->
       </div>
     </div>
     <div class="col-lg-9 col-md-8">
@@ -87,13 +39,11 @@
             <label class="leftLabel">
               <strong>Color:</strong>
             </label>
-            <input type="text" class="rightText" ng-model="editBtton.color">
-            <input type="submit" class="submit-det" ng-click="submit(editBtton)" />
+            <br/>
+            <input type="text" id="basicColor" ng-model="editBtton.color">
           </div>
+          <input ng-show="IsVisible" type="submit" class="submit-det" ng-click="submit(editBtton)" />
         </div>
-        <div class="panel bgcolor">
-        <button id="bgcolor-button">Choose background</button>
-      </div>
         <button type="button" ng-click="arrayShow()">Submit</button>
         <!-- END panel-->
       </div>
