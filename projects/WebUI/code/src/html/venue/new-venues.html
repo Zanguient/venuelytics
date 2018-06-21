@@ -36,7 +36,7 @@
                             <article class="card border_clouds wow materialUp animation-delay-5">
                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" >
                                     <div class="imgHolder">
-                                        <img ng-src="{{venue.imageUrls[0].smallUrl}}" alt="{{venue.venueName}}" class="img-responsive venueImages" >
+                                        <img ng-src="{{venue.imageUrls[0].smallUrl || venue.imageUrls[0].originalUrl}}" alt="{{venue.venueName}}" class="img-responsive venueImages" >
                                         <h5 class="pull-right " ng-show ="venue.feature === 'Y' || venue.feature === 'y'">{{'reservation.FEATURED' | translate}}</h5>
                                     </div>
                                 </figure>
