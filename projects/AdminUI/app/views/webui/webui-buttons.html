@@ -3,51 +3,61 @@
     <div class="col-lg-3 col-md-4">
       <div class="row">
         <div class="col-md-12 col-sm-6 col-xs-12 co-xs-pull-12">
-          <!-- START panel-->
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">Venue Services</h4>
             </div>
-            <!-- Default external events list-->
             <div class="external-events-trash">
               <div class="panel-body">
-                <div class="external-events" id="dragtarget" ng-model="buttonsUI" data-drop="true">
-                  <div ng-repeat="data in buttonsUI" ng-style="{background: data.color}" ng-click="currentButton(data,$index)" ng-show="data.name"
-                    ng-model="data.name">{{data.name}}</div>
+                <div class="external-events external-events-font removeIconFrist" id="dragtarget" ng-model="buttonsUI" data-drop="true">
+                  <div ng-repeat="data in buttonsUI" id="{data.serviceName}" ng-style="{background: data.color}" ng-click="currentButton(data,$index)"
+                    ng-show="data.name" ng-model="data.name">{{data.name}}
+                    <i class="fa fa-times removeButton" aria-hidden="true"></i>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- END panel-->
         </div>
       </div>
     </div>
     <div class="col-lg-9 col-md-8">
-      <!-- START panel-->
-      <div class="panel panel-default">
-        <div class="panel-body button-drag">
-          <div id="sortable2" class="external-events">
-            <div ng-repeat="data in buttonsUI1"></div>
+      <div class="panel panel-default col-md-6 button-drag">
+        <div class="panel-body">
+          <div id="sortable2" class="external-events external-events-font removeIcon">
           </div>
-          <div class="editBttonShow" ng-show="IsVisible">
-            <h4>Details About WebUI </h4>
-            <label class="leftLabel">
-              <strong>Name:</strong>
-            </label>
-            <input type="text" class="rightText" ng-model="editBtton.name">
-            <br/>
-            <label class="leftLabel">
-              <strong>Color:</strong>
-            </label>
-            <br/>
-            <input type="text" id="basicColor" ng-model="editBtton.color">
-          </div>
-          <input ng-show="IsVisible" type="submit" class="submit-det" ng-click="submit(editBtton)" />
         </div>
-        <button type="button" ng-click="arrayShow()">Submit</button>
-        <!-- END panel-->
+      </div>
+      <div class="panel panel-default col-md-6 button-drag">
+        <div ng-show="IsVisible">
+          <h4>Details About {{editButton.serviceName}}</h4>
+          <div class="row">
+            <div class="form-group col-sm-8">
+              <label class="control-label">Name </label>
+              <input type="text" name="name" class="form-control" ng-model="editButton.name" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-8">
+              <label class="control-label">Service Name </label>
+              <input type="text" name="name" class="form-control" ng-model="editButton.serviceName" disabled/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group mb0 col-sm-12">
+              <label class="control-label">Color </label>
+            </div>
+            <div class="form-group col-sm-6 col-xs-8">
+              <input type="text" name="name" class="form-control" ng-model="editButton.color" />
+            </div>
+            <div class="form-group col-sm-6 col-xs-4">
+              <input type="text" id="basicColor" class="form-control" ng-model="editButton.color">
+            </div>
+          </div>
+        </div>
+        <input ng-show="IsVisible" type="submit" value="Add" class="submit-det" ng-click="submit(editButton)" />
       </div>
     </div>
-    <!-- END row-->
+    <button type="button" ng-click="arrayShow()">Save</button>
   </div>
 </div>
