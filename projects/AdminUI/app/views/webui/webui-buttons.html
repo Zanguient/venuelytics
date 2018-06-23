@@ -10,8 +10,8 @@
             <div class="external-events-trash">
               <div class="panel-body">
                 <div class="external-events external-events-font removeIconFrist" id="dragtarget" ng-model="buttonsUI" data-drop="true">
-                  <div ng-repeat="data in buttonsUI" id="{data.serviceName}" ng-style="{background: data.color}" ng-click="currentButton(data,$index)"
-                    ng-show="data.name" ng-model="data.name">{{data.name}}
+                  <div ng-repeat="data in buttonsUI" id="{{data.id}}" serviceName="{{data.serviceName}}" name="{{data.name}}" color="{{data.color}}"
+                    ng-style="{background: data.color}" ng-model="data.name">{{data.name}}
                     <i class="fa fa-times removeButton" aria-hidden="true"></i>
                   </div>
                 </div>
@@ -25,6 +25,10 @@
       <div class="panel panel-default col-md-6 button-drag">
         <div class="panel-body">
           <div id="sortable2" class="external-events external-events-font removeIcon">
+            <div ng-repeat="dropOjb in newButtonArray" id="{{dropOjb.id}}" serviceName="{{dropOjb.serviceName}}" name="{{dropOjb.name}}"
+              color="{{dropOjb.color}}" ng-style="{background: dropOjb.color}" ng-click="currentButton(dropOjb,$index)" ng-model="dropOjb.name">{{dropOjb.name}}
+              <i class="fa fa-times removeButton" aria-hidden="true"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -55,7 +59,6 @@
             </div>
           </div>
         </div>
-        <input ng-show="IsVisible" type="submit" value="Add" class="submit-det" ng-click="submit(editButton)" />
       </div>
     </div>
     <button type="button" ng-click="arrayShow()">Save</button>

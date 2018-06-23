@@ -5,14 +5,44 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
 
         $scope.init = function () {
             $scope.editButton = {};
-            $scope.submitDetails = [];
+            $scope.newButtonArray = [];
             $scope.IsVisible = false;
         };
+
+        $scope.inArray = function (id, array) {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i].id === id) { return false; }
+            }
+            return true;
+        }
+        $("#sortable2").droppable({
+            drop: function (event, ui) {
+                let currentDraggableButton = {
+                    id: $(ui.draggable).attr("id"),
+                    name: $(ui.draggable).attr("name"),
+                    color: $(ui.draggable).attr("color"),
+                    serviceName: $(ui.draggable).attr("serviceName")
+                }
+                if ($scope.inArray($(ui.draggable).attr("id"), $scope.newButtonArray)) {
+                    $scope.newButtonArray.push(currentDraggableButton)
+                    for (let i = 0; i < $scope.buttonsUI.length; i++) {
+                        if ($scope.buttonsUI[i].id === currentDraggableButton.id) {
+                            $scope.buttonsUI.splice($scope.buttonsUI.indexOf($scope.buttonsUI[i]), 1)
+                        }
+                    }
+                }
+                // console.log($scope.newButtonArray)
+                // console.log(">>>>>>>>>>", $(ui.draggable).attr("id"));
+                // console.log(">>>>>uiiiii>>>>>", $(ui.draggable).attr("name"));
+                // console.log(">>>>>name>>>>>", $(ui.draggable).attr("color"));
+                // console.log(">>>>>name>>>>>", $(ui.draggable).attr("serviceName"));
+            }
+        });
 
         $(function ($scope) {
             $("#dragtarget, #sortable2").sortable({
                 connectWith: ".external-events",
-            }).disableSelection();
+            });
         });
 
         $("#basicColor").spectrum({
@@ -26,73 +56,73 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             "id": "bottleTab",
             "name": "Bottle Services",
             "serviceName": "bottle-service",
-            "color": "#37bc9b"
+            "color": "#7A11D9"
         },
         {
             "id": "privateEventTab",
             "name": "Private Events",
             "serviceName": "private-events",
-            "color": "#37bc9b"
+            "color": "#0E68A7"
         },
         {
             "id": "guestlistTab",
             "name": "Guest List",
             "serviceName": "guest-list",
-            "color": "#37bc9b"
+            "color": "#DC112A"
         },
         {
             "id": "tableServiceTab",
             "name": "Table Service",
             "serviceName": "table-services",
-            "color": "#37bc9b"
+            "color": "#DC992A"
         },
         {
             "id": "foodServiceTab",
             "name": "Food Service",
             "serviceName": "food-services",
-            "color": "#37bc9b"
+            "color": "#1E8644"
         },
         {
             "id": "drinkServiceTab",
             "name": "Drink Services",
             "serviceName": "drink-services",
-            "color": "#37bc9b"
+            "color": "#DA0615"
         },
         {
             "id": "waitTimeTab",
             "name": "Wait Time",
             "serviceName": "wait-time",
-            "color": "#37bc9b"
+            "color": "#3C3C3C"
         },
         {
             "id": "contestsTab",
             "name": "Contests",
             "serviceName": "contests",
-            "color": "#37bc9b"
+            "color": "#C83C3C"
         },
         {
             "id": "rewardsTab",
             "name": "Rewards",
             "serviceName": "rewards",
-            "color": "#37bc9b"
+            "color": "#C8C81E"
         },
         {
             "id": "dealsServiceTab",
             "name": "Deals",
             "serviceName": "deals-list",
-            "color": "#37bc9b"
+            "color": "#98399D"
         },
         {
             "id": "eventListTab",
             "name": "Event List",
             "serviceName": "event-list",
-            "color": "#37bc9b"
+            "color": "#000000"
         },
         {
             "id": "wineToHomeTab",
             "name": "Wine To Home",
             "serviceName": "wine-to-home",
-            "color": "#37bc9b"
+            "color": "#1E3CFA"
         }];
 
         $scope.currentButton = function (data, index) {
@@ -100,21 +130,8 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
             $scope.IsVisible = true;
         }
 
-        $scope.submit = function (editButton) {
-            if ($scope.submitDetails.indexOf(editButton) === -1) {
-                $scope.submitDetails.push(editButton);
-            } else {
-                for (let i = 0; i < $scope.submitDetails.length; i++) {
-                    if (editButton.buttonId === $scope.submitDetails[i].buttonId)
-                        $scope.submitDetails[i].name = editButton.name;
-                    $scope.submitDetails[i].color = editButton.color;
-                }
-            }
-            $scope.IsVisible = false;
-        }
-
         $scope.arrayShow = function () {
-            console.log($scope.submitDetails);
+            console.log($scope.newButtonArray);
         }
 
         $scope.init();
