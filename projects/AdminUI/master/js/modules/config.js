@@ -244,14 +244,14 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('datatables', 'datatables-pugins')
             })
-            .state('app.contest', {
+            /*.state('app.contest', {
                 url: '/contest',
                 title: 'Contest Management',
                 templateUrl: basepath('contest/contest.html'),
                 controller: 'ContestController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
                 resolve: resolveFor('datatables', 'datatables-pugins')
-            })
+            })*/
             .state('app.chatbot', {
                 url: '/chatbot/:id',
                 title: 'Chat Bot',
