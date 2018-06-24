@@ -13,7 +13,9 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
             $rootScope.selectedTab = 'consumer';
             $rootScope.blackTheme = "";
             $rootScope.embeddedFlag = $location.search().embeded === 'Y';
-             console.log("embeded flag=" +$rootScope.embeddedFlag);
+            self.selectedVenueType = $location.search().type || 'CLUB';
+
+            console.log("embeded flag=" +$rootScope.embeddedFlag);
             self.init = function() {
                 DataShare.bottleServiceData = {};
                 DataShare.guestListData = {};
@@ -39,23 +41,22 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                     self.restaurantTab = self.cityInfo.counts.RESTAURANT;
                     self.casinoTab = self.cityInfo.counts.CASINO;
                 });
-
                 if(DataShare.latitude && DataShare.longitude &&
                     DataShare.latitude !== '' && DataShare.longitude !== ''){
-                    self.setTab('CLUB');
+                   
                 } else{
 
                     if (navigator && navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(function(position){
                             DataShare.latitude = position.coords.latitude;
                             DataShare.longitude = position.coords.longitude;
-                            self.setTab('CLUB');
+                            
                             self.$apply(function(){
                                 self.position = position;
                             });
                         },
                         function (error) {
-                            self.setTab('CLUB');
+                            
                         });
                     }
                 }
@@ -74,9 +75,13 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                 $('.modal-backdrop').remove();
             };
 
+            self.isActive = function(t) {
+                return self.selectedVenueType ===  t ? 'active current' : 'inactive';
+            }
+
             self.setTab = function(type){
                 $(window).trigger('resize');
-                self.selectedVenueType = $translate.instant(type);
+                self.selectedVenueType = type;
                 //DataShare.selectedCity = self.selectedCityName;
                 AjaxService.getVenues(null,self.selectedCityName, type, DataShare.latitude, DataShare.longitude).then(function(response) {
                     self.listOfVenuesByCity = response.venues;
@@ -125,6 +130,7 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
                 $location.url('/cities/' + self.selectedCityName +'/'+ self.venueRefId(venue) + '/' + serviceType + q);
             };
     		self.init();
+            self.setTab(self.selectedVenueType);
     }])
 .filter('titleCase', function() {
     return function(input) {
