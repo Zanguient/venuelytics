@@ -1,25 +1,21 @@
 "use strict";
 const Users = require("../models/users");
 const serviceApi = require("../apis/app-api");
+const aiUtil = require('../lib/aiutils');
 
 function isNotEmpty(str) {
   return !(!str || 0 === str.length);
 }
 
-const dealsAndSpecials = function(userId, response, channel) {
+const sendAnswer = function(userId, response, channel) {
     let user = Users.getUser(userId);
-    if (!response || !response.parameters || !response.parameters.dealsNSpecials){
-    channel.sendMessage(userId, "Can you please repeat the question?");
-    return;  
+    if (!aiUtil.hasParam(response, 'dealsNSpecials')){
+      channel.sendMessage(userId, "Can you please repeat the question?");
+      return;  
     }
-    var deals = response.parameters.dealsNSpecials;
-    var data = user.state.get('info');
-    if (!data) {
-    var venue = user.state.get("venue");
-    data = venue.info;
-    user.state.set("info", data);
-    }
-    if (deals === 'deals' || deals === 'specials') {
+    let venue = user.state.get("venue");
+    let data = venue.info;
+    if (aiUtil.hasParam(response, 'dealsNSpecials', "deals") || aiUtil.hasParam(response, 'dealsNSpecials', "specials") ) {
        
         if (isNotEmpty(data['_deals'])) {
           channel.sendMessage(user.id, data['_deals']);
@@ -29,13 +25,13 @@ const dealsAndSpecials = function(userId, response, channel) {
         } else {
           channel.sendMessage(user.id, "sorry, currently we are not running any deals / specials.");        
         }
-    } else if(deals === 'vip specials') {
+    } else if(aiUtil.hasParam(response, 'dealsNSpecials', "vip specials")) {
         if (isNotEmpty(data['_vip-deals'])) {
           channel.sendMessage(user.id, "We have specials for our vip customers.");
         } else {
           channel.sendMessage(user.id, "sorry, currently we are not running any vip specials.");
         }
-    } else if(deals === 'happy hour') {
+    } else if(aiUtil.hasParam(response, 'dealsNSpecials', "happy hour")) {
         if (isNotEmpty(data['_happyhours'])) {
           channel.sendMessage(user.id, "We have specials for our vip customers.");
         } else {
@@ -47,5 +43,5 @@ const dealsAndSpecials = function(userId, response, channel) {
 
 
   module.exports = {
-    dealsAndSpecials: dealsAndSpecials
+    sendAnswer: sendAnswer
   };
