@@ -33,7 +33,7 @@
                     <img src="{{blog.image}}" alt="{{blog.title}}" class="img-responsive">
                 </figure>
                 <div class="card-block">
-                    <p class="title-bold"><a class=" whiteTheme" href="blogPost/{{blog.link}}">{{blog.title}}</a></p>
+                    <p class="title-bold"><a class=" whiteTheme" href="/blogPost/{{blog.link}}">{{blog.title}}</a></p>
                     <p class="title_desc ">{{blog.description | limitTo: 120 }}{{blog.description.length > 120 ? '...' :''}}</p>
                     <a href="blogPost/{{blog.link}}" class="more_link animate-icon">Read more <i class="ml-1 no-mr zmdi zmdi-long-arrow-right"></i></a>
                     
