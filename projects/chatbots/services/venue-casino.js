@@ -1,7 +1,7 @@
 "use strict";
 const Users = require("../models/users");
 const serviceApi = require("../apis/app-api");
-
+const aiUtil = require('../lib/aiutils');
 const sendAnswer = function(userId, response, channel) {
     let user = Users.getUser(userId);
     //we assume if we are here we have the venueId
@@ -46,10 +46,6 @@ const sendAnswer = function(userId, response, channel) {
         }
     }
 
-    if (response.parameters && response.parameters.Facilities ) {
-            facility = response.parameters.Facilities;
-    }
-
     if (response.parameters && response.parameters.Availability ) {
             availability = true;
     }
@@ -61,17 +57,16 @@ const sendAnswer = function(userId, response, channel) {
     if (response.parameters && response.parameters.props ) {
         props = response.parameters.props;
     }
-    if (criteria && props) { // current only min is supported
-        if (props.toLowerCase().indexOf("age") >=0) {
-            channel.sendMessage(userId,`Minimum age to play - 21 & over. The guests under 21 can eat at the restaurants.`);
-            return;
-        } 
+   
+    if (props && props.toLowerCase().indexOf("age") >=0) {
+        channel.sendMessage(userId,`Minimum age to play - 21 & over. The guests under 21 can eat at the restaurants.`);
+        return;
+    } 
 
-        if (props.toLowerCase().indexOf("bid") >=0 || props.toLowerCase().indexOf("bet") >=0){
-            minBet = true;
-        }
-
+    if (props && (props.toLowerCase().indexOf("bid") >=0 || props.toLowerCase().indexOf("bet")) >=0){
+        minBet = true;
     }
+
     if (sendWaitTime || minBet) { // get wait time for a game
         serviceApi.getActiveGames(venueId, originalGameName, function(games) {
             
@@ -88,7 +83,7 @@ const sendAnswer = function(userId, response, channel) {
         return;
     }
 
-    if (facility && facility.toLowerCase().indexOf("tournament") >=0 ) { // send send schedules or
+    if (aiUtil.hasParam("facilities", "tournament") ) { // send send schedules or
         serviceApi.getActiveTournaments(venueId, function(tournaments){
             if (tournaments.length === 0) {
                channel.sendMessage(userId,"Currently, there are no active tournaments. Please check later.");

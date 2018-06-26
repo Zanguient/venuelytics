@@ -10,11 +10,30 @@ const casino = require("./venue-casino");
 const hotel = require("./venue-hotel");
 const restaurant = require("./venue-restaurant");
 const dealsSpecials = require("./deals-specials");
+const topGolf = require("./top-golf");
+const events = require("./events");
+const shuttle = require("./shuttle-service");
+const reservation = require("./reservation");
+const chargers = require("./phone-chargers");
 
 
 const QUESTIONS = [];
-QUESTIONS["Q_CHARGER"] = fxCharger;
-  QUESTIONS["Q_FACILITY"] = curry(fxInfo)("Q_FACILITY");
+
+const gfx = function (type, dispatcher, userId, response, channel ) {
+  let user = Users.getUser(userId);
+  if (user.hasParameter("selectedVenueId")) {
+    dispatcher.sendAnswer(userId, response, channel);  
+  } else {
+    getVenueName(type, user, channel, response);
+  }  
+};
+
+function _D(t,fx) {
+  QUESTIONS[t] = curry(gfx)(t)(fx);
+}
+
+
+QUESTIONS["Q_FACILITY"] = curry(fxInfo)("Q_FACILITY");
 QUESTIONS["Q_FREE_FACILITY"] = curry(fxInfo)("Q_FREE_FACILITY");
 QUESTIONS["Q_WIFI_PASSWORD"] = curry(fxInfo)("Q_WIFI_PASSWORD");
 QUESTIONS["Q_COUNT_FACILITY"] = curry(fxInfo)("Q_COUNT_FACILITY");
@@ -25,20 +44,23 @@ QUESTIONS["Q_LASTCALL_TIME"] = curry(fxInfo)("Q_LASTCALL_TIME");
 QUESTIONS["Q_RESTAURANT_OPEN"] = curry(fxInfo)("Q_RESTAURANT_OPEN");
 QUESTIONS["Q_RESTAURANT_CLOSE"] = curry(fxInfo)("Q_RESTAURANT_CLOSE");
 QUESTIONS["Q_AMENITIES"] = curry(fxInfo)("Q_AMENITIES");
-QUESTIONS["Q_EVENTS"] = curry(fxInfo)("Q_EVENTS");
+
 QUESTIONS["Q_CHARGE"] = curry(fxInfo)("Q_CHARGE");
 
 QUESTIONS["Q_CLOSE_TIME"] = curry(fxInfo)("Q_CLOSE_TIME");
 QUESTIONS["Q_OPEN_TIME"] = curry(fxInfo)("Q_OPEN_TIME");
 QUESTIONS["Q_OPEN_CLOSE_TIME"] = curry(fxInfo)("Q_OPEN_CLOSE_TIME");
 QUESTIONS["Q_FACILITY_OPEN_CLOSE_TIME"] = curry(fxInfo)("Q_FACILITY_OPEN_CLOSE_TIME");
-QUESTIONS["Q_RESTAURANT_MENU"] = fxRestaurant;
-QUESTIONS["Q_CASINO"] = fxCasino;
 
+_D("Q_RESTAURANT_MENU",restaurant);
+_D("Q_CASINO",casino);
+_D("Q_SHUTTLE",shuttle);
+_D("Q_HOTEL",hotel);
+_D("Q_TOP_GOLF",topGolf);
+_D("Q_DEALS_AND_SPECIALS",dealsSpecials);
+_D("Q_EVENTS",events);
+_D("Q_CHARGER",chargers);
 
-QUESTIONS["Q_HOTEL"] = curry(fxHotel)("Q_HOTEL");
-QUESTIONS["Q_SHUTTLE"] = curry(fxHotel)("Q_SHUTTLE");
-QUESTIONS["Q_DEALS_AND_SPECIALS"] = dealsAndSpecials;
 QUESTIONS["Q_RESERVATION"] = fxReservationDispatcher;
 QUESTIONS["Q_PET_POLICY"] = curry(fxInfo)("Q_PET_POLICY");
 
@@ -49,7 +71,6 @@ const FACILITY_TYPE = [
 const ANSWERS = [];
 ANSWERS["Q_WIFI_PASSWORD"] = { text: "VALUE", api_name: "info", value: "wifi-password"};
 ANSWERS["Q_AMENITIES"] = { text: "VALUE", api_name: "info", value: "aminities"};
-ANSWERS["Q_EVENTS"] = { text: "VALUE", api_name: "info", value: "_events"};
 ANSWERS["Q_ADDRESS"] = { text: "Address: VALUE", api_name: "venue", value: "address"};
 
 function processMessage(senderId, text, channel) {
@@ -85,10 +106,19 @@ const fxReadVenue = function(senderId, text, channel, venue) {
 const aiResponse = function(channel, senderId, response) {
   console.log(JSON.stringify(response));
   let user = Users.getUser(senderId);
-  if (response.action === "smalltalk.greetings.bye") {
+  let restartAdvice = user.state.get("advice.restart");
+  if (!restartAdvice) {
+    channel.sendMessage(senderId, "you can type 'RESTART' to start over again. ");
+    user.state.set("advice.restart", true);
+  }
+  if (response.action === "RESTART") {
+    channel.sendMessage(senderId, "type BYE to confirm and again to Start over again.");
+    return;
+  } else if (response.action === "smalltalk.greetings.bye") {
     let user = Users.getUser(senderId);
     user.clear();
     channel.sendMessage(senderId, response.responseSpeech);
+    return;
   } else if (response.action.startsWith("Q_") || user.isInConversation()) {
     if (user.isInConversation()) {
       user.dispatch(response);
@@ -124,44 +154,7 @@ const aiResponse = function(channel, senderId, response) {
   }
 };
 
-function fxRestaurant(userId, response, channel) {
-  let user = Users.getUser(userId);
-  if (user.hasParameter("selectedVenueId")) {
-    restaurant.sendAnswer(userId, response, channel);  
-  } else {
-    getVenueName('Q_RESTAURANT_MENU', user, channel, response);
-  }       
-}
 
-function fxCasino(userId, response, channel) {
-  let user = Users.getUser(userId);
-  if (user.hasParameter("selectedVenueId")) {
-    casino.sendAnswer(userId, response, channel);  
-  } else {
-    getVenueName('Q_CASINO', user, channel, response);
-  }
-
-}
-function fxHotel(type, userId, response, channel) {
-  let user = Users.getUser(userId);
-  if (user.hasParameter("selectedVenueId")) {
-    hotel.sendAnswer(type, userId, response, channel);  
-  } else {
-    getVenueName('Q_HOTEL', user, channel, response);
-  }
-
-}
-
-function dealsAndSpecials(userId, response, channel) {
-  let user = Users.getUser(userId);
-
-  if (user.hasParameter("selectedVenueId")) {
-    dealsSpecials.dealsAndSpecials(userId, response,channel);
-  } else {
-    getVenueName('Q_DEALS_AND_SPECIALS', user, channel, response);
-  }
-  
-}
 function fxInfo(type, userId, response, channel) {
   let user = Users.getUser(userId);
 
@@ -274,16 +267,6 @@ function sendAnswer(user, answer, venueName, channel) {
 }
 
 
-function fxCharger(userId, response, channel) {
-  let user = Users.getUser(userId);
-  if (user.hasParameter("selectedVenueId")) {
-    channel.sendMessage(userId,"We do carry chargers for iPhone, Android and other Micro-USB chargers for phones. Please call front desk to see if they are available and not borrowed by other guests.");
-  } else {
-    getVenueName('Q_CHARGER', user, channel, response);
-  }
-
-}
-
 function formatText(answer, venueName, value) {
   var text = answer.text;
   var newString = text.replace(/VENUE_NAME/, venueName);
@@ -308,6 +291,9 @@ const aiError = function(channel, fromNumber, error) {
   console.log(JSON.stringify(error));
 };
 
+function fxReservationDispatcher(userId, response, channel) {
+  reservation.fxReservation(userId, response, channel);
+}
 
 module.exports = {
   ANSWERS: ANSWERS,
@@ -316,10 +302,6 @@ module.exports = {
   getVenueName: getVenueName,
   processMessage: processMessage
 };
-const reservation = require("./reservation");
 
-function fxReservationDispatcher(userId, response, channel) {
-  reservation.fxReservation(userId, response, channel);
-}
 
 
