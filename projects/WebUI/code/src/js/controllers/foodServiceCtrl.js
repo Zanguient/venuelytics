@@ -50,7 +50,7 @@ app.controller('foodServiceController', ['$log', '$scope', '$location', 'DataSha
 
         self.getSelectedTab = function () {
             $(".service-btn .card").removeClass("tabSelected");
-            $("#foodServices > .foodBtn").addClass("tabSelected");
+            $("#foodServices > .card").addClass("tabSelected");
         };
 
         self.removeFoodItems = function (index, obj) {

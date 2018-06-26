@@ -2598,104 +2598,6 @@ table.fc-border-separate {
   border-radius: 5px !important;
   box-shadow: none;
 }
-.bottleBtn {
-  background-color: rgba(122,17,217, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.tableBtn {
-  background-color: rgba(220,153,42, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.drinksBtn {
-  background-color: rgba(30,134,68, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.wineToHomeBtn {
-  background-color:rgba(122,17,217, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.foodBtn {
-  background-color: rgba(218,6,21, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.privateBtn {
-  background-color: rgba(14,104,167, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.guestBtn {
-  background-color: rgba(220,17,42, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.partyBtn {
-  background-color: rgba(30,30,168, 0.90) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.bachelorBtn {
-  background-color: rgba(103,111,121, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.eventListBtn {
-  background-color: rgba(0,0,0, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.dealsBtn {
-  background-color: rgba(152,57,157, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-
-.waitTimeBtn {
-  background-color: rgba(60,60,60, 0.90) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-
-.contestsBtn {
-  background-color: rgba(200,60,60, 0.90) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.rewardsBtn {
-  background-color: rgba(200,200,30, 0.90) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.eventListBtn {
-  background-color: rgba(30,60,250, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
-.winetohomeBtn {
-  background-color: rgba(30,60,250, 0.80) !important;
-  color: #fff !important;
-  border-color: white;
-}
-
 
 /* is */
 
@@ -3042,4 +2944,9 @@ button {
 
 .paypal-color-gold {
   background: #ffc439 !important;
+}
+
+.btn_gradient {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 150, 0.5)), to(rgba(0, 0, 150, 0)));
+    background-image: -moz-linear-gradient(rgba(0, 0, 150, 0.5) 0%, rgba(0, 0, 150, 0) 95%);
 }

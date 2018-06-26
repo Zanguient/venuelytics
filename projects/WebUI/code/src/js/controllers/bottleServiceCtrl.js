@@ -161,7 +161,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
 
             self.getSelectedTab = function() {
                 $(".service-btn .card").removeClass("tabSelected");
-                $("#bottleService > .bottleBtn").addClass("tabSelected");
+                $("#bottleService > .card").addClass("tabSelected");
             };
 
             self.tabClear = function() {

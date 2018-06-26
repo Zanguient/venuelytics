@@ -130,7 +130,7 @@ app.controller('ReservationServiceController', ['$log', '$scope', '$location', '
 
             self.getReserveSelectedTab = function() {
                 $(".service-btn .card").removeClass("tabSelected");
-                $("#reservationService > .partyBtn").addClass("tabSelected");
+                $("#reservationService > .card").addClass("tabSelected");
             };
 
             self.tabClear = function() {

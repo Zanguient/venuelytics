@@ -46,7 +46,7 @@ app.controller('EventListCtrl', ['$log', '$scope', '$routeParams', 'AjaxService'
     };
     self.getSelectedTab = function() {
       $(".service-btn .card").removeClass("tabSelected");
-      $("#eventList > .eventListBtn").addClass("tabSelected");
+      $("#eventList > .card").addClass("tabSelected");
     };
     self.eventCalender = function() {
       var today = new Date();

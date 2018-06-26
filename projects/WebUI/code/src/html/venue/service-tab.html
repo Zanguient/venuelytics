@@ -7,7 +7,7 @@
  -->
 
  <div class="col-xs-4 service-btn mt-1" ng-disabled="{{disabled}}"   id="{{selected}}" ng-click="onClick()">
-		<div class="card no-mb roundCornerBtn" ng-class="btnClass">
+		<div class="card no-mb roundCornerBtn btn_gradient" style="color: #fff; border-color: #fff; background-color: {{rgba}}">
 		    <div class="card-block wow text-center no-p zoom-img-25">
 		        <img ng-src="{{buttonImg}}" class="mt-1 service-icon responsive"></img>
 		        <p class="tabLabel h6 no-m mt-1">{{name | translate}}</p>

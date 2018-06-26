@@ -49,7 +49,7 @@ app.controller('DealListCtrl', ['$log', '$scope', '$routeParams', 'AjaxService',
     };
     self.getSelectedTab = function() {
       $(".service-btn .card").removeClass("tabSelected");
-      $("#deals > .dealsBtn").addClass("tabSelected");
+      $("#deals > .card").addClass("tabSelected");
     };
     self.dealsCalender = function() {
       var today = new Date();

@@ -6,7 +6,7 @@
 app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope','VenueService',
     function ($log, $scope, $http, $location, RestURL, DataShare, $window, $routeParams, AjaxService, $rootScope, venueService) {
 
-	$log.log('Inside ServiceTab Controller.');
+    $log.log('Inside ServiceTab Controller.');
 
     var self = $scope;
     self.displayTabs = [];
@@ -19,9 +19,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.venueId = -1;
     self.tabParams = $routeParams.tabParam;
     self.embeddedService = $routeParams.new;
-
+    self.tabBtnsLayout = '';
     self.init= function() {
-         AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
+        
+        AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
             self.detailsOfVenue = response;
             self.venueId = self.detailsOfVenue.id;
             venueService.saveVenue($routeParams.venueId, response);
@@ -38,7 +39,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 self.initMore();
             }, 10);
         });
-    }
+    };
+
     self.initMore = function() {
         //localStorage.clear();
         AjaxService.getInfo(self.venueId).then(function(response) {
@@ -54,6 +56,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.featuredEnable = response.data["Advance.featured"];
             self.eventsEnable = response.data["venueEvents"];
             $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
+            self.tabBtnsLayout = response.data['ui.service.service-buttons'] || '';
 
             if ($rootScope.blackTheme === '') {
                 $rootScope.bgMask = 'bg-mask-white';
@@ -75,6 +78,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.eventsEnable = self.eventsEnable === 'Y' ? false : true;
             /* self.tabParams = self.bottleServiceButton === false ? 'VIP' : 'private-events'; */
             self.dispatchToService(self.tabParams, true);
+            createBTNConfig();
             addTabs();
         }); 
         /*jshint maxcomplexity:14 */
@@ -173,8 +177,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         }
 
         return venueTime;
-    }
-    function addTab(id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected) {
+    };
+
+    function addTab(id, bId, img, name, tabParam, htmlContentPage, disableTab, rgba, tabSelected) {
         self.displayTabs.push({
            id: id,
            buttonId: bId,
@@ -182,7 +187,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
            serviceName: tabParam,
            name: name,
            disabled: disableTab,
-           btnClass : btnClass,
+           rgba : rgba,
            selected: tabSelected
            
         });
@@ -223,59 +228,68 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         return null;
     }
 
+    function createBTNConfig() {
+        self.btnMap = [];
+        self.btnMap['bottle-service'] = ['bottleTab','bottle', 'assets/img/service/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, '#7A11D9CC', 'bottleService'];
+        self.btnMap['private-events'] = ['privateEventTab','private', 'assets/img/service/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, '#0E68A7CC', 'privateEvents'];
+        self.btnMap['guest-list'] = ['guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, '#DC112ACC', 'guestList'];
+        self.btnMap['table-services'] = ['tableServiceTab','tableService', 'assets/img/service/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, '#DC992ACC', 'tableServices']; 
+        self.btnMap['food-services'] = ['foodServiceTab','foodTab', 'assets/img/service/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, '#1E8644CC', 'foodServices'];
+        self.btnMap['drink-services'] = ['drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, '#DA0615CC', 'drinkServices'];
+        self.btnMap['wait-time'] = ['waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'casino/wait-time.html',true, '#3C3C3CCC', 'waittime'];
+        self.btnMap['contests'] =  ['contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, '#C83C3CCC', 'contests'];
+        self.btnMap['rewards'] = ['rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, '#C8C81ECC', 'rewards'];
+
+        self.btnMap['deals-list'] = ['dealsServiceTab','deals', 'assets/img/ic_deals.png','Deals', 'deals-list', 'event-list/deals-list.html',false, '#98399DCC', 'deals'];
+        self.btnMap['event-list'] = ['eventListTab','eventlist', 'assets/img/service/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, '#000000CC', 'eventList'];
+        self.btnMap['wine-to-home'] = ['wineToHomeTab','winetohome', 'assets/img/service/event_image.png','reservation.WINE_TO_HOME', 'wine-to-home', 'wine-to-home/wine-to-home.html',self.wineToHomeEnable, '#1E3CFACC', 'wineToHome'];
+
+    }
+
     function addTabs() {
         self.displayTabs =[];
-        //self.tabBottle = self.tabParams === 'bottle-service' ? 'bottle-service' : '';
-        addTab('bottleTab','bottle', 'assets/img/service/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, 'bottleBtn', 'bottleService');
-
-      // self.tabBachelor = self.tabParams === 'bachelor-party' ? 'bachelor-party' : '';
-       /* if (self.bachelorFlag) {
-            addTab('bachelorTab','bachelor', 'assets/img/service/trophy.png','reservation.BACHELOR', 'bachelor-party', 'bachelor-party/bachelor-party.html',!self.bachelorFlag, 'bachelorBtn', 'bachelorParty');
-        }*/
-
-       // self.tabParty = self.tabParams === 'party-packages' ? 'party-packages' : '';
-       /* if (self.partyFlag) {
-            addTab('partyEventTab','party', 'assets/img/service/ic_party(2).png','reservation.PARTY', 'party-packages','party-service/party-packages.html',!self.partyFlag, 'partyBtn','partyPackage');
-        }*/
-
-        if (self.venueId === 70008) {
-         //   addTab('reservationTab','party', 'assets/img/service/ic_party(2).png','RESERVATION', 'reservation-service', 'reservation-service/reservation-service.html',false, 'partyBtn', 'reservationService');
-         //   addTab('guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, 'guestBtn', 'guestList');
-
-        } else {
-            addTab('privateEventTab','private', 'assets/img/service/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, 'privateBtn', 'privateEvents');
-            addTab('guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, 'guestBtn', 'guestList');
-
-        }
         
-       // self.tabPrivate = self.tabParams === 'private-events' ? 'private-events' : '';
-        
+        if (self.tabBtnsLayout && self.tabBtnsLayout.length > 2) {
+            var tabsBtns = JSON.parse(self.tabBtnsLayout);
+            for (var k=0; k < tabsBtns.length ; k++) {
+                var attrs = self.btnMap[tabsBtns[k].serviceName];
+                if (attrs) {
+                    attrs[3] = tabsBtns[k].name;
+                    addTab(attrs[0], attrs[1], attrs[2], attrs[3], attrs[4], attrs[5], attrs[6], attrs[7], attrs[8]);
+                }
+            }
+        } else { // old implementation000000CC
+            
+            addTab('bottleTab','bottle', 'assets/img/service/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, '#7A11D9CC', 'bottleService');
 
+            if (self.venueId === 70008) {
+             //   addTab('reservationTab','party', 'assets/img/service/ic_party(2).png','RESERVATION', 'reservation-service', 'reservation-service/reservation-service.html',false, 'partyBtn', 'reservationService');
+                addTab('guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, '#DC112ACC', 'guestList');
 
-        
-        // self.tabTable = self.tabParams === 'table-services' ? 'table-services' : '';
-        addTab('tableServiceTab','tableService', 'assets/img/service/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, 'tableBtn', 'tableServices');
+            } else {
+                addTab('privateEventTab','private', 'assets/img/service/privates.png','reservation.EVENTS', 'private-events', 'private-event/private-event.html', self.privateServiceButton, '#0E68A7CC', 'privateEvents');
+                addTab('guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, '#DC112ACC', 'guestList');
 
-       // self.tabFood = self.tabParams === 'food-services' ? 'food-services' : '';
-        addTab('foodServiceTab','foodTab', 'assets/img/service/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, 'foodBtn', 'foodServices');
-
-       // self.tabDrink = self.tabParams === 'drink-services' ? 'drink-services' : '';
-        addTab('drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, 'drinksBtn', 'drinkServices');
-        
-        if(self.venueId === 170649) {
-            //id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected
-            addTab('waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'casino/wait-time.html',true, 'waitTimeBtn', 'waittime');
-            addTab('contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, 'contestsBtn', 'contests');
-            addTab('rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, 'rewardsBtn', 'rewards');
-        }
-        if(self.venueId === 170649 || self.venueId === 10314 || self.venueId === 170941 || self.venueId === 170931 || self.venueId === 170933 || self.venueId === 170932 
-            || self.venueId === 170930 || self.venueId === 170612) {
-             addTab('dealsServiceTab','deals', 'assets/img/ic_deals.png','Deals', 'deals-list', 'event-list/deals-list.html',false, 'dealsBtn', 'deals');
-        }
-       // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
-        addTab('eventListTab','eventlist', 'assets/img/service/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, 'eventListBtn', 'eventList');
-        if(self.venueId === 170649) {
-            addTab('wineToHomeTab','winetohome', 'assets/img/service/event_image.png','reservation.WINE_TO_HOME', 'wine-to-home', 'wine-to-home/wine-to-home.html',self.wineToHomeEnable, 'winetohomeBtn', 'wineToHome');
+            }
+            addTab('tableServiceTab','tableService', 'assets/img/service/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, '#DC992ACC', 'tableServices');
+            addTab('foodServiceTab','foodTab', 'assets/img/service/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, '#1E8644CC', 'foodServices');
+            addTab('drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, '#DA0615CC', 'drinkServices');
+            
+            if(self.venueId === 170649) {
+                //id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected
+                addTab('waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'casino/wait-time.html',true, '#3C3C3CCC', 'waittime');
+                addTab('contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, '#C8C81ECC', 'contests');
+                addTab('rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, '#C8C81ECC', 'rewards');
+            }
+            if(self.venueId === 170649 || self.venueId === 10314 || self.venueId === 170941 || self.venueId === 170931 || self.venueId === 170933 || self.venueId === 170932 
+                || self.venueId === 170930 || self.venueId === 170612) {
+                 addTab('dealsServiceTab','deals', 'assets/img/ic_deals.png','Deals', 'deals-list', 'event-list/deals-list.html',false, '#98399DCC', 'deals');
+            }
+           // self.tabEvents = self.tabParams === 'event-list' ? 'event-list' : '';
+            addTab('eventListTab','eventlist', 'assets/img/service/event_image.png','reservation.EVENT_LIST', 'event-list', 'event-list/event-list.html',self.eventsEnable, '#000000CC', 'eventList');
+            if(self.venueId === 170649) {
+                addTab('wineToHomeTab','winetohome', 'assets/img/service/event_image.png','reservation.WINE_TO_HOME', 'wine-to-home', 'wine-to-home/wine-to-home.html',self.wineToHomeEnable, '#1E3CFACC', 'wineToHome');
+            }
         }
         //if(self.tabParams === "VIP"){
             var firstEnabledTabBtnId = optimizeTabDisplay(self.displayTabs);
