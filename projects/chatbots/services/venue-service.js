@@ -93,18 +93,11 @@ const fxReadVenue = function(senderId, text, channel, venue) {
   if (!!venue) {
     user.state.set("venue", venue);
   }
-  if (user.isInConversation() && user.ignoreTextProcessing()) {
-    var response = {};
-    response.action = ".readInput.no-tp";
-    response.queryText = text;
-    user.dispatch(response, channel);
-  } else {
-    aiClient.aiProcessText(senderId, text, curry(aiResponse)(channel), curry(aiError)(channel));
-  }
+  aiClient.aiProcessText(senderId, text, curry(aiResponse)(channel), curry(aiError)(channel));
+  
 };
 
 const aiResponse = function(channel, senderId, response) {
-  console.log(JSON.stringify(response));
   let user = Users.getUser(senderId);
   let restartAdvice = user.state.get("advice.restart");
   if (!restartAdvice) {
@@ -119,7 +112,21 @@ const aiResponse = function(channel, senderId, response) {
     user.clear();
     channel.sendMessage(senderId, response.responseSpeech);
     return;
-  } else if (response.action.startsWith("Q_") || user.isInConversation()) {
+  }
+  if (user.isInConversation() && user.ignoreTextProcessing()) {
+    var responsenew = {};
+    responsenew.action = ".readInput.no-tp";
+    responsenew.queryText = response.queryText;
+    user.dispatch(responsenew, channel);
+  } else {
+    processAIResponse(channel, senderId, response);
+  }
+}
+const processAIResponse = function(channel, senderId, response) {
+  console.log(JSON.stringify(response));
+  let user = Users.getUser(senderId);
+  
+  if (response.action.startsWith("Q_") || user.isInConversation()) {
     if (user.isInConversation()) {
       user.dispatch(response, channel);
     } else {
