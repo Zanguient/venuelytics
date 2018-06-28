@@ -76,7 +76,7 @@ const fxReadVenue = function(senderId, text, channel, venue) {
     var response = {};
     response.action = ".readInput.no-tp";
     response.queryText = text;
-    user.dispatch(response);
+    user.dispatch(response, channel);
   } else {
     aiClient.aiProcessText(senderId, text, curry(aiResponse)(channel), curry(aiError)(channel));
   }
@@ -91,7 +91,7 @@ const aiResponse = function(channel, senderId, response) {
     channel.sendMessage(senderId, response.responseSpeech);
   } else if (response.action.startsWith("Q_") || user.isInConversation()) {
     if (user.isInConversation()) {
-      user.dispatch(response);
+      user.dispatch(response, channel);
     } else {
       if (typeof(QUESTIONS[response.action]) === 'undefined' ) {
         channel.sendMessage(user.id, "Sorry! I didn't understand this question. Do you want me to connect to a live agent?");
@@ -199,7 +199,7 @@ function fetchDataAndSendReply(user, answer, venueName, channel) {
   }
 }
 
-function searchVenueWithAddress(channel, venueName, userId, address, type, response) {
+function searchVenueWithAddress(venueName, channel, userId, address, type, response) {
   searchVenueImpl(channel, userId, venueName, address, type, response);
 }
 
@@ -214,11 +214,11 @@ function searchVenueImpl(channel, userId, venueName, address, type, response) {
   serviceApi.searchVenueByName(venueName, address, function(venues) {
     if (venues.length > 4) {
       channel.sendMessage(userId,"I found many venues with this name, Please enter the city name or zipcode to narrow down the result.");
-      user.setConversationContext(type, true, curry(searchVenueWithAddress)(channel)(venueName), response);
+      user.setConversationContext(type, true, curry(searchVenueWithAddress)(venueName), response);
       return;
     } else if (venues.length === 0) {
       channel.sendMessage(userId,"I didn't find any venues. Please try again. Enter the venue name.");
-      user.setConversationContext(type, false, curry(searchVenue)(channel), response);
+      user.setConversationContext(type, false, searchVenue, response);
       return;
     }
 
@@ -228,7 +228,7 @@ function searchVenueImpl(channel, userId, venueName, address, type, response) {
 
     user.state.set("listOfVenues", venues);
     channel.sendVenueList(userId, venues);
-    user.setConversationContext(type, true, curry(selectVenue)(channel), response);
+    user.setConversationContext(type, true, selectVenue, response);
   });
 }
 
@@ -237,14 +237,14 @@ function selectVenue(channel, userId, searchIndex, type, response) {
   searchIndex = parseInt(searchIndex);
   if (isNaN(searchIndex) && response.action === "smalltalk.confirmation.no") {
     channel.sendMessage(userId, "It seems you didn't find the venue you were looking for. Let's try again. Enter the venue name.");
-    user.setConversationContext(type, false, curry(searchVenue)(channel));
+    user.setConversationContext(type, false, searchVenue);
     return;
   }
   const listOfVenues = user.state.get("listOfVenues");
   if (isNaN(searchIndex) || searchIndex < 1 || searchIndex > listOfVenues.length) {
     channel.sendMessage(userId, "Opps, You have selected a venue which is not in my list. Please select again...");
     channel.sendVenueList(userId, listOfVenues);
-    user.setConversationContext(type, false, curry(selectVenue)(channel));
+    user.setConversationContext(type, false, selectVenue);
     return;
   }
   const selectedVenue = listOfVenues[searchIndex - 1];
@@ -297,7 +297,7 @@ function isNotEmpty(str) {
   
 function getVenueName(type, user, channel, response) {
   channel.sendMessage(user.id, "Can you please give me the Venue name?");
-  user.setConversationContext(type,true, curry(searchVenue)(channel), response);
+  user.setConversationContext(type,true, searchVenue, response);
 }
 
 const aiServiceQuery = function(context, query, success, error) {

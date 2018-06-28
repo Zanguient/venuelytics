@@ -1,12 +1,10 @@
 'use strict';
 const express = require('express');
 const morgan = require('morgan');
-const session = require('express-session');
-const cookieParser = require("cookie-parser");
 const path = require('path');
 
 const clientPath = path.resolve(__dirname, "client");
-const http = require("http");
+
 const bodyParser = require('body-parser');
 
 const ejs = require("ejs");
@@ -17,12 +15,28 @@ const logger = require('morgan');
 const chatbotHandlers = require("./routers");
 const appApi = require('./apis/app-api');
 const botAgents = require('./models/botagents');
+
+var webbot = require("./controllers/webchat");
+
 /*============Initialize and COnfiguration===============*/
+
+const session = require('express-session')({
+  secret: config.session_secret,
+  resave: true,
+  saveUninitialized: true
+});
+
+const sharedsession = require("express-socket.io-session");
+
+const cookieParser = require("cookie-parser");
+
+
+/* ---------------------------------- */
 
 const app = express();
 const demo = config.demo_mode;
 app.use(logger('dev'));
-
+app.use(session);
 app.use(bodyParser.json({ limit: '50mb' }));
 app.set('view engine', 'ejs');
 appApi.getBotAgents((result) => {
@@ -45,12 +59,13 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
         "Access-Control-Allow-Headers",
-        "Origin, Accept, Content-Type, Content-Length, Authorization, X-Requested-With, X-XSRF-TOKEN"
+        "Origin, Accept, Content-Type, Content-Length, Authorization, X-Requested-With, X-XSRF-TOKEN, withCredentials"
     );
     res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
     if (req.method === "OPTIONS") {
         console.log("OPTIONS SUCCESS");
         res.end();
+        return;
     }
     next();
 });
@@ -102,7 +117,28 @@ app.use((req, res, next) => {
     });
   });
 
-app.listen(config.getPort());
-
+const server = app.listen(config.getPort());
+var io = require('socket.io').listen(server);
+io.use(sharedsession(session, {
+  autoSave:true
+})); 
 console.log('Express server listening on port: ' + config.getPort());
+
+var allClients = [];
+io.on('connection', (socket)=>{
+  console.log('a user connected');
+  
+  allClients.push(socket);
+  socket.on('message', (message)=>{
+    webbot.handleReceiveMessage(message, socket);
+  });
+
+  socket.on('disconnect', ()=>{
+    console.log('disconnected ..');
+    var i = allClients.indexOf(socket);
+    allClients.splice(i, 1);
+  });
+});
+
+
 

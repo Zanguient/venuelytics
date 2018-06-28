@@ -44,6 +44,6 @@ config.sms_debug_agent_number = '+17025000196';
 config.getPort = () => {
     return config.service.port;
 };
-
+config.session_secret = "venuelytics-secret-bcef-0000-cddc";
 module.exports = config;
 

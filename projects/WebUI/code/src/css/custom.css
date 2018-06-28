@@ -2954,7 +2954,7 @@ button {
   Chat 
  */
 .main-section{
-  width: 320px;
+  width: 350px;
   position: fixed;
   right:100px;
   bottom:-350px;
@@ -3007,8 +3007,8 @@ button {
   padding: 0px;
 }
 .left-chat img,.right-chat img{
-  width:50px;
-  height:50px;
+  width:35px;
+  height:35px;
   float:left;
   margin:0px 10px;
 }
@@ -3030,7 +3030,7 @@ button {
   color:#fff;
   border-radius: 5px; 
   float:left;
-  width:60%;
+  width:63%;
   margin-bottom:20px;
 }
 .left-chat span,.right-chat span{
@@ -3070,7 +3070,7 @@ button {
   content: " ";
   position:absolute;
   top:0px;
-  left:55px;
+  left:40px;
   bottom:100px;
   border:15px solid transparent;
   border-top-color:#FD8468; 
@@ -3079,7 +3079,7 @@ button {
   content: " ";
   position:absolute;
   top:0px;
-  right:55px;
+  right:40px;
   bottom:100px;
   border:15px solid transparent;
   border-top-color:#fff; 

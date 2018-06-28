@@ -52,7 +52,7 @@ class User {
         this.conversationContext.set(/.*/, ignoreTextProcessing, (userId, match, response) => fxCallback(userId, match, type, response));
     }
     
-    dispatch(response) {
+    dispatch(response, channel) {
         var type = response.queryText;
         var senderId = this._id;
         if (this.conversationContext !== null && this.conversationContext.isSet()) {
@@ -60,9 +60,9 @@ class User {
             this.conversationContext.match(type, function (err, match, contextCb) {
                 if (!err) {
                     if (!callbackResponse) {
-                        contextCb(senderId, match, response);
+                        contextCb(channel, senderId, match, response);
                     } else {
-                        contextCb(senderId, match, callbackResponse);
+                        contextCb(channel, senderId, match, callbackResponse);
                     }
                 } 
               });
