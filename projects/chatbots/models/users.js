@@ -49,7 +49,7 @@ class User {
     setConversationContext(type, ignoreTextProcessing, fxCallback, callbackResponse) {
         this.conversationContext = chatContext.getOrCreate(this._id);
         this.conversationContext.setCallbackResponse(callbackResponse);
-        this.conversationContext.set(/.*/, ignoreTextProcessing, (userId, match, response) => fxCallback(userId, match, type, response));
+        this.conversationContext.set(/.*/, ignoreTextProcessing, (channel, userId, match, response) => fxCallback(channel, userId, match, type, response));
     }
     
     dispatch(response, channel) {
