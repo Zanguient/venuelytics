@@ -2,6 +2,8 @@
 const Users = require("../models/users");
 const serviceApi = require("../apis/app-api");
 const pluralize = require('pluralize');
+const aiUtil = require('../lib/aiutils');
+
 const ANSWERS = [];
 const ANSWERS_DEFAULT = { text: "VALUE", api_name: "service-time", value: "facility" };
 
@@ -24,8 +26,7 @@ ANSWERS["Q_FACILITY_OPEN_CLOSE_TIME"] = {
 ANSWERS["Q_OPEN_CLOSE_TIME"] = {
       text: "VALUE", parameters: ["VENUE_NAME", "VALUE"], api_name: "service-time", type: "Venue", value: ""};
  
-ANSWERS["Q_CHARGE"] = {
-        text: "VALUE", parameters: ["VALUE"], api_name: "service-time", type: "CoverCharge", value: "value"};
+ANSWERS["Q_CHARGE"] = {text: "VALUE", parameters: ["VALUE"], api_name: "service-time", type: "CoverCharge", value: "value"};
 
   
   
@@ -52,7 +53,7 @@ const sendAnswer = function(type, userId, response, channel) {
   let venueName = venue.venueName;
   const info = venue.info;
   // one off
-  if (response.parameters && response.parameters.DressCode && response.parameters.DressCode.length > 0) {
+  if (aiUtil.hasParam(response,'DressCode')) {
     if (info['Advance.dressCode'] && info['Advance.dressCode'].length > 0) {
       channel.sendMessage(userId, `Dress code: ${info['Advance.dressCode'] }` );
     } else {
@@ -64,15 +65,24 @@ const sendAnswer = function(type, userId, response, channel) {
   if (!!ANSWERS[type]) {
     answer = Object.assign({}, ANSWERS[type]); 
   }
-  if (response.parameters.Facilities && response.parameters.Facilities.toLowerCase().indexOf("guest") >= 0) {
+  if (aiUtil.hasParam(response,'facilities',"guest")) {
     if (venue.info['Advance.GuestList.enable'] && venue.info['Advance.GuestList.enable'].toLowerCase() === 'y' ) {
       let guestListUrl = serviceApi.getGuestListUrl(venue.uniqueName, venue.id, venue.city);
       channel.sendMessage(userId, `YES! we do have Guest List. You can access our guest list at ${guestListUrl}`);
     } else {
-      channel.sendMessage(userId, `No, we donot have Guest List.`);
+      channel.sendMessage(userId, `No, we don't have Guest List.`);
     }
     return;
   }
+  if (aiUtil.hasParam(response,'item',"gift card")) {
+    if (venue.info['_giftcard'] ) {
+      channel.sendMessage(userId, venue.info['_giftcard']);
+    } else {
+      channel.sendMessage(userId, `Sorry, we don't have Gift Cards.`);
+    }
+    return;
+  }
+
 
   if (user.hasParameter(answer.api_name)) {
     sendAnswerImpl(type, user, answer, response, channel);
@@ -134,6 +144,7 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
   if ((type === 'Q_OPEN_CLOSE_TIME' || type === 'Q_FACILITY_OPEN_CLOSE_TIME') && response.parameters && response.parameters.openClosingTimes) {
     var timeType = response.parameters.openClosingTimes;
     var venueType = response.parameters.serviceType;
+    var openText = response.parameters.openText;
     if (timeType === 'Open') {
       answer.value = 'startTime';
     } else if (timeType === 'Close') {
@@ -149,12 +160,12 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
     answer.type = pluralize.singular(answer.type);
   }
 
-  let success = findAndReply(answer, data, channel, user, venueName, false);
+  let success = findAndReply(answer, openText, data, channel, user, venueName, false);
   if (success) {
     return;
   }
-  answer.type = response.parameters.Facilities;
-  success = findAndReply(answer, data, channel, user, venueName, true);
+  answer.type = response.parameters.facilities;
+  success = findAndReply(answer, openText, data, channel, user, venueName, true);
   
   if (success) {
     return;
@@ -182,18 +193,33 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
 
 }
 
-function findAndReply(answer, data, channel, user, venueName, generic) {
+function findAndReply(answer, openText, data, channel, user, venueName, generic) {
   if (answer.type && answer.type.toLowerCase() === 'kitchen' ) {
     answer.type = 'Restaurant';
+  }
+  if (!answer.type) {
+    answer.type = "";
+  }
+  if (!openText) {
+    openText ="";
   }
   for (var j = 0; j < data.length; j++) {
     
     if ((data[j].type.toLowerCase() === answer.type.toLowerCase() && !generic) || (data[j].type.toLowerCase().indexOf(answer.type.toLowerCase())> -1 && generic)) {
+      var startTime = formatTime(data[j]['startTime']);
+      var endTime = formatTime(data[j]['endTime']);
       if (answer.value && answer.value !== ''){
-        channel.sendMessage(user.id, formatText(answer, venueName, formatTime(data[j][answer.value])));
+        if (answer.value == 'startTime' && openText.toLowerCase().indexOf("24")) {
+          if (startTime === endTime) {
+            channel.sendMessage(user.id, `we are open 24 hours.` );
+          } else {
+            channel.sendMessage(user.id, `We are open from: ${startTime}, till: ${endTime}` );
+          }
+        } else {
+          channel.sendMessage(user.id, formatText(answer, venueName, formatTime(data[j][answer.value])));
+        }
       } else {
-        var startTime = formatTime(data[j]['startTime']);
-        var endTime = formatTime(data[j]['endTime']);
+        
         if (startTime === endTime) {
           channel.sendMessage(user.id, `we are open 24 hours.` );
         } else {
@@ -294,7 +320,12 @@ function sendAnswerFacilityImpl(type, user, answer, response, channel) {
     } 
     var names = [];
     if (!hasFacility) {
-      facilityType = response.parameters.Facilities; // generic
+      if ( Array.isArray(response.parameters.facilities)) {
+        facilityType = response.parameters.facilities[0]; // generic
+      } else {
+        facilityType = response.parameters.facilities; // generic
+      }
+      
       
       for (i = 0; i < data.length; i++) {
         if (data[i].type.toLowerCase().indexOf(facilityType.toLowerCase())>-1) {
