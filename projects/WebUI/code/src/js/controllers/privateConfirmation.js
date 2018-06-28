@@ -15,6 +15,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$location', 'Data
             self.venueId = self.venueDetails.id;
             $rootScope.description = self.venueDetails.description;
             $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
+            DataShare.successDescription = 'description', self.venueDetails.description + " Private Confirmation";
             ngMeta.setTag('description', self.venueDetails.description + " Private Confirmation");
             $rootScope.title = self.venueDetails.venueName +  " Venuelytics - Private Event Confirmation";
             ngMeta.setTitle($rootScope.title);
@@ -33,7 +34,7 @@ app.controller('PrivateConfirmController', ['$log', '$scope', '$location', 'Data
         self.privateEventSave = function () {
             AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function (response) {
                 if (response.status == 200 ||  response.srtatus == 201) {
-                 $location.url(self.selectedCity + '/private-success/' + self.venueRefId(self.venueDetails));
+                 $location.url(self.selectedCity + '/webui-success/' + self.venueRefId(self.venueDetails)+ '/private-events');
                 } else {
                     if (response.data && response.data.message) {
                         alert("Saving order failed with message: " + response.data.message );

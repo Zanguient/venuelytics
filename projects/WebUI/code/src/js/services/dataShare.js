@@ -41,6 +41,7 @@ app.service('DataShare', function () {
   this.selectedDrinks = '';
   this.amount = '';
   this.privateOrderItem = '';
+  this.paymetObjct={}
 
   /*this.getCurrentLocation = function() {
 
@@ -61,6 +62,13 @@ app.service('DataShare', function () {
     }
 
   };*/
-
+  this.clearmethod = function(){
+    this.bottleServiceData = {}; 
+    this.drinkServiceData = {};
+    this.privateEventData = {};
+    this.guestListData = {};
+    this.paymetObjct = {};
+    this.foodServiceData = {};
+  }
 
 });

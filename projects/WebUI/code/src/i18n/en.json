@@ -443,6 +443,7 @@
 		"VENUELYTICS_INC":"VenueLytics Inc - ItzFun Consumer & VenueLytics Business App Version v1.8(Build 18027)"
 	},
 	"reservation": {
+		"SUCCESS":"Success",
 		"WINE_TO_HOME": "Wine To Home",
 		"BILLING_ADDRESS":"Billing Address",
 		"SHIPPING_ADDRESS":"Shipping Address",

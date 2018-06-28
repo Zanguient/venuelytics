@@ -13,6 +13,7 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
             self.venueId = self.venueDetails.id;
             $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
             $rootScope.description = self.venueDetails.description;
+            DataShare.successDescription = 'description', self.venueDetails.description + " Drink Confirmation";
             ngMeta.setTag('description', self.venueDetails.description + " Drink Confirmation");
             $rootScope.title = self.venueDetails.venueName +  " Venuelytics - Drink Services Confirmation & Payment";
             ngMeta.setTitle($rootScope.title);
@@ -39,8 +40,11 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
             AjaxService.getTaxType(self.venueId, self.taxDate).then(function(response) {
                 self.taxNFeeRates = response.data;
                 self.paymentData = TaxNFeesService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.availableAmount), "Drinks", '');
+                DataShare.paymetObjct = self.paymentData;
+                DataShare.paymetObjct.paied = true;
             });
-            self.redirectUrl = self.city +"/drinkSuccess/" + self.venueRefId(self.venueDetails);
+            // self.redirectUrl = self.city +"/drinkSuccess/" + self.venueRefId(self.venueDetails);
+            self.redirectUrl = self.city + "/webui-success/" + self.venueRefId(self.venueDetails) + '/drink-services';
             self.payAtVenueUrl = self.city +'/drink-success/'+ self.venueRefId(self.venueDetails);
         };
 
@@ -54,8 +58,9 @@ app.controller('DrinkConfirmController', ['$log', '$scope', '$location', 'DataSh
         self.drinkServiceSave = function () {
             
             AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function (response) {
+                DataShare.paymetObjct.paied = false;
                 self.orderId = response.data.id;
-                $location.url(self.city + '/drink-success/' + self.venueRefId(self.venueDetails));
+                $location.url(self.city + '/webui-success/' + self.venueRefId(self.venueDetails)+ '/drink-services');
                 
             });
             
