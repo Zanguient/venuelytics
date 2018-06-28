@@ -1,5 +1,5 @@
 "use strict";
-app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService','TaxNFeesService',
+app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', '$rootScope', 'ngMeta', 'VenueService', 'TaxNFeesService',
     function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, $rootScope, ngMeta, venueService, TaxNFeesService) {
 
 
@@ -14,6 +14,7 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
             $rootScope.blackTheme = venueService.getVenueInfo(self.venueId, 'ui.service.theme') || '';
 
             $rootScope.description = self.venueDetails.description;
+            DataShare.successDescription = 'description', self.venueDetails.description + " Food Confirmation";
             ngMeta.setTag('description', self.venueDetails.description + " Food Confirmation");
             $rootScope.title = self.venueDetails.venueName + " Venuelytics - Food Services Confirmation & Payment";
             ngMeta.setTitle($rootScope.title);
@@ -26,31 +27,34 @@ app.controller('FoodConfirmController', ['$log', '$scope', '$location', 'DataSha
             self.enabledPayment = DataShare.enablePayment;
             self.venueName = self.venueDetails.venueName;
             self.taxDate = moment().format('YYYYMMDD');
-            
+
             var fullName = self.foodServiceDetails.firstName + " " + self.foodServiceDetails.lastName;
             self.authBase64Str = window.btoa(fullName + ':' + self.foodServiceDetails.emailId + ':' + self.foodServiceDetails.mobileNumber);
 
-            
+
             angular.forEach(self.selectedFoodItems, function (value1, key1) {
                 var total = parseFloat(value1.total);
-                self.availableAmount  += total;
+                self.availableAmount += total;
             });
-            
-            AjaxService.getTaxType(self.venueId, self.taxDate).then(function(response) {
+
+            AjaxService.getTaxType(self.venueId, self.taxDate).then(function (response) {
                 self.taxNFeeRates = response.data;
                 self.paymentData = TaxNFeesService.calculateTotalAmount(self.taxNFeeRates, parseFloat(self.availableAmount), "FOOD", '');
+                DataShare.paymetObjct = self.paymentData;
+                DataShare.paymetObjct.paied = true;
             });
-            self.redirectUrl = self.city +"/foodSuccess/" + self.venueRefId(self.venueDetails);
-            self.payAtVenueUrl = self.city +'/food-success/'+ self.venueRefId(self.venueDetails);
+            self.redirectUrl = self.city + "/webui-success/" + self.venueRefId(self.venueDetails) + '/food-services';
+            self.payAtVenueUrl = self.city + '/food-success/' + self.venueRefId(self.venueDetails);
         };
 
         self.foodServiceSave = function () {
-            
+
             AjaxService.placeServiceOrder(self.venueId, self.object, self.authBase64Str).then(function (response) {
+                DataShare.paymetObjct.paied = false;
                 self.orderId = response.data.id;
-                $location.url(self.city + '/food-success/' + self.venueRefId(self.venueDetails));
+                $location.url(self.city + '/webui-success/' + self.venueRefId(self.venueDetails) + '/food-services');
             });
-            
+
         };
 
         self.editFoodPage = function () {

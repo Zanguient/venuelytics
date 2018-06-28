@@ -176,10 +176,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'wine-to-home/wine-confirmation.html',
             controller:'WineConfirmController'
         })
-        .when('/:cityName/paymentSuccess/:venueId', {
-            templateUrl: 'payment-success.html',
-            controller:'ConfirmReservationController'          
-        })
+        // .when('/:cityName/paymentSuccess/:venueId', {
+        //     templateUrl: 'payment-success.html',
+        //     controller:'ConfirmReservationController'          
+        // })
         .when('/:cityName/partySuccess/:venueId', {
             templateUrl: 'party-service/party-payment-success.html',
             controller:'PartyConfirmController'
@@ -196,19 +196,19 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'drink-service/drink-payment.html',
             controller:'DrinkConfirmController'
         })
-        .when('/:cityName/foodSuccess/:venueId', {
-            templateUrl: 'food-service/food-payment-success.html',
-            controller:'FoodConfirmController'          
-        })
+        // .when('/:cityName/foodSuccess/:venueId', {
+        //     templateUrl: 'food-service/food-payment-success.html',
+        //     controller:'FoodConfirmController'          
+        // })
         .when('/:cityName/drinkSuccess/:venueId', {
             templateUrl: 'drink-service/drink-payment-success.html',
             controller:'DrinkConfirmController'
             
         })
-        .when('/:cityName/private-success/:venueId', {
-            templateUrl: 'private-event/private-success.html',
-            controller:'PrivateConfirmController'
-        })
+        // .when('/:cityName/private-success/:venueId', {
+        //     templateUrl: 'private-event/private-success.html',
+        //     controller:'PrivateConfirmController'
+        // })
         .when('/:cityName/party-success/:venueId', {
             templateUrl: 'party-service/party-success.html',
             controller:'PartyConfirmController'
@@ -229,9 +229,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'drink-service/drink-success.html',
             controller:'DrinkConfirmController'
         })
-        .when('/:cityName/guest-success/:venueId', {
-            templateUrl: 'guest-list/guest-success.html',
-            controller:'GuestConfirmController'
+        .when('/:cityName/webui-success/:venueId/:tabName', {
+            templateUrl: 'success/webui-success.html',
+            controller:'WebuiSuccessController'
         })
         .when('/wifiLanding', {
             templateUrl: 'landing/landing.html',

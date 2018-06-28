@@ -19,7 +19,7 @@ app.directive('paymentButton', function() {
      payAtVenueUrl: '@'
   	},
     
-  	controller: [ '$scope', 'AjaxService', 'TaxNFeesService', '$location', 'toaster',function ($scope, AjaxService, TaxNFeesService, $location, toaster) {
+  	controller: [ '$scope', 'AjaxService', 'TaxNFeesService', '$location', 'toaster','DataShare',function ($scope, AjaxService, TaxNFeesService, $location, toaster,DataShare) {
   	  var self = $scope;
       self.orderId = -1;
       self.taxNFeeRates = -[];
@@ -55,6 +55,7 @@ app.directive('paymentButton', function() {
         }
       };
       self.payAtVenue = function() {
+        DataShare.paymetObjct.paied = false;
         if (self.orderId <= 0) {
           AjaxService.placeServiceOrder(self.venueNumber, self.order, self.authToken).then(function(response) {
             if (response.status == 200 ||  response.srtatus == 201) {
