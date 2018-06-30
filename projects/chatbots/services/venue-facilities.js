@@ -140,11 +140,11 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
 
   var data = user.state.get(answer.api_name);
   let venueTimes = null;
-  
+  var timeType = response.parameters.openClosingTimes;
+  var venueType = response.parameters.serviceType;
+  var openText = response.parameters.openText;
   if ((type === 'Q_OPEN_CLOSE_TIME' || type === 'Q_FACILITY_OPEN_CLOSE_TIME') && response.parameters && response.parameters.openClosingTimes) {
-    var timeType = response.parameters.openClosingTimes;
-    var venueType = response.parameters.serviceType;
-    var openText = response.parameters.openText;
+    
     if (timeType === 'Open') {
       answer.value = 'startTime';
     } else if (timeType === 'Close') {
@@ -209,7 +209,7 @@ function findAndReply(answer, openText, data, channel, user, venueName, generic)
       var startTime = formatTime(data[j]['startTime']);
       var endTime = formatTime(data[j]['endTime']);
       if (answer.value && answer.value !== ''){
-        if (answer.value == 'startTime' && openText.toLowerCase().indexOf("24")) {
+        if (answer.value === 'startTime' && openText.toLowerCase().indexOf("24") >= 0) {
           if (startTime === endTime) {
             channel.sendMessage(user.id, `we are open 24 hours.` );
           } else {

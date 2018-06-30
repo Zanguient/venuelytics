@@ -26,7 +26,7 @@ const sendAnswer = function(userId, response, channel) {
             sendAnswerImpl(channel, userId, m, "I will send room service to take your order.");
             return;
     } else if(aiUtil.hasParam(response,'actionOriginal', 'bellman') || aiUtil.hasParam(response,'actionOriginal', 'luggage')) {
-        sendAnswerImpl(channel, userId, m, "I will send bellman to help you with that.");
+        sendAnswerImpl(channel, userId,  "I will send bellman to help you with that.", null);
         return;
     }   else if (aiUtil.hasParam(response,'toilettes')) {
        
