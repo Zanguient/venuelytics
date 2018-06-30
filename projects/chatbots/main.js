@@ -133,6 +133,10 @@ io.on('connection', (socket)=>{
     webbot.handleReceiveMessage(message, socket);
   });
 
+  socket.on('init', (message)=>{
+    webbot.handleInitMessage(message, socket);
+  });
+
   socket.on('disconnect', ()=>{
     console.log('disconnected ..');
     var i = allClients.indexOf(socket);

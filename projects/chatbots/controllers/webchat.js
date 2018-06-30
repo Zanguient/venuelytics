@@ -239,9 +239,16 @@ function confirmEmailAddress(userId, YESNO, email, sendApi) {
 }
 
 const handleReceiveMessage = (body, socket) => {
-    venueService.processMessage(1, body.message,new WebChannel(socket));
+  venueService.processMessage(socket.handshake.session.id, body.message,new WebChannel(socket));
+};
+
+const handleInitMessage = (body, socket) => {
+  const senderId = socket.handshake.session.id;
+  venueService.initializeSender(senderId, body.venueId, new WebChannel(socket));
+
 };
 
 module.exports = {
   handleReceiveMessage: handleReceiveMessage,
+  handleInitMessage: handleInitMessage
 };

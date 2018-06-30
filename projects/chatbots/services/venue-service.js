@@ -87,7 +87,29 @@ function processMessage(senderId, text, channel) {
   fxReadVenue(senderId, text, channel, null);
 }
 
+function initializeSender(senderId, venueNumber, channel){
+  let user = Users.getUser(senderId);
+  user.state.set("selectedVenueId", venueNumber);
+  serviceApi.searchVenueById(venueNumber, curry(initializationSuccess)(senderId)(channel));
+}
 
+function initializationSuccess(senderId, channel, venue) {
+  let user = Users.getUser(senderId);
+  if (!!venue) {
+    user.state.set("venue", venue);
+    let info = venue.info;
+    let venueName = venue.venueName;
+    venueName += "'s";
+    let welcomeMessage = info[`facebook.defaultWelcomeMessage`] ;
+    
+
+    let defaultMessage = `\nWelcome to ${venueName} Personalized Digital Concierge Service!  You can request Reservations, Bookings, Deals, Events, Rate the service, Amenities, Food & Drink Ordering. How can I help?`;
+
+    let message = welcomeMessage || defaultMessage;
+    channel.sendMessage(senderId,  message);
+
+  }
+}
 const fxReadVenue = function(senderId, text, channel, venue) {
   let user = Users.getUser(senderId);
   if (!!venue) {
@@ -154,7 +176,7 @@ const processAIResponse = function(channel, senderId, response) {
 
       let message = smsMessage || defaultMessage;
 
-      channel.sendMessage(senderId, response.responseSpeech + " "+ message);
+      channel.sendMessage(senderId,  message);
     } else {
       channel.sendMessage(senderId, response.responseSpeech);
     }
@@ -307,7 +329,8 @@ module.exports = {
   QUESTIONS: QUESTIONS,
   aiServiceQuery: aiServiceQuery,
   getVenueName: getVenueName,
-  processMessage: processMessage
+  processMessage: processMessage,
+  initializeSender: initializeSender
 };
 
 

@@ -153,7 +153,10 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
       answer.value = 'lastCallTime';
     }
   }
-  
+  if (!aiUtil.hasParam(response, 'facilityOriginal') && aiUtil.hasParam(response, 'eatNDrink')) {
+    response.parameters.facilityOriginal = response.parameters.eatNDrink;
+    response.parameters.facility = response.parameters.eatNDrink;
+  }
   if (response.parameters.facilityOriginal) {
     answer.type = response.parameters.facilityOriginal;
     answer.type = answer.type.replace("?", "");

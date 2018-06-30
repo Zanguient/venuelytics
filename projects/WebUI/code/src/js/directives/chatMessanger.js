@@ -8,16 +8,13 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
   return {
     restrict: 'EA',
     scope:{
-      venueId: '@',
-      venueName: '@',
-      serviceName: '@'
+      venueId: '=',
+      venueName: '=',
+      serviceName: '='
     },
-    controller: [ '$scope','$timeout','$compile',function ($scope, $timeout, $compile) {
-
-      $scope.question = "";
-      var windowId = "#chat_window_" + $scope.venueId;
-      var chatInputId = "#chat_input_" + $scope.venueId;
-
+    link: function(scope,elem,attr){
+      scope.question = "";
+      
       $(".left-first-section").click(function(){
         $('.main-section').toggleClass("open-more");
       });
@@ -27,30 +24,42 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
         $('.main-section').toggleClass("open-more");
       });
 
-      
+      scope.$watch('venueId', function() {
+        if (scope.venueId > 0) {
+          scope.windowId = "chat_window_" + scope.venueId;
+          scope.chatInputId = "chat_input_" + scope.venueId;
+          $('#'+scope.chatInputId).bind('keyup', function(e) {
+            if(e.keyCode === 13) {
+                scope.process();
+            }
+          });
+          scope.io = io('http://localhost:9000');
+          scope.io.on('connect', function(){
+            console.log('a user connected');
+            scope.socket = scope.io;
+            scope.io.emit('init', {venueId: scope.venueId});
+          });
 
-      $scope.io = io('http://localhost:9000');
+          scope.io.on('disconnect', function(){
+            console.log('user disconnected');
+            scope.socket = null;
+          });
 
-      $scope.io.on('connect', function(){
-        console.log('a user connected');
-        $scope.socket = $scope.io;
-      });
+          scope.io.on('message', function(data) {
+          
+            if (!data.message.attachment) {
+              scope.addTextMessage(data.message, false);
+            } else if (data.message.attachment) {
+              scope.addGenericList(data.message.attachment);
+            }
 
-      $scope.io.on('disconnect', function(){
-        console.log('user disconnected');
-        $scope.socket = null;
-      });
-
-      $scope.io.on('message', function(data) {
-        
-        if (!data.message.attachment) {
-          $scope.addTextMessage(data.message, false);
-        } else if (data.message.attachment) {
-          $scope.addGenericList(data.message.attachment);
+          });
         }
-
       });
+    },
+    controller: [ '$scope','$timeout','$compile',function ($scope, $timeout, $compile) {
 
+      
       
       $scope.addTextMessage = function(text, userInput) {
         console.log("adding Text Message ..." + JSON.stringify(text));
@@ -70,10 +79,10 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
       };
 
       $scope.addToChat = function(liElement) {
-        var element = document.getElementById("chat_window_1");
+        var element = document.getElementById($scope.windowId);
         angular.element(element).append(liElement);  
         $timeout(function(){
-            var chatBody = document.getElementById("chat_body");
+            var chatBody = document.getElementById("chat_body_"+$scope.venueId);
             chatBody.scrollTop = chatBody.scrollHeight;
         }, 200);
       };
@@ -124,35 +133,6 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
           $scope.initialieCarousel();
 
         }
-        /*<li class="list-group">
-             <div class="" >
-              <div class=" ">
-                <img class="" src="/assets/img/19.jpg"> 
-                <div class="col-sm-8 no-pr">
-                  <span class="h5">my title</span>
-                  <p>my long description and so on</p>
-                </div>
-                <a class="btn btn-raised btn-primary btn-sm" href="#" ng-click="select(1)">Select Venue</a>
-              </div>
-              <div class="col-sm-12 list-group_item well">
-                <img class="img-responsive no-p no-m col-sm-4" src="/assets/img/19.jpg"> 
-                <div class="col-sm-8 no-pr">
-                  <span class="h5">my title</span>
-                  <p>my long description and so on</p>
-                </div>
-                <a class="btn btn-raised btn-primary btn-sm" href="#" ng-click="select(1)">Select Venue</a>
-              </div>
-              <div class=" col-sm-12 list-group_item well">
-                <img class="img-responsive no-p no-m col-sm-4" src="/assets/img/19.jpg"> 
-                <div class="col-sm-8 no-pr">
-                  <span class="h5">my title</span>
-                  <p>my long description and so on</p>
-                </div>
-                <a class="btn btn-raised btn-primary btn-sm" href="#" ng-click="select(1)">Select Venue</a>
-              </div>
-              
-
-          </li>*/
       };
       $scope.process = function() {
         $scope.processInput($scope.question, $scope.question);
@@ -167,14 +147,9 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
         }
         
         $scope.question = "";
-      }
-      $timeout(function() {
-        $(chatInputId).bind('keyup', function(e) {
-            if(e.keyCode === 13) {
-                $scope.process();
-            }
-          });
-        }, 500);
+      };
+      
+
 
       $scope.initialieCarousel = function() {
         $timeout( function() {
@@ -188,20 +163,7 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
               nav: true,
               navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
               navClass:['owl-prev-1', 'owl-next-1'],
-              responsive:{
-                  0: {
-                      items: 1
-                  },
-                  768: {
-                      items: 1
-                  },
-                  992: {
-                      items: 1
-                  },
-                  1200: {
-                      items: 1,
-                  },
-              }
+              items: 1
           });
         });
       };
