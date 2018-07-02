@@ -193,11 +193,23 @@ App.controller('WebuiButtonsController', ['$state', '$stateParams', '$scope', '$
 
         $scope.save = function () {
         	var btns = [];
+            var orderMap = [];
+
         	for (var i=0; i < $scope.newButtonArray.length; i++) {
         		var src = $scope.newButtonArray[i];
-        		 var btn = { id: src.id, name: src.name, color: src.color,  serviceName: src.serviceName};
-        		 btns.push(btn);
+        		var btn = { id: src.id, name: src.name, color: src.color,  serviceName: src.serviceName};
+        		//btns.push(btn);
+                orderMap[src.id] = btn;
         	}
+
+            var orderedIds = $('#droptarget').sortable("toArray");
+            for (var oi=0; oi < orderedIds.length; oi++) {
+                var btn = orderMap[orderedIds[oi]];
+                if (!!btn) {
+                    btns.push(btn);
+                }
+            }
+
         	var uiBtnsJson = JSON.stringify(btns);
             var payload = {};
 
