@@ -3112,3 +3112,15 @@ button {
     display: block !important;
     border:0px solid black;
 }
+
+.nav_height {
+  margin-top: 30px;
+}
+
+.card .card-info {
+  width: 1035px;
+}
+
+.wait-bot {
+  margin-bottom: 3rem !important;
+}

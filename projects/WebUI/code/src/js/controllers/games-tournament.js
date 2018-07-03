@@ -24,6 +24,10 @@ app.controller('GamesTournamentController', ['$log', '$scope', '$http', '$locati
             ngMeta.setTitle("Games and Tournament - Venuelytics");
             ngMeta.setTag('image', 'assets/img/screen2.jpg');
             ngMeta.setTag('description',"View active Games, Wait time and Tournament schedules");
+            
+            if(self.venueName === 'Casino M8trix'){
+                $rootScope.headcasino = true;
+            }
         };
         
         self.initMore = function() {
