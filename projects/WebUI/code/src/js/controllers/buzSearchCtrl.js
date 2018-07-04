@@ -133,7 +133,6 @@ app.controller('BusinessSearchController', ['$log', '$translate','$scope', '$htt
         self.claim = function (selectedVenue) {
             $window.scrollTo(0, 0);
 
-            DataShare.selectedVenue = selectedVenue;
             self.selectedVenueName = selectedVenue.venueName;
             self.selectedVenueId = selectedVenue.id;
             self.selectedVenueWebsite = selectedVenue.website;
@@ -201,7 +200,6 @@ app.controller('BusinessSearchController', ['$log', '$translate','$scope', '$htt
         };
 
         self.alreadyClaimed = function (selectedVenue) {
-            DataShare.selectedVenue = selectedVenue;
             $location.url('/businessAlreadyClaimed/' + selectedVenue.id);
             /*AjaxService.getClaimBusiness(selectedVenue.id).then(function(response) {
                 // $location.path("/deployment/"+selectedVenue.id);

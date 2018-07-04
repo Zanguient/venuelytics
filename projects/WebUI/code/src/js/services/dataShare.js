@@ -3,9 +3,6 @@ app.service('DataShare', function () {
   this.latitude = '';
   this.tableGuests = '';
   this.longitude = '';
-  this.venueNumber = '';
-  this.venueName = '';
-  this.selectedVenue = {};
   this.bottleServiceData = {};
   this.claimBusiness = {};
   this.privateEventData = {};
@@ -26,7 +23,6 @@ app.service('DataShare', function () {
   this.userselectedTables = '';
   this.foodService = [];
   this.drinks = [];
-  this.selectedBlog = {};
   this.editBottle = '';
   this.enablePayment = '';
   this.serviceTypes = '';
@@ -41,7 +37,7 @@ app.service('DataShare', function () {
   this.selectedDrinks = '';
   this.amount = '';
   this.privateOrderItem = '';
-  this.paymetObjct={}
+  this.paymetObjct={};
 
   /*this.getCurrentLocation = function() {
 
@@ -69,6 +65,6 @@ app.service('DataShare', function () {
     this.guestListData = {};
     this.paymetObjct = {};
     this.foodServiceData = {};
-  }
+  };
 
 });
