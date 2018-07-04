@@ -46,7 +46,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         AjaxService.getInfo(self.venueId).then(function(response) {
             
             venueService.saveVenueInfo(self.venueId, response);
-            self.waitTimeButton = response.data["Advance.WaitTime.enable"];
+            self.waitTimeButton = response.data["Advance.showGameWaiting.enable"];
             self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
             self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
             self.bottleServiceButton = response.data["Advance.BottleService.enable"];
@@ -238,7 +238,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         self.btnMap['table-services'] = ['tableServiceTab','tableService', 'assets/img/service/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, '#DC992ACC', 'tableServices']; 
         self.btnMap['food-services'] = ['foodServiceTab','foodTab', 'assets/img/service/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, '#1E8644CC', 'foodServices'];
         self.btnMap['drink-services'] = ['drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, '#DA0615CC', 'drinkServices'];
-        self.btnMap['wait-time'] = ['waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'wait-time/wait-time.html',self.WaitTimeButton, '#3C3C3CCC', 'waittime'];
+        self.btnMap['wait-time'] = ['waitTimeTab','waittime', 'assets/img/service/vipbox_survey.png','Wait Time', 'wait-time', 'wait-time/wait-time.html',self.waitTimeButton, '#3C3C3CCC', 'waittime'];
         self.btnMap['contests'] =  ['contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, '#C83C3CCC', 'contests'];
         self.btnMap['rewards'] = ['rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, '#C8C81ECC', 'rewards'];
 
@@ -257,6 +257,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 var attrs = self.btnMap[tabsBtns[k].serviceName];
                 if (attrs) {
                     attrs[3] = tabsBtns[k].name;
+                    attrs[7] = tabsBtns[k].color + "CC";
                     addTab(attrs[0], attrs[1], attrs[2], attrs[3], attrs[4], attrs[5], attrs[6], attrs[7], attrs[8]);
                 }
             }

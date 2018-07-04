@@ -28,6 +28,9 @@ app.controller('GamesTournamentController', ['$log', '$scope', '$http', '$locati
             if(self.venueName === 'Casino M8trix'){
                 $rootScope.headcasino = true;
             }
+            setTimeout(function() {
+                self.getSelectedTab();
+            }, 600);
         };
         
         self.initMore = function() {
@@ -43,6 +46,11 @@ app.controller('GamesTournamentController', ['$log', '$scope', '$http', '$locati
              AjaxService.getTournament(self.detailsOfVenue.id).then(function(response){
                 self.tournaments = response.data;
             });
+        };
+
+        self.getSelectedTab = function() {
+            $(".service-btn .card").removeClass("tabSelected");
+            $("#waittime > .card").addClass("tabSelected");
         };
 
         self.init();
