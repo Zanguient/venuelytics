@@ -13,7 +13,7 @@ const dealsSpecials = require("./deals-specials");
 const topGolf = require("./top-golf");
 const events = require("./events");
 const shuttle = require("./shuttle-service");
-const reservation = require("./reservation");
+
 const chargers = require("./phone-chargers");
 
 
@@ -100,9 +100,8 @@ function initializationSuccess(senderId, channel, venue) {
     let info = venue.info;
     let venueName = venue.venueName;
     venueName += "'s";
-    let welcomeMessage = info[`facebook.defaultWelcomeMessage`] ;
-    
-
+    let welcomeMessage = info[`${channel.getName()}.defaultWelcomeMessage`] ;
+  
     let defaultMessage = `\nWelcome to ${venueName} Personalized Digital Concierge Service!  You can request Reservations, Bookings, Deals, Events, Rate the service, Amenities, Food & Drink Ordering. How can I help?`;
 
     let message = welcomeMessage || defaultMessage;
@@ -121,13 +120,11 @@ const fxReadVenue = function(senderId, text, channel, venue) {
 
 const aiResponse = function(channel, senderId, response) {
   let user = Users.getUser(senderId);
-  let restartAdvice = user.state.get("advice.restart");
-  if (!restartAdvice) {
-    channel.sendMessage(senderId, "you can type 'RESTART' to start over again. ");
-    user.state.set("advice.restart", true);
-  }
+  
   if (response.action === "RESTART") {
-    channel.sendMessage(senderId, "type BYE to confirm and again to Start over again.");
+    let user = Users.getUser(senderId);
+    user.clear();
+    channel.sendMessage(senderId, "Bye! See you again.");
     return;
   } else if (response.action === "smalltalk.greetings.bye") {
     let user = Users.getUser(senderId);
@@ -177,8 +174,15 @@ const processAIResponse = function(channel, senderId, response) {
       let message = smsMessage || defaultMessage;
 
       channel.sendMessage(senderId,  message);
+      
+
     } else {
       channel.sendMessage(senderId, response.responseSpeech);
+    }
+    let restartAdvice = user.state.get("advice.restart");
+    if (!restartAdvice) {
+        channel.sendMessage(senderId, "you can type 'RESTART' to start over again. ");
+        user.state.set("advice.restart", true);
     }
   }
 };
@@ -320,10 +324,6 @@ const aiError = function(channel, fromNumber, error) {
   console.log(JSON.stringify(error));
 };
 
-function fxReservationDispatcher(userId, response, channel) {
-  reservation.fxReservation(userId, response, channel);
-}
-
 module.exports = {
   ANSWERS: ANSWERS,
   QUESTIONS: QUESTIONS,
@@ -333,5 +333,7 @@ module.exports = {
   initializeSender: initializeSender
 };
 
-
-
+const reservation = require("./reservation");
+function fxReservationDispatcher(userId, response, channel) {
+  reservation.fxReservation(userId, response, channel);
+}

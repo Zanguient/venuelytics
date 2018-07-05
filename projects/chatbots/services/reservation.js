@@ -41,7 +41,7 @@ const reservationService = function(userId, response, channel) {
 
     if (!user.hasParameter("serviceType")) {
         channel.sendMessage(userId, "What kind of reservation you want to make? (Bottle, Table, GuestList)");
-        user.setConversationContext("Q_RESERVATION", false, curry(getServiceType)(channel));
+        user.setConversationContext("Q_RESERVATION", false, getServiceType);
         return;
     }
 
@@ -60,7 +60,7 @@ const reservationService = function(userId, response, channel) {
 function fxNumberOfGuests(type, userId, response, channel) {
   let user = Users.getUser(userId);
   channel.sendMessage(userId, "For how many guests you want to reserve tables?");
-  user.setConversationContext(type, false, curry(fxNumberOfGuestsResponse)(channel));
+  user.setConversationContext(type, false, fxNumberOfGuestsResponse);
 }
 
 function fxNumberOfGuestsResponse(channel, userId, noOfGuests, type, response) {
@@ -68,7 +68,7 @@ function fxNumberOfGuestsResponse(channel, userId, noOfGuests, type, response) {
   const user = Users.getUser(userId);
   if (isNaN(guests)) {
     channel.sendMessage(userId, "Please enter a number like 2 or say 2 guests.");
-    user.setConversationContext(type, false, curry(fxNumberOfGuestsResponse)(channel));
+    user.setConversationContext(type, false, fxNumberOfGuestsResponse);
     return;
   }
   
@@ -98,7 +98,7 @@ function fxReservation(userId, response, channel) {
 function fxReservationDate(type, userId, response, channel) {
   const user = Users.getUser(userId);
   channel.sendMessage(userId, "For which date you want to reserve?");
-  user.setConversationContext(type, false, curry(fxReservationDateResponse)(channel));
+  user.setConversationContext(type, false, fxReservationDateResponse);
 }
 
 function fxReservationDateResponse(channel, userId, reservationDate, type, response) {
@@ -125,7 +125,7 @@ function resolvedReservationDate(type, channel, userId, response) {
 function failedResolvingReservationDate(type, channel, userId, response) {
   const user = Users.getUser(userId);
   channel.sendMessage(userId, "Opps, Didn't understand your date! Please enter again, you can enter like jan 29");
-  user.setConversationContext( type, false, curry(fxReservationDateResponse)(channel));
+  user.setConversationContext( type, false, fxReservationDateResponse);
 }
 
 function fxTableNumber(type, userId, response, channel) {
@@ -160,7 +160,7 @@ function fxTableNumber(type, userId, response, channel) {
     } else {
       user.state.set("bottleTables", bottleTables);
       channel.sendTableList(userId, bottleTables);
-      user.setConversationContext(type, true, curry(fxSelectTableResponse)(channel));
+      user.setConversationContext(type, true, fxSelectTableResponse);
     }
   });
 }
@@ -170,7 +170,7 @@ function fxSelectTableResponse(channel, userId, tableIndex, type, response) {
   tableIndex = parseInt(tableIndex);
   if (isNaN(tableIndex)) {
     channel.sendMessage(userId, "Not a valid selection. Plese select again.");
-    user.setConversationContext(type, true, curry(fxSelectTableResponse)(channel) );
+    user.setConversationContext(type, true, fxSelectTableResponse );
     return;
   }
   var bottleTables = user.state.get("bottleTables");
@@ -188,18 +188,18 @@ function fxSelectTableResponse(channel, userId, tableIndex, type, response) {
 function fxGetEmail(type, userId, response, channel) {
   const user = Users.getUser(userId);
   channel.sendMessage(userId, "Please enter your email address to confirm and manage your order status.");
-  user.setConversationContext(type, true, curry(fxGetEmailResponse)(channel));
+  user.setConversationContext(type, true, fxGetEmailResponse);
 }
 
 function fxGetEmailResponse(channel, userId, email, type, response) {
   let user = Users.getUser(userId);
   if (!validateEmail(email)) {
     channel.sendMessage(userId, "You have entered invalid email address. Please enter a valid email.");
-    user.setConversationContext(type, true, curry(fxGetEmailResponse)(channel));
+    user.setConversationContext(type, true, fxGetEmailResponse);
   } else {
     channel.sendMessage(userId,`You have entered your email as ${email}. Type YES to continue, NO to correct your email.` );
     user.state.set("email", email);
-    user.setConversationContext(type, false, curry(fxConfirmEmail)(channel));
+    user.setConversationContext(type, false, fxConfirmEmail);
   }
 }
 
@@ -207,7 +207,7 @@ function fxConfirmEmail(channel, userId, yesno, type, response) {
   let user = Users.getUser(userId);
   if (response.action === "smalltalk.confirmation.yes") {
     channel.sendReservationConfirmation(userId, user, type);
-    user.setConversationContext(type, false, curry(fxConfirmReservationResponse)(channel));
+    user.setConversationContext(type, false, fxConfirmReservationResponse);
   } else {
     fxGetEmail(type, userId, response, channel);
   }
@@ -260,7 +260,7 @@ const resolvedServiceType = function(type, channel, userId, response) {
 const failedResolvingServiceType = function(type, channel, userId, error) {
     const user = Users.getUser(userId);
     channel.sendMessage(userId, "Opps, try again? (Bottle, Table, GuestList)");
-    user.setConversationContext(type, false, curry(getServiceType)(channel));
+    user.setConversationContext(type, false, getServiceType);
 };
 function parseDate(str) {
     var m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/);
@@ -286,7 +286,7 @@ function loginSuccess(userId, type, loginToken, channel) {
   
     if (!user.hasParameter("firstName")) {
       channel.sendMessage(userId,"Please enter guest name for this reservation.");
-      user.setConversationContext(type, true, curry(createOrder)(channel));
+      user.setConversationContext(type, true, createOrder);
     } else {
       createOrder(channel, userId, null, null, null);
     }
