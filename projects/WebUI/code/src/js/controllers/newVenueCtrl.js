@@ -106,9 +106,6 @@ app.controller('NewVenueController', ['$rootScope','$log', '$scope', '$http', '$
             };
 
             self.getVenueDetailUrl = function(venue) {
-                //DataShare.selectedVenueDetails = venue;
-                DataShare.selectedVenue = venue;
-                DataShare.venueNumber = venue.id;
                 self.selectedCityName = venue.city;
                 var q = "";    
                 if ($rootScope.embeddedFlag) {

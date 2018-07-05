@@ -46,6 +46,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         AjaxService.getInfo(self.venueId).then(function(response) {
             
             venueService.saveVenueInfo(self.venueId, response);
+            self.waitTimeButton = response.data["Advance.showGameWaiting.enable"];
             self.drinkSeriveButton = response.data["Advance.DrinksService.enable"];
             self.foodSeriveButton = response.data["Advance.FoodRequest.enable"];
             self.bottleServiceButton = response.data["Advance.BottleService.enable"];
@@ -69,6 +70,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 $rootScope.venueFooter = response.data["ui.custom.footer"];
                 $rootScope.embeddedFlag = true;
             }
+            self.waitTimeButton = self.waitTimeButton === 'Y' ? false : true;
             self.drinkSeriveButton = self.drinkSeriveButton === 'Y' ? false : true;
             self.foodSeriveButton = self.foodSeriveButton === 'Y' ? false : true;
             self.bottleServiceButton = self.bottleServiceButton === 'Y' ? false : true;
@@ -236,7 +238,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         self.btnMap['table-services'] = ['tableServiceTab','tableService', 'assets/img/service/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, '#DC992ACC', 'tableServices']; 
         self.btnMap['food-services'] = ['foodServiceTab','foodTab', 'assets/img/service/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, '#1E8644CC', 'foodServices'];
         self.btnMap['drink-services'] = ['drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, '#DA0615CC', 'drinkServices'];
-        self.btnMap['wait-time'] = ['waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'casino/wait-time.html',true, '#3C3C3CCC', 'waittime'];
+        self.btnMap['wait-time'] = ['waitTimeTab','waittime', 'assets/img/service/vipbox_survey.png','Wait Time', 'wait-time', 'wait-time/wait-time.html',self.waitTimeButton, '#3C3C3CCC', 'waittime'];
         self.btnMap['contests'] =  ['contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, '#C83C3CCC', 'contests'];
         self.btnMap['rewards'] = ['rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, '#C8C81ECC', 'rewards'];
 
@@ -255,12 +257,13 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 var attrs = self.btnMap[tabsBtns[k].serviceName];
                 if (attrs) {
                     attrs[3] = tabsBtns[k].name;
+                    attrs[7] = tabsBtns[k].color + "CC";
                     addTab(attrs[0], attrs[1], attrs[2], attrs[3], attrs[4], attrs[5], attrs[6], attrs[7], attrs[8]);
                 }
             }
         } else { // old implementation000000CC
             
-            addTab('bottleTab','bottle', 'assets/img/service/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, '#7A11D9CC', 'bottleService');
+             addTab('bottleTab','bottle', 'assets/img/service/bottles.png','reservation.BOTTLE_SERVICE', 'bottle-service', 'bottle-service/bottle-service.html', self.bottleServiceButton, '#7A11D9CC', 'bottleService');
 
             if (self.venueId === 70008) {
              //   addTab('reservationTab','party', 'assets/img/service/ic_party(2).png','RESERVATION', 'reservation-service', 'reservation-service/reservation-service.html',false, 'partyBtn', 'reservationService');
@@ -275,9 +278,11 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             addTab('foodServiceTab','foodTab', 'assets/img/service/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, '#1E8644CC', 'foodServices');
             addTab('drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, '#DA0615CC', 'drinkServices');
             
-            if(self.venueId === 170649) {
+            if(self.venueId === 960) {
+            console.log("self.venueId>>>>>>>>>>>>",self.venueId);
+                
                 //id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected
-                addTab('waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'casino/wait-time.html',true, '#3C3C3CCC', 'waittime');
+                addTab('waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'wait-time/wait-time.html',false, '#3C3C3CCC', 'waittime');
                 addTab('contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, '#C8C81ECC', 'contests');
                 addTab('rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, '#C8C81ECC', 'rewards');
             }

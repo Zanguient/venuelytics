@@ -27,7 +27,8 @@ App.controller('StoreController', ['$translate', '$scope', '$state', '$statePara
       "Advance.LostFacus.enable": false,
       "Advanced.tournaments.enable": false,
       "Advance.GuestList.enable": false,
-      "Advance.KarokeRequest.enable": false
+      "Advance.KarokeRequest.enable": false,
+      "Advance.showGameWaiting.enable": false
     };
 
     $scope.additionalFields = [

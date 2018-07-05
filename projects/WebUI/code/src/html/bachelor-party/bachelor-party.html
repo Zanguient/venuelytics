@@ -3,17 +3,17 @@
 <div class="showInWeb">
  <h4 >{{'bottleServiceTab.DESC' | translate}}</h4>
     <div class="form-group ">
-        <p id="banquetHallData">{{BacheolorDescription}}</p>
+        <p >{{BacheolorDescription}}</p>
     </div>
 </div>
 <div class="showInMobile">
  <h4 class="">{{'bottleServiceTab.DESC' | translate}}</h4>
     <div class="form-group" ng-if="!desc">
-        <p id="banquetHallData">{{"reservation.DESCRIPTION_MOBILE" | translate}}</p>
+        <p >{{"reservation.DESCRIPTION_MOBILE" | translate}}</p>
         <a class="btn btn-default btn-raised btn-xs pull-right" ng-click="privateDescription()">{{'reservation.READ_MORE' | translate}}</a>
     </div>
     <div class="form-group" ng-if="desc">
-        <p id="banquetHallData" >{{"reservation.DESCRIPTION" | translate}}</p>
+        <p >{{"reservation.DESCRIPTION" | translate}}</p>
     </div>
 </div>
 

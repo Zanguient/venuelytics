@@ -24,6 +24,13 @@ app.controller('GamesTournamentController', ['$log', '$scope', '$http', '$locati
             ngMeta.setTitle("Games and Tournament - Venuelytics");
             ngMeta.setTag('image', 'assets/img/screen2.jpg');
             ngMeta.setTag('description',"View active Games, Wait time and Tournament schedules");
+            
+            if(self.venueName === 'Casino M8trix'){
+                $rootScope.headcasino = true;
+            }
+            setTimeout(function() {
+                self.getSelectedTab();
+            }, 600);
         };
         
         self.initMore = function() {
@@ -39,6 +46,11 @@ app.controller('GamesTournamentController', ['$log', '$scope', '$http', '$locati
              AjaxService.getTournament(self.detailsOfVenue.id).then(function(response){
                 self.tournaments = response.data;
             });
+        };
+
+        self.getSelectedTab = function() {
+            $(".service-btn .card").removeClass("tabSelected");
+            $("#waittime > .card").addClass("tabSelected");
         };
 
         self.init();

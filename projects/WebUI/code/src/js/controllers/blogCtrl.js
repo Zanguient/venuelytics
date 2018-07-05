@@ -47,11 +47,7 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
             {date:"December 22, 2017", name:"App Advice",image:"app-advice.png", title: "ItzFun: Digital Concierge App", url: "https://appadvice.com/app/itzfun-digital-concierge-app/1035171101", description: "ItzFun! is an entertainment platform for consumers who want to know what are the happening & fun venues near them, at this very moment! Which are the casinos, clubs and lounges nearest to them, and what's the vibe at those venues right now? Users can also learn which venues offer the exclusive ItzFun! "},
             {date:"December 27, 2017", name:"App Advice",image:"get-app.png", title: "VenueLytics Pricing, Features, Reviews & Comparison of Alternatives", url: "https://www.getapp.com/operations-management-software/a/venuelytics/", description: "VenueLytics is a cloud-based event and venue management solution designed for businesses in the hospitality, entertainment, and service industries. The software includes tools for managing real-time reservations, food and drink services, guest lists, private events, customer loyalty and marketing campaigns, WiFi access, custom apps, and more."},
         ];
-        self.readMore = function(blogPost) {
-          DataShare.selectedBlog = blogPost;
-          $location.url('/blogPost');
-        };
-
+        
         $rootScope.getSearchBySearch = function(searchVenue){
           $location.url('/cities');
           setTimeout(function(){

@@ -178,8 +178,6 @@ app.controller('CityController', ['$log', '$scope', '$http', '$location', 'RestU
             }
             self.selectVenue = function(venue) {
                 self.selectedCityName = venue.city;
-                DataShare.selectedVenue = venue;
-                DataShare.venueNumber = venue.id;
                 $location.url('/cities/' + self.selectedCityName + '/' + self.venueRefId(venue) );
             };
 
