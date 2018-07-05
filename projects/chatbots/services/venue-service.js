@@ -70,7 +70,7 @@ const FACILITY_TYPE = [
 
 const ANSWERS = [];
 ANSWERS["Q_WIFI_PASSWORD"] = { text: "VALUE", api_name: "info", value: "wifi-password"};
-ANSWERS["Q_AMENITIES"] = { text: "VALUE", api_name: "info", value: "aminities"};
+ANSWERS["Q_AMENITIES"] = { text: "VALUE", api_name: "info", value: "amenities"};
 ANSWERS["Q_ADDRESS"] = { text: "Address: VALUE", api_name: "venue", value: "address"};
 
 function processMessage(senderId, text, channel) {

@@ -49,6 +49,8 @@
                     </div>
                 </div>
                 <div ng-include="selectedPage()" ng-hide="removeAllTabs === true"></div><br>
+                 <chat-messanger venue-id="venueId" venue-name="venueName" service-name="tabParams" ng-show="enableChatBot(tabParams)"/>
+
                 <div class="eventListcal" ng-if="removeAllTabs == true">
                     <table class="table">
                         <tr><td>

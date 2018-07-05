@@ -40,8 +40,9 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
             }
 
             var adminSettings = [
+            	{ "displayName": "Enable Web Bot", "name": "WebBot.enable", "type": "text", "help":"only Y or N","value": "" },
                 { "displayName": "SMS Bot Number", "name": "sms.bot.number", "type": "text", "value": "" },
-                { "displayName": "Aminities", "name": "aminities", "type": "text", "value": "" },
+                { "displayName": "Amenities", "name": "amenities", "type": "text", "value": "" },
                 { "displayName": "Wifi Info", "name": "wifi-password", "type": "text", "value": "" },
             ];
 

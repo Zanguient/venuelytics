@@ -3,7 +3,7 @@
         <div class="form-group">
             <label class="col-sm-4 control-label">{{setting.displayName}}:</label>
             <div class="col-sm-8">
-                <textarea class="form-control" rows="3" ng-model="setting.value" ng-trim="true" />
+                <textarea class="form-control" rows="3" ng-model="setting.value" ng-trim="true" placeholder="{{setting.help || ''}}"/>
             </div>
         </div>
     </fieldset>

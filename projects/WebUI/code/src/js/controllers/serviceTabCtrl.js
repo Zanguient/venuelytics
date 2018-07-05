@@ -20,6 +20,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
     self.tabParams = $routeParams.tabParam;
     self.embeddedService = $routeParams.new;
     self.tabBtnsLayout = '';
+    self.enableWebBot = false;
     self.init= function() {
         
         AjaxService.getVenues($routeParams.venueId,null,null).then(function(response) {
@@ -58,7 +59,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.eventsEnable = response.data["venueEvents"];
             $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
             self.tabBtnsLayout = response.data['ui.service.service-buttons'] || '';
-
+            self.enableWebBot = response.data['WebBot.enable'] === 'Y';
             if ($rootScope.blackTheme === '') {
                 $rootScope.bgMask = 'bg-mask-white';
             } else {
@@ -161,6 +162,12 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             self.tabParams = serviceName;
         }
     };
+    self.enableChatBot = function(serviceName) {
+ 		console.log("bot service for " + serviceName);
+    	var d = self.dispatchHandler[serviceName];
+    	return !!d && d.enabled && self.enableWebBot;
+    	
+    };
     self.venueTimeFormatted = function() {
         
         if (!!self.venueTotalHours && self.venueTotalHours.length == 1 && self.venueTotalHours[0].sTime ===  self.venueTotalHours[0].eTime) {
@@ -193,7 +200,10 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
            selected: tabSelected
            
         });
-        self.dispatchHandler[tabParam] = {dispatchId: tabParam, tabId: id, htmlPage: htmlContentPage};
+        if (typeof self.tabParams === 'undefined' && !disableTab) {
+        	self.tabParams = tabParam;
+        }
+        self.dispatchHandler[tabParam] = {dispatchId: tabParam, tabId: id, enabled: !disableTab, htmlPage: htmlContentPage};
     }
 
     function optimizeTabDisplay(tabArray) {
