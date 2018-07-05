@@ -210,7 +210,6 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         // get 3 tabs at at a time and check if they have ateast one service enabled.
         // If not remove that row
         var removeRows = [];      
-        
         for(var i = 0 ; i < tabArray.length; i=i+3){
             var disabled = tabArray[i].disabled;
             if (tabArray.length > i+1) {
@@ -248,7 +247,7 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
         self.btnMap['table-services'] = ['tableServiceTab','tableService', 'assets/img/service/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, '#DC992ACC', 'tableServices']; 
         self.btnMap['food-services'] = ['foodServiceTab','foodTab', 'assets/img/service/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, '#1E8644CC', 'foodServices'];
         self.btnMap['drink-services'] = ['drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, '#DA0615CC', 'drinkServices'];
-        self.btnMap['wait-time'] = ['waitTimeTab','waittime', 'assets/img/service/vipbox_survey.png','Wait Time', 'wait-time', 'wait-time/wait-time.html',self.waitTimeButton, '#3C3C3CCC', 'waittime'];
+        self.btnMap['wait-time'] = ['waitTimeTab','waitTime', 'assets/img/service/vipbox_survey.png','Wait Time', 'wait-time', 'wait-time/wait-time.html',self.waitTimeButton, '#3C3C3CCC', 'waittime'];
         self.btnMap['contests'] =  ['contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, '#C83C3CCC', 'contests'];
         self.btnMap['rewards'] = ['rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, '#C8C81ECC', 'rewards'];
 
@@ -289,10 +288,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             addTab('drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, '#DA0615CC', 'drinkServices');
             
             if(self.venueId === 960) {
-            console.log("self.venueId>>>>>>>>>>>>",self.venueId);
                 
                 //id, bId, img, name, tabParam, htmlContentPage, disableTab, btnClass, tabSelected
-                addTab('waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'wait-time/wait-time.html',false, '#3C3C3CCC', 'waittime');
+                addTab('waitTimeTab','waitTime', 'assets/img/service/event_image.png','Wait Time', 'wait-time', 'wait-time/wait-time.html',self.waitTimeButton, '#3C3C3CCC', 'waittime');
                 addTab('contestsTab','contests', 'assets/img/service/trophy.png','Contests', 'contests', 'casino/contests.html',true, '#C8C81ECC', 'contests');
                 addTab('rewardsTab','rewards', 'assets/img/service/privates.png','Rewards', 'rewards', 'casino/rewards.html',true, '#C8C81ECC', 'rewards');
             }

@@ -97,8 +97,8 @@
                         <tr ng-repeat="food in selectedFoodList">
                           <td>{{food.name}}</td>
                           <td>{{food.count}}</td>
-                          <td class="hidden-xs hidden-sm">&dollar;{{food.price  | number:2}}</td>
-                          <td><span ng-hide="((food == null || food.total == undefined))">&dollar;{{(food == null || food.total == undefined) ? "0" : food.total | number:2}}</span></td>
+                          <td><span class="hidden-xs hidden-sm" ng-if="food.price > 0">&dollar;{{food.price  | number:2}}</span></td>
+                          <td><span ng-hide="((food == null || food.total == undefined))" ng-if="food.price > 0">&dollar;{{(food == null || food.total == undefined) ? "0" : food.total | number:2}}</span></td>
                           <td><button type="submit" class="btn btn-xs btn-danger no-mt no-mb" ng-click="removeFoodItems($index,food)">
                             <i class="fa fa-2x fa-times"></i></button>
                             </td>
@@ -126,9 +126,9 @@
                                 <div class="menu-title">
                                     <div class="title bg-mask">
                                         {{item.name}}
-                                    </div>
-                                    <span class="bg-mask">
-                                        $ {{item.price | number:2}}
+                                    </div>                                                          
+                                    <span class="bg-mask" ng-if="item.price > 0" >
+                                     $ {{item.price | number:2}}
                                     </span>
                                 </div>
                                 <p>{{item.description}}</p>

@@ -86,8 +86,8 @@
                     <tr ng-repeat="drink in userSelectedDrinks">
                       <td>{{drink.name}}</td>
                       <td>{{drink.count}}</td>
-                      <td class="hidden-xs hidden-sm">&dollar;{{drink.price  | number:2}}</td>
-                      <td><span ng-hide="((drink == null || drink.total == undefined))">&dollar;{{(drink == null|| drink.total == undefined) ? "0" : drink.total | number:2}}</span></td>
+                      <td ><span class="hidden-xs hidden-sm" ng-if="drink.price > 0">&dollar;{{drink.price  | number:2}}</span></td>
+                      <td><span ng-hide="((drink == null || drink.total == undefined))" ng-if="drink.price > 0">&dollar;{{(drink == null|| drink.total == undefined) ? "0" : drink.total | number:2}}</span></td>
                        <td><button type="submit" class="btn btn-xs btn-danger no-mt no-mb" ng-click="removeDrinkItems($index,drink)"><i class="fa fa-2x fa-times"></i></td>
                     </tr>
                   </tbody>
@@ -114,7 +114,7 @@
                                     <div class="title" ng-class="bgMask">
                                         {{item.name}}
                                     </div>
-                                    <span ng-class="bgMask">
+                                    <span ng-class="bgMask" ng-if="item.price > 0">
                                         $ {{item.price | number:2}}
                                     </span>
                                 </div>
