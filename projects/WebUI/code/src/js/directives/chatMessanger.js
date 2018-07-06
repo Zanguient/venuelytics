@@ -117,7 +117,7 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
               for (var j=0; j < element.buttons.length ; j++) {
                 var b = element.buttons[j];
                 var action = "";
-                if (b.type == 'postback') {
+                if (b.type === 'postback') {
                   action = '<button class="btn btn-raised btn-primary btn-sm" ng-click="selectAction(\''+b.payload+'\',\''+ escape(element.title)+'\')">' + b.title + '</button>';  
                 } else {
                   action = '<a class="btn btn-raised btn-primary btn-sm" href="'+b.url+'" target="_blank">' + b.title + '</a>';    
