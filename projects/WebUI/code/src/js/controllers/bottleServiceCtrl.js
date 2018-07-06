@@ -9,9 +9,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             $log.debug('Inside Bottle Service Controller.');
 
 
-            var self = $scope;
+        let self = $scope;
 
-            self.selectionTableItems = [];
+        self.selectionTableItems = [];
             self.bottleCount = 1;
             self.selectedVenueMap = {};
             self.bottleMinimum = [];
@@ -27,13 +27,13 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 if (typeof(self.availableDays) === 'undefined' || self.availableDays.length === 0) {
                   return true;
                 }
-                var enabled = false;
-                for(var i = 0; i < self.availableDays.length; i++) {
-                  var startDate = new Date(self.availableDays[i].startDate.substring(0, 10));
-                  var endDate = new Date(self.availableDays[i].endDate.substring(0, 10));
-                  var strDate= iDate.getFullYear()+'-' + (iDate.getMonth()+1) + '-' + iDate.getDate();
-                  var date = new Date(strDate);
-                  enabled = enabled || (startDate.getTime() <= date.getTime() && endDate.getTime() >= date.getTime());
+                let enabled = false;
+                for(let i = 0; i < self.availableDays.length; i++) {
+                    const startDate = new Date(self.availableDays[i].startDate.substring(0, 10));
+                    const endDate = new Date(self.availableDays[i].endDate.substring(0, 10));
+                    const strDate = iDate.getFullYear() + '-' + (iDate.getMonth() + 1) + '-' + iDate.getDate();
+                    const date = new Date(strDate);
+                    enabled = enabled || (startDate.getTime() <= date.getTime() && endDate.getTime() >= date.getTime());
                 }
                 return enabled;
             }
@@ -65,10 +65,10 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             }
             self.initMore = function() {
                 //$("div.form-group").add("style", "margin-left: auto");
-                var date = new Date();
+                const date = new Date();
                 $rootScope.serviceTabClear = false;
-                var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-               
+                const today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
                 if((Object.keys(DataShare.bottleServiceData).length) !== 0) {
                     self.bottle = DataShare.bottleServiceData;
                     self.sum = DataShare.count;
@@ -130,22 +130,32 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             }; 
                        
             $(window).resize(function() {
-                var divHeight = $('#imagemap').height();
-                var divWidth = $('#imagemap').width();
-                setTimeout(function() {
-                    $('#imagemap').maphilight();
-                    if (divHeight > 0) {
-                        $('div.map.img-responsive').css('width', divWidth + 'px');
-                        $('div.map.img-responsive').css('height', divHeight + 'px');
-                        $('canvas').css('height', divHeight + 'px');
-                        $('canvas').css('width', divWidth + 'px');
-                        $('#imagemap').css('height', divHeight + 'px');
-                        $('#imagemap').css('width', divWidth + 'px');
-                    }
-                }, 7000);
+
+                self.updateVenueMap();
             });
 
             
+            self.updateVenueMap = function () {
+
+                let $imgMap = $('#imagemap');
+                let $canvas = $('canvas');
+
+                let $img  = $('div.map.img-responsive');
+                const divHeight = $imgMap.height();
+                const divWidth = $imgMap.width();
+
+                setTimeout(function() {
+                    $imgMap.maphilight();
+                    if (divHeight > 0) {
+                        $img.css('width', divWidth + 'px');
+                        $img.css('height', divHeight + 'px');
+                        $canvas.css('height', divHeight + 'px');
+                        $canvas.css('width', divWidth + 'px');
+                        $imgMap.css('height', divHeight + 'px');
+                        $imgMap.css('width', divWidth + 'px');
+                    }
+                }, 7000);
+            };
 
             self.refreshMap = function() {
               if((self.bottle.requestedDate !== "") || (self.bottle.requestedDate !== undefined)) {
@@ -196,8 +206,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 AjaxService.getTypeOfEvents(self.venueId, 'Bottle').then(function(response) {
                     self.eventTypes = response.data;
                     if(DataShare.editBottle === 'true') {
-                      var selectedType;
-                      angular.forEach(self.eventTypes, function(tmpType) {
+                        let selectedType;
+                        angular.forEach(self.eventTypes, function(tmpType) {
                         if(tmpType.id === DataShare.bottleServiceData.bottleOccasion.id) {
                           selectedType = tmpType;
                         }
@@ -233,12 +243,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.selectedBottles = function() {
-                var totalValue = self.chooseBottles.price * self.bottleCount;
+                const totalValue = self.chooseBottles.price * self.bottleCount;
                 console.log(totalValue);
-                var userSelectedBottles = {
-                    "price" : totalValue,
-                    "bottle" : self.chooseBottles.bottleName,
-                    "brand" : self.chooseBottles.brandName,
+                const userSelectedBottles = {
+                    "price": totalValue,
+                    "bottle": self.chooseBottles.bottleName,
+                    "brand": self.chooseBottles.brandName,
                     "quantity": self.bottleCount,
                     "productId": self.productId
                 };
@@ -249,8 +259,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.menuUrlSelection = function(bottleMenu) {
-                var data = bottleMenu.split(".");
-                var splitLength = data.length;
+                const data = bottleMenu.split(".");
+                const splitLength = data.length;
                 if(data[0] === "www") {
                     bottleMenu = 'http://' + bottleMenu;
                     $window.open(bottleMenu, '_blank');
@@ -275,7 +285,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                   }
                 // Date in YYYYMMDD format
                 self.bottleServiceDate = moment(self.startDate).format('YYYYMMDD');
-                var day = moment(self.startDate).format('ddd').toUpperCase();
+                const day = moment(self.startDate).format('ddd').toUpperCase();
 
                 if(DataShare.selectedDateForBottle !== self.bottleServiceDate) {
                   self.tableSelection = [];
@@ -286,9 +296,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.venueImageMapData = response.data;
                     DataShare.imageMapping.maps = [];
                     
-                    for (var index = 0; index < self.venueImageMapData.length; index++) {
-                      var venueMap = self.venueImageMapData[index];
-                      DataShare.elements = venueMap.elements;
+                    for (let index = 0; index < self.venueImageMapData.length; index++) {
+                        const venueMap = self.venueImageMapData[index];
+                        DataShare.elements = venueMap.elements;
                       if(venueMap.imageUrls.length !== 0) {
                         // $log.info("imageURl:", angular.toJson(self.venueImageMapData[index].imageUrls[0].originalUrl));
                         DataShare.imageMapping.pictureURL = venueMap.imageUrls[0].originalUrl;
@@ -301,18 +311,18 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                           self.selectedVenueMap.productsByName[obj.name] = obj;
                         });
 
-                        var tableMaps = [];
-                        if (venueMap.imageMap && venueMap.imageMap.length > 1) {
+                          let tableMaps = [];
+                          if (venueMap.imageMap && venueMap.imageMap.length > 1) {
                             tableMaps = JSON.parse(venueMap.imageMap);
                         }
-                        
 
-                        var maps =[];
-                        if (!!tableMaps) {
+
+                          const maps = [];
+                          if (!!tableMaps) {
                             tableMaps.map(function(t){
-                              var arc = JSON.parse("["+t.coordinates+"]");
-                              var elem = {};
-                              elem.name = t.TableName;
+                                const arc = JSON.parse("[" + t.coordinates + "]");
+                                const elem = {};
+                                elem.name = t.TableName;
                               if (typeof $scope.selectedVenueMap.productsByName[elem.name] !== 'undefined') {
                                 elem.id =  $scope.selectedVenueMap.productsByName[elem.name].id;
                                 elem.coords = [];
@@ -345,12 +355,12 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.fillColor = function(id) {
-              var obj = $scope.reservationData[id];
-              // $log.info("Reservation Data:", angular.toJson(obj));
+                let obj = $scope.reservationData[id];
+                // $log.info("Reservation Data:", angular.toJson(obj));
               // $log.info("tableSelection data:", angular.toJson(self.tableSelection));
               if (self.tableSelection.length !== 0) {
-                  for (var i = 0; i < self.tableSelection.length; i++) {
-                      var obj2 = self.tableSelection[i].id;
+                  for (let i = 0; i < self.tableSelection.length; i++) {
+                      const obj2 = self.tableSelection[i].id;
                       if (obj2 === id) {
                           // $log.info("Inside yellow");
                           return APP_COLORS.darkYellow;
@@ -376,31 +386,16 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
           self.showSelectedVenueMap = function() {
             setTimeout(function() {
               $("img[usemap]").rwdImageMaps();
-              /* setTimeout(function(){
-                $('#imagemap').maphilight();
-              }, 200); */
-                var divHeight = $('#imagemap').height();
-                var divWidth = $('#imagemap').width();
-                setTimeout(function() {
-                    $('#imagemap').maphilight();
-                    if (divHeight > 0) {
-                        $('div.map.img-responsive').css('width', divWidth + 'px');
-                        $('div.map.img-responsive').css('height', divHeight + 'px');
-                        $('canvas').css('height', divHeight + 'px');
-                        $('canvas').css('width', divWidth + 'px');
-                        $('#imagemap').css('height', divHeight + 'px');
-                        $('#imagemap').css('width', divWidth + 'px');
-                    }
-                }, 1000);
+                self.updateVenueMap();
             }, 1000);
           };
 
             self.strokeColor = function(id) {
-              var obj = $scope.reservationData[id];
+                let obj = $scope.reservationData[id];
 
-            	if(self.tableSelection.length !== 0) {
-                  for(var i = 0; i < self.tableSelection.length; i++) {
-                      var obj2 = self.tableSelection[i].id;
+                if(self.tableSelection.length !== 0) {
+                  for(let i = 0; i < self.tableSelection.length; i++) {
+                      const obj2 = self.tableSelection[i].id;
                       if(obj2 === id) {
                         // $log.info("Inside yellow");
                         return APP_COLORS.turbo;
@@ -429,8 +424,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             }
             self.tableSelection = [];
 
-            for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
-                var table = {
+            for (let itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
+                const table = {
                     "id": self.selectionTableItems[itemIndex].id,
                     "productType": self.selectionTableItems[itemIndex].productType,
                     "name": self.selectionTableItems[itemIndex].name,
@@ -438,8 +433,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     "imageUrls": self.selectionTableItems[itemIndex].imageUrls,
                     "description": self.selectionTableItems[itemIndex].description,
                     "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
-                  };
-                  self.tableSelection.push(table);
+                };
+                self.tableSelection.push(table);
               }
         };
 
@@ -458,7 +453,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
         self.isReserved = function (table) {
             table.reserved = false;
             if (self.reservations && typeof self.reservations !== 'undefined') {
-                for (var resIndex = 0; resIndex < self.reservations.length; resIndex++) {
+                for (let resIndex = 0; resIndex < self.reservations.length; resIndex++) {
                     if (table.id === self.reservations[resIndex].productId) {
                         table.reserved = true;
                         return true;
@@ -470,7 +465,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
 
         self.isSelected = function (table) {
             if (self.tableSelection && typeof self.tableSelection !== 'undefined') {
-                for (var resIndex = 0; resIndex < self.tableSelection.length; resIndex++) {
+                for (let resIndex = 0; resIndex < self.tableSelection.length; resIndex++) {
                     if (table.id === self.tableSelection[resIndex].id) {
                         return true;
                     }
@@ -485,9 +480,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             return "";
         };
         self.selectTable = function(id, name) {
-          
-            var data = $('#' + id).mouseout().data('maphilight') || {};
-            var dataValueObj = self.selectedVenueMap.productsByName[name];
+
+            const data = $('#' + id).mouseout().data('maphilight') || {};
+            const dataValueObj = self.selectedVenueMap.productsByName[name];
 
             // $log.info("Data :", data);
 
@@ -516,13 +511,13 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
 
 
                 self.tableSelection = [];
-                for (var itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
-                    var table = {
+                for (let itemIndex = 0; itemIndex < self.selectionTableItems.length; itemIndex++) {
+                    const table = {
                         "id": self.selectionTableItems[itemIndex].id,
                         "productType": self.selectionTableItems[itemIndex].productType,
                         "name": self.selectionTableItems[itemIndex].name,
                         "size": self.selectionTableItems[itemIndex].size,
-                        "price" : self.selectionTableItems[itemIndex].price,
+                        "price": self.selectionTableItems[itemIndex].price,
                         "imageUrls": self.selectionTableItems[itemIndex].imageUrls,
                         "description": self.selectionTableItems[itemIndex].description,
                         "minimumRequirement": self.selectionTableItems[itemIndex].minimumRequirement
@@ -549,8 +544,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
         self.removeSelectedTables = function(index,arrayObj,table) {
             angular.forEach(DataShare.elements, function(key, value) {
                 if(arrayObj.name === key.name) {
-                    var id = key.id;
-                    var data = $('#' + id).mouseout().data('maphilight') || {};
+                    const id = key.id;
+                    const data = $('#' + id).mouseout().data('maphilight') || {};
                     if (data.fillColor === APP_COLORS.darkYellow) {
                         data.fillColor = APP_COLORS.lightGreen;
                         data.strokeColor = APP_COLORS.darkGreen;
@@ -570,16 +565,16 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
         self.confirmBottleService = function() {
             DataShare.editBottle = 'true';
             $rootScope.serviceTabClear = true;
-            
-            var dateValue = self.bottle.requestedDate + 'T00:00:00';
+
+            const dateValue = self.bottle.requestedDate + 'T00:00:00';
 
             DataShare.selectedDateForBottle = self.bottleServiceDate;
-            var fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
-            var authBase64Str = window.btoa(fullName + ':' + self.bottle.email + ':' + self.bottle.mobile);
-            
+            const fullName = self.bottle.userFirstName + " " + self.bottle.userLastName;
+            const authBase64Str = window.btoa(fullName + ':' + self.bottle.email + ':' + self.bottle.mobile);
+
             self.sum = 0;
             self.price = 0;
-            for (var i = 0; i < $scope.tableSelection.length; i++) {
+            for (let i = 0; i < $scope.tableSelection.length; i++) {
               self.sum += $scope.tableSelection[i].size;
               self.price += $scope.tableSelection[i].price;
             }
@@ -629,7 +624,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
 
             if (self.tableSelection !== undefined) {
                 angular.forEach(self.tableSelection, function(value, key) {
-                    var items = {
+                    const items = {
                         "venueNumber": self.venueId,
                         "productId": value.id,
                         "productType": value.productType,
@@ -644,7 +639,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
 
             if (self.bottleMinimum !== undefined) {
                 angular.forEach(self.bottleMinimum, function(value1, key1) {
-                    var items = {
+                    const items = {
                         "venueNumber": self.venueId,
                         "productId": value1.productId,
                         "productType": 'Bottle',
