@@ -7,7 +7,7 @@
                 <tab>
                     <tab-heading ng-bind="head">Admin Settings</tab-heading>
                     <form id="admin" name="admin" validate-form="" novalidate role="form">
-                        <admin-directive></admin-directive>
+                        <admin-directive settings="adminSettings"></admin-directive>
                         <div class="panel-footer">
                             <button type="submit" class="btn btn-primary" ng-click="update(admin.$valid, admin, adminSettings)">Save</button>
                         </div>
