@@ -345,7 +345,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
     $rootScope.scrollToTop  = function(window) {
 
         if(inIframe(window)) {
-            window.parent.postMessage("scrollToTop", "*");
+        	if ('parentIFrame' in window) {
+  				parentIFrame.scrollTo(0,30);
+			}
         }
         console.log("scroll to top");
 
@@ -353,7 +355,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
 
     function inIframe (window) {
         try {
-                return window.self !== window.top;
+               return window.self !== window.top;
         } catch (e) {
             return true;
         }
