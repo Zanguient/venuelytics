@@ -283,9 +283,9 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
                 addTab('guestlistTab','glist', 'assets/img/service/guests.png','reservation.GUEST', 'guest-list', 'guest-list/guest-list.html', self.guestServiceButton, '#DC112ACC', 'guestList');
 
             }
-            addTab('tableServiceTab','tableService', 'assets/img/service/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, '#DC992ACC', 'tableServices');
+            addTab('tableServiceTab','tableService', 'assets/img/service/table.png','reservation.TABLE_SERVICE', 'table-services', 'table-service/table-service.html', self.tableServiceButton, '#DA0615CC', 'tableServices');
             addTab('foodServiceTab','foodTab', 'assets/img/service/foods.png','reservation.FOOD_SERVICE', 'food-services', 'food-service/food-service.html', self.foodSeriveButton, '#1E8644CC', 'foodServices');
-            addTab('drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, '#DA0615CC', 'drinkServices');
+            addTab('drinkServiceTab','drink', 'assets/img/service/drink.png','reservation.DRINK_SERVICE', 'drink-services', 'drink-service/drink-service.html', self.drinkSeriveButton, '#DC992ACC', 'drinkServices');
             
             if(self.venueId === 960) {
                 
