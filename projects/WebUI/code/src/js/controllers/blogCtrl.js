@@ -60,4 +60,11 @@ app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestU
             }
         };
 
+        var $container = $('.masonry-container');
+    	$container.imagesLoaded( function () {
+        $container.masonry({
+            columnWidth: '.masonry-item',
+            itemSelector: '.masonry-item'
+        });
+    });
     }]);
