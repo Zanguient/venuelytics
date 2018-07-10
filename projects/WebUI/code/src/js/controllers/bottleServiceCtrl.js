@@ -3,8 +3,8 @@
  * @date 19-MAY-2017
  */
 "use strict";
-app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta', 'VenueService',
-    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta, venueService) {
+app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', 'APP_COLORS', '$rootScope','ngMeta', 'VenueService', 'toaster','$translate',
+    function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, APP_COLORS, $rootScope, ngMeta, venueService, toaster, $translate) {
 
             $log.debug('Inside Bottle Service Controller.');
 
@@ -15,7 +15,6 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             self.bottleCount = 1;
             self.selectedVenueMap = {};
             self.bottleMinimum = [];
-            self.noTableSelected = false;
             self.moreCapacity = false;
             self.sum = 0;
             self.price = 0;
@@ -23,6 +22,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             self.bottle = {};
             self.bottle.requestedDate = moment().format('YYYY-MM-DD');
             self.chooseBottles = {};
+            self.requestMode = true;
+
             function  noWeekendsOrHolidays(iDate) {
                 if (typeof(self.availableDays) === 'undefined' || self.availableDays.length === 0) {
                   return true;
@@ -62,7 +63,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                         self.refreshMap();
                     }); 
                 });
-            }
+            };
             self.initMore = function() {
                 //$("div.form-group").add("style", "margin-left: auto");
                 const date = new Date();
@@ -77,7 +78,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.tabClear();
                 }
              
-                if(($rootScope.serviceName === 'BottleService') || (DataShare.amount !== '')) {
+                if(DataShare.amount !== '') {
                     self.tabClear();
                 } else {
                     self.bottle.authorize = false;
@@ -102,8 +103,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 self.restoreTab = DataShare.tab;
                 self.tabParam = $routeParams.tabParam;
                 
-                self.getBottleProducts();
                 self.getMenus();
+
                 self.getEventType();
                 
                 setTimeout(function() {
@@ -163,8 +164,8 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 }
                 self.showFloorMapByDate();
             }
-            self.getBottleProducts = function() {
-                AjaxService.getProductOfBottle(self.venueId).then(function(response) {
+            self.getBottleProducts = function(productType) {
+                AjaxService.getProductsByType(self.venueId, productType).then(function(response) {
                     self.allBottle = response.data;
                 });
             };
@@ -184,6 +185,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             };
 
             self.getMenus = function() {
+
                 AjaxService.getInfo(self.venueId).then(function(response) {
                     self.bottleMenuUrl = response.data["Bottle.menuUrl"];
                     self.bottleVIPPolicy = response.data["Bottle.BottleVIPPolicy"];
@@ -193,7 +195,16 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     self.reservationFee =  response.data["Bottle.BottleReservationFee"];
                     $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
                     self.enableBottleSelection = response.data["Bottle.SpecificServiceBottle.enable"] || 'N';
+                    
                     venueService.saveVenueInfo(self.venueId, response);
+                    var productTypeInfo = JSON.parse(response.data["Bottle.bottleProductInfo"] || { "type":"PartyPackage", "name":"Party Packages", "min.total.count": 1});
+
+                    self.bottleProductType = productTypeInfo.type;
+                    self.bottleProductLabel = productTypeInfo.name;
+                    self.bottleProductMinCount = productTypeInfo['min.total.count'] || 0;
+
+                    self.getBottleProducts(self.bottleProductType);
+                
                 });
             };
 
@@ -295,10 +306,18 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                 AjaxService.getVenueMap(self.venueId).then(function(response) {
                     self.venueImageMapData = response.data;
                     DataShare.imageMapping.maps = [];
+                    self.selectedVenueMap = {};
+                    self.requestMode = true;
+
+                    for (var z = 0; z < self.venueImageMapData.length; z++) {
+                    	var venueMap = self.venueImageMapData[z];
+                    	self.requestMode = self.requestMode && venueMap.elements.length === 0;
+                    }
                     
-                    for (let index = 0; index < self.venueImageMapData.length; index++) {
-                        const venueMap = self.venueImageMapData[index];
-                        DataShare.elements = venueMap.elements;
+                    for (var index = 0; index < self.venueImageMapData.length; index++) {
+                      var venueMap = self.venueImageMapData[index];
+                      DataShare.elements = venueMap.elements;
+                      
                       if(venueMap.imageUrls.length !== 0) {
                         // $log.info("imageURl:", angular.toJson(self.venueImageMapData[index].imageUrls[0].originalUrl));
                         DataShare.imageMapping.pictureURL = venueMap.imageUrls[0].originalUrl;
@@ -563,6 +582,18 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
         };
 
         self.confirmBottleService = function() {
+
+
+        	if(!self.requestMode && $scope.tableSelection.length === 0) {
+            	toaster.pop({ type: 'error', title: 'Bottle Service - Table Selection Error', body: $translate.instant("reservation.FLOOR_MAP_SELECTION"), timeout: 3000});
+            	return;
+            }
+
+            if (!!self.bottleMinimum < self.bottleProductMinCount) {
+            	var body = 'Please select atleast '+ self.bottleProductMinCount + ' ' + self.bottleProductLabel;
+            	toaster.pop({ type: 'error', title: 'Bottle Service - Minimum Requirement Error', body: body, timeout: 3000});
+            	return;
+            }
             DataShare.editBottle = 'true';
             $rootScope.serviceTabClear = true;
 
@@ -583,10 +614,9 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
             DataShare.bottleZip = self.bottle.bottleZipcode;
             DataShare.selectBottle = self.bottleMinimum;
             DataShare.tableSelection = self.tableSelection;
-            if($scope.tableSelection.length === 0) {
-                self.noTableSelected = true;
-                return;
-            }
+            
+           
+
             if (self.sum !== 0) {
               if(self.bottle.totalGuest > self.sum) {
                   $('#moreTableModal').modal('show');
@@ -642,7 +672,7 @@ app.controller('BottleServiceController', ['$log', '$scope', '$location', 'DataS
                     const items = {
                         "venueNumber": self.venueId,
                         "productId": value1.productId,
-                        "productType": 'Bottle',
+                        "productType": self.bottleProductType,
                         "quantity": value1.quantity,
                         "name": value1.bottle
                     };

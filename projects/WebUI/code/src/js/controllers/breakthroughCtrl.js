@@ -3,8 +3,8 @@
  * @date 09-SEP-2017
  */
 "use strict";
-app.controller('Breakthrough', ['$log', '$scope', 'DataShare','$translate', '$routeParams','APP_ARRAYS','$rootScope','ngMeta', 
-    function ($log, $scope, DataShare, $translate, $routeParams, APP_ARRAYS, $rootScope, ngMeta) {
+app.controller('Breakthrough', ['$log', '$scope', 'DataShare', '$routeParams','APP_ARRAYS','$rootScope','ngMeta', 
+    function ($log, $scope, DataShare, $routeParams, APP_ARRAYS, $rootScope, ngMeta) {
 
     	$log.log('Inside BreakThrough Controller.');
         $rootScope.blackTheme = "";

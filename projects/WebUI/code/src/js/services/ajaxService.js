@@ -243,18 +243,6 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         });
     };
 
-    this.getProductOfBottle = function(venueId) {
-        return $http({
-            method: 'GET',
-            url: RestURL.baseURL + 'products/' + venueId + '/type/Bottle'
-        }).then(function(success) {
-            return success;
-        }, function(error) {
-            $log.error('Error: ' + error);
-            return error;
-        });
-    };
-
     this.createTransaction = function(venueId, orderId, object, authBase64Str) {
         return $http({
             method: 'POST',

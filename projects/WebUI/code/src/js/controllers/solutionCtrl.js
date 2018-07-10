@@ -3,8 +3,8 @@
  * @date Jan -2 
  */
 "use strict";
-app.controller('SolutionController', ['$scope', '$location', 'DataShare','$translate', 'APP_ARRAYS', '$rootScope', 'AjaxService', '$routeParams', 'ngMeta', 'VenueService',
-    function ($scope, $location, DataShare, $translate, APP_ARRAYS, $rootScope, AjaxService, $routeParams, ngMeta, venueService) {
+app.controller('SolutionController', ['$scope', '$location', 'DataShare', 'APP_ARRAYS', '$rootScope', 'AjaxService', '$routeParams', 'ngMeta', 'VenueService',
+    function ($scope, $location, DataShare, APP_ARRAYS, $rootScope, AjaxService, $routeParams, ngMeta, venueService) {
 
     		
     		var self = $scope;

@@ -35,7 +35,7 @@
                         </div>
 
                     </center>
-                    <div ng-hide="removeAllTabs === true" class="mont-font-regular bottom-right pull-right">
+                    <div class="mont-font-regular bottom-right pull-right">
                             <div>Address: {{detailsOfVenue.address}}</div>
                             <div>Contact: {{detailsOfVenue.phone}}</div>
                             <div>Hours: {{venueTimeFormatted()}}</div>
@@ -48,7 +48,8 @@
                         </center>
                     </div>
                 </div>
-                <div ng-include="selectedPage()" ng-hide="removeAllTabs === true"></div><br>
+                <div class="mt-2" ng-include="selectedPage()" ng-hide="removeAllTabs === true"></div>
+                <br>
                  <chat-messanger venue-id="venueId" venue-name="venueName" service-name="tabParams" ng-show="enableChatBot(tabParams)"/>
 
                 <div class="eventListcal" ng-if="removeAllTabs == true">

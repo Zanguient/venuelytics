@@ -1,5 +1,5 @@
 <div class="container nav_height" ng-cloak>
-    <h1 class="text-center mt-6 animated zoomInDown animation-delay-5">{{selectedCityName}}</h1>
+    <h1 class="text-center mt-6 animated zoomInDown animation-delay-5" ng-hide="embeddedFlag === true">{{selectedCityName}}</h1>
     <h3>
     <a href="cities" class="navigation">{{"venue.HOME" | translate}} > {{"venue.CITIES" | translate}} -> {{selectedVenueType | titleCase}}</a></h3>
     <!-- Nav tabs -->
@@ -33,7 +33,7 @@
                 <div class="container">
                     <div class="masonry-container row">
                         <div class="col-md-4 col-sm-6 col-xs-12 masonry-item p-min wow fadeInUp animation-delay-2" ng-repeat="venue in listOfVenuesByCity">
-                            <article class="card border_clouds wow materialUp animation-delay-5">
+                            <article class="card border_clouds wow materialUp animation-delay-5 pb-2">
                                 <figure class="ms-thumbnail ms-thumbnail-left" ng-click="selectVenue(venue)" >
                                     <div class="imgHolder">
                                         <img ng-src="{{venue.imageUrls[0].smallUrl || venue.imageUrls[0].originalUrl}}" alt="{{venue.venueName}}" class="img-responsive venueImages" >
@@ -54,10 +54,13 @@
                                         <a ng-repeat="service in serviceIcons" ng-click="selectedServices(venue, service.tab)">
                                             <img ng-src="{{service.image}}" alt="{{service.title}}" class="serviceSmallIcon" title="{{service.title}}" ng-show="venue.info['{{service.fieldName}}'] == 'Y'">
                                         </a>
-                                        <a href="{{venue.website}}" target="_blank" class="no-mb mont-font-regular pull-right"><i class="fa fa-globe" aria-hidden="true"></i>Website</a>
+                                    </div>
+                                    <div class="col-xs-12 serviceIcon">
+                                    	<h6 ng-hide="!venue.distanceInMiles" id="distance" class="col-xs-12 no-m">{{venue.distanceInMiles | number : 2}} {{ "venue.MILES" | translate}}</h6> 
+                                    	<a href="{{venue.website}}" target="_blank" class="pull-right mont-font-regular"><i class="fa fa-globe" aria-hidden="true"></i>Website</a>
                                     </div>
                                    
-                                    <h6 ng-hide="!venue.distanceInMiles" id="distance" class="col-xs-12 no-m">{{venue.distanceInMiles | number : 2}} {{ "venue.MILES" | translate}}</h6>
+                                    
 
                                 </div> 
                             </article>
