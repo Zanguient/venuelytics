@@ -2892,6 +2892,7 @@ button {
     position: relative;
     min-height: 90px;
     margin: 0 auto 20px;
+    font-size: 1.2em;
     font-family: 'Dancing Script', cursive !important;
 }
 
@@ -2920,7 +2921,7 @@ button {
 .menu-item .menu-title .title {
 
   display: inline-block;
-  font-size: 1.2em;
+  font-size: 1.33em;
   padding: 0px 5px 0px 0;
   text-decoration: none;
   color: inherit;
@@ -2950,6 +2951,10 @@ button {
 .btn_gradient {
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 150, 0.5)), to(rgba(0, 0, 150, 0)));
     background-image: -moz-linear-gradient(rgba(0, 0, 150, 0.5) 0%, rgba(0, 0, 150, 0) 95%);
+}
+
+.btn_gradient:disabled, .btn_gradient[disabled] {
+   background-image: none !important;
 }
 /*
   Chat 
@@ -3007,24 +3012,29 @@ button {
 .chat-section ul{
   padding: 0px;
 }
+
 .left-chat img,.right-chat img{
   width:35px;
   height:35px;
   float:left;
   margin:0px 10px;
 }
+
 .right-chat img{
   float:right;
 }
+
 .second-section{
   padding: 0px;
   margin: 0px;
   background-color: #F3F3F3;
   height: 300px;
 }
+
 .left-chat,.right-chat{
   overflow: hidden;
 }
+
 .left-chat p,.right-chat p{
   background-color:#FD8468;
   padding: 10px;
@@ -3034,15 +3044,18 @@ button {
   width:63%;
   margin-bottom:20px;
 }
+
 .left-chat span,.right-chat span{
   position: absolute;
   left:70px;
   top:60px;
   color:#B7BCC5;
 }
+
 .right-chat span{
   left:45px;
 }
+
 .right-chat p{
   float:right;
   background-color: #FFFFFF;
@@ -3052,12 +3065,14 @@ button {
 .third-section{
   border-top: 1px solid #EEEEEE;
 }
+
 .text-bar input{
   width:90%;
   margin-left:-15px;
   padding:10px 10px;
   border:1px solid #fff;
 }
+
 .text-bar a i{
   background-color:#FD8468;
   color:#fff;
@@ -3067,6 +3082,7 @@ button {
   border-radius: 50%;
   text-align: center;
 }
+
 .left-chat:before{
   content: " ";
   position:absolute;
@@ -3076,6 +3092,7 @@ button {
   border:15px solid transparent;
   border-top-color:#FD8468; 
 }
+
 .right-chat:before{
   content: " ";
   position:absolute;

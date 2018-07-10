@@ -3,8 +3,8 @@
  * @date 28-JULY-2017
  */
 "use strict";
-app.controller('OrderConfirmController', ['$log', '$scope', '$location', 'DataShare','$translate', 'APP_ARRAYS', '$rootScope', 'AjaxService', '$routeParams', 'ngMeta', 'VenueService',
-    function ($log, $scope, $location, DataShare, $translate, APP_ARRAYS, $rootScope, AjaxService, $routeParams, ngMeta, venueService) {
+app.controller('OrderConfirmController', ['$log', '$scope', '$location', 'DataShare', 'APP_ARRAYS', '$rootScope', 'AjaxService', '$routeParams', 'ngMeta', 'VenueService',
+    function ($log, $scope, $location, DataShare, APP_ARRAYS, $rootScope, AjaxService, $routeParams, ngMeta, venueService) {
 
     		$log.log('Inside Order confirm Controller.');
 

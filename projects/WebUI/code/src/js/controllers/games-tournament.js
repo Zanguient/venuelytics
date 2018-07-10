@@ -2,8 +2,8 @@
  * @author Navaneethan
  */
 "use strict";
-app.controller('GamesTournamentController', ['$log', '$scope', '$http', '$location', 'RestURL', '$translate', '$routeParams', '$rootScope', 'AjaxService','ngMeta',
-    function ($log, $scope, $http, $location, RestURL,  $translate, $routeParams, $rootScope, AjaxService, ngMeta) {
+app.controller('GamesTournamentController', ['$log', '$scope', '$http', '$location', 'RestURL', '$routeParams', '$rootScope', 'AjaxService','ngMeta',
+    function ($log, $scope, $http, $location, RestURL, $routeParams, $rootScope, AjaxService, ngMeta) {
 
         var self = $scope;
         $rootScope.selectedTab = 'consumer';

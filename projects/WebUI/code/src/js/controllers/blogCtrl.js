@@ -3,8 +3,8 @@
  * @date 25-JULY-2017
  */
 "use strict";
-app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'APP_ARRAYS', '$rootScope', 'AjaxService','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, APP_ARRAYS, $rootScope, AjaxService, ngMeta) {
+app.controller('BlogController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'APP_ARRAYS', '$rootScope', 'AjaxService','ngMeta',
+    function ($log, $scope, $http, $location, RestURL, DataShare, APP_ARRAYS, $rootScope, AjaxService, ngMeta) {
 
     	$log.log('Inside Blog Controller.');
 

@@ -50,7 +50,7 @@
       </table>
     </div>
  
-    <div class="form-group">
+    <div class="form-group" ng-if="selectTables.length > 0">
         <h4 class="color-success">{{"reservation.SELECT_TABLE"  | translate}}</h4>
         <table class="table table-responsive table-no-border">
             <thead>
@@ -71,13 +71,13 @@
     </div>
   </div>
  
-  <div class="col-xs-12 col-md-8 col-md-offset-2 col-md-offset-right-2">
+  <div class="col-xs-12 col-md-8 col-md-offset-2 col-md-offset-right-2" ng-if="selectBottleOrders.length > 0">
     <div class="form-group">
-      <h4 class="color-success">{{"reservation.SELECT_BOTTLE"  | translate}}</h4>
+      <h4 class="color-success">Additional Items</h4>
       <table class="table table-responsive table-no-border">
           <thead>
             <tr>
-              <th>{{"reservation.BOTTLE"  | translate}}</th>
+              <th>Name</th>
               <th>{{"reservation.BRAND"  | translate}}</th>
               <th>{{"reservation.QUANTITY"  | translate}}</th>
               <th>{{"reservation.PRICE"  | translate}}</th>

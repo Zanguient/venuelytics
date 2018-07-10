@@ -2,8 +2,8 @@
  * @author Navaneethan
  */
 "use strict";
-app.controller('PricingController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare','$translate', 'PRICING_APP', '$rootScope', 'AjaxService','ngMeta',
-    function ($log, $scope, $http, $location, RestURL, DataShare, $translate, PRICING_APP, $rootScope, AjaxService, ngMeta) {
+app.controller('PricingController', ['$log', '$scope', '$http', '$location', 'RestURL', 'DataShare', 'PRICING_APP', '$rootScope', 'AjaxService','ngMeta',
+    function ($log, $scope, $http, $location, RestURL, DataShare,  PRICING_APP, $rootScope, AjaxService, ngMeta) {
 
         var self = $scope;
         $rootScope.selectedTab = 'pricing';
