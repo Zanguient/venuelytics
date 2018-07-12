@@ -21,62 +21,47 @@
                 <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineMobile" ng-model="wine.mobileNumber"
                     required="">
             </div>
-            <h5>{{'reservation.BILLING_ADDRESS' | translate}}</h5>
+            <h5>{{'reservation.SHIPPING_ADDRESS' | translate}}</h5>
             <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.ADDRESS' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillAddress" ng-model="wine.billingAddress.address"
+                <label class="control-label">{{'reservation.ADDRESS1' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipAddress1" ng-model="wine.shippingAddress.address1"
                     required="">
             </div>
             <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.CITY' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillCity" ng-model="wine.billingAddress.city"
-                    required="">
-            </div>
-            <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.STATE' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillState" ng-model="wine.billingAddress.state"
-                    required="">
-            </div>
-            <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.ZIP_CODE' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillZip" ng-model="wine.billingAddress.zip"
+                <label class="control-label">{{'reservation.ADDRESS2' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipAddress2" ng-model="wine.shippingAddress.address2"
                     required="">
             </div>
 
-            <h5>{{'reservation.SHIPPING_ADDRESS' | translate}}</h5>
-            <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.ADDRESS' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipAddress" ng-model="wine.shippingAddress.address"
-                    required="">
-            </div>
-            <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.CITY' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipCity" ng-model="wine.shippingAddress.city"
-                    required="">
-            </div>
-            <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.STATE' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipState" ng-model="wine.shippingAddress.state"
-                    required="">
-            </div>
-            <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.ZIP_CODE' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipZip" ng-model="wine.shippingAddress.zip"
-                    required="">
-            </div>
-            <div class="col-md-12">
-                <center>
-                    <a href="" class="btn btn-success btn-raised" ng-if="drinksWineListuUrl" ng-click="menuUrlSelection(drinksWineListuUrl)">
-                        <span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.DRINK_WINE" | translate}}</a>
-                    <a href="" class="btn btn-success btn-raised" ng-if="drinksHappyHourDrinkUrl" ng-click="menuUrlSelection(drinksHappyHourDrinkUrl)">
-                        <span class="glyphicon glyphicon-heart"></span> {{"reservation.DRINK_HAPPY_HOUR" | translate}}</a>
-                    <a href="" class="btn btn-success btn-raised" ng-if="drinksBeerMenuUrl" ng-click="menuUrlSelection(drinksBeerMenuUrl)">
-                        <span class="glyphicon glyphicon-play"></span> {{"reservation.DRINK_BEER_MENU" | translate}}</a>
-                    <a href="" class="btn btn-success btn-raised" ng-if="drinksMenuUrl" ng-click="menuUrlSelection(drinksMenuUrl)">
-                        <span class="glyphicon glyphicon-home"></span> {{"reservation.DRINK_MENU_URL" | translate}}</a>
-                    <a href="" class="btn btn-success btn-raised" ng-if="drinksCocktailsUrl" ng-click="menuUrlSelection(drinksCocktailsUrl)">
-                        <span class="glyphicon glyphicon-heart-empty"></span> {{"reservation.DRINK_COCKTAILS" | translate}}</a>
-                </center>
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.CITY' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipCity" ng-model="wine.shippingAddress.city"
+                            required="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.STATE' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipState" ng-model="wine.shippingAddress.state"
+                            required="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.COUNTRY' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipCountry" ng-model="wine.shippingAddress.country"
+                            required="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.ZIP_CODE' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipZip" ng-model="wine.shippingAddress.zip"
+                            required="">
+                    </div>
+                </div>
             </div>
             <br/>
 
@@ -131,10 +116,18 @@
                                             </span>
                                         </div>
                                         <p>{{item.description}}</p>
+                                        <div class="col-sm-6 col-xs-6 row">
+                                            <label class="col-md-12 col-sm-12 col-xs-12">{{"reservation.PACKAGE_TYPE" | translate}} </label>
+                                            <div class="col-md-4 col-sm-4 col-xs-4" ng-repeat="n in item.quantity track by $index">
+                                                <label>
+                                                    <input type="radio" ng-change="drinksPackage(item)" ng-model="item.package" value="{{n}}" />&nbsp;&nbsp;{{n}}
+                                                </label>
+                                            </div>
+                                        </div>
                                         <div class="col-sm-5 col-xs-6">
                                             <select class="form-control {{blackTheme}}" ng-change="drinkService(item)" ng-model="item.count" value="{{item.count || 0}}">
                                                 <option value="">{{"reservation.QUANTITY" | translate}}</option>
-                                                <option ng-repeat="n in item.quantity track by $index" value="{{n}}">{{n}}</option>
+                                                <option ng-repeat="n in [].constructor(10) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                                             </select>
                                         </div>
                                     </div>

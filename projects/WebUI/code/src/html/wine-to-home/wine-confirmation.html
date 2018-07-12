@@ -37,44 +37,6 @@
                             </td>
                             <td>{{wineServiceDetails.emailId}}</td>
                         </tr>
-                        <tr>
-                            <td>
-                                <h6>{{"reservation.BILLING_ADDRESS" | translate}}</h6>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    <b> {{'reservation.ADDRESS' | translate}}</b>
-                                </label>
-                            </td>
-                            <td>{{wineServiceDetails.billingAddress.address}}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    <b> {{'reservation.CITY' | translate}}</b>
-                                </label>
-                            </td>
-                            <td>{{wineServiceDetails.billingAddress.city}}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    <b> {{'reservation.STATE' | translate}}</b>
-                                </label>
-                            </td>
-                            <td>{{wineServiceDetails.billingAddress.state}}</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>
-                                    <b> {{'reservation.ZIP_CODE' | translate}}</b>
-                                </label>
-                            </td>
-                            <td>{{wineServiceDetails.billingAddress.zip}}</td>
-                        </tr>
-                        <tr>
                             <td>
                                 <h6>{{"reservation.SHIPPING_ADDRESS" | translate}}</h6>
                             </td>
@@ -82,10 +44,18 @@
                         <tr>
                             <td>
                                 <label>
-                                    <b> {{'reservation.ADDRESS' | translate}}</b>
+                                    <b> {{'reservation.ADDRESS1' | translate}}</b>
                                 </label>
                             </td>
-                            <td>{{wineServiceDetails.shippingAddress.address}}</td>
+                            <td>{{wineServiceDetails.shippingAddress.address1}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.ADDRESS2' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.shippingAddress.address2}}</td>
                         </tr>
                         <tr>
                             <td>
@@ -102,6 +72,14 @@
                                 </label>
                             </td>
                             <td>{{wineServiceDetails.shippingAddress.state}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.COUNTRY' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.shippingAddress.country}}</td>
                         </tr>
                         <tr>
                             <td>

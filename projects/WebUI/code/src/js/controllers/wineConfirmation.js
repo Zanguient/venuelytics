@@ -61,6 +61,12 @@ app.controller('WineConfirmController', ['$log', '$scope', '$location', 'DataSha
             $location.url('/cities/' + self.city + '/' + self.venueRefId(self.venueDetails) + '/wine-to-home');
         };
 
+        
+        self.payusingCC = function () {
+            $location.url( self.city + '/' + self.venueRefId(self.venueDetails) + '/wine-creditdebit');
+        };
+
+
         self.backToDrink = function () {
             $rootScope.serviceName = 'WineToHome';
             DataShare.wineServiceData = '';

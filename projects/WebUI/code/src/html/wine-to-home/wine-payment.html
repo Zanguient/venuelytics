@@ -37,10 +37,8 @@
                     </td>
                 </tr>
             </table>
-            <payment-button venue-number="{{venueId}}" tax-date="{{taxDate}}" order="object" amount="availableAmount" auth-token="{{authBase64Str}}"
-                service-type="DRINKS" redirect-url="{{redirectUrl}}" pay-at-venue-url="{{payAtVenueUrl}}">
-            </payment-button>
-            <input type="button" class="btn btn-raised btn-default" value="Return to Drinks Service" ng-click="backToDrink()">
+            <button class="btn btn-raised btn-primary" ng-click="payUsingCC()">{{"reservation.CREDIT_CARD" | translate}}</button>
+            <input type="button" class="btn btn-raised btn-danger" value="Return to Drinks Service" ng-click="backToDrink()">
         </div>
     </center>
 </div>

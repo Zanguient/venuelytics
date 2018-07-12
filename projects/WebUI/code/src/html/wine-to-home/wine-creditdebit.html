@@ -1,0 +1,92 @@
+<div class="container nav_height card {{blackTheme}}">
+    <form name="creditForm" autocomplete="off" validate-form="" parsley-validate novalidate ng-cloak>
+        <fieldset >
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.FIRST_NAME' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" id="wineFirstName" name="wineFirstName" class="form-control " ng-model="wine.firstName"
+                            required="" data-parsley-trigger="change">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.LAST_NAME' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" id="wineLastName" name="wineLastName" class="form-control " ng-model="wine.lastName"
+                            required="" data-parsley-trigger="change">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.CARD_NUMBER' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineCardnumber" ng-model="wine.cardnumber"
+                            required="">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.CSC' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineCSC" ng-model="wine.csc" required="">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.EXPIRY_DATE' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="date" class="form-control " name="wineExpirydate" ng-model="wine.expirydate"
+                            required="">
+                    </div>
+                </div>
+            </div>
+            <h5>{{'reservation.BILLING_ADDRESS' | translate}}</h5>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.ADDRESS1' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillAddress" ng-model="wine.billingAddress.address1"
+                    required="">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.ADDRESS2' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillAddress" ng-model="wine.billingAddress.address2"
+                    required="">
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.CITY' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillCity" ng-model="wine.billingAddress.city"
+                            required="">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.STATE' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillState" ng-model="wine.billingAddress.state"
+                            required="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.COUNTRY' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillState" ng-model="wine.billingAddress.country"
+                            required="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">{{'reservation.ZIP_CODE' | translate}}</label>
+                        <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillZip" ng-model="wine.billingAddress.zip"
+                            required="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.EMAIL' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="email" id="wineEmailId" name="wineEmailId" data-parsley-type="email" class="form-control "
+                    ng-model="wine.emailId" required="" data-parsley-trigger="change">
+            </div>
+            <button class="btn btn-raised btn-primary" ng-click="submit()">{{'business.SUBMIT' | translate}}</button>
+        </fieldset>
+    </form>
+</div>

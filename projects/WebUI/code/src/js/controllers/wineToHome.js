@@ -99,15 +99,16 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
         };
 
         self.userSelectedDrinks = [];
-
+        self.drinksPackage = function (number) {
+        }
         self.drinkService = function (item) {
             if (item.count !== undefined && item.count !== '') {
                 if (self.userSelectedDrinks.indexOf(item) === -1) {
                     for (let a = 0; a < item.quantity.length; a++) {
-                        if (parseInt(item.count) === item.quantity[a]) {
+                        if (parseInt(item.package) === item.quantity[a]) {
                             angular.forEach(item.price, function (value, key) {
                                 if (item.quantity.indexOf(item.quantity[a]) === key) {
-                                    item.total = value.toFixed(2);
+                                    item.total = value.toFixed(2) * parseInt(item.count);
                                     self.userSelectedDrinks.push(item);
                                 }
                             });
@@ -115,10 +116,10 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                     }
                 } else {
                     for (let a = 0; a < item.quantity.length; a++) {
-                        if (parseInt(item.count) === item.quantity[a]) {
+                        if (parseInt(item.package) === item.quantity[a]) {
                             angular.forEach(item.price, function (value, key) {
                                 if (item.quantity.indexOf(item.quantity[a]) === key) {
-                                    item.total = value.toFixed(2);
+                                    item.total = value.toFixed(2) * parseInt(item.count);
                                     self.userSelectedDrinks.total = item.total;
                                 }
                             });
@@ -236,8 +237,6 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
             var authBase64Str = window.btoa(fullName + ':' + self.wine.emailId + ':' + self.wine.mobileNumber + ':' + self.wine.billingAddress + ':' + self.wine.shippingAddress);
             DataShare.authBase64Str = authBase64Str;
             DataShare.wineServiceData = self.wine;
-            // AjaxService.addressValidation(self.wine.billingAddress, 'BillingAddress').then(function (response) {
-            //     if (response.result === 'validated') {
             //         AjaxService.addressValidation(self.wine.shippingAddress, 'ShippingAddress').then(function (response2) {
             //             if (response2.result === 'validated') {
             self.serviceJSON = {
@@ -276,8 +275,6 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
         }
         //             })
         //         }
-        //     })
-        // };
 
         self.venueRefId = function (venue) {
             if (!venue.uniqueName) {
