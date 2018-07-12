@@ -21,15 +21,47 @@
                 <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineMobile" ng-model="wine.mobileNumber"
                     required="">
             </div>
-
+            <h5>{{'reservation.BILLING_ADDRESS' | translate}}</h5>
             <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.BILLING_ADDRESS' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillingSelection" ng-model="wine.billingAddress"
+                <label class="control-label">{{'reservation.ADDRESS' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillAddress" ng-model="wine.billingAddress.address"
                     required="">
             </div>
             <div class="form-group label-floating">
-                <label class="control-label">{{'reservation.SHIPPING_ADDRESS' | translate}}</label>
-                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShippingAddress" ng-model="wine.shippingAddress"
+                <label class="control-label">{{'reservation.CITY' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillCity" ng-model="wine.billingAddress.city"
+                    required="">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.STATE' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillState" ng-model="wine.billingAddress.state"
+                    required="">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.ZIP_CODE' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineBillZip" ng-model="wine.billingAddress.zip"
+                    required="">
+            </div>
+
+            <h5>{{'reservation.SHIPPING_ADDRESS' | translate}}</h5>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.ADDRESS' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipAddress" ng-model="wine.shippingAddress.address"
+                    required="">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.CITY' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipCity" ng-model="wine.shippingAddress.city"
+                    required="">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.STATE' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipState" ng-model="wine.shippingAddress.state"
+                    required="">
+            </div>
+            <div class="form-group label-floating">
+                <label class="control-label">{{'reservation.ZIP_CODE' | translate}}</label>
+                <input ng-disabled="orderDisable === true" type="text" class="form-control " name="wineShipZip" ng-model="wine.shippingAddress.zip"
                     required="">
             </div>
             <div class="col-md-12">
@@ -68,20 +100,21 @@
                                     <span ng-hide="((drink == null || drink.total == 0 || drink.total == undefined))">&dollar;</span>{{(drink == null || drink.total == 0 || drink.total == undefined) ? "0"
                                     : drink.total | number:2}}</td>
                                 <td>
-                                    <button type="submit" class="btn btn-raised btn-sm btn-danger" ng-click="removeDrinkItems($index,drink)">X</td>
+                                    <button type="button" class="btn btn-raised btn-sm btn-danger" ng-click="removeDrinkItems($index,drink)">X</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-                <div ng-show="specificDrink === 'Y' || specificDrink === 'y'"  class="form-group" ng-class="blackTheme">
-                    <div ng-class="blackTheme">
+            <div ng-show="specificDrink === 'Y' || specificDrink === 'y'" class="form-group" ng-class="blackTheme">
+                <div ng-class="blackTheme">
                     <div class="ms-paper-content-container">
                         <div class="ms-paper-content">
-                            <h2 class="text-primary">{{"reservation.DRINK_ITEMS" | translate}}</h2>
-                            <section class="food-menu-section" >
+                            <h2 class="text-primary">{{"reservation.WINE_TO_HOME" | translate}}</h2>
+                            <section class="food-menu-section">
                                 <ul class="menus">
-                                    <li class="filter-button text-capitalize" ng-class="{'active': isMenuSelected(value)}" data-filter="{{value}}" ng-repeat="(key,value) in  drinkCategories" ng-click="selectMenu(value)">
+                                    <li class="filter-button text-capitalize" ng-class="{'active': isMenuSelected(value)}" data-filter="{{value}}" ng-repeat="(key,value) in  drinkCategories"
+                                        ng-click="selectMenu(value)">
                                         {{key | lowercase}}
                                     </li>
                                 </ul>
@@ -101,17 +134,16 @@
                                         <div class="col-sm-5 col-xs-6">
                                             <select class="form-control {{blackTheme}}" ng-change="drinkService(item)" ng-model="item.count" value="{{item.count || 0}}">
                                                 <option value="">{{"reservation.QUANTITY" | translate}}</option>
-                                                <option ng-repeat="n in [].constructor(10) track by $index" value="{{$index+1}}">{{$index+1}}</option>
+                                                <option ng-repeat="n in item.quantity track by $index" value="{{n}}">{{n}}</option>
                                             </select>
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
+            </div>
             <div class="form-group label-floating">
                 <label class="control-label">{{'reservation.SPECIAL_INSTRUCTION' | translate}}</label>
                 <input ng-disabled="orderDisable === true" type="text" class="form-control " id="wineInstructions" ng-model="wine.instructions">

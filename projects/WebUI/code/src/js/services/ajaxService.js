@@ -172,6 +172,31 @@ app.service('AjaxService', ['$http', 'RestURL', '$log', '$window', function($htt
         });
     };
 
+    this.addressValidation = function(object) {
+        return $http({
+            method: 'POST',
+            url: RestURL.baseURL + 'validateAddress',
+            data: object,
+        }).then(function(response) {
+            return response;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    }
+
+    this.getWine2Home = function(apikey) {
+        return $http({
+            method: 'GET',
+            url: RestURL.baseURL + '/inventory/?venueName=demo&apiKey=' + apikey
+        }).then(function(success) {
+            return success;
+        }, function(error) {
+            $log.error('Error: ' + error);
+            return error;
+        });
+    }
+
     this.placeServiceOrder = function(venueId, object, authBase64Str) {
         return $http({
                 method: 'POST',

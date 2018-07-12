@@ -176,6 +176,10 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider', '$sceDelegat
             templateUrl: 'wine-to-home/wine-confirmation.html',
             controller:'WineConfirmController'
         })
+        .when('/:cityName/winePayment/:venueId', {
+            templateUrl: 'wine-to-home/wine-payment.html',
+            controller:'WineConfirmController'
+        })
         // .when('/:cityName/paymentSuccess/:venueId', {
         //     templateUrl: 'payment-success.html',
         //     controller:'ConfirmReservationController'          

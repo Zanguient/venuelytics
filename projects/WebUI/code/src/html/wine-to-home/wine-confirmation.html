@@ -1,66 +1,164 @@
 <div class="container nav_height card {{blackTheme}}">
-	<center>
-		<h2 class="color-success">{{'reservation.WINE_CONFIRM' | translate}}</h2>
-	<div class="form-group">
-    <div class="col-xs-12 col-md-6 col-md-offset-3 col-md-offset-right-3">
-		  <table class="table table-responsive table-no-border">
-          <tbody>
-              <tr>
-                  <td> <label><b>{{'reservation.FIRST_NAME' | translate}}</b></label> </td>
-                  <td>{{wineServiceDetails.firstName}}</td>
-              </tr>
-              <tr>
-                  <td> <label><b>{{'reservation.LAST_NAME' | translate}}</b></label> </td>
-                  <td>{{wineServiceDetails.lastName}}</td>
-              </tr>
-              <tr>
-                  <td> <label><b>{{'reservation.MOBILE' | translate}}</b></label> </td>
-                  <td>{{wineServiceDetails.mobileNumber}}</td>
-              </tr>
-              <tr>
-                  <td><label><b> {{'reservation.EMAIL' | translate}}</b></label> </td>
-                  <td>{{wineServiceDetails.emailId}}</td>
-              </tr>
-              <td><label><b> {{'reservation.BILLING_ADDRESS' | translate}}</b></label> </td>
-                <td>{{wineServiceDetails.billingAddress}}</td>
-            </tr>
-            <tr>
-                <td><label><b> {{'reservation.SHIPPING_ADDRESS' | translate}}</b></label> </td>
-                <td>{{wineServiceDetails.shippingAddress}}</td>
-            </tr>
-          </tbody>
-      </table>
-      <h6 class="color-success">{{"reservation.SELECTED_DRINK_ITEMS"  | translate}}</h6>
-      <table class="table table-responsive table-no-border h6">
-        <thead>
-          <tr>
-            <th><label><b>{{"reservation.DRINK_TYPE"  | translate}}</b></label></th>
-            <th><label><b>{{"reservation.BRAND"  | translate}}</b></label></th>
-            <th><label><b>{{"reservation.QUANTITY"  | translate}}</b></label></th>
-            <th><label><b>{{"reservation.PRICE"  | translate}}</b></label></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="drinkItem in selectedDrinkItems">
-            <td>{{drinkItem.brand}}</td>
-            <td>{{drinkItem.name}}</td>
-            <td>{{drinkItem.count}}</td>
-            <td><span ng-hide="((drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined))">&dollar;</span>{{(drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined) ? "-" : drinkItem.total | number:2}}</td>
-          </tr>
-        </tbody>
-    </table>
-    
-    <div ng-if="enabledPayment != 'Y'">
-        <button type="submit" class="btn btn-raised btn-primary" ng-click="wineServiceSave()">{{"reservation.FOOD_CONFIRM_BUTTON"  | translate}}</button>
-        <button type="button" class="btn btn-raised btn-danger" ng-click="editWinePage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
-    </div>
-    <div ng-if="enabledPayment == 'Y'">
-        <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnabled()">{{"reservation.PAYMENT"  | translate}}</button>
-        <button type="button" class="btn btn-raised btn-danger" ng-click="editWinePage()">{{"reservation.EDIT_BUTTON"  | translate}}</button>
-    </div>
-  </div>
+    <center>
+        <h2 class="color-success">{{'reservation.WINE_CONFIRM' | translate}}</h2>
+        <div class="form-group">
+            <div class="col-xs-12 col-md-6 col-md-offset-3 col-md-offset-right-3">
+                <table class="table table-responsive table-no-border">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b>{{'reservation.FIRST_NAME' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b>{{'reservation.LAST_NAME' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.lastName}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b>{{'reservation.MOBILE' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.mobileNumber}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.EMAIL' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.emailId}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h6>{{"reservation.BILLING_ADDRESS" | translate}}</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.ADDRESS' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.billingAddress.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.CITY' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.billingAddress.city}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.STATE' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.billingAddress.state}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.ZIP_CODE' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.billingAddress.zip}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h6>{{"reservation.SHIPPING_ADDRESS" | translate}}</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.ADDRESS' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.shippingAddress.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.CITY' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.shippingAddress.city}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.STATE' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.shippingAddress.state}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <b> {{'reservation.ZIP_CODE' | translate}}</b>
+                                </label>
+                            </td>
+                            <td>{{wineServiceDetails.shippingAddress.zip}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h6 class="color-success">{{"reservation.SELECTED_DRINK_ITEMS" | translate}}</h6>
+                <table class="table table-responsive table-no-border h6">
+                    <thead>
+                        <tr>
+                            <th>
+                                <label>
+                                    <b>{{"reservation.DRINK_TYPE" | translate}}</b>
+                                </label>
+                            </th>
+                            <th>
+                                <label>
+                                    <b>{{"reservation.BRAND" | translate}}</b>
+                                </label>
+                            </th>
+                            <th>
+                                <label>
+                                    <b>{{"reservation.QUANTITY" | translate}}</b>
+                                </label>
+                            </th>
+                            <th>
+                                <label>
+                                    <b>{{"reservation.PRICE" | translate}}</b>
+                                </label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="drinkItem in selectedDrinkItems">
+                            <td>{{drinkItem.brand}}</td>
+                            <td>{{drinkItem.name}}</td>
+                            <td>{{drinkItem.count}}</td>
+                            <td>
+                                <span ng-hide="((drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined))">&dollar;</span>{{(drinkItem == null || drinkItem.total == 0 || drinkItem.total == undefined)
+                                ? "-" : drinkItem.total | number:2}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-if="enabledPayment != 'Y'">
+                    <button type="submit" class="btn btn-raised btn-primary" ng-click="wineServiceSave()">{{"reservation.FOOD_CONFIRM_BUTTON" | translate}}</button>
+                    <button type="button" class="btn btn-raised btn-danger" ng-click="editWinePage()">{{"reservation.EDIT_BUTTON" | translate}}</button>
+                </div>
+                <div ng-if="enabledPayment == 'Y'">
+                    <button type="submit" class="btn btn-raised btn-primary" ng-click="paymentEnabled()">{{"reservation.PAYMENT" | translate}}</button>
+                    <button type="button" class="btn btn-raised btn-danger" ng-click="editWinePage()">{{"reservation.EDIT_BUTTON" | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </center>
 </div>
-</center>
-</div>
-
-
