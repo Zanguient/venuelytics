@@ -140,7 +140,8 @@ const aiResponse = function(channel, senderId, response) {
   } else {
     processAIResponse(channel, senderId, response);
   }
-}
+};
+
 const processAIResponse = function(channel, senderId, response) {
   console.log(JSON.stringify(response));
   let user = Users.getUser(senderId);

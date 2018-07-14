@@ -56,7 +56,6 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
             { "displayName": "Events", "name": "_events", "type": "text", "value": "" },
             { "displayName": "Deals", "name": "_deals", "type": "text", "value": "" },
             { "displayName": "Happyhours", "name": "_happyhours", "type": "text", "value": "" },
-            { "displayName": "Additional Free Parking", "name": "_additional_free_parking", "type": "text", "value": "" },
         ];
 
         general = $.Apputil.makeMap(general);

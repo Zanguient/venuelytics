@@ -13,7 +13,8 @@
             "console" : "externalTerminal",
             "env": {
                 "PROD": "false",
-                "LOCAL": "false"
+                "LOCAL": "true",
+                "PROXY": "true"
             }
         }
     ]

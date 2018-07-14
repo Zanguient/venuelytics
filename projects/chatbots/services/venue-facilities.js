@@ -3,6 +3,7 @@ const Users = require("../models/users");
 const serviceApi = require("../apis/app-api");
 const pluralize = require('pluralize');
 const aiUtil = require('../lib/aiutils');
+const moment = require("moment");
 
 const ANSWERS = [];
 const ANSWERS_DEFAULT = { text: "VALUE", api_name: "service-time", value: "facility" };
@@ -30,8 +31,9 @@ ANSWERS["Q_CHARGE"] = {text: "VALUE", parameters: ["VALUE"], api_name: "service-
 
   
   
-  const FACILITY_TYPE = ['Q_FACILITY', 'Q_FREE_FACILITY', 'Q_COUNT_FACILITY'];
+const FACILITY_TYPE = ['Q_FACILITY', 'Q_FREE_FACILITY', 'Q_COUNT_FACILITY'];
 
+const KNOWN_FACILITIES = ['restaurant', 'gym', 'spa', 'sauna', 'hotel', 'pool', 'indoor pool', 'breakfast', 'gift shop', 'tour', 'heated pool', 'adult pool', 'lunch', 'dinner'];
 
 
 //// DO yo have GYM, Sauna, Restaurant, Pool etc
@@ -155,20 +157,30 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
   }
   if (!aiUtil.hasParam(response, 'facilityOriginal') && aiUtil.hasParam(response, 'eatNDrink')) {
     response.parameters.facilityOriginal = response.parameters.eatNDrink;
-    response.parameters.facility = response.parameters.eatNDrink;
+    response.parameters.facilities = response.parameters.eatNDrink;
   }
   if (response.parameters.facilityOriginal) {
     answer.type = response.parameters.facilityOriginal;
     answer.type = answer.type.replace("?", "");
     answer.type = pluralize.singular(answer.type);
   }
+  let dateObj = {hasDateTime : false, hasDate: false};
+  if (aiUtil.hasParam(response, 'date-time')) {
+    dateObj.hasDateTime = true;
+    dateObj.dateTime = response.parameters['date-time'];
+  }
+  
+  if (aiUtil.hasParam(response, 'date')) {
+    dateObj.hasDate = true;
+    dateObj.dateTime = response.parameters['date'];
+  }
 
-  let success = findAndReply(answer, openText, data, channel, user, venueName, false);
+  let success = findAndReply(answer, openText, data, channel, user, venueName, false, dateObj);
   if (success) {
     return;
   }
   answer.type = response.parameters.facilities;
-  success = findAndReply(answer, openText, data, channel, user, venueName, true);
+  success = findAndReply(answer, openText, data, channel, user, venueName, true, dateObj);
   
   if (success) {
     return;
@@ -190,13 +202,17 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
     channel.sendMessage(user.id, reply);
     return;
   }
-
-  channel.sendMessage(user.id, "Sorry! I don't know the answer. Do you want me to connect to a live agent?");
+  if (KNOWN_FACILITIES.includes(response.parameters.facilityOriginal) || KNOWN_FACILITIES.includes(response.parameters.facilities)) {
+    channel.sendMessage(user.id, `Sorry we don't have ${response.parameters.facilityOriginal}`);
+  } else {
+    channel.sendMessage(user.id, "Sorry! I don't know the answer. Do you want me to connect to a live agent?");
+  }
+  
 
 
 }
 
-function findAndReply(answer, openText, data, channel, user, venueName, generic) {
+function findAndReply(answer, openText, data, channel, user, venueName, generic, dateTime) {
   if (answer.type && answer.type.toLowerCase() === 'kitchen' ) {
     answer.type = 'Restaurant';
   }
@@ -212,11 +228,26 @@ function findAndReply(answer, openText, data, channel, user, venueName, generic)
       var startTime = formatTime(data[j]['startTime']);
       var endTime = formatTime(data[j]['endTime']);
       if (answer.value && answer.value !== ''){
-        if (answer.value === 'startTime' && openText.toLowerCase().indexOf("24") >= 0) {
+        if (answer.value === 'startTime' && (openText.toLowerCase().indexOf("24") >= 0 || dateTime.hasDate || dateTime.hasDateTime)) {
           if (startTime === endTime) {
-            channel.sendMessage(user.id, `we are open 24 hours.` );
+            if (dateTime.hasDate || dateTime.hasDateTime) {
+              channel.sendMessage(user.id, `YES, ${answer.type} is Open.` );
+            } else {
+              channel.sendMessage(user.id, `we are open 24 hours.` );
+            }
           } else {
-            channel.sendMessage(user.id, `We are open from: ${startTime}, till: ${endTime}` );
+            if (dateTime.hasDate || dateTime.hasDateTime) {
+              // ignore date for now
+              let open = isBetween(dateTime.dateTime, startTime, endTime);
+              if (open) {
+                channel.sendMessage(user.id, `YES, ${answer.type} is open.` );
+              } else {
+                channel.sendMessage(user.id, `NO, ${answer.type} is not open.` );
+              }
+              
+            } else {
+              channel.sendMessage(user.id, `We are open from: ${startTime}, till: ${endTime}` );
+            } 
           }
         } else {
           channel.sendMessage(user.id, formatText(answer, venueName, formatTime(data[j][answer.value])));
@@ -229,7 +260,6 @@ function findAndReply(answer, openText, data, channel, user, venueName, generic)
           channel.sendMessage(user.id, `Opening time: ${startTime}, Closing time: ${endTime}` );
         }
       }
-      
       return true;
     }
   }
@@ -238,28 +268,28 @@ function findAndReply(answer, openText, data, channel, user, venueName, generic)
 
 function formatTime(normalizedTime) {
   // Check correct time format and split into components
-  var time = normalizedTime.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [normalizedTime];
-
-  if (time.length > 1) {
-    // If time format correct
-    time = time.slice(1); // Remove full string match value
-    time[5] = +time[0] < 12 ? "AM" : "PM"; // Set AM/PM
-    time[0] = +time[0] % 12 || 12; // Adjust hours
-    return time.join(""); // return adjusted time or original string
-  } else {
-    var x = time[0];
-    if (x.length < 5) {
-      x += '0';
-    }
-    var hms = x.split(':'),
-          h = +hms[0],
-          suffix = (h < 12) ? ' AM' : ' PM';
-      hms[0] = h % 12 || 12;        
-      return hms.join(':') + suffix;
-  }
   
+    let time = normalizedTime;
+    if (time.length < 5) {
+      time += '0';
+    }
+    let hms = time.split(':');
+    
+    let h = +hms[0];
+    let suffix = (h < 12) ? ' AM' : ' PM';
+    hms[0] = h % 12 || 12;        
+    return hms.join(':') + suffix;
 }
 
+function isBetween(timeStr, startTime, endTime) {
+ 
+  // var time = moment() gives you current time. no format required.
+  var time = moment(timeStr,'hh:mm:ss'),
+  beforeTime = moment(startTime, 'hh:mm a'),
+  afterTime = moment(endTime, 'hh:mm a');
+
+  return time.isBetween(beforeTime, afterTime);
+}
 function sendChargeImpl(type, user, answer, response, channel) {
   const chargeType = response.parameters.chargeType;
   var data = user.state.get(answer.api_name);
@@ -362,8 +392,15 @@ function sendAnswerFacilityImpl(type, user, answer, response, channel) {
       return;
     }
   } else if (hasFacility && type === 'Q_FACILITY') {
-    let namesStr = names.slice(0, -1).join(', ') +', and '+ names.slice(-1);
-    channel.sendMessage(user.id, `We have the following kind of ${facilityType}'s - ${namesStr}`);
+    let namesStr = "";
+    if (names.length > 1) {
+      namesStr = names.slice(0, -1).join(', ') +', and '+ names.slice(-1);
+      channel.sendMessage(user.id, `We have the following kind of ${facilityType}'s - ${namesStr}`);
+    } else {
+      namesStr  = names[0];
+      channel.sendMessage(user.id, facilityText);
+    }
+    
   } else if (hasFacility && type === 'Q_FREE_FACILITY') {
     channel.sendMessage(user.id, `Sorry, We don't have free ${facilityType}. ${facilityText}`);
   } else {

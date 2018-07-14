@@ -29,7 +29,20 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
             {name: 'Heated Pool', label: "Heated Pool"},
             {name: 'Business Center', label: "Business Center"},
             {name: 'Steam Room', label: "Steam Room"},
+            {name: 'GYM', label: "GYM"},
+            {name: 'Breakfast', label: "Breakfast"},
+            {name: 'Lunch', label: "Lunch"},
+            {name: 'Dinner', label: "Dinner"},
+            {name: 'Breakfast', label: "Breakfast"},
+            {name: 'FastPass', label: "FastPass"},
+            {name: 'CoverCharges', label: "CoverCharges"},
+
+            {name: 'Parking', label: "Parking"},
+            {name: 'Valet Parking', label: "Valet Parking"},
+            {name: 'Additional Parking', label: "Additional Parking"},
         ];
+
+
 
         $scope.data = {};
         if ($stateParams.id !== 'new') {

@@ -46,7 +46,7 @@ const sendAnswer = function(userId, response, channel) {
         }
 
         if (aiUtil.hasParam(response, 'question')) {
-           channel.sendMessage(userId, "What kind of menu you are looking for - Food, Drinks, Dessert, Wine ...")
+           channel.sendMessage(userId, "What kind of menu you are looking for - Food, Drinks, Dessert, Wine ...");
             return;
         } else {
             channel.sendMessage(userId,`Sorry We don't carry menu you are looking for.`);
@@ -69,6 +69,7 @@ const sendAnswer = function(userId, response, channel) {
         }
 
         if (aiUtil.hasParam(response, 'EatNDrink', 'breakfast') || aiUtil.hasParam(response, 'EatNDrink', 'lunch') || aiUtil.hasParam(response, 'EatNDrink', 'dinner')) {
+
             channel.sendMessage(userId,`Yes we serve breakfast, lunch and dinner.`);
             return;
         }
