@@ -104,7 +104,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
         self.drinkService = function (item) {
             if (item.count !== undefined && item.count !== '') {
                 if (self.userSelectedDrinks.indexOf(item) === -1) {
-                    for (let a = 0; a < item.quantity.length; a++) {
+                    for (var a = 0; a < item.quantity.length; a++) {
                         if (parseInt(item.package) === item.quantity[a]) {
                             angular.forEach(item.price, function (value, key) {
                                 if (item.quantity.indexOf(item.quantity[a]) === key) {
@@ -115,7 +115,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                         }
                     }
                 } else {
-                    for (let a = 0; a < item.quantity.length; a++) {
+                    for (var a = 0; a < item.quantity.length; a++) {
                         if (parseInt(item.package) === item.quantity[a]) {
                             angular.forEach(item.price, function (value, key) {
                                 if (item.quantity.indexOf(item.quantity[a]) === key) {

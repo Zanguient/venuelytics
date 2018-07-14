@@ -29,15 +29,28 @@ const sendAnswer = function(userId, response, channel) {
         sendAnswerImpl(channel, userId,  "I will send bellman to help you with that.", null);
         return;
     }   else if (aiUtil.hasParam(response,'toilettes')) {
-       
         sendAnswerImpl(channel, userId, null, "I will send housekeeping to take care of it.");
         return;
         
+    } else if (aiUtil.hasParam(response,'action', 'extend')) {
+       
+        if (aiUtil.hasParam(response, 'duration')) {
+            sendAnswerImpl(channel, userId, null, "I will send your request to frontdesk they will contact you soon.");
+        } else {
+            sendAnswerImpl(channel, userId, null, "For how many days you want to extend your stay.");
+            user.setConversationContext('EXTEND_STAY', true, extendSayDuration, response);
+        }
+        return;
     }
         
-    sendAnswerImpl(channel, userId, null, "I will send your request to front desk.");
+    sendAnswerImpl(channel, userId, null, "Sure, I will send your request to front desk.");
    
  };
+
+ function extendSayDuration(channel, userId, text, type, originalResponse) {
+    console.log(text);
+    sendAnswerImpl(channel, userId, null, "I will send your request to frontdesk they will contact you soon.");
+ }
   
 function sendAnswerImpl(channel, userId, pMessage, nMessage) {
     if (pMessage && pMessage.length > 0) {

@@ -3,11 +3,11 @@
 const config = {}; 
 config.service = {}; 
 config.service.port = process.env.PORT || 9000;
-config.devMode = !process.env.PROD || false;
+config.devMode = process.env.PROD !== "true";
 config.WEBHOOK_TOKEN = "venuelytics-fb-agent-EAAcYqcwl1BwBANOAT";
 config.PAGE_ACCESS_TOKEN = "EAAcYqcwl1BwBANOATkspAplSbNdTDvXmbhyE8VdnQj44yjvfJROCcEn7uVy6NYZAPmbAQyZCxgzjbFNQQ5uN94ZB28ZAIoKewqSxCEUmHBdZAjL8MOh8BZBrtgh43AmLr708IHZBV0ZC8DedkvR8PYb8D8MiEWOT7U9vBC2KDPb3VgZDZD";
 
-const DEV_SRVR = 'https://dev.api.venuelytics.com';
+const DEV_SRVR = 'http://dev.api.venuelytics.com';
 const LOCAL_SRVR = 'http://localhost:8080';
 const PROD_SRVR = 'https://prod.api.venuelytics.com';
 
@@ -22,7 +22,9 @@ config.getAppUrl = () => {
     if (process.env.LOCAL === 'true') {
         return `${LOCAL_SRVR}/WebServices/rsapi/v1`;
     } else {
-        return config.devMode ? `${DEV_SRVR}/WebServices/rsapi/v1`: `${PROD_SRVR}/WebServices/rsapi/v1`;
+        const appAPIUrl = config.devMode ? `${DEV_SRVR}/WebServices/rsapi/v1`: `${PROD_SRVR}/WebServices/rsapi/v1`;
+        console.log(`using ${appAPIUrl}`);
+        return appAPIUrl;
     }
     
 };
@@ -39,8 +41,13 @@ config.accountSid =  'AC227acd740f9ff82b02f09298a8c13e0d';
 config.authToken = "1d9fa8df3728c108929887407cc0c552";
 
 config.smsDebug = (process.env.PROD === "false" ) || false;
+
+config.enableProxy = process.env.PROXY === "true";
+
+config.proxy = {'proxy':'http://localhost:8888'};
+
 console.log("sms bebug: " + config.smsDebug);
-config.sms_debug_agent_number = '+17025000196';
+config.sms_debug_agent_number = '12345';//'+17025000196';
 config.getPort = () => {
     return config.service.port;
 };

@@ -34,9 +34,9 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 		'eventType', 'eventTime', 'durationInMinutes', 'startDate', 'endDate', 'scheduleDayOfMonth', 'ageRestriction', 'agePricePolicy', 'performers',
 		'scheduleDayOfWeek', 'imageURL', 'bookingUrl', 'price', 'enabled', 'performerId', 'processingFeeMode', 'agencyId', 'needSponsor', 'address'];
 
-	var VenueDeal = ['id', 'venueNumber', 'title', 'longTitle', 'description', 'serviceType', 'couponType', 'promoCode',
+	var VenueDeal = ['id', 'venueNumber', 'title', 'description', 'serviceType', 'couponType', 'promoCode',
 		'actionUrl', 'contentUrl', 'originalPrice', 'discountAmount', 'discountPercent', 'imageUrl', 'thumbnailUrl', 'startDate',
-		'expiryDate', 'displayEndDate', 'deleted', 'enabled']
+		'expiryDate', 'displayEndDate', 'deleted', 'enabled', 'keywords']
 
 	var eventTicketProperties = ['id', 'storeNumber', 'name', 'description',
 		'price', 'discountedPrice', 'sectionName', 'seatStartNumber', 'count', 'row', 'eventDate', 'uiAttribute'];

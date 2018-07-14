@@ -1,8 +1,9 @@
 'use strict';
 var config = require('../config');
-var request = require('request');
+const requestBase = require('request');
 const PAGE_ACCESS_TOKEN = config.PAGE_ACCESS_TOKEN;
 
+const request = config.enableProxy ?  requestBase.defaults(config.proxy) : requestBase;
 
 const getDetailsFromFacebook = (userId, callback) => {
     request(
@@ -140,10 +141,17 @@ const getGuestListUrl = function(venueUniqueName, venueId, city) {
      if (!!venueUniqueName) {
         return  `${config.getWebUIUrl()}/cities/${city}/${venueUniqueName}/guest-list`;
     } else {
-        return `${config.getWebUIUrl()}/cities//${city}/${venueId}/guest-list`;
+        return `${config.getWebUIUrl()}/cities/${city}/${venueId}/guest-list`;
     }
 };
 
+const getDealsUrl = function(venueUniqueName, venueId, city) {
+    if (!!venueUniqueName) {
+       return  `${config.getWebUIUrl()}/cities/${city}/${venueUniqueName}/deals`;
+   } else {
+       return `${config.getWebUIUrl()}/cities/${city}/${venueId}/deals`;
+   }
+};
 const getActiveGames = function(venueId, gameName, callback) {
     var url = `${config.getAppUrl()}/venues/${venueId}/games/active`;
     if (gameName !== null && gameName.trim() !== '') {
@@ -169,7 +177,17 @@ const getGamesAvailableNow = function(venueId, callback) {
         retOBJ(body, response, callback);
     });
 };
+const getDealInfo = function(venueId, parameters, callback) {
+    var options = {
+        method: 'GET',
+        qs: parameters,
+        url: `${config.getAppUrl()}/coupons/${venueId}/active/info`,
+    };
 
+    request.get(options, function (error, response, body) {
+        retOBJ(body, response, callback);
+    });
+};
 const searchGamesByName = function(venueId, gameName, callback) {
 
     var url = `${config.getAppUrl()}/venues/${venueId}/games`;
@@ -259,5 +277,7 @@ module.exports= {
     searchGamesByName: searchGamesByName,
     getGamesUrl: getGamesUrl,
     getTournamentsUrl : getTournamentsUrl,
-    getGuestListUrl: getGuestListUrl
+    getGuestListUrl: getGuestListUrl,
+    getDealInfo : getDealInfo,
+    getDealsUrl : getDealsUrl
 };

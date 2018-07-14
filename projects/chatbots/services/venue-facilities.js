@@ -302,6 +302,7 @@ function sendAnswerFacilityImpl(type, user, answer, response, channel) {
   var facilityText = "";
   var count = 0;
   var locations = [];
+  var names = [];
   if (typeof(data) !== "undefined") {
     for (var i = 0; i < data.length; i++) {
       if (data[i].type.toLowerCase() === facilityType.toLowerCase()) {
@@ -321,7 +322,7 @@ function sendAnswerFacilityImpl(type, user, answer, response, channel) {
         }
       }
     } 
-    var names = [];
+    
     if (!hasFacility) {
       if ( Array.isArray(response.parameters.facilities)) {
         facilityType = response.parameters.facilities[0]; // generic

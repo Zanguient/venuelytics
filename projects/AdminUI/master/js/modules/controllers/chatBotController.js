@@ -37,9 +37,10 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
             { "displayName": "Pet Policy Cats", "name": "_pet_policy_cats", "type": "text", "value": "" },
             { "displayName": "Pet Policy", "name": "_pet_policy", "type": "text", "value": "" },
             { "displayName": "Order Food Drinks", "name": "_order-food-drinks", "type": "text", "value": "" },
-            { "displayName": "Nearby Restaurants", "name": "_nearby-restaurants", "type": "text", "value": "" },
-            { "displayName": "Nearby Bars", "name": "_nearby-bars", "type": "text", "value": "" },
-            { "displayName": "Nearby Bar", "name": "_nearby-bar", "type": "text", "value": "" },
+            { "displayName": "Nearby Restaurants", "name": "_nearby-restaurant", "type": "text", "value": "" },
+            { "displayName": "Nearby Bars", "name": "_nearby-bar", "type": "text", "value": "" },
+            { "displayName": "Nearby Attractions", "name": "_nearby-attraction", "type": "text", "value": "" },
+             { "displayName": "Nearby Malls", "name": "_nearby-shopping-mall", "type": "text", "value": "" },
             { "displayName": "Clean Room", "name": "_clean-room", "type": "text", "value": "" },
             { "displayName": "Airport Shuttle", "name": "_airport-shuttle", "type": "text", "value": "" },
         ];
