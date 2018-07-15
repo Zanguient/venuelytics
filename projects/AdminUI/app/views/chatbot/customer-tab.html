@@ -33,14 +33,6 @@
                </div>
            </div>
         </fieldset>
-        <fieldset>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">Customer Message</label>
-                <div class="col-sm-8">
-                    <textarea placeholder="Enter message to customer" rows="5" ng-model="data.message" class="form-control ng-pristine ng-valid"></textarea>
-                </div>
-            </div>
-        </fieldset>
         <button  type="submit" class="btn btn-primary pull-right" ng-click="updateCustomer(customerInfo.$valid,data)">Save Customer</button>
     </form>
 </div>
@@ -80,7 +72,7 @@
                 </div>
             </div>
         </fieldset>
-       
+
         <button  type="submit" class="btn btn-primary pull-right" ng-click="sendCustomerMessage(cs)">Send Message</button>
     </form>
 </div>

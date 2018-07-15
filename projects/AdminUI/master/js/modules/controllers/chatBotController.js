@@ -36,13 +36,13 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
             { "displayName": "Pet Policy Dogs", "name": "_pet_policy_dogs", "type": "text", "value": "" },
             { "displayName": "Pet Policy Cats", "name": "_pet_policy_cats", "type": "text", "value": "" },
             { "displayName": "Pet Policy", "name": "_pet_policy", "type": "text", "value": "" },
-            { "displayName": "Order Food Drinks", "name": "_order-food-drinks", "type": "text", "value": "" },
+            { "displayName": "Ordering Food & Drinks", "name": "_order-food-drinks", "type": "text", "value": "" },
             { "displayName": "Nearby Restaurants", "name": "_nearby-restaurant", "type": "text", "value": "" },
             { "displayName": "Nearby Bars", "name": "_nearby-bar", "type": "text", "value": "" },
             { "displayName": "Nearby Attractions", "name": "_nearby-attraction", "type": "text", "value": "" },
              { "displayName": "Nearby Malls", "name": "_nearby-shopping-mall", "type": "text", "value": "" },
-            { "displayName": "Clean Room", "name": "_clean-room", "type": "text", "value": "" },
-            { "displayName": "Airport Shuttle", "name": "_airport-shuttle", "type": "text", "value": "" },
+            { "displayName": "Room Cleaning", "name": "_clean-room", "type": "text", "value": "" },
+            { "displayName": "Airport Shuttle Service", "name": "_airport-shuttle", "type": "text", "value": "" },
         ];
 
         hotels = $.Apputil.makeMap(hotels);
@@ -62,10 +62,10 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
         settings.push(general);
 
         var topGolf = [
-            { "displayName": "Golf Play Weather", "name": "_golf.play.weather", "type": "text", "value": "" },
-            { "displayName": "Golf Play People Policy", "name": "_golf.play.people.policy", "type": "text", "value": "" },
-            { "displayName": "Golf Play Holiday", "name": "_golf.play.holiday", "type": "text", "value": "" },
-            { "displayName": "Golf Play Cost", "name": "_golf.play.cost", "type": "text", "value": "" },
+            { "displayName": "Open Weather conditions", "name": "_golf.play.weather", "type": "text", "value": "" },
+            { "displayName": "People Policy", "name": "_golf.play.people.policy", "type": "text", "value": "" },
+            { "displayName": "Holidays", "name": "_golf.play.holiday", "type": "text", "value": "" },
+            { "displayName": "Glof Playing Cost", "name": "_golf.play.cost", "type": "text", "value": "" },
             { "displayName": "Golf Club Policy", "name": "_golf.club.policy", "type": "text", "value": "" },
             { "displayName": "Golf Club Personal", "name": "_golf.club.personal", "type": "text", "value": "" },
             { "displayName": "Golf Club Cost", "name": "_golf.club.cost", "type": "text", "value": "" },
@@ -155,7 +155,7 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
             var obj = {};
             
             obj['sms.liveAgentNumber'] = sms.liveAgentNumber;
-            obj['sms.defaultWelcomeMessage'] = sms.defaultWelcomeMessage = 
+            obj['sms.defaultWelcomeMessage'] = sms.defaultWelcomeMessage;
             obj['sms.checkInMessage'] = sms.checkInMessage;
             obj['sms.checkOutMessage'] = sms.checkOutMessage;
             obj['sms.enableCheckoutRating'] = sms.enableCheckoutRating;
@@ -210,7 +210,7 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
             }
             else if (tabs.name === 'Hotels') {
                 $scope.adminSettings = hotels;
-                $scope.head="Hotel";
+                $scope.head="Response to the Standard customer questions";
             }
             else if (tabs.name === 'General') {
                 $scope.adminSettings = general;
