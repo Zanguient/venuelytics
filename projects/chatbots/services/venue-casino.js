@@ -58,11 +58,6 @@ const sendAnswer = function(userId, response, channel) {
         props = response.parameters.props;
     }
    
-    if (props && props.toLowerCase().indexOf("age") >=0) {
-        channel.sendMessage(userId,`Minimum age to play - 21 & over. The guests under 21 can eat at the restaurants.`);
-        return;
-    } 
-
     if (props && (props.toLowerCase().indexOf("bid") >=0 || props.toLowerCase().indexOf("bet")) >=0){
         minBet = true;
     }

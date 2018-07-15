@@ -60,7 +60,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label">Reason (Will not be send to customer)</label>
                 <div class="col-sm-8">
-                    <input type="text" name="phone" required="required"  class="form-control" ng-model="cs.reason"/>
+                    <select  name="reason" required="required"  required="required" class="form-control" ng-selected="onReasonSectionChange()" ng-model="cs.reason" ng-options="reason for reason in reasons"/>
                 </div>
             </div>
         </fieldset>
@@ -68,7 +68,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label">Customer Message</label>
                 <div class="col-sm-8">
-                    <textarea placeholder="Enter message to customer" rows="5" ng-model="cs.message" class="form-control ng-pristine ng-valid"></textarea>
+                    <textarea placeholder="Enter message to customer" required ="required" rows="5" ng-model="cs.message" class="form-control ng-pristine ng-valid"></textarea>
                 </div>
             </div>
         </fieldset>

@@ -41,7 +41,7 @@ const sendAnswer = function(userId, response, channel) {
         return;
     }
 
-    channel.sendAnswer(userId, "Humm, I didn't understand your question");
+    channel.sendAnswer(userId, "Hmm, I didn't understand your question");
 
 
 };

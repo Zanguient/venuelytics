@@ -3,6 +3,9 @@ const Users = require("../models/users");
 const serviceApi = require("../apis/app-api");
 const pluralize = require('pluralize');
 const aiUtil = require('../lib/aiutils');
+const KNOW_INFO_FACILITIES = { 'gift card' :{id: '_giftcard:', no:'Sorry, we don\'t have Gift Cards.'}, 
+'iron': {id: '_ironing', no: "Sorry, we don't have Iron and Iron Boards."}};
+
 const sendAnswer = function(userId, response, channel) {
     let user = Users.getUser(userId);
     //we assume if we are here we have the venueId
@@ -41,6 +44,17 @@ const sendAnswer = function(userId, response, channel) {
             user.setConversationContext('EXTEND_STAY', true, extendSayDuration, response);
         }
         return;
+    } else if (aiUtil.hasParam(response,'item') ){
+        
+        let item = KNOW_INFO_FACILITIES[response.parameters.item];
+        if (item) {
+            sendAnswerImpl(channel, userId, info[item.id], item.no);
+        } else {
+            sendAnswerImpl(channel, userId, null, `Sorry we don't have ${response.parameters.item}`);
+        }
+        
+            return;
+        }
     }
         
     sendAnswerImpl(channel, userId, null, "Sure, I will send your request to front desk.");

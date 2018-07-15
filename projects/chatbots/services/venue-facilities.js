@@ -76,16 +76,8 @@ const sendAnswer = function(type, userId, response, channel) {
     }
     return;
   }
-  if (aiUtil.hasParam(response,'item',"gift card")) {
-    if (venue.info['_giftcard'] ) {
-      channel.sendMessage(userId, venue.info['_giftcard']);
-    } else {
-      channel.sendMessage(userId, `Sorry, we don't have Gift Cards.`);
-    }
-    return;
-  }
-
-
+  
+  
   if (user.hasParameter(answer.api_name)) {
     sendAnswerImpl(type, user, answer, response, channel);
   } else {
@@ -194,9 +186,9 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
   if (!!venueTimes) {
     var openTime = formatTime(venueTimes.startTime);
     var closeTime = formatTime(venueTimes.endTime);
-    var reply = `Humm, not sure what you asked. We open at ${openTime} and close at ${closeTime}` ;
+    var reply = `Hmm, not sure what you asked. We open at ${openTime} and close at ${closeTime}` ;
     if (openTime === closeTime) {
-      reply = "Humm, not sure what you asked. We are open 24 hours!";
+      reply = "Hmm, not sure what you asked. We are open 24 hours!";
     }
     
     channel.sendMessage(user.id, reply);

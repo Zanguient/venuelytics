@@ -15,7 +15,7 @@ const events = require("./events");
 const shuttle = require("./shuttle-service");
 
 const chargers = require("./phone-chargers");
-
+const agePolicy = require("./age-policy");
 
 const QUESTIONS = [];
 
@@ -60,6 +60,7 @@ _D("Q_TOP_GOLF",topGolf);
 _D("Q_DEALS_AND_SPECIALS",dealsSpecials);
 _D("Q_EVENTS",events);
 _D("Q_CHARGER",chargers);
+_D("Q_AGE_POLICY", agePolicy);
 
 QUESTIONS["Q_RESERVATION"] = fxReservationDispatcher;
 QUESTIONS["Q_PET_POLICY"] = curry(fxInfo)("Q_PET_POLICY");

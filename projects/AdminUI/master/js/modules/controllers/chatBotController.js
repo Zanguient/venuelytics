@@ -5,14 +5,14 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
         'use strict';
         $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
         $scope.adminSettings = [];
+        $scope.reasons = ["Welcome Message","Checkin Rating", "Checkout Rating", "Service Message", "Other"];
         $scope.tabs = [
             { name: 'SMS Chatbot', content: 'app/views/chatbot/smsChat-tab.html', icon: 'fa-user-circle-o' },
             { name: 'Facebook Chatbot', content: 'app/views/chatbot/facebookChat-tab.html', icon: 'fa-address-book-o' },
             { name: 'Admin Settings', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
             { name: 'Customer Service', content: 'app/views/chatbot/customer-tab.html', icon: 'fa-address-book-o' },
-
-            { name: 'Hotels', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
             { name: 'General', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
+            { name: 'Hotels', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
             { name: 'Top Golf', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
             { name: 'Casino', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
         ];
@@ -49,6 +49,7 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
         settings.push(hotels);
 
         var general = [
+            { "displayName": "Age Policy", "name": "_age_policy", "type": "text", "value": "" },
             { "displayName": "Vip Deals", "name": "_vip_deals", "type": "text", "value": "" },
             { "displayName": "Events Organize", "name": "_events.organize", "type": "text", "value": "" },
             { "displayName": "Events Celebrate Special Day", "name": "_events.celebrate.special.day", "type": "text", "value": "" },
@@ -223,9 +224,24 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
             else if(tabs.name === 'Casino') {
                 $scope.adminSettings = casino;
                 $scope.head="Casino";
+            } else if (tabs.name == 'Customer Service') {
+                $scope.cs.reason = "Welcome Message";
+                $scope.cs.message = $scope.sms.defaultWelcomeMessage;
+
             }
         }
 
+        $scope.onReasonSectionChange = function() {
+            if ($scope.cs.reason === "Welcome Message") {
+                $scope.cs.message = $scope.sms.defaultWelcomeMessage;
+            }  else if ($scope.cs.reason === "Checkin Rating") {
+                $scope.cs.message = $scope.sms.checkInMessage;
+            } else if ($scope.cs.reason === "Checkout Rating") {
+                $scope.cs.message = $scope.sms.checkOutMessage;
+            } else {
+                $scope.cs.message = "";
+            }
+        };
 
         $scope.init();
 
