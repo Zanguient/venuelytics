@@ -561,6 +561,14 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 				}
 			});
 		},
+		MessangerService: function() {
+			return $resource(urlTemplate.replace("@context", "messanger"), {}, {
+				sendSMS: {
+					method: 'POST', params: { id: '@id' }
+				}
+			});
+
+		},
 		cleansePayload: function (serviceName, payload) {
 			var rProps = REQ_PROP[serviceName];
 			if (typeof rProps !== 'undefined') {

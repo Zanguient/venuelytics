@@ -1,24 +1,55 @@
 <div class="col-sm-6">
   <form  name="smsChatInfo" id="smsChatInfo" validate-form="" novalidate role="form">
     <!-- START panel-->
+    
     <fieldset>
-    <div class="form-group">
-      <label class="col-sm-4 control-label">Live Agent Number</label>
-      <div class="col-sm-8">
-      <input type="text" name="number" required="required"  class="form-control" ng-model="sms.liveAgentNumber"/>
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Live Agent Number</label>
+        <div class="col-sm-8">
+          <input type="text" name="number" required="required"  class="form-control" ng-model="sms.liveAgentNumber"/>
+        </div>
       </div>
-    </div>
-      </fieldset>
-      <fieldset>
-    <div class="form-group">
-      <label class="col-sm-4 control-label">Default Welcome Message</label>
-      <div class="col-sm-8">
-      <textarea placeholder="..." rows="5" name="message" ng-model="sms.defaultWelcomeMessage" class="form-control ng-pristine ng-valid"></textarea>
+    </fieldset>
+    <fieldset>
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Default Welcome Message</label>
+        <div class="col-sm-8">
+          <textarea placeholder="Enter default Welcome Message" rows="5" name="message" ng-model="sms.defaultWelcomeMessage" class="form-control"></textarea>
+        </div>
       </div>
-    </div>
-        </fieldset>
+    </fieldset>
+    <fieldset>
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Check-In Message</label>
+        <div class="col-sm-8">
+          <textarea placeholder="Enter Checkin message" rows="5" ng-model="sms.checkInMessage" class="form-control"></textarea>
+          <div class="checkbox c-checkbox">
+            <label>
+               <input type="checkbox" ng-model="sms.enableCheckinRating">
+               <span class="fa fa-check"></span>Enable Checkin Rating
+            </label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Check Out Message</label>
+        <div class="col-sm-8">
+          <textarea placeholder="Enter Checkout Message" rows="5" ng-model="sms.checkOutMessage" class="form-control"></textarea>
+            <div class="checkbox c-checkbox">
+            <label>
+               <input type="checkbox" ng-true-value="true"  ng-false-value="false" ng-model="sms.enableCheckoutRating">
+               <span class="fa fa-check"></span>Enable Checkout Rating
+            </label>
+          </div>
+        </div>
+        
+      </div>
+    </fieldset>
+   
     <div class="col-sm-8">
-    <button  type="submit" class="col-sm-8 btn btn-primary pull-right" ng-click="updateSmsChat(smsChatInfo.$valid,smsChatInfo,sms)">Save</button>
+      <button  type="submit" class="col-sm-8 btn btn-primary pull-right" ng-click="updateSmsChat(smsChatInfo.$valid,smsChatInfo,sms)">Save</button>
     </div>
   </form>
 </div>

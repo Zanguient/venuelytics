@@ -1,12 +1,11 @@
-<div class="col-sm-6">
+<div class="col-md-6 col-sm-12 br">
     <form  name="customerInfo" validate-form="" novalidate role="form">
         <!-- START panel-->
-
         <fieldset>
             <div class="form-group">
                 <label class="col-sm-4 control-label">Customer Name</label>
                 <div class="col-sm-8">
-                    <input type="text" name="major" required="required"  class="form-control" ng-model="data.name"/>
+                    <input type="text" name="name" required="required"  class="form-control" ng-model="data.name"/>
                 </div>
             </div>
         </fieldset>
@@ -14,15 +13,62 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label">Customer Number</label>
                 <div class="col-sm-8">
-                    <input type="text" name="major" required="required"  class="form-control" ng-model="data.number"/>
+                    <input type="text" name="phone" required="required"  class="form-control" ng-model="data.number"/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+           <div class="form-group">
+               <label class="col-sm-4 control-label">Checkin Day and Time</label>
+               <div class="col-sm-8">
+                   <input type="text" name="checkinTime" required="required"  class="form-control" ng-model="data.checkinTime"/>
+               </div>
+           </div>
+        </fieldset>
+        <fieldset>
+           <div class="form-group">
+               <label class="col-sm-4 control-label">Checkout Day and Time</label>
+               <div class="col-sm-8">
+                   <input type="text" name="checkoutTime" required="required"  class="form-control" ng-model="data.checkoutTime"/>
+               </div>
+           </div>
+        </fieldset>
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Customer Message</label>
+                <div class="col-sm-8">
+                    <textarea placeholder="Enter message to customer" rows="5" ng-model="data.message" class="form-control ng-pristine ng-valid"></textarea>
+                </div>
+            </div>
+        </fieldset>
+        <button  type="submit" class="btn btn-primary pull-right" ng-click="updateCustomer(customerInfo.$valid,data)">Save Customer</button>
+    </form>
+</div>
+
+<div class="col-md-6 col-sm-12">
+    <form  name="customerService" validate-form="" novalidate role="form">
+        <!-- START panel-->
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Customer Name</label>
+                <div class="col-sm-8">
+                    <input type="text" name="name" required="required"  class="form-control" ng-model="cs.name"/>
                 </div>
             </div>
         </fieldset>
         <fieldset>
             <div class="form-group">
-                <label class="col-sm-4 control-label">Checkout Day and Time</label>
+                <label class="col-sm-4 control-label">Customer Number</label>
                 <div class="col-sm-8">
-                    <input type="text" name="major" required="required"  class="form-control" ng-model="data.dayTime"/>
+                    <input type="text" name="phone" required="required"  class="form-control" ng-model="cs.customerNumber"/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Reason (Will not be send to customer)</label>
+                <div class="col-sm-8">
+                    <input type="text" name="phone" required="required"  class="form-control" ng-model="cs.reason"/>
                 </div>
             </div>
         </fieldset>
@@ -30,15 +76,11 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label">Customer Message</label>
                 <div class="col-sm-8">
-                    <textarea placeholder="..." rows="5" ng-model="data.message" class="form-control ng-pristine ng-valid"></textarea>
+                    <textarea placeholder="Enter message to customer" rows="5" ng-model="cs.message" class="form-control ng-pristine ng-valid"></textarea>
                 </div>
-            <div class ="col-sm-12">
-                <button  type="submit" class="btn btn-primary pull-right" ng-click="">Clear Message</button>
-            </div>
             </div>
         </fieldset>
-        <div class="col-sm-8">
-        <button  type="submit" class="col-sm-8 btn btn-primary pull-right" ng-click="updateCustomer(customerInfo.$valid,data)">Send Message</button>
-        </div>
+       
+        <button  type="submit" class="btn btn-primary pull-right" ng-click="sendCustomerMessage(cs)">Send Message</button>
     </form>
 </div>

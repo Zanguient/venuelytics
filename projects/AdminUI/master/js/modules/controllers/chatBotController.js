@@ -1,8 +1,7 @@
 
-App.controller('ChatbotController', ['$translate', '$scope', '$state', '$stateParams',
-    'RestServiceFactory', 'toaster', 'FORMATS', '$timeout', 'DataTableService', '$compile', 'ngDialog', 'ContextService', '$log', 'APP_EVENTS', 'AUTH_EVENTS',
-    function ($translate, $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS,
-        $timeout, DataTableService, $compile, ngDialog, contextService, $log, APP_EVENTS, AUTH_EVENTS) {
+App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestServiceFactory', 'toaster', 
+    'FORMATS',  'ngDialog', 'ContextService', '$log', 'APP_EVENTS',
+    function ( $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, ngDialog, contextService, $log, APP_EVENTS) {
         'use strict';
         $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
         $scope.adminSettings = [];
@@ -22,6 +21,7 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
         $scope.sms = {};
         $scope.facebook = {};
         var settings = [];
+        $scope.cs = {};
 
         var adminSettings = [
         	{ "displayName": "Enable Web Bot", "name": "WebBot.enable", "type": "text", "help":"only Y or N","value": "" },
@@ -90,6 +90,14 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
 
                     $scope.sms.liveAgentNumber = data['sms.liveAgentNumber'];
                     $scope.sms.defaultWelcomeMessage = data['sms.defaultWelcomeMessage'];
+                    
+                    $scope.cs.message = $scope.sms.defaultWelcomeMessage;
+
+                    $scope.sms.checkInMessage = data['sms.checkInMessage'];
+                    $scope.sms.checkOutMessage = data['sms.checkOutMessage'];
+                    $scope.sms.enableCheckoutRating = data['sms.enableCheckoutRating'];
+                    $scope.sms.enableCheckinRating = data['sms.enableCheckinRating'];
+
                     $scope.facebook.liveAgentNumber = data['facebook.liveAgentNumber'];
                     $scope.facebook.defaultWelcomeMessage = data['facebook.defaultWelcomeMessage'];
 
@@ -143,14 +151,17 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
                 return;
             }
 
-            var smsChat = {
-                "sms.liveAgentNumber": sms.liveAgentNumber,
-                "sms.defaultWelcomeMessage": sms.defaultWelcomeMessage,
-            };
-
             var target = { id: $scope.venueNumber };
+            var obj = {};
+            
+            obj['sms.liveAgentNumber'] = sms.liveAgentNumber;
+            obj['sms.defaultWelcomeMessage'] = sms.defaultWelcomeMessage = 
+            obj['sms.checkInMessage'] = sms.checkInMessage;
+            obj['sms.checkOutMessage'] = sms.checkOutMessage;
+            obj['sms.enableCheckoutRating'] = sms.enableCheckoutRating;
+            obj['sms.enableCheckinRating'] = sms.enableCheckinRating;
 
-            RestServiceFactory.VenueService().updateAttribute(target, smsChat, function (success) {
+            RestServiceFactory.VenueService().updateAttribute(target, obj, function (success) {
                 ngDialog.openConfirm({
                     template: '<p>Sms Chat information  successfully saved</p>',
                     plain: true,
@@ -162,9 +173,7 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
                 }
             });
 
-            $timeout(function () {
-
-            });
+            
         };
 
         $scope.updateFacebookChat = function (isValid, form, facebook) {
@@ -192,9 +201,7 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
                 }
             });
 
-            $timeout(function () {
-
-            });
+            
         };
         $scope.tabSelect = function (tabs) {
             if (tabs.name === "Admin Settings") {
@@ -229,5 +236,20 @@ App.controller('ChatbotController', ['$translate', '$scope', '$state', '$statePa
             $scope.init();
 
         });
+
+        $scope.sendCustomerMessage = function(cs) {
+            var target = { id: $scope.venueNumber };
+            var payload = {channelType: 'SMSBot', type: cs.reason, message: cs.message, to: cs.customerNumber};
+
+            RestServiceFactory.MessangerService().sendSMS(target, payload, function (success) {
+                if (success.message.indexOf("Fail") >=0) {
+                    toaster.pop('error', "Send Error", success.message);
+                } else {
+                    $scope.cs = {};
+                }
+            });
+
+            
+        };
 
     }]);
