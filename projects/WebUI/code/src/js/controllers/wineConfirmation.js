@@ -31,10 +31,19 @@ app.controller('WineConfirmController', ['$log', '$scope', '$location', 'DataSha
             self.venueName = self.venueDetails.venueName;
             self.taxDate = moment().format('YYYYMMDD');
             var amountValue = 0;
+            var totaltax = 0;
+            var totalHandle = 0;
+            var totalAmount = 0;
             angular.forEach(self.selectedDrinkItems, function (value1, key1) {
                 var total = parseFloat(value1.total);
-                amountValue = amountValue + total;
+                totalAmount = totalAmount +total;
+                totaltax = totaltax + parseFloat(value1.newtax);
+                totalHandle = totalHandle + parseFloat(value1.shiphand);
+                amountValue = amountValue + total + totaltax + totalHandle;
             });
+            self.totaltax = totaltax;
+            self.totalAmount = totalAmount;
+            self.totalHandle = totalHandle;
             self.availableAmount = amountValue;
             self.paymentData.finalCost = amountValue;
             DataShare.paymetObjct = self.paymentData;
@@ -61,9 +70,9 @@ app.controller('WineConfirmController', ['$log', '$scope', '$location', 'DataSha
             $location.url('/cities/' + self.city + '/' + self.venueRefId(self.venueDetails) + '/wine-to-home');
         };
 
-        
+
         self.payusingCC = function () {
-            $location.url( self.city + '/' + self.venueRefId(self.venueDetails) + '/wine-creditdebit');
+            $location.url(self.city + '/' + self.venueRefId(self.venueDetails) + '/wine-creditdebit');
         };
 
 
