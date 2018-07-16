@@ -33,7 +33,7 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
                 scope.process();
             }
           });
-          scope.io = io('https://dev.api.venuelytics.com');
+          scope.io = io();
           scope.io.on('connect', function(){
             console.log('a user connected');
             scope.socket = scope.io;
@@ -59,8 +59,6 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
     },
     controller: [ '$scope','$timeout','$compile',function ($scope, $timeout, $compile) {
 
-      
-      
       $scope.addTextMessage = function(text, userInput) {
         console.log("adding Text Message ..." + JSON.stringify(text));
         var c  = "right-chat";
