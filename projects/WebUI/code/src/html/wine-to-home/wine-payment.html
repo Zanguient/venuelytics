@@ -1,4 +1,4 @@
-<div class="container nav_height card {{blackTheme}}">
+<div class="container nav_height card {{blackTheme}}" ng-controller="WineConfirmController">
     <div class="text-center" ng-show="embeddedFlag === true">
         <h1 class="no-m ms-site-title center-block ms-site-title-lg mt-2 animated zoomInDown animation-delay-5">{{venueDetails.venueName}}</h1>
     </div>
@@ -23,9 +23,29 @@
                         </label>
                     </td>
                     <td>
-                        $ {{availableAmount | number:2}}
+                        $ {{totalAmount | number:2}}
                     </td>
                 </tr>
+                <tr>
+                        <td>
+                            <label>
+                                <b>{{"reservation.TAX" | translate}}</b>
+                            </label>
+                        </td>
+                        <td>
+                            $ {{ totaltax | number:2}}
+                        </td>
+                    </tr>
+                    <tr>
+                            <td>
+                                <label>
+                                    <b>{{"reservation.SHIPPING_HANDLING" | translate}}</b>
+                                </label>
+                            </td>
+                            <td>
+                                $ {{ totalHandle | number:2}}
+                            </td>
+                        </tr>
                 <tr>
                     <td>
                         <label>
@@ -37,7 +57,7 @@
                     </td>
                 </tr>
             </table>
-            <button class="btn btn-raised btn-primary" ng-click="payUsingCC()">{{"reservation.CREDIT_CARD" | translate}}</button>
+            <input type="button" class="btn btn-raised btn-primary" value="Credit/Debit Details" ng-click="payusingCC()">
             <input type="button" class="btn btn-raised btn-danger" value="Return to Drinks Service" ng-click="backToDrink()">
         </div>
     </center>

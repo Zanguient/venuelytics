@@ -112,6 +112,17 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                                     self.userSelectedDrinks.push(item);
                                 }
                             });
+                            angular.forEach(item.tax, function (value, key) {
+                                if (item.quantity.indexOf(item.quantity[a]) === key) {
+                                    item.newtax = value.toFixed(2) * parseInt(item.count);
+
+                                }
+                            });
+                            angular.forEach(item.shippingHandling, function (value, key) {
+                                if (item.quantity.indexOf(item.quantity[a]) === key) {
+                                    item.shiphand = value.toFixed(2) * parseInt(item.count);
+                                }
+                            });
                         }
                     }
                 } else {
@@ -121,6 +132,16 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                                 if (item.quantity.indexOf(item.quantity[a]) === key) {
                                     item.total = value.toFixed(2) * parseInt(item.count);
                                     self.userSelectedDrinks.total = item.total;
+                                }
+                            });
+                            angular.forEach(item.tax, function (value, key) {
+                                if (item.quantity.indexOf(item.quantity[a]) === key) {
+                                    item.newtax = value.toFixed(2) * parseInt(item.count);
+                                }
+                            });
+                            angular.forEach(item.shippingHandling, function (value, key) {
+                                if (item.quantity.indexOf(item.quantity[a]) === key) {
+                                    item.shiphand = value.toFixed(2) * parseInt(item.count);
                                 }
                             });
                         }
@@ -172,7 +193,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                     "largeWidth": 375,
                     "quantity": [3, 6, 12],
                     "price": [99.99, 175.00, 300.00],
-                    "tax": [0, 0, 0],
+                    "tax": [5, 6, 7],
                     "shippingHandling": [10.00, 20.00, 30.00],
                     "qtyOnHand": 125
                 },
