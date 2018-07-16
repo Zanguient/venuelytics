@@ -7,9 +7,20 @@
                 <tab>
                     <tab-heading ng-bind="head">Admin Settings</tab-heading>
                     <form id="admin" name="admin" validate-form="" novalidate role="form">
-                        <admin-directive settings="adminSettings"></admin-directive>
+                        <div>
+                            <fieldset ng-repeat="setting in selectedTabSettings">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">{{setting.displayName}}:</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" rows="3" ng-model="setting.value" ng-trim="true" placeholder="{{setting.help || ''}}"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+
                         <div class="panel-footer">
-                            <button type="submit" class="btn btn-primary" ng-click="update(admin.$valid, admin, adminSettings)">Save</button>
+                            <button type="submit" class="btn btn-primary" ng-click="update(admin.$valid, admin, selectedTabSettings)">Save</button>
                         </div>
                     </form>
                 </tab>

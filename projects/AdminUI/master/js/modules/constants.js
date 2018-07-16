@@ -89,7 +89,7 @@ App
       'parsley':            ['vendor/parsley/parsley-2.8.1.min.js'],
       'datatables':         ['vendor/datatable/media/js/jquery.dataTables.min.js', 
                               'vendor/datatable/extensions/datatable-bootstrap/css/dataTables.bootstrap.css'],
-      'datatables-pugins':  ['vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js',
+      'datatables-plugins':  ['vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js',
                              'vendor/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js',
                              'vendor/datatable/extensions/ColVis/js/dataTables.colVis.min.js',
                               'vendor/datatable/extensions/ColVis/css/dataTables.colVis.css'],

@@ -139,14 +139,14 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue/venues.html'),
                 controller: 'VenuesController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             }).state('app.band_artists', {
                 url: '/performers',
                 title: 'Bands And performers',
                 templateUrl: basepath('artists/band_artists.html'),
                 controller: 'BandArtistController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             }).state('app.artistedit', {
                 url: '/artist/:id',
                 title: 'Edit Artist',
@@ -167,35 +167,35 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('artists/associate_artists.html'),
                 controller: 'BandPerformerController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             }).state('app.newbandperformer', {
                 url: '/newbandperformer/:id',
                 title: 'Associate Performer to Band',
                 templateUrl: basepath('artists/new_band_performer.html'),
                 controller: 'AddBandPerformerController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             }).state('app.users', {
                 url: '/users',
                 title: 'Users',
                 templateUrl: basepath('user/users.html'),
                 controller: 'UsersController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             }).state('app.businessRequest', {
                 url: '/businessRequest',
                 title: 'Business Request',
                 templateUrl: basepath('businessRequest/business-request.html'),
                 controller: 'BusinessRequestController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             }).state('app.agencies', {
                 url: '/agencies',
                 title: 'Agencies',
                 templateUrl: basepath('agency/agencies.html'),
                 controller: 'AgenciesController',
                 data: { authorizedRoles: [USER_ROLES.admin], type: 'AGENCY' },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             }).state('app.agencyedit', {
                 url: '/agencyedit/:id',
                 title: 'Edit Agency',
@@ -210,7 +210,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('agency/stores.html'),
                 controller: 'StoresController',
                 data: { authorizedRoles: [USER_ROLES.admin], type: 'STORE' },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             })
             .state('app.storeedit', {
                 url: '/storeedit/:id',
@@ -226,7 +226,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('agency/agency-stores.html'),
                 controller: 'AgencyStoresController',
                 data: { authorizedRoles: [USER_ROLES.admin], mode: 'AS' },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             })
             .state('app.addAgencyStores', {
                 url: '/agency/:id/stores',
@@ -234,7 +234,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('agency/new-agency-store.html'),
                 controller: 'AgencyStoresController',
                 data: { authorizedRoles: [USER_ROLES.admin], mode: 'AAS' },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             })
             .state('app.loyalty', {
                 url: '/loyalty',
@@ -242,7 +242,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('loyalty/loyalty.html'),
                 controller: 'LoyaltyController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins')
+                resolve: resolveFor('datatables', 'datatables-plugins')
             })
             /*.state('app.contest', {
                 url: '/contest',
@@ -250,7 +250,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('contest/contest.html'),
                 controller: 'ContestController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins')
+                resolve: resolveFor('datatables', 'datatables-plugins')
             })*/
             .state('app.chatbot', {
                 url: '/chatbot/:id',
@@ -258,9 +258,9 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('chatbot/chatbot.html'),
                 controller: 'ChatbotController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'parsley', 'inputmask', 'ngDialog')
+                resolve: resolveFor('datatables', 'parsley', 'inputmask', 'ngDialog', 'taginput')
             })
-            /*.state('app.smsChatbot', {
+            /*.state('app.smsChatbot', { //'parsley', 'inputmask', 'datatables', 'datatables-plugins', 'ngDialog', 'taginput', 'chosen'
                 url: '/venues/:venueNumber/chatbot/:id',
                 title: 'SMS Chat Bot',
                 templateUrl: basepath('chatbot/smsChat-tab.html'),
@@ -282,7 +282,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue/store_edit.html'),
                 controller: 'StoreController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog', 'jquery-ui','moment')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-plugins', 'ngDialog', 'jquery-ui','moment')
             })
             .state('app.editProducts', {
                 url: '/editProducts/:venueNumber/:id',
@@ -306,7 +306,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue/banquet-hall-edit.html'),
                 controller: 'PrivateEventController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-plugins')
             })
             .state('app.editPartyHall', {
                 url: '/editPartyHall/:venueNumber/:id',
@@ -314,7 +314,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue/banquet-hall-edit.html'),
                 controller: 'PrivateEventController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-plugins')
             })
             .state('app.editVenueMap', {
                 url: '/venues/:venueNumber/editVenueMap/:id',
@@ -322,7 +322,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venuemap-edit.html'),
                 controller: 'NullController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngImgMap', 'ngDialog')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-plugins', 'ngImgMap', 'ngDialog')
             })
             .state('app.editVenueEvent', {
                 url: '/venues/:venueNumber/events/:id',
@@ -330,7 +330,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/venue-event-edit.html'),
                 controller: 'VenueEventController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog', 'taginput', 'chosen')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-plugins', 'ngDialog', 'taginput', 'chosen')
             })
             .state('app.editVenueDeals', {
                 url: '/venues/:venueNumber/deals/:id',
@@ -338,7 +338,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue/create-deal.html'),
                 controller: 'VenueDealsController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog', 'taginput', 'chosen')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-plugins', 'ngDialog', 'taginput', 'chosen')
             })
             .state('app.dealsManagement', {
                 url: '/dealsManagement',
@@ -346,7 +346,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue/venue-deals.html'),
                 controller: 'VenueDealsController',
                 data: { authorizedRoles: [USER_ROLES.admin, 51] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             })
             .state('app.eventManagement', {
                 url: '/eventManagement',
@@ -354,7 +354,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/venue-events.html'),
                 controller: 'VenueEventsController',
                 data: { authorizedRoles: [USER_ROLES.admin, 51] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog', 'jquery-ui', 'moment', 'fullcalendar')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog', 'jquery-ui', 'moment', 'fullcalendar')
             })
             .state('app.addVenueStore', {
                 url: '/venues/:id/stores',
@@ -362,7 +362,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue/new-venue-store.html'),
                 controller: 'NewVenueStoreController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'ngDialog')
             })
             .state('app.useredit', {
                 url: '/useredit/:id',
@@ -378,7 +378,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('businessRequest/business_request_edit.html'),
                 controller: 'BusinessRequestEditController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-pugins', 'ngDialog')
+                resolve: resolveFor('parsley', 'inputmask', 'datatables', 'datatables-plugins', 'ngDialog')
             })
             .state('app.uservenues', {
                 url: '/uservenue/:id',
@@ -386,14 +386,14 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('user/user_venue.html'),
                 controller: 'NullController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins')
+                resolve: resolveFor('datatables', 'datatables-plugins')
             }).state('app.venueUsers', {
                 url: '/venueUsers/:id',
                 title: 'Add users to Venue',
                 templateUrl: basepath('venue/add-venue-user.html'),
                 controller: 'AddVenueUsersController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins')
+                resolve: resolveFor('datatables', 'datatables-plugins')
             })
             .state('app.agencyUsers', {
                 url: '/agencyUsers/:id',
@@ -401,7 +401,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('agency/agency_users.html'),
                 controller: 'AgencyUserController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins')
+                resolve: resolveFor('datatables', 'datatables-plugins')
             })
             .state('app.newuservenues', {
                 url: '/newuservenue/:id',
@@ -409,7 +409,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('user/new_user_venue.html'),
                 controller: 'NullController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins')
+                resolve: resolveFor('datatables', 'datatables-plugins')
             })
             .state('app.newagencyuser', {
                 url: '/newagencyuser/:id',
@@ -417,7 +417,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('agency/new_agency_user.html'),
                 controller: 'UserAgencyController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins')
+                resolve: resolveFor('datatables', 'datatables-plugins')
             })
             .state('app.associateAgencyUser', {
                 url: '/associateAgencyUser/:id',
@@ -425,7 +425,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('agency/associate_agency_user.html'),
                 controller: 'AssociateAgencyUserController',
                 data: { authorizedRoles: [USER_ROLES.admin] },
-                resolve: resolveFor('datatables', 'datatables-pugins')
+                resolve: resolveFor('datatables', 'datatables-plugins')
             })
             .state('app.myprofile', {
                 url: '/myprofile',
@@ -489,7 +489,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/ticketsSold.html'),
                 controller: 'TicketsSoldController',
                 data: { authorizedRoles: [10, 11, 12] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'moment', 'fullcalendar')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'moment', 'fullcalendar')
             })
             .state('app.reports', {
                 url: '/ve-reports',
@@ -497,7 +497,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/venue-event-report.html'),
                 controller: 'NullController',
                 data: { authorizedRoles: [10, 11, 12, 51] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'moment', 'fullcalendar', 'parsley', 'inputmask')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'moment', 'fullcalendar', 'parsley', 'inputmask')
             })
             .state('app.cancelReports', {
                 url: '/ve-reports/cancel',
@@ -505,7 +505,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/venue-event-cancel-report.html'),
                 controller: 'VenueEventReportController',
                 data: { authorizedRoles: [10, 11, 12, 51] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'moment', 'fullcalendar', 'parsley', 'inputmask')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'moment', 'fullcalendar', 'parsley', 'inputmask')
             })
             .state('app.soldReports', {
                 url: '/ve-reports/sold',
@@ -513,7 +513,7 @@ App.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 templateUrl: basepath('venue-events/venue-event-sold-report.html'),
                 controller: 'VenueEventReportController',
                 data: { authorizedRoles: [10, 11, 12, 51] },
-                resolve: resolveFor('datatables', 'datatables-pugins', 'moment', 'fullcalendar', 'parsley', 'inputmask')
+                resolve: resolveFor('datatables', 'datatables-plugins', 'moment', 'fullcalendar', 'parsley', 'inputmask')
             })
             .state('app.registerComputer', {
                 url: '/registerComputer',

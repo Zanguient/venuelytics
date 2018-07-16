@@ -53,8 +53,7 @@ const sendAnswer = function(userId, response, channel) {
             sendAnswerImpl(channel, userId, null, `Sorry we don't have ${response.parameters.item}`);
         }
         
-            return;
-        }
+        return;
     }
         
     sendAnswerImpl(channel, userId, null, "Sure, I will send your request to front desk.");

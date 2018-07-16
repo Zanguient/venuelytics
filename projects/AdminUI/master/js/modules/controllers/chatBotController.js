@@ -1,10 +1,19 @@
 
 App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestServiceFactory', 'toaster', 
-    'FORMATS',  'ngDialog', 'ContextService', '$log', 'APP_EVENTS',
-    function ( $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, ngDialog, contextService, $log, APP_EVENTS) {
+    'FORMATS',  'ngDialog', 'ContextService', '$log', 'APP_EVENTS', '$timeout',
+    function ( $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, ngDialog, contextService, $log, APP_EVENTS, $timeout) {
         'use strict';
+        $scope.maxDate = new Date(2018,11,31);
+        
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+        
+        $scope.config = {};
+
         $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
-        $scope.adminSettings = [];
+        $scope.selectedTabSettings = [];
         $scope.reasons = ["Welcome Message","Checkin Rating", "Checkout Rating", "Service Message", "Other"];
         $scope.tabs = [
             { name: 'SMS Chatbot', content: 'app/views/chatbot/smsChat-tab.html', icon: 'fa-user-circle-o' },
@@ -119,10 +128,12 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
             } else {
                 var data = {};
                 $scope.data = data;
-            }            
+            } 
+            //$scope.config.startOpened = true;
+                    
         };
-
-         $scope.update = function (isValid, form, data) {
+       
+        $scope.update = function (isValid, form, data) {
 
 	        if (!isValid || !$("#admin").parsley().isValid()) {
 	            return;
@@ -206,7 +217,7 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
         };
         $scope.tabSelect = function (tabs) {
             if (tabs.name === "Admin Settings") {
-                $scope.adminSettings = adminSettings;
+                $scope.selectedTabSettings = adminSettings;
                 $scope.head="Admin Settings";
             }
             else if (tabs.name === 'Hotels') {
@@ -214,19 +225,36 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
                 $scope.head="Response to the Standard customer questions";
             }
             else if (tabs.name === 'General') {
-                $scope.adminSettings = general;
+                $scope.selectedTabSettings = general;
                 $scope.head="General";
             }
             else if (tabs.name === 'Top Golf') {
-                $scope.adminSettings = topGolf;
+                $scope.selectedTabSettings = topGolf;
                 $scope.head="Top Golf";
             }
             else if(tabs.name === 'Casino') {
-                $scope.adminSettings = casino;
+                $scope.selectedTabSettings = casino;
                 $scope.head="Casino";
             } else if (tabs.name == 'Customer Service') {
                 $scope.cs.reason = "Welcome Message";
                 $scope.cs.message = $scope.sms.defaultWelcomeMessage;
+                $('#checkInCalendarId').on('click', function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    $timeout(function() {
+                        $scope.config.startOpened = !$scope.config.startOpened;
+                    }, 200);
+                
+                }); 
+
+                $('#checkOutCalendarId').on('click', function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    $timeout(function() {
+                        $scope.config.endOpened = !$scope.config.endOpened;
+                    }, 200);
+                
+                }); 
 
             }
         }
@@ -268,4 +296,7 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
             
         };
 
+        $scope.disabled = function(date, mode) {
+            return false;
+        };
     }]);
