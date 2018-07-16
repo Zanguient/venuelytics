@@ -33,7 +33,7 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
                 scope.process();
             }
           });
-          scope.io = io('http://localhost:9000');
+          scope.io = io('http://dev.api.venuelytics.com');
           scope.io.on('connect', function(){
             console.log('a user connected');
             scope.socket = scope.io;

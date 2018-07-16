@@ -59,13 +59,11 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
 
         var general = [
             { "displayName": "Age Policy", "name": "_age_policy", "type": "text", "value": "" },
-            { "displayName": "Vip Deals", "name": "_vip_deals", "type": "text", "value": "" },
-            { "displayName": "Events Organize", "name": "_events.organize", "type": "text", "value": "" },
-            { "displayName": "Events Celebrate Special Day", "name": "_events.celebrate.special.day", "type": "text", "value": "" },
-            { "displayName": "Events Celebrate Bring Food", "name": "_events.celebrate.bring.food", "type": "text", "value": "" },
-            { "displayName": "Events", "name": "_events", "type": "text", "value": "" },
-            { "displayName": "Deals", "name": "_deals", "type": "text", "value": "" },
-            { "displayName": "Happyhours", "name": "_happyhours", "type": "text", "value": "" },
+            { "displayName": "Event Organizing (by the venue) policy", "name": "_events.organize", "type": "text", "value": "" },
+            { "displayName": "Special Day Celebration policy", "name": "_events.celebrate.special.day", "type": "text", "value": "" },
+            { "displayName": "Outside Food Policy", "name": "_events.celebrate.bring.food", "type": "text", "value": "" },
+            { "displayName": "Current Events in the Venues", "name": "_events", "type": "text", "value": "" },
+            
         ];
 
         general = $.Apputil.makeMap(general);
@@ -215,18 +213,27 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
 
             
         };
+        
         $scope.tabSelect = function (tabs) {
+            $timeout(function() {
+                $scope.tabSelectedImpl(tabs);
+            }, 200);
+        };  
+        
+        $scope.tabSelectedImpl = function (tabs) {
             if (tabs.name === "Admin Settings") {
                 $scope.selectedTabSettings = adminSettings;
                 $scope.head="Admin Settings";
             }
             else if (tabs.name === 'Hotels') {
-                $scope.adminSettings = hotels;
+                $scope.selectedTabSettings = hotels;
                 $scope.head="Response to the Standard customer questions";
             }
             else if (tabs.name === 'General') {
+                
                 $scope.selectedTabSettings = general;
                 $scope.head="General";
+                
             }
             else if (tabs.name === 'Top Golf') {
                 $scope.selectedTabSettings = topGolf;

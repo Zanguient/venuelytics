@@ -5,7 +5,7 @@
             <toaster-container toaster-options="{'position-class': 'toast-top-center', 'close-button':true}"></toaster-container>
             <tabset justified="true">
                 <tab>
-                    <tab-heading ng-bind="head">Admin Settings</tab-heading>
+                    <tab-heading ><h4>{{head}}</h4></tab-heading>
                     <form id="admin" name="admin" validate-form="" novalidate role="form">
                         <div>
                             <fieldset ng-repeat="setting in selectedTabSettings">
