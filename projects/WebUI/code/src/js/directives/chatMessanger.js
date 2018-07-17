@@ -3,7 +3,7 @@
  * Module: chatMessanger.js
 *
  =========================================================*/
-app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
+app.directive('chatMessanger', ['AjaxService','$location',function(AjaxService, $location) {
   'use strict';
   return {
     restrict: 'EA',
@@ -33,7 +33,12 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
                 scope.process();
             }
           });
-          scope.io = io();
+          if ($location.host().indexOf("localhost") >= 0) {
+            //scope.io = io('https://dev.api.venuelytics.com');
+            scope.io = io('http://localhost:9000');
+          } else {
+            scope.io = io();
+          }
           scope.io.on('connect', function(){
             console.log('a user connected');
             scope.socket = scope.io;
@@ -141,7 +146,7 @@ app.directive('chatMessanger', ['AjaxService',function(AjaxService) {
         $scope.addTextMessage(displayText, true);
        
         if ($scope.socket) {
-          $scope.socket.emit('message', {message: processText});         
+          $scope.socket.emit('message', {venueId: $scope.venueId, message: processText});         
         }
         
         $scope.question = "";

@@ -239,7 +239,15 @@ function confirmEmailAddress(userId, YESNO, email, sendApi) {
 }
 
 const handleReceiveMessage = (body, socket) => {
-  venueService.processMessage(socket.handshake.session.id, body.message,new WebChannel(socket));
+  const senderId = socket.handshake.session.id;
+  let user = Users.getUser(senderId);
+  if (!user.hasParameter("selectedVenueId")) {
+    venueService.initializeSender(senderId, body.venueId, new WebChannel(socket), function() {
+      venueService.processMessage(senderId, body.message,new WebChannel(socket));
+    });
+  } else {
+    venueService.processMessage(senderId, body.message,new WebChannel(socket));
+  }
 };
 
 const handleInitMessage = (body, socket) => {

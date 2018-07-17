@@ -12,9 +12,9 @@
             "program": "${workspaceFolder}/main.js", 
             "console" : "externalTerminal",
             "env": {
-                "PROD": "false",
+                "PROD": "true",
                 "LOCAL": "false",
-                "PROXY": "true"
+                "PROXY": "false"
             }
         }
     ]

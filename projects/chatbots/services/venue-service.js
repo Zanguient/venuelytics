@@ -88,13 +88,13 @@ function processMessage(senderId, text, channel) {
   fxReadVenue(senderId, text, channel, null);
 }
 
-function initializeSender(senderId, venueNumber, channel){
+function initializeSender(senderId, venueNumber, channel, callBack){
   let user = Users.getUser(senderId);
   user.state.set("selectedVenueId", venueNumber);
-  serviceApi.searchVenueById(venueNumber, curry(initializationSuccess)(senderId)(channel));
+  serviceApi.searchVenueById(venueNumber, curry(initializationSuccess)(senderId)(channel)(callBack));
 }
 
-function initializationSuccess(senderId, channel, venue) {
+function initializationSuccess(senderId, channel, callBack, venue) {
   let user = Users.getUser(senderId);
   if (!!venue) {
     user.state.set("venue", venue);
@@ -108,6 +108,9 @@ function initializationSuccess(senderId, channel, venue) {
     let message = welcomeMessage || defaultMessage;
     channel.sendMessage(senderId,  message);
 
+  }
+  if (callBack) {
+    callBack();
   }
 }
 const fxReadVenue = function(senderId, text, channel, venue) {

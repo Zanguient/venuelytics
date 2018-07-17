@@ -177,6 +177,11 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
   if (success) {
     return;
   }
+  if (KNOWN_FACILITIES.includes(response.parameters.facilityOriginal) || KNOWN_FACILITIES.includes(response.parameters.facilities)) {
+    channel.sendMessage(user.id, `Sorry we don't have ${response.parameters.facilityOriginal}`);
+    return;
+  } 
+
   for (var j = 0; j < data.length; j++) {
     if (data[j].type.toLowerCase() === 'venue') {
       venueTimes = data[j];
@@ -194,13 +199,6 @@ function sendAnswerFacilityTimes(type, user, answer, response, channel) {
     channel.sendMessage(user.id, reply);
     return;
   }
-  if (KNOWN_FACILITIES.includes(response.parameters.facilityOriginal) || KNOWN_FACILITIES.includes(response.parameters.facilities)) {
-    channel.sendMessage(user.id, `Sorry we don't have ${response.parameters.facilityOriginal}`);
-  } else {
-    channel.sendMessage(user.id, "Sorry! I don't know the answer. Do you want me to connect to a live agent?");
-  }
-  
-
 
 }
 
