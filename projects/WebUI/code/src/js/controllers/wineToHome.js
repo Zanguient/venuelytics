@@ -6,6 +6,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
         self.selectedDrinkItems = [];
         self.drinkCategories = {};
         self.init = function () {
+            self.drinkDetails = [];
             self.wine = {
                 billingAddress: {
                     "apiKey": "QWERTYUIOP123456",
@@ -104,48 +105,13 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
         self.drinkService = function (item) {
             if (item.count !== undefined && item.count !== '') {
                 if (self.userSelectedDrinks.indexOf(item) === -1) {
-                    for (var a = 0; a < item.quantity.length; a++) {
-                        if (parseInt(item.package) === item.quantity[a]) {
-                            angular.forEach(item.price, function (value, key) {
-                                if (item.quantity.indexOf(item.quantity[a]) === key) {
-                                    item.total = value.toFixed(2) * parseInt(item.count);
-                                    self.userSelectedDrinks.push(item);
-                                }
-                            });
-                            angular.forEach(item.tax, function (value, key) {
-                                if (item.quantity.indexOf(item.quantity[a]) === key) {
-                                    item.newtax = value.toFixed(2) * parseInt(item.count);
-
-                                }
-                            });
-                            angular.forEach(item.shippingHandling, function (value, key) {
-                                if (item.quantity.indexOf(item.quantity[a]) === key) {
-                                    item.shiphand = value.toFixed(2) * parseInt(item.count);
-                                }
-                            });
-                        }
-                    }
+                    item.total = parseInt(item.newPrice) * parseInt(item.count);
+                    item.total = item.total.toFixed(2)
+                    self.userSelectedDrinks.push(item);
                 } else {
-                    for (var a = 0; a < item.quantity.length; a++) {
-                        if (parseInt(item.package) === item.quantity[a]) {
-                            angular.forEach(item.price, function (value, key) {
-                                if (item.quantity.indexOf(item.quantity[a]) === key) {
-                                    item.total = value.toFixed(2) * parseInt(item.count);
-                                    self.userSelectedDrinks.total = item.total;
-                                }
-                            });
-                            angular.forEach(item.tax, function (value, key) {
-                                if (item.quantity.indexOf(item.quantity[a]) === key) {
-                                    item.newtax = value.toFixed(2) * parseInt(item.count);
-                                }
-                            });
-                            angular.forEach(item.shippingHandling, function (value, key) {
-                                if (item.quantity.indexOf(item.quantity[a]) === key) {
-                                    item.shiphand = value.toFixed(2) * parseInt(item.count);
-                                }
-                            });
-                        }
-                    }
+                    item.total = parseInt(item.newPrice) * parseInt(item.count);
+                    item.total = item.total.toFixed(2)
+                    self.userSelectedDrinks.total = item.total;
                 }
             }
 
@@ -166,10 +132,10 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
         self.getDrink = function () {
             // AjaxService.getWine2Home(self.apikey).then(function (response) {
             //     self.drinkDetails = response.data;
-            //     for(var j=0; j < response.data.length; j++) {
-            //         self.drinkCategories[response.data[j].category] = response.data[j].category;                     
-            //     }
-            self.drinkDetails = [
+            // for(var j=0; j < response.data.length; j++) {
+            //     self.drinkCategories[response.data[j].category] = response.data[j].category;                     
+            // }
+            self.newDrinkDetails = [
                 {
                     "id": "WHITE_OAK_CAB_2012",
                     "name": " Oaks Cabernet 2012",
@@ -199,7 +165,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                 },
                 {
                     "id": "Vodka_2012",
-                    "name": " vodka 2012",
+                    "name": "vodka 2012",
                     "type": "brandy",
                     "category": "Vodka",
                     "brand": "Vodka",
@@ -220,16 +186,28 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                     "largeWidth": 375,
                     "quantity": [4, 7, 13],
                     "price": [109.99, 185.00, 310.00],
-                    "tax": [0, 0, 0],
+                    "tax": [4, 5, 6],
                     "shippingHandling": [10.00, 20.00, 30.00],
                     "qtyOnHand": 125
-                },
-            ]
+                }
+            ];
+           
 
-            for (var j = 0; j < self.drinkDetails.length; j++) {
-                self.drinkCategories[self.drinkDetails[j].category] = self.drinkDetails[j].category;
+            for (var j = 0; j < self.newDrinkDetails.length; j++) {
+                for (var i = 0; i < self.newDrinkDetails[j].quantity.length; i++) {
+                    var cloneObj = $.extend({}, self.newDrinkDetails[j]);
+                    cloneObj.newPrice = self.newDrinkDetails[j].price[i];
+                    cloneObj.newQuantity = self.newDrinkDetails[j].quantity[i];
+                    cloneObj.newShippingHandling = self.newDrinkDetails[j].shippingHandling[i];
+                    cloneObj.newTax = self.newDrinkDetails[j].tax[i];
+                    self.drinkDetails.push(cloneObj);
+                }
             }
 
+            for(var j=0; j < self.drinkDetails.length; j++) {
+                self.drinkCategories[self.drinkDetails[j].category] =  self.drinkDetails[j].category;                     
+            }
+            
             self.menuTab = self.drinkDetails[0].category;
             if ((Object.keys(DataShare.selectedDrinks).length) !== 0) {
                 self.editDrinkItems = DataShare.selectedDrinks;
@@ -245,7 +223,6 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                 });
                 self.drinkDetails = self.editDrinkItems;
             }
-            // });
         };
 
         self.showPopUp = function (value) {

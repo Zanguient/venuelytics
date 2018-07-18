@@ -37,8 +37,8 @@ app.controller('WineConfirmController', ['$log', '$scope', '$location', 'DataSha
             angular.forEach(self.selectedDrinkItems, function (value1, key1) {
                 var total = parseFloat(value1.total);
                 totalAmount = totalAmount +total;
-                totaltax = totaltax + parseFloat(value1.newtax);
-                totalHandle = totalHandle + parseFloat(value1.shiphand);
+                totaltax = totaltax + parseFloat(value1.newTax);
+                totalHandle = totalHandle + parseFloat(value1.newShippingHandling);
                 amountValue = amountValue + total + totaltax + totalHandle;
             });
             self.totaltax = totaltax;
