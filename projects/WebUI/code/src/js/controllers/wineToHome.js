@@ -2,9 +2,11 @@
 app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$window', '$routeParams', 'AjaxService', 'APP_ARRAYS', '$rootScope', 'ngMeta', 'VenueService',
     function ($log, $scope, $location, DataShare, $window, $routeParams, AjaxService, APP_ARRAYS, $rootScope, ngMeta, venueService) {
 
+
         var self = $scope;
         self.selectedDrinkItems = [];
         self.drinkCategories = {};
+        self.removedrink = 0;
         self.init = function () {
             self.drinkDetails = [];
             self.wine = {
@@ -68,7 +70,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
         self.removeDrinkItems = function (index, obj) {
             self.userSelectedDrinks.splice(index, 1);
             angular.forEach(self.drinkDetails, function (value, key) {
-                if (obj.id === value.id) {
+                if (obj.newId === value.newId) {
                     value.count = '';
                 }
             });
@@ -191,7 +193,7 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                     "qtyOnHand": 125
                 }
             ];
-           
+
 
             for (var j = 0; j < self.newDrinkDetails.length; j++) {
                 for (var i = 0; i < self.newDrinkDetails[j].quantity.length; i++) {
@@ -200,14 +202,16 @@ app.controller('WineToHomeCtrl', ['$log', '$scope', '$location', 'DataShare', '$
                     cloneObj.newQuantity = self.newDrinkDetails[j].quantity[i];
                     cloneObj.newShippingHandling = self.newDrinkDetails[j].shippingHandling[i];
                     cloneObj.newTax = self.newDrinkDetails[j].tax[i];
+                    cloneObj.newId = self.removedrink + 1;
+                    self.removedrink = self.removedrink + 1
                     self.drinkDetails.push(cloneObj);
                 }
             }
 
-            for(var j=0; j < self.drinkDetails.length; j++) {
-                self.drinkCategories[self.drinkDetails[j].category] =  self.drinkDetails[j].category;                     
+            for (var j = 0; j < self.drinkDetails.length; j++) {
+                self.drinkCategories[self.drinkDetails[j].category] = self.drinkDetails[j].category;
             }
-            
+
             self.menuTab = self.drinkDetails[0].category;
             if ((Object.keys(DataShare.selectedDrinks).length) !== 0) {
                 self.editDrinkItems = DataShare.selectedDrinks;

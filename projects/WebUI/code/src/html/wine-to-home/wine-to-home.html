@@ -66,26 +66,31 @@
             <br/>
 
             <div ng-if="userSelectedDrinks.length != 0" ng-class="blackTheme">
-                <h2>Selected Drinks</h2>
+                <h2 class="text-primary">Selected Drinks</h2>
                 <div class="row" ng-class="blackTheme">
                     <table class="table table-no-border table-striped table-responsive h6">
-                        <thead>
+                        <thead class="text-primary">
                             <tr>
                                 <th>{{'reservation.NAME' | translate}}</th>
+                                <th>{{'reservation.PACKAGE'| translate}}</th>
                                 <th>{{'reservation.QUANTITY' | translate}}</th>
                                 <th>{{'reservation.PRICE' | translate}}</th>
+                                <th>Remove</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="drink in userSelectedDrinks">
                                 <td>{{drink.name}} - {{drink.brand}}</td>
+                                <td>{{drink.newQuantity}}</td>
                                 <td>{{drink.count}}</td>
                                 <td>
                                     <span ng-hide="((drink == null || drink.total == 0 || drink.total == undefined))">&dollar;</span>{{(drink == null || drink.total == 0 || drink.total == undefined) ? "0"
                                     : drink.total | number:2}}</td>
-                                <td>
-                                    <button type="button" class="btn btn-raised btn-sm btn-danger" ng-click="removeDrinkItems($index,drink)">X</td>
+                                    <td>
+                                        <button type="submit" class="btn btn-xs btn-danger no-mt no-mb" ng-click="removeDrinkItems($index,drink)">
+                                            <i class="fa fa-2x fa-times"></i>
+                                    </td>        
                             </tr>
                         </tbody>
                     </table>
@@ -108,7 +113,7 @@
                                     <div class="menu-item">
                                         <div class="menu-title">
                                             <div class="title" ng-class="bgMask">
-                                                {{item.name}} -- {{item.newQuantity}}
+                                                {{item.name}}   ({{item.newQuantity}})-{{"reservation.PACKAGE" | translate}}
                                             </div>
                                             <span ng-class="bgMask" ng-if="item.newPrice > 0">
                                                 $ {{item.newPrice | number:2}}

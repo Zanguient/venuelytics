@@ -5,7 +5,7 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
         var self = $scope;
         self.selectedDrinkItems = [];
         self.drinkType = 'Delivery';
-         self.drinkCategories = {};
+        self.drinkCategories = {};
         self.init = function () {
 
             self.venueDetails = venueService.getVenue($routeParams.venueId);
@@ -114,19 +114,19 @@ app.controller('drinkServiceController', ['$log', '$scope', '$location', 'DataSh
             }
             DataShare.drinks = self.userSelectedDrinks;
         };
-        self.isMenuSelected = function(name) {
+        self.isMenuSelected = function (name) {
             return name == self.menuTab
         };
 
-        self.selectMenu = function(name) {
+        self.selectMenu = function (name) {
             self.menuTab = name;
         };
 
         self.getDrink = function () {
             AjaxService.getProductsByType(self.venueId, 'Drinks').then(function (response) {
                 self.drinkDetails = response.data;
-                for(var j=0; j < response.data.length; j++) {
-                    self.drinkCategories[response.data[j].category] = response.data[j].category;                     
+                for (var j = 0; j < response.data.length; j++) {
+                    self.drinkCategories[response.data[j].category] = response.data[j].category;
                 }
                 self.menuTab = response.data[0].category;
                 if ((Object.keys(DataShare.selectedDrinks).length) !== 0) {

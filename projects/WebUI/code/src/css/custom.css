@@ -673,6 +673,11 @@
 }
 
 
+.table-response {
+  width: 120% !important;
+  max-width: 120% !important;
+}
+
 .mt0 {
   margin-top: 0px;
 }

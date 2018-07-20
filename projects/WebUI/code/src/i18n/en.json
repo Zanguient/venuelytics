@@ -454,6 +454,7 @@
 		"COUNTRY":"Country",
 		"ZIP_CODE":"Zipcode",
 		"PACKAGE_TYPE":"PackageType",
+		"PACKAGE":"Package",
 		"TAX":"Tax",
 		"SHIPPING_HANDLING":"Shipping Handling",
 		"WINE_ITEMS":"Wine Items",
