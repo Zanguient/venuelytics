@@ -3,7 +3,9 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
     'FORMATS',  'ngDialog', 'ContextService', '$log', 'APP_EVENTS', '$timeout',
     function ( $scope, $state, $stateParams, RestServiceFactory, toaster, FORMATS, ngDialog, contextService, $log, APP_EVENTS, $timeout) {
         'use strict';
-        $scope.maxDate = new Date(2018,11,31);
+        $scope.maxDate = new Date();
+        $scope.maxDate.setMonth($scope.maxDate.getMonth()+6);
+         $scope.minDate = new Date();
         
         $scope.dateOptions = {
             formatYear: 'yy',
@@ -11,6 +13,13 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
         };
         
         $scope.config = {};
+        $scope.checkin = {};
+        $scope.checkout = {};
+        $scope.checkin.checkinDate = new Date();
+        $scope.checkout.checkoutDate = new Date();
+        $scope.checkin.checkinTime = new Date();
+        $scope.checkout.checkoutTime = new Date();
+        
 
         $scope.venueNumber = contextService.userVenues.selectedVenueNumber;
         $scope.selectedTabSettings = [];
@@ -20,17 +29,21 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
             { name: 'Facebook Chatbot', content: 'app/views/chatbot/facebookChat-tab.html', icon: 'fa-address-book-o' },
             { name: 'Admin Settings', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
             { name: 'Customer Service', content: 'app/views/chatbot/customer-tab.html', icon: 'fa-address-book-o' },
-            { name: 'General', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
-            { name: 'Hotels', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
-            { name: 'Top Golf', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
-            { name: 'Casino', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
+            { name: 'General', content: 'app/views/chatbot/chat-qna-tab.html', icon: 'fa-user-circle-o' },
+            { name: 'Hotels', content: 'app/views/chatbot/chat-qna-tab.html', icon: 'fa-user-circle-o' },
+            //{ name: 'Top Golf', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
+            //{ name: 'Casino', content: 'app/views/chatbot/admin-tab.html', icon: 'fa-user-circle-o' },
         ];
 
         $scope.data = {};
+        $scope.customerData = {};
+        $scope.customerData.contact = {};
         $scope.sms = {};
         $scope.facebook = {};
         var settings = [];
         $scope.cs = {};
+        var hotels = [];
+        var general = [];
 
         var adminSettings = [
         	{ "displayName": "Enable Web Bot", "name": "WebBot.enable", "type": "text", "help":"only Y or N","value": "" },
@@ -40,7 +53,7 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
         ];
         adminSettings = $.Apputil.makeMap(adminSettings);
         settings.push(adminSettings);
-        var hotels = [
+       /* var hotels = [
             { "displayName": "Pet Policy Others", "name": "_pet_policy_others", "type": "text", "value": "" },
             { "displayName": "Pet Policy Dogs", "name": "_pet_policy_dogs", "type": "text", "value": "" },
             { "displayName": "Pet Policy Cats", "name": "_pet_policy_cats", "type": "text", "value": "" },
@@ -67,9 +80,9 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
         ];
 
         general = $.Apputil.makeMap(general);
-        settings.push(general);
+        settings.push(general);*/
 
-        var topGolf = [
+        /*var topGolf = [
             { "displayName": "Open Weather conditions", "name": "_golf.play.weather", "type": "text", "value": "" },
             { "displayName": "People Policy", "name": "_golf.play.people.policy", "type": "text", "value": "" },
             { "displayName": "Holidays", "name": "_golf.play.holiday", "type": "text", "value": "" },
@@ -77,56 +90,70 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
             { "displayName": "Golf Club Policy", "name": "_golf.club.policy", "type": "text", "value": "" },
             { "displayName": "Golf Club Personal", "name": "_golf.club.personal", "type": "text", "value": "" },
             { "displayName": "Golf Club Cost", "name": "_golf.club.cost", "type": "text", "value": "" },
-        ];
+        ];*/
 
-        topGolf = $.Apputil.makeMap(topGolf);
-        settings.push(topGolf);
+        /*topGolf = $.Apputil.makeMap(topGolf);
+        settings.push(topGolf);*/
 
-        var casino = [
+        /*var casino = [
             { "displayName": "Casino Valid Games Text", "name": "_casino.valid.games.text", "type": "text", "value": "" },
             { "displayName": "Casino Valid Games", "name": "_casino.valid.games", "type": "text", "value": "" },
-        ];
+        ];*/
 
-        casino = $.Apputil.makeMap(casino);
-        settings.push(casino);
+        /*casino = $.Apputil.makeMap(casino);
+        settings.push(casino);*/
 
         $scope.init = function () {
+            $('.selectpicker').selectpicker({
+                style: 'btn-info',
+                size: 4
+            });
 
-            if ($stateParams.id !== 'new') {
-                RestServiceFactory.VenueService().getInfo({ id: $scope.venueNumber} ,function (data) {
-                    $scope.data = data;
-
-                    $scope.sms.liveAgentNumber = data['sms.liveAgentNumber'];
-                    $scope.sms.defaultWelcomeMessage = data['sms.defaultWelcomeMessage'];
-                    
-                    $scope.cs.message = $scope.sms.defaultWelcomeMessage;
-
-                    $scope.sms.checkInMessage = data['sms.checkInMessage'];
-                    $scope.sms.checkOutMessage = data['sms.checkOutMessage'];
-                    $scope.sms.enableCheckoutRating = data['sms.enableCheckoutRating'];
-                    $scope.sms.enableCheckinRating = data['sms.enableCheckinRating'];
-
-                    $scope.facebook.liveAgentNumber = data['facebook.liveAgentNumber'];
-                    $scope.facebook.defaultWelcomeMessage = data['facebook.defaultWelcomeMessage'];
-
-                    
-                    for (var x = 0; x< settings.length; x++) {
-                    	var settingArray = settings[x];
-                    	for (var itemKey in settingArray) {
-		                    if (settingArray.hasOwnProperty(itemKey)) {
-		                    	if (!!data[itemKey]) {
-		                    		var value = data[itemKey]; 
-		                    		settingArray[itemKey].value = value;
-		                    	}
-		                    }
-		                }
-		            }
-              
-                });
-            } else {
-                var data = {};
+            RestServiceFactory.VenueService().getInfo({ id: $scope.venueNumber} ,function (data) {
                 $scope.data = data;
-            } 
+
+                $scope.sms.liveAgentNumber = data['sms.liveAgentNumber'];
+                $scope.sms.defaultWelcomeMessage = data['sms.defaultWelcomeMessage'];
+                
+                $scope.cs.message = $scope.sms.defaultWelcomeMessage;
+
+                $scope.sms.checkInMessage = data['sms.checkInMessage'];
+                $scope.sms.checkOutMessage = data['sms.checkOutMessage'];
+                $scope.sms.enableCheckoutRating = data['sms.enableCheckoutRating'];
+                $scope.sms.enableCheckinRating = data['sms.enableCheckinRating'];
+
+                $scope.facebook.liveAgentNumber = data['facebook.liveAgentNumber'];
+                $scope.facebook.defaultWelcomeMessage = data['facebook.defaultWelcomeMessage'];
+
+                
+                for (var x = 0; x< settings.length; x++) {
+                	var settingArray = settings[x];
+                	for (var itemKey in settingArray) {
+	                    if (settingArray.hasOwnProperty(itemKey)) {
+	                    	if (!!data[itemKey]) {
+	                    		var value = data[itemKey]; 
+	                    		settingArray[itemKey].value = value;
+	                    	}
+	                    }
+	                }
+	            }
+          
+            });
+
+            RestServiceFactory.VenueService().getFacilities({ id: $scope.venueNumber}, function(data) {
+               
+               for (var x = 0; x < data.length; x++) {
+                if (data[x].category === 'G' && data[x].type === 'TEXT') {
+                    general.push(data[x]);
+                } else if (data[x].category === 'H' && data[x].type === 'TEXT') {
+                    hotels.push(data[x]);
+                }
+               }
+
+                /*settings.push(hotels);
+                settings.push(general);*/
+            });
+            
             //$scope.config.startOpened = true;
                     
         };
@@ -137,14 +164,14 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
 	            return;
 	        }
 
-	        var payload = {};
+	        /*var payload = {};
 	        for (var type in data) {
 	            if (data.hasOwnProperty(type)) {
 	                payload[type] = data[type].value;
 	            }
-	        }
+	        }*/
 	        var target = { id: $scope.venueNumber };
-	        RestServiceFactory.VenueService().updateAttribute(target, payload, function (success) {
+	        RestServiceFactory.VenueService().updateFacilities(target, data, function (success) {
 
 	            $log.log("success: ", data);
 
@@ -288,6 +315,29 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
 
         });
 
+        $scope.updateCustomer = function(isValid,data) {
+
+            if (isValid) {
+                
+                $scope.checkin.checkinDate.setHours($scope.checkin.checkinTime.getHours());
+                $scope.checkin.checkinDate.setMinutes($scope.checkin.checkinTime.getMinutes());
+
+                $scope.checkout.checkoutDate.setHours($scope.checkout.checkoutTime.getHours());
+                $scope.checkout.checkoutDate.setMinutes($scope.checkout.checkoutTime.getMinutes());
+
+                data.checkinTime = $scope.checkin.checkinDate.toISOString();
+                data.checkoutTime = $scope.checkout.checkoutDate.toISOString();
+
+               RestServiceFactory.HotelService().saveCustomer({id: $scope.venueNumber}, data, function (success) {
+                    if (success.message.indexOf("Fail") >=0) {
+                        toaster.pop('error', "Send Error", success.message);
+                    } else {
+                        $scope.cs = {};
+                    }
+
+                }); 
+            }
+        }
         $scope.sendCustomerMessage = function(cs) {
             var target = { id: $scope.venueNumber };
             var payload = {channelType: 'SMSBot', type: cs.reason, message: cs.message, to: cs.customerNumber};

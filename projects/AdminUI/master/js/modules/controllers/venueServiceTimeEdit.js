@@ -25,21 +25,27 @@ App.controller('VenueServiceTimeEditController', ['$scope', '$state', '$statePar
             {name: 'Bar', label: "Bar"},
             {name: 'Hotel', label: "Hotel"},
             {name: 'Restaurant', label: "Restaurant"},
+            {name: 'Pool', label: "Pool"},
             {name: 'Indoor pool', label: "Indoor pool"},
             {name: 'Heated Pool', label: "Heated Pool"},
+            {name: 'Jacuzzi', label: "Jacuzzi"},
             {name: 'Business Center', label: "Business Center"},
             {name: 'Steam Room', label: "Steam Room"},
             {name: 'GYM', label: "GYM"},
             {name: 'Breakfast', label: "Breakfast"},
             {name: 'Lunch', label: "Lunch"},
             {name: 'Dinner', label: "Dinner"},
-            {name: 'Breakfast', label: "Breakfast"},
             {name: 'FastPass', label: "FastPass"},
             {name: 'CoverCharges', label: "CoverCharges"},
+            {name: 'DayCare', label: "Day Care"},
+            {name: 'Club', label: "Club"},
+            {name: 'Night Club', label: "Night Club"},
+            {name: 'Meeting Room', label: "Meeting Room"},
+            {name: 'Event Room', label: "Event Room"},
 
-            {name: 'Parking', label: "Parking"},
+            /*{name: 'Parking', label: "Parking"},
             {name: 'Valet Parking', label: "Valet Parking"},
-            {name: 'Additional Parking', label: "Additional Parking"},
+            {name: 'Additional Parking', label: "Additional Parking"},*/
         ];
 
 

@@ -331,6 +331,14 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 				getEventCategories: {
 					method: 'GET', params: { id: '@id' }, isArray: true,
 					url: urlTemplate.replace("@context", "vas") + "/categories?st=Events&type=EVENT"
+				},
+				getFacilities: {
+					method: 'GET', params: { id: '@id' }, isArray: true,
+					url: urlTemplate.replace("@context", "venues") + "/facilities"
+				},
+				updateFacilities: {
+					method: 'POST', params: { id: '@id' },
+					url: urlTemplate.replace("@context", "venues") + "/facilities"
 				}
 
 			});
@@ -561,6 +569,21 @@ App.factory('RestServiceFactory', ['$resource', 'Session', 'USER_ROLES', '$trans
 				}
 			});
 		},
+		HotelService: function() {
+			return $resource(urlTemplate.replace("@context", "hotels"), {}, {
+				
+				saveCustomer: {
+					method: 'POST', params: { id: '@id' }
+				},
+				getActiveCustomer: {
+					method: 'GET', params: { id: '@id' }, isArray: true,
+					url: urlTemplate.replace("@context", "hotels") + "/active"
+				},
+
+			});
+
+		},
+
 		MessangerService: function() {
 			return $resource(urlTemplate.replace("@context", "messanger"), {}, {
 				sendSMS: {

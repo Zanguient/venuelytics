@@ -109,7 +109,7 @@
                                 </ul>
                             </section>
                             <div class="row">
-                                <div class="col-sm-6 col-xs-12 " ng-repeat="item in drinkDetails | filter: {category: menuTab}">
+                                <div class="col-sm-6 col-xs-12 mb-2" ng-repeat="item in drinkDetails | filter: {category: menuTab}">
                                     <div class="menu-item">
                                         <div class="menu-title">
                                             <div class="title" ng-class="bgMask">
@@ -120,8 +120,8 @@
                                             </span>
                                         </div>
                                         <p>{{item.description}}</p>
-                                        <div class="col-sm-5 col-xs-6">
-                                            <select class="form-control {{blackTheme}}" ng-change="drinkService(item)" ng-model="item.count" value="{{item.count || 0}}">
+                                        <div class="col-sm-5 col-xs-6 ">
+                                            <select class="form-control" ng-change="drinkService(item)" ng-model="item.count" value="{{item.count || 0}}">
                                                 <option value="">{{"reservation.QUANTITY" | translate}}</option>
                                                 <option ng-repeat="n in [].constructor(10) track by $index" value="{{$index+1}}">{{$index+1}}</option>
                                             </select>

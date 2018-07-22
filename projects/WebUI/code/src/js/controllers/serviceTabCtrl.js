@@ -60,7 +60,8 @@ app.controller('ServiceTabController', ['$log', '$scope', '$http', '$location', 
             $rootScope.blackTheme = response.data["ui.service.theme"]  || '';
             self.tabBtnsLayout = response.data['ui.service.service-buttons'] || '';
             self.enableWebBot = response.data['WebBot.enable'] === 'Y';
-            if ($rootScope.blackTheme === '') {
+            console.log('X' + $rootScope.blackTheme +'X');
+            if ($rootScope.blackTheme !== 'blackTheme' || $rootScope.blackTheme === '') {
                 $rootScope.bgMask = 'bg-mask-white';
             } else {
                 $rootScope.bgMask = 'bg-mask-black';

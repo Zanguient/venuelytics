@@ -686,10 +686,10 @@
 }
 
 
-select {
+/* select {
   -moz-appearance: none;
 }
-
+ */
 .ui-helper-center {
   text-align: center;
 }
