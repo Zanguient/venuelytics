@@ -48,8 +48,8 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
         var adminSettings = [
         	{ "displayName": "Enable Web Bot", "name": "WebBot.enable", "type": "text", "help":"only Y or N","value": "" },
             { "displayName": "SMS Bot Number", "name": "sms.bot.number", "type": "text", "value": "" },
-            { "displayName": "Amenities", "name": "amenities", "type": "text", "value": "" },
-            { "displayName": "Wifi Info", "name": "wifi-password", "type": "text", "value": "" },
+            //{ "displayName": "Amenities", "name": "amenities", "type": "text", "value": "" },
+            //{ "displayName": "Wifi Info", "name": "wifi-password", "type": "text", "value": "" },
         ];
         adminSettings = $.Apputil.makeMap(adminSettings);
         settings.push(adminSettings);
@@ -104,10 +104,7 @@ App.controller('ChatbotController', [ '$scope', '$state', '$stateParams','RestSe
         settings.push(casino);*/
 
         $scope.init = function () {
-            $('.selectpicker').selectpicker({
-                style: 'btn-info',
-                size: 4
-            });
+           
 
             RestServiceFactory.VenueService().getInfo({ id: $scope.venueNumber} ,function (data) {
                 $scope.data = data;

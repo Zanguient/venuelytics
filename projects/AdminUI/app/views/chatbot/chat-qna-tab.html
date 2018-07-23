@@ -10,9 +10,10 @@
                         <div>
                             <fieldset ng-repeat="setting in selectedTabSettings">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">{{setting.name}}:</label>
-                                    <div class="col-sm-4">
-                                        <textarea class="form-control" rows="3" ng-model="setting.text" ng-trim="true" placeholder="{{setting.help || ''}}"/><br>
+                                    <label class="col-sm-3 control-label"><Strong>{{setting.description}}:</Strong>
+                                        <br>({{setting.name}})</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" rows="2" ng-model="setting.text" ng-trim="true" placeholder="{{setting.help || ''}}"/><br>
                                         <div class="checkbox c-checkbox">
                                           <label>
                                             <input type="checkbox"  ng-model="setting.present" ng-true-value="Y"  ng-false-value="N"/>
